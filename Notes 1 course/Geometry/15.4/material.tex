@@ -1,0 +1,163 @@
+\chapter{}
+
+\section{Ещё одну теорему забыл}
+
+\begin{theorem}[Вейерштрасса о прямом умножении]
+	$ X $ -- связное топологическое пространство \\
+    $ f : X \to \R $ -- непрерывная функция
+    $$ f(x_0) = a, \qquad f(x_1) = b, \qquad a \le c \le b $$
+    $$ \implies \exist x_2 \in X : f(x_2) = c $$
+\end{theorem}
+
+\begin{proof}
+	$ X $ -- связное $ \implies f(X) $ -- связное \\
+    Какие связные подмножества есть в $ \R $?
+\end{proof}
+
+\begin{theorem}
+	$ (X, \Omega) $ -- топологическое пространство \\
+    Равносильны следующие утверждения:
+    \begin{enumerate}
+        \item \label{en:1} Компоненты связности $ X $ открыты
+        \item \label{en:2} $ X = \bigcup_{i \in I} X_i $ ($ X_i $ -- \textit{компоненты}, топология $ X $ -- топология объединения, контрпример -- $ \Q $)
+        \item \label{en:3} У любой точки существует связная окрестность
+    \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+	Упражнение
+\end{proof}
+
+\section{Линейная связность}
+
+\begin{definition}
+	Пусть в $ X $ -- непрерывная $ f : [0, 1] \to X $
+    \begin{itemize}
+    	\item $ f(0) = x_0 $ -- начало пути
+        \item $ f(1) = x_1 $ -- конец пути
+    \end{itemize}
+\end{definition}
+
+\begin{definition}
+	$ X $ называется линейно свяным, если $ \forall x_0, x_1 \in X \quad \exist $ путь, соединяющий $ x_0 $ и $ x_1 $
+\end{definition}
+
+\begin{definition}
+    $ A \sub X $ линейно связно, если $ \forall x_0, x_1 \quad \exist \underset{\text{(не выходящий за пределы } A )}{\text{ путь в } A} $ между ними
+\end{definition}
+
+\begin{theorem}
+	Линейно связное пространство связно
+\end{theorem}
+
+\begin{proof}
+	Допустим, не связно
+    $$ X = U_1 \cup U_2, \qquad U_1 \cap U_2 \ne \O, \qquad x_1 \in U_1, \quad x_2 \in U_2 $$
+    Соединим их путём:
+    $$ \exist f : [0, 1] \to X :
+    \begin{cases}
+    	f(0) = x_1 \\
+        f(1) = x_2
+    \end{cases} $$
+    $ f^{-1}(U_1), f^{-1}(U_2) $ разбивают $ [0, 1] \implies [0, 1] $ не связен -- \contra (доказано, что $ [0, 1] $ связен)
+\end{proof}
+
+\begin{undefthm}{Верна ли обратная стрелка?}
+	Нет
+    \begin{eg}
+    	$ y = \sin\frac1x $ -- непрерывна на $ (0, +\infty) $
+    \end{eg}
+\end{undefthm}
+
+\begin{figure}[!ht]
+    \begin{tikzpicture}[domain=0.0001:2]
+        \draw[->][name path=ox] (-0.2,0) -- (3.2,0);
+        \draw[->] (0,-1.2) -- (0,1.2);
+
+        \draw[green!50!black, name path=sin, samples=50] plot function{sin(1 / x)};
+    \end{tikzpicture}
+    \caption{Связная, но не линейно связная функция}
+\end{figure}
+
+\section{Компактность}
+
+\subsection{Понятие компактности}
+
+\begin{definition}
+	$ X $ -- топологическое пространство \\
+    $ \set{U_i}_{i \in I} $ -- (открытое) покрытие $ X $, если $ \bigcup_{i \in I} U_i = X $ и $ \forall i \quad U_i \in \Omega $ \\
+    В этом курсе, покрытие $ \equiv $ открытое покрытие
+\end{definition}
+
+Если $ \set{U_i}_{i \in I} $ -- покрытие $ X $ и $ \set{U_{ij}}_{ij \in J \sub I} $ -- покрытие $ X $, то это -- подпокрытие $ \set{U_i}_{i \in I} $
+
+\begin{definition}
+	$ X $ называют компактным, если для любого покрытия можно выбрать конечное подпокрытие
+\end{definition}
+
+\begin{definition}
+	$ A \sub X $ компактно, если $ A $ компактно в индуцированной топологии, то есть
+    $$ \underset{(U_i \text{ открыто в } X)}{\forall \set{U_i}_{i \in I}} : \bigcup_{i \in I} U_i \supset A \quad \exist U_{i1}, U_{i2}, ..., U_{in} : \bigcup_{k = 1}^n U_{ik} \supset A $$
+\end{definition}
+
+\begin{theorem}
+	$ X $ компактно, $ \quad A $ замкнуто в $ X \qquad \implies \quad A $ компактно
+\end{theorem}
+
+\begin{proof}
+    Рассмотрим любое $ \set{U_i}_{i \in I} $ -- покрытие $ A $ \\
+    Рассмотрим $ V \define X \setminus A $ -- открытое \\
+    $ \set{U_i, V}_{i \in I} $ -- покрытие $ X $ \\
+    $ \implies \exist $ конечное подпокрытие. Выпишем его:
+    $$ V, U_{i1}, U_{i2}, ..., U_{in} $$
+\end{proof}
+
+\begin{theorem}
+	$ f : X \to Y $ непрерывна, $ \qquad A \sub X $ компактно $ \qquad \implies \quad f(A) $ компактно
+\end{theorem}
+
+\begin{proof}
+    Возьмём $ \set{V_i}_{i \in I} $ -- покрытие $ f(A) $
+    $$ V_i \sub Y \implies f^{-1}(V_i) \text{ -- открытое в } X $$
+    $ \set{f^{-1}(V_i)}_{i \in I} $ -- покрытие $ A $ \\
+    $ \implies f^{-1}(V_{i1}), ..., f^{-1}(V_{in}) $ -- конечное подпокрытие $ A $
+\end{proof}
+
+\begin{implication}
+	Компактность -- топологическое свойство (т. е. она сохраняется при гомеоморфизме)
+\end{implication}
+
+\subsection{Компактность и хаусдорфовость}
+
+\begin{definition}
+    $ X $ называется хаусдорфовым, если $ \underset{x \ne y}{\forall x, y \in X} \quad \exist U_x, U_y : U_x \cap U_y = \O $
+\end{definition}
+
+\begin{eg}
+	$ X $ -- метрическое $ \implies X $ -- хаусдорфово
+    $$ U_x \define B \bigg( x, \frac{\rho(x, y)}3 \bigg), \qquad U_y \define B \bigg( y, \frac{\rho(x, y)}3 \bigg) $$
+\end{eg}
+
+\begin{theorem}
+	$ X $ -- хаусдорфово, $ \quad A $ компактно $ \qquad \implies \quad A $ замкнуто
+\end{theorem}
+
+\begin{proof}
+    Нужно доказать, что $ X \setminus A $ открыто \\
+    Зафиксируем $ x_0 \in X \setminus A $
+    $$ \forall a \in A \quad \exist
+    \begin{Bmatrix}
+        U_{ax_0} \text{ -- окрестность } a \\
+        V_{ax_0} \text{ -- окрестность } x_0
+    \end{Bmatrix} : U_{ax_0} \cap V_{ax_0} = \O $$
+    $ \set{U_{ax_0}}_{a \in A} $ -- покрытие $ A $ \\
+    $ \implies \exist U_{ax_01}, ..., U_{ax_0n} $ -- подпокрытие \\
+    Возьмём $ V \define \bigcap_{k = 1}^n V_{ax_0k} $ \\
+    $ V $ открыто, $ \qquad V \cap A = \O, \qquad x_0 \in V $ \\
+    $ \implies X \setminus A $ открыто
+\end{proof}
+
+\begin{implication}
+	$ X $ -- компактно и хаусдорфово, $ \quad A \sub X $ \\
+    $ A $ компактно $ \iff A $ замкнуто
+\end{implication}

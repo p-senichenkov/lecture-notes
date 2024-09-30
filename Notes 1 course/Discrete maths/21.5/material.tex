@@ -1,0 +1,87 @@
+\section{Производящие функции}
+
+\subsection{Числа Фиббоначчи}
+
+$$ \underset1{F_0}, \underset1{F_1}, \underset2{F_2}, ... $$
+
+Наша цель -- получить формулу для $ n $-го числа Фиббоначчи
+
+\begin{multline*}
+    \mathcal{F}(x) = \sum_{k = 0}^\infty a_kx^k = \sum_{k = 0}^\infty F_kx^k = F_0 + F_1 \cdot x + \sum_{k = 2}^\infty F_kx^k \underset{\text{применим реккурентную формулу}}= \\
+    = F_0 + F_1x + \sum_{k = 2}^\infty(F_{k - 1} + F_{k - 2})x^k = F_0 + F_1x + \sum_{k = 2}^\infty F_{k - 1}x^k + \sum_{k = 2}^\infty F_{k - 2}x^k \underset{\text{поменяем пределы суммирования}} = \\
+    = F_0 + F_1 + \sum_{k = 1}^\infty F_k \cdot x^{k + 1} + \sum_{k = 0}F_k \cdot x^{k + 2} \underset{\text{вынесем } x}= F_0 + F_1x + x\sum_{k = 1}^\infty F_kx^k + x^2\sum_{k = 0}^\infty F_xx^k = \\
+    = F_0 + F_1x + x \bigg( \mathcal{F}(x) - F_0 \bigg) + x^2 \mathcal{F}(x)
+\end{multline*}
+
+$$ \mathcal{F}(x) = 1 + \cancel{x} + x \mathcal{F}(x) - \cancel{x} + x^2 \mathcal{F}(x) $$
+$$ \mathcal{F}(x)(1 - x - x^2) = 1 $$
+$$ \mathcal{F}(x) = \frac1{1 - x - x^2} $$
+Положим $ \alpha \define \dfrac{1 + \sqrt5}2, \quad \beta \define \dfrac{1 - \sqrt5}2 $
+$$ \mathcal{F}(x) = \frac1{(1 - \alpha x)(1 - \beta x)} $$
+Разложим дробь в сумму простейших:
+$$ \frac1{(1 - \alpha x)(1 - \beta x)} = \frac{A}{1 - \alpha x} + \frac{B}{1 - \beta x} = \frac{A - A \beta x + B - B \alpha x}{(1 - \alpha x)(1 - \beta x)} $$
+$$
+\begin{cases}
+	A + B = 1 \\
+    A \beta x + B \alpha x = 0
+\end{cases}, \qquad A = \frac\alpha{\alpha - \beta}, \quad B = \frac{-\beta}{\alpha - \beta} $$
+$$ \frac1{1 - \gamma x} = \sum_{k = 0}^\infty (\gamma x)^k $$
+$$ \mathcal{F}(x) = A \sum_{k = 0}^\infty \alpha^k x^k + B \sum_{k = 0}^\infty \beta^k x^k = \sum_{k = 0}^\infty \frac{\alpha^{k + 1} - \beta^{k + 1}}{\alpha - \beta}x^k $$
+$$ F_k = \frac1{\sqrt5} \left[ \bigg( \frac{1 + \sqrt5}2 \bigg)^{k + 1} - \bigg( \frac{1 - \sqrt5}2 \bigg)^{k + 1} \right] $$
+
+\subsection{Числа Каталана}
+
+$$ S_0 + (S_1 + S_2) + ... + S_n = S_0 + S^* + S_3 + ... + S_n $$
+Сколькими способами мы можем так сложить (т. е. сколько способов есть расставить скобки так, чтобы при раскрытии получилась данная сумма)? \\
+Введём $ C_n $ -- количество способов сложения $ n + 1 $ числа
+$$ C_n = \sum_{k = 0}^{n - 1} C_k \cdot C_{n - k - 1}, \qquad C_0 \define 1 $$
+$$ \mathcal{C}(x) = \sum_{k = 0}^\infty C_kx^k $$
+$$ \mathcal{C}^2(X) = \sum_{k = 0}^\infty C_kx^k \cdot \sum_{m = 0}^\infty C_m x^m = \sum_{k, m = 0}^\infty C_kC_mx^{m + k} = \sum_{r = 0}^\infty \underbrace{\sum_{m = 0}^r C_mC_{r - m}}_{\text{похоже на } C_{r + 1}}x^r = \sum_{r = 0}^\infty C_{r + 1}x^r $$
+$$ x \mathcal{C}^2(x) = \sum_{r = 0}^\infty C_{r + 1}x^{r + 1} = \mathcal{C}(x) - 1 $$
+$$ x \mathcal{C}^2(x) - \mathcal{C}(x) + 1 = 0 $$
+$$ \mathcal{C}(x) = \frac{1 \pm \sqrt{1 - 4x}}{2x} $$
+Положим $ f(x) \define \sqrt{1 - 4x} $ \\
+Разложим её в ряд:
+\begin{equ}1
+    f(x) = f(0) + \sum_{k = 1}^\infty \frac{f^{(k)}(0)}{k!} \cdot x^k
+\end{equ}
+Найдём $ k $-ю производную:
+\begin{equ}2
+    \frac{d^k}{dx^k}(\sqrt{1 - 4x}) = \frac12 \bigg( \frac12 - 1 \bigg) ... \bigg( \frac12 - k + 1 \bigg)(1 - 4x)^{\frac12 - k} \cdot (-4)^k = (-2)^k \big( 1 \cdot 3 \cdot 5 \cdot ... \cdot (2k - 3) \big) (1 - 4x)^{\frac12 - k}
+\end{equ}
+\begin{multline*}
+    C_{2k - 2}^{k - 1} = \frac{(2k - 2)!}{(k - 1)!(k - 1)!} \underset{\text{выделим произведение нечётных чисел}}= \\
+    = \frac{\bigg( 1 \cdot 3 \cdot 5 \cdot ... \cdot (2k - 3) \bigg) \cdot \bigg( 2 \cdot 4 \cdot ... \cdot (2k - 2) \bigg)}{(k - 1)!(k - 1)!} \underset{\text{вынесем двойки}}= \frac{\bigg( 1 \cdot 3 \cdot ... \cdot (2k - 3) \bigg) \cdot \bigg( 2^{k - 1} \cdot \cancel{(k - 1)!} \bigg)}{(k - 1)! \cancel{(k - 1)!}}
+\end{multline*}
+$$ 1 \cdot 3 \cdot ... \cdot (2k - 3) = \frac{(k - 1)! \cdot C_{2k - 2}^{k - 1}}{2^{k - 1}} $$
+Подставим это в \eref2:
+$$ \frac{d^k}{dx^k}(\sqrt{1 - 4x}) = (-2)^{\cancel{k}} C_{2k - 2}^{k - 1} (k - 1)! \frac1{\cancel{2^{k - 1}}} (1 - 4x)^{\frac12 - k} $$
+Подставим это в \eref1:
+$$ f(x) = 1 + \sum_{k = 1}^\infty (-2)(k - 1)!C_{2k - 2}^{k - 1}\frac1{k!}x^k = 1 - 2\sum_{k = 1}^\infty\frac1{k}C_{2k - 2}^{k - 1}x^k $$
+\begin{multline*}
+    \mathcal{C}(x) = \frac{1 - \bigg( 1 - 2 \sum_{k = 1}^\infty \frac1k C_{2k - 2}^{k - 1} x^k \bigg)}{2x} = \frac{\cancel2 \sum_{k = 1}^\infty \frac1k C_{2k - 2}^{k - 1} x^k}{\cancel2x} = \sum_{k = 1}^\infty \frac1k C_{2k - 2}^{k - 1} x^{k - 1} \underset{\text{поменяем пределы суммирования}}= \\
+    = \sum_{k = 0}^\infty \frac1{k + 1} C_{2k}^k x^k
+\end{multline*}
+$$ C_k = \frac1{k + 1} C_{2k}^k $$
+
+\section({Эпсилон-приближённые алгоритмы}){$ \bm{\veps} $-приближённые алгоритмы}
+
+Задан некоторый $ \veps $ -- точность (отклонение), стараемся его достичь \\
+При этом, трудоёмкость должна быть ограничена $ O \bigg( n \dfrac1\veps \bigg) $
+$$ \veps > 0 \qquad \frac{F_A - F_{opt}}{F_{opt}} < \veps $$
+
+\begin{problem}
+	$ m = 2 $ процессоров, $ \quad n $ заданий \\
+    Заданы $ t_1, t_2, ..., t_n $ -- времена выполнения
+    $$ x_i \define 1 \vee 0 $$
+    $$ \sum_{i = 1}^n t_i x_i \to \min $$
+    $$ \sum_{i = 1}^n t_i x_i \ge \frac{\sum_{i = 1}^n t_i}2 $$
+\end{problem}
+
+Построим полное дерево перебора. Получим двоичное дерево (слева $ x_i = 1 $, справа -- 0) \\
+Выбираем некоторое $ \delta > 0 $ \\
+В каждой вершине считаем $ f(x^k) = \sum_{i = 1}^k t_i x_i $ \\
+$ f(x^k) \ge \dfrac{\sum_{i = 1}^n t_i}2 $ -- полное решение, обрезаем и сохраняем куда-нибудь \\
+$ f(x^k) + \sum_{i = 1}^n t_i < \dfrac{\sum_{i = 1}^n}2 $ -- недопустимое решение, обрезаем
+$$ \bigg| f(x_i^k) - f(x_j^k) \bigg| < \delta $$
+Тз каждой группы берём решение с максимальным $ f(x^K) $

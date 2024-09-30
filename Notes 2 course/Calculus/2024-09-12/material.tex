@@ -1,0 +1,259 @@
+\section{О мультииндексах}
+
+\begin{definition}
+	Мультииндексом называется $ \alpha = (\alpha_1, ..., \alpha_n) \in \R^{n \ge 2}, \qquad \alpha _j \in \N \setminus \set0 $
+\end{definition}
+
+\begin{definition}[норма мультииндекса]
+	$ |\alpha| \define \alpha_1 + ... + \alpha_n, \qquad |\alpha| > 0 $
+\end{definition}
+
+\begin{notation}
+	$ \alpha! \define \alpha_1! \cdot ... \cdot \alpha_n! $
+\end{notation}
+
+\begin{notation}
+	$ x = \column{x_1}{x_n} \in \R^n $
+	$$ x^\alpha \define x_1^{\alpha_1} \cdot ... \cdot x_n^{\alpha_n}, \qquad 0^0 \define 1 $$
+\end{notation}
+
+\begin{notation}
+	$$ C_n^\alpha = \frac{n!}{\alpha!} = \frac{n!}{\alpha_1! \cdot ... \cdot \alpha_n!} $$
+\end{notation}
+
+\begin{notation}
+	$ \set{v_\alpha(x)}_{\alpha \in T} $
+	$$ \sum_{\alpha \in T} v_\alpha(x) $$
+\end{notation}
+
+\section{Классы гладкости}
+
+\begin{definition}[$ \mathcal{C}^r(E) $]
+	$ r \in \N, \qquad E \sub \R^{n \ge 2}, \qquad E $ открыто, $ \qquad f \in \Cont{E} $
+	$$ \forall x_1, ..., x_n \quad \forall X \in E \quad \exist f_{x_j}'(X) $$
+	\begin{itemize}
+		\item $ f_{x_j}'(X) \in \Cont{E} \implies f \in \Cont[1]{E} $
+		\item Пусть $ f \in \Cont[1]{E} $
+		$$ \forall 1 \le k \le r \quad \forall x_{i_1}, ..., x_{i_k} \quad \forall X \in E \quad \exist f_{x_{i_1}...x_{i_k}}^{(k)}(X) \in \Cont{E} $$
+		Тогда говорят, что $ f \in \Cont[r]{E} $
+	\end{itemize}
+\end{definition}
+
+\begin{theorem}
+	$ r \ge 2, \qquad E \sub \R^{n \ge 2}, \qquad E $ открытое, $ \qquad f \in \Cont[r]{E}, \qquad i_1, ..., i_r, \quad j_1, ..., j_r $
+	\begin{equ}1
+		\forall X \in E \quad f_{x_{i_1}...x_{i_r}}^{(r)}(X) = f_{x_{j_1}...x_{j_r}}^{(r)}(X)
+	\end{equ}
+\end{theorem}
+
+\begin{proof}
+	Докажем \textbf{по индукции}
+	\begin{itemize}
+		\item \textbf{База.} $ r = 2 $ -- доказано в конце прошлой лекции
+		\item \textbf{Переход.}
+		Пусть $ f \in \Cont[r + 1]{E} $ \\
+		$ j_k \ne j_{k + 1} $ \\
+		Рассмотрим частные производные:
+		$$ f_{x_{j_1}...\bm{x_{j_k}x_{j_{k + 1}}}...x_{j_{r + 1}}}^{(r + 1)}(X), \qquad f_{x_{j_1}...\bm{x_{j_{k + 1}}x_{j_k}}...x_{j_{r + 1}}}^{(r + 1)}(X) $$
+		Обозначим $ g(X) \define f_{x_{j_1}...x_{j_{k - 1}}}^{(k - 1)}(X) $
+		\begin{equ}2
+			f_{x_{j_1}...x_{j_{k - 1}}x_{j_k}x_{j_{k + 1}}}^{(k + 1)}(X) = g_{x_{j_k}x_{j_{k + 1}}}''(X)
+		\end{equ}
+		\begin{equ}3
+			f_{x_{j_1}...x_{j_{k + 1}}x_{j_k}}^{(k + 1)}(X) = g_{x_{j_{x + 1}}x_{j_k}}''(X)
+		\end{equ}
+		По следствию к теореме о смешанных производных, получаем
+		\begin{equ}4
+			\eref2, \eref3 \implies  g_{x_{j_k}x_{j_{k + 1}}} = g_{x_{j_{k + 1}}x_{j_k}}''(X)
+		\end{equ}
+		\begin{equ}5
+			\eref2 \implies f_{x_{j_1}...x_{j_k}x_{j_{k + 1}}...x_{j_{r + 1}}}^{(r + 1)}(X) = g_{x_{j_k}x_{j_{k + 1}}...x_{j_{r + 1}}}^{(r - k + 2)} \quad \forall X \in E
+		\end{equ}
+		\begin{equ}6
+			\eref3 \implies f_{x_{j_1}...x_{j_{k + 1}}x_{j_k}...x_{j_{r + 1}}}^{(r + 1)}(X) = g_{x_{j_{k + 1}}x_{j_k}...x_{j_{r + 1}}}^{(r - k + 2)} \quad \forall X \in E
+		\end{equ}
+		\begin{equ}7
+			\eref4, \eref5, \eref6 \implies f_{x_{j_1}...x_{j_k}x_{j_{k + 1}}...x_{j_{r + 1}}}^{(r + 1)}(X) = f_{x_{j_1}...x_{j_{k + 1}}x_{j_k}...x_{j_{r + 1}}}^{(r + 1)}(X) \quad \forall X \in E
+		\end{equ}
+		$ i_1, ..., i_n, \qquad j_k = i_1, \qquad j_k $ -- минимальный
+		Рассмотрим две ситуации:
+		\begin{itemize}
+			\item $ k = 1 $
+			$$ i_1, ..., i_{r + 1} $$
+			$$ i_1, j_2, ..., j_{r + 1} $$
+			Тогда индексы $ i_2, ..., i_{r + 1} $ и $ j_2, ..., j_{r + 1} $ получаются друг из друга перестановкой. А тогда, по индукции,
+			\begin{equ}8
+				f_{x_{i_1}x_{i_2}...x_{i_{r + 1}}}^{(r + 1)}(X) = \bigg( f_{x_{i_1}}' \bigg)_{x_{i_2}...x_{i_{r + 1}}}^{(r)} \underset{\text{инд. предполож.}}= \bigg( f_{x_{i_1}}' \bigg)^{(r)}_{x_{j_2}...x_{j_{r + 1}}}(X) = f_{x_{j_1}x_{j_2}...x_{j_{r + 1}}}^{(r + 1)}(X)
+			\end{equ}
+			\item $ k > 1 $ \\
+			Тогда $ j_1, ..., j_{k - 1} \ne i_1 $ \\
+			Тогда,
+			$$ \eref7 \implies f_{...x_{j_{k - 1}}x_{j_k}}^{(r + 1)} = f_{...x_{j_k}x_{j_{k - 1}}}^{(r + 1)} = f_{...x_{j_k}x_{j_{k - 2}}x_{j_{k - 1}}}^{(r + 1)} = \widedots[4em] = f_{x_{j_k}x_{j_2}...}^{(r + 1)} $$
+			Теперь можно перименить первый случай
+		\end{itemize}
+	\end{itemize}
+\end{proof}
+
+\begin{notation}
+	$ i_1, ..., i_r, \qquad 1 \le i_k \le n $ \\
+	Среди них есть:
+	\begin{itemize}
+		\item $ l_1 $ равных 1
+		\item $ l_2 $ равных 2 \\
+		\widedots[5em]
+		\item $ l_n $ равных $ n $
+	\end{itemize}
+	$$ l_1 + ... + l_n = r $$
+	Можно получить перестановку этих индексов:
+	$$ \underbrace{1, ..., 1}_{l_1}, \underbrace{2, ..., 2}_{l_2}, \widedots[4em], \underbrace{n, ..., n}_{l_n} $$
+	$ f \in \Cont[r]{E} $ \\
+	Тогда, по доказанной теореме,
+	\begin{equ}9
+		f_{x_{i_1}...x_{i_r}}^{(r)}(X) = f_{\underbrace{x_1...x_1}_{l_1}...\underbrace{x_n...x_n}_{l_n}}^{(r)}(X)
+	\end{equ}
+	Определим мультииндекс $ \alpha \define (l_1, ..., l_n), \qquad |\alpha| = r $ \\
+	Введём обозначение для частной производной:
+	$$ \eref9 \define \partial^\alpha f(X) $$
+\end{notation}
+
+\section{Формулы для производной порядка \texorpdfstring{$ r $}r одной сложной функции}
+
+\begin{theorem}
+	$ E \sub \R^{n \ge 2} $ -- открытое, $ \qquad f \in \Cont[r \ge 1]{E}, \qquad Y \in E, \qquad \underset{H \ne \On}{H \in \R^n}, \qquad t \in (-a, a) $ \\
+	$ Y + tH \in E \quad \forall t \in (-a, a) $
+	\begin{equ}{10}
+		g(t) \define f(Y + tH)
+	\end{equ}
+	\begin{equ}{11}
+		\implies g^{(r)}(0) = \sum_{\alpha : |\alpha| = r} C_r^\alpha \partial^\alpha f(Y) H^\alpha
+	\end{equ}
+\end{theorem}
+
+\begin{proof}
+	Докажем \textbf{по индукции}:
+	\begin{itemize}
+		\item \textbf{База.} $ r = 1 $ \\
+		То есть, $ |\alpha| = 1 $ \\
+		Если $ \alpha = (\alpha_1, ..., \alpha_n) $, то $ \alpha_1 + ... + \alpha_n = 1, \qquad \alpha_i \in \Z, \quad \alpha_i \ge 0 $ \\
+		Значит,
+		$$ \exist \nu :
+		\begin{cases}
+			\alpha_\nu = 1 \\
+			\alpha_j = 0, \quad j \ne \nu
+		\end{cases} $$
+		$$ \alpha = (0, ..., \underset\nu1, ..., 0) \define e_\nu, \qquad 1 \le \nu \le n $$
+		\begin{equ}{12}
+			C_1^{e_\nu} = \frac{1!}{0! \cdot ... \cdot 1! \cdot ... \cdot 0} = 1
+		\end{equ}
+		\begin{equ}{13}
+			\partial^{e_\nu} f(X) = f_{x_\nu}'(X)
+		\end{equ}
+		Если $ H = \column{h_1}{h_n} $, то
+		\begin{equ}{14}
+			H^{e_\nu} = h_\nu
+		\end{equ}
+		\begin{equ}{15}
+			\eref{11}, \eref{12}, \eref{13}, \eref{14} \implies g'(0) = \sum_{\nu = 1}^n f_{x_\nu}'(Y) h_\nu
+		\end{equ}
+		По условию, $ f \in \Cont[1]{E} $, а значит, применяя теорему о достаточном условии дифференцируемости, $ f $ дифф. в $ X \quad \forall X \in E $ \\
+		Рассмотрим отображение
+		\begin{equ}{16}
+			\Psi : (-a, a) \to \R^n, \qquad \Psi(t) = Y + tH
+		\end{equ}
+		\begin{equ}{17}
+			g(t) \bydef = f(\Psi(t)), \qquad f : E \to \R^1
+		\end{equ}
+		То есть, $ g : (-a, a) \to \R^1 $ и можно применить теорему о дифференцируемости суперпозиции дифференцируемых отображений:
+		\begin{equ}{18}
+			\mathcal{D}g(t) = \mathcal{D}f(V)\clamp{V = Y + tH} \cdot \mathcal{D}\Psi(t)
+		\end{equ}
+		Матрица Якоби для отображения $ \R^1 \to \R^1 $ -- матрица $ 1 \times 1 $:
+		\begin{equ}{19'}
+			\mathcal{D}g(t) = g'(t)
+		\end{equ}
+		$ f : \R^n \to \R^1 $, значит, её матрица Якоби -- это вектор-строка:
+		\begin{equ}{19}
+			\mathcal{D}f(V)\clamp{V = Y + tH} = \bigg( f_{x_1}'(Y + tH), ..., f_{x_n}'(Y + tH) \bigg)
+		\end{equ}
+		\begin{equ}{20}
+			\mathcal{D}\Psi(t) = \column{h_1}{h_n}
+		\end{equ}
+		\begin{equ}{21}
+			\eref{18}, \eref{19'}, \eref{19}, \eref{20} \implies g'(t) = \sum_{\nu = 1}^n f_{x_\nu}'(Y + tH)h_\nu, \qquad t \in (-a, a)
+		\end{equ}
+		Подставляя $ t = 0 $, получаем \eref{15}
+		\item \textbf{Переход.} \\
+		$ f \in \Cont[r + 1]E $ \\
+		Рассмотрим мультииндекс $ \beta = (\beta_1, ..., \beta_n), \qquad |\beta| = r + 1 $
+		$$ \beta = (0, ..., \beta_{i_1}, 0, ..., \beta_{i_l}, ..., 0), \qquad \beta_{i_k} \ne 0, \qquad 1 \le k \le l $$
+		То есть, некоторые члены не равны нулю, остальные -- нули \\
+		Пусть
+		$$ \alpha^{(1)} = (0, ..., 0, \beta_{i_1} - 1, \beta_{i_2}, ..., \beta_{i_l}, ..., 0) $$
+		$$ \alpha^{(2)} = (0, ...., \beta_{i_1}, 0, ..., \beta_{i_2} - 1, ..., \beta_{i_l}, ..., 0) $$
+		$$ \widedots $$
+		$$ \alpha^{(l)} = (0, ...., \beta_{i_1}, 0, ..., \beta_{i_2}, ..., \beta_{i_l} - 1, ..., 0) $$
+		$ |\alpha| = r, \qquad \alpha + e_\nu = \beta $ для некоторого $ \nu $
+		\begin{equ}{22}
+			\nu \in \set{i_1, ..., i_l} \text{ (иначе на месте одного из нулей была бы 1)}
+		\end{equ}
+		По индукционному предположению,
+		\begin{equ}{23}
+			g^{(r)}(Y + tH) = \sum_{|\alpha| = r} C_r^{(\alpha)} \partial^\alpha f(Y + tH) H^\alpha
+		\end{equ}
+		\begin{equ}{23'}
+			\eref{21}, \eref{23} \implies g^{(r + 1)}(Y + tH) = \sum_{|\alpha| = r} C_r^\alpha H^\alpha \bigg( \underbrace{\partial^\alpha f(Y + tH)}_{\define f_\alpha \in \Cont[1]E} \bigg)' \define F
+		\end{equ}
+		Воспользуемся базой индукции для $ f_\alpha $:
+		\begin{equ}{23''}
+			\eref{23'} = \sum_{|\alpha| = r}C_r^\alpha H^\alpha \bigg( \sum_{\nu = 1}^n f_{\alpha x_\nu}'(Y + tH)h_\nu \bigg) = \sum_{|\alpha| = 1} \sum_{\nu = 1}^n C_r^\alpha H^\alpha h_\nu \bigg( \partial^\alpha f(Y + tH) \bigg)_{x_\nu}'
+		\end{equ}
+		$$ \alpha = (l_1, ..., l_\nu, ..., l_n) $$
+		\begin{multline}\lbl{24}
+			\bigg( \partial^\alpha f(X) \bigg)_{x_\nu}' \bydef f_{\underbrace{x_1...x_1}_{l_1}...\underbrace{x_\nu...x_\nu}_{l_\nu}...\underbrace{x_n...x_n}_{l_n}\bm{x_\nu}}^{(r + 1)}(X) \underset{\text{т. о классах } \mathcal{C}^r}= \\
+			= f_{\underbrace{x_1...x_1}_{l_1}...\underbrace{x_\nu...x_\nu}_{l_\nu \bm{+ 1}}...\underbrace{x_n...x_n}_{l_n}}^{(r + 1)}(X) \bydef \partial^{\alpha + e_\nu}f(X)
+		\end{multline}
+		\begin{equ}{25}
+			H^\alpha h_\nu = h_1^{e_1}...h_\nu^{e_\nu}...h_n^{e_n}\bm{h_\nu} = h_1^{e_1}...h_\nu^{e_\nu \bm{ + 1}}...h_n^{e_n} = H^{\alpha + e_\nu}
+		\end{equ}
+		\begin{equ}{25'}
+			\eref{23''} \underset{\eref{23}, \eref{24}}= \sum_{|\alpha| = r} \sum_{\nu = 1}^n C_r^\alpha H^{\alpha + e_\nu} \partial^{\alpha + e_\nu} f(Y + tH)
+		\end{equ}
+		При этом, $ \alpha + e_\nu = \beta, \qquad |\beta| = r + 1 $
+		\begin{equ}{25''}
+			\eref{25'} = \sum_{|\beta| = r + 1} \partial^\beta f(Y + tH) H^\beta \sum_{\alpha, \nu : \alpha + e_\nu = \beta} C_r^\alpha
+		\end{equ}
+		$$ \alpha^{(\mu)} \define (0, ..., \beta_{i_1}, 0, ..., \beta_{i_\mu} - 1, 0, ..., \beta_{i_l}, 0, ...) $$
+		\begin{equ}{26}
+			\alpha^{(\mu)} + e_{i_\mu} = \beta, \qquad 1 \le \mu \le l
+		\end{equ}
+		\begin{multline}\lbl{27}
+			\eref{26} \implies \sum_{\alpha + e_\nu = \beta} C_r^\alpha = \sum_{\mu = 1}^l C_r^{\alpha^{(\mu)}} \bydef \sum_{\mu = 1}^l \frac{r!}{\beta_{i_1}!...(\beta_{i_\mu} - 1)!...\beta_{i_l}!} = \frac{r!}{\beta_{i_1}!...\beta_{i_l}!} \sum_{\mu = 1}^l \beta_{i_\mu} \bydef \\
+			= \frac{r!}{\beta!} |\beta| = \frac{r!}{\beta!}(r + 1) = \frac{(r + 1)!}{\beta!} = C_{r + 1}^\beta
+		\end{multline}
+		$$ \eref{25''} \underset{\eref{27}}= g^{(r + 1)}(t) = \sum_{|\beta| = r + 1} \partial^\beta f(Y + tH) H^\beta C_{r + 1}^\beta $$
+	\end{itemize}
+\end{proof}
+
+\section{Формула Тейлора с остатком в форме Лагранжа для функции \texorpdfstring{$ n $}n переменных}
+
+\begin{theorem}
+	$ E \sub \R^{n \ge 2} $ -- открытое, $ \qquad X_0 \in E, \qquad B_\delta(X_0) \sub E, \qquad f \in \Cont[r + 1]E $ \\
+	$ H \in \R^n, \qquad \norm{H} < \delta $
+	\begin{equ}{28}
+		\implies \exist 0 < c < 1 : f(X_0 + H) = f(X_0) + \sum_{k = 1}^r \sum_{|\alpha| = k} \frac1{\alpha!} \partial^\alpha f(X_0) H^\alpha + \sum_{|\alpha| = r + 1} \frac1{\alpha!} \partial^\alpha f(X_0 + cH) H^\alpha
+	\end{equ}
+\end{theorem}
+
+\begin{proof}
+	Рассмотрим $ g(t) \define f(X_0 + tH) $
+	$$ g(1) = f(X_0 + H), \qquad g(0) = f(X_0) $$
+	$$ g \in \Cont[r + 1]{(-a, a)}, \qquad a > 1 $$
+	так как $ \norm{H} < \delta \implies $ для некоторого $ a > 1 \quad \norm{aH} = a \norm{H} < \delta $ \\
+	Для функции $ g $ можно применить теорему Лагранжа для одной переменной:
+	\begin{multline*}
+		g(1) = g(0) + \sum_{k = 1}^r \frac{g^{(k)}(0)}{k!} \cdot 1^k + \frac1{(r + 1)!}g^{(r + 1)}(c) \cdot 1^{r + 1} = \\
+		= g(0) + \sum_{k = 1}^r \frac1{k!} g^{(k)}(0) + \frac1{(r + 1)!}g^{(r + 1)}(c) \underset{\text{формула для k-й производной}}= \\
+		= f(X_0) + \sum_{k = 1}^r \frac1{k!} \sum_{|\alpha| = k} C_k^\alpha \partial^\alpha f(X_0) H^\alpha + \frac1{(r + 1)!} \sum_{|\alpha| = r + 1} C_{r + 1}^\alpha \partial^\alpha f(X_0 + cH) H^\alpha = \\
+		= f(X_0) + \sum_{k = 1}^r \sum_{|\alpha| = k} \frac1{\alpha!} \partial^\alpha f(X_0) H^\alpha + \sum_{|\alpha| = r + 1} \frac1{\alpha!} \partial^\alpha f(X_0 + cH) H^\alpha
+	\end{multline*}
+\end{proof}

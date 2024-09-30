@@ -1,0 +1,227 @@
+\chapter{Производные и дифференцируемость}
+
+\section{Достаточное условие локального экстремума со второй производной}
+
+\begin{theorem}
+	$$ f : (a,b) \to \R $$
+    $$ \forall x \in (a,b) ~ \exist f'(x) $$
+    $$ x_0 \in (a,b) $$
+    $$ \exist f''(x_0) $$
+    $$ f'(x_0) = 0 $$
+    $$ f''(x_0) > 0 $$
+    $$ \implies x_0 \text{ -- строгий локальный минимум } f $$
+    \hfill
+    $$ g : (a,b) \to \R $$
+    $$ \exist g'(x) $$
+    $$ \exist g''(x_0) $$
+    $$ g'(x_0) = 0 $$
+    $$ g''(x_0) < 0 $$
+    $$ \implies x_0 \text{ -- строгий локальный максимум } g $$
+\end{theorem}
+
+\begin{replacementproof}[для $f$]
+    \begin{equ}1
+        f(x) = f(x_0) + f'(x_0)(x-x_0) + \frac12 f''(x_0)(x-x_0)^2 + r(x)
+    \end{equ}
+    \begin{equ}2
+        \frac{r(x)}{(x-x_0)^2} \underarr{x\to x_0} 0
+    \end{equ}
+    \begin{equ}3
+        \eref1 \implies f(x) = f(x_0) + \frac12 f''(x_0)(x-x_0)^2 + r(x)
+    \end{equ}
+    Возьмём $ \veps = \frac14 f''(x_0) $. Тогда
+    \begin{equ}4
+        \eref2 \implies \exist \omega(x_0) : \forall x \in \omega(x_0) \quad \bigg|\frac{r(x)}{(x-x_0)^2}\bigg| < \veps = \frac14 f''(x)
+    \end{equ}
+    $$ x \ne x_0, \quad x \in \omega $$
+    \begin{multline*}
+        \eref3, \eref4 \implies f(x) \ge f(x_0) + \frac12 f''(x_0)(x-x_0)^2 - |r(x)| > \\ > f(x_0) + \frac12 f''(x_0)(x-x_0)^2 - \underset{(\eref4 \cdot (x-x_0)^2)}{\frac14 f''(x_0)(x-x_0)^2} = f(x_0) + \frac14 f''(x_0)(x-x_0)^2 > f(x_0)
+    \end{multline*}
+\end{replacementproof}
+
+\begin{theorem}[О достаточном условии локального экстремума чётной производной]
+	$$ f : (a,b) \to \R $$
+    $$ n \ge 2 \quad \forall x \in (a,b) \begin{cases} \exist f'(x), ~ f''(x), ..., f^{(2n-1)}(x) \\ \exist f^{(2n)}(x_0) \end{cases} $$
+    $$ f'(x_0) = 0, ~ f''(x_0) = 0, ..., f^{(2n-1)} = 0 $$
+    $$ f^{(2n)} \ne 0 $$
+    \begin{itemize}
+        \item Если $f^{(2n)}(x_0) > 0 $, то $x_0$ -- строгий лок. мин.
+        \item Если $f^{(2n)}(x_0) < 0 $, то $x_0$ -- строгий лок. макс.
+    \end{itemize}
+\end{theorem}
+
+\begin{proof}
+    \begin{multline}\lbl5
+        f(x) = f(x_0) + f'(x_0)(x-x_0) + \frac12 f''(x_0)(x-x_0)^2 + \frac1{3!} f'''(x_0)(x-x_0^3) + ... + \\ + \frac1{(2n)!} f^{(2n)}(x_0)(x-x_0^{2n}) + r(x)
+    \end{multline}
+    \begin{equ}6
+        \frac{r(x)}{(x-x_0)^{2n}} \underarr{x\to x_0} 0
+    \end{equ}
+    \begin{equ}7
+        \eref5 \implies f(x) = f(x_0) + \frac1{(2n)!}f^{(2n)}(x_0)(x-x_0)^{2n} + r(x)
+    \end{equ}
+    $$ \veps = \frac12 \cdot \frac1{(2n)!}f^{(2n)}(x_0) $$
+    \begin{equ}8
+        \eref6 \implies \exist \omega(x_0) : \forall x \in \omega(x_0) \quad \bigg| \frac{r(x)}{(x-x_0)^{2n}} \bigg| < \veps
+    \end{equ}
+    $$ x \in \omega(x_0), \quad x \ne x_0 $$
+    \begin{multline*}
+        \eref7, \eref8 \implies f(x) \ge f(x_0) + \frac1{(2n)!} f^{(2n)}(x_0)(x-x_0)^{2n} - |r(x)| > \\ > f(x_0) + \frac{f^{(2n)}(x_0)}{(2n)!}(x-x_0)^{2n} - \frac12 \cdot \frac{f^{(2n)}(x_0)}{(2n)!}(x-x_0)^{2n} = \\ = f(x_0) + \frac12 \cdot \frac1{(2n)!}f^{(2n)}(x_0)(x-x_0)^{2n} > f(x_0)
+    \end{multline*}
+\end{proof}
+
+
+\begin{theorem}[Достаточное условие отсутствия локального экстремума нечётной производной]
+    $$ f : (a,b) \to \R $$
+    $$ x_0 \in (a,b) $$
+    $$ N \ge 1 \quad \forall x \in (a,b) \begin{cases} \exist f'(x), ~ f''(x), ..., f^{(2n)}(x) \\ \exist f^{(2n+1)}(x_0) \end{cases} $$
+    $$ f'(x_0) = 0, ~ f''(x_0) = 0, ..., f^{(2n)}(x_0) = 0 $$
+    $$ f^{(2n+1)}(x_0) \ne 0 $$
+    $$ \implies x_0 \text{ не является точкой локального экстремума} $$
+\end{theorem}
+
+\begin{proof}
+    $$ f(x) = f(x_0) + \frac1{(2n+1)!} f^{(2n+1)}(x_0)(x-x_0)^{2n+1} + r(x) $$
+    $$ \bigg| \frac{r(x)}{(x-x_0)^{2n+1}} \bigg| \underarr{x\to x_0} 0 $$
+    Возьмём $\omega(x_0)$
+    $$ \bigg| \frac{r(x)}{(x-x_0)^{2n+1}} \bigg| < \frac12 \cdot \frac1{(2n+1)!} \cdot |f^{(2n+1)}(x_0)| $$
+    2 случая:
+    \begin{itemize}
+    	\item $x > x_0 $:
+        $$ f(x) > f(x_0) + \frac1{(2n+1)!} f^{(2n+1)}(x_0)(x-x_0)^{2n+1} - \frac12 \cdot \frac1{(2n+1)!} f^{(2n+1)}(x_0)(x-x_0)^{2n+1} > f(x_0) $$
+        \item $x < x_0$:
+        \begin{multline*}
+            f(x) < f(x_0) + \frac{f^{(2n+1)}(x_0)}{(2n+1)!}(x-x_0)^{2n+1} + \frac12 \cdot \frac{f^{(2n+1)}(x_0)}{(2n+1)!}|(x-x_0)^{2n+1}| = \\ = f(x_0) + \frac12 \cdot \frac{f^{(2n+1)}(x_0)}{(2n+1)!}(x-x_0)^{2n+1} < f(x_0)
+        \end{multline*}
+    \end{itemize}
+\end{proof}
+
+\section{Правило Бернулли-Лопиталя}
+
+\begin{theorem}\label{th:1}
+    $$ f, g : (a,b) \to \R $$
+    $$ f(x) \ne 0 ~ \forall x \in (a,b) $$
+    $$ \forall x \in (a,b) ~ \exist f'(x), ~ \exist g'(x) $$
+    $$ f'(x) \ne 0 ~ \forall x \in (a,b) $$
+    $$ f(x) \underarr{x\to a+0} 0, \quad g(x) \underarr{x\to a+0} 0 $$
+    \begin{equ}{101}
+        \exist \liml{x\to a+0} \frac{g'(x)}{f'(x)} = A \in \RR
+    \end{equ}
+    \begin{equ}{102}
+        \implies \frac{g(x)}{f(x)} \underarr{x\to a+0} A
+    \end{equ}
+\end{theorem}
+
+\begin{proof}
+	$$ f(a) \bydef 0, ~ g(a) \bydef 0 $$
+    $$ f,g \in C([a,b]) $$
+    \begin{equ}{103}
+        b > x > a \quad \exist c \in (a,x) : \frac{f(x)-g(a)}{f(x)-f(a)} = \frac{g'(c)}{f'(c)}
+    \end{equ}
+    \begin{equ}{104}
+        \eref{103} \implies \frac{g(x)}{f(x)} = \frac{g'(c)}{f'(c)}
+    \end{equ}
+    $$ \forall \omega(A) ~ \exist \delta > 0 : \forall g \in (a, a + \delta) $$
+    \begin{equ}{105}
+        \eref{101} \implies \frac{g'(y)}{f'(y)} \in \delta(A)
+    \end{equ}
+    $$ c \in (a,x) \implies c \in a(a + \delta) $$
+    \begin{equ}{106}
+        \eref{105} \implies \frac{g'(c)}{f'(c)} \in \omega(A)
+    \end{equ}
+    $$ \eref{104}. \eref{106} \implies \frac{g(x)}{f(x)} \in \omega(A) \implies \eref{102} $$
+\end{proof}
+
+\begin{theorem}\label{th:1'}
+    $$ f, g : (a,b) \to \R $$
+    $$ f(x) \ne 0 ~ \forall x \in (a,b) $$
+    $$ \forall x \in (a,b) ~ \exist f'(x), ~ \exist g'(x) $$
+    $$ f'(x) \ne 0 ~ \forall x \in (a,b) $$
+    $$ f(x) \underarr{x\to b-0} 0, \quad g(x) \underarr{x\to b-0} 0 $$
+    \begin{equ}{101'}
+        \exist \liml{x\to b-0} \frac{g'(x)}{f'(x)} = A \in \RR
+    \end{equ}
+    \begin{equ}{102'}
+        \implies \frac{g(x)}{f(x)} \underarr{x\to b-0} A
+    \end{equ}
+\end{theorem}
+
+Доказательство совершенно аналогичное теореме \ref{th:1}
+
+\begin{theorem}\label{th:2}
+    $$ f,g : (a, +\infty) \to \R $$
+    $$ f(x) \ne 0 ~ \forall x \in (a, + \infty) $$
+    \begin{equ}{107}
+        f(x) \underarr{x\to\infty} + \infty
+    \end{equ}
+    $$ \forall x \in (a,\infty) ~ \exist f'(x), ~ g'(x) $$
+    $$ f'(x) \ne 0 ~ \forall x \in (a,\infty) $$
+    \begin{equ}{108}
+        \frac{g'(x)}{f'(x)} \underarr{x\to+\infty} A
+    \end{equ}
+    \begin{equ}{109}
+        \implies \frac{g(x)}{f(x)} \underarr{x\to+\infty} A
+    \end{equ}
+\end{theorem}
+
+\begin{proof}
+	Возьмём $ \forall \veps > 0 $
+    \begin{equ}{110}
+        \eref{108} \implies \exist L_1 : \forall x > L_1 \quad \frac{g'(x)}{f'(x)} \in (A-\veps, A+\veps)
+    \end{equ}
+    Возьмём $x_0 > L_1$ и $x > x_0$. Применим теорему Коши:
+    \begin{equ}{111}
+        \exist c \in (x_0,x) : \frac{g(x)-g(x_0}{f(x)-f(x_0)} = \frac{g'(c)}{f'(c)}
+    \end{equ}
+    В силу выбора чего-то мы получаем, что $c > L_1$
+    \begin{equ}{112}
+        \frac{g'(c)}{f'(c)} \in (A-\veps, A+\veps)
+    \end{equ}
+    Поделим \eref{111} на $f(x)$:
+    \begin{equ}{113}
+        \frac{g(x) - g(x_0)}{f(x) - f(x_0)} = \frac{\frac{g(x)}{f(x)} - \frac{f(x_0)}{f(x)}}{1 - \frac{f(x_0)}{f(x)}}
+    \end{equ}
+    Возьмём $L_2 \ge L_1$. При $ x > L_2$:
+    \begin{equ}{114}
+        \bigg| \frac{g(x_0)}{f(x)} \bigg| < \veps, \quad \bigg|\frac{f(x_0)}{f(x)} \bigg| < \veps
+    \end{equ}
+    Не умаляя общности, можем взять $\veps < \frac12$ \\
+    При $x > L_2 $ выполняется
+    \begin{equ}{115}
+        -2\veps = - \frac{\veps}{1 - \frac12} < \frac{\frac{g(x_0)}{f(x)}}{1 - \frac{f(x_0)}{f(x)}} < \frac{\veps}{1 - \frac12} = 2\veps
+    \end{equ}
+    \begin{equ}{116}
+        \eref{111}, \eref{112}, \eref{113} \implies A - 3\veps < \frac{\frac{g(x)}{f(x)}}{1 - \frac{f(x_0)}{f(x)}} < A + \veps + \frac{\frac{g(x_0)}{g(x)}}{1 - \frac{f(x_0}{f(x)}} < A + 3\veps
+    \end{equ}
+    \begin{equ}{117}
+        \eref{114}, \eref{116} \implies \frac{g(x)}{f(x)} < (A + 3\veps)(1 - \frac{f(x_0)}{f(x)}) < (A + 3\veps)(1 + \veps) = A + (A + 3)\veps + 3\veps^2
+    \end{equ}
+    \begin{equ}{118}
+        \frac{g(x)}{f(x)} > (A - 3\veps)(1 - \frac{f(x_0)}{f(x)}) > (A - 3\veps)(1 - \veps) = A - (A + 3)\veps + 3 \veps^2
+    \end{equ}
+    $$ \eref{117}, \eref{118} \implies \eref{109} $$
+\end{proof}
+
+\begin{implication}
+	$$ x > 1, \quad g(x) = \ln x, \quad f(x) = x^r, ~ r > 0 $$
+    $$ g'(x) = \frac1x, \quad f'(x) = rx^{r-1} $$
+    $$ \frac{g'(x)}{f'(x)} = \frac{\frac1x}{rx^{r-1}} = \frac1{2x^r} \underarr{x\to+\infty} 0 \implies \frac{\ln x}{x^r} \underarr{x\to+\infty} 0 $$
+\end{implication}
+
+\begin{theorem}\label{th:3}
+	$$ f,g : (a,b) \to \R $$
+    $$ x_0 \in (a,b) $$
+    $$ n \ge 2 \quad f(x) \ne 0 \text{, если } x \ne x_0 $$
+    $$ \forall x \in (a,b) \begin{cases} \exist f'(x), .., f^{(n-1)}(x) \\ \exist g'(x), ..., g^{(n-1)}(x) \\ \exist f^{(n)}(x_0), ~ g^{(n)}(x_0) \end{cases} $$
+    $$ f(x_0) = f'(x_0) = f^{(n-1)}(x_0) = 0 $$
+    $$ g(x_0) = g'(x_0) = f^{(n-1)}(x_0) = 0 $$
+    $$ f^{(n)} \ne 0 $$
+    \begin{equ}{119}
+        \implies \frac{g(x)}{f(x)} \underarr{x\to x_0} \frac{g^{(n)}(x_0)}{f^{(n)}(x_0)}
+    \end{equ}
+\end{theorem}
+
+
+\begin{proof}
+    $$ \frac{g(x)}{f(x)} = \frac{\frac{g^{(n)}(x_0)}{n!}(x-x_0)^n + r_1(x)}{\frac{f^{(n)}(x_0)}{n!}(x-x_0)^n + r_2(x) } = \frac{g^{(n)}(x_0) + n! \frac{r_1(x)}{(x-x_0)^n}}{f^{(n)}(x_0) + n! \frac{r_2(x)}{(x-x_0)^n}} \underarr{x\to x_0} \frac{g^{(n)}(x_0) + 0}{f^{(n)}(x_0) + 0} \implies \eref{119} $$
+\end{proof}

@@ -1,0 +1,259 @@
+\chapter{Векторные пространства}
+
+\section{Продолжение изоморфизма}
+
+\begin{implication}
+	Отношение изоморфизма симметрично и транзитивно
+\end{implication}
+
+\begin{property}
+	$ f : U \to V $ -- линейное отображение. Тогда
+    \begin{enumerate}
+        \item $ f $ -- инъекция $ \iff \ker f = \set{0} $
+        \begin{proof}
+        	\hfill
+            \begin{itemize}
+            	\item $\implies$
+                $$
+                \begin{rcases}
+                	f(0) = 0 \\
+                    f \text{ -- инъекция}
+                \end{rcases} \implies \forall u \ne 0 \quad f(u) \ne 0 \implies \forall u \ne 0 \quad u \notin \ker f $$
+                \item $ \impliedby $ \\
+                Пусть $ f(u_1) = f(u_2) \implies f(u_1 - u_2) = f(u_1) - f(u_2) = 0 \implies u_1 - u_2 \in \ker f = set{0} \implies u_1 - u_2 = 0 \implies u_1 = u_2 $
+            \end{itemize}
+        \end{proof}
+        \item $ \ker f = \set{0} \implies f $ -- изоморфизм из $ U $ в $ \Img f $
+        \begin{proof}
+        	$ f $ -- инъекция (по предыдущему пункту) \\
+            $ f $ -- сюръекция (по определению $\Img f $) \\
+            Значит, $ f $ -- биекция \\
+            $ f $ линейно \\
+            Значит, $ f $ -- изоморфизм
+        \end{proof}
+    \end{enumerate}
+\end{property}
+
+\begin{property}
+	Пусть $ f : U \to V $ -- изоморфизм. Тогда
+    \begin{enumerate}
+    	\item $ e_1, ..., e_k $ ЛНЗ $ \iff f(e_1), ..., f(e_k) $ ЛНЗ
+        \begin{proof}
+            $ f^{-1} $ -- изоморфизм $ \implies $ достаточно доказать $ \impliedby $, то есть, если $ e_1, ..., e_k $ ЛЗ, то $ f(e_1), ..., f(e_k) $ ЛЗ \\
+            Пусть $ a_1e_1 + ... + a_ke_k = 0 $, не все $ a_i$ равны 0 \\
+            Тогда $ a_1f(e_1) + ... + a_kf(e_k) = f(0) = 0 \implies f(e_i) $ ЛЗ
+        \end{proof}
+        \item $ e_1, ..., e_k $ -- базис $ U \implies f(e_1), ..., f(e_k) $ -- базис $ V $
+        \begin{proof}
+        	Базис -- максимальный ЛНЗ. Применим предыдущий пункт
+        \end{proof}
+        \item $ \dim U = \dim V $
+        \begin{proof}
+        	Следует из предыдущего пункта
+        \end{proof}
+    \end{enumerate}
+\end{property}
+
+\begin{lemma}[выделение ядра прямым сложением]
+	Пусть $ U, V $ -- конечномерны, $ f : U \to V $ линейно \\
+    Тогда $ \exist W $ -- подпространство $ U $, такое что:
+    \begin{enumerate}
+        \item $ W \cong \Img f, \qquad f \clamp{W} \to \Img f $ -- изоморфизм
+        \item $ \ker f \oplus W = U $
+    \end{enumerate}
+\end{lemma}
+
+\begin{proof}
+	Пусть $ g_1, ..., g_k \in V, \quad g_1, ..., g_k $ -- базис $ \Img f $
+    $$ g_i \in \Img f \implies \exist e_i : f(e_i) = g_i, \quad e_i \in U $$
+    Положим $ W = \langle e_1, ..., e_k \rangle $ \\
+    Докажем, что $ W $ подходит:
+    \begin{enumerate}
+        \item Пусть $ f_1 : W \to \Img f, \quad f_1 = f \clamp{W} $. Докажем, что $ f_1 $ -- изоморфизм:
+        \begin{itemize}
+        	\item Проверим сюръективность: \\
+            Пусть $ v \in \Img f \implies \exist a_i : v = a_1g_1 + ... + a_kg_k \implies v = a_1f(e_1) + ... + a_kf(e_k) = f_1(a_1e_1 + ... + a_ke_k) $
+            \item Проверим инъективность: \\
+            Достаточно проверить, что в 0 переходит только 0 \\
+            Пусть $ w \in W, \quad f_1(w) = 0 $
+            $$ w = a_1e_1 + ... + a_ke_k $$
+            $$ f_1(w) = a_1f(e_1) + ... + a_kf(e_k) = a_1g_1 + ... + a_kg_k \underimp{g_i \text{ ЛНЗ}} \forall i \quad a_i = 0 \implies w = 0 \cdot e_1 + ... + 0 \cdot e_k = 0 $$
+        \end{itemize}
+        \item Проверим, что $ \ker f + W = U $: \\
+        Пусть $ u \in U $ \\
+        Пусть $ f(u) = v \in \Img f $ \\
+        Пусть $ x \in W : f(x) = v $ (такой $x$ существует, так как $ f \clamp{W} $ -- изоморфизм) \\
+        Положим $ y = u - x $ \\
+        Тогда $ f(y) = f(u) - f(x) = v - v = 0 \implies y \in \ker f $
+        $$
+        \begin{rcases}
+        	u = y + x \\
+            y \in \ker f \\
+            x \in W
+        \end{rcases} \implies u \in \ker f + W $$
+        \item Докажем, что $ U = \ker f \oplus W $: \\
+        Достаточно доказать, что $ \underset{
+            \begin{subarray}{c}
+            	x \in \ker f \\
+                y \in W
+            \end{subarray}}{x + y = 0} \implies x = y = 0 $
+        $$ x \in \ker f \implies f(y) = f(-x) = -f(x) = 0 $$
+        $$
+        \begin{rcases}
+            f \clamp{W} \text{ -- инъекция} \\
+            f(y) = 0
+        \end{rcases} \implies y = 0 \implies x = 0 $$
+    \end{enumerate}
+\end{proof}
+
+\begin{theorem}[размерность ядра и образа]
+	Пусть $ U $ конечномерно, $ f : U \to V $ линейно \\
+    Тогда $ \dim \ker f + \dim \Img f = \dim U $
+\end{theorem}
+
+\begin{proof}
+    Положим $ W : W \cong \Img f, \quad U = \ker f \oplus W $ \\
+    По свойству прямой суммы, $ \dim U = \dim \ker f + \dim W \implies \dim U = \dim \ker f + \dim \Img f $
+\end{proof}
+
+\begin{theorem}[каноническая форма матрицы линейного отображения]
+	Пусть $ U, V $ конечномерны, $ f : U \to V $ линейно \\
+    Тогда существуют базисы $ u, v $, в которых матрица $ f $ имеет вид
+    $$
+    \begin{pmatrix}
+        E & 0 \\
+        0 & 0
+    \end{pmatrix} =
+    \begin{pmatrix}
+    	1 & 0 & 0 & ... & 0 \\
+        0 & 1 & 0 & ... & 0 \\
+        . & . & . & . & 0 \\
+        0 & 0 & 0 & 0 & 0
+    \end{pmatrix} $$
+\end{theorem}
+
+\begin{proof}
+    $ U = \ker f \oplus W, \qquad f \clamp{W} $ -- изоморфизм из $ W $ в $ \Img f $ \\
+    Пусть $ e_1, ..., e_k $ -- базис $ W, \qquad e_{k + 1}, ..., e_n $ -- базис $ \ker f $ \\
+    Тогда $ e_1, ..., e_n $ -- базис $ U $ (по свойству прямой суммы) \\
+    $ f(e_1), ..., f(e_k) $ -- базис $ \Img f $ (по свойству изоморфизма) \\
+    $ f(e_1), ..., f(e_k) $ ЛНЗ \\
+    Положим $ g_1 = f(e_1), ..., g_k = f(e_k) $ \\
+    Дополним $ g_1, ..., g_k $ до базиса $ V $ \\
+    Пусть $ g_1, ..., g_m $ -- базис $ V $ \\
+    Докажем, что базисы $ e_1, ..., e_n $ и $ g_1, ..., g_m $ подходят
+    \begin{itemize}
+    	\item Пусть $ i \le k $
+        $$ f(e_1) = g_i = 0 \cdot g_1 + ... + 1 \cdot g_i + ... + 0 \cdot g_k + ... $$
+        \item Пусть $ i > k $
+        $$ e_i \in \ker f \implies f(e_i) = 0 = 0 \cdot g_1 + ... + 0 \cdot g_m $$
+    \end{itemize}
+\end{proof}
+
+\begin{implication}
+	Пусть $ A $ -- матрица $ n \times n $ с коэффициентами из поля $ K $ \\
+    Тогда $ \exist C, D $ -- обратимые матрицы $ n \times n $, такие, что
+    $$ c^{-1} A D =
+    \begin{pmatrix}
+    	E & 0 \\
+        0 & 0
+    \end{pmatrix} $$
+\end{implication}
+
+\begin{proof}
+	Пусть $ U = K^n, \qquad e_1, ..., e_n $ -- базис $ U, \qquad f : A $ -- матрица $ f $ в $ e_1, ..., e_n $ \\
+    Пусть $ e_1', ..., e_n', \quad e_1'', ..., e_n'' $ -- базисы $ U $, в которых $ f $ имеет матрицу
+    $$
+    \begin{pmatrix}
+    	E & 0 \\
+        0 & 0
+    \end{pmatrix} \implies C^{-1} A D =
+    \begin{pmatrix}
+    	E & 0 \\
+        0 & 0
+    \end{pmatrix} $$
+    где $ C, D $ -- матрицы перехода
+\end{proof}
+
+\begin{theorem}[линейное отображение и ранг матрицы]
+	Пусть $ U, V $ конечномерны, $ f : U \to V $ линейно, $ A $ -- матрица $ f $ в некоторых базисах \\
+    Тогда $ \dim \Img f = \rk A $
+\end{theorem}
+
+\begin{proof}
+	Пусть $ e_1, ..., e_n $ -- базис $ U $, $ g_1, ..., g_m $ -- базис $ V $ \\
+    Пусть $ w_i = f(e_i) $ \\
+    Тогда $ \Img f = \langle w_1, ..., w_n \rangle $, т. к.
+    $$
+    \begin{rcases}
+    	\forall v \in \Img f ~ \exist u \in U : f(u) = v \\
+        \exist a_i : u = a_1e_1 + ... + a_ke_k
+    \end{rcases} \implies v = a_1f(e_1) + ... + a_kf(e_k) = a_1w_1 + ... + a_kw_k $$
+    Пусть $ X_j =
+    \begin{pmatrix}
+        a_{1j} \\
+        . \\
+        . \\
+        . \\
+        a_{mj}
+    \end{pmatrix} $ -- $j$-й столбец матрицы $ f $ \\
+    Тогда $ w_j = a_{1j}g_1 + ... + a_{mj}g_m $
+    $$ \rk A = \dim \langle X_1, ..., X_n \rangle, \qquad \dim f = \dim \langle w_1, ..., w_n \rangle $$
+    Из любой порождающей системы можно выбрать базис $ \implies \dim \langle w_1, ..., w_n \rangle $ равна максимальному количеству ЛНЗ векторов из $ w_1, ..., w_n $ \\
+    Аналогично для $ X_1, ..., X_n $ \\
+    Пусть $ v = c_1w_1 + ... + c_nw_n, \quad X $ -- столбец координат базиса \\
+    Тогда $ X = c_1X_1 + ... + c_nX_n $
+    \begin{multline*}
+        v = c_1w_1 + ... + c_nw_n = c_1(a_{11}g_1 + ... + a_{i1}g_1 + ... + a_{m1}g_m) + ... + c_n(a_{1n}g_1 + ... + a_{in}g_i + ... + a_{mn}g_m) = \\ = (c_1a_{11} + ... + c_na_{1n}g_1 + ... + (c_1a_{i1} + ... + c_na_{1n})g_i + ...
+    \end{multline*}
+    $$ v = 0 \iff x = 0 $$
+    $$ c_1w_1 = ... + c_nw_n = 0 \iff c_1x_1 + ... + c_nx_n = 0 $$
+\end{proof}
+
+\section{Действия над линейными отображениями}
+
+\begin{definition}
+	Пусть $ f, g : U \to V, \quad k $ -- скаляр \\
+    Отображением $ f + g $ называется такое отображение, что $ (f + g)(u) = f(u) + g(u) $ \\
+    Отображением $ kf $ называется такое отображение, что $ (kf)(u) = k \cdot f(u) $
+\end{definition}
+
+\begin{remark}
+	$ f + g, ~ kf $ линейны
+\end{remark}
+
+\begin{definition}
+	Произведением $ f : V \to W $ и $ g : U \to V $ называется $ fg = f \circ g : U \to V $ \\
+    В частности, $ f^n = \underbrace{f \circ f \circ ... \circ f}_n : U \to U $
+\end{definition}
+
+\begin{remark}
+	$ fg, ~ f^n $ линейны
+\end{remark}
+
+\begin{lemma}[действия над отображением и матрицей]
+	\hfill
+    \begin{enumerate}
+    	\item Пусть $ U, V $ конечномерны, $ e_i, e_i' $ -- их базисы, $f, g : U \to V $ линейны, $ A, B $ -- матрицы $ f $ и $ g $, $ a, b $ -- скаляры \\
+        Тогда $ aA + bB $ -- матрица $ af + bg $
+        \begin{proof}
+        	Пусть $ u \in U, \quad X $ -- столбец координат $ u $ в $ e_i, \quad Y_1, Y_2 $ -- столбцы координат $ f(u), g(u) $ в $ e_i \implies Y_1 = AX, ~ Y_2 = BX \implies aY_1 + bY_2 = aAX + bBX = (aA + bB)X $
+            $$ (af + bg)(u) = af(u) + bg(u) \implies \text{ столбец координат } (af + bg)(u) = aY_1 + bY_2 = (aA + bB)X $$
+        \end{proof}
+        \item Пусть $ U, V, W $ конечномерны, $ e_i, e_i', e_i'' $ -- их базисы, $ f : V \to W, g : U \to V $ линейны, $ A, B $ -- матрицы $ f, g $ \\
+        Тогда $ AB $ -- матрица $ fg $
+        \begin{proof}
+        	$ u \in U, w \in W : (fg)(u) = w $ \\
+            $ X, Z $ -- столбцы координат \\
+            Пусть $ v = g(u), \quad Y $ -- толбец координат $ V \implies Y = BX, ~ Z = AY \implies Z = A(BX) = (AB)X $
+        \end{proof}
+    \end{enumerate}
+\end{lemma}
+
+\begin{theorem}[пространство линейных отображений]
+	$ U, V $ -- векторные пространства над полем $ K $. Тогда:
+    \begin{enumerate}
+    	\item Множество линейных отображений образует векторное пространство над $ K $
+        \item Если $ \dim U = m, ~ \dim V = n $, то пространство линейных отображений изоморфна пространству матриц размера $ m \times n $, его размерность равна $ mn $
+    \end{enumerate}
+\end{theorem}

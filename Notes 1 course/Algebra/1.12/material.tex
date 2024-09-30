@@ -1,0 +1,172 @@
+\chapter{Полиномы}
+
+\section{}
+
+\begin{lemma}[Сопряжённые корни]
+	$$ P(x) \in \R[x], \quad c \in \Co $$
+    $c$ -- корень $P(x)$. Тогда $\overline{c}$ -- тожже корень $P(x)$
+\end{lemma}
+
+\begin{proof}
+    Пусть $P(x) = \sum a_nx^n, \quad a_n \in \R \implies \sum a_nc^n = 0 $
+    $$ \overline{a_n} = a_n $$
+    $$ 0 = \overline{0} = \overline{\sum a_nc^n} = \sum \overline{a_n} \overline{c^n} = \sum a_n \overline{c}^n = P(\overline{c}) $$
+\end{proof}
+
+\begin{theorem}[Разложение многочлена с вещественными коээфициентами]
+	Пусть $P(x) \in \R[x] $. Тогда $P(x)$ можно представить в виде
+    $$ P(x) = a(x-x_1)...(x-x_n)(x^2 + p_1x + q_1)...(x^2 + p_m + q_m) $$
+    где $a, x_i, p_i, q_i \in \R $ и $x^2 + p_i + q_i $ не имеют вещественных корней
+\end{theorem}
+
+\begin{proof}
+	Индукция по $n = \deg P $. \\
+    База $n = 0 \quad P(0) = a $ \\
+    Переход. Пусть $\deg P = n$, для многочленов степени меньше $n$ утверждение верно, $n \ge 1$
+    \begin{itemize}
+        \item Случай 1. $\exist x_1 \in \R : P(x_1) = 0 $ \\
+        По теореме Безу $P(x) = (x-x_1) \cdot Q(x), \quad \deg Q < n $ \\
+        По индукционному предположению $Q(x) = a(x-x_2)...(x^2 + p_1x + q_1) $
+        $$ \implies P(x) = a(x-x_1)(x-x_2)...(x^2 + p_1x + q_1) $$
+        \item Случай 2. У $P(x)$ нет вещественных корней. Тогда $ \exist z_1 \in \Co \setminus \R : P(z_1) = 0 \implies \overline{z_1} $ -- тоже корень $P(x) $
+        $$ \overline{z_1} \ne z_1 $$
+        По теореме Безу $ \exist Q(x) \in \Co[x] : P(x) = (x - z_1) \cdot Q(x) $
+        $$ 0 = P(\overline{z_1}) = \underbrace{(\overline{z} - z_1)}{\ne 0} \cdot Q(\overline{z_1}) \implies Q(\overline{z_1}) = 0 $$
+        По теореме Безу $ \exist R(x) \in \Co [x] : Q(x) = (x - \overline{z_1}) \cdot R(x) $ \\
+        Положим $H(x) = (x - z_1)(x - \overline{z_1}) $ \\
+        Тогда $P(x) = H(x) \cdot R(x) $
+        $$ H(x) = x^2 - (z_1 + \overline{z_1}) + z_1 \overline{z_1} $$
+        $$ z_1 + \overline{z_1} \in \R, \quad z_1 \overline{z_1} \in \R $$
+        $$ \begin{rcases} H(x) \in \R[x] \\ P(x) \in \R[x] \end{rcases} \implies R(x) \in \R[x] $$
+        Пусть $p_1, q_1 : H(x) = x^2 + p_1x + q_1 $
+        $$ R(x) = a(x^2 + p_2x + q_2)...(x^2 + p_mx + q_m) \implies P(x) = a(x^2 + p_1x + q_1)(x^2 + p_2x + q_2)... $$
+    \end{itemize}
+\end{proof}
+
+\begin{implication}
+    Пусть $P(x) \in \R[x], \quad c $ -- корень $P(x), \quad k $ -- показатель кратности $c$. Тогда $ \overline{c} $ -- тоже корень кратности $k$
+\end{implication}
+
+\begin{proof}
+	Индукция по $\deg P$
+    \begin{itemize}
+        \item Если $c \in \R$, то $ \overline{c} = c $
+        \item Пусть $c \notin \R $. Положим $H(x) = (x - c)(x - \overline{c}) \in \R[x] $.   Пусть $ R(x) \in \R[x] : P(x) = H(x) \cdot R(x) $
+        \begin{itemize}
+            \item Если $c, \overline{c} $ -- не корни $R(x)$, то $c, \overline{c} $ -- корни $P(x)$ кратности 1
+            \item Пусть $c, \overline{c}$ -- корни $R(x)$. Тогда, по индукционному предположению, кратности совпадают, то есть
+            $$ R(x) = (x - c)^s (x - \overline{c})^s ... \implies P(x) = (x - c)^{s + 1} (x - \overline{c})^{s + 1} $$
+        \end{itemize}
+    \end{itemize}
+\end{proof}
+
+\section{\S7. Производные}
+
+\begin{definition}
+    Пусть $P(x) = ax^n + ... + a_1x + a_0 $. Производной $P(x)$ называется многочлен $na_nx^{n-1} + ... + ia_ix^{i-1} + ... + a_1 $
+\end{definition}
+
+\begin{notation}
+	$ P'(x) $
+\end{notation}
+
+Короткая запись определения: если $P(x) = \sum_{i \ge 0} a_ix_i$, то $P'(x) = \sum_{i \ge 1}ia_ix^{i-1} $
+
+\begin{props}
+	\item Если $P(x)$ -- константа, то $P'(x) = 0$
+    \item Пусть $K$ -- поле, $P \in K[x]$, $P(x)$ -- не константа. Тогда $\deg P' = \deg P - 1 $
+    \begin{note}
+    	Поле нужно, чтобы степень, при уменьшении на единицу, не обратилась в ноль. На самом деле достаточно области целостности
+    \end{note}
+    \item $(P(x) + Q(x))' = P'(x) + Q'(x)$
+    \begin{proof}
+        Пусть $P(x) = \sum_{i \ge 0} a_i \cdot x^i, \quad Q(x) = \sum_{i \ge 0}b_i \cdot x^i$
+        \begin{multline*}
+            \implies (P(x) + Q(x))' = (\sum_{i \ge 0}(a_i + b_i)x^i)' = \sum_{i \ge 1} i (a_i + b_i) x^{i - 1}  = \\ = \sum_{i \ge 1} i a_i x^{i - 1} + \sum_{i \ge 1} i b_i x^{i - 1} = P'(x) + Q'(x)
+        \end{multline*}
+    \end{proof}
+    \begin{implication}
+    	$$ (P_1(x) + ... + P_k(x))' = P_1'(x) + ... + P_k'(x) $$
+    \end{implication}
+    \item Пусть $c$ -- константа. Тогда $(cP(x))' = c \cdot P'(x) $
+    \begin{proof}
+        Пусть $P(x) = \sum_{i \ge 0} a_i x^i $. Тогда
+        $$ \bigg(c(P(x))\bigg)' = \bigg(\sum_{i \ge 0} c a_i x^i\bigg)' = \sum_{i \ge 1} i c a_i x^{i-1} = c \cdot \sum_{o \ge 1} i a_i x^{i - 1} = c \cdot P'(x) $$
+    \end{proof}
+    \item $\bigg( P(x) \cdot Q(x) \bigg)' = P'(x) \cdot Q(x) + P(x) \cdot Q'(x) $
+    \begin{proof}
+        \hfill
+        \begin{itemize}
+    	\item Докажем для случая $ Q(x) = bx^k $
+            \begin{itemize}
+                \item Случай 1: $k = 0$
+                $$ (P(x)\cdot b)' \stackrel?= P'(x) \cdot b + P(x) \cdot \underset{=0}{b'} $$
+                $$ (P(x) \cdot b)' = P'(x) \cdot b \text{ (по свойству 4)} $$
+                \item Случай 2: $k > 0 $. Пусть $P(x) = \sum_{i \ge 0} a_i \cdot x^i $
+                $$ \bigg(P(x) \cdot Q(x)\bigg)' = \bigg( \sum_{i \ge 0} a_i b x^{i+k})\bigg)' = \sum_{i \ge 0} (i + k) a_i b x ^{i + k - 1} $$
+                \begin{multline*}
+                    P'(x) \cdot Q(x) + P(x) \cdot Q'(x) = \sum_{i \ge 1} i a_i x^{i-1} \cdot b x^k + \sum_{i \ge 0} a_i x^i \cdot b k x ^{k-1} = \\ = \sum_{i \ge 1} i a_i \cdot b x ^{i + k - 1} + \sum_[i \ge 0] k a_i \cdot bx^{i + k - 1} \underset{0 = 0a_0bx^{0+k-1}}= \\ = \sum_{i \ge 0} i a_i bx^{i + k - 1} + \sum_{i \ge 0} ka_ibx^{i + k - 1} = \sum_{i \ge 0} (i+k) a_i bx^{i + k - 1} $$
+                \end{multline*}
+            \end{itemize}
+        \item Пусть $Q(x) = Q_0 + Q_1(x) + ... + Q_m(x)$, где $Q_k(x) = b_kx^k$
+        \begin{multline*}
+            \bigg(P(x) \cdot Q(x) \bigg)' = \bigg(P(x) \sum Q_i(x) \bigg)' = \bigg( \sum \big(P(x) \cdot Q_i(x) \big) \bigg)' \underset{\text{следств. к св-ву 3}}= \\ = \sum \bigg(P(x) \cdot Q_ii(x) \bigg)' \underset{\text{по доказ.}}= \sum \bigg(P'(x) Q_i(x) + P(x) Q_i'(x) \bigg) = \\ = P'(x) \sum Q_i(x) + P(x) \sum Q_i'(x) \underset{\text{по следств. к св-ву 3}}= P'(x) Q(x) + P(x) \cdot \bigg(Q(x)\bigg)'
+        \end{multline*}
+        \end{itemize}
+    \end{proof}
+    \begin{implication}
+    	$$ \bigg( P_1(x)...P_k(x) \bigg)' = P_1'(x)P_2(x)...P_k(x) + P_1(x)P_2'(x)...P_k(x) + ... + P_1(x)P_2(x)...P_k'(x) $$
+    \end{implication}
+    \begin{proof}
+    	Индукция по $k$. \\
+        База $k = 2$ -- доказано \\
+        Переход.
+        \begin{multline*}
+            (P_1...P_k \cdot P_{k+1})' = (P_1...P_k)' \cdot P_{k+1} + (P_1...P_k) \cdot P_{k+1}' = \\ = (P_1'P_2...P_k + P_1P_2'...P_k + ...) P_{k+1} + P_1...P_kP_{k+1}' = \\ = P_1'P_2...P_{k+1} + P_1P_2'...P_{k+1} + ... + P_1...P_kP_{k+1}' $$
+        \end{multline*}
+    \end{proof}
+    \item $\bigg(\big(P(x) \big)^k \bigg)' = k \bigg(P(x) \bigg)^{k-1} P'(x) $
+    \begin{proof}
+    	Из следствия:
+        $$ (\underbrace{P \cdot P \cdot ... \cdot P}_k)' = P' \cdot P \cdot ... \cdot P + P \cdot P' \cdot ... \cdot P + ... + P \cdot P \cdot ... \cdot P' $$
+    \end{proof}
+\end{props}
+
+\begin{definition}[Производные высших порядков]
+    $$ P^{(k)}(x) = \bigg( P^{(k-1)}(x) \bigg)' $$
+\end{definition}
+
+\begin{theorem}[Кратный корень и производная]
+    Пусть $K$ -- поле, $P \in K[x] $ \\
+    Пусть $c$ -- корень многочлена $P(x)$. Тогда равносильны утверждения:
+    \begin{itemize}
+    	\item $c$ -- кратный корень
+        \item $P'(c) = 0$
+    \end{itemize}
+\end{theorem}
+
+\begin{proof}
+    По теореме Безу $P(x) = (x - c) \cdot Q(x) $ \\
+    $c$ -- кратный $ \iff P(x) \divby (x - c)^2 \iff Q(x) \divby (x - c) \underset{\text{т. Безу}}{\iff} Q(c) = 0 $
+    $$ P'(x) = (x - c)' \cdot Q(x) + (x - c) \cdot Q'(x) = Q(x) + (x - c) \cdot Q'(x) $$
+    Подставим $x = c$:
+    $$ P'(c) = Q(c) + (c - c) \cdot Q'(c) = Q(c) $$
+    $$ P'(c) = 0 \implies Q(c) = 0 $$
+\end{proof}
+
+\begin{implication}
+    $K$ -- поле, $P \in K[x], ~ c$ -- корень $P(x)$.
+    $$ \text{Показатель кратности равен } n \iff P(c) = ... = P^{(n-1)}(c) = 0, \quad P^{(n)} \ne 0 $$
+\end{implication}
+
+\begin{proof}
+    Докажем, что $P(x) \divby (x - c)^k \implies P(c) = ... P^{(k-1)}(c) = 0 $ \\
+    Индукция по $k$ \\
+    База $k = 2$ -- по теореме \\
+    Переход: \\
+    Пусть $P(x) = (x - c)^{k-1} \cdot Q(x) $
+    \begin{multline*}
+        P'(x) = \bigg( (x - c)^k \bigg)' \cdot Q(x) + (x - c)^k \cdot Q'(x) = \\ = (k - 1)(x - c)^{k - 1} Q(x) + (x - c)^k Q'(x) = (x - c)^{k - 1} \bigg( k Q(x) + (x - c) Q'(x) \bigg)
+    \end{multline*}
+    Если $P(x) \divby (x - c)^k $, то $kQ(x) + (x - c) Q'(x) \divby (x - c) $
+\end{proof}

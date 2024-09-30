@@ -1,0 +1,107 @@
+\chapter{Теория групп}
+
+\begin{undefthm}{Напоминание}
+	Мы доказываем, что $ |G| = |\Orb(m)| \cdot |\St(m)| $ \\
+    $ k \define |\Orb(m)| $
+    $$ \Orb(m) = \set{m_1, ..., m_k} $$
+\end{undefthm}
+
+\begin{proof}
+    Доказываем, что $ g_i $ -- представители всех смежных классов по $ \St(m) $
+    \begin{itemize}
+    	\item Докажем, что $ g_i, g_j $ принадлежат разным смежным классам: \\
+        Пусть они принадлежат одному смежному классу
+        $$ g_i^{-1}g_j \in \St(m) $$
+        $$ g_i^{-1}g_jm = m $$
+        $$ g_jm = g_im $$
+        \item Докажем, что $ \forall g \in G \quad \exist g_i : \overline{g} = \overline{g_i} $:
+        $$ gm \in \Orb(m) = \set{m_1, ..., m_k} $$
+        $ gm = m_i $ для некоторого $ i $
+        $$ gm = g_im = m_i $$
+        $$ (g_i^{-1}g)m = m \implies g_i^{-1}g \in \St(m) \implies \overline{g_i} = \overline{g} $$
+    \end{itemize}
+\end{proof}
+
+\begin{lemma}[Бернсамда]
+	$ G $ -- конечная группа, $ \quad M $ -- конечное множество, $ \quad G $ действует на $ M $ \\
+    Тогда количество орбит равно
+    $$ \frac1{|G|} \sum_{g \in G} |\Fix(g)| $$
+\end{lemma}
+
+\begin{remark}
+	Это средняя мощность фиксатора
+\end{remark}
+
+\begin{proof}
+	Заметим, что
+    $$ \sum_{g \in G} |\Fix(g)| = \sum_{m \in M} |\St(m)| $$
+    так как и то, и другое -- это количество пар $ (g, m) $, таких, что $ gm = m $ \\
+    Получили, что
+    $$ \frac1{|G|} \sum_{g \in G} |\Fix(g)| = \frac1{|G|} \sum_{m \in M} |\St(m)| = \sum_{m \in M} \frac{|\St(m)|}{|G|} \underset{\text{(предыдущая теорема)}}= \underbrace{\sum_{m \in M} \frac1{|\Orb(m)}}_{\define S} \stackrel?= \text{ кол-во орбит} $$
+    Пусть есть $ k $ орбит, в них $ a_1, ..., a_k $ элементов
+    \begin{multline*}
+        S = \underbrace{\overbrace{\bigg( \frac1{a_1} + \frac1{a_1} + ... + \frac1{a_1} \bigg) }^{a_1 \text{ слагаемых}}}_{m \text{ из 1-й орбиты}} + \underbrace{\overbrace{\bigg( \frac1{a_2} + \frac1{a_2} + ... + \frac1{a_2} \bigg) }^{a_2 \text{ слагаемых}}}_{m \text{ из 2-й орбиты}} + \widedots[4em] + \underbrace{\overbrace{\bigg( \frac1{a_k} + \frac1{a_k} + ... + \frac1{a_k} \bigg) }^{a_k \text{ слагаемых}}}_{m \text{ из k-й орбиты}} = \\ = \underbrace{1 + 1 + ... + 1}_k = k
+    \end{multline*}
+\end{proof}
+
+\section{Прямое произведение групп}
+
+\begin{definition}
+	$ (G, *), (H, \cdot) $ -- группы. Прямое произведение (внешнее) -- это множество $ G \times H $ с операцией $ \circ $, определённой как $ (g_1, h_1) \circ (g_2, h_2) = (g_1 * g_2, h_1 \cdot h_2) $
+\end{definition}
+
+\begin{remark}
+	Аналогично для нескольких групп
+\end{remark}
+
+\begin{notation}
+	$ G \times H, \qquad G_1 \times ... \times G_k $
+\end{notation}
+
+\begin{theorem}
+	Прямое произведение групп -- группа
+\end{theorem}
+
+\begin{proof}
+    Рассмотрим $ G \times H \times ... $
+    \begin{itemize}
+    	\item Замкнутость относительно операции очевидна
+        \item Ассоциативность:
+        \begin{multline*}
+            \bigg( (g_1, h_1, ...)(g_2, h_2, ...) \bigg) (g_3, h_3, ...) = (g_1g_2, h_1h_2, ...)(g_3, h_3, ...) = (g_1g_2g_3, h_1h_2h_3, ...) = \\ = (g_1, h_1, ...)(g_2g_3, h_2h_3, ...) = (g_1, h_1, ...) \bigg( (g_2, h_2, ...), (g_3, h_3, ...) \bigg)
+        \end{multline*}
+        \item Нейтральный:
+        $$ e_{G \times H \times ...} = (e_G, e_H, ...) $$
+        \item Обратный:
+        $$ (g, h, ...)^{-1} = (g^{-1}, h^{-1}, ...) $$
+    \end{itemize}
+\end{proof}
+
+\begin{property}[подгруппа прямого произведения]
+    $ G = G_1 \times G_2 \times G_k, \qquad e_i $ -- нейтральный элемент $ G_i $
+    $$ H_i \define \set{e_i, ..., e_{i - 1}, \bm{g_i}, e_{i + 1}, ..., e_k} $$
+    Тогда
+    \begin{enumerate}
+        \item[0.] $ H_i \cong G_i $
+    	\item $ H_i \vartriangleleft G_i $
+        \item $
+        \begin{rcases}
+        	i \ne j \\
+            h_i \in H_i \\
+            h_j \in H_j
+        \end{rcases} \implies h_ih_j = h_jh_i $
+        \item $ H_i \cap H_1 ... H_{i - 1}H_{i + 1} ... H_k = \set{e} $
+        \item $ H_1 ... H_k = G $
+        \item $ G|H_i \cong G_1 \times ... \times G_{i - 1} \times G_{i + 1} \times G_k $
+    \end{enumerate}
+\end{property}
+
+\begin{lemma}[порядки элементов в прямом произведении]
+	Пусть $ G = H_1 \times H_2 \times ... \times H_k, \qquad h_i \in H_i $ \\
+    $ g = (h_1, ..., h_k) $ \\
+    Тогда
+    \begin{enumerate}
+        \item $ \ord_{H_i}(h_i) = \infty $ для некоторого $ i \implies \ord_G(g) = \infty $
+    \end{enumerate}
+
+\end{lemma}

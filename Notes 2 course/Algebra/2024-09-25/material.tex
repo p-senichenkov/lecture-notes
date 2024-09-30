@@ -1,0 +1,354 @@
+\section{Многочлены от оператора}
+
+\begin{theorem}[ядро и образ многочлена от оператора]
+	$ \mathcal{A} $ -- оператор на $ V $, $ p $ -- многочлен, $ \mathcal{B} = p(\mathcal{A}) $ \\
+	Тогда $ \ker \mathcal{B} $ и $ \Img \mathcal{B} $ -- ивариантные подпространства относительно $ \mathcal{A} $
+\end{theorem}
+
+\begin{proof}
+	По лемме,
+	\begin{equ}1
+		\mc{A} \circ \mc{B} = \mc{B} \circ \mc{A}
+	\end{equ}
+	\begin{itemize}
+		\item $ \ker \mc{B} $
+		$$ v \in \ker \mc{B} \implies \mc{B}(v) = 0 \implies \mc{A} \bigg( \mc{B}(v) \bigg) = 0 \underimp{\eref1} \mc{B} \bigg( \mc{A}(v) \bigg) = 0 \implies \mc{A}(v) \in \ker \mc{B} $$
+		\item $ \Img \mc{B} $
+		$$ v \in \Img \mc{B} \implies v = \mc{B}(w) \implies \mc{A}(v) = \mc{A} \bigg( \mc{B}(w) \bigg) \underset{\eref1}= \mc{B} \bigg( \mc{A}(w) \bigg) $$
+	\end{itemize}
+\end{proof}
+
+\begin{definition}
+	$ \mc{A} $ -- оператор на $ V $, $ \qquad v \in V $
+	\begin{itemize}
+		\item Аннулятором $ v $ называется такой многочлен $ p $, что $ p(\mc{A})(v) = 0 $
+		\item Минимальным аннулятором $ v $ называется многочлен наименьшей степени среди ненулевых аннуляторов
+	\end{itemize}
+\end{definition}
+
+\begin{remark}
+	Минимальный аннулятор задаётся с точностью до умножения на константу
+\end{remark}
+
+\begin{exmpls}
+	\item $ v $ -- с. в., соответствующие $ \lambda $ (т. е. $ \mc{A}v = \lambda v $)
+	$$ \mc{B} = \mc{A} - \lambda\mc{E} \qquad \mc{B}(v) = \mc{A}(v) - \lambda \mc{E}(v) = \lambda v - \lambda v = 0 $$
+	Найдём $ p $, такой что $ \mc{B} = p(\mc{A}) $:
+	$$ p(t) = t - \lambda $$
+	$ p(t) $ -- минимальный аннулятор
+	\item $ \mc{A} : \R^2 \to \R^2 $
+	$$ \mc{A} : x \mapsto Ax, \qquad A =
+	\begin{pmatrix}
+		2 & 0 \\
+		1 & 2
+	\end{pmatrix} $$
+	\begin{enumerate}
+		\item Докажем, что $ p(t) = (t - 2)^2 $ -- аннулятор $ \forall v $: \\
+		Найдём матрицу оператора $ p(\mc{A}) = (\mc{A} - \mc{E})^2 $:
+		$$ (A - 2E)^2 =
+		\begin{pmatrix}
+			0 & 0 \\
+			1 & 0
+		\end{pmatrix}^2 =
+		\begin{pmatrix}
+			0 & 0 \\
+			0 & 0
+		\end{pmatrix} $$
+		\item Возьмём теперь $ Q(t) = t - 2 $ \\
+		Найдём $ v $, такие что $ Q(t) $ -- аннулятор $ v $:
+		$$ (\mc{A} - 2\mc{E})(v) = 0 $$
+		$$ \mc{A}(v) = 2v $$
+		$$
+		\begin{pmatrix}
+			2 & 0 \\
+			1 & 2
+		\end{pmatrix}
+		\begin{pmatrix}
+			x \\
+			y
+		\end{pmatrix} = 2
+		\begin{pmatrix}
+			x \\
+			y
+		\end{pmatrix} $$
+		$$ v =
+		\begin{pmatrix}
+			0 \\
+			y
+		\end{pmatrix} $$
+	\end{enumerate}
+\end{exmpls}
+
+\begin{props}
+	\item $ V $ -- конечномерно. Тогда
+	\begin{enumerate}
+		\item у любого вектора существует ненулевой аннулятор
+		\item если $ P_0 $ -- минимальный аннулятор, то $ \deg P_0 \le \dim V $
+	\end{enumerate}
+	\begin{proof}
+		Пусть $ n \define \dim V $ \\
+		Докажем, что $ \exist P : \deg P \le n , $ $ P $ -- аннулятор, $ P \ne 0 $ \\
+		Возьмём
+		$$ \underbrace{v_1\mc{A}(v), \mc{A}^2(v), ..., \mc{A}^n(v)}_{n + 1 \text{ вектор}} $$
+		Они ЛЗ, т. к. их больше, чем размерность пространства. Значит,
+		$$ \exist a_i \text{ не все равные } 0 : a_0v + a_1\mc{A}(v) + ... + a_n\mc{A}^n(v) = 0 $$
+		Подойдёт $ P(t) = a_nt^n + ... + a_1t + a_0 $
+	\end{proof}
+	\item \label{prop:2} $ P_1, ..., P_k $ -- аннуляторы $ v $ \\
+	Тогда
+	$$ \forall \text{ многочл. } Q_1, ..., Q_k \quad \text{ многочлен } S(t) = Q_1(t)P_1(t) + ... + Q_k(t)P_k(t) \text{ -- аннулятор} $$
+	\begin{proof}
+		Пусть $ \mc{B}_i \define P_i(\mc{A}), \qquad \mc{C}_i = Q_i(\mc{A}), \qquad \mc{D} = S(\mc{A}) $
+		$$ \mc{D}(v) = \mc{C}_1 \bigg( \underbrace{\mc{B}_1(v)}_{= 0 } \bigg) + ... + \mc{C}_k \bigg( \underbrace{\mc{B}_k(v)}_{= 0} \bigg) = \mc{C}_1(0) + ... + \mc{C}_k(0) = 0 $$
+	\end{proof}
+	\item $ P_0(t) $ -- минимальный аннулятор. Тогда
+	$$ P(t) \text{ -- аннулятор } \iff P(t) \divby P_0(t) $$
+	\begin{proof}
+		Поделим с остатком:
+		$$ P(t) = Q(t)P_0(t) + R(t), \qquad \deg R < \deg P_0 $$
+		\begin{itemize}
+			\item $ \impliedby $
+			$$ R(t) = 0, \qquad P(t) = \underbrace{P_0(t)}_{\text{аннулятор}}Q(t) \text{ -- аннулятор (по (\ref{prop:2}.))} $$
+			\item $ \implies $
+			$$ R(t) = \underbrace{P(t)}_{\text{аннул.}} - Q(t)\underbrace{P_0(t)}_{\text{аннул.}} \text{ -- аннулятор (по (\ref{prop:2}.))} $$
+		\end{itemize}
+	\end{proof}
+	\item Минимальный аннулятор -- единственный с точностью до ассциированности (умножения на обратимый, т. е. на константу)
+	\begin{proof}
+		$$ \exist P_1, P_2 \text{ -- мин. аннул. } \implies \underbrace{P_1}_{\text{аннул.}} \divby \underbrace{P_2}_{\text{мин. аннул.}} $$
+	\end{proof}
+\end{props}
+
+\section{Циклические подпространства}
+
+\begin{definition}
+	$ \mc{A} $ -- оператор на $ V $, $ \qquad v \in V $ \\
+	Циклическим подпространством, порождённым $ v $ называется минимальное по включению инвариантное подпространство, содержащее $ v $
+\end{definition}
+
+\begin{theorem}[базис циклического подпространства]
+	$ k \in \N $ такое, что:
+	\begin{enumerate}
+		\item $ v, \mc{A}(v), ..., \mc{A}^{k - 1}(v) $ ЛНЗ
+		\item $ v, \mc{A}(v), ..., \mc{A}^{k - 1}(v), \mc{A}^k(v) $ ЛЗ
+	\end{enumerate}
+	Тогда первый набор является базисом цикического подпространства, порождённого $ v $
+\end{theorem}
+
+\begin{proof}
+	Пусть $ U $ -- циклическое, порождённое $ v $
+	$$ U \text{ -- инвар. } \implies v \in U \implies \mc{A}v \in U \implies \underbrace{\mc{A}^2v}_{= \mc{A}(\mc{A}(v))} \in U \implies \widedots[5em] $$
+	$$ v, \mc{A}v, ..., \mc{A}^{k - 1}v \in U $$
+	Они ЛНЗ. Чтобы доказать, что это базис, надо доказать, что они прождают $ U $: \\
+	Положим $ W = \braket{v, \mc{A}v, ..., \mc{A}^{k - 1}v} $ \\
+	Докажем, что $ W = U $:
+	\begin{itemize}
+		\item Докажем, что $ W $ -- инвар.: \\
+		$ \mc{A}^kv $ -- ЛК $ v, \mc{A}v, ..., \mc{A}^{k - 1}v $
+		$$ w \in W, \qquad w = a_0v + ... + a_{k - 1}\mc{A}^{k - 1}v $$
+		$$ \mc{A}(w) = a_0\mc{A}v + ... + a_{k - 2}\mc{A}^{k - 1}v + \underbrace{a_{k + 1}\mc{A}^kv}_{\text{ЛК } v, ..., \mc{A}^{k - 1}v} $$
+		Значит, $ w $ является ЛК $ v, ..., \mc{A}^{k - 1}v $
+		\item Докажем, что $ W $ -- минимальное: \\
+		Докажем, что если $ W_1 $ инвариантно и $ v \in W_1 $, то $ W \sub W_1 $:
+		\begin{multline*}
+			\begin{rcases}
+				W_1 \text{ инвар. } \\
+				v \in W_1
+			\end{rcases} \implies \mc{A}v \in W_1, \qquad
+			\begin{rcases}
+				W_1 \text{ инвар. } \\
+				\mc{A}v \in W_1
+			\end{rcases} \implies \mc{A}^2v \in W_1, \quad \widedots[3em], \quad \underbrace{\mc{A}^iv}_{\text{порожд.} W} \in W_1 \implies \\
+			\implies W_1 \sub W
+		\end{multline*}
+	\end{itemize}
+\end{proof}
+
+\begin{eg}
+	$ \mc{A} : \R^3 \to \R^3 $
+	$$ \mc{A}
+	\begin{pmatrix}
+		x \\
+		y \\
+		z
+	\end{pmatrix} =
+	\begin{pmatrix}
+		x + y \\
+		y + z \\
+		z
+	\end{pmatrix} $$
+	$$ v_1 =
+	\begin{pmatrix}
+		1 \\
+		0 \\
+		0
+	\end{pmatrix}, \qquad \mc{A}(v_1) = v_1 $$
+	Циклическое подпространство -- $ \left\langle
+	\begin{pmatrix}
+		1 \\
+		0 \\
+		0
+	\end{pmatrix} \right\rangle $
+	$$ v_2 =
+	\begin{pmatrix}
+		0 \\
+		1 \\
+		0
+	\end{pmatrix}, \qquad \mc{A}(v_2) =
+	\begin{pmatrix}
+		1 \\
+		1 \\
+		0
+	\end{pmatrix}, \qquad \mc{A}^2(v_2) =
+	\begin{pmatrix}
+		2 \\
+		1 \\
+		0
+	\end{pmatrix} $$
+	Они все лежат в плоскости $ X, Y, 0 $, а их три штуки. Значит, они ЛЗ \\
+	Циклическое подпространство -- $ \braket{v_2, \mc{A}(v_2)} = \left\langle
+	\begin{pmatrix}
+		x \\
+		y \\
+		0
+	\end{pmatrix} \right\rangle $
+	$$ v_3 =
+	\begin{pmatrix}
+		0 \\
+		0 \\
+		1
+	\end{pmatrix}, \qquad \mc{A}(v_3) =
+	\begin{pmatrix}
+		0 \\
+		1 \\
+		1
+	\end{pmatrix}, \qquad \mc{A}^2(v_3) =
+	\begin{pmatrix}
+		1 \\
+		2 \\
+		1
+	\end{pmatrix} $$
+	Они ЛНЗ. Размерность нашего пространства -- 3, значит, если добавить четвёртый вектор, они будут ЛЗ \\
+	Циклическое подпространство -- $ \R^3 $
+\end{eg}
+
+\begin{notation}
+	$ a_1, .., a_n \ne \bigodot \iff $ \textbf{не} все они равны нулю
+\end{notation}
+
+\begin{theorem}[циклическое подпространство и минимальный аннулятор]
+	$ V $ -- конечномерное \\
+	$ \mc{A} $ -- оператор на $ V $, $ \qquad v \in V $, $ \qquad U $ -- цикл. подпр-во, порождённое $ v $ \\
+	$ \chi $ -- хар. многочлен $ \mc{A} $ на $ U $ \\
+	Тогда $ \chi $ -- минимальный аннулятор $ v $
+\end{theorem}
+
+\begin{proof}
+	Пусть $ k $ такое, что
+	\begin{enumerate}
+		\item $ v, \mc{A}v, ..., \mc{A}^{k - 1}v $ ЛНЗ
+		\item $ v, \mc{A}v, ..., \mc{A}^{k - 1}v, \mc{A}^kv $ ЛЗ
+	\end{enumerate}
+	Путь $ a_i $, не все равные нулю, такие, что
+	$$ a_0v + a_1\mc{A}v + ... + a_{k - 1}\mc{A}^{k - 1}v + a_k\mc{A}^kv = 0 $$
+	Значит, $ a_k \ne 0 $ (т. к. $ v ..., \mc{A}^{k - 1}v $ ЛНЗ) \\
+	Делим на $ a_k $, НУО считаея что $ a_k = 1 $:
+	$$ \mc{A}^kv + ... + a_1\mc{A}v + a_0 v = 0 $$
+	Положим $ P(t) \define t^k + a_{k - 1}t^{k - 1} + ... + a_1t + a_0 \implies P(t) $ -- аннулятор \\
+	Докажем, что $ P(t) $ -- минимальныйю \textbf{Пусть это не так}:
+	$$ \exist Q'(t) = b_mt^m + ... + t_0, \qquad Q \ne 0, \qquad Q \text{ -- аннул. }, \qquad m < k $$
+	$$ b_m\mc{A}^mv + ... + b_0v = 0 $$
+	$ b_i \ne \bigodot \implies \mc{A}^mv, ..., v $ -- ЛЗ -- \contra (это был не первый момент линейной зависимости) \\
+	Докажем, что $ P(t) = \pm \chi $: \\
+	Знаем, что
+	$$ v, ..., \mc{A}^{k - 1}v \text{ -- базис } U $$
+	Матрица $ \mc{A}\clamp{U} $ в этом базисе:
+	$$ A =
+	\begin{pmatrix}
+		v & \mc{A}v & ... & \mc{A}^{k - 2}v & \mc{A}^{k - 1}v \\
+		0 & 0 & ... & 0 & -a_0 \\
+		1 & 0 & ... & . & -a_1 \\
+		0 & 1 & ... & . & . \\
+		. & . & . & . & . \\
+		0 & 0 & ... & 0 & . \\
+		1 & 1 & ... & 1 & -a_{k - 1}
+	\end{pmatrix} $$
+	В первом столбце (начиная со второй строки) -- координаты $ \mc{A}v = 0 \cdot v + 1 \cdot \mc{A}v + 0 \cdot ... $ \\
+	Во втором столбце -- координаты $ \mc{A}^2v $ \\
+	\widedots[10em] \\
+	В последнем столбце -- координаты $ \mc{A}^kv $
+	$$ \chi_A(t) =
+	\begin{vmatrix}
+		-t & 0 & 0 & ... & 0 & -a_0 \\
+		1 & -t & 0 & ... & 0 & -a_1 \\
+		. & . & . & . & . & . \\
+		. & . & . & -t & 0 & -a_{k - 2} \\
+		. & . & . & . & . & -a_{k - 1} - t
+	\end{vmatrix} $$
+	Прибавим ко 2-й строке 1-ю, умноженную на $ \faktor1t $ \\
+	Прибавим к 3-й строке 2-ю, умноженную на $ \faktor1t $
+	\widedots[10em]
+	$$ \chi(t) =
+	\begin{vmatrix}
+		-t & 0 & 0 & ... & 0 & -a_1 \\
+		0 & -t & 0 & ... & 0 & -a_1 - \frac{a_0}t \\
+		0 & 0 & -t & ... & 0 & -a_2 - \frac{a_1}t - \frac{a_0}{t^2} \\
+		. & . & . & . & . & . \\
+		0 & . & . & . & 0 & t - a_{k - 1} - \frac{a_{k -2}}t - ... - \frac{a_1}{t^{k - 2}} - \frac{a_1}{t^{k - 1}}
+	\end{vmatrix} $$
+	Это будет $ (-1)^kP(t) $
+\end{proof}
+
+\section{Минимальный многочлен оператора}
+
+\begin{definition}
+	Многочлен $ P(t) $ аннулирует $ \mc{A} $, если $ P(\mc{A}) = 0 $
+\end{definition}
+
+\begin{remark}
+	Он является аннулятором для всех векторов
+\end{remark}
+
+\begin{eg}
+	$ \mc{A} : \R^2 \to \R^2 $
+	$$ \mc{A} : X \mapsto
+	\begin{pmatrix}
+		2 & 0 \\
+		1 & 2
+	\end{pmatrix}X $$
+	$$ P(t) = (t - 2)^2 \text{ -- аннулирует } A $$
+	$ Q(t) = t - 2 $ не аннулирует $ \mc{A} $, т. к. $ \bigg( Q(\mc{A}) \bigg) =
+	\begin{pmatrix}
+		1 \\
+		0
+	\end{pmatrix} \ne
+	\begin{pmatrix}
+		0 \\
+		0
+	\end{pmatrix} $
+\end{eg}
+
+\begin{definition}
+	Минимальным многочленом оператора $ \mc{A} $ называется ненулевой многочлен наименьшей степени, аннулирующий $ \mc{A} $
+\end{definition}
+
+\begin{properties}
+	$ \mc{A} $ -- оператор на $ V $
+	\begin{enumerate}
+		\item \label{prop:1} $ P_1, ..., P_k $ аннулируют $ \mc{A} $ \\
+		Тогда для любых многочленов $ Q_1, ..., Q_k $ многочлен $ S(t) = P_1(t)Q_1(t) + ... + Pk(t)Q_k(t) $ аннулирует $ \mc{A} $
+		\begin{proof}
+			$ \forall v \quad P_i $ -- аннулятор $ v \implies S(\mc{A}) $ -- аннулятор $ v \implies S $ аннулирует $ \mc{A} $
+		\end{proof}
+		\item $ P_0 $ -- минимальный многочлен для $ \mc{A} $. Тогда
+		$$ P \text{ аннулирует } \mc{A} \iff P \divby P_0 $$
+		\begin{proof}
+			Пусть $ P = P_0Q + R $
+			\begin{itemize}
+				\item Если $ P \divby P_0 $, то $ P = P_0Q \underimp{\ref{prop:1}.} P \text{ аннулирует } \mc{A} $
+				\item Если $ P $ аннулирует $ \mc{A} $, то $ R = P - P_0Q $ аннулирует $ \mc{A} \underimp{\ref{prop:1}.} R = 0 \implies P \divby P_0 $
+			\end{itemize}
+		\end{proof}
+		\item Минимальный многочлен $ \mc{A} $ единственнен с точностью до ассоциирования
+	\end{enumerate}
+\end{properties}

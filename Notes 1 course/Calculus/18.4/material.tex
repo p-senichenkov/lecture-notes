@@ -1,0 +1,361 @@
+\chapter(R\textasciicircum{}n){$ \R^n $}
+
+\section{Непрерывность суперпозиции отображений}
+
+\begin{theorem}
+	$ E \sub \R^n, \qquad G \sub \R^k, \qquad A \in E $ -- т. сг. $ E, \qquad \alpha \in G $ -- т. сг. $ G, \qquad n, k, l \ge 1 $ \\
+	$ F : E \to \R^k, \qquad \forall x \in E \quad F(X) \in G, \qquad F(A) = \alpha, \qquad F $ непр. в $ A $ \\
+	$ \Phi : G \to \R^l, \qquad \Phi $ непр. в $ \alpha, \qquad K : E \to \R^l, \qquad K(X) = \Phi(F(X)) $
+	\begin{equ}1
+		\text{Тогда } K \text{ непр. в } A
+	\end{equ}
+\end{theorem}
+
+\begin{proof}
+	Т. к. $ \Phi $ непр. в $ \alpha $,
+	\begin{equ}2
+		\forall \veps > 0 \quad \exist \eta > 0 : \forall y \in B_\eta(\alpha) \cap G \quad \norm{\Phi(y) - \Phi(\alpha)}_l < \veps
+	\end{equ}
+	Т. к. $ F $ непр. в $ A $,
+	\begin{equ}3
+		\exist \delta > 0 : \forall X \in B_\delta(A) \cap E \quad \norm{F(X) - F(A)}_k < \eta
+	\end{equ}
+	\begin{equ}4
+		\eref3 \implies F(X) \in B_\eta(F(A)) \cap G \implies F(X) \in B_\eta(\alpha) \cap G
+	\end{equ}
+	\begin{equ}5
+		\eref4, \eref2 \implies \forall X \in B_\delta(A) \cap E \quad \norm{\Phi(F(X)) - \Phi(\alpha)}_l < \veps
+	\end{equ}
+	$$ \eref5 \underset{(F(A) = \alpha)}\iff \norm{\Phi(F(X)) - \Phi(F(A))}_l < \veps \iff \norm{K(X) - K(A)}_l < \veps $$
+\end{proof}
+
+\begin{definition}
+	$ K \sub \R^n, \qquad n \ge 1, \qquad K \ne \O $ \\
+	Множество $ K $ называется компактом, если оно ограничено и замкнуто
+\end{definition}
+
+\begin{theorem}[первая Вейерштрасса]\label{th:1}
+	$ K $ -- компакт в $ \R^n, \quad n \ge 1, \qquad f : K \to \R^n, \qquad f $ непр. во всех т. сг. \\
+	Тогда $ f $ ограничена, т. е.
+	\begin{equ}{61}
+		\exist M : \forall X \in K \quad |f(X)| \le M
+	\end{equ}
+\end{theorem}
+
+\begin{proof}
+	Пусть это не так, т. е.
+	\begin{equ}6
+		\forall N \ge 2 \quad \exist X_N \in K : |f(X_N)| > |f(X_1)| + ... + |f(X_{N - 1})| + N, \qquad |f(X_1)| > 1
+	\end{equ}
+	$$ \eref6 \implies \forall p \ne q \quad X_p \ne X_q $$
+	Поскольку все они принадлежат $ K $, а $ K $ -- это ограниченное множество, то
+	\begin{equ}7
+		\exist R > 0 : \forall N \quad \norm{X_N} \le R
+	\end{equ}
+	Можно применить принцип выбора Больцано-Вейерштрасса:
+	\begin{equ}8
+		\exist \seq{X_{N_m}}m, \quad \exist X_* : X_{N_m} \underarr{m \to \infty} X_*
+	\end{equ}
+	$$ X_{N_m} \in K $$
+	Поскольку они все различны, $ X_* $ -- т. сг. $ K \underimp{K \text{ (замкн.)}} X_* \in K $ \\
+	Возьмём $ \veps = 1 $. Тогда, в силу непрерывности $ f $ в $ X_* $,
+	\begin{equ}9
+		\exist \delta_0 : \forall X \in K \cap B_{\delta_0}(X_*) \quad |f(X) - f(X_*) < 1
+	\end{equ}
+	\begin{equ}{10}
+		\eref9 \implies |f(X)| \trile |f(X) - f(X_*) + |f(X_*)| < 1 + |f(x_*)
+	\end{equ}
+	\begin{equ}{101}
+		\text{Возьмём } N_0 > 1 + |f(X_*)|
+	\end{equ}
+	\begin{equ}{11}
+		\eref8 \implies \exist N_1 : \forall m > N_1 \quad \norm{X_{N_m} - X_*} < \delta_0
+	\end{equ}
+	\begin{equ}{12}
+		\text{Возьмём } m_0 \define \max\set{N_0, N_1 + 1}
+	\end{equ}
+	\begin{equ}{13}
+		\eref6, \eref{101}, \eref{12} \implies |f(X_{N_{m_0}})| > N_{m_0} \ge N_0 > |f(X_*)| + 1
+	\end{equ}
+	С другой стороны,
+	\begin{equ}{14}
+		\eref{10}, \eref{11}, \eref{12} \implies |f(X_{N_{m_0}}) < |f(X_*)| + 1
+	\end{equ}
+	$$ \eref{13} \contra \eref{14} $$
+\end{proof}
+
+\begin{theorem}[вторая Вейерштрасса]
+	$ K \sub \R^n $ -- компакт, $ \qquad f : K \to \R^n $ непрерывна во всех т. сг. $ K $ \\
+	Тогда
+	\begin{equ}{15}
+		\exist X_-, X_+ \in K : \forall X \in K \quad f(X_-) \le f(X) \le f(X_+)
+	\end{equ}
+\end{theorem}
+
+\begin{proof}
+	\hfill
+	\begin{itemize}
+		\item $ X_+ $ \\
+		Пусть такого $ X_+ $ не существует \\
+		По теореме \ref{th:1},
+		\begin{equ}{16}
+			\exist M : \forall X \in K \quad f(X) \le M
+		\end{equ}
+		\begin{equ}{17}
+			\eref{16} \implies \sup_{x \in K}f(X) \define M_0 \le M
+		\end{equ}
+		\begin{equ}{18}
+			\forall X \in K \quad f(X) < M_0
+		\end{equ}
+		\begin{equ}{19}
+			\vphi(X) \define \frac1{M_0 - f(X)}
+		\end{equ}
+		\begin{equ}{20}
+			\eref{18} \implies \forall X \in K \quad \vphi(X) > 0
+		\end{equ}
+		$ \eref{18} \implies \vphi $ непрерывна во всех т. сг. $ K $ \\
+		По теореме \ref{th:1}, $ \vphi $ ограничена, т. е
+		\begin{equ}{21}
+			\exist L : \forall X \in K \quad \vphi(X) \le L
+		\end{equ}
+		\begin{equ}{22}
+			\eref{19}, \eref{21} \implies \frac1{M_0 - f(X)} \le L
+		\end{equ}
+		\begin{equ}{23}
+			\eref{22} \iff M_0 - f(X) \ge \frac1L \iff f(X) \le M_0 - \frac1L \quad \forall X \in K
+		\end{equ}
+		\begin{equ}{24}
+			\eref{23} \implies \sup_{X \in K} f(X) \le M_0 - \frac1L
+		\end{equ}
+		Вспомним, что через $ M_0 $ мы обозначили $ \sup_{X \in K} f(X) $ -- \contra
+		\item $ X_- $ \\
+		Рассмотрим $ g(X) = -f(X) $ \\
+		По только что доказанному,
+		$$ \exist X_- : g(X) \le g(X_-) \iff -f(X) \le -f(X_-) \iff f(X) \ge f(X_-) $$
+	\end{itemize}
+\end{proof}
+
+\begin{definition}
+	$ E \sub \R^n, \quad n \ge 1, \qquad X_0, X_1, X_2 \in E $ \\
+	$ X_0 $ будем называть внутренней точкой $ E $, если $ \exist B_r(X_0) \supset E $ \\
+	$ X_1 $ будем называть внешней точкой $ E $, если $ \exist \delta : B_\delta(X_1) \cap E \ne \O $ \\
+	$ X_2 $ будем называть граничной точкой $ E $, если она не внутренняя, и не внешняя
+\end{definition}
+
+\begin{statement}
+	$ E \sub \R^n, \quad n \ge 1, \qquad E \ne \O, \qquad E \ne \R^n $ \\
+	Тогда множество его граничных точек не пусто
+\end{statement}
+
+\begin{definition}
+	Множество граничных точек называется границей $ E $
+\end{definition}
+
+\begin{notation}
+	$ \partial E $
+\end{notation}
+
+\begin{definition}
+	$ E \sub \R^n, \quad n \ge 2, \qquad X = (x_1, ..., x_n) \in E $ -- внутр. т. $ E $ \\
+	Обозначим $ e_k \define (0, ..., \underset{k \text{ место}}1, ..., 0) $
+	\begin{equ}{31}
+		\exist \delta : \forall \underset{h \ne 0}{|h| < \delta} \quad \forall k = 1, ..., n \quad X + he_k = E
+	\end{equ}
+	$ f : E \to \R $
+	Чатсной производной по переменной $ x_k $ называется
+	\begin{equ}{32}
+		f_{x_k}'(X) \define \limz{h} \frac{f(X + he_k) - f(X)}h
+	\end{equ}
+	Рассмотрим $ g(y) = f(x_1, ..., \underset{k \text{ место}}y, ..., x_n), \qquad y \in (x_k - \delta, x_k + \delta) $
+	$$ \eref{32} \implies g'(x_k) = f'_{x_k}(X) $$
+\end{definition}
+
+\begin{eg}
+	$$ f(x_1, x_2) =
+	\begin{cases}
+		\dfrac{x_1x_2}{x_1^2 + x_2^2}, \qquad (x_1, x_2) \ne \On[2] \\
+		f(\On[2]) = 0
+	\end{cases} $$
+	$$
+	\begin{cases}
+		(0, 0) + he_1 = (h, 0) \\
+		(0, 0) + he_2 = (0, h)
+	\end{cases} $$
+	$$ \frac{f(\On[2] + he_1) - f(\On[2])}h = \frac{0 - 0}h = 0 \underarr{h \to 0} 0 $$
+	$$ \frac{f(\On[2] + he_2) - f(\On[2])}h = \frac{0 - 0}h = 0 \underarr{h \to 0} 0 $$
+	$$ \implies \exist f_{x_1}'(\On[2]), f_{x_2}'(\On[2]) $$
+	$$ X_n \define \bigg( \frac1n, \frac1n \bigg), \qquad X_n \underarr{n \to \infty} \On[2] $$
+	$$ f(X_n) = \frac{\dfrac1{n^2}}{\dfrac2{n^2}} = \half \underarr{n \to \infty} \half $$
+\end{eg}
+
+\begin{definition}
+	$ E \sub \R^n, \quad n \ge 1, \qquad X \in E $ -- внутр. т., $ \qquad f : E \to \R $ \\
+	Бдуем говорить, что $ f $ дифференцируема в $ X $, если
+	\begin{equ}{41}
+		\exist a_1, ..., a_n \in \R : \forall
+		\begin{cases}
+			H \in \R^n \\
+			X + H \in E \\
+			H = (h_1, ..., h_n)
+		\end{cases} \quad f(X + H) - f(X) = a_1h_1 + ... + a_nh_n + r(H)
+	\end{equ}
+	\begin{equ}{42}
+		\frac{r(H)}{\norm{H}} \underarr{H \to \On} 0
+	\end{equ}
+\end{definition}
+
+\begin{theorem}
+	$ f $ дифференц. в $ X $
+	\begin{equ}{43}
+		\implies \forall k = 1, ..., n \quad \exist f_{x_k}'(X) = a_k
+	\end{equ}
+\end{theorem}
+
+\begin{proof}
+	Возьмём $ \veps = 1 $
+	\begin{equ}{44}
+		\exist \delta > 0 : \forall 0 < \norm{H} < \delta \quad \bigg| \frac{r(H)}{\norm{H}} \bigg| < 1
+	\end{equ}
+	$$ \eref{44} \implies |r(H)| < \norm{H} $$
+	Возьмём $ A \define \sqrt{a_1^2 + ... + a_n^2} $
+	\begin{equ}{45}
+		|a_1h_1 + ... + a_nh_n| \le A \norm{H}
+	\end{equ}
+	$$ \eref{41}, \eref{44}, \eref{45} \implies |f(X + H) - f(X)| \le |a_1h_1 + ... + a_nh_n| + |r(H)| \le A \norm{H} + \norm{H} \underarr{H \to \On} 0 $$
+	Возьмём $ \forall 1 \le k \le n $
+	\begin{undefthm}{Напоминание}
+		Мы обозначаем $ e_k \define (0, ..., \underset{k}1, ..., 0) $
+	\end{undefthm}
+	Определим $ H_k \define he_k $ \\
+	Тогда $ \norm{H_k} = |h| $
+	\begin{equ}{46}
+		f(X + H_k) - f(X) = a_kh + r(H_k)
+	\end{equ}
+	Поделим на $ h $:
+	$$ \underset{\define F}{\frac{f(X + H_k) - f(X)}h} = a_k + \frac{r(H_k)}h $$
+	$$ \eref{42} \implies \bigg| \frac{r(H_k)}h \bigg| = \bigg| \frac{r(H_k)}{\norm{H_k}} \bigg| \underarr{h \to 0} 0 \implies F \underarr{h \to 0} a_k $$
+\end{proof}
+
+\begin{implication}
+	$ f $ дифференцируема в $ X $
+	\begin{equ}{47}
+		\implies f(X + H) - f(X) = f_{x_1}'(X)h_1 + ... + f_{x_n}'(X)h_n + r(H)
+	\end{equ}
+\end{implication}
+
+\begin{definition}
+	Эта функция называется дифференциалом функции $ f $ в точке $ X $ при значении $ H $
+\end{definition}
+
+\begin{notation}
+	$ \di f(X, H) \define f_{x_1}'(X)h_1 + ... + f_{x_n}'(X)h_n + r(H) $
+\end{notation}
+
+\section{Производная по направлению}
+
+\begin{definition}
+	$ \nu \in \R^n, \qquad \norm\nu = 1, \qquad \nu = \alpha_1e_1 + ... + \alpha_ne_n, \qquad n \ge 2 $ \\
+	$ \limz{h} \dfrac{f(X + h\nu) - f(X)}h \define f_\nu'(X) $ называется частной производной по направлению $ \nu $
+\end{definition}
+
+\begin{theorem}
+	$ f $ дифференцируема в $ X $. Тогда для любого $ \nu $
+	\begin{equ}{49}
+		\exist f_\nu'(X) = \alpha_1f_{x_1}'(X) + ... + \alpha_nf_{x_n}'(X)
+	\end{equ}
+\end{theorem}
+
+\begin{proof}
+	$ H = h\nu, \qquad \norm{H} = |h| \cdot \norm\nu = |h| $
+	\begin{equ}{410}
+		f(X + H) - f(X) = f_{x_1}'(X)h_1 + ... + f_{x_n}'(X)h_n + r(H)
+	\end{equ}
+	$$ H \underset{(h_k = h\alpha_k)}= (h\alpha_1, ..., h\alpha_n) $$
+	$$ \eref{410} \iff f(X + H) - f(X) = hf_{x_1}'(X)\alpha_1 + ... + hf_{x_n}'(X)\alpha_n + r(H) $$
+	\begin{equ}{411}
+		\eref{410} \implies \frac{f(X + h\nu) - f(X)}h = f_{x_1}'(X)\alpha_1 + ... + f_{x_n}'(X)\alpha_n + \frac{r(h\nu)}h
+	\end{equ}
+	\begin{equ}{412}
+		\bigg| \frac{r(h\nu)}h \bigg| = \bigg| \frac{r(H)}{\norm{H}} \bigg| \underarr{h \to 0} 0
+	\end{equ}
+	$$ \eref{411}, \eref{412} \implies \frac{f(X + h\nu) - f(X)}h \underarr{h \to 0} f_{x_1}'(X)\alpha_1 + ... + f_{x_n}'(X)\alpha_n $$
+\end{proof}
+
+\begin{definition}
+	$ f $ дифференцируема в $ X $ \\
+	Градиентом $ f $ в точке $ X $ называется \textbf{вектор-строка} $ \big( f_{x_1}'(X), ..., f_{x_n}'(X) \big) $
+\end{definition}
+
+\begin{notation}
+	$ \grad f $
+\end{notation}
+
+\begin{statement}
+	$ \nu = (\alpha_1, ..., \alpha_n) $ \\
+	Тогда $ f $ дифференцируема в $ X $ \\
+	Воспользуемся нераенством Коши-Буняковского:
+	\begin{equ}{413}
+		|f_\nu'(X)| = \sqrt{f_{x_1}'^2(X) + ... + f_{x_n}'^2(X)} \cdot \sqrt{\alpha_1^2 + ... + \alpha_n^2} = \sqrt{f_{x_1}'^2(X) + ... + f_{x_n}'^2(X)}
+	\end{equ}
+	$$ \eref{413} \iff |f_\nu'(X)| \le \norm{\grad f(X)} $$
+	Пусть $ \grad f(X) \ne \On $ \\
+	Положим $ t \define \norm{\grad f(X)} > 0 $ и
+	\begin{equ}{414}
+		\nu_0 \define \dfrac1t \grad f(X), \qquad \norm{\nu_0} = 1
+	\end{equ}
+	\begin{equ}{415}
+		\eref{414} \implies \nu_0 = \bigg( \frac1tf_{x_1}'(X), ..., \frac1tf_{x_n}'(X))
+	\end{equ}
+	\begin{equ}{416}
+		\eref{49}, \eref{415} \implies f_{\nu_0}'(X) = \frac1tf_{x_1}'^2(X) + ... + \frac1tf_{x_n}'^2(X) = \frac1t \norm{\grad f(X)}^2 \underset{t \bydef \norm{\grad f(X)}}= \norm{\grad f(X)}
+	\end{equ}
+	\begin{statement}
+		Если $ \nu \ne \nu_0 $, то $ f_\nu'(X) < f_{\nu_0}'(X) $
+	\end{statement}
+	\begin{proof}
+		Без доказательства
+	\end{proof}
+\end{statement}
+
+\section{Необходимое условие локального экстремума функции}
+
+\begin{theorem}
+	$ X \in E \sub \R^n, \quad n \ge 2, \qquad X $ -- внутр. т., $ \qquad f : E \to \R, \qquad f $ дифференц. в $ X $ \\
+	$ X $ -- точка локального экстремума $ f $
+	$$ \implies \grad f(X) = \On $$
+\end{theorem}
+
+\begin{proof}
+	Возьмём $ \forall 1 \le k \le n $
+	$$ \exist \delta > 0 : \forall |h| < \delta \quad X + he_k \in E $$
+	Зафиксируем $ k $ и рассомтрим функцию $ g(y) \define f(x_1, ..., \underset{k}y, ..., x_n), \qquad y \in (x_k - \delta, x_k + \delta) $ \\
+	$ x_k $ -- точка локального экстремума
+	$$ \exist g'(x_k) = f_{x_k}'(X) $$
+	По теореме Ферма,
+	$$ g'(X_k) = 0 \implies f_{x_k}'(X) = 0 $$
+\end{proof}
+
+Начиная с этого момента, будем трактовать $ \R^n $ как пространство вектор-столбцов, т. е.
+$$ X =
+\begin{bmatrix}
+	x_1 \\
+	. \\
+	. \\
+	. \\
+	x_n
+\end{bmatrix} \in \R^n, \qquad X^T = (x_1, ..., x_n) $$
+Дифференциал можно записать как $ \di f(X, H) = \grad f(X) H $
+
+\begin{definition}
+	$ n \ge 2, \quad k \ge 1, \qquad L : \R^n \to \R^k $ \\
+	$ L $ называется линейным, если
+	\begin{enumerate}
+		\item $ L(cX) = cL(X), \qquad c \in \R $
+		\item $ L(X_1 + X_2) = L(X_1) + L(X_2) $
+	\end{enumerate}
+\end{definition}
+
+\begin{theorem}
+	$ L $ -- линейное
+	$$ \implies \exist! A_{k \times n} : L(X) = A_{k \times n}X $$
+\end{theorem}

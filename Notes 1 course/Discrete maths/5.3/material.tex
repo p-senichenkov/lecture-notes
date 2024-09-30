@@ -1,0 +1,81 @@
+\chapter{Графы}
+
+\section{Продолжение про деревья}
+
+\begin{algorithm}[Прима]
+	\hfill
+    \begin{enumerate}
+    	\item Выбираем $ i \in M $ \\
+        $ \operatorname{num}(i) \define 0 $
+        \item Рассмотрим рёбра $ (u, v) : $ помечена ровно одна из вершин \\
+        $ \overline{N} $ -- кайма
+        \item $ l(\overline{e}) = \min\limits_{l \in \overline{N}} l(e) $
+        \item Добавляем $ \overline{e} $ к решению \\
+        $ N' = N' \cup \set{\overline{e}} $
+    \end{enumerate}
+\end{algorithm}
+
+\begin{theorem}
+	Алгоритм Прима строит оптимальное остовное дерево
+\end{theorem}
+
+\begin{theorem}
+	Следующие определения дерева эквивалентны:
+    \begin{enumerate}
+        \item \label{it:1} Связный граф без циклов
+        \item \label{it:2} Максимальный граф без циклов\footnote{Если добавить ребро между любыми двумя вершинами, то появится цикл}
+        \item \label{it:3} Любые две вершины соединены единственной цепью
+        \item \label{it:4} Минимальный связный граф\footnote{Если убрать любое ребро, то связность пропадёт}
+        \item \label{it:5} Связный граф: $ |N| = |M| - 1 $
+        \item \label{it:6} Граф без циклов: $ |N| = |M| - 1 $
+    \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+	\hfill
+    \begin{itemize}
+        \item $ \ref{it:1} \implies \ref{it:2} $ \\
+        Если в связный граф добавить ребро, то он замкнётся
+        \item $ \ref{it:2} \implies \ref{it:3} $ \\
+        Граф \textbf{максимальный} без циклов, значит, любые две вершины соединены (если добавить ребро, они будут соединены двумя цепями) \\
+        Отсюда же следует единственность
+        \item $ \ref{it:3} \implies \ref{it:4} $ \\
+        Любые две вершины соединены цепью $ \implies $ граф связный \\
+        Минимальность следует из единственности
+        \item $ \ref{it:4} \implies \ref{it:5} $ \\
+        \begin{itemize}
+        	\item $ |N| > |M| - 1 \implies $ есть цикл
+            \item $ |N| < |M| - 1 \implies $ граф не связный
+        \end{itemize}
+        \item $ \ref{it:5} \implies \ref{it:6} $
+        \item $ \ref{it:6} \implies \ref{it:1} $
+    \end{itemize}
+\end{proof}
+
+\section{Реализация алгоритмов Прима и \textit{Крастера}}
+
+\begin{algorithm}[\textit{Крастера}]
+    Будем хранить промежуточный результат в виде компонент связности
+    \hfill
+    \begin{itemize}
+    	\item Сортировка: $ l(e_1) \le l(e_2) \le ... \le l(e_n) $
+        \item
+        \begin{verbatim}
+        	for e = (u, v) \in E do
+                if FindSet(u) != FindSet(v)
+                    then {A := A \cup {e}, Union(u, v)}
+        \end{verbatim}
+        \item Процедура Union:
+        \begin{verbatim}
+        	p(x) := x       # родитель вершины x
+            define Link(x, y) {
+                if rank(x) > rank(y)
+                    then p(y) := x
+                    else p(x) := y
+                if rank(x) = rank(y)
+                    then rank(y) := rank(x) + 1
+            define Union(u, v) = Link(FindSet(u), FindSet(u))
+        \end{verbatim}
+    \end{itemize}
+
+\end{algorithm}

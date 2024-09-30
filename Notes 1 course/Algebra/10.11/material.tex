@@ -1,0 +1,175 @@
+\chapter{Комплексные числа}
+
+\section{Тригонометрическая форма комплексного числа (продолжение)}
+
+\begin{statement}
+    $$ n \in \Z $$
+    $$ z = r(\cos \vphi + i \sin \vphi) \implies z^n = r^n (\cos (n\vphi) + i \sin (n \vphi)) $$
+\end{statement}
+
+\begin{proof}
+    \hfill
+    \begin{itemize}
+        \item $ n = 0 $
+        $$ z^0 = 1 \quad r_0 (\cos (0 \cdot \vphi) + i \sin (0 \cdot \vphi)) = 1 $$
+        \item $ n > 0 $
+        \begin{multline*}
+            z^n = \underbrace{r (\cos \vphi + i \sin \vphi) \cdot r (\cos \vphi + i \sin \vphi)...}_{n \text{ раз}} = \\ = \underbrace{r \cdot r \cdot ... \cdot r}_{n \text{ раз}}(\cos (\underbrace{\vphi + \vphi + ...}_{n \text{ раз}}) + i\sin (\underbrace{\vphi + \vphi + ...}_{n \text{ раз}})) = r^n (\cos (n \vphi) + i \sin (n \vphi))
+        \end{multline*}
+        \item $ n < 0 $ \\
+        Положим $k = -n, ~ k > 0 $
+        $$ z^n = \frac1{z^k} = \frac1{r^k(\cos (n \vphi) + i \sin (n \vphi))} = \frac1{r^k}(\cos (-k \vphi) + i \sin (-k \vphi)) = r^n(\cos (n \vphi) + i \sin (n \vphi)) $$
+    \end{itemize}
+\end{proof}
+
+\begin{eg}
+    Найти $(-\sqrt3 + i)^{10} $
+    $$ z = -\sqrt3 + i $$
+    $$ r = \sqrt{(-\sqrt3)^2 + 1^2} = 2 $$
+    $$ \cos \vphi = - \frac{\sqrt3}2 \quad \sin \vphi = \frac12 \quad \vphi = \frac{5\pi}6 $$
+    $$ z = 2(\cos \frac{5\pi}6 + i \sin \frac{5\pi}6) $$
+    $$ z^{10} = 2^{10} (\cos (\frac{5\pi}6 \cdot 10 + i \sin (\frac{5\pi}6 c\dot 10))) = 1024 (\cos \frac{\pi}3 + i \sin \frac{\pi}3) = 512 + 512 \sqrt3 i $$
+\end{eg}
+
+\begin{theorem}[Извлечение корня в тригонометрической форме]
+	Пусть $a \in \Co, ~ a \ne 0, ~ n \in \N $. \\
+    Тогда уравнение $z^n = a $ имеет $n$ решений. \\
+    Если $ a = r(\cos \vphi + i \sin \vphi) $, то решениями уравнения являются числа:
+    $$ z_k = r^{\frac1n} (\cos \frac{\vphi + 2 \pi k}n + i \sin \frac{\vphi + 2 \pi k}n), \quad k = 0, 1, ..., n - 1 $$
+\end{theorem}
+
+\begin{proof}
+	Ищем решение в виде $z = \rho (\cos \psi + i \sin \psi) $. Возведём $z$ в $n$ степень:
+    $$ \rho^n (\cos (n \psi) + i \sin (n \psi)) = r(\cos \vphi + i \sin \vphi) $$
+    $$ \begin{cases} \rho^n = r \\ n\psi = \vphi + 2 \pi k, ~ k \in \Z \end{cases} \quad \implies \quad \begin{cases} \rho = r^{\frac1n} \\ \psi = \frac{\vphi + 2 \pi k}n, ~ k \in \Z \end{cases} $$
+    Проверим, что при $ k = 0, 1, .., n - 1 $ корни различны, и любой корень совпадает с одним из них:\\
+    Положим $ z_k = r^{\frac1n} (\cos \frac{\vphi + 2 \pi k}n + i \sin \frac{\vphi + 2 \pi k}n) $
+    \begin{multline*}
+        z_k = z_l \implies \arg z_k = \arg z_l \iff \frac{\phi + 2 \pi k}n = \frac{\phi + 2 \pi l}n + 2 \pi m \iff \\ \iff \phi + 2 \pi k = \phi + 2 \pi l + 2 \pi m \cdot n \iff k = l + mn \iff k \comp{n} l
+    \end{multline*}
+\end{proof}
+
+\begin{eg}
+    $$ \sqrt[3]{8i} $$
+    $$ z^3 = 8i $$
+    $$ r = 8 \quad \phi = \frac{\pi}2 $$
+    $$ z_k = \sqrt[3]{8}(\cos \frac{\frac{\pi}2 + 2 \pi k}3 + i \sin \frac{\frac{\pi}2 + 2 \pi k}3), \quad k = 0, 1, 2 $$
+    \begin{itemize}
+    	\item $ k = 0 $
+        $$ z_0 = 2 \cdot (\cos \frac{\pi}6 + i \sin \frac{\pi}6) = \sqrt3 + i $$
+        \item $ k = 1 $
+        $$ z_1 = 2 (\cos \frac{5\pi}6 + i \sin \frac{5\pi}6) = - \sqrt3 + i $$
+        \item $ k = 2 $
+        $$ z_2 = 2 (\cos \frac{3\pi}2 + i \sin \frac{3\pi}2) = -2i $$
+    \end{itemize}
+
+\end{eg}
+
+\begin{definition}
+    Число $ \veps \in \Co $ называется корнемм $n$-й степени из единицы, если $ \veps^n = 1 $
+\end{definition}
+
+\begin{notation}
+    $$ \veps_k = \cos \frac{2 \pi k}n + i \sin \frac{2 \pi k}n $$
+\end{notation}
+
+\begin{eg}
+	$ n = 4 $
+    $$ \veps_0 = 1 $$
+    $$ \veps_1 = i $$
+    $$ \veps_2 = -1 $$
+    $$ \veps_3 = -i $$
+\end{eg}
+
+\begin{properties}
+    \hfill
+    \begin{enumerate}
+    	\item Корни $n$-й степени из единицы образуют группу по умножению
+        \begin{proof}
+            \hfill
+            \begin{enumerate}
+                \item Ассоциативность -- всегда верно в $\Co$
+                \item Нейтральный элемент: 1 -- корень $n$-й степени из 1
+                \item Обратный элемент:
+                $$ (\frac1x)^n = \frac{1^n}{x^n} = \frac11 = 1 $$
+                \item Замкнутость относительно операции:
+                $$ (xy)^n = x^ny^n = 1 \cdot 1 = 1 $$
+            \end{enumerate}
+        \end{proof}
+        \item Пусть $a \in \Co, ~ a \ne 0, ~ x$ -- корень $n$-й степени из $a$. Тогда $\veps_0x, \veps_1x, ..., \veps_nx $ -- все корни $n$ степени из $a$
+        \begin{proof}
+            Докажем, что, если $y = \veps_ix$, то $y$ -- корень $n$-й степени из 1:
+            $$ y^n = \veps_i^nx^n = 1 \cdot a $$
+            Докажем, что, если $y$ -- корень $n$-й степени из 1, то $y = \veps_ix$, т. е. $\frac{y}x$ -- корень $n$-й степени из 1:
+            $$ (\frac{y}x)^n = \frac{y^n}{x^n} = \frac{a}a = 1 $$
+        \end{proof}
+    \end{enumerate}
+\end{properties}
+
+\begin{definition}
+	Число $\veps \in \Co$ называется перовобразным корнем $n$-й степени из 1, если $\veps^n = 1, ~ \veps^k \ne 1$ при $1 \le k < n $. Также называется корнем, принадлежащим показателю $n$
+\end{definition}
+
+\begin{eg}
+	$ n = 4 \quad 1, i, -1, -i $ \\
+    $i, -i $ -- первообразные (принадлежат показателю 4) \\
+    -1 -- первообразный корень степени 2 \\
+    1 -- первообразный корень степени 1
+\end{eg}
+
+\begin{props}
+    \item $\veps_k$ -- первообразный корень $n$-й степени из 1 $ \iff (k,n) = 1 $
+    \begin{proof}
+    	Пусть $km = nq + r, \quad 0 \le r \le n $
+        $$ \veps_k = (\cos \frac{2 \pi k}n + i \sin \frac{2 \pi k}n)^m = \cos \frac{2 \pi k m}n + i \sin \frac{2 \pi k m}n = \cos \frac{2 \pi r}n + i \sin \frac{2 \pi r}n $$
+        \begin{itemize}
+        	\item Пусть $(k,n) = 1$. Если $\veps_k^m = 1$, то $mk \divby n \implies m \divby n \implies m \ge n $
+            \item Пусть $(k,n) = d \ne 1 \implies \frac{n}d \cdot k \divby n \implies \veps_k^{\frac{n}d} = 1 \implies \veps_k$ -- не первообр.
+        \end{itemize}
+    \end{proof}
+    \item Пусть $\veps_k$ -- первообразный корень. Тогда любой корень $n$-й степени из 1 равен $\veps_k^m$ для некоторого $m$
+    \begin{proof}
+    	$\veps_k, \veps_k^2, .., \veps_k^n$ -- корни $n$-й степени из 1. Докажем, что они различны: \\
+        Пусть $\veps_k^m = \veps_m^l, \quad 1 \le m < l \le n \implies \veps_k^{l-m} = 1, \quad 1 \le l-m < n $
+    \end{proof}
+\end{props}
+
+\chapter{Полиномы}
+
+\section{\S1. Кольцо многочленов}
+
+Будем рассматривать многочлены как бесконечные последовательность коээфициентов (начиная с какого-то момента -- нули)
+
+\begin{definition}
+	Пусть $A$ -- кольцо. Многочленом над $A$ будем называть последовательность $(a_1, a_2, ...)$, в которой только конечное количество членов отлично от нуля.
+\end{definition}
+
+\begin{definition}
+	Суммой многочленов $(a_0, a_1, ...)$ и $(b_0, b_1, ...)$ называется многочлен $(c_0, c_1, ...)$, где $c_k = a_k + b_k ~ \forall k$
+\end{definition}
+
+\begin{definition}
+    Произведением многочленов $(a_0, a_1, ...)$ и $(b_0, b_1, ...)$ называется многочлен $(d_0, d_1, ...)$, где $d_k = a_0b_k + a_1b_{k-1} + ... + a_kb_0$, то есть $d_k = \sum_{i + j = k} a_ib_j$
+\end{definition}
+
+\begin{notation}
+	Множество многочленов над $A$ обозначается $A[x]$
+\end{notation}
+
+\begin{theorem}
+    \hfill
+    \begin{enumerate}
+    	\item Сумма и произведение многочленов определены корректно, т. е. в последовательностях $(c_0, c_1, ...)$ и $(d_0, d_1, ...)$ только конечное колическто членов отлично от нуля
+        \item $A[x]$ -- кольцо
+    \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+	\hfill
+    \begin{enumerate}
+        \item Пусть $N,M : \begin{Bmatrix} a_i = 0 \text{ при } i > N \\ b_i = 0 \text{ при } i > M \end{Bmatrix} \implies c_i = 0 \text{ при } i > \max\set{N,M} $
+        \item Докажем, что $d_k = 0$ при $k > M + N$:
+        $$ d_k = a_0b_k + ... + a_kb_0 = \sum_{i+j=k}a_ib_j$$
+        $$ i + j = k \implies i + j > M + N \implies \begin{bmatrix} i > N \\ j > M \end{bmatrix} \implies \begin{bmatrix} a_i = 0 \\ b_j = 0 \end{bmatrix} \implies a_ib_j = 0 $$
+     \end{enumerate}
+\end{proof}

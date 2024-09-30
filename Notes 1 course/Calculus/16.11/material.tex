@@ -1,0 +1,303 @@
+\chapter{Производные и дифференцируемость}
+
+\section{Таблица основных производных}
+
+\subsection{}
+$$ c \quad \R$$
+$$ c' = \limz{h} \frac{c - c}h = 0$$
+
+\subsection{}
+$$x \quad \R$$
+$$x' = \limz{h}\frac{x+h-x}h = 1$$
+
+\begin{implication}
+$$(f(ax+b))' = f'(ax+b)\cdot (ax+b)' = af'(ax+b)$$
+\end{implication}
+
+\subsection{}
+$$x^2 \quad \R$$
+$$ (x^2)' = (x\cdot x)' = x' \cdot x + x \cdot x' = 2x$$
+$$ n \ge 2 \quad (x^n)' = nx^{n-1}, \quad x \in \R$$
+$$(x^{n+1})' = (x \cdot x^n)' = x' \cdot x^n + x \cdot (x^n)' = x^n + x \cdot n \cdot x^{n-1} = (n+1)x^n$$
+
+\subsection{}
+$$ n \in \N, \quad x^{-n}, \quad \R \setminus \{0\}$$
+$$(x_{-n})' = (\frac1{x^n})' = -\frac{(x^n)''}{x^{2n}} = \frac{nx^{n-1}}{x^{2n}} = -nx^{-n-1}$$
+
+\subsection{}
+$$ e^x \quad \R$$
+$$(e^x)' = \lim \frac{e^{x+h}-e^x}h = e^x\lim \frac{e^h-1}h = e^x$$
+
+\subsection{}
+$$ \ln x \quad x > 0$$
+$$(\ln x)' = \lim \frac{\ln(x+h)-\ln x}h = \lim \frac{\ln\frac{x+h}x}h = \lim \frac{\ln(1 + \frac{h}x)}h = \frac1x \cdot \lim \frac{\ln(1 + \frac{h}x)}{\frac{h}x} = \frac1x$$
+
+\subsection{}
+$$ r \notin \Z \quad x \ge 0$$
+$$ (x^r)' = (e^{r \ln x)})' = \underset{y = r \ln x}{(e^y)' \cdot (r\ln x)'} = e^{r \ln x} \cdot \frac{r}x = rx^{r - 1}$$
+
+\subsection{}
+$$ \sin x \quad \R$$
+$$ (\sin x)' = \lim \frac{\sin (x + h) - \sin x}h = \lim \frac{2\sin \frac{h}2 \cdot \cos (x + \frac{h}2)}h = \lim \cos (x + \frac{h}2) \cdot \lim \frac{\sin\frac{h}2}{\frac{h}2} = \cos x$$
+
+\subsection{}
+$$ \cos x \quad \R$$
+$$ \cos x = \sin (x + \frac{\pi}2)$$
+$$ (\cos x)' = (\sin (x + \frac{\pi}2))' = \underset{y = x + \frac{\pi}2}{(\sin x)' \cdot 1} = \cos (x + \frac{\pi}2) = \sin x$$
+
+
+\subsection{}
+
+$$ \tg x \quad \underset{n \in \Z}{\R \setminus \bigcup \{ \frac{\pi}2 + \pi n \}}$$
+$$ (\tg x)' = (\frac{\sin x}{\cos x})' = \frac{(\sin x)' \cos x - \sin x (\cos x)'}{\cos^2 x} = \frac{\cos^2 x + \sin^2 x}{\cos^2 x} = \frac1{\cos^2 x}$$
+
+\subsection{}
+$$ \ctg x \quad \underset{n \in \Z}{\R \setminus \bigcup \{\pi n \}}$$
+$$ (\ctg x)' = (\frac{\cos x}{\sin x})' = \frac{(\cos x)' \sin x - \cos x (\sin x)'}{\sin^2 x} = \frac{\sin^2 x - \cos^2 x}{\sin^2 x} = - \frac1{\sin^2 x}$$
+
+\subsection{}
+$$ \arcsin x \quad (-1, 1)$$
+$$ f(x) = \arcsin x \quad g(y) = \sin y \clamp{[-\frac{\pi}2, \frac{\pi}2]}$$
+$$ x \in (-1,1) \quad \arcsin x = y \iff x = \sin y$$
+$$ (\arcsin x)' = \underset{t = y}{\frac1{(\sin t)'}} = \frac1{\cos y} = \frac1{\sqrt{1 - \sin^2 y}} = \frac1{\sqrt{1 - x^2}}$$
+
+\subsection{}
+$$ \arccos x \quad (-1,1)$$
+$$ f(x) = \arccos x \quad g(y) = \cos y \clamp{[0, \pi]}$$
+$$ y = \arccos x \iff x = \cos y$$
+$$ (\arccos x)' = \underset{t = y}{\frac1{(\cos t)'}} = -\frac1{\sin y} = -\frac1{\sqrt{1-\cos^2 y}} = -\frac1{\sqrt{1 - x^2}}$$
+
+\subsection{}
+$$ \arctg x \quad \R$$
+$$ f(x) = \arctg x \quad \tg y \clamp{(-\frac{\pi}2, \frac{pi},2)}$$
+$$ y = \arctg x \iff x = \tg y$$
+$$ (\arctg x)' = \underset{t = y}{\frac1{(\tg t)'}} = \frac1{\frac1{\cos^2 x}} = \cos^2 x$$
+$$ x^2 + 1 = \tg^2 y + 1 = \frac{\sin^2 y}{\cos^2 y} + 1 = \frac1{\cos^2 x}$$
+$$ \cos^2 y = \frac1{1 + x^2}$$
+$$ (\arcctg x)' = \frac1{1 + x^2}$$
+
+\subsection{}
+$$ \arcctg x \quad \R$$
+$$ f(x) = \arcctg x \quad g(y) = \ctg y \clamp{(0,\pi)}$$
+$$ (\arcctg x)' = \underset{t = y}{\frac1{(\ctg t)'}} = -\frac1{\frac1{\sin^2 y}} = -\sin^2 y$$
+$$ x^2 + 1 = \ctg^2 y + 1 = \frac{\cos^2 y}{\sin^2 y} + 1 = \frac1{\sin^2 y}$$
+$$ \sin^2 y = \frac1{1 + x^2}$$
+$$ (\arcctg x)' = -\frac1{1 + x^2}$$
+
+\section{Экстремумы}
+
+\begin{definition}
+	$$ f : [a,b] \to \R$$
+    $$ x_0 \in [a,b]$$
+    $x_0$ -- точка локального максимума $f$, если
+    $$ \exist \omega(x_0) : \forall x \in \omega(x_0) \cap [a,b] \quad f(x) \le f(x_0)$$
+    \\
+    $x_0$ -- точка строгого локального максимума $f$, если \\
+    $$ \exist \omega(x_0) : \forall x \ne x_0 \in \omega(x_0) \cap [a,b] \quad f(x) < f(x_0)$$
+    \\
+    $$ g : [a,b] \to \R$$
+    $$ x_1 \in [a,b]$$
+    $x_1$ -- точка локального минимума $g$, если
+    $$ \exist \omega_1(x_1) : \forall x \in \omega_1(x_1) \cap [a,b] \quad g(x) \ge f(x_1)$$
+    \ \\
+    $x_1$ -- точка строгого локального минимума $g$, если
+    $$ \exist \omega_1(x_1) : \forall x \ne x_1 \in \omega_1(x_1) \cap [a,b] \quad g(x) > f(x_1)$$
+    \ \\
+    $$ h : [a,b] \to \R$$
+    $$ x_2 \in [a,b]$$
+    $x_2$ -- точка локального экстремума $h$, если она является либо точкой локального максимума, либо точкой локального минимума \\
+    $x_2$ -- точка строгого локального экстремума $h$, если она является либо точкой строгого локального максимума, либо точкой строгого локального минимума
+\end{definition}
+
+\begin{theorem}[Ферма (не великая)]
+    $$ f : (a,b) \to \R $$
+    $$ x_0 \in (a,b) $$
+    $x_0$ -- локальный экстремум $f$
+    $$ \exist f'(x_0) $$
+    Тогда
+    \begin{equ}{1}
+        f'(x_0) = 0
+    \end{equ}
+\end{theorem}
+
+\begin{proof}
+    \ \\
+	Рассмотрим случай, когда $x_0$ -- локальный максимум $f$ \\
+    По определению локального максимума:
+    \begin{equ}2
+        \exist \veps > 0 : \text{при } x \in (x_0 - \veps, x_0 + \veps) \cap (a,b) \quad f(x) \le f(x_0)
+    \end{equ}
+     $$ (x_0 - \veps, x_0 + \veps) \sub (a,b) $$
+     \begin{multline} \lbl3
+         0 < h < \veps \quad \eref2 \implies f(x_0 + h) \le f(x_0) \implies \frac{f(x_0 + h) - f(x_0)}h \le 0 \implies \\ \implies \lim\limits_{h \to +0} \frac{f(x_0 + h) - f(x_0)}h \le 0
+    \end{multline}
+    \begin{multline} \lbl4
+        -\veps < h < 0 \quad \eref2 \implies f(x_0 + h) \le f(x_0) \implies \frac{f(x_0 + h) - f(x_0)}h \ge 0 \implies \\ \implies \lim\limits_{h \to -0} \frac{f(x_0 + h) - f(x_0)}h \ge 0
+    \end{multline}
+    $$ \eref3, \eref4 \implies \eref1 $$
+    \ \\
+    Рассмотрим случай, когда $x_0$ -- локальный минимум $f$
+    $$ g(x) - f(x)$$
+    $$ f(x) \ge f(x_0) \iff -f(x) \le -f(x_0) \iff g(x) \le g(x_0)$$
+    $x_0$ -- локальный максимум $g$ \\
+    По свойствам производных, $ \exist g'(x_0) = -f'(x_0)$ \\
+    По только что доказанному, $g'(x_0) = 0 \implies f'(x_0) = -g(x_0) = 0$
+\end{proof}
+
+\begin{theorem}[Ролля]
+    $$ f \in C([a,b])$$
+    $$ \forall x \in (a,b) ~ \exist f'(x) $$
+    \begin{equ}5
+        f(a) = f(b) \implies \exist x_0 \in (a,b) : f'(x_0) = 0
+    \end{equ}
+\end{theorem}
+
+\begin{proof}
+	\ \\
+    1. $f(x) \equiv f(a) ~ \forall x \in [a,b] \implies \forall x \in (a,b) \quad f'(x) = 0$ \\
+    2. $f(x) \not\equiv f(a) \implies \exist x_1 \in (a,b) : f(x_1) \ne f(a)$ \\
+    2.1 $f(x_1) > f(a)$ \\
+    2.2 $f(x_1) < f(a)$ \\
+    Случаи аналогичные, поэтому рассмотрим только 2.1 \\
+    Вспомним вторую теорему Вейерштрасса:
+    \begin{equ}6
+        \exist x_0 \in [a,b] : \forall x \in [a,b] \quad f(x) \le f(x_0))
+    \end{equ}
+    В частности:
+    \begin{equ}7
+        \eref6 \implies f(x_1) \le f(x_0)
+    \end{equ}
+    \begin{nequ}{1.7'}{71}
+        \eref7 \implies \begin{Bmatrix} f(x_0) > f(a) \\ f(x_0) > f(b) \end{Bmatrix} \implies x_0 \in (a,b)
+    \end{nequ}
+    \begin{equ}8
+        \exist f'(x_0)
+    \end{equ}
+    $$ \eref6,\eref{71},\eref8 \implies f'(x_0) = 0$$
+\end{proof}
+
+\begin{theorem}[Лагранжа]
+    $$ f \in C([a,b])$$
+    $$ \forall x \in (a,b) \quad \exist f'(x)$$
+    \begin{equ}9
+        \implies \exist x_0 \in (a,b) : f(b) - f(a) = f'(x_0)(b-a)
+    \end{equ}
+\end{theorem}
+
+\begin{proof}
+    \begin{equ}{10}
+        g(x) = (f(x) - f(a) - f(b))(b - a) - (f(b) - f(a))(x - a)
+    \end{equ}
+    \begin{nequ}{1.10'}{101}
+         (1.10) \implies g \in C([a,b])
+    \end{nequ}
+    \begin{multline} \lbl{11}
+        \eref{10} \implies \forall x \in (a,b) ~ \exist g'(x), ~ g'(x) = (b-a) \cdot f'(x) - (f(b) - f(a))(x-a)' = \\ = (b - a)f'(x) - (f(b) - f(a))
+    \end{multline}
+    \begin{equ}{12}
+        g(a) = 0, ~ g(b) = 0
+    \end{equ}
+    Применим теорему Ролля
+    \begin{equ}{13}
+        \eref{101}, \eref{11}, \eref{12} \implies \exist x_0 \in (a,b) : g'(x_0) = 0
+    \end{equ}
+    $$ \eref{11}, \eref{13} \implies (b - a)f'(x_0) - (f(b) - f(a)) = 0 \implies \eref9 $$
+\end{proof}
+
+\begin{implication}
+    $$ f \in C([a,b]), ~ \forall x \in (a,b) ~ \exist f'(x) \text{ и } f'(x) \ne 0 ~ \forall x \in (a,b) $$
+    $$ \implies f(b) \ne f(a) $$
+\end{implication}
+
+\begin{proof}
+    \ \\
+    По теореме Лагранжа $ \exist x_0 \in (a,b) : f(b) - f(a) = \underbrace{f'(x_0)}_{\ne 0}(b - a) $
+\end{proof}
+
+\begin{theorem}[Коши]
+    $$ f \in C([a,b]), \quad g \in C([a,b]) $$
+    $$ \forall x \in (a,b) ~ \exist f'(x), ~ \exist g'(x) $$
+    $$ g'(x) \ne 0 ~ \forall x \in (a,b) $$
+    \begin{equ}{14}
+        \implies \exist x_0 \in (a,b) : \frac{f(b) - f(a)}{g(b) - g(a)} = \frac{f'(x_0)}{g'(x_0)}
+    \end{equ}
+\end{theorem}
+
+\begin{proof}
+    \ \\
+    Рассмотрим вспомогательную функцию $h$:
+    \begin{equ}{15}
+        h(x) = (g(x) - g(a))(f(b) - f(a)) - (f(x) - f(a))(g(b) - g(a))
+    \end{equ}
+    \begin{equ}{16}
+        \eref{15} \implies h \in C([a,b])
+    \end{equ}
+    \begin{equ}{17}
+        \eref{15} \implies \forall x \in (a,b) ~ \exist h'(x) = (f(b) - f(a))g'(x) - (g(b) - g(a))f'(x)
+    \end{equ}
+    \begin{equ}{18}
+        \eref{15} \implies h(a) = 0, ~ h(b) = 0
+    \end{equ}
+    \begin{equ}{19}
+        \eref{16}, \eref{17}, \eref{18} \implies \exist x_0 \in (a,b) : h'(x_0) = 0
+    \end{equ}
+    \begin{equ}{20}
+        \eref{17}, \eref{19} \implies (f(b) - f(a))g'(x_0) - (g(b) - g(a))f'(x_0) = 0
+    \end{equ}
+    $$ \eref{20} \iff \eref{14} $$
+\end{proof}
+
+\section{Производные второго и последующего порядков}
+
+\begin{definition}
+	$$ f : (a,b) \to \R $$
+    $$ \forall x \in (a,b) ~ \exist f'(x) $$
+    $$ x_0 \in (a,b) $$
+    $$ f' : (a,b) \to \R $$
+    Пусть $ \exist (f')'(x_0) $. Тогда говорят, что существует вторая производная функции $f$:
+    $$ \exist f''(x_o) \define (f')'(x_0) $$
+    Пусть $ \forall x \in (a,b) ~ \exist f''(x) $. Тогда получаем функцию $ f''(a,b) \to \R $ \\
+    Пусть $ \exist (f'')'(x_0) $. Тогда говорят, что функция $f$ имеет третью производную:
+    $$ f'''(x_0) \define (f'')'(x_0) $$
+\end{definition}
+
+\begin{notation}
+    $$ f^{(1)}(x) = f'(x) $$
+    $$ f^{(2)}(x) = f''(x) $$
+\end{notation}
+
+Предположим, мы уже определили $ f^{(n)}(x) $ \\
+$$ \forall x \in (a,b) ~ \exist f^{(n)}(x) $$
+Пусть $ \exist (f^{(n)})'(x_0) $
+$$ f^{(n)} : (a,b) \to \R $$
+Если такая функция существует, то говорят, что $ \exist f^{(n+1)}(x_0) \define (f^{(n)})'(x_0) $
+
+\begin{theorem}[О линейности и аддитивности чего-то]
+	$$ f,g : (a,b) \to \R $$
+    $$ \forall x \in (a,b) \begin{cases} \exist f'(x), ~ f^{(2)}(x), ..., f^{(n-1)}(x) \\ \exist g'(x), ~ g^{(2)}(x), ..., g^{(n-1)}(x) \end{cases} $$
+    $$ x \in (a,b) \quad \exist f^{(n)}(x_0), ~ \exist g^{(n)}(x_0) $$
+    $$ \implies \exist (f + g)^{(n)}(x_0) = f^{(n)}(x_0) + g^{(n)}(x_0) $$
+    $$ c \in \R \implies \exist (cf)^{(n)}(x_0) = cf^{(n)} $$
+\end{theorem}
+
+\begin{proof}
+    (Сложение) \\
+	Индукция по $n$ \\
+    База. $n = 1$
+    $$ (f + g)'(x_0) = f'(x_0) + g'(x_0) $$
+    $$ (cf)'(x_0) = cf'(x_0) $$ \ \\
+    Переход.
+    $$ (f + g)^{(n)} = f^{(n)}(x) + g^{(n)}(x), \quad x \in (a,b) $$
+    \begin{multline}\lbl{21}
+        (f + g)^{(n+1)}(x_0) = ((f + g)^{(n)})'(x_0) = (f^{(n)} + g^{(n)})(x_0) = \\ = f^{(n+1)}(x_0) + g^{(n+1)}(x_0) = (f^{(n)})'(x_0) + (g^{(n)})'(x_0)
+    \end{multline}
+\end{proof}
+
+\begin{proof}
+    (Умножение на константу) \\
+	Индукция по $n$ \\
+    База. $n = 1$
+    $$ ((f))'(x_0) = cf'(x_0) $$ \ \\
+    Переход.
+    $$  $$
+\end{proof}

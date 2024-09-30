@@ -1,0 +1,223 @@
+\chapter{Многочлены}
+
+\section{Рациональные дроби}
+
+Далее в этом паранрафе рассматриваются многочлены и рациональные функции над некоторым полем $K$
+
+\begin{definition}
+    Рациональная дробь $\dfrac{F}G$ называется несократимой, если $(F, G) = 1$
+\end{definition}
+
+\begin{definition}
+	Многочлен называется нормализованным, если его старший коэффициент равен единице \\
+    Рациональная дробь $\dfrac{F}G$ называется нормализованной, если $(F, G) = 1$ и $G$ нормализованный
+\end{definition}
+
+\begin{property}
+	Любую рациональную функцию можно записать в виде нормализованной дроби
+\end{property}
+
+\begin{eg}
+    $$ \frac{x^2 + x}{2x^2 - 2} = \frac{x(x + 1)}{2(x - 1)(x + 1)} = \frac{\frac12 x}{x - 1} $$
+\end{eg}
+
+\begin{definition}
+    Рациональная дробь $\dfrac{F}G$ называется правильной, $\deg F < \deg G$
+\end{definition}
+
+\begin{properties}
+	\hfill
+    \begin{enumerate}
+        \item Если $\dfrac{F_1}{G_1} = \dfrac{F_2}{G_2}$ и $\dfrac{F_1}{G_1}$ -- правильная, то $\dfrac{F_2}{G_2}$ -- тоже правильная
+        \begin{proof}
+            \begin{multline*}
+                F_1G_2 = G_1F_2 \implies \deg F_1 + \deg G_2 = \deg G_1 + \deg F_1 \implies \deg G_2 - \deg F_2 = \\ = \deg G_1 - \deg F_1 > 0
+            \end{multline*}
+        \end{proof}
+        \item Сумма и произведение правильных дробей -- правильные дроби (т. е. правильные дроби образуют кольцо)
+        \begin{proof}
+            $\dfrac{F_1}{G_1}, \dfrac{F_2}{G_2}$ -- правильные дроби \\
+            $a = \deg F_1, \quad b = \deg G_1, \quad c = \deg F_2, \quad d = \deg G_2$ \\
+            $ a < b, \quad c < d $
+            \begin{itemize}
+                \item Сумма: $\deg(F_1G_2 + G_1F_2) \le \max \set{\underset{< b + d}{a + d}, \underset{< b + d}{b + c}} \le b + d = \deg(G_1, G_2)$
+                \item Произведение: $\deg(F_1F_2) = a + c < b + d = \deg(G_1G_2) $
+            \end{itemize}
+        \end{proof}
+        \item Любую рациональную дробь можно единественным образом представить в виде суммы многочленов и правильной дроби
+        \begin{proof}
+            \hfill
+            \begin{itemize}
+                \item Существование: дробь $\dfrac{F}G$ \\
+                Поделим $F$ на $G$ с остатком: $F = GQ + R, \quad \deg R < \deg G$ \\
+                Выделим целую часть: $\dfrac{F}G = Q + \dfrac{R}G, \quad \dfrac{R}G$ -- правильная
+                \item Единственность: пусть $P_1 + \dfrac{R_1}{S_1} = P_2 + \dfrac{R_2}{S_2}, \quad P_1 \ne P_2$ \\
+                Перенесём: $P_1 - P_2 = \underbrace{\dfrac{R_2}{S_2} - \dfrac{R_1}{S_1}}_{\text{правильная дробь}} \implies P_1 - P_2 = \dfrac{R}S, \quad \deg S > \deg R$ \\
+                Умножим на знаменатель: $(P_1 - P_2) \cdot S = R$ \\
+                $\deg \bigg( (P_1 - P_2) \cdot S \bigg) \ge \deg S > \deg R$ -- \contra
+            \end{itemize}
+        \end{proof}
+    \end{enumerate}
+\end{properties}
+
+\begin{lemma}[сумма дробей с взаимно простыми знаменателями]\label{l:1}
+    Пусть $\dfrac{F}{G_1G_2...G_k}$ -- правильная дробь, $G_i$ попарно взаимно просты. Тогда $\dfrac{F}{G_1G_2...G_k}$ можно представить в виде $\dfrac{F_1}{G_1} + \dfrac{F_2}{G_2} + ... + \dfrac{F_k}{G_k}$, где все слагаемые правильные, причём такое представление единственно
+\end{lemma}
+
+\begin{proof}
+	\hfill
+    \begin{itemize}
+    	\item Существование: индукция по $k$
+        \begin{itemize}
+        	\item База: $k = 2$ \\
+            $ \dfrac{F}{G_1G_2} $ \\
+            Существуют $A_1, A_2 : A_1G_1 + A_2G_2 = 1$ (по теореме о линейном представлении НОД) \\
+            Умножим это на $F$: $(A_1F)G_1 + (A_2F)G_2 = F$ \\
+            Пусть $\vawe{F_2} = A_1F, \quad \vawe{F_1} = A_2F$. Тогда $\vawe{F_2}G_1 + \vawe{F_1}G_2 = F \implies \dfrac{\vawe{F_2}}{G_2} + \dfrac{\vawe{F_1}}{G_1} = \dfrac{F}{G_1G_2}$ \\
+            Представим $\dfrac{\vawe{F_1}}{G_1}$ и $\dfrac{\vawe{F_2}}{G_2}$ в виде:
+            $$ \begin{cases}
+                \frac{\vawe{F_1}}{G_1} = P_1 + \frac{F_1}{G_1} \\
+                \frac{\vawe{F_2}}{G_2} = P_2 + \frac{F_2}{G_2}
+            \end{cases} \text{ , где $\dfrac{F_1}{G_1}, \dfrac{F_2}{G_2}$ -- правильные дроби} $$
+            $$ \frac{F}{G_1G_2} = P_1 + P_2 + \frac{F_1}{G_1} + \frac{F_2}{G_2} $$
+            $$ P_1 + P_2 = \underbrace{\frac{F}{G_1G_2} - \frac{F_1}{G_1} - \frac{F_2}{G_2}}_{\text{правильн.}} $$
+            $ P_1 + P_2 $ -- правильн. $\implies P_1 + P_2 = 0$
+            \item Переход: $k \to k + 1$ \\
+            $ \dfrac{F}{G_1...G_kG_{k+1}}$ \\
+            Пусть $G = G_1...G_k \implies (G, G_{k + 1}) = 1 \implies \exist H, F_{k + 1} : \dfrac{F}{G_1...G_kG_{k+1}} = \dfrac{H}{G_1...G_k} + \dfrac{F_{k+1}}{G_{k+1}}$ -- применяем предположение индукции
+        \end{itemize}
+        \item Единственность: \\
+        Пусть $\dfrac{F_1}{G_1} + \dfrac{F_2}{G_2} + ... + \dfrac{F_k}{G_k} = \dfrac{H_1}{G_1} + ... + \dfrac{H_k}{G_k} $ \\
+        Докажем, что $F_1 = H_1$:
+        $$ \frac{F_1 - H_1}{G_1} = \frac{H_2 - F_2}{G_2} + ... + \frac{H_k - F_k}{G_k} $$
+        $$ \frac{F_1 - H_1}{G_1} = \frac{(H_2 - F_2) \cdot \prod_{
+                \begin{subarray}l
+                	i \ne 1 \\
+                    i \ne 2
+                \end{subarray}}G_i + ... + (H_k - F_k) \cdot \prod_{
+            \begin{subarray}l
+            	i \ne 1 \\
+                i \ne k
+            \end{subarray}}G_i}{\prod_{i \ne 1}G_i} $$
+        $$ (F_1 - H_1)G_2 ... G_k = (H_2 - F_2)G_1 \cdot \prod_{
+            \begin{subarray}l
+                i \ne 1\\
+                i \ne 2
+            \end{subarray}}G_i + ... + (H_k - F_k)G_1 \cdot \prod_{
+            \begin{subarray}l
+                i \ne 1\\
+                i \ne k
+            \end{subarray}}G_i $$
+        \begin{multline*}
+            (F_1 - H_1) \underbrace{G_2...G_k}_{\text{вз. просты}} \divby G_1 \implies F_1 - H_1 \divby G_1 \implies (F_1 - H_1) = G_1 \cdot K \implies \\ \implies \deg(F_1 - H_1) \ge \deg G_1 \underimp{\text{прав. дробь}} F_1 = H_1
+        \end{multline*}
+    \end{itemize}
+
+\end{proof}
+
+\begin{definition}
+    Рациональная дробь называется примарной, если она имеет вид $\dfrac{F}{P_n}$, где $P$ -- нормализованный и неприводимый
+\end{definition}
+
+\begin{eg}
+    $ \dfrac{x^2 + x + 1}{(x + 1)^3} $ -- примарная
+\end{eg}
+
+\begin{lemma}[сумма примарных дробей]
+	Любую правильнцю дробь можно представить в виде суммы правильных примарных дробей
+    $$ \frac{F_1}{P_1^{S_1}} + ... + \frac{F_k}{P_k^{S_k}}, \quad P_i \text{ различны} $$
+    Причём такое представление единственно
+\end{lemma}
+
+\begin{proof}
+	\hfill
+    \begin{itemize}
+        \item Существование: $\dfrac{F}G $ -- правильная нормализованная дробь
+        $$ G_1 = P_1^{S_1} \cdot ... \cdot P_k^{S_k}, \quad P_i \text{ -- различные неприводимые нормализованные дроби} $$
+        $$ \frac{F}G = \frac{F}{P_1^{S_1} \cdot ... \cdot P_k^{S_k}} $$
+        Применяем лемму \ref{l:1} к $G_i = P_i^{S_i} $
+        \item Елинственность: пусть есть два представления
+        $$ \frac{F_1}{P_1^{S_1}} + ... + \frac{F_k}{P_k^{S_k}} = \frac{H_1}{P_1^{t_1}} + ... + \frac{H_k}{P_k^{t_k}} $$
+        $$ \frac{F_1P_1^{t_1} - H_1P_1^{S_1}}{P_1^{S_1 + t_1}} + ... + \frac{F_kP_k^{t_k} - H_kP_k^{S_k}}{P_k^{S_k + t_k}} = 0 $$
+        Получили представление нуля в виде суммы дробей с попарно простыми знаменателями, значит, по лемме \ref{l:1} все слагаемые -- нули
+        $$ \forall i \quad \frac{F_iP_i^{t_i} - H_iP_i^{S_i}}{P_i^{S_i + t_i}} = 0 \implies F_iP_i^{t_i} = H_iP_i^{S_i} \implies \frac{F_i}{P_i^{S_i}} = \frac{H_i}{P_i^{t_i}} $$
+    \end{itemize}
+\end{proof}
+
+\begin{definition}
+    Дробь называется простейшей, если она имеет вид $\dfrac{F}{P^n}$, где $P$ -- неприводимый нормализованный, $\deg F < \deg P$
+\end{definition}
+
+\begin{eg}
+    $ \dfrac{x^2 + x + 1}{(x + 1)^2}$ -- примарная, \textbf{не} простейшая \\
+    $ \dfrac{5}{(x + 1)^3} $ -- простейшая
+\end{eg}
+
+\textbf{Простейшие над $\Co$}: $\dfrac{A}{(x - a)^n} $ \\
+\textbf{Простейшие над } $\R$: $\dfrac{A}{(x - a)^n}, \dfrac{Mx + N}{(x^2 + px + q)^n}$, где $x^2 + px + q$ не имеет вещественных корней
+
+\begin{eg}
+    $ \dfrac{x}{x^2 + 1}$ -- простейшая над $\R$, \textbf{не} простейшая над $\Co$
+\end{eg}
+
+\begin{lemma}[разложение примарной дроби в сумму простейших]
+    Правильная примарная дробь $\dfrac{F}{P^n}$ может быть представлена в виде суммы правильных простейших дробей со знаменателем $P^i$, причём такое представление единственно
+\end{lemma}
+
+\begin{proof}
+	\hfill
+    \begin{itemize}
+    	\item Существование: индукция по $n$
+        \begin{itemize}
+        	\item База $n = 1$: \\
+            $\dfrac{F}P$ -- простейшая правильная $\implies \deg F < \deg P$
+            \item Переход $n \to n + 1$: \\
+            Дробь $\dfrac{F}{P^{n + 1}}$ \\
+            Делим $F$ на $P$ с остатком: $F = PQ + R, \quad \deg R < \deg P$
+            $$ \frac{F}{P^{n + 1}} = \frac{PQ + R}{P^{n + 1}} = \frac{Q}{P^n} + \frac{R}{P^{n + 1}}, \quad \frac{R}{P^{n + 1}} \text{ -- простейшая, правильная} $$
+            $ \dfrac{Q}{P^n} = \dfrac{F}{P^{n + 1}} - \dfrac{R}{P^{n + 1}}$ -- правильная \\
+            Применяем индукционное предположение
+            \item Единственность: пусть есть 2 представления \\
+            Рассмотрим их разность
+            $$ \frac{T_1}P + ... + \frac{T_n}{P^n} = \frac{H_1}{P} + ... + \frac{H_n}{P^n}, \quad T_i \ne 0, \quad H_i \ne 0 $$
+            $$ \frac{T_1 - H_1}P + ... + \frac{T_n - H_n}{P^n} = 0, \quad
+            \begin{rcases}
+            	\deg T_1 < \deg P \\
+                \deg H_1 < \deg P
+            \end{rcases} \implies \deg(T_i - H_i) < \deg P $$
+            Обозначим $F_i \define T_i - H_i$
+            $$ \frac{F_1}P + \frac{F_2}{P^2} + ... + \frac{F_k}{P^k} = 0 $$
+            $$ \underbrace{F_1P^{k - 1} + F_2P^{k - 2} + ... + F_{k - 1}P}_{\divby P} + F_k = 0 $$
+            $$ \left.
+            \begin{aligned}
+               	F_k \ne 0 \\
+                F_1P^{k - 1} + ... + F_{k - 1}P \divby P \implies F_k \divby P
+            \end{aligned} \right\} \implies \deg F_k \ge \deg P \text{ -- } \contra $$
+        \end{itemize}
+    \end{itemize}
+\end{proof}
+
+\begin{theorem}[разложение дроби в сумму простейших]
+	Правильную рациональную дробь можно представить в виде суммы простейших, причём такое представление единственно
+\end{theorem}
+
+\begin{proof}
+	\hfill
+    \begin{itemize}
+    	\item Существование: правильную дробь можно представить в виде суммы примарных, а примарную -- в виде суммы простейших
+        \item Единственность: пусть есть 2 представления
+        $$ \bigg( \frac{T_{11}}{P_1} + \frac{T_{12}{P_1^2}} + ... \bigg) + \bigg( \frac{T_{21}}{P_2} + \frac{T_{22}}{P_2^2} + ... \bigg) + ... = \bigg( \frac{H_{11}}{P_1} + \frac{H_12}{P_1^2} + ... \bigg) + \bigg( \frac{H_{21}}{P_2} + \frac{H_{22}}{P_2^2} + ... \bigg) + ... $$
+        Обозначим $F_{ij} \define T_{ij} - H_{ij} $
+        $$ \begin{rcases}
+            \deg T_{ij} < \deg P_i \\
+            \deg H_{ij} < \deg P_i
+        \end{rcases} \implies \deg F_{ij} < \deg P_i \implies \frac{F_{ij}}{P_i^j} \text{ -- простейшая} $$
+        $$ \bigg( \frac{F_{11}}{P_1} + \frac{F_{12}}{P_1^2} + ... \bigg) + \bigg( \frac{F_{21}}{P_2} + \frac{F_{22}}{P_2^2} + ... \bigg) = 0 $$
+        Сумма в $i$-й скобке правильная, $\dfrac{F_i}{P_i^{N_i}}$ -- примарная
+        $$ \frac{F_1}{P_1^{N_1}} + \frac{F_2}{P_2^{N_2}} + ... = 0 $$
+        Разложение в сумму примарных удинственно, значит $F_i = 0$ \\
+        Рассмотрим $i$-ю скобку:
+        $$ \frac{F_{i1}}{P_i} + \frac{F_{i2}}{P_i^2} + ... + \frac{F_{iN_i}}{P_i^{N_i}} = 0 $$
+        Разложение примарной дроби $\dfrac0{P_i^{N_i}}$ в сумму простейших единственно, значит $F_{ij} = 0$
+    \end{itemize}
+\end{proof}

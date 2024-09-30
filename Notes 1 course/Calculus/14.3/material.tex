@@ -1,0 +1,133 @@
+\chapter{Определённый интеграл}
+
+\section{Интегрирование по Риману}
+
+\begin{theorem}
+	$ f : [a, b] \to \R $ \\
+	$ f $ монотонна $ \implies f \in \Ri([a, b]) $
+\end{theorem}
+
+\begin{proof}
+	Возьмём $ \forall \veps > 0 $, выберем $ n : \dfrac{b - a}n < \veps $ \\
+	Рассмотрим разбиение $ P = \seqz[n]{x_k}k, \qquad x_k = a + \dfrac{b - a}nk, \quad 0 \le k \le n $
+	\begin{itemize}
+		\item Рассмотрим случай, когда $ f $ возрастает:
+		\begin{multline*}
+			\forall x \in [x_{k - 1}, x_k] \quad f(x_{k - 1}) \le f(x) \le f(x_k) \implies
+			\begin{cases}
+				M_k = f(x_k) \\
+				m_k = f(x_{k - 1})
+			\end{cases} \implies \\ \implies \omega_f([a_{k - 1}, x_k]) = f(x_k) - f(x_{k - 1})
+		\end{multline*}
+		$$ x_k - x_{k - 1} \bydef \frac{b - a}n $$
+		\begin{multline*}
+			\sum_{k = 1}^n \omega_f([x_{k - 1}, x_k])(x_k - x_{k - 1}) = \frac{b - a}n \sum_{k = 1}^n \bigg( f(x_k) - f(x_{k - 1}) \bigg) = \frac{b - a}n \bigg( f(x_n) - f(x_0) \bigg) = \\ = \frac{b - a}n \bigg( f(b) - f(a) \bigg) \le \veps \bigg( f(b) - f(a) \bigg)
+		\end{multline*}
+		\item Если $ f $ убывает, то $ g \define -f $ возрастает
+	\end{itemize}
+\end{proof}
+
+\section{Сумма Римана}
+
+\begin{definition}
+	$ [a, b], \qquad P = \seqz[n]{x_k}k $ \\
+	Оснащением этого разбиения называется множество $ T = \seq[n]{t_k}k : t_k \in [x_{k - 1}, x_k] $
+\end{definition}
+
+\begin{definition}
+	$ f : [a, b] \to \R $
+	$$ S_f(P, T) \define \sum_{k = 1}^n f(t_k)(x_k - x_{k - 1}) $$
+	$ S_f $ называется суммой Римана функции $ f $ по разбиению $ P $ и оснащению $ T $
+\end{definition}
+
+\begin{statement}
+	$ U(f, P), \qquad L(f, P) $ -- верхняя и нижняя \textit{что-то}
+	$$ L(f, P) \le S_f(P, T) \le U(f, P) $$
+\end{statement}
+
+\begin{proof}
+	Рассмотрим $ M_k, m_k $
+	$$ m_k \le f(t_k) \le M_k, \qquad k = 1, ..., n $$
+	$$ \sum_{k = 1}^n m_k (x_k - x_{k - 1}) \le \sum_{k = 1}^n f(t_k)(x_k - x_{k - 1}) \le \sum_{k = 1}^n M_k(x_k - x_{k - 1}) $$
+\end{proof}
+
+\begin{definition}
+	$ [a, b], \qquad P = \seqz[n]{x_k}k $
+	$$ d(P) \define \max\limits_{1 \le k \le n} (x_k - x_{k - 1}) $$
+	$ d(P) $ называется диаметром разбиения
+\end{definition}
+
+\begin{definition}
+	Будем говорить, что суммы Римана $ f $ стремятся к $ A \in \R $ при измельчении рабиения ($ S_f(P, T) \underarr{d(P) \to 0} A $), если $ \forall \veps ~ \exist \delta > 0 : \forall P : d(P) < \delta, ~ \forall ~ T \quad | S_f(P, T) - A | < \veps $
+\end{definition}
+
+\begin{theorem}
+	$ S_f(P, T) \underarr{d(P) \to 0} A \implies
+	\begin{cases}
+		f \in \Ri([a, b]) \\
+		A = \int_a^bf
+	\end{cases} $
+\end{theorem}
+
+\begin{proof}
+	\hfill
+	\begin{itemize}
+		\item Возьмём $ \forall \veps > 0 $ \\
+		Выберем $ \delta > 0 : \forall P : d(P) < \delta, ~ \forall T \quad | S_f(P, T) - A | < \dfrac\veps2 $ \\
+		Возьмём $ n : \dfrac{b - a}n < \delta, \quad x_k \define a + \dfrac{b - a}nk $
+		$$ x_k - x_{k - 1} = \frac{b - a}n < \delta $$
+		$$ d(P) = \frac{b - a}n < \delta $$
+		Положим $ T' = \seq[n]{t_k'}k, \quad T'' = \seq[n]{t_k''}k $ \\
+		Расмотрим $ M_k, m_k $ \\
+		Выберем $ t_k' $ и $ t_k'' $ так, чтобы
+		\begin{mequ}
+			\lbl2 M_k < f(t_k'') + \frac\veps{n} \\
+			\lbl3 m_k > f(t_k') - \frac\veps{n}
+		\end{mequ}
+		\begin{equ}4
+			\eref2, \eref3 \implies f(t_k'') - f(t_k') > M_k - m_k - \frac{2\veps}n
+		\end{equ}
+		\begin{multline*}
+			\eref4 \implies \sum_{k = 1}^n \bigg( f(t_k'') - f(t_k') \bigg)(x_k - x_{k - 1}) > \sum_{k = 1}^n ( M_k - m_k)(x_k - x_{k - 1}) - \frac{2\veps}n \sum_{k = 1}^n (x_k - x_{k - 1}) = \\ = \underbrace{\sum_{k = 1}^n \omega_f([x_{k - 1}, x_k])(x_k - x_{k - 1})}_{\define \Omega} - \frac{2\veps}n(b - a)
+		\end{multline*}
+		$$ S_f(P, T'') - S_f(P, T') > \Omega - \frac{2\veps}n(b - a) $$
+		$$ \veps > \frac\veps2 + \frac\veps2 > |S_f(P, T'') - A | + | S_f(P, T') - A | \ge | S_f(P, T'') - S_f(P, T') | $$
+		$$ \sum_{k = 1}^n \omega_f([x_{k - 1}, x_k])(x_k - x_{k - 1}) < \veps + \frac{2\veps}n(b - a) < 3\veps $$
+		Значит, $ f \in \Ri([a, b]) $
+		\item $ M_k < f(t_k'') + \frac\veps{n} $
+		$$ U(f, P) = \sum_{k = 1}^n M_k(x_k - x_{k - 1}) < \sum_{k = 1}^n f(t_k'')(x_k - x_{k - 1}) + \sum_{k = 1}^n \frac\veps{n}(x_k - x_{k - 1}) < S_f(P, T'') + \veps \le U(f, P) + \veps $$
+		$$ S_f(P, T'') \in \bigg( U(f, P), U(f, P) + \veps \bigg) $$
+		$$ | S_f(P, T'') - A | < \frac\veps2 $$
+		$$ S_f(P, T'') \in (A - \frac\veps2, A + \frac\veps2) $$
+		$$
+		\begin{rcases}
+			U(f, P) - L(f, P) < 3\veps \\
+			L(f, P) \le \underbrace{\int_a^b f}_{\define I} \le U(f, P)
+		\end{rcases} \implies U(f, P) \in (I - 3\veps, I + 3\veps) $$
+	\end{itemize}
+\end{proof}
+
+\begin{theorem}
+	$ f \in \Ri([a, b]) \implies S_f(P, T) \underarr{d(P) \to 0} \int_a^b f $
+\end{theorem}
+
+\begin{proof}
+	Возьмём $ \veps > 0 $
+	\begin{equ}5
+		\exist P = \seqz[n]{x_k}k : U(f, P) - L(f, P) < \veps
+	\end{equ}
+	Обозначим $ I \define \int_a^b f $
+	$$ L(f, P) \le I \le U(f, P) $$
+	Обозначим $ \sigma \define \min\limits_{1 \le k \le n}(x_k - x_{k - 1}), \qquad \delta_1 \define \dfrac\sigma4 $
+	$$ | f(x) | \le M, \qquad x \in [a, b] $$
+	Определим $ \delta_2 \define \dfrac\veps{Mn}, \qquad \delta \define \min(\delta, \delta_1) $ \\
+	Возьмём $ P_0 : d(P_0) < \delta, \quad \forall T $
+	$$ P_0 = \seqz[m]{y_l}l, \qquad T = \seq[m]{t_l}l $$
+	$$ P_1 \define P \cup P_0 $$
+	$$ L(f, P) \le L(f, P_1) \le I \le U(f, P_1) \le U(f, P) $$
+	\begin{equ}9
+		U(f, P_1) - L(f, P_1) < \veps
+	\end{equ}
+	$$ d(P_0) < \delta < \frac\delta4 $$
+	$$ \Lambda = \seqz[N]{\lambda_q}q, \qquad \lambda_q \define t_l $$
+\end{proof}

@@ -1,0 +1,217 @@
+\chapter{Метрические пространства}
+
+\begin{lemma}
+	$ B(x_0, \veps) $ открытый
+\end{lemma}
+
+\begin{proof}
+	$$ \forall x_1 \in B(x_0, \veps) $$
+	$$ \delta \define \veps - p(x_1, x_0) $$
+	$$ B(x_1, \delta) \sub B(x_0, \veps) \text{ -- ?} $$
+	$$ \rho(x_1, x_2) < \delta = \veps - \rho(x_0, x_1) $$
+	$$ \rho(x_0, x_2) \le \rho(x_0, x_1) + \rho(x_1, x_2) < \veps $$
+	$$ x_2 \le B(x_0, \veps) $$
+\end{proof}
+
+\begin{theorem}
+	Равносильны определения:
+	\begin{enumerate}
+		\item \label{it:1} Множество внутренних точек $\operatorname{Int} A$
+		\item \label{it:2} $ \bigcup_{
+			\begin{subarray}{c}
+				U \sub A \\
+				U \text{ открытое}
+			\end{subarray}} U $
+		\item \label{it:3} Максимальное открытое подмножество $A$
+	\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+	\hfill
+	\begin{itemize}
+		\item \eqref{it:2} $ \iff $ \eqref{it:3}
+		$$ \bigcup_{i \in I} U_i \text{ открытое, если } \forall i \quad U_i \text{ открытое} $$
+		$$ x_0 \in \bigcup_{i \in I} U_i $$
+		$$ \exist x_0 \in U_i $$
+		$$ \implies \exist \veps : B(x_0, \veps) \sub U_i \sub \bigcup_{i \in I} U_i $$
+		Почему это множество внутренних точек?
+		$$ x_0 \in \bigcup_{
+			\begin{subarray}{c}
+				U_i \sub A \\
+				U_i \text{ открытое}
+			\end{subarray}} U_i \sub A $$
+		$$ \exist \veps : B(x_0, \veps) \sub \bigcup_{
+			\begin{subarray}{c}
+				U_i \sub A \\
+				U_i \text{ открытое}
+			\end{subarray}} U_i \sub A $$
+		Если $x_0$ -- внутренняя для $A$, то $ \exist \veps : B(x_0, \veps) \sub A $
+	\end{itemize}
+\end{proof}
+
+\begin{theorem}[свойства открытых множеств]
+	\hfill
+	\begin{enumerate}
+		\item $ \bigcup_{i \in I} U_i$ открытое, если $\forall i \quad U_i$ открытое
+		\begin{proof}
+			$ x_0 \in \bigcup_{i \in I} U_i \implies \exist i : x_0 \in U_i \implies \exist \veps > 0 : B(x_0, \veps) \sub U_i \sub \bigcup_{i \in I} U_i $
+		\end{proof}
+		\item $ U_1, U_2, ..., U_n$ -- открытые $ \implies \bigcap_{i = 1}^n U_i $ открытое
+		\begin{proof}
+			$$ x_0 \in \bigcap_{i = 1}^n U_i \implies \forall i \quad x_0 \in M \implies \exist \veps_i : B(x_0, \veps_i) \sub U_i $$
+			$$ \veps \define \min\limits_{i = 1 : n}\set{ \veps_i } \implies B(x_0, \veps) \sub B(x_0, \veps_i) \sub U_i $$
+			$$ B(x_0, \veps) \sub \bigcap_{i = 1}^n U_i $$
+		\end{proof}
+		\item $ \O, M $ -- открытые
+	\end{enumerate}
+\end{theorem}
+
+\begin{definition}
+	$F$ называется замкнутым, если $ M \setminus F $ -- открытое
+\end{definition}
+
+\begin{theorem}[свойства замкнутых множеств]
+	\hfill
+	\begin{enumerate}
+		\item Если $ \set{F_{i \in I}}$ -- замкнутое $\implies \bigcap_{i \in I} F_i $ -- замкнутое
+		\begin{proof}
+			$$ U_i \define M \setminus F_i \text{ -- открытое} $$
+			$$ \bigcup U_i = \bigcup(M \setminus F_i) = M \setminus \bigcap F_i \implies \bigcap F_i \text{ -- замкнутое} $$
+		\end{proof}
+		\item Если $F_1, ..., F_n$ -- замкнутые $\implies \bigcup_{i = 1}^n$ -- замкнутое
+		\item $ \O, M$ -- замкнутые
+	\end{enumerate}
+\end{theorem}
+
+\begin{remark}
+	Открытое -- \textbf{не} обязательно не замкнутое
+\end{remark}
+
+\begin{exmpls}
+	\item $M = [0, 1] \cup [2, 3]$; стандартная метрика \\
+	$ \underset{=B(\faktor12, 1)}{[0, 1]} $ открыт в $M$ (но не открыт в $\R$) \\
+	Аналогично, $[2, 3] = B(2,5; 1) $ -- открытый $ \implies [0, 1] = \overline{[2, 3]} $ -- замкнутый
+	\item Дискретная метрика $\rho =
+	\begin{cases}
+		1, \quad x \ne y \\
+		0, \quad x = y
+	\end{cases} $ \\
+	$ B(x_0, 1) = \set{x_0} $ -- открытое \\
+	$ \forall U = \bigcup_{x_0 \in U} \set{x_0} $ -- открытое \\
+	Также, (так как все открытые), все замкнутые
+\end{exmpls}
+
+\begin{remark}
+	Существуют множества, не открытые, и не замкнутые
+\end{remark}
+
+\begin{eg}
+	$ [a, b) \in \R$; метрика стандартная
+\end{eg}
+
+
+\begin{theorem}[равносильные определения замыкания]
+	$M$ -- метрическое пространство, $A \sub M$ \\
+	Равносильны определения:
+	\begin{enumerate}
+		\item \label{it:11} Множество внутренних и граничных точек называется замыканием
+		\item \label{it:12} $M \setminus \operatorname{Int} (M \setminus A) $
+		\item \label{it:13} $ \bigcap_{
+			\begin{subarray}{c}
+				F \supset A \\
+				F \text{ замкнутое}
+			\end{subarray}} F $
+		\item \label{it:14} Минимальное замкнутое надмножество $A$
+	\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+	\hfill
+	\begin{itemize}
+		\item \eqref{it:13} $ \iff $ \eqref{it:14}
+		\item \eqref{it:11} $ \iff $ \eqref{it:12}, так как
+		$$ \operatorname{Int} (M \setminus A) = \operatorname{Ext} A $$
+		\item \eqref{it:12} $ \iff $ \eqref{it:13}, так как
+		$$ M \setminus \operatorname{Int} (M \setminus A) = M \setminus \bigcup_{
+			\begin{subarray}{c}
+				U \subset M \setminus A \\
+				U \text{ открытое}
+			\end{subarray}} U = \bigcap_{
+			\begin{subarray}{c}
+				U \subset M \setminus A \\
+				U \text{ открытое}
+			\end{subarray}} M \setminus U = \bigcap_{
+			\begin{subarray}{c}
+				F \supset A \\
+				F \text{ замкнутое}
+			\end{subarray}} F $$
+	\end{itemize}
+\end{proof}
+
+\chapter{Топологические пространства}
+
+\begin{definition}
+	$X$ -- множество, $ \Omega \sub 2^X $ \\
+	$(X, \Omega)$ называется топологическим пространством, если
+	\begin{enumerate}
+		\item $ \forall \set{U_i} \in \Omega \quad \bigcup U_i \in \Omega $
+		\item $ U_i, ..., U_n \in \Omega \implies \bigcap_{i = 1}^n U_i \in \Omega $
+		\item $\O, X \in \Omega $
+	\end{enumerate}
+	$\Omega$ называется топологией над $X$ \\
+	$U \in \Omega$ называется открытым
+\end{definition}
+
+\begin{definition}
+	$F$ называется замкнутым, если $X \setminus F $ открытое
+\end{definition}
+
+\begin{theorem}
+	\hfill
+	\begin{enumerate}
+		\item $ \set{F_i}$ -- замкнутое $\implies \bigcap_{i \in I} F_i $ -- замкнутое
+		\item $F_1, ..., F_n$ -- замкнутое $\implies \bigcup_{i = 1}^n F_i $ -- замкнутое
+		\item $\O, X$ -- замкнутые
+	\end{enumerate}
+\end{theorem}
+
+\begin{note}
+	Топологическое пространство можно задавать через замкнутые множества (вместо открытых)
+\end{note}
+
+\begin{remark}
+	Любое метрическое пространство является топологическим пространством
+\end{remark}
+
+
+\begin{exmpls}
+	\item $(M, \rho)$ -- метрическое $\implies$ $M$ -- топологическое
+	\item $ \forall X, \quad \Omega = \set{\O, X} $ -- антидискретная топология \\
+	$M$ -- топологическое, но \textbf{не} метрическое
+	\item $ \forall X, \quad \Omega = 2^X $ -- дискретная топология \\
+	Любое подмножество будет открытым (а, следовательно, и замкнутым)
+	\item ``Топология Зариского'' или Топология конечных дополнений \\
+	Будем называть множество замкнутым, если оно конечное или $X$ ($X$ -- бесконечный) \\
+	Открытые -- те, дополнения до которых конечны
+	\item Стрелка \\
+	$X = \R$ (или $\R_+$, или ...) \\
+	Открытыми будут лучи $(a, +\infty) $ или $\O$ или $\R$
+	\begin{note}
+		Если $(a, +\infty) $ заменить на $[a, +\infty)$, то это не будет топологией (т. к. $\bigcup [\frac1n; \infty] = (0, \infty)$)
+	\end{note}
+	\item Топология Зариского \\
+	$ X = \Co $ (важно, что не $\R$) \\
+	Замкнутым будем называть множество корней некоторого многочлена $f(x)$
+	$$ F_1 \iff f_1, \qquad F_2 \iff f_2 $$
+	$$ F_1 \cup F_2 \iff f_1 \cdot f_2 $$
+	$$ F_1 \cap F_2 \iff \GCD{f_1, f_2} $$
+\end{exmpls}
+
+\begin{definition}
+	$R$ -- коммутативное кольцо, $I \sub R$ \\
+	$I$ называется идеалом $F$, если
+	\begin{enumerate}
+		\item $x, y \in I \implies x + y \in I $
+		\item $x \in I; y \in R \implies x \cdot y \in I $
+	\end{enumerate}
+\end{definition}

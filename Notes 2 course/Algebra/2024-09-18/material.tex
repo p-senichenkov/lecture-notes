@@ -1,0 +1,336 @@
+\section{Жорданова форма}
+
+\subsection{Существование жордановой формы нильпотентного оператора}
+
+\begin{definition}
+	Жордановой лкеткой порядка $ r $ с собств. знач. $ 0 $ назыавется квадратная матрица порядка $ r $ вида
+	$$
+	\begin{pmatrix}
+		0 & - & . & 0 \\
+		1 & 0 & . & 0 \\
+		. & . & . & . \\
+		0 & . & 1 & 0
+	\end{pmatrix} $$
+\end{definition}
+
+\begin{notation}
+	$ J_r(0) $
+\end{notation}
+
+\begin{definition}
+	Жордановой матрицей с собств. знач. $ 0 $ назвыается матрица вида
+	$$
+	\begin{pmatrix}
+		J_{r_1}(0) & 0 & . & 0 \\
+		0 & J_{r_2}(0) & . & 0 \\
+		. & . & . & . \\
+		0 & . & F_{r_k}(0) & 0
+	\end{pmatrix} $$
+\end{definition}
+
+\begin{eg}
+	$$ J = \left(
+	\begin{tabular}{c c c | c c}
+		0 & 0 & 0 & 0 & 0 \\
+		1 & 0 & 0 & 0 & 0 \\
+		0 & 1 & 0 & 0 & 0 \\
+		\hline
+		0 & 0 & 0 & 0 & 0 \\
+		0 & 0 & 0 & 1 & 0 \\
+	\end{tabular} \right) $$
+	Пусть это матрица оператора в базисах $ e_1, e_2, e_3, e_4, e_5 $
+	$$ Je_1 = 0e_1 + 1e_2 + 0e_3 + 0e_4 + 0e_5 = e_2 $$
+	$$ Je_2 = e_3, \qquad Je_3 = 0, \qquad Je_4 = e_5, \qquad Je_5 = 0 $$
+\end{eg}
+
+\begin{notation}
+	$ e_1 \to e_2 \to e_3 \to 0, \qquad e_4 \to e_5 \to 0 $
+\end{notation}
+
+\begin{definition}
+	$ \mathcal{A} $ -- нильпотентный оператор \\
+	Жордановой цепочкой называется такой набор векторов $ e_1, e_2, ..., e_r $, что $ \mathcal{A}(e_i) = e_{i + 1} $ при $ i < r $ и $ \mathcal{A}(e_r) = 0 $
+\end{definition}
+
+\begin{notation}
+	$ e_1 \to e_2 \to ... \to e_r \to 0 $
+\end{notation}
+
+\begin{remark}
+	Вектор $ e_r $ является собственным вектором, соотв. $ \lambda = 0 $
+\end{remark}
+
+\begin{eg}
+	$ \mathcal{A} : \R^3 \to \R^3, \qquad X \mapsto AX $
+	$$ A =
+	\begin{pmatrix}
+		1 & 2 & -3 \\
+		1 & 2 & -3 \\
+		1 & 2 & -3
+	\end{pmatrix}, \qquad A^2 = 0 $$
+	\begin{itemize}
+		\item $ e_1 \to e_2 \to e_3 \to 0 $ не бывает, т. к. $ \mathcal{A}^2(e_1) = 0 $
+		\item Построим цепочку $ e_1 \to e_2 \to 0 $ \\
+		Найдём $ \ker \mathcal{A} $
+		$$
+		\begin{pmatrix}
+		1 & 2 & -3 \\
+		1 & 2 & -3 \\
+		1 & 2 & -3
+	\end{pmatrix}
+	\begin{pmatrix}
+		x \\
+		y \\
+		z
+	\end{pmatrix} = 0 \iff x + 2y - 3z = 0 $$
+	$$ \dim \ker \mathcal{A} = 2 $$
+	Найдём $ e_1 $, такой что $ e_1 \to e_2 \to 0 $: \\
+	Любой вектор за 2 шага перейдёт в 0, т. к. $ \mathcal{A}^2 = 0 $ \\
+	Найдём $ e_1 $, который за 1 шаг \textbf{не} перейдёт в 0: \\
+	Возьмём $ e_1 =
+	\begin{pmatrix}
+		1 \\
+		0 \\
+		0
+	\end{pmatrix} $
+	$$ e_2 = \mathcal{A}(e_1) =
+	\begin{pmatrix}
+		1 \\
+		1 \\
+		1
+	\end{pmatrix} $$
+	$$
+	\begin{pmatrix}
+		1 \\
+		0 \\
+		0
+	\end{pmatrix} \to
+	\begin{pmatrix}
+		1 \\
+		1 \\
+		1
+	\end{pmatrix} \to
+	\begin{pmatrix}
+		0 \\
+		0 \\
+		0
+	\end{pmatrix} $$
+	Найдём $ e_1' $, который перейдёт в 0: \\
+	Возьмём $ e_1' $, линейно независимый с $ e_2 $ \\
+	Подойдёт $ e_1' =
+	\begin{pmatrix}
+		-2 \\
+		1 \\
+		0
+	\end{pmatrix} $
+	$$ \underset{e_1}{
+		\begin{pmatrix}
+			1 \\
+			0 \\
+			0
+		\end{pmatrix}} \to \underset{e_2}{
+		\begin{pmatrix}
+			1 \\
+			1 \\
+			1
+		\end{pmatrix}} \to
+	\begin{pmatrix}
+		0 \\
+		0 \\
+		0
+	\end{pmatrix}, \qquad \underset{e_1'}{
+		\begin{pmatrix}
+			-2 \\
+			1 \\
+			0
+		\end{pmatrix}} \to
+	\begin{pmatrix}
+		0 \\
+		0 \\
+		0
+	\end{pmatrix} $$
+	$ e_1, e_2, e_1' $ -- жорданов базис \\
+	Жорданова форма:
+	$$ \left(
+	\begin{tabular}{c c | c}
+		0 & 0 & 0 \\
+		1 & 0 & 0 \\
+		\hline
+		0 & 0 & 0
+	\end{tabular} \right) $$
+	\end{itemize}
+\end{eg}
+
+\begin{lemma}[ЛНЗ жордановых цепочек]
+	Дано несколько жордановых цепочек:
+	$$ e_1^{(1)} \to e_2^{(1)} \to ... \to e_{r_1}^{(1)} \to 0 $$
+	$$ \widedots $$
+	$$ e_1^{(k)} \to e_2^{(k)} \to ... \to e_{r_k}^{(k)} \to 0 $$
+	Если последние векторы цепочек, т. е. $ e_{r_1}^{(1)}, ..., e_{r_k}^{(k)} $ ЛНЗ, то объединение цепочек ЛНЗ
+\end{lemma}
+
+\begin{proof}
+	\textbf{Индукция} по $ r \define \max\set{r_1, ..., r_k} $
+	\begin{itemize}
+		\item \textbf{База.} $ r = 1 $ \\
+		Все цепочки длины 1 \\
+		Все векторы -- последние и, по условию, ЛНЗ
+		\item \textbf{Переход.} $ r - 1 \to r $
+		$$ \mathcal{A}(e_i^{(j)}) =
+		\begin{cases}
+			e_{i + 1}^{(j)}, \qquad i < r_j \\
+			0, \qquad i = r_j
+		\end{cases} $$
+		Применим $ s $ раз:
+		$$ \mathcal{A}^s(e_i^{(j)}) =
+		\begin{cases}
+			e_{i + s}^{(j)}, \qquad i + s \le r_j \\
+			0, \qquad i + s < r_j
+		\end{cases} $$
+		Цепочки бывают двух видов: у некоторых длина $ r $, а у некоторых -- меньше (по определению $ r $) \\
+		НУО считаем, что цепочки с номерами $ 1, 2, ..., m $ имеют длину $ r $, а остальные -- меньше, т. е.
+		$$ r_1 = r_2 = ... = r_m = r, \qquad r_i < r \text{ при } i > m $$
+		\textbf{От противного:} пусть набор ЛЗ:
+		$$ \sum_{j = 1}^k \sum_{i = 1}^{r_j} a_i^{(j)}e_i^{(j)} = 0, \qquad \text{не все } a_i^{(j)} \text{ равны } 0 $$
+		Применим к этому равентсву $ \mathcal{A}^{r- 1} $:
+		\begin{itemize}
+			\item Если цепочка короче $ r $, то она вся перейдёт в 0
+			\item Иначе -- останется только поледний вектор
+		\end{itemize}
+		То есть,
+		$$ e_1^{(j)} \to e_r^{(j)}, \qquad a_1^{(j)}e_1^{(j)} \to a_1^{(j)}e_r^{(j)}, \qquad \text{остальные } \to 0 $$
+		Получится сумма:
+		$$ \sum_{j = 1}^m a_1^{(j)} e_r^{(j)} $$
+		Заметим, что это ЛК последних векторов (которые, по условию, ЛНЗ)
+		$$ \implies a_1^{(j)} = 0 \quad \text{при } j \le m $$
+		Уберём слагаемые $ 0 \cdot e_1^{(j)} $ при $ j \le m $
+		$$ \sum_{j \le m} \sum_{i = 2}^r a_i^{(j)} e_i^{(j)} + \sum_{j > m}a_i^{(j)}e_i^{(j)} = 0 $$
+		Это -- ЛК векторов из цепочек длины $ r - 1 $ с теми же последними векторами \\
+		Применим \textbf{индукционное предположение}. Вместе с условием, что последние векторы ЛНЗ, получаем, что все они ЛНЗ
+	\end{itemize}
+\end{proof}
+
+\begin{lemma}[базис из жордановых цепочек]
+	$ \mathcal{A} $ -- оператор на $ V $, базис $ e_1, e_2, ..., e_n $ -- базис, являющийся объединением жордановых цепочек (в естественном порядке):
+	$$ e_1 \to e_2 \to ... \to e_{r_1} \to 0 $$
+	$$ e_{r_1 + 1} \to e_{r_2 + 2} \to ... \to e_{r_1 + r_2} \to 0 $$
+	$$ \widedots $$
+	$$ e_{r_1 + ... + r_{k - 1} + 1} \to ... \to e_{r_1 + r_2 + ... + r_{k - 1} + r_k} \to 0 $$
+	Тогда матрица $ \mathcal{A} $ в этом базисе
+	$$ A =
+	\begin{pmatrix}
+		J_{r_1}(0) & 0 & . & 0 \\
+		0 & J_{r_2}(0) & . & 0 \\
+		. & . & . & . \\
+		0 & . & 0 & J_{r_k}(0)
+	\end{pmatrix} $$
+\end{lemma}
+
+\begin{proof}
+	$$ \mathcal{A}(e_{r_1}) = \mathcal{A}(e_{r_1 + r_2}) = ... = \mathcal{A}(e_{r_1 + ... + r_k}) = 0 $$
+	Значит, при $ i = r_1, r_1 + r_2, \widedots[5em], r_1 + ... + r_k $, $ \quad i $-й столбец -- нулевой \\
+	При $ i \ne r_1, \widedots[5em], r_1 + ... + r_k $, $ \quad \mathcal{A}(e_i) = e_{i + 1} \implies i $-й столбец:
+	$$
+	\begin{pmatrix}
+		0 \\
+		0 \\
+		\vdots \\
+		0 \\
+		1 \\
+		0 \\
+		\vdots \\
+		0
+	\end{pmatrix}
+	\begin{matrix}
+		\ \\
+		\ \\
+		\ \\
+		i \\
+		i + 1 \\
+		\ \\
+		\ \\
+		\
+	\end{matrix} $$
+\end{proof}
+
+\begin{theorem}[жорданова форма нильпотентного оператора]
+	Для любого нильпотентного оператора на конечномерном векторном пространстве существует форданов базис
+\end{theorem}
+
+\begin{proof}
+	Будем доказывать, что существует базис из жордановых цепочек \\
+	Положим $ W \define \ker \mathcal{A} $ \\
+	Если мы возьмём ЛНЗ векторы из ядра и достроим (слева от них) цепочки, то получим жорданов базис \\
+	Положим $ U_i \define \Img \mathcal{A}^i $
+	$$ V = U_0 \supset U_1 \supset U_2 \supset ... \supset U_{k - 1} \supset U_k = \set{0} $$
+	где $ k $ -- степень нильпотентности \\
+	Заметим, что если $ v \in U_t \cap W $, то существует цепочка длины $ t + 1 $ с концом $ v $ \\
+	Построим базис $ W $ (такой, чтобы можно было достроть цепочки): \\
+	Будем пересекать $ W $ с $ U_i $ \\
+	Выберем базис $ W \cap U_{k - 1} $. Он ЛНЗ, значит его можно дополнить до базиса $ W \cap U_{k - 2} $ \\
+	В итоге получим базис $ W \cap U_0 = W $ \\
+	Получили базис $ e_1, e_2, ... $ пространства $ W $ \\
+	Для $ e_i \in W \cap U_t $ построим цепочку длины $ t + 1 $ с концом $ e_i $:
+	$$ e_1^{(i)} \to e_2^{(i)} \to ... \to e_{t + 1}^{(i)} = e_i \to 0 $$
+	Объединение цепочек -- ЛНЗ (по лемме) \\
+	Докажем, что это базис, т. е. что набор порождающий: \\
+	Докажем, что если $ \mathcal{A}^s(v) = 0 $, то $ v $ является ЛК векторов цепочек \\
+	Докажем \textbf{индукцией} по $ s $:
+	\begin{itemize}
+		\item \textbf{База.} $ s = 1 $
+		$$ \mathcal{A}^1(v) = 0, \qquad v \in W, \qquad e_1, e_2, ... \text{ -- базис } W $$
+		\item \textbf{Переход.} $ s \to s + 1 $ \\
+		Пусть $ \mathcal{A}^{s + 1}(v) = 0, \quad \mathcal{A}^s(v) \ne 0 $ \\
+		Положим $ u = \mathcal{A}^s \implies u \in U_s $
+		$$ \underbrace{\overbrace{v \to \cdot \to ... \to u}^s \to 0}_{s + 1} $$
+		Значит, $ \mathcal{A}(u) = 0 \implies u \in W $ \\
+		Значит, $ u \in U_s \cap W $ \\
+		Представим его в виде ЛК базиса $ U_s \cap W $ (того, до которого мы дошли на каком-то очередном шагу дополнения базисов):
+		$$ u = \sum_i a_ie_i $$
+		$$ \forall e_i \text{ из этого бзиса выбрана цепочка длины хотя бы } s + 1 $$
+		$$ e_i = e_{s + t_i}^{(i)} \text{ -- последний вектор цепочки} $$
+		Пусть $ e_i' $ -- вектор цепочки, такой что $ \mathcal{A}^s(e_i') = e_i $ (вектор, который на $ s $ шагов раньше)
+		$$ \mathcal{A}^s \bigg( \sum a_ie_i' \bigg) = \sum a_ie_i = u $$
+		При этом, $ \mathcal{A}^s(v) \bydef u $ \\
+		Получили 2 линейных представления $ u $, значит,
+		$$ \mathcal{A}^s(v) = \mathcal{A}^s \bigg( \sum a_ie_i' \bigg) \implies \mathcal{A}^s \bigg( v - \sum a_ie_i' \bigg) = 0 $$
+		Тогда, \textbf{по индукционному предположению}, $ v - \sum a_ie_i' $ представляется в виде ЛК векторов из цепочек \\
+		Значит, $ v $ представляется в виде ЛК векторов цепочек
+	\end{itemize}
+\end{proof}
+
+\section{Многочлены от оператора}
+
+\begin{notation}
+	$ V $ -- векторное пространство над $ K $, $ \quad \mathcal{A} $ -- оператор на $ V $, $ \quad P \in K[x] $
+	$$ P(x) = a_nx^n + ... + a_1x + a_0 $$
+	Тогда $ P(\mathcal{A}) = a_n\mathcal{A}^n + ... + a_1\mathcal{A} + a_0\mathcal{E} $, т. е. такой опрератор $ \mathcal{B} $, что
+	$$ \mathcal{B}(v) = a_n \mathcal{A}^n(v) + ... + a_2\mathcal{A}^2(v) + a_1\mathcal{A}(v) + a_0v $$
+\end{notation}
+
+\begin{lemma}[произведение многочленов от оператора]
+	$ P, Q $ -- многочлены, $ \mathcal{A} $ -- оператор
+	$$ \implies (PQ)(\mathcal{A}) = P(\mathcal{A}) \circ Q(\mathcal{A}) $$
+\end{lemma}
+
+\begin{proof}
+	Пусть $ P(t) = \sum p_it^i, \quad Q(t) = \sum q_it^i, \quad R(t) = P(t)Q(t) $
+	$$ R(t) = \sum p_iq_jt^{i + j} $$
+	Положим $ \mathcal{B} = P(\mathcal{A}), \quad \mathcal{C} = Q(\mathcal{A}), \quad \mathcal{D} = R(\mathcal{A}) $ \\
+	Нужно доказать, что $ \mathcal{B} \bigg( \mathcal{C}(v) \bigg) = \mathcal{D}(v) \quad \forall v $ \\
+	Пусть $ w = \mathcal{C}(v) $
+	$$ \implies \mathcal{B}(w) = \sum p_i \mathcal{A}^i(w), \qquad \mathcal{C}(v) = \sum q_j\mathcal{A}^j(v), \qquad \mathcal{D}(v) = \sum p_iq_j \mathcal{A}^{i + j}(v) $$
+	\begin{multline*}
+		\mathcal{B} \bigg( \mathcal{C}(v) \bigg) = \mathcal{B}(w) = \mathcal{B} \bigg( \sum p_j \mathcal{A}^j(v) \bigg) = \sum q_j \mathcal{B} \bigg( \mathcal{A}^j(v) \bigg) = \sum q_j \bigg( \sum p_i \mathcal{A}^i \big( \mathcal{a^j}(v) \big) \bigg) = \\
+		= \sum q_j \bigg( \sum p_i \mathcal{A}^{i _ j} \bigg) = \sum q_jp_i \mathcal{A}^{i + j} = \mathcal{D}(v)
+	\end{multline*}
+\end{proof}
+
+\begin{implication}
+	$ P, Q $ -- многочлены, $ \quad \mathcal{A}, \mathcal{B}, \mathcal{C} $ -- операторы, $ \qquad \mathcal{B} = P(\mathcal{A}), \quad \mathcal{C} = Q(\mathcal{A}) $
+	$$ \implies \mathcal{B} \circ \mathcal{C} = \mathcal{C} \circ \mathcal{B} $$
+\end{implication}
+
+\begin{proof}
+	$ PQ = QP \implies (PQ)(A) = (QP)(A) $
+\end{proof}

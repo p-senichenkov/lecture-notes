@@ -1,0 +1,266 @@
+\section{Теорема Лагранжа для вектор-функций}
+
+\begin{definition}
+	Отображение $ F : (a, b) \to \R^{n \ge 2} $ называют вектор-функцией, заданной на $ (a, b) $
+\end{definition}
+
+\begin{remark}
+	$ \R $ можно трактовать как пространство вектор-столбцов, состоящих из одного элемента
+\end{remark}
+
+\begin{statement}
+	$ F : (a, b) \to \R^{n \ge 2}, \qquad F(t) = \column{f_1(t)}{f_n(t)}, \qquad t_0 \in (a, b) $
+	\begin{remind}
+		По теореме из прошлого семестра, $ F $ дифференцируема в $ t_0 $ тогда и только тогда, когда $ f_j(t) $ дифф. в $ t_0 \quad j = 1, ..., n $
+	\end{remind}
+	\begin{remind}
+		$ f_j(t) $ дифф. в $ t_0 $ тогда и только тогда, когда $ \exist f_j'(t_0) $
+	\end{remind}
+	$$ \mc{D}F(t_0) = \column{f_1'(t_0)}{f_n'(t_0)} $$
+	\begin{multline*}
+		\norm{\mc{D}F(t_0)} \underset{\text{как линейного отображения}}= \sup\limits_{
+			\begin{subarray}{c}
+				|h| \le 1 \\
+				h \in \R
+			\end{subarray}} \norm{\mc{D}F(t_0)h}_n = \sup\norm{h\mc{D}F(t_0)}_n = \sup |h| \norm{\mc{D}F(t_0)}_n = \\
+		= \norm{\mc{D}F(t_0)} = \norm{\column{f_1'(t_0)}{f_n'(t_0)}}_n
+	\end{multline*}
+\end{statement}
+
+\begin{theorem}[Лагранжа]
+	$ F : [a, b] \to \R^{n \ge 2}, \qquad F \in \Cont{[a, b]} $
+	\begin{remind}
+		$ F \in \Cont{[a, b]} \iff f_j \in \Cont{[a, b]} \quad j = 1, ..., n $
+	\end{remind}
+	$ \forall t \in (a, b) \quad F $ дифф. в $ t $
+	\begin{equ}1
+		\implies \exist c \in (a, b) : \norm{F(t)(b) - F(a)}_n \le \norm{\mc{D}F(c)}_n(b - a)
+	\end{equ}
+\end{theorem}
+
+\begin{proof}
+	Возьмём
+	\begin{equ}2
+		\vphi(t) \define F(t)^T \bigg( F(b) - F(a) \bigg) = f_1(t) \bigg( f_1(b) - f_1(a) \bigg) + ... + f_n(t) \bigg( f_n(b) - f_n(a) \bigg)
+	\end{equ}
+	Будем считать, что $ F(b) \ne F(a) $ (иначе -- очевидно) \\
+	По напоминанию из условия теоремы, $ \vphi \in \Cont{[a, b]} $
+	\begin{equ}3
+		\forall t \in (a, b) \quad \exist \vphi'(t)
+	\end{equ}
+	\begin{equ}4
+		\vphi'(t) = f_1'(t) \bigg( f_1(b) - f_1(a) \bigg) + ... + f_n'(t) \bigg( f_n(b) - f_n(a) \bigg)
+	\end{equ}
+	Значит, к $ \vphi $ можно применить теорему Лагранжа из первого семестра
+	\begin{equ}5
+		\exist c \in (a, b) : \vphi(b) - \vphi(a) = \vphi'(c)(b - a)
+	\end{equ}
+	\begin{equ}6
+		\eref2 \implies \vphi(b) - \vphi(a) = \bigg( f_1(b) - f_1(a) \bigg)^2 + ... + \bigg( f_n(b) - f_n(a) \bigg)^2
+	\end{equ}
+	Это означает что
+	\begin{equ}7
+		\vphi(b) - \vphi(a) = \norm{F(b) - F(a)}_n^2
+	\end{equ}
+	Применим к \eref4 неравенство КБШ:
+	\begin{multline}\lbl8
+		|\vphi'(c)| \le \bigg\lgroup \bigg( f_1'(c) \bigg)^2 + ... + \bigg(f_n'(c) \bigg)^2 \bigg\rgroup^\frac12 \cdot \bigg\lgroup \bigg( f_1(b) - f_1(a) \bigg)^2 + ... + \bigg( f_n(b) - f_n(a) \bigg)^2 \bigg\rgroup^\frac12 = \\
+		= \norm{\mc{D}F(c)} \cdot \norm{F(b) - F(a)}
+	\end{multline}
+	$$ \eref7, \eref8 \implies \norm{F(b) - F(a)}^2 \le \norm{\mc{D}F(c)} \cdot \norm{F(b) - F(a)} \implies \eref1 $$
+\end{proof}
+
+\section{Теорема об обратимости линейного отображения, близкого к обратимому}
+
+\begin{theorem}
+	$ \mc{A} : \R^{n \ge 2} \to \R^n $ -- линейное, т. е. $ \mc{A}(X) = AX, \quad X \in \R^n $ \\
+	$ A $ обратимо, т. е. $ \exist B : AB = I $ и $ BA = I $ ($ B $ называется обратной матрицей и обозначается $ B = A^{-1} $)
+	\begin{remind}
+		По теореме из алгебры, чтобы $ A $ была обратима, необходимо и достаточно, чтобы $ \det A \ne 0 $
+	\end{remind}
+	\begin{remind}
+		По ещё одной теореме из алгебры, $ A $ обратима тогда и только тогда, когда $ AX \ne \On \quad \forall X \ne \On $
+	\end{remind}
+	$ \norm{A^{-1}} = \frac1\alpha, \quad \alpha > 0, \qquad \norm{B - A} = \beta, \quad 0 < \beta < \alpha $ \\
+	Тогда $ B $ обратима и $ \norm{A^{-1} - B^{-1}} \le \dfrac{\beta}{\alpha(\beta - \alpha)} $
+\end{theorem}
+
+\begin{iproof}
+	\item Докажем, что $ B $ обратима:
+	\begin{multline}\lbl9
+		\underset{X \in \R^n}{X = IX} = (A^{-1}A)X = A^{-1}(AX) \implies \norm{X} = \norm{A^{-1}(AX)} \le \\
+		\le \norm{A^{-1}}\norm{AX} \bydef \frac1\alpha \norm{AX} \implies \norm{AX} \ge \alpha\norm{X}
+	\end{multline}
+	\begin{equ}{10}
+		BX = AX + (BX - AX) \implies \norm{BX} \trige \norm{AX} - \norm{BX - AX}
+	\end{equ}
+	\begin{equ}{11}
+		\norm{BX - AX} = \norm{(B - A)X} \le \norm{B - A}\norm{X}_n
+	\end{equ}
+	\begin{equ}{12}
+		\norm{BX}_n \underset{\eref{10}}\ge \underbrace{\alpha \norm{X}}_{\eref9} - \underbrace{\norm{B - A}\norm{X}}_{\eref{11}} = \underbrace{(\alpha - \beta)}_{> 0} \norm{X}
+	\end{equ}
+	Это означает, что $ B $ обратима (по второй теореме из алгебры)
+	\item Докажем соотношение для $ \norm{A^{-1} - B^{-1}} $: \\
+	Возьмём $ \forall Y \ne \On $ и $ X \define B^{-1}Y $
+	\begin{equ}{13}
+		\eref{12} \implies \norm{B(B^{-1}Y)} \bydef \norm{BX} \ge (\alpha - \beta) \norm{BX} \bydef (\alpha - \beta) \norm{B^{-1}Y}
+	\end{equ}
+	$$ B(B^{-1}Y \underset{\text{асс.}})= (BB^{-1})Y = IY = Y $$
+	\begin{equ}{14}
+		\eref{13} \implies \norm{B^{-1}Y} \le \frac1{\alpha - \beta} \norm{Y}
+	\end{equ}
+	\begin{equ}{15}
+		\norm{B^{-1}} \le \frac1{\alpha - \beta}
+	\end{equ}
+	\begin{multline}\lbl{16}
+		A(A^{-1} - B^{-1})B \underset{\text{асс.}}= \bigg( A(A^{-1} - B^{-1})B \bigg) \underset{\text{дистр.}}= ( AA^{-1} - AB^{-1})B = (I - AB^{-1})B \underset{\text{дистр.}}= \\
+		= IB - (AB^{-1})B \underset{\text{асс.}}= B - A(B^{-1}B) = B - AI = B - A
+	\end{multline}
+	\begin{equ}{17}
+		\eref{16} \implies \underbrace{(A^{-1}A)}_{= I}(A^{-1} - B^{-1})\underbrace{(BB^{-1})}_{= I} = A^{-1}(B - A)B^{-1} \implies A^{-1} - B^{-1} = A^{-1}(B - A)B^{-1}
+	\end{equ}
+	$$ \norm{A^{-1} - B^{-1}} \underset{\eref{17}}\le \norm{A^{-1}} \cdot \norm{B - A} \cdot \norm{B^{-1}} \underset{
+		\begin{subarray}{c}
+			\eref{15} \\
+			\text{определения } \alpha \text{ и } \beta
+		\end{subarray}}\le \frac1\alpha \cdot \beta \cdot \frac1{\alpha - \beta} $$
+\end{iproof}
+
+\section{Обратимые отображения}
+
+\begin{statement}
+	$ E \sub \R^{n \ge 2}, \qquad X_0 $ -- внутр. точка \\
+	$ F : E \to \R^n $ -- биекция, т. е. $ \underset{X_1, X_2 \in E}{\forall X_1 \ne X_2} \quad F(X_1) \ne F(X_2), \qquad G = F(E) $ \\
+	В силу \textit{какого-то свойства} $ F $ обратима \\
+	$ \Phi : G \to E, \qquad \Phi \bigg( F(X) \bigg) = X \quad \forall X, \qquad F \bigg( \Phi(X) \bigg) = Y \quad \forall Y \in G $ \\
+	$ F $ дифференцируемо в $ X_0, \qquad Y_0 = F(X_0), \qquad \Phi $ дифференцируемо в $ Y_0 $ \\
+	Обозначим $ I(X) = X \quad \forall X \in E $ -- тождественное отображение
+	\begin{remark}
+		Тождественное отображение дифференцируемо. Его матрица Якоби: $ \mc{D}I(X) = I_n $
+	\end{remark}
+	Тогда $ \Phi \bigg( F(X) \bigg) = I(X) $ \\
+	Применим теорему о дифференцируемости суперпозиции (утверждение про матрицы Якоби из неё):
+	$$ \Phi \bigg(F(X) \bigg) = I(X) \implies \mc{D}\Phi(Y_0)\mc{D}F(X_0) = \mc{D}I(X_0) = I_n $$
+	По определению, если произведение матриц является единичной матрицей, то они обратны друг другу:
+	$$ \mc{D}\Phi(Y_0) = \bigg( \mc{D}F(X_0) \bigg)^{-1} $$
+	Получили необходимое условие для обратных отображений
+\end{statement}
+
+\begin{theorem}[об обратимом отображении]
+	$ E \sub \R^{n \ge 2}, \qquad E $ открыто, $ \qquad X_0 \in E, \qquad F : E \to \R^1 $ \\
+	$ F \in \Cont[1]E $, т. е. все координатные функции $ \in \mc{C}^{-1} $ \\
+	$ Y_0 = F(X), \qquad \mc{D}F(X_0) $ обратима
+	\begin{equ}{18}
+		\implies \exist \underset{U, V \text{ открыты}}{U \sub E, V} :
+		\begin{cases}
+			X_0 \in U, Y_0 \in V \\
+			F\clamp{U} \text{ обратимо} \\
+			F(U) = V \\
+			\Phi = \bigg( F\clamp{U} \bigg)^{-1} \implies \Phi \in \Cont[1]{V}
+		\end{cases}
+	\end{equ}
+\end{theorem}
+
+\begin{proof}
+	\hfill
+	\begin{enumerate}
+		\item Определение множества $ U $ \\
+		Обозначим $ A \define \mc{D}F(X_0) $. По условию, она обратима \\
+		Положим $ \lambda \define \dfrac1{4\norm{A^{-1}}} $ \\
+		Обозначим $ F = \column{f_1}{f_n} $
+		$$ \mc{D}F(X) =
+		\begin{bmatrix}
+			f_{1x_1}'(X) & ... & f_{1x_n}'(X) \\
+			. & . & . \\
+			f_{1x_1}'(X) & ... & f_{nx_n}'(X)
+		\end{bmatrix} $$
+		$$ \mc{D}F(X) - \mc{D}F(X_0) =
+		\begin{bmatrix}
+			f_{1x_1}'(X) - f_{1x_1}'(X_0) & ... & f_{1x_n}'(X) - f_{1x_n}'(X_0) \\
+			. & . & . \\
+			f_{nx_1}'(X) - f_{nx_1}'(X_0) & ... & f_{nx_n}'(X) - f_{nx_n}'(X_0)
+		\end{bmatrix} $$
+		По свойству 6 нормы матрицы (лекция от 05.09.2024),
+		\begin{equ}{21}
+			\norm{\mc{D}F(X) - A} \bydef \norm{\mc{D}F(X) - \mc{D}F(X_0)} \le \bigg\lgroup \sum_{
+				\begin{subarray}{c}
+					i = 1, ..., n \\
+					j = 1, ..., n
+				\end{subarray}} \bigg( f_{ix_j}'(X) - f_{ix_j}'(X_0) \bigg)^2 \bigg\rgroup^{\frac12}
+		\end{equ}
+		\begin{equ}{22}
+			F \in \Cont[1]E, \eref{21} \implies \norm{\mc{D}F(X) - \mc{D}F(X_0)} \underarr{X \to X_0} 0
+		\end{equ}
+		\begin{equ}{23}
+			\eref{22} \implies \exist r > 0 : \forall X \in B_r(X_0) \quad \norm{\mc{D}F(X) - A} < 2\lambda
+		\end{equ}
+		\begin{equ}{24}
+			\text{Положим } U \define B_r(X_0)
+		\end{equ}
+		\item Инъективность $ F $ \\
+		Далее будем рассматривать $ F $ только на $ U $ (т. е. будем писать $ F \define F\clamp{U} $)
+		\begin{remark}[о выпуклости шара]
+			$ X_1, X_2 \in U, \qquad 0 < t < 1 $
+			$$ \implies tX_1 + (1 - t)X_2 \in U $$
+		\end{remark}
+		\begin{proof}
+			\begin{multline*}
+				\norm{tx_1 + (1 - t)X_2 - x_0} = \norm{t(X_1 - X_0) + (1 - t)(X_2 - x_0)}_n \trile \\
+				\le \norm{t(X_1 - X_0)} + \norm{(1 - t)(X_2 - X_0)} < t \cdot r + (1 - t) \cdot r = r
+			\end{multline*}
+		\end{proof}
+		\begin{implication}
+			$ X \in U, \qquad X + H \in U, \qquad 0 < t < 1 $
+			$$ \implies X + tH \in U $$
+		\end{implication}
+		\begin{proof}
+			$ X_1 \define X + H, \qquad X_2 \define X $
+			$$ tx_1 + (1 - t)X_2 = tX + tH + (1 - t)X = X + tH $$
+		\end{proof}
+		Возьмём $ X \in U $ и $ H \ne \On $, такие что $ X + H \in U $ \\
+		Докажем, что $ F(X + H) - F(X) \stackrel?\ne \On $. Это и будет означать инъективность \\
+		Возьмём $ t \in [0, 1] $ и
+		\begin{equ}{25}
+			P(t) \define F(X + tH) - tAH
+		\end{equ}
+		Это вектор-функция $ P : [0, 1] \to \R^n $
+		\begin{equ}{26}
+			\mc{D}P(t) = \mc{D} \bigg( F(X + tH) \bigg) - \mc{D}(tAH)
+		\end{equ}
+		Положим $ q(t) \define X + tH $ \\
+		Теперь можно переписать \eref{26}:
+		\begin{equ}{27}
+			\mc{D}P(t) = \mc{D} \bigg( F \big( q(t) \big) \bigg) - \mc{D}(tAH)
+		\end{equ}
+		\begin{remind}
+			Мы сегодня уже доказали, что для $ Y \in \R^n $ и отображения $ t \mapsto tY $, $ \mc{D}(tY) = Y $
+		\end{remind}
+		$$ \mc{D}(tAH) = AH, \qquad \mc{D}q(t) = H $$
+		$$ \mc{D}F \bigg( q(t) \bigg) = \mc{D}F \bigg( q(t) \bigg)\mc{D}q(t) = \mc{D}F(X + tH)H $$
+		Подставим это в \eref{27}:
+		\begin{equ}{28}
+			\mc{D}P(t) = \mc{D}F(X + tH)H - AH
+		\end{equ}
+		$$ \lambda \bydef \frac1{4\norm{A^{-1}}} \implies \norm{A^{-1}} = \frac1{4\lambda} $$
+		Возьмём $ H \ne \On $
+		\begin{multline}\lbl{29}
+			H = (A^{-1}A)H = A^{-1}AH \implies \norm{H} = \norm{A^{-1}(AH)} \le \norm{A^{-1}}\norm{AH} = \frac1{4\lambda}\norm{AH} \implies \\
+			\implies \norm{AH} \ge 4\lambda\norm{H}
+		\end{multline}
+		\begin{equ}{210}
+			P(1) - P(0) \bydef F(X + H) - AH - F(X) = F(X + H) - F(X) - AH
+		\end{equ}
+		Применим к $ P $ теорему Лагранжа для вектор-функции:
+		\begin{multline}\lbl{211}
+			\exist c \in [0, 1] : \norm{P(1) - P(0)} \le \norm{\mc{D}P(c)} \cdot = \norm{\mc{D}P(c)} \underset{\eref{28}}= \norm{ \bigg( \mc{D}F(X + cH) - A \bigg)H} \le \\
+			\le \norm{\mc{D}F\underbrace{(X + tH)}_{\in U} - A}\norm{H} < 2\lambda \norm{H} \bydef[\le] \frac1{\norm{AH}}
+		\end{multline}
+		\begin{equ}{213}
+			\eref{210}, \eref{211}, \eref{212} \implies \norm{F(X + H) - F(X) - AH} < \half\norm{AH}
+		\end{equ}
+		\begin{multline*}
+			\eref{213} \implies \norm{F(X + H) - F(X)} = \norm{AH + \bigg( F(X + H) - F(X) - AH \bigg)} \ge \norm{AH} - \norm{F(X + H) - F(X) - AH} > \norm{AH} - \half\norm{AH} = \half\norm{AH} \underset{\eref{29}}\ge 2\lambda \norm{H} > 0
+		\end{multline*}
+	\end{enumerate}
+\end{proof}

@@ -1,0 +1,378 @@
+\section{Условия монотонности и постоянства функций}
+
+\begin{theorem}[условие постоянства функции]
+	$f \in C \big( (a, b) \big), \qquad \forall x \in (a, b) \quad \exist f'(x) $
+    \begin{equ}1
+        \underset{\text{(то есть, } f(x) = \const)}{\forall x_0, x \in (a, b) \quad f(x) = f(x_0)}
+    \end{equ}
+    \begin{equ}2
+        \iff \forall x \in (a, b) \quad f'(x) = 0
+    \end{equ}
+\end{theorem}
+
+\begin{proof}
+    \hfill
+    \begin{itemize}
+    	\item $\implies$ \\
+        $ \eref1 \implies \eref2 $, так как $ c' \equiv 0 $
+        \item $\impliedby$ \\
+        Пусть $x \ne x_0 $ \\
+        По теореме Лагранжа, $ \exist x_1 $ между $x_0$ и $x : f(x) - f(x_0) = \underbrace{f'(x_1)}_{=0}(x - x_0) = 0 $
+    \end{itemize}
+\end{proof}
+
+\begin{theorem}[условие возрастания и убывания функции]
+	$ f \in C \big( [a, b] \big), \qquad \forall x \in (a, b) \quad \exist f'(x) $
+    \begin{equ}3
+        \forall x_1 < x_2 \in [a, b] \quad f(x_1) \le f(x_2)
+    \end{equ}
+    \begin{equ}4
+        \iff \forall x \in (a, b) \quad f'(x) \ge 0
+    \end{equ}
+    $ g \in C \big( [a, b] \big), \qquad \forall x \in (a, b) \quad \exist g'(x) $
+    \begin{equ}{31}
+    	\forall x_1 < x_2 \in [a, b] \quad g(x_1) \ge g(x_2)
+    \end{equ}
+    \begin{equ}{41}
+    	\iff \forall x \in (a, b) \quad g'(x) \le 0
+    \end{equ}
+\end{theorem}
+
+\begin{proof}
+	\hfill
+    \begin{itemize}
+    	\item $f(x)$
+        \begin{itemize}
+        	\item $\implies$ \\
+            Пусть выполнено \eref3 \\
+            Рассмотрим любую точку $x \in (a, b) $ \\
+            Возьмём $h > 0 : x + h < b $
+            \begin{multline*}
+                \eref3 \implies f(x + h) \ge f(x) \iff \frac{f(x + h) - f(x)}h \ge 0 \implies \liml{h \to 0+} \frac{f(x + h) - f(x)}h \ge 0 \iff \\ \iff f'(x) \ge 0
+            \end{multline*}
+            \item $\impliedby$ \\
+            Пусть выполнено \eref4 \\
+            Возьмём $ x_1, x_2 \in [a, b] $ \\
+            По теореме Лагранжа,
+            $$ \exist x_3 \in (x_1, x_2) : f(x_2) - f(x_1) = \underbrace{f'(x_3)}_{\ge 0}\underbrace{(x_2 - x_1)}_{\ge 0} \ge 0 \iff f(x_2) \ge f(x_1) $$
+        \end{itemize}
+        \item $g(x)$ \\
+        Рассмотрим функцию $f(x) \define -g(x)$ \\
+        По свойствам производной, $ \forall x \in (a, b) \quad f'(x) = -g'(x) $
+        $$ g(x_2) \le g(x_1) \iff -g(x_2) \ge -g(x_1) \iff f(x_2) \ge f(x_1) $$
+        По уже доказанному, получаем, что $\eref{31} \iff \eref{41} $
+    \end{itemize}
+\end{proof}
+
+\begin{theorem}[о строгом возрастании и строгом убывании функции]
+	$ f \in C \big( [a, b] \big), \qquad \forall x \in (a, b) \quad \exist f'(x) $
+    $$ \forall x_1 < x_2 \in [a, b] \quad f(x_1) < f(x_2) $$
+    \begin{mequ}[\iff \empheqlbrace]
+        \lbl5 \forall x \in (a, b) \quad f'(x) \ge 0 \\
+        \lbl6 \not\exist (\alpha, \beta) \sub (a, b) : \forall x \in (\alpha, \beta) \quad f'(x) = 0
+    \end{mequ}
+    $ g \in C \big( [a, b] \big), \qquad \forall x \in (a, b) \quad \exist g'(x) $
+    $$ \forall x_1 < x_2 \in [a, b] \quad f(x_1) > f(x_2) \iff
+    \begin{cases}
+        \forall x \in (a, b) \quad g'(x) \le 0 \\
+        \not\exist (\alpha_1, \beta_1) \sub (a, b) : \forall x \in (\alpha_1, \beta_1) \quad g'(x) = 0
+    \end{cases} $$
+\end{theorem}
+
+\begin{proof}
+    \hfill
+    \begin{itemize}
+    	\item $f(x)$
+        \begin{itemize}
+            \item $\implies$ \\
+            Пусть $f$ строго возрастает \\
+            По предыдущей теореме, выполнено \eref5 \\
+            Пусть \textbf{не} выполнено \eref6, то есть $ \exist (\alpha, \beta) \sub (a, b) : \forall x \in (\alpha, \beta) \quad f'(x) = 0 $ \\
+            По теореме об условии постоянства функции, $ \forall x_1 < x_2 \in (\alpha, \beta) \quad f(x_1) = f(x_2) $ -- \contra с предволожением, что $f$ строго возрастает
+            \item $\impliedby$ \\
+            Пусть выполнены \eref5 и \eref6 \\
+            Докажем, что $f$ строго возрастает:
+            \begin{equ}{81}
+                \eref5 \implies \forall x_1 < x_2 \in [a, b] \quad f(x_1) \le f(x_2)
+            \end{equ}
+            То есть, $f$ возрастает \\
+            Предположим, что $f$ \textbf{не строго} возрастает, то есть
+            \begin{equ}8
+                \exist x', x'' \in [a, b] : f(x') = f(x'')
+            \end{equ}
+            \begin{multline*}
+                \eref{81}, \eref8 \implies \forall x \in (x', x'') \quad f(x') \le f(x) \le f(x'') \iff \forall x \in (x', x'') \quad f(x) = f(x') \implies \\ \implies \forall x \in (x', x'') \quad f'(x) = 0 \text{ -- } \contra
+            \end{multline*}
+        \end{itemize}
+        \item $g(x)$ \\
+        Определим функцию $f(x) \define -g(x) $ \\
+        $g$ строго убывает $ \iff f$ строго возрастает \\
+        $ f'(x) = 0 \iff g'(x) = 0 $
+    \end{itemize}
+\end{proof}
+
+\section{Получение некоторых неравенств}
+
+\begin{statement}
+	$ \forall x \in [0, \dfrac\pi2] \qquad \sin x \ge \dfrac2\pi x $
+\end{statement}
+
+\begin{proof}
+	Рассомтрим функцию $ f(x) \define
+    \begin{cases}
+    	1, \quad x = 0 \\
+        \dfrac{\sin x}x, \quad 0 < x \le \dfrac\pi2
+    \end{cases} $ \\
+    По замечательному пределу для $ \dfrac{\sin x}x $, $ f \in C \big( [0, \dfrac\pi2] \big) $ \\
+    Найдём производную $f$:
+    $$ f'(x) = \frac{\sin' x \cdot x - \sin x \cdot x'}{x^2} = \frac{x \cos x - \sin x}{x^2} = \frac{\cos x}{x^2} (x - \tg x) $$
+    При доказательстве существенного неравенства для $\sin x$ было доказано, что $ \forall x \in (0, \dfrac\pi2) \quad x < \tg x $ \\
+    Значит, $ f'(x) = \underbrace{\dfrac{\sin x}{x^2}}_{> 0} \underbrace{(x - \tg x)}_{ < 0} < 0 $ \\
+    По теореме о строгом убывании, $f$ строго убывает, то есть $ \forall x \in [0, \dfrac\pi2) \quad f(x) > f(\dfrac\pi2) $
+    $$ f(\frac\pi2) = \frac{\sin \frac\pi2}{\frac\pi2} = \frac2\pi $$
+\end{proof}
+
+\begin{statement}
+	$ \forall x > -1 \qquad \ln (1 + x) \le x $ \\
+    Если $x \ne 0$, то $ \ln (1 + x) < x $
+\end{statement}
+
+\begin{proof}
+	Возьмём $ -1 < a < 0 < b $ \\
+    Рассмотрим $ f(x) \define \ln(1 + x) - x, \quad x \in [a, b] $
+    $$ f'(x) = \frac1{1 + x} - 1 = -\frac{x}{1 + x} $$
+    \begin{itemize}
+    	\item Рассмотрим отрезок $[a, 0]$:
+        $$ \forall x \in [a, 0] \quad
+        \begin{cases}
+            -x > 0 \\
+            1 + x > 0
+        \end{cases} \implies f(x) \text{ строго возрастает на } [a, 0] $$
+        То есть, $ \forall x \in [a, 0] \quad
+        \begin{cases}
+            f(x) \le f(0) = 0 \\
+            f(x) < f(x) \text{, если } x \ne 0
+        \end{cases} $
+        \item Рассмотрим отрезок $[0, b]$:
+        $$ \forall x \in [0, b] \quad
+        \begin{cases}
+        	-x < 0 \\
+            1 + x > 0
+        \end{cases} \implies f(x) \text{ строго убывает на } [0, b] $$
+        То есть, $\forall x \in [0, b] \quad
+        \begin{cases}
+        	f(x) \le f(0) = 0 \\
+            f(x) < f(0) \text{, если } x \ne 0
+        \end{cases} $
+    \end{itemize}
+    Получили, что $ \forall x \in [a, b] \quad f(x) \le 0 \iff \ln(1 + x) \le x $
+\end{proof}
+
+\begin{statement}[неравенство Бернулли]
+	$ \alpha > 1 $ \\
+    $ \forall x > -1 \qquad (1 + x)^\alpha \ge 1 + \alpha x $ \\
+    Если $ x \ne 0 $, то $ (1 + x)^\alpha > 1 + \alpha x $
+\end{statement}
+
+\begin{proof}
+    Рассмотрим $f(x) \define (1 + x)^\alpha - \alpha x $ для $ x \in [a, b] $\footnote{В дальнейшем нам понадобятся \textbf{замкнутые} промежутки, поэтому мы ``покрываем'' ими $(-1, +\infty)$}
+    \item Рассотрим $ -1 < a < 0 < b $ \\
+    Теперь $ f'(x) = \alpha(1 + x)^{\alpha - 1} - \alpha = \alpha \bigg( (1 + x)^{\alpha - 1} - 1 \bigg) $ \\
+    Обозначим $ \alpha - 1 \define \beta > 0 $
+    \begin{itemize}
+        \item $ -1 < x < 0 $
+        $$ 1 + x < 1 $$
+        $$ (1 + x)^\beta < 1^\beta $$
+        $$ (1 + x)^\beta - 1 < 0 $$
+        То есть, $f$ строго убывает на $[a, 0]$ и $f(x) < f(0) = 1 $
+        \item $0 < x$
+        $$ 1 + x > 1 $$
+        $$ (1 + x)^\beta > 1^\beta $$
+        $$ (1 + x)^\beta - 1 > 0 $$
+        То есть, $f$ строго возрастает на $[a, b]$ и $f(x) > f(0) = 1 $
+    \end{itemize}
+    Полуичили, что $f(x) \le 1$
+\end{proof}
+
+\begin{statement}[неравенство Бернулли]
+	$ 0 < \alpha < 1 $ \\
+    $ \forall x > -1 \qquad (1 + x)^\alpha \le 1 + \alpha x $ \\
+    Если $ x \ne 0 $, то $ (1 + x)^\alpha < 1 + \alpha x $
+\end{statement}
+
+\begin{proof}
+	Доказательство точно такое же, однако $ \alpha - 1 \define \beta < 0 $ и:
+    \begin{itemize}
+        \item $ -1 < x < 0 $
+        $$ 1 + x < 1 $$
+        $$ (1 + x)^\beta > 1^\beta $$
+        $$ (1 + x)^\beta - 1 > 0 $$
+        То есть, $f$ строго возрастает на $[a, 0]$ и $f(x) > f(0) = 1 $
+        \item $0 < x$
+        $$ 1 + x > 1 $$
+        $$ (1 + x)^\beta > 1^\beta $$
+        $$ (1 + x)^\beta - 1 > 0 $$
+        То есть, $f$ строго убывает на $[a, b]$ и $f(x) < f(0) = 1 $
+    \end{itemize}
+    Получили, что $f(x) \le 1 $
+\end{proof}
+
+\section{Выпуклые и вогнутые функции}
+
+\begin{definition}
+	$ f \in C \big( [a, b] \big) $ \\
+    $ f$ выпукла $ \iff \forall x_1, x_2 \in [a, b]$ и $ \forall t_1, t_2 > 0 : t_1 + t_2 = 1 $
+    \begin{equ}{11}
+        f(t_1x_1 + t_2x_2) \le t_1f(x_1) + t_2f(x_2)
+    \end{equ}
+    $ g \in C \big( [a, b] \big) $ \\
+    $g$ вогнута $ \iff \forall x_1, x_2 \in [a, b]$ и $ \forall t_1, t_2 > 0 : t_1 + t_2 = 1 $
+    \begin{equ}{12}
+    	g(t_1x_1 + t_2x_2) \ge t_1g(x_1) + t_2g(x_2))
+    \end{equ}
+\end{definition}
+
+\begin{statement}
+	$f$ выпукла $ \implies -f$ вогнута \\
+    $g$ вогнута $ \implies -g $ выпукла
+\end{statement}
+
+\begin{proof}
+	$f$ выпукла $ \iff $ выполнено \eref1 \\
+    Домножим \eref1 на $-1$:
+    $$ -f(t_1x_1 + t_2x_2) \ge t_1(-f(x_1)) + t_2(-f(x_2)) $$
+\end{proof}
+
+\begin{theorem}[о характеристике выпуклых и вогнутых функций в терминах производной]
+    \hfill \\
+	$f \in C \big( [a, b] \big), \qquad \forall x \in (a, b) \quad \exist f'(x) $ \\
+    $f$ выпукла $ \iff f'(x) $ возрастает \\
+    $g \in C \big( [a, b] \big), \qquad \forall x \in (a, b) \quad \exist g'(x) $ \\
+    $g$ вогнута $ \iff g'(x) $ убывает
+\end{theorem}
+
+\begin{proof}
+	\hfill
+    \begin{itemize}
+        \item $f(x)$
+        \begin{itemize}
+        	\item $\impliedby$ \\
+            Пусть $f$ возрастает \\
+            НУО положим $ a \le x_1 < x_2 \le b $ \\
+            Нужно доказать \eref{11}
+            \begin{multline*}
+                \eref1 \iff (t_1 + t_2)f(t_1x_1 + t_2x_2) \le t_1f(x_1) + t_2f(x_2) \iff \\ \iff t_1 \bigg( f(t_1x_1 + t_2x_2) - f(x_1) \bigg) \le t_2 \bigg( f(x_2) - f(t_1x_1 + t_2x_2) \bigg)
+            \end{multline*}
+            Обозначим $ x \define t_1x_1 + t_2x_2 $
+            $$ t_1 > 0 \implies x > t_1x_1 + t_2x_1 = x_1 $$
+            $$ x < t_1x_2 + t_2x_2 = x_2 $$
+            То есть, $ x_1 < x < x_2 $ \\
+            По теореме Лагранжа,
+            $$ \exist c_1 \in (x_1, x) : f(x) - f(x_1) = f'(c_1) \cdot (x - x_1) $$
+            $$ \exist c_2 \in (x_1, x_2) : f(x_2) - f(x) = f'(c_2) \cdot (x_2 - x) $$
+            Теперь нужно доказать, что
+            \begin{equ}{17}
+                t_1f'(c_1)(x - x_1) \le t_2f'(c_2)(x_2 - x)
+            \end{equ}
+            Если выполнено \eref{17}, то выполнено и \eref{11}
+            \begin{equ}{171}
+            	t_1 + t_2 \bydef 1 \implies
+                \begin{cases}
+                	t_1 - 1 = -t_2 \\
+                    1 - t_2 = t_1
+                \end{cases}
+            \end{equ}
+            \begin{equ}{172}
+                x - x_1 \bydef t_1x_1 + t_2x_2 - x_1 = x_1(t_1 - 1) + t_2x_2 \underset{\eref{171}}= -t_2x_1 + t_2x_2 = t_2(x_2 - x_1)
+            \end{equ}
+            \begin{equ}{173}
+                x_2 - x \bydef x_2 - (t_1x_1 + t_2x_2) = (1 - t_2)x_2 - t_1x_1 = t_1x_2 - t_1x_1 = t_1(x_2 - x_1)
+            \end{equ}
+            Подставим \eref{172} и \eref{173} в \eref{17}:
+            $$ t_1t_2(x_2 - x_1)f'(c_1) \le t_1t_2(x_2 - x_1)f'(c_2) $$
+            То есть нужно проверить, что $f'(c_1) \le f'(c_2) $ \\
+            При этом, $c_1 \le x \le c_2 \implies c_1 \le c_2 \implies f'(c_1) \le f/(c_2) $
+            \item $\implies$ \\
+            Пусть $f$ выпукла \\
+            Возьмём $ a < x_1 < x_2 < b $ \\
+            Возьмём $ x_1 < x < x_2 $ \\
+            Положим $ t_1 \define \dfrac{x_2 - x}{x_2 - x_1}, \quad t_2 \define \dfrac{x - x_1}{x_2 - x_1} $
+            $$ t_1x_1 + t_2x_2 = \frac{x_2 - x}{x_2 - x_1}x_1 + \frac{x - x_1}{x_2 - x_1}x_2 = \frac{x_1x_2 - xx_1 + xx_2 - x_1x_2}{x_2 - x_1} = x $$
+            Подставим в \eref{11}:
+            $$ f(x) \le \frac{x_2 - x}{x_2 - x_1}f(x_1) + \frac{x - x_1}{x_2 - x_1}f(x_2) $$
+            $$ \underbrace{\bigg( \frac{x_2 - x}{x_2 - x_1} + \frac{x - x_1}{x_2 - x_1} \bigg)}_{= t_1 + t_2 = 1}f(x) \le \frac{x_2 - x}{x_2 - x_1}f(x_1) + \frac{x - x_1}{x_2 - x_1}f(x_2) $$
+            $$ \frac{x_2 - x}{x_2 - x_1} \bigg( f(x) - f(x_1) \bigg) \le \frac{x - x_1}{x_2 - x_1} \bigg( f(x_2) - f(x) \bigg) $$
+            $$ (x_2 - x) \bigg( f(x) - f(x_1) \bigg) \le (x - x_1) \bigg( f(x_2) - f(x) \bigg) $$
+            \begin{equ}{110}
+                \frac{f(x) - f(x_1)}{x - x_1} \le \frac{f(x_2) - f(x)}{x_2 - x}
+            \end{equ}
+            Перейдём к пределу:
+            \begin{itemize}
+            	\item $$ \liml{x \to x_1 + 0} \frac{f(x) - f(x_1)}{x - x_1} \le \liml{x \to x_1 + 0} \frac{f(x_2) - f(x)}{x_2 - x} $$
+                \begin{equ}{111}
+                    f'(x_1) \le \frac{f(x_2) - f(x_1)}{x_2 - x_1}
+                \end{equ}
+                \item $$ \liml{x \to x_2 - 0} \frac{f(x) - f(x_1)}{x - x_1} \le \liml{x \to x_2 - 0} \frac{f(x_2) - f(x)}{x_2 - x} $$
+                \begin{equ}{112}
+                    \frac{f(x_2) - f(x_1)}{x_2 - x_1} \le f'(x_2)
+                \end{equ}
+            \end{itemize}
+            $$ \eref{111}, \eref{112} \implies f'(x_2) $$
+        \end{itemize}
+        \item $g(x)$ \\
+        Рассмотрим $f \define -g$
+    \end{itemize}
+\end{proof}
+
+\begin{theorem}[характеристика выпуклых и вогнутых функций в терминах второй производной]
+    \hfill \\
+	$f \in C \big( [a, b] \big), \qquad \forall x \in (a, b) \quad \exist f''(x) $ \\
+    $f$ выпукла $ \iff \forall x \in (a, b) \quad f''(x) \ge 0 $ \\
+    $g \in C \big( [a, b] \big), \qquad \forall x \in (a, b) \quad \exist g''(x) $ \\
+    $g$ вогнута $ \iff \forall x \in (a, b) \quad g''(x) \le 0 $
+\end{theorem}
+
+\begin{proof}
+	$f'(x)$ возрастает $ \iff \forall x \in (a, b) \quad (f')'(x) = f''(x) \ge 0 $
+\end{proof}
+
+\section{Неравенство Йенсена}
+
+\begin{theorem}
+	$ f \in C \big( [a, b] \big), \qquad f $ выпукла, $ \quad \underset{
+        \begin{subarray}{c}
+        	\forall k = 1...n \quad t_k > 0 \\
+            t_1 + ... + t_n = 1
+        \end{subarray}}{\forall t_1, ..., t_n,} \qquad \forall x_1, ..., x_n \in [a, b] $
+    \begin{equ}{115}
+    	f(t_1x_1 + t_2x_2 + ... + t_nx_n) \le t_1f(x_1) + t_2f(x_2) + ... + t_nf(x_n)
+    \end{equ}
+    $ g \in C \big( [a, b] \big), \qquad g $ вогнута, $ \quad \underset{
+        \begin{subarray}{c}
+        	\forall k = 1...n \quad t_k > 0 \\
+            t_1 + ... + t_n = 1
+        \end{subarray}}{\forall t_1, ..., t_n,} \qquad \forall x_1, ..., x_n \in [a, b] $
+    \begin{equ}{116}
+    	g(t_1x_1 + t_2x_2 + ... + t_nx_n) \ge t_1g(x_1) + t_2g(x_2) + ... + t_ng(x_n)
+    \end{equ}
+\end{theorem}
+
+\begin{proof}
+    \textbf{Индукция}
+    \begin{itemize}
+        \item \textbf{База.} $n = 2$ -- определение выпуклости
+        \item \textbf{Переход.} $n \to n + 1$
+        $$ t_1 + t_2 + ... + t_n + t_{n + 1} = 1 $$
+        \begin{equ}{117}
+            \text{Определим числа } \vawe{t_n} \define t_n + t_{n + 1}, \quad \vawe{x_n} = t_nx_n + t_{n + 1}x_{n + 1}
+        \end{equ}
+        $$ \eref{117} \implies
+        \begin{cases}
+            t_1 + ... + \vawe{t_n} = 1 \\
+            t_1x_1 + ... + \vawe{t_n}\vawe{x_n} = t_1x_1 + ... + t_nx_n + t_{n + 1}x_{n + 1}
+        \end{cases} $$
+        В силу индукционного предположения, $ \underbrace{(t_1x_1 + ... + \vawe{t_n}\vawe{x_n})}_{= f(t_nx_1 + ... + t_nx_n + t_{n + 1}x_{n + 1})} \le t_1f(x_1) + ... + \vawe{t_n}f(\vawe{x_n}) $
+        $$ \vawe{x_n} = \frac{t_n}{\vawe{t_n}}x_n + \frac{t_{n + 1}}{\vawe{t_n}} $$
+        $$ \vawe{t_n}f(\vawe{x_n}) = \vawe{t_n}f \bigg( \frac{t_n}{\vawe{t_n}}x_n + \frac{t_{n + 1}{\vawe{t_n}}}x_{n + 1} \bigg) \le \vawe{t_n} \frac{t_n}{\vawe{t_n}}f(x_n) + \vawe{t_n} \frac{t_{n + 1}}{\vawe{t_n}}f(x_{n + 1}) = t_nf(x_n) + t_{n + 1}f(x_{n + 1}) $$
+    \end{itemize}
+\end{proof}

@@ -1,0 +1,197 @@
+\chapter{Теория групп}
+
+\section{Продолжение про центр группы}
+
+\begin{undefthm}{Напоминание}
+	Центр -- множество элементов, которые коммутируют друг с другом
+    \begin{notation}
+    	$ Z(G) $
+    \end{notation}
+\end{undefthm}
+
+\begin{definition}
+    Если $ Z(G) = \set{e} $, то $ G $ называется группой с тривиальным центром или группой без центра
+\end{definition}
+
+\begin{exmpls}
+    \item Группа перестановок: $ Z(S_n) = \set{e} $ при $ n \ge 3 $
+    \item Чётные перстановки: $ Z(A_n) = \set{e} $ при $ n \ge 4 $
+    \item Обратимые матрицы: $ Z(GL_n(\R)) = \set{tE | t \in \R} $
+\end{exmpls}
+
+\section{Коммутант}
+
+\begin{definition}
+    Коммутатором элементов $ a, b \in G $ называется элемент $ a^{-1}b^{-1}ab $
+\end{definition}
+
+\begin{notation}
+	$ [a, b] $
+\end{notation}
+
+\begin{props}
+	\item $ ba \cdot [a, b] = ab $
+    \begin{proof}
+        $ ba\underbrace{a^{-1}}_eb^{-1}ab = e\underbrace{bb^{-1}}_eab = ab $
+    \end{proof}
+    \item $ [a, b]^{-1} = [b, a] $
+    \begin{proof}
+        $ (a^{-1}b^{-1}ab)^{-1} = b^{-1}a^{-1}(b^{-1})^{-1}(a{-1})^{-1} = b^{-1}a^{-1}ba $
+    \end{proof}
+    \item $ ab = ba \iff [a, b] = e $
+\end{props}
+
+\begin{definition}
+    Комммутант группы $ G $ -- это $ \braket{[a, b] | a, b \in G} $
+\end{definition}
+
+\begin{notation}
+	$ [G, G] $
+\end{notation}
+
+\begin{notation}
+    Если $ A, B \sub G $, то $ [A, B] = \braket{a^{-1}b^{-1}ab | a \in A, b \in B} $ -- взаимный коммутант $ A $ и $ B $
+\end{notation}
+
+\begin{exmpls}
+	\item $ [S_n, S_n] = A_n \quad \forall n $
+    \item $ [A_n, A_n] = A_n $ при $ n \ge 5 $
+\end{exmpls}
+
+\begin{theorem}
+	Коммутант является нормальной подгруппой
+\end{theorem}
+
+\begin{proof}
+	Коммутант, по определению, подгруппа. Значит доказать нужно только нормальность \\
+    Вспомним определение нормальности: \\
+    Пусть $ x \in G, ~ k \in [G, G] $. Докажем, что $ x^{-1}kx \in [G, G] $
+    $$ \exist a_i, b_i : k = [a_1, b_1] \cdot [a_2, b_2] \cdot ... \cdot [a_s, b_s] $$
+    $$ x^{-1}kx = x^{-1}[a_1, b_1] \cdot [a_2, b_2] \cdot ... \cdot [a_s, b_s] \cdot x = \big( x^{-1}[a_1, b_1]x \big) \big( x^{-1}[a_2, b_2]x \big) \cdot ... \cdot \big(x^{-1}[a_s, b_s]x \big) $$
+    Достаточно доказать, что $ \forall a, b, x \in G \quad x^{-1}[a, b]x \in [G, G] $. Докажем это:
+    $$ x^{-1}[a, b]x = x^{-1}a^{-1}b^{-1}abx = (x^{-1}a^{-1}xa)(a^{-1}x^{-1}b^{-1}abx) = [x, a] \big( a^{-1}(bx)^{-1}a(bx) \big) = [x, a] \cdot [a, bx] $$
+\end{proof}
+
+\begin{theorem}[фактор группы по коммутанту]
+	$ G $ -- группа. Положим $ K = [G, G] $. Тогда
+    \begin{enumerate}
+        \item \label{en:1} $ G | K $ абелева
+        \begin{proof}
+            Частный случай \ref{en:2}
+        \end{proof}
+        \item \label{en:2} Если $ H \vartriangleleft G, ~ K \sub H $, то $ G | H $ абелева
+        \begin{proof}
+            $ \overline{a}, \overline{b} $ -- смежные классы. Докажем, что
+            $$ \overline{a}\overline{b} = \overline{b}\overline{a} \impliedby \overline{ab} = \overline{ba} \impliedby \exist h \in H : ab = ba \cdot h \impliedby h = a^{-1}b^{-1}ab \in K \sub H $$
+        \end{proof}
+        \item \label{en:3} Если $ H \vartriangleleft G, ~ G | H $ абелева, то $ K \sub H $
+        \begin{proof}
+            $$ \forall a, b \quad \overline{a} \overline{b} = \overline{b} \overline{a} \implies \overline{ab} = \overline{ba} \implies \exist h \in H : ab = ba \cdot h \implies \underbrace{a^{-1}b^{-1}ab}_{= [a, b]} = (ba)^{-1}(ab) = h \in H $$
+        \end{proof}
+    \end{enumerate}
+\end{theorem}
+
+\section{Гомоморфизм}
+
+\begin{definition}
+	Пусть $ (G, *), ~ (H, \times) $ -- группы. Отображение $ f : G \to H $ называется гомоморфизмом, если
+    $$ f(a * b) = f(a) \times f(b) \quad \forall a, b \in G $$
+\end{definition}
+
+\begin{remark}
+	Знаки $ *, \times $ обычно не пишут, т. е. $ f(ab) = f(a)f(b) $
+\end{remark}
+
+\begin{exmpls}
+    \item $ f : \Co^* \to \R^*, \quad f(z) = |z| $ -- гомоморфизм, \textbf{не} инъекция и \textbf{не} сюръекция
+    \item $ f : GL_n(\R) \to \R^*, \quad f(A) = \det A $
+    \item $ f : \R^* \to \Co^*, \quad f(z) = z $
+\end{exmpls}
+
+\begin{props}
+	\item
+    \begin{itemize}
+    	\item $ f(e_G) = e_H $
+        \begin{proof}
+        	$ f(a)e_H = f(a) = f(ae_G) = f(a)f(e_G) $
+        \end{proof}
+        \item $ f(a^{-1}) = f^{-1}(a) $
+        \begin{proof}
+            $ f(a) \cdot f(a^{-1}) = f(aa^{-1}) = f(e_G) = e_H $
+        \end{proof}
+    \end{itemize}
+    \item $ f : G \to H, \quad f_1 : H \to K $ -- гомоморфизмы \\
+    Тогда $ f_1 \circ f : G \to k $ -- гомомрфизм
+\end{props}
+
+\begin{definition}
+	$ f : G \to H $ -- гомоморфизм \\
+    Ядро $ f $ -- это $ \set{x \in G | f(x) = e_H} $
+    \begin{notation}
+    	$ \ker f $
+    \end{notation}
+    Образ $ f $ -- это $ \set{f(x) | x \in G} $
+    \begin{notation}
+    	$ \Img f $
+    \end{notation}
+\end{definition}
+
+\begin{props}
+	\item $ \ker f \vartriangleleft G $ (ядро -- нормальная подгруппа)
+    \begin{proof}
+    	\hfill
+        \begin{itemize}
+        	\item Проверим, что подгруппа ($ \ker f < G $):
+            \begin{itemize}
+            	\item $ a, b \in \ker f \implies f(a) = f(b) = e_H \implies f(ab) = f(a)f(b) = e_He_H = e_H \implies ab \in \ker f $
+                \item $ a \in \ker f \implies (a^{-1}) = \big( f(a) \big)^{-1} = e_H^{-1} = e_H \implies a^{-1} \in \ker f $
+            \end{itemize}
+            \item Проверим, что нормальная ($ \ker f \vartriangleleft G $): \\
+            Пусть $ h \in \ker f, \quad g \in G $
+            $$ f(g^{-1}hg) = \big( f(g) \big)^{-1}f(h)f(g) = \big( f(g) \big)^{-1}e_Hf(g) = \big( f(g) \big)^{-1}f(g) = e_H \implies g^{-1}hg \in \ker f $$
+        \end{itemize}
+    \end{proof}
+    \item $ f $ -- инъекция $ \iff \ker f = \set{e_G} $
+    \begin{proof}
+    	\hfill
+        \begin{itemize}
+        	\item $ \implies $ \\
+            Пусть $ x \in \ker f $
+            $$
+            \begin{rcases}
+            	f(x) = e_H \\
+                f(e_G) = e_H
+            \end{rcases} \implies x = e_G $$
+            \item $ \impliedby $ \\
+            \widedots
+        \end{itemize}
+    \end{proof}
+\end{props}
+
+\begin{theorem}[о гомоморфизме]
+	Пусть $ f : G \to H $ -- гомомрфизм. Тогда $ G|\ker f \simeq \Img f $
+\end{theorem}
+
+\begin{proof}
+	Определим отображение $ \vphi : G|\ker f \to \Img f $ \\
+    Пусть $ A $ -- смежный класс. Возьмём произвольный $ a \in A $ \\
+    Положим $ \vphi(A) \define f(a) $. То есть $ \vphi(\overline{a}) = f(a) $
+    \begin{itemize}
+    	\item Корректность. Докажем, что $ a, a' \in A \implies f(a) = f(a') $: \\
+        Пусть $ a' = a \cdot h, \quad h \in \ker f $
+        $$ f(a') = f(ah) = f(a)f(h) \underset{h \in \ker f}= f(a)e_H = f(a) $$
+        \item $ \vphi $ -- гомоморфизм. Проверим, что $ \vphi(\overline{a}\overline{b}) = \vphi(\overline{a})\vphi(\overline(b)) $:
+        $$ \vphi(\overline{a}\overline{b}) = \vphi(\overline{ab}) = f(ab) = f(a)f(b) = \vphi(\overline(a))\vphi(\overline{b}) $$
+        \item Сюръективность: \\
+        Пусть $ x \in \Img f \implies \exist a \in G : x = f(a) \implies x = \vphi(\overline{a}) $
+        \item Инъективность: \\
+        Пусть $ \vphi(\overline{a}) = e_H \implies f(a) = e_H \implies a \in \ker f \implies \overline{a} = \ker f = e_G|\ker f $
+    \end{itemize}
+\end{proof}
+
+\begin{exmpls}
+	\item $ f : \Co^* \to \Co^*, \quad f(z) = |z| $ \\
+    $ \ker f = U $, где $ U = \set{z| |z| = 1} $, т. е. единичная окружность \\
+    $ \Img f = \R_+^* $, где $ \R_+^* = \set{x \in \R | x > 0} $
+    $$ \implies \Co^* | U \simeq \R_+^* $$
+\end{exmpls}

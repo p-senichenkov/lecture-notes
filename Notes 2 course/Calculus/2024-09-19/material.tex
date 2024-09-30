@@ -1,0 +1,255 @@
+\section{Формула Тейлора для функции \texorpdfstring{$ n $}n переменных с остатком в форме Пеано}
+
+\begin{theorem}
+	$ f : E \to \R^, \qquad E \sub \R^{n \ge 2}, \qquad X_0 \in E, \qquad X_0 \in \omega \sub E, \qquad f \in \Cont[r \ge 1]{\omega} $
+	\begin{equ}1
+		\implies f(X_0 + H) = f(X_0) + \sum_{k = 1}^r \sum_{|\alpha| = k} \frac1{\alpha!} \partial^\alpha f(X_0)H^\alpha + \rho(H)
+	\end{equ}
+	где
+	\begin{equ}2
+		\frac{\rho(H)}{\norm{H}^r} \underarr{H \to \On} 0
+	\end{equ}
+\end{theorem}
+
+\begin{iproof}
+	\item $ r = 1 $ \\
+	По достаточному условию дифференцируемости, $ f $ дифф. в $ X_0 $, что, по определению, означает, что
+	\begin{equ}3
+		f(X_0 + H) = f(X_0) + \sum_{\nu = 1}^n f_{x_\nu}'(X_0) h_\nu + \rho(H)
+	\end{equ}
+	где
+	\begin{equ}4
+		\frac{\rho(H)}{\norm{H}} \underarr{H \to \On} 0, \qquad H = \column{h_1}{h_n}
+	\end{equ}
+	Перепишем эту сумму, используя мультииндексы. Возьмём $ \alpha : |\alpha| = 1 $, то есть $ \alpha = (0, ..., \underset\nu1, ..., 0) $
+	$$ C_1^\alpha = \frac{0!...1!...0!}{1!} = 1 $$
+	$$ \sum_{n = 1}^n f_{x_\nu}'(X_0)h_\nu = \sum_{|\alpha| = 1}C_1^\alpha \partial^\alpha f(X_0) H^\alpha $$
+	Значит, ранее введённое определение дифференцируемости соотносится с обозначениями через мультииндексы
+	\item $ r \ge 2 $ \\
+	Применим к функции $ f $ формулу Тейлора с остатком в форме Лагранжа для $ r - 1 $:
+	\begin{multline}\lbl6
+		\exist c \in (0, 1) : f(X_0 + H) = \\
+		= f(X_0) + \sum_{k = 1}^{r - 1} \sum_{|\alpha| = k} \frac1{\alpha!} \partial^\alpha f(X_0)H^\alpha + \sum_{|\alpha| = r} \frac1{\alpha!} \partial^\alpha f(X_0 + cH)H^\alpha \underset{\pm \sum \frac1{\alpha!} \partial^\alpha f(X_0)H^\alpha}= \\
+		= f(X_0) + \sum_{k = 1}^{r - 1} \sum_{|\alpha| = k} \frac1{\alpha!} \partial^\alpha f(X_0) H^\alpha + \sum_{|\alpha| = r} \frac1{\alpha!} \partial^\alpha f(X_0) H^\alpha + \underbrace{\sum_{|\alpha| = r} \frac1{\alpha!} \bigg( \partial^\alpha f(X_0 + cH) - \partial^\alpha f(X_0) \bigg)H^\alpha}_{\rho(h)}
+	\end{multline}
+	Получили соотношение \eref1. Осталось доказать \eref2
+	\begin{equ}7
+		f \in \Cont[r]\omega \bydef[\implies] \partial^\alpha f(X_0 + H) - \partial^\alpha f(X_0) \underarr{H \to \On} 0 \qquad \forall \alpha : |\alpha| = r
+	\end{equ}
+	$$ H^\alpha \bydef h_1^{\alpha_1}...h_n^{\alpha_n} \implies |H^\alpha| \le \norm{H}^{\alpha_1}..\norm{H}^{\alpha_n} = \norm{H}^{|\alpha|} = \norm{H}^r $$
+	\begin{equ}8
+		\bigg| \frac{\rho(H)}{\norm{H}^r} \bigg| \underset{\eref6}= \bigg| \frac{\bigg( \partial^\alpha f(X_0 + H) - \partial^\alpha f(X_0) \bigg)H^\alpha}{\norm{H}^r} \bigg| \le \bigg| \partial^\alpha f(X_0 + cH) - \partial^\alpha f(X_0) \bigg| \underarr{H \to \On} 0
+	\end{equ}
+\end{iproof}
+
+\section{Дифференциалы второго и последующих порядков}
+
+Будем иметь дело с некоторым открытым $ \omega \sub \R^{n \ge 1} $
+
+\begin{definition}
+	$ f \in \Cont[1]\omega, \qquad X \in \omega, \qquad H \in \R^n, \qquad H = \column{h_1}{h_n} $
+	$$ \di[1] f(X, H) \define \di f(X, H) \bydef \sum_{k = 1}^n f_{x_k}'(X)h_k $$
+	$$ \widedots $$
+	Пусть для некоторого $ r \ge 1 $ для функции $ f \in \Cont[r]\omega $ для любых $ X $ и $ \omega $ определена функция
+	\begin{equ}9
+		\di[r]f(X, H) = \sum_{|\alpha| = r} A_{r,\alpha} \partial^\alpha f(X)H^\alpha, \qquad A_{r,\alpha} \text{ -- некоторые \textbf{определённые} коэффициенты}
+	\end{equ}
+	$$ A_{1,\alpha} = 1 \quad \forall \alpha : |\alpha| = 1 $$
+	Пусть $ f \in \Cont[r]\omega $. Определим дифференциал порядка $ r + 1 $:
+	\begin{equ}{10}
+		\di[r + 1]f(X, H) \define \sum_{|\alpha| = r} A_{r,\alpha} \di \bigg( \partial^\alpha f(X), H \bigg)H^\alpha = \sum_{|\alpha| = r + 1}A_{r + 1,\alpha} \partial^\alpha f(X)H^\alpha
+	\end{equ}
+\end{definition}
+
+Дальше функции предполагаются достаточно гладкими, если не оговорено особо
+
+\begin{eg}[переход от дифференциала пордяка 1 к дифференциалу порядка 2]
+	Воспользуемся тем, что $ C_1^\alpha = 1 \quad \forall \alpha : |\alpha| = 1 $ \\
+	Выпишем дифференциал перого порядка:
+	$$ \di[1] f(X, H) = \sum_{k = 1}^n f_{x_k}'(X)h_k $$
+	\begin{multline}\lbl{10'}
+		\di[2] f(X, H) \bydef \sum_{k = 1}^n \di \bigg( f_{x_k}'(X), H \bigg)h_k \bydef \sum_{k = 1}^n \bigg( \sum_{l = 1}^n f_{x_kx_l}''(X)h_l \bigg)h_k = \sum_{k = 1}^n \sum_{l = 1}^n f_{x_kx_l}''(X)h_lh_k \underset{f_{x_kx_l}'' = f_{x_lx_k}''}= \\
+		\sum_{k = 1}^n f_{x_kx_k}''(X)h_k^2 + 2\sum_{k < l} f_{x_kx_l}''(X)h_kh_l
+	\end{multline}
+	Возьмём $ \alpha : |\alpha| = 2 $:
+	\begin{itemize}
+		\item $ \alpha = (0, ..., \underset{k}2, ..., 0) $
+		$$ \partial^\alpha f(X) = f_{x_kx_l}'' $$
+		$$ C_2^\alpha \bydef \frac{2!}{0!...2!...0!} = 1 $$
+		\item $ \alpha = (0, ..., \underset{k}1, ..., \underset{l}1, ..., 0) $
+		$$ \partial^\alpha f = f_{x_kx_l}'' $$
+		$$ C_2^\alpha \bydef \frac{2!}{0!...1!...1!...0!} = 2 $$
+	\end{itemize}
+	Теперь можно записать, что
+	$$ \eref{10'} = \sum_{|\alpha| = 2} C_2^\alpha \partial^\alpha f(X) H^\alpha $$
+	То есть, $ A_{2,\alpha} = C_2^\alpha $
+\end{eg}
+
+\begin{theorem}
+	\begin{equ}{11}
+		A_{r,\alpha} = C_r^\alpha
+	\end{equ}
+\end{theorem}
+
+\begin{proof}
+	Будем доказывать \textbf{индукцией} по $ r $:
+	\begin{itemize}
+		\item \textbf{База.} $ r = 1, 2 $ -- только что проверили
+		\item \textbf{Переход.} Пусть это верно для $ r \ge 2 $. Докажем для $ r + 1 $: \\
+		По \textbf{предположению индукции},
+		\begin{equ}{12}
+			\di[r + 1] f(X, H) \bydef \sum_{|\alpha = 1}C_r^\alpha \di \bigg( \partial^\alpha f(X), H \bigg) H^\alpha = \sum_{|\alpha| = r} C_r^\alpha \bigg( \sum_{\nu = 1}^n (\partial^\alpha f)_{x_\nu}'(X) h_\nu \bigg) H^\alpha
+		\end{equ}
+		В доказательстве формулы для производной порядка $ r $ (в предыдущей лекции, формулы для $ g^{(r + 1)}(Y + tH) $) было доказано, что
+		$$ \eref{12} = \sum_{|\alpha| = r + 1} C_{r + 1}^\alpha \partial^\alpha f(X) H^\alpha $$
+	\end{itemize}
+\end{proof}
+
+\begin{statements}
+	Теперь можно переписать формулы Тейлора:
+	\begin{enumerate}
+		\item с остатком в форме Лагранжа:
+		$$ f(X_0 + H) = f(X_0) + \sum_{k = 1}^r \frac1{k!} \di[k] f(X_0, H) + \frac1{(r + 1)!} \di[r + 1]f(X_0 + cH, H) $$
+		\item с остатком в форме Пеано:
+		$$ f(X_0 + H) = f(X_0) + \sum_{k = 1}^r \frac1{k!}\di[k] f(X_0, H) + \rho(H) $$
+		$$ \frac{\rho(H)}{\norm{H}^r} \underarr{H \to \On} 0 $$
+	\end{enumerate}
+\end{statements}
+
+Применим формулу Тейлора с остатком в форме Лагранжа при $ r = 2 $:
+\begin{equ}{13}
+	f(X_0 + H) = f(X_0) + \di f(X_0, H) + \half \di[2]f(X_0, H) + \rho(H)
+\end{equ}
+где
+\begin{equ}{14}
+	\frac{\rho(H)}{\norm{H}^2} \underarr{H \to \On} 0
+\end{equ}
+Перепишем \eref{13} через двойные суммы (как мы это делали при переходе к дифференциалу порядка 2):
+\begin{equ}{15}
+	f(X_0 + H) = f(X_0) + \sum_{k = 1}^n f_{x_k}'(X_0)h_k + \half \sum_{k = 1}^n \sum_{l = 1}^n f_{x_kx_l}''(X_0)h_kh_l + \rho(H)
+\end{equ}
+Рассмотрим квадратичную форму
+$$ A(H) = \sum_{k = 1}^n \sum_{l = 1}^n a_{kl}h_kh_l, \qquad a_{kl} = \half f_{x_kx_l}''(X_0), \quad a_{kl} = a_{lk} $$
+
+\begin{remind}[классификация квадратичных форм]
+	Квадратичная форма называется:
+	\begin{enumerate}
+		\item положительно определённой, если $ \forall H \ne \On \quad A(H) > 0 $
+		\item отрицательно определённой, если $ \forall H \ne \On \quad A(H) < 0 $
+		\item неопределённой, если $ \exist H_1, H_2 \ne \On \quad A(H_1) > 0, \quad A(H_2) < 0 $
+	\end{enumerate}
+\end{remind}
+
+\begin{theorem}
+	Если квадратичная форма $ A $ положительно определена, то
+	\begin{equ}{21}
+		\exist m_1 > 0 \quad A(H) \ge m_1\norm{H}^2
+	\end{equ}
+	Если квадратичная форма отрицательно определена, то
+	\begin{equ}{22}
+		\exist m_2 > 0 \quad A(H) \le -m_2\norm{H}^2
+	\end{equ}
+\end{theorem}
+
+\begin{proof}
+	Достаточно доказать \eref{21}, т. к. для полож. определённой $ B $, форма $ -B(H) $ отрицательно определена \\
+	Рассмотрим единичную сферу $ S \define \set{H \in \R^n | \norm{H} = 1} $ \\
+	$ S $ -- компакт в пространстве $ \R^n $ (это доказывалось, когда рассматривались компакты в $ \R^n $)
+	\begin{intuition}
+		$ A(H) \in \Cont{\R^n} $
+	\end{intuition}
+	Значит, по второй теореме Вейерштрасса, $ A $ достигает своего минимального и максимального значений, т. е.
+	\begin{equ}{23}
+		\exist H_0 \in S : \forall H \in S \quad A(H) \ge A(H_0)
+	\end{equ}
+	Обозначим $ m_1 \define A(H_0) $ \\
+	Т. к. квадратичная форма положительно определена, $ m_1 > 0 $ \\
+	Рассмотрим $ \forall H \ne \On $ \\
+	Пусть $ t \define \norm{H} > 0 $ (т. к. $ H \ne \On $) \\
+	Рассмотрим $ H^* = \frac1t H $
+	$$ \norm{H*} = \norm{\frac1tH} = \frac1t\norm{H} = \frac{t}t = 1 $$
+	То есть, $ H^* \in S $ \\
+	Тогда, в силу выбора $ H_0 $, получаем, что $ A(H^*) \ge m_1 $
+	$$ A(H^*) \bydef A(\frac1tH) \underset{\text{по определению } A}= \frac1{t^2}A(H) \ge m_1 $$
+	$$ A(H) \ge m_1t^2 \bydef m_1 \norm{H}^2 $$
+\end{proof}
+
+\section{Достаточное условие экстремума для функции \texorpdfstring{$ n $}n переменных}
+
+\begin{theorem}
+	$ \omega \sub \R^n $ -- открытое, $ \qquad X_0 \in \omega, \qquad f \in \Cont[2]\omega $ \\
+	Выполнено необходимое условие локального экстремума, то есть $ f_{x_j}'(X_0) = 0, \quad 1 \le j \le n $
+	\begin{remark}
+		$ \implies \di f(X_0, H) = 0 \quad \forall H $
+	\end{remark}
+	Тогда
+	\begin{enumerate}
+		\item\label{th:4} если $ \di[2] f(X_0, H) $ положтельно определён, то $ X_0 $ -- строгий локальный минимум
+		\begin{proof}
+			Вспомним формулу Тейлора с остатком в форме Пеано:
+			\begin{equ}{27}
+				f(X_0 + H) = f(X_0) + \di f(X_0, H) + \half \di[2] f(X_0, H) + \rho(H)
+			\end{equ}
+			где
+			\begin{equ}{28}
+				\frac{\rho(H)}{\norm{H}^2} \underarr{H \to \On} 0
+			\end{equ}
+			Перепишем, применив замечание:
+			\begin{equ}{27'}
+				f(X_0 + H) = f(X_0) + \half \di[2] f(X_0, H) + \rho(H)
+			\end{equ}
+			Т. к. второй дифференциал положительно определён, то, по предыдущей теореме,
+			\begin{equ}{29}
+				\exist m_1 > 0 : \di[2] f(X_0, H) \ge m_1 \norm{H}^2
+			\end{equ}
+			Соотношение \eref{28} означает, что
+			\begin{equ}{210}
+				\exist \delta > 0 : \forall 0 < \norm{H} < \delta \quad \bigg| \frac{\rho(H)}{\norm{H}^2} \bigg| < \frac{m_1}4
+			\end{equ}
+			\begin{equ}{211}
+				\eref{210} \iff |\rho(H)| < \frac{m_1}4 \norm{H}^2
+			\end{equ}
+			\begin{multline*}
+				\eref{27'} \implies f(X_0 + H) \ge f(X_0) + \half \di[2] f(X_0, H) - |\rho(H)| \underset{\eref{29}, \eref{211}}> \\
+				> f(X_0) + \half[m_1]\norm{H}^2 - \frac{m_1}4\norm{H}^2 = f(X_0) + \frac{m_1}4\norm{H}^2 > f(X_0)
+			\end{multline*}
+		\end{proof}
+		\item\label{th:5} если $ \di[2] f(X_0, H) $ отрицательно определён, то $ X_0 $ -- строгий локальный максимум
+		\begin{proof}
+			Аналогично
+		\end{proof}
+		\item\label{th:6} если $ \di[2] f(X_0, H) $ неопределён, то нет локального экстремума
+		\begin{proof}
+			$ \di[2] f(X_0, H) $ неопределён означает, что
+			$$ A(H_1) > 0, \qquad A(H_2) < 0 $$
+			Рассмотрим $ H_1^* = \frac1{\norm{H_1}}H_1 $. Очевидно, что $ H_1^* \in S $
+			$$ A(H_1^*) = \frac1{\norm{H}^2}A(H_1) \define p_1 > 0 $$
+			Рассмотрим $ H_2^8 = \frac1{\norm{H_2}}H_2 $. Очевидно, что $ H_2^* \in S $
+			$$ A(H_2) = \frac1{\norm{H_2}^2}A(H_2) \define p_2 > 0 $$
+			Возьмём $ t > 0 $
+			\begin{equ}{212}
+				A(tH_2^*) = t^2A(H_2^*) = -p_2t^2
+			\end{equ}
+			\begin{equ}{213}
+				A(tH_1^*) = t^2A(H_1^*) = p_1t^2
+			\end{equ}
+			Это было верно для любой квадратичной форме. Вернёмся к $ A(H) = \di[2] f(X_0, H) $ \\
+			Выберем $ \delta_1 > 0 $, такое что
+			\begin{equ}{214}
+				\forall 0 < \norm{H} < \delta_1 \quad |\rho(H)| < \frac14 \min\set{p_1, p_2} \cdot \norm{H}^2
+			\end{equ}
+			Пусть $ 0 < t < \delta_1 $
+			$$ \norm{tH_1^*} = \norm{tH_2^*} = t $$
+			Рассмотрим
+			\begin{multline*}
+				f(X_0 + tH_1^*) = f(X_0) + \half \di[2] f(X_0, tH_1^*) + \rho(tH_1^*) \ge f(X_0) + \half t^2 \di[2] f(X_0, H_1^*) - |\rho(tH_1^*)| > \\
+				> f(X_0) + \half p_1t^2 - \frac14 p_1t^2 = f(X_0) + \frac14 p_1t^2 > f(X_0)
+			\end{multline*}
+			При этом, $ X_0 + tH_1^* $ лежит в любой окрестности $ X_0 $ \\
+			Рассмотрим
+			$$ f(X_0 + H_2^*) \underset{\eref{212}}\le f(X_0) - \half[p_2]t^2 + |\rho(H)| < f(X_0) - \half[p_2]t^2 + \frac{p_2}4t^2 = f(X_0) - \frac{p_2}4t^2 < f(X_0) $$
+			При этом, $ X_0 + tH_2^* $ тоже лежит в любой окрестности $ X_0 $ \\
+			Значит, локального экстремума нет (по определениб локального экстремума)
+		\end{proof}
+	\end{enumerate}
+\end{theorem}

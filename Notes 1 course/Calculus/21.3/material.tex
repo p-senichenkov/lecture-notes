@@ -1,0 +1,338 @@
+\chapter{Определённый интеграл}
+
+\section{Интеграл с переменным верхним пределом}
+
+\begin{definition}
+	$ f(x) \in \Ri([a, b]), \qquad x \in (a, b] \qquad \implies f \in \Ri([a, x]) $
+    \begin{equ}1
+        \Phi(x) \define \dint[y]{a}x{f(y)}, \qquad \Phi(a) \define 0
+    \end{equ}
+\end{definition}
+
+\begin{theorem}
+    Для $ \Phi $ справедливы следующие свойства:
+    \begin{itemize}
+    	\item
+        \begin{equ}2
+            \Phi(x) \in C([a, b])
+        \end{equ}
+        \item
+        \begin{equ}3
+            f \text{ непр. в } x_0 \implies \exist \Phi'(x_0) = f(x_0)
+        \end{equ}
+    \end{itemize}
+\end{theorem}
+
+\begin{proof}
+    \begin{itemize}
+    	\item $ a < x_1 < x_2 \le b $
+        \begin{multline}\lbl4
+            \Phi(x_2) - \Phi(x_1) = \dint[y]a{x_2}{f(y)} - \dint[y]a{x_1}{f(y)} = \\ = \dint[y]a{x_1}{f(y)} + \dint[y]{x_1}{x_2}{f(y)} - \dint[y]a{x_1}{f(y)} = \dint[y]{x_1}{x_2}{f(y)}
+        \end{multline}
+        \begin{equ}5
+            \exist M : \forall x \in [a, b] \quad |f(x)| \le M
+        \end{equ}
+        \begin{equ}6
+            \eref4, \eref5 \implies |\Phi(x_2) - \Phi(x_1)| \le M(x_2 - x_2) \implies \eref2
+        \end{equ}
+        \item $ x_0 \in (a, b) $ \\
+        Положим $ h \ne 0 : x_0 + h \in [a, b] $
+        \begin{itemize}
+        	\item $ h > 0 $
+            \begin{equ}7
+                \eref4 \implies \Phi(x_0 + h) - \Phi(x_0) = \dint[y]{x_0}{x_0 + h}{f(y)}
+            \end{equ}
+            \begin{multline}\lbl9
+                \eref7 \implies \Phi(x_0 + h) - \Phi(x_0) = \dint[y]{x_0}{x_0 + h}{f(y)} + \dint[y]{x_0}{x_0 + h}{\bigg( f(y) - f(x_0) \bigg)} = \\ = hf(x_0) + \dint[y]{x_0}{x_0 + h}{ \bigg( f(y) - f(x_0) \bigg) }
+            \end{multline}
+            \item $ h < 0 $
+            \begin{equ}8
+                \eref4 \implies \Phi(x_0) - \Phi(x_0 + h) = \dint[y]{x_0 + h}{x_0}{f(y)}
+            \end{equ}
+            \begin{multline}\lbl{10}
+                \eref8 \implies \Phi(x_0) - \Phi(x_0 + h) = \dint[x_0]{x_0 + h}{x_0}{f(x_0)} + \dint[y]{x_0 + h}{x_0}{ \bigg( f(y) - f(x_0) \bigg) } = \\ = -hf(x_0) + \dint[y]{x_0 + h}{x_0}{ \bigg( f(y) - f(x_0) \bigg) }
+            \end{multline}
+            \begin{equ}{11}
+                \eref{10} \iff \Phi(x_0 + h) - \Phi(x_0) = hf(x_0) - \dint[y]{x_0 + h}{x_0}{ \bigg( f(y) - f(x_0) \bigg) }
+            \end{equ}
+        \end{itemize}
+        \begin{equ}{12}
+            \eref9, \eref{11} \implies \frac{\Phi(x_0 + h) - \Phi(x_0)}h = f(x_0)
+            \begin{aligned}
+                + \frac1h \dint[y]{x_0}{x_0 + h}{ \bigg( f(y) - f(x_0) \bigg) } \\
+                - \frac1h \dint[y]{x_0 + h}{x_0}{ \bigg( f(y) - f(x_0) \bigg) }
+            \end{aligned}
+        \end{equ}
+        \begin{equ}{13}
+            \forall \veps > 0 ~ \underset{0 < |h| < \delta}{\exist \delta > 0} : \forall y \quad |y - x_0| < \delta \implies |f(y) - f(x_0)| < \veps
+        \end{equ}
+        \begin{equ}{14}
+            \eref{13} \implies \bigg| \frac1h \dint[y]{x_0}{x_0 + h}{ \bigg( f(y) - f(x_0) \bigg) } \bigg| \le \frac1h \veps \cdot h = \veps
+        \end{equ}
+        \begin{equ}{15}
+            \eref{13} \implies \bigg| \frac1h \dint[y]{x_0 + h}{x_0}{ \bigg( f(y) - f(x_0) \bigg) } \bigg| \le \frac1h \veps \cdot (-h) = \veps
+        \end{equ}
+        $$ \eref{12}, \eref{14}, \eref{15} \implies \underset{h \ne 0}{|h| < \delta} \quad \bigg| \frac{\Phi(x_0 + h) - \Phi(x_0)}h - f(x_0) \bigg| \le \bigg| \frac1h \int_{...}^{...}... \bigg| < \veps \implies \eref2 $$
+    \end{itemize}
+\end{proof}
+
+\begin{implication}
+	$ f \in C([a, b]) \implies \forall x \in [a, b] \quad \exist \Phi'(x) = f(x) $
+\end{implication}
+
+\begin{theorem}[формула Ньютона-Лейбница (напоминание)]
+	$ f \in C([a, b]), \qquad \forall x \in [a, b] ~ \exist f'(x) \qquad \implies f' \in \Ri([a, b]) $
+\end{theorem}
+
+\begin{theorem}[формула Ньютона-Лейбница (в новых обозначениях)]
+    $ f, F $, определённые на $ [a, b] $ \\
+    $ f \in \Ri([a, b]), \qquad F $ -- первообразная для $ f $
+    $$ \implies \dint{a}b{f(x)} = F(b) - F(a) $$
+\end{theorem}
+
+\section{Интеграл с переменным нижним пределом}
+
+\begin{definition}
+	$ f \in \Ri([a, b]), \qquad x \in [a, b) $
+    \begin{equ}{17}
+        \Psi(x) \define \dint[y]xb{f(y)}, \qquad \Psi(b) \define 0
+    \end{equ}
+\end{definition}
+
+\begin{theorem}
+	Для $ \Psi $ справедливы следующие свойства:
+    \begin{itemize}
+    	\item
+        \begin{equ}{181}
+            \Psi \in C([a, b])
+        \end{equ}
+        \item
+        \begin{equ}{18}
+            f \text{ непр. в } x_0 \implies \exist \Psi'(x_0) = -f(x_0)
+        \end{equ}
+    \end{itemize}
+\end{theorem}
+
+\begin{proof}
+	$ x \in (a, b) $
+    \begin{equ}{19}
+        \dint[y]ab{f(y)} = \dint[y]ax{f(y)} + \dint[y]xb{f(y)} = \Phi(x) + \Psi(x)
+    \end{equ}
+    \eref{19} верно при $ x \in [a, b] $
+    $$ \eref{19} \implies \Psi(x) = I - \Phi(x) \implies \eref{181} $$
+    $$ \eref{19} \implies \Psi'(x_0) = I' - \Phi(x_0) = -\Phi(x_0) = -f(x_0) \implies \eref{18} $$
+\end{proof}
+
+\section{Расширение символа определённого интеграла}
+
+\begin{definition}
+	Пусть $ a > b $
+    $$ \dint{a}b{f(x)} \define - \dint{b}a{f(x)} $$
+    $$ \dint{a}a{f(x)} \define 0 $$
+\end{definition}
+
+\begin{statement}
+	Формула Ньютона-Лейбница справедлива при любых соотношениях $ a $ и $ b $
+\end{statement}
+
+\begin{proof}
+	$ f \in \Ri([a, b]), \qquad \forall x \in (a, b) \quad F'(x) = f(x) $
+    $$ \implies \dint{b}a{f(x)} = -\dint{a}b{f(x)} = - \bigg( F(b) - F(a) \bigg) = F(a) - F(b) $$
+\end{proof}
+
+\section{Формула замены переменной в определённом интеграле}
+
+\begin{theorem}
+	$ f \in C(I) $ ($ I $ -- замкнутый промежуток с концами $ a $ и $ b $) \\
+    $ \vphi \in C([p, q]), \qquad \vphi' \in C([p, q]), \qquad \forall t \in [p, q] \quad \vphi(t) \in I, \qquad \vphi(p) = a, \quad \vphi(q) = b $
+    \begin{equ}{20}
+        \implies \dint[t]pq{f \big( \vphi(t) \big) \vphi'(t)} = \dint[x]ab{f(x)}
+    \end{equ}
+\end{theorem}
+
+\begin{proof}
+	$ \exist F $ -- первообразная $ f $ на $ I $
+    \begin{equ}{21}
+        \bigg( F \big( \vphi(t) \big) \bigg)' = F' \bigg( \vphi(t) \bigg) \cdot \vphi'(t) = f \bigg( \vphi(t) \bigg) \vphi'(t)
+    \end{equ}
+    $$ \eref{21} \implies F \bigg( \vphi(t) \bigg) \text{ -- первообразная для } f \bigg( \vphi(t) \bigg) \vphi'(t) $$
+    Применим формулу Ньютона-Лейбница:
+    $$ \dint[t]pq{f \bigg( \vphi(t) \bigg) \vphi'(t)} = F \bigg( \vphi(q) \bigg) - F \bigg( \vphi(p) \bigg) = F(b) - F(a) = \dint{a}b{f(x)} $$
+\end{proof}
+
+\section{Интегрирование по частям в определённом интеграле}
+
+\begin{theorem}
+	$ f, g \in C([a, b]), \qquad \forall x \in [a, b] \quad \exist f'(x), g'(x) \in C([a, b]) $
+    \begin{equ}{22}
+        \implies \dint{a}b{f'(x)g(x)} = f(b)g(b) - f(a)g(a) - \dint{a}b{f(x)g'(x)}
+    \end{equ}
+\end{theorem}
+
+\begin{proof}
+    \begin{equ}{23}
+        \exist F \in C([a, b]) : \forall x \in [a, b] \quad F'(x) = f'(x)g(x)
+    \end{equ}
+    \begin{equ}{24}
+        \exist G \in C([a, b]) : \forall x \in [a, b] \quad G'(x) = f(x)g'(x)
+    \end{equ}
+    Применим формулу Ньютона-Лейбница:
+    \begin{equ}{25}
+        \dint{a}b{f'(x)g(x)} = F(b) - F(a)
+    \end{equ}
+    \begin{equ}{26}
+        \dint{a}b{f(x)g'(x)} = G(b) - G(a)
+    \end{equ}
+    \begin{multline}\lbl{27}
+        \eref{25}, \eref{26} \implies \dint{a}b{f'(x)g(x)} + \dint{a}b{f(x)g'(x)} = F(b) - F(a) + G(b) - G(a) = \\ = F(b) + G(b) - \bigg( F(a) + G(a) \bigg)
+    \end{multline}
+    \begin{equ}{28}
+        \bigg( F(x) + G(x) \bigg)' = F'(x) + G'(x) = f'(x)g(x) + f(x)g'(x) = \bigg( f(x)g(x) \bigg)'
+    \end{equ}
+    Применим формулу Ньютона-Лейбница:
+    \begin{equ}{29}
+        \eref{28} \implies F(b) + G(b) - \bigg( F(a) + G(a) \bigg) = f(b)g(b) - f(a)g(a)
+    \end{equ}
+    $$ \eref{27}, \eref{29} \implies \eref{22} $$
+\end{proof}
+
+\begin{theorem}[о средних]
+    $ f \in C([a, b]), \qquad g \in \Ri([a, b]), \qquad \forall x \in [a, b] \quad g(x) \ge 0, \qquad \dint{a}b{g(x)} > 0 $
+    \begin{equ}{101}
+        \implies \exist c \in [a, b] : \dint{a}b{f(x)g(x)} = f(c) \dint{a}b{g(x)}
+    \end{equ}
+\end{theorem}
+
+\begin{proof}
+    \hfill
+    \begin{itemize}
+        \item $ \forall x \in [a, b] \quad f(x) = A \implies \dint{a}b{Ag(x)} = A \dint{a}b{g(x)} $
+        \item $ f(x) \not\equiv \const $ \\
+        По второй теореме Вейерштрасса,
+        \begin{equ}{102}
+        	\exist x_- \in [a, b] : \forall x \in [a, b] \quad f(x_-) \le f(x)
+        \end{equ}
+        \begin{equ}{103}
+        	\exist x_+ \in [a, b] : \forall x \in [a, b] \quad f(x_+) \ge f(x)
+        \end{equ}
+        Так как $ f \not\equiv \const $, то $ f(x_+) > f(x_-) $ \\
+        Положим $ r \define \dfrac{\dint{a}b{f(x)g(x)}}{\dint{a}b{g(x)}} $
+        \begin{intuition}
+            $ f(x)g(x) \ge f(x_-)g(x_-) $
+        \end{intuition}
+        \begin{equ}{104}
+            \eref{102} \implies \dint{a}b{f(x)g(x)} \ge \dint{a}b{f(x_-)g(x)} = f(x_-) \dint{a}b{g(x)} \implies r \ge f(x_-)
+        \end{equ}
+        \begin{intuition}
+            $ f(x)g(x) \le f(x_+)g(x_+) $
+        \end{intuition}
+        \begin{equ}{105}
+            \eref{103} \implies \dint{a}b{f(x)g(x)} \le \dint{a}b{f(x_+)g(x)} = f(x_+) \dint{a}b{g(x)} \implies f(x_+) \ge r
+        \end{equ}
+        \begin{itemize}
+        	\item $ r = f(x_+) \implies c = x_+ $
+            \item $ r = f(x_-) \implies c = x_- $
+            \item $ f(x_-) < r < f(x_+) $ \\
+            По теореме о промежуточном значении, $ \exist c : f(c) = r $
+        \end{itemize}
+    \end{itemize}
+\end{proof}
+
+\begin{remark}
+    В случае $ g(x) \le 0 $ и $ \dint{a}b{g(x)} < 0 $, утверждение теоремы верно
+\end{remark}
+
+\begin{proof}
+	Рассомтрим $ h(x) \define -g(x) \ge 0 $
+    $$ \dint{a}b{h(x)} = - \dint{a}b{g(x)} > 0 $$
+    По только что доказанному, $ \dint{a}b{f(x)h(x)} = f(c) \dint{a}b{h(x)} $
+    $$ \dint{a}b{f(x) \big( -h(x) \big) } = f(c) \dint{a}b{ \big( -h(x) \big) } $$
+\end{proof}
+
+\begin{theorem}[вторая теорема о среднем]
+    $ f \in C([a, b]), \qquad g \in C([a, b]), \qquad \forall x \in [a, b] \quad \exist g'(x) $ \\
+    $ g $ \textbf{монотонна}
+    \begin{equ}{106}
+        \implies \exist c \in [a, b] : \dint{a}b{f(x)g(x)} = g(a) \dint{a}c{f(x)} + g(b) \dint{c}b{f(x)}
+    \end{equ}
+\end{theorem}
+
+\begin{proof}
+	$ f $ непрерывна на $ [a, b] \implies \exist F : F'(x) = f(x) $ \\
+    Воспользуемся интегрированием по частям:
+    \begin{equ}{1061}
+        \dint{a}b{f(x)g(x)} = \dint{a}b{F'(x)g(x)} = F(b)g(b) - F(a)g(a) - \dint{a}b{F(x)g'(x)}
+    \end{equ}
+    Будем считать, что $ g(x) \not\equiv \const $ (иначе доказательство тривиально) \\
+    Тогда $ g(b) - g(a) \ne 0 $ \\
+    Применим формулу Ньютона-Лейбница:
+    $$ \dint{a}b{g'(x)} = g(b) - g(a) \ne 0 $$
+    К интегралу в правой части можно применить предыдущую теорему (или замечание к ней), поэтому:
+    \begin{equ}{107}
+        \exist c \in (a, b) : \dint{a}b{F(x)g'(x)} = F(c) \dint{a}b{g'(x)} = F(c) \bigg( g(b) - g(a) \bigg)
+    \end{equ}
+    Подставим в соотношение \eref{1061}:
+    \begin{equ}{1071}
+        \dint{a}b{f(x)g(x)} = ... = F(b)g(b) - F(a)g(a) - F(c) \bigg( g(b) - g(a) \bigg) = \bigg( F(b) - F(c) \bigg) g(b) + g(a) \bigg( F(c) - F(a) \bigg)
+    \end{equ}
+    Положим $ F(x) \define \dint[y]{a}x{f(y)}, \quad F(a) \define 0 $ \\
+    Тогда $ F(c) - F(a) = \dint[y]{a}c{f(y)}, \qquad F(b) - F(c) $ \\
+    Подставим в \eref{1071}:
+    $$ \dint{a}b{f(x)g(x)} = ... = g(b) \dint{a}b{f(x)} + g(a) \dint{a}c{f(x)} \iff \eref{106} $$
+\end{proof}
+
+\section{Несобственные интегралы}
+
+\begin{definition}
+    \begin{itemize}
+    	\item $ [a, \beta), \qquad a < \beta \le +\infty, \qquad \forall b < \beta f \in \Ri([a, b]), \qquad f \notin \Ri(a, \beta) $, т. е.
+        \begin{itemize}
+        	\item $ \beta = +\infty $
+            \item $ f $ неограничена на $ [a, \beta) $
+        \end{itemize}
+        \item $ -\infty \le \alpha < b, \qquad \forall \alpha < a < b \quad f \in \Ri([a, b]), \qquad f \notin \Ri([\alpha, b]) $, т. е.
+        \begin{itemize}
+        	\item $ \alpha = -\infty $
+            \item $ f $ неограничена на $ (\alpha, b] $
+        \end{itemize}
+    \end{itemize}
+    $ \dint{a}\beta{f(x)} $ и $ \dint\alpha{b}{f(x)} $ называются несобственными интегралами
+\end{definition}
+
+$$ \Phi(x) \define \dint[y]{a}x{f(y)}, \quad x < \beta $$
+$$ \Psi(x) \define \dint[y]{x}b{f(y)}, \quad x > \alpha $$
+
+\begin{definition}
+    Говорят, что соотвествующий несобственный интеграл сходится, если
+    \begin{itemize}
+        \item $ \exist \liml{x \to \beta} \Phi(x) \in \R $
+        \item $ \exist \liml{x \to \beta} \Psi(x) \in \R $
+    \end{itemize}
+    Иначе говорят, что он расходится
+\end{definition}
+
+\section{Критерий Коши сходимости несобственного интеграла}
+
+Через $ \omega(\beta) $ и $ \omega(\alpha) $ будем обозначать окрестности соотвествующих точек
+
+\begin{statement}
+    $$ \exist \liml{x \to \beta} \Phi(x) \in \R \iff \forall \veps > 0 ~ \exist \omega(\beta) : \forall x_1, x_2 \in [a, \beta) \cap \omega(\beta) \quad | \Phi(x_2) - \Phi(x_1) | < \veps $$
+    $$ \exist \liml{x \to \alpha} \Psi(x) \in \R \iff \forall \veps > 0 ~ \exist \omega(\alpha) : \forall x_1, x_2 \in (\alpha, b] \cap \omega(\alpha) \quad | \Psi(x_2) - \Psi(x_1) | < \veps $$
+    Будем считать, что $ x_1 < x_2 $
+    $$ \Phi(x_2) - \Phi(x_1) = \dint[y]a{x_2}{f(y)} - \dint[y]a{x_1}{f(y)} = \dint[y]{x_1}{x_2}{f(y)} $$
+    $$ \Psi(x_2) - \Psi(x_1) = \dint[y]{x_2}b{f(y)} - \dint[y]{x_1}b{f(y)} = -\dint[y]{x_1}{x_2}{f(y)} $$
+    Таким образом, критерий Коши переписываеся следующим образом:
+    $$ \exist \liml{x \to \beta} \Phi(x) \iff \forall \veps > 0 ~ \exist \omega(\beta) : \forall x_1, x_2 \in [a, \beta) \cap \omega(\beta) \quad \bigg| \dint[y]{x_1}{x_2}{f(y)} \bigg| < \veps $$
+    $$ \exist \liml{x \to \alpha} \Psi(x) \iff \forall \veps > 0 ~ \exist \omega(\alpha) : \forall x_1, x_2 \in (\alpha, b] \cap \omega(\alpha) \quad \bigg| \dint[y]{x_1}{x_2}{f(y)} \bigg| < \veps $$
+\end{statement}
+
+\section{Два важных конкретных примера, которые лекго проверяются}
+
+\begin{eg}
+    $ a > 0, \quad p > 1, \qquad \dfint{a}\infty{x^p} $
+    $$ \uint{x^{-p}} = \frac1{1 - p}x^{1 - p} + c $$
+    \begin{itemize}
+    	\item $ x > a $
+        $$ \dfint[y]ax{y^p} = \frac1{1 - p}x^{1 - p} - \frac1{1 - p}a^{1 - p} = \frac1{p - 1}a^{1 - p} + \frac1{1 - p}x^{1 - p} \underarr{x \to +\infty} \frac1{p - 1}a^{1 - p} $$
+    \end{itemize}
+\end{eg}

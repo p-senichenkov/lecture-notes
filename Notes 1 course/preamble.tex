@@ -1,0 +1,366 @@
+% basics
+\usepackage[utf8x]{inputenc}
+\usepackage[T2A]{fontenc}
+%\usepackage{textcomp}
+%\usepackage{url}
+\usepackage[a4paper, portrait, margin=.75in]{geometry}
+\usepackage[russian]{babel}
+
+% custom \chapter and \section formats
+\usepackage{titlesec}
+
+% references in table of contents
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true, %set true if you want colored links
+    linktoc=all,     %set to all if you want both sections and subsections linked
+    linkcolor=black, %choose some color if you want links to stand out
+}
+\urlstyle{same}      % links will be the same font as other text
+
+\usepackage{graphicx}
+%\usepackage{float}
+%\usepackage{booktabs}
+%\usepackage{enumitem}
+%\usepackage{emptypage}
+\usepackage{multicol}
+\usepackage[dvipsnames]{xcolor}
+
+% typeset pseudocode (algo2e option -- change env. name algorithm to algorithm2e)
+\usepackage[algo2e]{algorithm2e}
+
+% algorithm2e keywords:
+\SetKw{Define}{:=}
+
+% sections with separate PDF bookmark form
+\usepackage{hypbmsec}
+
+% subequations
+\usepackage[ntheorem]{empheq}
+
+\usepackage{amsmath, amsfonts, mathtools, amsthm, amssymb}
+
+% alternative caligraphy font
+%\usepackage{mathrsfs}
+
+% diagonal lines through items ("cancelling" 'em)
+\usepackage{cancel}
+
+% for \lightning (should be loaded *before* bm)
+\usepackage[only,lightning]{stmaryrd}
+
+% https://tex.stackexchange.com/questions/106714/stmaryrd-and-boldsymbol-avoid-warnings
+\SetSymbolFont{stmry}{bold}{U}{stmry}{m}{n}
+
+\usepackage{tikz}
+\usetikzlibrary{intersections, angles, calc, positioning, arrows.meta, decorations.pathreplacing}
+
+% multiple images in one figure
+\usepackage{subcaption}
+
+% for \set
+\usepackage{braket}
+
+% fractions like 2/a
+\usepackage{faktor}
+
+% bold font in maths, that preserve spacing (should be loaded *last*)
+\usepackage{bm}
+
+%%      math operators
+% distance
+\DeclareMathOperator{\dist}{dist}
+
+% constant
+\DeclareMathOperator{\const}{const}
+
+% matrix rank
+\DeclareMathOperator{\rk}{rk}
+
+% image
+\DeclareMathOperator{\Img}{Im}
+
+% interior
+\DeclareMathOperator{\Int}{Int}
+
+% exterior
+\DeclareMathOperator{\Ext}{Ext}
+
+% frame
+\DeclareMathOperator{\Fr}{Fr}
+
+% closure
+\DeclareMathOperator{\Cl}{Cl}
+
+%%  group and set
+\DeclareMathOperator{\Orb}{Orb}
+
+\DeclareMathOperator{\St}{St}
+
+\DeclareMathOperator{\Fix}{Fix}
+
+\DeclareMathOperator{\ord}{ord}
+
+% kernel
+\DeclareMathOperator{\Ker}{Ker}
+
+% gradient
+\DeclareMathOperator{\grad}{grad}
+
+% differential
+\newcommand\di{\ensuremath{\operatorname{d} \phantom{.}}}
+
+% partition diameter
+\DeclareMathOperator{\diam}{d}
+
+%%      numerating
+% shorthand for labeled equation
+\newenvironment{equ}[1]{\begin{equation} \label{eq:#1}}{\end{equation}}
+
+\newenvironment{mequ}[1][\empheqlbrace]
+{
+    \setkeys{EmphEqEnv}{align} \setkeys{EmphEqOpt}{left={#1}} \EmphEqMainEnv
+}
+{\endEmphEqMainEnv}
+
+%%      KaTeX
+\newcommand\sub{\ensuremath\subset}
+
+\newcommand\exist{\exists\,}
+
+%%      shorthands
+% phi and epsilon
+\let\vphi\varphi
+\let\veps\varepsilon
+
+% overline
+\let\ol\overline
+
+% small triangle
+\let\vtri\vartriangle
+
+\newcommand*\vawe[1]{\ensuremath\widetilde{#1}}
+
+\let\hat\widehat
+
+% arrows with text below `em
+\newcommand\underarr[1]{\ensuremath\xrightarrow[#1]{}}
+\newcommand\underimp[1]{\ensuremath\xRightarrow[#1]{}}
+
+% labels and references
+\newcommand*\lbl[1]{\label{eq:#1}}
+\newcommand*\eref[1]{\eqref{eq:#1}}
+
+% limits
+\newcommand\ulim{\ensuremath{\varlimsup\limits}}
+\newcommand\dlim{\ensuremath{\varliminf\limits}}
+
+\let\liminf\varliminf
+\let\limsup\varlimsup
+
+\newcommand\liml[1]{\lim\limits_{#1}}
+\newcommand\limz[1]{\lim\limits_{#1\to0}}
+\newcommand\limi[1]{\lim\limits_{#1\to\infty}}
+
+% integrals
+\newcommand\uint[2][x]{\ensuremath{\int {#2} \, \operatorname{d} {#1}}}
+\newcommand\ufint[2][x]{ \ensuremath{ \int{ \dfrac{\operatorname{d} {#1}}{{#2}} } } }
+\newcommand\dint[4][x]{\ensuremath{\int_{#2}^{#3} {#4} \, \operatorname{d} {#1}}}
+\newcommand\dfint[4][x]{\ensuremath{\int_{#2}^{#3} \dfrac{\operatorname{d} {#1}}{{#4}}}}
+
+% Riman's integral
+\newcommand\Ri{\ensuremath{\mathcal{R}}}
+
+% comparable by modulo
+\newcommand*\comp[1]{\ensuremath{\underset{#1}{\equiv}}}
+
+% by definition (default is =)
+\newcommand\define\coloneqq
+\newcommand*\definerel[1]{\mathrel{:{#1}}}
+\newcommand*\bydef[1][=]{\ensuremath{\stackrel{\text{def}}{#1}}}
+
+% sets:
+\newcommand\N{\ensuremath{\mathbb{N}}}
+\newcommand\R{\ensuremath{\mathbb{R}}}
+\newcommand\Z{\ensuremath{\mathbb{Z}}}
+\renewcommand\O{\ensuremath{\emptyset}}
+\newcommand\Q{\ensuremath{\mathbb{Q}}}
+\newcommand\Co{\ensuremath{\mathbb{C}}}     % because /C is already taken
+\newcommand\RR{\ensuremath{\overline{\mathbb{R}}}}  % extended R
+\newcommand\Prime{\ensuremath{\mathbb{P}}}     % prime numbers
+\newcommand\On[1][n]{\ensuremath{\mathbb{O}_{#1}}}  % (0, ..., 0)
+
+% Darboux and Riemann
+\newcommand\Par{\ensuremath{\mathtt{P}}}
+\newcommand\Teq{\ensuremath{\mathtt{T}}}
+\newcommand\Ud{\ensuremath{\mathtt{U}}}
+\newcommand\Ld{\ensuremath{\mathtt{L}}}
+\newcommand\Sr{\ensuremath{\mathtt{S}}}
+
+% a line of dots (13em by default)
+\newcommand*\widedots[1][13em]
+{
+    \tikz\draw[loosely dotted] (0, 0) -- (#1, 0pt);
+}
+
+% sequence
+\newcommand\seq[3][\infty]{\ensuremath{\{#2\}_{#3=1}^{#1}}}
+\newcommand\seqz[3][\infty]{\ensuremath{\{#2\}_{#3=0}^{#1}}}
+\newcommand\seqv[4][\infty]{\ensuremath{\{#2\}_{#3={#4}}^{#1}}}
+
+% column
+\newcommand\column[3][bmatrix]{\ensuremath{
+        \begin{#1}
+            {#2} \\
+            . \\
+            . \\
+            . \\
+            {#3}
+        \end{#1}
+    }}
+
+% clamp function
+\newcommand\clamp[2][]{\ensuremath{\bigg|_{#2}^{#1}}}
+
+% continuous function
+\newcommand\Cont[1]{\ensuremath{\mathcal{C} \bigg( {#1} \bigg) }}
+
+% long \vec
+\newcommand*\vect[1]{\overrightarrow{#1}}
+
+% norm in R^n
+\newcommand\norm[1]{\ensuremath{\left\|{#1}\right\|}}
+
+%%      decorations
+% divisible by
+\DeclareRobustCommand{\divby}{%
+  \mathrel{\vbox{\baselineskip.65ex\lineskiplimit0pt\hbox{.}\hbox{.}\hbox{.}}}%
+}
+
+% not divisible by
+\DeclareRobustCommand{\ndivby}{%
+  \mathrel{\not\vbox{\baselineskip.65ex\lineskiplimit0pt\hbox{.}\hbox{.}\hbox{.}}}%
+}
+
+% controversy
+\newcommand\contra{~\scalebox{1.2}{$\lightning$}~}
+
+% roman numbers
+\makeatletter
+\newcommand*{\rom}[1]{\expandafter\@slowromancap\romannumeral #1@}
+\makeatother
+
+% GCD
+\newcommand\GCD[1]{\text{НОД} \left( {#1} \right) }
+
+% SCM
+\newcommand\SCM[1]{\text{НОК} \left( {#1} \right) }
+
+% triangle inequality
+\newcommand\trile{\ensuremath{\stackrel\vartriangle\le}}
+\newcommand\trige{\ensuremath{\stackrel\vartriangle\ge}}
+
+% 1 / 2 or [x] / 2
+\newcommand\half[1][1]{\ensuremath{\frac{#1}2}}
+
+\newcommand\TODO[1]{\textcolor{red}{{\Huge TODO:} {#1}} \message{LaTeX Warning: TODO on line \the\inputlineno}}
+
+% \href to be used in chapter and section names
+\newcommand\hstring[2]{\texorpdfstring{\href{#1}{#2}}{#2}}
+
+%%     theorems
+\usepackage{thmtools, thm-restate}
+\usepackage[framemethod=TikZ]{mdframed}
+\mdfsetup{skipabove=.5em,skipbelow=0em}
+
+\theoremstyle{definition}
+
+\declaretheoremstyle[
+    headfont=\bfseries\sffamily\color{ForestGreen!70!black}, bodyfont=\normalfont,
+    mdframed={
+        linewidth=2pt,
+        rightline=false, topline=false, bottomline=false,
+        linecolor=ForestGreen, backgroundcolor=ForestGreen!5,
+    }
+]{thmgreenbox}
+
+\declaretheoremstyle[
+    headfont=\bfseries\sffamily\color{NavyBlue!70!black}, bodyfont=\normalfont,
+    mdframed={
+        linewidth=2pt,
+        rightline=false, topline=false, bottomline=false,
+        linecolor=NavyBlue, backgroundcolor=NavyBlue!5,
+    }
+]{thmbluebox}
+
+\declaretheoremstyle[
+    headfont=\bfseries\sffamily\color{NavyBlue!70!black}, bodyfont=\normalfont,
+    mdframed={
+        linewidth=2pt,
+        rightline=false, topline=false, bottomline=false,
+        linecolor=NavyBlue
+    }
+]{thmblueline}
+
+\declaretheoremstyle[
+    headfont=\bfseries\sffamily\color{RawSienna!70!black}, bodyfont=\normalfont,
+    mdframed={
+        linewidth=2pt,
+        rightline=false, topline=false, bottomline=false,
+        linecolor=RawSienna, backgroundcolor=RawSienna!5,
+    }
+]{thmredbox}
+
+\declaretheoremstyle[
+    headfont=\bfseries\sffamily\color{RawSienna!70!black}, bodyfont=\normalfont,
+    numbered=no,
+    mdframed={
+        linewidth=2pt,
+        rightline=false, topline=false, bottomline=false,
+        linecolor=RawSienna, backgroundcolor=RawSienna!1,
+    },
+    qed=\qedsymbol
+]{thmproofbox}
+
+\declaretheorem[style=thmgreenbox, name=Определение]{definition}
+
+\declaretheorem[style=thmbluebox, numbered=no, name=Пример]{eg}
+\declaretheorem[style=thmbluebox, numbered=no, name=Примеры]{egs}
+\declaretheorem[style=thmbluebox, numbered=no, name=Свойство]{property}
+\declaretheorem[style=thmbluebox, numbered=no, name=Свойства]{properties}
+\declaretheorem[style=thmbluebox, numbered=no, name=Алгоритм]{algorithm}
+
+\declaretheorem[style=thmredbox, name=Теорема]{theorem}
+\declaretheorem[style=thmredbox, name=Лемма]{lemma}
+\declaretheorem[style=thmredbox, name=Утверждение]{statement}
+\declaretheorem[style=thmredbox, name=Аксиома]{axiom}
+\declaretheorem[style=thmredbox, numbered=no, name=Утверждения]{statements}
+\declaretheorem[style=thmredbox, numbered=no, name=Следствие]{implication}
+\declaretheorem[style=thmredbox, numbered=no, name=Вывод]{corollary}
+
+\declaretheorem[style=thmblueline, numbered=no, name=Замечание]{remark}
+\declaretheorem[style=thmblueline, numbered=no, name=Примечание]{note}
+
+% numbered theorems
+\newenvironment{props}[1][ ]{\begin{properties}[{#1}]\hfill\begin{enumerate}}{\end{enumerate}\end{properties}}
+\newenvironment{stmts}[1][ ]{\begin{statements}[{#1}]\hfill\begin{enumerate}}{\end{enumerate}\end{statements}}
+\newenvironment{exmpls}[1][ ]{\begin{egs}[{#1}]\hfill\begin{enumerate}}{\end{enumerate}\end{egs}}
+\newenvironment{algo}[1][ ]{\begin{algorithm}[{#1}]\hfill\begin{enumerate}}{\end{enumerate}\end{algorithm}}
+
+\newenvironment{iproof}[1][ ]{\begin{proof}[{#1}]\hfill\begin{itemize}}{\end{itemize}\end{proof}}
+
+\declaretheorem[style=thmproofbox, name=Доказательство]{replacementproof}
+% proof, moved 0.5em up
+\renewenvironment{proof}{\vspace{-.5em}\begin{replacementproof}}{\end{replacementproof}}
+
+% no-style theorems
+\newtheorem*{notation}{Обозначение}
+\newtheorem*{problem}{Задача}
+\newtheorem*{intuition}{Очевидно, что}
+\newtheorem*{remind}{Напоминание}
+
+%%    ``undefined theorem'' -- theorem-like environment with custom header
+
+\newmdenv[linewidth=2pt, rightline=false, topline=false, bottomline=false, linecolor=black, backgroundcolor=black!2]{undefinedtheorem}
+
+\newenvironment{undefthm}[1]{\begin{undefinedtheorem}\textbf{#1. }}{\end{undefinedtheorem}}

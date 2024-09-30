@@ -1,0 +1,232 @@
+\chapter{Векторные пространства}
+
+\begin{theorem}
+	Следующие определения базиса равносильны:
+    \begin{enumerate}
+        \item \label{it:1} $u_i$ -- ЛНЗ и порождающая
+        \item \label{it:2} $u_i$ -- максимальная ЛНЗ
+        \item \label{it:3} $u_i$ -- минимальная порождающая
+        \item \label{it:4} Любой вектор можно единственным образом представить в виде ЛК $u_i$
+    \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+    Уже доказаны: $ \ref{it:2} \implies \ref{it:1} $, $ \ref{it:3} \implies \ref{it:1} $
+    \begin{itemize}
+        \item $ \ref{it:1} \implies \ref{it:2} $ \\
+        $ u_i $ -- ЛНЗ \\
+        Докажем, что $ u_1, ..., u_n, v $ -- ЛЗ для $ \forall v $ \\
+        $ u_i $ -- порождающая $ \implies \exist a_i : v = a_1u_1 + ... + a_nu_n $ \\
+        Оказалось, что $v$ -- ЛК $u_i \implies u_1, ..., u_n, v $ -- ЛЗ
+        \item $ \ref{it:1} \implies \ref{it:3} $ \\
+        $ u_i $ -- порождающая \\
+        Пусть $ u_i $ не минимальная. Пусть $ u_1, ..., u_{n - 1} $ тоже порождающая $ \implies \exist a_i : un = a_nu_1 + ... + a_{n - 1}u_{n - 1} \implies u_i $ -- ЛЗ
+        \item $ \ref{it:4} \iff \ref{it:1} $ \\
+        Система порождающая и в \ref{it:1}, и в \ref{it:4} \\
+        Нужно доказать, что представление единственно $ \iff $ ЛНЗ
+        \begin{itemize}
+            \item $ \ref{it:4} \implies \ref{it:1} $
+            $$ 0 = 0 \cdot u_1 + ... + 0 \cdot u_n $$
+            Представление нуля единственно. Значит, система ЛНЗ
+            \item $ \ref{it:4} \implies \ref{it:1} $
+            $$ v = a_1u_1 + ... + a_nu_n, \quad v = b_1u_1 + ... + b_nu_n $$
+            $$ 0 = v - v = (a_1 - b_1)u_1 + ... + (a_n - b_n)u_n $$
+            ЛНЗ $ \implies a_i - b_i = 0 $
+        \end{itemize}
+    \end{itemize}
+\end{proof}
+
+\begin{definition}
+	Координатами вектора $v$ в базисе $u_1, ..., u_n $ называется такой набор $ a_i, ..., a_n \in K : v = a_1u_1 + ... + a_nu_n $
+\end{definition}
+
+\begin{properties}[базиса]
+	$ V $ -- конечномерное векторное пространство
+    \begin{enumerate}
+    	\item Дополнение до базиса \\
+        Любую ЛНЗ систему можно дополнить до базиса
+        \begin{proof}
+            $ u_1, ..., u_k $ -- ЛНЗ
+            Если это не базис, можно добавить вектор так, что система останется ЛНЗ\footnote{Если ничего нельзя добавить, то она максимальная, и это базис} \\
+            Докажем, что процесс когда-нибудь закончится: \\
+            Пусть есть порождающая система из $n$ векторов $ \implies $ в любой ЛНЗ системе не более $n$ векторов
+        \end{proof}
+        \item ``Спуск'' к базису \\
+        Из любой порождающей системы можно выбрать базис
+        \begin{proof}
+        	Если система не минимальна, будем убирать векторы по одному
+        \end{proof}
+        \item Количество векторов \\
+        В любых двух базисах поровну элементов
+        \begin{proof}
+            Пусть $ u_1, ..., u_k $ и $ w_1, ..., w_m $ -- базисы \\
+            Тогда, $u_i$ -- порождающая, и $w_i$ -- ЛНЗ \\
+            По теореме о линейной зависимости линейной комбинации, $m \le k $ \\
+            Аналогично, $ m \ge k $
+        \end{proof}
+    \end{enumerate}
+\end{properties}
+
+\begin{definition}
+	Пусть $V$ конечномерно \\
+    Размерностью $V$ называется количество элементов в базисе
+    \begin{notation}
+        $ \dim V, \quad \dim_K V $
+    \end{notation}
+    Если $ V = \set{0} $, то $ \dim V = 0 $
+\end{definition}
+
+\section{Подпространства}
+
+\begin{definition}
+	Пусть $V$ -- векторное пространство над $K$, $U \sub V $ \\
+    $U$ называется подпространством, если $U$ -- векторное пространство над $K$ с теми же опреациями
+\end{definition}
+
+\begin{definition}
+	$ U, W $ -- подпространства $V$ \\
+    Их суммой называется множество $ \set{u + w | u \in U, w \in W} $
+\end{definition}
+
+\begin{notation}
+	$ U + W $
+\end{notation}
+
+\begin{definition}
+	$ U_1, ..., U_n $ -- подпространства $V$
+    $$ U_1 + ... U_n = \set{u_1 + ... + u_n | u_i \in U_i} $$
+\end{definition}
+
+\begin{remark}
+	$ U_1 + U_2 + U_3 = (U_1 + U_2) + U_3 $
+\end{remark}
+
+\begin{props}
+	\item Сумма подпространств является подпространством
+    \item Пересечение подпространств является подпространством
+\end{props}
+
+\begin{theorem}[формула Грассмана]
+	Пусть $ U, W $ -- конечномерные подпространства векторного пространства $V$ \\
+    Тогда $ \dim (U + W) + \dim (U \cap W) = \dim U + \dim W $
+\end{theorem}
+
+\begin{proof}
+    Пусть $ l_1, ..., l_k $ -- базис $ U \cap W \implies l_i $ -- ЛНЗ \\
+    Дополним их до базиса $U : l_1, ..., l_k, u_1, ..., u_m $ -- базис $U$ \\
+    Аналогично, $ l_1, ..., l_k, w_1, ..., w_n $ -- базис $W$ \\
+    Достаточно доказать, что $ l_1, ..., l_k, u_1, ..., u_m, w_1, ..., w_n $ -- базис $ U + W $, так как тогда $ (k + m + n) + k = (k + m) + (k + n) $ \\
+    \textbf{Докажем, что это порождающая система:} \\
+    Пусть $ v \in U + W, \quad v = u + w $ \\
+    Разложим по базису:
+    $$ u = \sum a_il_i + \sum b_iu_i, \quad w = \sum a_il_i + \sum d_iw_i $$
+    Сложим:
+    $$ v = \sum(a_i + b_i)l_i + \sum b_i u_i + \sum d_i w_i $$
+    \textbf{Докажем ЛНЗ:} \\
+    Пусть $ \sum a_il_i + \sum b_i u_i + \sum c_i w_i = 0 $
+    $$
+    \begin{rcases}
+    	\sum b_i u_i \in U \\
+        \sum b_i u_i = - \sum a_i b_i - \sum d_i w_i \in W
+    \end{rcases} \implies \sum b_iu_i \in U \cap W $$
+    $ l_1, ..., l_k $ -- базис $ U \cap W $
+    $$ \exist c_i : \sum b_iu_i = \sum c_il_i \implies (-c1)l_1 + ... + (-c_k)l_k + b_1u_1 + ... + b_mu_m = 0 \implies c_i = 0, l_i = 0 $$
+    $$ \exist a_ib_i + 0 + \sum d_iw_i = 0 \implies a_i = 0, d_i = 0 $$
+\end{proof}
+
+\begin{definition}
+	Подпространством, порождённым векторами $ u_1, ..., u_k $ называется множество всех линейных комбинаций $u_1, ..., u_k $
+\end{definition}
+
+\begin{notation}
+	$ \langle u_1, ..., u_k \rangle $
+\end{notation}
+
+\begin{props}
+	\item $ \langle u_1, ..., u_k \rangle $ является подпространством. Это минимальное по включению подпространство, содержащее все $u_i$
+    \item $ \langle u_1, ..., u_k \rangle = \langle u_1 \rangle + ... + \langle u_k \rangle $
+\end{props}
+
+\section{Прямая сумма подпространств}
+
+\begin{definition}\label{def:1}
+	$ V $ -- векторное пространство, $U, W $ -- подпространства \\
+    Сумма $ U + W $ называется прямой, если $ \forall v \in V $ представляется в виде $ u + w, \quad u \in U, w \in W $ единственным образом
+\end{definition}
+
+\begin{notation}
+	$ U \oplus W $
+\end{notation}
+
+\begin{remark}
+	Прямая сумма $U_1, ..., U_k$ определяется одинаково \\
+    Если $ V = U_1 \oplus ... \oplus U_k $, то говорят, что $V$ раскладывается в прямую сумму $U_i$
+\end{remark}
+
+\begin{theorem}
+	Равносильны определения прямой суммы в случае 2 подпространств $U$ и $W$ конечномерного просранства $V$:
+    \begin{enumerate}
+        \item \label{it:2:1} Сумма $U + W $ прямая (по определению \ref{def:1})
+        \item \label{it:2:2} Если $ u + w = 0, \quad u \in U, w \in W $, то $u = 0, w = 0 $
+        \item \label{it:2:3} $ U \cap W = \set{0} $
+        \item \label{it:2:4} Объединение базисов $U$ и $W$ является базисом $U + W$
+    \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+	\hfill
+    \begin{itemize}
+        \item $ \ref{it:2:1} \implies \ref{it:2:2} $ очевидно
+        \item $ \ref{it:2:2} \implies \ref{it:2:1} $ \\
+        Пусть $ u + w = u' + w' \implies (u - u') + (w - w') = 0 \implies u = u', w = w' $
+        \item $ \ref{it:2:2} \implies \ref{it:2:3} $ \\
+        Пусть $ v \in U \cap W \implies -v \in U \cap W $
+        $$ v + (-v) = 0 \implies v = 0 $$
+        \item $ \ref{it:2:3} \implies \ref{it:2:2} $ \\
+        Пусть $ u + w = 0, \quad u \in U, w \in W $ \\
+        $ \underset{\in U}u = -\underset{\in W}w \implies u \in U \cap W \implies u = 0 \implies w = 0 $
+        \item $ \ref{it:2:3} \iff \ref{it:2:4} $
+        $$ \dim U + \dim W = \dim (U + W) + \dim (U \cap W) $$
+        $$ \ref{it:2:4} \iff \dim U + \dim W = \dim (U + W) \iff \dim (U \cap W) = 0 \iff U \cap W = 0 $$
+    \end{itemize}
+\end{proof}
+
+\begin{theorem}
+	Пусть $V$ --- конечномерное пространство, $U_1, ..., U_k $ -- подпространства \\
+    Тогда следующие условия равносильны:
+    \begin{enumerate}
+        \item \label{it:3:1} Сумма $ U_1 + ... + U_k $ прямая
+        \item \label{it:3:2} Если $ u_1 + ... u_k, \quad u_i \in U $, то $u_i = 0 $
+        \item \label{it:3:3} $ \forall i \quad U_i \cap (U_1 + ... + U_{i - 1} + U_{i + 1} + ... + U_k) = \set{0} $
+        \item \label{it:3:4} $ U_1 \cap U_2 = \set{0}, \quad (U_1 + U_2) \cap U_3 = \set{0}, \quad \widedots[3em] $
+        \item \label{it:3:5} Объединение любых базисов $u_i$ является базисом $u_1 + ... + u_k $
+    \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+    \hfill
+    \begin{itemize}
+        \item $ \ref{it:3:1} \implies \ref{it:3:2} $ очевидно
+        \item $ \ref{it:3:2} \implies \ref{it:3:1} $ \\
+        Пусть $ v = u_1 + ... + u_k = u_1' + ... + u_k' $
+        $$ v - v = (u_1 - u_1') + ... + (u_k - u_k') = 0 \implies u_i = u_i' $$
+        \item $ \ref{it:3:2} \implies \ref{it:3:3} $ \\
+        Пусть $v \in U_1 \cap (U_2 + ... + U_k) $
+        $$ v = u_1 + ... + u_k, \quad u_i \in U_i $$
+        $$ v \in i \implies -v \in U_i $$
+        $$ 0 = (-v) + u_2 + ... + u_k \implies v = 0, \quad u_2 = ... = u_k = 0 $$
+        \item $ \ref{it:3:3} \implies \ref{it:3:4} $ \\
+        Докажем, что $ (U_1 + ... + U_{i - 1}) \cap U_i = 0 $ \\
+        Заметим, что $ U_1 + ... + U_{i - 1} \sub U_1 + ... + U_{i - 1} + U_{i + 1} + ... + U_k \implies (U_1 + ... + U_{i - 1}) \cap U_i \sub (U_1 + ... + U_{i - 1} + U_{i + 1} + ... + U_k) \cap U_i = \set{0} $
+        \item $ \ref{it:3:4} \implies \ref{it:3:2} $ \\
+        Пусть $ u_1 + ... + u_k = 0, \quad u_i \in U_i $ \\
+        Пусть не все $ u_1, ..., u_k $ равны 0 \\
+        Положим $ i \define \max\set{s | u_s \ne 0} $
+        $$ u_1 + ... + u_{i - 1} + \underset{\ne 0}{u_i} = 0 \implies u_i = -u_1 - ... - u_{i - 1} \in U_1 + ... + U_{i - 1} \implies u_i \in (U_1 + ... + U_{i - 1}) \cap U_i = \set{0} $$
+        \item $ \ref{it:3:4} \iff \ref{it:3:5} $ \\
+        Пусть $n_i = \dim U_i $ \\
+        Пусть $B$ -- объединение базисов $U_i$ \\
+        Тогда $B$ -- порождающая система $U_1 + ... + U_k $ \\
+        $B$ -- базис $ \iff B $ -- минимальная порождающая система $ \iff |B| = \dim (U_1 + ... + U_k) $
+    \end{itemize}
+\end{proof}

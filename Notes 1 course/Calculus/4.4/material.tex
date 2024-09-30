@@ -1,0 +1,461 @@
+\chapter{Числовые ряды}
+
+\section{Продолжение доказательства какого-то признака сходимости}
+
+Рассмотрим ряд $\sum_{n = 1}^\infty a_n, \qquad a_n \ge 0 $
+Положим $ q \define \ulim_{n \to \infty} \sqrt[n]{a_n} $
+
+\begin{itemize}
+	\item $ q > 1 $ \\
+	Возьмём $ \veps \define q - 1 > 0, \quad q - \veps = 1 $ \\
+	Вспомним, что $ \exist \seq{n_k}k $
+	$$ \sqrt[n_k]{a_{n_k}} > q - \veps = 1 \iff a_{n_k} > q^{n_k} \implies a \not\to 0 $$
+	Ряд расходится
+\end{itemize}
+
+\section{Признак Даламбера}
+
+\begin{theorem}[признак Даламбера]
+	\begin{equ}1
+		\sum_{n = 1}^\infty a_n, \qquad a_n > 0
+	\end{equ}
+	$$ \exist \limi{n} \frac{a_{n + 1}}{a_n} = q $$
+	Тогда:
+	\begin{itemize}
+		\item $ q < 1 \implies \eref1 $ сходится
+		\item $ q > 1 \implies \eref1 $ расходится
+		\item $ q = 1 $
+	\end{itemize}
+\end{theorem}
+
+\begin{proof}
+	\hfill
+	\begin{itemize}
+		\item $ q < 1 $ \\
+		Возьмём $ \veps > 0 : r \define q + \veps < 1 $
+		\begin{equ}2
+			\exist N : \forall n > N \quad \frac{a_{n + 1}}{a_n} < q + \veps = r
+		\end{equ}
+		Будем считать, что $ n \ge N + 1 $
+		\begin{equ}3
+			\eref2 \implies
+			\begin{cases}
+				\dfrac{a_{N + 2}}{a_{N + 1}} < r \\
+				\dfrac{a_{N + 3}}{a_{N + 2}} < r \\
+				\widedots[3em] \\
+				\dfrac{a_{n + 1}}{a_n} < r
+			\end{cases}
+		\end{equ}
+		Здесь $ n - N $ неравенств. Перемножим их:
+		\begin{equ}4
+			\eref3 \implies \frac{\cancel{a_{N + 2}}}{a_N + 1} \cdot \frac{\cancel{a_{N + 3}}}{\cancel{a_{N + 2}}} \cdot ... \cdot \frac{\cancel{a_n}}{\cancel{a_{n + 1}}} \cdot \frac{a_{n + 1}}{\cancel{a_n}} < r^{n - N}
+		\end{equ}
+		\begin{equ}{41}
+			\eref4 \iff \frac{a_{n + 1}}{a_{N + 1}} < \frac{r^n}{r^N}
+		\end{equ}
+		\begin{equ}{411}
+			\eref{41} \iff a_{n + 1} < \frac{a_{N + 1}}{r^N} \cdot r^n
+		\end{equ}
+		$$ \sum_{n = N + 1}^\infty \frac{a_{N + 1}}{r^N} \cdot r^n \text{ сходится } \implies \sum_{n = N + 1}^\infty a_n \text{ сходится} $$
+		Последний ряд -- это остаток ряда \eref1. Значит, ряд \eref1 сходится
+		\item $ q > 1 $ \\
+		Пусть $ \veps \define q - 1 > 0 $ \\
+		По свойствам предела,
+		\begin{equ}5
+			\exist N : \forall n > N \quad \frac{a_{n + 1}}{a_n} > q - \veps = 1
+		\end{equ}
+		Будем считать, что $ n > N + 1 $
+		$$ \eref5 \implies
+		\begin{cases}
+			\dfrac{a_{N + 2}}{a_{N + 1}} > 1 \\
+			\dfrac{a_{N + 3}}{a_{N + 2}} > 1 \\
+			\widedots[3em] \\
+			\dfrac{a_{n + 1}}{a_n} > 1
+		\end{cases} $$
+		Здесь $ n - N $ неравенств. Перемножим их:
+		$$ \frac{\cancel{a_{N + 2}}}{a_N + 1} \cdot \frac{\cancel{a_{N + 3}}}{\cancel{a_{N + 2}}} \cdot ... \cdot \frac{\cancel{a_n}}{\cancel{a_{n + 1}}} \cdot \frac{a_{n + 1}}{\cancel{a_n}} > 1 \iff \frac{a_{n + 1}}{a_{N + 1}} > 1 \iff a_{n + 1} > a_{N + 1} > 0 \implies \limi{n} a_n \ne 0 $$
+		Значит, ряд \eref1 расходится
+	\end{itemize}
+\end{proof}
+
+\section{Интегральный признак сходимости рядов}
+
+\begin{theorem}
+	$ f : [1, \infty], \qquad f(x) \ge 0, \qquad f(x) $ убывает
+	\begin{equ}7
+		\sum_{n = 1}^\infty f(n)
+	\end{equ}
+	\begin{equ}8
+		\dint1\infty{f(x)}
+	\end{equ}
+	Тогда \eref7 и \eref8 сходятся или расходятся одновременно
+\end{theorem}
+
+\begin{proof}
+	\hfill
+	\begin{itemize}
+		\item Пусть \eref7 сходится \\
+		Тогда, если $ x \in [n, n + 1] $, имеем неравенство
+		\begin{equ}9
+			f(n) \ge f(x)
+		\end{equ}
+		Применим свойство определённых интегралов:
+		\begin{equ}{10}
+			\eref9 \implies \underbrace{\dint{n}{n + 1}{f(n)}}_{= f(n)(n + 1 - n) = f(n)} \ge \dint{n}{n + 1}{f(x)}
+		\end{equ}
+		\begin{equ}{11}
+			\eref{10} \iff f(n) \ge \dint{n}{n + 1}{f(x)}
+		\end{equ}
+		Возьмём произволное $ N $ и $ n = 1, 2, ..., N $
+		\begin{equ}{12}
+			\eref{11} \implies
+			\begin{cases}
+				f(1) \ge \dint12{f(x)} \\
+				f(2) \ge \dint23{f(x)} \\
+				\widedots[8em] \\
+				f(N) \ge \dint{N}{N + 1}{f(x)}
+			\end{cases}
+		\end{equ}
+		Сложим все неравенства:
+		\begin{equ}{13}
+			\eref{12} \implies f(1) + ... + f(N) \ge \dint12{f(x)} + \dint23{f(x)} + ...  + \dint{N}{N + 1}{f(x)} = \dint1{N + 1}{f(x)}
+		\end{equ}
+		Поскольку ряд \eref7 сходится,
+		$$ f(1) + ...  f(N) \le \sum_{n = 1}^\infty f(n) = M \in \R $$
+		Таким образом,
+		\begin{equ}{14}
+			\eref{13} \implies \dint1{N + 1}{f(x)} \le M \quad \forall N
+		\end{equ}
+	\end{itemize}
+	Возьмём $ \forall 1 < b < \infty $ и рассомтрим интеграл $ \dint1b{f(x)} $ \\
+	Возьмём $ N : N + 1 > b $. Тогда
+	\begin{equ}{15}
+		\dint1b{f(x)} = \dint1{N + 1}{f(x)} - \underbrace{\dint{b}{N + 1}{f(x)}}_{\ge 0} \le \dint1{N + 1}{f(x)} \underset{\eref{14}}\le M
+	\end{equ}
+	\eref{15} $ \implies $ \eref8 сходится
+	\item Пусть сходится интеграл \eref8 \\
+	Для $ x \in [n, n + 1] $, в силу монотонности $ f $, справедливо
+	\begin{equ}{16}
+		f(x) \ge f(n + 1) \implies \dint{n}{n + 1}{f(x)} \ge \dint{n}{n + 1} = f(n + 1)
+	\end{equ}
+	Распишем \eref{16} для $ n = 1, 2, ..., N $
+	\begin{multline}\lbl{17}
+		\eref{16} \implies
+		\begin{cases}
+			\dint12{f(x)} \ge f(2) \\
+			\dint23{f(x)} \ge f(3) \\
+			\widedots[8em] \\
+			\dint{N}{N + 1}{f(x)} \ge f(N + 1)
+		\end{cases} \underimp{\sum} \\ \implies \dint12{f(x)} + \dint23{f(x)} + ... + \dint{N}{N + 1}f(x) \ge f(2) + f(3) + ... + f(N + 1)
+	\end{multline}
+	$$ \eref{17} \iff \dint1{N + 1}{f(x)} \ge f(2) + f(3) + ... + f(N + 1) $$
+	В наших обозначениях, это означает, что
+	\begin{equ}{18}
+		\dint1{N + 1}{f(x)} \le \dint1\infty{f(x)} \define L
+	\end{equ}
+	\begin{equ}{19}
+		\eref{17}, \eref{18} \implies f(2) + f(3) + ... + f(N + 1) \le L
+	\end{equ}
+	Получили, что последовательность ограничена сверху числом $ L $, которое не зависит от $ N $, а значит, ряд $ \sum_{n = 2}^\infty f(n) $ сходится. Это -- остаток ряда \eref7, значит, \eref7 сходится
+\end{proof}
+
+\begin{eg}
+	Рассмотрим ряд $ \sum_{n = 1}^\infty \dfrac1{n^p}, \quad p > 0 $ и $ f(x) \define \dfrac1{x^p} $ \\
+	Этот ряд сходится одновременно с интегралом $ \dfint1\infty{x^p} $, который сходится при $ p > 1 $ \\
+	Получили, что наш ряд:
+	\begin{itemize}
+		\item сходится при $ p > 1 $
+		\item расходится при $ 0 < p < 1 $
+	\end{itemize}
+	В частности, ряд $ \sum_{n = 1}^\infty \dfrac1n $ расходится. Этот ряд называется \textbf{гармоническим}
+\end{eg}
+
+\begin{eg}
+	Рассотрим ряд
+	$$ \sum_{n = 1}^\infty \frac1{(n + 1)\ln^p(n + 1)}, \qquad p > 0 $$
+	И функцию
+	$$ f(x) = \frac1{(x + 1)\ln^p(x + 1)} $$
+	Ряд сходится одновременно с интегралом
+	$$ \dfint1\infty{(x + 1)\ln^p(x + 1)} \underset{x + 1 \define y}= \dfint[y]2\infty{y\ln^py} $$
+	Этот интеграл сходится при $ p > 1 $
+\end{eg}
+
+\section{Абсолютно сходящиеся ряды}
+
+Пусть имеется некий ряд
+\begin{equ}{21}
+	\sum_{n = 1}^\infty a_n
+\end{equ}
+Рассмотрим также ряд
+\begin{equ}{22}
+	\sum_{n = 1}^\infty |a_n|
+\end{equ}
+
+\begin{definition}
+	Говорят, что ряд \eref{21} абсолютно сходится, если сходится ряд \eref{22}
+\end{definition}
+
+\begin{theorem}
+	Если ряд абсолютно сходится, то он сходится
+\end{theorem}
+
+\begin{proof}
+	Выпишем критерий Коши для ряда \eref{22}:
+	\begin{equ}{23}
+		\forall \veps > 0 \quad \exist N : \forall m > n > N \quad \bigg| \sum_{k = n + 1}^m |a_k| \bigg| < \veps
+	\end{equ}
+	$$ \eref{23} \iff \sum_{k = n + 1}^m |a_k| < \veps $$
+	$$ \bigg| \sum_{k = n + 1}^m a_k \bigg| \le \sum_{k = n + 1}^m |a_k| \underset{\eref{23}}< \veps $$
+	Значит, ряд \eref{21} сходится
+\end{proof}
+
+\begin{definition}
+	Если ряд \eref{21} сходится, а ряд \eref{22} расходится, то говорят, что ряд \eref{21} сходится неабсолютно или условно
+\end{definition}
+
+\section{Преобразование Абеля}
+
+Пусть имеется сумма $ \sum_{n = 1}^N a_nb_n $ \\
+Определим числа следующим образом:
+$$
+\begin{cases}
+	A_0 = 0 \\
+	A_1 = a_1 \\
+	A_2 = a_1 + a_2 \\
+	\widedots[2em] \\
+	A_k = a_1 + ... + a_k
+\end{cases} $$
+Тогда
+$$
+\begin{cases}
+	a_1 = A_1 - A_0 \\
+	a_2 = A_2 - A_1 \\
+	\widedots[2em] \\
+	a_k = A_k - A_{k - 1}
+\end{cases} $$
+Тогда наша сумма равна
+\begin{multline*}
+	\sum_{n = 1}^N a_nb_n = \sum_{n = 1}^N(A_n - A_{n - 1})b_n = \sum_{n = 1}^NA_nb_n - \sum_{n = 1}^NA_{n - 1}b_n \underset{\left(
+	\begin{subarray}{c}
+		n - 1 \define k \\
+		n \define k + 1
+	\end{subarray}\right)}= \sum_{n = 1}^NA_nb_n - \sum_{k = 0}^NA_kb_{k + 1} \underset{\eref{txt}}= \\ = \sum_{n = 1}^NA_nb_n - \sum_{n = 0}^{N - 1}A_nb_{n + 1} \underset{(A_0 = 0)}= \sum_{n = 1}^NA_nb_n - \sum_{n = 1}^{N - 1}A_nb_{n + 1} = \bigg( A_Nb_N + \sum_{n = 1}^{N - 1}A_nb_n \bigg) - \sum_{n = 1}^{N - 1}A_nb_{n + 1} = \\ = A_Nb_N + \sum_{n = 1}^{N - 1}(A_nb_n - A_nb_{n + 1}) = A_Nb_N + \sum_{n = 1}^{N - 1}A_n(b_n - b_{n + 1})
+\end{multline*}
+\begin{equ}{txt}
+	\text{В качестве счётчика суммы можно записать любую букву}
+\end{equ}
+
+\begin{theorem}[признак Абеля сходимости рядов]
+	\begin{equ}{31}
+		\sum_{n = 1}^\infty a_nb_n
+	\end{equ}
+	Пусть ряд
+	\begin{equ}{32}
+		\sum_{n = 1}^\infty a_n \text{ сходится}
+	\end{equ}
+	Последовательность
+	\begin{equ}{33}
+		\seq{b_n}n \text{ монотонна}
+	\end{equ}
+	и ограничена:
+	\begin{equ}{34}
+		\exist M : \forall n \quad |b_n| \le M
+	\end{equ}
+	Тогда ряд \eref{31} сходится
+\end{theorem}
+
+\begin{proof}
+	Так как ряд \eref{32} сходится, то, по критерию Коши:
+	\begin{equ}{35}
+		\forall \veps > 0 \quad \exist N : \forall m > n > N \quad \bigg| \sum_{k = n + 1}^m a_k \bigg| < \veps
+	\end{equ}
+	Положим
+	$$
+	\begin{cases}
+		A_1 \define a_{n + 1} \\
+		A_2 \define a_{n + 1} + a_{n + 2} \\
+		\widedots[9em] \\
+		A_k \define a_{n + 1} + ... + a_{n + k}
+	\end{cases} $$
+	Применим преобразование Абеля в наших обозначениях:
+	\begin{multline*}
+		\sum_{k = n + 1}^ma_kb_k = A_{m - n}b_m + \sum_{k = 1}^{m - n - 1}A_k(b_{n + k} - b_{n + k + 1}) \implies \bigg| \sum_{k = n + 1}^m a_kb_k \bigg| \le \\ \le |A_{m - n}| \cdot |b_m| + \sum_{k = 1}^{m - n - 1} |A_k| \cdot |b_{n + k} - b_{n + k + 1}| \underset{\eref{34}}\le \\ \le M \big| a_{n + 1} + ... + a_m \big| + \sum_{k = 1}^{m - n - 1} \big| a_{n + 1} + ... + a_{n + k} \big| \cdot \big| b_{n + k} - b_{n + k + 1} \big| \underset{\eref{35}}\le M \cdot \veps + \sum_{k = 1}^{m - n - 1}\veps |b_{n + k} - b_{n + k + 1}| = \\ = M \veps + \veps \bigg| \sum_{k = 1}^{m + n - 1}(b_{n + k} - b_{n + k + 1}) \bigg| = M \veps + \veps |b_{n + 1} - b_m| \le M \veps + \veps \big( |b_{n + 1}| + |b_m| \big) \le 3 \veps
+	\end{multline*}
+	Значит, при $ m > n > N $
+	$$ \bigg| \sum_{k = n + 1}^m a_kb_k \bigg| < 3 M \veps \implies \eref{31} \text{ сходится} $$
+\end{proof}
+
+\begin{theorem}[признак Дирихле сходимости рядов]
+	\begin{equ}{36}
+		\sum_{n = 1}^\infty a_nb_n
+	\end{equ}
+	\begin{equ}{37}
+		\exist L : \forall n \quad \bigg| \sum_{n = 1}^N a_n \le L
+	\end{equ}
+	\begin{equ}{38}
+		\seq{b_n}n \text{ монотонна}
+	\end{equ}
+	\begin{equ}{39}
+		b_n \underarr{n \to \infty} 0
+	\end{equ}
+	Тогда ряд \eref{36} сходится
+\end{theorem}
+
+\begin{proof}
+	Будем пользоваться критерием Коши \\
+	Возьмём $ \forall \veps > 0 $
+	\begin{equ}{310}
+		\eref{39} \implies \exist N : \forall n > N \quad |b_n| < \veps
+	\end{equ}
+	Возьмём $ \forall m > n > N $ \\
+	Выберем числа:
+	$$
+	\begin{cases}
+		A_1 \define a_{n + 1} \\
+		A_2 = a_{n + 1} + a_{n + 2} \\
+		\widedots[9em] \\
+		A_k = a_{n + 1} + ... + a_{n + k}
+	\end{cases} $$
+	Воспользуемся преобразованием Абеля для такой суммы:
+	\begin{equ}{311}
+		\sum_{k = n + 1}^m a_kb_k = A_{m - n}b_m + \sum_{k = 1}^{m - n - 1}A_k(b_{n + k} - b_{n + k + 1})
+	\end{equ}
+	$$ A_k = (a_1 + ... + a_{n + k}) - (a_1 + ... + a_n) $$
+	\begin{equ}{312}
+		\eref{37} \implies |A_k| \le |a_1 + ... + a_{n + k}| + |a_1 + ... + a_n| \le L + L = 2L
+	\end{equ}
+	\begin{multline*}
+		\eref{310}, \eref{311}, \eref{312} \implies \bigg| \sum_{k = n + 1}^m a_kb_k \bigg| \le 2L \cdot |b_m| + \sum_{k = 1}^{m - n - 1}2L|b_{k + n} - b_{k + n + 1}| = \\ = 2L \bigg( |b_m| + \bigg| \sum_{k = 1}^{m - n - 1}(b_{n + k} - b_{n + k + 1}) \bigg| \bigg) = 2L \big( |b_m| + |b_{n + 1} - b_m| \big) \le 2L \big( |b_m| + |b_{n + 1}| + |b_m| \big) \underset{\eref{310}}< 6L\veps \implies \\ \implies \eref{36} \text{ сходится}
+	\end{multline*}
+\end{proof}
+
+\begin{definition}
+	Знакопеременным рядом называется ряд вида
+	\begin{equ}{313}
+		\sum_{n = 1}^\infty (-1)^{n - 1}b_n, \qquad b_n > 0
+	\end{equ}
+\end{definition}
+
+\begin{theorem}[признак сходимости знакопеременного ряда]
+	\begin{equ}{314}
+		\begin{rcases}
+			b_n \text{ монотонна} \\
+			b_n \underarr{n \to \infty} 0
+		\end{rcases}
+	\end{equ}
+	Тогда ряд \eref{313} сходится
+\end{theorem}
+
+\begin{proof}
+	Положим $ a_k \define (-1)^{k - 1} $
+	$$ 1 - 1 + 1 - 1 + ... + (-1)^{N - 1} = \left[
+	\begin{aligned}
+		0 \\
+		1
+	\end{aligned} \right. $$
+\end{proof}
+
+\section{Перестановка слагаемых в рядах}
+
+\begin{undefthm}{Приготовления к теореме}
+	Пусть имеется некое взаимно однозначное отображение (биекция) $ \sigma : \N \to \N $ \\
+	Положим $ \tau \define \sigma^{-1} $ \\
+	Пусть имеется некая последовательность $ \seq{a_n}n $ \\
+	Определим
+	\begin{equ}{51}
+		b_n \define a_{\sigma(n)} \iff a_n = b_{\tau(n)}
+	\end{equ}
+	Будем считать, что $ \sigma(n) \not\equiv n $
+\end{undefthm}
+
+\begin{theorem}
+	$ \forall n \quad a_n \ge 0, \qquad \sum_{n = 1}^\infty a_n $ сходится \\
+	Тогда
+	\begin{equ}{52}
+		\sum_{n = 1}^\infty b_n \text{ сходится}
+	\end{equ}
+	\begin{equ}{53}
+		\sum_{n = 1}^\infty a_n = \sum_{n = 1}^\infty b_n = \sum_{n = 1}^\infty a_{\sigma(n)}
+	\end{equ}
+	(Строго говоря, третья сумма не определена, и в формулировку входит только равенство первых двух)
+\end{theorem}
+
+\begin{proof}
+	\begin{itemize}
+		\item \eref{52} \\
+		Обозначим $ \sum_{n = 1}^\infty a_n \define A \in \R $, т. е.
+		\begin{equ}{54}
+			\forall N \quad \sum_{n = 1}^N a_n \le A
+		\end{equ}
+		Возьмём $ \forall K $ и рассмотрим сумму
+		$$ \sum_{\nu = 1}^K b_\nu = a_{\sigma(1)} + ... + a_{\sigma(K)} $$
+		Пусть $ N \define \max\set{\sigma(1), ..., \sigma(K)} $. Тогда
+		\begin{equ}{55}
+			\sum_{\nu = 1}^K b_\nu = a_{\sigma(1)} + ... + a_{\sigma(K)} \le a_1 + a_2 + ... + a_N \underset{\eref{54}}\le A
+		\end{equ}
+		\begin{equ}{56}
+			\eref{55} \implies \sum_{\nu = 1}^\infty b_\nu \le A
+		\end{equ}
+		\item \eref{53}
+		Обозначим
+		$$ \sum_{\nu = 1}^\infty b_\nu \define B $$
+		Вспомним, что $ a_n = b_{\tau(n)} $ \\
+		Заменяя буквы, аналогичными соображениями получаем $ B \le A $ \\
+		При этом, $ A \le B $. Значит, суммы этих рядов совпадают $ \implies \eref{53} $
+	\end{itemize}
+\end{proof}
+
+Возьмём $ a \in \R $ и определим
+$$ a_+ \define
+\begin{cases}
+	a, \quad a \ge 0 \\
+	0, \quad a < 0
+\end{cases}, \qquad a_- \define
+\begin{cases}
+	|a|, \quad a < 0 \\
+	0, \quad a \ge 0
+\end{cases} $$
+\begin{intuition}
+	$ a = a_+ - a_-, \qquad |a| = a_+ + a_- $
+\end{intuition}
+
+
+\begin{theorem}
+	Пусть есть ряд
+	$$ \sum_{n = 1}^\infty a_n \text{ \textbf{-- абсолютно сходящийся}} $$
+	Опять есть биекция $ \sigma $ и $ b_n = a_{\sigma(n)} $
+	Тогда
+	\begin{equ}{56}
+		\sum_{n = 1}^\infty b_n = \sum_{n = 1}^\infty
+	\end{equ}
+\end{theorem}
+
+\begin{proof}
+	$$ \sum_{n = 1}^\infty a_n = \sum_{n = 1}^\infty a_{\sigma(n)} $$
+	\begin{equ}{57}
+		\sum_{n = 1}^\infty |a_n| = \sum_{n = 1}^\infty (a_{n+} + a_{n-}) \text{ сходится}
+	\end{equ}
+	\begin{equ}{58}
+		\eref{57} \implies
+		\begin{cases}
+			\sum_{n = 1}^\infty a_{n+} \text{ сходится} \\
+			\sum_{n = 1}^\infty a_{n-} \text{ сходится}
+		\end{cases}
+	\end{equ}
+	$$ b_{n+} = a_{\sigma(n)+}, \qquad b_{n-} = a_{\sigma(n)-} $$
+	\begin{equ}{59}
+		\begin{rcases}
+			\sum_{n = 1}^\infty b_{n+} = \sum_{n = 1}^\infty a_{n+} \\
+			\sum_{n = 1}^\infty b_{n-} = \sum_{n = 1}^\infty a_{n-}
+		\end{rcases}
+	\end{equ}
+	\begin{equ}{510}
+		\eref{59} \implies \sum_{n = 1}^\infty (b_{n+} - b_{n-}) = \sum_{n = 1}^\infty(a_{n+}-a_{n-})
+	\end{equ}
+\end{proof}
+
+\begin{theorem}[Римана]
+	Пусть \textbf{не}абсолютно сходящийся ряд $ \sum_{n = 1}^\infty a_n $ \\
+	Пусть $ c \in \R $
+	Тогда $ \exist \sigma : \N \to \N $ такая, что при $ b_n = a_{\sigma(n)} $, $ \sum_{n = 1}^\infty b_n = c $
+\end{theorem}

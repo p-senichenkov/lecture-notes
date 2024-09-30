@@ -1,0 +1,279 @@
+\chapter(R\textasciicircum{}n){$ \R^n $}
+
+\section{Норма линейного оператора}
+
+\begin{definition}
+	$ A : \R^{m \ge 1} \to \R^{n \ge 1} $
+	\begin{equ}1
+		\norm{A} \define \sup\limits_{
+			\begin{subarray}{c}
+				X \in \R^m \\
+				\norm{X}_m \le 1
+			\end{subarray}} \norm{AX}_n
+	\end{equ}
+\end{definition}
+
+\begin{props}
+	\item $ \norm{A} \ge 0 $
+	$$ \norm{A} = 0 \iff A \equiv \On, \qquad \text{ т. е. } \On[m] X = \On \quad \forall X \in \R_m $$
+	\begin{proof}
+		Первое утверждение очевидно из определения и аналогичного свойства нормы вектора. Докажем второе:
+		$$ AX = A_{n \times m}X $$
+		$$ A_{n \times m} =
+		\begin{bmatrix}
+			a_{11} & . & a_{1m} \\
+			. & . & . \\
+			a_{m1} & . & a_{nm}
+		\end{bmatrix} $$
+		Возьмём $ 1 \le i \le n $ и $ 1 \le j \le m $ \\
+		Обозначим
+		$$ e_j \define [\overbrace{0, ..., \underset{i}1, ..., 0}^n], \qquad f_j \define \left.
+		\begin{bmatrix}
+			0 \\
+			. \\
+			1 \\
+			. \\
+			0
+		\end{bmatrix} \right\} m $$
+		$$ \norm{A} = 0 \implies \norm{AX}_n = 0 \implies AX = \On \quad \forall \underset{\norm{X} = 1}{X \in \R^m} $$
+		Иначе супремум был бы положительным \\
+		То есть, $ A_{n \times m} X = \On $. Значит,
+		$$ e_i(A_{n \times m}f_j) = e_i \column00 = 0 $$
+		При этом,
+		$$ A_{n \times m} f_j =
+		\begin{bmatrix}
+			a_{11} & . & a_{1m} \\
+			. & . & . \\
+			a_{m1} & . & a_{nm}
+		\end{bmatrix}
+		\begin{bmatrix}
+			0 \\
+			. \\
+			1 \\
+			. \\
+			0
+		\end{bmatrix} = \column{a_{1j}}{a_{nj}} $$
+		$$ e_i \column{a_{1j}}{a_{nj}} = a_{ij} \implies A_{n \times m} = \On[n \times m] $$
+	\end{proof}
+	\item $ c \in \R $
+	$$ \norm{cA} = |c| \cdot \norm{A} $$
+	\begin{proof}
+		$$ \norm{cA} = \sup\limits_{
+			\begin{subarray}{c}
+				X \in \R^m \\
+				\norm{X}_m \le 1
+			\end{subarray}} \norm{(cA)X}_n \underset{\text{линейность}}= \sup \norm{c(AX)}_n = \sup |c| \cdot \norm{AX}_n = |c| \sup \norm{AX}_n = |c| \cdot \norm{A} $$
+	\end{proof}
+	\item $ A, B : \R^m \to \R^n $
+	$$ \norm{A + B} \le \norm{A} + \norm{B} $$
+	\begin{proof}
+		\begin{multline*}
+			\norm{A + B} = \sup \norm{(A + B)X}_n \bydef \sup \norm{AX + BX} \le \sup(\norm{AX} + \norm{BX}) \le \\
+			\le \sup \norm{AX} + \sup \norm{BX} \bydef \norm{A} + \norm{B}
+		\end{multline*}
+	\end{proof}
+	\item\label{prop:4} $ \norm{AX} \le \norm{A} \cdot \norm{X} \quad \forall X \in \R^m $
+	\begin{iproof}
+		\item Если $ X = \On[m] $, то это очевидно
+		\item Пусть $ X \ne \On[m] $ \\
+		Тогда $ t \define \norm{X}_m > 0 $ \\
+		Рассмотрим $ Y \define \frac1t X $
+		$$ \norm{Y}_m = \norm{\frac1t X} \underset{t > 0}= \frac1t \norm{X} \bydef 1 $$
+		$$ \norm{AY}_n \le \sup_{
+			\begin{subarray}{c}
+				U \in \R^m \\
+				\norm{U} \le 1
+			\end{subarray}} \norm{AU}_n = \norm{A} $$
+		$$ X = tY \implies \norm{AX}_n = \norm{A(tY)}_n = t \cdot \norm{AY} \le t \norm{A} \underset{t > 0}\le \norm{A} $$
+	\end{iproof}
+	\item\label{prop:1.5} $ c_0 > 0 $
+	\begin{equ}4
+		\forall X \in \R^m \quad \norm{AX}_n \le c_0 \cdot \norm{X}_m
+	\end{equ}
+	$$ \implies \norm{A} \le c_0 $$
+	\begin{proof}
+		Возьмём $ \forall X \in \R^m $, такое, что $ \norm{X}_m \le 1 $
+		\begin{equ}5
+			\norm{AX}_n \underset{\eref4}\le c_0 \cdot \norm{X}_m \bydef[\le] c_0
+		\end{equ}
+		$$ \eref5 \bydef[\iff] \sup \norm{AX}_n \le c_0 $$
+	\end{proof}
+	\item $ A =
+	\begin{bmatrix}
+		a_{11} & . & a_{1m} \\
+		. & . & . \\
+		a_{n1} & . & a_{nm}
+	\end{bmatrix} $
+	$$ \implies \norm{A} \le \bigg( \sum_{i = 1}^n \sum_{j = 1}^m a_{ij}^2 \bigg)^{\faktor12} $$
+	\begin{proof}
+		Пусть
+		$$ X \define \column{x_1}{x_m}, \qquad \norm{X}_m \le 1 $$
+		Тогда
+		\begin{equ}7
+			AX = \column{a_{11}x_1 + ... + a_{1m}x_m}{a_{n1}x_1 + ... + a_{nm}x_m}
+		\end{equ}
+		\begin{remind}
+			Неравенство КБШ:
+			$$ |(A, X)| \le |a_1| \cdot |x_1| + ... + |a_n| \cdot |x_n| \le \sqrt{a_1^2 + ... + a_n^2} \cdot \sqrt{x_1^2 + ... + x_n^2} = \norm{Y} \cdot \norm{X} $$
+		\end{remind}
+		$$ \eref7 \implies \norm{AX}_n^2 = \sum_{i = 1}^n \bigg( \sum_{j = 1}^m a_{ij}x_j \bigg)^2 \underset{\text{КБШ}}\le \sum_{i = 1}^n \bigg( \sum_{j = 1}^m a_{ij}^2 \bigg) \bigg( \sum_{j = 1}^m \underbrace{x_j^2}_{\bydef[\le] 1} \bigg) \le \sum_{i = 1}^n \sum_{j = 1}^m a_{ij}^2 $$
+	\end{proof}
+	\item $ \R^{n \ge 1}, \R^{m \ge 1}, \R^{k \ge 1}, \qquad A : \R^m \to \R^n, \quad B : \R^m \to \R^k, \qquad BA : \R^m \to \R^k $
+	$$ \implies \norm{BA} \le \norm{B} \cdot \norm{A} $$
+	\begin{proof}
+		Возьмём $ X \in \R^m $, такой, что $ \norm{X}_m \le 1 $ \\
+		Пусть $ Y = AX \in \R^n $ \\
+		Тогда $ BA(X) \bydef B(AX) = BY $
+		\begin{equ}9
+			\norm{BA(X)}_k = \norm{BY}_k \underset{\text{св-во \ref{prop:4}}}\le \norm{B} \cdot \norm{Y}_n
+		\end{equ}
+		\begin{equ}{10}
+			\norm{Y}_n \bydef \norm{AX}_n \underset{\text{св-во \ref{prop:4}}}\le \norm{A} \cdot \norm{X}_m \underset{\norm{X} \le 1}\le \norm{A}
+		\end{equ}
+		$$ \eref9, \eref{10} \implies \norm{BA(X)}_k \le \underbrace{\norm{B} \cdot \norm{A}}_{\define c_0} $$
+		Применяя свойство \ref{prop:1.5}, получаем нужное утверждение
+	\end{proof}
+\end{props}
+
+\section{Частные производные второго и последующих порядков}
+
+Рассматриваем вектор-столбцы, но, для удобства, иногда будем записывать их в строчку
+
+\begin{definition}
+	$ \Omega \sub \R^{n \ge 2} $ -- открытое, $ \Omega \ne \O, \qquad f : \Omega \to \R, \qquad 1 \le i \le n, \qquad \exist f_{x_i}'(X) \quad \forall X \in \Omega $ \\
+	$ X_0 \in \Omega, \qquad 1 \le j \le n $ \\
+	Получается новая функция $ f_{x_i}' : \Omega \to \R $ \\
+	Пусть $ \exist (f_{x_i}')_{x_j}'(X_0) $ \\
+	Говорят, что существует частная производная второго порядка
+	$$ f_{x_i,x_j}''(X_0) \define (f_{x_i}')_{x_j}'(X_0) $$
+\end{definition}
+
+\begin{definition}
+	Пусть $ \forall X \in \Omega \quad \exist f_{x_ix_j}''(X) $ \\
+	Рассмотрим $ 1 \le k \le n $ и $ X_0 \in \Omega $ \\
+	Пусть $ \exist (f_{x_ix_j}'')_{x_k}'(X_0) $ \\
+	Будем говорить, что существует частная производная третьего порядка
+	$$ f_{x_i,x_j,x_k}'''(X_0) = (f_{x_ix_j}'')_{x_k}'(X_0) $$
+	$$ \widedots $$
+	Пусть для $ l \ge 3 $ определено понятие $ f_{\underbrace{x_i, x_j, ..., x_s}_l}^{(l)}(X_0) $ \\
+	Пусть $ \forall X \in \Omega \exist f_{x_i, ..., x_s}^{(l)}(X) $ \\
+	Возьмём $ 1 \le t \le n $ \\
+	Предположим, что $ \exist (f_{x_i, ..., x_s}^{(l)})_{x_t}'(X_0) $ \\
+	Такую частную производную будем назвывать частной производной порядка $ l + 1 $
+	$$ f_{x_i, ..., x_s, x_t}^{(l + 1)}(X_0) \define (f_{x_i, ..., x_s}^{(l)})_{x_t}'(X_0) $$
+\end{definition}
+
+\begin{notation}
+	Исторически более распространено обозначение
+	$$ \frac{\partial^l f(x)}{\partial x_s, ..., \partial x_i} $$
+	В знаменателе $ x_j $ расположены в обратном порядке, т. к.
+	$$ \frac{\partial^2f(x)}{\partial x_j \partial x_i} = \frac{\partial \bigg( \dfrac{\partial f}{\partial x_i} \bigg)}{\partial x_j} = \frac\partial{\partial x_j} \frac{\partial f}{\partial x_i} $$
+\end{notation}
+
+В следующей теореме (и следствии к ней) считаем, что $ \R^2 $ -- пространство вектор-строк
+
+\begin{theorem}[о смешанных производных]
+	$ G = B_r(x_1^0, x_2^0), \qquad X_0 =
+	\begin{bmatrix}
+		x_1^0 \\
+		x_2^0
+	\end{bmatrix}, \qquad f : G \to \R, \qquad f \in \Cont{G} $ \\
+	$ \forall X \in G \quad \exist f_{x_1}'(X), f_{x_2}'(X) \in \Cont{G}, \qquad \forall X \in G \quad \exist f_{x_1x_2}''(X), f_{x_2x_1}''(X) \text{ непрерывные в } X_0 $
+	$$ \implies f_{x_1x_2}''(X_0) = f_{x_2x_1}''(X_0) $$
+\end{theorem}
+
+\begin{proof}
+	Возьмём $ 0 < h < \frac{r}{\sqrt2} $ \\
+	Тогда $ (x_1^0 + h, x_2^0 + h) \in G $ \\
+	Рассмотрим функцию
+	$$ g(h) \define \frac{f(x_1^0 + h, x_2^0 + h) - f(x_1^0 + h, x_2^0) - f(x_1^0, x_2^0 - h) + f(x_1^0, x_2^0)}{h^2} $$
+	Определим
+	$$ \vphi(x_2) \define \frac{f(x_1^0 + h, x_2) - f(x_1^0, x_2)}h, \qquad x_2 \in [x_2^0, x_2^0 + h] $$
+	Рассмотрим выражение
+	\begin{equ}{24}
+		\frac{\vphi(x_2^0 + h) - \vphi(x_2^0)}h \bydef \frac{f(x_1^0 + h, x_2^0 + h) - f(x_1^0, x_2^0 + h) - f(x_1^0 + h, x_2^0) + f(x_1^0, x_2^0)}{h^2} = g(h)
+	\end{equ}
+	\begin{equ}{25}
+		\forall x_2 \in [x_2^0, x_2^0 + h] \quad \exist \vphi'(x_2) \bydef \frac{f_{x_2}'(x_1^0 + h, x_2) - f_{x_2}'(x_1^0, x_2)}h
+	\end{equ}
+	Применим к $ \vphi $ теорему Лагранжа:
+	\begin{multline}\lbl{27'}
+		\exist 0 < h_2 < h : \vphi(x_2^0 + h) - \vphi(x_2^0) = \vphi'(x_2^0 + h_2) \cdot h \implies \\
+		\implies \frac{\vphi(x_2^0 + h) - \vphi(x_2^0)}h = \vphi'(x_2^0 + h_2) \underset{\eref{25}}= \frac{f_{x_2}'(x_1^0 + h_2, x_2^0 + h_2) - f_{x_2}'(x_1^0, x_2^0 + h_2)}h
+	\end{multline}
+	Рассмотрим отдельно выражение $ f_{x_2}'(x_1^0 + h, x_2^0 + h_2) - f_{x_2}'(x_1^0, x_2^0 + h_2) $ \\
+	Рассмотрим функцию $ l(x_1) \define f_{x_2}'(x_1, x_2^0 + h_2) $ \\
+	По условию, наложенному на первые производные, она непрерывна при $ x \in [x_1^0, x_1^0 + h] $ \\
+	По условию,
+	\begin{equ}{27}
+		\forall x_1 \in [x_1^0, x_1^0 + h] \quad \exist l'(x_1) = f_{x_2x_1}''(x_1, x_2^0 + h_2)
+	\end{equ}
+	Применим теорему Лагранжа к $ l $:
+	\begin{multline}\lbl{29}
+		\exist 0 < h_1 < h : l(x_1^0 + h) - l(x_1^0) = l'(x_1^0 + h_1) \cdot h \implies \\
+		\implies \frac{l(x_1^0 + h) - l(x_1^0)}h \bydef \frac{f_{x_2}'(x_1^0 + h, x_2^0 + h_2) - f_{x_2}'(x_1^0, x_2^0 + h_2)}h = \\
+		= l'(x_1^0 + h_1) \underset{\eref{27}}= f_{x_2x_1}''(x_1^0 + h_1, x_2^0 + h_2)
+	\end{multline}
+	\begin{multline}\lbl{210}
+		g(h) \underset{\eref{24}}= \frac{\vphi(x_2^0 + h) - \vphi(x_2^0)}h \underset{\eref{27'}}= \frac{f_{x_2}'(x_1^0 + h, x_2^0 + h_2) - f_{x_2}'(x_1^0, x_2^0 + h_2)}h \underset{\eref{29}}= \\
+		= f_{x_2x_1}''(x_1^0 + h_1, x_2^0 + h_2), \qquad 0 < h_1, h_2 < h
+	\end{multline}
+	Рассмотрим функцию
+	$$ \psi(x_1) \define \frac{f(x_1, x_2^0 + h) - f(x_1, x_2^0)}h $$
+	\begin{equ}{212}
+		\frac{\psi(x_1^0 + h) - \psi(x_1^0)}h = \frac{f(x_1^0 + h, x_2^0 + h) - f(x_1^0 + h, x_2^0) - f(x_1^0, x_2^0 + h) + f(x_1^0, x_2^0)}{h^2} = g(h)
+	\end{equ}
+	\begin{equ}{213}
+		\forall x_1 \in [x_1^0, x_1^0 + h] \quad \exist \psi'(x_1) = \frac{f_{x_1}'(x_1, x_2^0 + h) - f_{x_1}'(x_1, x_2^0)}h
+	\end{equ}
+	По теореме Лагранжа,
+	\begin{multline}\lbl{214}
+		\exist 0 < \overline{h_1}, \overline{h_2} < h : \frac{\psi(x_1^0 + h) - \psi(x_1^0)}h = \psi'(x_1 + \overline{h_1}) \underset{\eref{213}}= \frac{f_{x_1^0}'(x_1^0 + \overline{h_1}, x_2^0 + h) - f_{x_1}'(x_1^0 + \overline{h_1}, x_2^0)}h = \\
+		= f_{x_1x_2}''(x_1^0 + \overline{h_1}, x_2^0 + \overline{h_2})
+	\end{multline}
+	\begin{equ}{215}
+		g(h) \underset{\eref{212}}= \frac{\psi(x_1^0 + h) - \psi(x_1^0)}h \underset{\eref{214}}= f_{x_1x_2}''(x_1^0 + \overline{h_1}, x_2^0 + \overline{h_2})
+	\end{equ}
+	\begin{equ}{216}
+		\eref{210}, \eref{215} \implies f_{x_2x_1}''(x_1^0 + h_1, x_2^0 + h_2) = f_{x_1x_2}''(x_1^0 + \overline{h_1}, x_2^0 + \overline{h_2})
+	\end{equ}
+	Устремим $ h $ к нулю справа и слева \\
+	По условию теоремы,
+	$$ f_{x_2x_1}''(x_1^0 + h_1, x_2^0 + h_2) \underarr{h \to +0} f_{x_2x_1}''(x_1^0, x_2^0) $$
+	$$ f_{x_1x_2}''(x_1^0 + \overline{h_1}, x_2^0 + \overline{h_2}) \underarr{h \to -0} f_{x_1x_2}''(x_1^0, x_2^0) $$
+	По соотношению \eref{216}, это одна и та же функция, а значит, она имеет единственный предел
+\end{proof}
+
+\begin{implication}[для $ n > 2 $]
+	$ X_0 \in \R^{n \ge 3}, \qquad X_0 = (x_1^0, ..., x_i^0, ..., x_j^0, ..., x_n^0) $ \\
+	$ f : B_r(X_0) \to \R, \qquad f \in \Cont{B_r(X_0)}, \qquad \forall X \in B_r(X_0) \quad \exist f_{x_i}'(X), f_{x_j}'(X) \in \Cont{B_r(X_0)} $ \\
+	$ \forall X \in B_r(X_0) \quad \exist f_{x_ix_j}''(X), f_{x_jx_i}''(X) $ -- непр. в $ X_0 $
+	$$ \implies f_{x_ix_j}''(X_0) = f_{x_jx_i}''(X_0) $$
+\end{implication}
+
+\begin{proof}
+	$$ F(x_i, x_j) \define f(x_1^0, ..., x_i, ..., x_j, ..., x_n^0) $$
+	$$ F_{x_ix_j}''(X_i, x_j) = f_{x_ix_j}''(x_1^0, ..., x_i, ..., x_j, ..., x_n^0) $$
+\end{proof}
+
+\begin{statement}
+	$ \Omega \sub \R^{n \ge 2}, \qquad i \ne j, \qquad f \in \Cont{\Omega}, \qquad \forall X \in \Omega \quad f_{x_i}'(X), f_{x_j}'(X) \in \Cont{\Omega} $ \\
+	$ \forall X \in \Omega \quad \exist f_{x_ix_j}''(X), f_{x_jx_i}''(X) \in \Cont{\Omega} $ \\
+	По следствию,
+	$$ \forall X \in \Omega f_{x_ix_j}''(X) = f_{x_jx_i}''(X) $$
+\end{statement}
+
+\begin{remark}
+	Есть примеры, которые показывают, что если не требовать непрерывности вторых производных в точке $ X_0 $, то они могут не совпадать
+\end{remark}
+
+\begin{statement}[для будущего определения]
+	$ \Omega \sub \R^{n \ge 2}, \qquad i \ne j, \quad k $ \\
+	Рассмотрим $ f_{x_ix_jx_k}'''(X), \quad f_{x_jx_ix_k}'''(X), \quad f_{x_ix_kx_j}'''(X) $ \\
+	Пусть они все непрерывны на $ \Omega $ \\
+	Все производные первого и второго порядков существуют и непрерывны на $ \Omega $ \\
+	Тогда, по следствию
+	$$ f_{x_ix_j}'' = f_{x_jx_i}'' \implies (f_{x_ix_j}'')_{x_k}' = (f_{x_jx_i}'')_{x_k}' $$
+	$$ (f_{x_i}')_{x_kx_j}'' = (f_{x_i}')_{x_jx_k}'' $$
+	Тем самым мы доказали, что у такой функции все частные производные третьего порядка совпадают
+\end{statement}

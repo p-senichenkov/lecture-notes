@@ -1,0 +1,1780 @@
+\begin{notation}
+	$ A \Subset B $ -- непустое подмножество
+\end{notation}
+
+\setcounter{section}{22}
+
+\section{Подгруппа. Подгруппы целых чисел. Порождающее множество}
+
+\begin{definition}
+	$ G $ -- группа, $ \qquad H \sub G $ \\
+	Если $ H $ является группой относительно той же операции, то $ H $ называется подгруппой $ G $
+\end{definition}
+
+\begin{notation}
+	$ H < G $
+\end{notation}
+
+\begin{props}
+	\item $ e_H = e_G $
+	\item Если $ a' $ -- обратный к $ a $ в группе $ H $, то $ a' $ -- обратный к $ a $ в группе $ G $
+\end{props}
+
+\begin{theorem}[подгруппы группы $ \Z $]
+	$ H < \Z $
+	$$ \implies \exist d \in \Z : H = \set{dx | x \in \Z} $$
+\end{theorem}
+
+\begin{iproof}
+	\item Если $ H = \set{0} $, то $ d = 0 $
+	\item Пусть $ H \ne \set{0} $ \\
+	Тогда $ H $ содержит хотя бы одно положительное число, так как $ \forall x \in H \quad -x \in H $ \\
+	Пусть $ d $ -- наименьший положительный элемент $ H $ \\
+	Положим $ K \define \set{dx | x \in \Z} $ и докажем, что $ K = H $:
+	\begin{itemize}
+		\item $ H \sub K $
+		\begin{itemize}
+			\item Элементы $ d, 2d, 3d, ... $ принадлежат $ H $, т. к. $ H $ замкнута относительно сложения
+			\item Элемент $ -d $ принадлежит $ H $, т. к. $ H $ замкнута относительно взятия обратного
+			\item Элементы $ -d, -2d, -3d, ... $ принадлежат $ H $, т. к. $ -d \in H $ и $ H $ замкнута относительно сложения
+		\end{itemize}
+		\item $ K \sub H $ \\
+		Нужно доказать, что в $ H $ нет лишних \\
+		Пусть это не так, и существует $ a \in (H \setminus K) $ \\
+		Поделим $ a $ на $ d $ с остатком. Пусть $ x = aq + r, \quad 0 < r < d $
+		$$
+		\begin{rcases}
+			H \sub K \implies dq \in H \\
+			a \in H
+		\end{rcases} \implies r = a + (-dq) \in H \text{ -- \contra с минимальностью } d $$
+	\end{itemize}
+\end{iproof}
+
+\begin{lemma}[критерий подгруппы]
+	$ G $ -- группа, $ H \Subset G $
+	\begin{mequ}[H < G \iff \empheqlbrace]
+		\lbl{11} a, b \in H \implies ab \in H \\
+		\lbl{12} a \in H \implies a^{-1} \in H
+	\end{mequ}
+\end{lemma}
+
+\begin{iproof}
+	\item $ \implies $ \\
+	Очевидно из того, что $ H $ -- группа и подгруппа $ G $
+	\item $ \impliedby $
+	\begin{itemize}
+		\item Соответствие операций: \\
+		Из \eref{11} следует, что операция $ G $ является бинарной операцией в $ H $
+		\item Ассоциативность:
+		$$ a, b, c \in H \implies a, b, c \in G \implies (ab)c = a(bc) $$
+		\item Единица и обратный: \\
+		Пусть $ a \in H $
+		$$
+		\begin{rcases}
+			\eref{12} \implies a^{-1} \in H \\
+			\eref{11} \implies aa^{-1} \in H
+		\end{rcases} \implies a^{-1}a = aa^{-1} = e_H $$
+	\end{itemize}
+\end{iproof}
+
+\begin{implication}
+	$ \bigg( \bigcap_{H < G} H \bigg) < G $
+\end{implication}
+
+\begin{theorem}[порождающее множество]
+	$ G $ -- группа, $ \qquad S \Subset G $ \\
+	Тогда
+	\begin{enumerate}
+		\item $ \exist H_0 < G :
+		\begin{cases}
+			S \sub H_0 \\
+			H_0 \text{ -- минимальная по включению}
+		\end{cases} $
+		\item $ H_0 = \bigcap_{S \sub H} H $
+		\begin{proof}
+			Пусть $ M $ -- множество всех подгрупп, содержащих $ S $ \\
+			Обозначим
+			$$ H_0 \define \bigcap_{H \in M} H $$
+			По следствию к критерию подгруппы, $ H_0 $ является подгруппой. При этом $ H_0 $ содержит $ S $ \\
+			Проверим, что $ H_0 $ -- минимальная по включению: \\
+			Пусть $ H_1 $ содержит $ S $. Тогда $ H_1 \in M $ и
+			$$ H_1 \supset \bigcap_{H \in M} H = H_0 $$
+		\end{proof}
+		\item $ H_0 $ состоит из всех произведений элементов вида $ x $ и $ x^{-1} $, где $ x \in S $
+		\begin{proof}
+			Обозначим через $ S^{-1} $ множество элементов, обратным к элементам из $ S $ \\
+			Положим $ T \define S \cup S^{-1} $ \\
+			Обозначим $ K \define \set{x_1x_2...x_n | x_i \in T} $ \\
+			Нужно доказать, что $ K $ -- минимальная по включению подгруппа:
+			\begin{itemize}
+				\item Докажем, что $ K $ -- подгруппа \\
+				Применим критерий:
+				\begin{itemize}
+					\item $ a, b \in K, \qquad a = x_1...x_n, \quad b = y_1...y_m $
+					$$ ab = x_1...x_ny_1...y_m $$
+					Все сомножители принадлежат $ T $
+					\item $ a \in K, \qquad a = x_1...x_n $
+					$$ a^{-1} = x_n^{-1}...x_1^{-1} $$
+					Все сомножители принадлежат $ T $
+				\end{itemize}
+				\item Проверим минимальность $ K $: \\
+				Пусть $ H $ -- произвольная подгруппа, содержащая $ S $ \\
+				Тогда $ S^{-1} \sub H $ (т. к. любая подгруппа вместе с каждым элементом содержит его обратный) \\
+				Значит, $ T \sub H $, и произведение любого набора элементов из $ N $ принадлежит $ H $
+			\end{itemize}
+		\end{proof}
+	\end{enumerate}
+\end{theorem}
+
+\begin{definition}
+	Пусть $ H $ -- минимальная подгруппа, содержащая $ S $ \\
+	Тогда говорят, что $ S $ порождает $ H $
+\end{definition}
+
+\begin{notation}
+	$ H = \langle S \rangle $
+\end{notation}
+
+\section{Порядок элемента. Циклические группы}
+
+\begin{definition}
+	$ G $ -- группа, $ \qquad a \in G $ \\
+	Порядком $ a $ называется
+	$$ \ord a \define \min\set{n \in \N | a^n = e} $$
+	Если $ \not\exist n \in \N : a^n = e $, то $ \ord a \define \infty $
+\end{definition}
+
+\begin{props}
+	\item $ \ord a < \infty, \qquad k \in \Z $
+	$$ a^k = e \iff k \divby \ord a $$
+	\begin{proof}
+		Пусть $ n \define \ord a $ \\
+		Разделим $ k $ на $ n $ с остатком:
+		$$ k = nq + r, \qquad 0 \le r < n $$
+		$$ a^k = (a^n)^qa^r = e^qa^r = a^r $$
+		\begin{itemize}
+			\item Если $ k \divby n $, то $ r = 0 \implies a^r = e $
+			\item Иначе $ r \in \N, \quad r \ne 0 $ \\
+			Тогда $ a^r = e $ (т. к. $ n $ -- минимальная натуральная степень, при возведении в которую элемент $ a $ обращается в $ e $)
+		\end{itemize}
+	\end{proof}
+	\item $ \ord a < \infty, \qquad k, m \in \Z $
+	$$ a^k = a^m \iff k \comp{\ord a} m $$
+	\begin{proof}
+		$$ a^k = a^m \iff a^k(a^m)^{-1} = e \iff a^{k - m} = e \iff k - m \divby \ord a $$
+	\end{proof}
+\end{props}
+
+\begin{definition}
+	Группа $ G $ называется циклической, если $ G = \langle a \rangle $ для некоторого $ a \in G $
+\end{definition}
+
+\begin{props}
+	\item Если $ G = \langle a \rangle $, то $ G $ состоит из элементов $ a^n, \quad n \in \Z $
+	\item Циклическая группа абелева
+\end{props}
+
+\begin{theorem}[строение циклических групп]
+	$ G $ -- циклическая группа
+	\begin{itemize}
+		\item $ |G| = \infty \implies G \cong \Z $
+		\item $ |G| = n < \infty \implies G \cong \Z_n $
+	\end{itemize}
+\end{theorem}
+
+\begin{proof}
+	Пусть $ G = \langle a \rangle $
+	\begin{itemize}
+		\item Если $ \ord a = \infty $, то все элементы $ a^k, \quad k \in \Z $ различны, и, следовательно, $ |G| = \infty $ \\
+		Пусть $ f : \Z \to G $ определяется равенством $ f(x) = a^x $
+		\begin{itemize}
+			\item Проверим, что $ f $ согласовано с операцией:
+			$$ f(x + y) = a^{x + y} = a^xy^x = f(x)f(y) $$
+			\item Проверим биективность: \\
+			Мы только что выяснили, что элементы $ a^x $ различны при различных $ x $
+		\end{itemize}
+		\item Если $ \ord a $ конечен, то элементы $ a^0, a^1, ..., a^{\ord a - 1} $ различны, и любой другой элемент $ a^k $ совпадает с одним из них, следовательно, $ |G| = \ord a $ \\
+		Определим $ f : \Z_n \to G $ \\
+		Пусть $ x \in \Z, \quad 0 \le x \le n - 1 $, и $ \overline{x} \in \Z_n $ -- соответствующий вычет \\
+		Положим $ f(\overline{x}) \define a^x $
+		\begin{itemize}
+			\item Проверим, что $ f $ согласовано с операцией: \\
+			Пусть
+			$$ \overline{x}, \overline{y} \in \Z_n, \qquad x, y \in \Z, \qquad 0 \le x, y \le n - 1 $$
+			Тогда $ f(\overline{x}) = a^x, \quad f(\overline{y}) = a^y $ \\
+			Положим
+			$$ z \define
+			\begin{cases}
+				x + y, \qquad x + y < n \\
+				x + y - n, \qquad x + y \ge n
+			\end{cases} $$
+			Тогда $ \overline{z} = \overline{x} + \overline{y} $ в $ \Z_n $, и
+			$$ f(\overline{x} + \overline{y}) = f(\overline{z}) = a^z =
+			\begin{cases}
+				a^{x + y} = a^xa^y, \qquad x + y < n \\
+				a^{x + y - n} = a^xa^y(a^n)^{-1}, \qquad x + y \ge n
+			\end{cases} $$
+			Учитывая, что $ \ord a = |G| = n $, получаем, что $ a^n = e $, и правая часть равна $ a^xa^y = f(\overline{x})f(\overline{y}) $
+			\item Проверим биективность: \\
+			Пусть $ 0 \le x, y \le n - 1 $, и $ f(\overline{x}) = f(\overline{y}) $
+			$$ a^x = a^y \implies x \comp{n} y \implies x = y $$
+		\end{itemize}
+	\end{itemize}
+\end{proof}
+
+\begin{property}
+	$ |\langle a \rangle| = \ord a $
+\end{property}
+
+\section{Левые и правые смежные классы. Теорема Лагранжа и следствие из неё}
+
+\begin{notation}
+	$ G $ -- группа, $ \qquad H < G $ \\
+	На множестве элементов $ G $ введём отношение $ \sim $: \\
+	$ a \sim b $, если $ b = ah $ для некоторого $ h \in H $
+\end{notation}
+
+\begin{property}
+	$ \sim $ является отношением эквивалентности
+\end{property}
+
+\begin{definition}
+	Класс эквивалентности элемента $ a $ называется левым смежным классом $ a $ относительно $ H $ \\
+	Аналогично опредляются правые смежные классы
+\end{definition}
+
+\begin{property}
+	Левый смежный класс $ \overline{a} $ равен $ aH $, где $ aH = \set{ah | h \in H} $ \\
+	Правый смежный класс равен $ Ha $
+\end{property}
+
+\begin{definition}
+	Если $ H $ имеет конечное количество левых смежных классов, то их количество назвыается индексом $ H $ в $ G $
+\end{definition}
+
+\begin{notation}
+	$ [G : H] $
+\end{notation}
+
+\begin{theorem}[Лагранжа]
+	\hfill \\
+	$ G $ -- конечная группа, $ \quad H < G $ \\
+	Тогда $ |G| = [G : H] \cdot |H| $
+\end{theorem}
+
+\begin{proof}
+	Количество элементов в любом смежном классе равно $ |H| $ \\
+	Группа $ G $ разбивается на левые смежные классы, в каждом из них $ |H| $ элементов
+\end{proof}
+
+\begin{implication}
+	$ G $ -- конечная группа \\
+	Тогда $ |G| \divby \ord a \quad \forall a \in G $
+\end{implication}
+
+\begin{proof}
+	Положим $ H = \langle a \rangle $ \\
+	Применяя теорему Лагранжа, получаем, что $ |G| \divby \ord a $
+\end{proof}
+
+\section{Нормальные подгруппы}
+
+\begin{definition}
+	$ G $ -- группа \\
+	Подгруппа $ H $ называется нормальной, если $ aH = Ha \quad \forall a \in G $
+\end{definition}
+
+\begin{notation}
+	$ H \vartriangleleft G $
+\end{notation}
+
+\begin{theorem}[равносильные определения нормальной подгруппы]
+	$ G $ -- группа, $ \quad H < G $ \\
+	Следующие условия равносильны:
+	\begin{enumerate}
+		\item\label{en:261} $ H \vartriangleleft G $
+		\item\label{en:262} $ a^{-1}Ha = H \quad \forall a \in G $
+		\item\label{en:263} $ a^{-1}ha \in H \quad \forall a \in G, h \in H $
+	\end{enumerate}
+\end{theorem}
+
+\begin{iproof}
+	\item \ref{en:261} $ \iff $ \ref{en:262}
+	$$ aH = Ha \iff a^{-1}aH = a^{-1}Ha \iff eH = a^{-1}H \iff H = a^{-1}Ha $$
+	\item \ref{en:262} $ \implies $ \ref{en:263}
+	$$ a^{-1}Ha = H \implies a^{-1}Ha \sub H \implies a^{-1}ha \in H \quad \forall h \in H $$
+	\item \ref{en:263} $ \implies $ \ref{en:262}
+	\begin{itemize}
+		\item $ \sub $ -- очевидно
+		\item $ \supset $ \\
+		Зафиксируем $ a \in G $ \\
+		Нужно доказать, что $ H \sub a^{-1}Ha $, то есть, что
+		$$ \forall h \in H \quad \exist h_1 \in H : a^{-1}h_1a = h $$
+		Применим утверждение \ref{en:263} к $ h $ и $ a_1 = a^{-1} $. Получим, что
+		$$ a_1^{-1}ha_1 = aha^{-1} \in H $$
+		Элемент $ aha^{-1} $ подойдёт в качестве $ h_1 $
+	\end{itemize}
+\end{iproof}
+
+\section{Факторгруппа}
+
+\begin{definition}
+	$ H \vartriangleleft G $ \\
+	На множестве левых смежных классов относительно $ H $ определим операцию умножения: \\
+	Пусть $ A, B $ -- классы. Выберем в каждом классе произвольный элемент, пусть $ a \in A, b \in B $ \\
+	Тогда $ AB $ -- такой класс, что $ ab \in AB $
+\end{definition}
+
+\begin{theorem}[факторгруппа]
+	$ H \vartriangleleft G $
+	\begin{enumerate}
+		\item Операция умножения левых смежных классов определена корректно, то есть не зависит от выбора элементов в классах
+		\begin{proof}
+			Докажем, что, если $ a_1, a_2 $ лежат в одном смежном классе, и $ b_1, b_2 $ лежат в одном смежном классе, то $ a_1b_1, a_2b_2 $ лежат в одном смежном классе \\
+			Существуют $ x, y \in H $, такие, что $ a_2 = a_1x, \quad b_2 = b_1y $. Подставим:
+			$$ a_2b_2 = a_1b_1b_1^{-1}a_1^{-1}a_2b_2 = a_1b_1b_1^{-1}\cancel{a_1^{-1}}\cancel{a_1}xb_1y = a_1b_1b_1^{-1}xb_1y = (a_1b_1) \bigg( (b_1^{-1}xb_1)y \bigg) $$
+			Из того, что $ H \vartriangleleft G $ следует, что $ b_1^{-1}xb_1 \in H $ \\
+			Следовательно, $ (b_1^{-1}xb_1)y \in H $
+		\end{proof}
+		\item Множество левых смежных классов с операцией умножения является группой
+		\begin{iproof}
+			\item Ассоциативность: $ \qquad (\overline{a}\overline{b})(\overline{c}) = (\overline{ab})(\overline{c}) = (\overline{abc}) $
+			\item Единица: $ \qquad \overline{e} = H $
+			\item Обратный: $ \qquad (\overline{a})^{-1} = \overline{a}^{-1} $
+		\end{iproof}
+	\end{enumerate}
+\end{theorem}
+
+\begin{definition}
+	Группа смежных классов по подгруппе $ H $ назвыается факторгруппой $ G $ по $ H $
+\end{definition}
+
+\begin{notation}
+	$ G/H $
+\end{notation}
+
+\section{Центр группы}
+
+\begin{definition}
+	Центром группы $ G $ называется множество элементов, которые коммутируют со всеми элементами $ G $, т. е.
+	$$ Z(G) \define \set{a | ax = xa \quad \forall x \in G} $$
+\end{definition}
+
+\begin{property}
+	$ G $ абелева $ \iff G = Z(G) $
+\end{property}
+
+\begin{theorem}
+	Центр группы является нормальной подгруппой
+\end{theorem}
+
+\begin{iproof}
+	\item $ Z(G) < G $
+	$$ e \in Z(G) \implies Z(G) \ne \O $$
+	Применим критерий: \\
+	Пусть $ a, b \in Z(G) $
+	\begin{itemize}
+		\item Проверим, что $ ab \in Z(G) $, то есть, что $ (ab)x = x(ab) \quad \forall x \in G $ \\
+		Воспользуемся тем, что $ a $ и $ b $ коммутируют с любым элементом:
+		$$ abx = axb = xab $$
+		\item Проверим, что $ a^{-1} \in Z(G) $, то есть $ a^{-1}x = xa^{-1} \quad \forall G $
+		$$ a \in G \implies xa = ax \iff a(a^{-1}x)a = a(xa^{-1}) \iff a^{-1}x = xa^{-1} $$
+	\end{itemize}
+	\item $ Z(G) \vartriangleleft G $ \\
+	Пусть $ a \in Z(G), x \in G $
+	$$ x^{-1}ax = ax^{-1}x = a \in Z(G) $$
+\end{iproof}
+
+\begin{definition}
+	Если $ Z(G) = \set{e} $, то группа $ G $ называется группой с тривиальным центром или группой без центра
+\end{definition}
+
+\section{Коммутант группы: нормальность, факторгруппа}
+
+\begin{definition}
+	Коммутатором элементов $ a $ и $ b $ называется элемент $ a^{-1}b^{-1}ab $
+\end{definition}
+
+\begin{notation}
+	$ [a, b] $
+\end{notation}
+
+\begin{props}
+	\item $ ba[a, b] = ab $
+	\item $ [a, b]^{-1} = [b, a] $
+	\item $ ab = ba \iff [a, b] = e $
+\end{props}
+
+\begin{definition}
+	Коммутантом группы $ G $ называется подгруппа
+	$$ [G, G] \define \braket{[a, b] | a, b \in G} $$
+\end{definition}
+
+\begin{remark}
+	$ G $ абелева $ \iff [G, G] = \set{e} $
+\end{remark}
+
+\begin{definition}
+	$ L, M \sub G $ \\
+	Взаимным коммутантом $ L $ и $ M $ называется подгруппа
+	$$ [L, M] \define \braket{[a, b] | a \in L, b \in M} $$
+\end{definition}
+
+\begin{theorem}
+	Коммутант группы является нормальной подгруппой
+\end{theorem}
+
+\begin{proof}
+	Пусть $ g \in G, k \in K $ \\
+	Докажем, что $ g^{-1}kg \in K $: \\
+	Пусть $ a_i, b_i $ таковы, что
+	$$ k = [a_1, b_1][a_2, b_2]...[a_n, b_n] $$
+	\begin{multline*}
+		g^{-1}kg = g^{-1}[a_1, b_1][a_2, b_2]...[a_n, b_n]g = g^{-1}[a_1, b_1]gg^{-1}...gg^{-1}[a_n, b_n]g = \\
+		= (g^{-1}[a_1, b_1]g)(g^{-1}[a_2, b_2]g)...(g^{-1}[a_n, b_n]g)
+	\end{multline*}
+	Достаточно доказать, что произведение в любой скобке принадлежит $ K $, то есть для любых $ g, a, b \in G $ выполнено $ g^{-1}[a, b]g \in K $
+	$$ g^{-1}[a, b]g = g^{-1}a^{-1}b^{-1}abg = (g^{-1}a^{-1}ga)(a^{-1}g^{-1}b^{-1}abg) = [g, a][a, bg] $$
+\end{proof}
+
+\begin{theorem}[факторгруппа по коммутанту]
+	$ G $ -- группа, $ \qquad K = [G, G] $
+	\begin{enumerate}
+		\item группа $ G/[G, G] $ абелева
+		\begin{proof}
+			Частный случай следующего
+		\end{proof}
+		\item $ H \vartriangleleft G $
+		$$ [G, G] \sub H \iff G/H \text{ абелева} $$
+		\begin{proof}
+			\begin{multline*}
+				G/H \text{ абелева } \iff \forall a, b \in G \quad \overline{a}\overline{b} = \overline{b}\overline{a} \iff \overline{ab} = \overline{ba} \iff \exist h \in H : ab = bah \iff \\
+				\iff (ba)^{-1}ab \in H \iff [a, b] \in H \iff [G, G] \sub H
+			\end{multline*}
+		\end{proof}
+	\end{enumerate}
+\end{theorem}
+
+\section{Гомоморфизм: определение, примеры, свойства ядра и образа}
+
+\begin{definition}
+	$ (G, *), (H, \times) $ -- группы \\
+	Отображение $ f : G \to H $ называется гомоморфизмом, если
+	$$ \forall a, b \in G \quad f(a * b) = f(a) \times f(b) $$
+\end{definition}
+
+\begin{exmpls}
+	\item $ f : \underset{(\Co \setminus \set{0})}{\Co*} \to \Co*, \qquad f(z) = |z| $
+	\item $ f : \R* \to \Co*, \qquad f(z) = z $
+	\item $ f : \Z \to \Z, \qquad f(z) = 2z $
+\end{exmpls}
+
+\begin{props}
+	\item
+	\begin{enumerate}
+		\item $ f(e_G) = e_H $
+		\begin{proof}
+			$ f(a)e_H = f(a) = f(ae_G) = f(a)f(e_G) \implies f(e_G) $
+		\end{proof}
+		\item $ f(a^{-1}) = \bigg( f(a) \bigg)^{-1} $
+		\begin{proof}
+			$ f(a)f(a^{-1}) = f(aa^{-1}) = f(e_G) = e_H $
+		\end{proof}
+	\end{enumerate}
+	\item $ G, H, K $ -- группы, $ \qquad f : G \to H, \quad g : H \to K $ -- гомоморфизмы \\
+	Тогда $ g \circ f : G \to K $ -- гомоморфизм
+	\begin{proof}
+		$$ (g \circ f)(ab) = g \big( f(ab) \big) = f\big( f(a)f(b) \big) = g \big( f(a) \big) g \big( f(b) \big) = (g \circ f)(a) (g \circ f)(b) $$
+	\end{proof}
+\end{props}
+
+\begin{definition}[ядро и образ]
+	$ f : G \to H $ -- гомоморфизм
+	$$ \ker f \define \set{x \in G | f(x) = e_H} $$
+	$$ \Img f \define \set{f(a) | a \in G} $$
+\end{definition}
+
+\begin{props}[ядра]
+	\item $ \ker f \vartriangleleft G $
+	\begin{iproof}
+		\item $ \ker f < G $ \\
+		Пусть $ a, b \in \ker f $
+		\begin{itemize}
+			\item $ f(ab) = f(a)f(b) = e_He_H = e_H \implies ab \in \ker f $
+			\item $ f(a^{-1}) = \big( f(a) \big)^{-1} = e_H^{-1} = e_H \implies a^{-1} \in \ker f $
+		\end{itemize}
+		\item $ \ker f \vartriangleleft G $ \\
+		Пусть $ a \in G, h \in \ker f $
+		$$ f(a^{-1}ha) = f(a^{-1})f(h)f(a) = f(a)^{-1}e_Hf(a) = f(a)^{-1}f(a) = e_H \implies a^{-1}ha \in \ker f $$
+	\end{iproof}
+	\item $ f $ -- инъекция $ \iff \ker f = \set{e_G} $
+	\begin{iproof}
+		\item $ \implies $
+		$$ x \in \ker G \implies f(x) = e_H \implies f(x) = f(e_G) \implies x = e_G $$
+		\item $ \impliedby $
+		\begin{multline*}
+			f(x) = f(y) \implies f(x) \big( f(y) \big)^{-1} = e_H \implies f(x)f(y^{-1}) = e_H \implies f(xy^{-1}) = e_H \implies \\
+			\implies xy^{-1} \in \ker f \implies xy^{-1} = e_G \implies x = y
+		\end{multline*}
+	\end{iproof}
+\end{props}
+
+\begin{property}[образа]
+	$ \Img f < H $
+\end{property}
+
+\begin{proof}
+	Пусть $ a, b \in \Img f $ \\
+	Тогда
+	$$ \exist x, y \in G :
+	\begin{cases}
+		a = f(x) \\
+		b = f(y)
+	\end{cases} $$
+	\begin{itemize}
+		\item $ ab = f(xy) \in \Img f $
+		\item $ a^{-1} = f(x^{-1}) \in \Img f $
+	\end{itemize}
+\end{proof}
+
+\section{Теорема о гомоморфизме}
+
+\begin{theorem}
+	$ f : G \to H $ -- гомоморфизм
+	$$ \implies G/\ker f \cong \Img f $$
+\end{theorem}
+
+\begin{proof}
+	Определим отображение $ \vphi : G/\ker f \to \Img f $ \\
+	Пусть $ A \in G/\ker f $, то есть $ A $ -- некоторый смежный класс по подгруппе $ \ker f $ \\
+	Выберем произвольный элемент $ a \in A $ \\
+	Положим $ \vphi(A) \define f(a) $, т. е. $ \vphi(\overline{a}) = f(a) $
+	\begin{itemize}
+		\item Корректность \\
+		Проверим, что $ \forall a, a' \in A \quad f(a) = f(a') $: \\
+		Элементы $ a $ и $ a' $ принадлежат одному смежному классу, следовательно, $ a = a'x $ для некоторого $ x \in \ker f $ \\
+		Применим $ f $:
+		$$ f(a) = f(a'x) = f(a')f(x) = e_Hf(a') = f(a') $$
+		\item $ \vphi $ -- гомоморфизм \\
+		Пусть $ A, B $ -- смежные классы \\
+		Выберем произвольные $ a \in A, b \in B $ \\
+		Тогда $ AB $ -- это класс, которому принадлежит $ ab $ \\
+		То есть, $ A = \overline{a}, \quad B = \overline{b}, \quad AB = \overline{ab} $ \\
+		Применим $ \vphi $:
+		$$ \vphi(AB) = \vphi(\overline{ab}) = f(ab) = f(a)f(b) = \vphi(\overline{a})\vphi(\overline{b}) = \vphi(A)\vphi(B) $$
+		\item $ \vphi $ -- сюръекция
+		$$ x \in \Img f \implies \exist a \in G : x = f(a) \implies x = \vphi(\overline{a}) $$
+		\item $ \vphi $ -- инъекция
+		$$ \ker \vphi = e_{G/\ker f} = \set{\ker f} $$
+		$$ \overline{a} \in \ker \vphi \implies \vphi(\overline{a}) = e_H \implies f(a) = e_H \implies a \in \ker f \implies \overline{a} = \ker f $$
+	\end{itemize}
+\end{proof}
+
+\section{Теорема Кэли}
+
+\begin{notation}
+	$ S_n $ -- группа перестановок (т. е. биекций $ X = \set{1, 2, ..., n} $ в себя)
+\end{notation}
+
+\begin{theorem}
+	$ G $ -- конечная группа, $ \qquad |G| = n $ \\
+	Тогда $ G $ изоморфна некоторой подгруппе группы $ S_n $
+\end{theorem}
+
+\begin{proof}
+	Пронумеруем произвольным образом элементы группы, пусть это $ g_1, ..., g_n $ \\
+	Заметим, что для любого $ a \in G $ элементы $ ag_1, ..., ag_n $ различны \\
+	Следовательно, $ ag_1, ..., ag_n $ -- это некоторая перестановка элементов $ g_1, ..., g_n $ \\
+	Определим отображение $ \vphi : G \to S_n $ следующим образом: \\
+	Для элемента $ a \in G $ обозначим через $ \vphi(a) $ такую перестановку $ \sigma $, что
+	$$ ag_1 = g_{\sigma(1)}, \quad \widedots[7em], \quad ag_n = g_{\sigma(n)} $$
+	\begin{itemize}
+		\item Докажем, что $ \vphi $ -- гомоморфизм: \\
+		Пусть $ \vphi(a) \define \sigma, \quad \vphi(b) \define \tau $ \\
+		Нужно проверить, что $ \vphi(ab) = \sigma\tau $, т. е.
+		$$ \forall i \quad (ab)g_i = g_{(\sigma\tau)(i)} $$
+		Пусть $ \tau(i) = j, \quad \sigma(j) = k $
+		$$
+		\begin{rcases}
+			bg_i = g_j \\
+			(ab)g_i = a(bg_i) = ag_j = g_k \\
+			(\sigma\tau)(i) = k
+		\end{rcases} \implies (ab)g_i = g_k = g_{(\sigma\tau)(i)} $$
+		Положим $ H = \Img f $ \\
+		Тогда $ H < S_n $ \\
+		Докажем, что $ G \cong H $: \\
+		Гомоморфизм $ \vphi $ можно рассматривать как отображение $ G \to H $
+		\item Проверим, что это биекция: \\
+		Для этого нужно проверить, что $ \ker \vphi = \set{e} $ \\
+		Пусть $ a \in \ker \vphi $ \\
+		Тогда $ \vphi(a) $ -- тождественная перестановка
+		$$ ag_1 = g_1, \quad \widedots[7em], \quad ag_n = g_n $$
+		По свойству сокращения, из этого следует, что $ a = e $
+	\end{itemize}
+\end{proof}
+
+\section{Действие группы на множество. Орбиты. Стабилизаторы}
+
+\begin{definition}
+	$ G $ -- группа, $ M $ -- множество \\
+	Говорят, что группа $ G $ действует (слева) на множество $ M $, если каждой паре элементов $ g \in G, m \in M $ сопоставлен элемент $ g(m) \in M $, и при этом выполнены свойства:
+	\begin{enumerate}
+		\item $ (gh)(m) = g \big( h(m) \big) \quad \forall g, h \in G, m \in M $
+		\item $ e(m) = m \quad \forall m \in M $
+	\end{enumerate}
+\end{definition}
+
+\begin{note}
+	Аналогично определяется действие справа
+\end{note}
+
+\begin{definition}
+	Введём на $ M $ отношение эквивалентности: \\
+	$ m \sim l $, если $ \exist g \in G : gm = l $ \\
+	Классы эквивалентости по отношению $ \sim $ называются орбитами
+\end{definition}
+
+\begin{notation}
+	Орбита, содержащая элемент $ m $ обозначается $ \Orb m $ или $ Gm $
+\end{notation}
+
+\begin{proof}[корректности]
+	Проверим, что $ \sim $ является отношением эквивалентности:
+	\begin{itemize}
+		\item $ em = m \implies m \sim m $
+		\item Пусть $ m \sim l $ \\
+		Тогда $ gm = l $ для некоторого $ g \in G $
+		$$ \implies g^{-1}l = m \implies l \sim m $$
+		\item Пусть $ \sim l, l \sim k $ \\
+		Тогда $ gm = l, hl = k $ для некоторых $ g, h \in G $
+		$$ \implies k = h(gm) = (hg)m \implies m \sim k $$
+	\end{itemize}
+\end{proof}
+
+\begin{definition}
+	Стабилизатором элемента $ m \in M $ называется множество
+	$$ \St(m) \define \set{g \in G | gm = m} $$
+\end{definition}
+
+\begin{definition}
+	Фиксатором элемента $ g \in G $ называется множество
+	$$ \Fix(g) \define \set{m \in M | gm = m} $$
+\end{definition}
+
+\begin{props}
+	\item $ \St(m) < G \quad \forall m \in M $
+	\item $ G $ -- конечная группа
+	$$ |G| = |\Orb(m)| \cdot |\St(m)| $$
+\end{props}
+
+\begin{proof}
+	Пусть $ k \define |\Orb(m)| $, и $ m_i \in M, g_i \in G $ таковы, что
+	$$ \Orb(m) = \set{m_1, ..., m_k}, \qquad m_i = g_im $$
+	Докажем, что $ g_1, ..., g_k $ принадлежат различным смежным классам по подгруппе $ \St(m) $ и являются представителями всех классов:
+	\begin{itemize}
+		\item Пусть $ g_i, g_j $ принадлежат одному классу
+		$$ g_i^{-1}g_j \in \St(m) \implies g_i^{-1}g_jm = m \implies g_jm = g_im \implies m_j = m_i \text{ -- \contra} $$
+		\item Докажем, что любой элемент $ g \in G $ попадает в смежный класс, содержащий некоторый $ g_i $:
+		$$ gm \in \Orb(m) \implies \exist i : gm = m_i \implies gm = g_im = g_i^{-1}gm = m \implies g_i^{-1}g \in \St(m) $$
+		Значит, элементы $ g $ и $ g_i $ принадлежат одному смежному классу \\
+		Получили, что $ k = [G : \St(m)] $ \\
+		По теореме Лагранжа, выполнено $ |G| = k \cdot |\St(m)| $
+	\end{itemize}
+\end{proof}
+
+\section{Лемма Бернсайда, примеры применения}
+
+\begin{lemma}[Бернсайда]
+	$ G $ -- конечная группа, $ \qquad M $ -- конечное множество, $ \qquad G $ действует на $ M $ \\
+	Тогда количество орбит равно среднему арифметическому мощностей фиксаторов элементов $ G $, т. е.
+	$$ \frac1{|G|} \sum_{g \in G} |\Fix(g)| $$
+\end{lemma}
+
+\begin{proof}
+	Рассмотрим количество всех пар $ (g, m) $, для которых выполнено $ gm = m $:
+	\begin{itemize}
+		\item Если найти количество пар для каждого $ m $, а затем просуммировать, получится $ \sum_{m \in M} |\St(m)| $
+		\item Если найти количество пар для каждого $ g $, а затем просуммировать, получится $ \sum_{g \in G} |\Fix(m)| $
+	\end{itemize}
+	Приравняем и разделим на $ |G| $:
+	$$ \frac1{|G|} \sum_{g \in G} |\Fix(g)| = \frac1{|G|} \sum_{m \in M} |\St(m)| $$
+	Достаточно доказать, что правая часть равна количеству орбит. Преобразуем её, используя свойство стабилизатора:
+	$$ \frac1{|G|} \sum_{m \in M} |\St(m)| = \sum_{m \in M} \frac{|\St(m)|}{|G|} = \sum_{m \in M} \frac1{|\Orb(m)|} $$
+	Пусть есть $ n $ орбит, содержащих $ a_1, a_2, ..., $ элементов \\
+	Запишем сумму в правой части:
+	$$ \sum_{m \in M} \frac1{|\Orb(m)|} = \underbrace{\bigg( \frac1{a_1} + \frac1{a_1} + ... \bigg)}_{a_1 \text{ слаг.}} + \underbrace{\bigg( \frac1{a_2} + \frac1{a_2} + ... \bigg)}_{a_2 \text{ слаг.}} + \widedots[7em] $$
+	Следовательно, в каждой скобке сумма равна 1, а вся сумма равна $ n $
+\end{proof}
+
+\begin{exmpls}
+	\item Сколькими способами можно составить ожерелье из 5 чёрных и 5 белых бусин? Ожерелья считаются одинаковыми, если их можно перевести друг в друга поворотом или симметрией
+	\begin{undefthm}{Решение}
+		Пусть $ M $ -- множество различных раскрасок ожерелья, зафиксированного в пространстве, $ G $ -- группа самосовмещений ожерелья \\
+		Тогда $ G $ состоит из 10 поворотов и 10 осевых симметрий: \\
+		\begin{tabular}{l | r}
+			\textbf{Повороты} & $ |\Fix| $ \\
+			\hline \\
+			$ 0^\circ $ & $ C_{10}^5 = 252 $ \\
+			$ 36k^\circ, \quad k = 1, 3, 7, 9 $ & 0 \\
+			$ 36k^\circ, \quad k = 2, 4, 6, 8 $ & 2 \\
+			$ 180^\circ $ & 0 \\
+			\hline
+			\textbf{Симметрии} \\
+			\hline \\
+			Относительно прямой, проходящей через вершины & $ 2 \cdot C_4^2 = 12 $ \\
+			Относительно прямой, проходящей через середины сторон & 0
+		\end{tabular} \\
+		Искомое число:
+		$$ \frac1{20}(1 \cdot 252 + 4 \cdot 0 + 4 \cdot 2 + 1 \cdot 0 + 5 \cdot 12 + 5 \cdot 0) = 16 $$
+	\end{undefthm}
+	\item Требеутся найти количество раскрасок прямоугольника $ a \times b $ в $ k $ цветов с точностью до осевой или центральной симметрии
+	\begin{undefthm}{Решение}
+		Пусть $ M $ -- множество всех раскрасок прямоугольника, $ G $ -- группа самосовмещений прямоугольника. Тогда количество раскрасок с точностью до симметрии -- это количество орбит \\
+		Группа состоит из 4-х элементов:
+		\begin{itemize}
+			\item нейтральный $ e $
+			\item осевые симметрии $ \sigma_1, \sigma_2 $
+			\item центральная симметрия $ \tau $
+		\end{itemize}
+		Фиксатор любого элемента группы -- множество раскрасок, которые при данном преобразовании переходят сами в себя:
+		\begin{itemize}
+			\item $ \Fix(e) $ -- множество всех раскрасок, $ |\Fix(e)| = k^{ab} $
+			\item $ \Fix(\sigma_{1, 2}) $ -- множество раскрасок, симметричных относительно оси:
+			\begin{itemize}
+				\item Раскраска, симметричная относительно горизонтальной оси, определяется раскраской верхней половины, и, в случае нечётного количества строк -- раскраской средней строки \\
+				Следовательно, она определяется раскраской прямоугольника $ \lceil \half[a] \rceil \times b $ \\
+				Количество таких раскрасок равно $ k^{\lceil \faktor{a}2 \rceil b} $
+				\item Количество раскрасок, симметричных относительно вертикальной оси вычисляется аналогично, оно равно $ k^{a \lceil \faktor{b}2 \rceil} $
+			\end{itemize}
+			\item $ \Fix(\tau) $ -- количество раскрасок, которые переходят в себя при центральной симметрии. Такая раскраска задаётся раскраской $ \lceil \half[ab] \rceil $ клеток, количество раскрасок равно $ k^{\lceil \faktor{ab}2 \rceil} $
+		\end{itemize}
+		Количество орбит равно
+		$$ \frac14 \bigg( k^{ab} + k^{\lceil \faktor{a}2 \rceil b} + k^{a \lceil \faktor{b}2 \rceil} + k^{\lceil \faktor{ab}2 \rceil} \bigg) $$
+	\end{undefthm}
+\end{exmpls}
+
+\section{Прямое произведение групп: определение, подгруппы прямого произведения}
+
+\begin{definition}
+	$ (G, *), (H, \cdot) $ -- группы \\
+	(Внешнее) прямое произведение $ G $ и $ H $ -- это множество $ G \times H $ с операцией $ \circ $, определяемой равенством $ (g_1, h_1) \circ (g_2, h_2) = (g_1 * g_2, h_1 \cdot h_2) $
+\end{definition}
+
+\begin{note}
+	Аналогично определяется произведение нескольких групп
+\end{note}
+
+\begin{theorem}
+	Прямое произведение групп явялется группой
+\end{theorem}
+
+\begin{proof}
+	Пусть задано произведение групп $ G \times H \times ... $
+	\begin{itemize}
+		\item Ассоциативность:
+		$$ \bigg( (g_1, h_1, ...)(g_2, h_2, ...) \bigg) (g_3, h_3, ...) = (g_1g_2, h_1h_2, ...)(g_3, h_3, ...) = (g_1g_2g_3, h_1h_2h_3, ...) $$
+		$$ (g_1, h_1, ...) \bigg( (g_2, h_2, ...)(g_3, h_3, ...) \bigg) = (g_1, h_1, ...)(g_2g_3, h_2h_3, ...) = (g_1g_2g_3, h_1h_2h_3, ...) $$
+		\item Нейтральный:
+		$$ e_{G \times H \times ...} = (e_G, e_H, ...) $$
+		\item Обратный:
+		$$ (g, h, ...)^{-1} = (g^{-1}, h^{-1}, ...) $$
+	\end{itemize}
+\end{proof}
+
+\begin{property}
+	\hfill
+	\begin{itemize}
+		\item Если группы $ H_i $ конечны, то $ G $ тоже конечна, $ |G| = |H_1| \cdot |H_2| \cdot ... \cdot |H_k| $
+		\item Если хотя бы одна из $ H_i $ бесконечна, то $ G $ бесконечна
+	\end{itemize}
+\end{property}
+
+\begin{remind}
+	$ A_1, A_2, ..., A_k $ -- подмножества $ G $ \\
+	Произведением $ A_1A_2...A_k $ называется множество элементов $ a_1a_2...a_k $, где $ a_i \in A_i $
+\end{remind}
+
+\begin{properties}[подгруппы прямого произведения]
+	$ G = G_1 \times G_2 \times ... \times G_k, \qquad e_i $ -- нейтральный элемент $ G_i $ \\
+	$ H_i $ -- множество элементов вида $ (e_1, ..., e_{i - 1}, g_i, e_{i + 1}, ..., e_k) $
+	\begin{enumerate}
+		\item $ H_i \simeq G_i \quad \forall i $
+		\begin{proof}
+			Отображение $ f : G_i \to H_i $, заданное формулой
+			$$ f(x) = (e_1, ..., e_{i - 1}, x, e_{i + 1}, ..., e_k) \quad \text{является изоморфизмом} $$
+		\end{proof}
+		\item $ H_i \vartriangleleft G \quad \forall i $
+		\begin{iproof}
+			\item $ H_i < G $ \\
+			Надо доказать, что у произведений элементов из $ H_i $, все $ j $-е компоненты (при $ i \ne j $) равны $ e_j $. Это верно, т. к. $ e_je_j = e_j $ \\
+			То же самое для обратных
+			\item $ H_i \vartriangleleft G $ \\
+			Пусть $ h \in H_i, \quad x \in G, \quad x = (g_1, ..., g_k) $
+			$$ \underset{j \ne i}{\forall j} \quad j \text{-я комп. } x^{-1}hx \text{ равна } g_j^{-1}e_jg_j = g_j^{-1}g_j = e_j \quad \implies \quad x^{-1}hx \in H_i $$
+		\end{iproof}
+		\item $ \forall i \ne j, h_i \in H_i, h_j \in H_j \qquad h_ih_j = h_jh_i $
+		\begin{proof}
+			Пусть $ h_i = (e_1, ..., g_i, ..., e_j, ..., e_k), \quad h_j = (e_1, ..., g_j, ..., e_i, ..., e_k) $ \\
+			Тогда каждый из элементов $ h_ih_j, h_jh_i $ равен $ (e_1, ..., g_i, ..., g_j, ..., e_k) $
+		\end{proof}
+		\item $ H_i \cap H_1...H_{i - 1}H_{i + 1}...H_k = \set{e} $
+		\begin{proof}
+			У элементов $ H_i $ все компоненты, кроме $ i $-й равны нейтральным элементам \\
+			У элементов произведения $ H_1...H_{i - 1}H_{i + 1}...H_k $, $ i $-я компонента равна $ e_i $ \\
+			Следовательно, у элемента из пересечения все компоненты -- нейтральные
+		\end{proof}
+		\item $ H_1H_2...H_k = G $
+		\begin{proof}
+			Элемент $ (g_1, ..., g_k) $ равен произведению элементов $ (e_1, ..., g_i, ..., e_k) \in H_i $
+		\end{proof}
+		\item $ G/H_i \simeq G_1 \times ... \times G_{i - 1} \times G_{i + 1} \times ... \times G_k $
+		\begin{proof}
+			Пусть $ T \define G_1 \times ... \times G_{i - 1} \times G_{i + 1} \times ... \times G_k $ \\
+			Определим отображение $ f : G \to T $ как
+			$$ f(g_1, ..., g_{i - 1}, g_i, g_{i + 1}, ..., g_k) = \vphi(g_1, ..., g_{i - 1}, g_{i + 1}, ..., g_k) $$
+		Образ $ f $ равен $ T $ \\
+		Ядро $ f $ состоит из элементов, которые $ \vphi $ отображает в $ e_T = (e_1, ..., e_{i - 1}, e_{i + 1}, ..., e_k) $
+		$$ \ker f = \set{(e_1, ..., e_{i - 1}, e_{i + 1}, ..., e_k)} = H_i $$
+		Применяя теорему о гомоморфизме, получаем, что $ G/H_i \simeq T $
+		\end{proof}
+	\end{enumerate}
+\end{properties}
+
+\section{Порядки элементов в прямом произведении. Прямое произведение циклических подгрупп}
+
+\begin{lemma}[порядки элементов]
+	$ G = H_1 \times H_2 \times ... \times H_k, \qquad h_i \in H_i, \qquad g = (h_1, ..., h_k) $
+	\begin{enumerate}
+		\item $ \exist i : \ord_{H_i}(h_i) = \infty \quad \implies \quad \ord_G(g) = \infty $
+		\begin{proof}
+			Пусть $ e_i $ -- нейтральный элемент $ H_i $, и $ e $ -- нейтральный элемент $ G $ \\
+			Пусть $ \ord(g) $ конечен и равен $ n $
+			$$ (e_1, ..., e_k) = e = g^n = (h_1^n, ..., h_k^n) \implies h_i^n = e_i \quad \forall n \implies \ord(h_i) \le n \text{ -- \contra} $$
+		\end{proof}
+		\item $ \forall i \quad \ord_{H_i}(h_i) \text{ конечен } \quad \implies \quad \ord_G(g) = \GCD{\ord_{H_1}(h_1), ..., \ord_{H_k}(h_k)} $
+		\begin{proof}
+			Положим $ a_i \define \ord(h_i), \quad n \define \GCD{a_1, ..., a_n} $ \\
+			Из свойств порядка следует, что
+			$$ h_i^{b_i} = e_i \iff b_i \divby a_i $$
+			\begin{itemize}
+				\item Докажем, что $ n \ge \ord(g) $: \\
+				Для этого достаточно проверить, что $ g^n = e $
+				$$ n \divby a_i \quad \forall i \implies g^n = (h_1^n, ..., h_k^n) = (e_1, ..., e_k) = e $$
+				\item Докажем, что $ \ord(g) \ge n $:
+				\begin{multline*}
+					(h_1^{\ord(g)}, ..., h_k^{\ord(g)}) = g^{\ord(g)} = e = (e_1, ..., e_k) \implies h_i^{\ord(g)} = e_i \quad \forall i \implies \\
+					\implies \ord(g) \divby a_i \implies \ord(g) \divby n \implies \ord(g) \ge n
+				\end{multline*}
+			\end{itemize}
+		\end{proof}
+	\end{enumerate}
+\end{lemma}
+
+\begin{theorem}[прямое произведение]
+	$ a_1, ..., a_k \in \N, \qquad G = \Z_{a_1} \times ... \times \Z_{a_k}, \qquad a \define a_1 \cdot ... \cdot a_k $
+	\begin{itemize}
+		\item $ a_1, ..., a_k $ попарно взаимно просты $ \implies G \simeq \Z_a $
+		\item $ a_1, ..., a_k $ \textbf{не} попарно взаимно просты $ \implies G $ -- \textbf{не} циклическая
+	\end{itemize}
+\end{theorem}
+
+\begin{proof}
+	Используем аддитивные обозначения:
+	\begin{itemize}
+		\item Нейтральный элемент группы $ G $ -- это $ 0 = (\overline{0}, ..., \overline{0}) $
+		\item $ x + x + ... + x = s \cdot x $
+	\end{itemize}
+	Выполнено $ |G| = a_1...a_k $, следовательно,
+	$$ G \text{ -- цикл. } \iff \exist g \in G : \ord(g) = a_1...a_k $$
+	Кроме того,
+	$$ a_1, ..., a_k \text{ попарно вз. просты } \iff \GCD{a_1, ...., a_k} = a_1...a_k $$
+	\begin{itemize}
+		\item $ \ord_{H_i}(\overline{1}) = a_i \quad \forall i \implies \ord_G(\overline{1}, ..., \overline{1}) = \GCD{a_1, ..., a_k} = a_1...a_k $
+		\item Пусть $ g \in G, \quad g = (h_1, ..., h_k) $ \\
+		По следствию к теореме Лагранжа,
+		$$ a_i \divby \ord_{H_i}(h_i) \implies \GCD{a_1, ..., a_k} \divby \ord_{H_i}(h_i) \implies \GCD{a_1, ..., a_k} \cdot h_i = \overline{0} $$
+		$$ \GCD{a_1, ..., a_k} \cdot g = \bigg( \GCD{a_1, ...,, a_k} \cdot h_1, \widedots[5em], \GCD{a_1, ..., a_k} \cdot h_k \bigg) = (\overline{0}, ..., \overline{0}) = 0 $$
+		$$ \implies \forall g \in G \quad \ord(g) \le \GCD{a_1, ..., a_k} \le a_1a_2...a_k $$
+	\end{itemize}
+\end{proof}
+
+\section{Лемма о нормальных подгруппах с единичным пересечением. Прямое произведение подгрупп}
+
+\begin{definition}
+	$ G $ -- группа, $ \qquad H_1, ..., H_k \vartriangleleft G $ \\
+	Говорят, что $ G $ является (внутренним) прямым произведением подгрупп $ H_1, ..., H_k $ (разложена в произведение подгрупп $ H_1, ..., H_k $), если
+	\begin{enumerate}
+		\item $ \forall g \in G \quad \exist! \underset{h_i \in H_i}{h_1, ..., h_k} : g = h_1...h_k $
+		\item $ \forall \underset{i \ne j}{h_i \in H_i, h_j \in H_j} \quad h_ih_j = h_jh_i $
+	\end{enumerate}
+\end{definition}
+
+\begin{notation}
+	$ G = H_1 \times ... \times H_k $
+\end{notation}
+
+\begin{lemma}[нормальные подгруппы с единичным пересечением]
+	$ H \vartriangleleft G, \quad K \vartriangleleft G, \qquad H \cap K = \set{e} $ \\
+	Тогда элементы $ H $ коммутируют с элементами $ K $
+\end{lemma}
+
+\begin{proof}
+	По свойствам коммутанта,
+	$$ hk = kh \iff \underset{(h^{-1}k^{-1}hk)}{[h, k]} = e \iff
+	\begin{cases}
+		[h, k] \in H \\
+		[h, k] \in K
+	\end{cases} $$
+	Докажем первое включение (второе -- аналогично): \\
+	Запишем коммутант как $ h^{-1}(k^{-1}hk) $
+	$$ H \vartriangleleft G \implies
+	\begin{Bmatrix}
+		h^{-1} \in H \\
+		k^{-1}hk \in H
+	\end{Bmatrix} \implies h^{-1}(k^{-1}hk) \in H $$
+\end{proof}
+
+\begin{theorem}[прямое произведение двух подгрупп]
+	$ H \vartriangleleft G, \quad K \vartriangleleft G, \qquad H \cap K = \set{e}, \qquad HK = G $
+	$$ \implies G = H \times K $$
+\end{theorem}
+
+\begin{proof}
+	По лемме, элементы $ H $ коммутируют с элементами $ K $ \\
+	Условие $ G = HK $ означает, что любой элемент $ g \in G $ представим в виде $ g = hk, \quad h \in H, k \in K $ \\
+	Докажем единственность представления: \\
+	Пусть $ h_1k1 = h_2k_2, \quad h_i \in H, k_i \in K $
+	$$ \underbrace{h_2^{-1}h_1}_{\in H} = \underbrace{k_2k_1^{-1}}_{\in K} \underimp{H \cap K = \set{e}}
+	\begin{cases}
+		h_1 = h_2 \\
+		k_1 = k_2
+	\end{cases} $$
+\end{proof}
+
+\begin{theorem}[прямое прозведение нескольких подгрупп]
+	$ H_1 \vartriangleleft G, \widedots[4em], H_k \vartriangleleft G $ \\
+	$ \qquad \forall i \quad H_1...H_{i - 1} \cap H_i = \set{e}, \qquad H_1...H_k = G $
+	$$ \implies G = H_1 \times ... \times H_k $$
+\end{theorem}
+
+\begin{proof}
+	Пусть $ i \ne j $
+	\begin{itemize}
+		\item Докажем, что элементы из подгрупп $ H_i $ и $ H_j $ коммутируют: \\
+		НУО считаем, что $ i < j $
+		$$ \forall h_i \in H_i \quad h_i = e...eh_ie...e \implies H_i \sub H_1...H_{j - 1} \implies H_i \cap H_j = \set{e} \underimp{\text{лемма}} \text{ эл-ты коммутируют} $$
+		\item Докажем, что представление элемента $ g \in G $ в виде произвдения $ g = h_1h_2...h_k, \quad h_i \ni H_i $ единственно: \\
+		Пусть
+		$$ h_1h_2...h_k = h_1'h_2'...h_k', \qquad h_i, h_i' \in H_i, \qquad \exist s :
+		\begin{cases}
+			h_s \ne h_s' \\
+			h_i = h_i' \quad \forall i > s
+		\end{cases} $$
+		Тогда выполнено
+		$$ h_1h_2...h_s = h_1'h_2'...h_s' $$
+		Следовательно,
+		$$ (h_1h_1'^{-1})(h_2h_2'^{-1})...(h_{s - 1}h_{s - 1}'^{-1}) = h_s'h_s^{-1} $$
+		Этот элемент принадлежит $ H_1...H_{s - 1} \cap H_s $, следовательно, он равен $ e $. Получили, что
+		$$ h_s'h_s^{-1} = e \implies h_s' = h_s $$
+		Это противоречит выбору $ s $
+	\end{itemize}
+\end{proof}
+
+\section{Разложение конечной циклической группы в прямое произведение двух подгрупп}
+
+\begin{theorem}
+	$ G $ -- конечная циклическая группа, $ \qquad |G| = mn, \qquad \GCD{m, n} = 1 $ \\
+	Тогда $ G $ можно разложить в прямое произведение двух подгрупп, изоморфных $ \Z_m $ и $ \Z_n $
+\end{theorem}
+
+\begin{proof}
+	Положим
+	$$ G \define \braket{a}, \qquad b \define a^m, \qquad c \define a^n, \qquad H \define \braket{b}, \qquad K \define \braket{c} $$
+	\begin{itemize}
+		\item Проверим, что $ \ord(b) = n $ и $ \ord(c) = m $: \\
+		Имеем $ b^n = a^{mn} = e $
+		$$ \forall 0 < t < n \quad
+		\begin{Bmatrix}
+			b^t = a^{mt} \\
+			0 < mt < mn
+		\end{Bmatrix} \implies a^{mt} \ne e \implies b^t \ne e $$
+		Для $ c $ аналогично \\
+		Получаем, что $ |H| = n, |K| = n $ \\
+		Эти подгруппы циклические, следовательно, $ H \simeq \Z_n, K \simeq \Z_m $
+		\item Проверим, что $ G = H \times K $:
+		\begin{itemize}
+			\item Условие $ H, K \vartriangleleft G $ выполнено, так как любая подгруппа абелевой группы нормальна
+			\item Проверим, что $ H \cap K = \set{e} $: \\
+			Пусть $ x \in H \cap K $ и $ x = a^t $
+			$$ \exist s, r :
+			\begin{Bmatrix}
+				x = b^s = a^{ms} \\
+				x = c^r = a^{nr}
+			\end{Bmatrix} \implies a^{ms} = a^{nr} \implies ms - nr \divby mn \implies
+			\begin{cases}
+				nr \divby m \implies r \divby m \\
+				ms \divby n \implies s \divby n
+			\end{cases} $$
+			Получили, что $ ms \divby mn $ и $ x = a^{ms} = e $
+			\item Докажем, что $ HK = G $: \\
+			Элементы произведения $ HK $ имеют вид $ b^sc^r = a^{ms + nr} $ \\
+			По теореме о линейном представлении НОД,
+			$$ \exist s_0, r_0 : ms_0 + nr_0 = 1 \implies \forall x \quad a^x = a^{ms_0x + nr_0x} \in HK $$
+		\end{itemize}
+	\end{itemize}
+\end{proof}
+
+\section{Разложение конечной циклической группы в прямое произведение примарных подгрупп}
+
+\begin{definition}
+	Группа называется примарной, если она изоморфна $ \Z $ или $ \Z_{p^n} $ для некоторого $ p \in \Prime $
+\end{definition}
+
+\begin{theorem}
+	$ G $ -- конечная циклическая группа \\
+	Тогда $ G $ можно разложить в прямое произведение нескольких примарных подгрупп
+\end{theorem}
+
+\begin{proof}
+	Пусть
+	$$ |G| \define n, \qquad G \define \braket{a}, \qquad n \define p_1^{s_1}...p_k^{s_k}, \quad p_i \in \Prime, \qquad \forall i \quad q_i \define \frac{n}{p^{s_i}}, \quad b_i \define a^{q_i}, \quad H_i \define \braket{b_i} $$
+	Тогда $ \ord(b_i) = p^{s_i} $, и, следовательно, $ H_i $ -- примарная подгруппа, изоморфная $ \Z_{p^{s_i}} $ \\
+	Докажем, что $ G = H_1 \times ... \times H_k $:
+	\begin{itemize}
+		\item Условие $ H_i \vartriangleleft G $ выполнено, так как любая подгруппа абелевой группы нормальна
+		\item Проверим, что $ H_1...H_{i - 1} \cap H_i = \set{e} $: \\
+		Пусть $ x $ принадлежит пересечению
+		\begin{multline*}
+			\begin{rcases}
+				x \in H_1...H_{i - 1} \implies x = b_1^{t_1}...b_{i - 1}^{t_{i - 1}} = a^{q_1t_1 + ... + q_{i - 1}t_{i - 1}}, \qquad t_1, ..., t_{i - 1} \in \Z \\
+				x \in H_i \implies xx = b_i^{t_i} = a^{q_it_i}, \qquad t_i \in \Z
+			\end{rcases} \implies \\
+			\implies q_1t_1 + ... + q_{i - 1}t_{i - 1} - q_it_i \divby n \divby p_i^{s_i}
+		\end{multline*}
+		Числа $ q_1, ..., q_{i - 1} $ делятся на $ p_i^{s_i} $, а значит, $ q_it_i \divby n $ и $ x = a^{q_it_i} = e $
+		\item Докажем, что $ H_1...H_k = G $: \\
+		Элементы произведения $ H_1...H_k $ имеют вид $ a^{q_1t_1 + ... + q_kt_k} $
+		$$ \GCD{q_1, ..., q_k} = 1 \implies \forall x \in \Z \quad x = q_1t_1 + ... + q_kt_k, \qquad a^x \in H_1...H_k $$
+	\end{itemize}
+\end{proof}
+
+\begin{implication}
+	$ G $ -- циклическая группа, $ \qquad |G| = m_1m_2...m_k, \quad m_1, ..., m_k $ попарно взаимно просты \\
+	Тогда $ G $ можно разложить в прямое произведение подгрупп, изоморфных $ \Z_{m_1}, ..., \Z_{m_k} $
+\end{implication}
+
+\begin{proof}
+	Нужные группы -- произведения нескольких (или одной) примарных
+\end{proof}
+
+\section{Определение евклидова и унитарного пространства. Углы и расстояния. Неравенство Коши}
+
+\begin{notation}
+	$ \color{cyan}\overline{\color{black}a}\color{black} =
+	\begin{cases}
+		a \quad \text{ в евклидовом пространстве} \\
+		\overline{a} \quad \text{ в унитраном пространстве}
+	\end{cases} $
+\end{notation}
+
+\begin{definition}
+	Векторное пространство над $ \R $ будем называть вещественным \\
+	Векторное пространство над $ \Co $ будем называть комплексным
+\end{definition}
+
+\begin{definition}
+	$ V $ -- вещественое векторное пространство \\
+	Скалярным произведением на $ V $ называется функция $ (\cdot, \cdot) : V \times V \to \R $, обладающая следующими свойствами:
+	\begin{enumerate}
+		\item Линейность по первому аргументу: $ (au + bv, w) = a(u, w) + b(v, w) $
+		\item Симметричность: $ (u, v) = (v, u) $
+		\item Положительная определённость: $ (v, v) > 0 \quad \forall v \in (V \setminus \set{0}) $
+	\end{enumerate}
+\end{definition}
+
+\begin{note}
+	Из первых двух свойств следует линейность по второму аргументу \\
+	Из линейности следует, что $ (v, 0) = (0, v) = 0 $
+\end{note}
+
+\begin{definition}
+	Евклидовым пространством называется конечномерное вещественное векторное \\
+	пространство со скалярным произведением
+\end{definition}
+
+\begin{definition}
+	$ V $ -- комплексное векторное пространство \\
+	Скалярным произведением на $ V $ называется функция $ (\cdot, \cdot) : V \times V \to \Co $, обладающая следующими свойствами:
+	\begin{enumerate}
+		\item Линейность по первому аргументу: $ (au + bv) = a(u, w) + b(v, w) $
+		\item $ (u, v) = \overline{(v, u)} $
+		\item Положительная определённость: \\
+		$ (v, v) $ является вещественным положительным числом $ \forall v \in (V \setminus \set{0}) $
+	\end{enumerate}
+\end{definition}
+
+\begin{note}
+	Скалярное произведение на комплексном пространстве не линейно по второму аргументу, но выполняется равенство:
+	$$ (u, av + bw) = \overline{a}(u, v) + \overline{b}(u, w) $$
+\end{note}
+
+\begin{definition}
+	Унитарным пространством называется конечномерное комплексное векторное пространство со скалярным произведением
+\end{definition}
+
+\begin{definition}
+	Длина вектора $ v $ в евклидовом или унитарном пространстве определяется как
+	$$ |v| = \sqrt{(v, v)} $$
+\end{definition}
+
+\begin{definition}
+	Угол между векторами $ u $ и $ v $ в евклидовом пространстве определяется как
+	$$ \arccos \bigg( \frac{(u, v)}{|u| \cdot |v|} \bigg) $$
+\end{definition}
+
+\begin{note}
+	В унитарном пространстве углы не определяются
+\end{note}
+
+\begin{theorem}[неравенство Коши]
+	$ V $ -- евклидово или унитарное пространство \\
+	Для любых $ u, v \in V $ выполнено
+	$$ |(u, v)|^2 \le (u, u)(v, v) $$
+	Равенство достигается тогда и только тогда, когда $ u = sv $ для некторого $ s \in \R, \Co $ или при $ v = 0 $
+\end{theorem}
+
+\begin{proof}
+	Будем пользоваться линейностью по первому аргументу и равенством $ (u, av + bw) = \color{cyan}\overline{\color{black}a}\color{black}(u, v) + \color{cyan}\overline{\color{black}b}\color{black}(u, w) $ \\
+	Пусть $ v \ne 0 $. Тогда
+	\begin{equ}{401}
+		(v, v) > 0, \qquad (v, v) \in \R
+	\end{equ}
+	Положим
+	$$ a \define (u, u), \qquad b \define (u, v), \qquad c \define (v, v), \qquad t \define \frac{b}{c} $$
+	Заметим, что \eref{401} $ \implies \color{cyan}\overline{\color{black}t}\color{black}c = \color{cyan}\overline{\color{black}b}\color{black} $ \\
+	Применим свойство положительной определённости к вектору $ u - tv $:
+	$$ 0 \le (u - tv, u - tv) = (u, u) + (u, -tv) + (-tv, u) + (-tv, -tv) = a - \color{cyan}\overline{\color{black}t}\color{black}b - \color{cyan}\overline{\color{black}t}\color{black}b + t\color{cyan}\overline{\color{black}t}\color{black}c = a - \frac{b\color{cyan}\overline{\color{black}b}\color{black}}c - t(-\color{cyan}\overline{\color{black}b}\color{black} + \color{cyan}\overline{\color{black}t}\color{black}c) = a - \frac{|b|^2}c $$
+	Получаем, что $ a \ge \dfrac{|b|^2}c $ \\
+	Умножая на положительное число $ c $, получаем нужное неравенство \\
+	Равенство достигается тогда и только тогда, когда $ (u - tv, u - tv) = 0 $, т. е. $ u - tv = 0 $
+\end{proof}
+
+\begin{implication}[неравенство Коши-Буняковского]
+	Для любых $ x_1, ..., x_n, y_1, ..., y_n \in \R $ выполнено
+	$$ (x_1y_1 + ... + x_ny_n)^2 \le (x_1^2 + ... + x_n^2)(y_1^2 + ... + y_n^2) $$
+\end{implication}
+
+\begin{implication}[неравенство треугольника]
+	Для любых векторов $ u, v $ евклидова или унитарного пространства выполнено $ |u + v| \le |u| + |v| $
+\end{implication}
+
+\begin{proof}
+	Возведём левую часть в квадрат и оценим сверху, пользуясь неравенством Коши:
+	\begin{multline*}
+		|u + v|^2 = (u + v, u + v) = |(u + v, u + v)| = |(u, u) + (u, v) + (v, u) + (v, v)| \le \\
+		\le |(u, u)| + |(u, v)| + |(v, u)| + |(v, v)| \underset{\text{(Коши)}}\le (u, u) + \sqrt{(u, u)(v, v)} + \sqrt{(u, u)(v, v)} + (v, v) = (|u| + |v|)^2
+	\end{multline*}
+\end{proof}
+
+\section{Матрица Грама: вычисление скалярного произведения, замена базиса}
+
+\begin{definition}
+	$ V $ -- евклидово или унитарное пространство размерности $ n $ \\
+	Матрицей Грама для набора $ e_1, ..., e_n $ называется матрица $ \Gamma = (g_{ij}) $, где $ g_{ij} = e_ie_j $
+\end{definition}
+
+\begin{definition}
+	Матрица с условием $ A^T = A $ называется симметричной, а с условием $ A^T = \overline{A} $ -- эрмитовой
+\end{definition}
+
+\begin{property}
+	Матрица Грама является симметричной \textcolor{cyan}{(эрмитовой)}
+\end{property}
+
+\begin{theorem}[вычисление скалярного произведения]
+	\hfill \\
+	$ V $ -- евклидово \textcolor{cyan}{(унитарное)} пространство с базисом $ e_1, ..., e_n, \qquad \Gamma(g_{ij}) $ -- матрица Грама в этом базисе
+	\begin{enumerate}
+		\item $ \forall
+		\begin{cases}
+			u = x_1e_1 + ... + x_ne_n \\
+			v = y_1e_1 + ... + y_ne_n
+		\end{cases} \qquad (u, v) = \sum_{i,j} x_i\color{cyan}\overline{\color{black}y_j}\color{black}g_{ij} $
+		\begin{proof}
+			В евклидовом и унитарном пространстве выполняется аддитивность по обеим координатам, следовательно,
+			$$ (u, v) = \sum_{i, j} (x_ie_i, ~ y_je_j) = \sum x_i\color{cyan}\overline{\color{black}y_j}\color{black}(e_i, e_j) \sum = x_i\color{cyan}\overline{\color{black}y_j}\color{black}g_{ij} $$
+		\end{proof}
+		\item $ (u, v) = X^T\Gamma\color{cyan}\overline{\color{black}Y} $
+		\begin{proof}
+			Запишем матрицы $ X^T $ и $ Y $ в стандартном виде $ X^T = (x_{ki}) $ и $ Y = (y_{il}) $ \\
+			Тогда $ x_{1i} = x_i $ и $ y_{j1} = y_j $ \\
+			Применим формулу произведения трёх матриц к $ X\Gamma\color{cyan}\overline{\color{black}Y} $: \\
+			Произведение -- матрица $ 1 \times 1 $, её единственный элемент равен $ \sum_{i, j} x_{1i}\color{cyan}\overline{\color{black}g_{ij}}\color{black}y_{j1} $
+		\end{proof}
+		\item Если для матрицы $ \Gamma' $ выполнено $ (u, v) = X^T\Gamma'\color{cyan}\overline{\color{black}Y} $, то $ \Gamma' $ является матрицей Грама
+		\begin{proof}
+			Пусть $ \Gamma = (g_{ij}) $ и $ \Gamma' = (g_{ij}') $ \\
+			Возьмём $ u = e_i, ~ v = e_j $ \\
+			Тогда $ X $ и $ Y $ -- векторы, у которых $ i $-я и $ j $-я координаты равны 1, а остальные -- 0 \\
+			Перемножая матрицы получаем, что $ (e_j, e_i) = g_{ij}' $
+		\end{proof}
+	\end{enumerate}
+\end{theorem}
+
+\begin{theorem}[замена базиса]
+	Дано евклидово \textcolor{cyan}{(унитарное)} пространство \\
+	$ \Gamma, \Gamma' $ -- матрицы Грама в базисах $ e_i $ и $ e_i', \qquad C $ -- матрица перехода от $ e_i $ к $ e_i' $
+	$$ \implies \Gamma' = C^T\Gamma\color{cyan}\overline{\color{black}C} $$
+\end{theorem}
+
+\begin{proof}
+	Положим $ \Gamma'' \define C^T\Gamma\color{cyan}\overline{\color{black}C} $ \\
+	Пусть $ u, v $ -- векторы, $ X, X', Y, Y' $ -- их столбцы координат в базисах $ e_i, e_i' $. Тогда
+	$$ X = CX', \qquad Y = CY', \qquad (u, v) = X^T\Gamma\color{cyan}\overline{\color{black}Y} $$
+	Нужно проверить, что $ (u, v) = (X')^T\Gamma''\color{cyan}\overline{\color{black}Y'} $. Подставим:
+	$$ X^T\Gamma\color{cyan}\overline{\color{black}Y}\color{black} = (CX')^T\Gamma(\color{cyan}\overline{\color{black}CY'}\color{black}) = X'C^T\Gamma\color{cyan}\overline{\color{black}CY'}\color{black} = X'\Gamma''\color{cyan}\overline{\color{black}Y'}\color{black} $$
+\end{proof}
+
+\section{Свойства ортогональных векторов. Процесс ортогонализации \texorpdfstring{\\}{} Грама-Шмидта}
+
+\begin{definition}
+	Векторы $ u $ и $ v $ евклидова \textcolor{cyan}{(унитарного)} пространства называются ортогональными, если $ (u, v) = 0 $
+\end{definition}
+
+\begin{notation}
+	$ u \perp v $
+\end{notation}
+
+\begin{props}
+	\item $ u \perp v \implies v \perp u $
+	\begin{proof}
+		$ (v, u) = \color{cyan}\overline{\color{black}(u, v)}\color{black} = \color{cyan}\overline{\color{black}0} = 0 \color{black} $
+	\end{proof}
+	\item Если $ u $ ортогонален векторам $ v_1, ..., v_n $, то он ортогонален любой их линейной комбинации
+	\begin{proof}
+		$ (a_1v_1 + ... + a_kv_k, ~ u) = a_1(v_1, u) + ... + a_k(v_k, u) = a_1 \cdot 0 + ... + a_k \cdot 0 = 0 $
+	\end{proof}
+	\item Если $ u $ ортогонален любому вектору, то $ u = 0 $
+	\begin{proof}
+		$ u \perp u \implies (u, u) = 0 \implies u = 0 $
+	\end{proof}
+	\item Если $ u $ ортогонален всем векторам некоторого базиса, то $ u = 0 $
+	\begin{proof}
+		Следует из предыдущих двух
+	\end{proof}
+	\item $ e_1, ..., e_k $ -- базис, $ u, v $ -- некоторые векторы \\
+	Если $ \forall i \quad (u, e_i) = (v, e_i) $, то $ u = v $
+	\begin{proof}
+		Применим предыдущее свойство к $ (u - v) $
+	\end{proof}
+	\item Попарно ортогональные ненулевые векторы ЛНЗ
+	\begin{proof}
+		Пусть $ a_1e_1 + ... + a_ke_k = 0 $. Тогда
+		$$ \forall i \qquad 0 = (a_1e_1 + ... + a_ke_k, ~ e_i) = a_i(e_i, e_i) \implies a_i = 0 $$
+	\end{proof}
+\end{props}
+
+\begin{theorem}[ортогонализация Грама-Шмидта]
+	$ u_1, ..., u_n $ -- ЛНЗ в евклидовом \textcolor{cyan}{(унитарном)} пр-ве \\
+	Тогда существуют попарно ортогональные векторы $ x_1, ..., x_n $, такие, что
+	$$ \braket{x_1, ..., x_i} = \braket{u_1, ..., u_i} \quad \forall i $$
+\end{theorem}
+
+\begin{iproof}
+	\item Положим $ x_1 \define u_1 $
+	\item Пусть уже построены ортогональные векторы $ x_1, ..., x_k $, такие, что
+	$$ \braket{x_1, ..., x_i} = \braket{u_1, ..., u_i} \quad \forall i \le k $$
+	Заметим, что $ x_i \ne 0 \quad \forall i $,т. к.
+	$$ \dim\braket{x_1, ..., x_{i - 1}, 0} = \dim\braket{x_1, ..., x_{i - 1}} \le i - 1 < i = \dim\braket{u_1, ..., u_i} $$
+	Докажем, что сущестует вектор $ x_{k + 1} $, такой, что
+	\begin{mequ}
+		\lbl{421} x_{k + 1} \perp v_i \quad \forall i \le k \\
+		\lbl{422} \braket{x_1, ..., x_k, x_{k + 1}} = \braket{u_1, ..., u_k, u_{k + 1}}
+	\end{mequ}
+	Будем искать $ x_{k + 1} $ в виде
+	$$ x_{k + 1} = u_{k + 1} - a_1x_1 - ... - a_kx_k $$
+	где $ a_1, ..., a_k $ -- скаляры \\
+	Выполнено $ \braket{u_1, ..., u_i, u_{k + 1}} = \braket{x_1, ..., x_i, u_{k + 1}} $ и для любых скаляров $ a_1, ..., a_k $ выполнено
+	$$ \braket{x_1, ..., x_i, u_{k + 1}} = \braket{x_1, ..., x_i, u_{k + 1} - a_1x_1 - ... - a_kx_k} $$
+	Следовательно, для любого набора $ a_1, ..., a_k $ выполнено условие \eref{422} \\
+	Найдём такой набор, для которого выполнено условие \eref{421}: \\
+	Запишем скалярное произведение:
+	\begin{multline*}
+		(x_{k + 1}, x_i) = (u_{k + 1} - a_1x_1 - ... - a_ix_i - ... - a_kx_k, ~ x_i) = \\
+		= (u_{k + 1}, x_i) - a_1(x_1, x_i) - ... - a_i(x_i, x_i) - ... + a_k(x_k, x_i) = (u_{k + 1}, x_i) - a_1 \cdot 0 - ... - a_i(x_i, x_i) - ... - a_k \cdot 0 = \\
+		= (u_{k + 1}, x_i) + a_i(x_i, x_i)
+	\end{multline*}
+	Подойдут скаляры
+	$$ a_i = \frac{(u_{k + 1}, x_i)}{(x_i, x_i)} $$
+\end{iproof}
+
+\begin{definition}
+	Вектор называтся нормированным, если его длина равна 1
+\end{definition}
+
+\begin{definition}
+	Базис называется ортонормированным, если он состоит из попарно ортогональных нормированных векторов
+\end{definition}
+
+\begin{implication}
+	$ V $ -- евклидово или унитарное пространство
+	\begin{enumerate}
+		\item Существует ОНБ пространства $ V $
+		\item $ U $ -- подпространство $ V $ \\
+		Тогда существует ОНБ $ e_1, ..., e_n $ пространства $ V $, такой, что при некотором $ k \le n $ векторы $ e_1, ..., e_k $ образуют базис $ U $
+	\end{enumerate}
+\end{implication}
+
+\section{Ортогональное дополнение}
+
+\begin{definition}
+	$ V $ -- евклидово или унитарное пространство, $ \qquad U $ -- подпространство $ V $ \\
+	Ортогональным дополнением к подпространству $ V $ называется множество
+	$$ U^\perp \define \set{x | x \perp u \quad \forall u \in U} $$
+\end{definition}
+
+\begin{properties}
+	$ V $ -- евклидово или унитарное пространство, $ \qquad U, W $ -- подпространства $ V $
+	\begin{enumerate}
+		\item $ U^\perp $ является подпространством
+		\begin{proof}
+			$ x \in U^\perp \iff (x, u) = 0 \quad \forall u \in U $ \\
+			Применим линейность
+		\end{proof}
+		\item $ U \oplus U^\perp = V $
+		\begin{proof}
+			Достаточно доказать, что существуют такие базисы $ U $ и $ U^\perp $, что их объединение является базисом $ V $ \\
+			Выберем ОНБ $ e_1 ...., e_k, g_1, ..., e_m $ пространства $ V $ так, что $ e_1, ..., e_k $ -- базис $ U $ \\
+			Докажем, что $ g_i $ -- базис $ U^\perp $ \\
+			Проверим, что $ g_i $ порождают $ U^\perp $: \\
+			Пусть $ v \in U^\perp $ \\
+			Разложим $ v $ по базису всего пространства: $ v = \sum x_ie_i + \sum y_ig_i $
+			$$ x_i = (v, e_i) = 0 \quad \forall i $$
+			Следовательно, $ v = \sum y_ig_i $ \\
+			Набор векторов $ g_i $ является ЛНЗ, т. к. это -- подмножество базиса \\
+			Следовательно, векторы $ g_i $ образуют базис $ U^\perp $
+		\end{proof}
+		\item $ \dim U + \dim U^\perp = \dim V $
+		\begin{proof}
+			Следует из предыдущего
+		\end{proof}
+		\item\label{en:434} $ (U^\perp)^\perp = U $
+		\begin{proof}
+			Любой вектор из $ U $ ортогонален всем векторам из $ U^\perp $ \\
+			Следовательно, $ U \sub U^\perp $ \\
+			Применяя предыдущее к $ U $ и $ U^\perp $, получаем, что
+			$$ \dim U + \dim U^\perp = \dim V = \dim U^\perp + \dim (U^\perp)^\perp \implies \dim (U^\perp)^\perp = \dim U $$
+		\end{proof}
+		\item $ U \sub W \implies W^\perp \sub U^\perp $
+		\begin{proof}
+			Если $ v \in W^\perp $, то он ортогонален всем векторам из $ W $ \\
+			Следовательно, он ортогонален всем векторам из $ U $
+		\end{proof}
+		\item $ (U + W)^\perp = U^\perp \cap W^\perp $
+		\begin{iproof}
+			\item $ \sub $ \\
+			Применим предыдущее:
+			$$
+			\begin{rcases}
+				U \sub (U + W) \implies (U + W)^\perp \sub U^\perp \\
+				W \sub (U + W) \implies (U + W)^\perp \sub W^\perp
+			\end{rcases} \implies (U + W)^\perp \sub (U^\perp \cap W^\perp)$$
+			\item $ \supset $ \\
+			Пусть $ v \in (U^\perp \cap W^\perp) $ \\
+			Нужно доказать, что $ v $ ортогонален любому вектору из $ (U + W) $, т. е.
+			$$ v \perp (u + w) \quad \forall u \in U, w \in W $$
+			Это следует из того, что $ v \perp u $ и $ v \perp w $
+		\end{iproof}
+		\item $ (U \cap W)^\perp = U^\perp + W^\perp $
+		\begin{proof}
+			Применим предыдущее к $ U^\perp $ и $ W^\perp $ и воспользуемся (\ref{en:434}):
+			$$ (U^\perp + W^\perp)^\perp = (U^\perp)^\perp \cap (W^\perp)^\perp = U \cap W $$
+			Возьмём ортогональное дополнение к обеим частям, получим нужное равенство
+		\end{proof}
+	\end{enumerate}
+\end{properties}
+
+\begin{definition}
+	$ V $ -- евклидово или унитарное пространство, $ \qquad U $ -- подпространство $ V, \qquad v \in V $ \\
+	Проекцией вектора $ v $ на подпространство $ U $ называется такой вектор $ p $, что
+	$$
+	\begin{cases}
+		p \in U \\
+		v - p \in U^\perp
+	\end{cases} $$
+	Вектор $ (v - p) $ называется ортогональным дополнением
+\end{definition}
+
+\begin{property}
+	Для любых $ v $ и $ U $ существует единственная проекция $ v $ на $ U $
+\end{property}
+
+\begin{proof}
+	Утверждение следует из того, что $ U \oplus U^\perp = V $
+\end{proof}
+
+\section{Ортогональные и унитарные матрицы}
+
+\begin{definition}
+	Квадратная матрица $ A $ с вещественными элементами называется ортогональной, если $ AA^T = E $ \\
+	Квадратная матрица $ A $ с комплексными элементами называется унитарной, если $ A\overline{A}^T = E $
+\end{definition}
+
+\begin{props}
+	\item Ортогональные (унитарные) матрицы порядка $ n $ образуют группу по умножению
+	\begin{proof}
+		Докажем для унитарных: \\
+		Нужно доказать два утверждения:
+		\begin{enumerate}
+			\item если $ A $ и $ B $ -- унитарные матрицы, то $ AB $ -- унитарная матрица
+			$$ (AB)(\overline{AB})^T = AB\overline{B}^T\overline{A}^T = AE\overline{A}^T = A\overline{A}^T = E $$
+			\item если $ A $ -- унитарная матрица, то $ A $ обратима и $ A^{-1} $ является унитарной матрицей \\
+			Из равенства $ A\overline{A}^T = E $ следует, что $ A $ обратима, и $ A^{-1} = \overline{A}^T $ \\
+			Проверим, что $ A^{-1} $ унитарна:
+			$$ A^{-1}\overline{A^{-1}}^T = \overline{A}^T \overline{(\overline{A}^T)}^T = \overline{A}^TA = E $$
+		\end{enumerate}
+	\end{proof}
+	\item $ A $ -- квадратная матрица порядка $ n $ с вещественными (комплексными) элементами \\
+	Следующие условия равносильны:
+	\begin{enumerate}
+		\item\label{en:441} $ A $ -- ортогональная (унитарная)
+		\item\label{en:442} строки $ A $ образуют ОНБ $ \R^n $ ($ \Co^n $)
+		\item\label{en:443} столбцы $ A $ образуют ОНБ $ \R^n $ ($ \Co^n $)
+	\end{enumerate}
+	\begin{iproof}
+		\item Докажем $ \ref{en:441} \iff \ref{en:442} $ для унитарной матрицы: \\
+		Пусть $ X_1, ..., X_n $ -- строки $ A $ и $ B \define A\overline{A}^T, \quad B = (b_{ij}) $ \\
+		Тогда $ \overline{X_1}^T, ..., \overline{X_n}^T $ -- столбцы $ \overline{A}^T $, и
+		$$ b_{ij} = X_i\overline{X_j}^T = (X_i, X_j) $$
+		Таким образом,
+		$$ A \text{ -- унитарная } \iff B = E \iff b_{ij} =
+		\begin{cases}
+			1, \qquad i = j \\
+			0, \qquad i \ne j
+		\end{cases} \qquad \iff X_i \text{ -- ОНБ} $$
+		\item Доказательство $ \ref{en:441} \iff \ref{en:443} $ аналогично, нужно рассмотреть равенство $ \overline{A}^TA = E $
+	\end{iproof}
+	\item $ u_i $ -- ОНБ, $ \qquad v_i $ -- базис, $ \qquad C $ -- матрица перехода $ u_i \to v_i $ \\
+	$ C $ -- ортогональная (унитарная) $ \quad \iff \quad v_i $ -- ОНБ
+	\begin{proof}
+		Докажем для унитарной \\
+		Пусть $ C = (c_{ij}) $, и $ C_i $ -- это $ i $-й столбец матрицы $ C $, то есть
+		$$ C_i = \column[pmatrix]{c_{1i}}{c_{ni}} $$
+		Запишем $ (v_i, ~ v_j) $ и воспользуемся тем, что $ u_i $ -- ОНБ:
+		$$ (v_i, v_j) = (c_{1i}u_1 + ... + c_{ni}u_n, ~ c_{1j}u_1 + ... + c_{nj}u_n) = \sum_{s, t} c_{ti}\overline{c_{tj}}\underbrace{(u_s, u_t)}_{= 1} = c_{1i}\overline{c_{1j}} + ... + c_{ni}\overline{c_{nj}} = C_i^T\overline{C_j} $$
+		Следвательно, $ v_i $ -- ОНБ $ \iff C_i $ -- ОНБ в $ \Co^n $ \\
+		Применяя предыдущее свойство, получаем нужное утверждение
+	\end{proof}
+\end{props}
+
+\section{Сопряжённый оператор}
+
+\begin{remind}
+	Оператором на векторном пространстве $ V $ называется линейное отображение $ V \to V $
+\end{remind}
+
+\begin{notation}
+	Будем обозначать операторы в евклидовом или унитарном пространстве (если не обговорено другое) буквами $ \mathcal{A}, \mathcal{B}, ... $, а их матрицы в некотором базисе -- буквами $ A, B, ... $
+\end{notation}
+
+\begin{notation}
+	В записи $ \mathcal{A}(x) $ будем опускать скобки и писать $ \mathcal{A}x $
+\end{notation}
+
+\begin{remind}
+	Столбцы матрицы $ A $ -- это столбцы координат векторов $ \mathcal{A}e_i $ в выбранном базисе \\
+	Выполнено равенство $ AX = \mathcal{A}x $, где $ X $ -- столбец координат вектора $ x $
+\end{remind}
+
+\begin{definition}
+	$ \mathcal{B} $ называется сопряжённым к $ \mathcal{A} $, если
+	$$ (\mathcal{A}x, ~ y) = (x, ~ \mathcal{B}y) \quad \forall x, y $$
+\end{definition}
+
+\begin{notation}
+	$ \mathcal{A}^* $
+\end{notation}
+
+\begin{theorem}[существование и единственность сопряжённого оператора]
+	\hfill
+	\begin{enumerate}
+		\item Для любого $ \mathcal{A} $ существует единственный $ \mathcal{A}^* $
+		\item\label{en:452} Пусть выбран базис, и $ \Gamma $ -- матрица Грама в этом базисе
+		$$ A^* = \color{cyan}\overline{\color{black}\Gamma^{-1}A^T\Gamma} $$
+	\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+	Докажем два утверждения:
+	\begin{itemize}
+		\item Если $ \mathcal{B} $ -- оператор, заданный формулой из (\ref{en:452}), то $ (\mathcal{A}x, ~ y) = (x, ~ \mathcal{B}y) \quad \forall x, y $ \\
+		Будем доказывать для унитарного пространства \\
+		Пусть $ X, Y $ -- столбцы координат векторов $ x, y $
+		$$ (\mathcal{A}x, ~ y) = (AX)^T\Gamma\overline{Y} = X^TA^T\Gamma\overline{Y} $$
+		$$ (x, ~ \mathcal{B}y) = X^T\Gamma\overline{BY} = X^T\Gamma\overline{\overline{\Gamma^{-1}A^T\Gamma}Y} = X^T\Gamma\Gamma^{-1}A^T\Gamma\overline{Y} = X^TA^T\Gamma\overline{Y} $$
+		\item Если $ \mathcal{B}_1, \mathcal{B}_1 $ -- такие операторы, что $
+		\begin{cases}
+			(\mathcal{A}x, ~ y) = (x, ~ \mathcal{B}_1y) \\
+			(\mathcal{A}x, ~ y) = (x, ~ \mathcal{B}_2y)
+		\end{cases} \quad \forall x, y $, то $ \mathcal{B}_1 = \mathcal{B}_2 $
+		$$ 0 = (x, ~ \mathcal{B}_1y) - (x, ~ \mathcal{B}_2y) = \bigg( x, ~ (\mathcal{B}_1y - \mathcal{B}_2y) \bigg) \quad \forall x, y $$
+		Вектор $ (\mathcal{B}_1y - \mathcal{B}_2y) $ ортогонален любому вектору $ x \in V $, значит, он равен 0, и $ \mathcal{B}_1y = \mathcal{B}_2y $
+	\end{itemize}
+\end{proof}
+
+\begin{definition}
+	Подпространство $ U $ называется инвариантным для $ \mathcal{A} $, если
+	$$ \forall x \in U \quad \mathcal{A}x \in U $$
+\end{definition}
+
+\begin{props}
+	\item В случае ОНБ выполнено $ A* = \color{cyan}\overline{\color{black}A}\color{black}^T $
+	\begin{proof}
+		В ОНБ выполнено $ \Gamma = E $
+	\end{proof}
+	\item $ (\mathcal{A}^*)^* = \mathcal{A} $
+	\begin{proof}
+		Нужно проверить, что $ \mathcal{A} $ является сопряжённым к $ \mathcal{A}^* $, то есть
+		$$ (\mathcal{A}^*x, ~ y) = (x, ~ \mathcal{A}y) \quad \forall x, y $$
+		Левая часть равна $ \overline{(y, ~ \mathcal{A}^*x)} $, правая -- $ \overline{\mathcal{A}y, ~ x} $ \\
+		Они равны по определению сопряжённого оператора, применённого к паре $ y, x $
+	\end{proof}
+	\item (полуторалинейность)
+	$$
+	\begin{cases}
+		(\mathcal{A} + \mathcal{B})^* = \mathcal{A}^* + \mathcal{B}^* \\
+		(k\mathcal{A})^* = \color{cyan}\overline{\color{black}k}\color{black}\mathcal{A}^* \quad \forall k \in \R \color{cyan} (\Co)
+	\end{cases} $$
+	\begin{iproof}
+		\item Докажем второе равенство: \\
+		Проверим, что оператор $ \color{cyan}\overline{\color{black}k}\color{black}\mathcal{A}^* $ является сопряжённым к $ k\mathcal{A} $:
+		$$ \bigg( (k\mathcal{A})x, ~ y \bigg) = \bigg( k(\mathcal{A}x), ~ y \bigg) = k(\mathcal{A}x, ~ y) = k(x, ~ \mathcal{A}^*y) = (x, ~ \color{cyan}\overline{\color{black}k}\color{black}\mathcal{A}^*y) = \bigg( x, ~ (\color{cyan}\overline{\color{black}k}\color{black}\mathcal{A}^*)y \bigg) $$
+		\item Первое равенство доказывается аналогично
+	\end{iproof}
+	\item $ (\mathcal{A}\mathcal{B})^* = \mathcal{B}^*\mathcal{A}^* $
+	\begin{proof}
+		$$ \bigg( (\mathcal{A}\mathcal{B})x, ~ y \bigg) = \bigg( \mathcal{A}(\mathcal{B}x), ~ y \bigg) = (\mathcal{B}x, ~ \mathcal{A}^*y) = \bigg( x, ~ \mathcal{B}^*(\mathcal{A}^*y) \bigg) = \bigg( x, (\mathcal{B}^*\mathcal{A}^*)y \bigg) $$
+		Значит, $ \mathcal{B}^*\mathcal{A}^* $ является сопряжённым к $ \mathcal{A}\mathcal{B} $
+	\end{proof}
+	\item Если $ U $ инвариантно для $ \mathcal{A} $, то $ U^\perp $ инвариантно для $ \mathcal{A}^* $
+	\begin{proof}
+		Пусть $ y \in U^\perp $ \\
+		Нужно доказать, что $ \mathcal{A}^*y \in U^\perp $, то есть $ \mathcal{A}^*y \perp x \quad \forall x \in U $ \\
+		Тогда
+		$$ \forall x \in U \quad \mathcal{A}x \in U \quad \implies y \perp \mathcal{A}x $$
+		Запишем скалярное произведение:
+		$$ 0 = (\mathcal{A}x, ~ y) = (x, ~ \mathcal{A}^*y) \implies \mathcal{A}^*y \perp x $$
+	\end{proof}
+\end{props}
+
+\begin{notation}
+	$ \mathcal{E} $ -- тождественный оператор
+\end{notation}
+
+\begin{definition}
+	$ \mathcal{A} $ называется
+	\begin{itemize}
+		\item Нормальным, если $ \mathcal{A}\mathcal{A}^* = \mathcal{A}^*\mathcal{A} $
+		\item Ортогональным \textcolor{cyan}{(унитарным)}, если $ \mathcal{A}\mathcal{A}^* = \mathcal{A}^*\mathcal{A} = \mathcal{E} $
+		\item Самосопряжённым, если $ \mathcal{A} = \mathcal{A}^* $
+	\end{itemize}
+\end{definition}
+
+\begin{definition}
+	Матрица $ A $ называется нормальной, если $ A\overline{A}^T = \overline{A}^TA $
+\end{definition}
+
+\section{Собственные числа и собственные векторы}
+
+В этом вопросе рассматривается проивольное векторное пространство над произвольным полем
+
+\begin{definition}
+	$ \mathcal{A} $ -- оператор, действующий на векторном пространстве $ V $ \\
+	Число $ \lambda $ называется собственным числом $ \mathcal{A} $, если существует ненулевой вектор $ v $, такой, что $ \mathcal{A}v = \lambda v $ \\
+	Если $ \lambda $ -- с. ч. $ \mathcal{A} $, то любой вектор, удовлетворяющий условию $ \mathcal{A}v = \lambda v $, называется собственным вектором $ \mathcal{A} $, соотвестсвующим $ \lambda $
+\end{definition}
+
+\begin{definition}
+	$ A $ -- квадратная матрица \\
+	Число $ \lambda $ называется собственным числом $ A $, если существует ненулевой столбец $ X $, такой, что $ AX = \lambda X $ \\
+	Если $ \lambda $ -- с. ч. $ A $, то любой столбец $ X $, удовлетворяющий условию $ AX = \lambda X $, называется собственным столбцом $ A $, соотвестсвующим $ \lambda $
+\end{definition}
+
+\begin{definition}
+	$ A $ -- квадратная матрица \\
+	Характеристическим многочленом $ A $ называется многочлен от $ t $, равный $ \det(A - tE) $
+\end{definition}
+
+\begin{notation}
+	$ \chi(t), \chi_A(t) $
+\end{notation}
+
+\begin{properties}
+	$ A = (a_{ij}) $ -- матрица порядка $ n $, и $ \chi(t) $ -- её характеристический многочлен
+	\begin{enumerate}
+		\item $ \chi(t) $ является многочленом
+		\item $ \deg \chi = n $
+		\item Старший коэффициент $ \chi(t) $ равен $ (-1)^n $
+		\item Свободный член равен $ \det A $
+		\begin{proof}
+			Подставим $ t = 0 $
+		\end{proof}
+		\item Коэффициент при $ t^{n - 1} $ равен $ (-1)^{n - 1}(a_{11} + ... + a_{nn}) $
+		\begin{proof}
+			Без доказательства
+		\end{proof}
+	\end{enumerate}
+\end{properties}
+
+\begin{theorem}[о корнях характеристического многочлена]
+	Число $ \lambda $ является с. ч. матрицы $ A $ тогда и только тогда, когда оно является корнем характеристического многочлена $ A $
+	\begin{proof}
+		\begin{multline*}
+			\lambda \text{ является с. ч. } \iff \exist \underset{\text{не все равны нулю}}{x_1, ..., x_n} :
+			\begin{pmatrix}
+				a_{11} & ... & a_{1n} \\
+				. & . & . \\
+				a_{n1} & ... & a_{nn}
+			\end{pmatrix} \cdot \column[pmatrix]{x_1}{x_n} = \lambda \column[pmatrix]{x_1}{x_n} \iff \\
+			\iff \text{ система }
+			\begin{cases}
+				a_{11}x_1 + ... + a_{1n}x_n = \lambda x_1 \\
+				\widedots[10em] \\
+				a_{11}x_1 + ... + a_{nn}x_n = \lambda x_n
+			\end{cases} \quad \text{ имеет ненулевое решение } \iff \\
+			\iff \text{ система }
+			\begin{cases}
+				(a_{11} - \lambda)x_1 + ... + a_{1n}x_n = 0 \\
+				\widedots[10em] \\
+				a_{11}x_1 + ... + (a_{nn} - \lambda)x_n = 0
+			\end{cases} \quad \text{ имеет ненулевое решение } \iff \\
+			\iff \text{ однородная система с матрицей } (A - \lambda E) \text{ имеет ненулевое решение}
+		\end{multline*}
+		\begin{itemize}
+			\item Если $ \det(A - \lambda E) \ne 0 $, то по теореме Крамера, система имеет единственное решение \\
+			Это решение -- $ x_1 = ... = x_n = 0 $
+			\item Если $ \det(A - \lambda E) = 0 $, то $ \rk(A - \lambda E) \le n - 1 < n $ \\
+			По теореме о пространстве решений однородной системы, размерность пространства решений не равна 0, и, следовательно, пространство решений не равно $ \set{0} $ \\
+			Значит, в этом случае система имеет ненулевое решение
+		\end{itemize}
+	\end{proof}
+\end{theorem}
+
+\begin{definition}
+	$ \mathcal{A} $ -- оператор на конечномерном векторном пространстве $ V $ \\
+	Характеристическим многочленом $ \mathcal{A} $ назыается характеристический многочлен его матрицы в произвольном базисе
+\end{definition}
+
+\begin{notation}
+	$ \chi \mathcal{A} $
+\end{notation}
+
+\begin{props}
+	\item Характ. многочлен не зависит от выбора базиса
+	\begin{proof}
+		Пусть $ A, B $ -- матрицы оператора в разных базисах, $ C $ -- матрица перехода от первого базиса ко второму \\
+		Тогда $ B = C^{-1}AC $
+		$$ B - tE = C^{-1}AC - C^{-1}(tE)C = C^{-1}(A - tE)C $$
+		$$ \chi_B(t) = \det(B - tE) = \det(C^{-1})\det(A - tE)\det(C) = \det(A - tE) = \chi_A(t) $$
+	\end{proof}
+	\item С. ч. оператора на конечномерном пространстве совпадают с корнями его характ. многочлена
+	\begin{proof}
+		С. ч. оператора совпадают с с. ч. его матрицы в произвольном баисе, т. к. если $ X $ -- столбец координат $ v $, то
+		$$ \mathcal{A} v = \lambda v \iff AX = \lambda X, \qquad v \ne 0 \iff X \ne 0 $$
+	\end{proof}
+\end{props}
+
+\begin{definition}
+	$ \lambda $ -- с. ч. оператора $ \mathcal{A} $, действующего на пространстве $ V $ \\
+	Собственным подпространством $ \mathcal{A} $, соответствующим $ \lambda $, называется множество с. в., соответствующих $ \lambda $
+\end{definition}
+
+\begin{notation}
+	$ V_\lambda $
+\end{notation}
+
+\begin{property}
+	$ V_\lambda $ является подпространством
+\end{property}
+
+\section{Свойства нормального оператора}
+
+\begin{properties}
+	$ \mathcal{A} $ -- нормальный оператор в евклидовом или унитарном пространстве
+	\begin{enumerate}
+		\item\label{en:471} $ \forall x \quad (\mathcal{A}x, ~ \mathcal{A}x) = (\mathcal{A}^*x, ~ \mathcal{A}^*x) $, то есть $ |\mathcal{A}x| = |\mathcal{A}^*x | $
+		\begin{proof}
+			$ (\mathcal{A}x, ~ \mathcal{A}x) = (x, ~ \mathcal{A}^*\mathcal{A}x) = (x, ~ \mathcal{A}\mathcal{A}^*x) = (\mathcal{A}^*x, ~ \mathcal{A}^*x) $
+		\end{proof}
+		\item\label{en:472} $ v $ -- скаляр \\
+		Тогда $ \mathcal{A} - v\mathcal{E} $ -- тоже нормальный оператор
+		\begin{proof}
+			Положим $ \mathcal{B} \define \mathcal{A} - \lambda \mathcal{E} $ \\
+			Тогда $ \mathcal{B}^* = \mathcal{A}^* - \overline\lambda \mathcal{E} $ \\
+			Подставим:
+			\begin{multline*}
+				(\mathcal{B}\mathcal{B}^*)(x) = \mathcal{B}(\mathcal{B}^*x) \bydef \mathcal{B}(\mathcal{A}^*x - \overline\lambda\mathcal{E}x) = \mathcal{B}(\mathcal{A}^*x - \overline\lambda x) \bydef \\
+				= \mathcal{A}(\mathcal{A}^*x - \overline\lambda x) - \lambda(\mathcal{A}^*x - \overline\lambda x) = \mathcal{A}(\mathcal{A}^*x) - \overline\lambda\mathcal{A}x - \lambda\mathcal{A}^*x + \lambda\overline\lambda x
+			\end{multline*}
+			\begin{multline*}
+				(\mathcal{B}^*\mathcal{B})(x) = \mathcal{B}^*(\mathcal{B}x) \bydef \mathcal{B}^*(\mathcal{A}x - \lambda \mathcal{E}x) = \mathcal{B}^*(\mathcal{A}x - \lambda x) \bydef \\
+				= \mathcal{A}^*(\mathcal{A}x - \lambda x) - \overline\lambda(\mathcal{A}x - \lambda x) = \mathcal{A}(\mathcal{A}^*x) - \lambda\mathcal{A}^*x - \overline\lambda\mathcal{A}x + \overline\lambda\lambda x
+			\end{multline*}
+		\end{proof}
+		\item $ \lambda $ -- с. ч. оператора $ \mathcal{A} $ \\
+		Тогда $ \overline\lambda $ является с. ч. $ \mathcal{A}^* $, и собств. подпр-во $ \lambda $ для $ \mathcal{A} $ равно собств. подпр-ву $ \overline\lambda $ для $ \mathcal{A}^* $
+		\begin{proof}
+			Нужно доказать, что $ \mathcal{A}v = \lambda v \iff \mathcal{A}^*v = \lambda x $ \\
+			Положим $ \mathcal{B} \define \mathcal{A} - \lambda \mathcal{E} $ \\
+			Тогда $ \mathcal{B}^* = \mathcal{A}^* - \overline\lambda\mathcal{E} $ \\
+			Нужно доказать, что $ \mathcal{B}x = 0 \iff \mathcal{B}^*x = 0 $ \\
+			По (\ref{en:472}), оператор $ \mathcal{B} $ нормальный. Применим (\ref{en:471}):
+			$$ \mathcal{B}x = 0 \iff |\mathcal{B}x| = 0 \iff |\mathcal{B}^*x| = 0 \iff \mathcal{B}^*x = 0 $$
+		\end{proof}
+		\item С. в. $ \mathcal{A} $, относящиеся к разным с. ч., ортогональны
+		\begin{proof}
+			Пусть $ x, y $ -- с. в. $ \mathcal{A} $, соответствующие с. ч. $ \lambda, \mu $, где $ \lambda \ne \mu $ \\
+			Тогда $ x, y $ -- с. в. $ \mathcal{A}^* $, соответствующие с. ч. $ \overline\lambda, \overline\mu $ \\
+			Преобразуем $ (\mathcal{A}x, ~ y) $ двумя способами:
+			$$
+			\begin{cases}
+				(\mathcal{A}x, ~ y) = (\lambda x, y) = \lambda(x, y) \\
+				(\mathcal{A}x, ~ y) = (x, ~ \mathcal{A}^*y) = (x, \overline\mu u) = \mu(x, y)
+			\end{cases} $$
+			Из того, что $ \lambda(x, y) = \mu(x, y) $, следует, что $ (x, y) = 0 $
+		\end{proof}
+	\end{enumerate}
+\end{properties}
+
+\section{Диагонализуемость нормального оператора. Следствия (без доказательства)}
+
+\begin{theorem}
+	$ \mathcal{A} $ -- нормальный оператор в унитарном пространстве \\
+	Тогда существует ОНБ, состоящий из с. в. оператора $ \mathcal{A} $ \\
+	То есть, существует ОНБ, в котором матрица этого оператора диагональна
+\end{theorem}
+
+\begin{proof}
+	\textbf{Индукция} по размерности пространства \\
+	\textbf{База.} $ \dim = 1 $ -- очевидно \\
+	\textbf{Переход} \\
+	У оператора $ \mathcal{A} $ существует хотя бы одно с. ч. $ \lambda_1 $, т. к. характ. многочлен $ \chi_{\mathcal{A}} $ имеет корень в $ \Co $ \\
+	Пусть $ e_1 $ -- с. в. $ \mathcal{A} $, соотв. $ \lambda_1 $, такой, что $ |e_1| = 1 $ \\
+	Тогда $ e_1 $ является с. в. и для $ \mathcal{A}^* $ \\
+	Положим $ U \define \braket{e_1} $ \\
+	Тогда $ U $ инвариантно для $ \mathcal{A} $ и $ \mathcal{A}^* $, и, следовательно, $ \mathcal{U}^T $ инвариантно для $ \mathcal{A} $ и $ \mathcal{A}^* $ \\
+	Положим $ \mathcal{B} \define \mathcal{A}\clamp{U^\perp} $ \\
+	Тогда $ \mathcal{A}^*\clamp{U^\perp} $ является сопряжённым к $ \mathcal{B} $ на $ U^\perp $, т. .к равенство из определения сопряжённого оператора выполнено на подпространстве \\
+	По \textbf{индукционному предположению}, в $ U^\perp $ существует ОНБ из с. в. $ \mathcal{B} $ \\
+	Эти векторы являются собств. для $ \mathcal{A} $, и все они ортогональны $ e_1 $
+\end{proof}
+
+\begin{implication}[канонический вид матрицы нормального оператора]
+	$ A $ -- нормальная матрица в унитарном пространстве \\
+	Тогда существует унитарная матрица $ C $, такая, что матрица $ C^{-1}AC $ диагональна
+\end{implication}
+
+\begin{implication}[унитарный оператор]
+	$ \mathcal{A} $ -- нормальный оператор, $ \lambda_i $ -- с. ч. $ \mathcal{A} $ \\
+	$ \mathcal{A} $ -- унитарный $ \iff |\lambda_i| = 1 \quad \forall i $
+\end{implication}

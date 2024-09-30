@@ -1,0 +1,163 @@
+\section{Длина кривой}
+
+Разделим кривую на кусочки:
+$$ a = t_0 < t_1 < ... < t_n = b $$
+Найдём длину ломаной:
+$$ \sum_{i = 1}^n |\vect{f}(t_i) -\vect{f}(t_{i - 1})| \text{ -- интегральная сумма} $$
+Длина кривой -- предел интегральных сумм
+
+\begin{definition}
+	$$ \int \define \liml{\max{t_i - t_{i - 1}} \to 0} \sum_{i = 1}^n |\vect{f}(t_i) - \vect{f}(t_{i - 1}) $$
+	$$ \int \define \sup \sum_{i = 1}^n |\vect{f}(t_i) - \vect{f}(t_{i - 1}) $$
+\end{definition}
+
+\begin{remark}
+	Определения равносильны (в предположении, что предел существует)
+\end{remark}
+
+\begin{iproof}
+	\item $ \sup \ge \lim $ -- очевидно
+	\item $ \lim \ge \sup $ \\
+	$ \sup $ -- тоже какой-то частичный предел \\
+	Пусть есть последовательность разбиений таких, что длина ломаной стремится к $ \sup $ \\
+	Разобьём максимальную (по длине) $ t_i $ на $ n $ равных частей \\
+	При этом, по неравенству треугольника, длина ломаной не уменьшилась, а $ \max|t_i - t_{i - 1}| $ теперь стремится к нулю
+\end{iproof}
+
+\begin{definition}
+	Кривая называется спрямляемой, если $ \int < \infty $
+\end{definition}
+
+\begin{remark}
+	Тогда $ \sup $ можно заменить на $ \limsup $ \\
+	Для верхнего предела верно рассуждение о равносильности
+\end{remark}
+
+\begin{eg}[неспрямляемой кривой]
+	$$ y = \sin \frac1x, \qquad x \in (0, 1) $$
+\end{eg}
+
+\begin{figure}[!ht]
+	\begin{tikzpicture}[domain=0:1.2]
+		\draw[->] (-0.2, 0) -- (4.2, 0) node[right] {$ x $};
+		\draw[->] (0, -1.2) -- (0, 1.2) node[above] {$ f(x) $};
+
+		\draw[color=blue, samples=1000] plot[id=x] function{sin(1/x)} node[right] {$ f(x) = \sin \frac1x $};
+	\end{tikzpicture}
+\end{figure}
+
+\begin{theorem}
+	$ f $ непр. дифференц. на $ [a, b] \implies f $ спрямляема и
+	$$ \int = \dint[t]ab{|f'(t)|} $$
+\end{theorem}
+
+\begin{proof}
+	\begin{equ}1
+		\bigg| \dint[t]ab{|\vect{f}'(t)|} - \sum_{i = 1}^n |\vect{f}(t_i) - \vect{f}(t_{i - 1})| \bigg| \define A
+	\end{equ}
+	Хотим доказать, что это меньше $ 2\veps $
+	\begin{remind}
+		Неравенство треугольника:
+		$$ |\vect{a}| + |\vect{b}| \ge |\vect{a} + \vect{b}|, \qquad |\vect{a}| - |\vect{b}| \le |\vect{a} + \vect{b}| $$
+	\end{remind}
+	Обозначим
+	$$ \Delta_i t \define t_i - t_{i - 1}, \qquad \Delta_i f \define f(t_i) - f(t_{i - 1}), \qquad a_i \in [t_{i - 1}, t_i] $$
+	\begin{multline*}
+		\eref1 = \bigg| \dint[t]ab{|f'(t)|} - \sum_{i - 1}^n |f'(\tau_i)| \Delta_i t + \sum_{i = 1}^n |f'(\tau_i)| \Delta_i t - \sum_{i = 1}^n |f(t_i) - f(t_{i - 1})| \bigg| \trile \\
+		\le \bigg| \underbrace{\dint[t]ab{|f'(t)} - \sum_{i = 1}^n |f'(\tau_i) \Delta_i t}_{\define \rom1} \bigg| + \bigg| \underbrace{\sum_{i = 1}^n \big( f'(\tau_i) \Delta_i t - |\Delta_i f| \big)}_{\define \rom2} \bigg|
+	\end{multline*}
+	\begin{itemize}
+		\item $ \rom1 < \veps $ (фиксируем $ \veps $ и по нему подбираем мелкость разбиения)
+		\item
+		\begin{multline*}
+			\rom2 = \sum_{i = 1}^n \bigg( \big| f'(\tau_i) \big| \Delta_i t - |\Delta_if| \bigg) \le \sum_{i = 1}^n \bigg| f'(\tau_i) \Delta_it - \Delta_if \bigg| = \\
+			= \sum_{i = 1}^n \bigg| \dint[t]{t_{i - 1}}{t_i}{f'(\tau_i)} - \dint[t]{t_{i - 1}}{t_i}{f'(t)} \bigg| \le \sum_{i = 1}^n \dint[t]{t_{i - 1}}{t_i}{\bigg| f'(\tau_i) - f'(t) \bigg| } \underset{\eref2}< \sum_{i = 1}^n \dint[t]{t_{i - 1}}{t_i}\veps = \sum \veps \cdot \Delta_it = \\
+			= \veps(b - a)
+		\end{multline*}
+		\begin{equ}2
+			\bigg| f'(\tau_i) - f'(t) \bigg| < \veps \text{ при достаточно мелком разбиении}
+		\end{equ}
+		Воспользовались равномерной непрерывностью $ f'(t) $:
+		$$ \bigg| \int f(t) \di t \bigg| \le \int |f(t)| \di t $$
+	\end{itemize}
+\end{proof}
+
+\begin{undefthm}{Способы задания кривой}
+	\begin{enumerate}
+		\item Явно: \\
+		$ y = f(x) $ (плоская кривая)
+		$$ \int = \dint{x_0}{x_1}{\sqrt{1 + f'^2(x)}} $$
+		\item Явно в полярных координатах:
+		$$ r = r(\vphi) $$
+		$$ x = r(\vphi)\cos \vphi, \qquad y = r(\vphi)\sin \vphi $$
+		$$ x_\vphi' = r'\cos \vphi - r\sin \vphi, \qquad y_\vphi' = r'\sin \vphi + r\cos\vphi $$
+		\begin{multline*}
+			\sqrt{x'^2 + y'^2} = \sqrt{(r'\cos\vphi - r\sin\vphi)^2 + (r'\sin\vphi + r\cos\vphi)^2} = \\
+			= \sqrt{r'^2\cos^2 - \cancel{2r'r\cos\vphi\sin\vphi} + r^2\sin^2\vphi + r'^2\sin^2\vphi + \cancel{2r'r\sin\vphi\cos\vphi} + r^2\cos^2\vphi} = \sqrt{r'^2 + r^2}
+		\end{multline*}
+		$$ \int = \dint[\vphi]{\vphi_0}{\vphi_1}{\sqrt{r'^2 + r^2}} $$
+		\item Неявно:
+		$$ x^2 + y^2 - 1 = 0 $$
+		$$ F(x, y) = 0 $$
+		Воспользуемся теоремой \ref{th:1}:
+		$$ y = \pm \sqrt{1 - x^2}, \qquad \text{кроме } x = \pm 1, ~ y = 0 $$
+		$$ \int = \dint{x_0}{x_1}{\sqrt{1 + f'^2(x)}} $$
+		$$ f'(x) = y_x' = -\frac{F_x'}{F_y'} $$
+		$$ \int = \dint{x_0}{x_1}{\sqrt{1 + \frac{F_x'^2}{F_y'^2}}} $$
+	\end{enumerate}
+\end{undefthm}
+
+\begin{theorem}[о неявной функции]\label{th:1}
+	Если $ \dfrac{\partial F}{\partial y} \ne 0 $ в окрестности какой-то точки, то
+	$$ \text{в нек. } (x_0 - \veps, x_0 + \veps) \quad \exist f : F(x, f(x)) = 0 $$
+	То есть $ F(x, y) = 0 \iff y = f(x) $
+\end{theorem}
+
+$$ f(t) = \bigg( x(t), y(t), z(t) \bigg) $$
+$$ \int = \dint[t]{t_0}{t_1}{\sqrt{x'^2 + y'^2 + z'^2}} $$
+
+\section{Натуральная параметризация}
+
+\begin{definition}
+	Параметризация $ \vect{f}(t) $ называется натуральной, если $ |f'(t)| = 1 $
+\end{definition}
+
+\begin{theorem}
+	Натуральная параметризация существует и единственна (с точностью начального момента времени и направления обхода кривой)
+\end{theorem}
+
+\begin{iproof}
+	\item Существование
+	$$ s(t) \define \dint[\tau]{t_0}{\bm{t}}{|f'(\tau)} \implies s'(t) = |f'(t)| $$
+	Пусть $ t(s) \define \vphi(s), \qquad \vphi = s^{-1} $
+	$$ t'(s) = \vphi'(s) = \frac1{s'(t)} = \frac1{|f'(t)|} $$
+	Пусть $ \vect{g}(s) \define \vect{f}(\vphi(s)) $
+	$$ g'(s) = f'(\vphi(s)) \cdot \vphi'(s) = \frac{f'(\vphi(s))}{|f'(t)|} = \frac{f'(\vphi(s))}{|f'(\vphi(s))|} $$
+	$$ |g'(s)| = \bigg| ... \bigg| = 1 \implies s \text{ -- натур. параметр }, \quad g(s) \text{ -- натур. параметризация} $$
+	\item Единственность \\
+	Пусть $ s $ и $ t $ -- натуральные параметры
+	$$ g(s) = f \big( \vphi(s) \big), \qquad t = \vphi(s) $$
+	$$ 1 = |g'(s)| = |f'(t) \cdot \phi'(s)| = |f'(t)| \cdot |\vphi'(s)| $$
+	При этом, $ |f'(t)| = 1 $, т. к. $ t $ -- натур.
+	$$ \implies |\vphi'(s)| = 1 \implies \vphi'(s) = \pm 1 \implies \vphi(s) = \pm s + \const $$
+\end{iproof}
+
+\section{Реп\'{е}р Френе}
+
+Репер $ \equiv $ правая тройка ортонормированных векторов (зависит от $ t $) \\
+Пусть $ s $ -- натуральный параметр
+$$ \vect{v} \define f'(s), \qquad |\vect{v}(s)| \equiv 1 $$
+\begin{lemma}
+	Если ветор постоянной длины, то $ v'(s) \perp v(s) $
+\end{lemma}
+$$ \vect{n} \define \frac{v'}{|v'|} \text{ -- единичный} $$
+$$ \vect{b} \define v \times n $$
+
+\begin{definition}
+	Репер Френе: ($ v $, $ n $, $ b $) (зависит от $ t $ или от $ s $)
+	\begin{itemize}
+		\item $ \vect{v} $ -- касательный вектор
+		\item $ \vect{n} $ -- вектор главной нормали
+		\item $ \vect{b} $ -- вектор бинормали
+	\end{itemize}
+\end{definition}

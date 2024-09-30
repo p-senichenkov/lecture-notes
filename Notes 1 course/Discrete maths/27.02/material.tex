@@ -1,0 +1,87 @@
+\chapter{Графы}
+
+\section{Обход в ширину и обход в глубину}
+
+\begin{algorithm}[обход в ширину]
+	$ G = \langle M, N \rangle $ \\
+    Задан корень $ x \in M $ \\
+    $ M = M_0 \cup \underset{\text{фронт}}{M_1} \cup M_2 $ \\
+    Начальное состояние: $ M_0 = \O, \quad M_1 = \set{x} $ \\
+    Алгоритм работает, пока фронт не пуст
+    \begin{enumerate}
+    	\item Выбираем $ y \in M_1 $
+        \item Просматриваем все рёбра $ e = (y, v) \in N_y $ (выходящие из $y$):
+        \begin{enumerate}
+            \item $ v \in M_0 $ -- ничего не делаем
+            \item $ v \in M_1 $ -- ничего не делаем
+            \item $ v \in M_2 $ -- перемещаем $ v $ в $M_1$
+        \end{enumerate}
+        \item Перемещаем $y$ в $M_0$
+    \end{enumerate}
+\end{algorithm}
+
+\begin{algorithm}[обход в глубину]
+	$ G = \langle M, N \rangle $ \\
+    Задан корень $ x \in M $
+    \begin{verbatim}
+        for u \in V
+        {
+            color(u) = white
+        }
+        for u \in V
+        {
+            if color(u) == white
+            {
+                DFS(u)
+            }
+        }
+        DFS(u)
+        color(u) = gray
+        for (для всех дуг e = (u, w))
+        {
+            if color(w) == white
+            {
+                DFS(w)
+            }
+        }
+        color($u$) = black
+    \end{verbatim}
+\end{algorithm}
+
+\begin{theorem}[о связном подграфе]
+    В связном графе $ G = \langle M, N \rangle $ можно выделить связный подраф $ \overline{G} = \langle M, N' \rangle, \quad N' \sub N $, такой что:
+    \begin{itemize}
+    	\item $ |N'| = |M| - 1 $ (Вершины из $0 : k$, рёбра из $ 1 : k $)
+        \item $ \operatorname{num}(u) = \max\set{\operatorname{num}(\operatorname{beg}(u)), \operatorname{num}(\operatorname{end}(u))} $
+    \end{itemize}
+\end{theorem}
+
+\begin{proof}
+
+\end{proof}
+
+\begin{implication}
+	Если $ |N| < |M| - 1 $, то граф не связный
+\end{implication}
+
+\begin{undefthm}{Задача}
+    Задан связный граф $ G = \langle M, N \rangle, \quad l(u), \quad u \in N $. Найти остовное дерево $ \overline{G} = \langle M, N' \rangle : \sum_{u \in N'} l(u) \to \min $
+\end{undefthm}
+
+\begin{algorithm}[Краскалла]
+	\hfill
+    \begin{enumerate}
+    	\item Сортируем дуги: $ l(u_1) \le l(u_2) \le ... \le l(u_n), \qquad U_0 \ne \O $
+        \item
+        \begin{verbatim}
+        	for i := 1 to n
+                Рассматриваем ребро u_i
+                Пытаемся доавить в U_i-1:
+                - Если не получили цикла, то U_i = U_i-1 + { u_i }
+                - Если получили цикл, то U_i = U_i-1
+            end for
+        \end{verbatim}
+
+    \end{enumerate}
+
+\end{algorithm}

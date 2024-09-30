@@ -1,0 +1,128 @@
+\chapter{Теория групп}
+
+\section{Циклические группы}
+
+\begin{theorem}[разложение циклической группы в прямое произведение примарных подгрупп]
+	Пусть $ G $ -- конечная циклическая группа. Тогда её можно разложить в прямое произведение примарных циклических подгрупп
+\end{theorem}
+
+\begin{proof}
+    Пусть $ |G| \define n, \qquad G = \braket{a}, \qquad n = \underset{p_i \in \Prime}{p_1^{s_1}...p_k^{s_k}} $ \\
+    Пусть $ q_i \define \dfrac{n}{p_i^{s_i}}, \qquad b_i \define a^{q_i}, \qquad H_i \define \braket{b_i} $ \\
+    $ \ord b_i = p_i^{s_i} $, так как $ b_i^{p_i^{s_i}} = a^{q_ip_i^{s_i}} = a^n = e $ \\
+    При $ 0 < x < p_i^{s_i} $, $ \quad b_i^{p_i^{s_i}} = a^{q_ix} \ne e, \qquad 0 < q_ix < n $ \\
+    Значит, $ H_i \cong \Z_{p^{s_i}}, \qquad H_i $ -- примарная
+    \begin{itemize}
+    	\item Докажем, что $ G = H_1 \times H_2 \times ... \times H_k $: \\
+        $ H_i \vartriangleleft G $, так как $ G $ абелева
+        \item Докажем, что $ H_1H_2...H_{i - 1} \cap H_i = \set{e} $: \\
+        Пусть $ x \in H_1...H_{i - 1} \cap H_i $
+        $$ x \in H_i = \big( a^{q_i} \big)^{t_i} = a^{q_it_i} \quad \text{ для некоторого } t_i $$
+        $$ x \in H_1...H_{i - } \implies x = a^{q_1t_1}a^{q_2t_2}...a^{q_{i - 1}t_{i - 1}} = a^{q_1t_1 + ... + q_{i - 1}t_{i - 1}} \quad \text{ для которого } q_i $$
+        $$ a^{q_it_i} = a^{q_1t_1 + ... + q_{i - 1}t_{i - 1}} \implies q_1t_1 + ... + q_{i - 1}t_{i - 1} - q_it_i \divby \ord a = n $$
+        $$
+        \begin{rcases}
+            q_1t_1 + ... + q_{i - 1}t_{i - 1} - q_it_i \divby p_i^{s_i} \\
+            q_1, ..., q_{i - 1} \divby p_i^{s_i}
+        \end{rcases} \implies q_it_i \divby p_i^{s_i} \underimp{q_i \ndivby p_i} t_i \divby p_i^{s_i} $$
+        $$ t_i \divby p_i^{s_i} \implies q_it_i \divby \frac{n}{p^{s_i}} \cdot p^{s_i} = n $$
+        $$ x = a^{q_it_i} = e $$
+        \item Докажем, что $ H_1H_2...H_k = G $: \\
+        Пусть $ x \in G $ \\
+        Тогда $ x = a^t $ для некоторого $ t $ \\
+        По теореме о линеном представлении НОД,
+        $$ \exist \alpha_1, ..., \alpha_k : \alpha_1q_1 + ... + \alpha_kq_k = 1 \quad \text{ так как } \GCD(q_1, ..., q_k) = 1 $$
+        $$ a^t = a^{(t\alpha_1)q_1 + (t\alpha_2)q_2 + ... + (t\alpha_k)q_k} = \underset{\in H_1}{\big( a^{q_1} \big)^{t\alpha_1}} \cdot \widedots[3em] \cdot \underset{\in H_k}{\big( a^{q_k} \big)^{t\alpha_k}} \in H_1...H_k $$
+    \end{itemize}
+\end{proof}
+
+\begin{implication}
+	$ G $ -- циклическая, $ |G| = m_1 \cdot ... \cdot m_k $, где $ m_i $ попарно взаимно просты \\
+    Тогда $ G $ можно разложить в произведение циклических подгрупп порядков $ m_1, ..., m_k $
+\end{implication}
+
+\begin{proof}
+	Разложим $ G $ в произведение примарных подгрупп \\
+    Пусть $ m_i = p_1^{\alpha_1} \cdot ... \cdot p_s^{\alpha_s} $
+    $$ G = \widedots[3em] \times \underset{\cong \Z_{p_1^{\alpha_1}}}{H_1} \times \widedots[3em] \times \underset{\cong \Z_{p_2^{\alpha_2}}}{H_2} \times \widedots[3em] $$
+\end{proof}
+
+\chapter{Евклидовы и унитарные пространства}
+
+\section{Определение и примеры}
+
+\begin{undefthm}{Идея}
+	В $ \R^2, \R^3 $ есть скалярное произведение:
+    $$ (u, v) = |u| \cdot |v| \cdot \cos \angle(u, v) $$
+    Из него выводились разные свойства, например,
+    \begin{itemize}
+    	\item Билинейность:
+        $$ (tu, v) = t(u, v), \qquad t \in \R $$
+        $$ (u_1 + u_2, v) = (u_1, v) = (u_1, v) + (u_2, v) $$
+        \item Симметричность: $ (u, v) = (v, u) $
+        \item Положительная определённость: $ (u, u) \ge 0 $
+    \end{itemize}
+    Будем считать, что в Евклидовом пространстве есть скалярное произведение с такими свойствами. Через него выразим $ \cos $ и длину вектора
+\end{undefthm}
+
+\begin{definition}
+	Векторное пространство над $ \R $ называется вещественным \\
+    Векторное пространство над $ \Co $ называется комплексным
+\end{definition}
+
+\begin{definition}
+	$ V $ -- вещественное векторное пространство. Скалярным произведением на $ V $ называется функция $ (\cdot, \cdot) : V \times V \to \R $, такая, что выполнены свойства:
+    \begin{enumerate}
+        \item \label{en:1} Линейность по первому аргументу: $ (au + bv, w) = a(u, w) + b(v, w) $
+        \item \label{en:2} Симметричность: $ (u, v) = (v, u) $
+        \item Положительная определённость: $ (v, v) \ge 0 $
+    \end{enumerate}
+\end{definition}
+
+\begin{remark}
+    Из \ref{en:1} и \ref{en:2} следует линейность по второму аргументу. Говорят, что $ (\cdot, \cdot) $ билинейна
+\end{remark}
+
+\begin{remark}
+    $ (0, v) = 0 $, т. к. $ \underbrace{(u + 0, v)}_{= (u, v)} = (u, v) + (0, v) $ \\
+    В частности, $ (0, 0) = 0 $
+\end{remark}
+
+\begin{definition}
+	Евклидово пространство -- конечномерное вещественное пространтство со скалярным произведением
+\end{definition}
+
+\begin{definition}
+	Пусть $ V $ -- комплексное векторное пространство. Скалярным произведением на $ V $ называется функция $ (\cdot, \cdot) : V \times V \to \Co $, такая, что:
+    \begin{enumerate}
+    	\item Линейность по первому аргументу: $ (au + bv, w) = a(u, w) + b(v, w) $
+        \item $ (u, v) = \overline{(v, u)} $
+        \item $ (v, v) $ является вещественным положительным числом
+    \end{enumerate}
+\end{definition}
+
+\begin{definition}
+	Унитарным пространством называется конечномерное комплексное пространство со скалярным произведением
+\end{definition}
+
+\section{Неравенство Коши}
+
+\begin{definition}
+    Длина вектора $ V $ в евклидовом или унитарном пространстве определяется как $ |v| = \sqrt{(v, v)} $
+\end{definition}
+
+\begin{theorem}[неравенство Коши]
+	Пусть $ V $ -- евклидово или унитарное пространство
+    $$ \forall u, v \in V \quad |(u, v)^2 \le (u, u) \cdot (v, v) $$
+    Равенство достигается, если $ u = sv $, где $ s $ -- скаляр, или $ v = 0 $
+\end{theorem}
+
+\begin{proof}
+    Будем пользоваться линейностью по первой координате и
+    $$ (u, av + bw) = \overline{a}(u, v) + \overline{b}(u, w) $$
+    Пусть $ u \ne 0 $ \\
+    Положим $ a \define (u, u), \qquad b \define (u, v), \qquad c \define (v, v), \qquad t \define \dfrac{b}c $
+    \begin{multline*}
+        0 \le (u - tv, u - tv) = (u, u) + (u, -tv) + (-tv, u) + (-tv, -tv) = \\ = a - \overline{t}b - t\overline{b} + t\overline{t} \cdot c \underset{(-t\overline{b} + t\overline{t} \cdot c = \overline{t}(-b + tc) = 0)}= a - t\overline{b} \bydef a - \frac{b}c\overline{b} = a - \frac1c|\overline{b}|^2
+    \end{multline*}
+\end{proof}

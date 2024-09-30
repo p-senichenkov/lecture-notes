@@ -1,0 +1,53 @@
+\chapter{Теория графов}
+
+\section{Дерево кратчайших путей}
+
+\begin{undefthm}{Задача}
+    $ G = \langle M, N \rangle $ -- ориентированный, $ l(u) \ge 0, \quad u \in N, \quad x_0 \in M $ \\
+    Требуется построить дерево $ \overline{G} = \langle M, N' \rangle $ -- дерево от $ x_0 $ до всех остальных вершин \\
+    Целевая функция: $ \sum\limits_{u \in N'} l(u) \to \min $
+\end{undefthm}
+
+\begin{algorithm}[двух китайцев]
+    \hfill
+    \begin{enumerate}
+    	\item Спуск до нуля \\
+        $ \underset{i \ne x_0}{\forall i \in M} $ рассматриваем $ N_i^+ $ \\
+        $ l(\overline{u}) \define \min\limits_{u \in N_i^+} l(u) $ \\
+        $ l(u) \define l(u) - l(\overline{u}), \qquad u \in N_i^+ $
+        \item $ \forall i \ne x_0 $ берём нулевую дугу, $ \overline{N} $ ($m - 1$ дуг)
+        \item
+        \begin{itemize}
+        	\item Если $ \overline{G} = \langle M, \overline{N} \rangle $ -- дерево, то конец
+            \item Иначе:
+            \begin{enumerate}
+                \item Строим диаграмму порядка $ D = \langle M_0, N_0 \rangle $ графа $ \overline{G} $
+                \item Строим граф $ G_1 = \langle M_0, N_0 \cup N_1 \rangle $, где $ N_1 \sub N $ \\
+                Построение $ N_1 $:
+                \begin{enumerate}
+                	\item Добавляем все дуги
+                    \item Если $ u = (i, j) $ и $ v = (i, j) $, ``склеиваем'' их, выбирая дугу с наименьшей длиной
+                \end{enumerate}
+                \item Шаг назад: \\
+                Уже построены $ G_0, G_1, ..., G_{k - 1}, G_k $, где $ G_k $ -- дерево \\
+                Хотим вернуться к $ G_{k - 1} $:
+                \begin{enumerate}
+                	\item Возвращаем ``стянутый'' контур
+                    \item Удаляем одну дугу из контура
+                \end{enumerate}
+                Повторяем, пока не вернёмся к $ G_0 $
+            \end{enumerate}
+        \end{itemize}
+    \end{enumerate}
+\end{algorithm}
+
+\section{Сетевой график}
+
+$ G = \langle N \cup \set{i_0, i_+}, E \rangle $ \\
+$ i_0 $ -- начальная работа, $ i_+ $ -- конечная работа \\
+У каждой работы есть $ t(u) $ -- время выполнения \\
+Рёбра задают отношения порядка
+
+\begin{definition}
+	Сетевой график (в форме работы -- вершины) -- это граф без контуров, в котором выделены начальная и конечная вершины $ i_0 $ и $ i_+ $, и любая вершина лежит на пути из $ i_0 $ в $ i_+ $
+\end{definition}

@@ -1,0 +1,168 @@
+\chapter{Полиномы}
+
+\section{Продолжение чего-то}
+
+\begin{implication}
+    $c$ -- корень $P(x)$, $P(c) = P'(c) = ... = P^{(k-1)}(c) = 0$, $P^{(k)}\ne 0$. Тогда $k$ -- показатель кратности корня $c$
+\end{implication}
+
+\begin{proof}
+	Индукция. \\
+    База: $k = 1$, следует из теоремы
+    $$k = 1 \quad P(c) = 0, ~ P'(c) \ne 0 \implies c \text{ -- простой корень} $$
+    Переход: $k - 1 \to k, ~ k \ge 2$ \\
+    Положим $P_1(x) = P'(x)$, $c$ -- корень $P_1(x)$. Докажем, что показатель кратности $c$ для $P_1$ на 1 меньше, чем для $P$. Пусть $P(x) = (x - c)^m Q(x)$, $Q(x) \ndivby x - c$
+    \begin{multline*}
+        P_1(x) = \bigg((x-c)^mQ(x)\bigg)' = \bigg((x-c)^m\bigg)' \cdot Q(x) + (x-c)^m \cdot Q'(x) = \\ = \underbrace{m(x - c)^{m-1}\underbrace{Q(x)}_{\ndivby x-c}}_{\divby (x-c)^{m-1}, ~ \ndivby (x-c)^m} + (x - c)^m Q'(x) \implies P_1(x) \divby (x-c)^{m-1}, ~ \ndivby (x-c)^m
+    \end{multline*}
+\end{proof}
+
+\begin{theorem}[Формула Тейлора]
+    Пусть $P \in \R[x]$, $\deg P = n$. Тогда
+    $$ P(x) = P(c) + \frac{P'(c)}{1!}(x-c) + ... + \frac{P^{(k)}(c)}{k!}(x-c)^k + ... + \frac{P^{(n)}(c)}{n!}(x-c)^n $$
+\end{theorem}
+
+\begin{proof}
+    \hfill
+    \begin{enumerate}
+    	\item Докажем, что $\exist d_0, d_1, ..., d_n : P(x) = d_0 + d_1 (x-c) + ... + d_n (x-c)^n $: \\
+        Индукция:
+        \begin{itemize}
+        	\item База: $\deg P = 0 $ или $\deg P = - \infty $, $P(x)$ -- костанта $ \implies P(x) = d_0 $
+            \item Переход: $ n - 1 \to n $ \\
+            Разделим $P(x)$ на $x-c$ с остатком:
+            $$ P(x) = Q(x) \cdot (x - c) + r, \quad \deg Q = n - 1 $$
+            По индукционному предположению $ \exist c_i : Q(x) = c_0 + c_1 (x - c) + ... + c_{n-1}(x - c)^{n-1} $
+            $$ P(x) = c_0 (x - c) + c_1 (x - c)^2 + ... + c_{n-1} (x - c)^n + r $$
+            Подойдёт $d_0 = r$, $d_i = c_{i-1} $, при $ i \ge 1 $
+        \end{itemize}
+        \item Докажем, что $d_i = \frac{P^{(i)}(c)}{i!} $, $i \ge 1$, $ d_0 = P(c) $
+        $$ \bigg( (x-c)^i \bigg)^{(k)} = \left\{ \begin{tabular}{l c}
+                                                 	$0$ & $i < k$ \\
+                                                    $k(k-1)...1$ & $i = k$ \\
+                                                    $i(i-1)...(i-k+1)(x-c)^{i-k}$ & $i > k$
+                                                 \end{tabular} \right. $$
+        $$ \bigg( (x-c)^i \bigg)^{{k}} \clamp{x=c} = 0 $$
+        $$ P^{(k)}(c) = d_0 0 + ... + d_{k-1} 0 + d_k \cdot k! + d_{k+1} 0 + ... $$
+        $$ d_k = \frac{P^{(k)}(c)}{k!} $$
+    \end{enumerate}
+\end{proof}
+
+\section{\S8. Поле частных области целостности}
+
+\begin{egs}
+    \hfill
+    \begin{enumerate}
+    	\item $A = \Z$, $K = \Q$
+        \item $A$ -- кольцо многочленов над полем. $K$ -- поле рациональных функций $\frac{P(x)}{Q(x)}$
+    \end{enumerate}
+\end{egs}
+
+\begin{notation}
+	$A$ -- область целостности. $M$ -- множество пар $(a,b)$, где $b \ne 0$ \\
+    $\rho$ -- отношение эквивалентности на $M$, заданное правилом $(a,b) \mathrel{\rho} (c,d)$, если $ ad = bc $
+\end{notation}
+
+\begin{lemma}
+	$ \rho $ -- отношение эквивалентности
+\end{lemma}
+
+\begin{proof}
+    \hfill
+    \begin{itemize}
+        \item Рефлексивность: $ ab = ab \implies (a,b) \mathrel\rho (a, b) $
+        \item Симметричность: $ (a,b) \mathrel\rho (c,d) \implies ad = bc \implies cb = ad \implies (c,d) \mathrel\rho (a,b) $
+        \item Транзитивность:
+        $$ \begin{rcases} (a,b) \mathrel\rho (c,d) \\ (c,d) \mathrel\rho (e,f) \end{rcases} \stackrel?= (a,b) \mathrel (e,f) $$
+        $$ 0 = (ad - bc)f + (cf -de)b = adf - bde = d(af - be) \underset{\text{обл. цел.}}{\implies} af = be $$
+    \end{itemize}
+\end{proof}
+
+\begin{definition}
+	Пусть $(a,b)$, $(c,d) \in M $. Их суммой и произведением называются пары $(ad + bc, bd)$, $(ac, bd) \in M$
+\end{definition}
+
+\begin{lemma}
+	Пусть $u, v, u', v' \in M $, $u \mathrel\rho u'$, $v \mathrel\rho v'$. Тогда $(u + v) \mathrel\rho (u' + v')$, $ (uv) \mathrel\rho (u'v')$
+\end{lemma}
+
+\begin{proof}
+	Отношение $\rho$ транзитивно, значит достаточно проверить, что $v \rho v' \implies (u + v) \mathrel\rho (u + v'), ~ (uv) \mathrel\rho (uv') $ и $u \mathrel u' \implies (u + v) \mathrel\rho (u' + v), ~ (uv) \mathrel\rho (u'v) $ \\
+    Пусть $u = (a,b), ~ v = (c,d), ~ v' = (c',d') $, $cd' = c'd$
+    $$ (ad + bc)bd' - bd(ad' + bc') = b^2(cd' - dc') = 0 $$
+    $$ ac \cdot bd' - bd \cdot ac' = ab(cd' - dc') = 0 $$
+\end{proof}
+
+\begin{implication}
+    Операции сложения и умножения можно определить на классах эквивалентности
+\end{implication}
+
+\begin{theorem}
+	Пусть $A$ -- область целостности с единицей. $K$ -- множество классов эквивалентности множества $M$ по отношению $\rho$ с определёнными выше операциями сложения и умножения. Тогда $K$ -- поле
+\end{theorem}
+
+\begin{definition}
+    $K$ называется полем частных $A$
+\end{definition}
+
+\begin{proof}
+    $\overline{x}$ -- класс $x$
+    \begin{enumerate}
+    	\item Ассоциативность сложения:
+        $$ x = (a,b), ~ y = (c,d), ~ z = (e,f) $$
+        $$ x + y = (ad + bc, bd) $$
+        $$ (x + y) + z = (ad + bd, bd) + (e,f) = ((ad + bc) \cdot f + bd \cdot e, bd \cdot f) = (adf + bcf + bde, bdf) $$
+        $$ (y + z) = (cf + de, df) $$
+        $$ x + (y + z) = (a,b) + (cf + de, df) = (adf + b(cf + de), bdf) = (adf + bcf + bde, bdf) $$
+        \item Нейтральный по сложению: $0 = \overline{(0, 1)} $ \\
+        Пусть $x = (a,b) $
+        $$ x + (0,1) = (a,b) + (0,1) = (a \cdot 1 + b \cdot 0, b \cdot 1) = (a,b) = x $$
+        $$ (0,1) + x = (0,1) + (a,b) = (0 \cdot b + 1 \cdot a, 1 \cdot b) = (a,b) = x $$
+        Докажем, что $b \ne 0 \implies \overline{(0,b)} = 0 $. То есть, докажем, что $(0,b) \mathrel\rho (0,1) $:
+        $$ 0 \cdot 1 = b \cdot 0 \implies (0,b) \mathrel\rho (0,1) \implies \overline{(o,b)} = 0 $$
+        Докажем, что $\overline{(a,b)} = 0 \implies a = 0$:
+        $$ (a,b) \mathrel\rho (0,1) \implies a \cdot 1 = b \cdot 0 = 0 \implies a = 0$$
+        \item Оратный по сложению. Проверим, что $\overline{(-a,b)} = - \overline{(a,b)}$:
+        $$ (-a,b) + (a,b) = (-ab + ba, bb) = (0, b^2) = 0 $$
+        $$ (a,b) + (-a,b) = (ab + b(-a), bb) = (0, b^2) = 0 $$
+        \item Коммутативность сложения, дистрибутивность, ассоциативность умножения, коммутативность умножения -- упражненеия
+        \item Нейтральный по умножению: $ 1 = \overline{(1,1)} $ \\
+        Пусть $x = (a,b) $
+        $$ x \cdot (1,1) = (a,b) \cdot (1,1) = (a \cdot 1 + b \cdot 1) = (a,b) = x \implies \overline{x \cdot (1,1)} = \overline{x} $$
+        Докажем, что $ \forall b \ne 0 $ выполнено $ \overline{(b,b)} = 1 $: (не докажем)
+        \item Обратный по умножению: \\
+        Пусть $ \overline{(a,b)} \ne 0 $. Докажем, что $ \overline{(b,a)} = \overline{(a,b)^{-1}} $:
+        $$ \overline{(a,b)} \cdot \overline{(b,a)} = \overline{(ab,ab)} = 1 $$
+    \end{enumerate}
+\end{proof}
+
+\underline{Переход к стандартным обозначениям}:
+Вложим $A$ в $K$ по правилу $a \mapsto \overline{(a,1)}$ \\
+Сложение, умножение согласованы:
+$$ (a,1) + (b,1) = (a \cdot 1 + 1 \cdot b, 1 \cdot 1) = (a + b, 1) $$
+$$ (a,1) \cdot (b,1) = (ab, 1 \cdot 1) = (ab,1) $$
+Проверим, что $(a,b) = a : b $, то есть
+$$ \overline{(a,b)} \cdot b = a $$
+$$ (a,b) \cdot (b, 1) = (ab, b) $$
+$$ ab \cdot 1 = ba \implies (ab, b) \mathrel\rho (a,1) \implies (\overline{ab}, b) \mathrel\rho a $$
+Класс $\overline{(a,b)} $ записывают как $\frac{a}b $
+
+\section{\S9. Поле рациональных функций}
+
+\begin{definition}
+    Пусть $K$ -- поле. Полем рациональных функций над $K$ называется поле частных кольца $K[x]$
+\end{definition}
+
+\begin{notation}
+	$K(x)$
+\end{notation}
+
+\begin{eg}
+    $$ x^2 + 1 \in \R[x], ~ \in \R(x) $$
+    $$ \frac{x^2 + 1}{x+2} \in \R(x) $$
+\end{eg}
+
+\begin{definition}
+	Элементы $K(x)$ называются рациональными функциями (над $K$) или рациональными дробями (над $K$)
+\end{definition}
+

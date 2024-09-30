@@ -1,0 +1,244 @@
+\chapter{Жорданова форма оператора}
+
+$ V $ -- векторное пространство, $ \mathcal{A} : V \to V $
+$$ \mathcal{A} \overarr{e_1, ..., e_n} A, \qquad \mathcal{A} \overarr{e_1', ..., e_n'} A' $$
+Жорданова клетка:
+$$ Jr(\lambda) =
+\begin{pmatrix}
+	\lambda & 0 & 0 & . \\
+	1 & \lambda & 0 & . \\
+	0 & 1 & \lambda & . \\
+	. & . & . & .
+\end{pmatrix} $$
+Например,
+$$
+\begin{pmatrix}
+	5 & 0 & 0 \\
+	1 & 5 & 0 \\
+	0 & 1 & 5
+\end{pmatrix} $$
+Жорданова форма -- матрица, у которой на главной диагонали жордановы клетки
+$$
+\begin{pmatrix}
+	Jr(\lambda_1) & 0 & 0 & . \\
+	0 & Jr(\lambda_2) & 0 & . \\
+	0 & 0 & Jr(\lambda_3) & . \\
+	. & . & . & .
+\end{pmatrix} $$
+
+\subsection{Напоминание: собственные числа}
+
+\begin{definition}
+	$ \mathcal{A} $ -- оператор на $ V $ \\
+	Число $ \lambda $ называется собственным для $ \mathcal{A} $, если
+	$$ \exist \underset{v \ne 0}{v \in V} : \mathcal{A}v = \lambda v $$
+	$ v $ называется собственным вектором, соответствующим $ \lambda $
+\end{definition}
+
+\begin{definition}
+	$ A $ -- квадратная матрица \\
+	Число $ \lambda $ называется собственным, если
+	$$ \exist \underset{X \ne 0}{\text{ столбец } X} : \mathcal{A}X = \lambda X $$
+	$ X $ называется собственным столбцом
+\end{definition}
+
+\begin{definition}
+	$ A $ -- квадратная матрица \\
+	Характеристическим многочленом $ A $ называется $ \chi_A(t) = \det(A - tE) $
+\end{definition}
+
+\begin{theorem}
+	Собственные числа $ A $ -- корни $ \chi_A(t) $
+\end{theorem}
+
+\begin{definition}
+	$ \mathcal{A} $ -- оператор, $ A $ -- его матрица в некотором базисе \\
+	Характеристическим многочленом $ \mathcal{A} $ называется $ \chi_A(t) $
+\end{definition}
+
+\section{Собственные подпространства}
+
+\begin{definition}
+	$ V $ -- векторное пространство, $ \mathcal{A} $ -- оператор на $ V $, $ \lambda $ -- с. ч. \\
+	Собственным подпространством, соответствующим $ \lambda $, называется множество с. в., соответствующих $ \lambda $
+\end{definition}
+
+\begin{notation}
+	$ V_\lambda $
+\end{notation}
+
+\begin{definition}
+	$ U $ -- подпространство $ V $ \\
+	$ U $ называется инвариантным относительно $ \mathcal{A} $, если
+	$$ \forall x \in U \quad \mathcal{A}x \in U $$
+\end{definition}
+
+\begin{statement}
+	$ V_\lambda $ -- инвариантное подпространство
+\end{statement}
+
+\begin{iproof}
+	\item Подпространство
+	\begin{itemize}
+		\item $ u, v \in V_\lambda \implies
+		\begin{Bmatrix}
+			\mathcal{A}u = \lambda u \\
+			\mathcal{A}v = \lambda v
+		\end{Bmatrix} \implies \mathcal{A}(u + v) \underset{\text{линейность}}= \mathcal{A}u + \mathcal{A}v = \lambda u + \lambda v = \lambda (u + v) \implies u + v \in V_\lambda $
+		\item $ u \in V_\lambda, k \in K \implies \mathcal{A}(ku) = k \mathcal{A}(u) = k \lambda u = \lambda(ku) \implies ku \in V_\lambda $
+	\end{itemize}
+	\item Инвариантность
+	$$ u \in V_\lambda \implies \mathcal{A}u = \lambda u \in V_\lambda $$
+\end{iproof}
+
+\begin{theorem}[о сумме собственных подпространств]
+	$ \lambda_1, ..., \lambda_k $ -- различные собственные числа \\
+	Тогда сумма $ V_{\lambda_1} + ... + V_{\lambda_k} $ является прямой
+\end{theorem}
+
+\begin{proof}
+	\textbf{Индукция} по $ k $
+	\begin{itemize}
+		\item \textbf{База.} $ k = 1 $ -- очевидно
+		\item \textbf{Переход}. $ k - 1 \to k $ \\
+		Пусть $ U_1 + ... + U_{k - 1} + U_k = 0, \qquad U_i \in V_{\lambda_i} $
+		\begin{multline*}
+			0 = \mathcal{A}(\underbrace{U_1 + ... + U_{k - 1} + U_k}_{= 0 }) - \lambda_k(\underbrace{U_1 + ... + U_{k - 1} + U_k}_{= 0 }) = \\
+			= \lambda_1U_1 + ... + \lambda_{k - 1}U_{k - 1} + \lambda_kU_k - \lambda_kU_1 - ... - \lambda_kU_{k - 1} - \lambda_kU_k = \underbrace{(\lambda_1 - \lambda_k)}_{= 0}U_1 + ... + \underbrace{(\lambda_{k - 1} - \lambda_k)}_{= 0}U_{k - 1}
+		\end{multline*}
+		$$ (\lambda_1 - \lambda_k)U_1 \in V_{\lambda_1}, \widedots[5em], (\lambda_{k - 1} - \lambda_k)U_{k - 1} \in V_{\lambda_{k - 1}} $$
+		$ V_{\lambda_1} + ... + V_{\lambda_{k - 1}} $ -- прямая
+		$$ \implies (\lambda_1 - \lambda_k)U_1 = ... = (\lambda_{k - 1} - \lambda_k)U_{k - 1} = 0 \implies U_1 = ... = U_{k - 1} = 0 \implies U_k = 0 $$
+	\end{itemize}
+\end{proof}
+
+\begin{implication}
+	$ \lambda_1, ..., \lambda_k $ -- различные с. ч., $ U_i \in V_{\lambda_i} $, $ U_i \ne 0 $ \\
+	Тогда $ U_1, ..., U_k $ ЛНЗ
+\end{implication}
+
+\begin{proof}
+	Пусть $ a_1U_1 + ... + a_kU_k = 0 $
+	$$ a_1U_1 \in V_{\lambda_1}, ..., a_kU_k \in V_{\lambda_k} \implies a_1U_1 = ... = a_kU_k = 0 \implies a_1 = ... = a_k = 0 $$
+\end{proof}
+
+\section{Операторы с диагональными и блочно-диагональными матрицами}
+
+В этом параграфе рассматриваем конечномерные пространства
+
+\begin{definition}
+	Оператор $ \mathcal{A} $, действующий на $ V $ называется диагонализуемым, если его матрица в некотором базисе диагональна
+\end{definition}
+
+\begin{definition}
+	$ \mathcal{A} $ -- оператор, $ \lambda $ -- с. ч.
+	\begin{itemize}
+		\item Геометрической кратностью $ \lambda $ называется $ \dim V_\lambda $
+		\item Арифметической кратностью $ \lambda $ называется кратность $ \lambda $ как корня $ \chi_{\mathcal{A}}(t) $
+	\end{itemize}
+\end{definition}
+
+\begin{theorem}[критерий диагонализуемости в терминах геометрической кратности]
+	(\rom1) $ \mathcal{A} $ диагонализуем $ \iff $ (\rom2) сумма геометрических кратностей всех с. ч. равна $ \dim V $
+\end{theorem}
+
+\begin{proof}
+	$ \mathcal{A} $ диагонализуем $ \iff $ в нек. базисе $ e_1, ..., e_n $ матрица $ \mathcal{A} $ имеет вид $ A =
+	\begin{pmatrix}
+		a_1 & 0 & . \\
+		0 & a_2 & . \\
+		. & . & .
+	\end{pmatrix} $ \\
+	$ \iff $ для некоторого базиса $ e_1, ..., e_n $ выполнено
+	$$ \mathcal{A}e_i = 0 e_1 + ... + a_ie_i + ... + 0 e_n = a_ie_i $$
+	$ \iff $ (\rom1') сущ. базис из с. в. \\
+	Докажем, что (\rom1) $ \iff $ (\rom1'): \\
+	Пусть $ U = V_{\lambda_1} + ... + V_{\lambda_k} $
+	$$ n \define \dim V, \qquad d_i \define \dim V_{\lambda_i} $$
+	\begin{itemize}
+		\item (\rom2) $ \implies $ (\rom1') \\
+		Докажем, что $ d_1 + ... + d_k = n $
+		$$ V_{\lambda_1} + V_{\lambda_k} \text{ прямая } \implies \dim U = n \implies U = V $$
+		$$ V_{\lambda_1} + V_{\lambda_k} \text{ прямая } \implies \text{ объединение базисов является базисом } U = V $$
+		Эти базисы состоят из с. в. \\
+		Объединение базисов состоит из с. в. \\
+		Это базис $ V $
+		\item (\rom1') $ \implies $ (\rom2) \\
+		Сущетсвует базис $ V $ из с. в.
+		$$ \underbrace{e_1^{(1)}, ..., e_{t_1}^{(1)}}_{
+			\begin{subarray}{c}
+				\text{соотв. } \lambda_1 \\
+				\in V_{\lambda_1}
+			\end{subarray}}, \underbrace{e_1^{(2)}, ..., e_{t_2}^{(2)}}_{
+			\begin{subarray}{c}
+				\text{соотв. } \lambda_2 \\
+				\in V_{\lambda_2}
+			\end{subarray}}, \widedots $$
+		$$ e_1^{(1)}, ..., e_{t_1}^{(1)} \text{ ЛНЗ } \implies t_1 \le d_1 $$
+		$$ \widedots[8em] \implies t_2 \le d_2 $$
+		$$ \widedots $$
+		$$ d_1 + d_2 + ... + d_k \ge n $$
+		$$ n \ge \dim U = d_1 + ... + d_k $$
+	\end{itemize}
+\end{proof}
+
+\begin{implication}[достаточное условие диагонализуемости]
+	Пусть $ \dim V = n $ \\
+	Если у $ \mathcal{A} $ есть $ n $ различных с. ч., то $ \mathcal{A} $ диагонализуем
+\end{implication}
+
+\begin{proof}
+	$ \dim V_{\lambda_i} \ge 1 $
+	$$ n \ge \dim(V_{\lambda_1} + ... + V_{\lambda_k}) \underset{\text{пр. сумма}}= \dim V_{\lambda_1} + ... + \dim V_{\lambda_k} \ge n $$
+	Значит, достигается равенство
+\end{proof}
+
+\begin{remind}[определитель ступенчатой матрицы]
+	$$ M =
+	\begin{pmatrix}
+		A & B \\
+		0 & C
+	\end{pmatrix}, A, C \text{ -- кв. } \implies |M| = |A| \cdot |C| $$
+\end{remind}
+
+\begin{theorem}[арифм. и геом. кратности]
+	$ \lambda $ -- с. ч. $ \mathcal{A} $ \\
+	Геом. кратность $ \lambda \le $ арифм. кратности $ \lambda $
+\end{theorem}
+
+\begin{proof}
+	Пусть $ n = \dim V, \quad k $ -- геом. кр. $ \lambda $ \\
+	Выберем базис $ e_1, ..., e_k $ пространства $ V_{\lambda} $ \\
+	Дополним его до базиса $ V $: $ e_1, ..., e_k, ...., e_n $ \\
+	При $ i \le k $ выполнено $ \mathcal{A} e_i = \lambda e_i = 0e_1 + ... + \lambda e_i + ... + 0e_n $ \\
+	Матрица $ \mathcal{A} $ в базисе $ e_1, ..., e_n $:
+	$$ A =
+	\begin{pmatrix}
+		\lambda & . & & B \\
+		. & \lambda & & \\
+		\\
+		0 & 0 & & C \\
+		0 & 0 & &
+	\end{pmatrix} $$
+	Для некоторых $ B_{k \times n - k} $, $ C_{n - k \times n - k} $
+	$$ \chi(t) =
+	\begin{vmatrix}
+		(\lambda - t)E_k & B \\
+		0 & C - tE_{n - k}
+	\end{vmatrix} = \det \bigg( (\lambda - t)E_k \bigg) \cdot \det(C - tE_{n - k}) = (\lambda - t)^k \cdot \det(C - tE_{k - n}) $$
+\end{proof}
+
+\begin{implication}[критерий диагонализуемости в терминах арифметических и геометрических кратностей]
+	Опреатор $ \mathcal{A} $ диагонализуем $ \iff $
+	\begin{enumerate}
+		\item $ \chi_{\mathcal{A}}(t) $ раскладывается на линейные множители
+		\item $ \forall $ с. ч. $ \lambda \quad $ арифм. кр. = геом. кр.
+	\end{enumerate}
+\end{implication}
+
+\begin{proof}
+	Пусть $ \lambda_i $ -- с. ч., $ d_i $ -- геом. кр., $ a_i $ -- арифм. кр., $ n = \dim C $
+	$$ \chi(t) - (t - \lambda_1)^{a_1} ...(t - \lambda_k)^{a_k} \cdot f(t) $$
+	$$ n = \deg \chi(t) \ge a_1 + ... + a_k \ge d_1 + ... + d_k $$
+	Диагонал. $ \iff n = d_1 + ... + d_k \iff $ везде достигаются равенства
+\end{proof}

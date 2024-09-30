@@ -1,0 +1,54 @@
+\chapter{Теория групп}
+
+\section{Прямое произведение подгрупп}
+
+\begin{definition}
+	$ G $ -- группа, $ H_1, ..., H_k $ -- нормальные подгруппы $ G $ \\
+    Говорят, что $ G $ является (внутренним) прямым произведением $ H_1, ..., H_k $, если
+    \begin{enumerate}
+    	\item Любой элемент $ G $ можно единственным образом представить в виде $ g = h_1h_2...h_k $, где $ h_i \in H_i $
+        \item $ \forall \underset{h_i \in H_i, ~ h_j \in H_j}{i \ne j} \quad h_ih_j = h_jh_i $
+    \end{enumerate}
+\end{definition}
+
+\begin{notation}
+	$ G = H_1 \times ... \times H_k $
+\end{notation}
+
+\begin{undefthm}{Другое название}
+	$ G $ разложена в произведение подгрупп
+\end{undefthm}
+
+\begin{lemma}[нормальные подгруппы с единичным пересечением]
+    $ G $ -- группа, $ H \vartriangleleft G $, $ K \vartriangleleft G $, $ H \cap K = \set{e} $ \\
+    Тогда элементы \widedots
+\end{lemma}
+
+\begin{theorem}[прямое произведение нескольких подгрупп]
+    $ G $ -- группа, $ H_1 \vartriangleleft G, \widedots[2em], H_k \vartriangleleft G $
+    $$ \forall i \quad H_i \cdot ... \cdot H_{i - 1} \cap H_i = \set{e} $$
+    $$ H_1H_2...H_k = G $$
+    Тогда $ G = H_1 \times ... \times H_k $
+\end{theorem}
+
+\begin{proof}
+    Докажем, что $ H_i \cap H_j = \set{e} $: \\
+    Пусть $ j < i $ \\
+    $ H_j \sub H_1...H_j...H_{i - 1} $, т. к. $ h_j = e...eh_je...e $ \\
+    $ \implies H_j \cap H_i = \set{e} \implies $ элементы $ H_i $ и $ H_j $ коммутируют \\
+    \widedots
+\end{proof}
+
+\begin{theorem}[разложение циклической группы в прямое произведение двух подгрупп]
+    Пусть $ G $ -- циклическая, $ |G| = m^n $, $ \GCD{m, n} = 1 $ \\
+    Тогда $ G $ можно разложить в прямое произведение подгрупп, изоморфных $ \Z_m $ и $ \Z_n $
+\end{theorem}
+
+\begin{definition}
+    Группа называется примарной, если она изоморфна $ \Z $ или $ \Z_{p^n} $, где $ p \in \Prime $
+\end{definition}
+
+\begin{remark}
+	Теорема о линейном предстаавлении НОД верна для нескольких чисел:
+    $$ \forall a_1, ..., a_k \quad \exist t_1, ..., t_k : t_1a_1 + ... + t_ka_k = \GCD(a_1, ..., a_k) $$
+\end{remark}

@@ -1,0 +1,409 @@
+\chapter{Определённый интеграл}
+
+\section{Продолжение несобственных интегралов}
+
+\begin{property}
+	$ c \in \R $
+	$$ \dint{a}\beta{f(x)} \text{ сходится } \implies \dint{a}\beta{cf(x)} = c \dint{a}\beta{f(x)} $$
+	$$ \dint\alpha{b}{g(x)} \text{ сходится } \implies \dint\alpha{b}{cg(x)} = c \dint\alpha{b}{g(x)} $$
+\end{property}
+
+\begin{proof}
+	Следует из свойств пределов
+\end{proof}
+
+\begin{statement}
+	\hfill
+	\begin{itemize}
+		\item $ \forall x \in [a, \beta) \quad f(x) \ge 0, \qquad a < x_1 < x_2 < \beta $
+		\begin{equ}1
+			\dint[y]{a}{x_2}{f(y)} - \dint[y]a{x_1}{f(y)} = \dint[y]{x_1}{x_2}{f(y)} \ge 0
+		\end{equ}
+		Положим $ F(x) \define \dint[y]ax{f(y)} $
+		\begin{equ}2
+			\eref1 \implies F \text{ возрастает}
+		\end{equ}
+		\begin{undefthm}{Напоминание}
+			\begin{equ}3
+				\dint{a}\beta{f(x)} \text{ сходится } \iff \exist M > 0 : \forall x \in [a, \beta) \quad F(x) \le M
+			\end{equ}
+		\end{undefthm}
+		\item Рассмотрим $ \dint\alpha{b}{g(x)} $, где $ \forall x \in (\alpha, b] \quad g(x) \ge 0 $ и $ \alpha < x_1 < x_2 < b $ \\
+		Положим $ G(x) \define \dint[y]xb{g(y)} $
+		\begin{equ}4
+			G(x_1) - G(x_2) = \dint[y]{x_1}b{g(y)} - \dint[y]{x_2}b{g(y)} = \dint[y]{x_1}{x_2}{g(y)} \ge 0
+		\end{equ}
+		\eref 4 $ \implies G(x) $ убывает на $ (\alpha, b] $
+		\begin{undefthm}{Напоминание}
+			$$ \dint\alpha{b}{g(x)} \text{ сходится } \iff \exist L : \forall x \in (\alpha, b] \quad G(x) \le L $$
+		\end{undefthm}
+	\end{itemize}
+\end{statement}
+
+\begin{theorem}[признаки сравнения несобственных интегралов от неотрицательных функций]
+	$$ f_1, f_2 : [a, \beta), \qquad \forall x \in [a, \beta) \quad f_1(x) \ge 0, ~ f_2(x) \ge 0 $$
+	\begin{equ}6
+		\exist c > 0 : \forall x \in [a, \beta) \quad f_1(x) \le cf_2(x)
+	\end{equ}
+	\begin{enumerate}
+		\item \label{it:1} $ \dint{a}\beta{f_2(x)} $ сходится
+		\begin{equ}7
+			\implies
+			\begin{cases}
+				\dint{a}\beta{f_1(x)} \text{ сходится} \\
+				\dint{a}\beta{f_1(x)} \le c\dint{a}\beta{f_2(x)}
+			\end{cases}
+		\end{equ}
+		\begin{proof}
+			\begin{equ}{10}
+				\exist M : F_2(x) \define \dint[y]ax{f_2(y)} \le M
+			\end{equ}
+			\begin{equ}{11}
+				\eref6 \implies F_1(x) \define \dint[y]ax{f_1(y)} \le \dint[y]ax{cf_2(y)} = c\dint[y]ax{f_2(y)} = cF_2(x) \le cM
+			\end{equ}
+			$$ F_1(x) \le cF_2(x) \implies \liml{x \to \beta}F_1(x) \le \liml{x \to \beta}cF_2(x) \implies \eref7 $$
+		\end{proof}
+		\item $ \dint{a}\beta{f_2(x)} $ расходится $ \implies \dint{a}\beta{f_1(x)} $ расходится
+		\begin{proof}
+			Пусть это неверно, т. е. $ \dint{a}\beta{f_2(x)} $ сходится $ \underimp{\ref{it:1}} \dint{a}\beta{f_1(x)} $ сходится
+		\end{proof}
+	\end{enumerate}
+\end{theorem}
+
+\textit{Аналогичная теорема для } $ \int_\alpha^b $
+
+\section{Абсолютная сходимость несобственных интегралов}
+
+\begin{definition}
+	Говорят, что $ \dint{a}\beta{f(x)} $ абсолютно сходится, если сходится $ \dint{a}\beta{|f(x)|} $ \\
+	Говорят, что $ \dint\alpha{b}{g(x)} $ абсолютно сходится, если сходится $ \dint\alpha{b}{|g(x)|} $
+\end{definition}
+
+\begin{theorem}
+	Абсолютно сходящийся интеграл сходится
+\end{theorem}
+
+\begin{proof}
+	Будем рассматривать только $ \dint{a}\beta{f(x)} $ (второй -- аналогично) \\
+	Будем пользоваться критерием Коши \\
+	Возьмём $ \forall \veps > 0 $
+	\begin{equ}{14}
+		\dint{a}\beta{|f(x)|} \text{ сходится } \implies \exist \omega(\beta) : \forall x_1, x_2 \in \omega(\beta) \quad \bigg| \dint[y]{x_1}{x_2}{|f(y)|} \bigg| < \veps
+	\end{equ}
+	В силу одного из свойств,
+	\begin{equ}{141}
+		0 \le \dint[y]{x_1}{x_2}{|f(y)|} < \veps
+	\end{equ}
+	\begin{equ}{15}
+		\bigg| \dint[y]{x_1}{x_2}{f(y)} \bigg| \le \dint[y]{x_1}{x_2}{f(y)} \underset{\eref{141}}< \veps \implies \dint{a}\beta{f(x)} \text{ сходится}
+	\end{equ}
+\end{proof}
+
+\begin{definition}
+	Говорят, что $ \dint{a}\beta{f(x)} $ неабсолютно (условно) сходится, если он сходится, а \\ $ \dint{a}\beta{|f(x)|} $ расходтся \\
+	Аналогично для $ g(x) $
+\end{definition}
+
+\begin{theorem}[признак Абеля сходимости несобственных интегралов]
+	\begin{equ}{21}
+		\dint{a}\beta{f(x)g(x)}
+	\end{equ}
+	$ f, g \in C([a, \beta)), \qquad f'(x), g'(x) \in C([a, \beta)) $
+	\begin{equ}{22}
+		g(x) \text{ мнотонна}
+	\end{equ}
+	\begin{equ}{23}
+		\exist M : \forall x \in [a, \beta) \quad |g(x)| \le M
+	\end{equ}
+	\begin{equ}{24}
+		\dint{a}\beta{f(x)} \text{ сходится}
+	\end{equ}
+	$ \implies \eref{21} $ сходится
+\end{theorem}
+
+\begin{proof}
+	\begin{equ}{25}
+		\forall \veps > 0 \quad \exist \omega(\beta) : \forall x_1, x_2 \in \omega(\beta) \quad \bigg| \dint[y]{x_1}{x_2}{f(y)} \bigg| < \veps
+	\end{equ}
+	Рассмотрим $ \dint[y]{x_1}{x_2}{f(y)g(y)} $ \\
+	Применим вторую теорему о среднем:
+	\begin{equ}{26}
+		\exist c \text{ между } x_1 \text{ и } x_2 : \dint[y]{x_1}{x_2}{f(y)g(y)} = g(x_1)\dint[y]{x_1}c{f(y)} + g(x_2)\dint[y]c{x_2}{f(y)}
+	\end{equ}
+	\begin{multline}\lbl{27}
+		\eref{23}, \eref{25}, \eref{26} \implies \bigg| g(x_1) \dint[y]{x_1}c{f(y)} + g(x_2)\dint[y]c{x_2}{f(y)} \bigg| \le \\ \le | g(x_1) | \bigg| \dint[y]{x_1}c{f(y)} \bigg| + |g(x_2)| \bigg| \dint[y]c{x_2}{f(y)} \bigg| < M \cdot \veps + M \cdot \veps
+	\end{multline}
+	\eref{27} $ \implies $ \eref{21} сходится
+\end{proof}
+
+\begin{theorem}[признак Абеля сходимости несобственных интегралов]
+	\begin{equ}{28}
+		\dint\alpha{b}{f(x)g(x)}
+	\end{equ}
+	$ f, g \in C((\alpha, b]), \qquad f'(x), g'(x) \in C((\alpha, b]), \qquad g(x) $ монотонна \\
+	$ \qquad \exist M : \forall x \in (\alpha, b] \quad |g(x)| \le M, \qquad \dint\alpha{b}{f(x)} $ сходится
+	$ \implies \eref{28} $ сходится
+\end{theorem}
+
+\begin{theorem}[признак Дирихле сходимости несобственных интегралов]
+	\begin{equ}{29}
+		\dint{a}\beta{f(x)g(x)}
+	\end{equ}
+	$ f, g \in C([a, \beta)), \qquad g' \in C([a, \beta)) $
+	\begin{equ}{210}
+		f(x) \underarr{x \to \beta} 0
+	\end{equ}
+	\begin{equ}{211}
+		g \text{ монотонна}
+	\end{equ}
+	\begin{equ}{212}
+		\exist M : \forall x \in (a, \beta] \quad \bigg| \dint[y]ax{f(y)} \bigg| \le M
+	\end{equ}
+	$ \implies $ \eref{29} сходится
+\end{theorem}
+
+\begin{proof}
+	\begin{equ}{213}
+		\eref{210} \implies \forall \veps > 0 \quad \exist \omega(\beta) : \forall x \in \omega(\beta) \quad |g(x) | < \veps
+	\end{equ}
+	Возьмём $ x_1, x_2 \in \omega(\beta) $
+	\begin{multline}\lbl{214}
+		\eref{212} \implies \bigg| \dint[y]{x_1}{x_2}{f(y)} \bigg| = \bigg| \dint[y]a{x_2}{f(y)} - \dint[y]a{x_1}{f(y)} \bigg| \underset\triangle\le \bigg| \dint[y]a{x_1}{f(y)} \bigg| + \bigg| \dint[y]a{x_2}{f(y)} \bigg| \le \\ \le M + M = 2M
+	\end{multline}
+	\begin{multline*}
+		\exist c \text{ между } x_1 \text{ и } x_2 : \dint[y]{x_1}{x_2}{f(y)g(y)} = g(x_1)\dint[y]{x_1}c{f(y)} + g(x_2)\dint[y]c{x_2}{f(y)} \underimp{\eref{213}, \eref{214}} \\ \implies \bigg| \dint[y]{x_1}{x_2}{f(y)g(y)} \le |g(x_1)| \bigg| \dint[y]{x_1}c{f(y)} \bigg| + |g(x_2)| \bigg| \dint[y]c{x_2}{f(y)} \bigg| < \veps \cdot 2M + \veps \cdot 2M = 4M\veps \implies \\ \implies \eref{29} \text{ сходится}
+	\end{multline*}
+\end{proof}
+
+\textit{Аналогичная теорема для} $ \int_\alpha^b $
+
+\begin{statement}
+	$$ \dint1\infty{\frac{\sin x}x} $$
+	$$ f(x) = \sin x, \qquad g(x) = \frac1x \underarr{x \to +\infty} 0 $$
+	$$ \bigg| \dint1x{\sin x} \bigg| = | \cos 1 - \cos x | \le 2 \implies \dint1\infty{\frac{\sin x}x} \text{ сходится} $$
+	\begin{equ}{217}
+		\text{Предположим, что } \dint1\infty{\frac{|\sin x|}x} \text{ сходится}
+	\end{equ}
+	$$ \forall x \quad | \sin x | \ge \sin^2 x $$
+	\begin{equ}{218}
+		\eref{217} \implies \dint1\infty{\frac{\sin^2 x}x} \text{ сходится}
+	\end{equ}
+	$$ \sin^2 x = \frac12 - \frac12 \cos 2x $$
+	\begin{equ}{2181}
+		\dint1\infty{\frac1x \big( \frac12 - \frac12 \cos 2x \big) } \text{ сходится}
+	\end{equ}
+	\begin{equ}{219}
+		\dint1\infty{\frac12 \frac{\cos 2x}x} \text{ сходится}
+	\end{equ}
+	\begin{multline*}
+		\eref{2181}, \eref{219} \implies \dint1\infty{\bigg[ \frac1x \big( \frac12 - \frac12 \cos 2x \big) + \frac12 \frac{\cos 2x}x \bigg]} \text{ сходится } \implies \dint1\infty{\frac12 \frac{x}x} \text{ сходится } \implies \\ \implies \dfint1\infty{x} \text{ сходится }
+	\end{multline*}
+\end{statement}
+
+\section{Замена переменной в определённом интеграле}
+
+\begin{theorem}
+	$ \vphi \in C([P, Q)), \qquad \forall t \in [P, Q) \quad \vphi(t) \in [a, \beta), \qquad \vphi $ монотонна, $ \qquad \vphi' \in C([P, Q)), \qquad f \in C([a, \beta)), \qquad \vphi(P) = a, \quad \vphi(Q) = \beta, \qquad Q \le +\infty, \quad \beta \le +\infty $ \\
+	Если сходится один из $ I_1 \define \dint{a}\beta{f(x)}, \quad I_2 \define \dint[t]PQ{f \big( \vphi(t) \big)\vphi'(t)} $, то сходится и второй \\
+	При этом верно равенство $ I_1 = I_2 $
+\end{theorem}
+
+\begin{proof}
+	Положим $ P < q < Q $
+	$$ \dint{a}{\vphi(q)}{f(x)} = \dint[t]Pq{f \big( \vphi(t) \big) \vphi'(t)} $$
+	$$ q \to Q \iff \vphi(q) \to \beta $$
+\end{proof}
+
+\begin{eg}
+	$$ \dfint{e}\infty{x \ln^p x} $$
+	Положим $ x \define e^t $. Тогда $ \ln x = t $ и $ x' = e^t $
+	$$ \dfint{e}\infty{x \ln^p x} = \dint[t]1\infty{\frac{e^t}{e^t}t^p} = \dfint[t]1\infty{t^p} $$
+	Этот интеграл:
+	\begin{itemize}
+		\item сходится при $ p > 1 $
+		\item расходится при $ p \le 1 $
+	\end{itemize}
+\end{eg}
+
+\chapter{Числовые ряды}
+
+\begin{definition}
+	$ \seqz{a_n}n, \qquad a_n \in \R, \qquad k \ge 0 $ \\
+	Чисовым рядом будем называть \textbf{символ}
+	\begin{equ}{31}
+		\sum_{m = k}^\infty a_m
+	\end{equ}
+	Ему эквивалентен \textbf{символ}
+	\begin{equ}{311}
+		a_k + a_{k + 1} + ...
+	\end{equ}
+	Возьмём $ N \in \N $ \\
+	Частичной суммой ряда \eref{31} будем называть
+	\begin{equ}{32}
+		S_N = a_k + a_{k + 1} + ... + a_{k + N - 1}
+	\end{equ}
+\end{definition}
+
+\begin{definition}
+	Будем говорить, что ряд \eref{31} сходится, если
+	\begin{equ}{33}
+		\exist \limi{N} S_N \in \R
+	\end{equ}
+	Если ряд сходится, то будем называть этот предел суммой ряда \\
+	Ряду в таком случае придаётся числовое значение:
+	$$ \limi{N} S_N = \sum_{m = k}^\infty = a_k + a_{k + 1} + ... $$
+\end{definition}
+
+\begin{definition}
+	Если этот предел не существует или бесконечен, говорят, что ряд расходится \\
+	В таком случае ряду не придаётся никакого числового значения
+\end{definition}
+
+\begin{props}
+	\item Ряд \eref{31} сходится, $ \quad c \in \R $
+	$$ \sum_{m = k}^\infty ca_m = c \sum_{m = k}^\infty a_m $$
+	\begin{proof}
+		$$ ca_k + ca_{k + 1} + ... + ca_{k + N - 1} = c \big( a_k + ... + a_{k + N - 1} \big) $$
+	\end{proof}
+	\item Ряд \eref{31} сходится
+	$$ \sum_{m = k}^\infty b_m \text{ сходится } \implies \sum_{m = k}^\infty (a_m + b_m) = \sum_{m = k}^\infty a_m + \sum_{m = k}^\infty b_m $$
+\end{props}
+
+\begin{theorem}[необходимость \textit{сходимости}]
+	\begin{equ}{34}
+		\sum_{m = k}^\infty \text{ сходится } \implies a_n \underarr{n \to \infty} 0
+	\end{equ}
+\end{theorem}
+
+\begin{proof}
+	Положим $ \sum_{m = k}^\infty a_m \define S \in \R $ \\
+	Возьмём $ n > k $
+	\begin{equ}{35}
+		\begin{rcases}
+			a_k + a_{k + 1} + ... + a_{n - 1} \underarr{n \to \infty} S \\
+			a_k + a_{k + 1} + ... + a_n \underarr{n \to \infty}
+		\end{rcases}
+	\end{equ}
+	$$ \eref{35} \implies a_n = \big( a_k + a_{k + 1} + ... + a_n \big) - \big( a_k + a_{k + 1} + ... + a_{n - 1} \big) \to S - S = 0 $$
+\end{proof}
+
+\begin{definition}
+	Возьмём $ l > k $ \\
+	Ряд
+	\begin{equ}{3111}
+		\sum_{m = l}^\infty a_m
+	\end{equ}
+	называется остатком ряда \eref{31}
+\end{definition}
+
+\begin{statement}
+	Для того чтобы ряд \eref{31} сходился, необходимо и достаточно, чтобы любой его остаток сходился \\
+	При этом справедливо следующуе соотношение:
+	\begin{equ}{36}
+		\sum_{m = l}^\infty \underarr{l \to \infty} 0
+	\end{equ}
+\end{statement}
+
+\begin{proof}
+	Возьмём $ N > l $
+	\begin{itemize}
+		\item
+		\begin{equ}{37}
+			a_k + a_{k + 1} + ... + a_{l - 1} + a_l + ... + a_{N - 1} = \big( a_k + a_{k + 1} + ... + a_{l - 1} \big) + \big( a_l + ... + a_{N - 1} \big)
+		\end{equ}
+		Доказано, что любой остаток сходится вместве с самим рядом
+		\item Докажем соотношение \eref{36}: \\
+		Обозначим $ \sum_{m = k}^\infty a_m \define S $
+		$$ \forall \veps > 0 \quad \exist L : \forall l_0 > L \quad |a_k + a_{k + 1} + ... + a_{l_0} - S | < \veps $$
+		Положим $ l \define l_0 + 1 $ и выберем $ \forall N > l $
+		\begin{equ}{38}
+			a_l + a_{l + 1} + ... + a_{N - 1} = \big( a_k + a_{k + 1} + ... + a_{l - 1} + a_l + ... + a_{N - 1} \big) - \big( a_k + a_{k + 1} + ... + a_{l - 1} \big)
+		\end{equ}
+		$$ \eref{38} \implies | a_l + a_{l + 1} + ... + a_{N - 1} | \le |a_k + a_{k + 1} + ... + a_{N - 1} - S | + | a_k + a_{k + 1} + ... + a_{l - 1} - S | < \veps + \veps = 2\veps $$
+	\end{itemize}
+\end{proof}
+
+\begin{theorem}[критерий Коши сходимости ряда]
+	Для того чтобы ряд \eref{31} необходимо и достаточно, чтобы
+	\begin{equ}{39}
+		\forall \veps > 0 \quad \exist N : \forall n_2 > n_1 > N \quad |a_{n_1 + 1} + ... + a_{n_2} | < \veps
+	\end{equ}
+\end{theorem}
+
+\begin{proof}
+	$$ S_{n_2 + 1} = a_k + a_{k + 1} + ... + a_{n_2} $$
+	$$ S_{n_1 + 1} = a_k + a_{k + 1} + ... + a_{n_1} $$
+	Вспомним критерий Коши для последовательностей:
+	\begin{equ}{310}
+		S_n \underarr{n \to \infty} S \in \R \iff \forall \veps > 0 \quad \exist N : \forall n_2 > n_1 > N \quad |S_{n_2 + 1} - S_{n_1 + 1} < \veps
+	\end{equ}
+	$$ S_{n_2 + 1} - S_{n_1 + 1} = a_{n_1 + 1} + ... + a_{n_2} $$
+	$$ \eref{310} \implies \eref{39} $$
+\end{proof}
+
+\section{Ряды с неотрицательными слагаемыми}
+
+Будем рассматривать ряды вида
+\begin{equ}{41}
+	\sum_{m = 1}^\infty a_n, \qquad \forall n \quad a_n \ge 0
+\end{equ}
+$$ S_n = a_1 + ... + a_n $$
+$$ S_{n + 1} - S_n = \big( a_1 + ... + a_n + a_{n + 1} \big) - \big( a_1 + ... + a_n \big) = a_{n + 1} \ge 0 $$
+То есть, последовательность $ S_n $ возрастает
+
+\begin{theorem}[критерий сходимости рядов с неотрицательными слагаемыми]
+	Для того что бы ряд \eref{41} сходился, необходимо и достаточно, чтобы
+	\begin{equ}{42}
+		\exist M : \forall n \quad S_n \le M
+	\end{equ}
+\end{theorem}
+
+\begin{theorem}[признаки сравнения рядов с неотрицательными слагаемыми]
+	Рассмотрим также ряд
+	\begin{equ}{43}
+		\sum_{n = 1}^\infty b_n, \qquad \forall n \quad b_n \ge 0
+	\end{equ}
+	\begin{equ}{44}
+		\exist c : \forall n \quad a_n \le cb_n
+	\end{equ}
+	\begin{itemize}
+		\item Если \eref{43} сходится, то \eref{41} сходится, и выполнено
+		\begin{equ}{45}
+			\sum_{n = 1}^\infty a_n \le c \sum_{n = 1}^\infty b_n
+		\end{equ}
+		\begin{proof}
+			\begin{equ}{46}
+				\forall n \quad b_1 + ... + b_n \le M
+			\end{equ}
+			$$ \eref{46}, \eref{44} \implies a_1 + ... + a_n \le cb_1 + ... + cb_n = c \big( b_1 + ... + b_n \big) \le cM \implies \eref{41} \text{ сходится} $$
+		\end{proof}
+		\item Если \eref{41} расходится, то \eref{43} сходится
+	\end{itemize}
+\end{theorem}
+
+\begin{theorem}[признак Коши \textit{чего-то}]
+	\begin{equ}{48}
+		\sum_{n = 1}^\infty a_n, \qquad \forall n \quad a_n \ge 0
+	\end{equ}
+	$$ q \define \ulim{n \to \infty} \sqrt[n]{a_n} \ge 0 $$
+	\begin{itemize}
+		\item $ q < 1 \implies \eref{48} $ сходится
+		\item $ q > 1 \implies \eref{48} $ расходится
+		\item $ q = 1 \implies \widedots $
+		\begin{proof}
+			Выберем $ \veps > 0 : q + \veps \define r < 1 $
+			\begin{equ}{49}
+				\exist N : \forall n > N \quad \sqrt[n]{a_n} < q + \veps
+			\end{equ}
+			То есть,
+			\begin{equ}{410}
+				\sqrt[n]{a_n} < r \iff a_n < r^n
+			\end{equ}
+			\begin{equ}{411}
+				\sum_{n = N + 1}^\infty r^n \text{ сходится}
+			\end{equ}
+			По признаку сравнения,
+			$$ \eref{410}, \eref{411} \implies \sum_{n = N + 1}^\infty a_n \text{ сходится} $$
+		\end{proof}
+	\end{itemize}
+\end{theorem}

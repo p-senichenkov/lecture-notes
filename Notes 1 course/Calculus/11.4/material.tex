@@ -1,0 +1,386 @@
+\chapter({Пространство R\textasciicircum{}n}){Пространство $ \R^n $}
+
+\begin{definition}
+	Пространством $ \R^n $ называется множество всех упорядоченных наборов из $ n $ вещественных чисел
+\end{definition}
+
+\begin{notation}
+	$ (x_1, ..., x_n) $ или $
+	\begin{bmatrix}
+		x_1 \\
+		. \\
+		. \\
+		. \\
+		x_n
+	\end{bmatrix} $
+\end{notation}
+
+\begin{notation}
+	$ \On = (0, ..., 0) $
+\end{notation}
+
+\begin{undefthm}{Арифметические операции}
+	Положим $ X = (x_1, ..., x_n) \in \R^n $
+	$$ c \in \R \qquad cX \define (cx_1, ..., cx_n) $$
+	Возьмём $ Y = (y_1, ..., y_n) $
+	$$ X + Y \define (x_1 + y_1, ..., x_n + y_n) $$
+	$$ -X = (-1)X = (-x_1, ..., -x_n) $$
+	$$ Y - X = Y + (-1)X, \qquad X - X = \On $$
+	Скалярное произведение:
+	$$ (X, Y) \define x_1y_1 + ... + x_ny_n = (Y, X) $$
+	\begin{property}
+		$ (cX, Y) = (X, cY) = c(X, Y) $
+	\end{property}
+	Возьмём $ W = (w_1, ..., w_n) $
+	\begin{property}
+		$ (X, Y + W) = x_1(y_1 + w_1) + ... + x_n(y_n + w_n) = (X, Y) + (X, W) $
+	\end{property}
+\end{undefthm}
+
+\begin{definition}[норма]
+	$ \|X\| \define \sqrt{x_1^2 + ... + x_n^2} $
+\end{definition}
+
+\begin{remark}
+	$ (X, X) = \|X\|^2 $
+\end{remark}
+
+\begin{props}
+	\item $ \|X\| \ge 0, \qquad \|X\| = 0 \iff X = \On $
+	\item $ c \in \R \qquad \|cX\| = \sqrt{c^2x_1^2 + ... + c^2x_n^2} = |c|\sqrt{x_1^2 + ... + x_n^2} = |c| \cdot \|X\| $
+\end{props}
+
+\begin{statement}{неравенство КБШ}
+	$$ |(X, Y)| = |x_1y_1 + ... + x_ny_n| \le |x_1| \cdot |y_1| + ... + |x_n| \cdot |y_n| \underset{\text{(нер-во КБШ)}}\le \sqrt{x_1^2 + ... + x_n^2} \cdot \sqrt{y_1^2 + ... + y_n^2} = \|X\| \cdot \|Y\| $$
+\end{statement}
+
+\begin{statement}[неравенство треугольника]
+	\begin{equ}1
+		\|X + Y\| \le \|X\| + \|Y\|
+	\end{equ}
+\end{statement}
+
+\begin{proof}
+	$ X + Y \define U $
+	\begin{itemize}
+		\item Если $ U = \On $, то \eref1 выполнено
+		\item $ U \ne \On \implies \|U\| > 0 $ \\
+		Положим $ t \define \|U\|, \quad W \define \dfrac1tU $
+		\begin{equ}2
+			\norm{W} = \|\frac1tU\| = \frac1t\|U\| = 1
+		\end{equ}
+		\begin{multline}\lbl3
+			\bigg( (X + Y)W \bigg) = (X, W) + (Y, W) \implies \bigg| \big( (X + y)W \big) \bigg| \le \bigg| (X, W) \bigg| + \bigg| (Y, W) \bigg| \le \\ \le \norm{X} \cdot \norm{W} + \norm{Y} \cdot \norm{W} \underset{\eref2}= \norm{X} + \norm{Y}
+		\end{multline}
+		\begin{equ}4
+			\bigg( (X + Y)W \bigg) = (UW) = (U\frac1tU) \implies \frac1t(U, U) = \frac1t \norm{U}^2 = \frac1t \cdot \norm{U} \cdot \norm{U} = \norm{U} = \norm{X + Y} \underimp3 1
+		\end{equ}
+	\end{itemize}
+\end{proof}
+
+\begin{statement}
+	Пространство $ \R^n $ является метрическим пространством
+\end{statement}
+
+\begin{proof}
+	$ X, Y \in \R^n $ \\
+	Возьмём
+	\begin{equ}5
+		d(X, Y) \define \norm{X - Y}
+	\end{equ}
+	$ d(X, Y) $ будем называть расстоянием между $ X $ и $ Y $ \\
+	Проверим, что $ d(X, Y) $ является метрикой:
+	\begin{itemize}
+		\item $ d(X, Y) \ge 0, \qquad d(X, Y) = 0 \iff X = Y $
+		\item $ d(Y, X) = \norm{Y - X} = \norm{(-1)(X - Y)} = |-1| \cdot \norm{X - Y} = d(X, Y) $
+		\item Нужно проверить, что $ d(X< Z) \le d(X, Y) + d(Y, Z) $ \\
+		То есть, нужно проверить, что $ \norm{X - Z} \le \norm{X - Y} + \norm{Y - Z} $:
+		$$ X - Z = (X - Y) + (Y - Z) $$
+		$$ \norm{X - Z} \le \norm{X - Y} + \norm{Y - Z} $$
+	\end{itemize}
+\end{proof}
+
+\begin{definition}
+	$ X \in \R^n, \qquad r > 0 $ \\
+	$ B_r(X) = \set{y \in \R^n | \norm{Y - X} = d(Y, X) < r} $ -- открытый шар \\
+	$ \omega(X) = B_r(X) $ -- окрестность
+\end{definition}
+
+\begin{undefthm}{Напоминание}
+	Рассмотрим последовтельность $ \seq{Y_m}m, \quad Y_m \in \R^n $
+	$$ Y_m = (y_{1m}, ..., y_{nm}) $$
+	$ X \in \R^n $
+	\begin{equ}{55}
+		Y_m \underarr{m \to \infty} X \iff \forall \veps > 0 \quad \exist M : \forall m > M \quad d(Y_m, X) < \veps
+	\end{equ}
+\end{undefthm}
+
+$ X = (x_1, ..., x_n) $
+
+\begin{statement}
+	\begin{equ}6
+		Y_m \underarr{m \to \infty} X \iff \forall k = 1, ..., n \quad y_{km} \underarr{n \to \infty} x_k
+	\end{equ}
+\end{statement}
+
+\begin{proof}
+	\hfill
+	\begin{itemize}
+		\item $ \implies $ \\
+		Возьмём $ 1 \le k \le n $ \\
+		Тогда
+		$$ |y_{km} - x_k | \le \sqrt{(y_{1m} - x_1)^2 + ... + (y_{nm} - x_n)^2} < \veps \implies y_{km} \underarr{m \to \infty} x_k $$
+		\item $ \impliedby $
+		\begin{equ}7
+			\forall k = 1, ..., n \quad \exist M_k ; \forall m > M_k \quad |y_{km} - x_k| < \frac\veps{\sqrt{n}}
+		\end{equ}
+		Возьмём $ M = \max\limits_{1 \le k \le n} M_k $ \\
+		Тогда для $ \forall m > M $ выполнено \eref7
+		\begin{equ}8
+			\norm{Y_m - X} = \sqrt{(y_{1m} - x)^2 + ... + (y_{nm} - x_n)^2} \underset{\eref7}< \underbrace{\sqrt{\frac{\veps^2}n + ... + \frac{\veps^2}n}}_{n \text{ слагаемых}} = \veps
+		\end{equ}
+	\end{itemize}
+\end{proof}
+
+\begin{definition}
+	$ E \sub \R^n, \quad E \ne \O, \qquad X_0 \in \R^n $ \\
+	$ X_0 $ называется точкой сгущения, если
+	$$ \forall \omega(X_0) \quad \exist \underset{X_1 \ne X_0}{X_1 \in E \cap \omega(X_0)} $$
+	Если $ X_* \in E $ \textbf{не} является точкой сгущения $ E $, она называется изолированной точкой $ E $, т. е. \\
+	$ X_* $ -- изолированная, если
+	$$ \exist \omega(X_*) : E \cap \omega(X_*) = \set{X_*} $$
+\end{definition}
+
+\begin{definition}
+	$ E \sub \R^n, \quad E \ne \O $ \\
+	Будем говорить, что множество $ E $ открыто, если
+	$$ \forall X \in E \quad \exist \omega(X) : \omega(X) \sub E $$
+	Пустое множество считаем открытым
+\end{definition}
+
+\begin{intuition}
+	$ \R^n $ открыто
+\end{intuition}
+
+\begin{definition}
+	$ F \sub \R^n, \quad F \ne \O $ \\
+	$ F $ замкнуто, если $ \R^n \setminus F $ открыто \\
+	В частности, $ \O $ и $ \R^n $ замкнуты
+\end{definition}
+
+\begin{theorem}
+	Никакое подмножество $ \R^n $, кроме $ \O $ и $ \R^n $, не является одновременно открытым и замкнутым
+\end{theorem}
+
+\begin{theorem}
+	$ F \sub \R^n, \quad F \ne \O, \quad F \ne \R^n $
+	\begin{equ}9
+		F \text{ замкнуто } \iff \forall X_0 \text{ -- т. сг. } F \quad X_0 \in F
+	\end{equ}
+\end{theorem}
+
+\begin{proof}
+	\hfill
+	\begin{itemize}
+		\item $ \implies $ \\
+		Пусть $ F $ замкнуто, $ X_0 $ -- т. сг. $ F $ \\
+		Пусть $ X_0 \notin F \implies X_0 \in \underbrace{\R^n \setminus F}_{\text{открытое}} \implies \exist \omega_0(X_0) \sub \R^n \setminus F \implies \omega_0(X_0) \cap F = \O \implies X_0 $ -- не т. сг. $ F $ -- \contra
+		\item $ \impliedby $ \\
+		Нужно доказать, что $ \R^n \setminus F $ открыто \\
+		Пусть это не так \\
+		Тогда $ \exist X_* \in \R^n \setminus F : \forall \omega(X_*) \quad \omega(X_*) \not\sub \R^n \setminus F $ \\
+		Возьмём $ \omega_m(X_*) \define B_{\faktor1m}(X_*) $
+		$$ \exist X_m \in \omega_m(X_*) : X_m \notin \R^n \setminus F $$
+		То есть,
+		\begin{equ}{10}
+			X_m \in F
+		\end{equ}
+		$$
+		\begin{rcases}
+			\norm{X_m - X_*} < \frac1m \\
+			X_* \notin F
+		\end{rcases} \implies X_* \text{ -- т. сг. } F $$
+		Но $ X_* \notin F $ -- \contra
+	\end{itemize}
+\end{proof}
+
+\begin{definition}
+	$ \overline{B_r}(X) = \set{Y \in \R^n | \norm{Y - X} \le r} $ -- замкнутый шар \\
+	$ S_r(x) = \set{Y \in \R^n | \norm{Y - X} = r} $ -- сфера
+\end{definition}
+
+\begin{statement}
+	Открытый шар -- открытое множество \\
+	Замкнутый шар и сфера -- замкнутые множества
+\end{statement}
+
+\begin{definition}
+	$ E \sub \R^n $
+	Множество $ E $ называется ограниченым, если
+	$$ \exist R > 0 : \forall x \in E \quad \norm{X} \le R $$
+\end{definition}
+
+\section({Принцип выбора Больцано-Вейерштрасса в пространстве R\textasciicircum{}n}){Принцип выбора Больцано-Вейерштрасса в пространстве $ \R^n $}
+
+\begin{theorem}
+	$ \seq{X_m}m, \quad X_m \in \R^n, \qquad E = \bigcup_{m = 1}^\infty \set{X_m} $
+	\begin{equ}{11}
+		\exist R : \forall m \quad \norm{X_M} \le R
+	\end{equ}
+	\begin{equ}{12}
+		\implies
+		\begin{Bmatrix}
+			\exist \seq{X_{m_\nu}}\nu \\
+			\exist X_* \in \R^n
+		\end{Bmatrix} : X_{m_\nu} \underarr{\nu \to \infty} X_*
+	\end{equ}
+\end{theorem}
+
+\begin{proof}
+	$ X_m = (x_{1m}, ..., x_{nm}) $
+	\begin{equ}{13}
+		\eref{11} \implies \forall 1 \le k \le n \quad \forall m \ge 1 \quad |x_{km}| \le R
+	\end{equ}
+	Возьмём подпоследовательность $ \seq{x_{1m}}m $ и применим принцип выбора Больцано-Вейерштрасса для вещественных чисел:
+	\begin{equ}{14}
+		\eref{13} \implies
+		\begin{Bmatrix}
+			\exist \seq{x_{1m_l}}l \\
+			\exist x_{1*} \in \R
+		\end{Bmatrix} : x_{1m_l} \underarr{l \to \infty} x_{1*}
+	\end{equ}
+	Переобозначим $ \seq{x_{m_l}}l $ как $ \set{x_l} $: $ x_l = (x_{1l}, ..., x_{nl}) $ \\
+	Рассмотрим подпоследовательность $ \seq{x_{2l}}l $ \\
+	Для неё справедливо соотношение $ |x_{2l}| \le R \quad \forall l $ \\
+	Применим к неё принцип выбора Больцано-Вейерштрасса:
+	\begin{equ}{15}
+		\begin{rcases}
+			\exist \seq{x_{2l_\mu}}\mu \\
+			\exist x_{2*} \in \R
+		\end{rcases} : x_{2l_\mu} \underarr{\mu \to \infty} x_{2*}
+	\end{equ}
+	\begin{equ}{16}
+		\eref{14} \implies x_{1l_\mu} \underarr{\mu \to \infty} x_{1*}
+	\end{equ}
+	Ещё раз упростим обозначения: вместо $ x_{nl_\mu} $ будем писать $ x_{n\mu} $ \\
+	\widedots \\
+	Дошли до подпоследовательности $ \seq{x_q}q $ \\
+	Уже существуют $ x_{1*}, ..., x_{n - 1, *} $ такие, что
+	\begin{equ}{17}
+		x_{1q} \to x_{1*}, \widedots[3em], x_{n - 1, q} \to x_{n - 1, *}
+	\end{equ}
+	Рассмотрим подпоследовательность $ \seq{x_{nq}}q $, $ |x_{nq}| \le R $ и применим принцип выбора Больцано-Вейерштрасса:
+	\begin{equ}{18}
+		\begin{rcases}
+			\exist \seq{x_{q_\nu}}\nu \\
+			\exist x_{n*} \in \R
+		\end{rcases} : x_{nq_\nu} \underarr{\nu \to \infty} x_{n*}
+	\end{equ}
+	\begin{equ}{19}
+		\eref{17}, \eref{18} \implies x_{1q_\nu} \to x_{1*}, \widedots[3em], x_{nq_\nu} \to x_{n*}
+	\end{equ}
+	$$ \eref{19} \implies X_{q_\nu} \to X_*, \qquad X_* = (x_{1*}, ..., x_{n*}) $$
+\end{proof}
+
+\section({Предел функции в R\textasciicircum{}n}){Предел функции в $ \R^n $}
+
+$ E \sub \R^n, \quad E \ne \O, \qquad f : E \to \R $ \\
+$ n \ge 2 $ \\
+В таком случае будем говорить, что $ f $ -- функция от $ n $ переменных \\
+Её значение записывается в виде $ f(x_1, ..., x_n) $, где $ x_1, ..., x_n \in E $ \\
+Если $ X = (x_1, ..., x_n) $, то можно писать $ f(X) $
+
+\begin{definition}
+	$ x_0 $ -- точка сгущения $ E $ (не обязательно $ \in E $), $ \qquad A \in \R $
+	\begin{equ}{111}
+		f(x) \underarr{X \to X_0} \iff \forall \veps > 0 \quad \exist \omega(X_0) : \forall \underset{X \ne X_0}{X \in E \cap \omega(X_0)} \quad |f(X) - A| < \veps
+	\end{equ}
+\end{definition}
+
+\begin{lemma}
+	$ X_0 $ -- т. сг. $ E $
+	$$ \implies \exist \seq{X_m}m : \forall m \quad
+	\begin{cases}
+		X_m \in E \\
+		X_m \ne X_0
+	\end{cases} : X_m \underarr{m \to \infty} X_0 $$
+\end{lemma}
+
+\begin{stmts}
+	\item $ f \to A, \quad c \in \R \implies cf \to A $
+	\item $ f \to A, \quad g \to B \implies f + g \to A + B, \quad fg \to AB $
+	\item \label{en:1} $ g(x) \ne 0, \quad x \in E, \quad B \ne 0, \quad g \to B \implies \dfrac1g \to \dfrac1B $
+	\item $ f \to A, \quad g $ как в \ref{en:1} $ \implies \dfrac{f}g \to \dfrac{A}B $
+\end{stmts}
+
+\begin{definition}
+	$ E \sub \R^n, \quad n \ge 1, \qquad q \ge 2, \qquad F : E \to \R^q $ \\
+	Можно записать $ F(X) $ как $ F(X) = \bigg( f_1(X), ..., f_q(X) \bigg) $ \\
+	$ f_1, ..., f_q $ называются координатными функциями $ F(X) $
+\end{definition}
+
+Будем обозначать метрику в $ \R^n $ как $ \norm{X}_n $, а метрику в $ \R^q $ -- как $ \norm{F(X)}_q $
+
+\begin{definition}
+	$ X_0 $ -- т. сг. $ E \sub \R^n, \qquad \alpha \in \R^q $
+	\begin{equ}{113}
+		F(X) \underarr{X \to X_0} \alpha \iff \forall \veps > 0 \quad \exist \delta : \forall \underset{X \ne X_0}{X \in E : \norm{X - X_0}_n < \delta} \quad \norm{F(X) - \alpha}_q < \veps
+	\end{equ}
+\end{definition}
+
+Пусть $ \alpha = (\alpha_1, ..., \alpha_q), \quad \alpha_\nu \in \R $
+
+\begin{statement}
+	\begin{equ}{114}
+		F(x) \underarr{X \to X_0} \alpha \iff \forall 1 \le \nu \le q \quad f_\nu(X) \underarr{X \to X_0} \alpha_n
+	\end{equ}
+\end{statement}
+
+\begin{proof}
+	\hfill
+	\begin{itemize}
+		\item $ \implies $ \\
+		Воспользуемся соотношением \eref{113}:
+		\begin{equ}{115}
+			\forall \veps > 0 \quad \exist \delta > 0 : |f_\nu(X) - \alpha_\nu |\le \norm{F(x) - \alpha}_q < \veps
+		\end{equ}
+		\item $ \impliedby $ \\
+		Воспользуемся правой частью соотношения \eref{114}:
+		\begin{equ}{116}
+			\forall \veps > 0 \quad \exist \delta > 0 : \forall \underset{X \ne X_0}{X \in E} : \norm{X - X_0}_n < \delta_n \qquad |f_\nu(X) - \alpha_\nu| < \frac\veps{\sqrt{q}}
+		\end{equ}
+		Положим $ \delta = \min\limits{1 \le \nu \le q} \delta_\nu $
+		$$ \norm{F(x) - \alpha}_q = \sqrt{ \big( f_1(X) - \alpha \big)^2 + ... + \big( f_q(X) - \alpha_q \big)} \underset{\eref{116}}< \sqrt{\frac{\veps^2}q + ... + \frac{\veps^2}q} = \veps $$
+	\end{itemize}
+\end{proof}
+
+\section{Непрерывность функции в точке}
+
+\begin{definition}
+	$ E \sub \R^n, \quad n \ge 1, \qquad f : E \to \R^1, \qquad X_0 \in E $ -- т. сг. $ E $ \\
+	Будем говорить, что $ f $ непрерывна в $ x_0 $, если $ \exist \liml{X \to X_0} f(X) = f(X_0) $
+\end{definition}
+
+\begin{properties}[непрервных в точке функций]
+	$ E \sub \R^n, \quad n \ge 1, \qquad X_0 \in E $ -- т. сг. $ E $
+	\begin{enumerate}
+		\item $ f $ непр. $ \implies cf $ непр.
+		\item $ f, g $ непр. $ \implies f + g, fg $ непр.
+		\item \label{en:2} $ g(x) \ne 0 \quad \forall X \in E, \quad g $ непр. $ \implies \dfrac1g $ непр.
+		\item $ g $ как в \ref{en:2} $ \implies \dfrac{f}g $ непр.
+	\end{enumerate}
+\end{properties}
+
+\begin{definition}
+	$ F : E \to \R^q, \quad q \ge 2 $ \\
+	$ F $ непр. в $ X_0 $, если $ \exist \liml{X \to X_0} F(X) = F(X_0) $
+\end{definition}
+
+\begin{statement}
+	$ F $ непр. в $ X_0 \iff \forall n = 1, ..., q \quad f_\nu(X) $ непр. в $ X $
+\end{statement}
+
+\begin{proof}
+	$ F $ непр. $ \implies \exist \liml{X \to X_0} f_\nu(X) = \alpha_\nu = f_\nu(X_0) $ \\
+	В обратную сторону -- так же
+\end{proof}

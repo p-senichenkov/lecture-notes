@@ -1,0 +1,275 @@
+\section{Приложение неравенства Йенсена}
+
+\begin{undefthm}{Применение неравенства Йенсена к $\bm\ln$}
+    Рассмотрим функцию $ f(x) = \ln x$ при $x > 0$
+    $$ (\ln x)' = \frac1x, \qquad (\ln x)'' = -\frac1{x^2} < 0 $$
+    Значит, $f (x)$ -- вогнутая \\
+    Рассмотрим $x_1, ..., x_n > 0, \quad n \ge 2 $ \\
+    Возьмём $t_1 = t_2 = ... = t_n = \frac1n $ \\
+    Применим неравенство Йенсена:
+    $$ \ln \bigg( \frac{x_1}n + ... + \frac{x_n}n \bigg) \ge \frac1n \ln x_1 + ... \frac1n \ln x_n $$
+    $$ \ln \frac{x_1 + ... + x_n}n \ge \ln (x_1 \cdot ... \cdot x_n)^{\frac1n} $$
+    $$ \frac{x_1 + ... + x_n}n \ge (x_1 \cdot ... \cdot x_n)^{\frac1n} $$
+    Получили неравенство для среднего арифметического и среднего арифметического
+\end{undefthm}
+
+\begin{undefthm}{Применение неравенства Йенсена к $\bm{x^p}$}
+    Рассмотрим $f(x) = x^p, \quad p > 1, \quad x > 0 $
+    $$ (x^p)' = px^{p - 1}, \qquad (x^p)'' = p(p - 1)x^{p - 2} > 0 $$
+    Значит, $f(x)$ -- выпуклая \\
+    Рассмотрим $x_1, ..., x_n > 0$ и $t_1, ..., t_n > 0 : t_1 + ... t_n = 1 $
+    $$ (t_1x_1 + ... + t_nx_n)^p \le t_1x_1^p + ... + t_nx_n^p $$
+    Возьмём любые $y_1, ..., y_n > 0 $ \\
+    Положим $ T \define y_1 + ... + y_n $ \\
+    Теперь $t_k = \dfrac{y_k}T $ \\
+    Перепишем неравенство в терминах $y$:
+    $$ \bigg( \frac{y_1}Tx_1 + ... + \frac{y_n}Tx_n \bigg)^p \le \frac{y_1}Tx_1^p + ... + \frac{y_n}Tx_n^p $$
+    Умножим на $T^p$:
+    $$ (y_1x_1 + ... + y_nx_n)^p \le (y_1x_1^p + ... + y_nx_n^p){\underbrace{(y_1 + ... + y_n)}_{= T}}^{p - 1} $$
+    Введём числа $ a_k, b_k > 0 :
+    \begin{cases}
+    	a_kb_k = x_ky_k \\
+        a_k^p = y_kx_k^p
+    \end{cases} $ \\
+    Решим эту систему относительно $a_k$ и $b_k$: \\
+    Возведём первое уравнение в степень $p$:
+    $$
+    \begin{cases}
+       	a_k^pb_k^p = x_k^py_k^p \\
+        a_k^p = y_kx_k^p
+    \end{cases} $$
+    Поделим первую строчку на вторую:
+    $$
+    \begin{cases}
+        b_k^p = y_k^{p - 1} \\
+        a_k^p = y_kx_k^p
+    \end{cases} $$
+    $$ b_k = y_k^{\frac{p - 1}p} \iff y_k = b_k^{\frac{p}{p - 1}} $$
+    Следовательно, мы можем взять любые положительные $a_k, b_k$ и восстановить по ним $y_k, x_k$ \\
+    Перепишем неравенство:
+    $$ (a_1b_1 + ... + a_nb_n)^p \le (a_1^p + ... + a_n^p)(b_1^{\frac{p}{p - 1}} + ... + b_n^{\frac{p}{p - 1}})^{p - 1} $$
+    Извлечём корень степени $p$:
+    $$ a_1b_1 + ... + a_nb_n \le (a_1^p + ... + a_n^p)^{\frac1p} \cdot (b_1^{\frac{p}{p - 1}} + ... + b_n^{\frac{p}{p - 1}})^{\frac{p - 1}p} $$
+    Это называется \textbf{неравенство Гёльдера} \\
+    Оно переписывается в более симметричном виде: \\
+    Положим $ q : \dfrac1p + \dfrac1q = 1 \iff q = \dfrac{p}{p - 1} $
+    $$ a_1b_1 + ... + a_nb_n \le (a_1^p + ... + a_n^p)^{\frac1p} \cdot (b_1^q + ... + b_n^q)^{\frac1q} $$
+    Частным случаем является \textbf{неравенство Коши-Буняковского-Шварца}:
+    $$ a_1b_1 + ... + a_nb_n \le (a_1^2 + ... + a_n^2)^{\frac12} \cdot (b_1^2 + ... + b_n^2)^{\frac12} $$
+\end{undefthm}
+
+\section{Точки перегиба}
+
+\begin{definition}
+	$ f \in C \big( [a, b] \big), \qquad c \in (a, b) $ \\
+    $ c $ -- точка перегиба $f$, если:
+    \begin{itemize}
+    	\item $f$ выпукла на $[a, c]$ и вогнута на $[c, b]$
+        \item $f$ вогнута на $[a, c]$ и выпукла на $[c, b]$
+    \end{itemize}
+\end{definition}
+
+\begin{theorem}[необходимый признак точки перегиба]
+	$f \in C \big( [a, b] \big), \qquad \forall x \in (a, b) \quad \exist f'(x), \qquad c $ -- точка перегиба, $ \qquad \exist f''(c) $
+    $$ \implies f''(c) = 0 $$
+\end{theorem}
+
+\begin{proof}
+	Рассмотрим ситуацию когда $f$ сначала выпукла, потом вогнута (иначе -- аналогично)
+    $$
+    \begin{rcases}
+        f \text{ выпукла на } [a, c] \implies f'(x) \text{ возрастает на } (a, c) \\
+        \exist f''(c) \implies f'(x) \text{ непрерывна в } c
+    \end{rcases} \implies f'(x) \text{ возрастает на } (a, c] $$
+    То есть, $ \forall x \in (a, c) \quad f'(x) \le f'(c) $ \\
+    Аналогично, $f'(x) $ убывает на $ [c, b) $, то есть $ \forall x > c \quad f'(c) \ge f'(x) $ \\
+    То есть, $c$ -- точка максимума $f'(x) $ \\
+    По теореме Ферма, $ (f')'(c) = f''(c) = 0 $
+\end{proof}
+
+\chapter{Неопределённый интеграл}
+
+\begin{definition}
+	$ f : (a, b) \to \R, \qquad F : (a, b) \to \R, \qquad -\infty \bm\le a < b \bm\le +\infty $ \\
+    $ F $ -- первообразная $f$ на $(a, b) \iff \forall x \in (a, b) \quad \exist F'(x) = f(x) $
+\end{definition}
+
+\begin{note}
+	Если первообразная существует, то их бесконечно много
+\end{note}
+
+\begin{proof}
+	Возьмём $ c \in \R, \quad c \ne 0 $ \\
+    Положим $ F_1(x) \define F(x) + c $
+    $$ F_1'(x) = F'(x) + c' = f(x) + 0 = f(x) $$
+\end{proof}
+
+\begin{theorem}
+	$ f : (a, b) \to \ R, \qquad F $ -- первообразная $f$
+    $$ \forall x \in (a, b) \quad F_0'(x) = f(x) \implies \exist c_0 \in \R : F_0(x) = F(x) + c_0 $$
+\end{theorem}
+
+\begin{proof}
+	Рассмотрим $ g(x) \define F_0(x) - F(x) $
+    $$ \forall x \in (a, b) \quad f'(x) = F_0'(x) - F'(x) = f(x) - f(x) = 0 $$
+    Применим критерий постоянства функции:
+    $$ \exist c_0 : \forall x \in (a, b) \quad g(x) = c_0 $$
+\end{proof}
+
+\begin{definition}
+	Множество всех первообразных функции $f$ называется неопределённым интегралом функции $f$
+\end{definition}
+
+\begin{notation}
+    $ \uint{f(x)} = F(x) + c $ (фигурные скобки не пишут)
+\end{notation}
+
+\begin{property}[линейность]
+	$ b \ne 0, \quad b \in \R $
+    $$ \uint{bf(x)} = b \uint{f(x)} $$
+\end{property}
+
+\begin{property}[аддитивность]
+    $$ \uint{(f(x) + g(x))} = \uint{f(x)} + \uint{g(x)} $$
+\end{property}
+
+\begin{theorem}[о существовании первообразной]
+    $ f \in C \big( (a, b) \big) \implies \exist F : \forall x \in (a, b) \quad F'(x) = f(x) $
+\end{theorem}
+
+\begin{proof}
+	Будет доказано в лекции от 21.03
+\end{proof}
+
+\begin{undefthm}{Замена переменной в неопределённом интеграле}
+    \hfill \\
+	$ f : (a, b) \to \R, \qquad \forall x \in (a, b) \quad F'(x) = f(x) $ \\
+    $ \vphi : (p, q) : \forall p \in (p, q) \quad \vphi(p) \in (a, b), \qquad \forall t \in (p, q) \quad \exist \vphi'(t), \qquad G(t) \define F(\vphi(t)) $
+    $$ G'(t) = F' \big( \vphi(t) \big) \cdot \vphi'(t) = f \big( \vphi(t) \big) \cdot \vphi'(t) \implies \uint[t]{f \big( \vphi(t) \big) \cdot \vphi'(t)} = G(t) + c = F \big( \vphi(t) \big) + c $$
+    $$ \uint[t]{f \big(\vphi(t) \big) \cdot \vphi'(t)} = \uint{f(x)}, \qquad x = \vphi(t) $$
+\end{undefthm}
+
+\begin{undefthm}{Формула интегрирования по частям}
+    $ f, g : (a, b), \qquad F'(x) = f(x), \quad G'(x) = g(x) $ \\
+    Продифференцируем их произведение:
+    $$ \big( F(x) G(x) \big)' = F'(x)G(x) + F(x)G'(x) = f(x)G(x) + g(x)F(x) $$
+    $$ \uint{ \big( f(x)G(x) + g(x)F(x) \big) } = F(x)G(x) + c $$
+    $$ \uint{f(x)G(x)} + \uint{g(x)F(x)} = F(x)G(x) + c $$
+    $$ \uint{F'(x)G(x)} = F(x)G(x) - \uint{G'(x)F(x)} $$
+    Рассмотрим $ F(x) \define x $:
+    $$ \uint{G(x)} = xG(x) - \uint{xG'(x)} $$
+\end{undefthm}
+
+\section{Таблица основных неопределённых интегралов}
+
+\begin{statements}
+	$ x \in \R $
+    \begin{enumerate}
+    	\item $ \uint{0} = c $
+        \item $ \uint{1} = x + c $
+        \item $ \uint{x^n} = \dfrac1{n + 1}x^{n + 1} + c, \qquad n \in \N $
+        \item $ \uint{x^{-n}} = \dfrac1{1 - n}x^{1 - n} + c, \qquad n \in \N, \quad n \ge 2, \quad x \ne 0 $
+        \item $ \ufint{x} = \ln |x| + c, \qquad x \ne 0 $
+        \begin{proof}
+        	\hfill
+            \begin{itemize}
+            	\item $x > 0 \qquad \ln |x| = \ln x, \quad (\ln |x|)' = \frac1x $
+                \item $ x < 0 \qquad \ln |x| = \ln(-x), \quad (\ln(-x))' = \frac{(-x)'}{-x} = \frac{-1}{-x} = \frac1x $
+            \end{itemize}
+        \end{proof}
+        \item $ \uint{x^r} = \dfrac1{r + 1}x^{r + 1} + c, \qquad r \notin \Z, \quad x > 0 $
+        \item $ \uint{e^x} = e^x + c $
+        \item $ \uint{a^x} = \dfrac{a^x}{\ln a} + c, \qquad a > 0, \quad a \ne 1 $
+        \item $ \uint{\sin x} = -\cos x + c $
+        \item $ \uint{\cos x} = \sin x + c $
+        \item $ \ufint{\cos^2 x} = \tg x + c, \qquad x \ne \dfrac\pi2 + \pi n $
+        \item $ \ufint{\sin^2 x} = -\ctg x + c, \qquad x \ne \pi n $
+        \item $ \ufint{\sqrt{1 - x^2}} = \arcsin x + c, \qquad x \in (-1, 1) $
+        \item $ \ufint{1 + x^2} = \arctg x + c $
+        \item Применим интегрирование по частям (частный случай для $F(x) = x$): \\
+        $ \uint{\ln x} = x \ln x - \uint{x \cdot (\ln x)'} = x \ln x - \uint{x \cdot \dfrac1x} = x \ln x - x + c $
+    \end{enumerate}
+\end{statements}
+
+\begin{proof}
+	Формулы проверяются дифференцированием правой части
+\end{proof}
+
+\section{Неопределённые интегралы от рациональных функций}
+
+\begin{definition}
+    Рациональной функцией называется дробь вида $ \dfrac{p(x)}{q(x)}, \quad q(x) \ne 0 $, где $p, q$ -- многочлены
+\end{definition}
+
+\begin{theorem}
+	Если $ \deg p \ge \deg q$, то $ \dfrac{p(x)}{q(x)} = r(x) + \dfrac{p_1(x)}{q(x)}$, где $r$ -- многочлен, $ \deg p_1 < \deg q $
+\end{theorem}
+
+\begin{proof}
+	Доказано в курсе алгебры
+\end{proof}
+
+\begin{theorem}
+    $$ \uint{ \dfrac{p(x)}{q(x)} } = \uint{r(x)} + \uint{ \dfrac{p_1(x)}{q(x)}} $$
+    $$ r(x) = a_0x^n + a_1x^{n - 1} + ... + a_n \implies \uint{r(x)} = a_0 \dfrac{x^{n + 1}}{n + 1} + a_1 \dfrac{x^n}n + ... + a_nx + c $$
+\end{theorem}
+
+\begin{definition}
+    Будем называть простейшими дробями выражения вида:
+    \begin{itemize}
+    	\item $ \dfrac{a}{(x - b)^n}$, где $a, b \in \R, \quad n \in \N $
+        \item $ \dfrac{ax + b}{(x^2 + hx + g)^n} $, где $a, b, h, g \in \R, \quad n \in \N, \qquad x^2 + hx + g > 0 $ при $x \in \R $
+    \end{itemize}
+\end{definition}
+
+\begin{remark}
+	$ F'(x) = f(x) $
+    $$ \bigg( F(at + b) \bigg)' = F'(at + b) \cdot (at + b)' = af(at + b) $$
+    $$ \uint[t]{af(at + b)} = F(at + b) $$
+    $$ \uint[t]{f(at + b)} = \frac1a \uint{f(x)} \clamp{x = at + b} $$
+\end{remark}
+
+\begin{undefthm}{Неопределённый интеграл первого вида простейших дробей}
+    \hfill
+    \begin{itemize}
+    	\item $n \ge 2 $
+        $$ \uint{\frac{a}{(x - b)^n}} = \frac{a}{1 - n}(x - b)^{1 - n} + c $$
+        \item $ n = 1$
+        $$ \uint{\frac{a}{x - b}} = a \ln |x - b| + c $$
+    \end{itemize}
+\end{undefthm}
+
+\begin{undefthm}{Неопределённый интеграл второго вида простейших дробей}
+    $$ x^2 + hx + g = (x + \dfrac{h}2)^2 + g - \dfrac{h^2}4 > 0 \text{ (так как нет вещественных корней)} $$
+    $$ s^2 \define g - \frac{h^2}4, \qquad ax + b = a(x + \frac{h}2) + b - \frac{ah}2 $$
+    $$ b - \frac{ah}2 \define b_1 $$
+     \begin{multline*}
+         \uint{ \frac{ax + b}{(x^2 + hx + g)^n} } = \uint{ \frac{a \bigg( x + \dfrac{h}2 \bigg) + b_1}{ \bigg( \big( x + \dfrac{h}2 \big)^2 + s^2 \bigg)^n} } = a \uint{ \frac{x + \dfrac{h}2}{ \bigg( \big( x + \dfrac{h}2 \big)^2 + s^2 \bigg)^n} } \underset{x + \faktor{h}2 \define y}= \\ = a \uint[y]{ \frac{y}{(y^2 + s^2)^n} } + b_1 \uint[y]{ \frac{y}{(y^2 + s^2)^n} }
+     \end{multline*}
+    Положим $ t \define y^2 $ \\
+    Тогда (при $t > 0$), $ y = \sqrt{t} \define \vphi(t), \qquad \vphi'(t) = \dfrac1{2\sqrt{t}} $
+    $$ \uint[y]{ \frac{y}{(y^2 + s^2)^n} } = \uint[t]{ \frac{\sqrt{t} \cdot \dfrac1{w\sqrt{t}}}{(t + s^2)^n} } = \frac12 \ufint[t]{(t + s^2)^n} $$
+    Получили первый случай
+    $$ \ufint[y]{(y^2 + s^2)^n} \underset{y \define sz}= \uint[z]{ \frac{s}{(s^2z^2 + s^2)^n}} = s^{1 - 2n} \ufint[z]{(z^2 + 1)^n} $$
+    При $n = 1$, $ \ufint[z]{z^2 + 1} = \arctg z + c $
+    $$ F_n'(z) = \frac1{(z^2 + 1)^n}, \qquad n = 1 $$
+    \begin{multline*}
+        \ufint[z]{(z^2 + 1)^n} = z \cdot \frac1{(z^2 + 1)^n} - \uint[z]{z \bigg( \frac1{(z^2 + 1)^n} \bigg)'} = \frac{z}{(z^2 + 1)^n} + 2n \uint[z]{ \frac{z \cdot z}{(z^2 + 1)^n}} = \\ = \frac{z}{(z^2 + 1)^n} + 2n \uint{ \frac{z^2 + 1 - 1}{(z^2 + 1)^{n + 1}}} = \frac{z}{(z^2 + 1)^n} + 2n \ufint[z]{(z^2 + 1)^n} - 2n \ufint[z]{(z^2 + 1)^{n + 1}}
+    \end{multline*}
+    $$ 2n \ufint[z]{(z^2 + 1)^{n + 1}} = \frac{z}{(z^2 + 1)^n} + (2n - 1) \ufint[z]{(z^2 + 1)^n} $$
+    $$ \ufint[z]{(z^2 + 1)^{n + 1}} = \frac1{2n} \cdot \frac{z}{(z^2 + 1)^n} + \frac{2n - 1}{2n} \ufint[z]{(z^2 + 1)^n} = \frac1{2n} \cdot \frac{z}{(z^2 + 1)^n} + \frac{2n - 1}{2n} F_n(z) + c $$
+    $$ F_{n + 1}(z) = \frac1{2n} \cdot \frac{z}{(z^2 + 1)^n} + \frac{2n - 1}{2n} F_n(z) $$
+\end{undefthm}
+
+\begin{definition}
+    Рациональной функцией от двух переменных называется $ R(u, v) = \dfrac{P(u, v)}{Q(u, v)}$, где $P, Q$ -- многочлены от двух переменных, то есть $ P(u, v) = \sum c_{kl}u^kv^l $
+\end{definition}
+
+\begin{statement}
+    $ \uint{R(\cos x, \sin x)} $ \\
+    Положим $ t \define \tg \frac{x}2 $
+    $$ t^2 + 1 = \frac{\sin^2 \frac{x}2}{\cos^2 \frac{x}2} + 1 = \frac{\sin^2 \frac{x}2 + \cos^2 \frac{x}2}{\cos^2 \frac{x}2} = \frac1{\cos^2 \frac{x}2} $$
+    $$ \sin x = 2 \sin \frac{x}2 \cdot \cos \frac{x}2 = 2 \frac{\sin \frac{x}2}{ \cos \frac{x}2} \cdot \cos^2 \frac{x}2 = \frac22t{1 + t^2} $$
+    $$ \cos x = 2 \cos^2 \frac{x}2 - 1 = \frac{2}{1 + t^2} - 1 = \frac{1 - t^2}{1 + t^2} $$
+    $$ t^2 + 1 = \frac1{\cos^2  \frac{x}2} $$
+\end{statement}

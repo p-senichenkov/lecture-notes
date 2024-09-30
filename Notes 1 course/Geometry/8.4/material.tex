@@ -1,0 +1,211 @@
+\chapter{}
+
+\section{Связность}
+
+\begin{definition}
+    $ X $ -- топологическое пространство. $ X $ называется несвязным, если
+    $$ \underset{U_i \ne \O}{\exist U_1, U_2 \in \Omega_X} :
+    \begin{cases}
+    	U_1 \cap U_2 = \O \\
+        U_1 \cup U_2 = X
+    \end{cases} $$
+    Иначе -- связное
+\end{definition}
+
+\begin{remark}
+	Несвязность означает, что $ U_1, U_2 $ одновременно и открытые, и замкнутые \\
+    Связность означает, что нет нетривиальных открыто-замкнутых подмножеств
+\end{remark}
+
+\begin{definition}
+	$ (X, \Omega) $ -- топологическое пространство, $ A \sub X $. $ A $ называется связным, если оно связно в индуцированной топологии, т. е.
+    $$ \forall U_1, U_2 \in \Omega_X \quad
+    \begin{rcases}
+    	U_1 \cup U_2 \supset A \\
+        U_1 \cap U_2 \cap A = \O
+    \end{rcases} \implies \left[
+    \begin{aligned}
+    	U_1 \cap A = \O \\
+        U_2 \cap A = \O
+    \end{aligned} \right. $$
+\end{definition}
+
+\begin{exmpls}
+    \item Дискретное пространство более чем из одной точки \textbf{несвязно} (любое множество будет открытым и замкутым одновременно)
+    \item Аннидискретное пространство \textbf{связно} (всего два открытых множества -- $ \O $ и $ X $)
+    \item Стрелка \textbf{связна} (любые два непустых открытых множества пересекаются)
+    \item Зариского:
+    \begin{itemize}
+        \item Если пространство бесконечно -- \textbf{связно}
+        \item Если пространство конечно -- \textbf{несвязно} (конечное пространство Зариского -- то же самое, что дискретное пространство)
+    \end{itemize}
+    \item Стандартная топология:
+    \begin{itemize}
+        \item $ \R $ \textbf{связно}
+        \item $ [a, b] $ \textbf{связно}
+        \item $ \Q $ \textbf{несвязно}
+        \begin{proof}
+        	$ U_1 = (-\infty, \sqrt2) \cap \Q, \quad U_2 = (\sqrt2, +\infty) \cap Q $ -- граница не принадлежит ни $ U_1 $, ни $ U_2 $
+        \end{proof}
+        \begin{remark}
+            Отсюда видно, что любое подмножество $ \Q $ \textbf{несвязно}
+        \end{remark}
+    \end{itemize}
+\end{exmpls}
+
+\begin{theorem}
+	$ A $ связно, $ \quad A \sub B \sub \Cl A \implies B $ связно
+\end{theorem}
+
+\begin{proof}
+	Пусть $ B $ несвязно, т. е.
+    $$ \exist U_1, U_2 \in \Omega_X :
+    \begin{cases}
+    	U_1 \cup U_2 \supset B \\
+        U_1 \cap U_2 \cap B = \O \\
+        U_1 \cap B \ne \O \\
+        U_2 \cap B \ne \O
+    \end{cases} $$
+    $$ A \sub B \implies
+    \begin{cases}
+        U_1 \cup U_2 \supset A \\
+        U_1 \cap U_2 \cap A = \O
+    \end{cases} \underimp{(A \text{ связно})} \text{ считаем } A \cap U_1 = \O \implies U_2 \supset A $$
+    Возьмём $ F \define \Cl A \setminus U_1 $ \\
+    $ F $ замкнуто, $ F \supset A $ -- \contra (замыкание не наименьшее)
+\end{proof}
+
+\begin{implication}
+	$ A $ связно $ \implies \Cl A $ связно
+\end{implication}
+
+\begin{theorem}
+	$ A, B $ связны, $ A \cap B \ne \O \implies A \cup B $ связно
+\end{theorem}
+
+\begin{proof}
+	Пусть $ U_1, U_2 $ открытые, $ \quad U_1 \cup U_2 \supset A \cup B, \quad U_1 \cap U_2 \cap (A \cup B) = \O, $ \\
+    $ U_1 \cap (A \cup B) \ne \O, \quad U_2 \cap (A \cup B) \ne \O $ \\
+    Возьмём $ x_0 \in A \cup B $ \\
+    НУО считаем, что $
+    \begin{cases}
+    	x_0 \in U_1 \\
+        x_0 \notin U_2
+    \end{cases} $
+    $$
+    \begin{rcases}
+    	U_1 \cup U_2 \supset A \\
+        U_1 \cap U_2 \cap A = \O
+    \end{rcases} \underimp{A \text{ связно}} \left[
+    \begin{aligned}
+        U_1 \cap A = \O \\
+        U_2 \cap A = \O
+    \end{aligned} \right. $$
+    $$
+    \begin{rcases}
+    	U_1 \cup U_2 \supset B \\
+        U_1 \cap U_2 \cap B = \O
+    \end{rcases} \underimp{B \text{ связно}} \left[
+    \begin{aligned}
+        U_1 \cap B = \O \\
+        U_2 \cap B = \O
+    \end{aligned} \right. $$
+\end{proof}
+
+\begin{implication}
+	$ A_1, A_2, ..., A_n $ -- связные \\
+    Построим граф с вершинами из $ \set{A_n} $ \\
+    Если $ A_i \cap A_j \ne \O $, то проводим ребро \\
+    Если граф связный, то $ \bigcup_{i = 1}^n A_i $ связно
+\end{implication}
+
+\begin{theorem}
+	$ (0, 1) $ связен
+\end{theorem}
+
+\begin{proof}
+	Пусть $ (0, 1) $ несвязен $ \implies \exist $ открытые $ U_1, U_2 :
+    \begin{cases}
+    	U_1 \cup U_2 \supset (0, 1) \\
+        U_1 \cap U_2 \cap (0, 1) = \O
+    \end{cases} $ \\
+    Возьмём $ a \in U_1 \cap (0, 1), \quad b \in U_2 \cap (0, 1) $. Считаем $ a < b $ \\
+    Положим $ x_* \define \sup\set{x \in U_1 | x < b} $
+    $$  \left[
+    \begin{aligned}
+    	& x_* \in U_1 \implies \exist \veps > 0 : (x_* - \veps, x_* + \veps) \sub U_1 \implies b > x_* + \veps \quad \contra \quad \sup \\
+        & x_* \in U_2 \implies \exist \veps > 0 : (x_* - \veps, x_* + \veps) \sub U_2 \implies x_* \text{ не точная верхняя граница (} x_* - \veps \text{ точнее)}
+    \end{aligned} \right. $$
+\end{proof}
+
+\begin{implication}
+	$ [0, 1] $ связен (как замыкание $ [0, 1] $)
+\end{implication}
+
+\begin{theorem}
+	$ f : X \to Y $ -- непрерывная, $ A \sub X $ -- связно $ \implies f(A) $ связно в $ Y $
+\end{theorem}
+
+\begin{proof}
+	Пусть $ f(A) $ несвязно, т. е.
+    $$
+    \begin{cases}
+    	f(A) \sub U_1 \cup U_2 \\
+        U_1 \cap U_2 \cap f(A) = \O \\
+        U_1 \cap f(A) \ni y_1 \\
+        U_2 \cap f(A) \ni y_2
+    \end{cases} $$
+    Положим $ V_1 \define f^{-1}(U_1), \quad V_2 \define f^{-1}(U_2) $
+    $$ V_1 \cup V_2 = f^{-1}(U_1) \cup f^{-1}(U_2) = f^{-1}(U_1 \cup U_2) \supset f^{-1} \big( f(A) \big) \supset V_1 \cup V_2 \cup A = \O \supset A $$
+\end{proof}
+
+\begin{implication}
+	$ X \simeq Y, \quad X $ связно $ \implies Y $ связно
+\end{implication}
+
+\begin{theorem}
+	$ X \times Y $ связно $ \iff X, Y $ связны
+\end{theorem}
+
+\begin{proof}
+	\hfill
+    \begin{itemize}
+    	\item $ \implies $ \\
+        Возьмём отображения $
+        \begin{cases}
+        	p_X : X \times Y \to X \quad p_X(x, y) = x \\
+            p_Y : X \times Y \to Y \quad p_Y(x, y) = y
+        \end{cases} $
+        \item $ \impliedby $ \\
+        $ X, Y $ несвязные $ \implies
+        \begin{cases}
+            X \times Y = U_1 \cup U_2 \\
+            U_1 \cap U_2 = \O
+        \end{cases} $ \\
+        Возьмём $ (x_1, y_1) \in U_1, \quad (x_2, y_2) \in U_2 $ \\
+        НУО считаем $ (x_1, y_2) \in U_1 $ \\
+        $ X \times \set{y_2} \simeq X $ -- связная, а $ U_1, U_2 $ разбивают $ X \times \set{y_2} $ -- \contra
+    \end{itemize}
+\end{proof}
+
+\subsection{Компоненты связности}
+
+\begin{definition}[компонента связности точки]
+    $$ K_a \define \bigcup_{
+        \begin{subarray}{c}
+        	a \in A \\
+            A \text{ связно}
+        \end{subarray}}A \text{ -- связно} $$
+\end{definition}
+
+\begin{statement}
+	$ K_a = K_b $ или $ K_a \cap K_b = \O $
+\end{statement}
+
+\begin{proof}
+	Если $ K_a \ne K_b, K_a \cap K_b \ne \O \implies K_a \cup K_b $ связно
+\end{proof}
+
+\begin{statement}
+	$ K_a $ замкнута
+\end{statement}

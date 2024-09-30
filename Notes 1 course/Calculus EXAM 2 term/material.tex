@@ -1,0 +1,3008 @@
+\begin{notation}
+    $ x \in [a \between b] $ -- $ x $ между $ a $ и $ b $
+\end{notation}
+
+\section{Условие постоянства функции}
+
+\begin{theorem}
+    $ f \in \Cont{(a, b)}, \qquad \forall x \in (a, b) \quad \exist f'(x) $
+    \begin{equ}{11}
+        \forall x \in (a, b) \quad \underset{(\text{то есть, } f(x) = \const)}{f(x) = f(x_0)}
+    \end{equ}
+    \begin{equ}{22}
+    	\iff \forall x \in (a, b) \quad f'(x) = 0
+    \end{equ}
+\end{theorem}
+
+\begin{iproof}
+	\item $ \implies $ \\
+    $ \eref{11} \iff \eref{22} $, так как $ c' \equiv 0 $
+    \item $ \impliedby $ \\
+    Пусть $ x \ne x_0 $ \\
+    По теореме Лагранжа,
+    $$ \exist x_1 \in [x_0 \between x] : f(x) - f(x_0) = \underbrace{f'(x_1)}_{= 0}(x - x_0) = 0 $$
+\end{iproof}
+
+\section{Условие монотонности функции; условие строгой монотонности}
+
+\begin{theorem}[условие возрастания функции]
+    $ f \in \Cont{[a, b]}, \qquad \forall x \in (a, b) \quad \exist f'(x) $
+    \begin{equ}{23}
+    	\forall x_1 < x_2 \in [a, b] \quad f(x_1) \le f(x_2)
+    \end{equ}
+    \begin{equ}{24}
+    	\iff \forall x \in (a, b) \quad f'(x) \ge 0
+    \end{equ}
+\end{theorem}
+
+\begin{iproof}
+	\item $ \implies $ \\
+    Пусть выполнено \eref{23} \\
+    Рассмотрим любую точку $ x \in (a, b) $ \\
+    Возьмём $ h > 0 : x + h < b $
+    $$ \eref{23} \implies f(x + h) \ge f(x) \iff \frac{f(x + h) - f(x)}h \ge 0 \implies \lim_{h \to 0+} \frac{f(x + h) - f(x)}h \ge 0 \iff f'(x) \ge 0 $$
+    \item $ \impliedby $ \\
+    Пусть выполнено \eref{24} \\
+    Возьмём $ x_1, x_2 \in [a, b] $ \\
+    По теореме Лагранжа,
+    $$ \exist x_3 \in (x_1, x_2) : f(x_2) - f(x_1) = \underbrace{f'(x_3)}_{\ge 0}\underbrace{(x_2 - x_1)}_{\ge 0} \ge 0 \iff f(x_2) \ge f(x_1) $$
+\end{iproof}
+
+\begin{theorem}[условие строгого возрастания функции]
+    $ f \in C \big( [a, b] \big), \qquad \forall x \in (a, b) \quad \exist f'(x) $
+    $$ \forall x_1 < x_2 \in [a, b] \quad f(x_1) < f(x_2) $$
+    \begin{mequ}[\iff \empheqlbrace]
+        \lbl{27} \forall x \in (a, b) \quad f'(x) \ge 0 \\
+        \lbl{28} \not\exist (\alpha, \beta) \sub (a, b) : \forall x \in (\alpha, \beta) \quad f'(x) = 0
+    \end{mequ}
+\end{theorem}
+
+\begin{iproof}
+	\item $ \implies $ \\
+    Пусть $ f $ строго возрастает \\
+    По предыдущей тоереме, выполнено \eref{27} \\
+    Пусть \textbf{не} выполнено \eref{28}, то есть
+    $$ \exist (\alpha, \beta) \sub (a, b) : \forall x \in (\alpha, \beta) \quad f'(x) = 0 $$
+    По теореме об условии постоянства функции, $ \forall x_1 < x_2 \in (\alpha, \beta) \quad f(x_1) = f(x_2) $ -- \contra с предположением, что $ f $ строго возрастает
+    \item $ \impliedby $ \\
+    Пусть выполнены \eref{27} и \eref{28} \\
+    Докажем, что $ f $ строго возрастает:
+    \begin{equ}{29}
+        \eref{27} \implies \forall x_1 < x_2 \in [a, b] \quad f(x_1) \le f(x_2)
+    \end{equ}
+    То есть, $ f $ возрастает \\
+    Предположим, что $ f $ не строго возрастает, то есть
+    \begin{equ}{210}
+        \exist x', x'' \in [a, b] : f(x') = f(x'')
+    \end{equ}
+    \begin{multline*}
+        \eref{29}, \eref{210} \implies \forall x \in (x', x'') \quad f(x') \le f(x) \le f(x'') \iff \forall x \in (x', x'') \quad f(x) = f(x') \implies \\
+        \implies \forall x \in (x', x'') \quad f'(x) = 0 \text{ -- } \contra
+    \end{multline*}
+\end{iproof}
+
+\section({Неравенства sin x >= 2/п x, x из [0, п/2]; ln(1 + x) <= x, x > -1; (1 + x)\textasciicircum{}a >= 1 + a x, a > 1, x > -1; (1 + x)\textasciicircum{}a <= 1 + a x, 0 < a < 1, x > -1}){Неравенства $ \sin x \ge \frac2\pi x, x \in [0, \frac\pi2] $; $ \ln(1 + x) \le x, x > -1 $; $ (1 + x)^\alpha \ge 1 + \alpha x, \alpha > 1, x > -1 $; $ (1 + x)^\alpha \le 1 + \alpha x, 0 < \alpha < 1, x > -1 $}
+
+\begin{statement}
+	$ \forall x \in \big[0, \dfrac\pi2 \big] \quad \sin x \ge \dfrac2\pi x $
+\end{statement}
+
+\begin{proof}
+	Рассмотрим функцию
+    $$ f(x) \define
+    \begin{cases}
+    	1, \qquad x = 0 \\
+        \dfrac{\sin x}x, \qquad x < x \le \dfrac\pi2
+    \end{cases} $$
+    По замечательному пределу для $ \dfrac{\sin x}x $, $ \quad f \in \Cont{\big[ 0, \dfrac\pi2 \big]} $ \\
+    Найдём производную $ f $:
+    $$ f'(x) = \frac{\sin' x \cdot x - \sin x \cdot x'}{x^2} = \frac{x\cos x - \sin x}{x^2} = \frac{\cos x}{x^2}(x - \tg x) $$
+    При доказательстве существенного неравенства для $ \sin x $ было доказано, что $ \forall x \in \big( 0, \dfrac\pi2 \big) \quad x < \tg x $ \\
+    Значит,
+    $$ f'(x) = \underbrace{\frac{\cos x}{x^2}}_{> 0}\underbrace{(x - \tg x)}_{< 0} < 0 $$
+    По теореме о строгом убывании, $ f $ строго убывает, то есть, $ \forall x \in \big[ 0, \dfrac\pi2 \big) \quad f(x) > f \big( \dfrac\pi2 \big) $
+    $$ f \big( \frac\pi2 \big) = \frac{\sin \frac\pi2}{\frac\pi2} = \frac2\pi $$
+\end{proof}
+
+\begin{statement}
+	$$ \forall x > -1 \quad \ln(1 + x) \le x $$
+    $$ \ln(1 + x) = x \iff x = 0 $$
+\end{statement}
+
+\begin{proof}
+	Возьмём $ -1 < a < 0 < b $ \\
+    Рассмотрим $ f(x) \define \ln(1 + x) - x, \qquad x \in [a, b] $
+    $$ f'(x) = \frac1{1 + x} - 1 = -\frac{x}{1 + x} $$
+    \begin{itemize}
+    	\item Рассмотрим отрезок $ [a, 0] $:
+        $$ \forall x \in [a, 0] \quad
+        \begin{cases}
+        	-x > 0 \\
+            1 + x > 0
+        \end{cases} \quad \implies f(x) \text{ строго возр. на } [a, 0] $$
+        То есть,
+        $$ \forall x \in [a, 0] \quad f(x) \le f(0) = 0 $$
+        \item Рассмотрим отрезок $ [0, b] $:
+        $$ \forall x \in [0, b] \quad
+        \begin{cases}
+        	-x < 0 \\
+            1 + x > 0
+        \end{cases} \quad \implies f(x) \text{ строго убывает на } [0, b] $$
+        То есть,
+        $$ \forall x \in [0, b] \quad f(x) \le f(0) = 0 $$
+    \end{itemize}
+    Получили, что
+    $$ \forall x \in [a, b] \quad f(x) \le 0 \iff \ln(1 + x) \le x $$
+\end{proof}
+
+\begin{statement}[неравенство Бернулли]
+	$ \alpha > 1 $
+    $$ \forall x > -1 \quad (1 + x)^\alpha \ge 1 + \alpha x $$
+    $$ (1 + x)^\alpha = 1 + \alpha x \iff x = 0 $$
+\end{statement}
+
+\begin{proof}
+	Рассмотрим $ f(x) \define (1 + x)^\alpha - \alpha x \quad $ для $ x \in [a, b], \quad -1 < a < 0 < b $ \\
+    Теперь $ f'(x) = \alpha(1 + x)^{\alpha - 1} - \alpha = \alpha \bigg( (1 + x)^{\alpha - 1} - 1 \bigg) $ \\
+    Обозначим $ \beta \define \alpha - 1 > 0 $
+    \begin{itemize}
+    	\item $ -1 < x < 0 $
+        $$ 1 + x < 1 \quad \implies \quad (1 + x)^\beta < 1^\beta \quad \implies \quad (1 + x)^\beta - 1 < 0 $$
+        То есть, $ f $ строго убывает на $ [a, 0] $ и $ f(x) < f(0) = 1 $
+        \item $ 0 < x $
+        $$ 1 + x > 1 \quad \implies \quad (1 + x)^\beta > 1^\beta \quad \implies \quad (1 + x)^\beta - 1 > 0 $$
+        То есть, $ f $ строго убывает на $ [a, 0] $ и $ f(x) < f(0) = 1 $
+    \end{itemize}
+    Получили, что $ f(x) \le 1 $
+\end{proof}
+
+\begin{statement}[неравенство Бернулли]
+	$ 0 < \alpha < 1 $
+    $$ \forall x > -1 \quad (1 + x)^\alpha \le 1 + \alpha x $$
+    $$ (1 + x)^\alpha = 1 + \alpha x \iff x = 0 $$
+\end{statement}
+
+\begin{proof}
+	Доказательство точно такое же, но $ \beta \define 1 - \alpha $
+\end{proof}
+
+\section{Определение выпуклых, вогнутых функций; связь выпуклых и вогнутых функций; критерий выпуклости (вогнутости) функции \texorpdfstring{$ f $}{f} через \texorpdfstring{$ f' $}{f'}; через \texorpdfstring{$ f'' $}{f''}; точки перегиба}
+
+\begin{definition}
+    $ f \in \Cont{[a, b]} $
+    $$ f \text{ выпукла } \iff \forall x_1, x_2 \in [a, b] \quad \forall t_1, t_2 > 0 : t_1 + t_2 = 1 $$
+    \begin{equ}{411}
+    	f(t_1x_1 + t_2x_2) \le t_1f(x_1) + t_2f(x_2)
+    \end{equ}
+\end{definition}
+
+\begin{definition}
+    $ g \in \Cont{[a, b]} $
+    $$ g \text{ вогнута } \iff \forall x_1 , x_2 \in [a, b] \quad \forall t_1, t_2 > 0 : t_1 + t_2 = 1 \quad g(t_1x_1 + t_2x_2) \ge t_1g(x_1) + t_2g(x_2) $$
+\end{definition}
+
+\begin{theorem}
+	$ f $ выпукла $ \implies -f $ вогнута \\
+    $ g $ вогнута $ \implies -g $ выпукла
+\end{theorem}
+
+\begin{proof}
+    Домножим \eref{411} на $ -1 $:
+    $$ -f(t_1x_1 + t_2x_2) \ge t_1 \big( -f(x_1) \big) + t_2 \big( -f(x_2) \big) $$
+\end{proof}
+
+\begin{theorem}[характеристика выпуклых функций в терминах производной]
+    \hfill \\
+    $ f \in \Cont{[a, b]}, \qquad \forall x \in (a, b) \quad \exist f'(x) $
+    $$ f \text{ выпукла } \iff f'(x) \text{ возрастает} $$
+\end{theorem}
+
+\begin{iproof}
+    \item $ \implies $ \\
+    Пусть $ f' $ возрастает \\
+    НУО положим $ a \le x_1 < x_2 \le b $ \\
+    Нужно доказать \eref{411}
+    \begin{multline*}
+        \underbrace{(t_1 + t_2)}_{\bydef 1}f(t_1x_1 + t_2x_2) \le t_1f(x_1) + t_2f(x_2) \iff \\
+        \iff t_1 \bigg( f(t_1x_1 + t_2x_2) - f(x_1) \bigg) \le t_2 \bigg( f(x_2) - f(t_1x_1 + t_2x_2) \bigg)
+    \end{multline*}
+    Обозначим $ x \define t_1x_1 + t_2x_2 $
+    $$ x_1 \bydef[<] x_2 \implies
+    \begin{cases}
+        x > t_1x_1 + t_2x_1 = x_1 \\
+        x < t_1x_2 + t_2x_2 = x_2
+    \end{cases} $$
+    То есть, $ x_1 < x < x_2 $ \\
+    По теореме Лагранжа,
+    $$
+    \begin{cases}
+        \exist c_1 \in (x_1, x) : f(x) - f(x_1) = f'(c_1) \cdot (x - x_1) \\
+        \exist c_2 \in (x, x_2) : f(x_2) - f(x) = f'(c_2) \cdot (x_2 - x)
+    \end{cases} $$
+    Теперь достаточно доказать, что
+    \begin{equ}{413}
+    	t_1f'(c_1)(x - x_1) \le t_2f'(c_2)(x_2 - x)
+    \end{equ}
+    \begin{equ}{414}
+    	t_1 + t_2 \bydef 1 \implies
+        \begin{cases}
+        	t_1 - 1 = -t_2 \\
+            1 - t_2 = t_1
+        \end{cases}
+    \end{equ}
+    $$
+    \begin{rcases}
+        x - x_1 \bydef t_1x_1 + t_2x_2 - x_1 = x_1(t_1 - 1) + t_2x_2 \underset{\eref{414}}= -t_2x_1 + t_2x_2 = t_2(x_2 - x_1) \\
+        x_2 - x \bydef x_2 - (t_1x_1 + t_2x_2) = (1 - t_2)x_2 - t_1x_1 \underset{\eref{414}}= t_1x_2 - t_1x_1 = t_1(x_2 - x_1)
+    \end{rcases} $$
+    Подставим это в \eref{413}:
+    $$ t_1t_2(x_2 - x_1)f'(c_1) \le t_1t_2(x_2 - x_1)f'(c_2) $$
+    То есть, нужно проверить, что $ f'(c_1) \le f'(c_2) $, а производная возрастает
+    \item $ \impliedby $ \\
+    Пусть $ f $ выпукла \\
+    Возьмём $ a < x_1 < x < x_2 < b $ \\
+    Положим $ t_1 \define \dfrac{x_2 - x}{x_2 - x_1}, \quad t_2 \define \dfrac{x - x_1}{x_2 - x_1} $
+    $$ t_1x_1 + t_2x_2 = \frac{x_2 - x}{x_2 - x_1}x_1 + \frac{x - x_1}{x_2 - x_1}x_2 = \frac{\cancel{x_1x_2} - xx_1 + xx_2 - \cancel{x_1x_2}}{x_2 - x_1} = x $$
+    Подставим в \eref{411}:
+    $$ f(x) \le \frac{x_2 - x}{x_2 - x_1}f(x_1) + \frac{x - x_1}{x_2 - x_1}f(x_2) $$
+    $$ \underbrace{\bigg( \frac{x_2 - x}{x_2 - x_1} + \frac{x - x_1}{x_2 - x_1} \bigg)}_{= t_1 + t_2 = 1}f(x) \le \frac{x_2 - x}{x_2 - x_1}f(x_1) + \frac{x - x_1}{x_2 - x_1}f(x_2) $$
+    $$ \frac{x_2 - x}{x_2 - x_1} \bigg( f(x) - f(x_1) \bigg) \le \frac{x - x_1}{x_2 - x_1} \bigg( f(x_2) - f(x) \bigg) $$
+    $$ (x_2 - x) \bigg( f(x) - f(x_1) \bigg) \le (x - x_1) \bigg( f(x_2) - f(x) \bigg) $$
+    $$ \frac{f(x) - f(x_1)}{x - x_1} \le \frac{f(x_2) - f(x)}{x_2 - x} $$
+    Перейдём к пределу:
+    \begin{itemize}
+    	\item
+        $$ \liml{x \to x_1+} \frac{f(x) - f(x_1)}{x - x_1} \le \liml{x \to x_1+} \frac{f(x_2) - f(x)}{x_2 - x} $$
+        \begin{equ}{418}
+            f'(x_1) \le \frac{f(x_2) - f(x_1)}{x_2 - x_1}
+        \end{equ}
+        \item
+        $$ \liml{x \to x_2-} \frac{f(x) - f(x_1)}{x - x_1} \le \liml{x \to x_2-} \frac{f(x_2) - f(x)}{x_2 - x} $$
+        \begin{equ}{419}
+            \frac{f(x_2) - f(x_1)}{x_2 - x_1} \le f'(x_2)
+        \end{equ}
+    \end{itemize}
+    $$ \eref{418}, \eref{419} \implies f'(x_2) \text{ возр.} $$
+\end{iproof}
+
+\begin{theorem}[характеристика выпуклых функций в терминах второй производной]
+    \hfill \\
+    $ f \in \Cont{[a, b]}, \qquad \forall x \in (a, b) \quad \exist f''(x) $
+    $$ f \text{ выпукла } \iff \forall x \in (a, b) \quad f''(x) \ge 0 $$
+\end{theorem}
+
+\begin{proof}
+	$ f'(x) $ возр. $ \iff \forall x \in (a, b) \quad (f')'(x) = f''(x) \ge 0 $
+\end{proof}
+
+\section{Неравенство Йенсена}
+
+\begin{theorem}
+    \hfill
+    \begin{itemize}
+    	\item $ f \in \Cont{[a, b]}, \qquad f $ выпукла, $ \qquad \underset{
+            \begin{subarray}{c}
+                t_k > 0 \\
+                t_1 + ... + t_n = 1
+            \end{subarray}}{\forall t_1, ..., t_n}, \qquad \forall x_1, ..., x_n \in [a, b] $
+        \begin{equ}{520}
+            f \big( t_1x_1 + t_2x_2 + ... + t_nx_n \big) \le t_1f(x_1) + t_2f(x_2) + ... + t_nf(x_n)
+        \end{equ}
+        \item $ g \in \Cont{[a, b]}, \qquad g $ вогнута, $ \qquad \underset{
+            \begin{subarray}{c}
+                t_k > 0 \\
+                t_1 + ... + t_n = 1
+            \end{subarray}}{\forall t_1, ..., t_n}, \qquad \forall x_1, ..., x_n \in [a, b] $
+        \begin{equ}{521}
+        	g \big( t_1x_1 + t_2x_2 + ... + t_nx_n \big) \ge t_1g(x_1) + t_2g(x_2) + ... + t_ng(x_n)
+        \end{equ}
+    \end{itemize}
+\end{theorem}
+
+\begin{proof}
+    \textbf{Индукция}
+    \begin{itemize}
+        \item \textbf{База. } $ n = 2 $ -- по определению выпуклости
+        \item \textbf{Переход. } $ n \to n + 1 $
+        $$ t_1 + t_2 + ... + t_n + t_{n + 1} = 1 $$
+        Определим числа
+        $$ \vawe{t_n} \define t_n + t_{n + 1}, \qquad \vawe{x_n} \define t_nx_n + t_{n + 1}x_{n + 1} $$
+        Получается, что
+        $$
+        \begin{cases}
+            t_1 + ... + \vawe{t_n} = 1 \\
+            t_1x_1 + ... + \vawe{t_1}\vawe{x_n} = t_1x_1 + ... + t_nx_n + t_{n + 1}x_{n + 1} \implies \vawe{x_n} = \dfrac{t_n}{\vawe{t_n}}x_n + \dfrac{t_{n + 1}}{\vawe{t_n}}x_{n + 1}
+        \end{cases} $$
+        По индукционному предположению,
+        $$ \underbrace{(t_1x_1 + ... + \vawe{t_n}\vawe{x_n})}_{= f(t_1x_1 + ... + t_{n + 1}x_{n + 1})} \le t_1f(x_1) + ... + \vawe{t_n}f(\vawe{x_n}) $$
+        $$ \vawe{t_n}f(\vawe{x_n}) = \vawe{t_n}f \bigg( \frac{t_n}{\vawe{t_n}}x_n + \frac{t_{n + 1}}{\vawe{t_n}}x_{n + 1} \bigg) \le \vawe{t_n} \frac{t_n}{\vawe{t_n}}f(x_n) + \vawe{t_n} \frac{t_n}{\vawe{t_n}}f(x_{n + 1}) = t_nf(x_n) + t_{n + 1}f(x_{n + 1}) $$
+    \end{itemize}
+\end{proof}
+
+\section{Неравенство Гёльдера}
+
+\begin{undefthm}{Применение неравенства Йенсена к $ x^p $}
+	Рассмотрим $ f(x) = x^p, \qquad p > 1, \quad x > 0 $
+    $$ (x^p)' = px^{p - 1}, \qquad (x^p)'' = p(p - 1)x^{p - 2} > 0 $$
+    Значит, $ f(x) $ -- выпуклая \\
+    Рассмотрим $ x_1, ..., x_n > 0 $ и $ t_1, ..., t_n > 0 : t_1 + ... + t_n = 1 $ \\
+    По неравенству Йенсена,
+    $$ (t_1x_1 + ... + t_nx_n)^p \le t_1x_1^p + ... + t_nx_n^p $$
+    Возьмём любые $ y_1, ..., y_n > 0 $ \\
+    Положим $ T \define y_1 + ... + y_n $ \\
+    Теперь $ t_k = \dfrac{y_k}T $ \\
+    Перепишем неравенство:
+    $$ \bigg( \frac{y_1}Tx_1 + ... + \frac{y_n}Tx_n \bigg)^p \le \frac{y_1}Tx_1^p + ... + \frac{y_n}Tx_n^p $$
+    Умножим на $ T^p $:
+    $$ (y_1x_1 + ... + y_nx_n)^p \le (y_1x_1^p + ... + y_nx_n^p){\underbrace{(y_1 + ... + y_n)}_{= T}}^{p - 1} $$
+    Введём числа
+    $$ a_k, b_k > 0 :
+    \begin{cases}
+    	a_kb_k = x_ky_k \\
+        a_k^p = y_kx_k^p
+    \end{cases} $$
+    \begin{undefthm}{Решим эту систему относительно $ a_k $ и $ b_k $}
+        Возведём первое уравнение в степень $ p $:
+        $$
+        \begin{cases}
+        	a_k^pb_k^p = x_k^py_k^p \\
+            a_k^p = y_kx_k^p
+        \end{cases} $$
+        Поделим первую строчку на вторую:
+        $$
+        \begin{cases}
+            b_k^p = y_k^{p - 1} \\
+            a_k^p = y_kx_k^p
+        \end{cases} $$
+        $$ b_k = y_k^{\frac{p - 1}p} \iff y_k = b_k^{\frac{p}{p - 1}} $$
+        Следовательно, мы можем взять любые положиетльные $ a_k, b_k $ и восстановить по ним $ x_k, y_k $
+    \end{undefthm}
+    Перепишем неравенство:
+    $$ (a_1b_1 + ... + a_nb_n)^p \le (a_1^p + ... + a_n^p) \bigg( b_1^{\frac{p}{p - 1}} + ... + b^{\frac{p}{p - 1}} \bigg)^{p - 1} $$
+    Извлечём корень степени $ p $:
+    $$ a_1b_1 + ... + a_nb_n \le (a_1^p + ... + a_n^p)^{\faktor1p} \cdot \bigg( b_1^{\frac{p}{p - 1}} + .. + b_n^{\frac{p}{p - 1}} \bigg)^{\frac{p - 1}p} $$
+    Это называется \textbf{неравенство Гёльдера}
+\end{undefthm}
+
+\section{Неравенство между средним арифметическим и средним геометрическим}
+
+\begin{undefthm}{Применение неравенства Йенсена к $ ln $}
+    \hfill \\
+	Рассмотрим функцию $ f(x) = \ln x $ при $ x > 0 $
+    $$ (\ln x)' = \frac1x, \qquad (\ln x)'' = -\frac1{x^2} < 0 $$
+    Значит, $ f(x) $ -- вогнутая \\
+    Рассмотрим $ x_1, ..., x_n > 0, \quad n \ge 2 $ \\
+    Возьмём $ t_1 = t_2 = ... = t_n = \dfrac1n $ \\
+    Применим неравенство Йенсена:
+    $$ \ln \bigg( \frac{x_1}n + ... + \frac{x_n}n \bigg) \ge \frac1n \ln x_1 + ... + \frac1n \ln x $$
+    $$ \ln \frac{x_1 + ... + x_n}n \ge \ln(x_1 \cdot ... \cdot x_n)^{\faktor1n} $$
+    $$ \frac{x_1 + ... + x_n}n \ge (x_1 \cdot ... \cdot x_n)^{\faktor1n} $$
+\end{undefthm}
+
+\section{Первообразная; структура множества первообразных}
+
+\begin{definition}
+	$ f : (a, b) \to \R, \qquad F : (a, b) \to \R, \qquad -\infty \le a < b \le +\infty $ \\
+    $ F $ -- первообразная $ f $ на $ (a, b) \iff \forall x \in (a, b) \quad \exist F'(x) = f(x) $
+\end{definition}
+
+\begin{statement}
+	Если первообразная существует, то их бесконечно много
+\end{statement}
+
+\begin{proof}
+	Возьмём $ c \in \R, \quad c \ne 0 $
+    $$ (F + c)'(x) = F'(x) + c' = f(x) + 0 $$
+\end{proof}
+
+\begin{theorem}
+	$ f : (a, b) \to \R, \qquad F $ -- первообр. $ f $
+    $$ \forall x \in (a b) \quad F_0'(x) = f(x) \iff \exist c_0 \in \R : F_0(x) = F(x) + c_0 $$
+\end{theorem}
+
+\begin{proof}
+	Рассмотрим $ G(x) \define F_0(x) - F(x) $
+    $$ \forall x \in (a, b) \quad G'(x) = F_0'(x) - F'(x) = f(x) - f(x) = 0 $$
+    Применим критерий постоянства функции:
+    $$ \exist c_0 : G(x) \equiv c_0 $$
+\end{proof}
+
+\section({неопределённый интеграл cf(x); неопределённый интеграл (f(x) + g(x))}){$ \uint{cf(x)} $; $ \uint{\big( f(x) + g(x) \big)} $}
+
+\begin{property}
+	$ b \ne 0, \quad b \in \R $
+    $$ \uint{bf(x)} = b \uint{f(x)} $$
+\end{property}
+
+\begin{proof}
+	$ \big( bf(x) \big)' = bf'(x) $
+\end{proof}
+
+\begin{property}
+    $$ \uint{ \bigg( f(x) + g(x) \bigg) } = \uint{f(x)} + \uint{g(x)} $$
+\end{property}
+
+\begin{proof}
+	$ \bigg( f(x) + g(x) \bigg)' = f'(x) + g'(x) $
+\end{proof}
+
+\section{Интегрирование по частям в неопределённом интеграле}
+
+\begin{undefthm}{Формула интегрирования по частям}
+	$ f, g : (a, b), \qquad F'(x) = f(x), \quad G'(x) = g(x) $ \\
+    Продифференцируем их произведение:
+    $$ \bigg( F(x)G(x) \bigg)' = F'(x)G(x) + F(x)G'(x) = f(x)G(x) + g(x)F(x) $$
+    $$ \uint{ \bigg( f(x)G(x) + g(x)F(x) \bigg) } = F(x)G(x) + c $$
+    $$ \uint{ f(x)G(x) } + \uint{g(x)F(x)} = F(x)G(x) + c $$
+    $$ \uint{F'(x)G(x)} = F(x)G(x) - \uint{G'(x)F(x)} $$
+\end{undefthm}
+
+\section{Замена переменной в неопределённом интеграле}
+
+\begin{undefthm}{Замена переменной в неопределённом интеграле}
+	$ f : (a, b) \to \R, \qquad F'(x) = f(x) $ \\
+    $ \vphi : (p, q), \qquad \forall t \in (p, q) \quad \vphi(t) \in (a, b), ~ \exist \vphi'(t), \qquad G(t) \define F \big( \vphi(t) \big) $
+    $$ G'(t) = F' \big( \vphi(t) \big) \cdot \vphi'(t) = f \big( \vphi(t) \big) \cdot \vphi'(t) \implies \uint[t]{f \big( \vphi(t) \big) \cdot \vphi'(t)} = G(t) + c = F \big( \vphi(t) \big) + c $$
+    $$ \uint[t]{f \big( \vphi(t) \big) \cdot \vphi'(t)} = \uint{f(x)}, \qquad x = \vphi(t) $$
+\end{undefthm}
+
+\section({неопределённый интеграл R(x), R(x) - рациональная функция}){$ \uint{R(x)}, R(x) $ -- рациональная функция}
+
+\begin{definition}
+    Рациональной функцией называется дробь $ \dfrac{p(x)}{q(x)} $, где $ p, q $ -- многочлены, $ q(x) \not\equiv 0 $
+\end{definition}
+
+\begin{remind}
+	Если $ \deg p \ge \deg q $, то
+    $$ \frac{p(x)}{q(x)} = r(x) + \frac{p_1(x)}{q(x)} $$
+    где $ r(x) $ -- многочлен, $ \deg p_1 < \deg q $
+\end{remind}
+
+\begin{statement}
+    $$ \uint{\frac{p(x)}{q(x)}} = \uint{r(x)} + \uint{\frac{p_1(x)}{q(x)}} $$
+    Пусть $ r(x) = a_0x^n + ... + a_n $
+    $$ \uint{r(x)} = a_0 \frac{x^{n + 1}}{n + 1} + a_1 \frac{x^n}{n} + ... + a_nx + c $$
+\end{statement}
+
+\begin{definition}
+	Простейшими дробями будем называть рациональные функции вида
+    \begin{itemize}
+        \item $ \dfrac{a}{(x - b)^n} $
+        \item $ \dfrac{ax + b}{(x^2 + hx + g)^n}, \qquad x^2 + hx + g > 0 \quad \forall x \in \R $
+    \end{itemize}
+\end{definition}
+
+\begin{remind}
+	Любую рациональную функцию можно представить в виде суммы простеших дробей
+\end{remind}
+
+\begin{undefthm}{Важный пример замены переменной}
+	$ a \ne 0, \qquad F'(x) = f(x) $
+    $$ \bigg( F(at + b) \bigg)' = F'(at + b) \cdot (at + b)' = af(at + b) $$
+    $$ \uint[t]{af(at + b)} = F(at + b) $$
+    $$ \uint[t]{f(at + b)} = \frac1a \uint{f(x)}\clamp{x = at + b} $$
+\end{undefthm}
+
+\begin{statement}
+    $$ \uint{\frac{a}{(x - b)^n}} $$
+    Будем пользоваться важным примером:
+    \begin{itemize}
+    	\item $ n \ge 2 $
+        $$ \uint{\frac{a}{(x - b)^n}} = \frac{a}{1 - x}(x - b){1 - n} + c $$
+        \item $ n = 1 $
+        $$ \uint{\frac{a}{(x - b)^n}} = a\ln|x - b| + c $$
+    \end{itemize}
+\end{statement}
+
+\begin{statement}
+    $$ x^2 + hx + g = (x + \half[h])^2 + \underbrace{g - \frac{h^2}4}_{\define s} $$
+    $$ ax + b = a(x + \half[h]) + \underbrace{b - \half[ah]}_{\define b_1} $$
+    \begin{multline*}
+        \uint{\frac{ax + b}{(x^2 + hx + g)^n}} = \uint{\frac{a(x + \half[h]) + b_1}{\bigg( (x + \half[h])^2 + s^2 \bigg)^n}} = \\
+        = a \uint{\frac{x + \half[h]}{\bigg( (x + \half[h])^2 + s^2 \bigg)^n}} + b_1\ufint{\bigg( (x + \half[h])^2 + s^2 \bigg)^n} \underset{(y \define x + \half[h])}= \underbrace{a\uint[y]{\frac{y}{(y^2 + s^2)^n}}}_{\define I_1} + \underbrace{b_1\ufint[y]{(y^2 + s^2)^n}}_{\define I_2}
+    \end{multline*}
+    \begin{itemize}
+    	\item $ I_1 $ \\
+        Пусть $ y^2 = t, \qquad y = \sqrt{t} = \vphi(t), \qquad \vphi'(t) = \frac1{2\sqrt{t}} $
+        $$ \uint[y]{\frac{y}{(y^2 + s^2)^n}} = \uint[t]{\frac{\sqrt{t} \cdot \dfrac1{2\sqrt{t}}}{(t + s^2)^n}} = \half\ufint[t]{(t + s^2)^n} $$
+        \item $ I_2 $ \\
+        Пусть $ y = sz, \qquad z = \frac1sy $
+        $$ \uint[z]{\frac{s}{(x^2z^2 + s^2)^n}} = s^{1 - 2n}\ufint[z]{(z^2 + 1)^n} $$
+        \begin{itemize}
+        	\item $ n = 1 $
+            $$ \ufint[z]{(z^2 + 1)} = \arctg z + c $$
+            \item Дальше будем определять первообразные индуктивно:
+            $$ F_n'(z) = \frac1{(z^2 + 1)^n} $$
+            Проинтегрируем по частям:
+            \begin{multline*}
+                \ufint[z]{(z^2 + 1)^n} = z \cdot \frac1{(z^2 + 1)^n} - \uint[z]{z \cdot \underbrace{\bigg( \frac1{(z^2 + 1)^n} \bigg)'}_{= n \cdot \frac{2z}{(z^2 + 1)^{n + 1}}}} = \frac{z}{(z^2 + 1)^n} + 2n \uint[z]{\frac{z \cdot z}{(z^2 + 1)^{n + 1}}} = \\
+                = \frac{z}{(z^2 + 1)^n} + 2n \uint[z]{\frac{z^2 + 1 - 1}{(z^2 + 1)^{n + 1}}} = \frac{z}{(z^2 + 1)^n} + 2n \ufint[z]{(z^2 + 1)^n} - 2n \ufint[z]{(z^2 + 1)^{n + 1}}
+            \end{multline*}
+            $$ 2n \ufint[z]{(z^2 + 1)^{n + 1}} = \frac{z}{(z^2 + 1)^n} + (2n - 1) \ufint[z]{(z^2 + 1)^n} $$
+            $$ \ufint[z]{(z^2 + 1)^{n + 1}} = \frac{z}{2n(z^2 + 1)^n} + \frac{2n - 1}{2n} \ufint[z]{(z^2 + 1)^n} = \frac1{2n}\frac{z}{(z^2 + 1)^n} + \frac{2n - 1}{2n}F_n(z) + c $$
+            Здесь написано равенство множеств. Значит, мы можем сами назначить какую-нибудь первообразную из левой части
+            $$ F_{n + 1}(z) = \frac1{2n} \frac{z}{(z^2 + 1)^n} + \frac{2n - 1}{2n} F_n(z) $$
+        \end{itemize}
+    \end{itemize}
+\end{statement}
+
+\section({неопределённый интеграл R(cos x, sin x)}){$ \uint{R(\cos x, \sin x)} $}
+
+\begin{statement}
+    $ \uint{R(\cos x, \sin x)} $ \\
+    Положим $ t \define \tg \half[x] $
+    $$ t^2 + 1 = \frac{\sin^2 \frac{x}2}{\cos^2 \frac{x}2} + 1 = \frac{\sin^2 \frac{x}2 + \cos^2 \frac{x}2}{\cos^2 \frac{x}2} = \frac1{\cos^2 \frac{x}2} $$
+    $$ \cos^2 \frac{x}2 = \frac1{1 + t^2} $$
+    \begin{remind}
+        $ \cos x = 2 \cos^2 \dfrac{x}2 - 1 = \dfrac2{1 + t^2} - 1 = \dfrac{1 - t^2}{1 + t^2} $
+    \end{remind}
+    \begin{remind}
+        $ \sin x = 2 \sin \frac{x}2 \cdot \cos \frac{x}2 = 2 \dfrac{\sin \frac{x}2}{\cos \frac{x}2} \cdot \cos^2 \frac{x}2 = \dfrac{2t}{1 + t^2} $
+    \end{remind}
+    $$ \uint{R(\cos x, \sin x)} = \uint{R \bigg( \frac{1 + t^2}{1 + t^2}, \frac{2t}{1 + t^2} \bigg) \cdot \frac{2}{1 + t^2}} $$
+\end{statement}
+
+\section({неопределённый интеграл R((a1x + b1)/(a2x + b2), x)}){$ \uint{R \bigg( \big( \frac{a_1x + b_1}{a_2x + b_2} \big)^{\frac1n}, x \bigg)}, $}
+
+\begin{statement}
+	$ n \ge 2, \qquad a_1b_2 - a_2b_1 \ne 0 $
+    $$ \uint{R \bigg( \big( \frac{a_1x + b_1}{a_2x + b_2} \big)^{\faktor1n}, x \bigg)} $$
+    Положим
+    $$ t \define \bigg( \frac{a_1x + b_1}{a_2x + b_2} \bigg)^{\faktor1n} $$
+    $$ t^n = \frac{a_1x + b_1}{a_2x + b_2} $$
+    $$ a_1x + b_1 = a_2xt^n + b_2t^n $$
+    $$ x = \frac{b_2t^n - b_1}{a_1 - a_2t^n} $$
+    Подставим это в интеграл:
+    $$ \uint[t]{R \bigg( \big( \frac{a_1x + b_1}{a_2x + b_2} \big)^{\faktor1n}, x \bigg)} = \uint[t]{ R \bigg( t, \frac{b_2t^n - b_1}{a_1 - a_2t^n} \bigg) \bigg( \frac{b_2t^n - b_1}{a_1 - a_2t^n} \bigg)'} $$
+\end{statement}
+
+\section{Подстановки Эйлера}
+
+Будем рассматривать интеграл:
+$$ \uint{R \big( \sqrt{ax^2 + bx + c}, x \big)}, \qquad a \ne 0, \qquad |b| + |c| > 0 $$
+
+\begin{statement}[первая подстановка Эйлера]
+    $ a > 0 $ \\
+    Определим $ t $:
+    \begin{equ}{151}
+        \sqrt{ax^2 + bx + c} = \sqrt{a} \cdot x + t
+    \end{equ}
+    $$ \cancel{ax^2} + bx + c = \cancel{ax^2} + 2\sqrt{a} \cdot xt + t^2 $$
+    $$ x = \frac{t^2 - c}{b - 2\sqrt{a} \cdot t} $$
+    Подставим это в \eref{151}:
+    $$ \sqrt{ax^2 + bx + c} = \sqrt{a} \cdot \frac{t^2 - c}{b - 2 \sqrt{a} \cdot t} + t = \frac{-\sqrt{a} \cdot t^2 + bt - \sqrt{a} \cdot c}{b - 2\sqrt{a} \cdot t} $$
+    Подставим в интеграл:
+    $$ \uint{R \big( \sqrt{ax^2 + bx + c}, x \big)} = \uint[t]{R \bigg( \frac{-\sqrt{a} \cdot t + bt - \sqrt{a} \cdot c}{b - 2\sqrt{a} \cdot}, \frac{t^2 - c}{b - 2\sqrt{a} \cdot t} \bigg) \bigg( \frac{t^2 - c}{b - 2\sqrt{a} \cdot t} \bigg)'} $$
+\end{statement}
+
+\begin{statement}[вторая подстановка Эйлера]
+    $ c > 0, \qquad x \ne 0 $ \\
+    Определим $ t $:
+    \begin{equ}{152}
+        \sqrt{ax^2 + bx + c} = tx + \sqrt{c}
+    \end{equ}
+    $$ ax^2 + bx + \cancel{c} = t^2x^2 + 2tx\sqrt{c} + \cancel{c} $$
+    $$ ax + b = t^2x + 2t\sqrt{c} $$
+    $$ x = \frac{2t\sqrt{c} - b}{a - t^2} $$
+    Подставим это в \eref{152}:
+    $$ \sqrt{ax^2 + bx + c} = t \cdot \frac{2t\sqrt{c} - b}{a - t^2} + \sqrt{c} = \frac{\sqrt{c} \cdot t^2 - bt + a\sqrt{c}}{a - t^2} $$
+    Подставим в интеграл:
+    $$ \uint{R \big( \sqrt{ax^2 + bx + c}, x \big)} = \uint[t]{R \bigg( \frac{\sqrt{c} \cdot t^2 - bt + a\sqrt{c}}{a - t^2}, \frac{2t\sqrt{c} - b}{a - t^2} \bigg) \bigg( \frac{2t\sqrt{c} - b}{a - t^2} \bigg)'} $$
+\end{statement}
+
+\begin{statement}[третья подстановка Эйлера]
+    $ a < 0, \qquad c \le 0 $ \\
+    Чтобы корень был определён, нужно, чтобы
+    $$
+    \begin{cases}
+    	ax_1^2 + bx_1 + c = 0 \\
+        ax_2^2 + bx_2 + c = 0
+    \end{cases}, \qquad x_1, x_2 \in \R, \qquad x_1 \ne x_2 $$
+    Пусть, НУО, $ x \ne x_1 $ \\
+    Введём $ t $:
+    \begin{equ}{153}
+        \sqrt{ax^2 + bx + c} = t(x - x_1)
+    \end{equ}
+    $$ a(x - x_1)(x - x_2) = t^2(x - x_1)^2 $$
+    $$ a(x - x_2) = t^2(x - x_1) $$
+    $$ x = \frac{ax^2 - t^2x_1}{a - t^2} $$
+    $$ x - x_1 = \frac{ax_2 - t^2x}{a - t^2x_1} - x_1 = \frac{a(x_2 - x_1)}{a - t^2} $$
+    Подставим это в \eref{153}:
+    $$ \sqrt{ax^2 + bx + c} = \frac{at(x_2 - x_1)}{a - t^2} $$
+    Подставим в интеграл:
+    $$ \uint{R \big( \sqrt{ax^2 + bx + c}, x \big)} = \uint[t]{R \bigg( \frac{at(x_2 - x_1)}{a - t^2}, \frac{ax^2 - t^2x_1}{a - t^2} \bigg) \bigg( \frac{ax_2 - t^2x}{a - t^2} \bigg)'} $$
+\end{statement}
+
+\section({неопределённый интеграл x\textasciicircum{}m(ax\textasciicircum{}n + b)\textasciicircum{}p}){$ \uint{x^m(ax^n + b)^p} $}
+
+\begin{statement}
+    $ \uint{x^m(ax^n + b)^p}, \qquad m, n, p \in \Q, \qquad a, \ne 0 $
+    \begin{itemize}
+    	\item $ p \in \Z $ \\
+        Положим
+        $$ m \define \frac{m_1}q, \qquad n \define \frac{n_1}q, \qquad q \in \N, \quad m, n \in \Z $$
+        Перепишем подинтегральное выражение:
+        $$ x^m(ax^n + b)^p = \big( x^{\faktor1q} \big)^{m_1} \bigg( a \big( x^{\faktor1q} \big)^{n_1} + b \bigg)^p $$
+        $$ R(u) = u^{m_1}(au^{n_1} + b)^p $$
+        \item $ \dfrac{m + 1}n \in \Z $ \\
+        Положим
+        $$ p \define \frac{p_1}{r_1}, \qquad r_1 \in \N, \quad p_1 \in \Z $$
+        Возьмём $ x^n = t $ \\
+        Тогда
+        $$ x = t^{\faktor1n}, \qquad x'(t) = \frac1n t^{\frac1n - 1}, \qquad x^m = t^{\faktor{m}n} $$
+        Перепишем интеграл:
+        $$ \uint{x^m(ax^n + b)^p} = \uint[t]{t^{\faktor{m}n}(at + b)^{\faktor{p_1}{r_1} \cdot \frac1nt^{\frac1n - 1}}} = \frac1n \uint[t]{t^{m + 1}n - 1}(at + b)^{\faktor{p_1}{r_1}} $$
+        $$ R(u, v) = u^{\overbrace{\frac{m + 1}n - 1}^{\in \Z}}v^{p_1}, \qquad v = (at + b)^{\faktor1{r_1}} $$
+        \item $ \dfrac{m + 1}n + p \in \Z $
+        $$ \uint{x^m(ax^n + b)^p} = \frac1n \uint[t]{t^{\frac{m + 1}n + p - 1} \bigg( \frac{at + b}t \bigg)^p} $$
+    \end{itemize}
+\end{statement}
+
+\section({Суммы Дарбу; L(P) <= U(P); L(P) <= L(P u \{y\}); U(P u \{y\}) <= U(P)}){Суммы Дарбу; $ \Ld(\Par) \le \Ud(\Par) $; $ \Ld(\Par) \le \Ld(\Par \cup \set{y}) $; $ \Ud(\Par \cup \set{y}) \le \Ud(\Par) $}
+
+\begin{definition}
+	$ [a, b] $
+    $$ a = x_0 < x_1 < ... < x_n = b, \qquad n \ge 1 $$
+    Разбиением отрезка $ [a, b] $ будем называть
+    $$ \Par = \seqz[n]{x_k}k $$
+\end{definition}
+
+$$ f : [a, b] \to \R $$
+$$ \exist M : |f(x)| \le M \quad \forall x \in [a, b] $$
+$$ M_k \define \sup\limits_{x \in [x_{k - 1}, x_k]}\set{f(x)}, \qquad k = 1, ..., n $$
+$$ m_k \define \inf\limits_{x \in [x_{k - 1}, x_k]}\set{f(x)}, \qquad k = 1, ..., n $$
+$$ -M \le m_k \le M_k \le M $$
+
+\begin{definition}[верхняя сумма Дарбу]
+    $$ \Ud(f, \Par) \define \sum_{k = 1}^n M_k(x_k - x_{k - 1}) $$
+\end{definition}
+
+\begin{definition}[нижняя сумма Дарбу]
+    $$ \Ld(f, \Par) \define \sum_{k = 1}^n m_k(x_k - x_{k - 1}) $$
+\end{definition}
+
+\begin{properties}
+    \hfill
+    \begin{enumerate}
+        \item $ M(b - a) \le \Ld(f, \Par) \le \Ud(f, \Par) \le M(a - b) $
+        \begin{proof}
+            $$ -M \le m_k \le M_k \le M $$
+            $$ -M(x_k - x_{k - 1}) \le m_k(x_k - x_{k - 1}) \le M_k(x_k - x_{k - 1}) \le M(x_k - x_{k - 1}) $$
+            $$ -M \sum_{k = 1}^n (x_k - x_{k - 1}) \le \sum_{k = 1}^n m_k(x_k - x_{k - 1}) \le \sum_{k = 1}^n M_k(x_k - x_{k - 1}) \le M \sum_{k = 1}^n(x_k - x_{k - 1}) $$
+            $$ \sum_{k = 1}^n(x_k - x_{k - 1}) = \sum_{k = 1}^nx_k - \sum_{k = 1}^n x_{k - 1} = \sum_{k = 1}^n x_k - \sum_{k = 0}^{n - 1} x_k = x_n - x_0 = a - b $$
+        \end{proof}
+        \item $ x_{l - 1} < y < x_l, \qquad \vawe{\Par} \define \Par \cup \set{y} $
+        $$ \implies
+        \begin{cases}
+        	\Ld(f, \Par) \le \Ld(f, \vawe{\Par}) \\
+            \Ud(f, \Par) \ge \Ud(f, \vawe{\Par})
+        \end{cases} $$
+        \begin{proof}
+            $$ \Ud(f, \Par) = \sum_{k = 1}^n M_k(x_k - x_{k - 1}) = \sum_{k = 1}^{l - 1} M_k(x_k - x_{k - 1}) + M_l(x_l - x_{l - 1}) + \sum_{k = l +  1}^n M_k(x_k - x_{k - 1}) $$
+            $$ M_l' \define \sup\limits_{x \in [x_{l - 1}, y]}\set{f(x)}, \qquad M_l'' = \sup\limits_{x \in [y, x_l]}\set{f(x)} $$
+            $$ \Ud(f, \vawe{\Par}) = \sum_{k = 1}^{l - 1}M_k(x_k - x_{k - 1}) + M_l'(y - x_{l - 1}) + M_l''(x_l - y) + \sum_{k = l + 1}^n M_k(x_k - x_{k - 1}) $$
+            \begin{multline*}
+                \Ud(f, \Par) - \Ud(f, \vawe{\Par}) = M_l(x_l - x_{l - 1}) - M_l'(y - x_{l - 1}) - M_l''(x_l - y) = \\
+                = \underbrace{(M_l - M_l')}_{\ge 0}(y - x_{l - 1}) + \underbrace{(M_l - M_l'')}_{\ge 0}(x_l - y) \ge 0
+            \end{multline*}
+        \end{proof}
+    \end{enumerate}
+\end{properties}
+
+\section({L(P), L(P1), U(P), U(P1) при P -- подмножество P1}){$ \Ld(\Par), \Ld(\Par_1), \Ud(\Par), \Ud(\Par_1) $ при $ \Par \sub \Par_1 $}
+
+\begin{definition}
+	$ \Par_1, \Par_2 $ \\
+    Будем говорить, что $ \Par_2 $ является измельчением разбиения $ \Par_1 $, если
+    $$ \Par_1 \sub \Par_2, \quad \Par_1 \ne \Par_2 $$
+\end{definition}
+
+\begin{remark}
+	$ \exist y_1, ..., y_m \in (a, b), \qquad y_i \notin \Par_1, \qquad y_i \ne y_j $
+    $$ \Par_2 = \Par_1 \cup \bigcup_{q = 1}^m \set{y_q} $$
+\end{remark}
+
+\begin{property}
+    \item $ \Par_2 $ является измельчением $ \Par_1 $
+    $$ \implies
+    \begin{cases}
+        \Ld(f, \Par_1) \le \Ld(f, \Par_2) \\
+        \Ud(f, \Par_2) \ge \Ld(f, \Par_2)
+    \end{cases} $$
+\end{property}
+
+\begin{proof}
+    $$ \Ud(f, \Par_1) \ge \Ud(f, \Par_1 \cup \set{y_1}) \ge \Ud(f, \Par_1 \cup \set{y_1} \cup \set{y_2}) \ge \widedots[4em] \ge \Ud(f, \Par_1 \cup \bigcup_{q = 1}^m \set{y_q}) = \Ud(f, \Par_2) $$
+\end{proof}
+
+\section({L(Pi), U(Pi); определение определённого интеграла от a до b* f, определённого интеграла от a* до b f; определённый интеграл от a* до b f <= определённый интеграл от a до b* f}){$ L(P_i), U(P_i) $; определение $ \int_a^{b*}f, \int_{a*}^bf $; $ \int_{a*}^bf \le \int_a^{b*}f $}
+
+\begin{property}
+	$ \Par_1, \Par_2 $ -- произвольные разбиения
+    $$ \implies \Ld(f, \Par_1) \le \Ud(f, \Par_2) $$
+\end{property}
+
+\begin{proof}
+	Рассмотрим $ \Par \define \Par_1 \cup \Par_2 $
+    \begin{itemize}
+    	\item Если $ \Par_1 = \Par_2 $, то $ \Par = \Par_1 = \Par_2 $ -- это было проверено в первом свойстве
+        \item Если $ \Par_1 \ne \Par_2 $, то $ \Par $ -- измельчение и $ \Par_1 $, и $ \Par_2 $ \\
+        Тогда, по предыдущему свойству,
+        $$ \Ld(f, \Par_1) \le \Ld(f, \Par) \le \Ud(f, \Par) \le \Ud(f, \Par_2) $$
+    \end{itemize}
+\end{proof}
+
+\begin{definition}
+	Верхним интегралом Дарбу функции $ f $ по промежутку $ [a, b] $ называется
+    $$ \int_a^{b*} f \define \inf\limits_{\Par} \Ud(f, \Par) $$
+\end{definition}
+
+\begin{definition}
+	Нижним интегралом Дарбу функции $ f $ по промежутку $ [a, b] $ называется
+    $$ \int_{a*}^b f \define \sup\limits_{\Par} \Ld(f, \Par) $$
+\end{definition}
+
+\begin{statement}
+    $ \int_{a*}^b f \le \int_a^{b*} f $
+\end{statement}
+
+\begin{proof}
+	Зафиксируем какое-нибудь $ \Par_1 $ \\
+    Тогда, по последнему свойству,
+    $$ \Ld(f, \Par) \le \Ud(f, \Par_1) $$
+    Значит, $ \Ud(f, \Par_1) $ является верхней границей нижних сумм, т. е.
+    $$ \underbrace{\sup\limits_{\Par} \Ld(f, \Par)}_{= \int_{a*}^b f} \le \Ud(f, \Par_1) $$
+    Значит,
+    $$ \int_{a*}^b f \le \underbrace{\inf\limits_{\Par_1} \Ud(f, \Par_1)}_{ = \int_a^{b*} f} $$
+\end{proof}
+
+\section{Определение \texorpdfstring{$ \Ri([a, b]) $}{R([a, b])}; функция Дирихле}
+
+\begin{definition}
+	$ [a, b], \qquad f $ \\
+    Будем говорить, что функция $ f $ интегрируема по Риману, если
+    $$ f \in \Ri([a, b]) \iff \int_{a*}^b f = \int_a^{b*} f \define \int_a^b f $$
+\end{definition}
+
+\begin{eg}[функция Дирихле]
+	$$ f(x) =
+    \begin{cases}
+    	1, \quad x \in \Q \\
+        0, \quad x \notin \Q
+    \end{cases} $$
+    Будем рассматривать $ x \in [0, 1] $, т. е.
+    $$
+    \begin{cases}
+    	x_0 = 0 \\
+        x_n = 1
+    \end{cases} $$
+    $$ [x_{k - 1}, x_k] \sub [0, 1] $$
+    $$
+    \begin{cases}
+    	M_k = 1 \quad \forall k \\
+        m_k = 0 \quad \forall k
+    \end{cases} $$
+    $$
+    \begin{cases}
+        \Ud(f, \Par) = \sum_{k = 1}^n 1 \cdot (x_k - x_{k - 1}) = 1 \quad \forall \Par \implies \int_0^{1*} f = 1 \\
+        \Ld(f, \Par) = \sum_{k = 1}^n 0 \cdot (x_k - x_{k - 1}) = 0 \quad \forall \Par \implies \int_{0*}^1 f = 0
+    \end{cases} $$
+    Значит, $ f \notin \Ri([0, 1]) $
+\end{eg}
+
+\section({Критерий f из R([a, b])}){Критерий $ f \in \Ri([a, b]) $}
+
+\begin{theorem}
+    $ f \in \Ri([a, b]) \iff $
+    \begin{equ}{217}
+        \forall \veps > 0 \quad \exist \Par : \Ud(f, \Par) - \Ld(f, \Par) < \veps
+    \end{equ}
+\end{theorem}
+
+\begin{iproof}
+    \item $ \impliedby $
+    $$ \Ld(f, \Par) \le \int_{a*}^b f \le \int_a^{b*} f \le \Ud(f, \Par) \underimp{\eref{217}} \underbrace{\int_a^{b*} f - \int_{a*}^b f}_{\ge 0} \le \Ud(f, \Par) - \Ld(f, \Par) < \veps $$\
+    В силу произвольности $ \veps $,
+    $$ \int_{a*}^b f = \int_a^{b*} f $$
+    \item $ \implies $ \\
+    Дано $ I = \int_{a*}^b f = \int_a^{b*} f $ \\
+    Возьмём $ \forall \veps > 0 $ \\
+    По определению нижнего интеграла как супремума и верхнего интеграла как инфимума,
+    $$
+    \begin{cases}
+        \exist \Par_1 : \Ld(f, \Par_1) > \int_{a*}^b f - \frac\veps2 \\
+        \exist \Par_2 : \Ud(f, \Par_2) < \int_a^{b*} f + \frac\veps2
+    \end{cases} $$
+    Перепишем с использованием обозначения $ I $:
+    \begin{equ}{219}
+        \begin{cases}
+            \Ld(f, \Par_1) > I - \frac\veps2 \\
+            \Ud(f, \Par_2) < I + \frac\veps2
+        \end{cases}
+    \end{equ}
+    Рассмотрим $ \Par \define \Par_1 \cup \Par_2 $ \\
+    По одному из свойств,
+    $$
+    \begin{cases}
+        \Ld(f, \Par_1) \le \Ld(f, \Par) \\
+        \Ud(f, \Par_2) \ge \Ud(f, \Par)
+    \end{cases} $$
+    Подставим это в \eref{219}:
+    $$ I - \frac\veps2 < \Ld(f, \Par) \le \Ud(f, \Par) < I + \frac\veps2 $$
+    $$ \Ud(f, \Par) - \Ld(f, \Par) < (I + \frac\veps2) - (I - \frac\veps2) = \veps $$
+\end{iproof}
+
+\begin{undefthm}{Немного преобразуем}
+    $$ \Ud(f, \Par) - \Ld(f, \Par) = \sum_{k = 1}^n M_k(x_k - x_{k - 1}) - \sum_{k = 1}^n m_k(x_k - x_{k - 1}) = \sum_{k = 1}^n (M_k - m_k)(x_k - x_{k - 1}) $$
+    Разность $ (M_k - m_k) $ называется колебанием функции. Обозначим её $ \omega_k \ge 0 $ \\
+    Теперь критерий переписывается следующим образом:
+    $$ f \in \Ri([a, b]) \iff \forall \veps > 0 \quad \exist \Par : \sum_{k = 1}^n \omega_k(x_k - x_{k - 1}) < \veps $$
+\end{undefthm}
+
+\section({f из R([a, b]) <=> f из R([a, c]) и f из R([c, b]); f из Ri([a, b]) => cf из R([a, b])}){$ f \in \Ri([a, b]) \iff f \in \Ri([a, c]) $ и $ f \in \Ri([c, b]) $; \\
+$ f \in \Ri([a, b]) \implies cf \in \Ri([a, b]) $}
+
+\begin{property}
+	$ c \in (a, b) $
+    $$ f \in \Ri([a, b]) \iff
+    \begin{cases}
+        f \in \Ri([a, c]) \\
+        f \in \Ri([c, b])
+    \end{cases} $$
+\end{property}
+
+\begin{iproof}
+	\item $ \implies $ \\
+    Будем пользоваться критерием (последним его преобразованием)
+    $$ \Par = \seqz[n]{x_k}k, \qquad x_0 = a, \quad x_n = b, \qquad c \in \Par $$
+    $$ \forall \veps > 0 \quad \sum_{k = 1}^n \omega_k(x_k - x_{k - 1}) < \veps $$
+    Возьмём
+    $$ \Par_1 \define \seqz[l]{x_k}k, \qquad \Par_2 \define \seqv[n]{x_k}kl $$
+    $$ \sum_{k = 1}^n = \sum_{k = 1}^l + \sum_{k = l + 1}^n $$
+    $$ \sum_{k = 1}^l \omega_k(x_k - x_{k - 1}) + \sum_{k = l + 1}^n \omega_k(x_k - x_{k - 1}) < \veps + \veps = 2\veps $$
+    \item $ \impliedby $
+    $$ \vawe{\Par_1} = \seqz[m]{x_k}k, \qquad x_0 = 0, \qquad x_m = c, \qquad \Par_2 = \seqv[m + q]{x_k}km $$
+    $$ \sum_{k = 1}^m \omega_k(x_k - x_{k - 1}) < \frac\veps2, \qquad \sum_{k = m + 1}^{m + q} \omega_k(x_k - x_{k - 1}) < \frac\veps2 $$
+    Возьмём
+    $$ \vawe{\Par} \define \vawe{\Par_1} \cup \vawe{\Par_2} $$
+    $$ \sum_{k = 1}^{m + q} \omega_k(x_k - x_{k - 1}) = \sum_{k = 1}^m \omega_k(x_k - x_{k - 1}) + \sum_{k = m + 1}^{m + q} \omega_k(x_k - x_{k - 1}) < \frac\veps2 + \frac\veps2 = \veps $$
+\end{iproof}
+
+\begin{statement}\label{st:221}
+    $ \omega_{-f}([x_{k - 1}, x_k]) = \omega_f([x_{k - 1}, x_k]) $
+\end{statement}
+
+\begin{proof}
+    $$
+    \begin{rcases}
+        \sup\set{-f} = -\inf\set{f} \\
+        \inf\set{-f} = -\sup\set{f}
+    \end{rcases} \implies \sup\set{-f} - \inf\set{-f} = \sup\set{f} - \inf\set{f} $$
+\end{proof}
+
+\begin{property}
+	$ f \in \Ri([a, b]), \qquad c \ne 0 $
+    $$ \implies cf \in \Ri([a, b]) $$
+\end{property}
+
+\begin{iproof}
+	\item $ c > 0 $
+    $$ \forall [x_{k - 1}, x_k] \sub [a, b] \quad \omega_{cf}([x_{k - 1}, x_k]) = c\omega_f([x_{k - 1}, x_k]) $$
+    $$ \sum_{k = 1}^n \omega_{cf}([x_{k - 1}, x_k])(x_k - x_{k - 1}) = c \sum_{k = 1}^n \omega_f([x_{k - 1}, x_k])(x_k - x_[k - 1]) < c\veps $$
+    \item $ c < 0 $ \\
+    $ c = (-1) \cdot |c| $ (см. утв. \ref{st:221})
+\end{iproof}
+
+\section({{f, g из R([a, b]) => f + g из R([a, b])}}){$ f, g \in \Ri([a, b]) \implies f + g \in \Ri([a, b]) $}
+
+\begin{statement}\label{st:231}
+    $ \sup\set{f + g} \le \sup\set{f} + \sup\set{g} $ \\
+    $ \inf\set{f + g} \ge \inf\set{f} + \inf\set{g} $
+\end{statement}
+
+\begin{proof}
+    \begin{multline*}
+        \begin{rcases}
+            \forall \delta > 0 \quad \exist x_* \in [\alpha, \beta] : f(x_*) + g(x_*) > \sup\set{f + g} - \delta \\
+            \sup\set{f} + \sup\set{g} \ge f(x_*) + g(x_*)
+        \end{rcases} \implies \\
+        \implies \sup\set{f} + \sup\set{g} > \sup\set{f + g} - \delta \implies \sup\set{f} + \sup\set{g} \ge \sup\set{f + g}
+    \end{multline*}
+\end{proof}
+
+\begin{property}
+	$ f, g \in \Ri([a, b]) \quad \implies \quad f + g \in \Ri([a, b]) $
+\end{property}
+
+\begin{proof}
+    Воспользуемся утверждением \ref{st:231}:
+    $$
+    \begin{rcases}
+        \sup\set{f + g} \le \sup\set{f} + \sup\set{g} \\
+        \inf\set{f + g} \ge \inf\set{f} + \inf\set{g}
+    \end{rcases} \implies \omega_{f + g}([x_{k - 1}, x_k]) \le \omega_f([x_{k - 1}, x_k]) + \omega_g([x_{k - 1}, x_k]) $$
+    \begin{multline*}
+        \sum_{k = 1}^n \omega_{f + g}([x_{k - 1}, x_k])(x_k - x_{k - 1}) \le \\
+        \le \sum_{k = 1}^n \omega_f([x_{k - 1}, x_k])(x_k - x_{k - 1}) + \sum_{k = 1}^n \omega_g([x_{k - 1}, x_k])(x_k - x_{k - 1}) < \half[\veps] + \half[\veps] = \veps
+    \end{multline*}
+\end{proof}
+
+\section({f из R([a, b]) => |f| из R([a, b]); f\textasciicircum{}2 из R([a, b])}){$ f \in \Ri([a, b]) \implies |f| \in \Ri([a, b]) $; $ f^2 \in \Ri([a, b]) $}
+
+\begin{statement}\label{st:241}
+    $ \omega_{|f|}([x_{k - 1}, x_k]) \le \omega_f([x_{k - 1}, x_k]) $
+\end{statement}
+
+\begin{proof}
+    $ \omega_{|f|}([x_{k - 1}, x_k]) \bydef \underbrace{\sup\set{|f|}}_{\le \sup\set{f}} - \underbrace{\inf\set{|f|}}_{\ge \inf\set{f}} $
+\end{proof}
+
+\begin{properties}
+    \hfill
+    \begin{enumerate}
+        \item $ f \in \Ri([a, b]) \bm\implies |f| \in \Ri([a, b]) $
+        \begin{proof}
+            Следует из утверждения \ref{st:241}
+        \end{proof}
+        \item $ f \in \Ri([a, b]) \implies f^2 \in \Ri([a, b]) $
+        \begin{proof}
+        	$ f^2 = |f|^2 $ \\
+            Будем считать, что $
+            \begin{cases}
+            	f(x) \ge 0 \\
+                f \in \Ri([a, b])
+            \end{cases} $ \\
+            Значит, $ \forall x \quad f(x) \le M $ \\
+            Положим $ [a_1, b_1] \sub [a, b] $ \\
+            Возьмём
+            $$ x_1, x_2 \in [a_1, b_1] : f(x_2) \ge f(x_1) \ge 0 $$
+            \begin{equ}{241}
+                \begin{rcases}
+                	f^2(x_2) - f^2(x_1) = \bigg( f(x_2) - f(x_1) \bigg) \bigg( f(x_2) + f(x_1) \bigg) \le 2M \bigg( f(x_2) - f(x_1) \bigg) \\
+                    \begin{rcases}
+                        f(x_2) \le \sup\set{f} \\
+                        f(x_1) \ge \inf\set{f}
+                    \end{rcases} \implies 2M \bigg( f(x_2) - f(x_1) \bigg) \le 2M\omega_f([a_1, b_1])
+                \end{rcases}
+            \end{equ}
+            $$ \forall \delta > 0 \quad
+            \begin{cases}
+                f^2(x_2) > \sup\limits_{[a_1, b_1]}\set{f^2} - \delta \\
+                f^2(x_2) < \inf\limits_{[a_1, b_1]}\set{f^2} + \delta
+            \end{cases} $$
+            $$ 2M\omega_f([a_1, b_1]) \underset{\eref{241}}\ge f^2(x_2) - f^2(x_1) > \sup\set{f^2} - \delta - \inf\set{f^2} - \delta $$
+            \begin{multline*}
+                \omega_{f^2}([a_1, b_1]) < 2M\omega_f([a_1, b_1]) + 2\delta \implies \omega_{f^2}([a_1, b_1]) \le 2M\omega_f([a_1, b_1]) \implies \\
+                \implies \sum_{k = 1}^n \omega_{f^2}([x_k, x_{k - 1}])(x_k - x_{k - 1}) < 2m\veps
+            \end{multline*}
+        \end{proof}
+    \end{enumerate}
+\end{properties}
+
+\section({f, g из R([a, b]) => fg из R([a ,b])}){$ f, g \in \Ri([a, b]) \implies fg \in \Ri([a ,b]) $}
+
+\begin{property}
+	$ f, g \in \Ri([a, b]) \implies fg \in \Ri([a, b]) $
+\end{property}
+
+\begin{proof}
+    $$ fg = \frac14(f + g)^2 - \frac14(f - g)^2 $$
+    Все части этого выражения интегрируемы по Риману
+\end{proof}
+
+\section({f из C([a, b]) => f из R([a, b])}){$ f \in \mathcal{C}([a, b]) \implies f \in \Ri([a, b]) $}
+
+\begin{property}
+    $ f \in \Cont{[a, b]} \implies f \in \Ri([a, b]) $
+\end{property}
+
+\begin{proof}
+	По теореме Кантора, $ f $ равномерно непрерывна на $ [a, b] $. Значит,
+    $$ \forall \veps > 0 \quad \exist \delta > 0 : \underset{0 < x_2 - x_1 < \delta}{\forall x_1, x_2 \in [a, b]} \quad |f(x_2) - f(x_1)| < \veps $$
+    $$ \Par \define \seqz[n]{x_k}k, \qquad x_k \define a + \frac{b - a}nk, \qquad k = 0, 1, ..., n $$
+    $$ x_k - x_{k - 1} < \delta $$
+    По второй теореме Вейерштрасса,
+    $$
+    \begin{cases}
+        \exist x_k^+ \in [x_{k - 1}, x_k] : \forall x \in [x_{k - 1}, x_k] \quad f(x) \le f(x_k^+) \\
+        \exist x_k^- \in [x_{k - 1}, x_k] : \forall x \in [x_{k - 1}, x_k] \quad f(x) \ge f(x_k^-)
+    \end{cases} $$
+    $$ \omega_f([x_{k - 1}, x_k]) = f(x_k^+) - f(x_k^-) $$
+    $$ |x_k^+ - x_k^-| \le x_k - x_{k - 1} < \delta \implies f(x_k^+) - f(x_k^-) < \veps $$
+    $$ \sum_{k = 1}^n \omega_f([x_{k - 1}, x_k])(x_k - x_{k - 1}) < \sum_{k - 1}^n \veps(x_k - x_{k - 1}) = \veps(b - a) $$
+\end{proof}
+
+\section({f монотонна на [a, b] => f из R([a, b])}){$ f $ монотонна на $ [a, b] \implies f \in \Ri([a, b]) $}
+
+\begin{theorem}
+	$ f $ монотонна $ \implies f \in \Ri([a, b]) $
+\end{theorem}
+
+\begin{proof}
+    Возьмём $ \forall \veps > 0 $, выберем $ n : \dfrac{b - a}n < \veps $
+    $$ \Par \define \seqz[n]{x_k}k, \qquad x_k \define a + \frac{b - a}nk, \qquad 0 \le k \le n $$
+    Пусть, НУО, $ f $ возрастает (иначе, $ g \define -f $ возрастает)
+    \begin{multline*}
+        \forall x \in [x_{k - 1}, x_k] \quad f(x_{k - 1}) \le f(x) \le f(x_k) \implies
+        \begin{cases}
+        	M_k = f(x_k) \\
+            m_k = f(x_{k - 1})
+        \end{cases} \quad \implies \\
+        \implies \omega_f([x_{k - 1}, x_k]) = f(x_k) - f(x_{k - 1})
+    \end{multline*}
+    $$ x_k - x_{k - 1} \bydef \bigg( a + \frac{b - a}nk \bigg) - \bigg( a + \frac{b - a}n(k - 1) \bigg) = \frac{b - a}n $$
+    \begin{multline*}
+        \sum_{k = 1}^n \omega_f([x_{k - 1}, x_k])(x_k - x_{k - 1}) = \frac{b - a}n \sum_{k = 1}^n \bigg(f(x_k) - f(x_{k - 1}) \bigg) = \frac{b - a}n \bigg(f(x_n) - f(x_0) \bigg) = \\
+        = \frac{b - a}n \bigg( f(b) - f(a) \bigg) \le \veps \bigg( f(b) - f(a) \bigg)
+    \end{multline*}
+\end{proof}
+
+\section({Суммы Римана; L(f, P) <= Sf(P, T) <= U(f, P)}){Суммы Римана; $ \Ld(f, \Par) \le \Sr_f(\Par, \Teq) \le \Ud(f, \Par) $}
+
+\begin{definition}
+    $ [a, b], \qquad \Par = \seqz[n]{x_k}k $ \\
+    Оснащением этого разбиения называется множество
+    $$ \Teq = \seq[n]{t_k}k : t_k \in [x_{k - 1}, x_k] $$
+\end{definition}
+
+\begin{definition}
+    $ f : [a, b] \to \R $
+    $$ \Sr_f(\Par, \Teq) \define \sum_{k = 1}^n f(t_k)(x_k - x_{k - 1}) $$
+    $ \Sr_f $ называется суммой Римана функции $ f $ по разбиению $ \Par $ и оснащению $ \Teq $
+\end{definition}
+
+\begin{statement}
+	$ \Ld(f, \Par) \le \Sr_f(\Par, \Teq) \le \Ud(f, \Par) $
+\end{statement}
+
+\begin{proof}
+    $ m_k \le f(t_k) \le M_k, \qquad k = 1, ..., n $
+    $$ \sum_{k = 1}^n m_k(x_k - x_{k - 1}) \le \sum_{k = 1}^n f(t_k)(x_k - x_{k - 1}) \le \sum_{k = 1}^n M_k(x_k - x_{k - 1}) $$
+\end{proof}
+
+\section({Определение диаметра разбиения d(P); определение Sf(P, T) -> A при d(P) -> 0}){Определение диаметра разбиения $ \diam(\Par) $; \\ определение $ S_f(P, T) \underarr{d(P) \to 0} A $}
+
+\begin{definition}
+    $ [a, b], \qquad \Par = \seqz[n]{x_k}k $
+    $$ \diam(\Par) \define \max\limits_{1 \le k \le n}(x_k - x_{k - 1}) $$
+    $ \diam(\Par) $ называется диаметром разбиения
+\end{definition}
+
+\begin{definition}
+	Будем говорить, что суммы Римана стремятся к $ A \in \R $ при измельчении разбиения, если
+    $$ \forall \veps \quad \exist \delta > 0 : \underset{\diam(\Par) < \delta}{\forall \Par} : \quad \forall \Teq \quad |\Sr_f(\Par, \Teq) - A| < \veps $$
+\end{definition}
+
+\begin{notation}
+    $ \Sr_f(\Par, \Teq) \underarr{\diam(\Par) \to 0} A $
+\end{notation}
+
+\section({Sf(P, T) -> A при d(P) -> 0 => f из R([a, b])}){$ \Sr_f(\Par, \Teq) \underarr{\diam(\Par) \to 0} A \implies f \in \Ri([a, b]) $}
+
+\begin{theorem}
+    $ \Sr_f(\Par, \Teq) \underarr{\diam(\Par) \to 0} A \implies
+    \begin{cases}
+    	f \in \Ri([a, b]) \\
+        A = \int_a^b f
+    \end{cases} $
+\end{theorem}
+
+\begin{iproof}
+	\item Возьмём $ \forall \veps > 0 $ \\
+    Выберем
+    $$ \delta > 0 : \underset{\diam(\Par) < \delta}{\forall \Par} \quad \forall \Teq \quad |\Sr_f(\Par, \Teq) - A| < \half[\veps] $$
+    Возьмём
+    $$ n : \frac{b - a}n < \delta, \qquad x_k \define a + \frac{b - a}nk $$
+    $$ \diam(\Par) = x_k - x_{k - 1} = \frac{b - a}n < \delta $$
+    Положим
+    $$ \Teq' \define \seq[n]{t_k'}k, \qquad \Teq'' \define \seq[n]{t_k''}k $$
+    Выберем $ t_k' $ и $ t_k'' $ так, чтобы
+    $$
+    \begin{cases}
+        M_k < f(t_k'') + \frac\veps{n} \\
+        m_k > f(t_k') - \frac\veps{n}
+    \end{cases} $$
+    $$ f(t_k'') - f(t_k') > M_k - m_k - \frac{2\veps}n $$
+    \begin{multline*}
+        \sum_{k = 1}^n \bigg( f(t_k'') - f(t_k') \bigg)(x_k - x_{k - 1}) > \sum_{k = 1}^n (M_k - m_k)(x_k - x_{k - 1}) - \frac{2\veps}n \sum_{k = 1}^n(x_k - x_{k - 1}) = \\
+        = \underbrace{\sum_{k = 1}^n \omega_f([x_{k - 1}, x_k])(x_k - x_{k - 1})}_{\define \Omega} - \frac{2\veps}n(b - a)
+    \end{multline*}
+    $$ \Sr_f(\Par, \Teq'') - \Sr_f(\Par, \Teq') > \Omega - \frac{2\veps}n(b - a) $$
+    $$ \veps > \half[\veps] + \half[\veps] > |\Sr_f(\Par, \Teq'') - A| + |\Sr_f(\Par, \Teq') - A| \ge |\Sr_f(\Par, \Teq'') - \Sr_f(\Par, \Teq')| $$
+    $$ \sum_{k = 1}^n \omega_f([x_{k - 1}, x_k])(x_k - x_{k - 1}) < \veps + \frac{2\veps}n(b - a) < 3\veps $$
+    Значит, $ f \in \Ri([a, b]) $
+    \item
+    $$ M_k < f(t_k'') + \frac\veps{n} $$
+    $$ \Ud(f, \Par) = \sum_{k = 1}^n M_k(x_k - x_{k - 1}) < \sum_{k = 1}^n f(t_k'')(x_k - x_{k - 1}) + \sum_{k = 1}^n \frac\veps{n}(x_k - x_{k - 1}) < \Sr_f(\Par, \Teq'') + \veps \le \Ud(f, \Par) + \veps $$
+    $$ \Sr_f(\Par, \Teq'') \in \bigg( \Ud(f, \Par), \Ud(f, \Par) + \veps \bigg) $$
+    $$ |\Sr_f(\Par, \Teq'') - A| < \half[\veps] $$
+    $$ \Sr_f(\Par, \Teq'') \in \bigg( A - \half[\veps], A + \half[\veps] \bigg) $$
+    $$
+    \begin{rcases}
+    	\Ud(f, \Par) - \Ld(f, \Par) < 3\veps \\
+        \Ld(f, \Par) \le \int_a^b f \le \Ud(f, \Par)
+    \end{rcases} \implies \Ud(f, \Par) \in \bigg( \int_a^b f - 3\veps, \int_a^b f + 3\veps \bigg) $$
+\end{iproof}
+
+\section({f из R([a, b]) => Sf(P, T) -> определённому интегралу от a до b f при d(P) -> 0}){$ f \in \Ri([a, b]) \implies \Sr_f(\Par, \Teq) \underarr{\diam(\Par) \to 0} \int_a^b f $}
+
+\begin{theorem}
+    $ f \in \Ri([a, b]) \implies \Sr_f(\Par, \Teq) \underarr{\diam(\Par) \to 0} \int_a^b f $
+\end{theorem}
+
+\begin{proof}
+	Возьмём произвольный $ \veps > 0 $ \\
+    Т. к. $ f \in \Ri([a, b]) $,
+    \begin{equ}{315}
+        \exist \Par = \seqz[n]{x_k}k : \Ud(f, \Par) - \Ld(f, \Par) < \veps
+    \end{equ}
+    Обозначим $ I \define \int_a^b f $
+    $$ \Ld(f, \Par) \le I \le \Ud(f, \Par) $$
+    Обозначим $ \sigma \define \min\limits_{1 \le k \le n}(x_k - x_{k - 1}) $ \\
+    Функция $ f $ ограничена:
+    $$ |f(x)| \le M > 0, \qquad x \in [a, b] $$
+    Определим $ \delta_2 \define \dfrac\veps{Mn} $ \\
+    Возьмём $ \delta \define \min\set{\dfrac\sigma4, \delta_2} $ \\
+    Возьмём
+    $$ \forall \Par_0 = \seqz[m]{y_l}l : \diam(\Par_0) < \delta, \qquad \forall \Teq = \seq[m]{t_l}l $$
+    Рассмотрим $ \Par_1 \define \Par \cup \Par_0 $ \\
+    По свойствам сумм Дарбу,
+    $$ \Ld(f, \Par) \le \Ld(f, \Par_1) \le I \le \Ud(f, \Par_1) \le \Ud(f, \Par) $$
+    \begin{equ}{319}
+        \Ud(f, \Par_1) - \Ld(f, \Par_1) < \veps
+    \end{equ}
+    $$ \diam(\Par_0) < \delta \bydef[\le] \frac\sigma4 $$
+    Пусть в $ \Par_1 $ $ N $ точек \\
+    Определим оснащение
+    $$ \Lambda = \seqz[N]{\lambda_q}q, \qquad \lambda_q =
+    \begin{cases}
+        t_l, \quad \text{ если } [y_{l - 1}, y_l] \sub [x_{k - 1}, x_k] \\
+        \text{если какой-то } x_{k_0} \in (y_{l_0 - 1}, y_{l_0}) \text{ в } P_1 ~ [y_{l_0 - 1}, x_{k_0}] \text{ и } [x_{k_0}, y_{l_0}]
+    \end{cases} $$
+    $$ \lambda_{q_0} = \lambda_{q_0 + 1} = x_k $$
+    \begin{equ}{3112}
+        \begin{rcases}
+            \eref{319} \implies \bigg[ \Ld(f, \Par_1), \Ud(f, \Par_1) \bigg] \sub (I - \veps, I + \veps) \\
+            \Ld(f, \Par_1) \le \Sr_f(\Par_1, \Lambda) \le \Ud(f, \Par_1)
+        \end{rcases} \implies \Sr_f(\Par_1, \Lambda) \in (I - \veps, I + \veps)
+    \end{equ}
+    Но нас интересует сумма Римана для $ \Par_0 $. Посмотрим на их разность. Там есть много общих слагаемых:
+    \begin{multline*}
+        \Sr_f(\Par_1, \Lambda) - \Sr_f(\Par_0, \Teq) = \sum_{k ~ : ~ x_k \in (y_{l - 1}, y_l)} \bigg( f(x_k)(x_k - y_{l - 1}) + f(x_k)(y_l - x_k) - f(t_l)(y_l - y_{l - 1}) \bigg) \underset{t_l \in [y_{l - 1}, y_l]}= \\
+        = \sum_{...} \bigg( f(x_k) - f(t_l) \bigg)(y_l - y_{l - 1}) \define Q
+    \end{multline*}
+    $$ |Q| \le \sum_{...} \bigg| f(x_k) - f(t_l) \bigg|(y_l - y_{l - 1}) \underset{
+        \begin{subarray}{c}
+        	|f(x_k) - f(t_l)| \le 2M \\
+            y_l - y_{l - 1} \le \delta_2
+        \end{subarray}}\le 2M \sum_{...} \delta_2 $$
+    В любом случае, таких $ k $ не больше, чем внутренних точек разбиения $ \Par $, то есть $ n - 1 $ \\
+    Значит,
+    $$ |Q| \le 2M - \frac\veps{Mn} < 2\veps $$
+    $$
+    \begin{rcases}
+        |\Sr_f(\Par_1, \Lambda) - \Sr_f(\Par_0, \Teq)| < 2\veps \\
+        \eref{3112} \iff |\Sr_f(\Par_1, \Lambda) - I| < \veps
+    \end{rcases} \implies |\Sr_f(\Par_0, \Teq) - I| \trile |\Sr_f(\Par_0, \Teq) - \Sr_f(\Par_1, \Lambda)| + |\Sr_f(\Par_1, \Lambda) - I| < 2\veps + \veps = 3\veps $$
+\end{proof}
+
+\section({определённый интеграл от a до b f = определённый интеграл от a до c f + определённый интеграл от с до b f}){$ \int_a^bf = \int_a^cf + \int_c^bf $}
+
+\begin{property}
+	$ \int_a^b f = \int_a^c f + \int_c^b f, \qquad c \in (a, b) $
+\end{property}
+
+\begin{proof}
+	Положим
+    $$
+    \begin{cases}
+        \vawe{\Par_1} \define \Par_n([a, c]) \\
+        \vawe{\Par_2} \define \Par_n([c, b])
+    \end{cases} $$
+    $$
+    \begin{cases}
+        \diam(\vawe{\Par_1}) = \frac{c - a}n \\
+        \diam(\vawe{\Par_2}) = \frac{b - c}n
+    \end{cases} $$
+    $$
+    \begin{cases}
+        \frac{c - a}n < \frac{b - a}n \\
+        \frac{b - c}n < \frac{b - a}n
+    \end{cases} $$
+    $$ \vawe{\Par} \define \vawe{\Par_1} \cup \vawe{\Par_2} $$
+    $$ \vawe{\Teq} \define \Teq_n([a, c]) \cup \Teq_n([c, b]) $$
+    $$ \underset{\underarr{n \to \infty} \int_a^b f}{\Sr_n(\vawe{\Par}, \vawe{\Teq})} = \underset{\underarr{n \to \infty} \int_a^c f}{\Sr_n(f, [a, c])} + \underset{\underarr{n \to \infty} \int_c^b f}{\Sr_n(f, [c, b])} $$
+\end{proof}
+
+\section({определённый интеграл от a до b cf = c определённый интеграл от a до b f}){$ \int_a^bcf = c\int_a^bf $}
+
+\begin{property}
+	$ \int_a^b cf = c \int_a^b f $
+\end{property}
+
+\begin{proof}
+	$ \Sr_n(cf) = c \Sr_n(f) $
+\end{proof}
+
+\section({определённый интеграл от a до b c = c(b - a)}){$ \int_a^bc = c(b - a) $}
+
+\begin{property}
+    $ \int_a^b c = c(b - a) $
+\end{property}
+
+\begin{proof}
+    $ \Sr_n(c) = \sum_{k = 1}^n c \cdot \dfrac{b - a}n = c(b - a) $
+\end{proof}
+
+\section({определённый интеграл от a до b (f + g) = определённый интеграл от a до b f + определённый интеграл от a до b g}){$ \int_a^b(f + g) = \int_a^b f + \int_a^b g $}
+
+\begin{property}
+	$ \int_a^b (f + g) = \int_a^b f + \int_a^b g $
+\end{property}
+
+\begin{proof}
+	$ \Sr_n(f + g) = \Sr_n(f) + \Sr_n(g) $
+\end{proof}
+
+\section({f <= g => определённый интеграл от a до b f <= определённого интеграла от a до b g; g >= 0 => определённый интеграл от a до b g >= 0}){$ f \le g \implies \int_a^b f \le \int_a^b g $; $ g \ge 0 \implies \int_a^b g \ge 0 $}
+
+\begin{property}
+	$ f(x) \le g(x) \quad \forall x \in [a, b]  \qquad \implies \qquad \int_a^b f \le \int_a^b g $
+\end{property}
+
+\begin{proof}
+    $$ \Sr_n(f) = \sum_{k = 1}^n f(t_k) \cdot \frac{b - a}n \le \sum_{k = 1}^n g(t_k) \cdot \frac{b - a}n = \Sr_n(g) $$
+\end{proof}
+
+\section({|определённый интеграл от a до b f| <= определённый интеграл от a до b |f|}){$ \big| \int_a^bf \big| \le \int_a^b|f| $}
+
+\begin{property}
+	$ \bigg| \int_a^b f \bigg| \le \int_a^b |f| $
+\end{property}
+
+\begin{proof}
+    $$ | \Sr_n(f) | = \bigg| \sum_{k = 1}^n f(t_k) \cdot \frac{b - a}n \bigg| \le \sum_{k = 1}^n |f(t_k)| \cdot \bigg| \frac{b - a}n \bigg| = \Sr_n(|f|) $$
+\end{proof}
+
+\section({|f| <= M => |определённый интеграл от a до b f| <= M(b - a)}){$ |f| \le M \implies \big| \int_a^bf \big| \le M(b - a) $}
+
+\begin{property}
+	$ |f(x)| \le M \quad \forall x \in [a, b] \qquad \implies \qquad \bigg| \int_a^b f \bigg| \le \int_a^b |f| \le \int_a^b M = M(b - a) $
+\end{property}
+
+\section{Формула Ньютона-Лейбница}
+
+\begin{theorem}
+    $ f \in \Cont{(a, b)}, \qquad \forall x \in (a, b) \quad \exist f'(x), \qquad f' \in \Ri([a, b]) $
+    $$ \implies \int_a^b f' = f(b) - f(a) $$
+\end{theorem}
+
+\begin{proof}
+    Рассмотрим разбиение $ \Par_n([a, b]) = \seqz[n]{x_k}k $ \\
+    Будем строить оснащение к нему особым образом \\
+    Для начала заметим, что
+    \begin{equ}{3916}
+        f(b) - f(a) = f(x_n) - f(x_0) = \sum_{k = 1}^n \bigg( f(x_k) - f(x_{k - 1}) \bigg)
+    \end{equ}
+    Т. к. $ f $ дифференцируема,
+    $$ f \in \Cont{[x_{k - 1}, x_k]}, \qquad \forall x \in [x_{k - 1}, x_k] \quad \exist f'(x) $$
+    Значит, можно применить теорему Лагранжа:
+    \begin{equ}{3918}
+        \exist t_k \in (x_{k - 1}, x_k) : f(x_k) - f(x_{k - 1}) = f'(t_k)(x_k - x_{k - 1}) \underimp{\eref{3916}} f(b) - f(a) = \sum_{k = 1}^n f'(t_k)(x_k - x_{k - 1})
+    \end{equ}
+    Положим $ \Teq \define \seq[n]{t_k}k $
+    $$ \diam \bigg( \Par_n([a, b]) \bigg) = \frac{b - a}n \underarr{n \to \infty} 0 $$
+    Ещё раз посмотрим на соотношение \eref{3918}:
+    $$ f(b) - f(a) = \Sr_f(\Par_n, \Teq) $$
+    $$ \Sr_n(\Par_n, \Teq) \underarr{n \to \infty} \int_a^b f' $$
+    Это выражение постоянно (оно равно $ f(a) - f(b) $), а значит, стремится само к себе
+\end{proof}
+
+\section({Свойства определённого интеграла от a до x f(y)dy; существование первообразной для f из C([a, b])}){Свойства $ \dint[y]{a}x{f(y)} $; существование первообразной \\ для $ f \in \mathcal{C}([a, b]) $}
+
+\begin{notation}
+    $ \Phi(x) \define \dint[y]ax{f(y)}, \qquad \Phi(a) \define 0 $
+\end{notation}
+
+\begin{props}
+    \item $ \Phi(x) \in \Cont{[a, b]} $
+    \begin{proof}
+    	Возьмём $ a < x_1 < x_2 \le b $
+        \begin{multline*}
+            \Phi(x_2) - \Phi(x_1) = \dint[y]a{x_2}{f(y)} - \dint[y]a{x_1}{f(y)} = \\
+            = \dint[y]a{x_1}{f(y)} + \dint[y]{x_1}{x_2}{f(y)} - \dint[y]a{x_1}{f(y)} = \dint[y]{x_1}{x_2}{f(y)} \underimp{|f(x)| \le M} \\
+            \implies |\Phi(x_2) - \Phi(x_1)| \le M(x_2 - x_1) \implies \Phi(x) \in \Cont{[a, b]}
+        \end{multline*}
+    \end{proof}
+    \item $ f $ непр. в $ x_0 \implies \exist \Phi'(x_0) = f(x_0) $
+    \begin{proof}
+    	Положим $ h \ne 0 : x_0 + h \in [a, b] $
+        \begin{itemize}
+        	\item $ h > 0 $
+            \begin{multline}\lbl{4018}
+                \Phi(x_0 + h) - \Phi(x_0) = \dint[y]{x_0}{x_0 + h}{f(y)} = \dint[y]{x_0}{x_0 + h}{f(x_0)} + \dint[y]{x_0}{x_0 + h}{\bigg( f(y) - f(x_0) \bigg)} = \\
+                = hf(x_0) + \dint[y]{x_0}{x_0 + h}{\bigg( f(y) - f(x_0) \bigg)}
+            \end{multline}
+            \item $ h < 0 $
+            \begin{multline}\lbl{40111}
+                \Phi(x_0) - \Phi(x_0 + h) = \dint[y]{x_0 + h}{x_0}{f(y)} = \dint[x_0]{x_0 + h}{x_0}{f(x_0)} + \dint[y]{x_0 + h}{x_0}{\bigg( f(y) - f(x_0) \bigg)} = \\
+                = -hf(x_0) + \dint[y]{x_0 + h}{x_0}{\bigg( f(y) - f(x_0) \bigg)} \iff \\
+                \iff \Phi(x_0 + h) - \Phi(x_0) = hf(x_0) - \dint[y]{x_0 + h}{x_0}{\bigg( f(y) - f(x_0) \bigg)}
+            \end{multline}
+        \end{itemize}
+        \begin{equ}{40112}
+            \eref{4018}, \eref{40111} \implies \frac{\Phi(x_0 + h) - \Phi(x_0)}h = f(x_0) \left[
+            \begin{aligned}
+                - \frac1h \dint[y]{x_0 + h}{x_0}{\bigg( f(y) - f(x_0) \bigg)} \\
+                + \frac1h \dint[y]{x_0}{x_0 + h}{\bigg( f(y) - f(x_0) \bigg)}
+            \end{aligned} \right.
+        \end{equ}
+        Вспомним, что $ f $ непрерывна:
+        \begin{multline*}
+            \forall \veps > 0 \quad \underset{0 < |h| < \delta}{\exist \delta > 0} : \forall y \quad |y - x_0| < \delta \implies |f(y) - f(x_0)| < \veps \implies \\
+            \implies
+            \begin{Bmatrix}
+                \bigg| \dfrac1h \dint[y]{x_0}{x_0 + h}{\bigg( f(y) - f(x_0) \bigg)} \bigg| \le \dfrac1h \cdot \veps \cdot h = \veps \\
+                \bigg| -\dfrac1h \dint[y]{x_0 + h}{x_0}{\bigg( f(y) - f(x_0) \bigg)} \bigg| \le -\dfrac1h \cdot \veps \cdot (-h) = \veps \\
+            \end{Bmatrix} \underimp{\eref{40112}} \\
+            \implies \bigg| \frac{\Phi(x_0 + h) - \Phi(x_0)}h - f(x_0) \bigg| \le \bigg| \frac1h \int ... \bigg| < \veps $$
+        \end{multline*}
+    \end{proof}
+\end{props}
+
+\section({Свойства интеграла с переменным нижним пределом}){Свойства $ \dint[y]{x}b{f(y)} $}
+
+\begin{notation}
+    $ \Psi(x) \define \dint[y]xb{f(y)}, \qquad \Psi(b) \define 0 $
+\end{notation}
+
+\begin{props}
+    \item $ \Psi \in \Cont{[a, b]} $
+    \item $ f $ непр. в $ x_0 \implies \exist \Psi'(x_0) = -f(x_0) $
+\end{props}
+
+\begin{proof}
+    $$ \dint[y]ab{f(y)} = \dint[y]xa{f(y)} + \dint[y]xb{f(y)} = \Phi(x) + \Psi(x) $$
+    $$ \Psi(x) = \dint[y]ab{f(y)} - \Phi(x) $$
+\end{proof}
+
+\section({Определение определённого интеграла при любых a, b из R; формула Ньютона-Лейбница при любых a и b}){Определение $ \dint{a}b{f(x)} $ при любых $ a, b \in \R $; формула Ньютона-Лейбница при любых $ a $ и $ b $}
+
+\begin{definition}
+	$ a > b $
+    $$ \dint{a}b{f(x)} \define -\dint{b}a{f(x)} $$
+    $$ \dint{a}a{f(x)} \define 0 $$
+\end{definition}
+
+\begin{statement}
+	Формула Ньютона-Лейбница справедлива при любых соотношениях $ a $ и $ b $
+\end{statement}
+
+\begin{proof}
+	$ f \in \Ri([a, b]), \qquad F $ -- первообразная $ f $
+    $$ \dint{b}a{f(x)} = -\dint{a}b{f(x)} = - \bigg( F(b) - F(a) \bigg) = F(a) - F(b) $$
+\end{proof}
+
+\section{Замена переменной в определёном интеграле}
+
+\begin{theorem}
+    $ f \in \Cont{[a, b]}, \qquad \vphi, \vphi' \in \Cont{[p, q]}, \qquad \forall t \in [p, q] \quad \vphi(t) \in [a, b], \qquad \vphi(p) = a, \quad \vphi(q) = b $
+    $$ \implies \dint[t]pq{f \big( \vphi(t) \big) \vphi'(t)} = \dint{a}b{f(x)} $$
+\end{theorem}
+
+\begin{proof}
+	$ \exist F $ -- первообразная $ f $ на $ [a, b] $
+    $$ \bigg( F \big( \vphi(t) \big) \bigg)' = F' \big( \vphi(t) \big) \cdot \vphi'(t) = f \big( \vphi(t) \big) \cdot \vphi'(t) \implies F \big( \vphi(t) \big) \text{ -- первообразная для } f \big( \vphi(t) \big) \cdot \vphi'(t) $$
+    Применим формулу Ньютона-Лейбница:
+    $$ \dint[t]pq{f \big( \vphi(t) \big) \vphi'(t)} = F \big( \vphi(q) \big) - F \big( \vphi(p) \big) = F(b) - F(a) = \dint{a}b{f(x)} $$
+\end{proof}
+
+\section{Интегрирование по частям в определённом интеграле}
+
+\begin{theorem}
+    $ f, g \in \Cont{[a, b]}, \qquad \forall x \in [a, b] \quad \exist f'(x), g'(x) \in \Cont{[a, b]} $
+    $$ \implies \dint{a}b{f'(x)g(x)} = f(b)g(b) - f(a)g(a) - \dint{a}b{f(x)g'(x)} $$
+\end{theorem}
+
+\begin{proof}
+    $$
+    \begin{cases}
+        \exist F \in \Cont{[a, b]} : \forall x \in [a, b] \quad F'(x) = f'(x)g(x) \\
+        \exist G \in \Cont{[a, b]} : \forall x \in [a, b] \quad G'(x) = f(x)g'(x)
+    \end{cases} $$
+    Применим формулу Ньютона-Лейбница:
+    \begin{multline}\lbl{44127}
+        \begin{rcases}
+            \dint{a}b{f'(x)g(x)} = F(b) - F(a) \\
+            \dint{a}b{f(x)g'(x)} = G(b) - G(a)
+        \end{rcases} \implies \dint{a}b{f'(x)g(x)} + \dint{a}b{f(x)g'(x)} = \\
+        = F(b) - F(a) + G(b) - G(a) = \bigg( F(b) + G(b) \bigg) - \bigg( F(a) + G(a) \bigg)
+    \end{multline}
+    Продифференцируем:
+    $$ \bigg( F(x) + G(x) \bigg)' = F'(x) + G'(x) = f'(x)g(x) + f(x)g'(x) = \bigg( f(x)g(x) \bigg)' $$
+    Применим формулу Ньютона-Лейбница:
+    $$ \bigg( F(b) + G(b) \bigg) - \bigg( F(a) + G(b) \bigg) = f(b)g(b) - f(a)g(a) $$
+    Подставив в \eref{44127}, получим нужный результат
+\end{proof}
+
+\section({Определение сходимости несобственных интегралов; критерий Коши сходимости несобственных интегралов}){Определение сходимости несобственных интегралов $ \dint{a}\beta{f(x)} $ и $ \dint\alpha{b}{f(x)} $; критерий Коши сходимости несобственных интегралов}
+
+\begin{notation}
+    $$ \Phi(x) \define \dint[y]ax{f(y)}, \qquad x < \beta $$
+    $$ \Psi(x) \define \dint[y]xb{f(y)}, \qquad x > \alpha $$
+\end{notation}
+
+\begin{definition}
+	Говорят, что соответствующий несобственный интеграл сходится, если
+    \begin{itemize}
+        \item $ \exist \liml{x \to \beta} \Phi(x) \in \R $
+        \item $ \exist \liml{x \to \alpha} \Psi(x) \in \R $
+    \end{itemize}
+\end{definition}
+
+\begin{undefthm}{Криетрий Коши}
+	Через $ \omega(\beta) $ и $ \omega(\alpha) $ будем обозначать окрестности соответствующих точек \\
+    Вспомним критерий Коши для функций:
+    $$
+    \begin{cases}
+        \exist \liml{x \to \beta} \Phi(x) \in \R \iff \forall \veps > 0 \quad \exist \omega(\beta) : \forall x_1, x_2 \in [a, \beta) \cap \omega(\beta) \quad |\Phi(x_2) - \Phi(x_1)| < \veps \\
+        \exist \liml{x \to \alpha} \Psi(x) \in \R \iff \forall \veps > 0 \quad \exist \omega(\alpha) : \forall x_1, x_2 \in (\alpha, b] \cap \omega(\alpha) \quad |\Psi(x_2) - \Psi(x_1)| < \veps
+    \end{cases} $$
+    Будем считать, что $ x_1 < x_2 $
+    $$
+    \begin{cases}
+        \Phi(x_2) - \Phi(x_1) = \dint[y]a{x_2}{f(y)} - \dint[y]a{x_1}{f(y)} = \dint[y]{x_1}{x_2}{f(y)} \\
+        \Psi(x_2) - \Psi(x_1) = \dint[y]{x_2}b{f(y)} - \dint[y]{x_1}b{f(y)} = -\dint[y]{x_1}{x_2}{f(y)}
+    \end{cases} $$
+    Получаем критерий Коши для несобственных интегралов:
+    $$
+    \begin{cases}
+        \exist \liml{x \to \beta} \Phi(x) \iff \forall \veps > 0 \quad \exist \omega(\beta) : \forall x_1, x_2 \in [a, \beta) \cap \omega(\beta) \quad \bigg| \dint[y]{x_1}{x_2}{f(y)} \bigg| < \veps \\
+        \exist \liml{x \to \alpha} \Psi(x) \iff \forall \veps > 0 \quad \exist \omega(\alpha) : \forall x_1, x_2 \in (\alpha, b] \cap \omega(\alpha) \quad \bigg| \dint[y]{x_1}{x_2}{f(y)} \bigg| < \veps
+    \end{cases} $$
+\end{undefthm}
+
+\section(несобственный интеграл dx/x\textasciicircum{}p){$ \dfint{a}\infty{x^p} $; $ \dfint0b{x^p} $}
+
+\begin{eg}
+    $ a > 0 $
+    $$ \dfint{a}\infty{x^p} $$
+    \begin{remind}
+        $ \uint{x^{-p}} = \dfrac1{1 - p}x^{1 - p} + c $
+    \end{remind}
+    \begin{itemize}
+    	\item $ p > 1 $ \\
+        Пусть $ x > a $
+        \begin{equ}{461}
+            \dfint[y]ax{y^p} = \frac1{1 - p}x^{1 - p} - \frac1{1 - p}a^{1 - p} = \frac1{p - 1}a^{1 - p} + \frac1{1 - p}x^{1 - p} \underarr{x \to \infty} \frac1{p - 1}a^{1 - p}
+        \end{equ}
+        Значит, интеграл сходится
+        \item $ p = 1 $
+        $$ \dfint{a}\infty{x} $$
+        $$ \dfint[y]axy = \ln x - \ln a \to +\infty $$
+        Интеграл расходится
+        \item $ 0 < p < 1 $ \\
+        Снова получаем \eref{461}:
+        $$ \dfint[y]ax{y^p} = \frac1{p - 1}a^{1 - p} + \frac1{1 - p}x^{1 - p} \underarr{x \to \infty} +\infty $$
+        Интеграл расходится
+    \end{itemize}
+\end{eg}
+
+\begin{eg}
+    $$ \dfint0b{x^p}, \qquad b \in \R $$
+    Воспользуемся \eref{461}:
+    $$ \dfint[y]0b{y^p} = \frac1{1 - p}b^{1 - p} - \frac1{1 - p}x^{1 - p} $$
+    \begin{itemize}
+    	\item $ 0 < p < 1 $
+        $$ \frac1{1 - p}b^{1 - p} - \frac1{1 - p}x^{1 - p} \underarr{x \to 0} \frac1{1 - p}b^{1 - p} $$
+        Интеграл сходится
+        \item $ p > 1 $
+        $$ \frac1{1 - p}b^{1 - p} - \frac1{1 - p}x^{1 - p} \underarr{x \to 0} +\infty $$
+        Интеграл расходится
+        \item $ p = 1 $
+        $$ \dfint[y]oby = \ln b - \ln x \underarr{x \to 0+} +\infty $$
+        Интеграл расходится
+    \end{itemize}
+\end{eg}
+
+\section({несобственный интеграл cf(x); несобственный интеграл (f(x) + g(x))}){$ \dint{a}\beta{cf(x)}, \dint\alpha{b}{cf(x)}, \dint{a}\beta{\big( f(x) + g(x) \big)}, \dint\alpha{b}{\big( f(x) + g(x) \big)} $}
+
+\begin{property}
+	$ c \in \R $
+    $$ \dint{a}\beta{f(x)} \text{ сходится } \implies \dint{a}\beta{cf(x)} = c \dint{a}\beta{f(x)} $$
+    $$ \dint\alpha{b}{g(x)} \text{ сходится } \implies \dint\alpha{b}{cg(x)} = c \dint\alpha{b}{g(x)} $$
+\end{property}
+
+\begin{property}
+    $$
+    \begin{rcases}
+        \dint{a}\beta{f(x)} \text{ сходится } \\
+        \dint{a}\beta{g(x)} \text{ сходится }
+    \end{rcases} \implies \dint{a}\beta{f(x) + g(x)} = \dint{a}\beta{f(x)} + \dint{a}\beta{g(x)} $$
+    $$
+    \begin{rcases}
+        \dint\alpha{b}{f(x)} \text{ сходится } \\
+        \dint\alpha{b}{g(x)} \text{ сходится }
+    \end{rcases} \implies \dint\alpha{b}{f(x) + g(x)} = \dint\alpha{b}{f(x)} + \dint\alpha{b}{g(x)} $$
+\end{property}
+
+\section({Критерий сходимости несобственных интегралов при f(x) >= 0}){Критерий сходимости $ \dint{a}\beta{f(x)}, \dint\alpha{b}{f(x)} $ при $ f(x) \ge 0 $}
+
+\begin{undefthm}{Критерий сходимости неотрицательных функций}
+	\hfill
+    \begin{itemize}
+        \item $ \forall x \in [a, \beta) \quad f(x) \ge 0, \qquad a < x_1 < x_2 < \beta $
+        \begin{equ}{481}
+            \dint[y]a{x_2}{f(y)} - \dint[y]a{x_1}{f(y)} = \dint[y]{x_1}{x_2}{f(y)} \ge 0
+        \end{equ}
+        Рассмотрим
+        $$ F \define \dint[y]ax{f(y)} $$
+        $$ \eref{481} \implies F \text{ возрастает } $$
+        Вспомним, когда возрастающая функция имеет конечный предел:
+        $$ \dint{a}\beta{f(x)} \text{ сходится } \iff \exist M > 0 : \forall x \in [a, \beta) \quad F(x) \le M $$
+        \item Аналогично,
+        $$ G(x) \define \dint[y]xb{g(y)} $$
+        $ G(x) $ убывает
+        $$ \dint\alpha{b}{g(x)} \text{ сходится } \iff \exist L : \forall x \in (\alpha, b] \quad G(x) \ge L $$
+    \end{itemize}
+\end{undefthm}
+
+\section{Признаки сравнения несобственных интегралов от \texorpdfstring{\\}{} неотрицательных функций}
+
+\begin{theorem}
+	$ f_1, f_2 : [a, \beta), \qquad \forall x \in [a, \beta) \quad
+    \begin{cases}
+    	f_1(x) \ge 0 \\
+        f_2(x) \ge 0
+    \end{cases} $
+    \begin{equ}{495}
+    	\exist c > 0 : \forall x \in [a, \beta) \quad f_1(x) \le cf_2(x)
+    \end{equ}
+    \begin{enumerate}
+        \item $ \dint{a}\beta{f_2(x)} $ сходится
+        \begin{equ}{496} \implies
+            \begin{cases}
+                \dint{a}\beta{f_1(x)} \text{ сходится} \\
+                \dint{a}\beta{f_1(x)} \le c\dint{a}\beta{f_2(x)}
+            \end{cases}
+        \end{equ}
+        \begin{proof}
+        	Рассмотрим
+            $$ F_2(x) \define \dint[y]ax{f_1(y)}, \qquad F_2(x) \define \dint[y]ax{f_2(y)} $$
+            По критерию сходимости неотрицательных функций,
+            $$ \exist M : F_2(x) \le M \quad \forall x $$
+            $$ \eref{495} \implies F_1(x) = \dint[y]ax{f_1(y)} \le \dint[y]ax{cf_2(y)} = c\dint[y]ax{f_2(y)} = cF_2(x) \le cM $$
+            $$ F_1(x) \le cF_2(x) \implies \liml{x \to \beta} F_1(x) \le \liml{x \to \beta} cF_2(x) \implies \eref{496} $$
+        \end{proof}
+        \item $ \dint{a}\beta{f_2(x)} $ расходится $ \implies \dint{a}\beta{f_1(x)} $ расходится
+        \begin{proof}
+        	Пусть это неверно
+            $$ \dint{a}\beta{f_2(x)} \text{ сходится } \implies \dint{a}\beta{f(x)} \text{ сходится} $$
+        \end{proof}
+    \end{enumerate}
+\end{theorem}
+
+\section{Абсолютная сходимость несобственных интегралов}
+
+\begin{definition}
+    Говорят, что $ \dint{a}\beta{f(x)} $ абсолютно сходится, если сходится $ \dint{a}\beta{|f(x)|} $
+\end{definition}
+
+\begin{definition}
+	Абсолютно сходящийся интеграл сходится
+\end{definition}
+
+\begin{proof}
+    Рассмотрим $ \dint{a}\beta{f(x)} $ \\
+    Будем пользоваться критерием Коши \\
+    Возьмём $ \forall \veps > 0 $
+    $$ \dint{a}\beta{|f(x)|} \text{ сходится } \iff \exist \omega(\beta) : \forall x_1, x_2 \in \omega(\beta) \quad \bigg| \dint[y]{x_1}{x_2}{|f(y)|} \bigg| < \veps $$
+    В силу одного из свойств, это означает, что
+    \begin{equ}{5019}
+        0 \le \dint[y]{x_1}{x_2}{|f(y)|} < \veps
+    \end{equ}
+    $$ \bigg| \dint[y]{x_1}{x_2}{f(y)} \bigg| \le \dint[y]{x_1}{x_2}{|f(y)|} \underset{\eref{5019}}< \veps \implies \dint{a}\beta{f(x)} \text{ сходится} $$
+\end{proof}
+
+\section{Признак Абеля}
+
+\begin{theorem}
+	$ f, g, f', g' \in \Cont{[a, \beta)}, \qquad g(x) $ монотонна, $ \qquad \dint{a}\beta{f(x)} $ сходится
+    \begin{equ}{5114}
+        \exist M : \forall x \in [a, \beta) \quad |g(x)| \le M
+    \end{equ}
+    $$ \implies \dint{a}\beta{f(x)g(x)} \text{ сходится} $$
+\end{theorem}
+
+\begin{proof}
+	По критерию Коши,
+    \begin{equ}{5116}
+        \forall \veps > 0 \quad \exist \omega(\beta) : \forall x_1, x_2 \in \omega(\beta) \quad \bigg| \dint[y]{x_1}{x_2}{f(y)} \bigg| < \veps
+    \end{equ}
+    Рассмотрим $ \dint[y]{x_1}{x_2}{f(y)g(y)} $ \\
+    Применим вторую теорему о среднем:
+    \begin{multline*}
+        \exist c \in [x_1 \between x_2] : \dint[y]{x_1}{x_2}{f(y)g(y)} = g(x_1) \dint[y]{x_1}c{f(y)} + g(x_2) \dint[y]c{x_2}{f(y)} \implies \\
+        \implies \bigg| \dint[y]{x_1}{x_2}{f(y)g(y)} \bigg| = \bigg| g(x_1) \dint[y]{x_1}c{f(y)} + g(x_2)\dint[y]c{x_2}{f(y)} \bigg| \le \\
+        \le |g(x_1)| \cdot \bigg| \dint[y]{x_1}c{f(y)} \bigg| + |g(x_2)| \cdot \bigg| \dint[y]c{x_2}{f(y)} \bigg| \underset{\eref{5114}, \eref{5116}}< M \cdot \veps + M \cdot \veps
+    \end{multline*}
+    Значит, интеграл сходится
+\end{proof}
+
+\section{Признак Дирихле}
+
+\begin{theorem}
+    $ f, g, g' \in \Cont{[a, \beta)}, \qquad g(x) \underarr{x \to \beta} 0 $
+    \begin{equ}{5223}
+        \exist M : \forall x \in [a, \beta) \quad \bigg| \dint[y]a{x}{f(y)} \bigg| \le M
+    \end{equ}
+    $$ \implies \dint{a}\beta{f(x)g(x)} \text{ сходится} $$
+\end{theorem}
+
+\begin{proof}
+	Вспомним, когда монотонная функция стремится к нулю:
+    \begin{equ}{5224}
+    	\forall \veps > 0 \quad \exist \omega(\beta) : \forall x \in \omega(\beta) \quad |g(x)| < \veps
+    \end{equ}
+    Возьмём $ x_1, x_2 \in \omega(\beta) $
+    \begin{equ}{5225}
+        \bigg| \dint[y]{x_1}{x_2}{f(y)} \bigg| = \bigg| \dint[y]a{x_2}{f(y)} - \dint[y]a{x_1}{f(y)} \bigg| \trile \bigg| \dint[y]a{x_1}{f(y)} \bigg| + \bigg| \dint[y]a{x_1}{f(y)} \bigg| \underset{\eref{5223}}\le M + M = 2M
+    \end{equ}
+    По второй теореме о среднем,
+    \begin{multline*}
+        \exist c \in [x_1 \between x_2] : \dint[y]{x_1}{x_2}{f(y)g(y)} = g(x_1)\dint[y]{x_1}c{f(y)} + g(x_2)\dint[y]c{x_2}{f(y)} \implies \\
+        \implies \bigg| \dint[y]{x_1}{x_2}{f(y)g(y)} \bigg| \le |g(x_1)| \cdot \bigg| \dint[y]{x_1}c{f(y)} \bigg| + |g_2(x)| \cdot \bigg| \dint[y]c{x_2}{f(y)} \bigg| \underset{\eref{5224}, \eref{5225}}< \veps \cdot 2M + \veps \cdot 2M
+    \end{multline*}
+    Значит, интеграл сходится
+\end{proof}
+
+\section{Замена переменной в несобственном интеграле}
+
+\begin{theorem}
+    $ \vphi, f, \vphi' \in \Cont{[p, q)}, \qquad \forall t \in [p, q) \quad \vphi(t) \in [a, \beta), \qquad \vphi $ монотонна \\
+    $ \qquad \vphi(p) = a, \quad \vphi(q) = \beta, \qquad q, \beta \le +\infty $
+    $$ I_1 \define \dint{a}\beta{f(x)}, \qquad I_2 \define \dint[t]pq{f \bigg( \vphi(t) \bigg) \vphi'(t)} $$
+    Если сходится один из $ I_1, I_2 $, то сходится и второй \\
+    При этом, $ I_1 = I_2 $
+\end{theorem}
+
+\begin{proof}
+	Положим $ p < Q < q $
+    $$ \dint{a}{\vphi(Q)}{f(x)} = \dint[t]pQ{f \bigg( \vphi(t) \bigg)\vphi'(t)} $$
+    $$ Q \to q \iff \vphi(Q) \to \beta $$
+\end{proof}
+
+\section({определённый интеграл от e до бесконечности dx/(x ln\textasciicircum{}px); определённый интеграл от 1 до бесконечности sin x/x dx}){$ \dfint{e}\infty{x \ln^p x} $; $ \dint1\infty{\frac{\sin x}x} $}
+
+\begin{eg}[замена переменной]
+    $$ \dfint{e}\infty{x \ln^p x} $$
+    Положим $ x \define e^t $ \\
+    Тогда $ \ln x = t $ и $ x' = e^t $
+    $$ \dfint{e}\infty{x \ln^p x} = \dint[t]1\infty{\frac1{e^tt^p} \cdot e^t} = \dfint[t]1\infty{t^p} $$
+    Этот интеграл:
+    \begin{itemize}
+    	\item сходится при $ p > 1 $
+        \item иначе -- расходится
+    \end{itemize}
+\end{eg}
+
+\begin{eg}[признак Дирихле]
+    $$ \dint1\infty{\frac{\sin x}x} $$
+    \begin{itemize}
+    	\item Проверим сходимость: \\
+        Пусть
+        $$ f(x) = \sin x, \qquad g(x) = \frac1x \underarr{x \to \infty} 0 $$
+        $$ \bigg| \dint1x{\sin x} \bigg| = |\cos 1 - \cos x| \le 2 \underimp{\text{Дирихле}} \dint1\infty{\frac{\sin x}x} \text{ сходится} $$
+        \item Проверим абсолютную сходимость:
+        \begin{equ}{5426}
+            \text{Предположим, что } \dint1\infty{\frac{|\sin x|}x} \text{ сходится}
+        \end{equ}
+        $$ \forall x \quad |\sin x| \ge \sin^2 x $$
+        $$ \eref{5426} \implies \dint1\infty{\frac{\sin^2 x}x} \text{ сходится} $$
+        \begin{remind}
+        	$ \sin^2 x = \half - \half \cos2x $
+        \end{remind}
+        Значит,
+        \begin{equ}{54181}
+            \dint1\infty{\frac1x(\half - \half\cos2x)} \text{ сходится}
+        \end{equ}
+        Это -- сумма интегралов, а значит,
+        \begin{equ}{5419}
+            \text{сходится и } \dint1\infty{\half \cdot \frac{\cos2x}x}
+        \end{equ}
+        Сложим \eref{54181} и \eref{5419}:
+        \begin{multline*}
+            \dint1\infty{\bigg( \frac1x \big( \half - \cancel{\half\cos2x} \big) + \cancel{\half \cdot \frac{\cos2x}x} \bigg)} \text{ сходится } \implies \dint1\infty{\half \cdot \frac1x} \text{ сходится } \implies \\
+            \implies \dfint1\infty{x} \text{ сходится}
+        \end{multline*}
+        А это -- неправда. Значит, наше предположение неверно, и $ \dint1\infty{\frac{|\sin x|}x} $ расходится
+    \end{itemize}
+\end{eg}
+
+\section{Сходимость ряда \texorpdfstring{$ \sum_{n = k}^\infty a_n $}{}; необходимый признак сходимости; \texorpdfstring{\\}{} остаток ряда}
+
+\begin{definition}
+    Частичной суммой ряда будем называть $ S_N \define a_k + a_{k + 1} + ... + a_{k + N - 1} $
+\end{definition}
+
+\begin{definition}
+    Будем говорить, что ряд сходится, если $ \exist \limi{N} S_N \in \R $
+\end{definition}
+
+\begin{theorem}[необходимый признак сходимости]
+    $$ \sum_{m = k}^\infty a_m \text{ сходится } \bm{\implies} a_n \underarr{n \to \infty} 0 $$
+\end{theorem}
+
+\begin{proof}
+	Положим
+    $$ \sum_{m = k}^\infty a_m \define S \in \R $$
+    Возьмём $ n > k $
+    \begin{multline*}
+        \begin{rcases}
+            S_{n - 1} = a_k + a_{k + 1} + ... + a_{n - 1} \underarr{n \to \infty} S \\
+            S_n = a_k + a_{k + 1} + ... + a_n \underarr{n \to \infty} S
+        \end{rcases} \implies \\
+        \implies a_n = \big( a_k + a_{k + 1} + ... + a_n \big) - \big( a_k + a_{k + 1} + ... + a_{n - 1} \big) \to S - S = 0
+    \end{multline*}
+\end{proof}
+
+\begin{definition}
+	Возьмём $ l > k $ \\
+    Ряд $ \sum_{m = l}^\infty a_m $ называется остатком ряда $ \sum_{m = k}^\infty a_m $
+\end{definition}
+
+\section{Критерий Коши сходимости ряда}
+
+\begin{theorem}
+    Для того что бы ряд $ \sum_{m = k}^\infty a_m $ сходился, необходимо и достаточно, чтобы
+    $$ \forall \veps > 0 \quad \exist N : \forall n_2 > n_1 > N \quad |a_{n_1 + 1} + ... + a_{n_2}| < \veps $$
+\end{theorem}
+
+\begin{proof}
+	$$
+    \begin{cases}
+        S_{n_1 + 1} = a_k + a_{k + 1} + ... + a_{n_2} \\
+        S_{n_2 + 1} = a_k + a_{k + 1} + ... + a_{n_1}
+    \end{cases} $$
+    Вспомним критерий Коши для последовательностей:
+    $$ S_n \underarr{n \to \infty} S \in \R \iff \forall \veps > 0 \quad \exist N : \forall n_2 > n_1 > N \quad |S_{n_2 + 1} - S_{n_1 + 1}| < \veps $$
+    $$ S_{n_2 + 1} - S_{n_1 + 1} = a_{n_1 + 1} + ... + a_{n_2} $$
+\end{proof}
+
+\section{Критерий сходимости рядов с неотрицательными слагаемыми}
+
+Будем рассматривать ряды вида
+\begin{equ}{5713}
+    \sum_{n = 1}^\infty a_n, \qquad \forall n \quad a_n \ge 0
+\end{equ}
+
+$$ S_{n + 1} - S_n = (a_1 + ... + a_n + a_{n + 1}) - (a_1 + ... + a_n) = a_{n + 1} \ge 0 $$
+То есть, последовательность $ S_n $ не убывает
+
+\begin{theorem}
+    Для того, чтобы ряд $ \sum_{n = 1}^\infty a_m $ сходился необходимо и достаточно, чтобы
+    $$ \exist M : \forall n \quad S_n \le M $$
+\end{theorem}
+
+\begin{proof}
+	Неубывающая последовательность имеет конечный предел тогда и только тогда, когда она ограничена
+\end{proof}
+
+\section{Признаки сравнения рядов с неотрицательными слагаемыми}
+
+\begin{theorem}
+	Рассмотрим также ряд
+    \begin{equ}{5815}
+        \sum_{n = 1}^\infty b_n, \qquad \forall n \quad b_n \ge 0
+    \end{equ}
+    \begin{equ}{5816}
+        \exist c : \forall n \quad a_n \le cb_n
+    \end{equ}
+    \begin{itemize}
+        \item Если \eref{5815} сходится, то сходится и \eref{5713} \\
+        При этом выполнено
+        \begin{equ}{5817}
+            \sum_{n = 1}^\infty a_n \le c \sum_{n = 1}^\infty b_n
+        \end{equ}
+        \begin{proof}
+        	По предыдущему критерию,
+            \begin{equ}{5818}
+            	\exist M : \forall n \quad b_1 + ... + b_n \le M
+            \end{equ}
+            $$ \bm{a_1 + ... + a_n} \underset{\eref{5816}}{\bm\le} cb_1 + ... + cb_n = \bm{c(b_1 + ... + b_n)} \underset{\eref{5818}}\le cM $$
+            Значит, по предыдущему критерию, \eref{5713} сходится \\
+            \eref{5817} выполняется по выделенному
+        \end{proof}
+        \item Если \eref{5713} расходится, то расходится и \eref{5815}
+        \begin{proof}
+        	От противного
+        \end{proof}
+    \end{itemize}
+\end{theorem}
+
+\section{Признак Коши сходимости рядов}
+
+\begin{theorem}
+    \begin{equ}{5919}
+        \sum_{n = 1}^\infty a_n, \qquad \forall n \quad a_n \ge 0
+    \end{equ}
+    $$ q \define \ulim_{n \to \infty} \sqrt[n]{a_n} \ge 0 $$
+    \begin{itemize}
+        \item
+        \item $ q < 1 \implies \eref{5919} $ сходится
+        \begin{proof}
+        Выберем $ \veps > 0 : r \define q + \veps > 1 $ \\
+        По определению предела последовательности,
+        $$ \exist N : \forall n > N \quad \sqrt[n]{a_n} < r $$
+        То есть,
+        \begin{equ}{5921}
+            a_n < r^n
+        \end{equ}
+        \begin{intuition}
+            \begin{equ}{5922}
+                \sum_{n = N + 1}^\infty r^n \text{ сходится}
+            \end{equ}
+        \end{intuition}
+        Применим признак сравнения:
+        $$ \eref{5921}, \eref{5922} \implies \sum_{n = N + 1}^\infty a_n \text{ сходится} $$
+        А значит, сходится и \eref{5919}
+    \end{proof}
+        \item $ q > 1 \implies \eref{5919} $ расходится
+        \begin{proof}
+        	Возьмём $ \veps \define q - 1 > 0 $ \\
+            Применим принцип выбора Больцано-Вейерштрасса:
+            $$ \sqrt[n_k]{x_{n_k}} > q - \veps = 1 \iff a_{n_k} > q^{n_k} \implies a \to 0 $$
+        \end{proof}
+    \end{itemize}
+\end{theorem}
+
+\section{Признак Даламбера сходимости рядов}
+
+\begin{theorem}
+    \begin{equ}{601}
+        \sum_{n = 1}^\infty a_n, \qquad a_n > 0
+    \end{equ}
+    $$ \exist \limi{n} \frac{a_{n + 1}}{a_n} = q $$
+    \begin{itemize}
+        \item
+        \item $ q < 1 \implies \eref{601} $ сходится
+        \begin{proof}
+        	Возьмём $ \veps > 0 : r \define q + \veps < 1 $ \\
+            По определению предела последовательности,
+            \begin{equ}{602}
+                \exist N : \forall n >  N \quad \frac{a_{n + 1}}{a_n} < r
+            \end{equ}
+            Будем считать, что $ n \ge N + 1 $
+            $$ \eref{602} \implies
+            \begin{cases}
+                \dfrac{a_{N + 2}}{a_{N + 1}} < r \\ \\
+                \dfrac{a_{N + 3}}{a_{N + 2}} < r \\
+                \widedots[3em] \\
+                \dfrac{a_{n + 1}}{a_n} < r
+            \end{cases} $$
+            Перемножим эти неравенства:
+            $$ \frac{\cancel{a_{N + 2}}}{a_{N + 1}} \cdot \frac{\cancel{a_{N + 3}}}{\cancel{a_{N + 2}}} \cdot ... \cdot \frac{\cancel{a_n}}{\cancel{a_{n + 1}}} \cdot \frac{a_{n + 1}}{\cancel{a_n}} \underset{\text{здесь } n - N \text{ нер-в}}< r^{n - N} \iff \frac{a_{n + 1}}{a_{N + 1}} < \frac{r^n}{r^N} \iff a_{n + 1} < \frac{a_{N + 1}}{r^N} \cdot r^n $$
+            $$ \sum{n = N + 1}^\infty \frac{a_{N + 1}}{r^N} \cdot r^n \text{ сходится } \underimp{\text{призн. сравн.}} \sum_{n = N + 1}^\infty a_n \text{ сходится} $$
+            Значит, \eref{601} сходится
+        \end{proof}
+        \item $ q > 1 \implies \eref{601} $ расходится
+        \begin{proof}
+        	Пусть $ \veps \define q - 1 > 0 $ \\
+            По определению предела,
+            \begin{equ}{607}
+                \exist N : \forall n > N \quad \frac{a_n + 1}{a_n} > q - \veps = 1
+            \end{equ}
+            Будем считать, что $ n > N + 1 $
+            $$ \eref{607} \implies
+            \begin{cases}
+                \dfrac{a_{N + 2}}{a_{N + 1}} > 1 \\ \\
+                \dfrac{a_{N + 3}}{a_{N + 2}} > 1 \\
+                \widedots[3em] \\
+                \dfrac{a_{n + 1}}{a_n} > 1
+            \end{cases} $$
+            Перемножим эти неравенства:
+            $$ \frac{\cancel{a_{N + 2}}}{a_{N + 1}} \cdot ... \cdot \frac{a_{n + 1}}{\cancel{a_{N + 1}}} > 1 \iff a_{n + 1} > a_{N + 1} > 0 \implies \limi{n} a_n \ne 0 $$
+            Значит, \eref{601} расходится
+        \end{proof}
+    \end{itemize}
+\end{theorem}
+
+\section{Интегральный признак сходимости рядов}
+
+\begin{theorem}
+	$ f : [1, \infty], \qquad f(x) \ge 0, \qquad f(x) $ убывает
+    \begin{equ}{618}
+        \sum_{n = 1}^\infty f(n)
+    \end{equ}
+    \begin{equ}{619}
+        \dint1\infty f(x)
+    \end{equ}
+    \eref{618} и \eref{619} сходятся или расходятся одновременно
+\end{theorem}
+
+\begin{iproof}
+    \item Пусть \eref{618} сходится \\
+    При $ x \in [n, n + 1] $, имеем неравенство (вследствие убывания $ f $):
+    $$ f(n) \ge f(x) $$
+    Проинтегрируем:
+    $$ \underbrace{\dint{n}{n + 1}{f(n)}}_{f(n)(n + 1 - n) = f(n)} \ge  \dint{n}{n + 1}{f(x)} $$
+    $$ f(n) \ge \dint{n}{n + 1}{f(x)} $$
+    Возьмём произвольное $ N $ и $ n = 1, 2, ..., N $:
+    $$
+    \begin{cases}
+        f(1) \ge \dint12{f(x)} \\ \\
+        f(2) \ge \dint23{f(x)} \\
+        \widedots[6em] \\
+        f(N) \ge \dint{N}{N + 1}{f(x)}
+    \end{cases} $$
+    Сложим все неравенства:
+    $$ f(1) + ... + f(N) \ge \dint12{f(x)} + ... + \dint{N}{N + 1}{f(x)} = \dint1{N + 1}{f(x)} $$
+    Заметим, что слева записана частичная сумма ряда \eref{618}, а он сходится:
+    \begin{equ}{6115}
+        \dint1{N + 1}{f(x)} \le f(1) + ... + f(N) \le \sum{n = 1}^\infty f(n) = M \in \R
+    \end{equ}
+    Возьмём $ \forall ~ 1 < b < \infty $ и рассмотрим интеграл $ \dint1b{f(x)} $ \\
+    Возьмём $ N > b - 1 $
+    $$ \dint1b{f(x)} = \dint1{N + 1}{f(x)} - \underbrace{\dint{b}{N + 1}{f(x)}}_{\ge 0} \le \dint1{N + 1}{f(x)} \underset{\eref{6115}}\le M $$
+    Значит, \eref{619} сходится
+    \item Пусть сходится интеграл \eref{619} \\
+    Для $ x \in [n, n + 1] $ справедливо (в силу убывания $ f $):
+    $$ f(x) \ge f(n + 1) \implies \dint{n}{n + 1}{f(x)} \ge \dint{n}{n + 1}{f(n + 1)} $$
+    Распишем это для $ n = 1, 2, ..., N $:
+    $$
+    \begin{cases}
+        \dint12{f(x)} \ge f(2) \\ \\
+        \dint23{f(x)} \ge f(3) \\
+        \widedots[6em] \\
+        \dint{N}{N + 1}{f(x)} \ge f(N + 1)
+    \end{cases} $$
+    Сложим:
+    $$ \dint12{f(x)} + \dint23{f(x)} + ... + \dint{N}{N + 1}{f(x)} \ge f(2) + f(3) + ... + f(N + 1) $$
+    $$ \dint1{N + 1}{f(x)} \ge f(2) + f(3) + ... + f(N + 1) $$
+    В силу произвольности $ N $, это означает, что
+    $$ \dint1{N + 1}{f(x)} \le \dint1\infty{f(x)} \define L $$
+    Значит,
+    $$ f(2) + f(3) + ... + f(N + 1) \le L $$
+    Получили, что последовательность ограничена сверху числом $ L $, которое не зависит от $ N $, а значит, ряд $ \sum_{n = 1}^\infty f(n) $ сходится \\
+    Тогда сходится и ряд \eref{618}
+\end{iproof}
+
+\section({ряд 1/n\textasciicircum{}p; ряд 1/((n + 1)ln\textasciicircum{}p(n + 1))}){$ \sum_{n = 1}^\infty \frac1{n^p} $; $ \sum_{n = 1}^\infty \frac1{(n + 1) \ln^p (n + 1)} $}
+
+\begin{eg}
+    $$ \sum_{n = 1}^\infty \frac1{n^p}, \qquad p > 0, \qquad f(x) \define \frac1{x^p} $$
+    Этот ряд сходится одновременно с интегралом
+    $$ \dfint1\infty{x^p} $$
+    Мы знаем, что этот интеграл:
+    \begin{itemize}
+    	\item сходится при $ p > 1 $
+    	\item расходится при $ 0 < p < 1 $
+    \end{itemize}
+\end{eg}
+
+\begin{eg}
+    $$ \sum_{n = 1}^\infty \frac1{(n + 1)\ln^p(n + 1)}, \qquad p > 0 $$
+    $$ f(x) \define \frac1{(x + 1)\ln^p(x + 1)} $$
+    Ряд сходится одновременно с интегралом
+    $$ \dfint1\infty{(x + 1)\ln^p(x + 1)} \underset{(y \define x + 1)}= \dfint[y]2\infty{y \ln^p y} $$
+    Этот интеграл сходится при $ p > 1 $
+\end{eg}
+
+\section{Абсолютная сходимость рядов}
+
+Пусть имеется некий ряд
+\begin{equ}{6321}
+    \sum_{n = 1}^\infty a_n
+\end{equ}
+
+Рассмотрим также ряд
+\begin{equ}{6322}
+    \sum_{n = 1}^\infty |a_n|
+\end{equ}
+
+\begin{definition}
+    Говорят, что ряд \eref{6321} абсолютно сходится, если сходится \eref{6322}
+\end{definition}
+
+\begin{theorem}
+	Абсолютно сходящийся ряд сходится
+\end{theorem}
+
+\begin{proof}
+    Выпишем критерий Коши для ряда \eref{6322}:
+    $$ \forall \veps > 0 \quad \exist N : \forall m > n > N \quad \bigg| \sum_{k = n + 1}^m |a_k| \bigg| < \veps \qquad \iff \sum_{k = n + 1}^m |a_k| < \veps $$
+    $$ \bigg| \sum_{k = n + 1}^m a_k \bigg| \le \sum_{k = n + 1}^m |a_k| < \veps $$
+    Значит, ряд \eref{6321} сходится
+\end{proof}
+
+\section{Признак Абеля сходимости ряда}
+
+\begin{undefthm}{Преобразование Абеля}
+    Пусть имеется сумма $ \sum_{n = 1}^N a_nb_n $ \\
+    Определим числа следующим образом:
+    $$
+    \begin{cases}
+    	A_0 \define 0 \\
+        A_1 \define a_1 \\
+        A_2 \define a_1 + a_2 \\
+        \widedots[4em] \\
+        A_k \define a_1 + ... + a_k
+    \end{cases} \qquad \implies \qquad
+    \begin{cases}
+    	a_1 = A_1 - A_0 \\
+        a_2 = A_2 - A_1 \\
+        \widedots[3em] \\
+        a_k = A_k - A_{k - 1}
+    \end{cases} $$
+    Тогда наша сумма равна
+    \begin{multline*}
+        \sum_{n = 1}^N a_nb_n = \sum_{n = 1}^N (A_n - A_{n - 1})b_n = \sum_{n = 1}^N A_n b_n - \sum_{n = 1}^N A_{n - 1}b_n \underset{(k \define n - 1)}= \\
+        = \sum_{k = 1}^N A_nb_n - \sum_{k = 0}^{N - 1}A_kb_{k + 1} \underset{\left(
+            \begin{subarray}{c}
+                \text{в качестве счётчика суммы} \\
+                \text{можно взять любую букву}
+            \end{subarray} \right)}= \sum_{n = 1}^N A_nb_n - \sum_{n = 0}^{N - 1}A_nb_{n + 1} \underset{(A_0 \bydef 0)}= \\
+        = \sum_{n = 1}^N A_nb_n - \sum_{n = 1}^{N - 1}A_nb_{n + 1} = \bigg( A_Nb_N + \sum_{n = 1}^{N - 1}A_nb_n \bigg) - \sum_{n = 1}^{N - 1} A_nb_{n + 1} = \\
+        = A_Nb_N + \sum_{n = 1}^{N - 1}(A_nb_n - A_nb_{n + 1}) = A_Nb_N + \sum_{n = 1}^{N - 1}A_n(b_n - b_{n + 1})
+    \end{multline*}
+\end{undefthm}
+
+\begin{theorem}[признак Абеля]
+    \begin{equ}{6425}
+        \sum_{n = 1}^\infty a_nb_n
+    \end{equ}
+    \begin{equ}{6426}
+        \sum_{n = 1}^\infty a_n \text{ сходится}
+    \end{equ}
+    Последовательность $ \seq{b_n}n $ монотонна и ограничена \\
+    Тогда ряд \eref{6425} сходится
+\end{theorem}
+
+\begin{proof}
+    Выпишем критерий Коши для ряда \eref{6425}:
+    \begin{equ}{6429}
+        \forall \veps > 0 \quad \exist N : \forall m > n > N \quad \bigg| \sum_{k = n + 1}^m a_k \bigg| < \veps
+    \end{equ}
+    Положим
+    $$
+    \begin{cases}
+        A_1 \define a_{n + 1} \\
+        A_2 \define a_{n + 1} + a_{n + 2} \\
+        \widedots[5em] \\
+        A_k \define a_{n + 1} + ... + a_{n + k}
+    \end{cases} $$
+    Применим преобразование Абеля в наших обозначениях:
+    \begin{multline*}
+        \sum_{k = n + 1}^m a_kb_k = A_{m - n}b_m + \sum_{k = 1}^mA_k(b_{n + k} - b_{n + k + 1}) \implies \\
+        \implies \bigg| \sum_{k = n + 1}^m a_kb_k \bigg| \le |A_{m - n}| \cdot |b_m| + \sum_{k = 1}^{m - n - 1} |A_k| \cdot |b_{n + k} - b_{n + k + 1}| \underset{(\seq{b_n}n \text{ огр.})}\le \\
+        \le M \cdot | a_{n + 1} + ... + a_m| + \sum_{k = 1}^{m - n - 1} |a_{n + 1} + ... + a_{n + k}| \cdot |b_{n + k} - b_{n + k + 1}| \underset{\eref{6429}} M \cdot \veps + \sum_{k = 1}^{m - n - 1} \veps | b_{n + k} - b_{n + k + 1}| = \\
+        = M\veps + \veps \bigg| \sum_{k = 1}^{m - n - 1}(b_{n + k} - b_{n + k + 1}) \bigg| = M\veps + \veps|b_{n + 1} - b_m| \le M\veps + \veps(|b_{n + 1}| + |b_m|) \le 3\veps
+    \end{multline*}
+    Значит, при $ m > n > N $,
+    $$ \bigg| \sum_{k = n + 1}^m a_kb_k \bigg| < 3M\veps \implies \eref{6425} \text{ сходится} $$
+\end{proof}
+
+\section{Признак Дирихле сходимости ряда}
+
+\begin{theorem}
+    \begin{equ}{6530}
+        \sum_{n = 1}^\infty a_nb_n
+    \end{equ}
+    \begin{equ}{6531}
+        \exist L : \forall n \quad \bigg| \sum_{n = 1}^N a_n \bigg| \le L
+    \end{equ}
+    $ \seq{b_n}n $ монотонна, $ \quad b_n \underarr{n \to \infty} 0 $ \\
+    Тогда ряд \eref{6530} сходится
+\end{theorem}
+
+\begin{proof}
+	Будем пользоваться критерием Коши \\
+    Возьмём $ \forall \veps > 0 $ \\
+    По определению предела последовательности,
+    \begin{equ}{6534}
+    	\exist N : \forall n > N \quad |b_n| < \veps
+    \end{equ}
+    Возьмём $ \forall m > n > N $ \\
+    Выберем числа:
+    $$
+    \begin{cases}
+        A_1 \define a_{n + 1} \\
+        A_2 \define a_{n + 1} + a_{n + 2} \\
+        \widedots[4em] \\
+        A_k \define a_{n + 1} + ... + a_{n + k}
+    \end{cases} $$
+    Воспользуемся преобразованием Абеля:
+    \begin{equ}{6535}
+        \sum_{k = n + 1}^m a_kb_k = A_{m - n}b_m + \sum_{k = 1}^{m - n - 1} A_k(b_{n + k} - b_{n + k + 1})
+    \end{equ}
+    $$ A_k = (a_1 + ... + a_{n + k}) - (a_1 + ... + a_n) $$
+    \begin{multline*}
+        |A_k| \le |a_1 + ... + a_{n + k}| + |a_1 + ... + a_{n}| \underset{\eref{6531}}\le L + L = 2L \underimp{\eref{6535}} \\
+        \implies \bigg| \sum_{k = n + 1}^m a_kb_k \bigg| \le 2L \cdot |b_m| + \sum_{k = 1}^{m - n - 1} 2L |b_{k + n} - b_{k + n + 1}| = 2L \bigg( |b_m| + \bigg| \sum_{k = 1}^{m - n - 1}(b_{n + k} - b_{n + k + 1}) \bigg| \bigg) = \\
+        = 2L(|b_m| + |b_{n + 1} - b_m|) \le 2L(|b_m| + |b_{n + 1}| + |b_m|) \underset{\eref{6534}}< 6L\veps
+    \end{multline*}
+    Значит, \eref{6530} сходится
+\end{proof}
+
+\section{Сходимость знакопеременного ряда}
+
+\begin{definition}
+	Знакопеременным называется ряд вида
+    \begin{equ}{6637}
+        \sum_{n = 1}^\infty (-1)^{n - 1}b_n, \qquad b_n > 0
+    \end{equ}
+\end{definition}
+
+\begin{theorem}[признак сходимости знакопеременного ряда]
+    $ b_n $ монотонно убывает, $ \quad b_n \underarr{n \to \infty} 0 $ \\
+    Тогда ряд \eref{6637} сходится
+\end{theorem}
+
+\begin{proof}
+    Положим $ a_k \define (-1)^{k - 1} $ \\
+    Применим признак Дирихле
+    $$ \sum_{n = 1}^N (-1)^{n - 1} = 1 - 1 + 1 - ... + (-1)^{N - 1} = \left[
+    \begin{aligned}
+    	0 \\
+        1
+    \end{aligned} \right. $$
+\end{proof}
+
+\section({Пространство R\textasciicircum{}n; On; операции с X, X + Y, (X, Y); (cX, Y), (X, Y + Z)}){Пространство $ \R^n $; $ \On $; операции с $ X, X + Y, (X, Y) $; $ (cX, Y), (X, Y + Z) $}
+
+\begin{definition}
+	Пространством $ \R^n $ называется множество всех упорядоченных наборов из $ n $ вещественных чисел
+\end{definition}
+
+\begin{notation}
+	$ \On \define (0, ..., 0) $
+\end{notation}
+
+\begin{undefthm}{Арифметические операции}
+	Положим $ X \define (x_1, ..., x_n) $ и $ Y \define (y_1, ..., y_n) $
+    \begin{itemize}
+    	\item $ c \in \R \qquad cX \define (cx_1, ..., cx_n) $ \\
+        $ -X = (-1)X = (x_1, ..., -x_n) $
+        \item $ X + Y \define (x_1 + y_1, ..., x_n + y_n) $ \\
+        $ X - Y = X + (-1)Y $ \\
+        $ X - X = \On $
+        \item Скалярное произведение:
+        $$ (X, Y) \define x_1y_1 + ... + x_ny_n = (Y, X) $$
+    \end{itemize}
+\end{undefthm}
+
+\begin{props}
+	\item $ (cX, Y) = (X, cY) = c(X, Y) $
+    \item Возьмём $ Z = (z_1, ..., z_n) $
+    $$ (X, Y + Z) = x_1(y_1 + z_1) + ... + x_n(y_n + z_n) = (X, Y) + (X, Z) $$
+\end{props}
+
+\section({||X||; ||cX||, (X, X), ||X + Y|| <= ...; R\textasciicircum{}n как метрическое пространство}){$ \norm{X} $; $ \norm{cX}, (X, X), \norm{X + Y} \le ... $; $ \R^n $ как метрическое пространство}
+
+\begin{definition}
+    $ \norm{X} \define \sqrt{x_1^2 + ... + x_n^2} $
+\end{definition}
+
+\begin{remark}
+    $ (X, X) = \norm{X}^2 $
+\end{remark}
+
+\begin{property}
+	$ c \in \R $
+    $$ \norm{cX} = \sqrt{c^2x_1^2 + ... + c^2x_n^2} = |c|\sqrt{x_1^2 + ... + x_n^2} = |c| \cdot \norm{X} $$
+\end{property}
+
+\begin{statement}[неравенство треугольника]
+    $ \norm{X + Y} \le \norm{X} + \norm{Y} $
+\end{statement}
+
+\begin{proof}
+	Возьмём $ U \define X + Y $
+    \begin{itemize}
+    	\item Если $ U = \On $, то утверждение выполнено
+        \item $ U \ne \On \implies \norm{U} > 0 $ \\
+        Положим $ t \define \norm{U}, \qquad W \define \dfrac1t U $
+        \begin{equ}{682}
+            \norm{W} = \norm{\frac1tU} = \frac1t\norm{U} = 1
+        \end{equ}
+        \begin{multline*}
+        	\bigg( (X + Y), W \bigg) = (X, W) + (Y, W) \implies \bigg| \bigg( (X + Y), W \bigg) \bigg| \le \bigg| (X, W) \bigg| + \bigg| (Y, W) \bigg| \le \\
+            \le \norm{X} \cdot \norm{W} + \norm{Y} \cdot \norm{W} \underset{\eref{682}}= \norm{X} + \norm{Y}
+        \end{multline*}
+        С другой стороны,
+        $$ \bigg( (X + Y), W \bigg) = (U, W) = (U, \frac1tU) = \frac1t(U, U) = \frac1t \cdot \norm{U} \cdot \norm{U} \bydef \norm{U} \bydef \norm{X + Y} $$
+    \end{itemize}
+\end{proof}
+
+\begin{statement}
+	$ \R^n $ является метрическим пространством
+\end{statement}
+
+\begin{proof}
+	$ X, Y \in \R^n $ \\
+    Возьмём $ d(X, Y) \define \norm{X - Y} $ \\
+    Проверим, что $ d(X, Y) $ является метрикой:
+    \begin{itemize}
+    	\item $ d(X, Y) \ge 0, \qquad d(X, Y) = 0 \iff X = Y $
+        \item $ d(Y, X) = \norm{Y - X} = \norm{(-1)(X - Y)} = |-1| \cdot \norm{X - Y} = d(X, Y) $
+        \item Нужно проверить, что $ d(X, Z) \le d(X, Y) + d(Y, Z) $ \\
+        То есть, нужно проверить, что $ \norm{X - Z} \le \norm{X - Y} + \norm{Y - Z} $:
+        $$ X - Z = (X - Y) + (Y - Z) $$
+        $$ \norm{X - Z} \le \norm{X - Y} + \norm{Y - Z} $$
+    \end{itemize}
+\end{proof}
+
+\section{Шары \texorpdfstring{$ B_r(X) $}{}; открытые, замкнутые множества; характеристика замкнутых множеств}
+
+\begin{definition}
+	$ X \in \R^n, \qquad r > 0 $ \\
+    (Открытым) шаром называется
+    $$ B_r(X) \define \set{Y \in \R^n | \norm{Y - X} < r} $$
+\end{definition}
+
+\begin{definition}
+	$ E \sub \R^n, \qquad E \ne \O $ \\
+    Будем говорить, что множество $ E $ открыто, если
+    $$ \forall X \in E \quad \exist \omega(X) : \omega(X) \sub E $$
+    Пустое множество считаем открытым
+\end{definition}
+
+\begin{definition}
+	$ F \sub \R^n, \qquad F \ne \O $ \\
+    $ F $ замкнуто, если $ (\R^n \setminus F) $ открыто
+\end{definition}
+
+\begin{theorem}
+	$ F \sub \R^n, \qquad F \ne \O, \quad F \ne \R^n $
+    $$ F \text{ замкнуто } \iff \forall X_0 \text{ -- т. сг. } F \quad X_0 \in F $$
+\end{theorem}
+
+\begin{iproof}
+	\item $ \implies $ \\
+    Пусть $ F $ замкнуто, $ X_0 $ -- т. сг. $ F $ \\
+    Пусть $ X_0 \notin F $
+    $$ \implies X_0 \in \underbrace{(\R^n \setminus F)}_{\text{откр.}} \implies \exist \omega_0(X_0) \sub (\R^n \setminus F) \implies \omega_0(X_0) \cap F = \O \implies X_0 \text{ -- не т. сг. -- \contra} $$
+    \item $ \impliedby $ \\
+    Нужно доказать, что $ (\R^n \setminus F) $ открыто \\
+    Пусть это не так, т. е.
+    $$ \exist X_* \in (\R^n \setminus F) : \forall \omega(X_*) \not\sub (\R^n \setminus F) $$
+    Возьмём $ \omega_m(X_*) \define B_{\faktor1m}(X_*) $
+    $$ \exist X_m \in \omega_m(X_*) : X_m \notin (\R^n \setminus F) $$
+    То есть, $ X_m \in F $
+    $$
+    \begin{rcases}
+        \norm{X_m - X_*} < \frac1m \\
+        X_* \notin F
+    \end{rcases} \implies X_* \text{ -- т. сг. } F $$
+    Но $ X_* \notin F $ -- \contra
+\end{iproof}
+
+\section({Xm -> X0 <=> xkm -> xk0, 1 <= k <= n}){$ X_m \to X_0 \iff x_{km} \to x_{k0}, 1 \le k \le n $}
+
+\begin{remind}
+    Рассмотрим последовательность $ \seq{Y_m}m, \qquad Y_m \in \R^n $
+    $$ Y_m = (y_{1m}, ..., y_{nm}) $$
+    Возьмём $ X \in \R^n $ \\
+    Вспомним определение предела последовательности:
+    $$ Y_m \underarr{m \to \infty} X \iff \forall \veps > 0 \exist M : \forall m > M \quad \norm{Y_m - X} < \veps $$
+\end{remind}
+
+\begin{statement}
+    $$ Y_m \underarr{m \to \infty} X \iff \forall k = 1, ..., n \quad y_{km} \underarr{n \to \infty} x_k $$
+\end{statement}
+
+\begin{iproof}
+	\item $ \implies $ \\
+    Возьмём $ 1 \le k \le n $
+    $$ |y_{km} - x_k| \le \sqrt{(y_{1m} - x_1)^2 + \widedots[3em] + (y_{nm} - x_m)^2} < \veps \implies y_{km} \underarr{m \to \infty} x_k $$
+    \item $ \impliedby $
+    \begin{equ}{708}
+        \forall k = 1, ..., n \quad \exist M_k : \forall m > M_k \quad |y_{km} - x_k| < \frac\veps{\sqrt{n}}
+    \end{equ}
+    Возьмём $ M \define \max\limits_{1 \le k \le n} M_k $
+    $$ \norm{Y_m - X} = \sqrt{(y_{1m} - x)^2 + \widedots[3em] + (y_{nm} - x_n)^2} \underset{\eref{708}}< \underbrace{\sqrt{\frac{\veps^2}n + ... + \frac{\veps^2}n}}_{n \text{ слагаемых}} = \veps $$
+\end{iproof}
+
+\section{Принцип выбора Больцано-Вейерштрасса}
+
+\begin{theorem}
+    $ \seq{X_m}m, \quad X_m \in \R^n $
+    \begin{equ}{7112}
+        \exist R : \forall m \quad \norm{X_m} \le R
+    \end{equ}
+    $$ \implies
+    \begin{Bmatrix}
+        \exist \seq{X_{m_\nu}}\nu \\
+        \exist X_* \in \R^n
+    \end{Bmatrix} : X_{m_\nu} \underarr{\nu \to \infty} X_* $$
+\end{theorem}
+
+\begin{proof}
+    $ X_m = (x_{1m}, ..., x_{nm}) $
+    $$ \eref{7112} \implies \forall 1 \le k \le n \quad \forall m \ge 1 \quad |x_{km}| \le R $$
+    Получили, что последовательность $ \seq{x_{km}}m $ ограничена сверху
+    \begin{itemize}
+        \item Значит, можно применить принцип выбора Больцано-Вейерштрасса для вещественных чисел:
+        \begin{equ}{7115}
+            \begin{rcases}
+                \exist \seq{x_{1m_l}}l \\
+                \exist x_{1*} \in \R
+            \end{rcases} : x_{1m_l} \underarr{l \to \infty} x_{1*}
+        \end{equ}
+        Переобозначим $ \seq{x_{ml}}l $ как $ \seq{x_l}l $:
+        $$ x_l \define (x_{1l}, ..., x_{nl}) $$
+        \item Рассмотрим последовательность $ \seq{x_{2l}}l $ \\
+        Применим к ней принцип выбора Больцано-Вейерштрасса:
+        $$
+        \begin{rcases}
+            \exist \seq{x_{2l_\mu}}\mu \\
+            \exist x_{2*} \in \R
+        \end{rcases} : x_{2l_\mu} \underarr{\mu \to \infty} x_{2*} $$
+        $$ \eref{7115} \implies x_{1l_\mu} \underarr{\mu \to \infty} x_{1*} $$
+        Ещё раз упростим обозначения: вместо $ x_{nl_\mu} $ будем писать $ x_{n\nu} $ \\
+        \widedots
+        \item Дошли до последовательности $ \seq{x_q}q $ \\
+        Уже существуют $ x_{1*}, ..., x_{n - 1*} $ такие, что
+        \begin{equ}{7118}
+            \begin{cases}
+                x_{1q} \to x_{1*} \\
+                \widedots[3em] \\
+                x_{n - 1, q} \to x_{n - 1*}
+            \end{cases}
+        \end{equ}
+        Рассмотрим последовательность $ \seq{x_{nq}}q $
+        $$ |x_{nq}| \le R $$
+        Применим к ней принцип выбора Больцано-Вейерштрасса:
+        $$
+        \begin{rcases}
+            \exist \seq{x_{q\nu}}\nu \\
+            \exist x_{n*} \in \R
+        \end{rcases} : x_{nq_\nu} \underarr{\nu \to \infty} x_{n*} $$
+        Добавим эту подпоследовательность к \eref{7118}:
+        $$
+        \begin{cases}
+            x_{1q_\nu} \to x_{1*} \\
+            \widedots[3em] \\
+            x_{nq_\nu} \to x_{n*}
+        \end{cases} $$
+        Значит,
+        $$ X_{q_\nu} \to X_*, \qquad X_* = (x_{1*}, ..., x_{n*}) $$
+    \end{itemize}
+\end{proof}
+
+\section({Определение предела функции в R\textasciicircum{}n}){Определение $ f(X) \underarr{X \to X_0} A, X_0 \in \R^n $}
+
+\begin{undefthm}{Функции от нескольких переменных}
+	$ E \sub \R^n, \qquad E \ne \O, \qquad f : E \to \R, \qquad n \ge 2 $ \\
+    Будем говорить, что $ f $ -- функция от $ n $ переменных \\
+    Её значение записывается в виде $ f(x_1, ..., x_n) $ \\
+    Если $ X = (x_1, ..., x_n) $, то можно писать $ f(X) $
+\end{undefthm}
+
+\begin{definition}
+	$ X_0 $ -- т. сг. $ E, \qquad A \in \R $
+    $$ f(X) \underarr{X \to X_0} A \iff \forall \veps > 0 \quad \exist \omega(X_0) : \forall \underset{X \ne X_0}{X \in E \cap \omega(X_0)} \quad |f(X) - A| < \veps $$
+\end{definition}
+
+\section{Связь предела функции с пределами последовательностей}
+
+\begin{theorem}
+	$ X_0 $ -- т. сг. $ E \sub \R^n, \qquad f : E \to \R $
+    $$ \exist \liml{X \to X_0} f(X) = A \in \R^n \iff \forall \seq{X_m}m :
+    \begin{cases}
+    	X_m \to X_0 \\
+        \forall m \quad X_m \ne X_0
+    \end{cases} \qquad f(X_m) \underarr{m \to \infty} A $$
+\end{theorem}
+
+\begin{iproof}
+	\item $ \implies $
+    \begin{multline*}
+        \begin{rcases}
+            \liml{X \to X_0} f(X) = A \bydef[\iff] \forall \omega(A) \quad \exist \Omega(X_0) : \forall \underset{X \ne X_0}{X \in \Omega(\alpha)} \quad f(X) \in \omega(A) \\
+            X_m \to X_0 \bydef[\iff] \exist N : \forall m > N \quad X_m \in \Omega(X_0)
+        \end{rcases} \implies \\
+        \implies \forall m > N \quad f(X_m) \in \omega(A) \bydef[\iff] f(X_m) \to A
+    \end{multline*}
+    \item $ \impliedby $ \\
+    Пусть неверно, что $ \liml{X \to X_0} f(X) = A $, т. е.
+    $$ \exist \omega_0(A) : \forall \vawe{\Omega}(X_0) \quad \exist \underset{X \ne X_0}{X \in \vawe{\Omega}(X_0)} : f(X) \notin \omega_0(A) $$
+    Это будет верно, в том числе, для
+    $$ \Omega_{\faktor1n}(X_0) \define \set{X \in \R^n | \norm{X - X_0} < \dfrac1n} $$
+    То есть,
+    $$ \exist \omega_0(A) : \exist \underset{X \ne X_0}{X \in \Omega_{\faktor1n}}(X_0) : f(X) \notin \omega_0(A) $$
+    В том числе,
+    $$ \exist X_m \in \Omega_{\faktor1n}(X_0) : f(X_m) \notin \omega_0(A) \bydef[\iff] \lim f(X_m) \ne A \quad \contra \quad f(X_m) \to A $$
+\end{iproof}
+
+\section({f -> A => cf -> cA; f -> A, g -> B => f + g -> A + B, fg -> AB; f -> A => 1/f -> 1/A; f -> A, g -> B => g/f -> B/A}){$ f \to A \implies cf \to cA $; $ f \to A, g \to B \implies f + g \to A + B, fg \to AB $; $ f \to A \implies \frac1f \to \frac1A $; $ f \to A, g \to B \implies \frac{g}f \to \frac{B}A $}
+
+\begin{props}
+	\item $ c \in \R $
+    $$ f \to A \implies cf \to A $$
+    \item $
+    \begin{rcases}
+    	f \to A \\
+        g \to B
+    \end{rcases} \implies
+    \begin{cases}
+    	f + g \to A + B \\
+        fg \to AB
+    \end{cases} $
+    \item $ g(X) \ne 0, \qquad X \in E, \qquad B \ne 0 $
+    $$ g \to B \implies \frac1g \to \frac1B $$
+    $$
+    \begin{rcases}
+    	f \to A \\
+        g \to B
+    \end{rcases} \implies \frac{f}g \to \frac{A}B $$
+\end{props}
+
+\section({Определение F(X) -> a при X -> X0, X из E из R\textasciicircum{}n, a из R\textasciicircum{}q}){Определение $ F(X) \underarr{X \to X_0} \alpha, X \in E \sub \R^n, \alpha \in \R^q $}
+
+\begin{undefthm}{Координатные функции}
+	$ E \sub \R^n, \qquad n \ge 1, \qquad F : E \to \R^q, \qquad q \ge 2 $ \\
+    Можно записать $ F(X) $ как $ F(X) = \bigg( f_1(X), ..., f_q(X) \bigg) $ \\
+    $ f_1, ..., f_q $ называются координатными функциями $ F(X) $
+\end{undefthm}
+
+\begin{definition}
+	$ X_0 $ -- т. сг. $ E \sub \R^n, \qquad \alpha \in \R^q $
+    $$ F(X) \underarr{X \to X_0} \alpha \iff \forall \veps > 0 \quad \exist \delta : \forall \underset{X \ne X_0}{X \in E} : \norm{X - X_0}_n < \delta \quad \norm{F(X) - \alpha}_q < \veps $$
+\end{definition}
+
+\section({F = (f1, ..., fq); F(X) a при X -> X0 <=> fv(X) -> av при X -> X0, 1 <= v <= q}){$ F = (f_1, ..., f_q) $; $ F(X) \underarr{X \to X_0} \alpha \iff f_\nu(X) \underarr{X \to X_0} \alpha_\nu, 1 \le \nu \le q $}
+
+\begin{statement}
+    $ \alpha = (\alpha_1, ..., \alpha_q), \qquad \alpha_\nu \in \R $
+    $$ F(X) \underarr{X \to X_0} \alpha \iff \forall 1 \le \nu \le q \quad f_\nu(X) \underarr{X \to X_0} \alpha_\nu $$
+\end{statement}
+
+\begin{iproof}
+	\item $ \implies $ \\
+    Воспользуемся определением предела отображения:
+    $$ \forall \veps > 0 \quad \exist \delta > 0 : |f_\nu(X) - \alpha_\nu| \le \norm{F(X) - \alpha}_q < \veps $$
+    \item $ \impliedby $ \\
+    Воспользуемся правой частью утверждения:
+    \begin{equ}{7625}
+        \forall \veps > 0 \quad \exist \delta > 0 : \forall \underset{X \ne X_0}{X \in E} : \norm{X - X_0}_n < \delta_n \qquad |f_\nu(X) - \alpha_\nu| < \frac\veps{\sqrt{q}}
+    \end{equ}
+    Положим $ \delta \define \min\limits_{1 \le \nu \le q} \delta_\nu $
+    $$ \norm{F(X) - \alpha}_q \bydef \sqrt{\bigg( f_1(X) - \alpha \bigg)^2 + \widedots[3em] + \bigg( f_q(X) - \alpha_q \bigg)^2} \underset{\eref{7625}}< \sqrt{\frac{\veps^2}q + ... + \frac{\veps^2}q} = \veps $$
+\end{iproof}
+
+\section({Непрерывность функции в точке; f непр. в X0 => cf непр. в X0; f, g непр. в X0 => f + g, fg непр. в X0; f непр. в X0 => 1/f непр. в X0; g/f непр. в X0}){Непрерывность функции $ f $ в точке $ X_0 \in \R^n $; $ f $ непр. в $ X_0 \implies cf $ непр. в $ X_0 $; $ f, g $ непр. в $ X_0 \implies f + g, fg $ непр. в $ X_0 $; $ f $ непр. в $ X_0 \implies \frac1f $ непр. в $ X_0 $; $ \frac{g}f $ непр. в $ X_0 $}
+
+\begin{definition}
+    $ E \sub \R^{n \ge 1}, \qquad f : E \to \R, \qquad X_0 \in E $ -- т. сг. $ E $ \\
+    Будем говорить, что $ f $ непр. в $ X_0 $, если $ \exist \liml{X \to X_0} f(X) = f(X_0) $
+\end{definition}
+
+\begin{properties}
+	$ E \sub \R^n, \quad n \ge 1, \qquad X_0 \in E $ -- т. сг. $ E, \qquad c \in \R $
+    \begin{enumerate}
+    	\item $ f $ непр. $ \implies cf $ непр.
+        \item $ f, g $ непр. $ \implies f + g, fg $ непр.
+        \item $ \forall X \in E \quad f(X) \ne 0, \quad g $ непр. $ \implies \dfrac1g $ непр.
+        \item $ g $ как в предыдущем пункте, $ \quad f $ непр. $ \implies \dfrac{f}g $ непр.
+    \end{enumerate}
+\end{properties}
+
+\section({F : E -> R\textasciicircum{}q, E из R\textasciicircum{}n, F = (f1, ..., fq); определение непрерывности F в X0; F непр. в X0 <=> fn непр. в X0}){$ F : E \to \R^q, E \sub \R^n, F = (f_1, ..., f_q) $; определение непрерывности $ F $ в $ X_0 $; $ F $ непр. в $ X_0 \iff f_\nu $ непр. в $ X_0 $}
+
+\begin{definition}
+    $ F : E \to \R^{q \ge 2} $ \\
+    Будем говорить, что $ F $ непр. в $ X_0 $, если $ \exist \liml{X \to X_0} F(X) = F(X_0) $
+\end{definition}
+
+\begin{statement}
+	$ F $ непр. в $ X_0 \iff \forall \nu = 1, ..., q \quad f_\nu(X) $ непр. в $ X_0 $
+\end{statement}
+
+\begin{iproof}
+    \item $ F $ непр. $ \implies \exist \liml{X \to X_0} f_\nu(X) = \alpha_\nu = f_\nu(X_0) $
+    \item В обратную сторону -- так же
+\end{iproof}
+
+\section({F : E -> R\textasciicircum{}q, Ф : G -> R\textasciicircum{}l, F непр. в X0, Ф непр. в Y0 => Ф(F) непр. в X0}){$ F : E \to \R^q, \Phi : G \to \R^l, F $ непр. в $ X_0, \Phi $ непр. в $ Y_0 \implies \Phi(F) $ непр. в $ X_0 $}
+
+\begin{theorem}
+    $ A \in E \sub \R^{n \ge 1} $ -- т. сг. $ E, \qquad \alpha \in G \sub \R^{k \ge 1} $ -- т. сг. $ G, \qquad F : E \to \R^k $ \\
+    $ \forall x \in E \quad F(X) \in G, \qquad F(A) = \alpha, \qquad F $ непр. в $ A, \qquad \Phi : G \to \R^{l \ge 1}, \qquad \Phi $ непр. в $ \alpha $ \\
+    $ K : E \to \R^l, \qquad K(X) = \Phi \big( F(X) \big) $ \\
+    Тогда $ K $ непр. в $ A $
+\end{theorem}
+
+\begin{proof}
+	Выпишем определение непрерывности $ \Phi $ (подставив определение предела):
+    \begin{equ}{782}
+        \forall \veps > 0 \quad \exist \mu > 0 : \forall Y \in B_\mu(\alpha) \cap G \quad \norm{\Phi(Y) - \Phi(\alpha)}_l < \veps
+    \end{equ}
+    Сделаем то же самое для $ F $ (взяв $ \mu $ в качестве $ \veps $):
+    \begin{multline*}
+        \exist \delta > 0 : \forall X \in B_\delta(A) \cap E \quad \underbrace{\norm{F(X) - F(A)}_k < \mu}_{\iff F(X) \in B_\mu \big( F(A) \big) \bydef B_\mu(\alpha) \cap G} \underimp{\eref{782}} \\
+        \implies \forall X \in B_\delta(A) \cap E \quad \norm{\Phi \big( F(X) \big) - \Phi(\alpha)}_l < \veps \underset{\big( F(A) \bydef \alpha \big)}\iff \norm{\Phi \big( F(X) \big) - \Phi \big( F(A) \big)}_l < \veps \iff \\
+        \iff \norm{K(X) - K(A)}_l < \veps
+    \end{multline*}
+\end{proof}
+
+\section{Определение внутренних, внешних, граничных точек}
+
+\begin{definition}
+    $ E \sub \R^{n \ge 1}, \qquad X_0, X_1, X_2 \in E $
+    \begin{itemize}
+    	\item $ X_0 $ будем называть внутренней точкой $ E $, если $ \exist B_r(X_0) \sub E $
+        \item $ X_1 $ будем назвыать внешней точкой $ E $, если $ B_\delta(X_1) \cap E = \O $
+        \item $ X_2 $ будем называть граничной точкой $ E $, если она не внутренняя и не внешняя
+    \end{itemize}
+\end{definition}
+
+\section{Первая теорема Вейерштрасса}
+
+\begin{theorem}
+    $ K $ -- компакт в $ \R^{n \ge 1}, \qquad f : K \to \R^n, \qquad f $ непр. во всех т. сг. \\
+    Тогда $ f $ ограничена, т. е.
+    $$ \exist M : \forall X \in K \quad |f(X)| \le M $$
+\end{theorem}
+
+\begin{proof}
+	Пусть это не так, т. е.
+    \begin{equ}{807}
+        \forall N \ge 2 \quad \exist X_N \in K : |f(X_N)| > |f(X_1)| + ... + |f(X_{N - 1})| + N, \qquad |f(X_1)| > 1
+    \end{equ}
+    Отсюда следует, что $ \forall p \ne q \quad X_p \ne X_q $ (т. к. каждая следующая больше предыдущей) \\
+    Поскольку они все принадлежат $ K $, а $ K $ -- ограниченное мн-во, то
+    $$ \exist R > 0 : \forall N \quad \norm{X_N} \le R $$
+    Значит, можно применить принцип выбора Больцано-Вейерштрасса:
+    \begin{equ}{809}
+        \begin{rcases}
+            \exist \seq{X_{N_m}}m \\
+            \exist X_*
+        \end{rcases} : X_{N_m} \underarr{mm \to \infty} X_*
+    \end{equ}
+    \begin{intuition}
+        $ X_{N_m} \in K $
+    \end{intuition}
+    Поскольку они все различны,
+    $$ X_* \text{ -- т. сг. } K \underimp{(K \text{ замкн.})} X_* \in K $$
+    Возьмём $ \veps = 1 $ \\
+    В силу непрерывности $ f $ в $ X_* $,
+    \begin{equ}{8010}
+        \exist \delta_0 : \forall X \in K \cap B_{\delta_0}(X_*) \quad |f(X) - f(X_*)| < 1
+    \end{equ}
+    При этом,
+    $$ \eref{809} \implies \exist N_1 : \forall m > N_1 \quad X_{N_m} \in B_{\delta_0}(X_*) $$
+    То есть,
+    \begin{equ}{8013}
+        \forall m > N_1 \quad |f(X_{N_m}) - f(X_*)| < 1
+    \end{equ}
+    $$ |f(X)| \trile |f(X) - f(X_*)| + |f(X_*)| \underset{\eref{8010}}< 1 + |f(X_*)| $$
+    Возьмём $ N_0 > 1 + |f(X_*)| $ \\
+    Возьмём $ N_{m_0} \define \max\set{N_0, N_1 + 1} $
+    $$ |f(X_{N_{m_0}})| \underset{\eref{807}}> N_{m_0} \bydef[\ge] N_0 \bydef[>] |f(X_*)| + 1 $$
+    С другой стороны,
+    $$ |f(X_{N_{m_0}})| \underset{\eref{8013}}< |f(X_*)| + 1 $$
+\end{proof}
+
+\section{Вторая теорема Вейерштрасса}
+
+\begin{theorem}
+	$ K \sub \R^n $ -- компакт, $ \qquad f : K \to \R^n $ непр. во всех т. сг. $ K $ \\
+    Тогда
+    $$ \exist X_-, X_+ \in K : \forall X \in K \quad f(X_-) \le f(X) \le f(X_+) $$
+\end{theorem}
+
+\begin{iproof}
+	\item $ X_+ $ \\
+    Пусть такого $ X_+ $ не существует \\
+    По первой теореме Вейерштрасса,
+    $$ \exist M : \forall X \in K \quad f(X) \le M $$
+    То есть,
+    \begin{equ}{8120}
+        \sup\limits_{X \in K} f(X) \define M_0 \le M \bydef[\iff] \forall X \in K \quad f(X) \le M_0
+    \end{equ}
+    Положим
+    $$ \vphi(X) \define \frac1{M_0 - f(X)} $$
+    $$ \eref{8120} \implies \forall X \in K \quad \vphi(X) > 0 $$
+    Значит, $ \vphi $ непр. во всех т. сг. $ K $ \\
+    По первой теореме Вейерштрасса, $ \vphi $ ограничена, т. е.
+    \begin{multline*}
+        \exist L : \forall X \in K \quad \vphi(X) \le L \bydef[\iff] \frac1{M_0 - f(X)} \le L \iff M_0 - f(X) \ge \frac1L \iff f(X) \le M_0 - \frac1L \implies \\
+        \implies \sup\limits_{X \in K} f(X) \le M_0 - \frac1L \bydef[\iff] \sup f(X) \le \sup f(X) - \frac1L \text{ -- \contra}
+    \end{multline*}
+    \item $ X_- $ \\
+    Рассмотрим $ g(X) \define -f(X) $ \\
+    По только что доказанному,
+    $$ \exist X_- : g(X) \le g(X_-) \iff -f(X) \le -f(X_-) \iff f(X) \ge f(X_-) $$
+\end{iproof}
+
+\section({Определение fx'(X0); пример (x1x2)/(x1\textasciicircum{}2 + x2\textasciicircum{}2)}){Определение $ f_x'(X_0) $; пример $ \frac{x_1x_2}{x_1^2 + x_2^2} $}
+
+\begin{notation}
+    $ e_k \define (0, ..., \underset{k \text{ место}}1, ..., 0) $
+\end{notation}
+
+\begin{definition}
+    $ E \sub \R^{n \ge 2}, \qquad X = (x_1, ..., x_n) \in E $ -- внутр. т. $ E, \qquad f : E \to \R $
+    $$ \exist \delta : \forall \underset{h \ne 0}{|h| < \delta} \quad \forall k = 1, ..., n \quad X + he_k \in E $$
+    Частной производной по переменной $ x_k $ называется
+    $$ f_{x_k}'(X) \define \limz{h} \frac{f(X + he_k) - f(X)}h $$
+\end{definition}
+
+\begin{remark}
+    Рассмотрим $ g(y) \define (x_1, ..., \underset{k \text{ место}}y, ..., x_n), \qquad y \in (x_k - \delta, x_k + \delta) $
+    $$ g'(x_k) = f_{x_k}'(X) $$
+\end{remark}
+
+\begin{eg}
+	$$ f(x_1, x_2) \define
+    \begin{cases}
+        \dfrac{x_1x_2}{x_1^2 + x_2^2}, \qquad (x_1, x_2) \ne \On[2] \\ \\
+        f(\On[2]) = 0
+    \end{cases} $$
+    Найдём частные производные в $ \On[2] $:
+    $$
+    \begin{cases}
+    	(0, 0) + he_1 = (h, 0) \\
+        (0, 0) + he_2 = (0, h)
+    \end{cases} $$
+    $$
+    \begin{rcases}
+        \dfrac{f(\On[2] + he_1) - f(\On[2])}h = \dfrac{0 - 0}h = 0 \underarr{h \to 0} 0 \\ \\
+        \dfrac{f(\On[2] + he_2) - f(\On[2])}h = \dfrac{0 - 0}h = 0 \underarr{h \to 0} 0
+    \end{rcases} \implies \exist f_{x_1}'(\On[2]), ~ f_{x_2}'(\On[2]) $$
+    Положим $ X_n \define \bigg( \dfrac1n, \dfrac1n \bigg) $
+    \begin{intuition}
+        $ X_n \underarr{n \to \infty} \On[2] $
+    \end{intuition}
+    $$ f(X_n) = \frac{\faktor1{n^2}}{\faktor2{n^2}} = \half \underarr{n \to \infty} \half $$
+\end{eg}
+
+\section{Определение дифференцируемости функции, дифференциал \texorpdfstring{\\}{} функции; непрерывность дифференцируемой функции}
+
+\begin{definition}
+    $ E \sub \R^{n \ge 1}, \qquad X \in E $ -- внутр. т., $ \qquad f : E \to \R $ \\
+    Будем говорить, что $ f $ дифференцируема в $ X $, если
+    $$ \exist a_1, ..., a_n \in \R : \forall
+    \begin{cases}
+    	H \in \R^2 \\
+        X + H \in E \\
+        H = (h_1, ..., h_n)
+    \end{cases} \qquad f(X + H) - f(X) = a_1h_1 + ... + a_nh_n + r(H) $$
+    $$ \frac{r(H)}{\norm{H}} \underarr{H \to \On} 0 $$
+\end{definition}
+
+\begin{definition}
+	Дифференциалом функции $ f $ в точке $ X $ при значении $ H $ называется
+    $$ f(X + H) - f(X) = f_{x_1}'(X)h_1 + \widedots[3em] + f_{x_n}'(X)h_n + r(H) $$
+\end{definition}
+
+\begin{notation}
+    $ \di f(X, H) \define f_{x_1}'(X)h_1 + \widedots[3em] + f_{x_n}'(X)h_n + r(H) $
+\end{notation}
+
+\begin{theorem}
+	$ f $ диффер. в $ X \implies f $ непр. в $ X $ и
+    $$ \forall k = 1, ..., n \quad \exist f_{x_k}'(X) = a_k $$
+\end{theorem}
+
+\begin{iproof}
+	\item Непрерывность \\
+    Выберем $ \veps = 1 $ \\
+    По определению дифференцируемости и предела функции,
+    $$ \exist \delta > 0 : \forall 0 < \norm{H} < \delta \quad \bigg| \frac{r(H)}{\norm{H}} \bigg| < 1 $$
+    То есть,
+    \begin{equ}{834}
+        |r(H)| < \norm{H}
+    \end{equ}
+    Обозначим $ A \define \sqrt{a_1^2 + ... + a_n^2} $ \\
+    Применим неравенство КБШ:
+    \begin{equ}{835}
+        |a_1h_1 + ... + a_nh_n| \le A \norm{H}
+    \end{equ}
+    \begin{multline*}
+        |f(X + H) - f(X)| \underset{f \text{ дифф.}}= |a_1h_1 + ... + a_nh_n + r(H)| \trile |a_1h_1 + ... + a_nh_n| + |r(H)| \underset{\eref{834}, \eref{835}}\le \\
+        \le A\norm{H} + \norm{H} \underarr{H \to \On} 0
+    \end{multline*}
+    Тем самым, непрерывность доказана
+    \item Соотношение \\
+    Возьмём $ \forall k = 1, ..., $ \\
+    Пусть $ H_k \define he_k $ \\
+    Тогда $ \norm{H_k} = |h| $ \\
+    Воспользуемся определением дифференцируемости:
+    $$ f(X + H_k) - f(X) = a_kh + r(H_k) \implies \frac{f(X + H_k) - f(X)}h = a_k + \frac{r(H)}h $$
+    По определению дифференцируемости,
+    $$ \bigg| \frac{r(H)}h \bigg| = \bigg| \frac{r(H_k)}{\norm{H_k}} \bigg| \underarr{h \to 0} 0 $$
+    Значит,
+    $$ \frac{f(X + H_k) - f(X)}h \underarr{h \to 0} a_k $$
+    Этот предел и определяет частную производную
+\end{iproof}
+
+\section{Производная по направлению; градиент}
+
+\begin{definition}
+    $ \nu \in \R^{n \ge 2}, \qquad \norm{\nu} = 1, \qquad \nu = a_1e_1 + ... + a_ne_n $ \\
+    Частной производной по направлению $ \nu $ называется
+    $$ f_\nu'(X) \define \limz{h} \frac{f(X + h\nu) - f(X)}h $$
+\end{definition}
+
+\begin{definition}
+	$ f $ дифференцируема в $ X $ \\
+    Градиентом $ f $ называется вектор-строка
+    $$ \grad f \define \bigg( f_{x_1}'(X), \widedots[3em], f_{x_n}'(X) \bigg) $$
+\end{definition}
+
+\section{Необходимое условие локального экстремума}
+
+\begin{theorem}
+    $ X \in E \sub \R^{n \ge 2}, \qquad X $ -- внутр. т., $ \qquad f : E \to \R, \qquad f $ дифференц. в $ X $ \\
+    $ X $ -- т. лок. экстремума
+    $$ \implies \grad f(X) = \On $$
+\end{theorem}
+
+\begin{proof}
+	Возьмём $ \forall 1 \le k \le n $ \\
+    Вспомним определние частной производной:
+    $$ \exist \delta > 0 : \forall |h| < \delta \quad X + he_k \in E $$
+    Зафиксируем $ k $ (так, что $ x_k $ -- т. лок. экстремума) и рассмотрим функцию
+    $$ g(y) \define f(x_1, ..., \underset{k \text{ место}}y, ..., x_n), \qquad y \in (x_k - \delta, x_k + \delta) $$
+    $$ \exist g'(x_k) = f_{x_k}'(X) $$
+    По теореме Ферма,
+    $$ g'(x_k) = 0 \implies f_{x_k}(X) = 0 $$
+\end{proof}
+
+\section({Дифференцируемость отображения; F = [f1 ... fq], F дифференцируема в X <=> fv дифференцируема в X, 1 <= v <= q}){Дифференцируемость отображения; $ F = [f_1 ... f_q], F $ дифференцируема в $ X \iff f_\nu $ дифференцируема в $ X, 1 \le \nu \le q $}
+
+\begin{definition}
+    $ E \sub \R^{n \ge 1}, \qquad x \in E $ -- внутр. т., $ \qquad F : E \to \R^{k \ge 2} $ \\
+    Говорят, что $ F $ дифференцируемо, если
+    \begin{equ}{861}
+        \forall \underset{H \ne \On}{H \in \R^n} : X + H \in E \qquad F(X + H) - F(X) = L(X) + r(H)
+    \end{equ}
+    где $ L : \R^n \to \R^k $ -- линейное и
+    $$ \frac{\norm{r(H)}_k}{\norm{H}_n} \underarr{H \to \On} 0 $$
+\end{definition}
+
+\begin{remind}
+	$ L $ -- линейное, если
+    \begin{equ}{863}
+        \exist A_{k \times n} : L(H) = AH
+    \end{equ}
+\end{remind}
+
+Представим $ F $ в виде
+$$ F(Y) = \column{f_1(Y)}{f_k(Y)} $$
+
+\begin{statement}
+	$ F $ дифференцируемо в $ X $ тогда и только тогда, когда каждая координатная функция $ f_1, ..., f_k $ дифференцируема в $ X $
+\end{statement}
+
+\begin{iproof}
+	\item $ \implies $ \\
+    Пусть $ F $ дифференцируема \\
+    Умножим \eref{861} слева на $ e_j $:
+    \begin{equ}{865}
+        e_j \big( F(X + H) - F(X) \big) = e_j L(H) + e_jr(H) \underset{\eref{863}} e_j(AH) + e_jr(H)
+    \end{equ}
+    Посмотрим на левую часть:
+    \begin{equ}{866}
+        e_j \big( F(X + H) - f(X) \big) = e_j \cdot \left( \column{f_1(X + H)}{f_k(X + H)} - \column{f_1(X)}{f_k(X)} \right) = f_j(X + H) - f_i(X)
+    \end{equ}
+    Обозначим
+    $$ A \define
+    \begin{bmatrix}
+        a_{11} & ... & a_{1n} \\
+        . & . & . \\
+        a_{k1} & ... & a_{kn}
+    \end{bmatrix} $$
+    Умножим $ e_j $ на $ A $:
+    $$ e_jA = (0, ..., 1, ..., 0) \cdot
+    \begin{bmatrix}
+        a_{11} & ... & a_{1n} \\
+        . & . & . \\
+        a_{k1} & ... & a_{kn}
+    \end{bmatrix} = (a_{j1}, ..., a_{jn}) $$
+    Обозначим $ H \define \column{h_1}{h_n} $ \\
+    Посмотрим на правую часть \eref{865}:
+    \begin{equ}{867}
+        e_j(AH) = (a_{j1}, ..., a_{jn}) \cdot \column{h_1}{h_n} = a_{j1}h_1 + ... + a_{jn}h_n
+    \end{equ}
+    Обозначим $ r(H) \define \column{r_1(H)}{r_n(H)} $
+    \begin{equ}{868}
+    	e_jr(H) = r_j(H)
+    \end{equ}
+    Соберём всё это вместе:
+    \begin{multline*}
+        \begin{rcases}
+            \underbrace{f_j(X + H) - f_j(X)}_{\eref{866}} = \underbrace{a_{j1}h_1 + ... + a_{jn}h_n}_{\eref{867}} + \underbrace{r_j(H)}_{\eref{868}} \\ \\
+            \dfrac{|r_j(H)|}{\norm{H}_n} \le \dfrac{\norm{r(H)}_k}{\norm{H}_n} \underarr{H \to \On} 0
+        \end{rcases} \implies f_j \text{ дифф. в } X \implies \\
+        \implies \forall l = 1, ..., n \quad \exist f_{jx_i}'(X) = a_{jl}
+    \end{multline*}
+    $$ A =
+    \begin{bmatrix}
+        f_{1x_1}'(X) & ... & f_{1x_n}'(X) \\
+        . & . & . \\
+        f_{kx_1}'(X) & ... & f_{kx_n}'(X)
+    \end{bmatrix} $$
+    Эта матрица называется матрицей Якоби
+    \begin{notation}
+        $ A = \mathcal{D}F(X) $
+    \end{notation}
+    Теперь можно записать:
+    $$ F(X + H) - F(X) = \mathcal{D}F(X)H + r(H) $$
+    \item $ \impliedby $ \\
+    Пусть все координатные функции дифференцируемы \\
+    Запишем это при помощи градиента:
+    $$ f_l(X + H) - f_l(X) = \grad f_l(X)H + r_l(H), \qquad 1 \le l \le k $$
+    Запишем это всё в столбик:
+    \begin{multline*}
+        \begin{rcases}
+        	f_1(X + H) - f_l(X) = \grad f_1(X)H + r_1(H) \\
+            \widedots[15em] \\
+            f_k(X + H) - f_k(X) = \grad f_k(X)H + r_k(H)
+        \end{rcases} \iff \\
+        \iff F(X + H) - F(X) = \column{\grad f_1(X)}{\grad f_k(X)} \cdot H + \column{r_1(H)}{r_k(H)}
+    \end{multline*}
+    Заметим, что это -- матрица Якоби, т. е.
+    $$ F(X + H) - F(X) = \mathcal{D}F(X) + \column{r_1(H)}{r_k(H)} $$
+    $$ \frac1{\norm{H}_n} \cdot \norm{\column{r_1(H)}{r_k(H)}}_k = \sqrt{\underset{\underarr{H \to \On} 0}{\bigg( \frac{r_1(H)}{\norm{H}_n} \bigg)^2} + \widedots[3em] + \underset{\underarr{H \to \On} 0}{\bigg( \frac{r_k(H)}{\norm{H}_n} \bigg)^2}} \underarr{H \to \On} 0 $$
+    Значит, $ F $ диффер. в $ X $
+\end{iproof}
+
+\section({Матрица Якоби; D(Ф(F)) = DФDF}){Матрица Якоби; $ \mathcal{D} \big( \Phi(F) \big) = \mathcal{D}\Phi\mathcal{D}F $}
+
+\begin{lemma}[важное неравенство]
+    \begin{multline*}
+        \begin{bmatrix}
+            a_{11} & ... & a_{1k} \\
+            . & . & . \\
+            a_{l1} & ... & a_{ln}
+        \end{bmatrix} \cdot \overbrace{\column{b_1}{b_k}}^{\define B} = \column{a_{11}b_1 + ... + a_{1k}b_k}{a_{l1}b_1 + ... + a_{lk}b_k} \implies \\
+        \implies \norm{
+            \begin{bmatrix}
+                . & . & . \\
+                . & . & . \\
+                . & . & .
+            \end{bmatrix} \cdot \column..}_l = \sqrt{ \big( a_{11}b_1 + ... + a_{1k}b_k \big)^2 + \widedots[4em] + \big( a_{l1}b_1 + ... + a_{lk}b_k \big)^2 } \underset{\text{КБШ}}\le \\
+        \le \sqrt{\big( a_{11}^2 + ... + a_{1k}^2 \big) \big( b_1^2 + ... + b_k^2 \big) + \widedots[5em] + \big( a_{l1}^2 + ... + a_{lk}^2 \big) \big( b_1^2 + ... + b_k^2 \big)} = \norm{B}_k \cdot \sqrt{\sum_{\nu = 1}^l \sum_{\mu = 1}^k a_{\nu\mu}^2}
+    \end{multline*}
+\end{lemma}
+
+\begin{theorem}[дифференцируемость суперпозиции]
+    $ X_0 $ -- внутр. т. $ E \sub \R^{n \ge 1}, \qquad Y_0 $ -- внутр. т. $ G \sub \R^{k \ge 1} $ \\
+    $ F : E \to \R^k, \qquad F(X_0) = Y_0, \qquad \forall X \in E \quad F(X) \in G, \qquad \Phi : G \to \R^{l \ge 1}, \qquad T(X) = \Phi \big( F(X) \big) $ \\
+    $ F $ дифф. в $ X_0, \qquad \Phi $ дифф. в $ Y_0 $
+    $$ \implies
+    \begin{cases}
+        T \text{ дифф. в } X_0 \\
+        \mathcal{D}T(X_0) = \mathcal{D}\Phi(Y_0)\mathcal{D}F(X_0)
+    \end{cases} $$
+\end{theorem}
+
+\begin{proof}
+	Запишем то, что нам нужно рассмотреть:
+    \begin{multline}\lbl{8723}
+    	T(X_0 + H) - T(X_0) \bydef \Phi \big( F(X_0 + H) \big) - \Phi \big( F(X_0) \big) = \Phi \big( F(X_0 + H) \big) - \Phi(Y_0) = \\
+        = \Phi \bigg( Y_0 + \big( F(X_0 + H) - Y_0 \big) \bigg) - \Phi(Y_0) = \Phi \bigg( Y_0 + \big( F(X_0 + H) - F(X_0) \big) \bigg) - \Phi(Y_0)
+    \end{multline}
+    Обозначим $ \Lambda \define F(X_0 + H) - F(X_0) $
+    \begin{intuition}
+        $ \Lambda \underarr{H \to \On} \On[k] $
+    \end{intuition}
+    Воспользуемся дифференцируемостью $ \Phi $:
+    \begin{equ}{8724}
+        \Phi(Y_0 + \Lambda) - \Phi(Y_0) = \mathcal{D}\Phi(Y_0)\Lambda + r(\Lambda), \qquad \dfrac{\norm{r(\Lambda)}_l}{\norm{\Lambda}_k} \underarr{\Lambda \to \mathbb{O}_k} 0
+    \end{equ}
+    Положим
+    $$ \frac{r(\Lambda)}{\norm{\Lambda}_k} \define \delta(\Lambda) \in \R^l, \qquad \delta(\On[k]) \define \On[l] $$
+    Воспользуемся дифференцируемостью $ F $:
+    \begin{equ}{8728}
+        \Lambda \bydef F(X_0 + H) - F(X_0) = \mathcal{D}F(X_0)H + \rho(H), \qquad \frac{\norm{\rho(H)}_k}{\norm{H}_n} \underarr{H \to \On} 0
+    \end{equ}
+    \begin{multline*}
+        T(X_0 + H) - T(X_0) \underset{\eref{8723}}= \Phi \bigg( Y_0 + \underbrace{\big( F(X_0 + H) - F(X_0) \big)}_{\bydef \Lambda} \bigg) - \Phi(Y_0) \underset{\eref{8724}}= \mathcal{D}\Phi(Y_0)\Lambda + r(\Lambda) \bydef \\
+        = \mathcal{D}\Phi(Y_0) \bigg( F(X_0 + H) - F(X_0) \bigg) + r(\Lambda) \underset{\eref{8728}}= \mathcal{D}\Phi(Y_0) \bigg( \mathcal{D}F(X_0)H + \rho(H) \bigg) + r(\Lambda) = \\
+        = \mathcal{D}\Phi(Y_0)\mathcal{D}F(X_0)H + \underbrace{\mathcal{D}\Phi(Y_0)\rho(H) + r(\Lambda)}_{\define r_1(H)}
+    \end{multline*}
+    Если мы докажем, что $ r_1(H) $ обладает свойствами остатка, то теорема будет доказана
+    \begin{multline}\lbl{871}
+        \norm{r_1(H)}_l = \norm{\mathcal{D}\Phi(Y_0)\rho(H) + r(\Lambda)}_l \trile \norm{\mathcal{D}\Phi(Y_0)\rho(H)}_l + \norm{r(\Lambda)}_l \bydef \\
+        = \norm{\mathcal{D}\Phi(Y_0)\rho(h)}_l + \norm{\norm{\Lambda}_k \cdot \delta(\Lambda)}_l = \norm{\mathcal{D}\Phi(Y_0)\rho(H)}_l + \norm\Lambda_k \cdot \norm{\delta(\Lambda)}_l
+    \end{multline}
+    Обозначим
+    $$ \rho(H) \define \column{\rho_1(H)}{\rho_k(H)}, \qquad \Phi \define \column{\vphi_1}{\vphi_l} $$
+    Применим важное неравенство:
+    \begin{equ}{872}
+        \norm{\mathcal{D}\Phi(Y_0)\rho(H)}_l \le \norm{\rho(H)}_k \cdot \underbrace{\sqrt{\sum_{\nu = 1}^l \sum_{\mu = 1}^k \bigg( \vphi_{\nu ~ y_\mu}'(Y_0) \bigg)^2}}_{\define C}
+    \end{equ}
+    $$ \norm{\Lambda}_k \underset{\eref{8728}}\le \norm{\mathcal{D}F(X_0)H}_k + \norm{\rho(H)}_k $$
+    Обозначим
+    $$ F \define \column{f_1}{f_k} $$
+    Применим важное неравенство:
+    $$ \norm{\mathcal{D}F(X_0)H}_k \le \norm{H}_n \cdot \underbrace{\sqrt{\sum_{\alpha = 1}^k \sum_{\beta = 1}^n \bigg( f_{\alpha ~ x_\beta}'(X_0) \bigg)^2}}_{\define K} $$
+    Таким образом,
+    $$ \norm{\Lambda}_k \le K \norm{H}_n + \norm{\rho(H)}_k $$
+    \begin{equ}{873}
+        \norm{\Lambda}_k \cdot \norm{\delta(\Lambda)}_l \le K \norm{H}_n \cdot \norm{\delta(\Lambda)}_l + \norm{\rho(H)}_k \cdot \norm{\delta(\Lambda)}_l
+    \end{equ}
+    Поделим \eref{872} и \eref{873} на $ \norm{H} $:
+    \begin{equ}{8737}
+        \begin{cases}
+            \dfrac{\norm{\mathcal{D}\Phi(Y_0)\rho(H)}_l}{\norm{H}_n} \le \dfrac{C\norm{\rho(H)}_l}{\norm{H}_n} \underarr{H \to \On} 0 \qquad \text{ (т. к. } \rho(H) \text{ -- остаток)} \\ \\
+            \dfrac{\norm\Lambda_k \cdot \norm{\delta(\Lambda)}_l}{\norm{H}_n} \le \dfrac{ \bigg( K\norm{H}_n + \norm{\rho(H)}_k \bigg) \cdot \norm{\delta(\Lambda)}_l}{\norm{H}_n} = F\norm{\delta(\Lambda)}_l + \dfrac{\norm{\rho(H)}_k}{\norm{H}_n} \cdot \norm{\delta(\Lambda)}_l \underarr{H \to \On} 0
+        \end{cases}
+    \end{equ}
+    Получили, что все части $ \dfrac{\norm{r_1(H)}_l}{\norm{H}_n} $ стремятся к нулю при $ H \to \On $ \\
+    Значит, это -- остаток, и теорема доказана
+\end{proof}
+
+\section{Достаточное условие дифференцируемости функции}
+
+\begin{notation}
+    $ \Pi(a_1, a_2, ..., b_1, b_2) \define \set{X = (x_1, ..., x_n) | a_1 < x_1 < a_2, \widedots[3em], b_1 < x_n < b_2} $
+\end{notation}
+
+\begin{notation}
+    $ (x_1, ..., x_n)^T \define \column{x_1}{x_n} $
+\end{notation}
+
+\begin{theorem}
+    $ X_0 \in E \sub \R^{n \ge 2} $ -- внутр. т., $ \qquad f : E \to \R, \qquad B_\delta(X_0) \sub E $ \\
+    $ \forall j = 1, ..., n \quad \forall X \in B_\delta(X_0) \quad \exist f_{x_j}'(X), \qquad f_{x_j}'(X) $ непр. в $ X_0 $ \\
+    Тогда $ f $ дифференцируема в $ X_0 $
+\end{theorem}
+
+\begin{proof}
+    Пусть $ X_0 = (x_1^0, ..., x_n^0)^T $
+    $$ \Pi_0 \define \Pi(x_1^0 - \frac{\delta}{\sqrt{n}}, x_1^0 + \frac{\delta}{\sqrt{n}}, \widedots[4em], x_n^0 - \frac{\delta}{\sqrt{n}}, x_n^0 + \frac{\delta}{\sqrt{n}}) \sub B_\delta(X_0) $$
+    Обозначим $ \delta_1 \define \dfrac{\delta}{\sqrt{n}} $ \\
+    Пусть
+    $$ H \define \column{h_1}{h_n}, \qquad H \ne \On, \qquad |h_j| \le \delta_1 \quad 1 \le j \le n $$
+    Положим
+    $$
+    \begin{cases}
+    	H_0 \define H \\
+        H_1 \define (0, h_2, ..., h_n)^T \\
+        H_2 \define (0, 0, h_3, ..., h_n)^T \\
+        \widedots[10em] \\
+        H_{n - 1} \define (0, ..., 0, h_n)^T \\
+        H_n \define \On
+    \end{cases} $$
+    Тогда
+    \begin{equ}{8823}
+        f(X_0 + H) - f(X_0) = f(X_0 + H_0) - f(X_0 + H_n) = \sum_{k = 0}^{n - 1} \bigg( f(X_0 + H_k) - f(X_0 + H_{k + 1}) \bigg)
+    \end{equ}
+    Рассмотрим выражение $ f(X_0 + H_K) - f(X_0 + H_{k + 1}) $ \\
+    Имеем:
+    \begin{equ}{8825}
+        \begin{cases}
+            X_0 + H_k = (x_1^0, ..., x_k^0, x_{k + 1}^0 + h_{k + 1}, ..., x_n^0 + h_n)^T \\
+            X_0 + H_{k + 1} = (x_1^0, ..., x_k^0, x_{k + 1}^0, x_{k + 2}^0 + h_{k + 2}, ..., x_n^0 + h_n)^T
+        \end{cases}
+    \end{equ}
+    Отвюда следует, что разность $ f(X_0 + H_k) - f(X_0 + H_{k + 1}) $ можно рассматривать как функцию $ g_k $ от аргумента $ x_{k + 1} \define x_{k + 1}^0 + h_{k + 1} $ при $ x_{k + 1}^0 - \delta_1 < x_{k + 1} < x_{k + 1}^0 + \delta_1 $ \\
+    По определению частной производной, данная функция $ g_k(x_{k + 1}) $ имеет производную, именно, при указанных значениях $ x_{k + 1} $ имеем
+    \begin{equ}{8826}
+        g_k'(x_{k + 1}) = \bigg( f(X_0 + H_k) - f(X_0 + H_{k + 1}) \bigg)_{k + 1}'
+    \end{equ}
+    Поэтому к функции $ g_k $ применима теорема Лагранжа \\
+    Значит, найдутся $ c_{k + 1}, \quad 0 < |c_{k + 1}| < |h_{k + 1}|, \quad c_{k + 1} \cdot h_{k + 1} > 0 $, такие что
+    \begin{equ}{8827}
+        g_k(x_{k + 1}^0 + h_{k + 1}) - g_k(x_{k + 1}^0) = g_k'(x_{k + 1}^0 + c_{k + 1}) \cdot h_{k + 1}
+    \end{equ}
+    Функция $ f(X_0 + H_{k + 1}) $, в силу \eref{8825}, не зависит от аргумента $ x_{k + 1} $, поэтому $ f_{k + 1}'(X_0 + H_{k + 1}) = 0 $, и тогда \eref{8826} влечёт
+    \begin{equ}{8828}
+        g_k'(x_{k + 1}^0 + c_{k + 1}) = f_{k + 1}'(x_1^0, ..., x_k^0, x_{k + 1}^0 + c_{k + 1}, ..., x_n^0 + h_n)^T
+    \end{equ}
+    Теперь
+    \begin{multline}\lbl{8829}
+        f(X_0 + H) - f(X_0) \underset{\eref{8823}}= \sum_{k = 0}^{n - 1} \bigg( f(X_0 + H_k) - f(X_0 + H_{k + 1}) \bigg) \underset{\eref{8827}, \eref{8828}}= \\
+        = \sum_{k = 0}^{n - 1} f_{x_{k + 1}}'(x_1^0, x_{k + 1}^0 + c_{k + 1}, \widedots[3em], x_n^0 + h_n)^T \cdot h_{k + 1} = \sum_{j = 1}^n f_{x_j}'(x_1^0, x_j^0 + c_j, \widedots[3em], x_n^0 + h)^T \cdot h_j = \\
+        = \sum_{j = 1}^n f_{x_j}'(X_0)h_j + \sum_{j = 1}^n \bigg( f_{x_j}'(x_1^0, ..., x_j^0 + c_j, ..., x_n^0 + h_n)^T - f_{x_j}'(x_1^0, ..., x_j^0, ..., x_n^0)^T \bigg) h_j
+    \end{multline}
+    Поскольку $ |c_j| < |h_j| $, если $ h_j \ne 0 $, то $ (c_1, ..., c_n)^T \underarr{H \to \On} \On $ \\
+    Непрерывность фкнций $ f_{x_j}'(X) $ в точке $ X_0 $ влечёт
+    $$ 0 \le \frac{|f_{x_j}'(x_1^0, ..., x_j^0 + c_j, ..., x_n^0 + h_n) - f_{x_j}'(X_0)| \cdot |h_j|}{\norm{H}^n} \le |f_{x_j}'(x_1^0, ..., x_j^0 + c_j, ..., x_n^0 + h_n) - f_{x_j}'(X_0)| \underarr{H \to \On} 0 $$
+    Вместе с \eref{8829} это влечёт, что $ f $ дифференцируема в точке $ X_0 $
+\end{proof}

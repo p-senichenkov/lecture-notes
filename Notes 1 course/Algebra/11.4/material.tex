@@ -1,0 +1,179 @@
+\chapter{Теория групп}
+
+\section{Теорема Кэли}
+
+\begin{theorem}[Кэли]
+	$ G $ -- конечная группа, $ |G| = n $. Тогда $ \exist H < S_n : G \simeq H $
+\end{theorem}
+
+\begin{eg}
+	$ G = Z_3 $ \\
+    $ G = \set{g_1, g_2, g_3}, \qquad g_1 = \overline{0}, \quad g_2 = \overline{1}, \quad g_3 = \overline{2} $
+    $$
+    \begin{cases}
+        g_1g_1 = \overline{0} + \overline{0} = \overline{0} = g_1 \\
+        g_1g_2 = \overline{0} + \overline{1} = g_2 \\
+        g_1g_3 = \overline{0} + \overline{2} = g_3
+    \end{cases} $$
+    $ g_1 $ будет соотетствовать тождественной перестановке
+    $$
+    \begin{cases}
+    	g_2g_1 = g_2 \\
+        g_2g_2 = g_3 \\
+        g_2g_3 = g_1
+    \end{cases} $$
+    Получили, что $ g_2 $ соответствует перестановка $
+    \begin{cases}
+    	1 \to 2 \\
+        2 \to 3 \\
+        3 \to 1
+    \end{cases} $, то есть $ g_2 \to
+    \begin{pmatrix}
+    	1 & 2 & 3 \\
+        2 & 3 & 1
+    \end{pmatrix} $ \\
+    Аналогично, $ g_3 \to
+    \begin{pmatrix}
+    	1 & 2 & 3 \\
+        3 & 1 & 2
+    \end{pmatrix} $
+    $$ H = \left\{
+        \begin{pmatrix}
+        	1 & 2 & 3 \\
+            1 & 2 & 3
+        \end{pmatrix},
+        \begin{pmatrix}
+        	1 & 2 & 3 \\
+            2 & 3 & 1
+        \end{pmatrix},
+        \begin{pmatrix}
+        	1 & 2 & 3 \\
+            3 & 1 & 2
+        \end{pmatrix}
+        \right\} $$
+\end{eg}
+
+\begin{proof}
+	Пронумеруем элементы группы $ g_1, ..., g_n $ \\
+    Докажем, что $ \forall a \in G $ элементы $ ag_1, ..., ag_n $ -- это элементы $ g_1, ..., g_n $ в некотором порядке \\
+    Достаточно проверить, что $ ag_1, ..., ag_n $ различны:
+    $$ ag_i = ag_j \underimp{\text{свойство сокращения}} g_i = g_j \quad \contra $$
+    Пусть $ \sigma \in S_n $:
+    $$ ag_1 = g_{\sigma(1)}, \widedots[3em], ag_n = g_{\sigma(n)} $$
+    Определим $ \vphi : G \to S_n : \vphi(a) = \sigma : \forall i \quad ag_i = g_{\sigma(i)} $ \\
+    Проверим, что $ \vphi $ -- гомоморфизм: \\
+    Пусть $ \vphi(a) = \sigma, \quad \vphi(b) = \tau $
+    $$ (ab)g_i = a(bg_i) \underset{(\vphi(b) = \tau)}= ag_{\tau(i)} \underset{(\vphi(a) = \sigma)}= g_{\sigma(\tau(i))} = g_{(\sigma \circ \tau)(i)} \quad \forall i \implies \vphi(ab) = \sigma \circ \tau $$
+    Положим $ H = \Img \vphi \implies H < S_n $ \\
+    Проверим, что $ \vphi : G \to H $ -- изоморфизм:
+    \begin{itemize}
+    	\item $ \vphi $ сюръективна по определению $ \Img $
+        \item Проверим инъективность: \\
+        Пусть $ \vphi(a) = e_{S_n} =
+        \begin{pmatrix}
+        	1 & 2 & ... & n \\
+            1 & 2 & ... & n
+        \end{pmatrix} $
+        $$ ag_1 = g_1, \widedots[3em], ag_n = g_n $$
+        $$ ag_1 = eg_1 \implies a = e \implies \ker \vphi = \set{e} $$
+    \end{itemize}
+\end{proof}
+
+\section{Действие группы на множество}
+
+\begin{definition}
+	Пусть $ G $ -- группа, $ M $ -- множество \\
+    Говорят, что группа $ G $ действует (слева) на множество $ M $, если каждой паре $ g \in G, m \in M $ сопоставлен элемент $ g(m) \in M $, и при этом выполнены свойства:
+    \begin{enumerate}
+    	\item $ (gh)(m) = g \big( h(m) \big) \quad \forall g, h \in G, m \in M $
+        \item $ e(m) = m \quad \forall m \in M $
+    \end{enumerate}
+\end{definition}
+
+\begin{remark}
+	Для $ g, h \in G, m \in M $ запись $ ghm $ означает $ (gh)(m) = g \big( h(m) \big) $
+\end{remark}
+
+\begin{exmpls}
+	\item $ M $ -- множество, $ G $ -- множество биекций в себя
+    \item $ D_n $ -- группа самосовмещений правильного $ n $-угольника
+    \item $ M $ -- множество вершин $ n $-угольника, раскрашенных в несколько цветов, $ G $ -- группа самосовмещений
+    \item $ M = G $, $ (m, g) \to gm $
+    \item \label{eg:1} $ M = G $, действие -- сопряжение: $ (m, g) \to g^{-1}mg $
+\end{exmpls}
+
+\begin{definition}
+	Введём на множестве $ M $ отношение эквивалентности $ \sim $: \\
+    $ m \sim l $, если $ \exist g \in G : gm = l $
+\end{definition}
+
+\begin{definition}
+	Классы эквивалентности по отношению $ \sim $ называются орбитами
+\end{definition}
+
+\begin{notation}
+	$ \Orb(m), \quad Gm $
+\end{notation}
+
+\begin{undefthm}{Корректность}
+	Проверим, что $ \sim $ является отношением эквивалентности:
+    \begin{itemize}
+    	\item $ em = m \implies m \sim m $
+        \item $ m \sim e \implies l = gm \implies g^{-1}l = g^{-1}gm = m \implies l \sim m $
+        \item $
+        \begin{rcases}
+        	m \sim l \implies l = gm \\
+            l \sim k \implies k = hl
+        \end{rcases} \implies k = h(gm) = (hg)(m) \implies m \sim k $
+    \end{itemize}
+\end{undefthm}
+
+\begin{remark}
+    Если говорят про орбиты в группе без множества, имеются в виду орбиты по сопряжению (см. пример \ref{eg:1})
+\end{remark}
+
+\begin{definition}
+	Действие группы называется транзитивным, если есть ровно одна орбита
+\end{definition}
+
+\begin{definition}
+    Стабилизатором элемента $ m \in M $ называется множество $ \set{g \in G | gm = m} $
+\end{definition}
+
+\begin{notation}
+    $ \Fix(m), \quad G_m $
+\end{notation}
+
+\begin{definition}
+    Фиксатором элемента $ g \in G $ называется множество $ \set{m \in M | gm = m} $
+\end{definition}
+
+\begin{notation}
+    $ \Fix(g) $
+\end{notation}
+
+\begin{props}
+    \item $ \St(m) < G \quad \forall m \in M $
+    \begin{proof}
+    	$$
+        \begin{rcases}
+        	gm = m \\
+            hm = m
+        \end{rcases} \implies (gh)m = g(hm) = gm = m $$
+        $$ gm = m \implies g^{-1}m = g^{-1}gm = em = e $$
+    \end{proof}
+    \item Пусть $ G $ -- конечная группа. Тогда
+    $$ |G| = |\Orb(m)| \cdot |\St(m)| \quad \forall m \in M $$
+    \begin{proof}
+    	Пусть $ k \define |\Orb(m)| $
+        $$ \Orb(m) = \set{m_1, ..., m_k} $$
+        $ g_1, ..., g_k \in G $ -- такие, что $ g_im = m $ \\
+        Докажем, что $ g_1, ..., g_k $ принадлежат разным смежым классам по подгруппе $ \St(m) $ и являются представителями всех классов: \\
+        \begin{itemize}
+        	\item Различность: \\
+            Пусть $ g_i $ и $ g_j $ в одном классе
+            $$ g_i^{-1}g_j \in \St(m) \implies g_i^{-1}g_jm = m \implies g_ig_i^{-1}g_jm = g_im $$
+        \end{itemize}
+
+    \end{proof}
+\end{props}

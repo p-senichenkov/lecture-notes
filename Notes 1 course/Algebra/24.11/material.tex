@@ -1,0 +1,148 @@
+\chapter{Полиномы}
+
+\section{Факториальное кольцо (продолжение)}
+
+\begin{egs}
+    \begin{enumerate}
+        \hfill
+    	\item $K$ -- поле $ \implies K[x] $ факториально (доказательство потом)
+        Примеры разложений:
+        \begin{itemize}
+        	\item $ x^2 - 1 = 1 \cdot (x-1)(x+1) = \frac16 (2x-3)(3x+3) $
+        \end{itemize}
+        \item Кольцо тригонометриеских многочленов не факториально:
+        $$ \sum_{i,j \ge 0} a_{ij} (\sin x)^i (\cos x)^j $$
+    \end{enumerate}
+
+\end{egs}
+
+\section{\S 5. Евклидовы кольца}
+\begin{definition}
+    $A$ -- область целостности с 1. Кольцо $A$ называется евклидовым, если существует отображение $$ \delta : A \setminus \{0\} \to \N \setminus \{0\} : \begin{cases} \delta (ab) \ge \delta(a) ~ \quad \forall a,b \in A \setminus \{0\} \\ \forall a,b \in A, ~ b \ne 0 ~ \exist q,r : \begin{cases} a = bq + r \\ \delta(r) < \delta(b) \end{cases} \end{cases} $$ Отображение $ \delta$ называется евклидовой нормой
+\end{definition}
+
+\begin{eg}
+    \begin{enumerate}
+    	\item $ \Z, \quad \delta(a) = |a| $
+        $$ a = -17, ~ b = -5 $$
+        $$ -17 = (-5) \cdot \underset{q}3 + \underset{r}{(-2)} \quad |-2| < |-5| $$
+        \item $ K[x] $, где $K$ -- поле \quad $\delta(P) = \deg P $
+        \item $ \Z[i] = \set{a + bi \mid a, b \in \Z } $ -- кольцо Гауссовых чисел
+        $$ \delta(a + bi) = a^2 + b^2 $$
+    \end{enumerate}
+
+\end{eg}
+
+\begin{properties}
+    $ A $ -- евклидово кольцо, $\delta$ -- евклидова норма, $ a \ne 0 $, $ b \ne 0 $
+    \begin{enumerate}
+    	\item $ a \divby b \implies \delta(a) \ge \delta(b) $
+        \item $a$ и $b$ ассоц. $ \implies \delta(a) = \delta(b) $
+        \item $a = bc$, $c $ не обр. $ \implies \delta(a) > \delta(b) $
+    \end{enumerate}
+\end{properties}
+
+\begin{proof}
+    \hfill
+    \begin{enumerate}
+    	\item $ a = bc, ~ \delta(a) = \delta(bc) \ge \delta(b) $
+        \item Из 1): $ \delta(a) \ge \delta(b), ~ \delta(b) \ge \delta(a) \implies \delta(a) = \delta(b) $
+        \item Докажем, что $ b \ndivby a $. Пусть $ b = ad \implies a = bc = adc \implies dc = 1 \implies c $ обратимо
+        $$ \exist q,r : b = aq + r, ~ \delta (r) < \delta(a) \text{ или } r = 0 $$
+        $$ r \ne 0 \text{, т. к. } b \ndivby a $$
+        $$ r = b - ad \implies r \divby b \underimp{1)} \delta(r) \ge \delta(b) $$
+        $$ \delta (a) > \delta(r) \ge \delta(b) $$
+    \end{enumerate}
+\end{proof}
+
+\begin{theorem}[НОД в евклидовом кольце]
+    Пусть $A$ -- евклидово, $a,b \in A$, $ a \ne 0 $ или $ b \ne 0 $ (не оба нули). Тогда:
+    \begin{enumerate}
+    	\item Существует НОД$(a,b)$
+        \item Пусть $d$ явл. НОД $(a,b)$. Тогда $ \exist x, y \in A : d = ax + by $
+    \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+    Положим $ M = \set{ au + bv \mid u,v \in A } $. Пусть $ M = \min \bigg\{\delta(c) \bigg| c \in M \bigg\} $, пусть $ d_0 : d_0 \in M, ~ \delta(d_0) = m $. Докажем, что $ d_0 $ -- общий делитель $ a, b $. Пусть $ a \ndivby d $
+    $$ \exist q,r : a = dq + r, ~ r \ne 0, ~ \delta(r) < \delta(d_0) $$
+    $$ r = a - d_0 q = a - (ax + by) q = a(1-qx) + b(-qy) \in M $$
+    $$ \delta(r) < \delta(d_0) = m \quad \contra $$
+    Докажем, что если $k$ -- общий делитель $ a $ и $ b $, то $d_0 \divby k $
+    $$ \begin{rcases} a \divby k \\ b \divby k \end{rcases} \implies \begin{Bmatrix} ax \divby k \\ by \divby k \end{Bmatrix} \implies d_0 = ax + by \divby k $$
+    Докажем, что $ d_0 $ явл. НОД $ (a,b)  \implies $ НОД $ (a,b) $ существует:
+    $$ d, d_0 \text{ -- НОД} (a,b) \implies d = t \cdot d_0, ~ t \text{ -- обр.} \implies d = a(tx) + b(ty) $$
+\end{proof}
+
+\begin{property}[Взаимная простота с произведением]
+	$A$ -- евклидово кольцо. $a_1, a_2, ..., a_k, b \in A $ \\ $ (a_i,b) = 1 ~ \forall i $. Тогда $ (a_1a_2...a_k, b) = 1 $
+\end{property}
+
+\begin{property}[Взаимная простота и делимость]
+	$A$ -- евклидово кольцо.
+    \begin{enumerate}
+    	\item $ ab \divby c, ~ (a,c) = 1 \implies b \divby c $
+        \item $ a \divby b, ~ a \divby c, ~ (b,c) = 1 \implies a \divby bc $
+    \end{enumerate}
+\end{property}
+
+\begin{theorem}
+	Любое евклидово кольцо факториально
+\end{theorem}
+
+\begin{proof}
+    \begin{enumerate}
+        \hfill
+    	\item $ \exist $ \\
+        Докажем, что любой ненулевой элемент можно представить в виде произведения неразложимых элемент\underline{ов} и обратимого элемент\underline{а}: \\
+        Пусть $ a $ не представляется, и $ \delta (a) $ -- наименьшее возможное. $a$ не обратим, т. к. иначе $ a = a $ -- нужное представление. $a$ не неразложимый, т. к. иначе $ a = 1 \cdot a $ -- нужное представление.
+        $$ \exist b, c : a = bc, ~ b, c \text{ не обратимы} $$
+        $$ \delta (b) < \delta(a), ~ \delta(c) < \delta(a) $$
+        $b$ и $c$ можно представить в виде произведения неразлодимых элементов и обратимого элемента. Пусть $ \begin{rcases} b = up_1...p_k \\ c = vq_1...q_m \end{rcases} \implies a = (uv)p_1...p_kq_1...q_m \quad \contra $
+
+        \item $ ! $ \\
+        Докажем, что представление единственно с точностью до перестановки сомножителей и замены сомножителей на ассоциированные: \\
+        Пусть не для всех элементов единственно. Пусть $a$ -- такой, что для него не единственно, и $ \delta(a) $ -- наименьшая возможная.
+        $$ a = up_1 ... p_k, \quad a = vq_1...q_n $$
+        $$ vq_1...q_m \divby p_1 $$
+        $$ v \ndivby p_1 $$
+        $$ q_i \divby p_q \text{ или } (q_i,p_1) = 1 ~ \forall i $$
+        $$ (v,p_1) = 1 $$
+        Если $ (q_i,p_1) = 1 ~ \forall i \implies (vq_1...q_m, p_1) = 1 \implies vq_1 ... q_m \ndivby p_1 \implies a \ndivby p_1 \quad \contra $
+        $$ \exist i : q_i \divby p_q \implies q_i \text{ ассоц. с } p_1 $$
+        Переставим сомножители и будем считать, что $ q_1 $ ассоц. с $ p_1 $. Пусть $ q_1 = wp_1, ~ w $ обратимо
+        $$ \begin{cases} a = up_1...p_k \\ a = v(wp_1)q_2...q_m \end{cases} $$
+        Пусть $ b : bp_1 = a \implies \begin{cases} b = up_2...p_k \\ b = (vw)q_2...q_m \end{cases} $
+        $$ \delta(b) < \delta(a) $$
+        Произведение $up_2...p_k $ и $ (vw)q_2...q_m $ совпадают с точностью до перестановки сомножителей и замены сомножителей на ассоциированные $ \implies up_1p_2...p_k $ и $ vq_1q_2...q_m $ совпадают с точностью до перестановки сомножителей и замены сомножителей на ассоциированные
+    \end{enumerate}
+\end{proof}
+
+\begin{implication}
+	Пусть $K$ -- поле. Тогда $ [k] $ факториально
+\end{implication}
+
+\section{\S 6. Разложение многоленов над $\R$ и $\Co$}
+
+\begin{definition}
+    Пусть $K$ -- поле, $P \in K[x], ~ c \text{ -- корень } P(x) $ \\
+    Показателем кратности корня $c$ называется такое число $k$, что $P(x) \divby (x - c)^k, ~ \ndivby (x-c)^{k+1} $
+    \begin{itemize}
+    	\item Если $P(x) \divby x - c, ~ \ndivby (x-c)^2 $, то $c$ называется простым корнем
+        \item Если $P(x) \divby (x-c)^2 $, то $c$ называется кратным корнем
+    \end{itemize}
+
+\end{definition}
+
+\begin{theorem}[Основная теорема алгебры]
+    Любой многочлен с комплексными коэффициентами, отличный от константы имеет корень в $ \Co $
+\end{theorem}
+
+\begin{implication}
+    Пусть $P \in \Co[x], ~ \deg P = n $. Тогда $P(x) $ имеет $n$ корней с учётом кратности, $P$ можно представить в виде
+    $$ P(x) = a(x-x_1)(x-x_2)...(x-x_n) \quad a,x_i \in \Co $$
+\end{implication}
+
+\begin{proof}
+	Индукция
+\end{proof}

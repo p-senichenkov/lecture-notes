@@ -1,0 +1,207 @@
+\chapter{Полиномы}
+
+\section{Многочлены над \texorpdfstring{\Z}Z}
+
+\begin{theorem}[рациональный корень]
+    Пусть $F \in \Z[x]$, $F(x) = a_nx^n + ... + a_0$, $\frac{p}q$ -- корень $F(x)$, $(p, q) = 1$ \\
+    Тогда $a_n \divby q$, $a_0 \divby p$
+\end{theorem}
+
+\begin{proof}
+    $$ a_n \cdot \frac{p^n}{q^n} + a_{n - 1} \cdot \frac{p^{n - 1}}{q^{n - 1}} + ... + a_1\cdot \frac{p}q + a_0 = 0 $$
+    Умножим на $q^n$:
+    $$ \left.
+    \begin{aligned}
+        a_np^n + a_{n - 1}p^{n - 1}q + ... + a_1pq^{n - 1} + a_0q^n = 0 \implies
+        \begin{cases}
+            a_np^n \divby q \\
+            a_0q^n \divby p
+        \end{cases} \\
+        (p, q) = 1
+    \end{aligned} \right\} \implies
+    \begin{cases}
+    	a_n \divby q \\
+        a_0 \divby p
+    \end{cases} $$
+\end{proof}
+
+\begin{implication}
+    Пусть $F \in \Z[x]$, старший коэффициент $F$ равен $1$ \\
+    Тогда любой рациональный корень является целым и делит $a_0$
+\end{implication}
+
+\begin{proof}
+    $ q = a_n \divby q \implies q = \text{что-то} $
+\end{proof}
+
+\begin{definition}
+	Пусть $ P in \Z[x]$, $P \ne 0$, $P(x) = a_nx^n + ... + a_0$ \\
+    Содержанием $P(x)$ называется НОД($a_n, a_{n - 1}, ..., a_0$)
+    \begin{notation}
+    	$C(P)$
+    \end{notation}
+\end{definition}
+
+\begin{eg}
+	$C(2x^2 + 8x + 10) = 2$
+\end{eg}
+
+\begin{definition}
+    Многочлен $P \in \Z[x]$ называется примитивным, если $C(P) = 1$
+\end{definition}
+
+\begin{exmpls}
+    \item $2x^2 + 8x + 10$ -- \textbf{не} примитивный
+    \item $2x^2 + 8x + 9$ -- примитивный
+\end{exmpls}
+
+\begin{props}
+    \item Пусть $F \in \Z[x]$, $F_1(x) = \dfrac1{C(F)} \cdot F(x)$ \\
+    Тогда $F_1(x)$ -- примитивный
+    \begin{proof}
+        $ F(x) = a_nx^n + ... + a_0, \quad d = C(F) \implies \dfrac{a_n}d, ..., \dfrac{a_0}d$ -- целые, взаимно простые в совокупности
+    \end{proof}
+    \item Пусть $F, G$ -- примитивные, $F(x) = qG(x), \quad q \in \Q$ \\
+    Тогда $q = 1$ или $q = -1$
+    \begin{proof}
+        $F(x) = a_nx^n + ... + a_0, \quad G(x) = b_nx^n + ... + b_0, \quad q = \frac{r}s, \quad (r, s) = 1$ \\
+        $a_i = \frac{r}s \cdot b_i \quad \forall i$ \\
+        $a_i \cdot s = r \cdot b_i \quad \forall i$ \\
+        $ \forall i \quad a_i \cdot s \divby r \implies a_i \divby r \underimp{C(F) = 1} r = \pm 1$
+    \end{proof}
+    \item Пусть $F \in \Q[x]$ \\
+    Тогда $\exist! q > 0 \in \Q : q \cdot F(x)$ -- примитивный
+    \begin{eg}
+    	$F(x) = \frac32 x + \frac94, \quad q = \frac23, \quad $
+    \end{eg}
+    \begin{proof}
+        \hfill
+        \begin{itemize}
+        	\item Существование \\
+            Пусть $F(x) = \dfrac{a_n}{b_n} \cdot x^n + ... + \dfrac{a_0}{b_0}, \quad a_i, b_i \in \Z$ \\
+            $ N \define$ НОК($b_n, ..., b_0$) $\implies N \cdot F(x) \in \Z[x]$ \\
+            По свойству 1, $\dfrac1{C(N \cdot F(x))} \cdot N \cdot F(x)$ -- примитивный \\
+            $q = \dfrac{N}{C(NF(x))}$ -- подходит
+            \item Единственность
+        \end{itemize}
+    \end{proof}
+\end{props}
+
+\begin{lemma}[Гаусса]
+	Пусть $F(x), G(x) \in \Z[x], \quad H = F(x) \cdot G(x)$ \\
+    Тогда
+    \begin{enumerate}
+    	\item Если $F(x), G(x)$ -- примитивные, то $H(x)$ -- примитивный
+        \begin{proof}
+        	Пусть $F(x) = \sum a_i x^i, \quad G(x) = \sum b_ix^i, \quad H = \sum d_ix^i$ \\
+            Пусть $H$ не примитивный $\implies $ НОД($d_i$) $\ne 1 \implies \exist p \in \Prime : \forall i \quad d_i \divby p$ \\
+            Не все $a_i$ делятся на $p$, не все $b_i$ делятся на $p$. Пусть $k \define \min\set{i | a_i \ndivby p}, \quad l = \min\set{i | b_i \ndivby p} $
+            $$ (... + a_kx^k + ... + a_1x + a_0) \cdot (... + b_lx^l + ... + b_1x + b_0) $$
+            $$ d_{k + l} = \underset{\divby p}{a_0} b_{k + 1} + ... + \underset{\ndivby p}{a_k}b_l + ... + \underset{\divby p}{a_{k + l}}b_0 \quad \ndivby p \quad \contra $$
+        \end{proof}
+        \item $C(H) = C(F) \cdot C(G)$
+        \begin{proof}
+            $F_1(x) = \dfrac1{C(F)} \cdot F(x), \quad G_1(x) = \dfrac1{C(G)} \cdot G(x)$ \\
+            $F_1(x), G_1(x)$ -- примтивные (по свойству 1)
+            \begin{multline*}
+                \frac1{C(F) \cdot C(G)} \cdot H(x) = F_1(x) \cdot G_1(x) \text{ -- примитивный} \underimp{\text{ по свойству 3}} \\ \implies \frac1{C(f)C(G)} = \frac1{C(H)} \implies C(F) \cdot C(G) = C(H)
+            \end{multline*}
+        \end{proof}
+    \end{enumerate}
+\end{lemma}
+
+\begin{definition}
+    Многочлен $F(x) \in \Z[x]$ называется неприводимым над $\Z$, если его нельзя разложить в произведение сногочленов из $\Z[x]$, отличных от \textit{чего-то}
+\end{definition}
+
+\begin{theorem}[редукционный критерий неприводимости]
+    \hfill
+    \begin{enumerate}
+    	\item Пусть $F \in \Z[x]$, $F$ неприводимый над $\Z$ \\
+        Тогда $F$ неприводимый над $\Q$
+        \item Пусть $F \in \Z[x], \quad G, H \in \Q[x], \quad F(x) = G(x)H(x)$ \\
+        Тогда $\exist G_1, H_1 \in \Z[x]$, ассоциированные с $G, H$ над $\Q$, такие, что $F(x) = G_1(x)H_1(x)$
+        \begin{proof}
+            \hfill
+            \begin{enumerate}
+            	\item $F$ примитивный
+                $$ \underset{\in \Z[x] \text{, примитивный}}{F(x)} = \underset{\in \Q[x]}{G(x)} \cdot \underset{\in \Q[x]}{H(x)} $$
+                По свойству 3:
+                $$ \exist q_G, q_H > 0 \in \Q : q_GG(x), q_HH(x) \text{ -- примитивные} $$
+                $$ (q_Gq_H) \cdot \underset{\text{примтивный}}{F(x)} = \underset{\text{примтивный}}{(q_GG(x))} \cdot \underset{\text{примитивный}}{(q_HH(x))} \text{ -- примитивный} $$
+                $ F(x)$ -- примитивный $\implies q_Gq_H = 1 $
+                $$ F(x) = q_GG(x) \cdot q_HH(x) \implies
+                \begin{cases}
+                	G_1(x) = q_GG(x) \\
+                    H_1(x) = q_HH(x)
+                \end{cases} $$
+                Они подходят
+                \item Общий случай
+                $$ \underset{\in \Z[x]}{F(x)} = \underset{\in \Q[x]}{G(x)} \cdot \underset{\in \Q[x]}{H(x)} $$
+                Сделаем его примитивным:
+                $$ \frac1{C(F)} F(x)  = \frac1{C(F)} G(x) \cdot H(x) $$
+                $ \dfrac1{C(f)} F(x)$ -- примитивный \\
+                По (а) $\exist G_0(x), H_0(x)$, ассоциированные с $G(x), H(x)$, такие, что $\dfrac1{C(F)} F(x) = \underset{\in \Z[x}{G_0(x)} \cdot \underset{\in \Z[x]}{H_0(x)} $
+                $$ F(x) = \underbrace{C(F)G_0(x)}_{\in \Z[x]} \cdot H_0(x) $$
+                $$ \begin{cases}
+                   	G_1 \define C(F) G_0(x) \\
+                    H_1(x) \define H_0(x)
+                   \end{cases} $$
+                Они подходят
+            \end{enumerate}
+        \end{proof}
+        \begin{note}
+        	Первое -- просто другая формулировка второго
+        \end{note}
+    \end{enumerate}
+\end{theorem}
+
+\begin{theorem}[факториальность $\Z\lbrack x\rbrack$]
+    Любой многочлен из $\Z[x]$ можно представить в виде произведения простых чисел и примитивных многочленов, неприводимых над $\Q$ \\
+    Такое представление единственно с точностью до перестановки сомножителей и умножения сомножиетелей на $(-1)$
+\end{theorem}
+
+\begin{eg}
+	$5x^2 - 5 = 5(x - 1)(x + 1) = 5(-x + 1)(-x - 1)$
+\end{eg}
+
+\begin{proof}
+    \hfill
+    \begin{itemize}
+    	\item Существование \\
+        $F(x) \in \Q[x], \quad \Q[x]$ факториально $\implies F(x)$ можно представить как $F(x) = a \cdot P_1(x) \cdot ... \cdot P_k(x), \quad a \in \Q, \quad a \ne 0, \quad P_i(x) \in \Q[x], \quad P_i$ неприводимы над $\Q$ \\
+        Заменим $P_1(x)$ на $aP_1(x)$ \\
+        $F(x) = P_1(x) \cdot ... \cdot P_k(x), \quad P_i(x)$ неприводимы над $\Q$ \\
+        $ \exist H_i(x) \in \Z[x]$, ассоциированные с $P_i(x)$ \\
+        $F(x) = H_1(x) \cdot ... \cdot H_k(x), \quad H_i$ неприводимы над $\Q$ \\
+        Пусть $T_i(x) = \dfrac1{C(H_i)} \cdot H_i(x)$ -- примитивный, неприводимый над $\Q$ \\
+        Пусть $C(H_1) \cdot ... \cdot C(H_k) = p_1^{\alpha_1} \cdot ... \cdot p_m^{\alpha_m}, \quad p_i \in \Prime$ \\
+        Тогда $F(x) = p_1^{\alpha_1} \cdot ... \cdot p_m^{\alpha_m} \cdot T_1(x) \cdot ... \cdot T_k(x)$ -- нужное разложение
+        \item Единственность \\
+        $F(x) = \pm p_1p_2...\underbrace{T_1(x)T_2(x)...}_{\text{примитивный}}$ и $F(x) = \pm q_1q_2...\underbrace{H_1(x)H_2(x)...}_{\text{примитивный}}$ \\
+        $C(F) = p_1p_2...C(F) = q_1q_2...$ \\
+        Вспоминаем основную теорему арифметики (или факториальность $\Z$) -- \contra
+        $$ T_1(x) T_2(x) ... = H_1(x) H_2(x) ... $$
+        $\Q[x]$ -- факториально $\implies$ произведения совпадают с точностью до порядка и ассоциированности \\
+        Перенумеруем: $C_i(x) \define q_i H_i(x)$ \\
+        $T_i(x)H_i(x)$ -- примитивные $\implies q_i = \pm -1$
+    \end{itemize}
+\end{proof}
+
+\begin{theorem}[критерий неприводимости Эйзенштейна]
+    Пусть $a_0, a_1, ..., a_{n - 1} \in \Z, \quad a_n = 1, \quad p \in \Prime$ \\
+    Все $a_i$, кроме $a_n$ делятся на $p$, \quad $a_0 \ndivby p^2$ \\
+    Тогда $F(x) = x^n + a_{n - 1}x^{n - 1} + ... + a_1x + a_0$ неприводим над $\Q$
+\end{theorem}
+
+\begin{proof}
+	Достаточно доказать неприводимость над $\Z$ \\
+    Пусть приводим
+    $$ x^n + a_{n - 1}x^{n - 1} + ... + a_1x + a_0 = (... + b_1x + b_0) \cdot (... + c_1x + c_0), \quad b_i, c_i \in \Z $$
+    $b_0c_0 = a_0 \quad \divby p \quad \ndivby p^2 $ \\
+    Одно из чисел $b_0, c_0$ делится на $p$, другое -- нет \\
+    Пусть $b_0 \divby p, \quad c_0 \ndivby p$ \\
+    Не все $b_i$ делятся на $p$, так как $C(F) \ndivby p$ (т. к. старший коэффициент 1) \\
+    Пусть $k \define \min\set{i | b_i \ndivby p}, \quad k \le \deg (... + b_1x + b_0) < \deg F < n $ \\
+    Тогда $a_k = \underset{\ndivby p}{b_k}\underset{\ndivby p}{c_0} + \underbrace{\underset{\divby p}{b_{k - 1}}c_1 + ... + \underset{\divby p}{b_0}c_k}_{\divby p} \implies a_k \ndivby p $ -- \contra с $k < n$
+\end{proof}

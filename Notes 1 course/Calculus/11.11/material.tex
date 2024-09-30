@@ -1,0 +1,82 @@
+\chapter{Производные и дифференцируемость}
+
+\section{Свойства производной (продолжение)}
+
+\begin{property}[3]
+	$$(fg)'(x) = f'(x)g(x)+f(x)g'(x)$$
+\end{property}
+
+\begin{proof}
+	$$(fg)'(x) = \limz{h}\frac{f(x+h)g(x+h) - f(x)g(x)}h=\limz{h}\frac{f(x+h)-f(x)}h -\limz{h}g(x+h)+f(x)= $$
+	$$=\limz{h}\frac{g(x+h)-g(x)}h=f'(x)g(x)+f(x)g'(x)$$
+\end{proof}
+
+\begin{property}[4]
+	$$\text{Пусть } f(x)\ne 0 \text{ при } x \in(a,b) \text{. Тогда}$$
+	$$\bigg(\frac1f\bigg)'(x_o) =-\frac{f'(x_o)}{f^2(x_o)}$$
+\end{property}
+
+\begin{proof}
+	$$\bigg(\frac1f\bigg)'(x_o) = \limz{h}\frac{\frac1{f(x_o+h)}-\frac1(f(x_o))}h =-\frac1{f(x_o)} \cdot\limz{h}\frac1{f(x_o+h)}\cdot\limz{h}\frac{f(x_o+h)-f(x_o)}h=-\frac{f'(x_o)}{f^2(x_o)}$$
+\end{proof}
+
+\begin{property}[5]
+	$$\text{Пусть } f \text{, как в 4. Тогда}$$
+	$$\bigg(\frac{g}f\bigg)'(x_o)=\frac{g'(x_o)f(x_o)-g(x_o)f'(x_o)'}{f^2(x_o)}$$
+\end{property}
+
+\begin{proof}
+	Используем 3. и 4. Тогда \\
+	$$\bigg(\frac{g}f\bigg)'(x_o)=\bigg(g\cdot\frac1f\bigg)'(x_o)=g'(x_o)\cdot\frac1{f(x_o)}+g(x_o)\cdot\bigg(\frac1f\bigg)'(x_o)=$$
+	$$\frac{g'(x_o)'}{f(x_o)}-\frac{g(x_o)f'(x_o)'}{f^2(x_o)} = \frac{g'(x_o)'f(x_o)-g(x_o)f'(x_o)}{f^2(x_o)}$$
+\end{proof}
+
+\begin{property}[6. Производная суперпозиции функций]
+	$$\text{Пусть } f: (a,b) \to \R, \quad f(x) \in (p,q) \quad  при \quad x \in (a,b),$$
+	$$g: (p,q) \to \R, \quad x_o \in (a,b), \quad f(x_o)\define y_o \in(p,q)$$
+	$$\text{Предположим, что } \exists f'(x_o) ~ и ~ \exists g'(y_o)$$
+	$$\text{Положим }\varphi(x) = g(f(x)) \text{. Тогда } \varphi'(x_o) = g'(y_o)\cdot f'(x_o)$$
+\end{property}
+
+\begin{proof}
+	Используем связь производной с дифференцируемостью функции.
+	$$ g(y_o + l) = g(y_o) + g'(y_o)l + g(l) \text{, где } \frac{g(l)}l \underarr{l\to0} 0 $$
+	Положим $ \delta(0) \define \frac{g(l)}l, \quad l \in \omega(0) \setminus \{0\} $
+	Положим $\delta(0) \define 0 $. Тогда функция $\delta(l)$ определена в $\omega(0)$ и непрерывна в 0. \\
+	$\omega(0)$ -- окрестность, фигурирующая в определении дифференцируемости функции $g$. \\
+	Возьмём теперь $h \ne 0$ и положим \\
+	$$ l \define f(x_o+h) - f(x_o) = f(x_o + h) - y_o$$
+	В отличие от $h$, возможно, что $ l = 0$ при каких-то значениях $h$.\\
+	Теперь имеем, используя дифференцируемость $f$:
+	$$ \vphi(x_o+h) = g(f(x_o+h)) = g(f(x_o) + f'(x_o)h + \vawe{g}(h))) \text{, где}$$
+	$$\frac{\vawe{g}(h)}h \underarr{h\to0} 0$$
+	Пусть $f'(x_o)h + \vawe{g}(h) = g$, тогда
+	\begin{multline*}
+	$$ g(f(x_o) + g) = g(y_o + q) = g(y_o) + g'(y_o)q + q\delta(q) = \\ = \vphi(x_o) + g'(y_o)(f'(x_o)h + \vawe{g}(h)) + (g'(x_o)h + \vawe{g}(x))\delta(f'(x_o)h + \vawe{g}(h)) \bydef \\ \bydef \vphi(x_o) + g'(y_o)f'(x_o)h + R(h) \text{, где} \\ R(h) = g'(y_o)\vawe{g}(h) + f'(x_o)h\delta(f'(x_o)h + \vawe{g}(h)) + \vawe{g}(h)\delta(f'(x_o)h + \vawe{g}(h))$$
+	\end{multline*}
+	При $h\to0$ имеем $f'(x_o)h + \vawe{g}(h) \to 0$, поэтому
+	\begin{multline*}
+		\frac{R(h)}h = g'(y_o) \cdot \frac{\vawe{g}(h)}h + f'(x_o)\delta(f'(x_o)h + \vawe{g}(h)) + \frac{\vawe{g}(h)}h \delta (f'(x_o)h + \vawe{g}(h)) \underarr{h\to0} \\ \to g'(y_o) \cdot 0 + f'(x_o) \cdot 0 + 0 \cdot 0 = 0
+	\end{multline*}
+	Таким образом, функция $\vphi$ дифференцируема в $x_o$, и по теореме о связи производной и дифференцируемости $\vphi'(x_o) = g'(y_o)f'(x_o)$
+\end{proof}
+
+\begin{property}[7. Производная обратной функции]
+	Пусть $f \in C([a,b])$ и строго монотонна, $g$ -- обратная к $f$ функция. Пусть $x_o \in (a,b)$, функция $f$ имеет производную в $x_o$ и $f'(x_o) \ne 0$. \\
+	Положим $f(x_o) = y_o$. Тогда функция $g$ имеет производную в $y_o$ и $g'(y_o) = \frac1{f'(x_o)}$
+\end{property}
+
+\begin{proof}
+	Возьмём последовательность $\seq{h_n}n$, $h_n \ne 0$ $\forall n$ и $h_n \to 0$. Положим $l_n = f(x_o + h_n) - f(x_o)$. \\
+	В силу строгой монотонности функции $f$ имеем $l_n \ne 0 \space \forall n$ и $h_n \underarr{n\to\infty} 0$ в силу $f \in C([a,b])$. \\
+     $l_n$ и $h_n$ связаны также соотношением
+	$$f(x_o + h_n) = f(x_o) + l_n = y_o + l_n, \quad g(f(x_o + h_n)) = g(y_o + l_n), \quad x_o + h_n = g(y_o + l_n),$$
+     $$h_n = g(y_o + l_n) - x_o = g(y_o + l_n) - g(y_o)$$
+	Это соотношение показывает, что мы можем произвольно задать $l_n$, $l_n \ne 0$ $\forall n$, $l_n \underarr{n\to\infty}0$, и получим $h_n \ne 0,$ $h_n \underarr{n\to\infty}0$. \\
+	 Возьмём теперь произвольную последовательность $\seq{l_n}n$,
+	  $l_n \ne 0$ $\forall n$,
+	   $l_n \underarr{n\to\infty} 0$,
+	  $h_n$ -- соответствующая ей последовательность. Имеем
+    $$\frac{g(y_o + l_n) - g(y_o)}{l_n} = \frac{h_n}{l_n} = \frac{h_n}{f(x_o + h_n) - f(x_o)} = \frac1{\frac{f(x_o + h_n) - f(x_o)}{h_n}} \underarr{n\to\infty} \frac1{f'(x_o)}$$
+    В силу произвольности $\seq{l_n}n$, $g'(y_n) = \frac1{f'(x_o)}$
+\end{proof}

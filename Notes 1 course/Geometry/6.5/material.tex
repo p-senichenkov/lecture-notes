@@ -1,0 +1,107 @@
+\begin{problem}[Дидона]
+	Среди выпуклых фигур периметра $ P $ наибольшую площадь имеет круг
+\end{problem}
+
+\begin{theorem}
+	$ M $ -- метрическое пространство. Равносильны следующие утверждения:
+	\begin{enumerate}
+		\item \label{en:1} $ M $ компактно
+		\item \label{en:2} $ M $ секвенциально компактно
+		\item \label{en:3} $ M $ полное и вполне ограниченное
+	\end{enumerate}
+\end{theorem}
+
+\begin{definition}
+	$ M $ называется секвенциально компактным, если
+	$$ \forall \seq{x_n}n \quad \exist \text{ сходящаяся } \seq{x_{n_k}}k $$
+\end{definition}
+
+\begin{definition}
+	$ M $ называется полным, если любая фундамментальная последовательность в $ M $ сходится
+\end{definition}
+
+\begin{definition}
+	$ \seq{x_n}n $ фундаментальная, если $ \forall \veps > 0 \quad \exist N : \forall n, k > N \quad \rho(x_n, x_k) < \veps $
+\end{definition}
+
+\begin{definition}
+	$ M $ -- метрическое пространство, $ \qquad A \sub M $ \\
+	$ A $ называется $ \veps $-сетью, если
+	$$ \forall x \in M \quad \exist a \in A : \rho(x, a) < \veps $$
+\end{definition}
+
+\begin{definition}
+	$ M $ вполне ограничено, если для любого $ \veps > 0 $ существует конечная $ \veps $-сеть
+\end{definition}
+
+\section{Аксиомы отделимости}
+
+\begin{definition}
+	$ X $ -- топологическое пространство. Тогда $ X $ удовлетворяет следующим аксиомам:
+	\begin{enumerate}
+		\item[\textbf{T0}](Холмогорова). Для любых двух различных точек $ X $ существует окрестность, содержащая ровно одну из них
+		\item[\textbf{T1}](Тихонова). $ \forall \underset{x \ne y}{x, y \in X} \quad \exist U_x : y \notin U_x $
+		\item[\textbf{T2}](Хаусдорфа). $ \forall \underset{x \ne y}{x, y \in X} \quad \exist U_x, U_y : U_x \cap U_y = \O $
+		\item[\textbf{T3}] $ \forall $ замкнутого $ F $ и $ \forall x \notin F \quad \exist $ открытые $ U_x \ni x, U_F \sup F : U_x \cap U_F = \O $
+		\item[\textbf{T4}] $ \forall $ замкнутых $ \underset{F_1 \cap F_2 \ne \O}{F_1, F_2} \quad \exist $ открытые $ U_{F_1} \sup F_1, U_{F_2} \sup F_2 : U_{F_1} \cap U_{F_2} = \O $
+	\end{enumerate}
+\end{definition}
+
+\begin{remark}
+	$ \textbf{T2} \implies \textbf{T1} \implies \textbf{T0} $
+\end{remark}
+
+\begin{exmpls}
+	\item Антидискретное:
+	\begin{itemize}
+		\item Нет \textbf{T0}, \textbf{T1}, \textbf{T2}
+		\item Есть \textbf{T3}, \textbf{T4}
+	\end{itemize}
+	\item Дискретное: \\
+	Есть \textbf{T0} -- \textbf{T4}
+	\item Стандартная топология: \\
+	Есть \textbf{T0} -- \textbf{T4}
+	\item Стрелка:
+	\begin{itemize}
+		\item Есть \textbf{T0}, \textbf{T4}
+		\item Нет \textbf{T1}, \textbf{T2}, \textbf{T3}
+	\end{itemize}
+	\item Топология Зариского:
+	\begin{itemize}
+		\item Есть \textbf{T0}, \textbf{T1}
+		\item Нет \textbf{T2}, \textbf{T3}, \textbf{T4}
+	\end{itemize}
+\end{exmpls}
+
+\begin{theorem}
+	\textbf{T1} $ \iff \forall $ точка -- замкнутое множество
+\end{theorem}
+
+\begin{proof}
+	\hfill
+	\begin{itemize}
+		\item $ \implies $
+		$$ \forall x_0 \in X \quad \forall \underset{y \ne x_0}{y \in X} \quad \exist U_y \ni y \not\ni x_0 $$
+		$$ \bigcup_{y \in X \setminus \set{x_0}} U_y = X \setminus \set{x_0} \text{ -- откр. } \implies \set{x_0} \text{ -- замкн.} $$
+		\item $ \impliedby $
+		$$ \forall x \ne y \quad U_x \define X \setminus \set{y} \text{ -- откр.} $$
+	\end{itemize}
+
+\end{proof}
+
+\begin{implication}
+	При \textbf{T1} верно $ \textbf{T4} \implies \textbf{T3} \implies \textbf{T2} \implies \textbf{T1} $
+\end{implication}
+
+\begin{definition}
+	\textbf{T1}, \textbf{T3} (по следствию, всем, кроме \textbf{T4}) -- регулярное пространство \\
+	\textbf{T1}, \textbf{T4} (по следствию, всем) -- нормальное пространство
+\end{definition}
+
+\begin{properties}
+	\hfill
+	\begin{enumerate}
+		\item $ X $ удовлетворяет \textbf{T0} -- \textbf{T4}, $ \quad A \sub X \implies A $ удовл. \textbf{T0} -- \textbf{T3}
+		\item $ X, Y $ удовл. \textbf{T0} -- \textbf{T3}, то
+	\end{enumerate}
+\end{properties}

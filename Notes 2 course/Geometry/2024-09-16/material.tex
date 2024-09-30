@@ -1,0 +1,201 @@
+\section{Продолжаем репер Френе}
+
+\begin{notation}
+	$ \dot{r} $ -- производная по натуральному параметру
+\end{notation}
+
+\begin{undefthm}{На чём мы остановились}
+	$ \vect{r}(s) $ -- натуральная параметризация
+	$$ v(t) \define r'(s) \quad (\define \dot{r}(s)), \qquad |v| = 1 $$
+	$ \dot{v} \perp v $ (по лемме)
+	$$ \vect{n} \define \frac{\dot{v}}{|\dot{v}|} \qquad \vect{n}(s) \text{ -- вектор главной нормали} $$
+	$$ \vect{b} \vect{v} \times \vect{n} $$
+	Тем самым, $ (v, n, b) $ -- правая тройка (называется репер Френе)
+\end{undefthm}
+
+\begin{remark}
+	Репер Френе существует только если $ \dot{v} \ne \vect{0} $
+\end{remark}
+
+\begin{definition}
+	Кривая называется бирегулярной, если $ \dot{v} \ne \vect{0} $ ни при каких $ s $ (т. е. в любой точке существет репер Френе)
+\end{definition}
+
+\begin{exmpls}
+	\item Прямая \textbf{не} бирегулярна
+	\item Если у кривой есть точка перегиба, то она \textbf{не} бирегулярна в этой точке (чуть позже будет объяснение)
+\end{exmpls}
+
+\begin{statement}
+	Если $ \forall $ регулярной параметризации $ r''(t) \not\parallel r'(t) $, то кривая бирегулярна \\
+	Обратное \textbf{верно}
+\end{statement}
+
+\begin{proof}
+	Позже возникнет естественным образом
+\end{proof}
+
+\begin{itemize}
+	\item $ \braket{v, n} $ называется соприкасающейся плоскостью
+	\item $ \braket{b, n} $ называется нормальной плоскостью
+	\item $ \braket{v, b} $ называется спрямляющей плоскостью
+\end{itemize}
+
+\begin{remark}
+	Мы пока не умеем искать уравнения этих плоскостей (т. к. в начале нам нужна регулярная параметризация, к которой редко удаётся перейти)
+\end{remark}
+
+\subsection{Формула Френе}
+
+$$ \boxed{\dot{v} = k \cdot \vect{n}} \text{ -- первая формула Френе} $$
+$ k(s) \ge 0 $ (значит, кривая бирегулярна) \\
+$ k(s) $ -- скалярная функция
+
+\begin{definition}
+	$ k(s) $ называется кривизной кривой
+\end{definition}
+
+\begin{remark}
+	Первую формулу не надо доказывать. Она получается из определения
+\end{remark}
+
+\begin{eg}
+	$ x^2 + y^2 = R^2 $
+	$$
+	\begin{cases}
+		x = R \cos t \\
+		y = R \sin t \\
+		z = 0
+	\end{cases} \quad \text{-- \textbf{не} натуральная параметризация} $$
+	$$ s = \dint[\tau]0t{|r'(\tau)} = \dint[\tau]0t{\sqrt{R^2 \sin^2 \tau + R^2 \cos^2 \tau}} = R \dint[\tau]0t{} = Rt $$
+	$$ t = \frac{s}R $$
+	Натуральная параметризация:
+	$$
+	\begin{cases}
+		x = R \cos \faktor{s}R \\
+		y = R \sin \faktor{s}R \\
+		z = 0
+	\end{cases} $$
+	Интуитивно, это параметризация, такая, что мы проходим окружность за $ 2\pi R $. Для этого мы ``замедлили время'' в $ R $ раз
+	$$ \vect{v} = (\dot{x}, \dot{y}, \dot{z}) = \bigg( -\sin \frac{s}R, \cos \frac{s}R, 0 \bigg) $$
+	$$ \dot{v} = \bigg( -\frac1R \cos \frac{s}R, -\frac1R \sin \frac{s}R, 0 \bigg) $$
+	$$ |\dot{v}| = \frac1R = k $$
+	$$ \vect{n} = \bigg( -\cos \frac{s}R, -\sin \frac{s}R, 0 \bigg) $$
+	$$ \vect{b} = (0, 0, 1) $$
+\end{eg}
+
+$$ \boxed{\dot{b} = - \text{\ae} n} \text{ -- вторая формула Френе} $$
+
+\begin{definition}
+	$ \text{\ae} $ называется кручением кривой
+\end{definition}
+
+\begin{theorem}
+	$ \vect{\dot{b}} \parallel \vect{n} $
+\end{theorem}
+
+\begin{proof}
+	$ \dot{b} \perp b $ по лемме \\
+	Докажем, что $ \dot{b} \perp v $:
+	$$ \dot{b} = (v \times n)^. = \underbrace{\dot{v} \times n}_{= 0 } + \underbrace{v \times \dot{n}}_{\perp v} \perp v $$
+\end{proof}
+
+\begin{statement}
+	Кривая плоская $ \iff \text{\ae} = 0 $
+\end{statement}
+
+\begin{proof}
+	Упражнение
+\end{proof}
+
+$$ \dot{n} = (b \times v)^. = \dot{b} \times v + b \times \dot{v} = -\text{\ae} \underbrace{n \times v}_{= -b} + \underbrace{b \times kn}_{= -kv} = \text{\ae}b - kv $$
+$$ \boxed{\vect{\dot{n}} = \text{\ae}\vect{b} - k\vect{v}} \text{ -- тертья формула Френе} $$
+
+Все формулы Френе: \\
+\begin{tabular}{c | c | c | c}
+	& $ v $ & $ n $ & $ b $ \\
+	\hline
+	$ \dot{v} $ & 0 & $ k $ & 0 \\
+	\hline
+	$ \dot{n} $ & $ -k $ & 0 & \ae \\
+	\hline
+	$ \dot{b} $ & 0 & -\ae & 0
+\end{tabular} \\
+Таблица антисимметрична
+
+\section{Соприкасающаяся плоскость}
+
+\begin{theorem}
+	$ r(t) $ -- произвольная регулярная параметризация бирегулярной кривой
+	$$ \implies r''(t) \in \braket{v, n} $$
+\end{theorem}
+
+\begin{proof}
+	Пусть $ s $ -- натуральный параметр
+	$$ \frac{\di r}{\di t} = \frac{\di r}{\di s} \cdot \frac{\di s}{\di t} = \dot{r} \cdot s' $$
+	$$ r'' = \frac{\di^2 r}{\di t^2} = \frac{\di \dot{r}}{\di t} s' + \dot{r} \cdot s'' = \overset{..}r \cdot (s')^2 + \dot{r} s'' = k \vect{n} \cdot (s')^2 + vs'' $$
+	$$ \boxed{r'' = k(s')^2 \cdot \vect{n} + s''\vect{v}} $$
+	То есть, $ r'' $ раскладывается по векторам $ v $ и $ n $ \\
+	Причём, если параметризация бирегулярна, то $ k(s')^2 \ne 0 $
+\end{proof}
+
+\begin{implication}
+	Соприкасающаяся плоскость $ = \braket{r'(t), r''(t)} $
+\end{implication}
+
+\begin{problem}
+	Вычислить $ v, n, b $ и плоскости для произвольной параметризации $ r(t) $
+\end{problem}
+
+$$ \vect{v} = \frac{r'(t)}{|r'(t)|} $$
+$$ \vect{b} = \frac{r'' \times r'}{|r' \times r''|} $$
+$$ \vect{n} = \vect{b} \times \vect{n} = \frac{(r' \times r'') \times r'}{|r'| \cdot |r' \times r''|} $$
+Пусть
+$$ r(t) = \big( x(t), y(t), z(t) \big) $$
+$$ \vect{v} \parallel (x', y', z') = r' \text{ -- вектор нормали для нормальной плоскости} $$
+Тогда нормальная плоскость пишется так:
+$$ \boxed{x'\clamp{t_0}(x - x_0) + y'\clamp{t_0}(y - y_0) + z'\clamp{t_0}(z - z_0) = 0} $$
+Найдём соприкасающуюся плоскость:
+$$
+\begin{vmatrix}
+	x'\clamp{t_0} & y'\clamp{t_0} & z'\clamp{t_0} \\
+	x''\clamp{t_0} & y''\clamp{t_0} & z''\clamp{t_0} \\
+	x - x_0 & y - y_0 & z - z_0
+\end{vmatrix} = 0 $$
+(это -- смешанное произведение трёх векторов) \\
+Спрямляющая плоскость -- упражнение
+
+$$ A = r(t_0), \qquad B = r(t_0) $$
+$$ \delta \define \dist(B, \text{сопряж.}) $$
+
+\begin{theorem}
+	$$ \liml{t \to t_0} \frac\delta{AB^2} = 0 $$
+\end{theorem}
+
+\begin{proof}
+	Введём подходящие координаты, такие, что:
+	\begin{itemize}
+		\item Соприкас. = $ OXY $
+		\item Кас. прямая = $ OX $
+		\item $ A $ -- начало координат
+		\item $ t_0 = 0 $
+		\item $ y''(t) \ne 0 $
+		\item $ x'(0) \ne 0 $
+	\end{itemize}
+	Тогда $ r(t) = \bigg( x(t), y(t), z(t) \bigg) $
+	$$ x(0) = y(0) = z(0) = 0, \quad \text{т. к. } A \text{ -- начало координат} $$
+	$$ y'(0) = z'(0) = 0, \quad \text{т. к. касательная прямая -- } OX $$
+	$$ z''(0) = 0, \quad \text{т. к. соприкас. -- } OXY $$
+	$$ \delta = z(t) $$
+	Нужно сосчитать предел
+	$$ \limz{t} \frac{z(t)}{x^2 + y^2 + z^2} $$
+	Разложим по Тейлору:
+	$$ z(t) = o(t^2) $$
+	$$ y(t) = \half[y''(t)]t^2 + o(t^2) $$
+	$$ x(t) = x'(0)t + \half[x''(0)]t^2 + o(t^2) $$
+	$$ \lim = \limz{t} \frac{o(t^2)}{x'^2(0) t^2 + o(t^2)} = 0 $$
+\end{proof}
+
+\begin{implication}
+	Соприкасающаяся плоскость -- единственная, обладающая таким свойством
+\end{implication}

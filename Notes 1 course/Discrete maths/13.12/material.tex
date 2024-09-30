@@ -1,0 +1,66 @@
+\chapter{Базы данных}
+
+\begin{definition}
+	$U \sub A \times B$ -- отношение
+\end{definition}
+
+Схема БД: $R(A_1, A_2, ..., A_k)$ \\
+Для каждого атрибута определяется домен \\
+Арность -- количество атрибутов (столбцов)
+
+\vspace{1em}
+
+Читатель:
+\begin{center}
+    \begin{tabular}{c | c | c | c}
+        \textbf{\textnumero~билета} & ФИО & Адрес & Телефон\\
+        \hline \hline
+        × & × & × & ×\\
+        \hline
+        × & × & × & ×
+    \end{tabular}
+\end{center}
+
+\vspace{1em}
+
+Книга:
+\begin{center}
+    \begin{tabular}{c | c | c | c}
+        \textbf{Шифр} & Автор & Название & Количество \\
+        \hline \hline
+        × & × & × & × \\
+        \hline
+        × & × & × & ×
+    \end{tabular}
+\end{center}
+
+\vspace{1em}
+
+Связь:
+\begin{center}
+    \begin{tabular}{c | c | c}
+        \textnumero~билета & Шифр & Дата \\
+        \hline \hline
+        × & × & × \\
+        \hline
+        × & × & ×
+    \end{tabular}
+\end{center}
+
+Не должно быть избыточности
+
+\vspace{1em}
+
+Операции: \\
+$R, S$ -- две таблицы
+\begin{enumerate}
+	\item $ R \cup S$
+    \item $ R \cap S$
+    \item $ R \setminus S$
+    \item $ R \times S$
+    \item $ \delta (R) $
+    \item что-то $(R)$
+    \item $R \bowtie S$ -- естественное соединение
+    \item $R \underset\Theta\bowtie S$ -- $\Theta$-соединение
+\end{enumerate}
+

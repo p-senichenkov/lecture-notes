@@ -1,0 +1,209 @@
+\chapter{Производные и дифференцируемость}
+
+\section{Свойства производных (продолжение)}\label{sec:1}
+
+\begin{properties}[Производные тригонометрических функций]
+\begin{enumerate}
+    \hfill
+	\item $e^x$
+    $$ (e^x)' = e^x, \quad (e^x)'' = ((e^x)')' = (e^x)' = e^x $$
+    Индукция: $ (e^x)^{(n)} = e^x \quad (e^x)^{(n + 1)} = ((e^x)^{(n)})' = (e^x)' = e^x$
+    \item $\sin x$
+    $$ (\sin x)' = \cos x \quad (\sin x)'' = ((\sin x)')' = (\cos x)' = - \sin x$$
+    $$ (\sin x)''' = ((\sin x)'')' = (-\sin x)' = -\cos x $$
+    $$ (\sin x)^{(n)} = ((\sin x)''')' = (-\cos x)' = \sin x $$
+    То есть, $(\sin x)^{(4n)} = \sin x, \quad (\sin x)^{(4n + r)} = (\sin x)^{(r)}, \quad 1 \le r \le 3 $
+    \item $\cos x$
+    $$ (\cos x)' = -\sin x \quad (\cos x)'' = ((\cos x)')' = (-\sin x)' = -\cos x$$
+    $$ (\cos x)''' = ((\cos x)'')' = (-\cos x)' = \sin x $$
+    То есть, $ (\cos x)^{(4n)} = \cos x, \quad (\cos x)^{(4n+r)} = (\cos x)^{(r)}, \quad 1 \le r \le 3 $
+    \item $(x + a)^r, \quad r \notin \N $
+    \begin{itemize}
+    	\item Если $ r \notin \Z$, то $x > -a$
+        \item Если $ r \in \Z$, то $x \ne -a $
+    \end{itemize}
+    $$ ((x+a)^r)' = r(x+a)^{r-1} $$
+    $$ ((x+a)^r)'' = (r(x+a)^{r-1})' = r \cdot (r-1) \cdot (x+a)^{r-2} $$
+    $$ ((x + a)^r)''' = (r(r-1)(x+a)^{r-2})' = r(r-1)(r-2)(x+a)^{r-3} $$
+    $$ r-1 \ne 0, \quad r-2 \ne 0 $$
+    $$ ((x+a)^r)^{(n)} = r(r-1)(r-2)...(r-n+1)(x+a)^{r-n}, \quad r - k \ne 0 ~ \forall k \in \N $$
+    \item $ \ln (x+a) $
+    $$ (\ln (x+a))' = \frac1{x+a} = (x+a)^{-1} $$
+    \begin{multline*}
+         (\ln (x+a))^{(n)} = ((x+a)^{-1})^{(n-1)} = (-1) \cdot (-2) \cdot (-1-(n-1)+1) \cdot (x+a)^{-n} = \\ = (-1)^{n-1}(n-1)' \cdot (x+a)^{-n}
+    \end{multline*}
+    \item $(x+a)^k $
+    $$ (x+a)' = 1 $$
+    $$ (x+a)'' = 1' = 0 $$
+    $$ (x+a)^{(n)} = 0, \quad n \ge 2 $$
+    $$ ((x + a)^2)' = 2(x+a) $$
+    $$ ((x+a)^2)'' = (2(x+a))' = 2 $$
+    $$ ((x + a)^2)''' = 0 $$
+    $$ ((x + a)^2)^{(n)} = 0, \quad n \ge 3 $$
+    $$ k \ge 3 $$
+    $$ ((x+a)^k)' = k(x+a)^{k-1}((x+a)^k)'' = (k(x+a)^{k-1})' = k(k-1)(x+a)^{k-2} $$
+    $$ ((x+a)^k)''' = k(k-1)(k-2)(x+a)^{k-3} $$
+    Если $l < k - 1 $, то $ ((x+a)^k)^{(l)} = k(k-1)...(k-l+1)(x+a)^{k-l} $
+    $$ ((x + a)^k)^{k-1} = k\cdot(k-1)\cdot...\cdot2\cdot(x+a) $$
+    $$ ((x+a)^k)^{(k)} = k! \cdot (x+a)' = k! $$
+    $$ ((x+a)^k)^{(k+1)} = 0, \quad ((x+a)^k)^{(n)} = 0, ~ n \ge k + 1 $$
+    При $l < k$, $ ((x+a)^k)^{(l)}\clamp{x=-a}=0$
+    При $l > k$, $ ((x+a)^k)^{(l)}\clamp{x=-a} = 0$
+\end{enumerate}
+
+\end{properties}
+
+\begin{corollary}
+    $$ (\frac1{k!}(x+a)^k)^{(l)}\clamp{x=-a} = \begin{cases} 0, ~ l \ne k \\ 1, ~ l = k \end{cases} $$
+\end{corollary}
+
+\section{Формула Тейлора}
+
+$$ (\frac1{k!}(x-a)^k)^{(l)}\clamp{x=a} = \begin{cases} 0, \quad l \ne k \\ 1, \quad l = k \end{cases} $$
+$$b_0,...,b_n \in \R, \quad a \in \R $$
+$$ P(x) = b_0 + b_1(x-a) + \frac{b_2}{2!}(x-a)^2 + ... + \frac{b_n}{n!}(x-a)^n $$
+$$ P(a) = b_0 \quad P'(a) = b_0' + (b_1(x-a)')'\clamp{x=a} + ... + \bigg( \frac{b_n}{n!}(x-a)^n\bigg)\clamp{x=a} = b_1 $$
+$$ 1 \le k \le n $$
+$$ P^{(k)}(a) = b_0^{(k)} + (b(x-a))^{(k)}\clamp{x=a} + ... + \bigg( \frac{b_k}{k!}(x-a)^k\bigg)\clamp{x=a} + ... + \bigg(\frac{b_n}{n!}(x-a)^n\bigg)^{(k)}\clamp{x=a} = b_k $$
+
+\begin{statement}[Формула Тейлора для многочлена]
+    \begin{equ}1
+        P(x) = P(a) + P'(a)(x-a) + ... + \frac{P^{(n)}(a)}{n!}(x-a)^n
+    \end{equ}
+\end{statement}
+
+\begin{theorem}[Тейлора]
+	$$ f \in C((p,q)), \quad a \in (p,q) $$
+    \begin{itemize}
+    	\item Если $n = 1$, то $\exist f'(a)$
+        \item Если $n > 1$, то $\forall x \in (p,q) ~ \exist f^{(n-1)}(x)$ и $\exist f^{(n)}(a) $
+    \end{itemize}
+    \begin{equ}2
+        \implies f(x) = f(a) + f'(a)(x-a) + ... + \frac{f^{(n)}(a)}{n!}(x-a)^n + r(x)
+    \end{equ}
+    \begin{equ}3
+        \frac{r(x)}{(x-a)^n} \underarr{x\to a} 0
+    \end{equ}
+\end{theorem}
+
+\begin{lemma}
+	$$ g \in C((p,q)), \quad g'(a) = 0, ~ g(a) = 0 $$
+    \begin{itemize}
+    	\item Если $n = 1$, то $g'(a) = 0 $
+        \item Если $n > 1$, то $ \forall x \in (p,q) ~ \exist g^{(n-1)}(x)$ и $\exist g^{(n)}(a)$. При этом $g(a) = 0, ~ g'(a) = 0,...,g^{(n-1)}(a) = 0, ~ g^{(n)}(a) = 0$
+        \begin{equ}4
+            \implies \frac{g(x)}{(x-a)^n} \underarr{x\to a} 0
+        \end{equ}
+    \end{itemize}
+\end{lemma}
+
+\begin{replacementproof}[Леммы]
+    По индукции:
+    \begin{equ}5
+        g(x) = g(a) + g'(a)(x-a) + r(x) = r(x)
+    \end{equ}
+    $$ \frac{r(x)}{x-a} \underarr{x\to a} 0 $$
+    $$ n \ge 1 \quad h(a) = 0, ~ h'(a) = 0, ..., h^{(n-1)}(a) = 0 ~ \text{и} ~ \forall x \in (p,q) ~ \exist h^{(n-2)}(x) \text{, то}$$
+    \begin{equ}6
+        \frac{h(x)}{(x-a)^{n-1}} \underarr{x\to a} 0
+    \end{equ}
+    $$ h(x) \define g'(x), \quad (g')^{(n-1)}(x) = g^{(n)}(x) $$
+    $$ \delta(x) \define \frac{g'(x)}{(x-a)^{n-1}}, \quad \delta(a) \define 0 $$
+    Тогда $ \eref6 \implies \delta(x) \underarr{x\to a}0 $ \\
+    Применим теорему Лагранжа:
+    \begin{equ}7
+        g(x) \underset{(g(a) = 0)}= g(x) - g(a) = g'(c)(x-a)
+    \end{equ}
+    $$ \exist c = c(x), ~ c \text{ между } x \text{ и } a $$
+    \begin{equ}8
+        \eref7 \implies g(x) = \delta(c)(c-a)^{n-1}(x-a)
+    \end{equ}
+    \begin{multline*}
+        \eref8 \implies \frac{g(x)}{(x-a)^n} = \delta(c(x)) \frac{(c(x) - a)^{n-1}}{(x-a)^{n-1}} \implies \\ \implies \bigg| \frac{g(x)}{(x-a)^n} \bigg| \le | \delta(c(x))| \underarr{x\to a} 0 \iff \frac{g(x)}{(x-a)^n} \underarr{x\to a} 0
+    \end{multline*}
+\end{replacementproof}
+
+\begin{proof}[Теоремы]
+    Рассмотрим полином:
+    \begin{equ}9
+        P(x) = f(a) + f'(a)(x-a) + ... + \frac{f^{(n)}(a)}{n!}(x-a)^n
+    \end{equ}
+    \begin{equ}{11}
+        \eref9 \implies \begin{cases} P(a) = f(a) \\ P^{(k)}(a) = f^{(k)}(a) \end{cases}
+    \end{equ}
+    \begin{equ}{12}
+        g(x) = f(x) - P(x)
+    \end{equ}
+    $$ \forall x \in (p,q) ~ \exist g^{(n-1)}(x), ~ \exist g^{(n)}(a) $$
+    $$ \eref{11}, \eref{12} \implies g(a) = 0, ~ g'(a) = 0, ..., g^{(n)}(a) = 0 $$
+    По Лемме получаем:
+    $$ \frac{g(x)}{(x-a)^n} \underarr{x\to a} 0 $$
+    $$ \eref2, \eref{12} \implies r(x) \equiv g(x) $$
+\end{proof}
+
+\begin{theorem}
+    $$ f: (p,q) \to \R, \quad \text{для } n \ge 1 ~ \forall x \in (p,q) ~ \exist f^{(n+1)}(x) $$
+    $$ a \in (p,q), \quad x \in (p,q), \quad x \ne a $$
+    \begin{equ}{101}
+        \implies \exist c \text{ между } a \text{ и } x : f(x) = f(a) + f'(a)(x-a) + ... + \frac{f^{(n)}(a)}{n!}(x-a)^n + \frac{f^{(n+1)}(c)}{(n+1)!}(x-a)^{a+1}
+    \end{equ}
+\end{theorem}
+
+\begin{proof}
+	Фиксируем $x$, рассмотрим функцию от $y$:
+    \begin{equ}{102}
+        \vphi(y) \define f(x) - f(y) - f'(y)(x-y) - \frac{f''(y)}{2!}(x-y)^2 - ... - \frac{f^{(n)}(y)}{n!}(x-y)^n
+    \end{equ}
+    $$ \eref{102} \implies \forall y \in (p,q) ~ \exist \vphi'(y) $$
+    \begin{multline}\label{eq:103}
+        \eref{102} \implies \vphi'(y) = \underset{\text{(производная по $y$, а не по $x$)}}{(f(x))_y'} - f'(y) - (f'(y)(x-y))' - \bigg(\frac{f''(y)}{2!}(x-y)^2\bigg)' - ... - \\ - \bigg(\frac{f^{(n)}(y)}{n!}(x-y)^n\bigg)' = 0 - f'(y) - \bigg(f''(y)(x-y) - f'(y) \cdot 1\bigg) - \bigg(\frac{f'''(y)}{2!}(x-y)^2 - 2 \cdot \frac{f''(y)}{n!}(x-y)\bigg) - \\ - \bigg(\frac{f^{(n+1)}(y)}{n!}(x-y)^n - \frac{n}{n!}f^{(n)}(y)(x-y)^{n-1}\bigg) \underset{(\frac{n}{n!}=\frac1{(n-1)!})}= - \frac{f^{(n+1)}(y)}{n!}(x-y)^n $$
+    \end{multline}
+    $$ \vphi(x) = 0, \quad \vphi(a) \define r $$
+    Рассмотрим функцию $ \psi(y) \define (x-y)^{n+1} $, $ y \in [\min(a,x), \max(a, x)] $
+    $$ \psi(x) = 0, \quad \psi(a) = (x-a)^{n+1}$$
+    $$ \psi'(y) = -(n+1)(x-y)^n, \quad \psi'(y) \ne 0 \text{ при } y \in (\min(a,x), \max(a,x)) $$
+    Применим теорему Коши:
+    \begin{equ}{104}
+        \exist c \text{ между } a \text{ и } x : \frac{\vphi(a) - \vphi(x)}{\psi(a) - \psi(x)} = \frac{\vphi'(c)}{\psi'(c)}
+    \end{equ}
+    \begin{equ}{105}
+        \frac{r - 0}{(x-a)^{n+1} - 0} = \frac{- \frac{f^{(n+1)}(c)}{n!}(x-c)^n}{-(n+1)(x-c)^n} = \frac{f^{(n1)}(c)}{(n+1)!} \implies r = \frac{f^{(n+1)}(c)}{(n+1)!}(x-a)^{n+1}
+    \end{equ}
+    $$ \eref{102}, \eref{105} \implies \eref{101} $$
+\end{proof}
+
+
+\subsection{Применение формулы Тейлора к элементарным функциям}
+
+Будем пользоваться выражениями для производных (из параграфа \ref{sec:1})
+
+$$ a = 0 $$
+Обозначение: $\underset{T}=$ -- по формуле Тейлора. $c$ везде из теоремы Телора
+\begin{statements}
+    \hfill
+    \begin{enumerate}
+        \item $e^x$
+        $$ (e^x)^{(n)}\clamp{x=0} = 1 $$
+        $$ e^x \underset{T}= 1 + \frac{x}{1!} + \frac{x^2}{2!} + ... + \frac{x^n}{n!} + \frac{e^cx^{n+1}}{(n+1)!} \quad \begin{cases} cx > 0 \\ |c| < |x| \end{cases} $$
+        \item $\sin x$
+        $$ (\sin x)^{(2n)}\clamp{x=0} = 0 $$
+        $$ (\sin x)^{(2n-1)}\clamp{x=0} = (-1)^{n-1} $$
+        $$ \sin x \underset{T}= x - \frac{x^3}{3!} + \frac{x^5}{5!} - ... + (-1)^{n-1} \frac{x^{2n-1}}{(2n-1)!} \pm \sin c \frac{x^{2n}}{(2n)!} $$
+        \item $ \cos x $
+        $$ (\cos x)^{(2n-1)}\clamp{x=0} = 0 $$
+        $$ (\cos x)^{(2n)}\clamp{x=0} = (-1)^n $$
+        $$ \cos x \underset{T}= 1 - \frac{x^2}{2!} + \frac{x^4}{4!} - ... + (-1)^n \frac{x^{2n}}{(2n)!} \pm \frac{\sin c}{(2n+1)!} x^{2n+1} $$ \\
+        Дальше: $r \ne 0$, $r \notin \N$, $x \in (-1,1)$
+        \item $(1+x)^r$
+        $$ ((1+x)^r)^{(n)}\clamp{x=0} = r(r-1)...(r-n+1) $$
+        \begin{multline*}
+            (1+x)^r \underset{T}= 1 + rx + \frac{r(r-1)}{2!}x^2 + ... + \frac{r(r-1)...(r-n+1)}{n!}x^n + \\ + \frac{r(r-1)...(r-n+1)(r-n)}{(n+1)!}(1+c)^{r-n-1}x^{n+1}
+        \end{multline*}
+        \item $\ln (1+x)$
+        $$ (\ln (1+x))'\clamp{x=0} = 1 $$
+        $$ n \ge 2 \quad (\ln (1+x))^{(n)}\clamp{x=0} = (-1)^{n-1}(n-1)! $$
+        Вспомним, что $\frac{(n-1)!}{n!} = \frac1n $
+        $$ \ln (1+x) \underset{T}= x - \frac{x^2}2 + \frac{x^3}3 - \frac{x^4}4 + ... + (-1)^{n-1}\frac{x^n}n + (-1)^n \cdot \frac1{n+1} \cdot (1+c)^{-n-1} \cdot x^{n+1} $$
+    \end{enumerate}
+\end{statements}
+

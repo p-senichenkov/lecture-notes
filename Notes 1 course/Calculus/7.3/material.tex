@@ -1,0 +1,134 @@
+\chapter{Определённый интеграл}
+
+\section{Интегрирование по Риману}
+
+\begin{statement}
+	$ [a, b], \quad P = \seq{x_k}k, \quad f $
+	$$ U(f, P) - L(f, P) = \sum_{k = 1}^n M_k(x_k - x_{k - 1}) - \sum_{k = 1}^n m_k(x_k - x_{k - 1}) = \sum_{k = 1}^n (M_k - m_k)(x_k - x_{k - 1}) $$
+	Где $ M_k \define \underset{x \in [x_{k - 1}, x_k]}{\sup\set{f(x)}}, \quad m_k \define \underset{x \in [x_{k - 1}, x_k]}{\inf\set{f(x)}} $
+	$$ 0 \le M_k - m_k = \omega_k = \omega_f([x_{k - 1}, x_k]) $$
+	$$ f \in \Ri([a, b]) \iff \forall \veps > 0 \exist P $$
+	$$ \sum_{k = 1}^n \omega_k (x_k - x_{k - 1}) < \veps $$
+\end{statement}
+
+\begin{theorem}[Критерий интегрируемости по Риману]
+	$ c \in (a, b) $
+	$$ f \in \Ri([a, b]) \iff
+	\begin{cases}
+		f \in \Ri([a, c]) \\
+		f \in \Ri([c, b])
+	\end{cases} $$
+\end{theorem}
+
+\begin{proof}
+	\hfill
+	\begin{itemize}
+		\item $ \implies $
+		$$ P = \seqz[n]{x_k}k, \qquad x_0 = a, \quad x_n = b, \qquad c \in P $$
+		$$ \forall \veps > 0 \quad \sum_{k = 1}^n \omega_k(x_k - x_{k - 1}) < \veps $$
+		$$ P_1 = \seqz[l]{x_k}k, \qquad P_2 = \seqv[n]{x_k}kl $$
+		$$ \sum_{k = 1}^n ... = \sum_{k = 1}^l ... + \sum_{k = l + 1}^n ... $$
+		$$ \sum_{k = 1}^l \omega_k (x_k - x_{k - 1}) < \veps, \qquad \sum_{k = l + 1}^n \omega_k (x_k - x_{k - 1}) < \veps $$
+		\item $ \impliedby $
+		$$ \vawe{P_1} = \seqz[m]{x_k}k \quad x_0 = 0, \quad x_m = c, \qquad \vawe{P_2} = \seqv[m + q]{k_l}lm $$
+		$$ \sum_{k = 1}^m \omega_k(x_k - x_{k - 1}) < \frac\veps2, \qquad \sum_{k = m + 1}^{m + q} \omega_k (x_k - x_{k - 1}) < \frac\veps2 $$
+		$$ \vawe{P} = \vawe{P_1} \cup \vawe{P_2} $$
+		$$ \sum_{k = 1}^{m + q} \omega_k(x_k - x_{k - 1}) = \sum_{k = 1}^m \omega_k (x_k - x_{k - 1}) + \sum_{k = m + 1}^{m + 1} \omega_k (x_k - x_{k - 1}) < \frac\veps2 + \frac\veps2 = \veps $$
+	\end{itemize}
+\end{proof}
+
+\begin{statement}\label{st:1}
+	$ \sup\set{f + g} \le \sup\set{f} + \sup\set{g}, \qquad \inf\set{f + g} \ge \inf\set{f} + \inf\set{g} $
+\end{statement}
+\begin{proof}
+	\begin{multline*}
+		\begin{rcases}
+			\forall \delta > 0 \quad \exist x_* \in [\alpha, \beta] : f(x_*) + g(x_*) > \sup\set{f + g} - \delta \\
+			\sup\set{f} + \sup\set{g} \ge f(x_*) + g(x_*)
+		\end{rcases} \implies \\ \implies \sup\set{f} + \sup\set{g} > \sup\set{f + g} - \delta \implies \sup\set{f} + \sup\set{g} \ge \sup\set{f + g} $$
+	\end{multline*}
+\end{proof}
+
+\begin{props}
+	\item $ f \in \Ri([a, b]) $
+	$$ c \ne 0 \implies cf \in \Ri([a, b]) $$
+	\begin{proof}
+		\hfill
+		\begin{itemize}
+			\item $ c > 0 $
+			$$ \forall [x_{k - 1}, x_k] \sub [a, b] \quad \omega_{cf}([x_{k - 1}, x_k]) = c\omega_f([x_{k - 1}, x_k]) $$
+			$$ \sum_{k = 1}^n \omega_{cf}([x_{k - 1}, x_k])(x_k - x_{k - 1}) = c \sum_{k = 1}^n \omega_f([x_{k - 1}, x_k])(x_k - x_{k - 1}) < c\veps $$
+			\item $ c < 0 \qquad c = (-1) \cdot |c| $ (см. следующуе свойство)
+		\end{itemize}
+	\end{proof}
+	\item $ \omega_{-f} ([x_{k - 1}, x_k]) = \omega_f([x_{k - 1}, x_k]) $
+	\begin{proof}
+		$$ \sup\set{-f} = -\inf\set{f}, \qquad \inf\set{-f} = -\sup\set{f} $$
+		$$ \sup\set{-f} - \inf\set{-f} = \sup\set{f} - \inf\set{f} $$
+	\end{proof}
+	\item $ f \in \Ri([a, b]), \qquad g \in \Ri([a, b]) \quad \implies \quad f + g \in \Ri([a, b]) $
+	\begin{proof}
+		$$
+		\begin{rcases}
+			\sup\set{f + g} \le \sup{f} + \sup\set{g} \\
+			\inf\set{f + g} \ge \in\set{f} + \inf\set{g}
+		\end{rcases} \implies \omega_{f + g}([x_{k - 1}, x_k]) \le \omega_f([x_{k - 1}, x_k]) + \omega_g([x_{k - 1}, x_k]) $$
+		(см. утверждение \ref{st:1})
+		\begin{multline*}
+			\sum_{k = 1}^n \omega_{f + g}([x_{k - 1}, x_k])(x_k - x_{k - 1}) \le \\ \le \sum_{k = 1}^n \omega_f([x_{k - 1}, x_k])(x_k - x_{k - 1}) + \sum_{k = 1}^n \omega_g([x_{k - 1}, x_k])(x_k - x_{k - 1}) < \frac\veps2 + \frac\veps2 = \veps
+		\end{multline*}
+	\end{proof}
+	\item \label{it:1} $ \omega_{|f|}([x_{k - 1}, x_k]) \le \omega_f([x_{k - 1}, x_k]) $
+	\item $ f \in \Ri([a, b]) \implies |f| \in \Ri([a, b]) $ (в обратную сторону \textbf{неверно})
+	\begin{proof}
+		Следует из свойства \ref{it:1}
+	\end{proof}
+	\item $ f \in \Ri([a, b]) \implies f^2 \in \Ri([a, b]) $
+	\begin{proof}
+		$ f^2 = |f|^2 $ \\
+		Будем считать, что $ f(x) \ge 0, f \in \Ri([a, b]) $, значит, $ \forall x \in [a, b] \quad f(x) \le M $ \\
+		Положим $ [\alpha, \beta] \sub [a, b] $ \\
+		Возьмём $ x_1, x_2 \in [\alpha, \beta] : f(x_2) \ge f(x_1) \ge 0 $
+		$$ f^2(x_2) - f^2(x_1) = \bigg( f(x_2) - f(x_1) \bigg) \bigg( f(x_2) + f(x_1) \bigg) \le 2M \bigg( f(x_2) - f(x_1) \bigg) $$
+		\begin{equ}1
+			\begin{rcases}
+				f(x_2) \le \sup\set{f} \\
+				f(x_1) \ge \inf\set{f}
+			\end{rcases} \implies 2M \bigg( f(x_2) - f(x_1) \bigg) \le 2M \omega_f([\alpha, \beta])
+		\end{equ}
+		$$ \forall \delta > 0 \quad f^2(x_2) > \sup\limits_{[\alpha, \beta]}\set{f^2} - \delta, \qquad \forall \delta > 0 \quad f^2(x_2) < \inf\limits_{[\alpha, \beta]}\set{f^2} + \delta $$
+		$$ 2M \omega_f([\alpha, \beta]) \underset{\eref1}\ge f^2(x_2) - f^2(x_1) > \sup\set{f^2} - \inf\set{f^2} - \delta $$
+		\begin{multline*}
+			\omega_{f^2}([\alpha, \beta]) < 2M \omega_f([\alpha, \beta]) + 2\delta \implies \omega_{f^2}([\alpha, \beta]) \le 2M\omega_f([\alpha, \beta]) \implies \\ \implies \sum_{k = 1}^n \omega_{f^2}([x_k - x_{k - 1}])(x_k - x_{k - 1}) < 2M\veps
+		\end{multline*}
+	\end{proof}
+	\item $ f, g \in \Ri([a, b]) \implies fg \in \Ri([a, b]) $
+	\begin{proof}
+		\begin{intuition}
+			$ fg = \dfrac14(f + g)^2 - \dfrac14(f - g)^2 $
+		\end{intuition}
+		Все части этого выражения интегрируемы по Риману
+	\end{proof}
+\end{props}
+
+\begin{props}
+	\item $ f \in C([a, b]) \implies f \in \Ri([a, b]) $
+	\begin{proof}
+		По теореме Кантора, $f$ равномерно непрерывна на $ [a, b] $. Значит,
+		$$ \forall \veps > 0 \exist \delta > 0 : \forall \underset{0 < x_2 - x_1 < \delta}{x_1, x_2 \in [a, b]} \quad |f(x_2) - f(x_1) | < \veps $$
+		$$ x_k = a + \frac{b - a}nk, \qquad k = 0, 1, ..., n $$
+		$$ x_k - x_{k - 1} < \delta $$
+		По второй теореме Веейрштрасса,
+		$$
+		\begin{cases}
+			\exist x_k^+ \in [x_{k - 1}, x_k] : \forall x \in [x_{k - 1}, x_k] \quad f(x) \le f(x_k^+) \\
+			\exist x_k^- \in [x_{k - 1}, x_k] : \forall x \in [x_{k - 1}, x_k] \quad f(x) \ge f(x_k^-)
+		\end{cases} $$
+		$$ \omega_f([x_{k - 1}, x_k]) = f(x_k^+) - f(x_k^-) $$
+		$$ |x_k^+ - x_k^- | \le x_k - x_{k - 1} < \delta \implies f(x_k^+) - f(x_k^-) < \veps $$
+		$$ \sum_{k = 1}^n \omega_f([x_{k - 1}, x_k])(x_k - x_{k - 1}) < \sum_{k = 1}^n \veps(x_k - x_{k - 1}) = \veps(b - a) $$
+
+
+	\end{proof}
+
+\end{props}

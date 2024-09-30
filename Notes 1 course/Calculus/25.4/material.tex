@@ -1,0 +1,178 @@
+\chapter(R\textasciicircum{}n){$ \R^n $}
+
+\section{Дифференцируемость отображения}
+
+\begin{definition}
+	$ E \sub \R^n, \quad n \ge 1, \qquad x \in E $ -- внутр. т., $ \qquad F : E \to \R^k, \quad k \ge 2 $ \\
+	$ F $ дифференцируемо в $ X $, если
+	\begin{equ}1
+		\forall \underset{H \ne \On}{H \in \R^n} : X + H \in E \quad F(X + H) - F(X) = L(H) + r(H)
+	\end{equ}
+	где $ L : \R^n \to \R^k $ -- линейное и
+	\begin{equ}2
+		\frac{\norm{r(H)}_k}{\norm{H}_n} \underarr{H \to \On} 0
+	\end{equ}
+\end{definition}
+
+\begin{undefthm}{Напоминание}
+	$ L $ -- линейное, если
+	\begin{equ}3
+		\exist A_{k \times n} : L(H) = AH
+	\end{equ}
+\end{undefthm}
+
+Представим $ F $ в виде
+\begin{equ}4
+	F(Y) =
+	\begin{bmatrix}
+		f_1(Y) \\
+		... \\
+		f_k(Y)
+	\end{bmatrix}
+\end{equ}
+
+\begin{statement}
+	$ F $ дифференцируемо в $ X $ тогда и только тогда, когда каждая координатная функция $ f_1, ..., f_k $ дифференцируема в $ X $
+\end{statement}
+
+\begin{proof}
+	\hfill
+	\begin{itemize}
+		\item Пусть $ F $ дифференцируема \\
+		Пусть $ e_j \define (\overbrace{0, ..., \underset{j}1, ..., 0}_k) $ \\
+		Умножим \eref1 слева на $ e_j $, попутно подставив \eref3:
+		\begin{equ}5
+			e_j \bigg( F(X + H) - F(X) \bigg) = e_j(AH) + e_jr(H)
+		\end{equ}
+		Посмотрим на левую часть:
+		\begin{equ}6
+			e_j \bigg( F(X + H) - F(X) \bigg) = e_j \cdot \left( \column{f_1(X + H)}{f_k(X + H)} - \column{f_1(X)}{f_k(X)} \right) = f_j(X + H) - f_i(X)
+		\end{equ}
+		Обозначим $ A \define
+		\begin{bmatrix}
+			a_{11} & ... & a_{1n} \\
+			. & . & . \\
+			a_{k1} & ... & a_{kn}
+		\end{bmatrix} $ \\
+		Умножим $ e_j $ на $ A $:
+		$$ e_jA = (e_jA)H = (\overbrace{0, ..., \underset{j}1, ..., 0}_k) \cdot
+		\begin{bmatrix}
+			a_{11} & ... & a_{1n} \\
+			. & . & . \\
+			a_{k1} & ... & a_{kn}
+		\end{bmatrix} = (a_{j1}, ..., a_{jn}) $$
+		Обозначим $ H \define \column{h_1}{h_n} $
+		Посмотрим на правую часть \eref5:
+		\begin{equ}7
+			e_j(AH) = (a_{j1}, ..., a_{jn}) \cdot \column{h_1}{h_n} = a_{j1}h_1 + ... + a_{jn}h_n
+		\end{equ}
+		Обозначим $ r(H) \define \column{r_1(H)}{r_k(H)} $. Тогда
+		\begin{equ}8
+			e_jr(H) = r_j(H)
+		\end{equ}
+		\begin{equ}9
+			\eref5 \text{ -- } \eref8 \implies f_j(X + H) - f_j(X) = a_{j1}h_1 + ... + a_{jn}h_n + r_j(H)
+		\end{equ}
+		\begin{equ}{10}
+			\frac{|r_j(H)|}{\norm{H}_n} \le \frac{\norm{r(H)}_k}{\norm{H}_n} \underarr{H \to \On} 0
+		\end{equ}
+		\begin{equ}{11}
+			\eref9, \eref{10} \implies f_j \text{ диффер. в } X \implies \forall l = 1, ..., n \quad \exist f_{jx_l}'(X) = a_{jl}
+		\end{equ}
+		\begin{equ}{12}
+			A =
+			\begin{bmatrix}
+				f_{1x_1}'(X) & ... & f_{1x_n}'(X) \\
+				. & . & . \\
+				f_{kx_1}(X) & ... & f_{kx_n}'(X)
+			\end{bmatrix}
+		\end{equ}
+		Эта матрица называется матрицей Якоби
+		\begin{notation}
+			$ A = DF(X) $
+		\end{notation}
+		Теперь можно записать:
+		\begin{equ}{13}
+			F(X + H) - F(X) = DF(X)H + r(H)
+		\end{equ}
+		\item Пусть все координатные функции дифференцируемы \\
+		Запишем это при помощи градиента:
+		\begin{equ}{14}
+			f_l(X + H) - f_l(X) = \grad f_l(X) H + r_l(H), \qquad 1 \le l \le k
+		\end{equ}
+		Запишем это всё в столбик:
+		\begin{equ}{15}
+			\begin{rcases}
+				f_1(X + H) - f_1(X) = \grad f_1(X)H + r_1(H) \\
+				\widedots \\
+				f_k(X + H) - f_k(X) = \grad f_k(X)H + r_k(H)
+			\end{rcases}
+		\end{equ}
+		\begin{equ}{151}
+			\eref{15} \iff F(X + H) - F(X) = \column{\grad f_1(X)}{\grad f_k(X)} \cdot H + \column{r_1(H)}{r_k(H)}
+		\end{equ}
+		Заметим, что это матрица Якоби, т. е.
+		\begin{equ}{17}
+			F(X + H) - F(X) = DF(X) + \column{r_1(H)}{r_k(H)}
+		\end{equ}
+		\begin{equ}{18}
+			\frac1{\norm{H}_n} \cdot \norm{\column{r_1(H)}{r_k(h)}}_k = \sqrt{\underset{\underarr{H \to \On} 0}{\bigg( \frac{r_1(H)}{\norm{H}_n} \bigg)^2} + \widedots[2em] + \underset{\underarr{H \to \On} 0}{\bigg( \frac{r_k(H)}{\norm{H}_n} \bigg)^2}} \underarr{H \to \On} 0
+		\end{equ}
+		\eref{17}, \eref{18} $ \implies F $ диффер. в $ X $
+	\end{itemize}
+\end{proof}
+
+\section{Дифференцируемость суперпозиции}
+
+\begin{theorem}
+	\hfill
+	$ E \sub \R^n, \quad n \ge 1, \qquad X_0 \in E $ -- внутр. т. $ E $ \\
+	$ G \sub \R^k, \quad k \ge 1, \qquad Y_0 \in G $ -- внутр. т. $ G $ \\
+	$ F : E \to \R^k, \qquad F(X_0) = Y_0, \qquad \forall X \in E \quad F(X) \in G $ \\
+	$ \Phi : G \to \R^l, \quad l \ge 1 $
+	\begin{equ}{19}
+		T(X) = \Phi \big( F(X) \big)
+	\end{equ}
+	\begin{equ}{20}
+		F \text{ дифф. в } X_0, \qquad \Phi \text{ дифф. в } Y_0
+	\end{equ}
+	\begin{mequ}[\implies \empheqlbrace]
+		\lbl{21} T \text{ дифф. в } X_0 \\
+		\lbl{22} DT(X_0) = D\Phi(Y_0)DF(X_0)
+	\end{mequ}
+\end{theorem}
+
+\begin{proof}
+	Запишем то, что нам нужно рассмотреть:
+	\begin{multline}\lbl{22}
+		T(X_0 + H) - T(X_0) \bydef \Phi \big( F(X_0 + H) \big) - \Phi \big( F(X_0) \big) = \Phi \big( F(X_0 + H) \big) - \Phi(Y_0) = \\ = \Phi \bigg( Y_0 + \big( F(X_0 + H) - Y_0 \big) \bigg) - \Phi(Y_0) = \Phi \bigg( Y_0 + \big( F(X_0 + H) - F(X_0) \big) \bigg) - \Phi(Y_0)
+	\end{multline}
+	Обозначим $ \Lambda \define F(X_0 + H) - F(X_0) $ \\
+	Понятно, что $ \Lambda \underarr{H \to \On} \On[k] $ \\
+	Воспользуемся дифференцируемостью $ \Phi $:
+	\begin{equ}{24}
+		\Phi(Y_0 + \Lambda)  - \Phi(Y_0) = D\Phi(Y_0)\Lambda + r(\Lambda)
+	\end{equ}
+	где
+	\begin{equ}{25}
+		%\frac{\norm{r(\Lambda)}_l}{\norm{\Lambda}_k} \underarr{\Lambda \to \On[k]} 0
+	\end{equ}
+	Положим $ \frac{r(\Lambda)}{\norm{\Lambda}_k} \define \delta(\Lambda) \in \R^l $
+	\begin{equ}{26}
+		%\eref{25} \implies \norm{\delta{\Lambda}}_l \underarr{\Lambda \to \On[k]} 0
+	\end{equ}
+	Будем считать, что
+	\begin{equ}{27}
+		\delta(\On[k]) \define \On[l]
+	\end{equ}
+	\begin{equ}{28}
+		\Lambda = F(X_0 + H) - F(X_0) = DF(X_0)H + \rho(H)
+	\end{equ}
+	где
+	\begin{equ}{29}
+		\frac{\norm{\rho(H)}_k}{\norm{H}_n} \underarr{H \to \On} 0
+	\end{equ}
+	\begin{equ}{30}
+		\eref{23}, \eref{24}, \eref{28} \implies T(X_0 + H) - T(X_0) = D\Phi(Y_0) \bigg( DF(X_0)H + \rho(H) \bigg) + r(\Lambda)
+	\end{equ}
+\end{proof}

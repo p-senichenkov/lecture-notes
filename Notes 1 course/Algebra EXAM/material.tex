@@ -1,0 +1,2960 @@
+\section{Множества и операции над ними}
+
+Понятия ``множество'' и ``элемент'' считаем интуитивно понятными
+
+\begin{notation}
+	Запись $x \in A$ означает, что элемент $x$ принадлежит множеству $A$. \\
+	Используется также запись $x \notin A$, оначающая, что элемент $x$ \textbf{не} принадлежит множеству $A$
+\end{notation}
+
+
+\begin{definition}
+	Пустым множеством называется множество, не содержащее ни одного элемента
+	\begin{notation}
+		$\O$
+	\end{notation}
+
+\end{definition}
+
+\begin{definition}
+	Множество $B$ называется подмножеством множества $A$, если любой элемент множества $B$ принадлежит множеству $A$
+	\begin{notation}
+		$B \sub A$
+	\end{notation}
+
+	Подмножество $B$ множества $A$ называется собственным, если $B \ne A, B \ne \O$
+\end{definition}
+
+\begin{undefthm}{Операции над множествами}
+	\hfill
+	\begin{enumerate}
+		\item \textbf{Пересечением} множеств $A$ и $B$ называется множество $\set{x | x \in A \text{ и } x \in B}$
+		\begin{notation}
+			$A \cap B$
+		\end{notation}
+		\item \textbf{Объединением} множеств $A$ и $B$ называется множество $\set{x | x \in A \text{ или } x \in B}$
+		\begin{notation}
+			$A \cup B$
+		\end{notation}
+		\item \textbf{Разностью} множеств $A$ и $B$ называется множество $\set{x | x \in A \text{ и } x \notin B}$
+		\begin{notation}
+			$A \setminus B$
+		\end{notation}
+		\item Предположим, что все рассматриваемые множества являются подмножествами некоторого универсального множества $\mathbb{U}$. Тогда множество $\mathbb{U} \setminus A$ называется \textbf{дополнением} $A$
+		\begin{notation}
+			$\overline{A}$
+		\end{notation}
+		\item \textbf{Симметрической разностью} множеств $A$ и $B$ называется множество $(A \setminus B) \cup (B \setminus A)$
+		\begin{notation}
+			$A \triangle B$
+		\end{notation}
+	\end{enumerate}
+\end{undefthm}
+
+\begin{undefthm}{Порядок действий}
+	\hfill
+	\begin{enumerate}
+		\item Дополнение
+		\item Пересечение
+		\item Объединение, разность, симметрическая разность
+	\end{enumerate}
+\end{undefthm}
+
+\begin{props}
+	\item Дистрибутивность
+	\begin{enumerate}
+		\item $(A \cap B) \cup C = (A \cup C) \cap (B \cup C)$
+		\begin{proof}
+			\hfill
+			\begin{itemize}
+				\item Докажем, что $(A \cap B) \cup C \sub (A \cup C) \cap (B \cup C)$: \\
+				Пусть $x \in (A \cap B) \cup C$. Тогда выполнено хотя бы одно из условий:
+				\begin{enumerate}
+					\item $x \in A \cap B \implies
+					\begin{Bmatrix}
+					   	x \in A \\
+						x \in B
+					\end{Bmatrix} \implies
+					\begin{Bmatrix}
+					   	x \in A \cup C \\
+						x \in B \cup C
+					\end{Bmatrix} \implies x \in (A \cup C) \cap (B \cup C) $
+					\item $ x \in C \implies
+					\begin{Bmatrix}
+						x \in A \cup C \\
+						x \in B \cup C
+					\end{Bmatrix} \implies x \in (A \cup C) \cap (B \cup C) $
+				\end{enumerate}
+				\item Докажем, что $(A \cup C) \cap (B \cup C) \sub (A \cap B) \cup C$: \\
+				Пусть $x \in (A \cup C) \cap (B \cup C)$. Тогда $
+				\begin{cases}
+					x \in A \cup C \\
+					x \in B \cup C
+				\end{cases}$ \\
+				Рассмотрим два случая:
+				\begin{enumerate}
+					\item $x \in C \implies x \in (A \cap B) \cup C$
+					\item $x \notin C$:
+					$$ \begin{rcases}
+						x \in A \cup C \implies x \in A \\
+						x \in B \cup C \implies x \in B
+					   \end{rcases} \implies x \in A \cap B \implies x \in (A \cap B) \cup C $$
+				\end{enumerate}
+			\end{itemize}
+		\end{proof}
+		\item $(A \cup B) \cap C = (A \cap C) \cup (B \cap C)$
+		\begin{proof}
+			\hfill
+			\begin{itemize}
+				\item Докажем, что $(A \cup B) \cap C \sub (A \cap C) \cup (B \cap C)$: \\
+				Пусть $x \in (A \cup B) \cap C$. Тогда $x \in C$ и выполнено хотя бы одно из условий:
+				\begin{enumerate}
+					\item $x \in A \implies x \in A \cap C$
+					\item $x \in B \implies x \in B \cap C$
+				\end{enumerate}
+				В обоих случаях, $x \in (A \cap C) \cup (B \cap C)$
+				\item Докажем, что $(A \cap C) \cup (B \cap C) \sub (A \cup B) \cap C$:
+				Пусть $x \in (A \cap C) \cup (B \cap C)$. Тогда выполнено хотя бы одно из условий:
+				\begin{enumerate}
+					\item $
+					\begin{cases}
+						x \in A \\
+						x \in C
+					\end{cases} $
+					\item $
+					\begin{cases}
+						x \in B \\
+						x \in C
+					\end{cases} $
+				\end{enumerate}
+				В обоих случаях, $x \in C$. Кроме того, выполнено $x \in A$ или $x \in B$, а значит, $x \in A \cup B \implies x \in (A \cup C) \cap (A \cup B)$
+			\end{itemize}
+		\end{proof}
+	\end{enumerate}
+	\item Законы де-Моргана:
+	\begin{enumerate}
+		\item $\overline{A \cup B} = \overline{A} \cap \overline{B}$
+		\begin{proof}
+			$x \in \overline{A \cup B} \iff x \notin (A \cup B) \iff
+			\begin{Bmatrix}
+				x \notin A \\
+				x \notin B
+			\end{Bmatrix} \iff
+			\begin{Bmatrix}
+				x \in \overline{A} \\
+				x \in \overline{B}
+			\end{Bmatrix} \iff x \in \overline{A} \cap \overline{B} $
+		\end{proof}
+		\item $\overline{A \cap B} = \overline{A} \cup \overline{B}$
+		\begin{proof}
+			$x \in \overline{A \cap B} \iff x \in (A \cap B) \iff \left[
+			\begin{aligned}
+				x \notin A \\
+				x \notin B
+			\end{aligned} \left\} \iff \right[
+			\begin{aligned}
+				x \in \overline{A} \\
+				x \in \overline{B}
+			\end{aligned} \right\} \iff x \in \overline{A} \cup \overline{B} $
+		\end{proof}
+	\end{enumerate}
+\end{props}
+
+\begin{definition}
+	Прямым, или декартовым произведением множеств $A$ и $B$ называется множество, состоящее из всех упорядоченных пар $(a, b)$, де $a \in A, b \in B$
+	\begin{notation}
+		$A \times B$
+	\end{notation}
+\end{definition}
+
+\begin{notation}
+	Межде множествами $(A \times B) \times C$ и $A \times (B \times C)$ есть взаимно однозначное соответствие. Для таких множеств часто используется обозначение $A \times B \times C$
+\end{notation}
+
+\begin{notation}
+	Множество $\underbrace{A \times A \times ... \times A}_{n}$ обозначается $A^n$
+\end{notation}
+
+\section{Отображения}
+
+\begin{definition}
+	Отображением, или функцией из множества $X$ в множество $Y$ называется правило, которое каждому элементу множества $X$ сопоставляет ровно один элемент из множества $Y$ \\
+	Множество $X$ называется областью определения, множество $Y$ -- областью значений
+\end{definition}
+
+\begin{definition}
+	Образом отображения $f$ называется множество элементов вида $f(x)$
+	\begin{notation}
+		$\operatorname{Im} f, f(X)$
+	\end{notation}
+	То есть, $\operatorname{Im} f = \set{f(x) | x \in X}$
+\end{definition}
+
+\begin{definition}
+	Прообразом элемента $y \in Y$ называется множество элементов $x \in X$, которые при этом отображении переходят в $y$
+	\begin{notation}
+		$f^{-1}(y)$
+	\end{notation}
+	То есть, $f^{-1}(y) = \set{x \in X | f(x) = y}$ \\
+	Можно рассматривать прообраз любого подмножества образа: если $Y_1 \sub Y$, то
+	$$ f^{-1}(y) = \set{x \in X | \exist y \in Y_1 : f(x) = y} $$
+\end{definition}
+
+\begin{definition}
+	Отображение $f : X \to Y$ называется сюръективным, если прообраз любого элемента $y \in Y$ содержит хотя бы один элемент
+\end{definition}
+
+\begin{definition}
+	Отображение $f : X \to Y$ называется инъективным, если прообраз любого элемента $y \in Y$ содержит не более одного элемента
+\end{definition}
+
+\begin{definition}
+	Отображение $f : X \to Y$ называется биективным, если прообраз любого элемента $y \in Y$ содержит ровно один элемент
+\end{definition}
+
+\begin{note}
+	Если отображение $f$ биективно, то оно одновременно инъективно и сюръективно
+\end{note}
+
+\begin{definition}
+	Тождественным отображением называется такое отображение $e_X : X \to X$, что $e_X(x) = x$ для любого $x \in X$
+\end{definition}
+
+\begin{definition}
+	Пусть для множеств $X, Y, Z$ заданы отображения $f : Y \to Z, g : X \to Y$. Композицией отображений $f$ и $g$ называется отображение $f \circ g : X \to Z$, определённое условием:
+	$$ (f \circ g)(x) = f(g(x)) $$
+\end{definition}
+
+\begin{property}
+	Операция композиции ассоциативна, то есть $(f \circ g) \circ h = f \circ (g \circ h)$ \\
+	Отсюда следует, что можно использвать обозначение $f \circ g \circ h$
+\end{property}
+
+\begin{proof}
+	$ \bigg( (f \circ g) \circ h \bigg)(x) = f \bigg( g \big(h(x) \big) \bigg) = \bigg( f \circ (g \circ h) \bigg)(x) $
+\end{proof}
+
+\begin{definition}
+	Пусть заданы отображения $f : X \to Y$ и $g : Y \to X$. Отображение $g$ называется обратным к отображению $f$, если $f \circ g = e_Y, g \circ f = e_X$
+	\begin{notation}
+		$f^{-1}$
+	\end{notation}
+\end{definition}
+
+\begin{theorem}[существование обратного отображения]
+	Обратное отображение к отображению $f$ существует тогда и только тогда, когда $f$ является биекцией
+\end{theorem}
+
+\begin{proof}
+	\hfill
+	\begin{itemize}
+		\item Необходимость \\
+		Докажем, что если $f : X \to Y$ является биекцией, то существует отображение $g : Y \to X$, для которого выполнено $f \circ g = e_Y, g \circ f = e_X$: \\
+		Пусть $y \in Y$
+		$$ f \text{ -- биекция} \implies \exist! x \in X : f(x) = y $$
+		Положим $g(y) \define x$ \\
+		Тогда $
+		\begin{cases}
+			\forall x \in X \quad g(f(x)) = x \\
+			\forall y \in Y \quad f(g(y)) = y
+		\end{cases} $
+		\item Достаточность \\
+		Докажем, что если для некоторого отображения $g : Y \to X$ выполнено $f \circ g = e_Y, g \circ f = e_X$, то $f$ является биекцией:
+		\begin{itemize}
+			\item Проверим, что $f$ -- сюрьекция: \\
+			Пусть $y \in Y$. Тогда $g(y)$ является прообразом $y$ в $X$ для отображения $f$
+			\item Проверим, что $f$ -- инъекция: \\
+			Пусть $y \in Y$ и $x_1, x_2$ -- различные прообразы $y$ при отображении $f$. Тогда
+			$$ x_1 = g(f(x_1)) = f(y) = g(f(x_2)) = x_2 \text{ -- } \contra $$
+		\end{itemize}
+	\end{itemize}
+\end{proof}
+
+\begin{theorem}[единтсвенность обратного отображения]
+	Пусть $f$ -- биекция из $X$ в $Y$. Тогда отображение, обратное к $f$, единственно. То есть не существует различных отображений $g_1$ и $g_2$ из $Y$ в $X$, таких, что:
+	$$ f \circ g_1 = e_y, \quad g_1 \circ f = e_x, \qquad f \circ g_2 = e_Y, \quad g_2 \circ f = e_X $$
+\end{theorem}
+
+\begin{proof}
+	Предположим, что два таких отображения существуют. Тогда существует такой $y \in Y$, то $g_1(y) \ne g_2(y)$. Положим $x_1 \define g_1(y), x_2 \define g_2(y)$. Тогда:
+	$$ f(x_1) = f(g_1(y)) = y, \qquad f(x_2) = f(g_2(y)) = y $$
+	Полчили, что у $y$ есть два прообраза. \contra с инъективностью $f$
+\end{proof}
+
+\begin{note}
+	Из этой теоремы следует, что обозначение $f^{-1}$ корректно
+\end{note}
+
+\section{Отношения на множестве. Отношения эквивалентности и разбиение на классы}
+
+\begin{definition}
+	Бинарным отношением между $X$ и $Y$ называется подмножетво $X \times Y$
+\end{definition}
+
+\begin{notation}
+	Пусть задано бинарное отношение $\omega \subset X \times Y$. Тогда условие $(x, y) \in \omega$ записывают как $x \mathrel\omega y$
+\end{notation}
+
+\begin{notation}
+	Если $Y = X$, то говорят, что задано отношение на $X$
+\end{notation}
+
+\begin{note}
+	Любое отображение можно считать отношением
+\end{note}
+
+\begin{definition}
+	Бинарное отношение $\omega$ на множестве $X$ называется:
+	\begin{enumerate}
+		\item Рефлексивным, если для любого $x$ выполнено $x \mathrel\omega x$
+		\item Антирефлексивным, если ни для какого $x$ не выполнено $x \mathrel\omega x$
+		\item Симметричным, если $x \mathrel\omega y \implies y \mathrel\omega x$
+		\item Ассиметичным, если ни для каких $x, y$ не выполенено одновременно $x \mathrel\omega y$ и $y \mathrel\omega x$
+		\item Антисимметричным, если $x \mathrel\omega y$ и $y \mathrel\omega x$ выполнены одновременно только при $x = y$
+		\item Транзитивным, если $x \mathrel\omega y, y \mathrel\omega z \implies x \mathrel\omega z$
+	\end{enumerate}
+\end{definition}
+
+\begin{definition}
+	Бинарное отношение на множестве $X$ называется отношением эквивалентности, если оно рефлексивно, симметрично и транзитивно
+\end{definition}
+
+\begin{definition}
+	Предположим, что на множестве $X$ задано отношение эквивалентности $\sim$. \\
+	Классом эквивалентности элемента $a$ называется множество элементов, эквивалентных $a$, то есть $\set{x \in X | x \sim a}$
+\end{definition}
+
+\begin{theorem}[разбиение на классы эквивалентности]
+	Предположим, что на множестве $X$ задано отношение эквивалентности $\sim$. Тогда множество $X$ разбивается на классы эквивалентности. \\
+	То есть $X$ является объединением непересекающихся подмножеств, каждое из которых является классом эквивалентности некоторого элемента
+\end{theorem}
+
+\begin{proof}
+	Требуется доказать, что:
+	\begin{enumerate}
+		\item любой элемент множества $X$ принадлежит некоторому классу эквивалентности
+		\begin{proof}
+			Элемент $a$ принадлежит классу эквивалентности $\overline{a}$, так как по рефлексивности выполнено $a \sim a$
+		\end{proof}
+		\item лобые два класса эквивалентности либо не пересекаются, либо совпадают
+		\begin{proof}
+			Предположим, что два класса эквивалентности $\overline{a}$ и $\overline{b}$ содержат хотя бы один общий элемент $x$. Докажем, что эти классы совпадают: \\
+			Требуется доказать, что $\overline{a} = \overline{b}$. Это равносильно тому, что $\overline{a} \sub \overline{b}$ и $\overline{b} \sub \overline{a}$. Докажем первое включение (второе доказывается аналогично):
+			$$ \left.
+			\begin{aligned}
+				x \in \overline{a} \implies x \sim a \underimp{\text{симметричность}} a \sim x \\
+				x \in \overline{b} \implies x \sim b
+			\end{aligned} \right\} \underimp{\text{транзитивность}} a \sim b $$
+			$$ \left.
+			\begin{aligned}
+				y \in \overline{a} \implies y \sim a \\
+				a \sim b
+			\end{aligned} \right\} \underimp{\text{транзитивность}} y \sim b \implies y \in \overline{b} $$
+		\end{proof}
+	\end{enumerate}
+\end{proof}
+
+\section{Бинарные операции. Единственность единичного элемента. \texorpdfstring{\\}{} Определение моноида и полугруппы}
+
+\begin{definition}
+	Пусть $X$ -- множество. Бинарной алгебраической операцией на $X$ называется отображение $X \times X \to X$
+\end{definition}
+
+\begin{notation}
+	Множество $X$ с операцией $*$ обозначается $(X, *)$
+\end{notation}
+
+\begin{note}
+	Можно рассматривать $n$-арные оперции, то есть отображения $X^n \to X$
+\end{note}
+
+\begin{definition}
+	Бинарная операция на множестве $X$ называется:
+	\begin{enumerate}
+		\item Ассоциативной, если $(a * b) * c = a * (b * c)$ для любых $a, b, c \in X$
+		\item Коммутативной, если $a * b = b * a$ для любых $a, b \in X$
+	\end{enumerate}
+\end{definition}
+
+\begin{definition}
+	Элемент $e \in X$ называется единичным (нейтральным), если для любого $a \in X$ выполнено $a * e = e * a = a$
+\end{definition}
+
+\begin{note}
+	Если операция обозначена как $+$, нейтральный элемент обозначают как $0$
+\end{note}
+
+\begin{property}[единственность единичного элемента]
+	Пусть на множестве $X$ задана бинарная алгебраическая операция $*$. Тогда существует не более одного единичного элемента
+\end{property}
+
+\begin{proof}
+	Пусть элементы $e_1, e_2 \in X$ таковы, что $e_1 * a = a * e_1 = a, ~ e_2 * a = a * e_2 = a$ для любого $a \in X$ \\
+	Рассмотрим элемент $e_1 * e_2$. Из того, что $e_1$ -- нейтральный, следует, что $e_2 = e_1 * e_2$. Из того, что $e_2$ -- нейтральный, следует, что $e_1 = e_1 * e_2$. Таким образом,
+	$$ e_2 = e_1 * e_2 = e_1 $$
+\end{proof}
+
+\begin{definition}
+	Полугруппой называется множество с заданной на нём бинарной ассоциативной операцией
+\end{definition}
+
+\begin{definition}
+	Моноидом называется полугруппа, в которой существует нейтральный элемент
+\end{definition}
+
+\section{Группы: примеры, свойство сокращения, изоморфизм}
+
+\begin{definition}
+	Множество $G$ с бинарной операцией $*$ называется группой, если:
+	\begin{enumerate}
+		\item операция $*$ ассоциативна
+		\item существует нейтральный элемент $e$
+		\item для любого $a \in G$ существует обратный элемент $a^{-1} \in G$ такой, что $a * a^{-1} = a^{-1} * a = e$
+	\end{enumerate}
+\end{definition}
+
+\begin{notation}
+	$(G, *)$
+\end{notation}
+
+\begin{definition}
+	Группа $(G, *)$ называется абелевой (коммутативной), если операция $*$ коммутативна
+\end{definition}
+
+\begin{exmpls}
+	\item $\R^*$: множество $\R \setminus \set{0}$, операция -- умножение \\
+	Нейтральный элемент: $e = 1$. Обратный: $a^{-1} = \faktor1a$
+	\item Аналогично определяется $\Q^*$ \\
+	Эти группы абелевы
+	\item Абелевыми группами по умножению являются множества положительных чисел $\R_+^*$, $\Q_+^*$
+	\item $\R$ не группа по умножению, нет обратного у $0$
+	\item $\Z \setminus \set{0}$ не группа по умножению, нет обратных (кроме 1)
+	\item $\R, \Q, \Z$, операция -- сложение. Это абелевы группы
+	\item $\N$ не группа по сложению, нет нейтрального элемента
+	\item Группа биекций произвольного множества $X$ в себя, операция -- композиция
+	\item Группа движений плоскости, операция -- композиция
+	\item Подмножества произвольного множества, операция -- $\triangle$
+\end{exmpls}
+
+\begin{property}[сокращение]
+	Пусть $G$ -- группа, $a, b, c \in G$
+	\begin{itemize}
+		\item Если $ac = bc$, то $a = b$
+		\begin{proof}
+			$ ac = bc \implies (ac)c^{-1} = (bc)c^{-1} \implies a(cc^{-1}) = b(cc^{-1}) \implies ae = be \implies a = b $
+		\end{proof}
+		\item Если $ca = cb$, то $a = b$
+		\begin{proof}
+			Аналогично
+		\end{proof}
+	\end{itemize}
+\end{property}
+
+\begin{definition}
+	Группы $(G, \cdot)$ и $(H, *)$ называются изоморфными, если существует биекция $f : G \to H$, такая что $ \forall x, y \quad f(x \cdot y) = f(x) * f(y)$
+	\begin{notation}
+		$G \cong H$
+	\end{notation}
+\end{definition}
+
+\section{Кольца и поля: определение и примеры}
+
+\begin{definition}
+	Кольцом называется множество $R$, на котором заданы операции $+$ и $\cdot$, и  выполняются следующие свойства:
+	\begin{enumerate}
+		\item $R$ -- абелева группа по сложению
+		\item Дистрибутивность: $ \forall a, b, c \in R \quad (a + b)c = ac + bc, \quad a(b + c) = ab + ac $
+	\end{enumerate}
+\end{definition}
+
+\begin{exmpls}
+	\item $\Z, \Q, \R, \Co$ -- кольца
+	\item $\N$ -- не кольцо
+	\item $m\Z$ (множество целых чисел, делящихся на $m$) -- кольцо
+	\item Множество многочленов с вещественными (целыми, рациональными) коэффициентами -- кольцо
+	\begin{notation}
+		$\R[x], \Z[x], \Q[x]$
+	\end{notation}
+	\item Кольцо вычетов по модулю $m$
+	\begin{notation}
+		$\Z_m$
+	\end{notation}
+\end{exmpls}
+
+\begin{definition}
+	Кольцо называется областью целостности, если оно коммутативно, ассоциативно и из равенства $ab = 0$ следует, что $a = 0$ или $b = 0$
+\end{definition}
+
+\begin{exmpls}
+	\item $\Z, \Q, \R, \Co$ -- области целостности
+	\item $\Z_m$ -- область целостности $ \iff m $ простое
+\end{exmpls}
+
+\begin{definition}
+	Кольцо называется полем, если для него выполняются свойства:
+	\begin{enumerate}
+		\item Ассоциативность умножения
+		\item Коммутативность умножения
+		\item Существование нейтрального по умножению
+		\item Существование обратного по умножению
+	\end{enumerate}
+\end{definition}
+
+\begin{exmpls}
+	\item $\Q, \R, \Co$ -- поля
+	\item $\Z$ -- не поле (нет обратных)
+	\item $\Z_m$ -- поле $ \iff m $ простое
+\end{exmpls}
+
+\begin{note}
+	Любое поле явяется областью целостности
+\end{note}
+
+\section{Свойства делимости. Существование НОД и НОК}
+
+\begin{definition}
+	Говорят, что число $a$ делится на число $b$, если существует такое число $c$, что $a = bc$
+	\begin{notation}
+		$a \divby b$
+	\end{notation}
+\end{definition}
+
+\begin{props}
+	\item Если $a$ и $b$ делятся на $c$, то $a + b$ и $a - b$ делятся на $c$
+	\begin{proof}
+		Пусть $d, e$ таковы, что $a = dc, ~ b = ec$. Тогда $a + b = (d + e)c, ~ a - b = (d - e)c$
+	\end{proof}
+	\item Если $a$ делится на $b$, то $ak$ делится на $b$ для любого $k$
+	\begin{proof}
+		Пусть $c$ таково, что $a = bc$. Тогда $ak = (ck)b$
+	\end{proof}
+	\item Транзитивность: если $a \divby b, ~ b \divby c$, то $a \divby c$
+	\begin{proof}
+		Пусть $a = db, ~ b = ec$. Тогда $a = (de)c$
+	\end{proof}
+	\item Если $a$ делится на $b$, то $|a| \ge |b|$ или $a = 0$
+	\begin{proof}
+		Пусть $a = bc$. Тогда $|a| = |b| \cdot |c|$. При этом $|c| \ge 1$ или $c = 0$
+	\end{proof}
+	\item Число $1$ является делителем любого числа
+	\item Число $0$ является кратным любого числа
+\end{props}
+
+\begin{definition}
+	Наибольшим общим делителем чисел $a_1, ..., a_k$ называется наибольшее натуральное число, на которое делятся числа $a_1, ..., a_k$
+	\begin{notation}
+		НОК($a_1, ..., a_k$), $(a_1, ..., a_k)$
+	\end{notation}
+\end{definition}
+
+\begin{definition}
+	Наименьшим общим кратным чисел $a_1, ..., a_k$ называется наибольшее натуральное число, которое делится на числа $a_1, ..., a_k$
+	\begin{notation}
+		НОК($a_1, ..., a_k$), $[a_1, ..., a_k]$
+	\end{notation}
+\end{definition}
+
+\begin{theorem}
+	\hfill
+	\begin{enumerate}
+		\item Для любого набора чисел $a_1, ..., a_k$, в который входит хотя бы одно ненулевое число, существует НОД($a_1, ..., a_k$)
+		\begin{proof}
+			Множество общих натуральных делителей непусто, так как в него входит 1. Оно ограничено сверху числом $|a_i|$, где $a_i$ -- ненулевое число. В непустом ограниченном сверху множестве есть наибольший элемент
+		\end{proof}
+		\item Для любого набора чисел $a_1, ..., a_k$ в котором ни одно из чисел не равно 0, существует \\
+		НОК($a_1, ..., a_k$)
+		\begin{proof}
+			Множество общих натуральных кратных непусто, так как в него входит модуль произведения всех чисел. Оно ограничено снизу числом 0. В непустом ограниченном снизу множестве есть наименьший элемент
+		\end{proof}
+	\end{enumerate}
+\end{theorem}
+
+\section{Теорема о делении с остатком для целых чисел}
+
+\begin{theorem}
+	Пусть $a \in \Z, ~ b \in \N$. Тогда существуют единственные $q, r \in \Z$, такие что $a = bq + r$ и $0 \le r \le b - 1$
+\end{theorem}
+
+\begin{proof}
+	\hfill
+	\begin{itemize}
+		\item Существование \\
+		Рассмотрим множество $A \define \set{a - bx| x \in \Z}$ \\
+		Среди его элементов есть неотрицательные: например, при $a \ge 0$ можно взять $a - b \cdot 0$, при $a < 0$ можно взять $a - ba$ \\
+		Обозначим через $r$ наименьший неотрицательный элемент множества $A$, то есть наименьший элемент множества $B = A \cap (\N \cup \set{0})$
+		$$ r \in A \implies \exist q \in \Z : r = a - bq $$
+		Проверим, что эти $r$ и $q$ удовлетворяют условию:
+		$$ r \in \N \cup \set{0} \implies r \ge 0 $$
+		Если бы выполнялось $r \ge b$, то элемент $r - b$ тоже принадлежал бы множеству $B$, однако, $r$ минимальное, занчит $r \le b - 1$
+		\item Единственность \\
+		Предположми, что $a = bq_1 + r_1 = bq_2 + r_2, \quad 0 \le r_1, r_2 \le b - 1 $
+		$$ r_1 - r_2 = b(q_2 - q_1) \implies (r_1 - r_2) \divby b \implies \left[
+		\begin{aligned}
+			|r_1 - r_2| \ge b \\
+			r_1 - r_2 = 0
+		\end{aligned} \right. $$
+		Первое неравенство не выполняется, так как из неравенств $0 \le r_1, r_2 \le b - 1 $ следует, что:
+		$$ -(b - 1) \le r_1 - r_2 \le b - 1 $$
+	\end{itemize}
+\end{proof}
+
+\section{Алгоритм Евклида}
+
+\begin{algorithm}
+	Даны натуральные числа $a$ и $b$, причём $a \ge b$
+	\begin{enumerate}
+		\item Если $ a \divby b$, то алгоритм заканчивается, его результат равен $b$
+		\item Если $a \ndivby b$, то алгоритм применяется к паре $b, r$, где $r$ -- остаток от деления $a$ на $b$
+	\end{enumerate}
+\end{algorithm}
+
+\begin{lemma}
+	Для любых $a, b, k$ выполнено
+	$$ \GCD{a, b} = \GCD{a + kb, b} $$
+\end{lemma}
+
+\begin{proof}
+	Обозначим через $M_1$ множество общих делителей $a$ и $b$, обозначим через $M_2$ множество общих делителей $a + kb$ и $b$. Достаточно доказать, что $M_1 = M_2$
+	\begin{itemize}
+		\item $M_1 \sub M_2$
+		$$ d \in M_1 \implies
+		\begin{Bmatrix}
+			a \divby d \\
+			b \divby d \implies kb \divby d
+		\end{Bmatrix} \implies a + kb \divby d \implies d \in M_2 $$
+		\item $M_2 \sub M_1$
+		$$ d \in M_2 \implies
+		\begin{Bmatrix}
+			b \divby d \\
+			a + kb \divby d \implies
+			\begin{Bmatrix}
+				kb \divby d \\
+				a + kb \divby d
+			\end{Bmatrix} \implies (a + kb) - kb \divby d \implies a \divby d
+		\end{Bmatrix} \implies d \in M_1 $$
+	\end{itemize}
+\end{proof}
+
+
+\begin{theorem}[алгоритм Евклида]
+	Для любых чисел алгоритм Евклида заканчивается за конечное число шагов, и его результат равен НОД
+\end{theorem}
+
+\begin{proof}
+	\hfill
+	\begin{itemize}
+		\item Алгоритм заканчивается за конечное количество шагов, так как поледовательность получаемых остатков убывает и ограничена снизу числом 0:
+		$$ b > r_1 > r_2 > ... > 0 $$
+		\item Шаг 2 алгоритма не меняет НОД:
+		$$ a = bq + r \implies \GCD{a, b} = \GCD{r, b} $$
+		\item Так как $b$ является делителем $a$ и $b$, и любой делитель числа $b$ не превосходит $b$:
+		$$ a \divby b \implies b = \GCD{a, b} $$
+	\end{itemize}
+\end{proof}
+
+\section{Теорема о линейном представлении НОД}
+
+\begin{theorem}[линейное представление НОД]
+	Пусть $a, b \in \N$
+	\begin{enumerate}
+		\item $ \exist x, y \in \Z : ax + by = \GCD{a, b} $
+		\item Пусть $k$ -- общий делитель $a$ и $b$. Тогда $\GCD{a, b} \divby k $
+	\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+	Положим $M \define \set{au + bv | u, v \in \Z}$ \\
+	Обозначим через $d$ наименьший положительный элемент $M$ \\
+	Обозначим $x, y : d = ax + by $ \\
+	Докажем, что $d$ -- общий делитель $a$ и $b$, и  что для любого общего делителя $k$ чисел $a$ и $b$ выполнено $d \divby k$. Из этого следует утверждение теоремы
+	\begin{enumerate}
+		\item Докажем, что $a, b \divby d$: \\
+		Пусть $a \ndivby d$. Разделим $a$ на $d$ с остатком:
+		$$ a = dq + r, \quad 0 < r < d $$
+		Тогда:
+		$$ r = a - dq = a - (ax + by) = a(1 - x) + b(-y) \in M $$
+		Получаем, что $r$ -- положительный элемент множества $M$, меньший, чем $d$ -- \contra
+		\item $
+		\begin{rcases}
+			a \divby k \\
+			b \divby k
+		\end{rcases} \implies
+		\begin{Bmatrix}
+			ax \divby k \\
+			by \divby k
+		\end{Bmatrix} \implies (ax + by) \divby k $
+	\end{enumerate}
+\end{proof}
+
+\section{Взаимная простота с произведением}
+
+\begin{definition}
+	Целые числа $a$ и $b$ называются взаимно простыми, если $\GCD{a, b} = 1$
+\end{definition}
+
+\begin{definition}
+	Целые числа $a_1, ..., a_k$ называются взаимно простыми в совокупности, если
+	$$ \GCD{a_1, ..., a_k} = 1 $$
+\end{definition}
+
+\begin{definition}
+	Целые числа $a_1, ..., a_k$ называются попарно взаимно простыми, если $\GCD{a_i, a_j} = 1$ для любых различных $i, j$
+\end{definition}
+
+\begin{lemma}[линейное представление единицы]
+	Числа $a$ и $b$ взаимно просты $\iff \exist x, y : ax + by = 1 $
+\end{lemma}
+
+\begin{proof}
+	\hfill
+	\begin{itemize}
+		\item $\implies$ \\
+		Из теоремы о линейном представлении НОД
+		\item $\impliedby$ \\
+		Пусть $d = \GCD{a, b}$. Тогда из свойств делимости получаем, что $ (ax + by) \divby d$ \\
+		Значит, $1 \divby d \implies d = 1 $
+	\end{itemize}
+\end{proof}
+
+\begin{property}[взаимная простота с произведением]
+	Если каждое из чисел $a_1, ..., a_k$ взаимно просто с $b$, то $a_1 \cdot ... \cdot a_k$ взаимно просто с $b$
+\end{property}
+
+\begin{restatable}{proof}{mutprimemultproof}
+	\textbf{Индукция} по $k$ \\
+	\textbf{База.} $k = 2$: \\
+	Требуется доказать такое утверждение: если $a_1$ и $b$ взаимно просты, $a_2$ и $b$ взаимно просты, то $a_1a_2$ и $b$ взаимно просты \\
+	Пусть $x_1, x_2, y_1, y_2$ таковы, что:
+	$$ a_1x_1 + b_1y = 1, \qquad a_2x_2 + by_2 = 1 $$
+	Перемножим:
+	$$ a_1x_1a_2x_2 + a_1x_1by_2 + by_1a_2x_2 + b^2y_1y_2 = 1 $$
+	$$ (a_1a_2)(x_1x_2) + b(a_1x_1y_2 + y_1a_2x_2 + by_1y_2) = 1 $$
+	Получили линейное представление единицы через $a_1a_2$ и $b$. Значит, по лемме, $a_1a_2$ и $b$ взаимно просты
+	\textbf{Переход.} $k \to k + 1$: \\
+	По индукционному предположению $a_1 \cdot ... \cdot a_k$ и $b$ взаимно просты. Применяем утверждение для $k = 2$ к числам $a_1 \cdot ... \cdot a_k$ и $a_{k + 1} $
+\end{restatable}
+
+\section{Взаимная простота: связь с делимостью}
+
+\begin{property}[взаимная простота и делимость]
+	\hfill
+	\begin{enumerate}
+		\item Пусть $ab \divby c$ и пусть числа $a$  $c$ взаимно просты. Тогда $b \divby c$
+		\begin{restatable}{proof}{mutprimedivproof}
+			Запишем линейное представление единицы через $a$ и $c$:
+			$$ ax + cy = 1 $$
+			Умножим на $b$:
+			$$ bax + bcy = b $$
+			В левой части неравенства оба слагаемых делятся на $c$, значит $b$ делится на $c$
+		\end{restatable}
+		\item Пусть $a \divby b, ~ a \divby c $, числа $b$ и $c$ взаимно просты. Тогда $a \divby bc $
+		\begin{restatable}{proof}{mutprimedivprooff}
+			Пусть $a = bk, ~ a = cm$ \\
+			Запишем линейное представление единицы через $b$ и $c$:
+			$$ bx + cy = 1 $$
+			Умножим на $k$:
+			$$ k = bkx + cyk = ax + cyk = cmx + cyk $$
+			Подставим в формулу для $a$:
+			$$ a = bk = bc(mx + ky) \divby bc $$
+		\end{restatable}
+	\end{enumerate}
+\end{property}
+
+\section{Свойство составных чисел. Лемма о существовании простого делителя}
+
+\begin{definition}
+	Число $p$ наывается простым, если $p > 1$, и у $p$ нет натуральных делителей, кроме 1 и $p$ \\
+	Число называется составным, если оно больше 1 и не простое
+\end{definition}
+
+\begin{notation}
+	Будем обозначать множетсво простых чисел буквой $\Prime$
+\end{notation}
+
+\begin{property}
+	Число $a$ составное $ \iff \exist b, c : a = bc, \quad 1 < b, c < a $
+\end{property}
+
+\begin{proof}
+	\hfill
+	\begin{itemize}
+		\item $\implies$ \\
+		Из того, что $a \notin \Prime$ следует, что у $a$ есть делитель $b$, такой что $1 < b < a$ \\
+		По определению делимости сущетсвует такое $c$, что $a = bc$. Для $c = \frac{a}b$ выполнено $1 < c < a$
+		\item $\impliedby$ \\
+		У $a$ есть делитель $b \ne 1, \ne a$, значит, $a \notin \Prime$
+	\end{itemize}
+\end{proof}
+
+\begin{lemma}[о существовании простого делителя]
+	У любого натурального числа, большего единицы, существует хотя бы один простой делитель
+\end{lemma}
+
+\begin{proof}
+	\textbf{Индукция} по $n$ \\
+	\textbf{База.} $n = 2$. Простой делитель -- 2 \\
+	\textbf{Переход. } Предположим, что $n > 2$ и для любого $k$, такого что $1 < k < n$, у $k$ есть простой делитель \\
+	Рассмотрим два случая:
+	\begin{itemize}
+		\item $n \in \Prime$ \\
+		У $n$ есть простой делитель $n$
+		\item $n \notin \Prime$ \\
+		У $n$ есть делитель $k$, такой, что $1 < k < n$. По индукционному предположению, у $k$ есть простой делитель $p$ \\
+		Получаем, что $n \divby k, ~ k \divby p \implies n \divby p $
+	\end{itemize}
+\end{proof}
+
+\section{Бесконечность множества простых чисел}
+
+\begin{theorem}[Евклида]
+	Множество простых чисел бесокнечно
+\end{theorem}
+
+\begin{proof}
+	Пусть $p_1, ..., p_k$ -- все простые числа \\
+	Положим $N = p_1 \cdot ... \cdot p_k + 1$ \\
+	По лемме, у $N$ есть простой делитель. То есть, $ \exist i : N \divby p_i$. При этом:
+	$$ N - 1 = p_i(p_1 \cdot ... \cdot p_{i - 1} \cdot p_{i + 1} \cdot ... \cdot p_k) \divby p_i $$
+	Тогда:
+	$$ 1 = N - (N - 1) \divby p_i $$
+	Противоречие
+\end{proof}
+
+\section{Основная теорема арифметики}
+
+\begin{theorem}[основная теорема арифметики]
+	Любое натуральное число, большее 1, можно представить в виде произведения простых чисел. Такое представление единственно с точностью до порядка сомножиетелей
+\end{theorem}
+
+\begin{proof}
+	\hfill
+	\begin{itemize}
+		\item Существование \\
+		Докажем по \textbf{индукции} \\
+		\textbf{База.} $n = 2$. Разложение: $ 2 = 2 $ \\
+		\textbf{Переход.} Предположим, что все числа, меньшие $n$, раскладываются на простые множтели. Докажем, что $n$ тоже раскладывается: \\
+		Рассмотим два случая:
+		\begin{itemize}
+			\item $n \in \Prime$. Тогда $n = n$ -- разложение на простые
+			\item $n \notin \Prime$ \\
+			У $n$ есть простой делитель $p$, причём $p \ne n$ \\
+			Тогда $1 < p < n$ \\
+			По индукционному предположению, $\frac{n}p$ раскладывается на простые множители. Умножим разложение для $\frac{n}p$ на $p$, получим разложение для $n$
+		\end{itemize}
+		\item Единственность \\
+		Пусть $n$ -- наименьшее натуральное число, которое можно представить в виде произведения простых разными способами \\
+		Пусть
+		$$ n = p_1 \cdot ... \cdot p_k, \qquad n = q_1 \cdot ... \cdot q_m $$
+		Если $p_i = q_j$ для некоторых $i, j$, то $\frac{n}{p_i} = \frac{n}{q_j}$ тоже раскладывается на простые множители разными способами. Это противоречит минимальности $n$ \\
+		Получаем, что $p_i \ne q_j$ для любых $i, j$ \\
+		Рассмотрим $p_1$. Все числа $q_1, ..., q_m$ взаимно просты с $p_1$, так как делители любого $q_j$ -- это $1$ и $q_j$, делители $p_1$ -- это $1$ и $p_1$, общий делитель -- только 1 \\
+		По свойству взаимно простых чисел, произведение $q_1 \cdot ... \cdot q_m$ взаимно просто с $p_1$. Но, при этом, оно равно $n$, и следовательно, делится на $p_1$
+	\end{itemize}
+\end{proof}
+
+\begin{implication}
+	Если произведение нескольких чисел делится на простое число $p$, то хотя бы один из сомножителей делится на $p$
+\end{implication}
+
+\section{Сравнения и их свойства}
+
+\begin{definition}
+	Пусть $m$ -- натуральное число. Числа $a$ и $b$ называются сравнимыми по модулю $m$, если $a - b \divby m$
+	\begin{notation}
+		$ a \equiv b (\mod m), \quad a \comp{m} b $
+	\end{notation}
+\end{definition}
+
+\begin{theorem}
+	Отношение $\comp{m}$ является отношением эквивалентности
+\end{theorem}
+
+\begin{proof}
+	\hfill
+	\begin{itemize}
+		\item Рефлексивность: $a - a = 0 \divby m$
+		\item Симметричность: $a - b \divby m \implies b - a = -(a - b) \divby m $
+		\item Транзитивность: $a - b \divby m, ~ b - c \divby m \implies a - c = (a - b) + (b - c) \divby m $
+	\end{itemize}
+\end{proof}
+
+\begin{properties}[арифметические свойства сравнений]
+	Пусть $a \comp{m} b, \quad c \comp{m} d $
+	\begin{itemize}
+		\item $ a + c \comp{m} b + d, \quad a - c \comp{m} b - d $
+		\begin{proof}
+			$ (a \pm c) - (b \pm d) = (a - b) \pm (c - d) \divby m $
+		\end{proof}
+		\item $ ac \comp{m} bd $
+		\begin{proof}
+			$ ac - bd = ac - bc + bc - bd = (a - b)c + b(c - d) \divby m $
+		\end{proof}
+	\end{itemize}
+\end{properties}
+
+\begin{property}[решение линейного сравнения]
+	Пусть $a, b \in \Z, \quad m \in \N \quad (a, m) = 1 $. Тогда:
+	\begin{itemize}
+		\item Сравнение $ax \comp{m} b$ имеет решение
+		\begin{proof}
+			$ (a, m) = 1 \implies \exist \vawe{x}, \vawe{y} : a\vawe{x} + m\vawe{y} = 1 \implies a\vawe{x} \comp{m} 1 \underimp{\cdot b} a(b\vawe{x}) \comp{m} b \implies x = b\vawe{x} $ является решением сравнения
+		\end{proof}
+		\item Если $x_1, x_2$ -- решения, то $ x_1 \comp{m} x_2 $
+		\begin{proof}
+			$$ \begin{rcases}
+				ax_1 \comp{m} b \\
+				ax_2 \comp{m} b
+			\end{rcases} \implies ax_1 \comp{m} ax_2 \implies \underbrace{a}_{\divby m}(x_1 - x_2) \divby m \implies x_1 - x_2 \divby m \implies x_1 \comp{m} x_2 $$
+		\end{proof}
+	\end{itemize}
+\end{property}
+
+\section{Кольцо вычетов}
+
+\begin{definition}
+	Классами вычетов по модулю $m$ называются классы эквивалентности на $\Z$ по отношению $\comp{m}$
+\end{definition}
+
+\begin{definition}
+	Набор чисел называется полной системой вычетов по модулю $m$, если в него входит по одному представителю из каждого класса вычетов
+\end{definition}
+
+\begin{definition}
+	$ \overline{a} + \overline{b} = \overline{a + b}, \qquad \overline{a}\overline{b} = \overline{ab} $
+\end{definition}
+
+\begin{theorem}[кольцо вычетов]
+	Пусть $m \in \N, ~ m > 1 $. Рассмотрим классы вычетов по модулю $m$
+	\begin{itemize}
+		\item Сумма и произведение классов вычетов определены корректно, то есть результат не зависит от выбора представителей классов
+		\begin{replacementproof}[для суммы]
+			Пусть $a_1, a_2$ -- представители одного класса, и $b_1, b_2$ -- другого \\
+			Нужно доказать, что $a_1 + b_1$ и $a_2 + b_2$ принадлежат одному классу \\
+			Применим свойства сравнений:
+			$$ \begin{rcases}
+				a_1 \comp{m} a_2 \\
+				b_1 \comp{m} b_2
+			\end{rcases} \implies a_1 + b_1 \comp{m} a_2 + b_2 $$
+		\end{replacementproof}
+		\item Классы вычетов образуют ассоциативное коммутативное кольцо с единицей
+		\begin{proof}
+			\hfill
+			\begin{itemize}
+				\item Нейтральный по сложению -- $\overline{0}$
+				\item Нейтральный по умножению -- $\overline{1}$
+				\item Обратный по сложению к $\overline{a}$ -- $\overline{(-a)}$
+			\end{itemize}
+			Все свойства следуют из аналогичных свойств для чисел
+		\end{proof}
+		\item Кольцо классов вычетов является полем тогда и только тогда, когда $m \in \Prime$
+		\begin{proof}
+			Ассоциативное коммутативное кольцо с единицей является полем $\iff$ у любого ненулевого элемента есть обратный по умножению
+			\begin{itemize}
+				\item $\impliedby$ \\
+				Пусть $a$ -- такой элемент что $\overline{a} \ne \overline{0}$. Тогда $a \ndivby m $
+				$$ \begin{rcases}
+				   	m \in \Prime \\
+					a \ndivby m
+				   \end{rcases} \implies (a, m) = 1 $$
+				По свойству о решении линейного сравнения, существует $x$, такой, что $ax \comp{m} 1$. Тогда $\overline{a} \cdot \overline{x} = 1 $, класс $\overline{x}$ является обратным к $\overline{a}$ по умножению
+				\item $\implies$ \\
+				Пусть $m \notin \Prime$, $ m = ab$, $a, b > 1 $ \\
+				Докажем, что у класса $\overline{a}$ нет обратного. Пусть есть, $\overline{x} = (\overline{a})^{-1} $. Тогда
+				$$ \overline{b} = \overline{1} \cdot \overline{b} = \overline{xa} \cdot \overline{b} = \overline{xm} = \overline{0} $$
+				Но $b \ndivby m$ -- \contra
+			\end{itemize}
+		\end{proof}
+	\end{itemize}
+\end{theorem}
+
+\section{Теорема Вильсона, малая теорема Ферма}
+
+\begin{theorem}[Вильсона]
+	$ p \in \Prime \implies (p - 1)! \comp{p} -1 $
+\end{theorem}
+
+\begin{proof}
+	\hfill
+	\begin{itemize}
+		\item $p = 2$ \\
+		Подставим: $1! \comp{p} -1$, верно
+		\item $p > 2$ \\
+		Докажем, что равенство $x = x^{-1}$ выполнено только для $x = 1$ и $x = p - 1$: \\
+		Преобразуем формулы, и учтём, что поле является областью целостности:
+		$$ x = x^{-1} \iff x \cdot x = x - 1 \cdot x \iff x^2 = 1 \iff x^2 - 1 = 0 \iff (x - 1)(x + 1) = 0 \iff \left[
+		\begin{aligned}
+			x - 1 = 0 \\
+			x + 1 = 0
+		\end{aligned} \right. $$
+		Получили, что все элементы, кроме $1$ и $p - 1$ разбиваются на пары обратных. Следовательно,
+		$$ 1 \cdot 2 \cdot ... \cdot (p - 1) = 1 \cdot (p - 1) \cdot (x_1x_1^{-1}) \cdot (x_2x_2^{-1}) \cdot ... = (p - 1) \cdot 1 \cdot 1 \cdot ... = p - 1 \comp{p} - 1 $$
+	\end{itemize}
+\end{proof}
+
+\begin{lemma}
+	Пусть $p \in \Prime$ \\
+	Тогда для любого $a \in \Z_p, a \ne 0$ набор элементов $0 \cdot a, 1 \cdot a, ..., (p - 1) \cdot a \in \Z_p$ является перестановкой элементов $0, 1, ..., (p - 1) \in \Z_p$
+\end{lemma}
+
+\begin{undefthm}{Другая формулировка}
+	Для любого $a \in \Z, a \ndivby p$ набор чисел $0 \cdot a, 1 \cdot a, ..., (p - 1) \cdot a \in \Z_p$ является полной системой вычетов по модулю $p$
+\end{undefthm}
+
+\begin{proof}
+	Докажем, что все элементы $0 \cdot a, 1 \cdot 1, ..., (p - 1) \cdot a \in \Z_p$ различны: \\
+	Пусть это не так, и $ax = ay$ для некоторых $x, y$ \\
+	Тогда $a(x - y) = 0$ \\
+	Из того, что $a \ne 0$ и $\Z_p$ -- область целостности, следует, что $x - y = 0$, и таким образом, $x = y$ \\
+	В наборе $0 \cdot a, 1 \cdot a, ..., (p - 1) \cdot a$ все элементы различны, их количество равно $p$. Следовательно, это все элементы $\Z_p$
+\end{proof}
+
+\begin{theorem}[малая теорема Ферма]
+	$p \in \Prime, \quad a \ndivby p \implies a^{p - 1} \comp{p} 1 $
+\end{theorem}
+
+\begin{proof}
+	Рассмотрим кольцо $\Z_p$ \\
+	По лемме, совпадают наборы элементов $0 \cdot a, 1 \cdot a, ..., (p - 1) \cdot a$ и $0, 1, ..., (p - 1)$ \\
+	Уберём из каждого набора $0$ и перемножим \\
+	Получим, что в $\Z_p$ выполнено равенство
+	$$ (1 \cdot a) (2 \cdot a)...\bigg( (p - 1) \cdot a \bigg) = 1 \cdot 2 \cdot ... \cdot (p - 1) $$
+	Поделим обе части на $1 \cdot 2 \cdot ... \cdot (p - 1)$, получим, что $a^{p - 1} = 1$ в $\Z_p$
+\end{proof}
+
+\section{Китайская теорема об остатках}
+
+\begin{theorem}[китайская теорема об остатках для двух сравнений]
+	Пусть $m$ и $n$ взаимно просты \\
+	Тогда для любых $a$ и $b$ существует решение системы
+	$$ \begin{cases}
+		x \comp{m} a \\
+		x \comp{n} b
+	   \end{cases} $$
+	   Если $x_1, x_2$ -- два решения системы, то $x_1 \comp{mn} x_2 $
+\end{theorem}
+
+\begin{undefthm}{Другая формулировка}
+	Если $a$ и $b$ независимо друг от друга пробегают полные системы вычетов по модулям $m$ и $n$, то $x$ пробегает полную систему вычетов по модулю $mn$
+\end{undefthm}
+
+\begin{proof}
+	\hfill
+	\begin{itemize}
+		\item Существование решения \\
+		Положим $ X = \set{0, 1, ..., mn - 1}, \quad M = \set{0, 1, ..., m - 1}, \quad N = \set{0, 1, ..., n - 1}, \quad Y = M \times N $ \\
+		Построим оотображение $f : X \to Y$ по правилу: $f(x) = (r_m, r_n)$, где $r_m$ и $r_n$ -- остатки $x$ от деления на $m$ и $n$ соответственно
+		\begin{itemize}
+			\item Докажем, что $f$ -- инъекция: \\
+			Пусть
+			$$ f(x) = (r_m, r_n), \qquad f(x') = (r_m, r_n) $$
+			Тогда
+			$$ \begin{rcases}
+				x \comp{m} r_m \comp{m} x' \\
+				x \comp{n} r_n \comp{n} x'
+			   \end{rcases} \implies
+			   \begin{Bmatrix}
+				x - x' \divby m \\
+				x - x' \divby n
+			   \end{Bmatrix} \implies x - x' \divby mn \implies x = x' $$
+			Получили, что образы разных элементов не могут совпадать
+			\item Докажем, что $f$ -- биекция: \\
+			Мощности множеств $X$ и $Y$ равны:
+			$$ |X| = mn, \qquad |Y| = |M| \cdot |N| = mn $$
+			Мощность $ \operatorname{Im}(f) $ равна мощности $X$, так как $f$ -- инъекция. Следовательно, $\operatorname{Im}(f) = Y $
+		\end{itemize}
+		Из того, что $f$ - биекция, следует, что существует обратное отображение $f^{-1}$ \\
+		Рассмотрим систему. Пусть $r_m$ и $r_n$ -- остатки $a$ и $b$ от деления на $m$ и $n$. Тогда $x = f^{-1}(r_m, r_n)$ -- решение системы
+		\item Пусть $x_1, x_2$ -- решения. Тогда
+		$$ \begin{rcases}
+			x_1 \comp{m} a \comp{m} x_2 \\
+			x_1 \comp{n} b \comp{n} x_2
+		   \end{rcases} \implies
+		   \begin{Bmatrix}
+		   	x_1 - x_2 \divby m \\
+			x_1 - x_2 \divby n
+		   \end{Bmatrix} \implies x_1 - x_2 \divby mn $$
+	\end{itemize}
+\end{proof}
+
+\begin{theorem}[китайская теорема об остатках в общем виде]
+	Пусть $m_1, m_2, ..., m_k$ попарно взаимно просты. Тогда для любых $a_1, a_2, ..., a_k$ существует решение системы
+	$$ \begin{cases}
+		x \comp{m_1} a_1 \\
+		x \comp{m_2} a_2 \\
+		\widedots[3em] \\
+		x \comp{m_k} a_k
+	   \end{cases} $$
+	Если $x_1, x_2$ -- два решения системы, то $x_1 - x_2 \divby m_1m_2...m_k$
+\end{theorem}
+
+\begin{proof}
+	\textbf{Индукция} по $k$ \\
+	\textbf{База.} $k = 2$ -- это предыдущая теорема \\
+	\textbf{Переход.} $k \to k + 1$ \\
+	Рассмотрим систему
+	$$ \begin{cases}
+		x \comp{m_1} a_1 \\
+		x \comp{m_2} a_2 \\
+		\widedots[3em] \\
+		x \comp{m_k} a_k \\
+		x \comp{n} b
+	\end{cases} $$
+	где числа $m_1, ..., m_k, n$ попарно взаимно просты. Положим $m = m_1 \cdot ... \cdot m_k$. Тогда $m$ и $n$ взаимно просты по свойству о взаимной простоте с произведением \\
+	Применим индукционное предположение к системе из первых $k$ сравнений. Система имеет решение $x_0$, и любое другое решение сравнимо с $x_0$ по модулю $m$. Следовательно, система из $k + 1$ сравнений равносильна системе
+	$$ \begin{cases}
+		x \comp{m} x_0 \\
+		x \comp{n} b
+	   \end{cases} $$
+	Применяя КТО для двух сравнений получаем, что эта система имеет решение, и для любых двух решений $x_1, x_2$ выполнено
+	$$ x_1 - x_2 \divby mn = m_1m_2...m_ \cdot n $$
+\end{proof}
+
+\section{Группа обратимых элементов. Обратимые элементы в кольце вычетов. Теорема Эйлера}
+
+\begin{definition}
+	Пусть $R$ -- коммутативное кольцо с единицей. Элемент $x \in R$ называется обратимым, если существует $x^{-1}$, такой что $xx^{-1} = 1$. Элемент $x^{-1}$ называется обратным к $x$
+	\begin{notation}
+		Множество обратимых элементов обозначается $R^*$
+	\end{notation}
+\end{definition}
+
+\begin{note}
+	В некоммутативном кольце можно рассматривать левые обратные и правые обратные
+\end{note}
+
+\begin{property}
+	Пусть $R$ -- коммутативное ассоциативное кольцо с единицей. Тогда $R^*$ с операцией умножения является группой
+\end{property}
+
+\begin{proof}
+	\hfill
+	\begin{itemize}
+		\item Проверим, что $R^*$ замкнуто относительно умножения, то есть
+		$$ x, y \in R^* \implies xy \in R^* $$
+		Обратным к элементу $xy$ является элемент $y^{-1}x^{-1}$, так как
+		$$ (xy)(y^{-1}x^{-1}) = x(yy^{-1})x^{-1} = x \cdot q \cdot x^{-1} = xx^{-1} = 1 $$
+		\item Операция ассоциативна, так как кольцо ассоциативно
+		\item $1 \in R^*$, так как $ 1 \cdot 1 = 1$, и, следовательно, $1 = q^{-1}$
+		\item Проверим, что для любого $x \in R^*$ выполнено $x^{-1} \in R^* $: \\
+		Из равенства $xx^{-1} = 1$ следует, что $x$ является обратным к $x^{-1}$. Следовательно, $x^{-1}$ обратим
+	\end{itemize}
+\end{proof}
+
+\begin{lemma}[НОД с вычетом]
+	Рассмотрим вычеты по модулю $n$. Пусть $a, x \in \Z$ таковы, что $x \in \overline{a}$. Тогда $\GCD{x, n} = \GCD{a, n}$
+\end{lemma}
+
+\begin{proof}
+	Имеем $x = a + nq$ для некоторого $q$. По лемме из доказательства алгоритма Евклида выполнено
+	$$ \GCD{a, n} = \GCD{a + qn, n} = \GCD{x, n} $$
+\end{proof}
+
+\begin{definition}
+	Вычет $\overline{a}$ по модулю $n$ называется примитивным, если $\GCD{a, n} = 1$
+\end{definition}
+
+\begin{note}
+	Из леммы следует, что определение корректно, то есть свойство примитивности не зависит от выбора предстваителя класса
+\end{note}
+
+\begin{theorem}[обратимые элементы в кольце вычетов]
+	Множество обратимых элементов кольца $\Z_n$ совпадает с множеством примитивных вычетов
+\end{theorem}
+
+\begin{proof}
+	$\overline{a} \in \Z_n$ обратим $\iff \exist \overline{x} \in \Z_n : \overline{a}x = \overline{1} \iff \exist x \in \Z : ax \comp{n} 1 \iff \exist x, q \in \Z : ax - nq = 1 $ \\
+	По теореме о линейном предствалении НОД последнее уравнение равносильно тому, что $1 \divby \GCD{a, n} $. Это равносильно тому, что $\GCD{a, n} = 1$
+\end{proof}
+
+\begin{definition}
+	Количество примитивных вычетов по модулю $n$ обозначается $\vphi(n)$. Функция $\vphi(n)$ называется функцией Эйлера
+\end{definition}
+
+\begin{theorem}[Эйлера]
+	$ \GCD{a, n} = 1 \implies a^{\vphi(n)} \comp{n} 1 $
+\end{theorem}
+
+\begin{proof}
+	Положим $k \define \vphi(n)$. Нужно доказать, что $\overline{a}^k = \overline{1}$ в $\Z_n$ \\
+	Пусть $\Z_n^* = \set{\overline{x_1}, ..., \overline{x_k}}$ \\
+	Из того, что $(a, n) = 1$ следует, что $\overline{a} \in \Z_n^*$ \\
+	Элеенты $ax_1, ..., ax_k$ принадлежат $\Z_n^*$ и различны по свойству сокращения в группе. Следовательно, наборы $\overline{x_1}, ..., \overline{x_k}$ и $\overline{ax_1}, ..., \overline{ax_k}$ освпадают с точностью до перестановки \\
+	Перемножим и вынесесем из каждого сомножителя $\overline{a}$:
+	$$ \overline{1} \cdot \overline{x_1} \cdot ... \cdot \overline{x_k} = \overline{a^k} \cdot \overline{x_1} ... \overline{x_k} $$
+	Сократим на $\overline{x_1}...\overline{x_k}$ и  получим, что $\overline{a^k} = \overline{1}$ в $\Z_n$
+\end{proof}
+
+\section{Вычисление функции Эйлера}
+
+\begin{theorem}[мультипликативность функции Эйлера]
+	Если $m$ и $n$ взаимно просты, то
+	$$ \vphi(mn) = \vphi(m) \cdot \vphi(n) $$
+\end{theorem}
+
+\begin{proof}
+	\hfill
+	\begin{itemize}
+		\item Пусть $x \in \Z$. Обозначим через $r_m$ и $r_n$ остатки $x$ от деления на $m$ и $n$ соответственно. Докажем, что
+		$$ \GCD{x, mn} = 1 \iff
+		\begin{cases}
+			\GCD{x, m} = 1 \\
+			\GCD{x, n} = 1
+		\end{cases} $$
+		Числа $x$ и $mn$ взамино просты $\iff$ у $x$ нет общих простых делителей с $mn \iff$ у $x$ нет общих простых делителей, ни с $m$, ни с $n \iff$ число $x$ взаимно просто и с $m$, и с $n$ \\
+		По лемме про НОД с вычетом, из этого следует, что
+		$$ \GCD{x, mn} = 1 \iff
+		\begin{cases}
+			\GCD{r_m, m} = 1 \\
+			\GCD{r_n, n} = 1
+		\end{cases} $$
+		\item Обозначим через $X$ множество остатков от деления на $mn$, взаимно простых с $mn$, через $M$ -- множество остатков от деления на $m$, взаимно простых с $m$, через $N$ -- множество остатков от деления на $n$, и положим $Y = M \times N$. Тогда
+		$$ |X| = \vphi(mn), \quad |M| = \vphi(m), \quad |N| = \vphi(n), \quad |Y| = \vphi(m) \cdot \vphi(n) $$
+		Нужно доказать, что $|X| = |Y|$ \\
+		Построим отображение $f : X \to Y$. Пусть $x \in X$ и $r_n, r_m$ -- остатки от деления $x$ на $m, n$. Тогда $(r_n, r_m) \in Y$. Положим $f(x) = (r_n, r_m)$
+		\begin{itemize}
+			\item Проверим, что $f$ -- инъекция: \\
+			Пусть
+			$$ f(x_1) = \GCD{r_n, r_m}, \qquad f(x_2) = \GCD{r_n, r_n} $$
+		\end{itemize}
+		Тогда
+		$$ \begin{rcases}
+			x_1 \comp{m} r_m \comp{m} x_2 \\
+			x_1 \comp{n} r_n \comp{n} x_2
+		   \end{rcases} \implies
+		   \begin{rcases}
+		   	x_1 - x_2 \divby m \\
+			x_1 - x_2 \divby n
+		   \end{rcases} \implies x_1 - x_2 \divby mn \implies x_1 = x_2 $$
+		\item Проверим, что $f$ -- сюръекция: \\
+		Пусть $y \in Y, y = \GCD{r_n, r_m}$ \\
+		По КТО существует $x \in \Z$, такой, что $
+		\begin{cases}
+			x \comp{m} r_m \\
+			x \comp{n} r_n
+		\end{cases} $ \\
+		Можно выбрать $x$ так, что выполняется $0 \le x < mn$ \\
+		Из того, что $r_m, r_n$ взаимно просты с $m, n$ следует, что $x$ взаимно прост с $mn$ \\
+		Получили, что $x \in X$. Элемент $x \in X$ является проообразом элемента $y \in Y$
+	\end{itemize}
+	Доказано, что $f$ -- биекция. Следовательно, $|X| = |Y|$
+\end{proof}
+
+\begin{implication}
+	Если числа $m_1, ..., m_k$ попарно взаимно просты, то
+	$$ \vphi(m_1 \cdot ... \cdot m_k) = \vphi(m_1) \cdot ... \cdot \vphi(m_k) $$
+\end{implication}
+
+\begin{lemma}
+	$ p \in \Prime \implies \vphi(p^a) = p^a - p^{a - 1} $
+\end{lemma}
+
+\begin{proof}
+	Множество чисел, взаимно простых с $p^a$ совпадает с множеством чисел, не делящихся на $p$ \\
+	Рассмотрим натуральные числа, не превосходящие $p^a$. Среди них $\frac1p p^a = p^{a - 1}$ делятся на $p$, остальные $p^a - p^{a - 1}$ не делятся на $p$
+\end{proof}
+
+\begin{theorem}[формула для функции Эйлера]
+	Пусть $n = p_1^{a_1} \cdot ... \cdot p_k^{a_k}, \quad a_i > 0 $. Тогда верны равенства:
+	$$ \vphi(n) = n \bigg(1 - \frac1{p_1} \bigg) \cdot ... \cdot \bigg( 1 - \frac1{p_k} \bigg) $$
+	$$ \vphi(n) = (p_1^{a_1} - p_1^{a_1 -1}) \cdot ... \cdot (p_k^{a_k} - p_k^{a_k - 1}) $$
+\end{theorem}
+
+\begin{proof}
+	Докажем вторую формулу (первая получается из неё вынесением всех множителей вида $p_i^{a_i}$): \\
+	Числа $p_1^{a_1}, ..., p_k^{a_k}$ попарно взаимно просты, следовательно,
+	$$ \vphi(n) = \vphi(p_1^{a_1}) \cdot ... \cdot \vphi(p_k^{a_k}) $$
+	Применим к каждому сомножителю лемму, получим нужное равенство
+\end{proof}
+
+\section{Построение поля комплексных чисел. Комплексное сопряжение}
+
+\begin{definition}
+	Комплексными числами называются пары вещественных чисел \\
+	Если $z = (a, b)$, то $a$ и $b$ называются вещественной и мнимой частью $z$
+	\begin{notation}
+		$a = \operatorname{Re} z, \quad b = \operatorname{Im} z $
+	\end{notation}
+	Число $(0, 1)$ называется мнимой единицей \\
+	Арифметические операции над комплексными числами определяются равенствами:
+	$$ (a_1, b_1) + (a_2, b_2) = (a_1 + a_2, b_1 + b_2) $$
+	$$ (a_1, b_1) \cdot (a_2, b_2) = (a_1a_2 - b_1b_2, a_1b_2 + b_1a_2) $$
+\end{definition}
+
+\begin{notation}
+	Множество комплексных чисел обозначается $\Co$
+\end{notation}
+
+\begin{undefthm}{Вложение вещественных чисел в комплексные}
+	Пара $(a, 0)$ отождествляется с вещественным числом $a$. Свойство равенства и арифметические операции для вещественных чисел и для пар $(a, 0)$ согласованы:
+	$$ (a_1, 0) = (a_2, 0) \iff
+	\begin{Bmatrix}
+		a_1 = a_2 \\
+		0 = 0
+	\end{Bmatrix} \iff a_1 = a_2 $$
+	$$ (a_1, 0) + (a_2, 0) = (a_1 + a_2, 0 + 0) = (a_1 + a_2, 0) $$
+	$$ (a_1, 0) \cdot (a_2, 0) = (a_1 \cdot a_2 - 0 \cdot 0, a_1 \cdot 0 + 0 \cdot a_2) = (a_1a_2, 0) $$
+\end{undefthm}
+
+\begin{theorem}[поле комплексных чисел]
+	Множество $\Co$ является полем \\
+	При этом, $0$ и $1$ явлются нейтральными элементами по сложению и умножению \\
+	Для $z = (a, b)$ выполнено:
+	\begin{itemize}
+		\item $-z = (-z, -b)$
+		\item если $z \ne 0$, то $z^{-1} = \bigg( \dfrac{a}{a^2 + b^2}, -\dfrac{b}{a^2 + b^2} \bigg) $
+	\end{itemize}
+	То есть, выполнены следующие свойства:
+	\begin{enumerate}
+		\item Коммутативность сложения: $z_1 + z_2 = z_2 + z_1 $
+		\begin{proof}
+			$ (a_1, b_1) + (a_2, b_2) = (a_1 + a_2, b_1 + b_2) = (a_2 + a_1, b_2 + b_1) = (a_2, b_2) + (a_1, b_1) $
+		\end{proof}
+		\item Ассоциативность сложения: $ (z_1 + z_2) + z_3 = z_1 + (z_2 + z_3) $
+		\item Нейтральный элемент по сложению: $z + 0 = z$
+		\item Обратный элемент по сложению: $(a, b) + (-a, -b) = 0$
+		\item Дистрибутивность: $z_1(z_2 + z_3) = z_1z_2 + z_1z_3, \quad (z_1 + z_2)z_3 = z_1z_3 + z_2z_3 $
+		\item Коммутативность умножения: $z_1z_2 = z_2z_1 $
+		\item Ассоциативность умножения: $(z_1z_2)z_3 = z_1(z_2z_3) $
+		\item Нейтральный элемент по умножению: $z \cdot 1 = z$
+		\item Обратный элемент по умножению: $(a, b) \cdot \bigg( \dfrac{a}{a^2 + b^2}, -\dfrac{b}{a^2 + b^2} \bigg) = (1, 0) $
+	\end{enumerate}
+\end{theorem}
+
+\begin{undefthm}{Алгебраическая запись комплексного числа}
+	Комплексное число $(a, b)$ записывается как $a + bi$. В частности, $i = (0, 1)$ \\
+	Знак ``$+$'' соответствует сложению в $\Co$
+\end{undefthm}
+
+\begin{definition}
+	Пусть $z = a + bi$. Число $a - bi$ называется сопряжённым к $z$
+	\begin{notation}
+		$\overline{z}$
+	\end{notation}
+\end{definition}
+
+\begin{props}
+	\item
+	\begin{enumerate}
+		\item $\overline{z_1 + z_2} = \overline{z_1} + \overline{z_2} $
+		\begin{proof}
+			Пусть $z_1 = a_1 + b_1i, \quad z_2 + a2 + b_2i$. Тогда
+			$$ \overline{z_1} = a_1 - b_1i, \qquad \overline{z_2} = a_2 - b_2i $$
+			$$ z_1 + z_2 = (a_1 + a_2) + (b_! + b_2)i, \qquad \overline{z_1 + z_2} = (a_1 + a_2) - (b_1 + b_2)i $$
+			$$ \overline{z_1} + \overline{z_2} = (a_1 + a_2) - (b_1 + b_2)i $$
+		\end{proof}
+		\item $ \overline{z_1z_2} = \overline{z_1} \cdot \overline{z_2} $
+		\begin{proof}
+			Пусть $z_1 = a_1 + b_1i, \quad z_2 + a2 + b_2i$. Тогда
+			$$ \overline{z_1} = a_1 - b_1i, \qquad \overline{z_2} = a_2 - b_2i $$
+			$$ z_1z_2 = (a_1a_2 - b_1b_2) + (a_1b_2 + b_1a_2)i, \qquad \overline{z_1z_2} = (a_1 + a_2) - (b_1 + b_2)i $$
+			$$ \overline{z_1} \cdot \overline{z_2} = (a_1a_2 - (-b_1)(-b_2)) + (a_1(-b_2) + (-b_1)a_2)i = (a_1a_2 - b_1b_2) - (a_1b_2 + b_1a_2)i $$
+		\end{proof}
+	\end{enumerate}
+	\item $z + \overline{z} \in \R, \quad z \cdot \overline{z} \in \R$ для любого $z \in \Co$ \\
+	Причём, при $z \ne 0$ выполнено $z \cdot \overline{z} > 0$
+	\begin{proof}
+		Пусть $z = a + bi$. Тогда $z + \overline{z} = 2a, \quad z \cdot \overline{z} = a^2 - (bi)^2 = a^2 + b^2 $
+	\end{proof}
+\end{props}
+
+\section{Комплексная плоскость. Свойства модуля}
+
+\begin{undefthm}{Изображение комплексных чисел на плоскости}
+	На плоскости задана система координат, оси называются вещественной и мнимой, и обозначаются $\operatorname{Re}$ и $\operatorname{Im}$ \\
+	Комплексное число $z = a + bi$ изображается точкой с координатами $(a, b)$
+\end{undefthm}
+
+\begin{definition}
+	Модулем комплексного числа называется расстояние от 0 до точки, изображающей это число
+	\begin{notation}
+		$|z|$
+	\end{notation}
+\end{definition}
+
+\begin{definition}
+	Аргументом ненулевого комплексного числа называется угол между направлением оси $\operatorname{Re}$ и направлением на точку, изображающую это комплексное число \\
+	Аргумент определён с точностью до $2\pi$, то есть аргумент -- это класс эквивалентности по отношению
+	$$ x \sim y \iff x - y = 2\pi k, \quad k \in \Z $$
+	\begin{notation}
+		$ \arg(z) $
+	\end{notation}
+\end{definition}
+
+\begin{note}
+	Модуль и аргумент -- полярные координаты соответствующей точки
+\end{note}
+
+\begin{props}
+	\item $|z|^2 = (\operatorname{Re} z)^2 + (\operatorname{Im} z)^2 $
+	\begin{proof}
+		Следует из формулы расстояния между точками на плоскости
+	\end{proof}
+	\item $|z| = |-z| = |\overline{z}| $
+	\begin{proof}
+		Пусть $z = x +yi$. Тогда $-z = (-z) + (-y)i, \quad \overline{z} = x + (-y)i$. Подставим в предыдущий пункт, получим, что все три модуля равны $ \sqrt{x^2 + y^2} $
+	\end{proof}
+\end{props}
+
+\section{Неравенство треугольника}
+
+\begin{theorem}[неравенство треугольника]
+	Для любых комплексных чисел $z_1, ..., z_n$ выполнено
+	$$ |z_1 + ... + z_n| \le |z_1| + ... + |z_n| $$
+\end{theorem}
+
+\begin{proof}
+	\textbf{Индукция} по $n$ \\
+	\textbf{База.} $n = 2$ \\
+	Пусть $z_1 = a + bi, \quad z_2 = c + di$. Тогда
+	$$ z_1 + z_2 = (a + c) + (b + d)i, \qquad |z_1| = \sqrt{a^2 + b^2}, \qquad |z_2| = \sqrt{c^2 + d^2}, \qquad |z_1 + z_2| = \sqrt{(a + c)^2 + (b + d)^2} $$
+	Требуется доказать, что для любых вещественных чисел $a, b, c, d$ выполнено неравенство
+	$$ \sqrt{(a + c)^2 + (b + d)^2} \le \sqrt{a^2 + b^2} + \sqrt{c^2 + d^2} $$
+	Возведём в квадрат:
+	$$ (a + c)^2 + (b + d)^2 \le a^2 + b^2 + 2\sqrt{a^2 + b^2}\sqrt{c^2 + d^2} $$
+	$$ a^2 + 2ac + c^2 + b^2 + 2bd + d^2 \le a^2 + b^2 + 2\sqrt{a^2 + b^2}\sqrt{c^2 + d^2} $$
+	$$ 2ac + 2bd \le 2\sqrt{a^2 + b^2}\sqrt{c^2 + d^2} $$
+	$$ ac + bd \le \sqrt{a^2 + b^2}\sqrt{c^2 + d^2} $$
+	Возведём в квадрат:
+	$$ a^2c^2 + 2abcd + b^2d^2 \le (a^2 + b^2)(c^2 + d^2) $$
+	$$ a^2c^2 + 2abcd + b^2d^2 \le a^2c^2 + a^2d^2 + b^2c^2 + b^2d^2 $$
+	$$ 0 \le a^2d^2 - 2abcd + b^2c^2 $$
+	$$ 0 \le (ad - bc)^2 $$
+	Это верно всегда \\
+	\textbf{Переход.} $n \to n + 1$ \\
+	Положим $z' = z_1 + ... + z_n$. Тогда по индукционному предположению выполнено
+	$$ |z'| \le |z_1| + ... + |z_n| $$
+	$$ |z_1 + ... + z_n + z_{n + 1}| = |z' + z_{n + 1}| \le |z'| + |z_{n + 1}| \le |z_n| + ... + |z_n| + |z_{n + 1}| $$
+\end{proof}
+
+\begin{implication}
+	\hfill
+	\begin{itemize}
+		\item $|z_1 - z_2| \le |z_1| + |z_2|$
+		\begin{proof}
+			Применим неравенство треугольника к $z_1$ и $-z_2$ и учтём, что $|-z_2| = |z_2|$
+		\end{proof}
+		\item $|z_1 - z_2| \le |z_1| - |z_2|$
+		\begin{proof}
+			Имеем $ |z_1| = |(z_1 - z_2) + z_2| \le |z_1 - z_2| + |z_2| $
+		\end{proof}
+		\item $|z_1 + z_2| \le |z_1| - |z_2|$
+		\begin{proof}
+			Получается из предыдущего пункта заменой $z_2$ на $-z_2$
+		\end{proof}
+	\end{itemize}
+\end{implication}
+
+\section{Тригонометрическая форма комплексного числа. Умножение и деление}
+
+\begin{theorem}[тригонометрическая форма]
+	Пусть $z \in \Co, \quad z \ne 0 $
+	\begin{enumerate}
+		\item Пусть $x = \operatorname{Re} z, \quad y = \operatorname{Im} z, \quad r = |z|, \quad \vphi = \arg(z)$. Тогда
+		$$ r = \sqrt{x^2 + y^2}, \qquad \cos \vphi = \frac{x}r, \qquad \sin \vphi = \frac{y}r $$
+		\begin{proof}
+			Первая формула следует из формулы расстояния между точками на плоскости, вторая и третья -- из определения синуса и косинуса и подобия треугольников
+		\end{proof}
+		\item Пусть $\vphi = \arg(z), \quad r = |z|$. Тогда
+		$$ z = r(\cos \vphi + i \sin \vphi) $$
+		\begin{proof}
+			Положим $x \define \operatorname{Re} x, \quad y \define \operatorname{Im} z $. Тогда из предыдущего пункта следует что $x = r \cos \vphi, \quad y = r \sin \vphi $. Подставим:
+			$$ r(\cos \vphi + i \sin \vphi) = r \cos \vphi + ir \sin \vphi = x + iy = z $$
+		\end{proof}
+		\item Пусть для некоторых $r, \vphi \in \R, \quad r > 0 $ выполнено
+		$$ z = r(\cos \vphi + i \sin \vphi) $$
+		Тогда $ r = |z|, \quad \vphi = \arg(z) $
+	\end{enumerate}
+	\begin{proof}
+		Положим $x \define \operatorname{Re} z, \quad y \define \operatorname{Im} z $ \\
+		Приравняем и раскроем скобки:
+		$$ x + yi = z = r \cos \vphi + ir \sin \vphi \implies
+		\begin{cases}
+			x = r \cos \vphi \\
+			y = r \sin \vphi
+		\end{cases} $$
+		Пусть $\rho = |z|, \quad \psi = \arg(z)$. Тогда из первого пункта следует, что $x = \rho \cos \psi, \quad y = \rho \sin \psi $ \\
+		Проверим, что $ r = \rho $:
+		$$ r = \sqrt{r^2} = \sqrt{r^2 \cos^2 \vphi + r^2 \sin^2 \vphi} = \sqrt{x^2 + y^2} = \sqrt{\rho^2 \cos^2 \psi + \rho^2 \sin^2 \psi} = \sqrt{\rho^2} = \rho $$
+		Получили, что
+		$$ \begin{rcases}
+		   	x = \rho \cos \vphi \\
+			x = \rho \cos \psi
+		   \end{rcases} \implies \cos \vphi = \cos \psi $$
+		Следовательно, $\vphi$ и $\psi$ совпадают с точностью до $2\pi k$
+	\end{proof}
+\end{theorem}
+
+\begin{definition}
+	Тригонометрической формой числа $z \in \Co, \quad z \ne 0 $ называется запись
+	$$ z = r(\cos \vphi + i \sin \vphi), \qquad r = |z|, \quad \vphi = \arg z $$
+\end{definition}
+
+\begin{theorem}[умножение комплексных чисел в тригонометрической форме]
+	При умножении комплексных чисел их модули перемножаются, аргументы -- складываются \\
+	То есть для любых комплексных чисел $z_1, ..., z_n$, не равных 0, выполнено
+	$$ |z_1 \cdot ... \cdot z_n| = |z_1| \cdot ... \cdot |z_n| $$
+	$$ \arg(z_1 \cdot ... \cdot z_n) = \arg(z_1) + ... + \arg(z_n) $$
+\end{theorem}
+
+\begin{proof}
+	\textbf{Индукция} по $n$ \\
+	\textbf{База.} $n = 2$ \\
+	Пусть $z_1 = r_1 (\cos \vphi_1 + i \sin \vphi_1), \quad z_2 = r_2 (\cos \vphi_2 + i \sin \vphi_2) $. Тогда
+	\begin{multline*}
+		z_1z_2 = r_1r_2 (\cos \vphi_1 + i \sin \vphi_1)(\cos \vphi_2 + i \sin \vphi_2) = \\ = r_1r_2 \bigg( (\cos \vphi_1 \cos \vphi_2 - \sin \vphi_1 \sin \vphi_2) + i(\cos \vphi_1 \sin \vphi_2 + \sin \vphi_1 \cos \vphi_2) \bigg) = \\ = (r_1r_2) \bigg( \cos (\vphi_1 + \vphi_2) + i \sin (\vphi_1 + \vphi_2) \bigg)
+	\end{multline*}
+	\textbf{Переход.} $n \to n + 1$ \\
+	Пусть $z' = z_1z_2...z_n$ \\
+	По индукционному предположению, выполнено
+	$$ |z'| = |z_1| \cdot ... \cdot |z_n|, \qquad \arg z' = \arg(z_1) + ... + \arg(z_n) $$
+	Применяя утверждение для $n = 2$ к $z'$ и $z_n$, получаем нужные равенства
+\end{proof}
+
+\begin{implication}[тригонометрическая форма обратного числа]
+	Для любого $z \ne 0$ выполнено
+	$$ |z^{-1}| = |z|^{-1}, \qquad \arg z^{-1} = -\arg z $$
+\end{implication}
+
+\section{Формула Муавра. Корни из комплексных чисел}
+
+\begin{theorem}[возведение в степень комплексных чисел в тригонометрической форме]
+	Пусть $z \in \Co, \quad r = |z|, \quad \vphi = \arg z, \quad n \in \Z$. Тогда
+	$$ z^n = r^n \big( \cos(n\vphi) + i \sin (n\vphi) \big) $$
+\end{theorem}
+
+\begin{proof}
+	\hfill
+	\begin{itemize}
+		\item $n = 0$
+		$$ z^0 = 1, \qquad r^0 \big( \cos(0\vphi) + i \sin(0\vphi) \big) = 1(1 + i \cdot 0) = 1 $$
+		\item $n > 0$ \\
+		Применим теорему о произведении в тригонометрической форме к $z_1 = z_2 = ... = z_n = z $
+		\item $n < 0$ \\
+		Положим $n_1 = -n, \quad z_1 = z^{-1}$, применим формулу для тригонометрической формы обратного числа и доказанное утверждение для $n_1 > 0$:
+		$$ z^n = z_1^{n_1} = \bigg( \frac1r \big( \cos(-\vphi) + i \sin(-\vphi) \big) \bigg)^{n_1} = \frac1{r^{n_1}} \big( \cos(-n_1\vphi) + i \sin(-n_1\vphi)) = r^n \big( \cos(n\vphi) + i\sin(n\vphi) \big) $$
+	\end{itemize}
+\end{proof}
+
+\begin{implication}[формула Муавра]
+	Пусть $z = \cos \vphi + i \sin \vphi, \quad n \in \Z$. Тогда $z^n = \cos(n\vphi) + i\sin(n\vphi) $
+\end{implication}
+
+\begin{theorem}[извлечение корня в тригонометрической форме]
+	Пусть $a \in \Co, \quad a \ne 0, \quad n \in \N$. Тогда уравнение $z^n = a$ имеет $n$ решений \\
+	Если $ a = r(\cos \vphi + i \sin \vphi)$, то решениями уравнения являются числа вида
+	$$ z_k = r^{\faktor1n}\bigg( \cos \frac{\vphi + 2\pi k}n + i \sin \frac{\vphi + 2\pi k}n \bigg), \qquad k = 0, 1, ..., (n - 1) $$
+\end{theorem}
+
+\begin{proof}
+	Будем искать решение в виде $z = \rho(\cos \psi + i \sin \psi)$ \\
+	Возведём $z$ в $n$-ю степень в тригонометрической форме и приравняем к $a$:
+	$$ \rho^n \big( \cos(n\psi) + i \sin(n\psi) \big) = r(\cos \vphi + i \sin \vphi) $$
+	Следовательно,
+	$$ \rho^n = r, \qquad n\psi = \vphi + 2\pi k, \qquad k \in \Z $$
+	Получаем, что корни уравнения имеют вид
+	$$ z_k = r^{\faktor1n} \bigg( \cos \frac{\vphi + 2\pi k}n + i \sin \frac{\vphi + 2\pi k}n \bigg), \qquad k \in \Z $$
+	Проверим, что при $k = 0, 1, ..., (n - 1)$ корни $z_k$ различны, и любой другой корень совпадает с одним из этих корней \\
+	Модели всех чисел $z_k$ равны. Следовательно,
+	\begin{multline*}
+		z_k = z_l \iff \arg z_k = \arg z_l \iff \frac{\vphi + 2\pi k}n = \frac{\vphi + 2\pi l}n + 2\pi m, \quad m \in \Z \iff \\ \iff \vphi + 2\pi k = \vphi + 2\pi l + 2\pi mn, \quad m \in \Z \iff k \comp{n} l
+	\end{multline*}
+	Следовательно, $z_k$ и $z_l$ совпадают тогда и только тогда, когда $k$ и $l$ принадлежат одному классу вычетов по модулю $n$
+\end{proof}
+
+\section{Комплексные корни из единицы. Первообразные корни}
+
+\begin{definition}
+	Число $\veps \in \Co$ называется корнем $n$-й степени из единицы, если $\veps^n = 1 $
+\end{definition}
+
+\begin{notation}
+	Будем обозначать корни из единицы как
+	$$ \veps_k = \cos \frac{2\pi k}n + i \sin \frac{2\pi k}n, \qquad k = 0, 1, ..., (n - 1) $$
+\end{notation}
+
+\begin{props}
+	\item Корни $n$-й степени из 1 образуют группу с операцией умножения
+	\begin{proof}
+		\hfill
+		\begin{itemize}
+			\item Замкнутость относительно операции: \\
+			Проверим, что если $x, y$ -- корни $n$-й степени из 1, то $xy$ -- корень $n$-й степени из 1:
+			$$ \begin{rcases}
+			   	x^n = 1 \\
+				y^n = 1
+			   \end{rcases} \implies (xy)^n = x^ny^n = 1 \cdot 1 = 1 $$
+			\item Ассоциативность следует из ассоциативности в $\Co$
+			\item Существование единицы: \\
+			Число 1 является корнем $n$-й степени из 1, так как $1^n = 1$
+			\item Существование обратного: \\
+			Проверим, что если $x$ -- корень $n$-й степени из 1, то $\frac1x$ -- корень $n$-й степени из 1:
+			$$ \bigg( \frac1x \bigg)^n = \frac1{x^n} = \frac11 = 1 $$
+		\end{itemize}
+	\end{proof}
+	\item Пусть $a \in \Co, \quad a \ne 0, \quad x$ -- некоторый корень $n$-й степени из $a$. Тогда $\veps_0x, ..., \veps_{n - 1}x$ -- все корни $n$-й степени из $a$
+	\begin{proof}
+		\hfill
+		\begin{itemize}
+			\item Докажем, что если $y = \veps_ix$, то $y$ -- корень $n$-й степени из $a$:
+			$$ y^n = x^n\veps_i^n = a \cdot 1 = a $$
+			\item Докажем, что если $y$ -- корень $n$-й степени из 1, то $y = \veps_ix$ для некоторого $x$, то есть $\frac{y}x$ является корнем $n$-й степени из 1:
+			$$ \bigg( \frac{y}x \bigg)^n = \frac{y^n}{x^n} = \frac{a}a = 1 $$
+		\end{itemize}
+	\end{proof}
+\end{props}
+
+\begin{definition}
+	Число $\veps \in \Co$ называется первообразным корнем $n$-й степени из единицы, если $\veps^n$ = 1, и $\veps^k \ne 1$ при $1 \le k < n$
+\end{definition}
+
+\begin{undefthm}{Другое название}
+	Корень, принадлежащий показателю $n$
+\end{undefthm}
+
+\begin{properties}
+	Рассмотрим корни $n$-й степени из единицы
+	\begin{enumerate}
+		\item Корень $\veps_k$ является первообразным тогда и только тогда, когда $\GCD{k, n} = 1$
+		\begin{proof}
+			Докажем, что $\veps_k^m = 1 \iff km \divby n$: \\
+			Разделим $km$ на $n$ с остатком: пусть $km = nq + r, \quad 0 \le r < n$. Тогда
+			$$ \veps_k^m = \bigg( \cos \frac{2\pi k}n + i \sin \frac{2\pi k}n \bigg)^m = \cos \frac{2\pi km}n + i \sin \frac{2\pi km}n = \cos \frac{2\pi r}n + i \sin \frac{2\pi r}n $$
+			Правая часть равна 1 тогда и только тогда, когда $r = 0$
+			\begin{itemize}
+				\item Пусть $\GCD{k, n} = 1$. Тогда из условия $km \divby n$ следует, что $m \divby n$. Для $1 \le m < n$ это не выполнено, корень является первообразным
+				\item Пусть $\GCD{k, n} = d > 1 $ \\
+				Тогда для $m = \frac{n}d < n$ выполнено $mk \divby n$, корень не является первообразным
+			\end{itemize}
+		\end{proof}
+		\item Пусть $\veps_k$ -- первообразный корень. Тогда любой корень $k$-й степени из единицы равен $\veps_k^m$ для некоторого $m$
+		\begin{proof}
+			Числа $\veps_k, \veps_k^2, ..., \veps_k^n$ являются корнями $k$-й степени из единицы \\
+			Докажем, что они различны: \\
+			Пусть $\veps_k^m = \veps_k^l, \quad 0 < m < l < k$ \\
+			Тогда $\veps_k^{l - m} = 1$. Это противоречит тому, что $\veps_k$ -- первообразный корень
+		\end{proof}
+	\end{enumerate}
+\end{properties}
+
+\section{Кольцо многочленов. Переход к стандартной записи}
+
+\begin{definition}
+	Пусть $A$ -- кольцо. Многочленом над кольцом $A$ будем называть последовательность $(a_0, a_1, ...)$, в которой только конечное количество членов отлично от нуля \\
+	Пусть $P = (a_0, a_1, ...), Q = (b_0, b_1, ...)$. Суммой $P + Q$ называется многочлен $(c_0, c_1, ...)$, заданный условием $ \forall k \quad c_k = a_k + b_k $ \\
+	Произведением $PQ$ называется многочлен $(d_0, d_1, ...)$, заданный условием
+	$$ \forall k \quad d_k = a_0b_k + a_1b_{k - 1} + ... + a_{k - 1}b_1 + a_kb_0 $$
+\end{definition}
+
+\begin{notation}
+	Множество многочленов над кольцом $A$ обозначается $A[x]$
+\end{notation}
+
+\begin{theorem}[кольцо многочленов]
+	\hfill
+	\begin{enumerate}
+		\item Сумма и произведение многочленов определены корректно, то есть в последовательностях \\ $(c_0, c_1, ...)$ и $(d_0, d_1, ...)$ только конечное число членов отлично от нуля
+		\begin{proof}
+			Пусть $N, M$ таковы, что $
+			\begin{cases}
+				\forall k > N \quad a_k = 0 \\
+				\forall k > M \quad b_k 0
+			\end{cases} $ \\
+			Тогда:
+			\begin{itemize}
+				\item $ \forall k > \max \set{M, N} \quad c_k = 0 $
+				\item $\forall k > M + N \quad d_k = 0 $, так как в сумме
+				$$ d_k = a_0b_k + a_1b_{k - 1} + ... + a_{k - 1}b_1 + a_kb_0 = \sum_{i + j = k}a_ib_j $$
+				для каждой пары $(i, j)$ выполнено $i > M$ или $j > N$, следовательно, в каждом слагаемом хотя бы один из сомножителей равен 0
+			\end{itemize}
+		\end{proof}
+		\item Множество $A[x]$ является кольцом
+		\begin{proof}
+			Нужно проверить свойства:
+			\begin{itemize}
+				\item Ассоциативность сложения -- следует из ассоциативности в $A$
+				\item Коммутативность сложения -- следует из коммутативности в $A$
+				\item Нейтральный по сложению: \\
+				Положим $N = (0, 0, ...)$
+				$$ P + N = (a_0, a_1, ...) + (0, 0, ...) = (a_0 + 0, a_1 + 0, ...) = (a_0, a_1, ...) = P $$
+				\item Обратный по сложению -- следует из существования обратного по сложению в $A$
+				\item Дистрибутивность: \\
+				Пусть $P = (a_0, a_1, ...), \quad Q = (b_0, b_1, ...), \quad R = (c_0, c_1, ...)$ \\
+				Докажем, что $(P + Q)R = PR + QR$, записав формулу для $k$-го элемента последовательности:
+				$$ P + Q = (a_0 + b_0, a_1 + b_1, ...) $$
+				$$ (P + Q)R = (..., (a_0 + b_0)c_k + (a_1 + b_1)c_{k - 1} + ... + (a_{k - 1}b_{k - 1})c_1 + (a_k + b_k)c_0, ...) $$
+				$$ PR = (..., a_0c_k + a_1c_{k - 1} + ... + a-{k - 1}c_1 + a_kc_0, ...) $$
+				$$ QR = (..., b_0c_k + b_1c_{k - 1} + ... + b_{k - 1}c_1 + b_kc_0, ...) $$
+				$$ (P + Q)R = (..., (a_0c_k + a_1c_{k - 1} + ... + a_{k - 1}c_1 + a_kc_0) + (b_0c_k + b_1c_{k - 1} + ... + b_{k - 1}c_1 + b_kc_0), ...) $$
+			\end{itemize}
+		\end{proof}
+	\end{enumerate}
+\end{theorem}
+
+\begin{notation}
+	Пусть $a \in A$. Элемент $a$ отождествляется с многочленом $(a, 0, 0, ...) $
+\end{notation}
+
+\begin{undefthm}{Корректность}
+	Пусть $a, b \in A$. Тогда $a + b$ и $ab$ определены в $A$ и в $A[x]$ одинаково
+\end{undefthm}
+
+\begin{notation}
+	Положим $x = (0, 1, 0, 0, ...) $
+\end{notation}
+
+\begin{properties}[переход к стандартной записи]
+	Пусть $A$ -- ассоциативное кольцо с единицей
+	\begin{enumerate}
+		\item Пусть $b \in A$. Тогда для любого $P = (a_0, a_1, ...)$ выполнено $ bP = (a_0b, a_1b, ...) $
+		\begin{proof}
+			Пусть $bP = (c_0, c_1, ...) $. Тогда
+			$$ c_k = ba_k + 0b_{k - 1} + 0a_{k - 2} + ... = ba_k \quad \forall k $$
+		\end{proof}
+		\item Для любого $P = (a_0, a_1, ...)$ выполнено $ xP = (0, a_0, a_1, ...) $
+		\begin{proof}
+			Пусть $xP = (c_0, c_1, ...)$. Тогда $c_0 = a_0 \cdot 0 = 0 $
+			$$ c_k = 0a_k + 1a_{k - 1} + 0a_{k - 2} + ... = a_{k - 1} \quad \forall k \ge 1 $$
+		\end{proof}
+		\item $x^n = (0, 0, ..., 0, 1, 0, ...)$, где 1 записано на месте с номером $n$
+		\begin{proof}
+			Следует из предыдущего пункта
+		\end{proof}
+		\item Пусть $P = (a_0, a_1, a_2, ..., a_n, 0, 0, ...)$. Тогда $ P = a_0 + a_1x + a_2 x^2 + ... + a_nx^n $
+		\begin{proof}
+			Из первого и третьего пункта слудет, что для $a \in A$ выполнено $ax^n = (0, 0, ..., 0, a, 0, ...)$, где $a$ записано на месте с номером $n$ \\
+			Применим эту формулу к $a_0, a_1x, a_2x^2, ...$ и сложим
+		\end{proof}
+	\end{enumerate}
+\end{properties}
+
+\begin{notation}
+	Будем использовать обозначение $P(x) = a_0 + a_1x + a_2x^2 + ... + a_nx^n $
+\end{notation}
+
+\section{Степень многочлена. Многочлены над областью целостности}
+
+\begin{definition}
+	Пусть $P = (a_0, a_1, ...)$ -- многочлен, отличный от нуля. Степенью $P$ называется $\max \set{k | a_k \ne 0}$
+	\begin{notation}
+		$ \deg P$
+	\end{notation}
+	Если $P$ -- нулевой многочлен, полагаем $\deg P = -\infty$
+\end{definition}
+
+\begin{theorem}[многочлены над областью целостности]
+	Пусть $A$ -- область целостности. Тогда
+	\begin{enumerate}
+		\item Для любых многочленов $P, Q$ выполнено $\deg (P + Q) \le \max \set{\deg P, \deg Q}$
+		\begin{proof}
+			Пусть $n = \max \set{\deg P, \deg Q}, \quad P = (a_0, a_1, ...), \quad Q = (b_0, b_1, ...)$ \\
+			При $i > n$ выполнено
+			$$ \begin{rcases}
+			   	a_i = 0 \\
+				b_i = 0
+			   \end{rcases} \implies a_i + b_i = 0 $$
+		\end{proof}
+		\item Для любых многочленов $P, Q$ выполнено $\deg(PQ) = \deg P + \deg Q$
+		\begin{proof}
+			Если $P = 0$ или $Q = 0$, то $PQ = 0$. Равенство $-\infty = -\infty + k$, где $k \in \Z$ или $ k = -\infty$, верно \\
+			Пусть $P \ne 0, \quad Q \ne 0, \quad \deg P = k, \quad \deg Q = m$ \\
+			Докажем, что $PQ \ne 0$ и $\deg(PQ) = k + m$: \\
+			Пусть
+			$$ P = (a_0, a_1, ...), \qquad Q = (b_0, b_1, ...), \qquad PQ = (c_0, c_1, ...) $$
+			Тогда
+			$$ \begin{rcases}
+			   	a_k \ne 0 \\
+				b_m \ne 0
+			   \end{rcases} \implies a_kb_m \ne 0 $$
+			$a_i = 0$ при $i > k$, и $b_i = 0$ при $i > m$ \\
+			Докажем, что $c_{k + m} \ne 0$:
+			$$ c_{k + m} = a_0b_{k + m} + ... + a_kb_m + ... + a_{k + m}b_0 = a_0 \cdot 0 + ... + a_kb_m + 0 \cdot b_0 = a_kb_m \ne 0 $$
+			Докажем, что $c_n = 0$ при $i > k + m$:
+			$$ c_n = \sum_{i + j = k + m}a_ib_j $$
+			для каждой пары $(i, j)$ выполнено $ i > k$ или $j > m$, следовательно, в каждом слагаемом хотя бы один из сомножителей равен 0
+		\end{proof}
+		\item $A[x]$ -- область целостности
+		\begin{proof}
+			\hfill
+			\begin{itemize}
+				\item Коммутативность: \\
+				Пусть $P = (a_0, a_1, ...), \quad Q = (b_0, b_1, ...), \quad PQ = (c_0, c_1, ...), \quad QP = (d_0, d_1, ...) $
+				$$ c_k = \sum_{i + j = k}a_ib_j = \sum_{i + j = k}b_ja_i = d_k $$
+				\item Ассоциативность: \\
+				Пусть $P = (a_0, a_1, ...), \quad Q = (b_0, b_1, ...), \quad R = (c_0, c_1, ...) $ \\
+				Пусть $(PQ) = (d_0, d_1, ...), \quad d_k = \sum_{i + j = k}a_ib_j$, и коээфициент многочлена $(PQ)R$ на $n$-м месте равен
+				$$ \sum_{k + l = n}d_kc_l = \sum_{k + l = n} \bigg( \sum_{i + j = k}a_ib_j \bigg)c_l = \sum_{i + j + l = n}a_ib_jc_l $$
+				Аналогично доказывается, что соответствующий коэффициент многочлена $P(QR)$ равен этой же сумме
+				\item Из второго пункта следует, что произведение ненулевых многочленов -- ненулевой многочлен
+			\end{itemize}
+		\end{proof}
+	\end{enumerate}
+\end{theorem}
+
+\section{Деление с остатком для многочленов. Теорема Безу}
+
+\begin{definition}
+	Пусть $K$ -- поле, $F(x), G(x) \in K[x], \quad G(x) \ne 0$. Если для многочленов $Q(x)$ и $R(x)$ выполнено
+	$$ F(x) = Q(x)G(x) + R(x), \qquad \deg R < \deg G $$
+	то $Q(x)$ и $R(x)$ называются неполным частным и остатком от деления $F(x)$ на $G(x)$
+\end{definition}
+
+\begin{theorem}[деление многочленов с остатком]
+	Пусть $K$ -- поле, $F(x), G(x) \in K[x], \quad G(x) \ne 0 $ \\
+	Тогда существуют единственные многочлены $Q(x)$ и $R(x)$, для которых выполнено
+	$$ F(x) = Q(x)G(x) + R(x), \qquad \deg R < \deg G $$
+\end{theorem}
+
+\begin{proof}
+	\hfill
+	\begin{itemize}
+		\item Существование \\
+		Положим
+		$$ A = \set{F(x) - T(x)G(x) | T(x) \text{ -- многочлен}} $$
+		В множестве $A$ выберем многочлен наименьшей степени. Обозначим его через $R(x)$, и обозначим через $Q(x)$ таком многочлен, что $R(x) = F(x) - Q(x)G(x) $ \\
+		Докажем, что эти многочлены $Q(x)$ и $R(x)$ подходят: \\
+		Равенство $F(x) = Q(x)G(x) + R(x)$ выполнено. Проверим, что $\deg R < \deg G$: \\
+		Пусть это не так. \\
+		Положим $G(x) \define a_nx^n + ... + a_0, \quad R(x) \define b_mx^m + ... + b_0, \quad a_n \ne 0, \quad b_m \ne 0, \quad m \ge n $ \\
+		Положим
+		$$ R_1(x) = R(x) - \frac{b_m}{a_n}x^{m - n}G(x) $$
+		Тогда $R_1(x) \in A$, так как
+		$$ R_1(x) = F(x) - \bigg( T(x) + \frac{b_m}{a_n}x^{m - n} \bigg)G(x) $$
+		При этом, $\deg R_1 < \deg R$ \\
+		Получили противоречие с тем, что $R(x)$ -- многочлен наименьшей степени в множестве $A$
+		\item Единственность \\
+		Предположим, что
+		$$ F(x) = Q_1G(x) + R_1(x), \qquad \deg R_1 < \deg G $$
+		$$ F(x) = Q_2(x)G(x) + R_2(x), \qquad \deg R_2 < \deg G $$
+		$$ Q_1(x) \ne Q_2(x), \qquad R_1(x) \ne R_2 $$
+		Приравняем формулы для $F(x)$:
+		$$ Q_1(x)G(x) + R_1(x) = Q_2(x)G(x) + R_2(x) $$
+		Преобразуем:
+		$$ \bigg( Q_1(x) - Q_2(x) \bigg)G(x) = R_2(x) - R_1(x) $$
+		Степени многочленов в левой и правой части должны быть равны. Но, по свойствам степени суммы и произведения многочленов, выполнено
+		$$ \deg \bigg( (Q_1 - Q_2)G \bigg) = \deg(Q_1 - Q_2) + \deg G \ge \deg G $$
+		$$ \deg (R_1 - R_2) \ge \max \set{\deg R_1, \deg R_2} < \deg G $$
+		Противоречие
+	\end{itemize}
+\end{proof}
+
+\begin{theorem}[Безу]
+	Пусть $K$ -- поле, $F(x) \in K[x]$, и $c \in K$ \\
+	Тогда остаток от деления многочлена $F(x)$ на $(x - c)$ равен $F(c)$
+\end{theorem}
+
+\begin{proof}
+	Остаток от деления -- многочлен, степень которого не выше 0, следовательно, это константа \\
+	Обозначим остаток через $r$. Тогда
+	$$ F(x) = Q(x)(x - c) + r $$
+	Подставив $x = c$, получаем
+	$$ F(c) = Q(c)\underbrace{(c -c)}_{= 0} + r $$
+\end{proof}
+
+\begin{implication}
+	Число $c$ является корнем многочлена $F(x) \iff F(x) \divby (x - c) $
+\end{implication}
+
+\begin{proof}
+	Многочлен $F(x)$ делится на двучлен $(x - c)$ тогда и только тогда, когда остаток от деления $F(x)$ на $(x - c)$ равен 0. По теореме Безу, это равносильно тому, что $F(c) = 0$
+\end{proof}
+
+\section{Число корней многочлена. Формальное и функциональное равенство многочленов}
+
+\begin{theorem}[о количестве корней многочлена]
+	Пусть $K$ -- поле, $F(x) \in K[x], \quad F(x) \ne 0$. Тогда количество корней многочлена $F(x)$ не превосходит $\deg F$
+\end{theorem}
+
+\begin{proof}
+	Докажем, что многочлен $P(x)$ степени $n$ имеет не более $n$ корней: \\
+	\textbf{Индукция} по $n$ \\
+	\textbf{База.} $n = 0$. Многочлен $P(x)$ -- ненулевая константа. У него нет корней \\
+	\textbf{Переход.} $n \to n + 1$ \\
+	Пусть $P(x)$ -- многочлен степени $n + 1$ \\
+	Если у $P(x)$ нет корней, то утверждение верно \\
+	Пусть у многочлена $P(x)$ есть корень $c$. Тогда, по следствию к теореме Безу, выполнено $P(x) = Q(x)(x - c)$ для некоторого многочлена $Q(x)$ \\
+	По свойству степени произведения, выполнено
+	$$ n + 1 = \deg P = \deg Q + \deg(x - c) = \deg Q + 1 $$
+	следовательно, $\deg Q = n$ \\
+	По индукционному предположению, у многочлена $Q(x)$ не более $n$ корней \\
+	Для любого корня $x_0$ многочлена $P(x)$ выполнено
+	$$ 0 = P(x_0) = (x_0 - c)Q(x_0) $$
+	Следовательно, $x_0$ равно $c$ или одному из корней многочлена $Q(x)$. Таким образом, у многочлена $P(x)$ не более $n + 1$ корней
+\end{proof}
+
+\begin{implication}[формальное и функциональное равенство]
+	Пусть $K$ -- бесконечное поле, $F, G \in K[x]$ \\
+	Если для любого $c \in K$ выполнено $F(c) = G(c)$, то $F = G$, то есть соответсвующие коэффициенты $F$ и $G$ совпадают
+\end{implication}
+
+\begin{proof}
+	Пусть $F \ne G$ \\
+	Положим $H = F - G$ \\
+	Тогда $H$ -- ненулевой многочлен. Следовательно, $H$ имеет не более $\deg H$ корней. Но $H(c) = 0 \quad \forall c \in k$
+\end{proof}
+
+\section{Интерполяционная формула Лагранжа}
+
+\begin{theorem}[интерполяционная формула Лагранжа]
+	Пусть $K$ -- поле \\
+	Для любых различных $x_1, ..., x_n \in K$ и любых чисел $y_1, ..., y_n$ существует единственный многочлен $F \in K[x]$, такой, что $\deg F \le (n - 1)$, и $F(x_i) = y_i $ для любого $i$ \\
+	Многочлен можно найти по формуле
+	$$ F(x) = L_1(x)y_1 + L_2(x)y_2 + ... + L_n(x)y_n $$
+	где
+	$$ L_i(x) = \frac{(x - x_1)...(x - x_{i - 1})(x - x_{i + 1})...(x - x_n)}{(x_i - x_1)...(x_i - x_{i - 1})(x_i - x_{i + 1})...(x_i - x_n)} $$
+\end{theorem}
+
+\begin{proof}
+	\hfill
+	\begin{itemize}
+		\item Существование и формула \\
+		Проверим, что многочлен, заданный формулой, подходит:
+		\begin{itemize}
+			\item Оценим степень: \\
+			Для любого $i$ выполнено $\deg L_i(x) = (n - 1)$, следовательно, $L_i(x)y_i$ -- либо многочлен степени $(n - 1)$, либо нулевой многочлен, следовательно
+			$$ \deg F \le \max \set{\deg L_1, ..., \deg L_n} \le n - 1 $$
+			\item Проверим, что $F(x)$ принимает нужные значения: \\
+			Заметим, что $L_i(x_i) = 1, \quad L_i(x_j) = 0$ при $i \ne j$. Действительно,
+			$$ L_i(x_i) = \frac{(x_i - x_1)...(x_i - x_{i - 1})(x_i - x_{i + 1})...(x_i - x_n)}{(x_i - x_1)...(x_i - x_{i - 1})(x_i - x_{i + 1})...(x_i - x_n)} = 1 $$
+			а при $i \ne j$, в формуле для $L_i(x_j)$ в числителе есть нулевой сомножитель $(x_j - x_j)$ \\
+			Теперь найдём значения $F(x)$ в точках $x_i$:
+			$$ F(x_i) = L_1(x_i)y_1 + ... + L_i(x_i)y_i + ... + L_n(x_n) = 0y_1 + ... + 1y_i + ... + 0y_n = y_i $$
+		\end{itemize}
+		\item Единтсвенность \\
+		Прдеположим, что для различных многочленов $F(x)$ и $G(x)$ выполнено $\deg F, \deg G \le (n - 1), \quad F(x_i) = G(x_i) = y_i $ \\
+		Положим $R(x) = F(x) - G(x)$. Тогда
+		$$ \deg R \le \max \set{\deg F, \deg G} \le n - 1 $$
+		и $R(x)$ имеет $n$ корней $x_1, ..., x_n$ -- \contra
+	\end{itemize}
+\end{proof}
+
+\section{Метод интерполяции Ньютона}
+
+\begin{algorithm}[метод интерполяции Ньютона]
+	Для данных различных $x_1, ..., x_n$ и произвольных $y_1, ..., y_n$ требуется построить многочлен $F(x)$, такой, что $\deg F \le n - 1 $ и $F(x_i) = y_i $ \\
+	Построим последовательно многочлены $L_1(x), ..., L_n(x)$, такие, что $\deg L_k \le k - 1, \quad L_k(x_i) = y_i$ при $i \le k$ \\
+	В качетсве $F(x)$ подойдёт $L_n(x)$
+	\begin{itemize}
+		\item Многочлен $L_1(x)$ -- это константа $y_1$
+		\item Многочлен $L_k(x)$ определим по формуле
+		$$ L_k(x) = L_{k - 1}(x) + A_{k - 1}g_{k - 1}(x) $$
+		где
+		$$ g_{k - 1}(x) = (x - x_1)...(x - x_{k - 1}), \qquad A_{k - 1} = \frac{y_k - F_{k - 1}(x_k)}{g_{k - 1}(x_k)} $$
+	\end{itemize}
+\end{algorithm}
+
+\begin{theorem}
+	Метод интерполяции Ньютона корректно определён, и результат его применения -- требуемый многочлен
+\end{theorem}
+
+\begin{proof}
+	\hfill
+	\begin{itemize}
+		\item Число $A_k$ корректно определено, так как $g(x_k) \ne 0 $
+		\item Неравенство $ \deg F_k \le (k - 1)$ доказывается по \textbf{индукции}: \\
+		\textbf{База.} $k = 1$: $\deg F_1 = 0$ или $ \deg F_1 = -\infty$ \\
+		\textbf{Переход.} Имеем $\deg g_{k - 1} \le (k - 1)$, следовательно, $\deg A_kg_{k - 1} = k - 1$ или $\deg A_kg_{k - 1} = 0 $
+		$$ \begin{rcases}
+			\deg F_{k - 1} \le k - 2 < k - 1 \\
+			\deg A_kg_{k - 1} \le k - 1
+		\end{rcases} \implies \deg F_{k - 1} + a_kg_{k - 1} \le k - 2 < k - 1 $$
+		При $i < k$ выполнено $g(x_i) = 0$, следовательно,
+		$$ F_k(x_i) = F_{k - 1}(x_i) + a_k \cdot 0 = F_k(x_i) = y_i $$
+		\item Равенство $F(x_k) = y_k$ проверяется подстановкой в формулу
+	\end{itemize}
+\end{proof}
+
+\section{Делимость в области целостности}
+
+\begin{props}
+	\item Если $a$ и $b$ делятся на $c$, то $a + b$ и $a - b$ делятся на $c$
+	\begin{proof}
+		Пусть $d, e$ таковы, что $a = dc, b = ec$. Тогда $a + b = (d + e)c, a - b = (d - e)c $
+	\end{proof}
+	\item Если $a$ делится на $b$, то $ak$ делится на $b$ для любого $k$
+	\begin{proof}
+		Пусть $c$ таково, что $a = bc$. Тогда $ak = (ck)b$
+	\end{proof}
+	\item Транзитивность: если $a \divby b, b \divby c$, то $a \divby c$
+	\begin{proof}
+		Пусть $a = db, b = ec$. Тогда $a = (de)c $
+	\end{proof}
+\end{props}
+
+\begin{definition}
+	Пусть $A$ -- область целостности, $a, b \in A$ \\
+	Элементы $a, b \in A$ называются ассоциированными, если $a \divby b$ и $b \divby a$
+\end{definition}
+
+\begin{exmpls}
+	\item Кольцо $\Z$. Числа, ассоциированные с $a$ -- это $\pm a$
+	\item Кольцо $\R[x]$. Многочлены, ассоциированные с $P(x)$ -- это $cP(x)$, где $c$ -- ненулевое число
+\end{exmpls}
+
+\begin{properties}
+	Пусть $A$ -- область целостности с единицей
+	\begin{enumerate}
+		\item Элементы $a, b \in A$ ассоцированы $\iff \exist u : a = bu$ и $u$ -- обратимый элемент
+		\begin{proof}
+			\hfill
+			\begin{itemize}
+				\item $\implies$ \\
+				Пусть $a = bc, \quad b = ad$ \\
+				Тогда $ab = (cd)(ab)$, следовательно, $cd$ = 1, и $c$ обратим
+				\item $\impliedby$ \\
+				Пусть $a = bu$ и $u$ обратим. Тогда $b = au^{-1}$
+			\end{itemize}
+		\end{proof}
+		\item Пусть $a, b \in A, \quad a \divby b$, элементы $a_1, b_1$ ассоциированы с $a, b$ осстветственно. Тогда $a_1 \divby b_1$
+		\begin{proof}
+			Пусть $a = bc, \quad a = ua_1, \quad b = wb_1$, и $u, w$ обратимы. Тогда $a_1 = b_1(u^{-1}wc) $
+		\end{proof}
+	\end{enumerate}
+\end{properties}
+
+\begin{definition}
+	Пусть $A$ -- область целостности с единицей. Элемент $p \in A$ называется неразложимым (простым), если он необратим, и его нельзя представить в виде $p = ab$, где $a, b$ -- необратимые элементы
+\end{definition}
+
+\begin{definition}
+	Пусть $K$ -- поле, $A = K[x]$ \\
+	Неразложимый в $A$ многочлен называется неприводимым над $K$
+\end{definition}
+
+\begin{definition}
+	Пусть $A$ -- область целостности, $a, b \in A$ \\
+	Элемент $ d \in A$ называется $\GCD{a, b}$, если $a, b \divby d $ и для $x \in A $ выполнено $a, b \divby x \implies d \divby x$
+\end{definition}
+
+\begin{definition}
+	Элементы $a$ и $b$ называются взаимно простыми, если 1 является $\GCD{a, b}$
+\end{definition}
+
+\begin{props}
+	\item Если $d$ является $\GCD{a, b}$, и $d_1$ ассоциирован с $d$, то $d_1$ является $\GCD{a, b}$
+	\begin{proof}
+		Свойство делимости сохраняется при замене элементов на ассоциированные. Если $a, b \divby d$, то $a, b \divby d_1$; если $d \divby x$, то $d_1 \divby x $
+	\end{proof}
+	\item Если $d_1, d_2$ являются $\GCD{a, b}$, то $d_1$ и $d_2$ ассоциированы
+	\begin{proof}
+		Из того, что $d_1$ является общим делителем, и $d_2$ является НОД, следует, что $d_2 \divby d_1$. Аналогично, $d_1 \divby d_2 $
+	\end{proof}
+\end{props}
+
+\begin{definition}
+	Кольцо $A$ называется факториальным, если оно является областью целостности с единицей; \\
+	Любой элемент $a \in A \setminus \set{0}$ можно представить в виде произведения $a = up_1...p_r$, где $u$ -- обратим, $p_i$ неразложимы; \\
+	Такое представление единственно с точностью до замены сомножитлей на ассоциированные и их перестановки
+\end{definition}
+
+\section{Евклидовы кольца. НОД в евклидовом кольце}
+
+\begin{definition}
+	Пусть $A$ -- область целостности с единицей. Кольцо $A$ называется евклидовым, если существует отображение
+	$$ \delta : A \setminus \set{0} \to \N \cup \set{0} $$
+	такое, что
+	\begin{enumerate}
+		\item $ \delta(ab) \ge \delta(a) \quad \forall a, b \in K \setminus \set{0}$
+		\item для любых $a \in K, \quad b \in K \setminus \set{0}$ сущетсвуют $q, r \in K$, такие, что $a = bq + r$ и выполнено $\delta(r) < \delta(b)$ или $r = 0 $
+	\end{enumerate}
+	Отображение $\delta$ называется евклидовой нормой
+\end{definition}
+
+\begin{lemma}
+	Пусть $A$ -- евклидово, $\delta$ -- евклидова норма, и $a, b \in A \setminus \set{0}$. Тогда
+	\begin{enumerate}
+		\item если $a \divby b$, то $\delta(a) \ge \delta(b)$
+		\begin{proof}
+			Существует $c$ такое, что $a = bc$, следовательно,
+			$$ \delta(a) = \delta(bc) \ge \delta(b) $$
+		\end{proof}
+		\item если $a$ и $b$ ассоццированы, то $\delta(a) = \delta(b)$
+		\begin{proof}
+			Из предыдущего пункта следует, что $\delta(a) \ge \delta(b)$ и $\delta(b) \ge \delta(a) $
+		\end{proof}
+		\item если $a = bc$ и $c$ необратим, то $\delta(a) > \delta(b)$
+		\begin{proof}
+			Докажем, что $b \ndivby a$. Пусть для некоторого $d$ выполнено $b = ad$. Тогда
+			$$ a = bc = (ad)c = a(dc) \implies dc = 1 $$
+			Это противоречит тому, что $c$ не обратим \\
+			``Разделим с остатком'' $b$ на $a$: пусть $q, r$ таковы, что $a = bq + r$, и $\delta(r) < \delta(a)$ или $ r = 0 $ \\
+			Из того, что $b \divby a$, следует, что $r \ne 0$. Из того что $a \divby b$, следует, что
+			$$ r = a - bq \divby b $$
+			Следовательно,
+			$$ \delta(a) > \delta(r) \ge \delta(b) $$
+		\end{proof}
+	\end{enumerate}
+\end{lemma}
+
+\begin{theorem}[НОД в евклидовом кольце]
+	Пусть $A$ -- евклидово кольцо, $a, b \in A$, и $(a, b) \ne (0, 0) $ \\
+	Тогда
+	\begin{enumerate}
+		\item Существует $\GCD{a, b}$
+		\item Пусть $d$ явлется $\GCD{a, b}$. Тогда существуют $x, y \in A$, такие, что $ax + by = d$
+	\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+	Положим $M \define \set{au + bv | u, v \in A} $ \\
+	Пусть $ m \define \min\set{\delta(c) | c \in M, c \ne 0} $ \\
+	Пусть $d_0 \in M$ таков, что $\delta(d_0) = m$, и $x_0, y_0$ таковы, что $d_0 = ax_0 + by_0 $ \\
+	Докажем, что $d_0$ -- общий делитель $a$ и $b$ \\
+	Пусть $a \ndivby d_0$. Тогда существуют $q, r$, такие, что
+	$$ a = d_0q + r, \qquad r \ne 0, \qquad \delta(r) < \delta(d_0) $$
+	Тогда
+	$$ r = a - d_0q = a - (ax_0 + by_0) = a(1 - x_0) + b(-y_0) \in M, \qquad \delta(r) < m $$
+	Получаем противоречие \\
+	Докажем, что если $k$ -- общий делитель, то $d \divby k$:
+	$$ \begin{rcases}
+	   	a \divby k \\
+		b \divby k
+	   \end{rcases} \implies
+	   \begin{Bmatrix}
+	   	ax_0 \divby k \\
+		by_0 \divby k
+	   \end{Bmatrix} \implies ax + by \divby k $$
+	   Получили, что $d_0$ является $\GCD{a, b}$, и для него существует линейное представление \\
+	   Пусть $d$ -- произвольный $\GCD{a, b}$. Тогда $d = wd_0$ для некоторого обратимого $w$. Следовательно, $d = a(2x_0) + b(wy_0) $
+\end{proof}
+
+\section{Свойства взаимно простых элементов в евклидовом кольце}
+
+\begin{property}[взаимная простота с произведением]
+	Пусть $A$ -- евклидово кольцо, $a_1, ..., a_k, \quad b \in A$, \\
+	$\GCD{a_i, b} = 1 \quad \forall i$ \\
+	Тогда $(a_1 \cdot ... \cdot a_k, b) = 1 $
+\end{property}
+
+\mutprimemultproof*
+
+\begin{property}[взаимная простота и делимость]
+	Пусть $A$ -- евклидово кольцо, $a, b, c \in A$
+	\begin{enumerate}
+		\item $
+		\begin{rcases}
+			ab \divby c \\
+			\GCD{a, c} = 1
+        \end{rcases} \implies b \divby c $
+		\mutprimedivproof*
+		\item $
+		\begin{rcases}
+			a \divby b \\
+			a \divby c \\
+			\GCD{b, c} = 1
+		\end{rcases} \implies a \divby bc $
+		\mutprimedivprooff*
+	\end{enumerate}
+\end{property}
+
+\section{Факториальность евклидова кольца}
+
+\begin{theorem}
+	Евклидово кольцо факториально
+\end{theorem}
+
+\begin{proof}
+	\hfill
+	\begin{itemize}
+		\item Докажем, что любой ненулевой элемент можно представить в виде произведения неразложимых элементов и обратимого элемента: \\
+		Пусть сущетсвуют элементы, которые нельзя так представить. Выберем из них элемент $a$, на котором значение $\delta$ минимально \\
+		Элемент $a$ не является обратимым и не является неразложимым, так как иначе $a = a$ было бы подходящим произведением \\
+		Следовательно, существуют такие $b, c$, что $a = bc$, и $b, c$ не обратимы \\
+		Тогда $\delta(b) < \delta(a), \quad \delta(c) < \delta(a)$, и, следовательно, для $b, c$ существуют представления нужного вида:
+		$$ b = up_1 \cdot ... \cdot p_k, \qquad c = wq_1 \cdot ... \cdot q_m $$
+		Перемножив их, получим представление для $a$:
+		$$ a = (uw)p_1 \cdot ... \cdot p_k \cdot q_1 \cdot ... \cdot q_m $$
+		Противоречие
+		\item Докажем, что представление единственно с точностью до перестановки сомножителей и замены сомножителей на ассоциированные \\
+		Пусть для некоторых элементов представление не единственно, и $a$ -- такой элемент с минимальным значением $\delta$. Пусть
+		$$ a = up_1 \cdot ... \cdot p_k, \qquad a = wq_1 \cdot ... \cdot q_m $$
+		Из неразложимости $p_1$ следует, что среди сомножителей второго произведения есть элемент, делящийся на $p_1$ \\
+		Это не элемент $u$, так как иначе оказалось бы, что $q = uu^{-1} \divby p_1$, а $p_1$ -- не делитель 1 \\
+		Переставив сомножители, будем считать, что $q_1 \divby p_1$ \\
+		Из неразложимости $q_1$ следует, что $q_1$ и $p_1$ ассоциированы, пусть $q_1 = vp_1$. Тогда
+		$$ up_1p_2 \cdot ... \cdot p_k = a = (wv)p_1 \cdot q_2 \cdot ... \cdot q_m \implies up_2 \cdot ... \cdot p_k = (wv) \cdot q_2 \cdot ... \cdot q_m $$
+		Обозначим элемент из последнего равенства через $b$. Тогда
+		$$ a = p_1b \implies \delta(b) < \delta(a) $$
+		Следовательно, представление для $b$ единственно, то есть $k = m$, и, после перестановки сомножителей, $p_i$ ассоциирован с $q_i$ при $i \ge 2$ \\
+		Для $i = 1$ это уже доказано
+	\end{itemize}
+\end{proof}
+
+\begin{implication}
+	Кольцо многочленов над любым полем факториально
+\end{implication}
+
+\section({Разложение многочлена на неприводимые множители над R и C}){Разложение многочлена на неприводимые множители над $\R$ и $\Co$}
+
+\begin{definition}
+	Пусть $K$ -- поле, $P \in K[x], c \in K$, и $c$ -- корень $P(x)$ \\
+	Показателем кратности корня $c$ называется такое число $n \in \N$, что $
+	\begin{cases}
+		P(x) \divby (x - c)^n \\
+		P(x) \ndivby (x - c)^{n + 1}
+	\end{cases} $ \\
+	Если показатель кратности равен 1, корень называется простым, если больше 1 -- кратным
+\end{definition}
+
+\begin{theorem}[основная теорема алгебры]
+	Любой многочлен с комплексными коэффициентами, отличный от константы, имеет комплексный корень
+\end{theorem}
+\textit{Без доказательства}
+
+\begin{implication}
+	Многочлен с комплексными коэффициентами степени $n$ имеет ровно $n$ корней с учётом кратности (т. е. корень кратности $k$ учитывается как $k$ корней) \\
+	Многочлен можно представить в виде
+	$$ P(x) a(x - x_1)(x - x_2)...(x - x_n) $$
+\end{implication}
+
+\begin{proof}
+	\textbf{Индукция} по $n$ \\
+	\textbf{База.} $n = 1$ -- очевидно \\
+	\textbf{Переход.} $n \to n + 1$ \\
+	Нужно доказать для $P(x)$, $\deg P = n + 1 $ \\
+	По основной теореме алгебры, $P$ имеет корень. Обозначим его $c$ \\
+	По теореме Безу, $P(x) \divby (x - c)$, то есть $P(x) = (x - c)G(x)$, где $ \deg G = \deg P - \deg (x - c) = n $ \\
+	По индукционному предположению, $G(x)$ имеет $n$ корней
+\end{proof}
+
+\begin{lemma}[сопряжённые корни вещественного многочлена]
+	Пусть $P(x) \in \R[x]$, и $c$ -- корень $P(x)$ \\
+	Тогда $\overline{c}$ -- тоже корень $P(x)$
+\end{lemma}
+
+\begin{proof}
+	Пусть $P(x) = \sum a_nx^n$ \\
+	Тогда $\sum a_nc^n = 0$ \\
+	$ a_n \in \R \implies \overline{a_n} = a_n$ \\
+	Подставим $\overline{c}$ в $P(x)$:
+	$$ P(\overline{c}) = \sum a_n (\overline{c})^n = \sum \overline{a_n}(\overline{c})^n = \overline{\sum a_nc^n} = \overline0 = 0 $$
+\end{proof}
+
+\begin{theorem}[разложение многочлена с вещественными коэффициентами]
+	Пусть $P(x) \in \R[x]$ \\
+	Тогда $P(x)$ можно представить в виде
+	$$ P(x) = a(x - x_1)(x - x_2)...(x^2 + p_1x + q_1)(x^2 + p_2x + q_2)... $$
+	где $x^2 + p_ix + q_i$ -- квадратные трёхчлены, не имеющие вещественных корней
+\end{theorem}
+
+\begin{proof}
+	Пусть $n = \deg P$ \\
+	Докажем утверждение \textbf{индукцией} по $n$ \\
+	\textbf{База.} $n = 0$. Многочлен $P(x)$ -- константа \\
+	\textbf{Переход.} Пусть утверждение доказано для всех многочленов степени меньше $n$. Докажем его для многочленов степени $n$
+	\begin{itemize}
+		\item У многочлена $P(x)$ есть вещественный корень $x_1$ \\
+		Тогда $P(x) = (x - x_1)Q(x)$, причём $Q(x) \in \R[x]$ \\
+		Применим к многочлену $Q(x)$ индукционное предположение, и умножим полученное для $Q(x)$ разложение на $x - x_1$
+		\item У многочлена $P(x)$ нет вещественных корней \\
+		По основной теореме алгебры, у $P(x)$ есть корень $z_1 \in \Co \setminus \R$ \\
+		Тогда $\overline{z_1}$ -- тоже корень $P(x)$ и $\overline{z_1} \ne z_1 $ \\
+		По теореме Безу, $P(x) = (x - z_1)Q_1(x)$ для некоторого многочлена $Q_1(x)$ \\
+		$ P(\overline{z_1}) = 0 \implies Q_1(\overline{z_1}) = 0 $ \\
+		По теореме Безу, $Q_1(x) = (x - \overline{z_1})Q_2(x) $ \\
+		Положим $H(x) \define (x - z_1)(x - \overline{z_1}) $ \\
+		Тогда $P(x) = H(x)R(x)$
+		$$ H(x) = x^2 + p_1x + q_1, \qquad \text{где } p_1 = -(z_1 - \overline{z_1}), \quad q_1 = z_1\overline{z_1} $$
+		По лемме, коэффициенты $H(x)$ вещественные \\
+		Следовательно, коэффициенты $R(x)$ вещественные \\
+		Применим к многочлену $R(x)$ индукционное предположение, и умножим полученное для $R(x)$ разложение на $(x^2 + p_1x + q_1)$
+	\end{itemize}
+\end{proof}
+
+\begin{implication}
+	Пусть $P(x) \in \R[x]$, и $c$ -- корень $P(x)$ \\
+	Тогда показатели кратности корней $c$ и $\overline{c}$ равны
+\end{implication}
+
+\begin{proof}
+	\textbf{Индукция} по $\deg P$ \\
+	Пусть $c \in \R \setminus \Co$, пусть $H(x) \define (x - c)(x - \overline{c})$, и $P(x) \define H(x)R(x)$
+	\begin{itemize}
+		\item Если $c$ не является корнем $R(x)$, то $c$ и $\overline{c}$ -- корни $P(x)$ кратности 1
+		\item Пусть $c$ -- корень $R(x)$ кратности $m$ \\
+		Тогда $\overline{c}$ -- тоже корень $R(x)$ кратности $m$
+	\end{itemize}
+	Следовательно, $c$ и $\overline{c}$ -- корни $P(x)$ кратности $m + 1$
+\end{proof}
+
+\section{Производная многочлена, её свойства}
+
+\begin{definition}
+	Производной многочлена $P(x) = a_nx^n + a_{n - 1}x^{n - 1} + ... + a_1x + a_0 $ называется многочлен $na_nx^n + (n - 1)a_{n - 1}x^{n - 2} + ... + a_1 $
+	\begin{notation}
+		$P'(x)$
+	\end{notation}
+
+\end{definition}
+
+\begin{undefthm}{Короткая запись}
+	Если $P(x) = \sum_{n \ge 0} a_nx^n$, то $P'(x) = \sum_{n \ge 1}na_nx^{n - 1}$
+\end{undefthm}
+
+\begin{props}
+	\item Если $P(x)$ -- константа, то $P'(x) = 0$
+	\item Пусть $K$ -- поле, $P(x) \in K[x]$, и $P(x)$ не константа. Тогда $ \deg P' = \deg P - 1 $
+	\item $ \bigg( P(x) + Q(x) \bigg)' = P'(x) + Q'(x)$
+	\begin{proof}
+		Пусть $P(x) = \sum_{n \ge 0}a_nx^n, \quad Q(x) = \sum_{n \ge 0}b_nx^n$. Тогда
+		$$ \bigg( P(x) + Q(x) \bigg)' = \bigg( \sum_{n \ge 0}(a_n + b_n)(x^n) \bigg)' = \sum_{n \ge 1}n(a_n + b_n)x^{n - 1} $$
+		$$P'(x) + Q'(x) = \sum_{n \ge 1}na_nx^{n - 1} + \sum_{n \ge 1}nb_nx^{n - 1} $$
+	\end{proof}
+
+	\begin{implication}
+		$ \bigg( P_1(x) + P_2(x) + ... + P_n(x) \bigg)' = P_1'(x) + P_2'(x) + ... + P_n'(x) $
+	\end{implication}
+
+	\begin{proof}
+		Выводится \textbf{индукцией} из третьего свойства
+	\end{proof}
+
+	\item Если $c$ -- константа,то $\bigg( cP(x) \bigg)' = cP'(x) $
+	\begin{proof}
+		Пусть $P(x) = \sum_{n \ge 0}a_nx^n$. Тогда
+		$$ \bigg( cP(x) \bigg)' = \bigg( c\sum_{n \ge 0}a_nx^n \bigg)' = \bigg( \sum_{n \ge 0}ca_nx^n \bigg)' = \sum_{n \ge 1}nca_nx^{n - 1} $$
+		$$ cP'(x) = c \bigg( \sum_{n \ge 0}a_nx^n \bigg)' = c \sum_{n \ge 1}na_nx^{n - 1} = \sum_{n \ge 1}nca_nx^{n - 1} $$
+	\end{proof}
+	\item $ \bigg( P(x)Q(x) \bigg)' = P'(x)Q(x) + P(x)Q'(x) $
+	\begin{proof}
+		\hfill
+		\begin{itemize}
+			\item Сначала докажем равенство для случая, когда $Q(x)$ -- одночлен, то есть $Q(x) = bx^k$ \\
+			Случай $k = 0$ следует из свойств 1 и 4. Считаем, что $k > 0$ \\
+			Найдём $ \bigg( P(x)Q(x) \bigg)'$:
+			$$ P(x)Q(x) = \sum_{n \ge 0}a_nbx^{n + k} $$
+			и $n + k > 0$ для любого $n \ge 0$, следовательно,
+			$$ \bigg( P(x)Q(x) \bigg)' = \sum_{n \ge 0}(n + k)a_nbx^{n + k - 1} $$
+			Найдём $P'(x)Q(x) + P(x)Q'(x)$:
+			\begin{multline*}
+				P'(x)Q(x) + P(x)Q'(x) = \sum_{n \ge 1}na_nx^{n - 1} \cdot bx^k + \sum{n \ge 0}a_nx^n \cdot kbx^{k - 1} = \\ = \sum_{n \ge 1}na_nbx^{n + k - 1} + \sum_{n \ge 0}ka_nbx^{n + k - 1}
+			\end{multline*}
+			Заметим, что, если довабить в первую сумму в правной части слагаемое, соответствующее $n = 0$, то есть $0a_0bx^{-1}$, то сумма не изменится:
+			$$ P'(x)Q(x) + P(x)Q'(x) = \sum_{n \ge 0}na_nbx^{n + k - 1} + \sum_{n \ge 0}ka_nbx^{n + k - 1} = \sum_{n \ge 0}(n + k)a_nbx^{n + k - 1} $$
+			Равенство для случая $Q(x) = bx^k$ доказано
+			\item Докажем утверждение для произвольного $Q(x)$, пользуясь тем, что оно верно для случая, когда $Q(x)$ является одночленом, и свойством производной суммы: \\
+			Представим $Q(x)$ в виде суммы одночленов:
+			$$ Q(x) \define Q_0(x) + Q_1(x) + ... + Q_m(x) $$
+			где $Q_k(x) = b_kx^k$, Тогда
+			\begin{multline*}
+				\bigg( P(x)Q(x) \bigg)' = \bigg( \sum P(x)Q_k(x) \bigg)' = \sum \bigg( P'(x)Q_k(x) + P(x)Q_k'(x) \bigg) = \\ = \sum P'(x)Q_k(x) + \sum P(x)Q_k'(x) = P'(x) \sum Q_k(x) + P(x) \sum Q_k'(x) = \\ = P'(x)Q(x) + P(x) \bigg( \sum Q_k(x) \bigg)' = P'(x)Q(x) + P(x)Q'(x)
+			\end{multline*}
+		\end{itemize}
+	\end{proof}
+	\begin{implication}
+		$$ \bigg( P_1(x)P_2(x)...P_k(x) \bigg)' = P_1(x)P_2(x)...P_k(x) + P_1(x)P_2'(x)...P_k(x) + ... + P_1(x)P_2(x)...P_k'(x) $$
+	\end{implication}
+	\begin{proof}
+		\textbf{Индукция} по $k$ \\
+		\textbf{База.} $k = 2$ -- предыдущее свойство \\
+		\textbf{Переход.} $k \to k + 1$ \\
+		Положим $Q(x) = P_1(x)P_2(x)...P_k(x)$. Тогда
+		\begin{multline*}
+			\bigg( P_1(x)P_2(x)...P_k(x)P_{k + 1}(x) \bigg)' = \bigg( Q(x)P_{k + 1}(x) \bigg)' = Q'(x)P_{k + 1}(x) + Q(x)P_{k + 1}'(x) = \\ = \bigg( P_1'(x)P_2(x)...P_k(x) + P_1(x)P_2'(x)...P_k(x) + ... + P_1(x)P_2(x)...P_k'(x) \bigg)P_{k + 1}(x) + \\ + P_1(x)P_2(x)...P_k(x)P_{k + 1}'(x) = \\ = P_1'(x)P_2(x)...P_k(x)P_{k + 1}(x) + P_1(x)P_2'(x)...P_k(x)P_{k + 1}(x) + ... + \\ + P_1(x)P_2(x)...P'(x)P_{k + 1}(x) + P_1(x)P_2(x)...P_k(x)P_{k + 1}'(x)
+		\end{multline*}
+	\end{proof}
+	\item $ \bigg(P^k(x) \bigg)' = kP'(x)P^{k - 1}(x) $
+	\begin{proof}
+		Следует из предыдущего свойства, применённого к
+		$$ P_1(x) = P_2(x) = ... = P_k(x) = P(x) $$
+	\end{proof}
+\end{props}
+
+\begin{note}
+	Производные высших порядков определяются как обычно:
+	$$ P''(x) = \bigg( P'(x) \bigg)', \quad ..., \quad P^{(k)}(x) = \bigg( P^{(k - 1)}(x) \bigg)' $$
+\end{note}
+
+\section{Кратные корни и производная}
+
+\begin{theorem}[кратный корень и производная]
+	$K$ -- поле, $P(x) \in K[x]$, и $c$ -- корень $P(x)$ \\
+	Тогда равносильны утверждения:
+	\begin{itemize}
+		\item $c$ -- кратный корень $P(x)$
+		\item $P'(c) = 0$
+	\end{itemize}
+\end{theorem}
+
+\begin{proof}
+	По теореме Безу, $P(x) = (x - c)Q(x)$ для некоторого $Q(x)$ \\
+	Применяя теорему Безу к $Q(x)$, получаем, что
+	$$ c \text{ -- кратный корень} \iff P(x) \divby (x - c)^2 \iff Q(x) \divby (x - c) \iff Q(c) = 0 $$
+	Найдём производную $P(x)$ как производную произведения:
+	$$ P'(x) = (x - c)'Q(x) + (x - c)Q'(x) = 1 \cdot Q(x) + (x - c)Q'(x) = Q(x) + (x - c)Q'(x) $$
+	Подставим $x = c$:
+	$$ P'(c) = Q(c) + (c - c)Q'(x) = Q(c) $$
+	Следовательно, $P'(c) = 0 \iff Q(c) = 0 $
+\end{proof}
+
+\begin{implication}
+	Пусть $c$ -- корень многочлена $P(x)$, и число $n$ таково, что $P^{(i)}(c) = 0$ при $i \le n - 1$, и $P^{(n)}(c) \ne 0$ \\
+	Тогда $n$ -- показатель кратности корня $c$
+\end{implication}
+
+\begin{proof}
+	Докажем по $\textbf{индукции}$ \\
+	\textbf{База.} $n = 1$ -- по теореме \\
+	\textbf{Переход.} \\
+	Положим $P_1(x) = P'(x)$ \\
+	Тогда $P_1^{(i)}(x) = P^{(i + 1)}(x)$ для любого $i$ \\
+	Достаточно доказать, что показатель кратности $c$ для $P_1(x)$ на один меньше, чем для $P(x)$ \\
+	Пусть $P(x) = (x - c)^mQ(x)$, где $Q(x) \ndivby (x - c)$. Тогда
+	\begin{multline*}
+		P_1(x) = \bigg( (x - c)^mQ(x) \bigg)' = \bigg( (x - c)^m \bigg)'Q(x) + (x - c)^mQ'(x) = k(x - c)'(x - c)^{m - 1}Q(x) + (x - c)^mQ'(x) = \\ = k(x - c)^{m - 1}Q(x) + (x - c)^mQ'(x) = (x - c)^{m - 1} \bigg( kQ(x) + (x - c)Q'(x) \bigg)
+	\end{multline*}
+	второй сомножитель не делится на $(x - c)$
+\end{proof}
+
+\section{Формула Тейлора}
+
+\begin{theorem}[формула Тейлора]
+	Пусть $P \in \R[x], \quad \deg P = n $ \\
+	Тогда для любого $c \in K$ выполнено
+	$$ P(x) = P(c) + \frac{P'(c)}{1!}(x - c) + \frac{P''(c)}{2!}(x - c)^2 + ... + \frac{P^{(n)}(c)}{n!}(x - c)^n $$
+\end{theorem}
+
+\begin{proof}
+	\hfill
+	\begin{itemize}
+		\item Докажем, что существуют некоторые $d_0, d_1, ..., d_n$, для которых выполнено
+		$$ P(x) = d_0 + d_1(x - c) + ... + d_n(x - c)^n $$
+		\textbf{Индукция} по $n$ \\
+		\textbf{База.} $n \le 0 $. Тогда $P(x)$ -- константа, $P(x) = d_0$ для некоторого $d_0$ \\
+		\textbf{Переход.} Пусть для всех многочленов степени $(n - 1)$ утверждение верно, докажем для многочлена $P(x)$ степени $n$: \\
+		Поделим $P(x)$ на $(x - c)$ с остатком. Пусть $P(x) = Q(x)(x - c) + r$ \\
+		Применим к $Q(x)$ предположение индукции. Пусть $Q(x) = c_0 + c_1(x - c) + ... + c_{n - 1}(x - c)^{n - 1} $ \\
+		Тогда подойдут $d_0 = r, \quad d_i = c_{i - 1}$ при $i \ge 1$
+		\item Докажем, что $d_k = \dfrac{P^{(k)}(c)}{k!}$: \\
+		Найдём значение $k$-й производной в точке $c$ для суммы
+		$$ d_0 + d_1(x - c) + ... + d_n(x - c)^n $$
+		Положим $H_i(x) = (x - c)^i $
+		\begin{itemize}
+			\item При $i < k$ выполнено $ \deg H_i < k$, следовательно, $H_i^{(k)}(x) = 0 $
+			\item При $i \ge k$ выполнено $H_i^{(k)}(x) = k(k - 1)...(k - i + 1)(x - c)^{k - i} $ \\
+			Следовательно,
+			\begin{itemize}
+				\item При $i = k$ выполнено
+				$$ H_k^{(k)}(x) = k(k - 1)...1(x - c)^0 = k!, \qquad H_k^{(k)}(c) = k! $$
+				\item При $i > k$ выполнено
+				$$ H_k^{(k)}(c) = k(k - 1)...(k - i + 1) \cdot 0^{k - i} = 0 $$
+			\end{itemize}
+		\end{itemize}
+		Получаем, что $P^{(k)}(c) = d_kk! \implies d_k = \dfrac{p^{(k)}(c)}{k!} $
+	\end{itemize}
+\end{proof}
+
+\section{Построение поля частных: леммы о классах эквивалентности}
+
+\begin{notation}
+	Будем использовать слдующие обозначения:
+	\begin{itemize}
+		\item $A$ -- область целостности
+		\item $M$ -- множество пар $(a, b)$, где $b \ne 0$
+		\item $\rho$ -- отношение на $M$, заданное правилом:
+		$$ (a, b) \mathrel\rho (c, d), \quad \text{если } ad = bc $$
+	\end{itemize}
+\end{notation}
+
+\begin{lemma}
+	Отношение $\rho$ является отношениием эквивалентности
+\end{lemma}
+
+\begin{proof}
+	\hfill
+	\begin{itemize}
+		\item Рефлексивность:
+		$$ ab = ab \implies (a, b) \mathrel\rho (b, a) $$
+		\item Симметричность:
+		$$ (a, b) \mathrel\rho (c, d) \implies ad = bc \implies cb = da \implies (c, d) \mathrel\rho (a, b) $$
+		\item Транзитивность: \\
+		Докажем, что из условий $(a, b) \mathrel\rho (c, d)$ и $(c, d) \mathrel\rho (e, f)$ следует $(a, b) \mathrel\rho (e, f) $: \\
+		Нужно доказать, что из равенств $ad = bc$ и $cf = ed$ следует равенство $af = be$ \\
+		Домножим на ``знаменатели'' и сложим:
+		$$ 0 = (ad - bc)f + (cf - ed)b = adf - edb = d(af - eb) \underimp{d \ne 0} af = be $$
+	\end{itemize}
+\end{proof}
+
+\begin{definition}
+	Пусть $(a, b), (c, d) \in M$ \\
+	Их суммой и произведением называются пары $(ad + bc, bd)$ и $(ac, bd)$
+\end{definition}
+
+\begin{undefthm}{Замечание о корректности}
+	Пары $(ad + bc, bd)$ и $(ac, bd)$ принадлежат $M$, так как
+	$$ \begin{rcases}
+	   	b \ne 0 \\
+		d \ne 0
+	   \end{rcases} \implies bd \ne 0 $$
+\end{undefthm}
+
+\begin{lemma}
+	Пусть $u, v, u', v' \in M$, $u \mathrel\rho u', ~ v \mathrel\rho v'$ \\
+	Тогда $(u + v) \mathrel\rho (u' + v'), \quad (uv) = (u'v') $
+\end{lemma}
+
+\begin{proof}
+	Отношение $\rho$ транзитивно, поэтому достаточно проверить, что сумма (произведение) переходдят в эквивалентную при замене одного слагаемого (сомножителя) на эквивалентный, то есть
+	$$ v \mathrel\rho v' \implies (u + v) \mathrel\rho (u + v'), \quad (uv) = (uv'), \qquad u \mathrel\rho u' \implies (u + v) \mathrel\rho (u' + v), \quad (uv) = (u'v) $$
+	Проверим первое утверждение (второе проверяется аналогично): \\
+	Пусть $u = (a, b), \quad v = (c, d), \quad v' = (c', d') $. Тогда $cd = dc' $ \\
+	Нужно доказать, что:
+	\begin{itemize}
+		\item $(ad + bd, bd) \mathrel\rho (ad' + bc', bd') $
+		$$ (ad + bc)bd' - bd(ad' + bc') = b^2(cd' - dc') = b^2 \cdot 0 = 0 $$
+		\item $(ac, bd) \mathrel\rho (ac', bd') $
+		$$ ac \cdot bd' - bd \cdot ac' = ab(cd' - dc') = ab \cdot 0 = 0 $$
+	\end{itemize}
+\end{proof}
+
+\begin{implication}
+	Операции сложения и умножения можно определить на классах эквивалентности множества $M$ по отношению $\rho$
+\end{implication}
+
+\section{Построение поля частных: доказательство теоремы}
+
+\begin{theorem}[поле частных]
+	Пусть $A$ -- область целостности с единицей \\
+	Пусть $K$ -- множество классов эквивалентности $M$ по отношению $\rho$ с введёнными выше операциями сложения и умножения \\
+	Тогда $K$ -- поле
+\end{theorem}
+
+\begin{proof}
+	Будем обозначать через $\overline{x}$ класс элемента $x$ \\
+	Пусть $x = (a, b), \quad y = (c, d), \quad z = (e, f)$
+	\begin{itemize}
+		\item Ассоциативность сложения:
+		$$ x + y = (ad + bc, bd), \qquad (x + y) + z = \bigg( (ad + bc)f + (bd)e, (bd)f \bigg) = (adf + bcf + bde, bdf) $$
+		$$ y + z = (cf + de, df), \qquad x + (y + z) = \bigg( a(df) + b(cf + de), b(df) \bigg) = (adf + bcf + bde, bdf) $$
+		\item Нейтральный элемент по сложению: $0 = (0, 1)$
+		$$ x + (0, 1) = (a, b) + (0, 1) = (a \cdot 1 + 0 \cdot b, 1 \cdot b) = (a, b) = x $$
+		$$ (0, 1) + x = (0, 1) + (a, b) = (0 \cdot b + a \cdot 1, 1 \cdot b) = (a, b) = x $$
+		Докажем, что для любого $b \ne 0$ выполнено $ \overline{(0, b)} = 0$:
+		$$ 0 \cdot 1 = b \cdot 0 \implies (0, b) \mathrel\rho (0, 1) \implies \overline{(0, b)} = \overline{(0, 1)} = 0 $$
+		Докажем, что если $ \overline{(a, b)} = 0$, то $a = 0$:
+		$$ \overline{(a, b)} = \overline{(0, 1)} \implies a \cdot 1 = b \cdot 0 \implies a = 0 $$
+		\item Обратный по сложению: $-(a, b) = (-a, b)$
+		$$ (a, b) + (-a, b) = (ab + b(-a), b^2) = (0, b^2) \implies \overline{(a, b)} + \overline{(-a, b)} = 0 $$
+		\item Коммутативность сложения, дистрибутивность, асоциативность и коммутативность сложения доказываются аналогично
+		\item Обратный по умножению: \\
+		Пусть $\overline{(a, b)} \ne 0$. Тогда $a \ne 0 $ \\
+		Докажем, что $\overline{(b, a)}$ является обратным к $\overline{(a, b)}$:
+		$$ \overline{(a, b)} \cdot \overline{(b, a)} = \overline{(ab, ba)} = 1 $$
+	\end{itemize}
+\end{proof}
+
+\begin{definition}
+	Построенное поле называется полем частных области целостности $A$
+\end{definition}
+
+\begin{note}
+	Существование единицы не обязательно. Достаточно, чтобы область целостности содержала хотя бы один ненулевой элемент
+\end{note}
+
+\begin{undefthm}{Переход к стандартным обозначениям}
+	Вложим $A$ в $K$, по правилу $a \mapsto \overline{(a, 1)} $ \\
+	Операции сложения и умножения согласованы:
+	$$ (a, 1) + (b, 1) = (a \cdot 1 + 1 \cdot b, 1 \cdot 1) = (a + b, 1) $$
+	$$ (a, 1) \cdot (b, 1) = (a \cdot b, 1 \cdot 1) = (ab, 1) $$
+	Пусть $a, b \in A, \quad b \ne 0 $. Проверим, что частное $a$ и $b$ равно $\overline{(a, b)}$:
+	$$ \overline{(a, b)} \cdot \overline{(b, 1)} = \overline{(ab, b)}, \qquad (ab, b) \mathrel\rho (a, 1) $$
+	Далее вместо $\overline{(a, b)}$ будем писать $\frac{a}b$
+\end{undefthm}
+
+\section{Поле рациональных функций. Правильные дроби}
+
+\begin{definition}
+	Пусть $K$ -- поле \\
+	Поле частных кольца $K[x]$ называется полем рациональных функций над $K$
+	\begin{notation}
+		$K(x)$
+	\end{notation}
+	Элементы $K(x)$ называются рациональными функциями или рациональными дробями (над $K$)
+\end{definition}
+Далее рассмтариваются многочлены и рациональные функции над некоторым полем $K$
+
+\begin{definition}
+	Рациональная дробь $\frac{F}G$ называется несократимой, если $\GCD{F, G} = 1$
+\end{definition}
+
+\begin{definition}
+	Многочлен называется нормализованным, если его старший коэффициент равен 1
+\end{definition}
+
+\begin{definition}
+	Рациональная дробь называется нормализованной, если она несократима, и её знаменатель -- нормализованный многочлен
+\end{definition}
+
+\begin{property}
+	Для любой рациональной дроби существует равная ей нормализованная дробь
+\end{property}
+
+\begin{definition}
+	Рациональная дробь $\frac{F}G$ называется правильной, если $\deg F < \deg G$
+\end{definition}
+
+\begin{props}
+	\item Если $\frac{F_1}{G_1} = \frac{F_2}{G_2}$, и $\frac{F_1}{G_1}$ -- правильная дробь, то $\frac{F_2}{G_2}$ -- тоже правильная дробь
+	\begin{proof}
+		$ F_1G_2 = G_1F_2 \implies \deg F_1 + \deg G_2 = \deg G_1 + \deg F_2 \implies \deg G_2 - \deg F_2 = \deg G_1 - \deg F_1 > 0 $
+	\end{proof}
+	\item Сумма и произведение правильных рациональных дробей является правильной рациональной дробью
+	\begin{proof}
+		Пусть $\frac{F_1}{G_1}, \frac{F_2}{G_2}$ -- правильные дроби
+		$$ a \define \deg F_1, \qquad b \define \deg G_1, \qquad c \define \deg F_2, \qquad d \define \deg G_2 $$
+		Тогда $a < b, \quad c < d$
+		$$ \deg(F_1G_2 + F_2G_1) \le \max\set{a + d, b + c} < b + d = \deg(G_1G_2) $$
+		$$ \deg(F_1F_2) = a + c < b + d = \deg(G_1G_2) $$
+	\end{proof}
+	\item Любую рациональную дробь можно единственным образом представить в виде суммы многочлена и правильной дроби
+	\begin{proof}
+		Пусть $\frac{F}G$ -- рациональная дробь
+		\begin{itemize}
+			\item Существование \\
+			Разделим $F$ на $G$ с остатком, пусть $F = QG + R, \quad \deg R < \deg G$. Тогда подходит представление
+			$$ \frac{F}G = Q + \frac{R}G $$
+			\item Единственность \\
+			Пусть
+			$$ P_1 + \frac{R_1}{S_1} = P_2 + \frac{R_2}{S_2}, \qquad P_1 \ne P_2 $$
+			Положим $P \define P_1 - P_2$. Тогда $P$ является разностью правильных дробей, следовательно, $P$ можно представить в виде
+			$$ P = \frac{R}S, \qquad \deg R < \deg S $$
+			Умножим на $S$:
+			$$ SP = R $$
+			Степень многочлена в левой части больше, чем в правой. Противоречие
+		\end{itemize}
+	\end{proof}
+\end{props}
+
+\section{Лемма о дроби, знаменатель которой разложен на взаимно простые множители}
+
+\begin{lemma}[сумма дробей с взаимно простыми знаменателями]
+	Пусть $\dfrac{F}{G_1...G_k}$ -- правильная рациональная дробь, многочлены $G_i$ -- попарно взаимно просты \\
+	Тогда дробь $\dfrac{F}{G_1...G_k}$ можно представить в виде
+	$$ \frac{F_1}{G_1} + ... + \frac{F_k}{G_k} $$
+	где $\dfrac{F_i}{G_i}$ -- правильные дроби, причём такое разложение единственно
+\end{lemma}
+
+\begin{proof}
+	\hfill
+	\begin{itemize}
+		\item Существование \\
+		\textbf{Индукция} по $k$ \\
+		\textbf{База.} $k = 2$ \\
+		По теореме о линейном представлении НОД, можно представить $F$ в виде $F = H_1G_1 + H_2G_2$ \\
+		Разделим на $G_1G_2$:
+		$$ \frac{F}{G_1G_2} = \frac{H_1}{G_2} + \frac{H_2}{G_1} $$
+		Представим каждое слагаемое в виде суммы многочлена и правильной дроби:
+		$$ \frac{F}{G_1G_2} = \bigg( P_1 + \frac{F_1}{G_1} \bigg) + \bigg(P_2 + \frac{F_2}{G_2} \bigg) $$
+		Преобразуем:
+		$$ P_1 + P_2 = \frac{F}{G_1G_2} - \bigg( \frac{F_1}{G_1} + \frac{F_2}{G_2} \bigg) $$
+		Левая часть равенства -- многочлен, правая -- правильная дробь. Следовательно, обе части равентсва равны 0, и
+		$$ \frac{F}{G_1G_2} = \frac{F_1}{G_1} + \frac{F_2}{G_2} $$
+		\textbf{Переход.} $k \to k + 1$ \\
+		Многочлены $G_1...G_k$ и $G_{k + 1}$ взаимно просты. Представим дробь $\dfrac{F}{G_1...G_kG_{k + 1}}$ в виде суммы правильных дробей:
+		$$ \frac{H}{G_1...G_k} + \frac{F_{k + 1}}{G_{k + 1}} $$
+		Теперь применим индукционное предположение к первому слагаемому
+		\item Единственность \\
+		Пусть
+		$$ \frac{F_1}{G_1} + \frac{F_2}{G_2} + ... + \frac{F_k}{G_k} = \frac{H_1}{G_1} + \frac{H_2}{G_2} + ... + \frac{H_k}{G_k} $$
+		где $\dfrac{F_i}{G_i}, \dfrac{H_i}{G_i}$ -- правильные дроби \\
+		Положим $T_i \define F_i - H_i$. Тогда $\deg T_i < \deg G_i$, и
+		$$ \frac{T_1}{G_1} + \frac{T_2}{G_2} + ... + \frac{T_k}{G_k} = 0 $$
+		Требуется доказать, что $T_i = 0$ для любого $i$ \\
+		Для удобства обозначений докажем это для случая $i = 1$, то есть докажем, что $F_1 = H_1$ \\
+		Преобразуем равенство:
+		$$ \frac{T_1}{G_1} = \frac{-T_2}{G_2} + ... + \frac{-T_k}{G_k} $$
+		$$ T_1G_2...G_k = -T_2 \prod_{i \ne 2}G_i - ... - T_k \prod_{i \ne k}G_i $$
+		Правая часть равенства делится на $G_1$, следовательно, левая тоже делится на $G_1$ \\
+		При этом, $G_2...G_k$ и $G_1$ взаимно просты. Следовательно, $T_1 \divby G_1$
+		$$ \begin{rcases}
+		   	T_1 \divby G_1 \\
+			\deg T_1 < \deg G_1
+		   \end{rcases} \implies T_1 = 0 $$
+	\end{itemize}
+\end{proof}
+
+\section{Разложение правильной дроби в сумму правильных примарных дробей}
+
+\begin{definition}
+	Нормализованная рациональная дробь называется примарной, если она имеет вид $\dfrac{F}{P^n}$, где $P$ -- неприводимый нормализованный многочлен
+\end{definition}
+
+\begin{lemma}[сумма примарных дробей]
+	Любую правильную дробь можно представить в виде суммы правильных примарных дробей
+	$$ \frac{F_1}{P_1^{S_1}} + ... + \frac{F_k}{P_k^{S_k}}, \qquad P_i \text{ различны} $$
+	Причём, такое разложение единственно
+\end{lemma}
+
+\begin{proof}
+	Пусть $\frac{F}G$ -- нормализованная правильная дробь. Разложим $G$ в произведение нормализованных неприводимых многочленов: $G = P_1^{S_1}...P_k^{S_k} $
+	\begin{itemize}
+		\item Существование \\
+		Применим лемму о сумме дробей с взаимно простыми знаменателями к $G_i = P_i^{S_i} $
+		\item Еслинственность \\
+		Пусть есть два представления. Добавив, если нужно, слагаемые вида $\dfrac{0}{P^k}$, будем считать, что
+		$$ \frac{F_1}{P_1^{S_1}} + ... + \frac{F_k}{P_k^{S_k}} = \dfrac{H_1}{P_1^{t_1}} + ... + \frac{H_k}{P_k^{t_k}}, \qquad P_i \text{ различны} $$
+		Вычтем:
+		$$ \frac{F_1P_1^{t_1} - H_1P_1^{S_1}}{P_1^{S_1 + t_1}} + ... + \frac{F_kP_1^{t_k} - H_kP_1^{S_k}}{P_k^{S_k + t_k}} = 0 $$
+		Получили представление 0 в виде суммы дробей с взаимно простыми знаменателями \\
+		Такое представление единственно, следовательно, числители всех дробей равны 0 \\
+		Следовательно, соответствующие слагаемые равны
+	\end{itemize}
+\end{proof}
+
+\section{Разложение правильной примарной дроби и произвольной дроби в сумму простейших}
+
+\begin{definition}
+	Нормализованная рациональная дробь называется простейшей, если она имеет вид $\dfrac{F}{P^n}$, где $P$ -- нормализованный неприводимый многочлен, и $ \deg F < \deg P$
+\end{definition}
+
+\begin{lemma}[разложение примарной дроби в сумму простейших]
+	Любую правильную примарную дробь $\dfrac{F}{P^n}$ можно представить в виде суммы простейших дробей со знаменателями $P^i$, причём такое представление единственно
+\end{lemma}
+
+\begin{proof}
+	\hfill
+	\begin{itemize}
+		\item Существование \\
+		Докажем, что примарную дробь $\dfrac{F}{P^n}$ можно представить в виде суммы простейших \\
+		\textbf{Индукция} по $n$ \\
+		\textbf{База.} $n = 1$. В этом случае, $\deg F < \deg P$, и дробь является простейшей \\
+		\textbf{Переход.} $n \to n + 1$ \\
+		Разделим $F$ на $P$ с остатком:
+		$$ F = PQ + R, \qquad \deg R < \deg P $$
+		Подставим в формулу:
+		$$ \frac{F}{P^{n + 1}} = \frac{PQ + R}{P^{n + 1}} = \frac{Q}{P^n} + \frac{R}{P^{n + 1}} $$
+		К первому слагаемому можно применить индукционное предположение, а второе является простейшей дробью
+		\item Единственность \\
+		Пусть есть два представления. Добавив, если нужно, слагаемые вида $\dfrac0{P^i}$, будем считать, что
+		$$ \frac{F_1}P + \frac{F_2}{P^2} + ... + \frac{F_k}{P^k} = \frac{H_1}P + \frac{H_2}{P^2} + ... + \frac{H_k}{P^k} $$
+		где $ \deg F_i < \deg P, \quad \deg H_i < \deg P $ \\
+		Положим $T_i \define F_i - H_i$. Тогда
+		$$ \frac{T_1}P + \frac{T_2}{P^2} + ... + \frac{T_k}{P^k} = 0, \qquad \deg T_i < \deg P $$
+		Предположим, что не все $T_i$ равны нулю \\
+		Пусть $m$ таково, что $T_m \ne 0$ и $T_i = 0$ при $i > m$. Тогда
+		$$ \frac{T_1P^{k - 1} + T_2P^2 + ... + T_{m - 1}P + F_m}{P^m} = 0, \qquad T_m \ne 0 $$
+		Числитель раен $0$, следовательно, $F_m \divby P$. Это противоречит тому, что $F_m \ne 0$, и $ \deg F_m < \deg P $
+	\end{itemize}
+\end{proof}
+
+\begin{theorem}[разложение дроби в сумму простейших]
+	Правильная рациональная дробь может быть представлена в виде суммы простейших дробей, причём такое представление единственно
+\end{theorem}
+
+\begin{proof}
+	\hfill
+	\begin{itemize}
+		\item Существование \\
+		Правильную дробь можно представить в виде суммы примарных, а примарную -- в виде суммы простейших
+		\item Единственность \\
+		Пусть есть два представления:
+		$$ \bigg(\frac{T_{11}}{P_1} + \frac{T_{12}}{P_1^2} + ... \bigg) + \bigg( \frac{T_{21}}{P_2} + \frac{T_{22}}{P_2^2} + ... \bigg) + ... = \bigg( \frac{H_{11}}{P_1} + ... + \frac{H_{12}}{P_1^2} + ... \bigg) + \bigg( \frac{H_{21}}{P_2} + \frac{H_{22}}{P_2^2} + ... \bigg) + ... $$
+		Обозначим $F_{ij} \define T_{ij} - H_{ij} $
+		$$ \begin{rcases}
+			\deg T_{ij} < \deg P_i \\
+			\deg H_{ij} < \deg P_i
+		\end{rcases} \implies \deg F_{ij} < \deg P_i \implies \frac{F_{ij}}{P_i^j} \text{ -- простейшая} $$
+		Вычтем одно разложение из другого (в новых обозначениях):
+		$$ \bigg( \frac{F_{11}}{P_1} + \frac{F_{12}}{P_1^2} + ... \bigg) + \bigg( \frac{F_{21}}{P_2} + \frac{F_{22}}{P_2^2} + ... \bigg) + ... = 0 $$
+		Сумма в каждой скобке является примарной дробью вида $\dfrac{F_i}{P_i^{n_i}}$ \\
+		Представление в виде суммы примарных дробей единственно, следовательно, сумма в каждой скобке равна 0 \\
+		Разложение примарной дроби $\dfrac{F_i}{P_i^{n_i}}$ в сумму простейших $\sum_j \dfrac{F_{ij}}{P_i^j}$ единственно, следовательно, каждое слагаемое в каждой скобке равно 0
+	\end{itemize}
+\end{proof}
+
+\section{Рациональный корень целочисленного многочлена. Следствие о целом корне}
+
+\begin{theorem}[рациональный корень]
+	Пусть $F \in \Z[x]$, и
+	$$ F(x) = a_nx^n + a_{n - 1}x^{n - 1} + ... + a_1x + a_0 $$
+	Пусть $\frac{p}q$ -- корень $F(x)$, и $\GCD{p, q} = 1$ \\
+	Тогда $
+	\begin{cases}
+		a_n \divby q \\
+		a_0 \divby p
+	\end{cases} $
+\end{theorem}
+
+\begin{proof}
+	Подставим:
+	$$ a_n \bigg( \frac{p}q \bigg)^n + a_{n - 1}x^{n - 1} \bigg( \frac{p}q \bigg)^{n - 1} + ... + a_1 \frac{p}q + a_0 = 0 $$
+	Умножим на $q^n$:
+	$$ a_np^n + a_{n - 1}p^{n - 1}q + ... + a_1pq^{n - 1} + a_0q^n = 0 $$
+	Все слагаемые, кроме последнего, делятся на $p$, следовательно, последнее слагаемое тоже делится на $p$ \\
+	Учитывая, что $\GCD{p, q} = 1$, получаем что $a_0 \divby p$ \\
+	Все слагаемые, кроме первого, делятся на $q$. Аналогично получаем $a_n \divby q$
+\end{proof}
+
+\begin{implication}
+	Пусть $F \in \Z[x]$, и старший коэффициент $F(x)$ равен 1 \\
+	Тогда любой рациональный корень $F(x)$ является целым числом, и свободный член $a_0$ делится на любой ненулевой целый корень
+	\begin{proof}
+		Пусть $\frac{p}q$ -- корень $F(x)$, и $\GCD{p, q} = 1$. Тогда
+		$$ q \divby q \implies q = \pm1 \implies \frac{p}q \in \Z $$
+	\end{proof}
+\end{implication}
+
+\section({Многочлены над Z: содержание многочлена, примитивные многочлены}){Многочлены над $\Z$: содержание многочлена, примитивные многочлены}
+
+\begin{definition}
+	Пусть $F(x) \in \Z[x], \quad F(x) = a_0 + a_1x + ... + a_nx^n $ \\
+	Содержанием многочлена $F(x)$ называется $\GCD{a_0, a_1, ..., a_n}$
+	\begin{notation}
+		$c(F)$
+	\end{notation}
+\end{definition}
+
+\begin{definition}
+	Многочлен $F$ называется примитивным, если $F \in \Z[x]$, и $c(F) = 1$
+\end{definition}
+
+\begin{props}
+	\item \label{pr:491} Пусть $F \in \Z[x]$, и $F_1(x) = \dfrac1{c(F)} \cdot F(x)$. Тогда $F_1(x)$ -- примитивный многочлен
+	\begin{proof}
+		Коэффициенты многочлена разделим на их НОД. В результате получим целые взаимно простые числа
+	\end{proof}
+	\item \label{pr:492} Пусть $F_1(x), F_2(x)$ -- примитивные, $q \in \Q, \quad F_2(x) = qF_1(x)$. Тогда $q = \pm1$
+	\begin{proof}
+		Пусть $q = \frac{r}s$ -- несократимая дробь. Тогда $rF_1(x) = sF_2(x)$ \\
+		Пусть $F_1(x) = \sum a_ix^i, \quad F_2(x) = \sum b_ix^i$. Тогда
+		$$ ra_i = sb_i \quad \forall i \implies sb_i \divby r \quad \forall i \implies r = \pm 1 $$
+		Аналогично, $s = \pm 1$
+	\end{proof}
+	\item Пусть $F(x) \in \Q[x]$. Тогда существует единственное положительное число $q \in \Q$, для которого многочлен $qF(x)$ является примитивным
+	\begin{proof}
+		\hfill
+		\begin{itemize}
+			\item Существование \\
+			Пусть $N$ -- общее кратное знаменателей всех коэффициентов, и $F_1 = NF(x)$ \\
+			Тогда $F_1(x) \in \Z[x]$ \\
+			По \eqref{pr:491}, многочлен $\dfrac1{c(F_1)}F_1(x)$ -- целочисленный и примитивный \\
+			Число $q = \dfrac{N}{c(F_1)}$ подходит
+			\item Единственность \\
+			Пусть $F_1(x) = q_1F(x)$, и $F_2(x) = q_2F(x)$ -- целочисленные примитивные \\
+			Применим \eqref{pr:492} к $q = \dfrac{q_1}{q_2}$, получим, что $\dfrac{q_1}{q_2} = 1$
+		\end{itemize}
+	\end{proof}
+\end{props}
+
+\section{Лемма Гаусса}
+
+\begin{lemma}[Гаусса]
+	Пусть $F(x), G(x) \in \Z[x]$, и $H(x) = F(x)G(x)$. Тогда
+	\begin{itemize}
+		\item Если $F(x), G(x)$ -- примитивные, то $H(x)$ -- примитивный
+		\begin{proof}
+			Пусть $P(x) = \sum a_ix^i, \quad G(x) = \sum b_ix^i, \quad H(x) = \sum d_ix^i $ \\
+			Предположим, что $H(x)$ не примитивный \\
+			Тогда для некоторого $p \in \Prime$ выполнено $d_i \in p \quad \forall i $ \\
+			Из того, что $F(x), G(x)$ -- примитивные, следует, что \textbf{не} все $a_i$ делятся на $p$, и \textbf{не} все $b_i$ делятся на $p$ \\
+			Пусть
+			$$ k \min\set{i | a_i \ndivby p}, \qquad l = \min\set{i | b_i \ndivby p} $$
+			Тогда
+			$$ d_{k + l} = a_0b_{k + l} + ... + a_kb_l + ... + a_{k + l}b_0 \ndivby p $$
+			так как $a_kb_l \ndivby p$, а остальные слагаемые делятся на $p$. Противоречие
+		\end{proof}
+		\item \label{pr:493} $c(H) = c(F)c(G)$
+		\begin{proof}
+			Пусть $F_1(x) = \dfrac1{c(F)}F(x), \quad G_1(x) = \dfrac1{c(G)}G(x)$. Тогда
+			$$ \frac1{c(F)c(G)}H(x) = F_1(x)G_1(x) $$
+			Применяя \eqref{pr:491}, получаем, что $\dfrac1{c(F)c(G)}H(x)$ -- примитивный многочлен \\
+			При этом, $\dfrac1{c(H)}H(x)$ -- тоже примитивный многочлен \\
+			Следовательно, $c(H) = c(F)c(G)$
+		\end{proof}
+	\end{itemize}
+\end{lemma}
+
+\section{Редукционный критерий неприводимости. Следствие про рациональный корень}
+
+\begin{definition}
+	Многочлен $P \in \Z[x]$ называется неприводимым над $\Z$, если его нельзя разложить в произведение двух многочленов из $\Z[x]$, отличных от константы
+\end{definition}
+
+\begin{theorem}[редукционный критерий неприводимости]
+	\hfill
+	\begin{enumerate}
+		\item Пусть $F(x) \in \Z[x]$, и $F(x)$ неприводим над $\Z$. Тогда $F(x)$ неприводим над $\Q$
+		\item \label{th:501} Пусть $F(x) \in \Z[x], \quad G(x), H(x) \in \Q[x]$, и $F(x) = G(x)H(x)$ \\
+		Тогда существуют $G_1(x), H_1(x) \in \Z[x]$, ассоциированные с $G(x), H(x)$ над $\Q$, такие, что $F(x) = G_1(x)H_1(x)$
+	\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+	Достаточно доказать \eqref{th:501}
+	\begin{itemize}
+		\item Докажем утверждение для случая, когда $F(x)$ -- примитивный \\
+		По свойству \eqref{pr:493}, сущетсвуют такие $q_G, q_H \in \Q$, что $q_G, q_H > 0$, и многочлены $q_GG(x), q_HH(x)$ принадлежат $\Z[x]$ и являются примитивными \\
+		Тогда многочлен
+		$$ (q_Gq_H)F(x) = q_gG(x) \cdot q_HH(x) $$
+		является примитивным по лемме Гаусса \\
+		Многочлены $F(x)$ и $(q_gq_H)F(x)$ -- примитивные, следовательно, по свойству \ref{pr:492}, выполнено $q_gq_H = 1$ \\
+		Получаем, что
+		$$ F(x) = q_gG(x) \cdot q_HH(x) $$
+		Многочлены $q_GG(x)$ и $q_HH(x)$ подойдут в качестве $H_1(x)$ и $G_1(x)$
+		\item Докажем утверждение в общем случае \\
+		Многочлен $\dfrac1{c(F)}F(x)$ -- примитивный, и он раскладывается в произведение
+		$$ \frac1{c(F)}F(x) = \frac1{c(F)}G(x) \cdot H(x) $$
+		Существуют целочисленные многочлены $G_0(x)$ и $H_0(x)$, асоциированные с $G(x)$ и $H(x)$, для которых выполнено
+		$$ \frac1{c(F)}F(x) = G_0(x)H_0(x) $$
+		В качетсве $G_1(x)$ и $H_1(x)$ подойдут $c(F)G_0(x)$ и $H_0(x)$
+	\end{itemize}
+\end{proof}
+
+\section({Факториальность Z[X]}){Факториальность $\Z[X]$}
+
+\begin{theorem}
+	Любой многочлен с целыми коэффициентами можно представить в виде произведения простых чисел и примитивных многочленов, неприводимых над $\Q$ \\
+	Такое представление единственно с точностью до перестановки сомножителей и умножения сомножиелей на $-1$
+\end{theorem}
+
+\begin{proof}
+	\hfill
+	\begin{itemize}
+		\item Существование \\
+		Пусть $F(x) \in \Z[x]$ \\
+		Расссмотрим $F(x)$ как элемент $\Q[x]$ \\
+		Кольцо $\Q[x]$ факториально, поэтому $F(x)$ можно представить в виде произведения обратимого элемента и неразложимых элементов \\
+		В $\Q[x]$ обратимыми элементами являются ненулевые константы, а неразложимыми -- неприводимые над $\Q$ многочлены \\
+		Пусть
+		$$ F(x) = aP_1(x)...P_k(x) $$
+		Заменив $P_1(x)$ на $aP_1(x)$, будем считать, что
+		$$ F(x) = aP_1(x)...P_k(x), \qquad P_i \text{ неприводим над } \Q $$
+		По редукционному критерию неприводимости, существуют многочлены $H_i \in \Z[x]$, такие, что $H_i(x) = q_iP_i(x)$, и
+		$$ F(x) = H_1(x)...H_k(x) $$
+		Пусть $T_i(x) \define \dfrac1{c(H_i)}H_i(x)$ \\
+		Тогда многочлены $T_i(x)$ примитивны и неприводимы над $\Q$, так как ассоциированы с неприводимыми многочленами $P_i(x)$. Получили разложение
+		$$ F(x) = aT_1(x)...T_k(x), \qquad \text{где } b = c(H_1)...c(H_k) $$
+		Разложим $b$ в произведение простых чисел, и если нужно, $-1$ \\
+		Получится требуемое разложение $P(x)$
+		\item Единственность \\
+		Пусть
+		$$ F(x) = \pm p_1p_2...T_1(x)T_2(x)..., \qquad F(x) = \pm q_1q_2...H_1(x)H_2(x)... $$
+		где $p_i, q_i \in \Prime$, и $T_i(x), H_i(x)$ -- примитивные многочлены, неприводимые над $\Q$ \\
+		По лемме Гаусса, произведения $T_1(x)T_2(x)...$ и $H_1(x)H_2(x)...$ являются примитивными многочленами, следовательно,
+		$$ c(F) = \pm p_1p_2..., \qquad c(F) = \pm q_1q_2... $$
+		Из факториальности кольца $\Q[x]$ следует, что произведения $T_1(x)T_2(x)...$ и $H_1(x)H_2(x)...$ совпадают с точностью до перестановки сомножителей и замены на ассоциированные \\
+		То есть, можно так перенумеровать $H_i(x)$, что $H_i(x) = q_iT_i(x)$ для некоторого $q_i \in \Q$ \\
+		Многочлены $T_i(x)$ и $H_i(x)$ примитивные, следовательно, $q_i = \pm 1 $
+	\end{itemize}
+\end{proof}
+
+\section{Критерий неприводимости Эйзенштейна}
+
+\begin{theorem}[критерий неприводимости Эйзенштейна]
+	Пусть $a_0, a_1, ..., a_{n - 1} \in \Z, \quad p \in \Prime, \quad a_i \divby p$ для любого $i$, и $a_0 \ndivby p^2 $ \\
+	Тогда многочлен $ F(x) = x^n + a_{n - 1}x^{n - 1} + ... + a_1x + a_0 $ неприводим над $\Q$
+\end{theorem}
+
+\begin{proof}
+	Предположим, что $F(x)$ приводим над $\Q$ \\
+	Тогда $F(x)$ приводим над $\Z$ \\
+	Пусть
+	$$ F(x) \define G(x)H(x), \qquad G(x), H(x) \in \Z[x], \qquad G(x) \define \sum b_ix^i, \quad H(x) \define \sum c_ix^i $$
+	причём, $G(x)$ и $H(x)$ -- не константы \\
+	Число $b_0c_0 = a_0$ делится на $p$ и \textbf{не} делится на $p^2$ \\
+	Следовательно, одно из чисел $b_0, c_0$ делится на $p$, а второе -- не делится \\
+	НУО будем считать, что $b_0 \divby p, \quad c_0 \ndivby p $ \\
+	Старший коэффициент $F(x)$ не делится на $p$, следовательно, не все $b_i$ делятся на $p$ \\
+	Пусть $ k \define \min\set{i | b_i \ndivby p} $ \\
+	Тогда $k \le \deg G < \deg F = n $ \\
+	Имеем $a_k = b_0c_k + ... + b_{k - 1}c_1 + b_kc_0 \ndivby p $, так как все слагаемые, кроме последнего, делятся на $p$, а последнее -- не делится на $p$ -- \contra
+\end{proof}

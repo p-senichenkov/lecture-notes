@@ -1,0 +1,150 @@
+\section{Вычисление кривизны}
+
+$ r = \vec{f}(t) $ \\
+Как вычислить кривизну $ k $ через эту параметризацию? \\
+Есть перепараметризация $ \vec{f}(t) = \vec{g}(s), \qquad s $ -- натуральный параметр
+$$ |\vec{g}'(s)| = 1 \qquad k = |g''(s)| $$
+$$ s(t) = \dint[\tau]{t_0}t{|f'(t)|} \qquad s'(t) = |f'(t)| $$
+$$ f(t) = g \bigg( s(t) \bigg) $$
+$$ f'(t) = g' \bigg( s(t) \bigg) \cdot s'(t) $$
+$$ f''(t) = g'' \cdot s'^2 + g' \cdot s'' $$
+$ g'' $ -- то, что нам нужно, но мешает $ s'' $ (там будет производная от модуля, это не очень хорошо) \\
+Домножим векторно на $ f' $ ($ = g's' $):
+$$ f'' \times f' = (\vec{g''}s'^2) \times \vec{g'}s' + \underbrace{(\vec{g}'s'') \times \vec{g'}s'}_{= 0} $$
+$$ f'' \times f' = s'^3 \cdot (g'' \times g') $$
+$$ |f'' \times f'| = |s'|^3 \cdot \underbrace{|g''|}_{= k} \cdot \underbrace{|g'|}_{= 1} \cdot \underbrace{\sin(\widehat{g'', g'})}_{= 1} $$
+$$ |f'' \times f'| = |f'|^3 \cdot k $$
+$$ \boxed{k = \frac{|f' \times f''|}{|f'|^3}} $$
+
+\begin{exmpls}[общие формулы для разных способов задания кривой]
+	\item Кривая задана на плоскости, в явном виде
+	$$ y = f(x) $$
+	$$
+	\begin{cases}
+		x = t \\
+		y = f(t) \\
+		z = 0
+	\end{cases} $$
+	$$ \vec{r} = (t, f(t), 0) \text{ -- то, что в формуле было } \vec{f} $$
+	$$ \vec{r'} = (1, f', 0), \qquad \vec{r''} = (0, f'', 0), \qquad r' \times r'' = (0, 0, f'') $$
+	$$ \boxed{k = \frac{|f''|}{(1 + f'^2)^{\faktor32}}} $$
+	\item В полярных координатах
+	$$ r = r(\vphi) $$
+	$$
+	\begin{cases}
+		x = r(\vphi)\cos\vphi \\
+		y = r(\vphi)\sin\vphi \\
+		z = 0
+	\end{cases} $$
+	$$ \vec{f}(t) = (r\cos\vphi, r\sin\vphi, 0), \qquad f' = (r'\cos\vphi - r\sin\vphi; r'\sin\vphi + r\cos\vphi; 0) $$
+	\begin{remind}
+		$ |f'| = \sqrt{r^2 + r'^2} $
+	\end{remind}
+	\begin{remind}
+		$ (f \cdot g)'' = f''g + 2f'g' + f'g'' $
+		$$ (f \cdot g)^{(n)} = f^{(n)}g + \ln^1 f^{(n - 1)}g' + \ln^2 f^{(n - 2)}g'' + ... $$
+	\end{remind}
+	$$ f'' = (r''\cos \vphi - 2r'\cos\vphi - r\cos\vphi; r''\sin\vphi + 2r'\cos\vphi - r\cos\vphi; 0) $$
+	Векторно умножаем два вектора с нулевой третьей координатой, получаем вектор с единественной третьей ненулевой координатой:
+	\begin{multline*}
+		f' \times f'' = \bigg( 0; 0; \\
+		(r'\cos\vphi - r\sin\vphi)(r''\sin\vphi + 2r'\cos\vphi - r\sin\vphi) - (r'\sin\vphi + r\cos\vphi)(r''\cos\vphi - 2r'\sin\vphi - r\cos\vphi)\bigg)
+	\end{multline*}
+	\begin{multline*}
+		|f' \times f''| = \\
+		= |\cancel{r'r''\cos\vphi\sin\vphi} + 2r'^2\cos^2\vphi - \cancel{r'r\cos\vphi\sin\vphi} - r''r\sin^2\vphi - \cancel{2r'r\cos\vphi\sin\vphi} + \\
+		+ r^2\sin^2\vphi - \cancel{r''r'\cos\vphi\sin\vphi} + 2r'^2\sin^2\vphi + \cancel{r'r\sin\vphi\cos\vphi} - rr''\cos^2\vphi + \cancel{2rr'\cos\vphi\sin\vphi} + r^2\cos\vphi| = \\
+		= 2r'^2 - r''r + r^2
+	\end{multline*}
+	$$ \boxed{k = \frac{r''r - 2r'^2 - r^2}{(r^2 + r'^2)^{\faktor32}}} $$
+	\item $ f(t) = \bigg(x(t), y(t), z(t) \bigg) $
+	$$ f' = (x', y', z'), \qquad f'' = (x'', y'', z''), \qquad f'' \times f' = (y''z' - z''y'; z''x' - x''z'; x''y' - y''x') $$
+	$$ \boxed{k =\frac{\sqrt{(y''z' - z''y')^2 + (z''x' - x''z')^2 + (x''y' - y''x')^2}}{(x'^2 + y'^2 + z'^2)^{\faktor32}}} $$
+\end{exmpls}
+
+\begin{theorem}
+	$ k(t) = 0 \iff $ кривая является частью прямой (отрезком)
+\end{theorem}
+
+\begin{iproof}
+	\item $ \impliedby $ -- очевидно (у линейной функции вторая производная равна нулю)
+	\item $ \implies $ \\
+	Рассмотрим натуральную параметризацию $ g(s) $ \\
+	По условию, $ g''(s) = 0 $ \\
+	Значит, $ g(s) $ -- линейная функция (решаем простенький дифур, получаем)
+\end{iproof}
+
+\section{Высисление кручения}
+
+\begin{undefthm}{Как кручение вычисляется в натуральной параметризации?}
+	$$ g' = v, \qquad g'' = v' = k \cdot n, \qquad g''' = k'n + kn' \underset{\text{Френе}}= k'n + k(-k\vec{v} + \text{\ae}\vec{b}) $$
+	$$ (g', g'', g''') = (\vec{v}, k\vec{n}, \cancel{k'\vec{n}} - k^2\vec{v} + k\text\ae\vec{b}) = k^2 \text\ae\underbrace{(v, n, b)}_{= 1} $$
+	$$ \boxed{\text\ae = \frac{(g', g'', g''')}{k^2}} $$
+\end{undefthm}
+
+$$ v = \vec{f}(t) = \vec{g}(s) = g \bigg( s(t) \bigg) $$
+$$ f' = g' \cdot s' $$
+$$ f'' = g''s'^2 + g's'' $$
+\begin{remind}
+	$ (g')' = g''s' $ (как сложная функция)
+\end{remind}
+$$ f''' = g''' \cdot s'^3 + g''2s' \cdot s'' + g''s's'' + g's''' = g'''s'^3 + 3g''s''s' + g's''' $$
+Избавимся от $ s'' $ и $ s''' $:
+\begin{remind}
+	$ (\vec{a}, \vec{b}, \vec{c}) = (\vec{a}, \vec{b} + \lambda \vec{c}, \vec{c}) $
+\end{remind}
+$$ (f', f'', f''') = \bigg( \vec{g'}s'; g''s'^2 + \cancel{\vec{g'}s''}; g'''s'^3 + \cancel{3g''s''s'} + \cancel{g's'''} \bigg) = |\underbrace{f'}_{s'}|^6 (g', g'', g''') = |f'|^6k^2\text\ae $$
+$$ \text\ae = \frac{(f', f'', f''')}{k^2|f'|^6} $$
+\begin{remind}
+	$$ k = \frac{|f' \times f''|}{|f'|^3} $$
+\end{remind}
+$$ \boxed{\text\ae = \frac{(f', f'', f''')}{|f' \times f''|^2}} $$
+
+\begin{remark}
+	Кручение определено только для бирегулярной кривой ($ \iff k \ne 0 $)
+\end{remark}
+
+\begin{theorem}
+	$ \text\ae = 0 \iff $ кривая плоская
+\end{theorem}
+
+\begin{proof}
+	Докажем в натуральной параметризации: \\
+	По формуле Френе, $ b' = -\text\ae \vec{n} $ \\
+	$ b' = 0 $, если $ \text\ae = 0 $ \\
+	Значит, $ b = \const \implies $ все соприкасающиеся плоскости параллельны \\
+	То есть, все соприкасающиеся плоскость -- это одна и та же плоскость (\textit{есть объяснение на рисунке})
+\end{proof}
+
+\section{Натуральные уравнения}
+
+\begin{theorem}
+	Кривая задаётся кривизной и кручением (с точностью до положения в пространстве)
+\end{theorem}
+
+\begin{proof}
+	Пусть есть две кривые, у которых $ k_1 = k_2 $ и $ \text\ae_1 = \text\ae_2 $ \\
+	Рассмотрим $ \vec{g_1}(s); \vec{g_2}(s) $ -- натуральные параметризации \\
+	Совместим так, чтобы
+	$$
+	\begin{cases}
+		v_1(s_0) = v_2(s_0) \\
+		n_1(s_0) = n_2(s_0) \\
+		b_1(s_0) = b_2(s_0)
+	\end{cases} $$
+	Это и означает ``с точностью до положения в пространстве'' \\
+	Рассмотрим функцию
+	$$ f(s) = \vec{v_1}(s) \cdot \vec{v_2}(s) + \vec{n_1}(s) \cdot \vec{n_2}(s) + \vec{b_1}(s) \cdot \vec{b_2}(s) $$
+	$ f(s_0) = 3 $ (скалярное произведение соотв. функций равно 1) \\
+	При этом, $ f(s) \le 3 $ (по тем же сооражениям) \\
+	$ f(s) = 3 \iff v_1 = v_2, n_1 = n_2, b_1 = b_2 $ в точке $ s $ \\
+	Хотим доказать, что $ f(s) = 3 $ везде \\
+	Возьмём производную:
+	$$ f'(s) = v_1'v_2 + v_1v_2' + n_1'n_2 + n_1n_2' + b_1'b_2 + b_1b_2' $$
+	Распишем по формуле Френе:
+	$$ f'(s) = k_1n_1v_2 + k_2v_1n_2 - k_1v_1n_2 + \text\ae_1b_1n_2 - k_2n_1v_2 + \text\ae_2n_1b_2 - \text\ae_1n_1b_2 - \text\ae_2b_1n_2 \underset{
+		\begin{subarray}{c}
+			k_1 = k_2 \\
+			\text\ae_1 = \text\ae_2
+		\end{subarray}}= 0 $$
+\end{proof}

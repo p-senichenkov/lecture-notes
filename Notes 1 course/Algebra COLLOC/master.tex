@@ -1,0 +1,23 @@
+\documentclass[a4paper]{article}
+\input{../preamble.tex}
+
+% so that it will be more convenient for questions:
+\titleformat{\section}
+{\normalfont\bfseries\Large}    % font
+{\color{gray}{\thesection.}}  % number
+{0.5em} % separator
+{}  % before-code
+[]  % after-code
+
+\titleformat{\chapter}[block]
+{\normalfont\bfseries\huge}{}{1em}{\Huge}
+\titlespacing*{\chapter}{0pt}{-19pt}{0pt}
+
+\begin{document}
+
+    \tableofcontents
+
+    \input{./material.tex}
+
+\end{document}
+
