@@ -27,7 +27,7 @@
 		\end{bmatrix} $$
 		Возьмём $ 1 \le i \le n $ и $ 1 \le j \le m $ \\
 		Обозначим
-		$$ e_j \define [\overbrace{0, ..., \underset{i}1, ..., 0}^n], \qquad f_j \define \left.
+		$$ e_i \define [\overbrace{0, ..., \underset{i}1, ..., 0}^n], \qquad f_j \define \left.
 		\begin{bmatrix}
 			0 \\
 			. \\
@@ -38,7 +38,9 @@
 		$$ \norm{A} = 0 \implies \norm{AX}_n = 0 \implies AX = \On \quad \forall \underset{\norm{X} = 1}{X \in \R^m} $$
 		Иначе супремум был бы положительным \\
 		То есть, $ A_{n \times m} X = \On $. Значит,
-		$$ e_i(A_{n \times m}f_j) = e_i \column00 = 0 $$
+		\begin{equ}{31}
+			e_i(A_{n \times m}f_j) = e_i \column00 = 0
+		\end{equ}
 		При этом,
 		$$ A_{n \times m} f_j =
 		\begin{bmatrix}
@@ -53,22 +55,25 @@
 			. \\
 			0
 		\end{bmatrix} = \column{a_{1j}}{a_{nj}} $$
-		$$ e_i \column{a_{1j}}{a_{nj}} = a_{ij} \implies A_{n \times m} = \On[n \times m] $$
+		$$ e_i \column{a_{1j}}{a_{nj}} = a_{ij} \undereq{\eref{31}} 0 \implies A_{n \times m} = \On[n \times m] $$
 	\end{proof}
 	\item $ c \in \R $
 	$$ \norm{cA} = |c| \cdot \norm{A} $$
 	\begin{proof}
-		$$ \norm{cA} = \sup\limits_{
-			\begin{subarray}{c}
-				X \in \R^m \\
-				\norm{X}_m \le 1
-			\end{subarray}} \norm{(cA)X}_n \underset{\text{линейность}}= \sup \norm{c(AX)}_n = \sup |c| \cdot \norm{AX}_n = |c| \sup \norm{AX}_n = |c| \cdot \norm{A} $$
+		\begin{multline*}
+			\norm{cA} = \sup\limits_{
+				\begin{subarray}{c}
+					X \in \R^m \\
+					\norm{X}_m \le 1
+				\end{subarray}} \norm{(cA)X}_n \undereq{\text{линейность}} \sup \norm{c(AX)}_n = \sup |c| \cdot \norm{AX}_n = \\
+			= |c| \sup \norm{AX}_n = |c| \cdot \norm{A}
+		\end{multline*}
 	\end{proof}
 	\item $ A, B : \R^m \to \R^n $
 	$$ \norm{A + B} \le \norm{A} + \norm{B} $$
 	\begin{proof}
 		\begin{multline*}
-			\norm{A + B} = \sup \norm{(A + B)X}_n \bydef \sup \norm{AX + BX} \le \sup(\norm{AX} + \norm{BX}) \le \\
+			\norm{A + B} = \sup \norm{(A + B)X}_n \undereq{\text{линейность}} \sup \norm{AX + BX} \le \sup(\norm{AX} + \norm{BX}) \le \\
 			\le \sup \norm{AX} + \sup \norm{BX} \bydef \norm{A} + \norm{B}
 		\end{multline*}
 	\end{proof}
@@ -170,7 +175,7 @@
 	$$ \frac{\partial^2f(x)}{\partial x_j \partial x_i} = \frac{\partial \bigg( \dfrac{\partial f}{\partial x_i} \bigg)}{\partial x_j} = \frac\partial{\partial x_j} \frac{\partial f}{\partial x_i} $$
 \end{notation}
 
-В следующей теореме (и следствии к ней) считаем, что $ \R^2 $ -- пространство вектор-строк
+В следующей теореме (и следствии к ней) считаем, что $ \R^n $ -- пространство вектор-строк
 
 \begin{theorem}[о смешанных производных]
 	$ G = B_r(x_1^0, x_2^0), \qquad X_0 =
@@ -260,7 +265,7 @@
 	$ \Omega \sub \R^{n \ge 2}, \qquad i \ne j, \qquad f \in \Cont{\Omega}, \qquad \forall X \in \Omega \quad f_{x_i}'(X), f_{x_j}'(X) \in \Cont{\Omega} $ \\
 	$ \forall X \in \Omega \quad \exist f_{x_ix_j}''(X), f_{x_jx_i}''(X) \in \Cont{\Omega} $ \\
 	По следствию,
-	$$ \forall X \in \Omega f_{x_ix_j}''(X) = f_{x_jx_i}''(X) $$
+	$$ \forall X \in \Omega \quad f_{x_ix_j}''(X) = f_{x_jx_i}''(X) $$
 \end{statement}
 
 \begin{remark}

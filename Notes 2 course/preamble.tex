@@ -64,6 +64,9 @@
 % fractions like 2/a
 \usepackage{faktor}
 
+% xlongequal
+\usepackage{extarrows}
+
 % bold font in maths, that preserve spacing (should be loaded *last*)
 \usepackage{bm}
 
@@ -94,11 +97,8 @@
 
 %%  group and set
 \DeclareMathOperator{\Orb}{Orb}
-
 \DeclareMathOperator{\St}{St}
-
 \DeclareMathOperator{\Fix}{Fix}
-
 \DeclareMathOperator{\ord}{ord}
 
 % gradient
@@ -133,18 +133,20 @@
 % small triangle
 \let\vtri\vartriangle
 
-% overline
+%% over-decorations
 \let\ol\overline
-
-\newcommand*\vawe[1]{\ensuremath\widetilde{#1}}
-
+\let\vawe\widetilde
 \let\hat\widehat
 
 % arrows with text below `em
 \newcommand\underarr[1]{\ensuremath\xrightarrow[#1]{}}
 \newcommand\underimp[1]{\ensuremath\xRightarrow[#1]{}}
 
+% arrows with text above `em
 \newcommand\overarr[1]{\ensuremath\xrightarrow{#1}}
+
+% not-arrows with text below `em
+\newcommand\undereq[1]{\ensuremath\xlongequal[#1]{}}
 
 % labels and references
 \newcommand*\lbl[1]{\label{eq:#1}}

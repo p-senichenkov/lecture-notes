@@ -1,7 +1,7 @@
 \section{О мультииндексах}
 
 \begin{definition}
-	Мультииндексом называется $ \alpha = (\alpha_1, ..., \alpha_n) \in \R^{n \ge 2}, \qquad \alpha _j \in \N \setminus \set0 $
+	Мультииндексом называется $ \alpha = (\alpha_1, ..., \alpha_n) \in \R^{n \ge 2}, \qquad \alpha _j \in \N \cup \set0 $
 \end{definition}
 
 \begin{definition}[норма мультииндекса]
@@ -161,7 +161,7 @@
 			\Psi : (-a, a) \to \R^n, \qquad \Psi(t) = Y + tH
 		\end{equ}
 		\begin{equ}{17}
-			g(t) \bydef = f(\Psi(t)), \qquad f : E \to \R^1
+			g(t) \bydef f(\Psi(t)), \qquad f : E \to \R^1
 		\end{equ}
 		То есть, $ g : (-a, a) \to \R^1 $ и можно применить теорему о дифференцируемости суперпозиции дифференцируемых отображений:
 		\begin{equ}{18}
@@ -209,7 +209,7 @@
 		\end{equ}
 		$$ \alpha = (l_1, ..., l_\nu, ..., l_n) $$
 		\begin{multline}\lbl{24}
-			\bigg( \partial^\alpha f(X) \bigg)_{x_\nu}' \bydef f_{\underbrace{x_1...x_1}_{l_1}...\underbrace{x_\nu...x_\nu}_{l_\nu}...\underbrace{x_n...x_n}_{l_n}\bm{x_\nu}}^{(r + 1)}(X) \underset{\text{т. о классах } \mathcal{C}^r}= \\
+			\bigg( \partial^\alpha f(X) \bigg)_{x_\nu}' \bydef f_{\underbrace{x_1...x_1}_{l_1}...\underbrace{x_\nu...x_\nu}_{l_\nu}...\underbrace{x_n...x_n}_{l_n}\bm{x_\nu}}^{(r + 1)}(X) \undereq{\text{т. о классах } \mathcal{C}^r} \\
 			= f_{\underbrace{x_1...x_1}_{l_1}...\underbrace{x_\nu...x_\nu}_{l_\nu \bm{+ 1}}...\underbrace{x_n...x_n}_{l_n}}^{(r + 1)}(X) \bydef \partial^{\alpha + e_\nu}f(X)
 		\end{multline}
 		\begin{equ}{25}
