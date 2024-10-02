@@ -18,7 +18,7 @@
 	\end{remind}
 	$$ \mc{D}F(t_0) = \column{f_1'(t_0)}{f_n'(t_0)} $$
 	\begin{multline*}
-		\norm{\mc{D}F(t_0)} \underset{\text{как линейного отображения}}= \sup\limits_{
+		\norm{\mc{D}F(t_0)} \undereq{\text{как лин. отобр.}} \sup\limits_{
 			\begin{subarray}{c}
 				|h| \le 1 \\
 				h \in \R
@@ -34,7 +34,7 @@
 	\end{remind}
 	$ \forall t \in (a, b) \quad F $ дифф. в $ t $
 	\begin{equ}1
-		\implies \exist c \in (a, b) : \norm{F(t)(b) - F(a)}_n \le \norm{\mc{D}F(c)}_n(b - a)
+		\implies \exist c \in (a, b) : \norm{F(b) - F(a)}_n \le \norm{\mc{D}F(c)}_n(b - a)
 	\end{equ}
 \end{theorem}
 
@@ -44,24 +44,18 @@
 		\vphi(t) \define F(t)^T \bigg( F(b) - F(a) \bigg) = f_1(t) \bigg( f_1(b) - f_1(a) \bigg) + ... + f_n(t) \bigg( f_n(b) - f_n(a) \bigg)
 	\end{equ}
 	Будем считать, что $ F(b) \ne F(a) $ (иначе -- очевидно) \\
-	По напоминанию из условия теоремы, $ \vphi \in \Cont{[a, b]} $
-	\begin{equ}3
-		\forall t \in (a, b) \quad \exist \vphi'(t)
-	\end{equ}
+	По напоминанию из условия теоремы, $ \vphi \in \Cont{[a, b]} $. Значит, $ \forall t \in (a, b) \quad \exist \vphi'(t) $
 	\begin{equ}4
 		\vphi'(t) = f_1'(t) \bigg( f_1(b) - f_1(a) \bigg) + ... + f_n'(t) \bigg( f_n(b) - f_n(a) \bigg)
 	\end{equ}
-	Значит, к $ \vphi $ можно применить теорему Лагранжа из первого семестра
+	К $ \vphi $ можно применить теорему Лагранжа из первого семестра:
 	\begin{equ}5
 		\exist c \in (a, b) : \vphi(b) - \vphi(a) = \vphi'(c)(b - a)
 	\end{equ}
-	\begin{equ}6
-		\eref2 \implies \vphi(b) - \vphi(a) = \bigg( f_1(b) - f_1(a) \bigg)^2 + ... + \bigg( f_n(b) - f_n(a) \bigg)^2
-	\end{equ}
-	Это означает что
-	\begin{equ}7
-		\vphi(b) - \vphi(a) = \norm{F(b) - F(a)}_n^2
-	\end{equ}
+	\begin{multline}\lbl7
+		\vphi(b) - \vphi(a) \undereq{\eref2} \bigg\lgroup f_1(b) \bigg(f_1(b) - f_1(a) \bigg) + \widedots[4em] \bigg\rgroup - \bigg\lgroup f_1(a) \bigg( f_1(b) - f_1(a) \bigg) + \widedots[4em] \bigg\rgroup = \\
+		= \bigg( f_1(b) - f_1(a) \bigg)^2 + ... + \bigg( f_n(b) - f_n(a) \bigg)^2 = \norm{F(b) - F(a)}_n^2
+	\end{multline}
 	Применим к \eref4 неравенство КБШ:
 	\begin{multline}\lbl8
 		|\vphi'(c)| \le \bigg\lgroup \bigg( f_1'(c) \bigg)^2 + ... + \bigg(f_n'(c) \bigg)^2 \bigg\rgroup^\frac12 \cdot \bigg\lgroup \bigg( f_1(b) - f_1(a) \bigg)^2 + ... + \bigg( f_n(b) - f_n(a) \bigg)^2 \bigg\rgroup^\frac12 = \\
@@ -74,22 +68,24 @@
 
 \begin{theorem}
 	$ \mc{A} : \R^{n \ge 2} \to \R^n $ -- линейное, т. е. $ \mc{A}(X) = AX, \quad X \in \R^n $ \\
-	$ A $ обратимо, т. е. $ \exist B : AB = I $ и $ BA = I $ ($ B $ называется обратной матрицей и обозначается $ B = A^{-1} $)
+	$ A $ обратимо, т. е. $ \exist D : AD = I $ и $ DA = I $ ($ D $ называется обратной матрицей и обозначается $ D = A^{-1} $) \\
+	Вспомним две теоремы из алгебры:
 	\begin{remind}
-		По теореме из алгебры, чтобы $ A $ была обратима, необходимо и достаточно, чтобы $ \det A \ne 0 $
+		$ A $ обратима $ \iff \det A \ne 0 $
 	\end{remind}
 	\begin{remind}
-		По ещё одной теореме из алгебры, $ A $ обратима тогда и только тогда, когда $ AX \ne \On \quad \forall X \ne \On $
+		$ A $ обратима $ \iff AX \ne \On \quad \forall X \ne \On $
 	\end{remind}
 	$ \norm{A^{-1}} = \frac1\alpha, \quad \alpha > 0, \qquad \norm{B - A} = \beta, \quad 0 < \beta < \alpha $ \\
 	Тогда $ B $ обратима и $ \norm{A^{-1} - B^{-1}} \le \dfrac{\beta}{\alpha(\beta - \alpha)} $
 \end{theorem}
 
 \begin{iproof}
-	\item Докажем, что $ B $ обратима:
+	\item Докажем, что $ B $ обратима: \\
+	Возьмём $ X \in \R^n $
 	\begin{multline}\lbl9
-		\underset{X \in \R^n}{X = IX} = (A^{-1}A)X = A^{-1}(AX) \implies \norm{X} = \norm{A^{-1}(AX)} \le \\
-		\le \norm{A^{-1}}\norm{AX} \bydef \frac1\alpha \norm{AX} \implies \norm{AX} \ge \alpha\norm{X}
+		X = IX = (A^{-1}A)X = A^{-1}(AX) \implies \norm{X} = \norm{A^{-1}(AX)} \le \\
+		\le \norm{A^{-1}}\norm{AX} \bdefeq\alpha \frac1\alpha \norm{AX} \implies \norm{AX} \ge \alpha\norm{X}
 	\end{multline}
 	\begin{equ}{10}
 		BX = AX + (BX - AX) \implies \norm{BX} \trige \norm{AX} - \norm{BX - AX}
@@ -102,23 +98,20 @@
 	\end{equ}
 	Это означает, что $ B $ обратима (по второй теореме из алгебры)
 	\item Докажем соотношение для $ \norm{A^{-1} - B^{-1}} $: \\
-	Возьмём $ \forall Y \ne \On $ и $ X \define B^{-1}Y $
+	Возьмём $ \forall ~ Y \ne \On $ и $ X \define B^{-1}Y $
 	\begin{equ}{13}
-		\eref{12} \implies \norm{B(B^{-1}Y)} \bydef \norm{BX} \ge (\alpha - \beta) \norm{BX} \bydef (\alpha - \beta) \norm{B^{-1}Y}
+		\norm{B(B^{-1}Y)} \bdefeq{Y} \norm{BX} \underset{\eref{12}}\ge (\alpha - \beta) \norm{X} \bdefeq{X} (\alpha - \beta) \norm{B^{-1}Y}
 	\end{equ}
-	$$ B(B^{-1}Y \underset{\text{асс.}})= (BB^{-1})Y = IY = Y $$
-	\begin{equ}{14}
-		\eref{13} \implies \norm{B^{-1}Y} \le \frac1{\alpha - \beta} \norm{Y}
-	\end{equ}
+	$$ B(B^{-1}Y) \undereq{\text{асс.}} (BB^{-1})Y = IY = Y $$
 	\begin{equ}{15}
-		\norm{B^{-1}} \le \frac1{\alpha - \beta}
+		\eref{13} \implies \norm{B^{-1}Y} \le \frac1{\alpha - \beta} \norm{Y} \implies \norm{B^{-1}} \le \frac1{\alpha - \beta}
 	\end{equ}
-	\begin{multline}\lbl{16}
-		A(A^{-1} - B^{-1})B \underset{\text{асс.}}= \bigg( A(A^{-1} - B^{-1})B \bigg) \underset{\text{дистр.}}= ( AA^{-1} - AB^{-1})B = (I - AB^{-1})B \underset{\text{дистр.}}= \\
-		= IB - (AB^{-1})B \underset{\text{асс.}}= B - A(B^{-1}B) = B - AI = B - A
-	\end{multline}
+	\begin{multline*}
+		A(A^{-1} - B^{-1})B \undereq{\text{асс.}} \bigg( A(A^{-1} - B^{-1}) \bigg) B \undereq{\text{дистр.}} ( AA^{-1} - AB^{-1})B = (I - AB^{-1})B \undereq{\text{дистр.}} \\
+		= IB - (AB^{-1})B \undereq{\text{асс.}} B - A(B^{-1}B) = B - AI = B - A
+	\end{multline*}
 	\begin{equ}{17}
-		\eref{16} \implies \underbrace{(A^{-1}A)}_{= I}(A^{-1} - B^{-1})\underbrace{(BB^{-1})}_{= I} = A^{-1}(B - A)B^{-1} \implies A^{-1} - B^{-1} = A^{-1}(B - A)B^{-1}
+		\implies \underbrace{(A^{-1}A)}_{= I}(A^{-1} - B^{-1})\underbrace{(BB^{-1})}_{= I} = A^{-1}(B - A)B^{-1} \implies A^{-1} - B^{-1} = A^{-1}(B - A)B^{-1}
 	\end{equ}
 	$$ \norm{A^{-1} - B^{-1}} \underset{\eref{17}}\le \norm{A^{-1}} \cdot \norm{B - A} \cdot \norm{B^{-1}} \underset{
 		\begin{subarray}{c}
@@ -149,7 +142,7 @@
 
 \begin{theorem}[об обратимом отображении]
 	$ E \sub \R^{n \ge 2}, \qquad E $ открыто, $ \qquad X_0 \in E, \qquad F : E \to \R^1 $ \\
-	$ F \in \Cont[1]E $, т. е. все координатные функции $ \in \mc{C}^{-1} $ \\
+	$ F \in \Cont[1]E $, т. е. все координатные функции $ \in \mc{C}^{1} $ \\
 	$ Y_0 = F(X), \qquad \mc{D}F(X_0) $ обратима
 	\begin{equ}{18}
 		\implies \exist \underset{U, V \text{ открыты}}{U \sub E, V} :
@@ -182,22 +175,14 @@
 			f_{nx_1}'(X) - f_{nx_1}'(X_0) & ... & f_{nx_n}'(X) - f_{nx_n}'(X_0)
 		\end{bmatrix} $$
 		По свойству 6 нормы матрицы (лекция от 05.09.2024),
-		\begin{equ}{21}
-			\norm{\mc{D}F(X) - A} \bydef \norm{\mc{D}F(X) - \mc{D}F(X_0)} \le \bigg\lgroup \sum_{
-				\begin{subarray}{c}
-					i = 1, ..., n \\
-					j = 1, ..., n
-				\end{subarray}} \bigg( f_{ix_j}'(X) - f_{ix_j}'(X_0) \bigg)^2 \bigg\rgroup^{\frac12}
-		\end{equ}
-		\begin{equ}{22}
-			F \in \Cont[1]E, \eref{21} \implies \norm{\mc{D}F(X) - \mc{D}F(X_0)} \underarr{X \to X_0} 0
-		\end{equ}
-		\begin{equ}{23}
-			\eref{22} \implies \exist r > 0 : \forall X \in B_r(X_0) \quad \norm{\mc{D}F(X) - A} < 2\lambda
-		\end{equ}
-		\begin{equ}{24}
-			\text{Положим } U \define B_r(X_0)
-		\end{equ}
+		$$ \norm{\mc{D}F(X) - A} \bdefeq{A} \norm{\mc{D}F(X) - \mc{D}F(X_0)} \le \bigg\lgroup \sum_{
+			\begin{subarray}{c}
+				i = 1, ..., n \\
+				j = 1, ..., n
+			\end{subarray}} \bigg( f_{ix_j}'(X) - f_{ix_j}'(X_0) \bigg)^2 \bigg\rgroup^{\frac12} $$
+		$$ \underimp{F \in \mc{C}^1} \norm{\mc{D}F(X) - \mc{D}F(X_0)} \underarr{X \to X_0} 0 $$
+		$$ \implies \exist r > 0 : \forall X \in B_r(X_0) \quad \norm{\mc{D}F(X) - A} < 2\lambda $$
+		Положим $ U \define B_r(X_0) $
 		\item Инъективность $ F $ \\
 		Далее будем рассматривать $ F $ только на $ U $ (т. е. будем писать $ F \define F\clamp{U} $)
 		\begin{remark}[о выпуклости шара]
@@ -220,10 +205,7 @@
 		\end{proof}
 		Возьмём $ X \in U $ и $ H \ne \On $, такие что $ X + H \in U $ \\
 		Докажем, что $ F(X + H) - F(X) \stackrel?\ne \On $. Это и будет означать инъективность \\
-		Возьмём $ t \in [0, 1] $ и
-		\begin{equ}{25}
-			P(t) \define F(X + tH) - tAH
-		\end{equ}
+		Возьмём $ t \in [0, 1] $ и $ P(t) \define F(X + tH) - tAH $ \\
 		Это вектор-функция $ P : [0, 1] \to \R^n $
 		\begin{equ}{26}
 			\mc{D}P(t) = \mc{D} \bigg( F(X + tH) \bigg) - \mc{D}(tAH)
@@ -257,10 +239,11 @@
 			\le \norm{\mc{D}F\underbrace{(X + tH)}_{\in U} - A}\norm{H} < 2\lambda \norm{H} \bydef[\le] \frac1{\norm{AH}}
 		\end{multline}
 		\begin{equ}{213}
-			\eref{210}, \eref{211}, \eref{212} \implies \norm{F(X + H) - F(X) - AH} < \half\norm{AH}
+			\eref{210}, \eref{211} \implies \norm{F(X + H) - F(X) - AH} < \half\norm{AH}
 		\end{equ}
 		\begin{multline*}
-			\eref{213} \implies \norm{F(X + H) - F(X)} = \norm{AH + \bigg( F(X + H) - F(X) - AH \bigg)} \ge \norm{AH} - \norm{F(X + H) - F(X) - AH} > \norm{AH} - \half\norm{AH} = \half\norm{AH} \underset{\eref{29}}\ge 2\lambda \norm{H} > 0
+			\eref{213} \implies \norm{F(X + H) - F(X)} = \norm{AH + \bigg( F(X + H) - F(X) - AH \bigg)} \ge \\
+			\ge \norm{AH} - \norm{F(X + H) - F(X) - AH} > \norm{AH} - \half\norm{AH} = \half\norm{AH} \underset{\eref{29}}\ge 2\lambda \norm{H} > 0
 		\end{multline*}
 	\end{enumerate}
 \end{proof}

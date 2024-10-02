@@ -1,0 +1,275 @@
+\section{Минимальный многочлен оператора}
+
+\begin{props}[минимального многочлена оператора]
+	\item[4.] $ e_1, ..., e_n $ -- базис $ V, \qquad P_1(t), ..., P_n(t) $ -- минимальные аннуляторы для $ e_1, ..., e_n $ \\
+	Тогда $ \SCM{P_1, ..., P_n} $ является минимальным многочленом для $ A $
+	\begin{proof}
+		Пусть $ P = \SCM{P_1, ..., P_n} $
+		\begin{itemize}
+			\item Проверим, что $ P $ аннулирует $ A $: \\
+			Пусть $ v \in V, \qquad v = a_1e_1 + ... + a_ne_n $ \\
+			Применим $ P $:
+			$$ P(\mc{A})(v) = a_1P(\mc{A})e_1 + ... + a_nP(\mc{A})e_n $$
+			$$ P \divby P_i \implies P \text{ -- аннул. для } e_i \implies P(\mc{A})e_i = 0 $$
+			$$ P(\mc{A})(v) = a_1 \cdot 0 + ... + a_n \cdot 0 = 0 $$
+			\begin{remark}
+				Тем самым, мы доказали, что аннулятор многочлена существует
+			\end{remark}
+			\item Проверим, что $ P $ минимальный: \\
+			Пусть $ Q(t) $ аннулирует $ \mc{A} $
+			\begin{multline*}
+				\implies Q(\mc{A})v = 0 \quad \forall v \implies Q(\mc{A})e_i = 0 \quad \forall i \underimp{P_i \text{ -- мин. аннул.}} \\
+				\implies Q \divby P_i \quad \forall i \implies Q \divby P \implies \deg Q \ge \deg P
+			\end{multline*}
+		\end{itemize}
+	\end{proof}
+\end{props}
+
+
+\begin{theorem}[Гамильтона-Кэли]
+	Характеристический многочлен оператора $ \mc{A} $ аннулирует $ \mc{A} $, т. е.
+	$$ \chi_{\mc{A}}(\mc{A}) = 0 $$
+\end{theorem}
+
+\begin{proof}
+	Нужно доказать, что $ \forall v \quad \chi(\mc{A})v = 0 $ \\
+	Докажем, что $ \chi_{\mc{A}} \divby P_0 $, где $ P_0 $ -- минимальный аннулятор (было свойство, что все аннуляторы делятся на минимальный): \\
+	Пусть $ U $ -- циклическое подпространство, порождённое $ v $ \\
+	$ \chi_U $ -- характеристический многочлен $ \mc{A}\clamp{U} $ (он определён, т. к. пространство ивариантно) \\
+	По следствию о делителях характеристического многочлена, $ \chi \divby \chi_U $ \\
+	Знаем, что $ \chi_U $ -- минимальный аннулятор для $ v $ на $ U $ (по теореме о циклическом подпространстве и минимальном аннуляторе)
+	$$
+	\begin{rcases}
+		\chi_U = P_0 \\
+		\chi \divby \chi_U
+	\end{rcases} \implies \chi \divby P_0 $$
+\end{proof}
+
+\begin{eg}
+	$$ A =
+	\begin{pmatrix}
+		1 & 0 \\
+		1 & 1
+	\end{pmatrix} \qquad \chi_{\mc{A}}(t) = (1 - t)^2 = t^2 - 2t + t $$
+	$$ A^2 - 2A + E =
+	\begin{pmatrix}
+		1 & 0 \\
+		2 & 1
+	\end{pmatrix} -
+	\begin{pmatrix}
+		2 & 0 \\
+		2 & 2
+	\end{pmatrix} +
+	\begin{pmatrix}
+		1 & 0 \\
+		0 & 1
+	\end{pmatrix} =
+	\begin{pmatrix}
+		0 & 0 \\
+		0 & 0
+	\end{pmatrix} $$
+\end{eg}
+
+\begin{implication}
+	$ P_0 $ -- минимальный многочлен $ \mc{A} $ \\
+	Тогда $ \chi \divby P $
+\end{implication}
+
+\section{Примарные и корневые подпространства}
+
+\begin{definition}
+	$ K $ -- поле, $ \qquad V $ -- векторное пространство над $ K, \qquad \mc{A} $ -- оператор на $ V $ \\
+	$ P(t) $ -- минимальный многочлен $ \mc{A} $, такой, что старший коэффициент $ P $ равен 1 \\
+	Пространство $ V $ называется примарным относительно $ \mc{A} $, если $ P(t) = Q^s(t) $ для некоторого $ Q(t) $, неприводимого над $ K $
+\end{definition}
+
+\begin{remark}
+	Если $ s = 0 $, то $ P = \const \implies V = \set{0} $. Можно считать, что оно примарно
+\end{remark}
+
+\begin{exmpls}
+	\item $ K = \R, \qquad V = \R^4, \qquad \mc{A} : X \mapsto AX $
+	$$ A =
+	\begin{pmatrix}
+		2 & & & \\
+		0 & 2 & * & \\
+		0 & 0 & 2 & \\
+		0 & 0 & 0 & 2
+	\end{pmatrix}, \qquad \chi_A = (2 - t)^4 $$
+	$ (2 - t)^4 \divby $ минимальный многочлен $ \implies $ минимальный многочлен $ = (2 - t)^s, \quad s \le 4 $
+	\item $ V = \R^2, \qquad \mc{A} : X \mapsto AX $
+	$$ A =
+	\begin{pmatrix}
+		0 & -1 \\
+		1 & 0
+	\end{pmatrix}, \qquad \chi_{\mc{A}} = t^2 + 1 \text{ -- неприв. } \implies \text{ примарно} $$
+	\item То же самое, но $ K = \Co $
+	$$ \chi_{\mc{A}} = t^2 + 1 = (t - i)(t + i) $$
+	$$ P_1(t) = t - i, \qquad P_2(t) = t + i $$
+	$ P_1, P_2 $ -- не аннул. $ \mc{A} $:
+	$$
+	\begin{pmatrix}
+		i & -1 \\
+		1 & i
+	\end{pmatrix} \ne 0, \qquad
+	\begin{pmatrix}
+		-i & -1 \\
+		1 & -i
+	\end{pmatrix} \ne 0 $$
+	$ \implies \chi_{\mc{A}}(t) $ -- минимальный многочлен. Пространство не примарно
+\end{exmpls}
+
+\begin{properties}[взаимно простых многочленов от оператора]
+	$ \mc{A} $ -- оператор на $ V $
+	\begin{enumerate}
+		\item $ P_1, P_2, ..., P_k $ -- попарно взаимно просты, $ \qquad T(t) = P_1(t)...P_k(t), \qquad v \in V, \qquad T $ аннулирует $ V $ \\
+		Тогда $ \exist v_1, ..., v_k : v = v_1 + ... + v_k $ и $ P_i $ аннулирует $ v_i $
+		\begin{proof}
+			\textbf{Индукция.}
+			\begin{itemize}
+				\item \textbf{База.} $ k = 2 $ \\
+				$ P, Q $ взаимно просты, $ \qquad v \in V $ \\
+				Докажем, что $ \exist v, w : v = u + w, \qquad P(\mc{A})u = 0, \qquad Q(\mc{A})w = 0 $ \\
+				Т. к. $ P, Q $ взаимно просты, можно разложить их НОД ($ = 1 $):
+				$$ \exist F(t), G(t) : P(t)F(t) + Q(t)G(t) = 1 $$
+				Применим к $ \mc{A} $:
+				$$ P(\mc{A}) \circ F(\mc{A}) + Q(\mc{A}) \circ G(\mc{A}) = \mc{E} $$
+				Применим к $ v $:
+				$$ (PF)(\mc{A})v + (QG)(\mc{A})v = v $$
+				Положим $ u = (QG)(\mc{A})v, \qquad w = (PF)(\mc{A})v $ \\
+				Проверим, что $ P(\mc{A})u = 0 $ (для $ w $ -- аналогично):
+				\begin{multline*}
+					P(\mc{A}) \circ \bigg( QG(\mc{A}) \bigg)v = \bigg( PQG \bigg)(\mc{A})v \undereq{\text{коммут.}} \bigg( GPQ \bigg)(\mc{A})v = \\
+					= G(\mc{A}) \underbrace{(PQ)(\mc{A})v}_{= 0 \text{ (т. к. } T = PQ \text{ аннулирует } v)} = 0
+				\end{multline*}
+				\item \textbf{Переход.} $ k - 1 \to k $
+				$$ T = \underbrace{P_1...P_{k - 1}}_{P}\underbrace{P_k}_Q $$
+				$$ (PQ)(\mc{A})v = 0 \underimp{\text{\textbf{база}}} \exist u, w : v = u + w, \qquad P(\mc{A})u = 0, \quad Q(\mc{A})w = 0 $$
+				По \textbf{индукционному предположению},
+				$$ \exist v_1, ..., v_{k - 1} : P_i \text{ аннул. } v_i, \qquad u = v_1 + ... + v_{k - 1} $$
+				$$ v = v_1 + ... + v_{k - 1} + \underset{\define v_k}w $$
+			\end{itemize}
+		\end{proof}
+		\item $ P, Q $ взаимно просты, $ \qquad P, Q $ аннуляторы $ v $
+		$$ \implies v = 0 $$
+		\begin{proof}
+			Пусть $ T $ -- минимальный аннулятор $ v $
+			$$
+			\begin{rcases}
+				P \divby T \\
+				Q \divby T
+			\end{rcases} \implies T = \const, \qquad T(t) = c \implies cv = 0 \implies v = 0 $$
+		\end{proof}
+	\end{enumerate}
+\end{properties}
+
+\begin{theorem}[разложение пространства в прямую сумму примарных подпространств]
+	$ K $ -- поле, $ \qquad V $ -- векторное пространство над $ K, \qquad \mc{A} $ -- оператор на $ V $ \\
+	$ P(t) $ -- минимальный моногочлен $ \mc{A} $, он разложен в сумму:
+	$$ P(t) = P_1(t)...P_k(t), \qquad \text{ где } P_i(t) = Q_i^{s_i}(t), \qquad Q_i \text{ -- непривод. над } K $$
+	Тогда $ \exist $ подпространства $ U_1, ..., U_k $, такие что
+	\begin{enumerate}
+		\item все $ U_i $ ивариантны
+		\item $ V = U_1 \oplus ... \oplus U_k $
+		\item $ P_i(t) $ -- минимальный многочлен $ \mc{A} $ на $ U_i \quad \forall i $
+	\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+	Положим $ U_i = \ker P_i(\mc{A}) $. Докажем, что они подойдут:
+	\begin{enumerate}
+		\item Ядро многочлена от оператора инвариантно (было такое свойство)
+		\item
+		\begin{enumerate}
+			\item Докажем, что $ V = U_1 + ... + U_k $ \\
+			$ P_1, ..., P_k $ попарно взаимно просты, и $ P_1 \cdot ... \cdot P_k $ аннулируют любой $ v $, значит
+			$$ \forall v \quad \exist v_1, ..., v_k : v_1 + ... + v_k, \qquad P_i \text{ аннул. } v_i \implies v_i \in U_i $$
+			\item Докажем, что сумма прямая: \\
+			Нужно проверить, что $ U_s \cap \bigg( U_1 + ... + U_{s - 1} + U_{s + 1} + ... + U_k \bigg) = \set{0} \quad \forall s $ \\
+			НУО проверим, что $ (U_1 + ... + U_k) \cap U_k = \set{0} $ \\
+			Возьмём $ v \in (U_1 + ... + U_{k - 1}) \cap U_k $
+			$$ v = v_1 + ... + v_{k - 1}, \qquad v_i \in U_i, \qquad v \in U_k $$
+			По одному из свойств,
+			$$ P_1 \cdot ... \cdot P_{k - 1} \text{ аннулирует } v_1 + ... + v_{k - 1} = v $$
+			При этом, $ P_k $ аннулирует $ v $ \\
+			Заметим, что $ (P_1 \cdot ... \cdot P_{k - 1}, P_k) = 1 $ \\
+			По одному из свойств, это означает, что $ v = 0 $
+		\end{enumerate}
+		\item
+		$$ U_i = \ker P_i(\mc{A}) \implies P_i(\mc{A}) \clamp{U_i} = 0 $$
+		$ P_i $ аннулирует $ \mc{A}\clamp{U_i} $ \\
+		Значит, $ P_i $ делится на минимальный многочлен $ \mc{A}\clamp{U_i} $ \\
+		При этом, $ P_i = Q_i^{s_i} $ \\
+		Отсюда минимальный тоже является $ Q_i^{r_i}, \qquad r_i \le s_i $ \\
+		Хотим доказать, что $ r_i = s_i $ \\
+		Пусть $ T = Q_1^{r_1}...Q_k^{r_k} $ \\
+		Т. к. у нас прямая сумма, сущестует $ e_1, ..., e_n $ -- базис $ V $, он является объединением базисов $ U_i $
+		$$ \implies T(\mc{A})e_1 = 0, \widedots[10em], T(\mc{A})e_k = 0 $$
+		$$ \implies T \text{ аннулирует } \mc{A} \underimp{P \text{ -- мин. многочл.}} \underbrace{T}_{\prod Q_i^{r_i}} \divby \underbrace{P}_{\prod Q_i^{s_i}}, \quad r_i \le s_i \implies r_i = s_i $$
+	\end{enumerate}
+\end{proof}
+
+\begin{definition}
+	$ \lambda $ -- с. ч. $ \mc{A} $ \\
+	Вектор $ v $ называется корневым вектором, соответствующим $ \lambda $, если для некоторого $ k $ многочлен $ P(t) = (t - \lambda)^k $ является аннулятором $ V $ \\
+	Множество корневых векторов называется корневым попространством, соотв. $ \lambda $
+\end{definition}
+
+\begin{props}
+	\item Корневое подпространство инвариантно
+	\begin{proof}
+		Пусть $ P(t) = (\lambda - t)^k $ -- аннул. $ v $, т. е. $ P(\mc{A})v = 0 $
+		$$ P(\mc{A})(\mc{A}v) = \bigg( P(\mc{A}) \circ \mc{A} \bigg)v = \bigg( \mc{A} \circ P(\mc{A}) \bigg)v = \mc{A} \bigg( \underbrace{P(\mc{A})v}_{= 0} \bigg) = \mc{A}(0) = 0 $$
+	\end{proof}
+	\item $ V $ конечномерно, минимальный многочлен $ \mc{A} $ раскладывается на линейные множители
+	$$ P(t) = (\lambda_1 - t)^{s_1}...(\lambda_k - t)^{s_k} $$
+	Тогда $ \ker \bigg( (\lambda_i \mc{E} - \mc{A})^{s_i} \bigg) $ -- корневые подпространства
+	\begin{proof}
+		Пусть $ U_i = \ker \bigg( (\lambda_i \mc{E} - \mc{A})^{s_i} \bigg), \qquad W_i $ -- корневое подпространство для $ \lambda_i $
+		\begin{itemize}
+			\item $ U_i \sub W_i $ -- очевидно ($ v \in U_i \implies (\lambda_i \mc{E} - \mc{A})^{s_i}v = 0, \qquad $ подойдёт $ k = s_i $)
+			\item $ W_i \sub U_i $ \\
+			Пусть $ v \in W_i $ \\
+			Пусть $ k $ -- минимальное число, такое что $ (\lambda_i \mc{E} - \mc{A})^k $ аннулирует $ v $ \\
+			Тогда $ (\lambda - t)^k $ -- минимальный аннулятор $ v $ \\
+			При этом, $ P(t) $ -- аннулятор $ v $
+			$$ \implies P(t) \divby (\lambda - t)^k \implies k \le s_i \implies v \in U_i $$
+		\end{itemize}
+	\end{proof}
+\end{props}
+
+\section{Существование жордановой формы}
+
+Повторим определения:
+
+\begin{definition}
+	Жордановой клеткой порядка $ r $ с с. ч. $ \lambda $ называется матрица порядка $ r $ вида
+	$$ J_r(\lambda) =
+	\begin{pmatrix}
+		\lambda & 0 & . & 0 \\
+		1 & \lambda & . & 0 \\
+		. & . & . & . \\
+		0 & . & 1 & \lambda
+	\end{pmatrix} $$
+\end{definition}
+
+\begin{definition}
+	Жордановой матрицей называется блочно-диагональная матрица вида
+	$$
+	\begin{pmatrix}
+		J_{r_1}(\lambda_1) & 0 & . & 0 \\
+		0 & J_{r_2}(\lambda_2) & . & 0 \\
+		. & . & . & . \\
+		0 & . & 0 & J_{r_k}(\lambda_k)
+	\end{pmatrix} \qquad \text{(как } r_i \text{, так и } \lambda_i \text{ могут совпадать)} $$
+\end{definition}
+
+\begin{definition}
+	Жорданов базис -- базис, в котором матрица оператора жорданова
+\end{definition}
+
+\begin{theorem}[существование жордановой формы]
+	$ K $ -- поле, $ \qquad V $ -- векторное пространство над $ K $ \\
+	$ \mc{A} $ -- оператор, $ \qquad \chi_{\mc{A}}(t) $ раскладывается на линейные множители над $ K $ \\
+	Тогда для $ \mc{A} $ существует жорданов базис
+\end{theorem}

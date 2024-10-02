@@ -201,11 +201,11 @@
 			g^{(r)}(Y + tH) = \sum_{|\alpha| = r} C_r^{(\alpha)} \partial^\alpha f(Y + tH) H^\alpha
 		\end{equ}
 		\begin{equ}{23'}
-			\eref{21}, \eref{23} \implies g^{(r + 1)}(Y + tH) = \sum_{|\alpha| = r} C_r^\alpha H^\alpha \bigg( \underbrace{\partial^\alpha f(Y + tH)}_{\define f_\alpha \in \Cont[1]E} \bigg)' \define F
+			\eref{21}, \eref{23} \implies g^{(r + 1)}(Y + tH) = \sum_{|\alpha| = r} C_r^\alpha H^\alpha \bigg( \underbrace{\partial^\alpha f(Y + tH)}_{\in \Cont[1]E} \bigg)'
 		\end{equ}
 		Воспользуемся базой индукции для $ f_\alpha $:
 		\begin{equ}{23''}
-			\eref{23'} = \sum_{|\alpha| = r}C_r^\alpha H^\alpha \bigg( \sum_{\nu = 1}^n f_{\alpha x_\nu}'(Y + tH)h_\nu \bigg) = \sum_{|\alpha| = 1} \sum_{\nu = 1}^n C_r^\alpha H^\alpha h_\nu \bigg( \partial^\alpha f(Y + tH) \bigg)_{x_\nu}'
+			\eref{23'} = \sum_{|\alpha| = r}C_r^\alpha H^\alpha \bigg( \sum_{\nu = 1}^n (\partial^\alpha f{x_\nu})'(Y + tH)h_\nu \bigg) = \sum_{|\alpha| = 1} \sum_{\nu = 1}^n C_r^\alpha H^\alpha h_\nu \bigg( \partial^\alpha f(Y + tH) \bigg)_{x_\nu}'
 		\end{equ}
 		$$ \alpha = (l_1, ..., l_\nu, ..., l_n) $$
 		\begin{multline}\lbl{24}
