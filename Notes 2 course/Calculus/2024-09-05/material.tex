@@ -4,13 +4,11 @@
 
 \begin{definition}
 	$ A : \R^{m \ge 1} \to \R^{n \ge 1} $
-	\begin{equ}1
-		\norm{A} \define \sup\limits_{
-			\begin{subarray}{c}
-				X \in \R^m \\
-				\norm{X}_m \le 1
-			\end{subarray}} \norm{AX}_n
-	\end{equ}
+	$$ \norm{A} \define \sup\limits_{
+		\begin{subarray}{c}
+			X \in \R^m \\
+			\norm{X}_m \le 1
+		\end{subarray}} \norm{AX}_n $$
 \end{definition}
 
 \begin{props}
@@ -74,7 +72,7 @@
 	\begin{proof}
 		\begin{multline*}
 			\norm{A + B} = \sup \norm{(A + B)X}_n \undereq{\text{линейность}} \sup \norm{AX + BX} \le \sup(\norm{AX} + \norm{BX}) \le \\
-			\le \sup \norm{AX} + \sup \norm{BX} \bydef \norm{A} + \norm{B}
+			\le \sup \norm{AX} + \sup \norm{BX} \bdefeq{\norm{A}, \norm{B}} \norm{A} + \norm{B}
 		\end{multline*}
 	\end{proof}
 	\item\label{prop:4} $ \norm{AX} \le \norm{A} \cdot \norm{X} \quad \forall X \in \R^m $
@@ -83,7 +81,7 @@
 		\item Пусть $ X \ne \On[m] $ \\
 		Тогда $ t \define \norm{X}_m > 0 $ \\
 		Рассмотрим $ Y \define \frac1t X $
-		$$ \norm{Y}_m = \norm{\frac1t X} \underset{t > 0}= \frac1t \norm{X} \bydef 1 $$
+		$$ \norm{Y}_m = \norm{\frac1t X} \underset{t > 0}= \frac1t \norm{X} \bdefeq{t} 1 $$
 		$$ \norm{AY}_n \le \sup_{
 			\begin{subarray}{c}
 				U \in \R^m \\
@@ -101,7 +99,7 @@
 		\begin{equ}5
 			\norm{AX}_n \underset{\eref4}\le c_0 \cdot \norm{X}_m \bydef[\le] c_0
 		\end{equ}
-		$$ \eref5 \bydef[\iff] \sup \norm{AX}_n \le c_0 $$
+		$$ \eref5 \bdef[\iff]\sup \sup\limits_{\norm{X} \le 1} \norm{AX}_n \le c_0 $$
 	\end{proof}
 	\item $ A =
 	\begin{bmatrix}
@@ -121,19 +119,19 @@
 			Неравенство КБШ:
 			$$ |(A, X)| \le |a_1| \cdot |x_1| + ... + |a_n| \cdot |x_n| \le \sqrt{a_1^2 + ... + a_n^2} \cdot \sqrt{x_1^2 + ... + x_n^2} = \norm{Y} \cdot \norm{X} $$
 		\end{remind}
-		$$ \eref7 \implies \norm{AX}_n^2 = \sum_{i = 1}^n \bigg( \sum_{j = 1}^m a_{ij}x_j \bigg)^2 \underset{\text{КБШ}}\le \sum_{i = 1}^n \bigg( \sum_{j = 1}^m a_{ij}^2 \bigg) \bigg( \sum_{j = 1}^m \underbrace{x_j^2}_{\bydef[\le] 1} \bigg) \le \sum_{i = 1}^n \sum_{j = 1}^m a_{ij}^2 $$
+		$$ \norm{AX}_n^2 \undereq{\eref7} \sum_{i = 1}^n \bigg( \sum_{j = 1}^m a_{ij}x_j \bigg)^2 \underset{\text{КБШ}}\le \sum_{i = 1}^n \bigg( \sum_{j = 1}^m a_{ij}^2 \bigg) \bigg( \sum_{j = 1}^m \underbrace{x_j^2}_{\bydef[\le] 1} \bigg) \le \sum_{i = 1}^n \sum_{j = 1}^m a_{ij}^2 $$
 	\end{proof}
 	\item $ \R^{n \ge 1}, \R^{m \ge 1}, \R^{k \ge 1}, \qquad A : \R^m \to \R^n, \quad B : \R^m \to \R^k, \qquad BA : \R^m \to \R^k $
 	$$ \implies \norm{BA} \le \norm{B} \cdot \norm{A} $$
 	\begin{proof}
 		Возьмём $ X \in \R^m $, такой, что $ \norm{X}_m \le 1 $ \\
 		Пусть $ Y = AX \in \R^n $ \\
-		Тогда $ BA(X) \bydef B(AX) = BY $
+		Тогда $ BA(X) \bdefeq{BA} B(AX) \bdefeq{X} BY $
 		\begin{equ}9
 			\norm{BA(X)}_k = \norm{BY}_k \underset{\text{св-во \ref{prop:4}}}\le \norm{B} \cdot \norm{Y}_n
 		\end{equ}
 		\begin{equ}{10}
-			\norm{Y}_n \bydef \norm{AX}_n \underset{\text{св-во \ref{prop:4}}}\le \norm{A} \cdot \norm{X}_m \underset{\norm{X} \le 1}\le \norm{A}
+			\norm{Y}_n \bdefeq{Y} \norm{AX}_n \underset{\text{св-во \ref{prop:4}}}\le \norm{A} \cdot \norm{X}_m \underset{\norm{X} \le 1}\le \norm{A}
 		\end{equ}
 		$$ \eref9, \eref{10} \implies \norm{BA(X)}_k \le \underbrace{\norm{B} \cdot \norm{A}}_{\define c_0} $$
 		Применяя свойство \ref{prop:1.5}, получаем нужное утверждение
@@ -196,10 +194,10 @@
 	$$ \vphi(x_2) \define \frac{f(x_1^0 + h, x_2) - f(x_1^0, x_2)}h, \qquad x_2 \in [x_2^0, x_2^0 + h] $$
 	Рассмотрим выражение
 	\begin{equ}{24}
-		\frac{\vphi(x_2^0 + h) - \vphi(x_2^0)}h \bydef \frac{f(x_1^0 + h, x_2^0 + h) - f(x_1^0, x_2^0 + h) - f(x_1^0 + h, x_2^0) + f(x_1^0, x_2^0)}{h^2} = g(h)
+		\frac{\vphi(x_2^0 + h) - \vphi(x_2^0)}h \bdefeq\vphi \frac{f(x_1^0 + h, x_2^0 + h) - f(x_1^0, x_2^0 + h) - f(x_1^0 + h, x_2^0) + f(x_1^0, x_2^0)}{h^2} = g(h)
 	\end{equ}
 	\begin{equ}{25}
-		\forall x_2 \in [x_2^0, x_2^0 + h] \quad \exist \vphi'(x_2) \bydef \frac{f_{x_2}'(x_1^0 + h, x_2) - f_{x_2}'(x_1^0, x_2)}h
+		\forall x_2 \in [x_2^0, x_2^0 + h] \quad \exist \vphi'(x_2) \bdefeq\vphi \frac{f_{x_2}'(x_1^0 + h, x_2) - f_{x_2}'(x_1^0, x_2)}h
 	\end{equ}
 	Применим к $ \vphi $ теорему Лагранжа:
 	\begin{multline}\lbl{27'}

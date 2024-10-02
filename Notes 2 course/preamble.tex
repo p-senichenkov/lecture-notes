@@ -175,10 +175,16 @@
 % comparable by modulo
 \newcommand*\comp[1]{\ensuremath{\underset{#1}{\equiv}}}
 
-% by definition (default is =)
+%% definition:
+% :=
 \newcommand\define\coloneqq
+% :{#1}
 \newcommand*\definerel[1]{\mathrel{:{#1}}}
+% by definition (default is =) (DEPRECATED)
 \newcommand*\bydef[1][=]{\ensuremath{\stackrel{\text{def}}{#1}}}
+% by definition with NECESSARY text:
+\newcommand*\bdef[2][=]{\ensuremath{\stackrel{\text{def }{#2}}{#1}}}
+\newcommand*\bdefeq[1]{\ensuremath{\xlongequal{\text{def }{#1}}}}
 
 % sets:
 \newcommand\N{\ensuremath{\mathbb{N}}}

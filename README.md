@@ -4,10 +4,10 @@
 ### Volumes:
 - Algebra:
   - 1 term:
-    - [EXAM](https://github.com/Petua41/lecture-notes/tree/main/Notes%201%20course/Algebra)
+    - [EXAM](https://github.com/Petua41/lecture-notes/tree/main/Notes%201%20course/Algebra%20EXAM)
   - 2 term:
     - [COLLOC](https://github.com/Petua41/lecture-notes/tree/main/Notes%201%20course/Algebra%20COLLOC)
-    - [EXAM](https://github.com/Petua41/lecture-notes/tree/main/Notes%201%20course/Algebra%20COLLOC)
+    - [EXAM](https://github.com/Petua41/lecture-notes/tree/main/Notes%201%20course/Algebra%20EXAM%202%20term)
 - Calculus:
   - 1 term:
     - [EXAM](https://github.com/Petua41/lecture-notes/tree/main/Notes%201%20course/Calculus%20EXAM)
