@@ -165,7 +165,7 @@
 
 \begin{theorem}[разложение пространства в прямую сумму примарных подпространств]
 	$ K $ -- поле, $ \qquad V $ -- векторное пространство над $ K, \qquad \mc{A} $ -- оператор на $ V $ \\
-	$ P(t) $ -- минимальный моногочлен $ \mc{A} $, он разложен в сумму:
+	$ P(t) $ -- минимальный моногочлен $ \mc{A} $, он разложен на множители:
 	$$ P(t) = P_1(t)...P_k(t), \qquad \text{ где } P_i(t) = Q_i^{s_i}(t), \qquad Q_i \text{ -- непривод. над } K $$
 	Тогда $ \exist $ подпространства $ U_1, ..., U_k $, такие что
 	\begin{enumerate}
@@ -205,14 +205,14 @@
 		Пусть $ T = Q_1^{r_1}...Q_k^{r_k} $ \\
 		Т. к. у нас прямая сумма, сущестует $ e_1, ..., e_n $ -- базис $ V $, он является объединением базисов $ U_i $
 		$$ \implies T(\mc{A})e_1 = 0, \widedots[10em], T(\mc{A})e_k = 0 $$
-		$$ \implies T \text{ аннулирует } \mc{A} \underimp{P \text{ -- мин. многочл.}} \underbrace{T}_{\prod Q_i^{r_i}} \divby \underbrace{P}_{\prod Q_i^{s_i}}, \quad r_i \le s_i \implies r_i = s_i $$
+		$$ \implies T \text{ аннулирует } \mc{A} \underimp{P \text{ -- мин. многочл.}} \underbrace{T}_{\prod Q_i^{r_i}} \divby \underbrace{P}_{\prod Q_i^{s_i}}, \quad r_i \ge s_i \implies r_i = s_i $$
 	\end{enumerate}
 \end{proof}
 
 \begin{definition}
 	$ \lambda $ -- с. ч. $ \mc{A} $ \\
-	Вектор $ v $ называется корневым вектором, соответствующим $ \lambda $, если для некоторого $ k $ многочлен $ P(t) = (t - \lambda)^k $ является аннулятором $ V $ \\
-	Множество корневых векторов называется корневым попространством, соотв. $ \lambda $
+	Вектор $ v $ называется корневым вектором, соответствующим $ \lambda $, если для некоторого $ k $ многочлен $ P(t) = (t - \lambda)^k $ является аннулятором $ v $ \\
+	Множество корневых векторов называется корневым подпространством, соотв. $ \lambda $
 \end{definition}
 
 \begin{props}
@@ -229,11 +229,12 @@
 		\begin{itemize}
 			\item $ U_i \sub W_i $ -- очевидно ($ v \in U_i \implies (\lambda_i \mc{E} - \mc{A})^{s_i}v = 0, \qquad $ подойдёт $ k = s_i $)
 			\item $ W_i \sub U_i $ \\
+			Нужно показать, что если вектор аннулируется, то он это сделает не больше чем за $ s_i $ шагов \\
 			Пусть $ v \in W_i $ \\
 			Пусть $ k $ -- минимальное число, такое что $ (\lambda_i \mc{E} - \mc{A})^k $ аннулирует $ v $ \\
 			Тогда $ (\lambda - t)^k $ -- минимальный аннулятор $ v $ \\
 			При этом, $ P(t) $ -- аннулятор $ v $
-			$$ \implies P(t) \divby (\lambda - t)^k \implies k \le s_i \implies v \in U_i $$
+			$$ \implies P(t) \divby (\lambda - t)^k \underimp{(\lambda - t) \text{ входит в } P \text{ только в степени } s_i} k \le s_i \implies v \in U_i $$
 		\end{itemize}
 	\end{proof}
 \end{props}

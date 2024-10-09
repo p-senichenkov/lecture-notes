@@ -1,0 +1,431 @@
+\section{Продолжаем доказывать теорему об обратном отображении}
+
+\begin{lemma}
+	$ U = B_r(X_0), \qquad X_1 \in U, \qquad 0 < \rho < r - \norm{X_0 - X_1}, \qquad S = B_\rho(X_1) $
+	\begin{remark}
+		В силу последних двух условий, $ S \sub U $ (т. к. $ U \bydef B_r(X_0) $)
+	\end{remark}
+	$ Y_1 = F(X_1) $
+	\begin{equ}1
+		\implies B_{\lambda\rho}(Y_1) \sub F(S)
+	\end{equ}
+\end{lemma}
+
+\begin{note}
+	$ r, \lambda, X_0, F $ из теоремы и первых двух шагов доказательства
+\end{note}
+
+\begin{figure}[!ht]
+	\begin{tikzpicture}[>=Stealth]
+		\fill (0, 0) circle [radius=0.05] node[anchor=north east]{$ X_0 $};
+		\draw[name path=B_r] (0, 0) circle [radius=2];
+		\path[name path=line] (0, 0) -- +(45:3);
+		\node[name intersections={of=B_r and line}] at (intersection-1) [anchor=south west]{$ B_r(X_0) $};
+
+		\path[name path=circ-1] (0, 0) circle [radius=1];
+		\fill[name intersections={of=circ-1 and line}] (intersection-1) circle [radius=0.05] node[below]{$ X_1 $};
+
+		\draw[name path=B_rho, name intersections={of=circ-1 and line}] (intersection-1) circle [radius=0.7];
+		\path[name path=line-2, name intersections={of=circ-1 and line}] (intersection-1) -- +(180:1);
+		\path[name intersections={of=B_rho and line-2}] (intersection-1) circle[radius=0.05] node[anchor=south east]{$ B_\rho(X_1) $};
+	\end{tikzpicture}
+	\caption{Здесь $ r = 2 $, $ \norm{X_0 - X_1} = 1 $, $ \rho = 0.7 $}
+\end{figure}
+
+\begin{proof}
+	$ X \in U, \qquad X + H \in U $
+	\begin{equ}{2'}
+		\norm{F(X + H) - F(X)} \ge 2\lambda\norm{H}
+	\end{equ}
+	(по последнему соотношению из второго шага доказательства)
+	\begin{equ}2
+		\eref{2'} \iff \norm{F(X_2) - F(X_3)} \ge 2\lambda\norm{X_2 - X_3} \qquad \forall X_2, X_3 \in U
+	\end{equ}
+	По условию, $ Y_1 \in F(S) $ (т. к. это образ $ X_1 $) \\
+	Возьмём $ Y \ne Y_1, \quad Y \in B_{\lambda\rho}(Y_1) $ \\
+	$ S $ -- открытый шар \\
+	Рассмотрим функцию $ k(X) \define \norm{F(X) - Y}, \qquad X \in \ol{S} $ \\
+	$ \ol{S} $ -- замкнутый шар, а значит, компакт. Поэтому $ k \in \Cont{\ol{S}} $ \\
+	По второй теореме Вейерштрасса, $ k $ достигает минимального значения:
+	\begin{equ}4
+		\exist X_* \in \ol{S} : k(X_*) \le k(X) \quad \forall X \in \ol{S}
+	\end{equ}
+	\begin{statement}
+		$ X_* $ не принадлежит границе $ \ol{S} $ (т. е. $ X_* \in S $)
+	\end{statement}
+	\begin{proof}
+		Действительно, если $ \norm{X_0 - X_1} = \rho $ (т. е. $ X_0 $ лежит на границе $ \ol{S} $), то
+		$$ \implies \norm{F(X_0) - F(X_1)} \underset{\eref2}\ge 2\lambda\norm{X_1 - X_0} = 2\lambda\rho $$
+		По определению, $ F(X_1) = Y_1 $. Подставим:
+		\begin{equ}{61}
+			\norm{F(X_0) - Y_1} \ge 2\lambda\rho
+		\end{equ}
+		При этом, $ Y \in B_{\rho\lambda}(Y_1) $. Значит,
+		\begin{equ}{62}
+			\norm{Y - Y_1} < \lambda\rho
+		\end{equ}
+		$$ \norm{F(X_0) - Y} \trige \norm{F(X_0) - Y_1} - \norm{Y_1 - Y} \underset{\eref{61}, \eref{62}}> 2\lambda\rho - \lambda\rho = \lambda\rho $$
+		В обозначениях $ k $ можно записать:
+		\begin{equ}9
+			\begin{rcases}
+				k(X_0) \bdefeq{k} \norm{F(X_0) - Y} > \lambda\rho \\
+				k(X_1) \bdefeq{k} \norm{Y_1 - Y} < \lambda\rho
+			\end{rcases} \implies k(X_1) < k(X_0)
+		\end{equ}
+		Взяли точку на границе диска (на сфере). Получили, что значение функции на границе строго больше, чем значение в центре. Значит, минимум ($ X_* $) не может лежать на границе, т. е.
+		\begin{equ}{11}
+			X_* \in S
+		\end{equ}
+	\end{proof}
+	Рассмотрим функцию $ l(X) \define k^2(X) $ \\
+	Понятно, что её минимум совпадёт с минимумом $ k $:
+	\begin{equ}{12}
+		\eref4 \implies l(X_*) \le l(X) \quad \forall X \in \ol{S}
+	\end{equ}
+	\begin{equ}{13}
+		l(X) \bdefeq{k} \norm{F(X) - Y}^2
+	\end{equ}
+	Пусть
+	$$ F = \column{f_1}{f_n}, \qquad Y = \column{y_1}{y_n} $$
+	В этих обозначениях,
+	\begin{equ}{14}
+		\eref{13} \implies l(X) = \sum_{i = 1}^l \bigg( f_i(X) - y_i \bigg)^2
+	\end{equ}
+	По условию теоремы, $ F $, а значит и его координатные функции гладкие ($ \in \mc{C}^1 $, т. е. имеют непрервные частные производные). Нетрудно заметить, что
+	\begin{equ}{15}
+		l \in \Cont[1]{U}
+	\end{equ}
+	Вспомним необходимое условие локального экстремума (из второго семестра):
+	\begin{remind}
+		Если функция имеет частный экстремум и она дифференцируема в этой точке, то все частные производные в этой точке равны нулю
+	\end{remind}
+	Его можно применять только к внутренним точкам (именно для этого мы и проверяли, что $ X_* \in S $)
+	\begin{equ}{16}
+		\eref{11}, \eref{12}, \eref{15} \implies l_{x_j}'(X_*) = 0 \qquad j = 1, .., n
+	\end{equ}
+	Из соотношения \eref{14} понятно, как выглядят частные производные:
+	$$ l_{x_j}'(X_*) \undereq{\eref{14}} \sum_{i = 1}^n 2 \bigg( f_i(X_*) - y_i \bigg) f_{ix_j}'(X_*) \undereq{\eref{16}} 0 \qquad j = 1, ..., n $$
+	Поделим на 2:
+	\begin{equ}{17'}
+		\sum_{i = 1}^n \bigg( f_i(X_*) - y_i \bigg) f_{ix_j}'(X_*) = 0 \qquad j = 1, ..., n
+	\end{equ}
+	Заметим, что здесь фигурирует матрица Якоби. Чтобы её записать, введём обозначение:
+	$$ A \define \bigg( f_1(X_*) - y_1, \widedots[3em], f_n(X_*) - y_n \bigg) $$
+	\begin{intuition}
+		\begin{equ}{17''}
+			A = \bigg( F(X_*) - Y \bigg)^T
+		\end{equ}
+	\end{intuition}
+	Имеется $ n $ равенств. В них фигурируют элементы матрицы Якоби:
+	\begin{statement}
+		\begin{equ}{18}
+			\eref{17'} \iff A\mc{D}F(X_*) = \On^T
+		\end{equ}
+	\end{statement}
+	\begin{proof}
+		$$ \mc{D}F(X_*) =
+		\begin{pmatrix}
+			f_{1x_1}'(X_*) & ... & f_{1x_n}'(X_*) \\
+			. & . & . \\
+			f_{nx_1}'(X_*) & ... & f_{nx_n}'(X_*)
+		\end{pmatrix} $$
+		\begin{multline*}
+			A\mc{D}F(X_*) = \left[ \bigg( f_1(X_*) - y_1 \bigg) f_{1x_1}'(X_*) + ... + \bigg( f_n(X_*) - y_n \bigg) f_{nx_1}'(X_*), \widedots[3em] \right] = \\
+			= \left[ \sum_{i = 1}^n \bigg( f_i(X_*) - y_i \bigg)f_{ix_1}(X_*), \widedots[3em] \right] = \eref{17'}
+		\end{multline*}
+	\end{proof}
+	\begin{statement}
+		\begin{equ}{19}
+			\det \mc{D}F(X) \ne 0 \qquad \forall X \in U
+		\end{equ}
+	\end{statement}
+	\begin{proof}
+		Вспомним соотношение из теоремы об отображении, близком к обратимому:
+		$$ \norm{A} = \frac1\alpha, \quad \norm{A - B} = \beta < \alpha \qquad \implies \norm{B^{-1}} \le \frac1{2\alpha} $$
+		Применим это к $ \alpha = 4\lambda, \quad \beta = 2\lambda $:
+		$$ \norm{\mc{D}F(X) - \mc{D}F(X_0)} < 2\lambda $$
+		$$ \norm{\mc{D}F(X_0)} = \frac1{4\lambda} $$
+		Отсюда следует, что $ \mc{D}F(X_0) $ обратима и для неё выполняется неравенство:
+		$$ \norm{\bigg( \mc{D}F(X) \bigg)^{-1}} \le \frac1{2\lambda} $$
+		Это значит, что она она неособенна ($ \det \ne 0 $)
+	\end{proof}
+	\eref{19} позволяет нам взять обратную матрицу к $ \mc{D}F(X_*) $:
+	$$
+	\begin{rcases}
+		\bigg( A\mc{D}F(X_*) \bigg) \bigg( \mc{D}F(X_*) \bigg)^{-1} \undereq{\eref{18}} \On^T \bigg( \mc{D}F(X_*) \bigg)^{-1} = \On^T \\
+		\bigg( A\mc{D}F(X_*) \bigg) \bigg( \mc{D}F(X_*) \bigg)^{-1} \undereq{\text{асс.}} A \bigg( \mc{D}F(X_*) \bigg) \bigg( \mc{D}F(X_*) \bigg)^{-1} = AI = A
+	\end{rcases} \implies A = \On^T $$
+	При этом, $ A \undereq{\eref{17''}} \bigg( F(X_*) - Y \bigg)^T $, то есть $ F(X_*) - Y = \On $ \\
+	Значит, $ F(X_*) = Y $ и $ Y \in F(S) $
+\end{proof}
+
+\begin{definition}
+	$ \Lambda \sub \R^n $ -- открытое, $ \qquad M : \Lambda \to \R^n $ \\
+	Будем говорить, что $ M $ -- открытое отображение, если
+	$$ \forall \underset{\omega \text{ -- откр.}}{\omega \sub \Lambda} \quad M(\omega) \text{ открытое} $$
+	(то есть, открытые отображения переводятся в открытые)
+\end{definition}
+
+Приведём определение непрерывного отображения, которое используется в топологии (частный его случай для евклидова пространства):
+\begin{definition}\label{def:1}
+	$ \Lambda \sub \R^n $ -- открытое, $ \qquad M : \Lambda \to \R^n $ \\
+	$ M $ непрерывно, если прообраз любого открытого множества открыт
+\end{definition}
+
+\begin{note}
+	Пустое множество открыто. Если прообраза у какого-то множества нет, то считаем, что прообраз пуст (а значит, открыт)
+\end{note}
+
+\begin{definition}[из второго семестра]\label{def:2}
+	$ M : \Lambda \to \R^n $ непрерывно, если оно непрерывно в каждой точке $ \Lambda $, то есть
+	$$ \forall X_0 \in \Lambda \quad \exist \liml{X \to X_0} M(X) = M(X_0) $$
+	То есть, в терминах шаров,
+	$$ \forall X_0 \in \Lambda \quad \forall \veps > 0 \quad \exist \delta > 0 : \forall X \in B_\delta(X_0) \setminus \set{X_0} \quad M(X_0) \in B_\veps \bigg( M(X_0) \bigg) $$
+	То есть,
+	$$ \forall X_0 \in \Lambda \quad \forall \veps > 0 \quad \exist \delta > 0 : M \bigg( B_\delta(X_0) \bigg) \sub B_\veps \bigg( M(X_0) \bigg) $$
+\end{definition}
+
+\begin{statement}
+	Приведённое определение непрерывности эквивалентно определению непрерывности, приведённому во втором семестре
+\end{statement}
+
+\begin{iproof}
+	\item опр. \ref{def:2} $ \implies $ опр. \ref{def:1} \\
+	Возьмём $ V \sub \Lambda : U = M(V) $ открыто \\
+	Возьмём $ X_0 \in V $. Тогда $ M(X_0) \in U $ \\
+	Т. к. $ U $ открыто, $ M(X_0) $ содержится в нём вместе с каким-то шаром:
+	$$ \exist \veps > 0 : B_\veps \bigg( M(X_0) \bigg) \in U $$
+	По определению \ref{def:2},
+	$$ \exist \delta > 0 : M \bigg( B_\delta(X_0) \bigg) \sub B_\veps \bigg( M(X_0) \bigg) $$
+	То есть, $ B_\delta(X_0) \sub V $
+	\item опр. \ref{def:1} $ \implies $ опр. \ref{def:2} \\
+	Возьмём $ X_0 \in \Lambda $ и $ \veps > 0 $ \\
+	Обозначим $ U = B_\veps \bigg( M(X_0) \bigg) $ \\
+	При этом, $ X_0 \in M^{-1}(U) $ \\
+	По определению \ref{def:1}, $ M^{-1}(U) $ открыто, то есть
+	$$ \exist \delta : B_\delta(X_0) \sub M^{-1}(U) \bdefeq{U} M^{-1} \bigg( B_\veps \big( M(X_0) \big) \bigg) $$
+	Применим $ M $:
+	$$ M \bigg( B_\delta(X_0) \bigg) \sub B_\veps \bigg( M(X_0) \bigg) $$
+	В силу произвольности $ \veps $, это и есть определение \ref{def:2}
+\end{iproof}
+
+\begin{theorem}[об обратном отображении]
+	$ E \sub \R^{n \ge 2}, \qquad E $ открыто, $ \qquad X_0 \in E, \qquad F : E \to \R^1 $ \\
+	$ F \in \Cont[1]E $, т. е. все координатные функции $ \in \mc{C}^{1}, \qquad Y_0 = F(X_0), \qquad \mc{D}F(X_0) $ обратима
+	$$ \implies \exist U \text{ -- окрестность } X_0, V \text{ -- окрестность } Y_0 :
+	\begin{cases}
+		F\clamp{U} \text{ обратимо} \\
+		F(U) = V \\
+		\Phi = \bigg( F\clamp{U} \bigg)^{-1} \implies \Phi \in \Cont[1]{V}
+	\end{cases} $$
+\end{theorem}
+
+\begin{proof}[продолжение]
+	\hfill
+	\begin{enumerate}
+		\item Определили $ U \define B_r(X_0) $
+		\item Доказали инъективность $ F\clamp{U} $
+		\item Применяем лемму
+		\item Докажем, что $ F $ -- открытое отображение:
+		\begin{itemize}
+			\item По условию, $ V = F(U) $. Докажем, что $ V $ -- открытое множество: \\
+			Возьмём $ Y_1 \in F(U) $. Тогда $ \exist X_1 \in U : F(X_1) = Y_1 $ \\
+			Возьмём $ 0 < \rho < r - \norm{X_1 - X_0} $ \\
+			Пусть $ S \define B_{\rho}(X_1) $ \\
+			Тогда, по шагу 3,
+			$$ B_{\lambda\rho}(Y_1) \sub F \bigg( B_\rho(X_1) \bigg) \sub V = F(U) $$
+			Это и есть определение открытого множества
+			$$ \implies V \text{ -- откр.} $$
+			\item Возьмём $ \omega \in U $ -- открытое. Нужно доказать, что $ F(\omega) $ открыто: \\
+			Возьмём $ Y_2 \in F(\omega) $ \\
+			Тогда $ \exist X_2 : F(X_2) = Y_2 $ \\
+			Поскольку $ X_2 \in \omega $,
+			$$ \exist \rho_1 > 0 : B_{\rho_1}(X_2) \sub \omega \sub U $$
+			Снова применяем шаг 3:
+			$$ B_{\lambda\rho_1}(Y_2) \sub F \bigg( B_{\rho_1}(X_2) \bigg) \sub F(\omega) $$
+			Получили, что некоторый открытый шар полностью содержится в $ F(\omega) $. Это и есть то, что требовалось доказать
+		\end{itemize}
+		\item Непрерывность обратного \\
+		На втором шаге мы выяснили, что $ F\clamp{U} $ -- биекция. Для любой биекции можно определить обратное отображение:
+		$$ \exist \Phi : V \to \R^n :
+		\begin{cases}
+			\Phi(V) = U \\
+			F \bigg( \Phi(Y) \bigg) = Y \quad \forall Y \in V \\
+			\Phi \bigg( F(X) \bigg) = X \quad \forall X \in V
+		\end{cases} $$
+		Проверим, что $ \Phi \in \Cont{V} $: \\
+		По определению \ref{def:1}, нужно доказать, что $ \forall \omega \sub U $ -- откр. $ \quad $ прообраз $ \omega $ открыт \\
+		Напишем определение прообраза $ \omega $ при $ \Phi $:
+		$$ \omega^{-1} = \set{ Y \in V : \Phi(Y) \in \omega } $$
+		Если $ F $ -- биекция, то и $ \Phi $ -- биекция:
+		$$ \Phi(Y) \in \omega \underiff{\text{биективность } \Phi} F \bigg( \Phi(Y) \bigg) \in F(\omega) \iff Y \in F(\omega) $$
+		Теперь можно переписать определение прообраза:
+		$$ \omega^{-1} = \set{Y : Y \in F(\omega)} $$
+		По шагу 4, $ F(\omega) $ открыто (как образ открытого при открытом отображении)
+		\item $ \Phi $ дифференцируема в $ Y \quad \forall Y \in V $ \\
+		Зафиксируем $ K $ такое, что $ Y + K \in V, \qquad K \ne \On $ \\
+		Обозначим $ \Phi(Y) \define X, \qquad \Phi(Y + K) \define X + H $ \\
+		Это эквивалентно тому, что $ Y = F(X), \qquad Y + K = F(X + H) $
+		\begin{equ}{21'}
+			K = Y + K - Y = F(X + H) - F(X)
+		\end{equ}
+		На основании шага 5,
+		$$ K \underarr{H \to \On} \On, \qquad H \underarr{K \to \On} \On $$
+		Также, по соотношению (20) из шага 2, $ \norm{F(X + H) - F(X)} \ge 2\lambda\norm{H} $, то есть
+		\begin{equ}{20}
+			\norm{K} \ge 2\lambda\norm{H}
+		\end{equ}
+		\begin{remind}
+			По условию, $ \mc{D}F(X) $ обратима и
+			\begin{equ}{19'}
+				\norm{ \bigg( \mc{D}F(X) \bigg)^{-1}} \le \frac1{2\lambda}
+			\end{equ}
+		\end{remind}
+		(это мы выяснили в лемме, при доказательстве соотношения \eref{19}) \\
+		Обозначим $ B \define \bigg( \mc{D}F(X) \bigg)^{-1} $
+		\begin{equ}{21}
+			K = \eref{21'} = \mc{D}F(X)H + t(H)
+		\end{equ}
+		$$ \text{где } \frac1{\norm{H}}t(H) \underarr{H \to \On} \On $$
+		Домножим \eref{21} на $ B $ слева:
+		$$ BK = B \bigg( \mc{D}F(X)H \bigg) + Bt(H) \bdefeq{B} IH + Bt(H) = H + Bt(H) $$
+		\begin{equ}{24}
+			\implies BK - Bt(H) = H \undereq{\eref{21'}} \Phi(Y + K) - \Phi(Y)
+		\end{equ}В силу биективности $ F $ и $ \Phi $,
+		$$ K \ne \On \iff H \ne \On $$
+		\begin{equ}{24'}
+			\text{Значит, можно делить на } \norm{H}
+		\end{equ}
+		\begin{equ}{25}
+			\frac{\norm{Bt(H)}_n}{\norm{K}_n} \le \frac{\norm{B} \cdot \norm{t(H)}_n}{\norm{K}_n} \underset{\eref{19'}}\le \frac1{2\lambda} \cdot \frac{\norm{t(H)}_n}{\norm{K}_n} \undereq{\eref{24'}} \frac1{2\lambda} \cdot \frac{\norm{t(H)}}{\norm{H}} \cdot \frac{\norm{H}}{\norm{K}} \underset{\eref{20}}\le \frac1{4\lambda^2}\frac{\norm{t(H)}}{\norm{H}} \underarr{K \to \On} 0
+		\end{equ}
+		$$ \eref{24}, \eref{25} \implies \Phi \text{ дифф. в } Y $$
+		\begin{remind}
+			Дифф. $ \Phi $ означает, что
+			$$ \Phi(Y + K) - \Phi(Y) = \mc{D}\Phi(Y)K + r(K), \qquad \frac{\norm{r(K)}}{\norm{K}} \underarr{K \to \On} 0 $$
+			(важно, что матрица Якоби единственна)
+		\end{remind}
+		Значит, кроме дифференцируемости, мы установили, что
+		\begin{equ}{26}
+			\eref{24} \implies \mc{D}F(Y) = \bigg( \mc{D}F(X) \bigg)^{-1}, \qquad X = \Phi(Y)
+		\end{equ}
+		\item $ \Phi \in \Cont[1]{V} $ \\
+		Пользуясь формулой \eref{26}, запишем матрицу Якоби $ \Phi $ в следующем виде:
+		\begin{equ}{28}
+			\mc{D}\Phi(Y) = \bigg( \mc{D}F \big( \Phi(Y) \big) \bigg)^{-1}
+		\end{equ}
+		Из курса алгебры знаем, что обратимы только неособенные матрицы:
+		$$ \det \mc{D}F(X) \ne 0 \quad \forall X \in U $$
+		Матрица Якоби состоит из частных производных. Все они непрерывны по условию. Значит,
+		$$ \det \mc{D}F(X) \in \Cont{U} $$
+		Два последних выражения означают, что
+		\begin{equ}{29}
+			\frac1{\det\mc{D}F(X)} \in \Cont{U}
+		\end{equ}
+		В силу шага 5,
+		\begin{equ}{30}
+			\eref{29} \implies \frac1{\det\mc{D}F \bigg( \Phi(Y) \bigg)} \in \Cont{V}
+		\end{equ}
+		Алгебраические дополнения состоят из сумм и произведений частных производных в точке $ Y $. Значит, они (дополнения) непрерывны, а значит
+		$$ \eref{28}, \eref{30} \implies \mc{D}F(Y) \in \Cont{V} \iff \Phi \in \Cont[1]{V} $$
+	\end{enumerate}
+\end{proof}
+
+\section{Теорема об открытом отображении}
+
+\begin{theorem}
+	$ G \sub \R^n $ -- открыто, $ \qquad F : G \to \R^n, \qquad F \in \Cont[1]G, \qquad \det \mc{D}F(X) \ne 0 \quad \forall X \in G $ \\
+	Тогда $ F $ открыто
+\end{theorem}
+
+\begin{remark}
+	Ничего о взаимной однозначности $ F $ не говорится
+\end{remark}
+
+\begin{proof}
+	Пусть $ \omega \sub G $ -- открыто \\
+	Пусть $ S = F(\omega) $ \\
+	Нужно доказать, что $ S $ открыто \\
+	Возьмём $ \forall Y \in S $ \\
+	Поскольку $ S $ -- это образ $ \omega $,
+	$$ \exist X \in \omega : F(X) = Y \qquad (X \text{ не обязательно единственный -- берём любой)} $$
+	Поскольку $ \omega $ открыто,
+	$$ \exist r_0 > 0 : B_{r_0}(X) \sub \omega $$
+	Определим $ \lambda $ такое, что
+	$$ \norm{\bigg( \mc{D}F(X) \bigg)^{-1}} = \frac1{4\lambda} $$
+	Возьмём $ r $, такое что
+	$$ \forall X_1 \in \underbrace{B_r(X)}_{\sub G} \quad \norm{\mc{D}F(X_1) - \mc{D}F(X)} < 2\lambda $$
+	Возьмём $ 0 < \rho < \min(r, r_0) $ \\
+	Если мы проведём для $ B_\rho(X) $ рассуждения из шага 4, то получим, что
+	$$ F \bigg( B_\rho(X) \bigg) \supset B_{\lambda\rho} \bigg( F(X) \bigg) = B_{\lambda\rho}(Y) $$
+	Понятно, что $ B_\rho(X) \sub \omega $ \\
+	Таким образом, $ B_{\lambda\rho}(Y) \sub F(\omega) $ \\
+	В силу произвольности $ Y $, это означает, что $ S $ открыто
+\end{proof}
+
+\section{Теорема о неявной функции (отображении)}
+
+\begin{theorem}
+	$ \R^{n \ge 1}, \qquad \R^{m \ge 1}, \qquad \R^{n + m} $
+	$$ X = \column{x_1}{x_n} \sub \R^n, \qquad Y = \column{y_1}{y_m} \sub \R^m, \qquad Z =
+	\begin{bmatrix}
+		x_1 \\
+		\cdots \\
+		x_n \\
+		y_1 \\
+		\cdots \\
+		y_m
+	\end{bmatrix} \define
+	\begin{bmatrix}
+		X \\
+		Y
+	\end{bmatrix} \sub \R^{n + m} $$
+	$ G \sub \R^{n + m} $ -- откр., $ \qquad F : G \to \R^n, \qquad F = \column{f_1}{f_n}, \qquad F \in \Cont[1]G, \qquad Z_0 =
+	\begin{bmatrix}
+		X_0 \\
+		Y_0
+	\end{bmatrix} $
+	$$ f_j = f_j(Z) = f_j \left(
+	\begin{bmatrix}
+		X \\
+		Y
+	\end{bmatrix} \right) $$
+	Выпишем матрицу Якоби для $ Z $:
+	$$ \mc{D}F(Z_0) =
+	\begin{bmatrix}
+		f_{1x_1}'(Z_0) & ... & f_{1x_n}'(Z_0) & f_{1y_1}'(Z_0) & ... & f_{1y_m}'(Z_0) \\
+		. & . & . & . & . & . \\
+		f_{nx_1}'(Z_0) & ... & f_{nx_n}'(Z_0) & f_{ny_1}'(Z_0) & ... & f_{ny_m}'(Z_0)
+	\end{bmatrix} $$
+	Обозначим
+	$$ A \define
+	\begin{bmatrix}
+		f_{1x_1}' & ... & f_{nx_1}' \\
+		. & . & . \\
+		f_{nx_n}' & ... & f_{nx_n}'
+	\end{bmatrix}, \qquad B \define
+	\begin{pmatrix}
+		f_{1y_1}' & ... & f_{1y_m}' \\
+		. & . & . \\
+		f_{ny_1}' & ... & f_{ny_m}'
+	\end{pmatrix} $$
+	$$ \mc{D}F(Z_0) = [AB] $$
+	$ Z_0 \in G $, такая что $ F(Z_0) = \On $
+	$$ \implies \exist \underset{\text{окрестность}}{W(Y_0) \sub \R^n} \text{ и единственное отобр. } G : W \to \R^n :
+	\begin{cases}
+		g \in \Cont[1]W \\
+		g(Y_0) = X_0 \\
+		\forall Y \in W \quad
+		\begin{cases}
+			\begin{bmatrix}
+				g(Y) \\
+				Y
+			\end{bmatrix} \in G \\
+			F \left(
+			\begin{bmatrix}
+				g(Y) \\
+				Y
+			\end{bmatrix} \right) = \On
+		\end{cases}
+	\end{cases} $$
+\end{theorem}

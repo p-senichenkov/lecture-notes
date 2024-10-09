@@ -18,12 +18,12 @@
 	\end{remind}
 	$$ \mc{D}F(t_0) = \column{f_1'(t_0)}{f_n'(t_0)} $$
 	\begin{multline*}
-		\norm{\mc{D}F(t_0)} \undereq{\text{как лин. отобр.}} \sup\limits_{
+		\underset{\text{(как линейного отображения)}}{\norm{\mc{D}F(t_0)}} = \sup\limits_{
 			\begin{subarray}{c}
 				|h| \le 1 \\
 				h \in \R
 			\end{subarray}} \norm{\mc{D}F(t_0)h}_n = \sup\norm{h\mc{D}F(t_0)}_n = \sup |h| \norm{\mc{D}F(t_0)}_n = \\
-		= \norm{\mc{D}F(t_0)} = \norm{\column{f_1'(t_0)}{f_n'(t_0)}}_n
+		= \norm{\mc{D}F(t_0)}_n = \norm{\column{f_1'(t_0)}{f_n'(t_0)}}_n
 	\end{multline*}
 \end{statement}
 
@@ -123,10 +123,11 @@
 \section{Обратимые отображения}
 
 \begin{statement}
-	$ E \sub \R^{n \ge 2}, \qquad X_0 $ -- внутр. точка \\
-	$ F : E \to \R^n $ -- биекция, т. е. $ \underset{X_1, X_2 \in E}{\forall X_1 \ne X_2} \quad F(X_1) \ne F(X_2), \qquad G = F(E) $ \\
-	В силу \textit{какого-то свойства} $ F $ обратима \\
-	$ \Phi : G \to E, \qquad \Phi \bigg( F(X) \bigg) = X \quad \forall X, \qquad F \bigg( \Phi(X) \bigg) = Y \quad \forall Y \in G $ \\
+	$ E \sub \R^{n \ge 2}, \qquad X_0 $ -- внутр. точка, $ \qquad F : E \to \R^n $ -- биекция, $ \qquad G = F(E) $
+	\begin{remark}
+		$ F $ -- биекция $ \iff F $ обратима
+	\end{remark}
+	$ \Phi : G \to E, \qquad \Phi \bigg( F(X) \bigg) = X \quad \forall X, \qquad F \bigg( \Phi(X) \bigg) = Y \quad \forall Y \in G \qquad $ (т. е. $ \Phi = F^{-1} $) \\
 	$ F $ дифференцируемо в $ X_0, \qquad Y_0 = F(X_0), \qquad \Phi $ дифференцируемо в $ Y_0 $ \\
 	Обозначим $ I(X) = X \quad \forall X \in E $ -- тождественное отображение
 	\begin{remark}
@@ -140,19 +141,15 @@
 	Получили необходимое условие для обратных отображений
 \end{statement}
 
-\begin{theorem}[об обратимом отображении]
+\begin{theorem}[об обратном отображении]
 	$ E \sub \R^{n \ge 2}, \qquad E $ открыто, $ \qquad X_0 \in E, \qquad F : E \to \R^1 $ \\
-	$ F \in \Cont[1]E $, т. е. все координатные функции $ \in \mc{C}^{1} $ \\
-	$ Y_0 = F(X), \qquad \mc{D}F(X_0) $ обратима
-	\begin{equ}{18}
-		\implies \exist \underset{U, V \text{ открыты}}{U \sub E, V} :
-		\begin{cases}
-			X_0 \in U, Y_0 \in V \\
-			F\clamp{U} \text{ обратимо} \\
-			F(U) = V \\
-			\Phi = \bigg( F\clamp{U} \bigg)^{-1} \implies \Phi \in \Cont[1]{V}
-		\end{cases}
-	\end{equ}
+	$ F \in \Cont[1]E $, т. е. все координатные функции $ \in \mc{C}^{1}, \qquad Y_0 = F(X_0), \qquad \mc{D}F(X_0) $ обратима
+	$$ \implies \exist U \text{ -- окрестность } X_0, V \text{ -- окрестность } Y_0 :
+	\begin{cases}
+		F\clamp{U} \text{ обратимо} \\
+		F(U) = V \\
+		\Phi = \bigg( F\clamp{U} \bigg)^{-1} \implies \Phi \in \Cont[1]{V}
+	\end{cases} $$
 \end{theorem}
 
 \begin{proof}
@@ -181,17 +178,23 @@
 				j = 1, ..., n
 			\end{subarray}} \bigg( f_{ix_j}'(X) - f_{ix_j}'(X_0) \bigg)^2 \bigg\rgroup^{\frac12} $$
 		$$ \underimp{F \in \mc{C}^1} \norm{\mc{D}F(X) - \mc{D}F(X_0)} \underarr{X \to X_0} 0 $$
-		$$ \implies \exist r > 0 : \forall X \in B_r(X_0) \quad \norm{\mc{D}F(X) - A} < 2\lambda $$
+		\begin{equ}{25}
+			\implies \exist r > 0 : \forall X \in B_r(X_0) \quad \norm{\mc{D}F(X) - A} < 2\lambda
+		\end{equ}
 		Положим $ U \define B_r(X_0) $
 		\item Инъективность $ F $ \\
 		Далее будем рассматривать $ F $ только на $ U $ (т. е. будем писать $ F \define F\clamp{U} $)
 		\begin{remark}[о выпуклости шара]
 			$ X_1, X_2 \in U, \qquad 0 < t < 1 $
 			$$ \implies tX_1 + (1 - t)X_2 \in U $$
+			(см. рис. \ref{fig:1})
+		\end{remark}
+		\begin{remark}
+			Используем наши обозначения (т. е. $ U = B_r(X_0) $)
 		\end{remark}
 		\begin{proof}
 			\begin{multline*}
-				\norm{tx_1 + (1 - t)X_2 - x_0} = \norm{t(X_1 - X_0) + (1 - t)(X_2 - x_0)}_n \trile \\
+				\norm{tX_1 + (1 - t)X_2 - X_0} = \norm{t(X_1 - X_0) + (1 - t)(X_2 - X_0)} \trile \\
 				\le \norm{t(X_1 - X_0)} + \norm{(1 - t)(X_2 - X_0)} < t \cdot r + (1 - t) \cdot r = r
 			\end{multline*}
 		\end{proof}
@@ -208,7 +211,7 @@
 		Возьмём $ t \in [0, 1] $ и $ P(t) \define F(X + tH) - tAH $ \\
 		Это вектор-функция $ P : [0, 1] \to \R^n $
 		\begin{equ}{26}
-			\mc{D}P(t) = \mc{D} \bigg( F(X + tH) \bigg) - \mc{D}(tAH)
+			\mc{D}P(t) \bdefeq{P} \mc{D} \bigg( F(X + tH) \bigg) - \mc{D}(tAH)
 		\end{equ}
 		Положим $ q(t) \define X + tH $ \\
 		Теперь можно переписать \eref{26}:
@@ -216,7 +219,7 @@
 			\mc{D}P(t) = \mc{D} \bigg( F \big( q(t) \big) \bigg) - \mc{D}(tAH)
 		\end{equ}
 		\begin{remind}
-			Мы сегодня уже доказали, что для $ Y \in \R^n $ и отображения $ t \mapsto tY $, $ \mc{D}(tY) = Y $
+			Мы уже доказали, что для $ Y \in \R^n $ и отображения $ t \mapsto tY $ выполнено $ \mc{D}(tY) = Y $
 		\end{remind}
 		$$ \mc{D}(tAH) = AH, \qquad \mc{D}q(t) = H $$
 		$$ \mc{D}F \bigg( q(t) \bigg) = \mc{D}F \bigg( q(t) \bigg)\mc{D}q(t) = \mc{D}F(X + tH)H $$
@@ -231,19 +234,39 @@
 			\implies \norm{AH} \ge 4\lambda\norm{H}
 		\end{multline}
 		\begin{equ}{210}
-			P(1) - P(0) \bydef F(X + H) - AH - F(X) = F(X + H) - F(X) - AH
+			P(1) - P(0) \bdefeq{P} F(X + H) - AH - F(X) = F(X + H) - F(X) - AH
 		\end{equ}
 		Применим к $ P $ теорему Лагранжа для вектор-функции:
 		\begin{multline}\lbl{211}
-			\exist c \in [0, 1] : \norm{P(1) - P(0)} \le \norm{\mc{D}P(c)} \cdot = \norm{\mc{D}P(c)} \underset{\eref{28}}= \norm{ \bigg( \mc{D}F(X + cH) - A \bigg)H} \le \\
-			\le \norm{\mc{D}F\underbrace{(X + tH)}_{\in U} - A}\norm{H} < 2\lambda \norm{H} \bydef[\le] \frac1{\norm{AH}}
+			\exist c \in [0, 1] : \norm{P(1) - P(0)} \le \norm{\mc{D}P(c)} \cdot (1 - 0) = \norm{\mc{D}P(c)} \underset{\eref{28}}= \norm{ \bigg( \mc{D}F(X + cH) - A \bigg)H} \le \\
+			\le \norm{\mc{D}F\underbrace{(X + cH)}_{\in U} - A}\norm{H} \underset{\eref{25}}< 2\lambda \norm{H} \underset{\eref{29}}\le \half\norm{AH}
 		\end{multline}
 		\begin{equ}{213}
-			\eref{210}, \eref{211} \implies \norm{F(X + H) - F(X) - AH} < \half\norm{AH}
+			\norm{F(X + H) - F(X) - AH} \undereq{\eref{210}} \norm{P(1) - P(0)} \underset{\eref{211}}< \half\norm{AH}
 		\end{equ}
 		\begin{multline*}
-			\eref{213} \implies \norm{F(X + H) - F(X)} = \norm{AH + \bigg( F(X + H) - F(X) - AH \bigg)} \ge \\
-			\ge \norm{AH} - \norm{F(X + H) - F(X) - AH} > \norm{AH} - \half\norm{AH} = \half\norm{AH} \underset{\eref{29}}\ge 2\lambda \norm{H} > 0
+			\norm{F(X + H) - F(X)} = \norm{AH + \bigg( F(X + H) - F(X) - AH \bigg)} \ge \\
+			\ge \norm{AH} - \norm{F(X + H) - F(X) - AH} \underset{\eref{213}}> \norm{AH} - \half\norm{AH} = \half\norm{AH} \underset{\eref{29}}\ge 2\lambda \norm{H} > 0
 		\end{multline*}
 	\end{enumerate}
 \end{proof}
+
+\begin{figure}[!ht]
+	\begin{tikzpicture}[>=Stealth]
+		\draw[->, thin, gray] (-2.3, 0) -- (2.3, 0) node[right]{$ x $};
+		\draw[->, thin, gray] (0, -2.3) -- (0, 2.3) node[above]{$ y $};
+
+		\draw (0, 0) circle [radius=2];
+
+		\draw[->] (0, 0) -- +(45:1.5) node[right]{$ X_1 $};
+		\draw[->] (0, 0) -- +(150:1.8) node[below]{$ X_2 $};
+
+		\path[name path=X_1] (0, 0) -- +(45:1.5);
+		\path[name path=circ] (0, 0) circle [radius=1];
+
+		\draw[->, blue, thick, name intersections={of=X_1 and circ}] (0, 0) -- (intersection-1) node[anchor=north west]{$ tX_1 $};
+		\draw[->, blue, thick, name intersections={of=X_1 and circ}] (intersection-1) -- +(150:0.6) node[above]{$ (1 - t)X_2 $};
+	\end{tikzpicture}
+	\caption{Выпуклость шара}
+	\label{fig:1}
+\end{figure}

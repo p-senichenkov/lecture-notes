@@ -26,6 +26,8 @@
 \usepackage{multicol}
 \usepackage[dvipsnames]{xcolor}
 
+\usepackage{braket}
+
 % typeset pseudocode (algo2e option -- change env. name algorithm to algorithm2e)
 \usepackage[algo2e]{algorithm2e}
 
@@ -58,8 +60,8 @@
 % multiple images in one figure
 \usepackage{subcaption}
 
-% for \set
-\usepackage{braket}
+% figure, wrapped in text
+\usepackage{wrapfig}
 
 % fractions like 2/a
 \usepackage{faktor}
@@ -110,15 +112,21 @@
 % partition diameter
 \DeclareMathOperator{\diam}{d}
 
-%%      numerating
-% shorthand for labeled equation
-\newenvironment{equ}[1]{\begin{equation} \label{eq:#1}}{\end{equation}}
+% sign
+\DeclareMathOperator{\sign}{sign}
 
+%%      numerating
+% labeled equation
+\newenvironment{equ}[1]{\begin{equation} \label{eq:#1}}{\end{equation}}
+% multiline equation with *every* line numbered
 \newenvironment{mequ}[1][\empheqlbrace]
 {
     \setkeys{EmphEqEnv}{align} \setkeys{EmphEqOpt}{left={#1}} \EmphEqMainEnv
 }
 {\endEmphEqMainEnv}
+
+% variants
+\newenvironment{vars}{\left[\begin{array}{l}}{\end{array}\right.}
 
 %%      KaTeX
 \newcommand\sub{\ensuremath\subset}
@@ -137,16 +145,31 @@
 \let\ol\overline
 \let\vawe\widetilde
 \let\hat\widehat
+% long \vec (DEPRECATED)
+\newcommand*\vect[1]{\overrightarrow{#1}}
+% long \vec
+\let\vec\overrightarrow
+
+\let\mc\mathcal
+
+% partial derivative
+\newcommand*\pder[2]{\ensuremath{\frac{\partial {#1}}{\partial {#2}}}}
 
 % arrows with text below `em
 \newcommand\underarr[1]{\ensuremath\xrightarrow[#1]{}}
 \newcommand\underimp[1]{\ensuremath\xRightarrow[#1]{}}
+\newcommand\underiff[1]{\ensuremath\xLeftrightarrow[#1]{}}
 
 % arrows with text above `em
 \newcommand\overarr[1]{\ensuremath\xrightarrow{#1}}
 
 % not-arrows with text below `em
 \newcommand\undereq[1]{\ensuremath\xlongequal[#1]{}}
+
+% special cases
+\newcommand\limarr[2]{\ensuremath\underarr{{#1} \to {#2}}}
+\newcommand\infarr[1]{\ensuremath\limarr{#1}\infty}
+\newcommand\zarr[1]{\ensuremath\limarr{#1}0}
 
 % labels and references
 \newcommand*\lbl[1]{\label{eq:#1}}
@@ -230,12 +253,6 @@
 % continuous function
 \newcommand\Cont[2][]{\ensuremath{\mathcal{C}^{#1} \bigg( {#2} \bigg) }}
 
-% long \vec (DEPRECATED)
-\newcommand*\vect[1]{\overrightarrow{#1}}
-
-% long \vec
-\let\vec\overrightarrow
-
 % norm in R^n
 \newcommand\norm[1]{\ensuremath{\left\|{#1}\right\|}}
 
@@ -273,10 +290,39 @@
 
 \newcommand\TODO[1]{\textcolor{red}{{\Huge TODO:} {#1}} \message{LaTeX Warning: TODO on line \the\inputlineno}}
 
-\let\mc\mathcal
+% "not important"
+\newcommand\nimp[1][\text{если не оговорено иное}]{\textcolor{gray}{#1}}
 
 %%     \section
+% "math string"
 \newcommand\mstring[1]{\texorpdfstring{$ {#1} $}{#1}}
+% \\
+\newcommand\n{\texorpdfstring\\{}}
+
+%% set package shorthands
+\let\tset\set
+\let\set\Set
+
+\let\tbraket\braket
+\let\braket\Braket
+
+%%     Basov
+% Basov's "antlers" -- two cases:
+\newcommand\commonantlers[2]{\vspace{-2em}
+\begin{figure}[h]
+    	\centering
+        \begin{tikzpicture}
+        	\draw[->, name path=antler-1] (0, 0) -- (2, -0.5);
+            \path[name path=vert-1] (1, -0.5) -- (1, 0);
+            \node[name intersections={of=antler-1 and vert-1}] at (intersection-1)[above]{#2};
+
+            \draw[->, name path=antler-2] (0, 0) -- (-2, -0.5);
+            \path[name path=vert-2] (-1, -0.5) -- (-1, 0);
+            \node[name intersections={of=antler-2 and vert-2}] at (intersection-1)[above]{#1};
+        \end{tikzpicture}
+    \end{figure}\vspace{-2em}}
+\newcommand\antlers{\commonantlers{}{}}
+\newcommand\antlersimp{\commonantlers{}{\textcolor{red}{!!!}}}
 
 %%     theorems
 \usepackage{thmtools, thm-restate}
@@ -323,6 +369,15 @@
 
 \declaretheoremstyle[
     headfont=\bfseries\sffamily\color{RawSienna!70!black}, bodyfont=\normalfont,
+    mdframed={
+        linewidth=2pt,
+        rightline=false, topline=false, bottomline=false,
+        linecolor=RawSienna, backgroundcolor=RawSienna!2.5
+    }
+]{thmredline}
+
+\declaretheoremstyle[
+    headfont=\bfseries\sffamily\color{RawSienna!70!black}, bodyfont=\normalfont,
     numbered=no,
     mdframed={
         linewidth=2pt,
@@ -339,6 +394,7 @@
 \declaretheorem[style=thmbluebox, numbered=no, name=Свойство]{property}
 \declaretheorem[style=thmbluebox, numbered=no, name=Свойства]{properties}
 \declaretheorem[style=thmbluebox, numbered=no, name=Алгоритм]{algorithm}
+\declaretheorem[style=thmbluebox, name=Вопрос]{quest}
 
 \declaretheorem[style=thmredbox, name=Теорема]{theorem}
 \declaretheorem[style=thmredbox, name=Лемма]{lemma}
@@ -348,8 +404,16 @@
 \declaretheorem[style=thmredbox, numbered=no, name=Следствие]{implication}
 \declaretheorem[style=thmredbox, numbered=no, name=Вывод]{corollary}
 
+\declaretheorem[style=thmredline, numbered=no, name=Другая формулировка]{restatebase}
+
+\newenvironment{restate}{\vspace{-.5em}\begin{restatebase}}{\end{restatebase}}
+
 \declaretheorem[style=thmblueline, numbered=no, name=Замечание]{remark}
 \declaretheorem[style=thmblueline, numbered=no, name=Примечание]{note}
+
+% Basov's control point. It's green, because it's commonly used inside of algorithm, which is blue
+\declaretheorem[style=thmgreenbox, numbered=no, name=Контрольная точка]{control}
+\declaretheorem[style=thmgreenbox, numbered=no, name=Ответ]{answerbase}
 
 % numbered theorems
 \newenvironment{props}[1][ ]{\begin{properties}[{#1}]\hfill\begin{enumerate}}{\end{enumerate}\end{properties}}
@@ -362,6 +426,8 @@
 \declaretheorem[style=thmproofbox, name=Доказательство]{replacementproof}
 % proof, moved 0.5em up
 \renewenvironment{proof}{\vspace{-.5em}\begin{replacementproof}}{\end{replacementproof}}
+
+\newenvironment{answer}{\vspace{-.5em}\begin{answerbase}}{\end{answerbase}}
 
 % no-style theorems
 \newtheorem*{notation}{Обозначение}

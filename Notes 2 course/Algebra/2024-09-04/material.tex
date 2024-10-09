@@ -1,30 +1,38 @@
 \chapter{Жорданова форма оператора}
 
-$ V $ -- векторное пространство, $ \mathcal{A} : V \to V $
-$$ \mathcal{A} \overarr{e_1, ..., e_n} A, \qquad \mathcal{A} \overarr{e_1', ..., e_n'} A' $$
-Жорданова клетка:
-$$ Jr(\lambda) =
-\begin{pmatrix}
-	\lambda & 0 & 0 & . \\
-	1 & \lambda & 0 & . \\
-	0 & 1 & \lambda & . \\
-	. & . & . & .
-\end{pmatrix} $$
-Например,
-$$
-\begin{pmatrix}
-	5 & 0 & 0 \\
-	1 & 5 & 0 \\
-	0 & 1 & 5
-\end{pmatrix} $$
-Жорданова форма -- матрица, у которой на главной диагонали жордановы клетки
-$$
-\begin{pmatrix}
-	Jr(\lambda_1) & 0 & 0 & . \\
-	0 & Jr(\lambda_2) & 0 & . \\
-	0 & 0 & Jr(\lambda_3) & . \\
-	. & . & . & .
-\end{pmatrix} $$
+\section{Определения}
+
+\begin{definition}
+	$ V $ -- векторное пространство, $ \mathcal{A} : V \to V $
+	Жорданова клетка:
+	$$ Jr(\lambda) =
+	\begin{pmatrix}
+		\lambda & 0 & 0 & . \\
+		1 & \lambda & 0 & . \\
+		0 & 1 & \lambda & . \\
+		. & . & . & .
+	\end{pmatrix} $$
+\end{definition}
+
+\begin{eg}
+	$$
+	\begin{pmatrix}
+		5 & 0 & 0 \\
+		1 & 5 & 0 \\
+		0 & 1 & 5
+	\end{pmatrix} $$
+\end{eg}
+
+\begin{definition}
+	Жорданова форма -- матрица, у которой на главной диагонали жордановы клетки
+	$$
+	\begin{pmatrix}
+		Jr(\lambda_1) & 0 & 0 & . \\
+		0 & Jr(\lambda_2) & 0 & . \\
+		0 & 0 & Jr(\lambda_3) & . \\
+		. & . & . & .
+	\end{pmatrix} $$
+\end{definition}
 
 \subsection{Напоминание: собственные числа}
 
@@ -84,8 +92,8 @@ $$
 		\begin{Bmatrix}
 			\mathcal{A}u = \lambda u \\
 			\mathcal{A}v = \lambda v
-		\end{Bmatrix} \implies \mathcal{A}(u + v) \underset{\text{линейность}}= \mathcal{A}u + \mathcal{A}v = \lambda u + \lambda v = \lambda (u + v) \implies u + v \in V_\lambda $
-		\item $ u \in V_\lambda, k \in K \implies \mathcal{A}(ku) = k \mathcal{A}(u) = k \lambda u = \lambda(ku) \implies ku \in V_\lambda $
+		\end{Bmatrix} \implies \mathcal{A}(u + v) \undereq{\text{линейность}} \mathcal{A}u + \mathcal{A}v = \lambda u + \lambda v = \lambda (u + v) \implies u + v \in V_\lambda $
+		\item $ u \in V_\lambda, k \in K \implies \mathcal{A}(ku) \undereq{\text{линейность}} k \mathcal{A}(u) = k \lambda u = \lambda(ku) \implies ku \in V_\lambda $
 	\end{itemize}
 	\item Инвариантность
 	$$ u \in V_\lambda \implies \mathcal{A}u = \lambda u \in V_\lambda $$
@@ -104,11 +112,13 @@ $$
 		Пусть $ U_1 + ... + U_{k - 1} + U_k = 0, \qquad U_i \in V_{\lambda_i} $
 		\begin{multline*}
 			0 = \mathcal{A}(\underbrace{U_1 + ... + U_{k - 1} + U_k}_{= 0 }) - \lambda_k(\underbrace{U_1 + ... + U_{k - 1} + U_k}_{= 0 }) = \\
-			= \lambda_1U_1 + ... + \lambda_{k - 1}U_{k - 1} + \lambda_kU_k - \lambda_kU_1 - ... - \lambda_kU_{k - 1} - \lambda_kU_k = \underbrace{(\lambda_1 - \lambda_k)}_{= 0}U_1 + ... + \underbrace{(\lambda_{k - 1} - \lambda_k)}_{= 0}U_{k - 1}
+			= \lambda_1U_1 + ... + \lambda_{k - 1}U_{k - 1} + \cancel{\lambda_kU_k} - \lambda_kU_1 - ... - \lambda_kU_{k - 1} - \cancel{\lambda_kU_k} = \underbrace{(\lambda_1 - \lambda_k)}_{\ne 0}U_1 + ... + \underbrace{(\lambda_{k - 1} - \lambda_k)}_{\ne 0}U_{k - 1}
 		\end{multline*}
-		$$ (\lambda_1 - \lambda_k)U_1 \in V_{\lambda_1}, \widedots[5em], (\lambda_{k - 1} - \lambda_k)U_{k - 1} \in V_{\lambda_{k - 1}} $$
-		$ V_{\lambda_1} + ... + V_{\lambda_{k - 1}} $ -- прямая
-		$$ \implies (\lambda_1 - \lambda_k)U_1 = ... = (\lambda_{k - 1} - \lambda_k)U_{k - 1} = 0 \implies U_1 = ... = U_{k - 1} = 0 \implies U_k = 0 $$
+		(т. к. по условию собственные числа различны)
+		$$ (\lambda_1 - \lambda_k)U_1 \in V_{\lambda_1}, \quad \widedots[5em], \quad (\lambda_{k - 1} - \lambda_k)U_{k - 1} \in V_{\lambda_{k - 1}} $$
+		По \textbf{индукционному предположению}, $ V_{\lambda_1} \oplus ... \oplus V_{\lambda_{k - 1}} $ \\
+		А мы представили 0 в виде суммы. Значит, все слагаемые нулевые:
+		$$ (\lambda_1 - \lambda_k)U_1 = ... = (\lambda_{k - 1} - \lambda_k)U_{k - 1} = 0 \implies U_1 = ... = U_{k - 1} = 0 \implies U_k = 0 $$
 	\end{itemize}
 \end{proof}
 
@@ -151,20 +161,21 @@ $$
 	\end{pmatrix} $ \\
 	$ \iff $ для некоторого базиса $ e_1, ..., e_n $ выполнено
 	$$ \mathcal{A}e_i = 0 e_1 + ... + a_ie_i + ... + 0 e_n = a_ie_i $$
-	$ \iff $ (\rom1') сущ. базис из с. в. \\
-	Докажем, что (\rom1) $ \iff $ (\rom1'): \\
+	$ \iff $ (\rom1') существует базис из с. в. \\
+	Докажем, что (\rom1') $ \iff $ (\rom2): \\
 	Пусть $ U = V_{\lambda_1} + ... + V_{\lambda_k} $
 	$$ n \define \dim V, \qquad d_i \define \dim V_{\lambda_i} $$
 	\begin{itemize}
 		\item (\rom2) $ \implies $ (\rom1') \\
-		Докажем, что $ d_1 + ... + d_k = n $
-		$$ V_{\lambda_1} + V_{\lambda_k} \text{ прямая } \implies \dim U = n \implies U = V $$
-		$$ V_{\lambda_1} + V_{\lambda_k} \text{ прямая } \implies \text{ объединение базисов является базисом } U = V $$
+		Имеем $ d_1 + ... + d_k = n $
+		$$ V_{\lambda_1} + V_{\lambda_k} \text{ прямая } \implies \dim U = n \underimp{U \text{ -- подпр-во } V} U = V $$
+		$$ V_{\lambda_1} + V_{\lambda_k} \text{ прямая } \implies \text{ объединение базисов } V_\lambda \text{ является базисом } U = V $$
 		Эти базисы состоят из с. в. \\
 		Объединение базисов состоит из с. в. \\
 		Это базис $ V $
 		\item (\rom1') $ \implies $ (\rom2) \\
-		Сущетсвует базис $ V $ из с. в.
+		Сущетсвует базис $ V $ из с. в. \\
+		Они распределяются по $ V_\lambda $ (но не обязательно для каждого $ V_\lambda $ представлен весь его базис):
 		$$ \underbrace{e_1^{(1)}, ..., e_{t_1}^{(1)}}_{
 			\begin{subarray}{c}
 				\text{соотв. } \lambda_1 \\
@@ -174,11 +185,13 @@ $$
 				\text{соотв. } \lambda_2 \\
 				\in V_{\lambda_2}
 			\end{subarray}}, \widedots $$
-		$$ e_1^{(1)}, ..., e_{t_1}^{(1)} \text{ ЛНЗ } \implies t_1 \le d_1 $$
-		$$ \widedots[8em] \implies t_2 \le d_2 $$
-		$$ \widedots $$
-		$$ d_1 + d_2 + ... + d_k \ge n $$
-		$$ n \ge \dim U = d_1 + ... + d_k $$
+		$$ \underset{\text{(т. к. они лежат в большом-большом базисе)}}{e_1^{(i)}, ..., e_{t_i}^{(i)} \text{ ЛНЗ }} \implies t_i \le d_i \quad \forall i $$
+		Сложим все эти неравенства:
+		$$
+		\begin{rcases}
+			d_1 + d_2 + ... + d_k \ge t_1 + ... + t_k = n \\
+			n \ge \dim U \undereq{U = V_{\lambda_1} \oplus ... \oplus V_{\lambda_k}} d_1 + ... + d_k
+		\end{rcases} \implies n = d_1 + ... + d_k $$
 	\end{itemize}
 \end{proof}
 
@@ -189,7 +202,7 @@ $$
 
 \begin{proof}
 	$ \dim V_{\lambda_i} \ge 1 $
-	$$ n \ge \dim(V_{\lambda_1} + ... + V_{\lambda_k}) \underset{\text{пр. сумма}}= \dim V_{\lambda_1} + ... + \dim V_{\lambda_k} \ge n $$
+	$$ n \ge \dim(V_{\lambda_1} + ... + V_{\lambda_k}) \undereq{\text{пр. сумма}} \dim V_{\lambda_1} + ... + \dim V_{\lambda_k} \ge n $$
 	Значит, достигается равенство
 \end{proof}
 

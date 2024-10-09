@@ -7,8 +7,8 @@ $$ \sum_{i = 1}^n |\vect{f}(t_i) -\vect{f}(t_{i - 1})| \text{ -- интегра�
 Длина кривой -- предел интегральных сумм
 
 \begin{definition}
-	$$ \int \define \liml{\max{t_i - t_{i - 1}} \to 0} \sum_{i = 1}^n |\vect{f}(t_i) - \vect{f}(t_{i - 1}) $$
-	$$ \int \define \sup \sum_{i = 1}^n |\vect{f}(t_i) - \vect{f}(t_{i - 1}) $$
+	$$ \int \define \liml{\max\set{t_i - t_{i - 1}} \to 0} \sum_{i = 1}^n |\vect{f}(t_i) - \vect{f}(t_{i - 1})| $$
+	$$ \int \define \sup \sum_{i = 1}^n |\vect{f}(t_i) - \vect{f}(t_{i - 1})| $$
 \end{definition}
 
 \begin{remark}
@@ -39,7 +39,7 @@ $$ \sum_{i = 1}^n |\vect{f}(t_i) -\vect{f}(t_{i - 1})| \text{ -- интегра�
 
 \begin{figure}[!ht]
 	\begin{tikzpicture}[domain=0:1.2]
-		\draw[->] (-0.2, 0) -- (4.2, 0) node[right] {$ x $};
+		\draw[->] (-0.2, 0) -- (2.2, 0) node[right] {$ x $};
 		\draw[->] (0, -1.2) -- (0, 1.2) node[above] {$ f(x) $};
 
 		\draw[color=blue, samples=1000] plot[id=x] function{sin(1/x)} node[right] {$ f(x) = \sin \frac1x $};
@@ -51,26 +51,27 @@ $$ \sum_{i = 1}^n |\vect{f}(t_i) -\vect{f}(t_{i - 1})| \text{ -- интегра�
 	$$ \int = \dint[t]ab{|f'(t)|} $$
 \end{theorem}
 
+\begin{note}[геометрический смысл]
+	$ |f'(t)| $ -- скалярная функция скорости, её первообразная -- перемещение
+\end{note}
+
 \begin{proof}
+	Докажем формулу. Из неё будет следовать, что кривая спрямляема (производная непрерывна, а у непрерывной функции всегда есть конечный интеграл по конечному промежутку)
 	\begin{equ}1
-		\bigg| \dint[t]ab{|\vect{f}'(t)|} - \sum_{i = 1}^n |\vect{f}(t_i) - \vect{f}(t_{i - 1})| \bigg| \define A
+		\bigg| \dint[t]ab{|\vect{f}'(t)|} - \sum_{i = 1}^n |\vect{f}(t_i) - \vect{f}(t_{i - 1})| \bigg|
 	\end{equ}
-	Хотим доказать, что это меньше $ 2\veps $
-	\begin{remind}
-		Неравенство треугольника:
-		$$ |\vect{a}| + |\vect{b}| \ge |\vect{a} + \vect{b}|, \qquad |\vect{a}| - |\vect{b}| \le |\vect{a} + \vect{b}| $$
-	\end{remind}
+	Хотим доказать, что это меньше $ 2\veps $ \\
 	Обозначим
-	$$ \Delta_i t \define t_i - t_{i - 1}, \qquad \Delta_i f \define f(t_i) - f(t_{i - 1}), \qquad a_i \in [t_{i - 1}, t_i] $$
+	$$ \Delta_i t \define t_i - t_{i - 1}, \qquad \Delta_i f \define f(t_i) - f(t_{i - 1}), \qquad \tau_i \in [t_{i - 1}, t_i] $$
 	\begin{multline*}
-		\eref1 = \bigg| \dint[t]ab{|f'(t)|} - \sum_{i - 1}^n |f'(\tau_i)| \Delta_i t + \sum_{i = 1}^n |f'(\tau_i)| \Delta_i t - \sum_{i = 1}^n |f(t_i) - f(t_{i - 1})| \bigg| \trile \\
-		\le \bigg| \underbrace{\dint[t]ab{|f'(t)} - \sum_{i = 1}^n |f'(\tau_i) \Delta_i t}_{\define \rom1} \bigg| + \bigg| \underbrace{\sum_{i = 1}^n \big( f'(\tau_i) \Delta_i t - |\Delta_i f| \big)}_{\define \rom2} \bigg|
+		\eref1 \undereq{\mp \sum |f'(\tau_i)|\Delta_i t} \bigg| \dint[t]ab{|f'(t)|} - \sum_{i - 1}^n |f'(\tau_i)| \Delta_i t + \sum_{i = 1}^n |f'(\tau_i)| \Delta_i t - \sum_{i = 1}^n |f(t_i) - f(t_{i - 1})| \bigg| \trile \\
+		\le \bigg| \underbrace{\dint[t]ab{|f'(t)|} - \sum_{i = 1}^n |f'(\tau_i)| \Delta_i t}_{\define \rom1} \bigg| + \bigg| \underbrace{\sum_{i = 1}^n \big( f'(\tau_i) \Delta_i t - |\Delta_i f| \big)}_{\define \rom2} \bigg|
 	\end{multline*}
 	\begin{itemize}
 		\item $ \rom1 < \veps $ (фиксируем $ \veps $ и по нему подбираем мелкость разбиения)
 		\item
 		\begin{multline*}
-			\rom2 = \sum_{i = 1}^n \bigg( \big| f'(\tau_i) \big| \Delta_i t - |\Delta_if| \bigg) \le \sum_{i = 1}^n \bigg| f'(\tau_i) \Delta_it - \Delta_if \bigg| = \\
+			\rom2 = \sum_{i = 1}^n \bigg( \big| f'(\tau_i) \big| \Delta_i t - |\Delta_if| \bigg) \trile \sum_{i = 1}^n \bigg| f'(\tau_i) \Delta_it - \Delta_if \bigg| = \\
 			= \sum_{i = 1}^n \bigg| \dint[t]{t_{i - 1}}{t_i}{f'(\tau_i)} - \dint[t]{t_{i - 1}}{t_i}{f'(t)} \bigg| \le \sum_{i = 1}^n \dint[t]{t_{i - 1}}{t_i}{\bigg| f'(\tau_i) - f'(t) \bigg| } \underset{\eref2}< \sum_{i = 1}^n \dint[t]{t_{i - 1}}{t_i}\veps = \sum \veps \cdot \Delta_it = \\
 			= \veps(b - a)
 		\end{multline*}

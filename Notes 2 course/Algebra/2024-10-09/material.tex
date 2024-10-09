@@ -1,0 +1,261 @@
+\section{Существование жордановой формы}
+
+\begin{iproof}[теоремы о существовании жордановый формы]
+	\item Докажем для случая, когда минимальный многочлен $ \mc{A} $ имеет вид $ P(t) = (t - \lambda)^r $ \\
+	Сведём к случаю нильпотентного опреатора: \\
+	Положим $ B = \mc{A} - \lambda\mc{E} $ \\
+	$ \mc{B}^r = 0, \quad \mc{B} $ -- нильпотентный \\
+	Значит, существует жорданов базис $ \mc{B} $, причём на диагонали жордановой формы стоят нули
+	\item Общий случай
+	$$ \chi_{\mc{A}} = (-1)^n(t - \lambda_1)^{s_1} \cdot ... \cdot (t - \lambda_m)^{s_m} $$
+	По следствию к теореме Гамильтона-Кэли минимальный многочлен -- делитель $ \chi \implies $ минимальный многочлен имеет вид
+	$$ P(t) = (t - \lambda_1)^{r_1} \cdot ... \cdot (t - \lambda_m)^{r_m} $$
+	Применим теорему о разложении в сумму примарных подпространств: \\
+	Пусть $ Q_i \define (t - \lambda_i)^{r_i} $ \\
+	По теореме
+	$$ V = U_1 \oplus ... \oplus U_k $$
+	$ U_i $ инвариантны \\
+	$ Q_i(t) $ -- минимальный многочлен $ \mc{A} $ на $ U_i $ \\
+	К $ U_i $ применяем нильпотентный случай: \\
+	Существует жорданов базис $ U_i $ \\
+	Матрица $ \mc{A}\clamp{U_i} $ имеет вид
+	$$ J_i =
+	\begin{pmatrix}
+		J_{r_1}(\lambda_i) & . & . \\
+		. & . & . \\
+		. & . & J_{r_k}(\lambda_1)
+	\end{pmatrix} $$
+	Значит, в базисе, полученном объединением базисов $ U_i $ матрица $ \mc{A} $ имеет вид
+	$$ J =
+	\begin{pmatrix}
+		J_1 & . & . \\
+		. & . & . \\
+		. & . & J_m
+	\end{pmatrix} $$
+\end{iproof}
+
+\begin{props}[возведения в степень жордановой клетки]
+	\item
+	\begin{enumerate}
+		\item $ \bigg( J_r(0) \bigg)^s =
+		\begin{pmatrix}
+			0 & . & . & . & . \\
+			0 & 0 & . & . & . \\
+			. & . & . & . & . \\
+			1 & . & . & . & . \\
+			. & . & . & . & . \\
+			. & 1 & . & 0 & 0
+		\end{pmatrix} \qquad $ при $ s < r $ \\
+		То есть,
+		$$ a_{ij} =
+		\begin{cases}
+			1, \qquad i - j = s \\
+			0, \qquad \text{иначе}
+		\end{cases} $$
+		\item $ \bigg( J_r(0) \bigg)^s 0 \qquad $ при $ s \ge r $
+	\end{enumerate}
+	\begin{eg}
+		$ r = 4 $
+		$$ \bigg( J_4(0) \bigg)^1 =
+		\begin{pmatrix}
+			0 & 0 & 0 & 0 \\
+			1 & 0 & 0 & 0 \\
+			0 & 1 & 0 & 0 \\
+			0 & 0 & 1 & 0
+		\end{pmatrix}, \qquad \bigg( J_4(0) \bigg)^2 =
+		\begin{pmatrix}
+			0 & 0 & 0 & 0 \\
+			0 & 0 & 0 & 0 \\
+			1 & 0 & 0 & 0 \\
+			0 & 1 & 0 & 0
+		\end{pmatrix} $$
+		$$ \bigg( J_4(0) \bigg)^3 =
+		\begin{pmatrix}
+			0 & 0 & 0 & 0 \\
+			0 & 0 & 0 & 0 \\
+			0 & 0 & 0 & 0 \\
+			1 & 0 & 0 & 0
+		\end{pmatrix}, \qquad \bigg( J_4(0) \bigg)^4 =
+		\begin{pmatrix}
+			0 & 0 & 0 & 0 \\
+			0 & 0 & 0 & 0 \\
+			0 & 0 & 0 & 0 \\
+			0 & 0 & 0 & 0
+		\end{pmatrix} $$
+	\end{eg}
+	\begin{proof}
+		Формально -- \textbf{индукция} по $ s $. На самом деле, повторяем действия из примера
+		\begin{itemize}
+			\item \textbf{База.} $ s = 1 $
+			$$ J_1(0) = (0) $$
+			\item \textbf{Переход.} $ s \to s + 1 $
+			$$ J_r^s(0) = a_{ij}, \qquad J_r(0) = b_{ij}, \qquad J_r^{s + 1}(0) = c_{ij} $$
+			\begin{equ}1
+				c_{ij} = a_{i1}b_{1j} + a_{i2}b_{2i} + ... + a_{in}b_{ni}
+			\end{equ}
+			Среди $ a_{ij} $ не более одной единицы, остальные нули \\
+			Среди $ b_{xj} $ не более одной единицы, остальные нули \\
+			Значит, $ c_{ij} = 0 $ или $ c_{ij} = 1 $
+			$$ c_{ij} = 1 \iff \exist x :
+			\begin{cases}
+				a_{ix} = 1 \\
+				b_{xi} = 1
+			\end{cases} \qquad \underiff{\eref1} \exist x :
+			\begin{cases}
+				i - x = s \\
+				x - j = 1
+			\end{cases} \qquad \iff i - j = s + 1 $$
+		\end{itemize}
+	\end{proof}
+	\item Пусть $ \lambda \ne 0, \qquad A = \bigg( J_r(\lambda) \bigg)^s $ \\
+	Тогда $ A $ нижнетреугольная
+	$$ a_{ij} =
+	\begin{cases}
+		\lambda^{i - j}C_s^{i - j}, \qquad i > j, i - j \le s \\
+		0, \qquad i > j, i - j > s
+	\end{cases} $$
+	\begin{eg}
+		\begin{multline*}
+			\bigg( J_4(2) \bigg)^5 =
+			\begin{pmatrix}
+				2^5 & 0 & 0 & 0 \\
+				C_5^1 \cdot 2^4 & 2^5 & 0 & 0 \\
+				C_5^2 \cdot 2^3 & C_5^1 \cdot 2^4 & 2^5 & 0 \\
+				C_5^3 \cdot 2^3 & C_5^2 \cdot 2^5 & C_5^1 \cdot 2 & 2^5
+			\end{pmatrix} =
+			\begin{pmatrix}
+				2^5 & 0 & 0 & 0 \\
+				5 \cdot 2^4 & 2^5 & 0 & 0 \\
+				10 \cdot 2^3 & 5 \cdot 2^4 & 2^5 & 0 \\
+				10 \cdot 2^3 & 10 \cdot 2^3 & 5 \cdot 2^4 & 2^5
+			\end{pmatrix} = \\
+			=
+			\begin{pmatrix}
+				32 & 0 & 0 & 0 \\
+				80 & 32 & 0 & 0 \\
+				80 & 80 & 32 & 0 \\
+				40 & 80 & 80 & 32
+			\end{pmatrix}
+		\end{multline*}
+	\end{eg}
+	\begin{proof}
+		$ J_r(\lambda) = \lambda \cdot E + J_r(0) $ \\
+		Возведём в степень и распишем как бином Ньютона (учитывая, что $ \lambda E $ коммутирует с чем угодно, а значит, можно приводить подобные):
+		\begin{multline*}
+			\bigg( J_r(\lambda) \bigg)^s = (\lambda E)^s + C_s^1 (\lambda E)^{s - 1} J_r(0) + \widedots[3em] + C_s^{r - 1}(\lambda E)^{s - r + 1} J_r(0)^{r - 1} + \underbrace{J_r^r(0)}_{= 0}(...) \undereq{\text{св-во } 1a} \\
+			= \lambda^s E + C_s^1 \lambda^{s - 1}J_r(0) + \widedots[3em] + C_s^{r - 1}\lambda^{s - r + 1}J_r^{r - 1}(0) = \\
+			=
+			\begin{pmatrix}
+				\lambda^s & . & 0 \\
+				. & . & . \\
+				0 & . & \lambda^s
+			\end{pmatrix} +
+			\begin{pmatrix}
+				0 & . & . & 0 \\
+				\lambda^{s - 1}C_s^1 & . & . & 0 \\
+				. & . & . & . \\
+				0 & . & \lambda^{s - 1}C_s^1 & 0
+			\end{pmatrix} + \widedots[3em] +
+			\begin{pmatrix}
+				0 & . & 0 \\
+				. & . & . \\
+				\lambda^{s - r + 1}C_s^{r - 1} & . & 0
+			\end{pmatrix}
+		\end{multline*}
+	\end{proof}
+	\item $ \rk \bigg( \big( J_r(0) \big)^s \bigg) =
+	\begin{cases}
+		r - s, \qquad s < r \\
+		0, \qquad s \ge r
+	\end{cases} $
+\end{props}
+
+\begin{theorem}[количество клеток и ранг]
+	$ J $ -- жорданова матрица \\
+	Тогда количество клеток вида $ J_r(\lambda) $ равно
+	$$ \rk \bigg( J - \lambda E \bigg)^{r - 1} - 2 \rk \bigg( J - \lambda E \bigg)^r + \rk \bigg( J - \lambda E \bigg)^{r + 1} $$
+\end{theorem}
+
+\begin{proof}
+	Положим $ f(s) \define \rk (J - \lambda E)^s $
+	$$ J =
+	\begin{pmatrix}
+		J_{r_1}(\lambda_1) & . & . \\
+		. & . & . \\
+		. & . & J_{r_k}(\lambda_k)
+	\end{pmatrix}, \qquad J - \lambda E =
+	\begin{pmatrix}
+		J_{r_1}(\lambda_1 - \lambda) & . & . \\
+		. & . & . \\
+		. & . & J_{r_k}(\lambda_k - \lambda)
+	\end{pmatrix} $$
+	$$ (J - \lambda E)^s =
+	\begin{pmatrix}
+		\bigg( J_{r_1}(\lambda_1 - \lambda) \bigg)^s & . & . \\
+		. & . & . \\
+		. & . & \bigg( J_{r_k}(\lambda_k - \lambda) \bigg)^s
+	\end{pmatrix} $$
+	Какое-то из $ \lambda_i $ совпало с $ \lambda $
+	$$ f(s) = \sum_{i = 1}^k \rk \bigg( \big( J_{r_i}(\lambda_i - \lambda) \big)^s \bigg) $$
+	\begin{itemize}
+		\item Если $ \lambda \ne \lambda_i $, то $ \rk \bigg( \big( J_{r_i}(\lambda - \lambda_i) \big)^s \bigg) = r_i \quad \forall s $
+		$$ f(s) - f(s + 1) = \sum \bigg\lgroup \rk \bigg( J_{r_i}^s(\lambda_i - \lambda) \bigg) - \rk \bigg( J_{r_i}^{s + 1}(\lambda - \lambda_i) \bigg) \bigg\rgroup $$
+		То есть, если $ \lambda_i \ne \lambda_j $, то $ i $-е слагаемое равно $ r_i - r_j = 0 $
+		\item Если $ \lambda_i = \lambda, \quad r_i \le s $, то $ i $-е слагаемое равно $ 0 - 0 = 0 $
+		\item Если $ \lambda_i = \lambda, \quad r_i < s $, то $ i $-е слагаемое равно $ (r_i - s) - \bigg( r_i - (s + 1) \bigg) = 1 $
+	\end{itemize}
+	$ f(s + 1) - f(s) $ -- количество клесток, для которых $ \lambda_i = \lambda, \quad r_i > s $ \\
+	$ \bigg( f(s + 1) - f(s) \bigg) - \bigg( f(s) - f(s - 1) \bigg) $ -- количество клеток размера $ s $ \\
+	Применяя три случая, получаем, что это равно $ f(s + 1) - 2f(s) + f(s - 1) $
+\end{proof}
+
+\begin{implication}[единственность жордановой формы]
+	Пусть $ J, J' $ -- жордановы \\
+	$ J, J' $ -- матрицы $ \mc{A} $ в некоторых базисах \\
+	Тогда $ J, J' $ совпадают с точностью до перестановки жордановых клеток
+\end{implication}
+
+\begin{proof}
+	$ J, J' $ -- матрицы $ \mc{A} $ \\
+	$ J - \lambda E, J' - \lambda E $ -- матрицы $ \mc{A} - \lambda \mc{E} $ \\
+	$ (J - \lambda E)^s, (J' - \lambda E)^s $ -- матрицы $ (\mc{A} - \lambda \mc{E})^s $ \\
+	$ \rk $ не зависит от выбора базиса
+\end{proof}
+
+\begin{theorem}[минимальный многочлен]
+	$ J $ -- жоданова матрица, $ \qquad \lambda_1, ..., \lambda_k $ -- с. ч. $ J $ \\
+	$ r_i $ -- максимальный размер жордановой клетки, соотв. $ \lambda_i $ \\
+	Тогда минимальный многочлен равен $ (t - \lambda_1)^{r_1}...(t - \lambda_k)^{r_k} $
+\end{theorem}
+
+\begin{proof}
+	Пусть $ e_1, ..., e_n $ -- жорданов базис \\
+	$ P_i $ -- минимальный аннулятор $ e_i $ \\
+	Тогда минимальный многочлен равен $ \SCM{P_1, ..., P_n} $ \\
+	Пусть $ e_i $ соответстсвует $ j $-му столбцу клетки $ J_r(\lambda) $
+	$$ (\mc{A} - \lambda \mc{E})^{r - i}(e_i) = 0, \qquad (\mc{A} - \lambda \mc{E})^{r - i - 1}(e_i) \ne 0 $$
+	$$ \implies P_i(t) = (t - \lambda)^{r - i} $$
+	Минимальный многочлен -- это НОК многочленов вида $ (t - \lambda_i)^s, \quad s \le r_i $ \\
+	Среди них есть $ (t - \lambda_1)^{r_1}, ..., (t - \lambda_k)^{r_k} $ \\
+	Значит, среди них есть $ P_i $, а остальные -- не делители
+	$$ \implies \text{НОК} = (t - \lambda_1)^{r_1}...(t - \lambda_k)^{r_k} $$
+\end{proof}
+
+\section{Комплексификация}
+
+В предыдущем параграфе мы доказали, что жорданова форма существует, если многочлен расладывается на простейшие множители. Это всегда верно над $ \Co $. В этом параграфе рассмотрим жордановы формы над $ \R $
+
+\begin{undefthm}[Идея построения]
+	$ V $ -- вект. пространство над $ \R $ \\
+	Построим $ \hat{V} $ над $ \Co $, состоящее из $ u + vi, \quad u, v \in \R $ \\
+	Для этого определим сложение и умножение:
+	\begin{itemize}
+		\item $ (u_1 + v_1i) + (u_2 + v_2i) = (u_1 + u_2) + (v_1 + v_2)i $
+		\item $ (a + bi)(u + vi) = au + bui + avi + bvi^2 $
+	\end{itemize}
+\end{undefthm}
+
+\begin{definition}
+	$ V $ -- векторное пространство над $ \R $ \\
+	Комплексификация $ V $ -- это множество $ \hat{V} $, состоящее из пар $ (u, v) $ с операцией
+\end{definition}

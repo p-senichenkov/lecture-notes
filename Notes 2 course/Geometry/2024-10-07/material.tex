@@ -1,0 +1,249 @@
+\section{Ещё немного про натуральное уравнение}
+
+\begin{quest}
+	Верно ли что для всяких $ k $ и $ \text\ae $ существует кривая, задаваемая ими?
+\end{quest}
+
+\begin{answer}
+	Только для положительных $ k $
+\end{answer}
+
+\begin{proof}
+	Составляем дифур, доказываем, что решение существует
+\end{proof}
+
+\begin{quest}
+	Можно ли нарезать болты как-то, кроме (классической) винтовой спирали?
+\end{quest}
+
+\begin{answer}
+	Нельзя
+\end{answer}
+
+\begin{proof}
+	Резьба болта и резьба гайки должны совмещаться в любой точке \\
+	Это означает постоянство кривизны и кручения \\
+	А мы доказали, что для заданных кривизны и кручения существует только одна кривая (с точностью до положения в пространстве)
+\end{proof}
+
+\chapter{Дифференциальная геометрия поверхностей}
+
+\begin{undefthm}{Немного истории}
+	Изучение поверхностей началось с Гаусса: \\
+	Военные обратились к Гауссу с вопросом ``почему карта искажает расстояния и можно ли нарисовать карту без искажений'' \\
+	Гаусс доказал, что нельзя
+\end{undefthm}
+
+\begin{note}
+	Гаусс доказал, что сфера не изоморфна плоскости
+\end{note}
+
+\section{Поверхности}
+
+\begin{definition}
+	$ D \sub \R^2 $ -- область (открытое + связное) \\
+	$ \vec{r} : D \to \R^3 $ -- вектор-функция (гладкая) \\
+	$ \vec{r} $ называется параметризацией
+\end{definition}
+
+\begin{definition}
+	Диффеоморфизм -- гладкий гомеоморфизм, обратное тоже гладкое
+\end{definition}
+
+\begin{note}
+	Гдакость обозначает \textbf{нужное количество} непрерывных производных \\
+	Нужное количество включает в себя ``нужное для равенства интересующих нас частных производных''
+\end{note}
+
+\begin{definition}
+	$ \rho : \vawe{D} \to \R^3 $ -- другая вектор-функция
+	$$ r(D) = \rho(\vawe{D}) \implies \exist \underbrace{\rho^{-1} \circ r}_{\text{диффеоморфизм}} : D \to \vawe{D} $$
+	Тогда $ r $ и $ \rho $ -- разные параметризации одной поверхности
+\end{definition}
+
+\begin{definition}
+	Поверхностью будем называть класс эквивалентности соответствующих функций
+\end{definition}
+Будем предполагать, что задана координатная сетка \\
+Её внутренние координаты -- $ u $ и $ v $
+
+\begin{definition}
+	Поверхность назвыается регуляной, если $ \pder{r}u \nparallel \pder{r}v $
+\end{definition}
+
+\begin{remark}
+	Это -- касательные векторы к координатным прямым \\
+	Это означает, что координатная сетка нигде не имеет нулевого угла между координатными линиями
+\end{remark}
+
+Везде, где не оговорено особо, считаем что поверхность регулярна
+
+\begin{eg}[нерегулярной поверхности]
+	Есть какая-нибудь кривая \\
+	К каждой её точке проводим касательую прямую \\
+	Если кривая не плоская, то эти касательные будут образовывать некоторую поверхность \\
+	Угол между этими касательными везде будет нулевой
+\end{eg}
+
+\begin{exmpls}[как поверхность задавать]
+	\item В явном виде: $ z = f(x, y) $ \\
+	Поверхность является графиком такой функции
+	\item Неявно: $ F(x, y, z) = 0 $ \\
+	По теореме о неявной функции, в определённых случаях это можно превратить в явную функцию в некоторых окрестностях
+	\item Параметрически:
+	$$
+	\begin{cases}
+		x = x(u, v) \\
+		y = y(u, v) \\
+		z = z(u, v)
+	\end{cases} $$
+\end{exmpls}
+
+\section{Касательная плоскость}
+
+\begin{undefthm}[как задаётся кривая на поверхности]
+	Любая точка кривой лежит на поверхности \\
+	Тогда мы можем применить к ней $ r^{-1} $ и ``спустить'' её на $ D $ \\
+	Получим координаты $ u(t), v(t) $ \\
+	Они называются внутренними координатами кривой на поверхности
+\end{undefthm}
+
+\begin{definition}
+	Пусть $ u(t), v(t) $ -- внутренние координаты кривой на поверхности \\
+	$ \vec{r} \bigg( u(t), v(t) \bigg) $ -- кривая на поверхности \\
+	$ \dfrac{\di \vec{r}}{\di t}\clamp{t = t_0} $ -- касательный вектор
+\end{definition}
+
+\begin{definition}
+	Касательная плоскость к поверхности -- множество касательных векторов в данной точке
+\end{definition}
+
+\begin{statement}
+	Это плоскость с базисом $ \pder{r}u $ и $ \pder{r}v $
+\end{statement}
+
+\begin{notation}
+	$ r_u \define \pder{r}u $ ($ = r_u' $)
+\end{notation}
+
+\begin{proof}
+	Распишем и всё получится: \\
+	Касательный вектор -- $ \dfrac{\di \vec{r}}{\di t}\clamp{t = t_0} $
+	$$ \dfrac{\di \vec{r}}{\di t}\clamp{t = t_0} = \pder{r}{u} \cdot \frac{\di u}{\di t} + \pder{r}v \cdot \frac{\di v}{\di t} $$
+	Это линейная комбинация $ \pder{t}u $ и $ \pder{r}v $ \\
+	Верно ли, что $ \alpha r_u + \beta r_v $ является касательным вектором? \\
+	Верно, для кривой
+	$$
+	\begin{cases}
+		u = \alpha(t + t_0) \\
+		v = \beta(t + t_1)
+	\end{cases} \qquad
+	\begin{cases}
+		u_t = \alpha \\
+		v_t = \beta
+	\end{cases} $$
+\end{proof}
+
+$$ r_u \times r_v \ne 0 $$
+$ n \define \frac{r_u \times r_v}{|r_u \times r_v|} $ -- вектор нормали \\
+$ (r_u, r_v, n) $ -- правая тройка
+
+\begin{exmpls}
+	\item Явное задание:
+	$$
+	\begin{cases}
+		x = u \\
+		y = v \\
+		z = z(u, v)
+	\end{cases} $$
+	Это частный случай параметрического задания
+	\item Неявное задание:
+	$$ \nabla f(x, y, z) \parallel \vec{n} $$
+	Нормальная прямая будет иметь уравнение:
+	$$ \frac{x - x_0}{f_x\clamp{x_0, y_0, z_0}} = \frac{y - y_0}{f_y\clamp{x_0, y_0, z_0}} = \frac{z - z_0}{f_z\clamp{x_0, y_0, z_0}} $$
+	Касательная плоскость:
+	$$ f_x\clamp{x_0, y_0, z_0}(x - x_0) + f_y\clamp{x_0, y_0, z_0}(y - y_0) + f_z\clamp{x_0, y_0, z_0}(z - z_0) = 0 $$
+	\item Параметрическое задание:
+	$$ r_u = (x_u, y_u, z_u), \qquad r_v = (x_v, y_v, z_v) $$
+	$$ n \parallel
+	\begin{vmatrix}
+		i & j & k \\
+		x_u & y_u & z_u \\
+		x_v & y_v & z_v
+	\end{vmatrix} $$
+	Нормальная прямая:
+	$$ \frac{x - x_0}{
+		\begin{vmatrix}
+			y_u & z_u \\
+			y_v & z_v
+		\end{vmatrix}} = \frac{y - y_0}{
+		\begin{vmatrix}
+			z_u & x_u \\
+			z_v & x_v
+		\end{vmatrix}} = \frac{z - z_0}{
+		\begin{vmatrix}
+			x_u & y_u \\
+			x_v & y_v
+		\end{vmatrix}} $$
+	Касательная плоскость:
+	$$
+	\begin{vmatrix}
+		y_u & z_u \\
+		y_v & z_v
+	\end{vmatrix}(x - x_0) +
+	\begin{vmatrix}
+		z_u & x_u \\
+		z_v & x_v
+	\end{vmatrix}(y - y_0) +
+	\begin{vmatrix}
+		x_u & y_u \\
+		x_v & y_v
+	\end{vmatrix}(z - z_0) = 0 $$
+	\begin{remark}
+		Мы переставили столбцы, чтобы избавиться от знаков
+	\end{remark}
+\end{exmpls}
+
+\section{Длина кривой на поверхности}
+
+\begin{definition}
+	Коэффициенты \rom1 квадратичной формы поверхности:
+	$$
+	\begin{cases}
+		E \define |r_u|^2 = (r_u, r_u) \\
+		F \define (r_u, r_v) \\
+		G \define (r_v, r_v) = |r_v|^2
+	\end{cases} $$
+\end{definition}
+
+$$ \vec{r} = \bigg( x(u, v), y(u, v), z(u, v) \bigg) $$
+$$ u = u(t), \qquad v = v(t) $$
+\begin{multline*}
+	l = \dint[t]ab{\bigg| \frac{\di r}{\di t} \bigg|} = \dint[t]ab{|r_uu_t + r_vv_t|} = \dint[t]ab{\sqrt{(r_uu_t + r_vv_t; r_uu_t + r_vv_t)}} = \\
+	= \dint[t]ab{\sqrt{(r_u, r_u)u_t^2 + 2(r_u, r_v)u_tv_t + (r_v, r_v)v_t^2}} = \dint[t]ab{\sqrt{Eu_t^2 + 2Fu_tv_t + Gv_t^2}}
+\end{multline*}
+\rom1 форма:
+$$ Eu_t^2 + 2Fu_tv_t + Gv_t^2, \qquad E, F, G \text{ -- функции от } u, v $$
+
+\begin{remark}
+	\hfill \\
+	$
+	\begin{rcases}
+		f = 0 \\
+		E, G > 0
+	\end{rcases} \iff $ координатная сетка ортогональна \\
+	$ E = 1 \iff $ координатные линии $ v = \const $, т. е. находятся в натуральной параметризации
+\end{remark}
+
+\begin{eg}[как параметризовать сферу]
+	Координаты на сфере обычно называются широта и долгота \\
+	Долгота меяется от какого-то нулевого меридиана \\
+	Долгота -- угол $ \vphi $, широта -- угол $ \psi $ \\
+	Сферическая система координат:
+	$$
+	\begin{cases}
+		x = R\cos\vphi\cos\psi \\
+		y = R\sin\vphi\cos\psi \\
+		z = R\sin\psi
+	\end{cases} $$
+\end{eg}
