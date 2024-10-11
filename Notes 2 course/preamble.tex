@@ -1,8 +1,6 @@
 % basics
 \usepackage[utf8x]{inputenc}
 \usepackage[T2A]{fontenc}
-%\usepackage{textcomp}
-%\usepackage{url}
 \usepackage[a4paper, portrait, margin=.75in]{geometry}
 \usepackage[russian]{babel}
 
@@ -19,10 +17,6 @@
 \urlstyle{same}      % links will be the same font as other text
 
 \usepackage{graphicx}
-%\usepackage{float}
-%\usepackage{booktabs}
-%\usepackage{enumitem}
-%\usepackage{emptypage}
 \usepackage{multicol}
 \usepackage[dvipsnames]{xcolor}
 
@@ -41,9 +35,6 @@
 \usepackage[ntheorem]{empheq}
 
 \usepackage{amsmath, amsfonts, mathtools, amsthm, amssymb}
-
-% alternative caligraphy font
-%\usepackage{mathrsfs}
 
 % diagonal lines through items ("cancelling" 'em)
 \usepackage{cancel}
@@ -133,6 +124,8 @@
 
 \newcommand\exist{\exists\,}
 
+\newcommand\foral{\forall~}
+
 %%      shorthands
 % phi and epsilon
 \let\vphi\varphi
@@ -152,6 +145,8 @@
 
 \let\mc\mathcal
 
+\let\bt\textbf
+
 % partial derivative
 \newcommand*\pder[2]{\ensuremath{\frac{\partial {#1}}{\partial {#2}}}}
 
@@ -165,6 +160,15 @@
 
 % not-arrows with text below `em
 \newcommand\undereq[1]{\ensuremath\xlongequal[#1]{}}
+
+% custom extensible arrows
+\makeatletter
+\newdimen\@temp
+\settowidth\@temp{$ \m@th \relbar $}
+\def\@highRelbar{\raisebox{-0.1675em}{$ \relbar $}\hspace{-\@temp}\raisebox{0.1675em}{$ \relbar $}}
+\def\xrightrightarrowsfill@{\arrowfill@\@highRelbar\@highRelbar\rightrightarrows}
+\newcommand\xrightrightarrows[2][]{\ext@arrow 0099\xrightrightarrowsfill@{#1}{#2}}
+\makeatother
 
 % special cases
 \newcommand\limarr[2]{\ensuremath\underarr{{#1} \to {#2}}}
@@ -201,6 +205,8 @@
 %% definition:
 % :=
 \newcommand\define\coloneqq
+% =:
+\newcommand\fed\eqqcolon
 % :{#1}
 \newcommand*\definerel[1]{\mathrel{:{#1}}}
 % by definition (default is =) (DEPRECATED)
@@ -226,6 +232,9 @@
 \newcommand\Ud{\ensuremath{\mathtt{U}}}
 \newcommand\Ld{\ensuremath{\mathtt{L}}}
 \newcommand\Sr{\ensuremath{\mathtt{S}}}
+
+% Ball
+\newcommand\B{\ensuremath{\mathtt{B}}}
 
 % a line of dots (13em by default)
 \newcommand*\widedots[1][13em]
@@ -305,6 +314,9 @@
 
 \let\tbraket\braket
 \let\braket\Braket
+
+% vector-argument of function
+\newenvironment{barg}{\left(\begin{bmatrix}}{\end{bmatrix}\right)}
 
 %%     Basov
 % Basov's "antlers" -- two cases:

@@ -1,0 +1,658 @@
+\section{Теорема о неявной функции (отображении)}
+
+\begin{theorem}
+	$ \R^{n \ge 1}, \qquad \R^{m \ge 1}, \qquad \R^{n + m} $
+	$$ X = \column{x_1}{x_n} \sub \R^n, \qquad Y = \column{y_1}{y_m} \sub \R^m, \qquad Z =
+	\begin{bmatrix}
+		x_1 \\
+		\cdots \\
+		x_n \\
+		y_1 \\
+		\cdots \\
+		y_m
+	\end{bmatrix} \define
+	\begin{bmatrix}
+		X \\
+		Y
+	\end{bmatrix} \sub \R^{n + m} $$
+	$ E \sub \R^{n + m} $ -- откр., $ \qquad F : E \to \R^n, \qquad F = \column{f_1}{f_n}, \qquad F \in \Cont[1]E $ \\
+	$ Z_0 =
+	\begin{bmatrix}
+		X_0 \\
+		Y_0
+	\end{bmatrix} \in E $ такая, что $ F(Z_0) = \On, \qquad f_j(Z) = f_j
+	\begin{barg}
+		X \\
+		Y
+	\end{barg} $
+	$$ \implies \exist \underset{\text{окрестность}}{W(Y_0) \sub \R^n}, \quad \exist! g : W \to \R^n :
+	\begin{cases}
+		g \in \Cont[1]W \\
+		g(Y_0) = X_0 \\
+		\foral Y \in W \quad
+		\begin{cases}
+			\begin{bmatrix}
+				g(Y) \\
+				Y
+			\end{bmatrix} \in E \\
+			F
+			\begin{barg}
+				g(Y) \\
+				Y
+			\end{barg} = \On
+		\end{cases}
+	\end{cases} $$
+\end{theorem}
+
+\begin{proof}
+	Выпишем матрицу Якоби для $ F $:
+	$$ \mc{D}F(Z_0) =
+	\begin{bmatrix}
+		f_{1x_1}'(Z_0) & ... & f_{1x_n}'(Z_0) & f_{1y_1}'(Z_0) & ... & f_{1y_m}'(Z_0) \\
+		. & . & . & . & . & . \\
+		f_{nx_1}'(Z_0) & ... & f_{nx_n}'(Z_0) & f_{ny_1}'(Z_0) & ... & f_{ny_m}'(Z_0)
+	\end{bmatrix} $$
+	\begin{enumerate}
+		\item Построение $ g, W, E $ \\
+		Определим отображение $ \Phi(Z) \define
+		\begin{bmatrix}
+			F(Z) \\
+			Y
+		\end{bmatrix} $
+		$$ \Phi : E \to \R^{n + m} $$
+		$$ \Phi(Z) = \Phi
+		\begin{barg}
+			X \\
+			Y
+		\end{barg} =
+		\begin{bmatrix}
+			F \left(
+			\begin{bmatrix}
+				X \\
+				Y
+			\end{bmatrix} \right) \\
+			Y
+		\end{bmatrix} \fed \column{\vphi_1(Z)}{\vphi_{n + m}(Z)} $$
+		\begin{remind}
+			$ Y = \column{y_1}{y_m} $
+		\end{remind}
+		$$ \vphi_k
+		\begin{barg}
+			X \\
+			Y
+		\end{barg} =
+		\begin{cases}
+			y_{k - n}, \qquad k > n \\
+			f_k \left(
+		\begin{bmatrix}
+			X \\
+			Y
+		\end{bmatrix} \right), \qquad 1 \le k \le n
+		\end{cases} $$
+		$$ \Phi \in \Cont[1]{E} $$
+		Временно обозначим $ x_{n + k} \define y_k $ \\
+		Напишем матрицу Якоби для $ \Phi $:
+		\begin{multline*}
+			\mc{D}\Phi
+			\begin{barg}
+				X \\
+				\hline
+				Y
+			\end{barg} =
+			\begin{bmatrix}
+				\vphi_{1x_1}'(Z) & ... & \vphi_{1x_{n + m}}(Z) \\
+				. & . & . \\
+				\hline
+				. & . & . \\
+				\vphi_{n + mx_1}'(Z) & ... & \vphi_{n + m}{x_{n + m}}'(Z)
+			\end{bmatrix} = \\
+			=
+			\begin{bmatrix}
+				f_{1x_1}'(Z) & ... & f_{1x_n}'(Z) & f_{1y_1}'(Z) & ... & ... & f_{1y_m}'(Z) \\
+				. & . & . & . & . & . & . \\
+				f_{nx_1}'(Z) & ... & f_{nx_n}'(Z) & f_{ny_1}'(Z) & ... & ... & f_{ny_m}'(Z) \\
+				\hline
+				0 & ... & 0 & 1 & 0 & ... & 0 \\
+				. & . & . & . & . & . & . \\
+				0 & ... & 0 & 0 & ... & 0 & 1
+			\end{bmatrix}
+		\end{multline*}
+		(черта стоит после $ n $-го ряда) \\
+		Обозначим
+		$$ A(Z) \define
+		\begin{bmatrix}
+			f_{1x_1}'(Z) & ... & f{1x_n}'(Z) \\
+			. & . & . \\
+			f_{nx_1}'(Z) & ... & f_{nx_n}'(Z)
+		\end{bmatrix}, \qquad B(Z) \define
+		\begin{bmatrix}
+			f_{1y_1}'(Z) & ... & f_{1y_m}'(Z) \\
+			. & . & . \\
+			f_{ny_1}'(Z) & ... & f_{ny_m}'(Z)
+		\end{bmatrix} $$
+		В этих обозначениях
+		$$ \mc{D}F(Z) = \bigg[ A(Z)B(Z) \bigg], \qquad \mc{D}\Phi(Z) =
+		\begin{bmatrix}
+			A(Z) & B(Z) \\
+			\On[m \times n] & I_m
+		\end{bmatrix} $$
+		Найдём Якобиан $ \Phi $: \\
+		Раскладвыая по последней строке, получаем новую матрицу поряка $ (m - 1) \times (n - 1) $ \\
+		Будем так делать, пока внизу стоит $ I_m $ (т. е. $ m $ раз) \\
+		Останется $ A(Z) $:
+		$$ \det \mc{D}F(Z) = \det A(Z), \qquad \text{в частности, } \det \mc{D}F(Z_0) = \det A(Z_0) \underset{\text{по усл.}}\ne 0 $$
+		То есть, матрица Якоби в $ Z_0 $ обратима. Значит, к $ \Phi $ можно применить теорему об обратном отображении \\
+		Будем верхним индексом к шарам обозначать, в каком пространстве они находятся
+		$$ \exist \B_r^{n + m}(Z_0), \quad V \define \Phi \bigg( \B_r^{n + m}(Z_0) \bigg), \qquad \exist \Psi : V \to B_r^{n + m}(Z_0) \text{, такое что:} $$
+		$$ \Psi \in \Cont[1]V $$
+		\begin{equ}2
+			\Phi \left\lgroup \Psi
+			\begin{barg}
+				S \\
+				T
+			\end{barg} \right\rgroup =
+			\begin{bmatrix}
+				S \\
+				T
+			\end{bmatrix} \qquad \forall
+			\begin{bmatrix}
+				S \\
+				T
+			\end{bmatrix} \in V, \qquad S \in \R^n, \quad T \in \R^m
+		\end{equ}
+		\begin{equ}3
+			\Psi \left\lgroup \Phi
+			\begin{barg}
+				X \\
+				Y
+			\end{barg} \right\rgroup =
+			\begin{bmatrix}
+				X \\
+				Y
+			\end{bmatrix} \qquad \forall
+			\begin{bmatrix}
+				X \\
+				Y
+			\end{bmatrix} \in B_r^{n + m}(Z_0)
+		\end{equ}
+		Обозначим
+		$$ \Psi \left(
+		\begin{bmatrix}
+			S \\
+			T
+		\end{bmatrix} \right) \fed
+		\begin{bmatrix}
+			\psi
+			\begin{barg}
+				S \\
+				T
+			\end{barg} \\
+			\lambda
+			\begin{barg}
+				S \\
+				T
+			\end{barg}
+		\end{bmatrix} $$
+		(где $ \psi $ задаёт первые $ n $ столбцов, а $ \lambda $ -- оставшиеся $ m $)
+		\begin{equ}5
+			\Phi \left(
+			\begin{bmatrix}
+				\psi \left(
+				\begin{bmatrix}
+					S \\
+					T
+			\end{bmatrix} \right) \\
+			\lambda \left(
+				\begin{bmatrix}
+					S \\
+					T
+				\end{bmatrix} \right)
+			\end{bmatrix} \right) \bdefeq\Phi
+			\begin{bmatrix}
+				F \left(
+				\begin{bmatrix}
+					\psi \left(
+					\begin{bmatrix}
+						S \\
+						T
+				\end{bmatrix} \right) \\
+				\lambda \left(
+					\begin{bmatrix}
+						S \\
+						T
+					\end{bmatrix} \right)
+				\end{bmatrix} \right) \\
+				\lambda \left(
+				\begin{bmatrix}
+					S \\
+					T
+				\end{bmatrix} \right)
+			\end{bmatrix} \undereq{\eref2}
+			\begin{bmatrix}
+				S \\
+				T
+			\end{bmatrix}
+		\end{equ}
+		\begin{equ}6
+			\eref5 \implies \lambda \left(
+			\begin{bmatrix}
+				S \\
+				T
+			\end{bmatrix} \right) = T
+		\end{equ}
+		\begin{equ}7
+			\Psi
+			\begin{barg}
+				S \\
+				T
+			\end{barg} \bdefeq{\Psi, \eref{6}}
+			\begin{bmatrix}
+				\psi
+				\begin{barg}
+					S \\
+					T
+				\end{barg} \\
+				T
+			\end{bmatrix}
+		\end{equ}
+		Рассмотрим случай, когда $ S = \On $:
+		$$ \Phi
+		\begin{barg}
+			\psi
+			\begin{barg}
+				\On \\
+				T
+			\end{barg} \\
+			T
+		\end{barg} \undereq{\eref7} \Phi \left\lgroup \Psi
+		\begin{barg}
+			\On \\
+			T
+		\end{barg} \right\rgroup \undereq{\eref2}
+		\begin{bmatrix}
+			\On \\
+			T
+		\end{bmatrix} $$
+		При этом,
+		$$ \Phi
+		\begin{barg}
+			\psi
+			\begin{barg}
+				\On \\
+				T
+			\end{barg} \\
+			T
+		\end{barg} \bdefeq\Phi
+		\begin{bmatrix}
+			F \left(
+			\begin{bmatrix}
+				\psi \left(
+				\begin{bmatrix}
+					\On \\
+					T
+				\end{bmatrix} \right) \\
+				T
+			\end{bmatrix} \right) \\
+			T
+		\end{bmatrix} $$
+		Из последних двух выражений следует, что
+		\begin{equ}8
+			F \left(
+			\begin{bmatrix}
+				\psi \left(
+				\begin{bmatrix}
+					\On \\
+					T
+				\end{bmatrix} \right) \\
+				T
+			\end{bmatrix} \right) = \On
+		\end{equ}
+		Из того, что $ V $ открытое и $
+		\begin{bmatrix}
+			\On \\
+			Y_0
+		\end{bmatrix} \in V $, следует, что
+		$$ \exist \rho > 0 : \quad \B_\rho^{n + m}
+		\begin{barg}
+			\On \\
+			Y_0
+		\end{barg} \sub V $$
+		При этом, если $ Y \in \B_\rho^m(Y_0) $, то
+		$$
+		\begin{bmatrix}
+			\On \\
+			Y
+		\end{bmatrix} \in \B_\rho^{n + m} \left(
+		\begin{bmatrix}
+			\On \\
+			Y_0
+		\end{bmatrix} \right) $$
+		Поэтому \eref8 выполнено при $ T \in \B_\rho^m(Y_0) $ \\
+		Вспомним про отображение $ g $ из формулировки теоремы. Оно действует из некоторого $ W $ \\
+		Возьмём
+		$$ W \define \B_\rho^m(Y_0), \qquad E \define \B_\rho^{n + m}
+		\begin{barg}
+			\On \\
+			Y_0
+		\end{barg}, \qquad g(Y) \define \psi
+		\begin{barg}
+			\On \\
+			Y
+		\end{barg} $$
+		Тогда мы действительно имеем $ g : W \to \R^n $
+		$$ F
+		\begin{barg}
+			g(Y) \\
+			Y
+		\end{barg} \bdefeq{g} F
+		\begin{barg}
+			\psi
+			\begin{barg}
+				\On \\
+				Y
+			\end{barg} \\
+			Y
+		\end{barg} \undereq{\eref8} \On $$
+		\item Теперь надо выяснить, чему равно $ g(Y_0) $
+		\begin{equ}{12}
+			\Phi \left(
+			\begin{bmatrix}
+				X_0 \\
+				Y_0
+			\end{bmatrix} \right) =
+			\begin{bmatrix}
+				F \left(
+				\begin{bmatrix}
+					X_0 \\
+					Y_0
+				\end{bmatrix} \right) \\
+				Y_0
+			\end{bmatrix} =
+			\begin{bmatrix}
+				\On \\
+				Y_0
+			\end{bmatrix}
+		\end{equ}
+		$$
+		\begin{rcases}
+			\Psi \left\lgroup \Phi
+			\begin{barg}
+				X_0 \\
+				Y_0
+			\end{barg} \right\rgroup \undereq{\eref3}
+			\begin{bmatrix}
+				X_0 \\
+				Y_0
+			\end{bmatrix} \\
+			\Psi \left\lgroup \Phi
+			\begin{barg}
+				X_0 \\
+				Y_0
+			\end{barg} \right\rgroup \undereq{\eref{12}}
+			\Psi
+			\begin{barg}
+				\On \\
+				Y_0
+			\end{barg} \bdefeq\Psi
+			\begin{bmatrix}
+				\psi
+				\begin{barg}
+					\On \\
+					Y_0
+				\end{barg} \\
+				Y_0
+			\end{bmatrix} \bdefeq{g}
+			\begin{bmatrix}
+				g(Y_0) \\
+				Y_0
+			\end{bmatrix}
+		\end{rcases} \implies g(Y_0) = X_0 $$
+		\item Оталось проверить единственность $ g $ \\
+		\textbf{Пусть есть другое} $ g_1 \in \Cont[1]{B_\rho^m(Y_0)} $, такое что
+		$$ g_1(Y_0) = X_0, \qquad F \left(
+		\begin{bmatrix}
+			g_1(Y) \\
+			Y
+		\end{bmatrix} \right) = \On $$
+		$$ \eref3 \implies \Psi
+		\begin{barg}
+			F
+			\begin{barg}
+				g_1(Y) \\
+				Y
+			\end{barg} \\
+			Y
+		\end{barg} =
+		\begin{bmatrix}
+			g_1(Y) \\
+			Y
+		\end{bmatrix} $$
+		При этом,
+		$$ \Psi
+		\begin{barg}
+			\On \\
+			Y
+		\end{barg} =
+		\begin{bmatrix}
+			\psi
+			\begin{barg}
+				\On \\
+				Y
+			\end{barg} \\
+			Y
+		\end{bmatrix} =
+		\begin{bmatrix}
+			g(Y) \\
+			Y
+		\end{bmatrix} $$
+		Правые части равны, а значит, и левые части равны \\
+		Значит, $ g_1(Y) = g(Y) $
+	\end{enumerate}
+\end{proof}
+
+\subsection{Вычисление матрицы Якоби для неявного отображения}
+
+$$ P(Y) =
+\begin{bmatrix}
+	g(Y) \\
+	Y
+\end{bmatrix}, \qquad g \in \Cont[1]W, \qquad P \in \Cont[1]W $$
+\begin{equ}{14}
+	F \bigg( P(Y) \bigg) = \On \quad \forall Y \in W
+\end{equ}
+\begin{equ}{15}
+	\eref{14} = \mc{D} \bigg( F \big( P(Y) \big) \bigg) = \On[n \times m]
+\end{equ}
+Применим теорему о матрице Якоби суперпозиции:
+\begin{equ}{16}
+	\eref{15} \implies \mc{D}F \bigg( P(Y) \bigg)\mc{D}P(Y) = \On[n \times m]
+\end{equ}
+\begin{equ}{17}
+	\mc{D}P(Y) =
+	\begin{bmatrix}
+		\mc{D}g(Y) \\
+		I_m
+	\end{bmatrix}
+\end{equ}
+Обозначим $ Z \define P(Y) $
+$$ \mc{D}F(Z) = \bigg[ A(Z) B(Z) \bigg] $$
+\begin{equ}{18}
+	\eref{17} \implies \mc{D}F(Z)\mc{D}P(Y) = \bigg[ A(Z)B(Z) \bigg]
+	\begin{bmatrix}
+		\mc{D}g(Y) \\
+		I_m
+	\end{bmatrix} = A(Z)\mc{D}g(Y) + B(Z)I_m = A(Z)\mc{D}g(Y) + B(Z)
+\end{equ}
+$$ \eref{16}, \eref{18} \implies A(Z)\mc{D}g(Y) + B(Z) = \On[n \times m] \implies \mc{D}g(Y) = -A^{-1}(Z)B(Z) $$
+
+\section{Условные экстремумы}
+
+\begin{definition}
+	$ E \sub \R^{n \ge 2}, \qquad M \sub E, \qquad X_0 \in M, \qquad f : E \to \R $ \\
+	Говорят, что $ X_0 $ -- точка локального экстремума $ f $ при условии $ M $, если $ X_0 $ -- точка локального экстремума функции $ f\clamp{M} $
+\end{definition}
+
+\begin{definition}
+	$ E \sub \R^{n + m} $ -- открытое, $ \qquad F : E \to \R^n, \qquad X_0 \in E, \qquad f(X_0) = \On, \qquad f : E \to R $ \\
+	Говорят, что $ X_0 $ -- точка локального экстремума $ f $ при условии $ F(X) = \On $, если $ X_0 $ -- точка локального экстремума $ f $ при условии $ \ker F $
+\end{definition}
+
+\subsection{Теорема о множителях Лагранжа}
+
+\begin{theorem}[о множиетелях Лагранжа]
+	$ E \sub \R^{n + m} $ -- открытое, $ \qquad F \in \Cont[1]E $ \\
+	$ \rk \mc{D}F(X) = n \quad \forall X \in E, \qquad X_0 \in E : \quad F(X_0) = \On $
+	\begin{equ}{21}
+		\implies \exist \Lambda = (\lambda_1, ..., \lambda_n) : \quad \text{для } \vphi(X, \Lambda) \define f(X) + \underset{\text{строка}}\Lambda \underset{\text{столбец}}{F(X)} \qquad \nabla \vphi(X_0, \Lambda) = \underset{\text{строка}}{\On[n + m]^T}
+	\end{equ}
+\end{theorem}
+
+\begin{remark}
+	Числа $ \lambda_i $ называются множителями Лагранжа
+\end{remark}
+
+\begin{proof}
+	Пусть $ X = \column{x_1}{x_{n + m}}, \qquad F = \column{F_1}{F_n} $ \\
+	Запишем матрицу Якоби для $ F $:
+	$$ \mc{D}F(X) =
+	\begin{bmatrix}
+		F_{1x_1}'(X) & ... & F_{1x_{n + m}}'(X) \\
+		. & . & . \\
+		F_{nx_1}'(X) & ... & F_{nx_{n + m}}'(X)
+	\end{bmatrix} $$
+	По условию, её ранг равен $ n $ при любом $ X $, в том числе
+	\begin{equ}{22}
+		\begin{vmatrix}
+			F_{1x_1}'(X_0) & ... & F_{1x_n}'(X_0) \\
+			. & . & . \\
+			F_{nx_1}'(X_0) & ... & F_{nx_n}'(X_0)
+		\end{vmatrix} \ne 0
+	\end{equ}
+	Обозначим $ X' \define \column{x_1}{x_n}, \quad Y = \column{x_{n + 1}}{x_{n + m}} $ \\
+	Определим матрицы $ A $ и $ B $ так же, как в теореме о неявном отображении, то есть так, что
+	$$ \mc{D}F(X) = \bigg[ A(X)B(X) \bigg], \qquad \det A(X_0) \ne 0 $$
+	Обозначим $ X_0' \define \column{x_1^0}{x_n^0}, \quad Y_0 = \column{x_{n + 1}^0}{x_{n + m}^0} $ \\
+	По теореме о неявном отображении
+	\begin{equ}{23}
+		\exist W \ni Y_0, \qquad \exist! g : W \to \R^n : \quad g \in \Cont[1]W, \quad F
+		\begin{barg}
+			g(Y) \\
+			Y
+		\end{barg} = \On
+	\end{equ}
+	Из единственности $ g $ следует, что
+	\begin{equ}{24}
+		\exist U \sub E \sub \R^{n + m}, ~ X_0 \in U : \quad \forall X \in U \quad \nimp[\bigg(] F(X) = \On \iff X =
+		\begin{bmatrix}
+			g(Y) \\
+			Y
+		\end{bmatrix}, \quad Y \in W \nimp[\bigg)]
+	\end{equ}
+	\begin{equ}{25}
+		\vphi(X, \Lambda) \bdefeq\vphi f(X) + \Lambda F(X)
+	\end{equ}
+	$$ \vphi(X, \Lambda) = f(X) + \Lambda \On = f(X) $$
+	\begin{equ}{26}
+		\text{То есть, } X_0 \text{ -- т. лок. экстеремума функции } \vphi(X, \Lambda) \quad \forall \Lambda \text{ при условии } F(X) = \On
+	\end{equ}
+	Возьмём $ Y \in W $ \\
+	Рассмотрим функцию
+	\begin{equ}{27}
+		h(Y, \Lambda) \define \vphi \left(
+		\begin{bmatrix}
+			g(Y) \\
+			Y
+		\end{bmatrix}, \Lambda \right) = f
+		\begin{barg}
+			g(Y) \\
+			Y
+		\end{barg} + \Lambda F
+		\begin{barg}
+			g(Y) \\
+			Y
+		\end{barg}, \qquad Y_0 \in W
+	\end{equ}
+	\begin{equ}{28}
+		\vphi(X, \Lambda) \undereq{\text{при } X \in U \text{ и } F(x) = \On} h(Y, \Lambda), \qquad \text{где } X =
+		\begin{bmatrix}
+			g(Y) \\
+			Y
+		\end{bmatrix}
+	\end{equ}
+	$$ \eref{26}, \eref{28} \implies Y_0 \text{ -- точка локального экстремума } h(Y) \quad \text{(без условий)} $$
+	Для $ h $ действует необходиомое условие локального экстремума:
+	$$ \nabla h(Y_0, \Lambda) = \On[m]^T $$
+	Рассмотрим теперь $ h $ как отображение в $ \R^1 $ \\
+	Его градиент будет матрицей Якоби $ n \times 1 $:
+	\begin{equ}{29}
+		\mc{D}h(Y_0, \Lambda) = \nabla = \On[m]^T
+	\end{equ}
+	Определим отображение $ P(y) \define
+	\begin{bmatrix}
+		g(Y) \\
+		Y
+	\end{bmatrix} $ \\
+	Возьмём $ Y \in W $
+	\begin{equ}{210}
+		h(Y, \Lambda) = f \bigg( P(Y) \bigg) + \Lambda F \bigg( P(Y) \bigg)
+	\end{equ}
+	\begin{equ}{211}
+		\eref{210} \implies \mc{D}h(Y, \Lambda) = \mc{D} \bigg( f \big( P(Y) \big) \bigg) + \Lambda \mc{D} \bigg( F \big( P(Y) \big) \bigg)
+	\end{equ}
+	Вспомним, чему равны матрицы Якоби суперпозиции:
+	\begin{equ}{212}
+		\mc{D} \bigg( f \big( P(Y) \big) \bigg) = \mc{D} f \bigg( P(Y) \bigg) \cdot \mc{D}P(Y)
+	\end{equ}
+	\begin{equ}{213}
+		\mc{D} \bigg( F \big( P(Y) \big) \bigg) = \mc{D} F \bigg( P(Y) \bigg) \cdot \mc{D}P(Y)
+	\end{equ}
+	При доказательстве теоремы о неявной функции мы получили, что
+	\begin{equ}{214}
+		\mc{D}P(Y) =
+		\begin{bmatrix}
+			\mc{D}g(Y) \\
+			I_m
+		\end{bmatrix}
+	\end{equ}
+	$$ \mc{D}F(X_0) = \bigg[ A(X_0)B(X_0) \bigg] $$
+	Подставим $ Y_0 $ в \eref{211}, \eref{212} и \eref{213}:
+	$$ P(Y_0) = X_0 $$
+	Снова будем вместо матрицы Якоби писать градиент:
+	$$ \mc{D}f(X_0) = \bigg( f_{x_1}'(X_0), ..., f_{x_{x + m}}'(X_0) \bigg) $$
+	Запишем его как два градиента:
+	$$ \nabla_1f(X_0) \define \bigg( f_{x_1}'(X_0), ..., f_{x_n}'(X_0) \bigg), \qquad \nabla_2f(X_0) \define \bigg( f_{x_{n + 1}}'(X_0), ..., f_{x_{n + m}}'(X_0) \bigg) $$
+	\begin{equ}{215}
+		\mc{D}f(X_0) = \bigg( \nabla_1f(X_0), \nabla_2f(X_0) \bigg)
+	\end{equ}
+	\begin{multline}\lbl{216}
+		\eref{212} - \eref{214} \implies \On[m]^T \undereq{\eref{29}} \mc{D}h(Y_0, \Lambda) \undereq{\eref{211}} \\
+		= \underbrace{\bigg( \nabla_1f(X_0), \nabla_2f(X_0) \bigg)}_{\eref{215}}
+		\begin{bmatrix}
+			\mc{D}g(Y_0) \\
+			I_m
+		\end{bmatrix} + \Lambda \bigg[ A(X_0)B(X_0) \bigg]
+		\begin{bmatrix}
+			\mc{D}g(Y) \\
+			I_m
+		\end{bmatrix} = \\
+		= \nabla_1f(X_0)\underline{\mc{D}g(Y_0)} + \nabla_2f(X_0) + \Lambda \bigg( A(X_0)\mc{D}g(Y_0) + B(X_0) \bigg) = \\
+		= \underbrace{\bigg( \nabla_1f(X_0) + \Lambda A(X_0) \bigg)} \mc{D}g(Y_0) + \nabla_2 f(X_0) + \Lambda B(X_0)
+	\end{multline}
+	Хотим выбрать $ \Lambda $ так, чтобы скобка обратилась в 0:
+	$$ \nabla_1f(X_0) + \Lambda A(X_0) = \On[m]^T $$
+	\begin{equ}{217}
+		\Lambda = -\nabla_1f(X_0) A^{-1}(X_0)
+	\end{equ}
+	При таком $ \Lambda $ выделенная скобка равна 0, а значит
+	\begin{equ}{218}
+		\eref{216}, \eref{217} \implies \nabla_2f(X_0) + \Lambda B(X_0) = \On[m]^T
+	\end{equ}
+	Вернёмся к полному градиенту:
+	$$ \eref{217} \eref{218} \implies \nabla f(X_0) + \Lambda \bigg[ A(X_0) B(X_0) \bigg] = \On[n + m]^T $$
+	``Склеивая'' $ A $ и $ B $, получаем
+	$$ \nabla f(X_0) + \Lambda \mc{D}F(X_0) = \On[n + m]^T $$
+	Существование доказано. Докажем единственность: \\
+	Возьмём какой-то другой набор $ \Lambda $
+	$$ \grad_1 f(X_0) + \Lambda A(X_0) = \On[n]^T $$
+	Так мы определяли $ \Lambda $, а значит она единственна
+\end{proof}

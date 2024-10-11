@@ -514,7 +514,72 @@ $$ \psi'(x_j) = \psi_{\mp}'(x_j) \liml{x \to x_j^{\mp0}}\frac{\psi(x) - \psi(x_j
 	\hfill
     \begin{enumerate}
         \item Для произвольной точки $ (x_0, y_0) $ из $ G $ построим прямоугольник $ \ol{R} \sub G $ с центром в $ (x_0, y_0) $ и два лежащих в нём равнобедренных треугольника $ \ol{T^-}, \ol{T^+} $ с общей вершиной в точке $ (y_0, x_0) $ и основаниями, параллельными оси ординат, как это было сделано при построении отрезка Пеано \\
-        При этом зафиксируются константы $ a, b, M, h $
+        При этом зафиксируются константы $ a, b, M, h $ \\
+        Выберем $ \delta_* < \delta $ так, чтобы число $ \frac{h}{\delta_*} \fed N \in \N $ \\
+        Положим $ x_{j + 1} \define x_j + \delta_* $ ($ j = \ol{0, N - 1}) $, тогда $ x_N = x_0 + h $ \\
+        Для всякого $ x > x_0 $ будем последовательно строить отрезки ломаной Эйлера $ y = \psi(x) $ с узлами в точках $ x_j $ \\
+        Для любого $ j = 0, ..., N $ это сделать возможно, так как модуль тангенса укла наклона каждого отрезка равен $ \big| f \big(x_j, \psi(x_j) \big) \big| $, а тангенсы углов наклона боковых сторон треугольника $ \ol{T^+} $ по построению равны $ \pm M $, где $ M = \max|f(x, y)| $ на компакте $ \ol{R} $ \\
+        Поэтому любой отрезок ломаной Эйлера, начиная с первого, не может пересечь боковую стенку $ \ol{T^+} $, а значит, содержится в нём \\
+        В результате для всех $ x \in [x_0, x_0 + h] $ точка $ \big( x, \psi(x) \big) \in \ol{T^+} $ и требуемая ломаная Эйлера построена на $ [x_0, x_0 + h] $ \\
+        Для левого отрезка Пеано всё аналогично
+        \item Зафиксируем теперь произвольное положительное число $ \veps $ \\
+        Функция $ f(x, y) $ непрерывна на компакте $ \ol{R} $, следовательно, по теореме Кантора $ f $ равномерно непрерывна на нём. По определнию это занчит, что существует такое $ \delta_1 > 0 $, что для любых двух точек $ (x' y') $ и $ (x'', y'') $ из прямоугольника $ \ol{R} $ таких, что $ |x' - x''| \le \delta_1 $ и $ |y' - y''| < \delta_1 $, выполняется неравенство $ |f(x', y') - f(x'', y'')| \le \veps $ \\
+        Положим $ \delta \define \min\set{\delta_1, \frac{\delta_1}M} $ и покажем, что для любой ломаной Эйлера $ y = \psi(x) $ с рангом дробления меньшим, чем $ \delta $ на отрезке Пеано $ \ol{P_h}(x_0, y_0) = [x_0 - h, x_0 + h] $, справедливо неравенство \eref{1.10}: \\
+        Возьмём любую точку $ x $ из отрезка Пеано, например справа от $ x_0 $ \\
+        Найдётся индекс $ j \in \set{0, ..., N - 1} $ такой, что $ x \in (x_j, x_{j + 1}] $, т. е. $ x_j $ -- ближайшая к $ x $ левая угловая точка ломаной Эйлера \\
+        Согласно \eref{1.9}
+        $$ \psi'(x) - f \big(x, \psi(x) \big) = f \big( x_j, \psi(x_j) \big) - f \big( x, \psi(x) \big) $$
+        Оценим близость аргументов функции $ f $: \\
+        По выбору $ \delta $ и $ j $ имеем
+        $$ |x - x_j| \le \delta \le \delta_1, \qquad |\psi(x) - \psi(x_j)| \undereq{\eref{1.8}} \big| f \big( x_j, \psi(x_j) \big) \big| \cdot |x - x_j| \le M\delta \bdef[\le]\delta \delta_1 $$
+        Поэтому из равномерной непрерывности функции $ f $ вытекает, что
+        $$ \big| f(x_j, \psi(x_j) \big) - f \big( x, \psi(x) \big) \big| \le \veps $$
+        А значит, неравенство \eref{1.10} из определения $ \veps $-решения выполняется на отрезке Пеано
     \end{enumerate}
-
 \end{proof}
+
+\subsection{Лемма Арцела-Асколи}
+
+Пусть последовательность функций $ \seq{h_n(x)}n $ задана на $ [a, b] $
+
+\begin{definition}
+    Каждая из функций последовательности $ \seq{h_n(x)}n $ ограничена на $ [a, b] $, если
+    $$ \forall n \ge 1 \quad \exist K_n > 0 : \quad \forall x \in [a, b] \quad |h_n(x)| \le K_n $$
+\end{definition}
+
+\begin{definition}\label{def:clamp:eq}
+    Последовательность $ \seq{h_n(x)}n $ \bt{равномерно} ограничена на отрезке $ [a, b] $, если
+    $$ \bm{\exist K > 0} : \quad \forall n \ge 1 \quad \forall x \in [a, b] \quad |h_n(x)| \le K $$
+\end{definition}
+
+\begin{definition}
+    Каждая из функций последовательности $ \seq{h_n(x)}n $ непрерывна на отрезке $ [a, b] $, значит, согласно теореме Кантора, равномерно непрерывна на $ [a, b] $, если
+    $$ \forall \veps > 0 \quad \forall n \ge 1 \quad \exist \delta_n > 0 : \quad \forall x', x'' \in [a, b] \quad \nimp[\bigg(] |x' - x''| \le \delta_n \implies |h_n(x') - h_n(x'')| \le \veps \nimp[\bigg)] $$
+\end{definition}
+
+\begin{definition}\label{def:cont:eq}
+    Последовательность $ \seq{h_n(x)}n $ \bt{равностепенно} непрерывна на отрезке $ [a, b] $, если
+    $$ \forall \veps > 0 \quad \bm{\exist \delta > 0} : \quad \forall n \ge 1 \quad \forall x', x'' \in [a, b] \quad \nimp[\bigg(] |x' - x''| \le \delta \implies |h_n(x') - h_n(x'')| \le \veps \nimp[\bigg)] $$
+\end{definition}
+
+\begin{definition}
+    Последовательность функций $ \seq{h_n(x)}n $ поточечно сходится к некоторой функции $ h(x) $ на отрезке $ [a, b] $, если
+    $$ \forall \veps > 0 \quad \forall x \in [a, b] \quad \exist N_x > 0 : \quad \forall i, j \ge N_x \quad |h_i(x) - h_j(x)| \le \veps $$
+\end{definition}
+
+\begin{definition}\label{def:lim:eq}
+    Последовательность $ \seq{h_n(x)}n $ \bt{равномерно} сходится к некоторой функции $ h(x) $ на отрезке $ [a, b] $, если
+    $$ \forall \veps > 0 \quad \bm{\exist N > 0} : \quad \forall i, j \ge N \quad \forall x \in [a, b] \quad |h_i(x) - h_j(x)| \le \veps $$
+\end{definition}
+
+\begin{notation}
+	Для любого $ x \in [a, b] $ поточечная сходимость обозначается $ h_n(x) \to h(x) $
+\end{notation}
+
+\begin{notation}
+    Равномерная относительно $ [a, b] $ сходимость обозначается $ h_n(x) \xrightrightarrows[x \to \infty]{[a, b]} h(x) $
+\end{notation}
+
+\begin{remark}
+    В определениях \ref{def:clamp:eq} и \ref{def:cont:eq} слова ``равномерно'' и ``равностепенно'' означают, что константы $ K, \delta $ не зависят от выбора $ n $, а в \ref{def:lim:eq} -- что номер $ N $ не зависит от выбора $ x $
+\end{remark}
