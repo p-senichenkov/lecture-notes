@@ -1,14 +1,23 @@
-\documentclass[a4paper]{report}
+\documentclass[a4paper]{article}
 \input{../../preamble.tex}
-% \usepackage{cmbright}
 
 \graphicspath{{figures/}}
 
 \usepackage[russian]{babel}
-\usepackage{faktor}
 
+\titleformat{\section}
+{\normalfont\bfseries\Large}    % font
+{\textcolor{gray}{\rom\thesection.}}  % number
+{0.5em} % separator
+{}  % before-code
+[]  % after-code
+
+\title{Типы уравнений первого порядка}
+\author{}
+\date{}
 
 \begin{document}
+    \maketitle
 
     \tableofcontents
 
