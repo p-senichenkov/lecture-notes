@@ -1,0 +1,231 @@
+\section{Продолжаем комплексификацию}
+
+\begin{remind}
+	Мы ввели элементы вида $ u + vi $, определили для них сложение и умножение, доказали, что это векторное пространство
+\end{remind}
+
+\begin{theorem}[базис комплексификации]
+	Пусть $ e_1, .., e_n $ -- бизс $ V $ \\
+	Тогда $ e_1 = e_1 + 0 \cdot i, ..., e_n = e_n + 0 \cdot i $ -- базс $ \hat{V} $
+\end{theorem}
+
+\begin{iproof}
+	\item Докажем, что система является порождающей: \\
+	Пусть $ w \in \hat{V} $ \\
+	Разложим $ u $ и $ v $ по базису $ e_1, ..., e_n $ в $ V $:
+	$$ u = a_1e_1 + ... + a_ne_n, \qquad v = b_1e_1 + ... + b_ne_n, \qquad a_s, b_s \in \R $$
+	$$ w = (\underbrace{a_1 + b_1i}_{\in \Co})e_1 + ... + (\underbrace{a_n + b_ni}_{\in \Co})e_n $$
+	\item Докажем ЛНЗ: \\
+	Пусть $ c_1e_1 + ... + c_ne_n = 0, \quad c_s \in \Co, \quad c_s = a_ + b_si, \quad a_s, b_s \in \R $
+	$$ (a_1 + b_1i)(e_1 + 0i) + \widedots[4em] + (a_n + b_ni)(e_n + 0i) = 0 $$
+	Разделим вещественную и мнимую части:
+	$$ \bigg( (a_1e_1 - b_10) + \widedots[4em] + (a_ne_n - b_n0) \bigg) + \bigg( (a_10 + b_1e_1) + \widedots[4em] + (a_n0 + b_ne_n) \bigg) i = 0 + 0i $$
+	Значит, каждое большое слагаемое равно нулю:
+	$$
+	\begin{cases}
+		a_1e_1 + ... + a_ne_n = 0 \\
+		b_1e_1 + ... + b_ne_n = 0
+	\end{cases} \underimp{e_1, ..., e_n \text{ ЛНЗ в } V}
+	\begin{cases}
+		a_1 = ... = a_n = 0 \\
+		b_1 = ... = b_n = 0
+	\end{cases} $$
+\end{iproof}
+
+\begin{implication}
+	$ \dim_\Co\hat{V} = \dim_\R V $
+\end{implication}
+
+\begin{props}[сопряжённых векторов]
+	\item $ \ol{\ol{w}} = w $
+	\begin{proof}
+		$ w = u + vi, \qquad \ol{w} = u - vi, \qquad \ol{\ol{w}} = u - (-v)i = u + vi = w $
+	\end{proof}
+	\item $ \ol{w_1 + w_2} = \ol{w_1} + \ol{w_2}, \qquad \ol{z \cdot w} = \ol{z} \cdot \ol{w} $
+	\begin{proof}
+		Первое равенство -- упражнение. Проверим второе: \\
+		Пусть $ z = a + bi, \quad w = u + vi $
+		$$ \ol{(a + bi)(u + vi)} = \ol{(au - bv) + (av + bu)i} = (au - bv) - (av + bu)i $$
+		$$ \ol{(a + bi)} \cdot \ol{(u + vi)} = (a - b_i)(u - v_i) = \bigg( \underbrace{au - (-b)(-v)}_{au - bv} \bigg) + \bigg( \underbrace{a(-v) + (-b)u}_{-(av + bu)} \bigg) $$
+	\end{proof}
+	\item $ w_1, ..., w_n $ ЛНЗ $ \iff \ol{w_1}, ..., \ol{w_n} $ ЛНЗ
+	\begin{proof}
+		Достаточно доказать в одну сторону ($ \implies $), дальше сошлёмся на первое свойство \\
+		Пусть $ \ol{w_1}, ..., \ol{w_n} $ ЛЗ, то есть
+		$$ c_1, ..., c_n \in \Co : \quad c_1\ol{w_1} + ... + c_n\ol{w_n} = 0, \qquad c_i \neq \bigodot $$
+		$$ 0 = \ol0 = \ol{c_1\ol{w_1} + ... + c_n\ol{w_n}} \undereq{\text{2 св-во}} \ol{c_1}\ol{\ol{w_1}} + ... + \ol{c_n}\ol{\ol{w_n}} \undereq{\text{1 св-во}} \ol{c_1}w_1 + ... + \ol{c_n}w_n $$
+		$$ c_i \neq \bigodot \implies \ol{c_i} \neq \bigodot $$
+		$ w_1, ..., w_n $ ЛЗ -- \contra
+	\end{proof}
+\end{props}
+
+\subsection{Операторы}
+
+\begin{definition}
+	$ \mc{A} $ -- оператор на $ V $ \\
+	Продолжением $ \mc{A} $ на $ \hat{V} $ называется отображение $ \hat{\mc{A}} : \hat{V} \to \hat{V} $, заданный равенством $ \hat{\mc{A}}(u + vi) = \mc{A}(u) = \mc{A}(v)i $
+\end{definition}
+
+\begin{property}
+	$ \hat{\mc{A}} $ линейно
+\end{property}
+
+\begin{proof}
+	Упражнение
+\end{proof}
+
+\subsection{Многочлены от оператора}
+
+\begin{notation}
+	$ P(t) = c_Kt^k + c_{k - 1}t^{k - 1} + ... + c_0, \qquad c_s \in \Co $ \\
+	Тогда $ \ol{P}(t) = \ol{c_k}t^k + \ol{c_{k - 1}}t^{k - 1} + ... + \ol{c_0} $ -- сопряжённый к $ P $
+\end{notation}
+
+\begin{lemma}[применение операторов к сопряжённым векторам]
+	$ \mc{A} $ -- оператор на $ V $. Тогда
+	\begin{enumerate}
+		\item $ \hat{\mc{A}}(\ol{w}) = \ol{\hat{\mc{A}}(w)} $
+		\begin{proof}
+			Пусть $ w = u + iv, \qquad \ol{w} = u - iv $
+			$$ \hat{\mc{A}}(w) = \mc{A}u + \mc{A}vi, \qquad \mc{A}(\ol{w}) = \mc{A}u + \mc{A}(-v)i = \mc{A}u - \mc{A}vi $$
+		\end{proof}
+		\item $ P(\hat{\mc{A}})(w_1) = w_2 \implies \ol{P}(\hat{\mc{A}})(\ol{w_1}) = \ol{w_2} $
+		\begin{proof}
+			Из первого свойства $ \hat{\mc{A}}^{(s)}(\ol{w_1}) = \ol{\mc{A}^{(s)}(w_1)} $ \\
+			Пусть $ P(t) = c_kt^k + ... + c_0 $
+			$$ w_2 = c_kP(\hat{\mc{A}})(w_1) + ... + c_0w_1 $$
+			$$ \ol{w_2} = \ol{c_k}\ol{P}(\hat{\mc{A}})(\ol{w_1}) + ... + c_0\ol{w_1} = \ol{P}(\hat{\mc{A}})(\ol{w_1}) $$
+		\end{proof}
+		\item Если $ P(t) $ аннулирует $ w $, то $ \ol{P}(t) $ аннулирует $ \ol{w} $
+		\begin{proof}
+			$ P(\hat{\mc{A}})(w) = 0 \implies \ol{P}(\hat{\mc{A}})(\ol{w}) \undereq{\text{2 св-во}} \ol{P(\hat{\mc{A}})(w)} = \ol0 = 0 $
+		\end{proof}
+		\item Если $ w $ -- корневой вектор, соответствующий $ \lambda $, то $ \ol{w} $ -- корневой вектор, соответствующий $ \ol{\lambda} $
+		\begin{proof}
+			$ P(t) = (t - \lambda)^k $ аннулирует $ w $ для некоторого $ k $ \\
+			$ \implies \ol{P}(t) $ аннулирует $ \ol{w} $ (из 3 св-ва)
+			$$ \ol{P}(t) = (t - \ol{\lambda})^k $$
+		\end{proof}
+		\item Если $ w_1, ..., w_n $ -- (жорданов) базис корневого подпространства, соответствующего $ \lambda $, то $ \ol{w_1}, ..., \ol{w_n} $ -- (жорданов) базис корневого подпространства, соответствующего $ \ol{\lambda} $ \nimp[(если один жорданов, то и второй жорданов)]
+		\begin{iproof}
+			\item ЛНЗ доказана
+			\item Докажем, что это порождающая система: \\
+			Пусть $ \ol{w} $ принадлежит пространству, соответстсвующему $ \ol\lambda \implies w $ принадлежит пространству, соотв. $ \lambda $ \\
+			Разложим по базису:
+			$$ \exist c_i : \quad w = c_1e_1 + ... + c_ne_n $$
+			$$ \implies \ol{w} = \ol{c_1}\ol{e_1} + ... + \ol{c_n}\ol{e_n} $$
+			\item Докажем, что сопряжённый к жорданову базису жорданов:
+			$$ \hat{\mc{A} - \lambda \mc{E}} = \hat{\mc{A}} - \lambda \hat{\mc{E}} $$
+			$$ (\hat{\mc{A}} - \lambda \hat{\mc{E}})e_i = e_{i - 1} \implies (\hat{\mc{A}} - \ol{\lambda}\mc{E})\ol{e_i} = \ol{e_{i + 1}} $$
+		\end{iproof}
+	\end{enumerate}
+\end{lemma}
+
+\begin{theorem}
+	Пусть $ V $ - конечномерное векторное пространство над $ \R $, $ \quad \mc{A} $ -- оператор на $ V $ \\
+	Тогда существует базис $ V $, в котором матрица $ \mc{A} $ является блочно-диагональной, и каждый блок -- либо жорданова клетка, либо имеет вид
+	$$
+	\begin{pmatrix}
+		a & b & . & . & . & . & . & . & . & . \\
+		-b & a & . & . & . & . & . & . & . & . \\
+		1 & 0 & a & b & . & . & . & . & . & . \\
+		0 & 1 & -b & a & . & . & . & . & . & . \\
+		. & . & 1 & 0 & a & b & . & . & . & . \\
+		. & . & 0 & 1 & -b & a & . & . & . & . \\
+		. & . & . & . & . & . & . & . & . & . \\
+		. & . & . & . & . & . & . & . & . & . \\
+		. & . & . & . & . & . & . & . & a & b \\
+		. & . & . & . & . & . & . & . & -b & a
+	\end{pmatrix} $$
+\end{theorem}
+
+\begin{proof}
+	Пусть минимальный многочлен $ \mc{A} $ равен
+	$$ P(t) = (t - a_1)^{m_1}\widedots[3em](t^2 + p_1t + a_1)^{s_1}\widedots[3em] $$
+	где $ t + p_1t + q_1, \widedots[3em] $ не имеют вещественных корней \\
+	Разложим $ V $ в прямую сумму примарных подпространств \\
+	Достаточно доказать для одного подпростанства \\
+	Для пространства, соответствующего $ (t - a)^m $ есть базис, в котором матрица $ \mc{A} $ является блочно-диагональной, и в котром матрица $ \mc{A} $ жорданова \\
+	Рассмотрим подпространство, соответствующе $ t^2 + pt + q)^s $: \\
+	Пусть $ \lambda, \ol\lambda $ -- комплексные корни $ t^2 + pt  q $
+	$$ (t^2 + pt + q)^s = (t - \lambda)^s(t - \ol\lambda)^s $$
+	Пусть $ P_1 = (t^2 + pt + q)^s $ \\
+	Знаем, что $ P_1(\mc{A}) = 0 $ на корневом подпространстве $ U $ \\
+	Тогда $ P_1(\hat{\mc{A}}) = 0 $ на $ \hat{U} $
+	$$ \hat{U} = \hat{W_1} + \hat{W_2}, \qquad \hat{W_1}, \hat{W_2} \text{ -- корневые подпространства для } \lambda, \ol\lambda $$
+	Существует жорданов базис $ w_1, ..., w_k $ для $ \hat{W_1} $ \\
+	Тогда $ \ol{w_1}, ..., \ol{w_k} $ -- жорданов базис для $ \hat{W_2} $ \\
+	$ w_1, ..., w_k, \ol{w_1}, ..., \ol{w_k} $ -- базис $ \hat{U} $ \\
+	Пусть $ w_i = u_i + v_i $ \\
+	Докажем, что $ u_1, v_1, u_2, v_2, ..., u_k, v_k $ -- базис $ U $: \\
+	$ u_1 + iv_1, u_2 - iv_1, u_2  + iv_2 u_2 - iv_2, \widedots[4em] $ -- базис $ \hat{U} $ \\
+	$ u_1 + iv_1, (u_1 - iv_1) + (u_1 + iv_1), u_2 + iv_2, (u_2 - iv_2) + (u_2 + iv_2), \widedots[4em] $ -- базис $ \hat{U} $ \\
+	$ u_1, u_1 + iv_1, u_2, u_2 + iv_2, \widedots[4em] $ -- базис $ \hat{U} $ \\
+	$ u_1, u_1 + iv_1 - u_1, u_2, u_2 + iv_2 - v_2, \widedots[4em] $ -- базис $ \hat{U} $ \\
+	$ u_1, v_1, u_2, v_2, \widedots[4em] $ -- базис $ \hat{U} $, а значит и базис $ U $ \\
+	Проверим, что в этом базисе получается правильная жорданова матрица: \\
+	Рассмотрим жордановы цепочки
+	$$ w_1, ..., w_{r_1}, w_{r_1 + 1}, ..., w_{r_1 + r_2}, \widedots[4em] $$
+	Докажем, что им соотвествуют клетки размера $ 2r_1, 2r_2, ... $: \\
+	Рассмотрим первую цепочку:
+	$$ \hat{\mc{A}}(u_m + iv_m) =
+	\begin{cases}
+		\lambda(u_m + iv_m) + (u_m + iv_m), \qquad m < r_1 \\
+		\lambda(u_r + iv_r), \qquad m = r
+	\end{cases} $$
+	Пусть $ \lambda = a + bi $ \\
+	При $ m < r $,
+	$$ \mc{A}(u_m) + \mc{A}(v_m)i = (au_m - bv_m) + (bu_m + av_m)i = \underbrace{(au_m - bv_m + u_{m + 1})}_{\mc{A}(u_m)} + \underbrace{(bu_m + av_m + v_{m + 1})}_{\mc{A}(v_m)}i $$
+	\textit{тут надо проверить} \\
+	При $ m = r $,
+	$$ \mc{A}(u_m) = (au_m - bv_m) + (bu_m + av_m)i = (au_m - bv_m) + (bu_m + av_m)i $$
+\end{proof}
+
+\chapter{Линейные отображения в евклидовых и унитарных пространствах}
+
+\section{Двойственное пространство}
+
+\subsection{Более общие вещи}
+
+\begin{definition}
+	$ V $ -- векторное пространство над полем $ K $ \\
+	Линейным функционалом на $ V $ называется линейное отображение $ V \to K $
+\end{definition}
+
+\begin{exmpls}
+	\item $ V $ конечномерное, $ \quad e_1, ..., e_n $ -- базис \\
+	Первая координата, т. е. отображение
+	$$ a_1e_1 + ... + a_ne_n \mapsto a_1 \text{ -- функционал} $$
+	Любая линейная функция от координат будет функционалом
+	\item $ V $ -- пространство многочленов над $ \R $ \\
+	$ P(t) \mapsto P(1) $ -- функционал \\
+	$ P(t) \mapsto P'(2) $ -- функционал
+	\item $ \Co $ -- векторное пространство над $ \R $ \\
+	$ \operatorname{Re}(z), \operatorname{Im}(z) $ -- функционалы
+	\item $ V $ -- векторное пространство со скалярным произведением, зафиксирован $ v \in V $
+	$$ y(x) = (x, v) $$
+	Представим предыдущие примеры в таком виде:
+	\begin{enumerate}
+		\item $ \R^n \to \R $
+		$$ (a_1, ..., a_n) \mapsto 2a_1 + 3a_2 $$
+		Это скалярное умножение на $ (2, 3, 0, ..., 0) $
+		\item $ V $ -- пространство многочленов $ at^2 + bt + c $
+		$$ P(t) \mapsto P(1) $$
+		Рассмотрим соотвествующие векторы в $ \R^3 $
+		$$
+		\begin{pmatrix}
+			a \\
+			b \\
+			c
+		\end{pmatrix} \mapsto a + b + c $$
+		Это умножение на $ (1, 1, 1) $
+	\end{enumerate}
+	\item $ K $ -- поле \\
+	$ K^\infty $ -- множество бесконечных последовательностей $ (a_1, a_2, ...) $, в которых только конечное количество членов отлично от нуля \\
+	Сложение и умножение на скаляр -- покомпонентно \\
+	Получили векторное пространство над $ K $ \\
+	Фиксируем бесконечную последовательность $ (v_1, v_2, ...) $ (не обязательно из $ K^\infty $) \\
+	Функционал на $ K^\infty $:
+	$$ (a_1, a_2, ...) \mapsto a_1v_1 + a_2v_2 + ... $$
+	(это бесконечная сумма, но в ней только конечное количество слагаемых отлично от нуля)
+\end{exmpls}
