@@ -1,0 +1,364 @@
+\chapter{Функциональные последовательности и ряды}
+
+\section{Переход к пределу и непрерывность в функциональных рядах}
+
+\begin{theorem}
+	$ X $ -- метрическое пространство, $ \qquad \seq{v_n(x)}n, \qquad $ имеется ряд
+	\begin{equ}1
+		\sum_{n = 1}^\infty v_n(x) = S(x)
+	\end{equ}
+	\begin{enumerate}
+		\item $ x_0 \in X $ -- точка сгущения, $ \qquad \eref1 $ сходится равномерно на $ X \setminus \set{x_0}, \qquad \forall n \quad \exist \liml{x \to x_0} v_n(x) = c_n $
+		$$ \implies
+		\begin{cases}
+			\sum_{n = 1}^\infty c_n \text{ сходится } \\
+			\exist \liml{x \to x_0} S(x) \\
+			\sum_{n = 1}^\infty c_n = \liml{x \to x_0} S(x)
+		\end{cases} $$
+		\item \eref1 сходится равномерно на всём $ X, \qquad v_n $ непр. в $ x_0 \quad \forall n $
+		$$ \implies S(x) \text{ непр. в } x_0 $$
+		\item $ X $ всюду плотно, $ \qquad \eref1 $ сходится равномерно на всём $ X, \qquad v_n \in \Cont{X} \quad \forall n $
+		$$ \implies S \in \Cont{X} $$
+	\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+	$ S_n(x) = v_1(x) + ... + v_n(x) $ \\
+	Равномерная сходимость ряда \eref1 по определению означает, что
+	$$ S_n(x) \uniarr{x \in X \setminus \set{x_0}} S(x) $$
+	Применима аналогичная теорема для функциональных последовательностей
+\end{proof}
+
+\section{Интегрирование функциональных последовательностей и рядов}
+
+\begin{theorem}
+	$ \seq{f_n(x)}n, \qquad f_n \in \Cont{[a, b]}, \qquad f_n(x) \uniarr{x \in [a, b]} f(x) $
+	\begin{remark}
+		В таком случае $ f \in \Cont{[a, b]} $, а значит $ f \in \Ri{[a, b]} $
+	\end{remark}
+	$$ \implies \dint{a}b{f_n(x)} \infarr{n} \dint{a}b{f(x)} $$
+\end{theorem}
+
+\begin{proof}
+	Равномерная сходимость означает, что
+	\begin{equ}3
+		\forall \veps > 0 \quad \exist N : \quad \forall n > N \quad \forall x \in [a, b] \quad |f_n(x) - f(x)| < \veps
+	\end{equ}
+	$$ \bigg| \dint{a}b{f_n(x)} - \dint{a}b{f(x)} \bigg| = \bigg| \dint{a}b{\bigg( f_n(x) - f(x) \bigg)} \bigg| \le \dint{a}b{\big| f_n(x) - f(x) \big|} \undereq{\eref3} \dint{a}b\veps = \veps(b - a) $$
+	Это и есть определение сходимости требуемой числовой последовательности
+\end{proof}
+
+\begin{theorem}[интегрирование функционального ряда]
+	$ \seq{v_n(x)}n, \qquad v_n \in \Cont{[a, b]} $ \\
+	$ \sum_{n = 1}^\infty v_n(x) $ равномерно сходится на $ [a, b] $
+	$$ \implies \dint{a}b{\sum_{n = 1}^\infty v_n(x)} = \sum_{n = 1}^\infty \dint{a}b{v_n(x)} $$
+\end{theorem}
+
+\begin{proof}
+	Обозначим
+	$$ c_n \define \dint{a}b{v_n(x)}, \qquad B_n \define c_1 + ... + c_n, \qquad S_n(x) \define v_1(x) + ... + v_n(x), \qquad S(x) \define \sum_{n = 1}^\infty v_n(x) $$
+	По определению равномерной сходимости ряда,
+	$$ S_n(x) \uniarr{x \in [a, b]} S(x) $$
+	Отсюда, по только что доказанной теореме,
+	$$
+	\begin{rcases}
+		\dint{a}b{S_n(x)} \infarr{n} \dint{a}b{S(x)} \\
+		\dint{a}b{S_n(x)} = \dint{a}b{\bigg( v_1(x) + ... + v_n(x) \bigg)} = B_n
+	\end{rcases} \implies B_n \infarr{n} \dint{a}b{S(x)} $$
+\end{proof}
+
+\section{Теорема о производной в функциональной последовательности}
+
+\begin{theorem}
+	$ \seq{f_n(x)}n, \qquad f_n \in \Cont{[a, b]}, \qquad \forall n $
+	\begin{equ}{10}
+		\forall x \in [a, b] \quad \exist f_n'(x)
+	\end{equ}
+	\begin{note}
+		Непрерывность можно было бы не указывать -- она следует из существования производной
+	\end{note}
+	\begin{equ}{11}
+		\exist \vphi(x) : [a, b]  \to \R : \quad f_n'(x) \uniarr{x \in [a, b]} \vphi(x)
+	\end{equ}
+	\begin{equ}{12}
+		\exist x_0 \in [a, b] : \quad \exist \limi{n} f_n(x_0) \in \R
+	\end{equ}
+	\begin{mequ}[{\implies \exist f : [a, b] \to \R : \quad \empheqlbrace}]
+		&f_n(x) \uniarr{x \in [a, b]} f(x) \\
+		\lbl{14} &\forall x \in [a, b] \quad \exist f'(x) \\
+		\lbl{15} &f'(x) = \vphi(x)
+	\end{mequ}
+\end{theorem}
+
+\begin{iproof}
+	\item Возьмём $ m \ne n $ \\
+	Определим функции:
+	$$ P_{mn}(x) \define f_m(x) - f_n(x) $$
+	\begin{equ}{16}
+		\eref{10} \implies \exist P_{mn}'(x) = f_m'(x) - f_n'(x)
+	\end{equ}
+	Значит, к $ P_{mn} $ можно применить теорему Лагранжа:
+	\begin{multline}\lbl{17}
+		\forall x \in [a, b] : x \ne x_0 \quad \exist c \in (x \between x_0) : \quad P_{mn}(x) - P_{mn}(x_0) = P_{mn}'(c)(x - x_0) \undereq{\eref{16}} \\
+		= \bigg( f_m'(c) - f_n'(c) \bigg)(x - x_0)
+	\end{multline}
+	К функциональной последовательности производных применим необходимую часть критерия Коши:
+	\begin{equ}{18}
+		\forall \veps > 0 \quad \exist N_1 : \quad \forall m > n > N_1 \quad \forall x \in [a, b] \quad |f_m'(x) - f_n'(x)| < \veps
+	\end{equ}
+	\begin{multline}\lbl{19}
+		\underimp{\eref{17}} \forall m > n > N_1 \quad \forall x \in [a, b], x \ne x_0 \quad |P_{mn}(x) - P_{mn}(x_0)| = \\
+		= |f_m'(c) - f_n'(c)| \cdot |x - x_0| < \veps (b - a)
+	\end{multline}
+	По условию \eref{12} мы можем применить критерий Коши к $ f_n(x_0) $:
+	$$ \exist N_2 : \quad \forall m > n > N_2 \quad |f_m(x_0) - f_n(x_0)| < \veps $$
+	Применим обозначение $ P_{mn} $:
+	\begin{equ}{20}
+		\forall m > n > N_2 \quad |P_{mn}(x_0)| < \veps
+	\end{equ}
+	Пусть $ N \define \max\set{N_1, N_2} $. При $ m > n > N $ действуют и \eref{19}, и \eref{20}:
+	\begin{multline*}
+		\forall x \in [a, b], x \ne x_0 \quad |P_{mn}(x)| = |P_{mn}(x) - P_{mn}(x_0) + P_{mn}(x_0)| \trile |P_{mn}(x) - P_{mn}(x_0)| + |P_{mn}(x_0)| < \\
+		< (b - a)\veps + \veps = (b - a + 1)\veps
+	\end{multline*}
+	При $ x = x_0 $ это тоже верно (т. к. у нас есть \eref{20}), т. е.
+	$$ \forall x \in [a, b] \quad |f_m(x) - f_n(x)| < (b - a + 1)\veps $$
+	Значит, к функциональной последовательности $ f_n(x) $ можно применить критерий Коши:
+	\begin{equ}{13}
+		\implies f_n(x) \uniarr{x \in [a, b]} f(x)
+	\end{equ}
+	$$ f_n \in \Cont{[a, b]} \implies f \in \Cont{[a, b]} $$
+	\item Фиксируем произвольный $ x \in [a, b] $ \\
+	Рассмотрим
+	$$ g_n : [a, b] \setminus \set{x} : \quad g_n(y) \define \frac{f_n(y) - f_n(x)}{y - x}, \qquad g : [a, b] \setminus \set{x} : \quad g(y) \define \frac{f(y) - f(x)}{y - x} $$
+	\begin{multline}\lbl{24}
+		g_m(y) - g_n(y) = \frac{f_m(y) - f_m(x) - (f_n(y) - f_n(x))}{y - x} = \frac{\big( f_m(y) - f_n(y) \big) - \big( f_m(x) - f_n(x) \big)}{y - x} = \\
+		= \frac{P_{mn}(y) - P_{mn}(x)}{y - x}
+	\end{multline}
+	Применим теорему Лагранжа:
+	$$ \exist c_1 \in (y \between x) : \quad P_{mn}(y) - P_{mn}(x) = P_{mn}'(c_1)(y - x) $$
+	Подставим в \eref{24}:
+	\begin{equ}{26}
+		g_m(y) - g_n(y) = P_{mn}'(c_1)
+	\end{equ}
+	$$ P_{mn}'(c_1) \undereq{\eref{16}} f_m'(c_1) - f_n'(c_1) $$
+	$$ \forall \veps > 0 \quad \exist N_1 : \quad \text{ выполнено } \eref{18} $$
+	\begin{equ}{27}
+		\underimp{\eref{26}} \forall y \in [a, b] \setminus \set{x} \quad \forall m > n > N_1 \quad |g_m(y) - g_n(y)| < \veps|y - x| \le \veps(b - a)
+	\end{equ}
+	Применим критерий Коши:
+	\begin{equ}{28}
+		\exist h : [a, b] \setminus \set{x} : \quad g_n(y) \uniarr{y \in [a, b] \setminus \set{x}} h(y)
+	\end{equ}
+	Зафиксируем $ y \in [a, b] \setminus \set{x} $ и рассмотрим числовую последовательность:
+	\begin{equ}{29}
+		\eref{28} \implies g_n(y) \infarr{n} h(y)
+	\end{equ}
+	$$ g_n(y) \bdefeq{g_n} \frac{f_n(y) - f_n(x)}{y - x} $$
+	\begin{equ}{30}
+		\eref{13} \implies
+		\begin{cases}
+			f_n(y) \infarr{n} f(y) \\
+			f_n(x) \infarr{n} f(x)
+		\end{cases}
+	\end{equ}
+	\begin{equ}{31}
+		\eref{30} \implies g_n(y) \infarr{n} \frac{f(y) - f(x)}{y - x}
+	\end{equ}
+	\begin{equ}{32}
+		\eref{29}, \eref{31} \implies h(y) = \frac{f(y) - f(x)}{y - x}
+	\end{equ}
+	\begin{equ}{33}
+		\eref{28}, \eref{32} \implies \frac{f_n(y) - f_n(x)}{y - x} \uniarr{y \in [a, b] \setminus \set{x}} \frac{f(y) - f(x)}{y - x}
+	\end{equ}
+	Вспомним, как мы определяли $ g_n(y) $ и $ g(y) $:
+	$$ \implies g_n(y) \uniarr{y \in [a, b] \setminus \set{x}} g(y) $$
+	\begin{equ}{34}
+		\eref{10} \bdef[\iff]{g_n} \forall n \quad \exist \liml{y \to x} g_n(y) = f_n'(x)
+	\end{equ}
+	К последним двум выражениям можно применить теорему о предельном переходе в функциональной последовательности:
+	\begin{equ}{35}
+		\exist \liml{y \to x} g(y) = A, \qquad \exist \limi{n} f_n'(x)
+	\end{equ}
+	\begin{equ}{36}
+		A = \limi{n} f_n'(x)
+	\end{equ}
+	$$ \eref{35} \bdef[\implies]{g(y)} \exist \liml{y \to x} \frac{f(y) - f(x)}{y - x} = f'(x) = A $$
+	$$
+	\begin{rcases}
+		\eref{35}, \eref{36} \implies \exist f'(x) = \limi{n} f_n'(x) \\
+		\eref{11} \implies \text{ для фиксированного } x \in [a, b] \quad f_n'(x) \infarr{n} \vphi(x)
+	\end{rcases} \implies \vphi(x) = f'(x) $$
+\end{iproof}
+
+У этой теоремы имеется вариант для функциональных рядов:
+
+\begin{theorem}[о производной функционального ряда]
+	$ \seq{v_n(x)}, \qquad v_n \in \Cont{[a, b]} $ \\
+	$ \forall x \in [a, b] \quad \exist v_n'(x) $
+	\begin{equ}{40}
+		\sum_{n = 1}^\infty v_n'(x) \text{ равномерно сходится на } [a, b]
+	\end{equ}
+	\begin{equ}{41}
+		\exist x_0 \in [a, b] : \quad \sum_{n = 1}^\infty v_n(x_0) \text{ сходится}
+	\end{equ}
+	$$ \implies \left\{
+	\begin{aligned}
+		\forall x \in [a, b] \quad \exist \bigg( \sum_{n = 1}^\infty v_n(x) \bigg)' \\
+		\bigg( \sum_{n = 1}^\infty v_n(x) \bigg)' = \sum_{n = 1}^\infty v_n'(x)
+	\end{aligned} \right. $$
+\end{theorem}
+
+\begin{proof}
+	Рассмотрим частичные суммы:
+	$$ S_n(x) = v_1(x) + ... + v_n(x) \quad \forall x \in [a, b] \quad \forall n $$
+	$$ \exist S_n'(x) = v_1'(x) + ... + v_n'(x) $$
+	$$ \eref{40} \implies \exist \vphi(x) : \quad S_n'(x) \rightrightarrows \vphi(x) $$
+	$$ \eref{41} \implies S_n(x_0) \infarr{n} A \in \R $$
+	К функциональной последовательности частичных сумм можно применить только что доказанную теорему
+\end{proof}
+
+\section{Пример ван дер Вардена}
+
+\begin{theorem}
+	$ \exist f \in \Cont\R : \quad \forall x \in \R \quad \not\exist f'(x) $
+\end{theorem}
+
+\begin{proof}[построение ван дер Вардена]
+	Рассмотрим функцию $ \vphi(x) \define 1 - |x - 1| $ при $ x \in [0, 2] $ (рис. \ref{tikz:1.a}) \\
+	При $ x \in [2k, 2k + 2] $, где $ k \ne 0 \in \Z $, полагаем $ \vphi(x) \define \vphi(x - 2k) $ (рис. \ref{tikz:1.b})
+	\begin{equ}{43}
+		f(x) \define \sum_{n = 0}^\infty \bigg( \frac34 \bigg)^n \vphi(4^n x)
+	\end{equ}
+	\begin{itemize}
+		\item Проверим непрерывность $ f(x) $: \\
+		Воспользуемся признаком Вейерштрасса:
+		\begin{intuition}
+			$ \vphi(4^n x) \in \Cont\R $
+		\end{intuition}
+		При этом, $ 0 \le \vphi(x) \le 1 $
+		$$ \implies \bigg( \frac34 \bigg)^n |\vphi(4^n x) | = \bigg( \frac34 \bigg)^n \vphi(4^n x) \le \bigg( \frac34 \bigg)^n $$
+		$$ \sum_{n = 0}^\infty \bigg( \frac34 \bigg)^n = \frac1{1 - \frac34} = 4 $$
+		Значит, ряд \eref{43} равномерно сходится на $ \R $ \\
+		Значит, и его сумма непрерывна
+		\item Докажем, что производной не существует: \\
+		Доказывать будем \bt{от противного}. Пусть есть точка, в которой существует производная:
+		\begin{equ}{44}
+			\exist x \in \R : \quad \exist f'(x)
+		\end{equ}
+		Это эквивалентно тому, что она дифференцируема в этой точке:
+		\begin{equ}{45}
+			f(y) - f(x) = f'(x)(y - x) + r(y)
+		\end{equ}
+		\begin{equ}{46}
+			\text{где } \frac{|r(y)|}{|y - x|} \underarr{y \in x} 0
+		\end{equ}
+		\begin{equ}{47}
+			\eref{46} \bdef[\implies]{\lim} \exist \delta > 0 : \quad \forall y \in [x - \delta, x + \delta] \quad \frac{|r(y)|}{|y - x|} \le 1
+		\end{equ}
+		\begin{multline}\lbl{48}
+			\eref{45}, \eref{47} \implies \forall y \in [x - \delta, x + \delta] \quad |f(y) - f(x)| \le |f'(x)| \cdot |y - x| + |r(y)| \le \\
+			\le \bigg( \underbrace{|f'(x)| + 1 \bigg)}_{\fed A}|y - x| = A|y - x|
+		\end{multline}
+		Рассмотрим $ x - \delta \le y_1 \le x \le y_2 \le x + \delta $
+		\begin{equ}{49}
+			\eref{48} \implies |f(y_2) - f(x)| \le A(y_2 - x)
+		\end{equ}
+		\begin{equ}{410}
+			\eref{48} \implies |f(x) - f(y_1)| \le A(x - y_1)
+		\end{equ}
+		\begin{multline*}
+			\eref{49}, \eref{410} \implies |f(y_2) - f(y_1)| = \bigg| \bigg( f(y_2) - f(x) \bigg) + \bigg( f(x) - f(y_1) \bigg) \bigg| \trile \\
+			\le |f(y_2) - f(x)| + |f(x) - f(y_1)| \le A(y_2 - x) + A(x - y_1) = A(y_2 - y_1)
+		\end{multline*}
+		Выберем $ m \ge 1 $ так, что
+		$$ 4^m > \frac1\delta $$
+		Рассмотрим число $ 4^mx $ \\
+		Так как это какое-то конкретное вещественное число, то
+		$$ \exist k \in \Z : \quad k \le 4^mx < k + 1 $$
+		\begin{equ}{415}
+			\implies \underbrace{k \cdot 4^{-m}}_{\fed a_m} \le x < \underbrace{(k + 1) \cdot 4^{-m}}_{\fed b_m}
+		\end{equ}
+		\begin{equ}{416}
+			b_m - a_m \bydef 4^{-m}
+		\end{equ}
+		\begin{itemize}
+			\item Возьмём $ n > m $
+			$$ 4^nx = 4^{n - m} \cdot 4^mx $$
+			(это справедливо для любого $ n $) \\
+			Рассмотрим числа $ 4^na_m $ и $ 4^nb_m $
+			$$ 4^na_m = 4^{n - m} \cdot 4^ma_m = 4^{n - m} \cdot k $$
+			$$ 4^nb_m = 4^{n - m} \cdot 4^mb_m = 4^{n - m}(k + 1) = \underbrace{4^{n - m}k}_{4^na_m} + \underbrace{4^{n - m}}_{\text{чётное}} $$
+			\begin{equ}{418}
+				\implies \vphi(4^nb_m) = \vphi(4^na_m + \text{ чётное}) = \vphi(4^na_m)
+			\end{equ}
+			(т. к. у функциии $ \vphi $ период 2)
+			\item Если $ n = m $
+			$$ 4^ma_m = k, \qquad 4^mb_m = k + 1 $$
+			\begin{equ}{419}
+				\vphi(4^mb_m) - \vphi(4^ma_m) = \vphi(k + 1) - \vphi(k)
+			\end{equ}
+			Посмотрев на график $ \vphi $, видим, что для всякого целого $ k $
+			\begin{equ}{420}
+				|\vphi(k + 1) - \vphi(k)| = 1
+			\end{equ}
+			\item Пусть $ 0 < n < m $
+			\begin{equ}{421}
+				4^nb_m - 4^na_n = 4^{n - m}4^m(b_m - a_m) = 4^{n - m}
+			\end{equ}
+			Запишем некоторые свойства $ \vphi(x) $, которые видно из графика, но можно доказать и аналитически:
+			\begin{equ}{422}
+				\forall y_1, y_2 \in \R \quad |\vphi(y_2) - \vphi(y_1)| \le |y_2 - y_1|
+			\end{equ}
+			Рассмотрим выражение
+			\begin{multline*}
+				f(b_m) - f(a_m) \bdefeq{f} \sum_{n = 0}^\infty \bigg( \frac34 \bigg)^n \vphi(4^n b_m) - \sum_{n = 0}^\infty \bigg( \frac34 \bigg)^n \vphi(4^nb_m) = \\
+				= \sum_{n = 0}^{m - 1} \bigg( \frac34 \bigg)^n \bigg( \vphi(4^nb_m) - \vphi(4^na_m) \bigg) + \bigg( \frac34 \bigg)^m \bigg( \vphi(4^mb_m) - \vphi(4^ma_m) \bigg) + \\
+				+ \sum_{n = m + 1}^\infty \bigg( \frac34 \bigg)^n \bigg( \underbrace{\vphi(4^nb_m) - \vphi(4^na_m)}_{= 0 \text{ по } \eref{418}} \bigg) = \\
+				= \bigg( \frac34 \bigg)^m \bigg( \vphi(4^mb_m) - \vphi(4^ma_m) \bigg) + \sum_{n = 0}^{m - 1} \bigg( \frac34 \bigg)^n \bigg( \vphi(4^nb_m) - \vphi(4^na_m) \bigg)
+			\end{multline*}
+			\begin{multline}\lbl{424}
+				\implies |f(b_m) - f(a_m)| \ge \\
+				\ge \bigg( \frac34 \bigg)^m |\vphi(4^mb_m) - \vphi(4^ma_m)| - \sum_{n = 0}^{m - 1} \bigg( \frac34 \bigg)^n |\vphi(4^nb_m) - \vphi(4^na_m)| \underset{\eref{419}, \eref{422}}\ge \\
+				\ge \bigg( \frac34 \bigg)^m |\vphi(k + 1) - \vphi(k)| - \sum_{n = 0}^{m - 1} |4^nb_m - 4^na_m| \undereq{\eref{420}, \eref{421}} \bigg( \frac34 \bigg)^m \cdot 1 - \sum_{n = 0}^{m - 1} \bigg( \frac34 \bigg)^n \cdot 4^{n - m} = \\
+				= \bigg( \frac34 \bigg)^m - 4^{-m} \sum_{n = 0}^{m - 1} 3^n \undereq{\text{геом. прогр.}} \bigg( \frac34 \bigg)^m - 4^{-m} \cdot \frac{3^m - 1}{3 - 1} > \half \cdot \bigg( \frac34 \bigg)^m
+			\end{multline}
+			При этом, $ a_m \le x < b_m $, поэтому
+			$$ |f(b_m) - f(a_m)| \underset{\eref{48}}\le A(b_m - a_m) \undereq{\eref{416}} A \cdot 4^{-m} $$
+			$$ \underimp{\eref{424}} 4^{-m} > \half \cdot 3^m \cdot 4^{-m} \quad \implies \quad \half \cdot 3^m < A $$
+			При этом, $ A $ не зависит от $ m $, а условие на $ m $ позволяет нам брать произвольно большие $ m $, в том числе такое, что
+			$$ \half \cdot 3^m > A \text{ -- } \contra $$
+		\end{itemize}
+	\end{itemize}
+\end{proof}
+
+\begin{figure}[!ht]
+	\begin{subcaptionblock}{0.249\textwidth}
+		\begin{tikzpicture}[>=Stealth]
+			\draw[->] (-0.5, 0) -- (2.5, 0) node[right]{$ x $};
+			\draw[->] (0, -0.5) -- (0, 1.5) node[above]{$ y $};
+
+			\node[anchor=north east] at (0, 0) {0};
+			\foreach \x in {1, ..., 2} \draw (\x, 0.05) -- (\x, -0.05) node[below]{\x};
+			\foreach \y in {1} \draw (0.05, \y) -- (-0.05, \y) node[left]{\y};
+
+			\draw[blue] (0, 0) -- (1, 1) -- (2, 0);
+		\end{tikzpicture}
+		\subcaption{Шаг 1}
+		\label{tikz:1.a}
+	\end{subcaptionblock}
+	\begin{subcaptionblock}{0.499\textwidth}
+		\begin{tikzpicture}[>=Stealth]
+			\draw[->] (-1, 0) -- (4.5, 0) node[right]{$ x $};
+			\draw[->] (0, -0.5) -- (0, 1.5) node[above]{$ y $};
+
+			\node[anchor=north east] at (0, 0) {0};
+			\foreach \x in {1, ..., 4} \draw (\x, 0.05) -- (\x, -0.05) node[below]{\x};
+			\foreach \y in {1} \draw (0.05, \y) -- (-0.05, \y) node[left]{\y};
+
+			\draw[blue] (-0.5, 0.5) -- (0, 0) -- (1, 1) -- (2, 0) -- (3, 1) -- (4, 0) -- (4.5, 0.5);
+		\end{tikzpicture}
+		\subcaption{Шаг 2}
+		\label{tikz:1.b}
+	\end{subcaptionblock}
+\end{figure}

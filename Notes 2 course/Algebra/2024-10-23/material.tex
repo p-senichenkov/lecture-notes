@@ -1,0 +1,271 @@
+\section{Проолжаем функционалы}
+
+\begin{property}
+	Линейные функционалы пространства $ V $ над $ K $ образуют веторное пространство над $ K $
+\end{property}
+
+\begin{proof}
+	Очевидно
+\end{proof}
+
+
+\begin{definition}
+	Пространство функционалов называется двойственным или сопряжённым
+\end{definition}
+
+\begin{notation}
+	$ V^* $
+\end{notation}
+
+\begin{theorem}[изоморфизм пространства и двойственного к нему]
+	\hfill
+	\begin{enumerate}
+		\item $ V $ -- конечномерное пространство над $ K $
+		$$ \implies V^* \simeq V $$
+		\begin{proof}
+			Пусть $ n \define \dim V $ \\
+			Достаточно доказать, что $ \dim V^* = n $ (тогда можно будет построить изоморфизм из базиса в базис) \\
+			Зафиксируем базис: \\
+			Пусть $ e_1, ..., e_n $ -- базис $ V $ \\
+			Пусть $ \vphi : V^* \to K^n $ такое, что $ \vphi(y) = \bigg( \underbrace{y(e_1)}_{\in K}, ..., \underbrace{y(e_n)}_{\in K} \bigg) $ \\
+			Мы знаем, что протранства одной размерности изоморфны, так что $ K^n \simeq V $ \\
+			Докажем, что это изоморфизм:
+			\begin{itemize}
+				\item Линейность:
+				\begin{itemize}
+					\item Надо проверить, что $ \vphi(y_1 + y_2) \stackrel?= \vphi(y_1) + \vphi(y_2) $
+					\begin{multline*}
+						\vphi(y_1 + y_2) = \bigg( (y_1 + y_2)(e_1), \widedots[5em], (y_1 + y_2)(e_n) \bigg) = \\
+						= \bigg( y_1(e_1) + y_2(e_1), \widedots[5em], y_1(e_n) + y_2(e_n) \bigg) \undereq{\text{сложение в } K^n \text{ покомпонентно}} \\
+						= \bigg( y_1(e_1), ..., y_1(e_n) \bigg) + \bigg( y_2(e_1), ..., y_2(e_n) \bigg) = \vphi(y_1) + \vphi(y_2)
+					\end{multline*}
+					\item Надо проверить, что $ \vphi(ky) \stackrel?= k\vphi(y) $
+					\begin{multline*}
+						\vphi(ky) = \bigg( (ky)(e_1), \widedots[3em], (ky)(e_n) \bigg) = \bigg( ky(e_1), \widedots[3em], ky(e_n) \bigg) = \\
+						\undereq{\text{умножение в } K^n \text{ покомпонентно}} k \bigg( y(e_1), \widedots[3em], y(e_n) \bigg) = k\vphi(y)
+					\end{multline*}
+				\end{itemize}
+				\item Биективность: \\
+				Пусть $ a \in K^n, \qquad a = (a_1, ..., a_n), \quad a_i \in K $
+				$$ \exist ! y \in V^* : \quad \vphi(y) = a $$
+				так как
+				$$ \exist ! y \in V^* : y(e_1) = a_1, \widedots[4em], y(e_n) = a_n $$
+			\end{itemize}
+		\end{proof}
+		\item $ V $ -- евклидово пространство \\
+		Для любого $ v \in V $ определим $ y_v \in V^* $ как $ y_v(x) = (x, v) $ \\
+		Тогда отображение $ v \mapsto y_v $ является изоморфизмом
+		\begin{iproof}
+			\item Проверим, что $ y_v \in V^* $, т. е. что $ y_v $ линейно:
+			\begin{itemize}
+				\item $ y_v(x_1 + x_2) = (x_1 + x_2, v) \undereq{\text{скалярное произведение линейно по первой координате}} (x_1, v) + (x_2, v) = y_v(x_1) + y_v(x_2) $
+				\item $ y_v(kx) = (kx, v) = k(x, v) = ky_v(x) $
+			\end{itemize}
+			\item Пусть $ \vphi(v) = y_v $. Докажем, что $ \vphi $ -- изоморфизм $ V \to V^* $:
+			\begin{itemize}
+				\item Линейность:
+				\begin{itemize}
+					\item $ \vphi(u + v) \stackrel?= \vphi(u) + \vphi(v) $
+					\begin{multline*}
+						\vphi(u + v) \stackrel?= \vphi(u) + \vphi(v) \quad \iff \quad y_{u + v} \stackrel?= y_u + y_v \quad \iff \\
+						\iff \quad y_{u + v}(x) \stackrel?= y_u(x) + y_v(x) \quad \forall x \quad \iff \\
+						\iff \quad (x, u + v) \undereq{\text{лин. скалярного произв.}} (x, u) + (x, v)
+					\end{multline*}
+					\begin{remark}
+						В унитарном пространстве не будет этого равенства
+					\end{remark}
+					\item $ \vphi(kv) \stackrel?= k\vphi(v) $
+					\begin{multline*}
+						\vphi(kv) \stackrel?= k\vphi(v) \quad \iff \quad y_{kv} \stackrel?= ky_v \quad \iff \quad y_{kv}(x) \stackrel?= ky_v(x) \quad \forall x \quad \iff \\
+						(x, kv) \undereq{\text{лин. скалярного произв.}} k(x, v)
+					\end{multline*}
+				\end{itemize}
+				\item Инъективность: \\
+				Пусть $ \vphi(v) = 0 $. Тогда
+				$$ y_v = 0 \quad \implies \quad y_v(x) = 0 \quad \forall x \quad \implies (x, v) = 0 \quad \forall x \quad \implies v = 0 $$
+				Вместе с тем, что $ \dim V = \dim V^* $, это даёт биективность
+			\end{itemize}
+		\end{iproof}
+	\end{enumerate}
+\end{theorem}
+
+\begin{definition}
+	Изоморфизм из пункта 2 называется каноническим изоморфизмом из $ V $ в $ V^* $
+\end{definition}
+
+\begin{note}
+	Каноническим обычно называется объект, который не зависит от выбора базиса
+\end{note}
+
+\begin{remark}
+	В унитарном пространстве второй пункт теоремы не выполнится ($ y_v $ определить можно, но оно не будет линейным). Исправить это, поменяв координаты, нельзя
+\end{remark}
+
+\begin{eg}[бесконечномерные пространства]
+	$ K $ -- поле, $ \quad K^\infty $ -- пространство формальных многочленов (бесконечные последовательности с конечным количеством членов, отличных от нуля) \\
+	Фунцкионалы:
+	$$ a = (a_1, a_2, ..., a_n, ...) \quad \text{такой, что} \quad a(x_1, x_2, ...) = a_1x_1 + a_2x_2 + ... $$
+	\begin{remark}
+		$ a_i \in K $ (без ограничения на количество ненулевых членов)
+	\end{remark}
+	\textit{Что-то здесь изоморфно, а что-то -- нет. Надо смотреть}
+\end{eg}
+
+\begin{theorem}[дважды двойственное пространство]
+	$ V $ -- векторное пространство над $ K $ \\
+	Для любого $ x \in V $ обозначим через $ z_x $ отображение $ V^* \to K $, заданное формулой $ z_x(\underset{\in V^*}{y}) = \underbrace{y(x)}_{\in K} $ \\
+	Тогда:
+	\begin{enumerate}
+		\item $ \forall x \in K \quad z_x \in (V^*)^* $, т. е. $ z_x $ -- линейный функционал на $ V^* $
+		\begin{iproof}
+			\item $ z_x(y_1 + y_2) \stackrel?= z_x(y_1) + z_x(y_2) $
+			$$ z_x(y_1 + y_2) = (y_1 + y_2)(x) $$
+			$$ z_x(y_1) + z_x(y_2) = y_1(x) + y_2(x) $$
+			\item $ z_x(ky) \stackrel?= kz_x(y) $
+			$$ z_x(ky) = (ky)(x) = ky(x) = kz_x(y) $$
+		\end{iproof}
+		\item отображение $ \vphi : V \to (V^*)^* $, заданное формулой $ \vphi(x) = z_x $ является линейным
+		\begin{iproof}
+			\item $ \vphi(x_1 + x_2) \stackrel?= \vphi(x_1) + \vphi(x_2) $
+			$$ z_{x_1 + x_2} \stackrel?= z_{x_1} + z_{x_2} $$
+			$$ \forall y \quad z_{x_1 + x_2}(y) = z_{x_1}(y) + z_{x_2}(y) $$
+			$$ y(x_1 + x_2) \stackrel?= y(x_1) + y(x_2) $$
+			Это верно, так как $ y $ линейно
+			\item $ \vphi(kx) \stackrel?= k\vphi(x) $
+			$$ z_{kx} \stackrel?= kz_x $$
+			$$ \forall y \quad z_{kx}(y) \stackrel?= kz_x(y) $$
+			$$ y(kx) \stackrel?= ky(x) $$
+			Это верно, так как $ y $ линейно
+		\end{iproof}
+		\item если $ V $ конечномерно, то $ \vphi $ -- изоморфизм
+		\begin{proof}
+			Размерности равны, так что достаточно доказать инъективность: \\
+			$ \vphi $ инъективно $ \iff \vphi(x) = 0 $ только при $ x = 0 \quad \iff z_x $ -- нулевое отображение только при $ x = 0 \quad \iff z_x(y) = 0 \quad \forall y \quad \iff y(x) = 0 \quad \forall y $ \\
+			Нужно проверить, что $ \forall x \ne 0 \quad \exist $ линейное отображение $ y : \quad y(x) \ne 0 $ \\
+			Дополним до базиса: \\
+			Пусть $ x, e_2, ..., e_n $ -- базис $ V $ \\
+			Определим $ y : y(x) = 1, \quad y(e_i) = 0 $
+			$$ y(\alpha x + \beta_2e_2 + ... + \beta_ne_n) = \alpha $$
+			Оно линейно, $ y(x) \ne 0 $
+		\end{proof}
+	\end{enumerate}
+\end{theorem}
+
+\begin{lemma}
+	$ V $ -- конечномерное векторное пространство, $ \quad e_1, ..., e_n $ -- базис $ V $ \\
+	$ f_1, ..., f_n \in V^* $ такие, что $ f_i(e_i) = 1, \quad f_i(e_j) = 0 $ при $ i \ne j \quad $ \nimp[(здесь существование не утверждается, но понятно, что их всегда можно построить)] \\
+	Тогда $ f_1, .., f_n $ -- базис $ V^* $
+\end{lemma}
+
+\begin{proof}
+	Знаем, что $ \dim V = \dim V^* $ \\
+	Достаточно доказать ЛНЗ: \\
+	Возьмём ЛК: \\
+	Пусть $ a_1, ..., a_n \in K $ такие, что $ f = a_1f_1 + ... + a_nf_n $ -- нулевой функционал
+	$$ 0 = f(e_i) = a_1\underbrace{f_1(e_i)}_0 + ... + a_i\underbrace{f_i(e_i)}_1 + ... + a_n\underbrace{f_n(e_i)}_0 = a_i \quad \forall i $$
+\end{proof}
+
+\begin{definition}
+	$ e_1, ..., e_n $ -- базис $ V, \qquad f_1, ..., f_n $ -- базис $ V^*, \qquad f_i(e_i) = 1, \quad f_i(e_j) = 0 $ при $ i \ne j $ \\
+	Тогда $ f_1, ..., f_n $ называется двойственным базисом к $ e_1, ..., e_n $
+\end{definition}
+
+\begin{remind}
+	$ e_i, e_i' $ -- базисы $ V $ \\
+	Матрицей перехода от $ e_i $ к $ e_i' $ называется такая матрица $ C $, что в $ i $-м столбце записаны координаты $ e_i' $ в $ e_1, ..., e_n $ \\
+	Пусть $ X, X' $ -- координаты $ c $ в $ e_i, e_i' $. Тогда $ X = CX' $
+\end{remind}
+
+\begin{theorem}
+	$ e_i, e_i' $ -- базисы $ V, \qquad C $ -- матрица перехода от $ e_i $ к $ e_i' $ \\
+	$ f_i, f_i' $ -- соответствующие двойственные базисы \\
+	Тогда:
+	\begin{enumerate}
+		\item Матрица перехода от $ f_i $ к $ f_i' $ равна $ (C^{-1})^T \nimp[~ = ~ (C^T)^{-1}] $
+		\begin{proof}
+			Пусть $ D = (d_{ij}) $ -- матрица перехода от $ f_i $ к $ f_i' $
+			$$ U = (u_{ij}), \qquad U = D^TC $$
+			Докажем, что $ U = E $
+			$$ e_i' = c_{1i}e_1 + c_{2i}e_2 + ..., \qquad f_j' = d_{1j}f_1 + d_{2j}f_2 + ... $$
+			Применим одно к другому:
+			\begin{multline*}
+				\begin{rcases}
+					1, \quad i = j \\
+					0, \quad i \ne j
+				\end{rcases} = f_j'(e_i') = d_{1j}f_1(c_{1i}e_1 + c_{2i}e_2 + ...) + d_{2j}f_2(c_{1i}e_i + c_{2i}e_2 + ...) + \widedots[5em] = \\
+				= d_{1j}c_{1i} \cdot 1 + d_{1j}c_{2i} \cdot 0 + \widedots[3em] + d_{2j}c_{1i} \cdot 0 + d_{2j}c_{2i} \cdot 1 + \widedots[3em] = d_{1j}c_{1i} + d_{2j}c_{2i} + \widedots[3em]
+			\end{multline*}
+			$ d $ -- этой $ j $-я строка $ D^T, \quad c $ -- $ i $-й столбец $ C $ \\
+			Значит, $ f_j'(e_i') = u_{ji} $
+		\end{proof}
+		\item Пусть $ Y, Y' $ -- строки координат $ y \in V^* $ в базисах $ f_i, f_i' $ \\
+		Тогда $ Y' = YC $
+		\begin{proof}
+			$ (C^{-1})^T $ -- матрица перехода от $ f_i $ к $ f_i' $ \\
+			$ Y^T, Y'^T $ -- столбцы координат $ y $ \\
+			$ Y^T = (C^{-1})^TY'^T $ -- транспонированный
+			$$ Y = Y'C^{-1} \implies YC = Y' $$
+		\end{proof}
+	\end{enumerate}
+\end{theorem}
+
+\section{Сопряжённые операторы}
+
+\subsection{Напоминание из второго семестра}
+
+\begin{definition}
+	$ \mc{A} $ -- оператор в евклидовом или унитарном пространстве \\
+	$ \mc{B} $ называется сопряжённым к $ \mc{A} $, если $ (\mc{A}x, y) = (x, \mc{B}y) \quad \forall x, y $
+\end{definition}
+
+\begin{notation}
+	$ \mc{A}^* $
+\end{notation}
+
+\begin{theorem}
+	$ \forall \mc{A} \quad \exist ! \mc{A}^* $
+\end{theorem}
+
+\begin{props}
+	\item $ (mc{A}^*)^* = \mc{A} $
+	\item Пусть $ A, A^* $ -- матрицы $ \mc{A}, \mc{A}^* $ в некотором ОНБ \\
+	Тогда
+	\begin{itemize}
+		\item $ A^* = A^T $ в евклидовом пространстве
+		\item $ A^* = \ol{A}^T $ в унитарном пространстве
+	\end{itemize}
+\end{props}
+
+\begin{definition}
+	Оператор в веклидовом или унитарном пространстве назвыается
+	\begin{itemize}
+		\item нормальным, если $ \mc{A}^*\mc{A} = \mc{A}\mc{A}^* $
+		\item ортогональным (унитарным), если $ \mc{A}\mc{A}^* = \mc{A}^*\mc{A} = \mc{E} $
+		\item самосопряжённым, если $ \mc{A}^* = \mc{A} $
+	\end{itemize}
+\end{definition}
+
+\begin{definition}
+	Квадратная матрица называется
+	\begin{itemize}
+		\item симметричной (симметрической), если $ A = A^T $
+		\item эрмитовой, если $ A = \ol{A}^T $
+	\end{itemize}
+\end{definition}
+
+\begin{property}
+	$ \mc{A} $ -- оператор в евлидовом/унитарном пространстве, $ \quad A $ -- его матрица \bt{в ОНБ} \\
+	Тогда \\
+	$ \mc{A} $ самосопряжённый $ \iff A $ симметрична/эрмитова
+\end{property}
+
+\begin{theorem}
+	$ \mc{A} $ -- нормальный оператор в унитарном пространстве \\
+	Тогда
+	\begin{enumerate}
+		\item если $ \lambda $ -- с. ч. $ \mc{A} $, то $ \ol\lambda $ -- с. ч. $ \mc{A}^* $
+		\item с. в. $ \mc{A}^* $, соответствующие разным с. ч. ортогональны
+		\item Существует ОНБ, состоящий из с. в. $ \mc{A} \quad $ \nimp[$ \implies $ он диагонализуем]
+	\end{enumerate}
+
+\end{theorem}

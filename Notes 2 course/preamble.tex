@@ -174,6 +174,7 @@
 \newcommand\limarr[2]{\ensuremath\underarr{{#1} \to {#2}}}
 \newcommand\infarr[1]{\ensuremath\limarr{#1}\infty}
 \newcommand\zarr[1]{\ensuremath\limarr{#1}0}
+\newcommand\uniarr[2][n]{\ensuremath\xrightrightarrows[#1 \to \infty]{#2}}
 
 % labels and references
 \newcommand*\lbl[1]{\label{eq:#1}}
@@ -336,6 +337,9 @@
 \newcommand\antlers{\commonantlers{}{}}
 \newcommand\antlersimp{\commonantlers{}{\textcolor{red}{!!!}}}
 
+% Cauchy's problem
+\newcommand\caupr[2][]{$ \text{ЗК}_{\ensuremath{#1}}(#2) $}
+
 %%     theorems
 \usepackage{thmtools, thm-restate}
 \usepackage[framemethod=TikZ]{mdframed}
@@ -451,4 +455,4 @@
 
 \newmdenv[linewidth=2pt, rightline=false, topline=false, bottomline=false, linecolor=black, backgroundcolor=black!2]{undefinedtheorem}
 
-\newenvironment{undefthm}[1]{\begin{undefinedtheorem}\textbf{#1. }}{\end{undefinedtheorem}}
+\newenvironment{undefthm}[1]{\begin{undefinedtheorem}\textbf{#1 }}{\end{undefinedtheorem}}

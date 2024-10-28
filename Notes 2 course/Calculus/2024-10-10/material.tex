@@ -457,18 +457,15 @@ $$ P(Y) =
 	g(Y) \\
 	Y
 \end{bmatrix}, \qquad g \in \Cont[1]W, \qquad P \in \Cont[1]W $$
-\begin{equ}{14}
-	F \bigg( P(Y) \bigg) = \On \quad \forall Y \in W
-\end{equ}
-\begin{equ}{15}
-	\eref{14} = \mc{D} \bigg( F \big( P(Y) \big) \bigg) = \On[n \times m]
-\end{equ}
+По последнему утверждению из теоремы,
+$$ F \bigg( P(Y) \bigg) = \On \quad \forall Y \in W $$
+$$ \implies \mc{D} \bigg( F \big( P(Y) \big) \bigg) = \On[n \times m] $$
 Применим теорему о матрице Якоби суперпозиции:
 \begin{equ}{16}
-	\eref{15} \implies \mc{D}F \bigg( P(Y) \bigg)\mc{D}P(Y) = \On[n \times m]
+	\mc{D}F \bigg( P(Y) \bigg)\mc{D}P(Y) = \On[n \times m]
 \end{equ}
 \begin{equ}{17}
-	\mc{D}P(Y) =
+	\mc{D}P(Y) \bdefeq{P(Y)}
 	\begin{bmatrix}
 		\mc{D}g(Y) \\
 		I_m
@@ -477,7 +474,7 @@ $$ P(Y) =
 Обозначим $ Z \define P(Y) $
 $$ \mc{D}F(Z) = \bigg[ A(Z) B(Z) \bigg] $$
 \begin{equ}{18}
-	\eref{17} \implies \mc{D}F(Z)\mc{D}P(Y) = \bigg[ A(Z)B(Z) \bigg]
+	\mc{D}F(Z)\mc{D}P(Y) \undereq{\eref{17}} \bigg[ A(Z)B(Z) \bigg]
 	\begin{bmatrix}
 		\mc{D}g(Y) \\
 		I_m
@@ -503,7 +500,7 @@ $$ \eref{16}, \eref{18} \implies A(Z)\mc{D}g(Y) + B(Z) = \On[n \times m] \implie
 	$ E \sub \R^{n + m} $ -- открытое, $ \qquad F \in \Cont[1]E $ \\
 	$ \rk \mc{D}F(X) = n \quad \forall X \in E, \qquad X_0 \in E : \quad F(X_0) = \On $
 	\begin{equ}{21}
-		\implies \exist \Lambda = (\lambda_1, ..., \lambda_n) : \quad \text{для } \vphi(X, \Lambda) \define f(X) + \underset{\text{строка}}\Lambda \underset{\text{столбец}}{F(X)} \qquad \nabla \vphi(X_0, \Lambda) = \underset{\text{строка}}{\On[n + m]^T}
+		\implies \exist! \Lambda = (\lambda_1, ..., \lambda_n) : \quad \text{для } \vphi(X, \Lambda) \define f(X) + \underset{\text{строка}}\Lambda \underset{\text{столбец}}{F(X)} \qquad \nabla \vphi(X_0, \Lambda) = \underset{\text{строка}}{\On[n + m]^T}
 	\end{equ}
 \end{theorem}
 
@@ -511,7 +508,8 @@ $$ \eref{16}, \eref{18} \implies A(Z)\mc{D}g(Y) + B(Z) = \On[n \times m] \implie
 	Числа $ \lambda_i $ называются множителями Лагранжа
 \end{remark}
 
-\begin{proof}
+\begin{iproof}
+	\item Существование \\
 	Пусть $ X = \column{x_1}{x_{n + m}}, \qquad F = \column{F_1}{F_n} $ \\
 	Запишем матрицу Якоби для $ F $:
 	$$ \mc{D}F(X) =
@@ -520,7 +518,7 @@ $$ \eref{16}, \eref{18} \implies A(Z)\mc{D}g(Y) + B(Z) = \On[n \times m] \implie
 		. & . & . \\
 		F_{nx_1}'(X) & ... & F_{nx_{n + m}}'(X)
 	\end{bmatrix} $$
-	По условию, её ранг равен $ n $ при любом $ X $, в том числе
+	По условию, её ранг равен $ n $ при любом $ X $. НУО считаем, что не равен нулю ``верхний левый'' минор, в том числе при $ X_0 $:
 	\begin{equ}{22}
 		\begin{vmatrix}
 			F_{1x_1}'(X_0) & ... & F_{1x_n}'(X_0) \\
@@ -538,20 +536,16 @@ $$ \eref{16}, \eref{18} \implies A(Z)\mc{D}g(Y) + B(Z) = \On[n \times m] \implie
 		\begin{barg}
 			g(Y) \\
 			Y
-		\end{barg} = \On
+		\end{barg} = \On \quad \foral Y \in W
 	\end{equ}
 	Из единственности $ g $ следует, что
-	\begin{equ}{24}
-		\exist U \sub E \sub \R^{n + m}, ~ X_0 \in U : \quad \forall X \in U \quad \nimp[\bigg(] F(X) = \On \iff X =
-		\begin{bmatrix}
-			g(Y) \\
-			Y
-		\end{bmatrix}, \quad Y \in W \nimp[\bigg)]
-	\end{equ}
-	\begin{equ}{25}
-		\vphi(X, \Lambda) \bdefeq\vphi f(X) + \Lambda F(X)
-	\end{equ}
-	$$ \vphi(X, \Lambda) = f(X) + \Lambda \On = f(X) $$
+	$$ \exist U \sub E \sub \R^{n + m}, ~ X_0 \in U : \quad \forall X \in U \quad \nimp[\bigg(] F(X) = \On \iff X =
+	\begin{bmatrix}
+		g(Y) \\
+		Y
+	\end{bmatrix}, \quad Y \in W \nimp[\bigg)] $$
+	$ X $ из условия теоремы подходит под правое условие, значит,
+	$$ \vphi(X, \Lambda) \bdefeq\vphi f(X) + \Lambda F(x) = f(X) + \Lambda \On = f(X) $$
 	\begin{equ}{26}
 		\text{То есть, } X_0 \text{ -- т. лок. экстеремума функции } \vphi(X, \Lambda) \quad \forall \Lambda \text{ при условии } F(X) = \On
 	\end{equ}
@@ -572,39 +566,35 @@ $$ \eref{16}, \eref{18} \implies A(Z)\mc{D}g(Y) + B(Z) = \On[n \times m] \implie
 			Y
 		\end{barg}, \qquad Y_0 \in W
 	\end{equ}
-	\begin{equ}{28}
-		\vphi(X, \Lambda) \undereq{\text{при } X \in U \text{ и } F(x) = \On} h(Y, \Lambda), \qquad \text{где } X =
-		\begin{bmatrix}
-			g(Y) \\
-			Y
-		\end{bmatrix}
-	\end{equ}
-	$$ \eref{26}, \eref{28} \implies Y_0 \text{ -- точка локального экстремума } h(Y) \quad \text{(без условий)} $$
+	$$ \vphi(X, \Lambda) \undereq{\text{при } X \in U \text{ и } F(X) = \On} h(Y, \Lambda), \qquad \text{где } X =
+	\begin{bmatrix}
+		g(Y) \\
+		Y
+	\end{bmatrix} $$
+	Вместе с \eref{26} это означает, что $ Y_0 $ -- точка локального экстремума $ h(Y) $ \nimp[(без условий)] \\
 	Для $ h $ действует необходиомое условие локального экстремума:
 	$$ \nabla h(Y_0, \Lambda) = \On[m]^T $$
 	Рассмотрим теперь $ h $ как отображение в $ \R^1 $ \\
 	Его градиент будет матрицей Якоби $ n \times 1 $:
 	\begin{equ}{29}
-		\mc{D}h(Y_0, \Lambda) = \nabla = \On[m]^T
+		\mc{D}h(Y_0, \Lambda) = \nabla h(Y_0, \Lambda) = \On[m]^T
 	\end{equ}
-	Определим отображение $ P(y) \define
+	Определим отображение $ P(Y) \define
 	\begin{bmatrix}
 		g(Y) \\
 		Y
 	\end{bmatrix} $ \\
 	Возьмём $ Y \in W $
-	\begin{equ}{210}
-		h(Y, \Lambda) = f \bigg( P(Y) \bigg) + \Lambda F \bigg( P(Y) \bigg)
-	\end{equ}
+	$$ h(Y, \Lambda) \undereq{\eref{27}} f \bigg( P(Y) \bigg) + \Lambda F \bigg( P(Y) \bigg) $$
 	\begin{equ}{211}
-		\eref{210} \implies \mc{D}h(Y, \Lambda) = \mc{D} \bigg( f \big( P(Y) \big) \bigg) + \Lambda \mc{D} \bigg( F \big( P(Y) \big) \bigg)
+		\implies \mc{D}h(Y, \Lambda) = \mc{D} \bigg( f \big( P(Y) \big) \bigg) + \Lambda \mc{D} \bigg( F \big( P(Y) \big) \bigg)
 	\end{equ}
 	Вспомним, чему равны матрицы Якоби суперпозиции:
 	\begin{equ}{212}
-		\mc{D} \bigg( f \big( P(Y) \big) \bigg) = \mc{D} f \bigg( P(Y) \bigg) \cdot \mc{D}P(Y)
-	\end{equ}
-	\begin{equ}{213}
-		\mc{D} \bigg( F \big( P(Y) \big) \bigg) = \mc{D} F \bigg( P(Y) \bigg) \cdot \mc{D}P(Y)
+		\begin{rcases}
+			\mc{D} \bigg( f \big( P(Y) \big) \bigg) = \mc{D} f \bigg( P(Y) \bigg) \cdot \mc{D}P(Y) \\
+			\mc{D} \bigg( F \big( P(Y) \big) \bigg) = \mc{D} F \bigg( P(Y) \bigg) \cdot \mc{D}P(Y)
+		\end{rcases}
 	\end{equ}
 	При доказательстве теоремы о неявной функции мы получили, что
 	\begin{equ}{214}
@@ -615,7 +605,7 @@ $$ \eref{16}, \eref{18} \implies A(Z)\mc{D}g(Y) + B(Z) = \On[n \times m] \implie
 		\end{bmatrix}
 	\end{equ}
 	$$ \mc{D}F(X_0) = \bigg[ A(X_0)B(X_0) \bigg] $$
-	Подставим $ Y_0 $ в \eref{211}, \eref{212} и \eref{213}:
+	Подставим $ Y_0 $ в \eref{211} и \eref{212}:
 	$$ P(Y_0) = X_0 $$
 	Снова будем вместо матрицы Якоби писать градиент:
 	$$ \mc{D}f(X_0) = \bigg( f_{x_1}'(X_0), ..., f_{x_{x + m}}'(X_0) \bigg) $$
@@ -635,24 +625,20 @@ $$ \eref{16}, \eref{18} \implies A(Z)\mc{D}g(Y) + B(Z) = \On[n \times m] \implie
 			\mc{D}g(Y) \\
 			I_m
 		\end{bmatrix} = \\
-		= \nabla_1f(X_0)\underline{\mc{D}g(Y_0)} + \nabla_2f(X_0) + \Lambda \bigg( A(X_0)\mc{D}g(Y_0) + B(X_0) \bigg) = \\
+		= \nabla_1f(X_0)\underline{\mc{D}g(Y_0)} + \nabla_2f(X_0) + \Lambda \bigg( A(X_0)\underline{\mc{D}g(Y_0)} + B(X_0) \bigg) = \\
 		= \underbrace{\bigg( \nabla_1f(X_0) + \Lambda A(X_0) \bigg)} \mc{D}g(Y_0) + \nabla_2 f(X_0) + \Lambda B(X_0)
 	\end{multline}
 	Хотим выбрать $ \Lambda $ так, чтобы скобка обратилась в 0:
 	$$ \nabla_1f(X_0) + \Lambda A(X_0) = \On[m]^T $$
-	\begin{equ}{217}
-		\Lambda = -\nabla_1f(X_0) A^{-1}(X_0)
-	\end{equ}
-	При таком $ \Lambda $ выделенная скобка равна 0, а значит
-	\begin{equ}{218}
-		\eref{216}, \eref{217} \implies \nabla_2f(X_0) + \Lambda B(X_0) = \On[m]^T
-	\end{equ}
+	$$ \Lambda = -\nabla_1f(X_0) A^{-1}(X_0) $$
+	При таком $ \Lambda $ выделенная скобка равна 0, а значит из \eref{216} остаётся только
+	$$ \nabla_2f(X_0) + \Lambda B(X_0) = \On[m]^T $$
 	Вернёмся к полному градиенту:
-	$$ \eref{217} \eref{218} \implies \nabla f(X_0) + \Lambda \bigg[ A(X_0) B(X_0) \bigg] = \On[n + m]^T $$
+	$$ \nabla f(X_0) + \Lambda \bigg[ A(X_0) B(X_0) \bigg] = \On[n + m]^T $$
 	``Склеивая'' $ A $ и $ B $, получаем
 	$$ \nabla f(X_0) + \Lambda \mc{D}F(X_0) = \On[n + m]^T $$
-	Существование доказано. Докажем единственность: \\
+	\item Единственность \\
 	Возьмём какой-то другой набор $ \Lambda $
-	$$ \grad_1 f(X_0) + \Lambda A(X_0) = \On[n]^T $$
+	$$ \nabla_1 f(X_0) + \Lambda A(X_0) = \On[n]^T $$
 	Так мы определяли $ \Lambda $, а значит она единственна
-\end{proof}
+\end{iproof}

@@ -1,0 +1,252 @@
+\chapter{Дифферинциальная геометрия поверхностей}
+
+\begin{eg}[сфера]
+	\hfill
+	\begin{undefthm}{Почему сфера параметризуется именно так?}
+		Как параметризуется любая поверхность вращения: \\
+		Есть кривая на плоскости $ XOZ $ (рис. \ref{tikz:1.a}):
+		$$
+		\begin{cases}
+			x = f(t) \\
+			z = g(t)
+		\end{cases} $$
+		Начали вращать -- получили ``кувшин'' (рис. \ref{tikz:1.b}). Как его запараметризовать?
+		$$
+		\begin{cases}
+			x = f(t) \cdot \cos \alpha \\
+			y = f(t) \cdot \sin \alpha
+			z = g(t)
+		\end{cases} $$
+		Сфера -- продукт вращения полуокружности:
+		$$
+		\begin{cases}
+			x = R \cos \psi \\
+			z = R \sin \psi
+		\end{cases} $$
+		Сфера:
+		$$
+		\begin{cases}
+			x = R \cos \vphi \cos \psi \\
+			y = R \sin \vphi \cos \psi \\
+			z = R \sin \psi
+		\end{cases} $$
+		где $ \psi $ -- ``широта'', т. е. угол подъёма над экватором, $ \psi $ -- ``долгота'' (то, что было $ \alpha $)
+	\end{undefthm}
+	$$ r_\vphi =
+	\begin{pmatrix}
+		-R \cos \vphi \cos \psi \\
+		R \cos \vphi \cos \psi \\
+		0
+	\end{pmatrix}, \qquad r_\psi =
+	\begin{pmatrix}
+		-R \cos \vphi \sin \psi \\
+		-R \sin \vphi \sin \psi \\
+		R \cos \psi
+	\end{pmatrix} $$
+	$$ E = R^2 \cos^2 \psi $$
+	$$ F = r_\vphi \cdot r_\psi = 0 $$
+	$$ G = r_\psi^2 = R^2 \cos^2 \vphi \sin^2 \psi + R^2 \sin^2 \vphi \sin^2 \psi + R^2 \cos^2 \psi = R^2 $$
+\end{eg}
+
+\begin{figure}[!ht]
+	\begin{subcaptionblock}{0.49\textwidth}
+		\begin{tikzpicture}[>=Stealth]
+			\draw[->] (-2.5, 0) -- (2.5, 0) node[right]{$ x $};
+			\draw[->] (0, -2.5) -- (0, 2.5) node[above]{$ z $};
+
+			\draw[blue] plot[smooth] coordinates {(1, -2) (0.5, 0) (2, 1) (1, 2)};
+		\end{tikzpicture}
+		\subcaption{Кривая}
+		\label{tikz:1.a}
+	\end{subcaptionblock}
+	\begin{subcaptionblock}{0.49\textwidth}
+		\begin{tikzpicture}[>=Stealth]
+			\draw[->] (-2.5, 0) -- (2.5, 0) node[right]{$ x $};
+			\draw[->] (0, -2.5) -- (0, 2.5) node[above]{$ z $};
+
+			\draw[blue] plot[smooth] coordinates {(1, -2) (0.5, 0) (2, 1) (1, 2)};
+			\draw[blue] plot[smooth] coordinates {(-1, -2) (-0.5, 0) (-2, 1) (-1, 2)};
+			\draw[blue] (0, 2) ellipse[x radius = 1, y radius = 0.2];
+			\draw[blue] (0, -2) ellipse[x radius = 1, y radius = 0.2];
+		\end{tikzpicture}
+		\subcaption{Кувшин}
+		\label{tikz:1.b}
+	\end{subcaptionblock}
+\end{figure}
+
+\section{Угол между кривыми на поверхности}
+
+Есть параметризация поверхности $ r(u, v) $ и внутренние параметризации кривых: $ (u, v) = \big( u_1(t), v_1(t) \big) $ и $ (u, v) = \big( u_2(t), v_2(t) \big) $ \\
+Пусть касательный вектор к первой кривой будет $ \vec{V}_1 $, ко второй -- $ \vec{V}_2 $
+$$ \vec{V}_1 = \frac{\di \vec{r} \big( u_1(t), v_1(t) \big)}{\di t} = r_u' \cdot u_1' + r_v \cdot v_1' $$
+Аналогично,
+$$ \vec{V}_2 = r_u u_2' + r_v v_2' $$
+$$ \cos \alpha = \frac{\vec{V}_1 \cdot \vec{V}_2}{|V_1| \cdot |V_2|} = \frac{Eu_1'u2' + F(u_1'v_2' + u_2'v_1') + Gv_1'v_2'}{\sqrt{Eu_1'^2 + 2Fu_1'v_1' + Fv_1'^2} \cdot \sqrt{Eu_2'^2 + Fu_2'v_2' + Gv_2'^2}} $$
+
+\section{Внутренняя геометрия поверхности}
+
+Есть лист бумаги, на нём живут бумажные клещи. Они не видят ничего, кроме своего листа
+
+\begin{definition}
+	Изометрия поверхностей:
+	$$ r_1 : D_1 \to \R^3, \qquad r_2 : D_2 \to \R^3 $$
+	$ \Phi : D_1 \to D_2 $ назыается изометрией, если длина кривой на $ r_1(D_1) $ равна длине образа \\
+	\textit{Тут нужна картинка}
+\end{definition}
+
+С учётом некоторой перепараметризации рассмотрим в некотором роде одинаковые параметризации
+
+\begin{theorem}
+	Поверхности изометричны \bt{тогда и только тогда}, когда в некоторой параметризации у них совпадают коэффициенты $ E, F, G $
+\end{theorem}
+
+\begin{iproof}
+	\item $ \impliedby $: \\
+	Формула длины кривой:
+	$$ l = \dint[t]{a}b{\sqrt{Eu'^2 + 2Fu'v' + Gv'^2}} $$
+	Они должны совпасть
+	$$ \ol{\Phi} \define r_2 \circ r_1^{-1} $$
+	\item $ \implies $: \\
+	Возьмём кривую
+	$$
+	\begin{cases}
+		u(t) = t \\
+		v(t) = t_0
+	\end{cases} $$
+	Можно НУО считать, что параметризованы одинаково (иначе перепараметризуем)
+	$$ l_1 = \dint[t]{a}b{\sqrt{E_1}} = \sqrt{E_1}(b - a) $$
+	$$ l_2 = \dint[t]{a}b{\sqrt{E_2}} = \sqrt{E_2}(b - a) $$
+	По предположению, они равны \\
+	Тем самым $ E_1 = E_2 $ \\
+	Аналогично, взяв
+	$$
+	\begin{cases}
+		u(t) = t_0 \\
+		v(t) = t
+	\end{cases} $$
+	получаем $ G_1 = G_2 $ \\
+	Взяв
+	$$
+	\begin{cases}
+		u(t) = t + t_0 \\
+		v(t) = t + t_1
+	\end{cases} $$
+	получаем
+	$$ \dint[t]{a}b{\sqrt{E_1 + 2F_1 + G_1}} = \dint[t]{a}b{\sqrt{E_2 + 2F_2 + G_2}} \quad \implies F_1 = F_2 $$
+\end{iproof}
+
+\begin{remark}
+	То, что поверхности изометричны, \bt{не} означает, что первые квадратичные формы совпадут. Это лишь значит, что \bt{сущетсвует} параметризация, в которой они совпали
+\end{remark}
+
+\subsection{Рецепт использования}
+
+\begin{definition}
+	$ k $ -- характеристика поверхности \\
+	Говорят, что $ k $ относится к внутренней геометрии поверхности, если $ k $ не меняется при изометрии
+\end{definition}
+
+\begin{restate}
+	$ k $ зависит только от $ E, F, G $
+\end{restate}
+
+\begin{remark}
+	$ E, F, G $ -- функции. Так что зависимость от их производны тоже пойдойдёт
+\end{remark}
+
+\begin{problem}[поставленная Гауссу]
+	Можно ли нарисовать карту, не искажающую расстояния?
+\end{problem}
+
+\begin{restate}
+	Изометрична ли сфера плоскости?
+\end{restate}
+
+\begin{answer}
+	Нет
+\end{answer}
+
+В дальнейшем это будет доказано
+
+\section{Площадь поверхности}
+
+\subsection{Интуиция}
+
+Наверное, площадь не должна меняться при изометрии
+
+\begin{undefthm}{Как хосется определить площадь поверхности:}
+	Натыкать много точек, соединить их треугольничками, взять предел суммы их площадей
+\end{undefthm}
+
+Оказывается, так сделать нельзя:
+
+\begin{eg}[сапог Шварца]
+	Есть цилиндр \\
+	Его можно развернуть в прямоугольник и посчитать площадь:
+	$$ S = 2\pi R H $$
+	Разобъём на треугольники:
+	\begin{enumerate}
+		\item Порежем на слои
+		\item В каждый слой впишем правильный $ n $-уголькик
+		\item Построим антипризму \\
+		Антипризма:
+		\begin{enumerate}
+			\item Берём в верхнем и нижнем основании правильный $ n $-угольник
+			\item Поворачиваем одно из оснований так, чтобы напротив вершины оказалась середина стороны
+			\item Соединим вершины
+		\end{enumerate}
+		\item Счиатем, что высоту мы разбили на $ k $ частей, каждая часть представляет собой $ n $-угольную антипризму
+		\begin{quest}
+			Сколько в одном слое треугольников?
+		\end{quest}
+		\begin{answer}
+			$ 2n $
+		\end{answer}
+		Всего $ 2kn $ треугольников
+		\item Посчитаем площадь каждого треугольника:
+		$$ S_\triangle = \half lh $$
+		Найдём $ l $: \\
+		Есть круг радиуса $ R $, мы в него вписали правильный $ n $-угольник, хотим посчитать его сторону.  Угол в центре будет равен $ \dfrac{2\pi}n $. Применим теорему косинусов:
+		$$ l^2 = 2R^2 - 2R^2 \cos \frac{2\pi}n $$
+		$$ l = R \sqrt{2 \bigg( 1 - \cos \frac{2\pi}n \bigg) } = 2R\sin \frac\pi{n} $$
+		Найдём $ h $:
+		\begin{remark}
+			Треугольник немножко искривляется. Направление его высоты не совпадает с напрвлением образующей цилиндра. $ h \bm{\ne} \dfrac{H}k $
+		\end{remark}
+		$$ a = R - R \cos \frac\pi{n} $$
+		$$ h = \sqrt{\frac{H^2}{k^2} + R^2 \bigg(1 - \cos \frac\pi{n} \bigg)^2} = \sqrt{\frac{H^2}{k^2} + R^2 \cdot 4 \sin^4 \frac\pi{2n}} $$
+		$$ S \stackrel?= \limi{\pi n} 2kn \cdot \half \cdot 2R\underbrace{\sin \frac\pi{n}}_{\sim \faktor\pi{n}} \cdot \sqrt{\frac{H^2}{k^2} + 4R^2 \sin^4 \frac\pi{2n}} = 2\pi RH \lim \sqrt{1 + \frac{k^2}{H^2} \cdot 4R^2 \sin^4 \frac\pi{2n}} $$
+		Это равно $ 2\pi RH $ тогда и только тогда, когда
+		$$ \frac{k^2}{H^2} \cdot 4R^2 \sin^4 \frac\pi{2n} \stackrel?\to 0 $$
+		$$ \frac{\pi^4R^2}{4H^2} \cdot \frac{k^2}{n^4} \stackrel?\to 0 $$
+		То есть, $ k \stackrel?= o(n^2) $ \\
+		То есть, разбивая на много низких, крупно нарезанных антипризм, получаем неправильную площадь
+	\end{enumerate}
+\end{eg}
+
+Исправить $ k $ и $ n $ мы не можем. Так что проблема в том, что треугольники не совпадают с касательными плоскостями
+
+\subsection{Правильное определение}
+
+Рассмотрим разбиение координатными линиями. Каждый полученный криволинейный четырёхугольник проецируем на касательные плоскости \\
+Берём предел суммы площадей этих проекций
+
+\textit{Надо это нормально записать}
+
+\begin{theorem}
+	$ S = \iint\sqrt{r_u \times r_v}\di u \di v $
+\end{theorem}
+
+\begin{proof}
+	Без доказательства (на самом деле, это и есть определение двойного интеграла)
+\end{proof}
+
+\begin{theorem}
+	$ S = \iint\sqrt{EG - F^2}\di u \di v $
+\end{theorem}
+
+Следует из леммы:
+
+\begin{lemma}
+	$ |r_u \times r_v | = \sqrt{EG - F^2} $
+\end{lemma}

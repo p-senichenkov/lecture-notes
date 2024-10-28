@@ -261,3 +261,51 @@ $$ y = z^m, \qquad y' = mz^{m - 1}z', \qquad z = y^{\faktor1m} $$
         \end{note}
     \end{control}
 \end{itemize}
+
+\section{Уравнение в полных дифференциалах}
+
+\begin{equ}{9.1}
+	M(x, y)\di x + N(x, y) \di y = 0
+\end{equ}
+
+\begin{definition}
+    Уравнение \eref{9.1} называется уравнением в полных дифференциалах (УПД), если
+    $$ \exist U(x, y) \in \Cont[1]B : \quad
+    \begin{cases}
+    	U_x' = M \\
+        U_y' = N
+    \end{cases} $$
+\end{definition}
+
+Если нашлась такая $ U $, то $ U(x, y) \equiv C $ -- ответ
+
+\begin{statement}
+    Уравнение \eref{9.1} является УПД \bt{тогда и только тогда}, когда
+    \begin{equ}{9.3}
+        M_y' - N_x' \equiv 0 \quad \text{\nimp[локально]}
+    \end{equ}
+\end{statement}
+
+Проверяем \eref{9.3} \\
+Ищем $ U $:
+$$ U_x' = M \implies \quad U(x, y) = \uint{M(x, y)} + C(y) $$
+\begin{equ}{9.*}
+    U_y' = N \implies \quad \bigg( \uint{M(x, y)} \bigg)_y' + C'(y) = N(x, y)
+\end{equ}
+$$ C(y) = \uint[y]{N(x, y)} + \uint[y]{\bigg( \uint{M(x, y)} \bigg)_y'} ~ \nimp[+ ~ 0] $$
+или
+$$ U_y' = N \implies \quad U(x, y) = \uint[y]{N(x, y)} + C(x) $$
+\begin{equ}{9.*'}
+    U_x' = M \implies \quad \bigg( \uint[y]{N(x, y)} \bigg)_x' + C'(x) = M(x, y)
+\end{equ}
+$$ C(y) = \uint[x]{M(x, y)} + \uint[x]{\bigg( \uint[y]{N(x, y)} \bigg)_x'} ~ \nimp[+ ~ 0] $$
+
+Подставляем $ C(y) $ в первое выражение, получаем $ U(x, y) $
+
+\begin{control}
+    В \eref{9.*} и \eref{9.*'} \bt{не} должно остаться $ x $
+\end{control}
+
+\begin{remark}
+	Может оказаться, что $ C' \equiv 0 $. Тогда можно считать, что $ C(y) \equiv 0 $ (нужна ведь произвольная константа)
+\end{remark}

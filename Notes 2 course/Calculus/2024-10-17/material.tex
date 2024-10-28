@@ -1,0 +1,349 @@
+\chapter{Функцональные последовательности и ряды}
+
+\begin{definition}
+	$ X, d(x, y) $ -- метрическое пространство \\
+	$ f_1(x), f_2(x), ..., f_n(x), ... $ -- функции, $ \quad f_n : X \to \R, \quad n = 1, ... $ \\
+	$ \seq{f_n(x)}n $ -- функциональная последовательность
+\end{definition}
+
+\begin{definition}
+	$ \seq{v_n(x)}n $ \\
+	Функциональным рядом будем называть символ
+	$$ \sum_{n = 1}^\infty v_n(x) $$
+\end{definition}
+
+\begin{definition}
+	$ x_0 \in X $ \\
+	Будем называть $ x_0 $ точкой сходимости последовательности $ \seq{f_n(x)}n $, если
+	$$ \exist \liml{n \to \infty}f_n(x_0) \in \R $$
+	Точку $ x_1 \in X $ будем называть точкой расходимости последовательности $ \seq{f_n(x)}n $, если предел $ \limi{n} f_n(x_1) $ не существует или бесконечен
+\end{definition}
+
+\begin{definition}
+	Определим сумму ряда $ \sum v_n(x) $:
+	$$ S_n(x) = v_1(x) + ... + v_n(x) $$
+	Будем называть точку $ x_0 \in X $ точкой сходимости ряда, если существует конечный предел последовательности $ \seq{S_n(x)}n $ \\
+	Аналогично определяется точка расходимости ряда
+\end{definition}
+
+\begin{remark}
+	Любая точка для фиксированной последовательности или фиксированного ряда является либо точкой сходимости, либо точкой расходиомости
+\end{remark}
+
+\begin{definition}
+	Множество всех точек сходимости функциональной последовательности или ряда будем называть множеством сходимости
+	\begin{notation}
+		$ E_0 $
+	\end{notation}
+	Множество точек расходимости -- множеством расходимости
+	\begin{notation}
+		$ E_1 $
+	\end{notation}
+\end{definition}
+
+\begin{remark}
+	Какое-то из них может быть пусто. Выполняются соотношения:
+	$$ E_0 \cup E_1 = X, \qquad E_0 \cap E_1 = \O $$
+\end{remark}
+
+\begin{definition}
+	$ f : X \to \R, \qquad \forall x \in X \quad f_n(x) \infarr{n} f(x) $ \\
+	Говорят, что функцоинальная последовательность \bt{поточечно} сходится к $ f(x) $
+\end{definition}
+
+\begin{definition}
+	$ S : X \to \R, \qquad \forall x \in X \quad S_n(x) \infarr{n} S(x) $ \\
+	Говорят, что функциональный ряд \bt{поточечно} сходится к $ S $
+\end{definition}
+
+\begin{remark}
+	В этих определениях мы нигде не использовали метрику, так что можно говорить о функциональных последовательностях и рядах на более общих множествах. Однако, нам это не надо
+\end{remark}
+
+\section{Равномерная сходимость}
+
+\begin{definition}
+	$ f_n(x) $ \bt{равномерно} на $ X $ сходится (стремится) к $ f(x) $, если
+	$$ \forall \veps > 0 \quad \exist N : \quad \forall n > N \quad \forall x \in X \quad |f_n(x) - f(x)| < \veps $$
+\end{definition}
+
+\begin{notation}
+	$ f_n(x) \uniarr{x \in X} f(x) $
+\end{notation}
+
+\begin{definition}
+	Будем говорить, что функциональный ряд \bt{равномерно} сходится на $ X $ к сумме $ S(x) $, если
+	$$ S_n(x) \uniarr{x \in X} S(x) $$
+	Тогда ряду приписывается значение:
+	$$ \sum_{n = 1}^\infty v_n(x) \define S(x) $$
+\end{definition}
+
+\section{Критерий Коши равномерной сходимости}
+
+\begin{theorem}
+	Для того чтобы функцональная последовательность \bt{равномерно} сходилась на $ X $ к некоторой функции $ f $, \bt{необходимо и достаточно}, чтобы
+	$$ \forall \veps > 0 \quad \exist N : \quad \forall n > N, ~ m > N \quad \forall x \in X \quad |f_n(x) - f_m(x)| < \veps $$
+\end{theorem}
+
+\begin{iproof}
+	\item Необходимость \\
+	Пусть $ f_n(x) \uniarr{x \in X} f(x) $ \\
+	В таком случае, по определению равномерной сходиомости,
+	$$ \forall \veps > 0 \quad \exist N : \quad \forall n > N \quad \forall x \in X \quad |f_n(x) - f(x)| < \half[\veps] $$
+	Возьмём произвольный $ x \in X $
+	$$ |f_m(x) - f_n(x)| \undereq{\pm f(x)} \bigg| \bigg( f_m(x) - f(x) \bigg) + \bigg( f(x) - f_n(x) \bigg) \bigg| \trile |f_m(x) - f(x)| + |f(x) - f_n(x)| < \half[\veps] + \half[\veps] = \veps $$
+	\item Достаточность \\
+	Фиксируем $ x \in X $ \\
+	Получаем \bt{числовую} последовательность $ \seq{f_n(x)}n $ \\
+	По критерию Коши для числовых последовательностей, она имеет конечный предел:
+	$$ \exist \limi{n} f_n(x) \in \R $$
+	То есть, любая точка из $ X $ является точкой сходиомости:
+	$$ E_0 = X $$
+	Получается, что $ f_n(x) $ поточечно сходится к $ f(x) $ на $ X $:
+	\begin{equ}{7'}
+		f_n(x) \infarr{n} f(x)
+	\end{equ}
+	При фиксированных $ x $ и $ \veps $ имеем
+	$$ |f_m(x) - f_n(x)| < \veps $$
+	Фиксируем $ \forall m > N $ и переходим к пределу по $ n $:
+	$$ \limi{n} |f_m(x) - f_n(x)| \le \veps \quad \underimp{\eref{7'}} |f_m(x) - f(x)| \le \veps $$
+	Т. к. мы брали $ \forall m > N $ и $ \forall x \in X $, это и есть определение равномерной сходимости
+\end{iproof}
+
+\begin{theorem}
+	Имеется ряд
+	$$ \sum_{n = 1}^\infty v_n(x), \qquad x \in X $$
+	Для того чтобы он \bt{равномерно} сходился, \bt{необходимо и достаточно}, чтобы
+	\begin{equ}{11}
+		\forall \veps > 0 \quad \exist N : \quad \forall m > n > N \quad \forall x \in X \quad \bigg| \sum_{k = n + 1}^m v_k(x) \bigg| < \veps
+	\end{equ}
+\end{theorem}
+
+\begin{proof}
+	По определению равномерная сходимость функционального ряда означает, что равномерно сходится последовательность $ \seq{S_n(x)}n $ \\
+	Применяя к ней критерий Коши, получаем, что для её равномерной сходимости необходимо и достаточно, чтобы
+	$$ \forall \veps > 0 \quad \exist N : \quad \forall m > n > N \quad \forall x \in X \quad |S_n(x) - S_m(x)| < \veps $$
+	Это и есть условие \eref{11}
+\end{proof}
+
+\section{Достаточные условия равномерной сходимости функциональных рядов}
+
+\subsection{Признак Вейерштрасса}
+
+\begin{theorem}
+	Имеется ряд
+	\begin{equ}{14}
+		\sum_{n = 1}^\infty v_n(x)
+	\end{equ}
+	\begin{equ}{15}
+		\exist c_n : \quad \sum_{n = 1}^\infty c_n \text{ сходится}
+	\end{equ}
+	\begin{equ}{16}
+		|v_n(x)| \le c_n \quad \forall x \in X
+	\end{equ}
+	Тогда ряд \eref{14} сходится \bt{равномерно}
+\end{theorem}
+
+\begin{proof}
+	Вспомним критерий Коши для числовых рядов: \\
+	Возьмём $ \forall \veps > 0 $
+	\begin{equ}{17}
+		\eref{15} \implies \exist N : \quad \forall m > n > N \quad \sum_{k = n + 1}^m c_k < \veps
+	\end{equ}
+	\begin{note}
+		Мы не ставим модуль, поскольку $ c_k $ положительные
+	\end{note}
+	Зафиксируем эти $ m, n, N $ и возьмём $ \forall x \in X $
+	$$ \eref{17} \implies \bigg| \sum_{k = n + 1}^m v_k(x) \bigg| \trile \sum_{k = n + 1}^m |v_k(x)|\underset{\eref{16}}\le \sum_{k = n + 1}^m c_k \underset{\eref{17}}< \veps $$
+	Применяем критерий Коши для функционального ряда
+\end{proof}
+
+\subsection{Признак Дирихле}
+
+\begin{theorem}
+	Имеется ряд
+	\begin{equ}{19}
+		\sum_{n = 1}^\infty b_n(x)v_n
+	\end{equ}
+	\begin{equ}{20}
+		b_n \text{ монотонна по } n \quad \forall \text{ фиксированного } x \in X
+	\end{equ}
+	\begin{note}
+		Она может возрастать при одних $ x $ и убывать при других
+	\end{note}
+	\begin{equ}{21}
+		b_n(x) \uniarr{x \in X} 0
+	\end{equ}
+	\begin{note}
+		Имеется в виду функция $ 0_X : X \to \R $ такая, что $ 0_X(x) = 0 \quad \forall x \in X $
+	\end{note}
+	\begin{equ}{22}
+		\exist c > 0 : \quad \forall n \quad \forall x \in X \quad \bigg| \sum_{k = 1}^n v_k(x) \bigg| \le c
+	\end{equ}
+	Тогда ряд \eref{19} \bt{равномерно} сходится на $ X $
+\end{theorem}
+
+\begin{proof}
+	Возьмём $ \forall \veps > 0 $
+	\begin{equ}{23}
+		\eref{21} \implies \exist N : \quad \forall n > N \quad \forall x \in X \quad |b_n(x)| < \veps
+	\end{equ}
+	\begin{equ}{24}
+		\forall m > n \ge 1 \quad \bigg| \sum_{k = n + 1}^m v_k(x) \bigg| = \bigg| \sum_{k = 1}^m v_k(x) - \sum_{k = 1}^n v_k(x) \bigg| \trile \sum_{k = 1}^m |v_k(x)| - \sum_{k = 1}^n |v_k(x)| \underset{\eref{22}}\le c + c = 2c
+	\end{equ}
+	Рассмотрим сумму
+	$$ \sum_{k = n + 1}^m b_k(x) v_k(x) $$
+	Определим
+	$$ V_n(x) \definerel\equiv 0 $$
+	$$ V_{n + 1}(x) \define v_{n + 1}(x) $$
+	$$ \widedots[6em] $$
+	$$ V_l(x) = v_{n + 1}(x) + ... + v_l(x), \qquad n + 1 < l \le m $$
+	Тогда $ v_k(x) = V_k(x) - V_{k - 1}(x), \quad k \ge n + 1 $ \\
+	Перепишем нашу сумму:
+	\begin{multline}\lbl{25}
+		\sum_{k = n + 1}^m b_k(x)v_k(x) = \sum_{k = n + 1}^m b_k(x) \bigg( V_k(x) - V_{k - 1}(x) \bigg) = \\
+		= \sum_{k = n + 1}^m b_k(x) V_k(x) - \sum_{k = n + 1}^m b_k(x) V_{k - 1}(x) \undereq{\text{во второй сумме заменим } k - 1 \text{ на } k} \\
+		= \sum_{k = n + 1}^m b_k(x) V_k(x) - \sum_{k = n}^{m - 1}b_{k + 1}(x) V_k(x) \undereq{V_n \bydef 0} b_m(x)V_m(x) + \sum_{k = n + 1}^{m - 1} \bigg( b_k(x) - b_{k + 1}(x) \bigg)V_k(x)
+	\end{multline}
+	\begin{equ}{26}
+		\eref{24} \implies |V_k(x)| \le 2c \quad \forall k
+	\end{equ}
+	Возьмём $ N $ из \eref{23}, $ m > n > N $ и $ \forall x \in X $
+	\begin{multline*}
+		\eref{25} \implies \bigg| \sum_{k = n + 1}^m b_k(x)v_k(x) \bigg| \le |b_m(x)| \cdot |V_m(x)| + \sum_{k = n + 1}^{m - 1} |b_k(x) - b_{k + 1}(x)| \cdot |V_k(x)| < \\
+		< \veps \cdot 2c + 2c \sum_{k = n + 1}^{m - 1} |b_k(x) - b_{k + 1}(x)| \undereq{\eref{20}} 2c\veps + 2c \bigg| \sum_{k = n + 1}^{m - 1} \bigg( b_k(x) - b_{k + 1}(x) \bigg) \bigg| = 2c\veps + 2c|b_{n + 1}(x) - b_m(x)| \le \\
+		\le 2c\veps + 2c \bigg( \underbrace{|b_{n + 1}(x)|}_{< \veps} + \underbrace{|b_m(x)|}_{< \veps} \bigg) < 6c\veps
+	\end{multline*}
+	Можно применить критерий Коши
+\end{proof}
+
+\subsection{Признак Абеля}
+
+\begin{theorem}
+	Имеется ряд
+	\begin{equ}{27}
+		\sum_{n = 1}^\infty b_n(x)v_n(x)
+	\end{equ}
+	\begin{equ}{28}
+		b_n(x) \text{ монотонна по } n \quad \forall x \in X
+	\end{equ}
+	\begin{equ}{29}
+		\exist c > 0 : \quad |b_n(x)| \le c \quad \forall n \quad \forall x \in X
+	\end{equ}
+	\begin{equ}{30}
+		\sum_{n = 1}^\infty v_n(x) \text{ равномерно сходится на } X
+	\end{equ}
+	\begin{equ}{31}
+		\implies \text{ ряд \eref{31} равномерно сходится}
+	\end{equ}
+\end{theorem}
+
+\begin{proof}
+	Применим необходимую часть критерия Коши к условию \eref{30}:
+	\begin{equ}{32}
+		\forall \veps > 0 \quad \exist N : \quad \forall m > n > N \quad \forall x \in X \quad \bigg| \sum_{k = n + 1}^m v_k(x) \bigg| < \veps
+	\end{equ}
+	Возьмём какое-нибудь $ m_0 > n > N $ \\
+	Соотношение \eref{32} действует при $ m = n + 1, ..., m_0 $ \\
+	Определим функции $ V_k(x) $ так же, как в доказательстве признака Дирихле \\
+	Там было доказано, что
+	\begin{equ}{33}
+		\sum_{k = 1}^{m_0} b_k(s)v_k(x) = \sum_{k = n + 1}^{m_0 - 1}V_k(x) \bigg( b_k(x) - b_{k + 1}(x) \bigg) + b_{m_0}(x)V_{m_0}(x)
+	\end{equ}
+	\begin{multline*}
+		\eref{33}, \eref{32} \implies \bigg| \sum_{k = n + 1}^{m_0} b_k(x)v_k(x) \bigg| \le \bigg| \sum_{k = n + 1}^{m_0 - 1} V_k(x) \bigg( b_k(x) - b_{k + 1}(x) \bigg) \bigg| + |b_{m_0}(x)| \cdot |V_{m_0}(x)| \le \\
+		\le \sum_{k = n + 1}^{m_0 - 1} |V_k(x)| \cdot \bigg| b_k(x) - b_{k + 1} \bigg| + |b_{m_0}(x)V_{m_0}(x)| \le \underbrace{|b_{m_0}(x)|}_{\le c} \veps + \veps \sum_{k = n + 1}^{m_0 - 1} |b_k(x) - b_{k + 1}(x)| \le \\
+		\le c\veps + \veps \bigg| \sum_{k = n + 1}^{m_0 - 1} \bigg( b_k(x) - b_{k + 1} \bigg) \bigg| = c\veps + \veps |b_{n + 1}(x) - b_{m_0}(x)| \le 3c\veps \implies \eref{31}
+	\end{multline*}
+\end{proof}
+
+\section{Теорема о переходе к пределу в равномерно сходящейся функциональной последовательности}
+
+\begin{theorem}
+	$ X, \diam(x, y) $ -- метрическое пространство, $ \qquad x_0 \in X $ -- точка сгущения $ X $ \\
+	$ \seq{f_n(x)}n, \qquad f_n : X \setminus \set{x_0} \to \R, \qquad f : X \setminus \set{x_0} \to \R $
+	\begin{equ}{41}
+		f_n(x) \uniarr{x \in X \setminus \set{x_0}} f(x)
+	\end{equ}
+	\begin{equ}{42}
+		\forall x \in X \setminus \set{x_0} \quad \exist \liml{x \to x_0} f_n(x) = a_n
+	\end{equ}
+	\begin{mequ}[\implies \empheqlbrace]
+		\lbl{43} \exist \limi{n} a_n = A \in \R \\
+		\lbl{44} \exist \liml{x \to x_0} f(x) \\
+		\lbl{45} \liml{x \to x_0} f(x) = A
+	\end{mequ}
+\end{theorem}
+
+\begin{proof}
+	Применим критерий Коши к \eref{41}:
+	\begin{equ}{46}
+		\implies \forall \veps > 0 \quad \exist N : \quad \forall m, n > N \quad \forall x \in X \quad |f_m(x) - f_n(x)| < \veps
+	\end{equ}
+	Зафиксируем всё, кроме $ x $, а $ x $ устремим к $ x_0 $:
+	\begin{equ}{47}
+		\implies \liml{x \to x_0} |f_m(x) - f_n(x)| \le \veps
+	\end{equ}
+	\begin{equ}{48}
+		\underimp{42} |a_m - a_n| \le \veps
+	\end{equ}
+	$$ \implies \exist \limi{n} a_n = A \in \R $$
+	\eref{43} доказано \\
+	Докажем \eref{45} (из него будет следовать \eref{44}): \\
+	Возьмём $ \forall \veps > 0 $ \\
+	Выберем $ N_1 $ такое, что
+	\begin{equ}{49}
+		\forall n > N \quad \forall x \in X \setminus \set{x_0} \quad |f_n(x) - f(x)| < \veps
+	\end{equ}
+	Выберем $ N_2 $ такое, что
+	\begin{equ}{410}
+		\forall n > N_2 \quad |a_n - A| < \veps
+	\end{equ}
+	Выберем $ N_0 \define \max\set{N_1, N_2} + 1 $
+	\begin{remark}
+		$ N_1, N_2, N_0 $ зависят от $ \veps $
+	\end{remark}
+	Выберем $ \delta > 0 $ такое, что
+	\begin{equ}{411}
+		\forall y \in X \setminus \set{x_0} \quad \nimp[\bigg(] \diam(y, x_0) < \delta \implies |f_{N_0}(y) - A_{N_0}| < \veps \nimp[\bigg)]
+	\end{equ}
+	\begin{remark}
+		$ \delta $ зависит \bt{только} от $ \veps $
+	\end{remark}
+	$$ f(y) - A \undereq{
+		\begin{subarray}{c}
+			\pm f_{N_0}(y) \\
+			\pm a_{N_0}
+		\end{subarray}} f(y) - f_{N_0}(y) + f_{N_0}(y) - a_{N_0} + a_{N_0} - A $$
+	$$ \implies |f(y) - A| \trile \underbrace{|f(y) - f_{N_0}(y)|}_{\underset{\eref{41}}< \veps} + \underbrace{|f_{N_0}(y) - a_{N_0}|}_{\underset{\eref{411}}< \veps} + \underbrace{|a_{N_0} - A|}_{\underset{\eref{410}}< \veps} < 3\veps \implies \eref{45} $$
+\end{proof}
+
+\begin{implication}[о непрерывности предельной функции равномерно сходящейся функциональной последовательности]
+	$ X, \qquad x_0 \in X, \qquad f_n : X \to \R $
+	\begin{equ}{412}
+		f_n(x) \uniarr{x \in X} f(x)
+	\end{equ}
+	\begin{equ}{413}
+		f_n(x) \text{ непрерывна в } x_0 \quad \forall n
+	\end{equ}
+	\begin{equ}{414}
+		\implies f(x) \text{ непрерывна в } x_0 \quad \forall n
+	\end{equ}
+\end{implication}
+
+\begin{proof}
+	\eref{413} означает, что
+	$$ \liml{x \to x_0} f_n(x) = \underbrace{f_n(x_0)}_{a_n} \in \R $$
+	То есть, выполнено второе условие из теоремы
+	\begin{equ}{415}
+		\eref{412} \implies f_n(x_0) \infarr{n} f(x_0)
+	\end{equ}
+	$$ \exist \limi{n} a_n = \limi{n} f_n(x_0) \undereq{\eref{415}} f(x_0) $$
+	$$ \exist \liml{x \to x_0} f(x) = \limi{n} a_n = f(x_0) $$
+\end{proof}
+
+\begin{implication}
+	$ X $ всюду плотно (т. е. все точки $ X $ являются точками сугщения) \\
+	$ f_n \in \Cont{X}, \qquad f_n(x) \uniarr{x \in X} f(x) $
+	$$ \implies f \in \Cont{X} $$
+\end{implication}

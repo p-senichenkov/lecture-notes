@@ -11190,3 +11190,478 @@ $$ x_k + \overline{x_k} = 2\operatorname{Re}x_k = 2\cos \frac{(2k + 1)\pi}9, \qq
     $$ W \cap U = \set{0} \implies W \oplus U \implies \dim(W + U) = 4 $$
     Значит, этот набор будет базисом
 \end{itemize}
+
+\section{ДЗ к пересдаче. Дубль 2}
+
+\subsection{Квадратичные формы}
+
+\subsubsection{1}
+
+$$ Q = \sum_{i = 1}^n x_i^2 + \sum_{i < j}x_ix_j $$
+$$ A =
+\begin{pmatrix}
+	1 & \half & . & . & \half \\
+    \half & 1 & \half & . & \half \\
+    . & . & . & . & . \\
+    \half & . & . & \half & 1
+\end{pmatrix} $$
+$$ \chi(\lambda) =
+\begin{vmatrix}
+	1 - \lambda & \half & . & \half \\
+    \half & 1 - \lambda & . & \half \\
+    . & . & . & . \\
+    \half & . & \half & 1 - \lambda
+\end{vmatrix} $$
+\begin{itemize}
+	\item $ \lambda = \half $
+    $$ A - \half I =
+    \begin{pmatrix}
+    	\half & . & \half \\
+        . & . & . \\
+        \half & . & \half
+    \end{pmatrix} $$
+    Ранг этой матрицы равен 1. Значит, размерность ядра равна $ n - 1 $
+    \item $ \sum \lambda_i = \operatorname{tr} A = n $
+    $$ \lambda = n - (n - 1) \cdot \half = \half[n + 1] $$
+\end{itemize}
+$$ Q = \sum_i^{n - 1} \half[x_i]^2 + \half[(n + 1)x_n^2] $$
+
+\subsection{2}
+
+$$ Q = \sum_{i < j} x_ix_j $$
+$$ A =
+\begin{pmatrix}
+	0 & \half & . & \half \\
+    \half & 0 & . & \half \\
+    . & . & . & . \\
+    \half & . & \half & 0
+\end{pmatrix} $$
+\begin{itemize}
+	\item $ \lambda = -\half $
+    $$ A + \half I =
+    \begin{pmatrix}
+    	\half & . & \half \\
+        . & . & . \\
+        \half & . & \half
+    \end{pmatrix} $$
+    Ранг этой матрицы равен 1, значит, размерность ядра равна $ n - 1 $
+    \item $ \sum \lambda_i = \operatorname{tr} A = 0 $
+    $$ \lambda = \half[n - 1] $$
+\end{itemize}
+$$ Q = -\sum_{i = 1}^{n - 1} \half[x_i^2] + \half[(n - 1)x_n^2] $$
+
+\section{Разложение на простейшие}
+
+\subsection{1}
+
+$$ \frac{x^3}{x^9 - 1} $$
+Разложим над $ \Co $: \\
+Корни многочлена $ F(x) = x^9 - 1 $ -- это корни из единицы 9 степени:
+$$ x_k = \cos \frac{2\pi k}9 + i \sin \frac{2 \pi k}9, \qquad k = 0, ..., 8 $$
+При этом, $ x_0 = 1 $, а остальные разбиваются на пары сопряжённых: $ \ol{x_k} = x_{9 - k} $
+$$ F'(x) = 9x^8, \qquad F'(x_k) = 9x_k^8 = 9x_k^9x_k^{-1} = 9x_k^{-1} $$
+$$ x_k + \ol{x_k} = 2\operatorname{Re}x_k = 2\cos \frac{2\pi k}9, \qquad x_k\ol{x_k} = |x_k|^2 = 1, \qquad x_k^m = \cos\frac{2\pi k m}9 + i \sin \frac{2\pi km}9 $$
+Воспользуемся формулой Лагранжа:
+\begin{multline*}
+    \frac{x^3}{x^9 - 1} = \sum_{k = 0}^8 \frac{x_k^3}{(x - x_k)(9x_k^{-1})} = \frac19 \bigg\lgroup \frac{x_0^4}{x - x_0} + \sum_{k = 1}^4 \frac{x_k^4}{x - x_k} + \sum_{k = 1}^4 \frac{\ol{x_k}^4}{x - \ol{x_k}} \bigg\rgroup = \\
+    = \frac19 \bigg\lgroup \frac1{x - 1} + \sum_{k = 1}^4 \frac{x_k^4(x - \ol{x_k}) + \ol{x_k}^4(x - x_k)}{(x - x_k)(x - \ol{x_k})} \bigg\rgroup = \frac19 \bigg\lgroup \frac1{x - 1} + \sum_{k = 1}^4 \frac{x(x_k^4 + \ol{x_k}^4) - (x_k^3x_k\ol{x_k} + \ol{x_k}^3\ol{x_k}x_k)}{x^2 - x(x_k + \ol{x_k}) + x_k\ol{x_k}} \bigg\rgroup = \\
+    = \frac19 \bigg\lgroup \frac1{x - 1} + \sum_{k = 1}^4 \frac{2x\cos\frac{8\pi k}9 - (x_k^3 + \ol{x_k}^3)}{x^2 - 2x\cos\frac{2\pi k}9 + 1} \bigg\rgroup = \frac19 \bigg\lgroup \frac1{x - 1} + 2\sum_{k = 1}^4 \frac{x\cos\frac{8\pi k}9 - \cos\frac{2\pi k}3}{x^2 - 2x\cos\frac{2\pi k}9 + 1} \bigg\rgroup
+\end{multline*}
+
+\subsection{2}
+
+$$ \frac{x^3}{x^9 + 1} $$
+Разложим над $ \Co $: \\
+Корни многочлена $ F(x) = x^9 + 1 $ имеют вид
+$$ x_k = \cos\frac{(2k + 1)\pi}9 + i\sin\frac{(2k + 1)\pi}9, \qquad k = 0, ..., 8 $$
+При этом, $ x_4 = -1 $, а остальные разбиваются на пары сопряжённых: $ \ol{x_k} = x_{9 - k} $
+$$ F'(x) = 9x^8, \qquad F'(x_k) = 9x_k^8 = 9x_k^9x_k^{-1} = -9x_k^{-1} $$
+Воспользуемся формулой Лагранжа:
+\begin{multline*}
+    \frac{x^3}{x^9 + 1} = \sum_{k = 0}^8\frac{x_k^3}{(x - x_k)(-9x_k^{-1})} = -\frac19 \bigg\lgroup \frac1{x + 1} + \sum_{k = 0}^3 \frac{x_k^4(x - \ol{x_k}) + \ol{x_k}^4(x - x_k)}{(x - x_k)(x - \ol{x_k})} \bigg\rgroup = \\
+    = -\frac19 \bigg\lgroup \frac1{x + 1} + \sum_{k = 0}^3 \frac{x(x_k^4 + \ol{x_k}^4) - (x_k^3 + \ol{x_k}^3)}{x^2 - 2x\cos\frac{(2k + 1)\pi}9 + 1} \bigg\rgroup = -\frac19 \bigg\lgroup \frac1{x + 1} + 2\sum_{k = 0}^3 \frac{x\cos\frac{4(2k + 1)\pi}9 - \cos\frac{(2k + 1)\pi}3}{x^2 - 2x\cos\frac{(2k + 1)\pi}9 + 1} \bigg\rgroup
+\end{multline*}
+
+\section{Теория групп}
+
+\subsection{1}
+
+\begin{statement}
+	Пусть конечная группа $ G $ состоит из чётного числа элементов. Доказать, что существует элемент порядка 2
+\end{statement}
+
+\begin{proof}
+	Каждый элемент группы имеет обратный, при этом обратный к единице -- это единица. Значит, все элементы, единицы, разбиваются на пары обратных. \\
+    Чтобы группа содержала чётное число элементов, должен быть ещё один элемент, обратный сам к себе, т. е. $ \exist a \ne e : \quad a^{-1} = a \iff aa^{-1} = e \iff a^2 = e \iff \ord(a) = 2 $
+\end{proof}
+
+\subsection{2}
+
+\begin{statement}
+	Пусть группа $ G $ не имеет нетривиальных подгрупп. Доказать, что $ G $ конечна и $ |G| $ простое
+\end{statement}
+
+\begin{iproof}
+	\item Докажем, что $ G $ циклическая: \\
+    Пусть это не так. Тогда порождающее множество $ G $ состоит из нескольких элементов. Возьмём из него $ a \ne b $ \\
+    Рассмотрим циклические подгруппы $ \braket{a} $ и $ \braket{b} $. Они не равны (т. к. $ a \not\in \braket{b} $ и наоборот). Значит, хотя бы одна из них нетривиальна -- \contra
+    \item Докажем, что $ G $ конечна: \\
+    $ G $ циклическая $ \implies G \sim
+    \begin{cases}
+        \Z, \qquad G \text{ бесконечна} \\
+        \Z_n, \qquad n = \ord G < \infty
+    \end{cases} $ \\
+    $ \Z $ содержит нетривиальные подгруппы, значит $ G $ конечна и изоморфна $ \Z_n $
+    \item Докажем, что $ n \in \Prime $: \\
+    Пусть это не так, и $ n = mp $ \\
+    Зафиксируем элемент $ a \in G $, $ a \ne e $. Тогда $ a^{pm} = e $. Возможно два случая:
+    \begin{itemize}
+    	\item $ a^p = e $ \\
+        Рассмотрим циклическую подгруппу $ \braket{a} $
+        $$ 1 < \ord(\braket{a}) \le p < mp \implies \braket{a} \text{ нетривиальна} $$
+        \item $ a^p \ne e $ \\
+        Рассмотрим циклическую подгруппу $ \braket{a^p} $
+        $$ 1 < \ord{\braket{a^p}} \le m < mp \implies \braket{a^p} \text{ нетривиальна} $$
+    \end{itemize}
+    В обоих случаях получили противоречие, значит, $ n \in \Prime $
+\end{iproof}
+
+\section{Базисы подпространств}
+
+subsection{1}
+
+Пусть $ V = \R^4 $, $ W $ -- подпространство $ V $, натянутое на векторы
+$$
+\begin{pmatrix}
+	1 \\
+    1 \\
+    1 \\
+    2
+\end{pmatrix},
+\begin{pmatrix}
+	1 \\
+    0 \\
+    -1 \\
+    -1
+\end{pmatrix} $$
+$ U $ -- подпространство $ V $, натянутое на векторы
+$$
+\begin{pmatrix}
+	3 \\
+    1 \\
+    -1 \\
+    0
+\end{pmatrix},
+\begin{pmatrix}
+	3 \\
+    3 \\
+    2 \\
+    2
+\end{pmatrix} $$
+Найти размерность и базис для $ W \cap U $ и $ W + U $. Является ли $ W + U $ прямой суммой?
+
+\begin{itemize}
+	\item $ W \cap U $ \\
+    Возьмём $ v \in U \cap W $
+    $$ v \in W \implies v = a
+    \begin{pmatrix}
+    	1 \\
+        1 \\
+        1 \\
+        2
+    \end{pmatrix} + b
+    \begin{pmatrix}
+    	1 \\
+        0 \\
+        -1 \\
+        -1
+    \end{pmatrix}, \qquad v \in U \implies v = c
+    \begin{pmatrix}
+    	3 \\
+        1 \\
+        -1 \\
+        0
+    \end{pmatrix} + d
+    \begin{pmatrix}
+    	3 \\
+        3 \\
+        2 \\
+        2
+    \end{pmatrix} $$
+    $$
+    \begin{cases}
+    	a + b - 3c - 3d = 0 \\
+        a - c - 3d = 0 \\
+        a - b + c - 2d = 0 \\
+        2a - b - 2d = 0
+    \end{cases} \qquad
+    \begin{cases}
+    	a = c + 3d \\
+        c + 3d + b - 3c - 3d = 0 \\
+        c + 3d - b + c - 2d = 0 \\
+        2c - 6d - b - 2d = 0
+    \end{cases} \qquad
+    \begin{cases}
+    	b - 2c = 0 \\
+        -b + 2c + d = 0 \\
+        -b + 2c - 8d = 0
+    \end{cases} $$
+    $$
+    \begin{cases}
+    	b = 2c \\
+        -2c + 2c + d = 0 \\
+        -2c + 2c - 8d = 0
+    \end{cases} \qquad
+    \begin{cases}
+    	a = c \\
+        b = 2c \\
+        d = 0
+    \end{cases} $$
+    $$ U \cap W = \left\langle
+    \begin{pmatrix}
+    	1 \\
+        2 \\
+        1 \\
+        0
+    \end{pmatrix} \right\rangle, \qquad \dim (W \cap U) = 1 $$
+    \item $ W + U $ \\
+    $ \dim (W \cap U) \ne 0 \implies $ сумма не прямая
+    $$ W \cap U = \left\langle
+    \begin{pmatrix}
+    	1 \\
+        1 \\
+        1 \\
+        2
+    \end{pmatrix},
+    \begin{pmatrix}
+    	1 \\
+        0 \\
+        -1 \\
+        -1
+    \end{pmatrix},
+    \begin{pmatrix}
+    	3 \\
+        1 \\
+        -1 \\
+        0
+    \end{pmatrix},
+    \begin{pmatrix}
+    	3 \\
+        3 \\
+        2 \\
+        2
+    \end{pmatrix} \right\rangle $$
+    По формуле Грассмана, $ \dim (U + W) = \dim U + \dim W - \dim (U \cap W) = 3 $ \\
+    Значит, нужно исключить один вектор
+    $$
+    \begin{cases}
+    	a + b + 3c = 3 \\
+        a + c = 3 \\
+        a - b - c = 2 \\
+        2a - b = 2
+    \end{cases} \qquad
+    \begin{cases}
+    	a = 3 - c \\
+        3 - c + b + 3c - 3 = 0 \\
+        3 - c - b - c - 2 = 0 \\
+        6 - 2c - b - 2 = 0
+    \end{cases} \qquad
+    \begin{cases}
+    	b + 2c = 0 \\
+        -b - 2c + 1 = 0 \\
+        -b - 2c + 4 = 0
+    \end{cases} \qquad b = -2c $$
+    Четвёртый вектор выражается через остальные, значит его можно исключить. Базис $ U + W $:
+    $$
+    \begin{pmatrix}
+    	1 \\
+        1 \\
+        1 \\
+        2
+    \end{pmatrix},
+    \begin{pmatrix}
+    	1 \\
+        0 \\
+        -1 \\
+        -1
+    \end{pmatrix},
+    \begin{pmatrix}
+        3 \\
+        1 \\
+        -1 \\
+        0
+    \end{pmatrix} $$
+\end{itemize}
+
+\subsection{2}
+
+Пусть $ V = \R^4 $, $ W $ -- подпространство $ V $, натянутое на векторы
+$$
+\begin{pmatrix}
+	0 \\
+    1 \\
+    -1 \\
+    1
+\end{pmatrix},
+\begin{pmatrix}
+	-1 \\
+    -2 \\
+    2 \\
+    2
+\end{pmatrix} $$
+$ U $ -- подпространство $ V $, натянутое на векторы
+$$
+\begin{pmatrix}
+	-1 \\
+    1 \\
+    -1 \\
+    5
+\end{pmatrix},
+\begin{pmatrix}
+	3 \\
+    3 \\
+    2 \\
+    1
+\end{pmatrix} $$
+Найти размерность и базис для $ W \cap U $ и $ W + U $. Является ли $ W + U $ прямой суммой?
+
+\begin{itemize}
+	\item $ W \cap U $ \\
+    Возьмём $ v \in W \cap U $
+    $$ v \in W \implies v = a
+    \begin{pmatrix}
+    	0 \\
+        1 \\
+        -1 \\
+        1
+    \end{pmatrix} + b
+    \begin{pmatrix}
+    	-1 \\
+        -2 \\
+        2 \\
+        2
+    \end{pmatrix}, \qquad v \in U \implies v = c
+    \begin{pmatrix}
+    	-1 \\
+        1 \\
+        -1 \\
+        5
+    \end{pmatrix} + d
+    \begin{pmatrix}
+    	3 \\
+        3 \\
+        2 \\
+        1
+    \end{pmatrix} $$
+    $$
+    \begin{cases}
+    	-b + c - 3d = 0 \\
+        a - 2b - c - 3d = 0 \\
+        -a + 2b + c - 2d = 0 \\
+        a + 2b - 5c - d = 0
+    \end{cases} \qquad
+    \begin{cases}
+    	b = c - 3d \\
+        a - 2c + 6d - c - 3d = 0 \\
+        -a + 2c - 6d + c - 2d = 0 \\
+        a + 2c - 6d - 5c - d = 0
+    \end{cases} \qquad
+    \begin{cases}
+    	b = c - 3d \\
+        a - 3c + 3d = 0 \\
+        -a + 3c - 8d = 0 \\
+        a - 3c - 7d = 0
+    \end{cases} $$
+    $$
+    \begin{cases}
+    	a = 3c - 3d \\
+        -3c + 3d + 3c - 8d = 0 \\
+        3c - 3d - 3c - 7d = 0
+    \end{cases} \qquad
+    \begin{cases}
+    	a = 3c \\
+        b = c \\
+        d = 0
+    \end{cases} $$
+    $$ W \cap U = \left\langle
+    \begin{pmatrix}
+    	3 \\
+        1 \\
+        1 \\
+        0
+    \end{pmatrix} \right\rangle, \qquad \dim (W \cap U) = 1 $$
+    \item $ W + U $ \\
+    $ \dim(W \cap U) \ne 0 \implies $ сумма не прямая \\
+    По формуле Грассмана,
+    $$ \dim(W + U) = \dim U + \dim W - \dim(W \cap U) = 3 $$
+    $$ W + U = \left\langle
+    \begin{pmatrix}
+    	0 \\
+        1 \\
+        -1 \\
+        1
+    \end{pmatrix},
+    \begin{pmatrix}
+    	-1 \\
+        -2 \\
+        2 \\
+        2
+    \end{pmatrix},
+    \begin{pmatrix}
+    	-1 \\
+        1 \\
+        -1 \\
+        5
+    \end{pmatrix},
+    \begin{pmatrix}
+    	3 \\
+        3 \\
+        2 \\
+        1
+    \end{pmatrix} \right\rangle $$
+    Базис должен состоять из трёх векторов, значит один ветор надо исключить
+    $$
+    \begin{cases}
+    	-a - b + 3c = 0 \\
+        -2a + b + 3c = 1 \\
+        2a - b + 2c = -1 \\
+        2a + 5b + c = 1
+    \end{cases} \qquad
+    \begin{cases}
+    	a = -b + 3c \\
+        2b - 6c + b + 3c = 1 \\
+        -2b + 6c - b + 2c = - 1 \\
+        -2b + 6c + 5b + c = 1
+    \end{cases} \qquad
+    \begin{cases}
+    	3b - 3c - 1 = 0 \\
+        -3b + 8c + 1 = 0 \\
+        3b + 7c - 1 = 0
+    \end{cases} $$
+    $$
+    \begin{cases}
+    	a = -\frac13 \\
+        b = \frac13 \\
+        c = 0
+    \end{cases} $$
+    Первый вектор выражается через остальные. Базис $ W + U $:
+    $$
+    \begin{pmatrix}
+    	-1 \\
+        -2 \\
+        2 \\
+        2
+    \end{pmatrix},
+    \begin{pmatrix}
+    	-1 \\
+        1 \\
+        -1 \\
+        5
+    \end{pmatrix},
+    \begin{pmatrix}
+    	3 \\
+        3 \\
+        2 \\
+        1
+    \end{pmatrix} $$
+\end{itemize}
