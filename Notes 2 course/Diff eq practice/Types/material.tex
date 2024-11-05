@@ -309,3 +309,31 @@ $$ C(y) = \uint[x]{M(x, y)} + \uint[x]{\bigg( \uint[y]{N(x, y)} \bigg)_x'} ~ \ni
 \begin{remark}
 	Может оказаться, что $ C' \equiv 0 $. Тогда можно считать, что $ C(y) \equiv 0 $ (нужна ведь произвольная константа)
 \end{remark}
+
+\section{Поиск интегрирующего множителя}
+
+$$ M(x, y) \di x + N(x, y) \di y = 0 $$
+Если это не УПД, то есть $ M_y' - N_x' \not\equiv 0 $, то можно попытаться найти интегрирующий множитель \\
+Это будет $ \mu(x ,y) \in \Cont[1]{B^0} $, такая что
+$$ \mu M\di x + \mu N \di y = 0 $$
+станет УПД, то есть
+$$ N\mu_x' - M\mu_y' = (M_y' - N_x')\mu $$
+Это уравнение мат. физики. Его можно попытаться решить: \\
+Пусть $ \mu $ -- функция от $ \omega $:
+$$ \mu(\omega) = \mu \bigg( \omega(x, y) \bigg), \qquad \mu_x' = \frac{\di \mu}{\di \omega}\omega_x', \qquad \mu_y' = \frac{\di \mu}{\di \omega}\omega_y' $$
+$$ \frac{\di \mu}{\di \omega} = \frac{\overbrace{M_y' - N_x'}^A}{N\omega_x' - N\omega_y'} \cdot \mu(\omega) $$
+Нужно подобрать $ \omega $ так, чтобы $ A $ зависело от $ \omega $ \\
+Если подобрали, то
+$$ \frac{\di\mu}{\di\omega} = A(\omega)\mu $$
+Это уравнение с разделяющимися переменными:
+$$ \mu(\omega) = 1 \cdot e^{\uint[\omega]{A(\omega)}} $$
+Как выбрать $ \omega $:
+\begin{itemize}
+	\item $ \omega = x $
+    $$ A(x) \iseq \frac{M_y' - N_x'}N $$
+    \item $ \omega = y $
+    $$ A(y) \iseq \frac{M_y' - N_x'}{-M} $$
+    \item $ \omega = x^\alpha y^\beta $ или $ \omega = x^\alpha \pm y^\beta $ \\
+    Подставляем, например, $ \alpha = 1 $, и подбираем $ \beta $ так, чтобы привелись подобные
+\end{itemize}
+

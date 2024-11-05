@@ -307,3 +307,6 @@ TSWLatexianTemp*
 
 # Don't upload lecture recordings
 *.mp4
+
+# Don't upload courseworks
+Coursework
