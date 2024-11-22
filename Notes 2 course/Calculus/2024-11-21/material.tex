@@ -1,0 +1,360 @@
+\chapter{Функциональные последовательности и ряды}
+
+\section{Вещественные степенные ряды}
+
+\begin{definition}
+	\begin{equ}1
+		\sum_{n = 1}^\infty a_n(x - x_0)^n
+	\end{equ}
+	Будем называть \eref1 вещественным степенным рядом, если $ x_0 \in \R, \quad a_n \in \R, ~ n \ge 1, \quad x \in \R $
+\end{definition}
+
+Можно найти радиус сходимости и круг сходимости соответсвующего комплексного степенного ряда:
+
+\begin{enumerate}
+	\item $ R = 0, \quad \B = \O $ \\
+	Ряд сходится только при $ x = x_0 $
+	\item $ R = \infty, \quad \B = \Co $ \\
+	Ряд сходится при любых $ z \in \Co $, а значит, и при любых $ x \in \R $
+	\item $ 0 < R < \infty, \quad \B \ne \O, \Co $ \\
+	Пусть $ I \define \B \cap \R $
+	$$ I = (x_0 - R, x_0 + R) $$
+	\begin{itemize}
+		\item $ x \in I \implies x \in \B \implies $ ряд сходится в $ x $
+		\item $ x_1 \nin \ol I \implies x_1 \nin \ol\B \implies $ ряд расходится в $ x_1 $
+	\end{itemize}
+	Пусть есть $ 0 < r < R $ \\
+	Рассмотрим промежуток $ [x_0 - r, x_0 + r] \sub \B \quad \implies $ ряд сходится равномерно на $ [x_0 - r, x_0 + r] $
+\end{enumerate}
+
+При доказательстве теоремы о радиусе сходимости для комплексных рядов мы пользовались признаком Вейерштрасса. Если перейти к вещественным рядам, то при $ x \in [x_0 - r, x_0 + r] $ будет равномерно сходится ряд
+$$ \sum_{n = 1}^\infty |a_n(x - x_0)^n| $$
+
+\subsubsection{Теорема Абеля}
+
+Бывает, что при $ r = R $ ряд сходится
+
+\begin{theorem}[Абеля]
+	Ряд \eref1 сходится при $ x_0 - R $ или при $ x_0 + R $
+	\begin{equ}5
+		S(x) \define \sum_{n = 1}^\infty a_n(x - x_0)^n
+	\end{equ}
+	Тогда ряд сходится равномерно на $ [x_0 - R, x_0] $ или $ [x_0, x_0 + R] $, и
+	$$ \implies
+	\begin{vars}
+		S \in \Cont{[x_0 - R, x_0]} \\
+		S \in \Cont{[x_0, x_0 + R]}
+	\end{vars} $$
+	Если ряд сходится и при $ x_0 - R $, и при $ x_0 + R $, то верны оба утверждения
+\end{theorem}
+
+\begin{proof}
+	Докажем для $ [x_0 - R, x_0] $: \\
+	Так как $ x_0 - R - x_0 = -R $,
+	\begin{equ}6
+		\sum_{n = 1}^\infty a_n(-R)^n \text{ сходится}
+	\end{equ}
+	Пусть $ x_0 - R < x < x_0 $
+	\begin{equ}7
+		\sum_{n = 1}^\infty a_n(x - x_0)^n = \sum_{n = 1}^\infty a_n(-R)^n \cdot \bigg( \frac{x - x_0}{-R} \bigg)^n = \sum_{n = 1}^\infty (-R)^n \cdot \bigg( \frac{x_0 - x}R \bigg)^n
+	\end{equ}
+	Положим
+	$$ u_n(x) \define a_n(-R)^n, \qquad v_n(x) \define \bigg( \frac{x_0 - x}R \bigg)^n $$
+	Тогда $ \sum u_n(x) $ равномерно сходится на $ [x_0 - R, x_0] $ (т.~к. он не зависит от $ x $)
+	$$ 0 \le v_n(x) \le 1, \qquad v_n(x) \text{ монотонн. по } n \quad \forall x \in [x_0 - R, x_0] $$
+	По признаку Абеля, последние два утверждения влекут, что
+	$$ S(x) \bdefeq{u_n, v_n} \sum_{n = 1}^\infty u_n(x)v_n(x) \text{ равномерно сходится при } x \in [x_0 - R, x_0] $$
+	$$ a_n(x - x_0)^n \in \Cont{[x_0 - R, x_0]} $$
+	Можно применить следствие о непрерывности ряда непрерывных функций
+\end{proof}
+
+\subsection{Дифференцирование степенного ряда}
+
+\begin{theorem}
+	Имеется вещественный степенной ряд
+	\begin{equ}{11}
+		S(x) \define a_0 + \sum_{n = 1}^\infty a_n(x - x_0)^n, \qquad R > 0
+	\end{equ}
+	\begin{equ}{12}
+		T(x) \define a_1 + \sum_{n = 2}^\infty na_n(x - x_0)^{n - 1}, \qquad R_0 \text{ "--- его радиус сх.}
+	\end{equ}
+	\begin{equ}{13}
+		\implies R_0 = R
+	\end{equ}
+\end{theorem}
+
+\begin{note}
+	$ R > 0 $ только потому, что иначе неинтересно рассматривать
+\end{note}
+
+\begin{remark}
+	\begin{equ}{14}
+		\sum_{n = 1}^\infty na_n(x - x_0)^n = (x - x_0)\sum_{n = 1}^\infty na_n(x - x_0)^{n - 1}, \qquad x \ne x_0
+	\end{equ}
+	Ряды слева и справа сходится или расходятся одновременно, так как они различаются умножением на ненулевую константу
+\end{remark}
+
+\begin{proof}
+	$$ t = \ulim_{n \to \infty} \sqrt[n]{|a_n|}, \qquad t_0 = \ulim_{n \to \infty}\sqrt[n]{|na_n|} $$
+	Видно, что $ t_0 \ge t $
+	\begin{equ}{15}
+		R = \frac1t, \qquad R_0 = \frac1{t_0}
+	\end{equ}
+	\begin{equ}{16}
+		\implies R_0 \le R
+	\end{equ}
+	Нужно доказать, что они совпадают \\
+	Возьмём $ x $ такой, что $ |x - x_0| \fed r < R $ \\
+	Докажем, что при таком $ x $ будет сходится ряд $ T(x) $: \\
+	Возьмём $ r < \rho < R, \quad q \define \frac r\rho, \quad 0 < q < 1 $ \\
+	Докажем, что $ T(x) $ абсолютно сходится (из этого будет следовать, что он сходится):
+	\begin{equ}{17}
+		\sum_{n = 1}^\infty n|a_n|r^n = \sum_{n = 1}^\infty |a_n|\rho^n \cdot \bigg( n\frac{r^n}{\rho^n} \bigg) \bdefeq q \sum |a_n|\rho^n \cdot (nq^n)
+	\end{equ}
+	Рассмотрим $ \vphi(x) \define xq^x, \quad x \ge 0 $ \\
+	Понятно, что $ \vphi(0) = 0, \qquad \vphi(x) \infarr x 0 $ \\
+	Найдём её максимум:
+	$$ \vphi'(x) = q^x + x\ln q q^x $$
+	$$ q^{x_0} + x_0\ln qq^{x_0} = 0 $$
+	\begin{equ}{18}
+		x_0 = -\frac1{\ln q} = \frac1{\ln \frac1q} \fed M
+	\end{equ}
+	$$ \implies nq^n \le M \quad \forall n $$
+	\begin{equ}{20}
+		\underimp{\eref{17}} \sum_{n = 1}^\infty |a_n|\rho^n(nq^n) \le \sum |a_n|\rho^n \cdot M \underset{S(x) \text{ сх.}}< \infty
+	\end{equ}
+	$$ \implies [x_0 - r, x_0 + r] \sub (x_0 - R_0, x_0 + R_0) $$
+	$$ \underimp{\text{в силу произвольности } r} (x_0 - R, x_0 + R) \sub (x_0 - R_0, x_0 + R_0) \quad \implies R \le R_0 \quad \underimp{\eref{16}} \eref{13} $$
+\end{proof}
+
+\begin{implication}
+	Обозначим $ u_n(x) \define a_n(x - x_0)^n $ \\
+	Тогда $ u_n'(x) = na_n(x - x_0)^{n - 1} $ \\
+	Если взять $ \forall 0 < r < R $, то ряд $ T(x) $ сходится равномерно при $ x \in [x_0 - r, x_0 + r] $ \\
+	Ряд $ S(x) $ сходится равномерно там же
+	$$ \implies \forall x \in [x_0 - r, x_0 + r] \quad \exist S'(x) = T(x) $$
+	Это верно при $ \forall x \in I $ (т. к. можно обозначить $ |x - x_0| \fed r < R $)
+\end{implication}
+
+Рассмотрим ряд $ T(x) $ как первоначальный ряд. \\
+По теореме получаем, что радиус сходимости $ T'(x) $ будет таким же, то есть,
+
+\begin{implication}
+	$$ 2a_2 + \sum_{n = 3}^\infty n(n - 1)a_n(x - x_0)^{n - 2} = \bigg( S'(x) \bigg)' = S''(x) $$
+\end{implication}
+
+Это можно продолжать. Получаем следующую теорему:
+
+\begin{theorem}
+	\begin{equ}{25}
+		\forall m \quad \forall x \in I \quad \exist S^{(m)}(x) = \sum_{n = 1}^\infty \bigg( a_n(x - x_0)^n \bigg)^{(m)}
+	\end{equ}
+\end{theorem}
+
+\subsection{Степенной ряд как ряд Тейлора}
+
+$$ \bigg( (x - x_0)^n \bigg)' = n(x - x_0)^{n - 1} $$
+$$ \bigg( (x - x_0)^n \bigg)'' = n(n - 1)(x - x_0)^{n - 2} $$
+$$ \widedots $$
+\begin{equ}{26}
+	\bigg( (x - x_0)^n \bigg)^{(m)} = n(n - 1)\dots(n - m + 1)(x - x_0)^{n - m}, \qquad m < n
+\end{equ}
+\begin{equ}{27}
+	\bigg( (x - x_0)^n \bigg)^{(n)} = n!
+\end{equ}
+\begin{equ}{28}
+	\bigg( (x - x_0)^n \bigg)^{(m)} \equiv 0, \qquad m > n
+\end{equ}
+Если в этих формулах положить $ x = x_0 $, то почти везде будет ноль:
+\begin{equ}{29}
+	\bigg( (x - x_0)^n \bigg)^{(m)}\clamp{x = x_0} =
+	\begin{cases}
+		n!, \qquad m = n \\
+		0
+	\end{cases}
+\end{equ}
+Подставим в \eref{25}:
+\begin{equ}{30}
+	S^{(m)}(x_0) = a_m \cdot m! \quad \implies a_m = \frac{S^{(m)}(x_0)}{m!}
+\end{equ}
+Подставим в сам ряд:
+$$ S(x) = a_0 + \sum_{n = 1}^\infty \frac{S^{(n)}(x_0)}{n!}(x - x_0)^n $$
+При этом, $ S(x_0) = a_0 $
+Получаем формулу Тейлора:
+$$ S(x) = S(x_0) + \sum_{n = 1}^\infty \frac{S^{(n)}(x_0)}{n!}(x - x_0)^n, \qquad x \in I $$
+
+\subsection{Интегрирование степенного ряда}
+
+\begin{theorem}[об интегрируемости вещественного степенного ряда]
+	\hfill \\
+	По-прежнему рассматриваем ряд $ S(x), \qquad p, q \in I $ \nimp[(не обязательно $ p < q $)]
+	\begin{equ}{32}
+		\implies \dint pq{S(x)} = a_0(q - p) + \sum_{n = 1}^\infty a_n \frac{(q - x_0)^{n + 1} - (p - x_0)^{n + 1}}{n + 1}
+	\end{equ}
+\end{theorem}
+
+\begin{proof}
+	$ S $ равномерно сходится на $ [p \between q] $. \\
+	Его можно интегрировать почленно, что и записано в теореме.
+\end{proof}
+
+\begin{statement}
+	В частности, при $ p = x_0, \quad q = y \in I $,
+	\begin{equ}{33}
+		\dint{x_0}y{S(x)} = a_0(y - x_0) + \sum_{n = 1}^\infty a_n \frac{(y - x_0)^{n + 1}}{n + 1}
+	\end{equ}
+\end{statement}
+
+\subsection{Применение свойств степенных рядов}
+
+Рассмотрим ряд
+$$ 1 + \sum_{n = 1}^\infty (-1)^nx^n = \frac1{1 + x}, \qquad x \in (-1, 1) $$
+Понятно, что при $ r < 1 $ ряд сходится равномерно на $ [-r, r] $. \\
+Возьмём $ |y| \le r $ и проинтегрируем по формуле \eref{33}:
+$$ \boxed{\ln (1 + y)} = \dfint0y{1 + x} = y + \sum_{n = 1}^\infty (-1)^n \frac{y^{n + 1}}{n + 1} = \boxed{\sum_{n = 1}^\infty (-1)^{n - 1} \frac{y^n}n} $$
+Радиус сходимости этого ряда равен 1. При $ y = 1 $ он сходится. По теореме Абеля он сходится равномерно на $ [0, 1] $.
+$$ \implies \boxed{\sum_{n = 1}^\infty \frac{(-1)^{n - 1}}n} = \liml{y \to 1} \ln(1 + y) = \boxed{\ln 2} $$
+Напишем в этом равенстве $ x^2 $ вместо $ x $:
+$$ 1 + \sum_{n = 1}^\infty (-1)^n x^{2n} = \frac1{1 + x^2} $$
+Рассмотрим $ |y| < 1 $:
+$$ \boxed{\arctg y} = \dfint0y{1 + x^2} = y + \sum_{n = 1}^\infty (-1)^n \frac{y^{2n + 1}}{2n + 1} = \boxed{\sum_{n = 1}^\infty \frac{y^{2n - 1}}{2n - 1}} $$
+При $ y = 1 $ этот рад сходится как знакочередующийся. По теореме абеля он непрерывен на $ [0, 1] $
+$$ \boxed{\sum_{n = 1}^\infty \frac{(-1)^{n - 1}}{2n - 1}} = \liml{y \to 1^-} \arctg y = \boxed{\frac\pi4} $$
+
+\begin{lemma}[техническая]
+	$ r > 0 $
+	$$ \implies \frac{r^n}{n!} \infarr n 0 $$
+\end{lemma}
+
+\begin{proof}
+	Будем считать, что $ n \ge [r] + 2 $. \\
+	Пусть $ M \define \dfrac{r^{n_0}}{n_0!} $. \\
+	Если $ n = n_0 + 1, \dots, n_0 + k, \dots $, то
+	$$ \frac{r^n}{n!} = \frac{r^{n_0}}{n_0!} \cdot \frac{r}{n_0 + 1} \cdot \frac{r}{n_0 + 2} \cdot \dots \cdot \frac{r}{n_0 + k} $$
+	Обозначим $ \frac{r}{n_0 + 1} = \frac r{[r] + 3} \fed q < 1 $
+	$$ \frac{r^n}{n!} < M \cdot \underbrace{q \cdot \dots q}_k = Mq^k \infarr{k} 0 $$
+\end{proof}
+
+\subsection{Разложение функций в степенной ряд}
+
+\begin{notation}
+	$ \overset T= $ "--- ``равно по формуле Тейлора с остатком в форме Лагранжа''
+\end{notation}
+
+Рассматриваем $ x_0 = 0 $
+
+\begin{enumerate}
+	\item $ e^x $
+	$$ (e^x)^{(n)} = e^x $$
+	$$ (e^x)^{(n)}\clamp{x = 0} = 1 $$
+	$$ e^0 = 1 $$
+	\begin{equ}{45}
+		e^x \overset T= 1 + x + \frac{x^2}{2!} + \dots + \frac{x^n}{n!} + e^c \cdot \frac{x^{n + 1}}{(n + 1)!}, \qquad c < |x|, \quad cx > 0
+	\end{equ}
+	$$ \bigg| e^c \frac{x^{n + 1}}{(n + 1)!} \bigg| \le e^{|x|} \cdot \frac{|x|^{n + 1}}{(n + 1)!} \infarr{n} 0 $$
+	$$ \underimp{\eref{45}} \boxed{e^x = 1 + \sum_{n = 1}^\infty \frac{x^n}{n!}, \qquad x \in \R} $$
+	При $ x = 1 $ получаем
+	$$ e = 2 + \sum_{n = 2}^\infty \frac1{n!} $$
+	Взяв сумму до пятого слагаемого, получаем очень хорошее приближение "--- с точностью до $ \frac1{720} $
+	\item $ \cos x $
+	$$ (\cos x)' = -\sin x $$
+	$$ (\cos x)'' = -\cos x $$
+	$$ (\cos x)''' = \sin x $$
+	$$ (\cos x)^{(4)} = \cos x $$
+	$$ (\cos x)^{(2n - 1)}\clamp{x = 0} = 0 $$
+	$$ (\cos x)^{(2n)}\clamp{x = 0} = (-1)^n $$
+	$$ \cos x \overset T= 1 - \frac{x^2}{2!} + \frac{x^4}{4!} + \dots + (-1)^n \frac{x^{2n}}{(2n)!} \pm \sin c \cdot \frac{x^{2n + 1}}{(2n + 1)!} $$
+	$$ \underimp{\text{лемма}} \boxed{\cos x = 1 + \sum_{n = 1}^\infty (-1)^n \frac{x^{2n}}{(2n)!}} $$
+	\item $ \sin x $
+	$$ (\sin x)' = \cos x $$
+	$$ (\sin x)'' = -\sin x $$
+	$$ (\sin x)''' = -\cos x $$
+	$$ (\sin x)^{(4)} = \sin x $$
+	$$ (\sin x)^{(2n)}\clamp{x = 0} = 0 $$
+	$$ (\sin x)^{2n - 1}\clamp{x = 0} = (-1)^{n - 1} $$
+	$$ \sin x \overset T= x - \frac{x^3}{3!} + \frac{x^5}{5!} - \dots + (-1)^{n - 1} \frac{x^{2n - 1}}{(2n - 1)!} \pm \sin c \cdot \frac{x^{2n}}{2n!} $$
+	$$ \underimp{\text{лемма}} \boxed{\sin x = \sum_{n = 1}^\infty (-1)^{n - 1} \frac{x^{2n - 1}}{(2n - 1)!}} $$
+\end{enumerate}
+
+\subsection{Формула Тейлора с остатком в интеральной форме (в форме Коши)}
+
+\begin{theorem}
+	$ f \in \Cont[n]{(a, b)}, \qquad x, x_0 \in (a, b), \quad x \ne x_0 $
+	\begin{equ}{49}
+		\implies f(x) = f(x_0) + \frac{f'(x_0)}{1!}(x - x_0) + \dots + \frac{f^{(n - 1)}(x_0)}{(n - 1)!}(x - x_0)^{n - 1} + \frac1{(n - 1)!} \dint[t]{x_0}x{(x - t)^{n - 1}f^{(n)}(t)}
+	\end{equ}
+\end{theorem}
+
+\begin{proof}
+	Докажем \bt{по индукции}.
+	\begin{itemize}
+		\item \bt{База.} $ n = 1 $
+		$$ f(x) \stackrel?= f(x_0) + \dint[t]{x_0}x{f'(t)} $$
+		Это "--- формула Ньютона"--~Лейбница.
+		\item \bt{Переход.} $ n \to n + 1 $
+		$$ f \in \Cont[n + 1]{(a, b)} $$
+		Проинтегрируем по частям по $ t $:
+		$$ \bigg( -\frac{x - t)^n}n \bigg)_t' = (x - t)^{n - 1} $$
+		\begin{multline*}
+			\dint[t]{x_0}x{ \bigg( -\frac{(x - t)^n}n \bigg)'}f^{(n)}(t) = \bigg( -\frac{(x - t)^n}n f^{(n)}(t) \bigg) \clamp[x]{x_0} - \dint[t]{x_0}x{\bigg( -\frac{(x - t)^n}n \bigg)f^{(n + 1)}(t)} = \\
+			= \frac{(x - x_0)^n}nf^{(n)}(x_0) + \frac1n \dint[t]{x_0}x{\frac{(x - t)^n}n f^{(n + 1)}(t)}
+		\end{multline*}
+		\begin{multline*}
+			\underimp{\bt{предп.}} f(x) = \\
+			= f(x_0) \frac{f'(x_0)}{1!}(x - x_0) + \dots + \frac{f^{(n - 1)}(x_0)}{(n - 1)!}(x - x_0)^{n - 1} + \frac{f^{(n)}(x_0)}{n!}(x - x_0)^n + \frac1{n!} \dint[t]{x_0}x{\frac{(x - t)^n}nf^{(n + 1)}(t)}
+		\end{multline*}
+	\end{itemize}
+\end{proof}
+
+\subsection{Продолжаем раскладывать в ряд}
+
+\begin{enumerate}
+	\item[4.] $ (1 + x)^r, \qquad r \nin \N, \quad r \ne 0 $ \nimp[(чтобы была нетривиальность)]
+	$$ \bigg( (1 + x)^r \bigg)' = r(1 + x)^{r - 1} $$
+	$$ \bigg( (1 + x)^r \bigg)'' = r(r - 1)(1 + x)^{r - 2} $$
+	$$ \bigg( (1 + x)^r \bigg)^{(n)} = r(r - 1)(r - 2)\dots(r - n + 1)(1 + x)^{r - n} $$
+	$$ \bigg( (1 + x)^r \bigg)^{(n)}\clamp{x = 0} = r(r - 1)\dots(r - n + 1) $$
+	Применим формулу Тейлора с остатком в форме Коши:
+	\begin{multline}\lbl{413}
+		(1 + x)^r = 1 + \frac{rx}{1!}x + \frac{r(r -1)}{2!}x^2 + \dots + \frac{r(r - 1)\dots(r - n + 1)}{n!}x^n + \\
+		+ \underbrace{\frac1{n!} \dint[t]0x{(x - t)^nr(r - 1)\dots(r - n)(1 + t)^{r - n - 1}}}_{I_n}
+	\end{multline}
+	$$ (x - t)^n(1 + t)^{-n} = \bigg( \frac{x - t}{1 + t} \bigg)^n $$
+	Всё это верно при $ 0 \le |t| \le x, \quad tx \ge 0 $
+	\begin{itemize}
+		\item $ x > 0 $
+		\begin{equ}{414}
+			0 \le \frac{x - t}{1 + t} \le x
+		\end{equ}
+		\item $ x < 0 $
+		\begin{equ}{415}
+			\frac{x - t}{1 + t} = \frac{-|x| + |t|}{1 - |t|} \implies \bigg| \frac{x - t}{1 + t} \bigg| = \frac{|x| - |t|}{1 - |t|} \le |x|
+		\end{equ}
+	\end{itemize}
+	\begin{equ}{416}
+		\eref{14}, \eref{15} \implies \bigg| \frac{x - t}{1 + t} \bigg| \le |x|, \qquad \text{при } |t| \le |x|, \quad tx \ge 0
+	\end{equ}
+	\begin{multline}\lbl{417}
+		\implies |I_n| \le \frac{|r(r - 1)\dots(r - n)|}{n!} \bigg| \dint[t]0x{\bigg| \frac{x - t}{1 + t} \bigg|^n \cdot (1 + t)^{r - 1}} \bigg| \le \\
+		\le \frac{|r(r - 1)\dots(r - n)|}{n!}|x^n| \bigg| \underbrace{\dint[t]0x{(1 + t)^{r - 1}}}_{M(x)} \bigg|
+	\end{multline}
+	Обозначим
+	$$ \alpha_n \define \frac{|r(r - 1)\dots(r - n)|}{n!}|x|^n $$
+	Считаем, что $ n > r + 1 $
+	$$ \frac{\alpha_{n + 1}}{\alpha_n} = \frac1{n + 1} \cdot |r - n - 1| \cdot |x| $$
+	$$ |r - n + 1| = n + 1 - r $$
+	\begin{equ}{418}
+		\implies \frac{\alpha_{n + 1}}{\alpha_n} = \frac{n + 1 - r}{n + 1} \cdot |x| = \bigg( 1 - \frac{r}{n + 1} \bigg) |x| \infarr n |x|
+	\end{equ}
+	Обозначим
+	$$ q \define \frac{1 + |x|}2, \qquad q < 1, \quad |x| < q $$
+	В новых обозначениях,
+	$$ \frac{\alpha_{n + 1}}{\alpha_n} \le q \quad \forall n \ge \nimp[\text{ некторого }] n_0 $$
+	Значит, при $ n > n_0, ~ \alpha_n > 0 $, $ \alpha_n $ монотонно убывает
+	\begin{equ}{420}
+		\implies \exist \limi{n} \alpha_n \fed \alpha \ge 0
+	\end{equ}
+	$$ \eref{418} \iff \alpha_{n + 1} = \alpha_n \bigg( 1 - \frac{r}{n + 1} \bigg) \cdot |x| $$
+	$$ \underimp{\eref{20}} \alpha = \alpha|x| \implies \alpha = 0 $$
+	$$ \underimp{\eref{413}} (1 + x)^r = 1 + \frac{rx}{1!} + \frac{r(r - 1)x^2}{2!} + \dots + \frac{r(r - 1)\dots(r - n + 1)}{n!}x^n + \widedots[4em] $$
+\end{enumerate}

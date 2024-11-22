@@ -1,0 +1,318 @@
+\chapter{Кольца и поля}
+
+Эта глава читается по книгам ван дер Вардена ``Алгебра'' и Ленга ``Алгебра''
+
+\section{Идеал кольца}
+
+\subsection{Напоминание}
+
+\begin{definition}
+	Кольцо -- множество $ A $ с операциями $ +, \cdot $, такими что:
+	\begin{enumerate}
+		\item $ A $ -- абелева группа по сложению
+		\item Дистрибутивность:
+		\begin{enumerate}
+			\item $ (a + b)c = ac + bc $
+			\item $ a(b + c) = ab + ac $
+		\end{enumerate}
+	\end{enumerate}
+\end{definition}
+
+\begin{definition}
+	Поле -- кольцо, для которого выполнены:
+	\begin{enumerate}
+		\item Ассоциативность умножения
+		\item Коммутативность умножения
+		\item Существование единицы
+		\item Существование обратного по умножению
+	\end{enumerate}
+\end{definition}
+
+\begin{note}
+	У ван дер Вардена и Ленга определения другие -- прежде чем читать, надо осознать, что добавляется
+\end{note}
+
+\begin{definition}
+	Мы будем рассматривать только ассоциативные кольца
+\end{definition}
+
+\subsection{Новые определения}
+
+\begin{definition}
+	$ A $ -- коммутативное ассоциативное кольцо, $ I \sub A $ \\
+	$ I $ называется идеалом, если:
+	\begin{enumerate}
+		\item $ I $ -- подгруппа по сложению
+		\item $ a \in I, ~ t \in A \quad \implies ta \in I $
+	\end{enumerate}
+\end{definition}
+
+\begin{remark}
+	$ I < A \iff $
+	\begin{enumerate}
+		\item $ a, b \in I \implies a + b \in I $
+		\item $ a \in I \implies -a \in I $
+	\end{enumerate}
+\end{remark}
+
+\begin{remark}
+	Если бы кольцо было с единицей, то второе свойство было бы лишним -- можно было бы домножать элементы на $ -1 $
+\end{remark}
+
+\begin{remark}
+	Если $ A $ не коммутативно, то можно рассматривать левые и правые идеалы
+\end{remark}
+
+\begin{exmpls}
+	\item $ \set{0}, A $ -- идеалы
+	\item $ A = \Z $ \\
+	$ I = 2\Z $ -- идеал:
+	\begin{enumerate}
+		\item
+		\begin{enumerate}
+			\item $ a \divby 2, b \divby 2 \implies a + b \divby 2 $
+			\item $ a \divby 2 \implies -a \divby 2 $
+		\end{enumerate}
+		\item $ a \divby 2, ~ t \in \Z \implies ta \divby 2 $
+	\end{enumerate}
+	Аналогично $ k\Z $ -- идеал $ \quad \forall k $
+	\item $ \R[x] $
+	\begin{enumerate}
+		\item $ I = \set{p(x) = a_nx^n + ... + a_1x} $
+		Свободный член равен 0
+		\item $ I = \set{s_nx^n + ... + a_kx^k} $ \\
+		$ k $ -- фиксированный
+		\item $ I = \set{p(x) | p(1) = 0} $
+		\begin{enumerate}
+			\item $ p(1) = 0, q(1) = 0 \implies (p + q)(1) = 0 $
+			\item $ p(1) = 0 \implies -p(1) = 0 $
+			\item $ p(1) = 0, ~ \forall q \implies (pq)(1) = p(1)q(1) = 0 $
+		\end{enumerate}
+		\item $ I $ -- множество многочленов, делящихся на заданный $ p_0(x) $
+	\end{enumerate}
+	\item $ A = \Z_{10} $ \\
+	$ I = \set{0, 2, 4, 6, 8} $ -- идеал
+	\item $ \Z[x] $ \\
+	$ I $ -- множество многочленов с чётным свободным членом
+\end{exmpls}
+
+\begin{definition}
+	$ A $ -- ассоциативное коммутативное кольцо с единицей, $ \qquad S \sub A $ \\
+	Идеалом, порождённым $ S $ называется минимальный по включению идеал, содержащий $ S $
+\end{definition}
+
+\begin{notation}
+	$ \braket{S} $
+\end{notation}
+
+\begin{props}
+	\item Идеал $ \braket{S} $ существует и единственный \\
+	Он состоит из элементов вида $ t_1s_1 + ... + t_ks_k, \qquad s_i \in S, \quad t_i \in A $
+\end{props}
+
+\begin{definition}
+	Идеал, порождённый одним элементом, называется главным
+\end{definition}
+
+\begin{exmpls}
+	\item $ \Z $ \\
+	$ m\Z = \braket{m} $ -- главный
+	\item $ A $ -- любое коммутативное ассоциативное кольцо с единицей
+	$$ \braket{0} = \set{0}, \qquad \braket{1} = A $$
+	\begin{remark}
+		Если идеал содержит единицу, то это всё кольцо:
+		$$ a \cdot 1 \in I \quad \forall a \in A $$
+	\end{remark}
+	\item $ A = \Z[x] $ \\
+	$ I $ -- множество многочленов с чётным свободным членом
+	$$ I = \braket{2, x} $$
+	\item $ K $ -- поле, $ \quad K[x, y] $ -- кольцо многочленов от двух переменных, т. е. многочленов вида $ \sum a_{ij}x^iy^j $, только конечное число $ a_{ij} $ отлично от нуля \\
+	$ I $ -- мноежство многочленов таких, что $ a_{00} = 0 $ \\
+	$ I = \braket{x, y} $ -- не главный
+\end{exmpls}
+
+\begin{definition}
+	Если все идеалы главные, то $ A $ назыавется кольцом главных идеалов
+\end{definition}
+
+\begin{theorem}[примеры колец главных идеалов]
+	\hfill
+	\begin{enumerate}
+		\item $ \Z $ -- кольцо главных идеалов
+		\begin{proof}
+			$ I $ -- идеал
+			\begin{itemize}
+				\item Если $ I = \set{0} $, то $ I = \braket{0} $ -- главный
+				\item Пусть $ I \ne \set{0}, \qquad a $ -- наименьшее положительное число из $ I $ \\
+				Докажем, что $ I = \braket{a} $: \\
+				$ \braket{a} $ -- мноежство чисел, делящихся на $ a $ \\
+				\bt{Допустим}, что это не весь идеал, т. е. $ \exist b : b \in I, \quad b \ndivby a $ \\
+				Поделим с остатком:
+				$$ b = aq + r, \qquad a < r < a $$
+				$$ r = b - aq = \underbrace{b}_{\in I} + (-q)\underbrace{a}_{\in I} \in I \quad \contra $$
+			\end{itemize}
+		\end{proof}
+		\item $ K $ -- поле $ \implies K[x] $ -- кольцо главных идеалов
+		\begin{proof}
+			Аналогично:
+			\begin{itemize}
+				\item $ \set{0} = \braket{0} $
+				\item Если $ I \ne \set{0} $, то $ I = \braket{p} $, где $ p $ -- многочлен наименьшей степени, лежащий в $ I $
+			\end{itemize}
+		\end{proof}
+	\end{enumerate}
+\end{theorem}
+
+\begin{remark}
+	Любое евклидово кольцо -- кольцо главных идеалов \\
+	Не доказываем, т. к. долго вспоминать, что такое евклидово кольцо \\
+	Доказательство то же (берём элемент с наименьшей евклидовой нормой)
+\end{remark}
+
+\begin{definition}
+	$ A $ -- коммутативное ассоциативное кольцо, $ \qquad I $ -- идеал \\
+	$ I $ называется простым, если
+	$$ \forall a, b \in A \quad ab \in I \implies a \in I \quad \text{ или } \quad b \in I $$
+\end{definition}
+
+\begin{eg}
+	\item $ \Z, \qquad I = \braket{k\Z} $ \\
+	$ I $ простой $ \iff k \in \Prime $
+	\begin{proof}
+		$$ a, b \in I \stackrel?\implies a \in I \quad \text{ или } \quad b \in I $$
+		$$ ab \divby k \stackrel?\implies
+		\begin{vars}
+			a \divby k \\
+			b \divby k
+		\end{vars} $$
+		Это верно для простого $ k $ и не верно для составного
+	\end{proof}
+	\item $ K $ -- поле, $ \qquad A = K[x] $ \\
+	$ \braket{p(x)} $ простой $ \iff p(x) $ неприводим
+	\item $ K $ -- поле, $ \qquad A = K[x, y] $
+	$$ I = \braket{x}, \qquad J = \braket{x, y} $$
+	Оба простые
+\end{eg}
+
+\begin{definition}
+	$ A $ -- коммутативное ассоциативное кольцо, $ \qquad I $ -- идеал \\
+	$ I $ называется максимальным, если не существует такого идеала $ J $, что $ I \sub J, ~ J \ne I, ~ J \ne A $
+\end{definition}
+
+\begin{exmpls}
+	\item $ A = \Z, \qquad I = \braket{k} $ \\
+	$ I $ -- максимальный $ \iff k \in \Prime $ \\
+	Например,
+	\begin{enumerate}
+		\item $ k = 10 $
+		$$ \braket{10} \sub \braket2 $$
+		\item $ k = 5 $ \\
+		Пусть $ \braket5 \sub J $ \\
+		$ J = \braket{d} $, т. к. все идеалы главные
+		$$ \braket5 \sub \braket{d} \implies 5 \divby d \implies
+		\begin{vars}
+			d = \pm 5 \implies J = I \\
+			d = \pm 1 \implies J = A
+		\end{vars} $$
+	\end{enumerate}
+	\item $ K[x, y] $ \\
+	$ \braket{x} $ -- не максимальный, $ \braket{x} \sub \braket{x, y} $ \\
+	$ \braket{x, y} $ -- максимальный
+\end{exmpls}
+
+\begin{remark}
+	Любой максимальный идеал простой
+\end{remark}
+
+\section{Факторкольцо}
+
+\begin{definition}
+	$ A $ -- коммутативное ассоциативое кольцо с единицей, $ \qquad I $ -- идеал \\
+	Элементы $ a $ и $ b $ называются сравнимыми по модулю $ I $, если $ a - b \in I $
+\end{definition}
+
+\begin{notation}
+	$ a \equiv b \pmod I \qquad a \comp{I} b $
+\end{notation}
+
+\begin{exmpls}
+	\item $ \Z, \qquad I = \braket{k} $
+	$$ a \comp{\braket{k}} b \iff a \comp{k} b $$
+	\item $ \Z[x], \qquad I = \braket{2, x} $ \\
+	$ P(x) \comp{I} Q(x) $, если свободные коэффициенты одной чётности
+\end{exmpls}
+
+\begin{property}
+	$ \comp{I} $ является отношением эквивалентности
+\end{property}
+
+\begin{proof}
+	\hfill
+	\begin{enumerate}
+		\item Рефлексивность:
+		$$ a - a = 0 \in I $$
+		\item Симметричность:
+		$$ a - b \in I \implies b - a = -(a - b) \in I $$
+		\item Транзитивность:
+		$$ a - b \in I, b - c \in I \implies a - c = (a - b) + (b - c) \in I $$
+	\end{enumerate}
+\end{proof}
+
+\begin{definition}
+	$ A $ -- коммутативное кольцо, $ \qquad I $ -- идеал \\
+	На множестве классов эквивалентности по отношению $ \comp{I} $ введём операции сложения и умножения:
+	$$ \ol{x} + \ol{y} = \ol{x + y}, \qquad \ol{x} \cdot \ol{y} = \ol{xy} $$
+\end{definition}
+
+\begin{theorem}[корректность]
+	$ A $ -- коммутативное ассоциативное кольцо, $ \qquad I $ -- идеал \\
+	Тогда
+	\begin{enumerate}
+		\item операции сложения и умножения на классах эквивалентности определены корректно, то есть не зависят от выбора представителей
+		\begin{proof}
+			$$
+			\begin{rcases}
+				x_1, x_2 \text{ в одном классе }
+			\end{rcases} \stackrel?\implies
+			\begin{cases}
+				x_1 + y_1 \text{ и } x_2 + y_2 \text{ в одном классе} \\
+				x_1y_1 \text{ и } x_2y_2 \text{ в одном классе}
+			\end{cases} $$
+			Пусть $ x \define x_1 - x_2, \quad y \define y_1 - y_2 \quad \implies x, y \in I $
+			$$ (x_1 + y_1) - (x_2 + y_2) = x + y \in I $$
+			$$ x_1y_1 - x_2y_2 = (x + x_2)(y + y_2) - x_2y_2 = xy + ... $$
+			\TODO{надо дописать}
+		\end{proof}
+		\item множество классов эквивалентности является ассоциативным коммутативным кольцом. Если в $ A $ была единица, то и в кольце классов эквивалентности будет единица
+	\end{enumerate}
+\end{theorem}
+
+\begin{definition}
+	Кольцо классов эквивалентности называется факторкольцом по идеалу $ I $
+\end{definition}
+
+\begin{notation}
+	$ \faktor{A}{I} $
+\end{notation}
+
+\begin{exmpls}
+	\item $ \faktor{\Z}{\braket{m}} = \Z_m $
+	\item $ \faktor{A}{\braket0} \simeq A $ \\
+	$ \faktor{A}A $ -- кольцо из одного элемента
+	\item $ \faktor{\R[x]}{\braket{x^2 + 1}} $
+	\begin{statement}
+		Классы вычетов имеют вид $ \ol{ax + b} = \ol{a} \cdot \ol{x} + \ol{b} $
+	\end{statement}
+	\begin{proof}
+		Рассмотрим класс $ T, \qquad P(x) \in T $ \\
+		Поделим $ P(x) $ на $ x^2 + 1 $ с остатком:
+		$$ P(x) = (x^2 + 1)Q(x) + (ax + b), \qquad a, b \in \R $$
+		$$ P(x) - (ax + b) = (x^2 + 1)Q(x) \in \braket{x^2 + 1} $$
+		$$ P(x) \comp{\braket{x^2 + 1}} ax + b \implies ax + b \in T $$
+	\end{proof}
+	Значит, в каждом классе можно выбрать представителя вида $ ax + b $, причём единственным образом
+	$$ \ol{x} \cdot \ol{x} = \ol{x^2} = \ol{x^2 - (x^2 + 1)} = \ol{-1} $$
+	Если обозначить $ \ol{x} $ за $ i $, то $ i^2 = 1 $. Получаем $ \Co $
+\end{exmpls}
+
+Теперь можно строить поля в огромных количествах, беря такие факторкольца

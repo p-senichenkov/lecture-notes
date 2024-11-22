@@ -1,0 +1,154 @@
+\chapter{Дифферинциальная геометрия поверхностей}
+
+\begin{theorem}
+	$ |r_u \times r_v| = \sqrt{EG - F^2} $
+\end{theorem}
+
+\begin{proof}
+	$$ (r_u \times r_v, r_u \times r_v) = |r_u \times r_v|^2 = EG - F^2 $$
+	\textit{Может быть, это делается проще как-то без координат}
+	$$ r_u (x_u, y_u, z_u), \qquad r_v = (x_v, y_v, z_v) $$
+	$$ r_u \times r_v = (y_uz_v - z_uy_v; z_ux_v - x_uz_v; x_uy_v - y_ux_v) $$
+	$$ (r_u \times r_v)^2 = (y_uz_v - z_uy_v)^2 + (z_ux_v - x_uz_v)^2 + (x_uy_v - y_ux_v)^2 $$
+	\begin{multline*}
+		EG - F^2 = (x_u^2 + y_u^2 + z_u^2)(x_v^2 + y_v^2 + z_v^2) - (x_ux_v + y_uy_v + z_uz_v)^2 = \\
+		= \underbrace{\cancel{x_u^2x_v^2} + \underline{x_u^2y_v^2} + ... + z_u^2z_v^2}_{\text{9 слагаемых}} - \cancel{x_u^2x_v^2} - \cancel{y_u^2y_v^2} - \cancel{z_u^2z_v^2} - \underline{2x_1x_vy_uy_v} - 2x_ux_vz_uz_v - 2y_uy_vz_uz_v
+	\end{multline*}
+	Подчёркнутые (вместе с ещё одним) запаковываются в квадрат разности. Остальные -- аналогично
+\end{proof}
+
+ПКФ была нужна, чтобы задать внутреннюю метрику на поверхности
+
+\section{Вторая квадратичная форма}
+
+Теперь мы хотим посчитать кривизну кривой на поверхности. Очевидно, что она не относится к внутренней геометрии поверхности. Значит, ПКФ не хватит \\
+В процессе станет очевидно, что изогнув прямой лист бумаги, можно только увеличить кривизну кривых, нарисованных на нём \\
+Кривая задана внутренним уравнением $ \bigg( u(s), v(s) \bigg) $ в натуральной параметризации
+$$ \vec{r}(s) = \vec{r} \bigg( u(s), v(s) \bigg) $$
+$$ \vec{k} = \vec{r}''(s) \quad (k = |\vec{k}|) $$
+$$ r_s' = r_u'u_s' + r_v'v_s' $$
+$$ r''(s) = r_{uu}u'^2 + 2r_{uv}u'v' + r_{vv}v'^2 + \underline{r_uu'' + r_vv''} $$
+Хотим избавиться от подчёркнутых слагаемых. Домножим равенство на вектор нормали ($ n \perp r_u, ~ n \perp r_v $)
+$$ k\cos \theta = \vec{r}''(s) \cdot \vec{n} = \underbrace{(r_{uu}; n)}_{\fed L} \cdot u'^2 + 2\underbrace{(r_{uv}; n)}_{\fed M} \cdot u'v' + \underbrace{(r_{vv}; n)}_{\fed N} \cdot v'^2 $$
+где $ \theta $ -- угол между вектором кривизны кривой и вектором нормали к поверхности \\
+Получили проекцию кривизны на вектор нормали \\
+$ L, M, N $ зависят только от поверхности (не от кривой) \\
+Получаем следующую формулу:
+
+\begin{theorem}
+	$ k \cos \theta = Lu'^2 + 2Mu'v' + Nv'^2 $, если кривая в натуральной параметризации
+\end{theorem}
+
+\begin{definition}
+	$ L, M, N $ -- коэффициенты второй квадратичной формы
+\end{definition}
+
+\begin{definition}
+	$ k\cos \theta $ называется нормальной кривизной поверхности в направлении $ (u', v') $
+\end{definition}
+
+\begin{theorem}
+	$ k\cos\theta $ зависит только от направления
+\end{theorem}
+
+\begin{eg}
+	Возьмём кривую такую, что $ \cos\theta = \pm 1 $ \\
+	Тогда $ k $ = нормальная кривизна поверхности в данном направлении \\
+	Такая кривая -- крвая с наименьшей кривизной, которая лежит на поверхности с данным касательным вектором
+\end{eg}
+
+\subsection{Переход к произвольной параметризации}
+
+\begin{theorem}[Мёнье]
+	$$ k\cos\theta = \frac{\rom2(u', v')}{\rom1(u', v')} = \frac{Lu'^2 + 2Mu'v' + Nv'^2}{Eu'^2 + 2Fu'v' + Gv'^2} $$
+\end{theorem}
+
+\begin{proof}
+	Будем действовать в натуральной параметризациии \\
+	Пусть $ s = \vphi(t) $
+	$$ \vphi'(t) = |r_t'| = |r_uu_t' + r_vv_t'| $$
+	$$ u_t' = u_s's_t' = u_s' \cdot |r_t'| $$
+	$$ u_s' = \frac{u_t'}{|r_t'|}, \qquad v_s' = \frac{v_t'}{|r_t'|} $$
+	$$ k\cos\theta = L \frac{u_t'^2}{|r_t'|^2} + 2M \frac{u_t'v_t'}{|r_t'|^2} + N \frac{v_t'}{|r_t'|^2} = \frac{\rom2(u_t', v_t')}{|r_t'|^2} $$
+	Мы знаем, что $ |r_t'|^2 = \rom1(u_t', v_t') $, так как
+	$$ \uint[t]{|r_t'|} \text{ -- длина кривой } = \uint[t]{\sqrt{Eu_t'^2 + 2Fu_t'v_t' + Gv_t'^2}} $$
+\end{proof}
+
+\begin{eg}[\rom2 форма сферы]
+	$$
+	\begin{cases}
+		x = R\cos u \cos v \\
+		y = R\sin u \cos v \\
+		z = R\sin v
+	\end{cases} $$
+	$$ \vec{n} = \frac{r_u \times r_v}{|r_u \times r_v|} $$
+	У сферы $ \vec{n} = \frac{\vec{r}}R = \frac{(x, y, z)}R $
+	$$ r_{uu} = \bigg( -R\cos u \cos v; -R \sin u\cos v; 0 \bigg) $$
+	$$ \vec{n} = \bigg( \cos u \cos v; \sin u \cos v; \sin v \bigg) $$
+	$$ \bm{L} = -R(\cos^2u\cos^2v + \sin^2u\cos^2v) = \bm{-R\cos^2v} $$
+	$$ r_{uv} = \bigg( R\sin u\sin v; -R\cos u \sin v; 0 \bigg) $$
+	$$ \bm{M} = R\cos u \sin u \cos vv \sin v - R\sin u \cos u \sin v \cos v = \bm0 $$
+	$$ r_{vv} = \bigg( -R\cos u\cos v; -R\sin u\cos v; -R\sin v \bigg) = -R\vec{n} $$
+	$$ \bm{N} = \bm{-R} $$
+\end{eg}
+
+\section{Соприкасающийся параболоид}
+
+В этом параграфе рассмариваем локальное поведение поверхности в какой-то точке (или её окрестности) \\
+Рассмотрим векторы $ r, r_u, r_v, r_{uu}, r_{uv}, r_{vv} $ \\
+Введём точку $ M = (0, 0, 0) $ \\
+Касательная плокость = $ OXY $
+$$ \vec{n} \parallel OZ $$
+По теореме а неявной функции поверхность в окрестности $ M $ задаётся $ z = f(x, y) $ \\
+Разложим по Тейлору:
+$$ z = f(0, 0) + f_x(0, 0)x + f_y(0, 0)y + \frac{f_{xx}(0, 0)}2x^2 + f_{xy}(0, 0)xy + \frac{f_{yy}(0, 0)}2y^2 + o(x^2 + y^2) $$
+$$ f(0, 0) = 0, \qquad f_x(0, 0) = f_y(0, 0) = 0 $$
+
+\begin{definition}
+	$$ z = \half[A]x^2 + Bxy + \half[C]y^2 $$
+	$$ A = f_{xx}(0, 0), \qquad B = f_{xy}(0, 0), \qquad C = f_{yy}(0, 0) $$
+	Это называется соприкасающийся параболоид
+\end{definition}
+
+Можем сделать поворот $ OXY $ и тогда:
+$$ z = \vawe{A}\vawe{x}^2 + \vawe{C}\vawe{y}^2 $$
+
+\begin{definition}[классификация]
+	\hfill
+	\begin{itemize}
+		\item $ \vawe{A} = \vawe{C} > 0 $ \\
+		Эллиптический параболоид \\
+		Эллиптическая точка
+		\item $ \vawe{A} \cdot \vawe{C} < 0 $ \\
+		Гиперболический параболоид \\
+		Гиперболическая точка
+		\item $ \vawe{A} \cdot \vawe{C} = 0 $
+		\begin{itemize}
+			\item Параболический параболоид \\
+			Параболическая точка
+			\item Плоскость \\
+			Точка уплощения
+		\end{itemize}
+		\item $ \vawe{A} = \vawe{C} $ \\
+		Параболоид вращения \\
+		Точка округления
+	\end{itemize}
+\end{definition}
+
+\begin{theorem}
+	У поверхности и соприкасающегося параболоида одинаковые $ E, F, G, L, M, N $ в точке
+\end{theorem}
+
+\begin{proof}
+	$ z = f(x, y) $ в окрестности точки
+	$$
+	\begin{cases}
+		x = u \\
+		y = v \\
+		z = f(u, v)
+	\end{cases} $$
+	$$ r(u, v) = \bigg( u, v, f(u, v) \bigg) $$
+	$$ r_u = (1, 0 f_u), \qquad r_v = (0, 1, f_v), \qquad r_{uu} = (0, 0, f_{uu}), \qquad \widedots[5em] $$
+	Это верно как для соприкасающегося параболоиа, так и для поверхности
+	$$ \vec{n} = (0, 0, 1) \text{ для обеих поверхностей} $$
+\end{proof}

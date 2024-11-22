@@ -1,0 +1,357 @@
+\chapter{Функциональные последовательности и ряды}
+
+\section{Интегралы от параметра}
+
+\subsection{Признак Абеля равномерной сходимости семейства несобственных интегралов}
+
+\begin{theorem}
+	$ f : [a, \infty) \times Y, \qquad Y \sub \R^n, \qquad f \in \Cont{[a, \infty) \times Y}, \qquad g : [a, \infty) \times Y \to \R $
+	\begin{equ}1
+		\exist M : \quad |g(x, y)| \le M \quad \forall x \in [a, \infty)
+	\end{equ}
+	$ g(x, y) $ монотонна по $ x $ при $ \forall y \in Y $
+	\begin{equ}3
+		\dint{a}\infty{f(x, y)} \text{ равномерно сх. при } y \in Y
+	\end{equ}
+	$$ \implies \dint{a}\infty{f(x, y)g(x, y)} \text{ равномерно сх. при } y \in Y $$
+\end{theorem}
+
+\begin{proof}
+	Возьмём $ \forall \veps > 0 $ и воспользуемся критерием Коши для несобственных интегралов (условие \eref3):
+	\begin{equ}4
+		\exist A > a : \quad \forall A_2 > A_1 > A \quad \forall y \in Y \quad \bigg| \dint{A_1}{A_2}{f(x, y)} \bigg| < \veps
+	\end{equ}
+	\begin{statement}
+		Вторая теорема о среднем справедлива, если $ f $ монотонна, а $ g $ интегрируема \\
+		Мы требовали дифференцируемости $ g $ для упрощения доказательства
+	\end{statement}
+	Применим её:
+	$$ \dint{A_1}{A_2}{f(x, y)g(x, y)} g(A, y) \dint{A_1}c{f(x, y)} + g(A_2, y)\dint{c}{A_2}{f(x, y)} $$
+	\begin{multline*}
+		\implies \bigg| \dint{A_1}{A_2}{f(x, y)g(x, y)} \bigg| \le |g(A, y)| \cdot \bigg| \dint{A_1}c{F(x, y)} \bigg| + |g(A_2, y)| \cdot \bigg| \dint{c}{A_2}{f(x, y)}\bigg| \underset{\eref1, \eref4}\le \\
+		\le M \cdot \veps + M \cdot \veps = 2M\veps
+	\end{multline*}
+\end{proof}
+
+\subsection{Признак Дирихле равномерной сходимости несобственных интегралов}
+
+\begin{theorem}
+	$ f \in \Cont{[a, \infty) \times Y}, \qquad g : [a, \infty) \times Y \to \R, \qquad g $ монотонна по $ x $ при $ \forall y \in Y $
+	\begin{equ}7
+		g(x, y) \uniarr[x \to \infty]{y \in Y} 0
+	\end{equ}
+	\begin{equ}8
+		\exist L > 0 : \quad \forall A > a \quad \forall y \in Y \quad \bigg| \dint{a}A{f(x, y)} \bigg| \le L
+	\end{equ}
+	$$ \implies \dint{a}\infty{f(x, y)g(x, y)} \text{ сходится равномерно при } y \in Y $$
+\end{theorem}
+
+\begin{proof}
+	\begin{multline}\lbl{10}
+		\forall A_2 > A_1 > a \quad \bigg| \dint{A_1}{A_2}{f(x, y)} \bigg| = \bigg| \dint{a}{A_2}{f(x, y)} - \dint{a}{A_1}{f(x, y)} \bigg| \trile \\
+		\le \bigg| \dint{a}{A_2}{f(x, y)} \bigg| - \bigg| \dint{a}{A_1}{f(x, y)} \bigg| \underset{\eref8}\le 2L
+	\end{multline}
+	По определению равномерной сходимости,
+	\begin{equ}{11}
+		\eref7 \implies \exist A > a : \quad \forall A_1 > A \quad \forall y \in Y \quad |g(A_1, y)| < \veps
+	\end{equ}
+	Возьмём $ A_2 > A_1 > A $ \\
+	Воспользуемся второй теоремой о среднем:
+	\begin{equ}{12}
+		\exist c \in (A_1, A_2) : \quad \dint{A_1}{A_2}{f(x, y)g(x, y)} = g(A_1, y)\dint{A_1}c{f(x, y)} + g(A_2, y)\dint{c}{A_2}{f(x, y)}
+	\end{equ}
+	\begin{multline*}
+		\implies \bigg| \dint{A_1}{A_2}{f(x, y)g(x, y)} \bigg| \le |g(A_1, y)| \cdot \bigg| \dint{A_1}c{F(x, y)} \bigg| + |g(A_2, y)| \cdot \bigg| \dint{c}{A_2}{f(x, y)} \bigg| \underset{\eref{10}, \eref{11}}\le \\
+		\le 2L\veps + 2L\veps = 4L\veps
+	\end{multline*}
+\end{proof}
+
+\subsection{Свойства равномерно сходящихся несобственных интегралов}
+
+\subsubsection{Переход к пределу}
+
+\begin{theorem}
+	$ Y \sub \R^n, \qquad y_0 $ -- т. сг. $ Y $ \nimp[(не обязательно $ \in Y $)], $ \qquad f \in \Cont{[a, \infty) \times Y} $
+	\begin{equ}{14}
+		I(y) \define \dint{a}\infty{f(x, y)} \text{ равномерно сходится при } y \in Y
+	\end{equ}
+	\begin{equ}{15}
+		\forall x \in [a, \infty) \quad \exist \vphi(x) : \quad f(x, y) \uniarr[y \to y_0]{x \in [a, \infty)} \vphi(x)
+	\end{equ}
+	\begin{equ}{16}
+		\implies \dint{a}\infty{\vphi(x)} \text{ сходится}
+	\end{equ}
+	\begin{equ}{17}
+		I(y) \underarr{y \to y_0} \dint{a}\infty{\vphi(x)}
+	\end{equ}
+\end{theorem}
+
+\begin{remark}
+	Требование \eref{15} можно ослабить:
+	$$ \forall A > a, \quad A \text{ фикс. } \quad f(x, y) \uniarr[y \to y_0]{x \in [a, A]} \vphi(x) $$
+\end{remark}
+
+\begin{proof}
+	Рассмотрим функции:
+	$$ F(A, y) \define \dint{a}{A}{f(x, y)}, \qquad \Phi(A) \define \dint{a}{A}{\vphi(x)} $$
+	\begin{equ}{18}
+		\eref{15} \implies \vphi \in \Cont{[a, \infty)}
+	\end{equ}
+	Значит, функция $ \Phi $ корректно определена
+	\begin{equ}{14'}
+		\eref{14} \iff F(a, y) \uniarr[A \to \infty]{y \in Y} I(y)
+	\end{equ}
+	Можно применить теорему о функциональной сходимости функционального семейства:
+	\begin{equ}{19}
+		\eref{15} \implies \forall A > a \quad \dint{a}{A}{f(x, y)} \underarr{y \to y_0} \dint{a}{A}{\vphi(x)}
+	\end{equ}
+	В обозначениях $ F, \Phi $ это означает, что
+	\begin{equ}{19'}
+		F(A, y) \underarr{y \to y_0} \Phi(A)
+	\end{equ}
+	Можно применить теорему о предельном переходе в функциональном семействе:
+	\begin{equ}{20}
+		\eref{14'}, \eref{19'} \implies \exist \liml{y \to y_0} I(y)
+	\end{equ}
+	и
+	\begin{equ}{21}
+		\implies \exist \liml{A \to \infty} \Phi(A)
+	\end{equ}
+	и
+	\begin{equ}{22}
+		\implies \limi{A} \Phi(A) = \liml{y \to y_0} I(y)
+	\end{equ}
+	При этом,
+	$$ \dint{a}\infty{\vphi(x)} \bdefeq{\Phi} \limi{A} \Phi(A) $$
+	$$ \eref{21} \implies \eref{16} $$
+	$$ \eref{22} \implies \eref{17} $$
+\end{proof}
+
+\begin{implication}[непрерывность в точке]
+	$ f \in \Cont{[a, \infty) \times Y}, \qquad y_0 \in Y $ -- т. сг. $ Y $
+	\begin{equ}{23}
+		f(x, y) \uniarr[y \to y_0]{x \in [a, \infty)} f(x, y_0)
+	\end{equ}
+	\begin{equ}{24}
+		I(y) \define \dint{a}\infty{f(x, y)} \text{ равномерно сходится при } y \in Y
+	\end{equ}
+	$$ \implies I(y) \text{ непр. в } y_0 $$
+\end{implication}
+
+\begin{implication}
+	$ f \in \Cont{[a, \infty) \times Y}, \qquad I(y) $ равномерно сходится при $ y \in Y $
+	$$ \implies I(y) \in \Cont{Y} $$
+\end{implication}
+
+Рассмотрим $ Y = [p, q] $, а равномерную сходимость функционального семейства требовать не будем:
+
+\begin{statement}[частный случай]
+	$ f \in \Cont{Y = [p, q]} $ \\
+	$ I(y) \define \dint{a}\infty{f(x, y)} $ равномерно сходится при $ y \in [p, q] $
+	$$ \implies I(y) \to I(y_0) $$
+\end{statement}
+
+\begin{proof}
+	Рассмотрим
+	$$ F(A, y) \define \dint{a}{A}{f(x, y)} $$
+	Пусть $ y_0 \in [p, q] $ \\
+	$ f $ непрерывна на всём произведении, в частности $ f(x, y) \in \Cont{[a, A] \times [p, q]} $ \\
+	Это -- компакт. Значит, $ f $ равномерно непрерывна на $ [p, q] $
+	$$ \implies f(x, y) \uniarr[y \to y_0]{x \in [a, A]} f(x, y_0) $$
+	Применяя те же рассуждения, что и в доказательстве теоремы, получаем, что
+	$$ I(y) \to I(y_0) $$
+\end{proof}
+
+\subsection{Интегрирование несобственного интеграла от параметра}
+
+\begin{theorem}
+	$ f \in \Cont{[a, \infty) \times [p, q]} $
+	$$ I(y) \define \dint{a}\infty{f(x, y)} \text{ равномерно сх. при } y \in [p, q] $$
+	По последнему следствию, $ I(y) \in \Cont{[p, q]} $, и  можно рассматривать $ \dint[y]pq{I(y)} $
+	$$ K(y) \define \dint[y]{p}{q}{f(x, y)} $$
+	$ K(y) $ -- собственный интеграл от параметра, значит $ k \in \Cont{[a, \infty)} $
+	\begin{equ}{31}
+		\implies \dint{a}\infty{K(x)} \text{ сходится}
+	\end{equ}
+	\begin{equ}{32}
+		\implies \dint[y]{p}{q}{I(y)} = \dint{a}\infty{K(x)}
+	\end{equ}
+	или
+	$$ \dint[y]{p}q{\bigg( \dint{a}\infty{f(x, y)} \bigg)} = \dint{a}\infty{ \bigg( \dint[y]pq{f(x, y)} \bigg)} $$
+\end{theorem}
+
+\begin{proof}
+	Рассмотрим функцию
+	$$ F(A, y) = \dint{a}A{f(x, y)} $$
+	$ F \in \Cont{[a, A] \times [p, q]} $, значит, по теореме об интегрировании \nimp[``собственного''] интеграла от параметра,
+	\begin{equ}{33}
+		\dint[y]pq{F(A, y)} \bdefeq{F} \dint[y]pq{ \bigg( \dint{a}{A}{f(x, y)} \bigg)} = \dint{a}{A}{ \bigg( \dint[y]pq{f(x, y)} \bigg)} \bdefeq{K} \dint{a}{A}{K(x)}
+	\end{equ}
+	По условию,
+	\begin{equ}{34}
+		F(y) \uniarr[A \to \infty]{y \in [p, q]} I(y) \underimp{\text{т. о переходе к пределу}} \dint[y]pq{F(y)} \infarr{A} \dint[y]pq{I(y)}
+	\end{equ}
+	\begin{equ}{35}
+		\implies \exist \limi{A} \dint{a}A{K(x)} \bdefeq{\text{ несобств. инт.}} \dint{a}\infty{K(x)}
+	\end{equ}
+	$$ \eref{35} \implies \eref{31} $$
+	$$ \eref{34}, \eref{35} \implies \eref{32} $$
+\end{proof}
+
+\subsection{Несобственный интеграл от несобственного интеграла от параметра}
+
+\begin{theorem}
+	$ f \in \Cont{[a, \infty) \times [p, \infty)}, \qquad f(x, y) \ge 0 $
+	$$ \forall y \in [p, \infty) \quad \exist I(y) \define \dint{a}\infty{f(x, y)} $$
+	$$ \forall x \in [a, \infty) \quad \exist K(x) = \dint[y]p\infty{f(x, y)} $$
+	Существует по крайней мере один из интегралов:
+	$$ \dint[y]p\infty{I(y)}, \qquad \dint{a}\infty{K(y)} $$
+	Тогда существует и второй, и справедливо равенство:
+	$$ \dint[y]p\infty{I(y)} = \dint{a}\infty{K(x)} $$
+	то есть,
+	$$ \dint[y]p\infty{\bigg( \dint{a}\infty{f(x, y)} \bigg)} = \dint{a}\infty{\bigg( \dint[y]p\infty{f(x, y)} \bigg)} $$
+\end{theorem}
+
+\begin{remark}
+	Важность этой теоремы заключается в том, что в ней не требуется равномерная сходимость
+\end{remark}
+
+\begin{proof}
+	Будет доказано в четвёртом семестре
+\end{proof}
+
+\subsection{Производная несобственного интеграла от параметра}
+
+\begin{theorem}
+	$ f \in \Cont{[a, \infty) \times [p, q]}, \qquad \forall x \in [a, \infty) \quad \forall y \in [p, q] \quad \exist f_y'(x, y) $
+	$$ f_y'(x, y) \in \Cont{[a, \infty) \times [p, q]} $$
+	$$ \forall y \in [p, q] \quad \bt{ сходится } I(y) \define \dint{a}\infty{f(x, y)} $$
+	\begin{equ}{38}
+		\dint{a}\infty{f_y'(x, y)} \text{ \bt{равномерно сходится} при } y \in [p, q]
+	\end{equ}
+	$$ \implies \forall y \in [p, q] \quad \exist I'(y), \qquad I'(y) = \dint{a}\infty{f_y'(x, y)} $$
+\end{theorem}
+
+\begin{proof}
+	Зафиксируем $ y_0 \in [p, q] $ \\
+	Обозначим $ Y \define [p, q] \setminus \set{y_0} $ \\
+	Рассмотрим функции
+	$$ F(A, y) \define \dint{a}A{f(x, y)}, \qquad G(A, y) \define \frac{F(A, y) - F(A, y_0)}{y - y_0} $$
+	$ f $ удовлетворяет требованиям, которые накладывались на функцию в теореме о производной интеграла от параметра:
+	\begin{equ}{312}
+		\exist \liml{y \to y_0} G(A, y) \bydef \liml{y \to y_0} \frac{F(A, y) - F(A, y_0)}{y - y_0} \bdefeq{F_y'} F_y'(A, y_0) \undereq{\text{упомятнутая теорема}} \dint{a}A{f_y'(x, y_0)}
+	\end{equ}
+	(для любого фиксированного $ A > a $)
+	\begin{statement}
+		\begin{equ}{314}
+			\exist \Phi(y), \quad y \in Y : \quad G(A, y) \uniarr[A \to \infty]{y \in Y} \Phi(y)
+		\end{equ}
+	\end{statement}
+	\begin{proof}
+		Докажем, используя критерий Коши (применяя его к условию \eref{38}):
+		\begin{equ}{315}
+			\forall \veps > 0 \quad \exist A > a : \quad \forall A_2 > A_1 > A \quad \forall y \in [p, q] \quad \bigg| \dint{A_1}{A_2}{f_y'(x, y)} \bigg| < \veps
+		\end{equ}
+		\begin{multline}\lbl{316}
+			G(A_2, y) - G(A_1, y) \bdefeq{G} \frac{F(A_2, y) - F(A_2, y_0)}{y - y_0} - \frac{F(A_1, y) - F(A_1, y_0)}{y - y_0} = \\
+			= \frac{\bigg( F(A_2, y) - F(A_1, y) \bigg) - \bigg( F(A_2, y_0) - F(A_1, y_0) \bigg)}{y - y_0} \bdefeq{F} \frac{\dint{A_1}{A_2}{f(x, y)} - \dint{A_1}{A_2}{f(x, y_0)}}{y - y_0}
+		\end{multline}
+		Определим (учитывая, что $ A_1, A_2 $ фиксированы)
+		$$ V(y) \define \dint{A_1}{A_2}{F(x, y)} $$
+		\begin{equ}{317}
+			\forall y \in [p, q] \quad \exist V'(y), \qquad V'(y) = \dint{A_1}{A_2}{f_y'(x, y)}
+		\end{equ}
+		По теореме Лагранжа
+		\begin{equ}{318}
+			\exist c \in (y, \between y_0) : \quad V(y) - V(y_0) = V'(c)(y - y_0)
+		\end{equ}
+		$$ G(A_2, y) - G(A_1, y) \xlongequal[\eref{316}]{\operatorname{def} V} \frac{V(y) - V(y_0)}{y - y_0} \undereq{\eref{318}} \frac{V'(c)(y - y_0)}{y - y_0} = V'(c) \undereq{\eref{317}} \dint{A_1}{A_2}{f_y'(x, c)} $$
+		$$ \implies |G(A_2, y) - G(A_1, y)| = \bigg| \dint{A_1}{A_2}{f_y'(x, c)} \bigg| \underset{\eref{315}}< \veps $$
+	\end{proof}
+	Применим теорему о предельном переходе в функциональном семействе:
+	\begin{equ}{323}
+		\eref{312}, \eref{314} \implies
+		\begin{cases}
+			\exist \liml{y \to y_0} \Phi(y) \\
+			\exist \limi{A} \dint{a}A{f_y'(x, y_0)} = \dint{a}\infty{f_y'(x, y_0)} \\
+			\liml{y \to y_0} \Phi(y) = \dint{a}\infty{f_y'(x, y_0)}
+		\end{cases}
+	\end{equ}
+	$$ G(A, y) \xrightarrow[A \to \infty]{\operatorname{def} G, F} \frac{I(y) - I(y_0)}{y - y_0} $$
+	То есть,
+	\begin{equ}{325}
+		\Phi(y) = \frac{I(y) - I(y_0)}{y - y_0}
+	\end{equ}
+	Вместе с \eref{323}, получаем утверждение теоремы
+\end{proof}
+
+\subsection{Интеграл Дирихле}
+
+\begin{theorem}
+	$$ \dint0\infty{\frac{\sin x}x} = \half[\pi] $$
+\end{theorem}
+
+\begin{proof}
+	Применим признак Абеля к
+	$$ f(x, y) \define \frac{\sin x}x, \qquad x \in [0, \infty), \quad y \in [0, \infty) $$
+	Интеграл, не зависящий от $ y $ равномерно сходится:
+	\begin{equ}{41}
+		\dint0\infty{f(x, y)} = \dint0\infty{\frac{\sin x}x} \text{ равн. сх. при } y \in [0, \infty)
+	\end{equ}
+	\begin{equ}{42}
+		g(x, y) \define e^{-xy} \text{ монот. по } x \text{ при } y \in [0, \infty)
+	\end{equ}
+	\begin{equ}{43}
+		0 < e^{-xy} \le 1
+	\end{equ}
+	\begin{equ}{44}
+		\eref{41}, \eref{42}, \eref{43} \implies I(y) \define \dint0\infty{\frac{\sin x}xe^{-xy}} \text{ равн. сх. при } y \in [0, \infty)
+	\end{equ}
+	\begin{equ}{45}
+		h(x, y) \define \frac{\sin x}xe^{-xy} \in \Cont{[0, \infty) \times [0, \infty)}
+	\end{equ}
+	По частному случаю перехода к пределу
+	\begin{equ}{46}
+		\eref{44}, \eref{45} \implies I(0) = \liml{y \to +0} I(y)
+	\end{equ}
+	Возьмём $ y \ge \delta > 0 $
+	\begin{equ}{47}
+		\bigg| \frac{\sin x}xe^{-xy} \bigg| \le e^{-\delta x}
+	\end{equ}
+	$$ \implies h_y'(x, y) = -\sin xe^{-xy} $$
+	\begin{equ}{48}
+		|h_y'(x, y)| \le e^{-xy} \le e^{-\delta x}
+	\end{equ}
+	По только что доказанной теореме
+	\begin{mequ}[\eref{47}, \eref{48} \implies \empheqlbrace]
+		\lbl{49} \dint0\infty{\frac{\sin x}xe^{-xy}} \text{ сходится} \\
+		\lbl{410} \dint0\infty{h_y'(x, y)} \text{ равномерно сходится}
+	\end{mequ}
+	То есть
+	$$ \forall A > \delta \quad \exist I'(y) \text{ при } y \in [\delta, A] $$
+	\begin{equ}{411}
+		\implies \forall y \ge \delta \quad \exist I'(y), \qquad I'(y) = \dint0\infty{h_y'(x, y)} = -\dint0\infty{\sin xe^{-xy}}
+	\end{equ}
+	Проинтегрируем по частям (это не строго, на самом деле нужно считать предел):
+	\begin{multline*}
+		-\dint0\infty{\sin xe^{-xy}} = \dint0\infty{e^{-xy}(\cos x)'} = e^{-xy}\cos \clamp[\infty]0 - \dint0\infty{\cos x(e^{-xy})_x'} = \\
+		= -1 + y\dint0\infty{e^{-xy}\cos x} \undereq{\text{по частям}} -1 + y\dint0\infty{e^{-xy}(\sin x)'} = \\
+		= -1 + y \bigg( \underbrace{e^{-xy}\sin x \clamp[\infty]0}_{=0} - \dint0\infty{\sin x(e^{-xy})'} \bigg) = -1 + y^2\dint0\infty{e^{-xy}\sin x}
+	\end{multline*}
+	$$ \implies -(1 + y^2)\dint0\infty{e^{-xy}\sin x} = -1 $$
+	$$ -\dint0\infty{e^{-xy}\sin x} = -\frac1{1 + y^2} $$
+	\begin{equ}{412}
+		\iff I'(y) = -\frac1{1 + y^2}
+	\end{equ}
+	Применим формулу Ньютона-Лейбница:
+	\begin{equ}{413}
+		I(B) - I(\delta) = \dint[y]\delta{B}{I'(y)} \undereq{\eref{412}} -\dfint[y]\delta{B}{1 + y^2} = -\arctg y\clamp[B]\delta = \arctg \delta - \arctg B
+	\end{equ}
+	При $ B \to \infty $
+	$$ |I(B)| \le \dint0\infty{e^{-Bx}} = \frac1B \infarr{B} 0 $$
+	$$ \eref{413} \implies 0 - I(\delta) = \arctg \delta - \half[\pi] $$
+	\begin{equ}{414}
+		\implies I(\delta) = \half[\pi] - \arctg \delta
+	\end{equ}
+	$$ \dint0\infty{\sin x} = I(0) = \liml{\delta \to +0} I(\delta) = \lim \bigg( \half[\pi] - \arctg \delta \bigg) = \half[\pi] $$
+\end{proof}

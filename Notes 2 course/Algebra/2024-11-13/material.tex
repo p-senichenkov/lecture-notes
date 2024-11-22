@@ -1,0 +1,278 @@
+\chapter{Кольца и поля}
+
+\section{Факторкольцо}
+
+\begin{remind}
+	$ A $ -- кольцо, $ \faktor{A}I $ -- множество классов вычетов
+\end{remind}
+
+Продолжаем доказательство:
+
+\begin{proof}
+	$ \faktor{A}I $ -- абелева группа (по т. о факторгруппе) \\
+	Нужно доказать, что $ (\ol{x} + \ol{y})\ol{z} = \ol{x}\ol{z} + \ol{y}\ol{z} $ \\
+	Выберем $ x \in \ol{x}, \quad y \in \ol{y}, \quad z \in \ol{z} $
+	$$ (\ol{x} + \ol{y})\ol{z} = \ol{x}\ol{z} + \ol{y}\ol{z} \quad \impliedby \quad \ol{(x + y)z} = \ol{xz + yz} $$
+	Остальное -- аналогично \\
+	Если $ A $ -- кольцо с единицей, то $ \ol1 $ -- единица в $ \faktor{A}I $
+\end{proof}
+
+\begin{theorem}[факторкольцо по простому идеалу]
+	$ A $ -- коммутативное ассоциативное кольцо, $ I $ -- идеал. Следующие условия равносильны:
+	\begin{enumerate}
+		\item\label{en:fak:1} $ I $ -- простой
+		\item\label{en:fak:2} $ \frac{A}I $ -- область целостности
+	\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+	Пусть $ X \in \faktor{A}I, \quad x \in X $ \\
+	Тогда $ X = 0 \quad \iff \quad \ol{x} = \ol0 \quad \iff \quad x \comp{I} 0 \quad \iff \quad x - 0 \in I \quad \iff \quad x \in I $
+	\begin{itemize}
+		\item (\ref{en:fak:1}) $ \implies $ (\ref{en:fak:2}) \\
+		Пусть $ X, Y \in \faktor{A}I, \qquad XY = \ol0 $ \\
+		Пусть $ x \in X, \quad y \in Y \implies \ol{xy} = \ol0 \implies xy \in I \underimp{I \text{ простой}}
+		\begin{vars}
+			x \in I \implies X = \ol0 \\
+			y \in I \implies Y = \ol0
+		\end{vars} $
+		\item (\ref{en:fak:2}) $ \implies $ (\ref{en:fak:1}) \\
+		Пусть $ xy \in I \implies \ol{xy} = \ol0 \implies \ol{x} \cdot \ol{y} = \ol0 \underimp{\text{обл. цел.}}
+		\begin{vars}
+			\ol{x} = 0 \implies x \in I \\
+			\ol{y} = 0 \implies y \in I
+		\end{vars} $
+	\end{itemize}
+\end{proof}
+
+\begin{theorem}[факторкольцо по максимальному идеалу]
+	$ A $ -- коммутативное ассоциативное кольцо с единицей, $ I $ -- идеал. Следующие условия равносильны:
+	\begin{enumerate}
+		\item\label{en:max:1} $ I $ -- максимальный
+		\item\label{en:max:2} $ \faktor{A}I $ -- поле
+	\end{enumerate}
+\end{theorem}
+
+\begin{iproof}
+	\item (\ref{en:max:1}) $ \implies $ (\ref{en:max:2}) \\
+	$ \faktor{A}I $ -- коммутативное ассоциативное кольцо с единицей \\
+	Осталось доказать, что $ \forall X \in \faktor{A}I, ~ X \ne \ol0 \quad \exist X^{-1} $
+	$$ \ol0 = I \implies X \ne I $$
+	Пусть $ x \in X \implies x \in I $ \\
+	Пусть $ J \define \braket{x, I} $ (он существует, это обсуждалось в прошлый раз)
+	$$ J \supset I, ~ J \ne I \underimp{I \text{ -- макс.}} J = A \implies A \in J $$
+	$$ 1 \in \braket{I, x} \implies 1 = \underbrace{a_1s_1 + ... + a_ks_k}_{\in I} + bx \text{ для некоторых } s_i \in I, \quad a_i, b \in A $$
+	$$ \implies 1 \equiv bx \pmod I \implies \ol1 = \ol b \cdot \ol x = \ol b X \implies \ol b = X^{-1} $$
+	\item (\ref{en:max:2}) $ \implies $ (\ref{en:max:1}) \\
+	Пусть $ J $ -- идеал, $ I \sub J, ~ I \ne J $ \\
+	Докажем, что $ J = A $: \\
+	Пусть $ x \in J \setminus I $
+	$$ \ol x \in \faktor AI, \qquad \ol x \ne \ol0 \quad \implies \exist Y : \ol x Y = \ol 1 $$
+	Пусть $ \ol y \in Y \implies \ol x \cdot \ol y = \ol 1 \implies xy - 1 \in I $
+	$$
+	\begin{rcases}
+		x \in J \\
+		xy - 1 \in I
+	\end{rcases} \implies 1 = \underbrace{xy}_{\in J} - \underbrace{(xy - 1)}_{\in I} \in J \implies J = A $$
+\end{iproof}
+
+\begin{remark}
+	Поле является областью целостности $ \implies $ в кольце с единицей максимальный идеал является простым
+\end{remark}
+
+\begin{theorem}[факторкольцо кольца многочленов]
+	$ K $ -- поле, $ \qquad A = K[x], \qquad P(x) \in A, \qquad I = \braket{P(x)} $ (это не условие, а обозначение -- известно, что все идеалы такие), $ \qquad B = \faktor AI $ \\
+	Тогда равносильны условия:
+	\begin{enumerate}
+		\item $ P $ неприводим $ \iff \faktor AI $ -- поле
+	\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+	Правая часть равносильна тому, что $ I $ максимальный
+	\begin{itemize}
+		\item $ \implies $ \\
+		Пусть $ I \in J, \quad Q(x) $ -- такой, что $ J = \braket{Q(x)} $
+		\begin{multline*}
+			\braket{P(x)} \sub \braket{Q(x)} \implies P(x) \divby Q(x) \underimp{P \text{ неприводимый}} \\
+			\implies
+			\begin{vars}
+				Q(x) = cP(x), \quad c \in K, \quad c \ne 0 \implies J = I \\
+				Q(x) = c, \quad c \in K, \quad c \ne 0 \implies J = A
+			\end{vars} \implies I \max
+		\end{multline*}
+		\item $ \impliedby $ \\
+		Пусть $ P $ приводим
+		$$ \implies \exist Q(x) : \quad P(x) \divby Q(x), \qquad Q(x) \ne cP(x), \quad Q(x) \ne c $$
+		$$ \implies \braket{P(x)} \subsetneq \braket{Q(x)} \subsetneq A \implies I \text{ не } \max $$
+	\end{itemize}
+\end{proof}
+
+\section{Гомоморфизм колец}
+
+\begin{definition}
+	$ (A, +_A, \cdot_A), ~ (B, +_B, \cdot_B) $ -- кольца \\
+	Отображение $ f : A \to B $ называется гомоморфизмом, если
+	$$ f(x +_A y) = f(x) +_B f(y) $$
+	$$ f(x \cdot_A y) = f(a) \cdot_B f(y) $$
+\end{definition}
+
+\begin{definition}
+	Отображение $ f : A \to B $ называется изоморфизмом, если $ f $ -- гомоморфизм и биекция
+\end{definition}
+
+\begin{definition}
+	Если существует изоморфизм из $ A $ в $ B $, то $ A $ и $ B $ называются изоморфными
+\end{definition}
+
+\begin{notation}
+	$ A \simeq B $
+\end{notation}
+
+Все тривиальные свойства верны: про обратный, про композицию, про отношение ``эквивалентности'' (настоящей эквивалентности здесь нет -- нет множества всех колец)
+
+\begin{definition}
+	$ A $, $ B $ -- цольцо, $ f : A \to B $ -- гомоморфизм \\
+	Ядро: $ \set{x \in A | f(x) = 0} $
+	\begin{notation}
+		$ \ker f $
+	\end{notation}
+	Образ: $ \set{f(x) | x \in A} $
+	\begin{notation}
+		$ \Img A $
+	\end{notation}
+\end{definition}
+
+\begin{properties}
+	$ A, B $ -- коммутативные, $ f : A \to B $ - гомоморфизм
+	\begin{enumerate}
+		\item $ f(0) = 0 $
+		\begin{proof}
+			Следует из аналогичного свойства для гомоморфизма групп
+		\end{proof}
+		\begin{remark}
+			Коммутативность здесь не нужна
+		\end{remark}
+		\begin{remark}
+			Для единицы не верно
+		\end{remark}
+		\item $ \ker f $ -- идеал
+		\begin{proof}
+			$ \ker f \ne 0 $, т. к. $ 0_A \in \ker f $
+			\begin{itemize}
+				\item $ x, y \in \ker f \implies f(x + y) = \underbrace{f(x)}_0 + \underbrace{f(y)}_0 = 0 + 0 = 0 $
+				\item $ \underbrace{f(0)}_0 = f \big( x + (-x) \big) = \underbrace{f(x)}_0 + f(x) \implies f(-x) = 0 $
+				\item $ a \in A \qquad f(ax) = f(a)f(x) = f(a) \cdot 0 = 0 $
+			\end{itemize}
+		\end{proof}
+		\item $ \Img f $ -- подкольцо $ B $
+		\begin{proof}
+			$ \Img f \sub B $ \\
+			Нужно преверить, что $ \Img f $ замкнут относительно операции \\
+			Для сложения -- можно сослаться на группы \\
+			Для умножения:
+			$$ x, y \in \Img f \implies a, b \in A : \quad f(a) = x, \quad f(b) = y $$
+			$$ \implies xy = f(a)f(b) = f(ab) \in \Img f $$
+		\end{proof}
+	\end{enumerate}
+\end{properties}
+
+\begin{theorem}[о гомомрфизме колец]
+	$ A, B $ -- коммутативные ассоциативные кольца \\
+	$ \qquad f : A \to B $ -- гомоморфизм \\
+	Тогда $ \faktor{A}{\ker f} \simeq \Img f $
+\end{theorem}
+
+\begin{proof}
+	Определим $ \vphi : \faktor{A}{\ker f} \to \Img f $ \\
+	Пусть $ X \in \faktor{A}{\ker f}, \quad x \in X $ \\
+	Положим $ \vphi(X) \define f(x) $
+	$$ x \in X \implies X = \ol x \implies \vphi(\ol x) = f(x) $$
+	\begin{itemize}
+		\item Корректность: \\
+		Пусть $ x, x' \in X $ \\
+		Проверим, что $ f(x') = f(x) $
+		$$ \ol x = \ol{x'} \implies x \comp{\ker f} x' \implies x - x' \in \ker f \implies f(x) = f \big( x' + (x - x') \big) = f(x') + \underbrace{f(x - x')}_{0 ~ (x - x' \in \ker f)} $$
+		\item Гомоморфизм:
+		$$ X, Y \in \faktor{A}{\ker f}, \qquad x \in, \quad y \in Y $$
+		$$ X = \ol x, \quad Y = \ol y, \qquad X + Y = \ol{x + y}, \quad XY = \ol{xy} $$
+		$$ \vphi(X + Y) = \vphi(\ol{x + y}) = f(x + y) \undereq{f \text{ гомомрф.}} f(x) + f(y) = \vphi(\ol x) + \vphi(\ol y) = \vphi(\ol x + \ol y) $$
+		Для умножения -- то же самое
+		\item Сюръективность: \\
+		Пусть $ b \in \Img f $
+		$$ \implies \exist x \in A : \quad f(x) = b \implies \vphi(\ol x) = b $$
+		\item Инъективность: \\
+		Пусть $ \vphi(X) = \vphi(Y), \quad x \in X, ~ y \in Y $
+		$$ \implies f(x) = f(y) \implies f(x - y) = 0 \implies x - y \in \ker f \implies \ol x \comp{\ker f} y \implies \ol x = \ol y \implies X = Y $$
+	\end{itemize}
+\end{proof}
+
+\section{Классификация простых полей}
+
+\begin{definition}
+	$ A $ -- кольцо \\
+	Характеристикой $ A $ называется называется наименьшее $ n \in \N $ такое, что
+	$$ \underbrace{a + a + ... + a}_n = 0 \quad \forall a \in A $$
+	Если такого $ n $ не существует, то характеристика равна нулю
+\end{definition}
+
+\begin{definition}
+	$ \chara A $
+\end{definition}
+
+\begin{egs}
+	$ \R, \Z, \Q $ -- $ \chara = 0 $ \\
+	$ \chara (\Z_2) = 2 $
+\end{egs}
+
+\begin{property}
+	Если $ A $ кольцо с единицей, то $ \chara A $ -- ниаменьшее $ n \in \N $ такое, что
+	$$ \underbrace{1 + 1 + ... + 1}_n = 0 $$
+\end{property}
+
+\begin{proof}
+	Нужно доказать, что
+	$$ \underbrace{a + a + ... + a}_n = 0 \quad \forall a \in A \qquad \iff \qquad \underbrace{1 + 1 + ... + 1}_n = 0 $$
+	\begin{itemize}
+		\item $ \implies $ \\
+		Подставим $ a = 1 $
+		\item $ \impliedby $
+		$$ a + a + ... + a = a(1 + ... + 1) = a \cdot 0 = 0 $$
+	\end{itemize}
+\end{proof}
+
+\begin{property}
+	$ A $ -- поле \\
+	Тогда $ \chara A = 0 $ или $ \chara A \in \Prime $
+\end{property}
+
+\begin{proof}
+	Пусть \bt{это не так} и $ \chara A $ -- составное
+	$$ \chara A = n = mk, \qquad 1 < m, \quad k < n $$
+	$$ 0 = \underbrace{1 + ... + 1}_n = (\underbrace{1 + ... + 1}_m)(\underbrace{1 + .... + 1}_k) \implies
+	\begin{vars}
+		\underbrace{1 + ... + 1}_m = 0 \\
+		\underbrace{1 + .... + 1}_k = 0
+	\end{vars} $$
+	Получили противоречие с минимальностью $ n $
+\end{proof}
+
+\begin{note}
+	Достаточно области целостности с единицей
+\end{note}
+
+\begin{definition}
+	$ L $ -- поле, $ \qquad K \sub L, \qquad K $ является полем с теми же операциями \\
+	Тогда $ K $ назыается подполем $ L $ \\
+	$ L $ называется расширением $ K $
+\end{definition}
+
+\begin{exmpls}
+	\item $ \R $ -- подполе $ \Co $
+	\item $ \R(x) $ -- расширение $ \R $
+\end{exmpls}
+
+\begin{definition}
+	Поле $ K $ называется простым, если оно не содержит подполей, отличных от $ K $ \\
+	(считаем, что поле не может состоять из одного элемента, т. е. $ 0 \ne 1 $)
+\end{definition}

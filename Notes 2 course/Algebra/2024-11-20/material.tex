@@ -1,0 +1,209 @@
+\chapter{Кольца и поля}
+
+\section{Классификация простых полей}
+
+\begin{theorem}[классификация простых полей]
+	\hfill
+	\begin{enumerate}
+		\item Поля $ \Q $ и $ \Z_p $ при $ p \in \Prime $ -- простые
+		\begin{proof}
+			\hfill
+			\begin{itemize}
+				\item $ \Q $ \\
+				Пусть $ \Q $ \bt{не простое}, и $ K $ -- подполе $ \Q \quad \implies 0, 1 \in K $
+				$$ \underbrace{1 + 1 + \dots + 1}_n \in K \quad \forall n \quad \implies \N \sub K $$
+				Если $ n \in K $, то $ (-1) \in K \quad \implies \Z \sub K $ \\
+				Если $ n \in K, ~ n \ne 0 $, то $ \frac1n \in K \quad \implies \frac1n \in K \quad \forall n \in \N $
+				$$ m \in \Z, ~ n \in \N \implies \frac mn = m \cdot \frac1n \in K \quad \implies \Q = K $$
+				\item $ \Z_p $ \\
+				Аналогично, пусть $ K $ -- подполе $ \Z_p $
+				$$ \ol1 \in K $$
+				$$ \underbrace{\ol1 + \ol1 + \dots + \ol1}_n \in K \quad \forall n \quad \implies \ol n \in K \quad \forall n \quad \implies \Z_p = K $$
+			\end{itemize}
+		\end{proof}
+		\item Любое простое поле изоморфно $ \Q $ или $ \Z_p $ для некоторого $ p \in \Prime $
+		\begin{proof}
+			Пусть $ K $ "--- поле \\
+			Докажем, что $ K $ содержит подполе, изоморфное $ \Q $ или $ \Z_p $ \\
+			Возьмём $ A $ "--- минимальное подкольцо $ K $, содержащее 1 \\
+			Докажем, что $ A \simeq \Z $ (взяв все частные из $ A $, получим множество дробей) или $ A \simeq \Z_p $: \\
+			Пусть $ f : \Z \to A $ такое, что
+			$$ f(n) \define
+			\begin{cases}
+				\underbrace{1 + 1 + \dots + 1}_n, \qquad n > 0 \\
+				-(\underbrace{1 + 1 + \dots + 1}_n), \qquad n < 0 \\
+				0, \qquad n = 0
+			\end{cases} $$
+			\begin{itemize}
+				\item Докажем, что $ f $ "--- гомоморфизм:
+				\begin{itemize}
+					\item Докажем, что $ f(n) + f(k) = f(n + k) $: \\
+					Кольцо "--- это группа по сложению. Умножение $ n $ единиц "--- это возведение в $ n $ степень. Знаем, что $ 1^n * 1^k = 1^{n + k} $, где $ * $ "--- это $ + $
+					\item $ f(nk) = f(n) \cdot f(k) $:
+					\begin{itemize}
+						\item $ n, k > 0 $
+						$$ (\underbrace{1 + \dots + 1}_n)(\underbrace{1 + \dots + 1}_k) = \underbrace{1 \cdot 1 + \dots + 1 \cdot 1}_{nk} = \underbrace{1 + \dots + 1}_{nk} $$
+						\item $ n = 0 $
+						$$ f(0) = f(0) f(k) $$
+						\item $ n > 0, ~ k < 0 $ \\
+						Положим $ k_1 \define -k $
+						$$ f \bigg( n(-k_1) \bigg) = f(n) f(-k_1) \quad \impliedby \quad -f(nk_1) = f(n) \bigg( -f(k_1) \bigg) $$
+					\end{itemize}
+					По теореме о гомомрфизме $ \Img f \simeq \faktor\Z{\ker f} $ \\
+					$ \Img f $ "--- подкольцо $ A $ \\
+					$ \ker f $ "--- идеал $ \implies \ker f = \braket m $
+					\begin{itemize}
+						\item $ m = 0 $
+						$$ \ker f = \set0 \implies \faktor\Z{\ker f} = \faktor\Z{\set0} \simeq \Z $$
+						\item $ m \ne 0 $
+						$$ \Img f \simeq \faktor\Z{\braket m} \simeq \Z_m $$
+						$ \Img f $ "--- подкольцо поля $ K \implies \Img f $ "--- область целостности \\
+						$ \implies \braket m $ "--- простой идеал $ \implies m \in \Prime $
+					\end{itemize}
+				\end{itemize}
+			\end{itemize}
+		\end{proof}
+	\end{enumerate}
+\end{theorem}
+
+\begin{remark}
+	Характеристику можно определять по простому полю:
+	$$ K \simeq \faktor\Z{\braket m} \implies \chara \Z = m $$
+	Отсюда видно, почему характеристика 0, если не существует нужной степени
+\end{remark}
+
+\section{Степень расширения}
+
+\begin{lemma}
+	$ K $ "--- поле, $ \qquad L $ "--- расширение $ K $ \\
+	Тогда $ L $ является векторным пространством над $ K $
+\end{lemma}
+
+\begin{iproof}
+	\item Операции:
+	\begin{itemize}
+		\item $ l_1 + l_2, \quad l_1, l_2 \in L $
+		\item $ kl, \quad k \in K, ~ l \in L $
+	\end{itemize}
+	$ k, l $ "--- элементы $ L $, для них операции определены
+	\item $ L $ "--- абелева группа по сложению:
+	$$ (k_1k_2)l = k_1(k_2l) $$
+\end{iproof}
+
+\begin{exmpls}
+	\item $ \R \sub \Co $ \\
+	Базис "--- $ \set{1, i} $
+	\item $ \R(x) $ "--- бесконечномерное векторное пространство над $ \R $
+\end{exmpls}
+
+\begin{definition}
+	$ L $ "--- расширение $ K $ \\
+	Степенью расширения $ L $ над $ K $ называется $ \dim_K L $
+\end{definition}
+
+\begin{notation}
+	$ |L : K|, \qquad (L : K), \qquad [L : K] $
+\end{notation}
+
+Если $ |L : K| $, то $ L $ "--- конечное расширение $ K $ ($ L $ конечно над $ K $) \\
+Иначе "--- бесконечное
+
+\begin{exmpls}
+	\item $ |\Co : \R| = 2 $
+	\item $ |\R(x) : \R| = \infty $
+	\item $ |K : K| = 1 $ \\
+	Базис "--- $ \set1 $ ($ k \cdot 1 $ "--- множество всех $ k \in K $) \\
+	Если $ K \sub L, ~ |L : K| = 1 $, то $ L = K $
+	\item $ \Q(\sqrt2) $ "--- наименьшее поле, содержащее $ \Q $ и $ \sqrt2 $ \\
+	Такое поле существует, т.~к. $ \Q \sub \R, ~ \sqrt2 \in \R $, можно взять наименьшее подполе $ \R $, которое содержит $ \Q $ и $ \sqrt2 $ \\
+	Оно состоит из чисел вида $ a + b\sqrt2 $ \\
+	Проверим, что это поле:
+	$$ (a + b\sqrt2)(c + d\sqrt2) = (ac + 2db) + (ad + bc)\sqrt2 $$
+	$$ \frac1{a + b\sqrt2} = \frac{a - b\sqrt2}{a^2 - 2b^2} = \frac{a}{a^2 - 2b^2} + \frac{-b}{a^2 - 2b^2}\sqrt2 $$
+	$$ |\Q(\sqrt2) : \Q| = 2 $$
+	Базис "--- $ \set{1, \sqrt2} $
+	\item $ \Q(\sqrt2, i) $ "--- наименьшее поле, содержащее $ \Q, \sqrt2, i $ \\
+	Оно аналогично является подполем $ \Co $
+	\begin{statement}
+		$ |\Q(\sqrt2, i) : \Q| = 4 $
+	\end{statement}
+	\begin{proof}
+		$$ \Q(\sqrt2, i) = \set{a + bi \mid a, b \in \Q(\sqrt2)} $$
+		$ |\Q(\sqrt2, i) : \Q(\sqrt2)| = 2 $, базис "--- $ \set{1, i} $ \\
+		Базис $ \Q(\sqrt2, i) $ над $ \Q $: $ \set{1 \cdot 1, 1 \cdot i, \sqrt2 \cdot 1, \sqrt2 \cdot i} $
+	\end{proof}
+\end{exmpls}
+
+\begin{theorem}[мультипликативность степени]
+	$ K \sub M \sub L $ "--- поля с общими операциями \\
+	Тогда $ |L : K| = |L : M| \cdot |M : K| $
+\end{theorem}
+
+\begin{note}
+	Если $ M $ конечно над $ K $ и $ L $ конечно над $ M $, то $ L $ конечно над $ K $ и выполнено равенство \\
+	Иначе $ L $ бесконечно над $ K $
+\end{note}
+
+\begin{iproof}
+	\item Докажем, что если $ e_1, \dots, e_r \in M $ ЛНЗ над $ K $ и $ f_1, \dots, f_s \in L $ ЛНЗ над $ M $, то $ g_{ij} \define e_if_j $ ЛНЗ над $ K $: \\
+	Пусть $ a_{ij} \in K : \sum a_{ij}g_{ji} = 0 $
+	$$ a_{11}e_1f_1 + a_{12}e_1f_2 + \dots + a_{21}e_2f_1 + a_{22}e_2f_2 + \widedots[4em] = 0 $$
+	Сгруппируем по элементам $ f $:
+	$$ \bigg( a_{11}e_1f_1 + a_{21}e_2f_1 + \dots \bigg) + \bigg( a_{12}e_1f_2 + a_{22}e_2f_2 + \dots \bigg) + \widedots[4em] = 0 $$
+	$$ \underbrace{(a_{11}e_1 + a_{21}e_2 + \dots)}_{\in M}f_1 + \underbrace{(a_{12}e_1 + a_{22}e_2 + \dots)}_{\in M}f_2 + \widedots[4em] = 0 $$
+	Пусть $ b_j \define a_{1j}e_1 + a_{2j}e_2 + \dots + a_{rj}e_r $ \\
+	Тогда $ b_j \in M, \quad b_1f_1 + \dots b_sf_s = 0 $ \\
+	$ f_1, \dots f_s $ ЛНЗ над $ M \implies b_1 = b_2 = \dots = b_s = 0 $
+	$$ a_{1j}e_1 + \dots + a_{rj}e_r = b_j = 0 $$
+	$ e_1, \dots, e_r $ ЛНЗ над $ K \implies a_{ij} = 0 \quad \forall i, j $
+	\item Конечный случай \\
+	Пусть $ e_1, \dots, e_r $ "--- базис $ M $ над $ K, \quad f_1, \dots, f_s $ "--- базис $ L $ над $ M $ \\
+	Докажем, что $ g_{ij} \define e_if_j $ "--- базис $ L $ над $ K $: \\
+	ЛНЗ уже доказана. Осталось доказать, что любой элемент порождается $ g_{ij} $: \\
+	Пусть $ c \in L \quad \implies \exist b_i \in M : \quad c = b_1f_1 + \dots + b_sf_s $
+	$$ b_j \in M, \quad e_i \text{ порожд. } M \text{ над } K \implies \forall j \quad \exist a_{ij} : \quad b_j = a_{1j}e_1 + \dots + a_{rj}e_r $$
+	$$ \implies c = \sum a_{ij}eIf_j = \sum a_{ij}g_{ij} $$
+	\item Бесконечный случай \\
+	Нужно доказать, что $ \forall N \quad \exist N $ ЛНЗ элементов $ L $ над $ K $ (т.~е. существует сколь угодно большая ЛНЗ система) \\
+	Можно выбрать $ e_1, \dots e_N $ ЛНЗ, или $ f_1, \dots f_N $ ЛНЗ \\
+	Тогда $ e_if_j $ ЛНЗ над $ K $
+\end{iproof}
+
+\begin{implication}
+	$ L $ "--- конечное расширение над $ K, \qquad K \sub M \sub L $ \\
+	Тогда $ |M : K| $ и $ |L : M| $ "--- делители $ |L : K| $
+\end{implication}
+
+\begin{implication}
+	$ L $ "--- конечное расширение $ K, \qquad |L : K| $ "--- простое число
+	$$ \implies \not\exist M : \quad K \sub M \sub L, \quad M \ne K, ~ M \ne L $$
+\end{implication}
+
+\begin{eg}
+	Не существует поля $ M : \quad \R \sub M \sub \Co $, отличного от них \\
+	По основной теореме алгебры поле $ \Co $ большое "--- в нём есть корень любого многочлена \\
+	С другой стороны, оно маленькое "--- только что мы выяснили, что оно довольно близко к $ \R $
+\end{eg}
+
+\begin{implication}
+	$ K \sub M \sub L $ \\
+	Тогда
+	\begin{itemize}
+		\item если $ |M : K| = |L : K| $, то $ M = L $
+		\item если $ |L : M| = |L : K| $, то $ M = K $
+	\end{itemize}
+\end{implication}
+
+\begin{implication}
+	$ K \sub M \sub L, \qquad L $ бесконечно над $ K $ \\
+	Тогда $ M $ бесконечно над $ K $ или $ L $ бесконечно над $ M $
+\end{implication}
+
+\begin{eg}
+	$ \R(x) $ над $ \R $ бесконечно \\
+	Значит, не существует $ M : \quad \R \sub M \sub \R(x) $, и $ M $ кончено над $ \R $, и $ \R(x) $ конечно над $ M $
+\end{eg}
+
+\begin{remark}
+	Нельзя построить ``башню'' из любого количества полей так, чтобы все шаги были конечны
+\end{remark}

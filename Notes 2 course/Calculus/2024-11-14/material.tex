@@ -1,0 +1,218 @@
+\chapter{Функциональные последовательности и ряды}
+
+\section{Равномерно сходящиеся комплексные функциональные ряды}
+
+\begin{definition}
+	$ E $ "--- метрическое пространство, $ \qquad \seq{\gamma_n(x)}n, \quad \gamma E \to \Co $ \\
+	Комплексным функциональным рядом называется символ
+	\begin{equ}{19}
+		\sum_{n = 1}^\infty \gamma_n(x)
+	\end{equ}
+	Частичной суммой называется $ w_n(x) \define \gamma_1(x) + \dots + \gamma_n(x) $ \\
+	Говорят, что ряд равномерно сходится на множестве $ E $, если
+	$$ \exist w : E \to \Co : \quad w_n(x) \uniarr{x \in E} w(x) $$
+\end{definition}
+
+\subsection{Критерий Коши}
+
+\begin{theorem}
+	Для того чтобы ряд \eref{19} \bt{равномерно} сходился на $ E $, \bt{необходимо и достаточно}, чтобы
+	$$ \forall \veps > 0 \quad \exist N : \quad \forall m > n > N \quad \forall x \in E \quad |\gamma_{n + 1}(x) + \dots + \gamma_m(x)| < \veps $$
+\end{theorem}
+
+\begin{definition}
+	МОжно применить критерий Коши для комплексной функциональной последовательности
+\end{definition}
+
+\subsection{Признак Вейерштрасса}
+
+\begin{theorem}
+	\begin{equ}{21}
+		\seq{a_n}n, \quad a_n > 0 : \quad |\gamma_n(x)| \le a_n \quad \forall n \quad \forall x \in E
+	\end{equ}
+	Ряд $ a_n $ сходится
+	\begin{equ}{22}
+		\sum_{n = 1}^\infty a_n < \infty
+	\end{equ}
+	$$ \implies \eref{19} \text{ сходится равномерно} $$
+\end{theorem}
+
+\begin{proof}
+	Возьмём $ \forall \veps > 0 $
+	\begin{equ}{23}
+		\eref{22} \implies \exist N : \quad \forall m > n > N \quad a_{n + 1} + \dots + a_n < \veps
+	\end{equ}
+	$$ |\gamma_{n + 1}(x) + \dots + \gamma_n(x)| \le |\gamma_{n + 1}(x)| + \dots + |\gamma_m(x)| \underset{a_n > 0}\le a_{n + 1} + \dots + a_m \underset{\eref{23}}< \veps $$
+	По критерию Коши получаем равномерную сходимость
+\end{proof}
+
+\section{Комплексные степенные ряды}
+
+$ E = \Co $
+$$ \seqz{c_n}n, \qquad c_n \in \Co $$
+$ z_0 \in \Co $ \\
+Положим $ \gamma_0(z) \define c_0, \quad \gamma_n(z) \define c_n(z - z_0)^n $
+\begin{equ}{32}
+	c_0 + \sum_{n = 1}^\infty c_n(z - z_0)^n
+\end{equ}
+Такое выражение будем называть комплексным степенным рядом с центром $ z_0 $ (рядом по степеням $ (z - z_0) $)
+
+\begin{remark}
+	$ \seq{c_n}n, \qquad c_n \to c \in \Co $
+	$$ \implies \exist M : \quad |c_n| \le M \quad \forall n $$
+\end{remark}
+
+\begin{proof}
+	Положим $ c_n = a_n + ib_n, \quad c = a + ib $
+	$$ a_n \to a, \qquad b_n \to b $$
+	Дальше применяем теорему из первого семестра
+\end{proof}
+
+\begin{remark}[необходимый признак сходимости комплексных числовых рядов]
+	$$ \sum_{n = 1}^\infty \text{ сх. } \implies \gamma_n \infarr{n} 0 $$
+\end{remark}
+
+\begin{proof}
+	$ c_n = \gamma_1 + ... + \gamma_n $
+	$$
+	\begin{rcases}
+		c_n \to c \\
+		c_{n - 1} \to c
+	\end{rcases} \implies \underbrace{c_n - c_{n - 1}}_{\gamma_n} \to c - c = 0 $$
+\end{proof}
+
+\begin{implication}
+	$$ \exist M : \quad |\gamma_n| \le M \quad \forall n $$
+\end{implication}
+
+\begin{lemma}[Абеля]
+	$$ \exist z_1 \ne z_0 : \quad \eref{32} \text{ сходится при } z_1 $$
+	Обозначим $ R \define |z_1 - z_0| $
+	\begin{equ}{33}
+		\implies \eref{32} \text{ сх. } \quad \forall z : |z - z_0| < R
+	\end{equ}
+	\begin{equ}{34}
+		\implies \forall 0 < r < R \quad \eref{32} \text{ равн. сх. при } |z - z_0| \le r
+	\end{equ}
+\end{lemma}
+
+\begin{proof}
+	Докажем \eref{34}: \\
+	Обозначим $ 0 < q \define \frac r R < 1 $ \\
+	Сходимость при $ z_1 $, по первому замечанию, означает, что
+	\begin{equ}{35}
+		c_n(z_1 - z_0)^n \infarr{n} 0
+	\end{equ}
+	Тогда, по следствию,
+	\begin{equ}{36}
+		\exist M : \quad |c_n(z_1 - z_0)^n| \le M
+	\end{equ}
+	\begin{equ}{37}
+		\iff |c_n| \cdot |z_1 - z_0| \le M \overset{\operatorname{def}~R}\iff |c_n| \le \frac{M}{R^n}
+	\end{equ}
+	\begin{equ}{38}
+		|c_n(z - z_0)^n| = |c_n| \cdot |z - z_0|^n \underset{\text{усл. } \eref{34}, \eref{37}}\le \frac{M}{R^n} \cdot r^n = Mq^n
+	\end{equ}
+	$$ \sum_{n = 1}^\infty Mq^n = \frac{Mq}{1 - q} $$
+	Можно применить признак Вейерштрасса, тем самым доказывая \eref{34}
+	$$ \eref{34} \implies \eref{32} \text{ сх. абс. при } |z - z_0| < R $$
+\end{proof}
+
+\subsection{Радиус сходимости и  круг сходимости}
+
+\begin{definition}
+	\begin{enumerate}
+		\item Пусть \eref{32} сходится только при $ z = z_0 $ \\
+		Будем полагать радиус сходимости $ R \define 0 $, круг сходимости $ \B \define \O $
+		\item \eref{32} сходится при всех $ z $ \\
+		Полагаем $ R \define +\infty, \quad \B \define \Co $
+		\item $ \exist z_1 \ne z_0 : \quad \eref{32} \text{ сх. в } z_1, \qquad \exist z_2 : \quad \eref{32} \text{ расх. в } z_2 $
+		$$ R \define \sup\set{r \mid r = |z_* - z_0|, \quad \eref{32} \text{ сх. в } z_*}, \qquad \B \define \set{z_0 \mid |z - z_0| < R} $$
+	\end{enumerate}
+\end{definition}
+
+Положим $ r_1 \define |z_1 - z_0|, \quad r_2 \define |z_2 - z_1| $ \\
+По определению $ R $
+$$ R \ge r_1 > 0 $$
+Возьмём $ z_3 : \quad r_3 \define |z_3 - z_0| > r_2 $ \\
+Если бы \eref{32} сходился при $ z_3 $, можно было бы применить к $ z_3 $ лемму Абеля. Тогда бы \eref{32} сходился в $ z_2 $ "--- \contra \\
+То есть, в $ z_3 $ ряд расходится \\
+Значит, $ R \le r_2, \quad r_1 < r_2 $
+
+\subsection{Свойства круга сходимости}
+
+Рассматриваем только случай, когда $ 0 < R < \infty $
+
+\begin{theorem}
+	\begin{equ}{312}
+		\eref{32} \text{ сх. } \quad \forall z \in \B
+	\end{equ}
+	\begin{equ}{313}
+		\eref{32} \text{ расх. } \quad \forall z_2 \in \Co \setminus \ol{B}
+	\end{equ}
+\end{theorem}
+
+\begin{iproof}
+	\item Докажем \eref{312}: \\
+	Возьмём $ r \define |z - z_0| < R $ \\
+	По определению $ R $
+	$$ \exist z_* : \quad |z_* - z_0| > R, \quad \eref{32} \text{ сх. в } z_* $$
+	По лемме Абеля \eref{32} сх. в $ z $
+	\item Докажем \eref{313}: \\
+	Возьмём $ \rho \define |\hat z - z_0| > R $ \\
+	Если ряд сходится, то $ \rho $ больше супремума, что невозможно
+\end{iproof}
+
+\begin{definition}
+	Определим
+	\begin{equ}{314}
+		t \define \ulim{n \to \infty} \sqrt[n]{c_n}
+	\end{equ}
+\end{definition}
+
+\begin{theorem}
+	\hfill
+	\begin{enumerate}
+		\item $ R = 0 $, если $ t = +\infty $
+		\item $ R = +\infty $, если $ t = 0 $
+		\item $ R = \frac1t $ иначе
+	\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+	Будем рассматривать только последний случай \\
+	Определим $ R_0 \define \frac1t $
+	\begin{itemize}
+		\item Возьмём $ z_2 : \quad |z_2 - z_0| > R_0 $ \\
+		Обозначим $ \veps \define |z_2 - z_0| - R_0 > 0 $ \\
+		Определим
+		$$ \delta \define \frac{\veps t^2}{1 + \veps t} $$
+		По определению верхнего предела
+		\begin{equ}{316}
+			\exist \seq{n_k}k : \quad \sqrt[n_k]{c_{n_k}} > t - \delta
+		\end{equ}
+		$$ \iff |c_{n_k}| > (t - \veps)^{n_k} $$
+		$$ \implies |c_{n_k}(z_2 - z_0)^{n_k}| = |c_{n_k}| \cdot |z_2 - z_0|^{n_k} > (t - \delta)^{n_k} \cdot (R_0 + \veps)^{n_k} = \bigg( (t - \delta)(R_0 + \veps) \bigg)^{n_k} $$
+		$$ (t - \delta)(R_0 + \veps) = \bigg( t - \frac{\veps t^2}{1 + \veps t} \bigg)\bigg( \frac1t + \veps \bigg) = \frac{t + \veps t^2 - \veps t^2}{1 + \veps t} \cdot \frac{1 + \veps t}t = 1 $$
+		\begin{equ}{319}
+			\implies |c_{n_k}(z_2 - z_0)^{n_k}| \ge 1
+		\end{equ}
+		По второму замечанию ряд в $ z_2 $ расходится
+		\item Возьмём $ z_1 : \quad |z_1 - z_0| < R_0 $ \\
+		Пусть
+		$$ \veps_0 \define R_0 - |z_1 - z_0|, \quad \delta_0 \define \half \cdot \frac{\veps_0t^2}{1 - \veps_0t} $$
+		По свойствам верхнего предела
+		$$ \exist N : \quad \forall n > N \quad \sqrt[n]{|c_n|} < t + \delta_0 $$
+		$$ \iff |c_n| < (t + \delta_0)^n $$
+		$$ \implies \forall n > N \quad |c_n(z_1 - z_0)^n| = |c_n| \cdot |z_1 - z_0|^n < (t + \delta_0)^n \cdot (R_0 - \veps_0)^n = \bigg( (t - \delta_0)(R_0 - \veps_0) \bigg)^n $$
+		$$ (t + \delta_0)(R_0 - \veps_0) \bdefeq{\delta} \bigg( t + \half \cdot \frac{\veps_0t^2}{1 - \veps_0t} \bigg) \bigg( \frac1t - \veps_0 \bigg) = \frac{t - \veps_0t^2 + \half\veps_0t^2}{1 - \veps_0t} \cdot \frac{1 - \veps_0t}{t} = 1 - \half\veps_0t $$
+		$$ 0 < q \define 1 -\half \veps_0t < 1 $$
+		$$ \implies |c_n(z_1 - z_0)^n| < q^n < 1 $$
+		Значит, ряд сходится при $ z_1 $
+	\end{itemize}
+\end{proof}
+
+\begin{theorem}
+	$ c_n \ne 0 \quad \forall n, \qquad \exist \limi{n} \frac{|c_n|}{|c_{n + 1}|} $ \\
+	Тогда этот предел и равен радиусу сходимости
+\end{theorem}

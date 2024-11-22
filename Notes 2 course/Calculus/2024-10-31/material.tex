@@ -1,0 +1,241 @@
+\chapter{Функциональные последовательности и ряды}
+
+\section{Семейства функций}
+
+\begin{definition}
+	$ E \ne \O $ -- произвольное множество, $ \qquad Y \sub \R^{n \ge 1} $ \\
+	Функции $ f : E \times Y \to \R $ будем называть семейством функций, заданных на $ E $
+\end{definition}
+
+\begin{notation}
+	$ f(x, y), \qquad x \in E, \quad y \in Y $
+\end{notation}
+
+\begin{eg}
+	Функциональная последовательность $ \seq{f_n(x)}n $ является частным случаем семейства \\ функций при $ Y = \N $
+\end{eg}
+
+\begin{definition}
+	$ y_0 $ -- т. сг. $ Y, \qquad f : E \times Y \to \R, \qquad f_0 : E \to \R $ \\
+	Будем говорить, что семейство функций \bt{равномерно} сходится к $ f_0 $ при $ y \to y_0 $, если
+	\begin{equ}1
+		\forall \veps > 0 \quad \exist \text{окрест. } U(y_0) : \quad \forall x \in E \quad \quad \forall y \in \bigg( U(y_0) \cap Y \bigg) \setminus \set{y_0} \quad |f(x, y) - f_0(x)| < \veps
+	\end{equ}
+\end{definition}
+
+\begin{notation}
+	$ f(x, y) \uniarr[y \to y_0]{x \in E} f_0(x) $
+\end{notation}
+
+\begin{theorem}[Критерий Коши равномерной сходимости семейства функций]
+	$ f : E \times Y \to \R, \qquad y_0 $ -- т. сг. $ Y $ \\
+	Для того, чтобы семейство функций равномерно сходилось к некоторой функции $ f_0 $ \bt{необходимо и достаточно}, чтобы
+	\begin{equ}2
+		\forall \veps > 0 \quad \exist \text{окрест. } U(y_0) : \quad \forall y_1, y_2 \in \bigg( U(y_0) \cap Y \bigg) \setminus \set{y_0} \quad \forall x \in E \quad |f(x, y_2) - f(x, y_1)| < \veps
+	\end{equ}
+\end{theorem}
+
+\begin{iproof}
+	\item Необходимость: \\
+	Пусть семейство функций $ f : E \times Y \to \R $ равномерно сходится к $ f_0 $ при $ y \to y_0 $ \\
+	По определению это означает, что
+	$$ \forall \veps > 0 \quad \exist \text{окр. } U(y_0) : \quad \forall y_1, y_2 \in \bigg( U(y_0) \cap Y \bigg) \setminus \set{y_0} \quad |f(x, y_{1,2}) - f_0(x)| < \half[\veps] $$
+	$$ \implies |f(x, y_2) - f(x, y_1)| \trile |f(x, y_2) - f_0(x)| + |f_0(x) - f(x, y_1)| < \half[\veps] + \half[\veps] = \veps $$
+	\item Достаточность \\
+	Фиксируем $ x \in E $ \\
+	Применяя критерий Коши к функции одного аругмента $ f(x, y) $, получаем, что $ \exist \liml{y \to y_0} f(x, y) \define f_0(x) $ \\
+	Возьмём $ \forall \veps > 0 $, выберем окрестность $ U(y_0) $ \\
+	Возьмём $ \forall y_1, y_2 \in \big( U(y_0), \cap Y \big) \setminus \set{x_0} $ и зафиксируем $ y_1 $
+	$$ \liml{y_2 \to y_0} |f(x, y_2) - f(x, y_1)| \le \veps $$
+	$$ |f_0(x) - f(x, y_1)| \bdefeq{f_0} \bigg| \liml{y_2 \to y_0} \bigg( f(x, y_2) - f(x, y_1) \bigg) \bigg| \undereq{\text{непр. } | \cdot |} \liml{y_2 \to y_0} | f(x, y_2) - f(x, y_1)| \le \veps $$
+	Значит, $ f(x, y) $ равномерно сходится к $ f_0(x) $ при $ y \to y_0 $
+\end{iproof}
+
+\subsection{Переход к пределу в равномерно сходящемся семестве функций}
+
+\begin{theorem}
+	$ f : E \times Y \to \R, \quad Y \sub \R^{n \ge 1}, \qquad y_0 \in \R^n $ -- т. сг. $ Y $
+	\begin{equ}7
+		f(x, y) \uniarr[y \to y_0]{x \in E} f_0(x)
+	\end{equ}
+	$ E, d(x_1, x_2) $ -- метрическое пространство, $ \qquad x_0 \in E $ -- т. сг. $ E $
+	$$ \forall y \in Y \quad \exist \liml{x \to x_0} f(x, y) = \vphi(x) $$
+	Тогда $ \exist \liml{y \to y_0} \vphi(y) $ и $ \exist \liml{x \to x_0} f_0(x) $ и справедливо
+	\begin{equ}8
+		\liml{y \to y_0} \vphi(y) = \liml{x \to x_0} f_0(x)
+	\end{equ}
+\end{theorem}
+
+\begin{proof}
+	Возьмём любую последовательность $ \seq{y_n}n, \quad y_n \in Y, \quad y_n \infarr{n} y_0 $ \\
+	Положим $ f_n(x) \define f(x, y_n) $
+	\begin{equ}9
+		f(x, y) \uniarr[y \to y_0]{x \in E} f_0(x) \quad \implies \quad f_n(x) \uniarr{x \in E} f_0(x)
+	\end{equ}
+	При этом, по условию теоремы для любого $ n $ имеем
+	\begin{equ}{10}
+		\vphi(y_n) = \liml{x \to x_0} f(x, y_n) \bdefeq{f_n} \liml{x \to x_0}f_n(x)
+	\end{equ}
+	Значит, можно применить теорему о переходе к пределу в равномерно сходящейся функциональной последовательности:
+	$$ \exist \limi{n}\vphi(y_n) \in \R, \qquad \exist \liml{x \to x_0} f_0(x), \qquad \limi{n}\vphi(y_n) = \liml{x \to x_0}f_0(x) $$
+	В силу произвольности $ \seq{y_n}n $ и условий, наложенных на $ y_n $ в начале, последнее утверждение доказывает теорему
+\end{proof}
+
+\subsection{Непрерывность предельной функции}
+
+\begin{theorem}
+	$ E, d $ -- метрическое пространство, $ \qquad x_0 \in E $ -- т. сг., $ \qquad y_0 $ -- т. сг. $ Y \sub \R^n $ \\
+	$ f(x, y) \uniarr[y \to y_0]{x \in E} f_0(x), \qquad \forall y \in Y \quad f(x, y) $ непр. в $ x_0 $ \\
+	Тогда $ f_0(x) $ непр. в $ x_0 $
+\end{theorem}
+
+\begin{proof}
+	Применим предыдущую теорему: \\
+	По условию имеем $ \exist \liml{x \to x_0} f(x, y) \define \vphi(y) \quad \forall y \in Y $, при этом $ \vphi(y) = f(x_0, y) $ \\
+	По предыдущей теореме $ \exist \liml{y \to y_0} \vphi(y) $ и $ \exist \liml{x \to x_0} f_0(x) $ и тогда
+	$$ \liml{y \to y_0} f(x_0, y) = \liml{y \to y_0} \vphi(y) = \liml{x \to x_0} f_0(x) $$
+	Но $ \liml{y \to y_0} f(x_0, y) = f_0(x_0) $, что и даёт непрерывность $ f_0 $ в $ x_0 $
+\end{proof}
+
+\begin{implication}
+	$ f : E \times Y \to \R, \qquad f(x, y) \uniarr[y \to y_0]{x \in E} f_0(x), \qquad \forall y \in Y \quad f(x, y) \in \Cont{E} $
+	$$ \implies f_0 \in \Cont{E} $$
+\end{implication}
+
+\section{Интегралы, зависящие от параметра}
+
+\begin{definition}
+	$ f : [a, b] \times Y \to \R $ -- семейство функций, $ \quad Y \sub \R^{n \ge 1}, \qquad \forall y \in Y \quad f(x, y) \in \Cont{[a, b]} $ \\
+	Интегралом, зависящим от параметра, будем называть функцию $ I : Y \to \R $:
+	$$ I(y) \define \dint{a}b{f(x, y)} $$
+\end{definition}
+
+\subsection{Непрерывность интеграла от параметра}
+
+\begin{theorem}
+	$ y_0 $ -- т. сг. $ Y, \qquad f(x, y) \uniarr[y \to y_0]{x \in [a, b]} f_0(x) $ \\
+	Тогда $ f_0 \in \Cont{[a, b]} $ и
+	\begin{equ}{15}
+		I(y) = \dint{a}b{f(x, y)} \underarr{y \to y_0} \dint{a}b{f_0(x)}
+	\end{equ}
+\end{theorem}
+
+\begin{proof}
+	Непрерывность $ f_0 $ следует из следствия к предыдущей теореме, поэтому интеграл в правой части \eref{15} определён \\
+	По определению равномерной сходимости,
+	$$ \forall \veps > 0 \quad \exist U(y_0) : \quad \forall y \in \bigg( U(y_0) \cap Y \bigg) \setminus \set{y_0} \quad |f(x, y) - f_0(x)| < \veps $$
+	При таких $ y $ имеем
+	$$ |I(t) - \dint{a}b{f_0(x)}| = \bigg| \dint{a}b{\bigg( f(x, y) - f_0(x) \bigg)} \bigg| \le \dint{a}b{|f(x, y) - f_0(x)|} \le \dint{a}b\veps = \veps(b - a) $$
+\end{proof}
+
+\begin{implication}
+	$ Y = [p, q], \qquad f : [a, b] \times Y \to \R, \qquad f \in \Cont{[a, b] \times Y} $
+	$$ \implies I(y) \in \Cont{[p, q]} $$
+\end{implication}
+
+\subsection{Производная интеграла от параметра}
+
+\begin{theorem}
+	$ f : [a, b] \times Y \to \R, \qquad Y = [p, q], \qquad f \in \Cont{[a, b] \times Y} $
+	$$ \foral (x, y) \in [a, b] \times Y \quad \exist f'(x, y), \qquad f_y'(x, y) \in \Cont{[a, b] \times Y} $$
+	$$ \implies \quad \forall y \in [p, q] \quad \exist I'(y), \qquad I'(y) = \dint{a}b{f_y'(x, y)} $$
+\end{theorem}
+
+\begin{proof}
+	Поскольку $ f_y' $ непрерывна, к нейц применима терема Кантора:
+	$$ \forall \veps > 0 \quad \exist \delta > 0 : \quad \forall (x_1, y_1), (x_2, y_2) : \sqrt{(x_2 - x_1)^2 + (y_2 - y_1)^2} < \delta \qquad |f_y'(x_2, y_2) - f_y'(x_1, y_1)| < \veps $$
+	Пусть $ 0 < |h| < \delta $, тогда
+	$$ \exist c \in (y \between y + h) : \quad f(x, y + h) - f(x, y) = f_y'(x, c)h $$
+	\begin{equ}{18}
+		f(x, y + h) - f(x, y) = f_y'(x, y)h + \bigg( f_y'(x, c) - f_y'(x, y) \bigg)h \define f_y'(x, y)h + r_h(x, y)h, \qquad |r_h(x, y)| < \veps
+	\end{equ}
+	\begin{multline*}
+		I(y + h) - I(y) \bydef \dint{a}b{\bigg( f(x, y + h) - f(x, y) \bigg)} \undereq{18} \\
+		= \dint{a}b{f_y'(x, y)h} + \dint{a}b{r_h(x, y)h} = h\dint{a}b{f'(x, y)} + h\dint{a}b{r_h(x, y)}
+	\end{multline*}
+	$$ \bigg| h\dint{a}b{r_h(x, y)}\bigg| \le |h| \dint{a}b{|r_h(x, y)|} \le |h| \dint{a}b\veps = |h|\veps(b - a) $$
+	Отсюда следует, что $ I(y) $ дифференцируема в $ y $ и выполнено утверждение теоремы
+\end{proof}
+
+\subsection{Интегрирование интеграла от параметра}
+
+\begin{theorem}
+	$ f \in \Cont{[a, b] \times [p, q]}, \qquad I(y) \define \dint{a}b{f(x, y)}, \quad K(x) \define \dint[y]{p}q{f(x, y)} $
+	$$ \implies \dint[y]pq{I(y)} = \dint{a}b{K(x)} $$
+\end{theorem}
+
+\begin{proof}
+	По теореме о непрерывности интеграла, $ I(y) \in \Cont{[a, b]} $ \\
+	Положим
+	$$ \vphi(y_0) \define \dint[y]{p}{y_0}{I(y)}, \qquad v(y) \define \dint{a}b{l(x, y_0)}, \qquad l(x, y_0) \define \dint[y]{p}{y_0}{f(x, y)} $$
+	$ \vphi \in \Cont{[p, q]} $, поскольку $ I(y) \in \Cont{[p, q]} $ \\
+	Поскольку $ f \in \Cont{[a, b] \times [p, q]} $, то она ограничена (по первой теореме Вейерштрасса), т. е.
+	$$ \exist M : \quad \forall (x, y) \in [a, b] \times [p, q] \quad |f(x, y)| \le M $$
+	Поэтому при $ y_1, y_2 \in [p, q] $ имеем
+	\begin{multline}\lbl{24}
+		|f(x, y_2) - l(x, y_1)| = \bigg| \dint[y]{p}{y_2}{f(x, y)} - \dint[y]{p}{y_1}{f(x, y)} \bigg| = \bigg| \dint[y]{y_1}{y_2}{f(x, y)} \bigg| \le \\
+		\le \bigg| \dint[y]{y_1}{y_2}{|f(x, y)|} \bigg| \le |M(y_2 - y_1)| = M|y_2 - y_1|
+	\end{multline}
+	При фиксированном $ y_0 $ функция $ l(x, y_0) \in \Cont{[a, b]} $, поэтому, с учётом \eref{24} имеем
+	$$ l(x, y_0) \in \Cont{[a, b] \times [p, q]} $$
+	По определению $ l $, при фиксированном $ x $ получаем
+	$$ l_{y_0}'(x, y) = f(x, y_0) $$
+	$$ \implies l_{y_0}'(x, y) \in \Cont{[a, b] \times [p, q]} $$
+	$$ \implies \exist v'(y_0), \qquad v'(y_0) = \dint{a}b{l_{y_0}'(x, y_0)} = \dint{a}b{f(x, y_0)} = I(y_0) $$
+	По определению $ \vphi $,
+	$$ \exist \vphi'(y_0), \qquad \vphi'(y_0) = I(y_0) $$
+	Из последних двух выражений следует, что
+	$$ v'(y_0) = \vphi'(y_0), \qquad y_0 \in [p, q] $$
+	Подставляя $ p $ вместо $ y_0 $ получаем
+	$$ \vphi(p) = \dint[y]{p}p{I(y)} = 0, \qquad v(p) = \dint{a}b{l(x, p)} $$
+	$$ f(x, p) = \dint[y]{p}p{f(x, y)} = 0 \quad \implies \quad v(p) = 0 $$
+	\begin{multline*}
+		\implies \dint[y]pq{I(y)} = \vphi(q) = \vphi(q) - \vphi(p) = \dint[y_0]pq{\vphi'(y_0)} = \dint[y_0]{p}q{v'(y_0)} = \\
+		= v(q) - v(p) = v(q) = \dint{a}b{l(x, q)} = \dint{a}b{K(x)}
+	\end{multline*}
+\end{proof}
+
+\subsection{Несобственные интегралы, зависящиеся от параметра}
+
+Пусть $ Y \sub \R^{n \ge 1}, \qquad f : [a, \infty) \times Y \to \R $ -- семейство функций \\
+Предположим, что $ f \in \Cont{[a, \infty) \times Y} $ и пусть $ A > a $ \\
+Определим функцию $ F : Y ]times [a, \infty) $:
+$$ f(y, A) \define \dint{a}A{f(x, y)}, \qquad y \in Y, \quad A > a $$
+Пусть
+$$ \forall y \in Y \quad \exist \limi{A} F(y, A) \fed F_0(y) $$
+
+\begin{definition}
+	Будем говорить, что несобственный интеграл $ \dint{a}\infty{f(x, y)} $ равномерно сходится при $ y \in Y $, если
+	$$ F(y, A) \uniarr[A \to \infty]{y \in Y} F_0(y) $$
+\end{definition}
+
+Применяя критерий Коши равномерной сходимости семейства функций, получаем следующее утверждение:
+
+\begin{theorem}
+	Для того, чтобы несобственнный интеграл $ \dint{a}\infty{f(x, y)} $, зависящий от параметра, равномерно сходился при $ y \in Y $, \bt{необходимо и достаточно}, чтобы
+	$$ \forall \veps > 0 \quad \exist L > a : \quad \forall A_1, A_2 > L \quad \forall y \in Y \quad \bigg| \dint{A_1}{A_2}{f(x, y)} \bigg| < \veps $$
+\end{theorem}
+
+\begin{proof}
+	Заметим, что
+	$$ F(y, A_2) - F(y, A_1) = \dint{a}{A_2}{f(x, y)} - \dint{a}{A_1}{f(x, y)} = \dint{A_1}{A_2}{f(x, y)} $$
+\end{proof}
+
+\subsection{Признак Вейерштрасса равномерной сходимости несобственного интеграла от параметра}
+
+\begin{theorem}
+	$ f \in \Cont{[a, \infty) \times Y} $
+	\begin{equ}{35}
+		\forall y \in Y \quad |f(x, y)| \le g
+	\end{equ}
+	$$ \dint{a}\infty{g(x)} < \infty $$
+	Тогда несобственный интеграл $ \dint{a}\infty{f(x, y)} $ сходится равномерно при $ y \in Y $
+\end{theorem}
+
+\begin{proof}
+	Возьмём $ \forall \veps > 0 $, выберем $ L $ так, чтобы $ \dint{L}\infty{g(x)} < \veps $. Тогда
+	$$ \forall A_1, A_2 > L \quad \bigg| \dint{A_1}{A_2}{f(x, y)} \bigg| \le \bigg| \dint{A_1}{A_2}{|f(x, y)|} \bigg| \underset{\eref{35}}\le \bigg| \dint{A_1}{A_2}{g(x)} \bigg| \le \dint{L}\infty{g(x)} < \veps $$
+	при любом $ y \in Y $ \\
+	По предыдущей теореме
+	$$ \dint{a}A{f(x, y)} \uniarr[A \to \infty]{y \in Y} \dint{a}\infty{f(x, y)} $$
+\end{proof}

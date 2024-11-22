@@ -1,8 +1,22 @@
 % basics
-\usepackage[utf8x]{inputenc}
-\usepackage[T2A]{fontenc}
 \usepackage[a4paper, portrait, margin=.75in]{geometry}
-\usepackage[russian]{babel}
+
+\usepackage{fontspec}
+\setmainfont{CMU Serif}
+\setsansfont{CMU Sans Serif}
+\setmonofont{CMU Typewriter Text}
+
+\usepackage{polyglossia}
+\setmainlanguage{russian}
+\setotherlanguage{english}
+\setkeys{russian}{babelshorthands=true, mathfunctions=true}
+
+%% polyglossia shorthands:
+%   "-   -- additional hypen point, does *not* disable others
+%   ""   -- *allows* linebrak, *without* hypen sign
+%   "--- -- normal dash ( -- )
+%   "--~ -- dash for compound names (--)
+%   "--* -- dash for direct speech (--  )
 
 % custom \chapter and \section formats
 \usepackage{titlesec}
@@ -106,6 +120,9 @@
 % sign
 \DeclareMathOperator{\sign}{sign}
 
+% ring's characteristics
+\DeclareMathOperator{\chara}{char}
+
 %%      numerating
 % labeled equation
 \newenvironment{equ}[1]{\begin{equation} \label{eq:#1}}{\end{equation}}
@@ -137,7 +154,6 @@
 %% over-decorations
 \let\ol\overline
 \let\vawe\widetilde
-\let\hat\widehat
 % long \vec (DEPRECATED)
 \newcommand*\vect[1]{\overrightarrow{#1}}
 % long \vec
@@ -145,6 +161,9 @@
 
 % ?=
 \newcommand\iseq{\stackrel?=}
+
+% not in
+\let\nin\notin
 
 \let\mc\mathcal
 
@@ -164,6 +183,12 @@
 % not-arrows with text below `em
 \newcommand\undereq[1]{\ensuremath\xlongequal[#1]{}}
 
+\makeatletter
+\let\equiv@\equiv
+\newcommand\@equiv[1][]{\overset{#1}\equiv@}
+\let\equiv\@equiv
+\makeatother
+
 % custom extensible arrows
 \makeatletter
 \newdimen\@temp
@@ -177,7 +202,7 @@
 \newcommand\limarr[2]{\ensuremath\underarr{{#1} \to {#2}}}
 \newcommand\infarr[1]{\ensuremath\limarr{#1}\infty}
 \newcommand\zarr[1]{\ensuremath\limarr{#1}0}
-\newcommand\uniarr[2][n]{\ensuremath\xrightrightarrows[#1 \to \infty]{#2}}
+\newcommand\uniarr[2][n \to \infty]{\ensuremath\xrightrightarrows[#1]{#2}}
 
 % labels and references
 \newcommand*\lbl[1]{\label{eq:#1}}
@@ -283,15 +308,16 @@
 % controversy
 \newcommand\contra{~\scalebox{1.2}{$\lightning$}~}
 
+% consider
+\newcommand\consider{\bigg)\hskip{0.3em}<}
+
 % roman numbers
 \makeatletter
 \newcommand*{\rom}[1]{\expandafter\@slowromancap\romannumeral #1@}
 \makeatother
 
-% GCD
+% GCD and LCM (DEPRECATED -- now polyglossia handles them)
 \newcommand\GCD[1]{\text{НОД} \left( {#1} \right) }
-
-% SCM
 \newcommand\SCM[1]{\text{НОК} \left( {#1} \right) }
 
 % triangle inequality

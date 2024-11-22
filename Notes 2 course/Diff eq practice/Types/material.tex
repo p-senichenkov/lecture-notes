@@ -1,3 +1,5 @@
+\part{Уравнения, разрешённые относительно производной}
+
 \section{Уравение с разделёнными переменными}
 
 $$ \frac{\di x}{g(x)} + \frac{\di y}{h(y)} = 0 $$
@@ -337,3 +339,156 @@ $$ \mu(\omega) = 1 \cdot e^{\uint[\omega]{A(\omega)}} $$
     Подставляем, например, $ \alpha = 1 $, и подбираем $ \beta $ так, чтобы привелись подобные
 \end{itemize}
 
+\part{Уравнения, не разрешённые относительно \n производной}
+
+\section{Уравнение, не разрешённое относительно производной}
+
+$$ F(x, y, y') = 0, \qquad D \in \Cont{W}, \qquad W \text{ связно} $$
+Варианты решения:
+\begin{enumerate}
+	\item Свести к
+    $$ y' = f_k(x, y), \qquad k = 1, 2, ... $$
+    $ k $ может быть сколько угодно -- конечное число (например, если уравнение содержало $ y'^2 $), счётно (например, $ \sin y' $) или континуум \\
+    Каждое из них решаем как обычно
+    \item Свести к
+    \begin{enumerate}
+    	\item $ y = g(x, y') $ \\
+        Положим $ p = y' $, тогда $ \di y = p\di x $. Подставим:
+        \begin{equ}{*}
+            y = g(x, p)
+        \end{equ}
+        Берём дифференциалы от левой и правой частей:
+        $$ \bigg( g_x'(x, p) - p \bigg)\di x + g_p'(x, p)\di p = 0 $$
+        Как правило, левая часть раскладывается на множители:
+        \begin{equ}{26}
+            \chi(x, p) \bigg( M(x, p) \di x + N(x, p)\di p \bigg) = 0
+        \end{equ}
+        где равенство $ \chi(x, p) = 0 $ задаёт особые решения в неявном виде, а уравнение в симметричной форме $ M\di x + N\di p = 0 $ предстоит решить
+        \begin{undefthm}{Совет}
+        	На этом моменте надо забыть, что $ p = y' $ -- исходное уравнение мы уже проинтегрировали
+        \end{undefthm}
+        Если \eref{26} решается только относительно:
+        \begin{enumerate}
+            \item[$ \bm{p} $.] Решения будут иметь вид
+            $$
+            \begin{vars}
+            	p = \vphi(x, C) \\
+                p = \vphi_k(x), \qquad k = 0, 1, ...
+            \end{vars} $$
+            где $ \vphi_0(x) $ -- решение уравнения $ \chi(x, p) = 0 $, а $ \vphi_k $ -- решения, не попавшие в формулу $ p = \vphi(x, C) $ \\
+            Подставим в \eref*:
+            $$
+            \begin{vars}
+            	y = g \bigg( x, \vphi(x, C) \bigg) \\
+                y = g \bigg( x, \vphi_k(x) \bigg)
+            \end{vars} $$
+            \item[$ \bm{x} $.] Аналогично:
+            $$
+            \begin{vars}
+            	x = \psi(p, C) \\
+                x = \psi_k(p)
+            \end{vars} $$
+            $$
+            \begin{vars}
+                \begin{cases}
+                    x = \psi(p, C) \\
+                    y = g\big( \psi(p, C), p \big)
+                \end{cases} \\
+                \begin{cases}
+                    x = \psi_k(p) \\
+                    y = g \big( \psi_k(p), p \big)
+                \end{cases}
+            \end{vars} $$
+        \end{enumerate}
+        Если уравнение можно решить и относительно $ x $, и относительно $ p $, то надо решать относительно $ p $
+        \begin{undefthm}{Решение ЗК}
+        	Если сразу подставить начальные данные $ x_0, y_0 $ в формулу общего решения, записанного в параметрическом виде, то придётся решать двумерную систему относительно $ p $ и $ C $ \\
+            Лучше сначала найти значения $ p $, отвечающие выбранным начальным данным. Для этого надо подставить $ x_0, y_0 $ в равенство \eref* и найти $ p_1, p_2, ... $ -- корни полученного уравнения, после чего для всякого $ m $ из уравнения $ x_0 = \psi(p_m, C) $ найти константы $ C_m $
+            \begin{control}
+            	Сожно проверить выполнение равенства:
+                $$ y_0 = g \bigg( \psi(p_m, C_m), p_m \bigg) $$
+            \end{control}
+        \end{undefthm}
+        \item $ x = h(y, y') $ \\
+        Положим $ y' = p, \qquad \di x = p^{-1}\di y $ \\
+        \antlersimp
+        \begin{multicols}{2}
+           Дифференцируем равентво $ x = h(y, p) $:
+           $$ \bigg( h_y'(y, p) - p^{-1} \bigg)\di y + h_p'(y, p)\di p = 0 $$
+            \columnbreak \\
+            Надо проверить, будет ли функция $ y(x) = C $ при каких-либо $ C $ решением
+        \end{multicols}
+    \end{enumerate}
+    \item Если $ F(x, y') = 0 $ или $ F(y, y') = 0 $, то ищем $ \xi(t), \mu(t) $ такие, что
+    $$ F \bigg( \xi(t), \mu(t) \bigg) \overset{t}\equiv 0 $$
+    Если нашлись, то уравнение можно проинтегрировать в общем виде:
+    \begin{enumerate}
+    	\item Если $ F(y, y') = 0 $ и допускает параметризацию аргументов $ y $ и $ y' = p $ ($ \di y = p\di x $) функциями $ t $:
+        $$ y = \vphi(t), \qquad p = \psi(t), \qquad F \bigg( \vphi(t), \psi(t) \bigg) \equiv 0 $$
+        Интегрируя равенство $ y = \vphi(t) $, поулчаем:
+        $$
+        \begin{cases}
+            \di y = p\di x = \psi(t)\di x \\
+            \di y = \vphi'(t)\di t
+        \end{cases} $$
+        $$ x = \uint[t]{\frac{\vphi'(t)}{\psi(t)}} + C, \qquad y = \vphi(t) $$
+        \item Если $ F(x, y') = 0 $ -- аналогично
+    \end{enumerate}
+\end{enumerate}
+
+\section{Уравнения высокого пордяка}
+
+$$ F(x, y, y', \dots, y^{(n)}), \qquad y^{(n)} = f(x, y, y', \dots, y^{(n - 1)}) $$
+Существует 4 способа понизить порядок:
+\begin{enumerate}
+	\item Нет первых нескольких производных:
+    $$ F(x, y^{(k)}, \dots, y^{(n)}), \qquad 1 \le k \le n $$
+    (если $ k = 1$, то нет $ y $) \\
+    Замена:
+    $$ z = y^{(k)}, \qquad z' = y^{(k + 1)}, \qquad \widedots[4em] $$
+    Порядок понижается на $ k $:
+    $$ f(x, z, z', \dots, z^{(n - k)}) $$
+    $$ z = z(x, C_1, \dots, C_{n - k}), \qquad y^{(k)} = z(y, C_1, \dots, C_{n - k}) $$
+    \item Нет $ x $:
+    $$ F(y, y', \dots, y^{(n)}) = 0 $$
+    $ y $ становится независимой переменной:
+    $$ y'(x) = p(y) $$
+    Обязательно пишем ОДЗ на замену: $ y \stackrel?\equiv C $ \\
+    $$ y''(x) = \frac{\di y'(x)}{\di x} = \frac{\di p(y)}{\di y} \cdot \frac{\di y}{\di x}= p'(y) \cdot p(y) $$
+    $$ y'''(x) = \widedots[5em] = \bigg( p''(y)p(y) + p'^2(y) \bigg) \cdot p(y) $$
+    Получаем уравнение на порядок ниже:
+    $$ \vawe F(y, p, p', \dots, p^{(n - 1)}) = 0 $$
+    $$ p = p(y, C_1, \dots, C_{n - 1}), \qquad y' = p(y, C_1, \dots, C_{n - 1}) $$
+    \antlersimp
+    \begin{multicols}2
+        $$ p^{-1}(y, C_1, \dots, C_{n - 1})\di y = \di x $$
+        \columnbreak
+        $$ p(y, C_1, \dots, C_{n - 1}) = 0 $$
+    \end{multicols}
+    \item Однородное относительно $ y, y', \dots, y^{(n)} $ порядка $ k $ ($ x $ не влияет): \\
+    Замена $ y' = z(x)y $
+    $$ y'' = z'y + zy' = (z' + z^2)y, \qquad y''' = \widedots[3em] = (z'' + 3zz' + z^3)y $$
+    $$ \vawe F(x, z, \dots, z^{(n - 1)}) = 0, \qquad z = z(x, C_1, \dots, C_{n - 1}) $$
+    Получаем ЛОУ:
+    $$ y' = z(x, C_1, \dots, C_{n - 1})y $$
+    \antlersimp
+    \begin{multicols}2
+        $$ \ln \frac{y}{C_n} = \uint z $$
+        $$ y = C_n^\sigma, \qquad \sigma = 1, -1 $$
+        \columnbreak
+        $$ y \equiv 0 $$
+    \end{multicols}
+    \item ООУ относительно всех переменных: \\
+    Каждое слагаемое имеет суммарный порядок $ s $, если счиать, что $ x $ имеет порядок 1, $ \quad y $ имеет порядок $ m, \quad y' $ имеет порядок $ m - 1 $, и т.~д. \\
+    Замена:
+    $$ x = e^t > 0, \qquad y = u(t)e^{mt} $$
+    Смотрим инвариантность. Если нет, то смотрим на порядок выше "--- там скорее всего будет \\
+    Возвратная замена:
+    $$ t = \ln x, \qquad u(t) = yx^{-m} $$
+    $$ y' = (\dot{u} + mu)e^{(m - 1)t}, \qquad y'' = \bigg( \ddot u + (2m - 1)\dot u + m(m - 1)u \bigg)e^{(m - 2)t} $$
+    $$ \vawe F(\overset{(n)}u, \dots) = 0 $$
+    \begin{control}
+        Всё делится на $ e^{st} $
+    \end{control}
+    Получаем случай 2
+\end{enumerate}
