@@ -1,0 +1,2113 @@
+\chapter{Линейные отображения в евклидовых и унитарных пространствах}
+
+\section{Двойственное пространство}
+
+\subsection{Более общие вещи}
+
+\begin{definition}
+	$ V $ -- векторное пространство над полем $ K $ \\
+	Линейным функционалом на $ V $ называется линейное отображение $ V \to K $
+\end{definition}
+
+\begin{exmpls}
+	\item $ V $ конечномерное, $ \quad e_1, ..., e_n $ -- базис \\
+	Первая координата, т. е. отображение
+	$$ a_1e_1 + ... + a_ne_n \mapsto a_1 \text{ -- функционал} $$
+	Любая линейная функция от координат будет функционалом
+	\item $ V $ -- пространство многочленов над $ \R $ \\
+	$ P(t) \mapsto P(1) $ -- функционал \\
+	$ P(t) \mapsto P'(2) $ -- функционал
+	\item $ \Co $ -- векторное пространство над $ \R $ \\
+	$ \operatorname{Re}(z), \operatorname{Im}(z) $ -- функционалы
+	\item $ V $ -- векторное пространство со скалярным произведением, зафиксирован $ v \in V $
+	$$ y(x) = (x, v) $$
+	Представим предыдущие примеры в таком виде:
+	\begin{enumerate}
+		\item $ \R^n \to \R $
+		$$ (a_1, ..., a_n) \mapsto 2a_1 + 3a_2 $$
+		Это скалярное умножение на $ (2, 3, 0, ..., 0) $
+		\item $ V $ -- пространство многочленов $ at^2 + bt + c $
+		$$ P(t) \mapsto P(1) $$
+		Рассмотрим соотвествующие векторы в $ \R^3 $
+		$$
+		\begin{pmatrix}
+			a \\
+			b \\
+			c
+		\end{pmatrix} \mapsto a + b + c $$
+		Это умножение на $ (1, 1, 1) $
+	\end{enumerate}
+	\item $ K $ -- поле \\
+	$ K^\infty $ -- множество бесконечных последовательностей $ (a_1, a_2, ...) $, в которых только конечное количество членов отлично от нуля \\
+	Сложение и умножение на скаляр -- покомпонентно \\
+	Получили векторное пространство над $ K $ \\
+	Фиксируем бесконечную последовательность $ (v_1, v_2, ...) $ (не обязательно из $ K^\infty $) \\
+	Функционал на $ K^\infty $:
+	$$ (a_1, a_2, ...) \mapsto a_1v_1 + a_2v_2 + ... $$
+	(это бесконечная сумма, но в ней только конечное количество слагаемых отлично от нуля)
+\end{exmpls}
+
+
+\section{Проолжаем функционалы}
+
+\begin{property}
+	Линейные функционалы пространства $ V $ над $ K $ образуют веторное пространство над $ K $
+\end{property}
+
+\begin{proof}
+	Очевидно
+\end{proof}
+
+
+\begin{definition}
+	Пространство функционалов называется двойственным или сопряжённым
+\end{definition}
+
+\begin{notation}
+	$ V^* $
+\end{notation}
+
+\begin{theorem}[изоморфизм пространства и двойственного к нему]
+	\hfill
+	\begin{enumerate}
+		\item $ V $ -- конечномерное пространство над $ K $
+		$$ \implies V^* \simeq V $$
+		\begin{proof}
+			Пусть $ n \define \dim V $ \\
+			Достаточно доказать, что $ \dim V^* = n $ (тогда можно будет построить изоморфизм из базиса в базис) \\
+			Зафиксируем базис: \\
+			Пусть $ e_1, ..., e_n $ -- базис $ V $ \\
+			Пусть $ \vphi : V^* \to K^n $ такое, что $ \vphi(y) = \bigg( \underbrace{y(e_1)}_{\in K}, ..., \underbrace{y(e_n)}_{\in K} \bigg) $ \\
+			Мы знаем, что протранства одной размерности изоморфны, так что $ K^n \simeq V $ \\
+			Докажем, что это изоморфизм:
+			\begin{itemize}
+				\item Линейность:
+				\begin{itemize}
+					\item Надо проверить, что $ \vphi(y_1 + y_2) \stackrel?= \vphi(y_1) + \vphi(y_2) $
+					\begin{multline*}
+						\vphi(y_1 + y_2) = \bigg( (y_1 + y_2)(e_1), \widedots[5em], (y_1 + y_2)(e_n) \bigg) = \\
+						= \bigg( y_1(e_1) + y_2(e_1), \widedots[5em], y_1(e_n) + y_2(e_n) \bigg) \undereq{\text{сложение в } K^n \text{ покомпонентно}} \\
+						= \bigg( y_1(e_1), ..., y_1(e_n) \bigg) + \bigg( y_2(e_1), ..., y_2(e_n) \bigg) = \vphi(y_1) + \vphi(y_2)
+					\end{multline*}
+					\item Надо проверить, что $ \vphi(ky) \stackrel?= k\vphi(y) $
+					\begin{multline*}
+						\vphi(ky) = \bigg( (ky)(e_1), \widedots[3em], (ky)(e_n) \bigg) = \bigg( ky(e_1), \widedots[3em], ky(e_n) \bigg) = \\
+						\undereq{\text{умножение в } K^n \text{ покомпонентно}} k \bigg( y(e_1), \widedots[3em], y(e_n) \bigg) = k\vphi(y)
+					\end{multline*}
+				\end{itemize}
+				\item Биективность: \\
+				Пусть $ a \in K^n, \qquad a = (a_1, ..., a_n), \quad a_i \in K $
+				$$ \exist ! y \in V^* : \quad \vphi(y) = a $$
+				так как
+				$$ \exist ! y \in V^* : y(e_1) = a_1, \widedots[4em], y(e_n) = a_n $$
+			\end{itemize}
+		\end{proof}
+		\item $ V $ -- евклидово пространство \\
+		Для любого $ v \in V $ определим $ y_v \in V^* $ как $ y_v(x) = (x, v) $ \\
+		Тогда отображение $ v \mapsto y_v $ является изоморфизмом
+		\begin{iproof}
+			\item Проверим, что $ y_v \in V^* $, т. е. что $ y_v $ линейно:
+			\begin{itemize}
+				\item $ y_v(x_1 + x_2) = (x_1 + x_2, v) \undereq{\text{скалярное произведение линейно по первой координате}} (x_1, v) + (x_2, v) = y_v(x_1) + y_v(x_2) $
+				\item $ y_v(kx) = (kx, v) = k(x, v) = ky_v(x) $
+			\end{itemize}
+			\item Пусть $ \vphi(v) = y_v $. Докажем, что $ \vphi $ -- изоморфизм $ V \to V^* $:
+			\begin{itemize}
+				\item Линейность:
+				\begin{itemize}
+					\item $ \vphi(u + v) \stackrel?= \vphi(u) + \vphi(v) $
+					\begin{multline*}
+						\vphi(u + v) \stackrel?= \vphi(u) + \vphi(v) \quad \iff \quad y_{u + v} \stackrel?= y_u + y_v \quad \iff \\
+						\iff \quad y_{u + v}(x) \stackrel?= y_u(x) + y_v(x) \quad \forall x \quad \iff \\
+						\iff \quad (x, u + v) \undereq{\text{лин. скалярного произв.}} (x, u) + (x, v)
+					\end{multline*}
+					\begin{remark}
+						В унитарном пространстве не будет этого равенства
+					\end{remark}
+					\item $ \vphi(kv) \stackrel?= k\vphi(v) $
+					\begin{multline*}
+						\vphi(kv) \stackrel?= k\vphi(v) \quad \iff \quad y_{kv} \stackrel?= ky_v \quad \iff \quad y_{kv}(x) \stackrel?= ky_v(x) \quad \forall x \quad \iff \\
+						(x, kv) \undereq{\text{лин. скалярного произв.}} k(x, v)
+					\end{multline*}
+				\end{itemize}
+				\item Инъективность: \\
+				Пусть $ \vphi(v) = 0 $. Тогда
+				$$ y_v = 0 \quad \implies \quad y_v(x) = 0 \quad \forall x \quad \implies (x, v) = 0 \quad \forall x \quad \implies v = 0 $$
+				Вместе с тем, что $ \dim V = \dim V^* $, это даёт биективность
+			\end{itemize}
+		\end{iproof}
+	\end{enumerate}
+\end{theorem}
+
+\begin{definition}
+	Изоморфизм из пункта 2 называется каноническим изоморфизмом из $ V $ в $ V^* $
+\end{definition}
+
+\begin{note}
+	Каноническим обычно называется объект, который не зависит от выбора базиса
+\end{note}
+
+\begin{remark}
+	В унитарном пространстве второй пункт теоремы не выполнится ($ y_v $ определить можно, но оно не будет линейным). Исправить это, поменяв координаты, нельзя
+\end{remark}
+
+\begin{eg}[бесконечномерные пространства]
+	$ K $ -- поле, $ \quad K^\infty $ -- пространство формальных многочленов (бесконечные последовательности с конечным количеством членов, отличных от нуля) \\
+	Фунцкионалы:
+	$$ a = (a_1, a_2, ..., a_n, ...) \quad \text{такой, что} \quad a(x_1, x_2, ...) = a_1x_1 + a_2x_2 + ... $$
+	\begin{remark}
+		$ a_i \in K $ (без ограничения на количество ненулевых членов)
+	\end{remark}
+	\textit{Что-то здесь изоморфно, а что-то -- нет. Надо смотреть}
+\end{eg}
+
+\begin{theorem}[дважды двойственное пространство]
+	$ V $ -- векторное пространство над $ K $ \\
+	Для любого $ x \in V $ обозначим через $ z_x $ отображение $ V^* \to K $, заданное формулой $ z_x(\underset{\in V^*}{y}) = \underbrace{y(x)}_{\in K} $ \\
+	Тогда:
+	\begin{enumerate}
+		\item $ \forall x \in K \quad z_x \in (V^*)^* $, т. е. $ z_x $ -- линейный функционал на $ V^* $
+		\begin{iproof}
+			\item $ z_x(y_1 + y_2) \stackrel?= z_x(y_1) + z_x(y_2) $
+			$$ z_x(y_1 + y_2) = (y_1 + y_2)(x) $$
+			$$ z_x(y_1) + z_x(y_2) = y_1(x) + y_2(x) $$
+			\item $ z_x(ky) \stackrel?= kz_x(y) $
+			$$ z_x(ky) = (ky)(x) = ky(x) = kz_x(y) $$
+		\end{iproof}
+		\item отображение $ \vphi : V \to (V^*)^* $, заданное формулой $ \vphi(x) = z_x $ является линейным
+		\begin{iproof}
+			\item $ \vphi(x_1 + x_2) \stackrel?= \vphi(x_1) + \vphi(x_2) $
+			$$ z_{x_1 + x_2} \stackrel?= z_{x_1} + z_{x_2} $$
+			$$ \forall y \quad z_{x_1 + x_2}(y) = z_{x_1}(y) + z_{x_2}(y) $$
+			$$ y(x_1 + x_2) \stackrel?= y(x_1) + y(x_2) $$
+			Это верно, так как $ y $ линейно
+			\item $ \vphi(kx) \stackrel?= k\vphi(x) $
+			$$ z_{kx} \stackrel?= kz_x $$
+			$$ \forall y \quad z_{kx}(y) \stackrel?= kz_x(y) $$
+			$$ y(kx) \stackrel?= ky(x) $$
+			Это верно, так как $ y $ линейно
+		\end{iproof}
+		\item если $ V $ конечномерно, то $ \vphi $ -- изоморфизм
+		\begin{proof}
+			Размерности равны, так что достаточно доказать инъективность: \\
+			$ \vphi $ инъективно $ \iff \vphi(x) = 0 $ только при $ x = 0 \quad \iff z_x $ -- нулевое отображение только при $ x = 0 \quad \iff z_x(y) = 0 \quad \forall y \quad \iff y(x) = 0 \quad \forall y $ \\
+			Нужно проверить, что $ \forall x \ne 0 \quad \exist $ линейное отображение $ y : \quad y(x) \ne 0 $ \\
+			Дополним до базиса: \\
+			Пусть $ x, e_2, ..., e_n $ -- базис $ V $ \\
+			Определим $ y : y(x) = 1, \quad y(e_i) = 0 $
+			$$ y(\alpha x + \beta_2e_2 + ... + \beta_ne_n) = \alpha $$
+			Оно линейно, $ y(x) \ne 0 $
+		\end{proof}
+	\end{enumerate}
+\end{theorem}
+
+\begin{lemma}
+	$ V $ -- конечномерное векторное пространство, $ \quad e_1, ..., e_n $ -- базис $ V $ \\
+	$ f_1, ..., f_n \in V^* $ такие, что $ f_i(e_i) = 1, \quad f_i(e_j) = 0 $ при $ i \ne j \quad $ \nimp[(здесь существование не утверждается, но понятно, что их всегда можно построить)] \\
+	Тогда $ f_1, .., f_n $ -- базис $ V^* $
+\end{lemma}
+
+\begin{proof}
+	Знаем, что $ \dim V = \dim V^* $ \\
+	Достаточно доказать ЛНЗ: \\
+	Возьмём ЛК: \\
+	Пусть $ a_1, ..., a_n \in K $ такие, что $ f = a_1f_1 + ... + a_nf_n $ -- нулевой функционал
+	$$ 0 = f(e_i) = a_1\underbrace{f_1(e_i)}_0 + ... + a_i\underbrace{f_i(e_i)}_1 + ... + a_n\underbrace{f_n(e_i)}_0 = a_i \quad \forall i $$
+\end{proof}
+
+\begin{definition}
+	$ e_1, ..., e_n $ -- базис $ V, \qquad f_1, ..., f_n $ -- базис $ V^*, \qquad f_i(e_i) = 1, \quad f_i(e_j) = 0 $ при $ i \ne j $ \\
+	Тогда $ f_1, ..., f_n $ называется двойственным базисом к $ e_1, ..., e_n $
+\end{definition}
+
+\begin{remind}
+	$ e_i, e_i' $ -- базисы $ V $ \\
+	Матрицей перехода от $ e_i $ к $ e_i' $ называется такая матрица $ C $, что в $ i $-м столбце записаны координаты $ e_i' $ в $ e_1, ..., e_n $ \\
+	Пусть $ X, X' $ -- координаты $ c $ в $ e_i, e_i' $. Тогда $ X = CX' $
+\end{remind}
+
+\begin{theorem}
+	$ e_i, e_i' $ -- базисы $ V, \qquad C $ -- матрица перехода от $ e_i $ к $ e_i' $ \\
+	$ f_i, f_i' $ -- соответствующие двойственные базисы \\
+	Тогда:
+	\begin{enumerate}
+		\item Матрица перехода от $ f_i $ к $ f_i' $ равна $ (C^{-1})^T \nimp[~ = ~ (C^T)^{-1}] $
+		\begin{proof}
+			Пусть $ D = (d_{ij}) $ -- матрица перехода от $ f_i $ к $ f_i' $
+			$$ U = (u_{ij}), \qquad U = D^TC $$
+			Докажем, что $ U = E $
+			$$ e_i' = c_{1i}e_1 + c_{2i}e_2 + ..., \qquad f_j' = d_{1j}f_1 + d_{2j}f_2 + ... $$
+			Применим одно к другому:
+			\begin{multline*}
+				\begin{rcases}
+					1, \quad i = j \\
+					0, \quad i \ne j
+				\end{rcases} = f_j'(e_i') = d_{1j}f_1(c_{1i}e_1 + c_{2i}e_2 + ...) + d_{2j}f_2(c_{1i}e_i + c_{2i}e_2 + ...) + \widedots[5em] = \\
+				= d_{1j}c_{1i} \cdot 1 + d_{1j}c_{2i} \cdot 0 + \widedots[3em] + d_{2j}c_{1i} \cdot 0 + d_{2j}c_{2i} \cdot 1 + \widedots[3em] = d_{1j}c_{1i} + d_{2j}c_{2i} + \widedots[3em]
+			\end{multline*}
+			$ d $ -- этой $ j $-я строка $ D^T, \quad c $ -- $ i $-й столбец $ C $ \\
+			Значит, $ f_j'(e_i') = u_{ji} $
+		\end{proof}
+		\item Пусть $ Y, Y' $ -- строки координат $ y \in V^* $ в базисах $ f_i, f_i' $ \\
+		Тогда $ Y' = YC $
+		\begin{proof}
+			$ (C^{-1})^T $ -- матрица перехода от $ f_i $ к $ f_i' $ \\
+			$ Y^T, Y'^T $ -- столбцы координат $ y $ \\
+			$ Y^T = (C^{-1})^TY'^T $ -- транспонированный
+			$$ Y = Y'C^{-1} \implies YC = Y' $$
+		\end{proof}
+	\end{enumerate}
+\end{theorem}
+
+\section{Сопряжённые операторы}
+
+\subsection{Напоминание из второго семестра}
+
+\begin{definition}
+	$ \mc{A} $ -- оператор в евклидовом или унитарном пространстве \\
+	$ \mc{B} $ называется сопряжённым к $ \mc{A} $, если $ (\mc{A}x, y) = (x, \mc{B}y) \quad \forall x, y $
+\end{definition}
+
+\begin{notation}
+	$ \mc{A}^* $
+\end{notation}
+
+\begin{theorem}
+	$ \forall \mc{A} \quad \exist ! \mc{A}^* $
+\end{theorem}
+
+\begin{props}
+	\item $ (mc{A}^*)^* = \mc{A} $
+	\item Пусть $ A, A^* $ -- матрицы $ \mc{A}, \mc{A}^* $ в некотором ОНБ \\
+	Тогда
+	\begin{itemize}
+		\item $ A^* = A^T $ в евклидовом пространстве
+		\item $ A^* = \ol{A}^T $ в унитарном пространстве
+	\end{itemize}
+\end{props}
+
+\begin{definition}
+	Оператор в веклидовом или унитарном пространстве назвыается
+	\begin{itemize}
+		\item нормальным, если $ \mc{A}^*\mc{A} = \mc{A}\mc{A}^* $
+		\item ортогональным (унитарным), если $ \mc{A}\mc{A}^* = \mc{A}^*\mc{A} = \mc{E} $
+		\item самосопряжённым, если $ \mc{A}^* = \mc{A} $
+	\end{itemize}
+\end{definition}
+
+\begin{definition}
+	Квадратная матрица называется
+	\begin{itemize}
+		\item симметричной (симметрической), если $ A = A^T $
+		\item эрмитовой, если $ A = \ol{A}^T $
+	\end{itemize}
+\end{definition}
+
+\begin{property}
+	$ \mc{A} $ -- оператор в евлидовом/унитарном пространстве, $ \quad A $ -- его матрица \bt{в ОНБ} \\
+	Тогда \\
+	$ \mc{A} $ самосопряжённый $ \iff A $ симметрична/эрмитова
+\end{property}
+
+\begin{theorem}
+	$ \mc{A} $ -- нормальный оператор в унитарном пространстве \\
+	Тогда
+	\begin{enumerate}
+		\item если $ \lambda $ -- с. ч. $ \mc{A} $, то $ \ol\lambda $ -- с. ч. $ \mc{A}^* $
+		\item с. в. $ \mc{A}^* $, соответствующие разным с. ч. ортогональны
+		\item Существует ОНБ, состоящий из с. в. $ \mc{A} \quad $ \nimp[$ \implies $ он диагонализуем]
+	\end{enumerate}
+
+\end{theorem}
+
+
+\chapter{Евклидовы и унитарные пространства}
+
+\section{Самосопряжённый оператор}
+
+\begin{lemma}
+	$ \mc{A} $ -- самосопряжённый оператор на унитарном пространстве \\
+	Тогда $ (\mc{A}x, x) \in \R \quad \forall x $
+\end{lemma}
+
+\begin{proof}
+	$$ (\mc{A}x, x) \undereq{\text{самосопр.}} (x, \mc{A}^*x) = (x, \mc{A}x) $$
+	$$ (\mc{A}x, x) \undereq{\text{полуторалинейность}} \ol{(x, \mc{A}x)} $$
+	$$ \implies (x, \mc{A}x) \in \R \implies (\mc{A}x, x) \in \R $$
+\end{proof}
+
+\begin{definition}
+	Самосопряжённый оператор назвыается положительно определённым, если $ (\mc{A}x, x) > 0 \quad \forall x \ne 0 $
+\end{definition}
+
+\begin{notation}
+	$ a_i \in \bigodot \quad \iff a_1 = ... = a_n = 0 $
+\end{notation}
+
+\begin{theorem}[о собственных числах самосопряжённого оператора]
+	$ \mc{A} $ -- оператор на унитарном пространстве
+	\begin{enumerate}
+		\item $ \mc{A} $ -- нормальный \\
+		$ \mc{A} $ самоспряжённый $ \quad \iff \quad $ все с. ч. $ \mc{A} $ вещественные
+		\begin{proof}
+			Знаем, что существует ОНБ из с. в. \\
+			Пусть $ \lambda_i $ -- с. ч. \\
+			$ A, A^* $ -- матрицы $ \mc{A} $ и $ \ol{\mc{A}^*} $ в этом базисе $ \quad \implies A^* = A^T $ \\
+			$ \mc{A} $ -- самосопряжённый $ \iff A = A^* \iff A = \ol{A^T} \iff $
+			$$
+			\begin{pmatrix}
+				\lambda_1 & & 0 \\
+				. & . & . \\
+				0 & . & \lambda_n
+			\end{pmatrix} =
+			\begin{pmatrix}
+				\ol{\lambda_1} & & 0 \\
+				. & . & . \\
+				0 & . & \ol{\lambda_n}
+			\end{pmatrix}^T \quad \iff \lambda_i = \ol{\lambda_i} \quad \forall i \quad \iff \lambda_i \in \R $$
+		\end{proof}
+		\item $ \mc{A} $ -- самосопряжённый \\
+		$ \mc{A} $ положительно определён $ \quad \iff \quad $ все с. ч. положительны
+		\begin{proof}
+			Пусть $ e_i $ -- ОНБ из с. в., $ \qquad \lambda_i $ -- с. ч., $ \qquad \lambda_i \in \R $ (т. к. самосопр. -- частный случай нормального) \\
+			Пусть $ x = a_1e_1 + ... + a_ne_n $
+			\begin{multline*}
+				(\mc{A}x, x) = (a_1\lambda_1e_1 + ... + a_n\lambda_ne_n, \quad a_1e_1 + ... + a_ne_n) = \sum \lambda_ia_i\ol{a_j}\underbrace{(e_i, e_j)}_{0 \text{ или } 1} = \\
+				= \sum \lambda_ia_i\ol{a_i} = \sum \lambda_i |a_i|^2 \nimp[\in \R]
+			\end{multline*}
+			\begin{itemize}
+				\item Если $ \lambda_i > 0 \quad \forall i $, то $ \sum \underbrace{\lambda_i}_{> 0} |a_i|^2 \ge 0 $ \\
+				Равенство достигается только при $ |a_i|^2 \in \bigodot $, то есть $ a_i \in \bigodot $. Значит, $ x = 0 $
+				\item Пусть не все $ \lambda_i > 0, \qquad \lambda_{i_0} \le 0 $ \\
+				Для $ x = e_{i_0} \quad x \ne 0, \quad (\mc{A}x, x) = \lambda_{i_0} \le 0 $ -- \contra
+			\end{itemize}
+		\end{proof}
+	\end{enumerate}
+\end{theorem}
+
+\subsection{Переход к вещественному случаю}
+
+\begin{lemma}\label{lm:2}
+	$ A $ -- эрмитова матрица \\
+	Тогда все корни $ \chi_A(t) $ вещественны
+\end{lemma}
+
+\begin{proof}
+	$ A $ -- матрица порядка $ n $ \\
+	Определим оператор $ \mc{A} : \Co^n $ как $ X \mapsto AX $ \\
+	Тогда $ A $ -- матрица $ \mc{A} $ в стандартном базисе \\
+	$ A $ -- эрмитова; станд. базис является ОНБ $ \quad \implies \mc{A} $ -- самосопряжённый \\
+	Все с. ч. $ \mc{A} $ вещественны, это и есть корни $ \chi_A(t) $
+\end{proof}
+
+\begin{lemma}[ортогональность с. в.]
+	$ \mc{A} $ самосопряжённый на $ \R^n, \qquad \mu, \lambda $ -- различные с. ч., $ \quad x, y $ -- соостветсвующие с. в. \\
+	Тогда $ (x, y) = 0 $
+\end{lemma}
+
+\begin{remark}
+	Доказательство для $ \Co^n $ здесь не пожходит
+\end{remark}
+
+\begin{proof}
+	$$ \lambda(x, y) \undereq{\text{линейность}} (\lambda x, y) \undereq{\text{с. в.}} (\mc{A}x, y) \bdefeq{\mc{A}^*} (x, \mc{A}^*y) \undereq{\text{самоспр.}} (x, \mc{A}y) \undereq{\text{с. в.}} (x, \mu x) \undereq{\text{линейность}} \mu(x, y) $$
+\end{proof}
+
+\begin{theorem}
+	$ \mc{A} $ -- самосопряжённый оператор на $ \R^n $ \\
+	Тогда
+	\begin{enumerate}
+		\item $ \chi_A(t) $ раскладывается на линейные множители над $ \R $
+		\begin{proof}
+			Разложим $ \chi_A(t) $ на линейные множиетли над $ \Co $:
+			$$ \chi_A(t) = (-1)^n(t - \lambda_1)...(t - \lambda_n), \qquad \lambda_i \in \Co $$
+			Пусть $ A $ -- матрица $ \mc{A} $ в стандартном базисе $ \quad \implies A = A^T \quad \underimp{A \text{ вещ.}} A = \ol{A^T} \quad \implies $ \\
+			$ \implies A $ эрмитова $ \quad \underimp{\text{лемма \ref{lm:2}}} \lambda_i \in \R \quad \forall i $
+		\end{proof}
+		\item Существует ОНБ $ \R^n $, состоящий из с. в. $ \mc{A} $
+		\begin{proof}
+			$ \chi_A(t) $ раскладывается на линейные множители над $ \R $ \\
+			$ \mc{A} $ диагонализуем над $ \Co $. Есть базис из с. в. в $ \Co^n $ \\
+			$ \implies $ есть базис из с. в. в $ \R^n $ (т. к. $ \R $ -- поле, там неоткуда взяться комплексным числам, а коэффициенты изначально были вещественные, \textit{надо нормально это записать}) \\
+			$ \implies \dim U_{\lambda_i} = r_i $ \\
+			Выберем ОНБ в каждом подпространстве $ U_{\lambda_i} $ \\
+			По лемме об ортогональный с. в. объединение этих базисов -- ОНБ $ \R^n $
+		\end{proof}
+	\end{enumerate}
+\end{theorem}
+
+\begin{theorem}[корень из самосопряжённого оператора]
+	$ \mc{A} $ -- положительно определённый самосопряжённый \\
+	Тогда существует положиетльно определённый самосопряжённый $ \mc{B} : \quad \mc{A} = \mc{B}^2 $ \nimp[в смысле композиции]
+\end{theorem}
+
+\begin{proof}
+	$ \mc{A} $ -- самосопряжённый $ \implies \mc{A} $ -- нормальный $ \implies \exist $ ОНБ из с. в. $ \mc{A} $ \\
+	Пусть $ e_1, ..., e_n $ -- ОНБ из с. в., $ \qquad \lambda_1, ... \lambda_n $ -- с. ч. \\
+	$ \mc{A} $ -- самоспряжённый $ \implies \lambda_i \in \R $ \\
+	$ \mc{A} $ -- полож. опред. $ \implies \lambda_i > 0 $ \\
+	Определим $ \mc{B} $ как $ \mc{B}(e_i) = \sqrt{\lambda_i}e_i $ \\
+	Проверим, что он подойдёт: \\
+	Рассмотрим матрицу $ \mc{B} $ в базисе $ e_1, ..., e_n $:
+	$$ B =
+	\begin{pmatrix}
+		\sqrt{\lambda_1} & . & . \\
+		. & . & . \\
+		. & . & \sqrt{\lambda_n}
+	\end{pmatrix} $$
+	Она эрмитова $ \implies \mc{B} $ самоспряжённый \\
+	$ \sqrt{\lambda_i} > 0 \implies \mc{B} $ положиетльно определён
+	$$ \mc{B} \big( \mc{B}(e_i) \big) = \mc{B}(\sqrt{\lambda_i}e_i) = \lambda_ie_i = \mc{A}(e_i) \quad \forall i \quad \implies \mc{B}^2 = \mc{A} $$
+\end{proof}
+
+\begin{lemma}
+	$ \mc{A} $ невырожденный \\
+	Тогда $ \mc{A}\mc{A}^* $ - самосопряжённый положительно определённый
+\end{lemma}
+
+\begin{proof}
+	$$ \bigg( \mc{A}\mc{A}^* \bigg)^* = \bigg( \mc{A}^* \bigg)^* \mc{A}^* = \mc{A}\mc{A}^* $$
+	$$ \bigg( \mc{A}^*\mc{A}x, x \bigg) = \bigg( \mc{A}^*(\mc{A}x), x \bigg) = \bigg( \mc{A}x, (\mc{A}^*)^*x \bigg) = (\mc{A}x, \mc{A}x) \underset{\mc{A}x \ne 0 \text{, т. к. } \mc{A} \text{ невырожд.}}> 0 $$
+\end{proof}
+
+\begin{theorem}[полярное разложение оператора]
+	$ \mc{A} $ -- невырожденный \nimp[(обратимый)] оператор на унитарном пространстве \\
+	Тогда $ \exist \mc{U}, \mc{B} $ такие, что:
+	\begin{enumerate}
+		\item $ \mc{U} $ унитарный
+		\item $ \mc{B} $ -- самосопряжённый положительно определённый
+		\item $ \mc{A} = \mc{U}\mc{B} $
+	\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+	$ \mc{A}\mc{A}^* $ самосопряжённый положительно определённый (по лемме). Значит
+	$$ \exist \mc{B} : \quad \mc{B}^2 = \mc{A}^*\mc{A}, \qquad \mc{B} \text{ полож. опр. самосопряж.} $$
+	$ \mc{A}^*, \mc{A} $ невырожденные $ \implies \mc{A}^*\mc{A} $ невырожденный $ \implies \mc{B} $ невырожденный $ \implies \exist \mc{B}^{-1} $ \\
+	Положим $ \mc{U} = \mc{A}\mc{B}^{-1} $ \\
+	Докажем, что эти $ \mc{U}, \mc{B} $ подойдут: \\
+	Осталось проверить только унитарность, т. е. что $ \mc{U}^* \iseq \mc{U} $
+	$$ \mc{U}^* = \bigg( \mc{A}\mc{B}^{-1} \bigg)^* = \bigg( \mc{B}^{-1} \bigg)^* \mc{A}^* \undereq{\text{видно из матрицы}} \bigg( \mc{B}^* \bigg)^{-1}\mc{A}^* \undereq{\mc{B} \text{ самоспр.}} \mc{B}^{-1} \mc{A}^* $$
+	$$ \mc{U}^*\mc{U} = \bigg( \mc{B}^{-1}\mc{A}^* \bigg) \bigg( \mc{A}\mc{B}^{-1} \bigg) = \mc{B}^{-1} \bigg( \mc{A}^*\mc{A} \bigg)\mc{B}^{-1} = \mc{B}^{-1}\mc{B}^2\mc{B}^{-1} = \mc{E} $$
+\end{proof}
+
+\begin{implication}[перестановка сомножителей]
+	$ \mc{A} $ -- невырожденный оператор \\
+	Тогда $ \exist $ уинтарный $ \mc{U} $ и самосопряжённый положиетльно определённый $ \mc{B} $ такие, что $ \mc{A} = \mc{B}\mc{U} $
+\end{implication}
+
+\begin{proof}
+	Применим теорему у $ \mc{A}^* $: \\
+	$ \mc{A}^* = \mc{U}_1\mc{B}, \qquad \mc{U}_1 $ -- унитарный, $ \quad \mc{B} $ -- самосопряжённый пол. опред.
+	$$ \mc{A} = \bigg( \mc{A}^* \bigg)^* = \bigg( \mc{B}\mc{U}_1 \bigg)^* = \mc{U}_1^* \mc{B}^* = \mc{U}_1^*\mc{B} $$
+	Подойдёт $ \mc{U} = \mc{U}_1 $
+\end{proof}
+
+\section{Квадратичные формы}
+
+\subsection{Напоминание}
+
+$ A $ -- симметрическая матрица, $ \quad A = (a_{ij}) $ \\
+Соответствующая квадратичная форма $ f(x_1, ..., x_n) = \sum a_{ij}x_ix_j $ \\
+Матричная запись: $ f(x_1, ..., x_n) = X^TAX $ \\
+Линейное преобразование $ X = CY \quad \implies \quad A \mapsto C^TAC $ \\
+Неособое преобразование: $ C $ обратима \\
+Диагональный (канонический) вид -- если $ A $ -- диагональна
+
+\begin{theorem}[ортогональное преобразование квадратичной формы]\label{th:quad_form}
+	\hfill
+	\begin{enumerate}
+		\item Вещественная квадратичная форма может быть приведена к диагональному виду ортогональным преобразованием
+		\begin{proof}
+			$ \mc{A} $ -- оператор на $ \R^n $, матрица в стандартном базисе \textit{что-то} \\
+			$ \mc{A} $ самосопряжённый $ \implies \exist $ ОНБ $ T_1, ..., T_n $ из с. в. \\
+			Пусть $ \lambda_1, ..., \lambda_n $ -- с. ч. \\
+			Матрица $ \mc{A} $ в $ T_1, ..., T_n $ является диагональной \\
+			Матрица $ \mc{A} $ в $ T_1, ..., T_n $ равна $ C^{-1}AC $, где $ C $ -- матрица перехода \\
+			$ C $ состоит из столбцов $ T_i $, т. к. это матрица перехода от стандартного базиса к $ T_i $ \\
+			Значит, $ C $ -- ортогональная матрица \\
+			$ C^{-1}AC = C^TAC $, т. к. $ C $ ортогональна
+		\end{proof}
+		\item Если $ C $ -- ортогональная матрица, $ C^TAC $ -- диагональная, то на диагонали матрицы $ C^TAC $ записаны с. ч. матрицы $ A $
+		\begin{proof}
+			Пусть $ B = C^TAC, $ она диагональна, $ \qquad \mu_1, ..., \mu_n $ -- числа на диагонали \\
+			$ S_1, ..., S_n $ -- столбцы $ B \quad \implies B = C^{-1}AC \implies B $ -- матрица $ \mc{A} $ в ОНБ $ S_1, ..., S_n \implies \mc{A}S_i = \mu_iS_i \implies \mu_i $ -- с. ч.
+		\end{proof}
+	\end{enumerate}
+\end{theorem}
+
+\begin{theorem}[преобразование двух форм]
+	\hfill \\
+	$ f(x_1, ..., x_n), \quad g(x_1, ..., x_n) $ -- вещественные квадратичные формы, $ \qquad f $ положительно определена \\
+	Тогда существует неособое преобразование, при котором обе формы приводятся к диагональному виду
+\end{theorem}
+
+\begin{proof}
+	Композиция неособенных преобразований -- неособенное преобразование, так что можно сделать несколько шагов:
+	\begin{enumerate}
+		\item Приведём $ f $ к диагональному виду $ f_1 $:
+		$$ f_1(y_1, ..., y_n) = \lambda_1y_1^2 + ... + \lambda_ny_n^2, \qquad \lambda_i > 0 $$
+		\item Избавимся от $ \lambda $:
+		$$ z_i = \sqrt{\lambda_i}y_i $$
+		$$ f_2(z_1, ..., z_n) = z_1^2 + ... + z_n^2 $$
+		При этом, $ g_2 $ тоже как-то изменилась:
+		$$ g_2(z_1, ..., z_n) $$
+		Нужно доказать, что форму $ f_2 = z_1^2 + ... + z_n^2 $ и любую форму $ g_2 $ можно одновеременно привести к диагоналному виду
+		\item Приведём $ g_2 $ к диагональному виду ортогональным перобразованием $ C $ \\
+		Матрица $ f_2 $ равна $ E $
+		$$ E \to C^TEC = C^TC = E $$
+		Значит, $ f $ приведена к диагональному виду
+	\end{enumerate}
+\end{proof}
+
+\begin{eg}[на теорему \ref{th:quad_form}]
+	$$ \underbrace{2x_1^2 + x_2^@ - 4x_1x_2 - 4x_2x_3}_{Q} + 12x_1 - 8x_2 + 8x_3 + 6 = 0 $$
+	Приведём $ Q $ к диагональному виду:
+	$$ C =
+	\begin{pmatrix}
+		\faktor23 & \faktor23 & \faktor13 \\
+		-\faktor23 & \faktor13 & \faktor23 \\
+		\faktor13 & -\faktor23 & \faktor23
+	\end{pmatrix} $$
+	С. ч.: $ \lambda_1 = 4, \quad \lambda_2 = 1, \quad \lambda_3 = -2 $
+	$$ 4y_1^2 + 1y_2^2 - 2y_3^2 + 12 \bigg( \frac23 y_1 + \frac23 y_2 + \frac13 y_3 \bigg) - 8 $$
+	$$ 4y_1^2 + 16y_1 = 4(y_1 + 2)^2 - 16 $$
+	\textit{Этот пример есть в Боревиче. Надо посмотреть}
+\end{eg}
+
+
+\chapter{Кольца и поля}
+
+Эта глава читается по книгам ван дер Вардена ``Алгебра'' и Ленга ``Алгебра''
+
+\section{Идеал кольца}
+
+\subsection{Напоминание}
+
+\begin{definition}
+	Кольцо -- множество $ A $ с операциями $ +, \cdot $, такими что:
+	\begin{enumerate}
+		\item $ A $ -- абелева группа по сложению
+		\item Дистрибутивность:
+		\begin{enumerate}
+			\item $ (a + b)c = ac + bc $
+			\item $ a(b + c) = ab + ac $
+		\end{enumerate}
+	\end{enumerate}
+\end{definition}
+
+\begin{definition}
+	Поле -- кольцо, для которого выполнены:
+	\begin{enumerate}
+		\item Ассоциативность умножения
+		\item Коммутативность умножения
+		\item Существование единицы
+		\item Существование обратного по умножению
+	\end{enumerate}
+\end{definition}
+
+\begin{note}
+	У ван дер Вардена и Ленга определения другие -- прежде чем читать, надо осознать, что добавляется
+\end{note}
+
+\begin{definition}
+	Мы будем рассматривать только ассоциативные кольца
+\end{definition}
+
+\subsection{Новые определения}
+
+\begin{definition}
+	$ A $ -- коммутативное ассоциативное кольцо, $ I \sub A $ \\
+	$ I $ называется идеалом, если:
+	\begin{enumerate}
+		\item $ I $ -- подгруппа по сложению
+		\item $ a \in I, ~ t \in A \quad \implies ta \in I $
+	\end{enumerate}
+\end{definition}
+
+\begin{remark}
+	$ I < A \iff $
+	\begin{enumerate}
+		\item $ a, b \in I \implies a + b \in I $
+		\item $ a \in I \implies -a \in I $
+	\end{enumerate}
+\end{remark}
+
+\begin{remark}
+	Если бы кольцо было с единицей, то второе свойство было бы лишним -- можно было бы домножать элементы на $ -1 $
+\end{remark}
+
+\begin{remark}
+	Если $ A $ не коммутативно, то можно рассматривать левые и правые идеалы
+\end{remark}
+
+\begin{exmpls}
+	\item $ \set{0}, A $ -- идеалы
+	\item $ A = \Z $ \\
+	$ I = 2\Z $ -- идеал:
+	\begin{enumerate}
+		\item
+		\begin{enumerate}
+			\item $ a \divby 2, b \divby 2 \implies a + b \divby 2 $
+			\item $ a \divby 2 \implies -a \divby 2 $
+		\end{enumerate}
+		\item $ a \divby 2, ~ t \in \Z \implies ta \divby 2 $
+	\end{enumerate}
+	Аналогично $ k\Z $ -- идеал $ \quad \forall k $
+	\item $ \R[x] $
+	\begin{enumerate}
+		\item $ I = \set{p(x) = a_nx^n + ... + a_1x} $
+		Свободный член равен 0
+		\item $ I = \set{s_nx^n + ... + a_kx^k} $ \\
+		$ k $ -- фиксированный
+		\item $ I = \set{p(x) | p(1) = 0} $
+		\begin{enumerate}
+			\item $ p(1) = 0, q(1) = 0 \implies (p + q)(1) = 0 $
+			\item $ p(1) = 0 \implies -p(1) = 0 $
+			\item $ p(1) = 0, ~ \forall q \implies (pq)(1) = p(1)q(1) = 0 $
+		\end{enumerate}
+		\item $ I $ -- множество многочленов, делящихся на заданный $ p_0(x) $
+	\end{enumerate}
+	\item $ A = \Z_{10} $ \\
+	$ I = \set{0, 2, 4, 6, 8} $ -- идеал
+	\item $ \Z[x] $ \\
+	$ I $ -- множество многочленов с чётным свободным членом
+\end{exmpls}
+
+\begin{definition}
+	$ A $ -- ассоциативное коммутативное кольцо с единицей, $ \qquad S \sub A $ \\
+	Идеалом, порождённым $ S $ называется минимальный по включению идеал, содержащий $ S $
+\end{definition}
+
+\begin{notation}
+	$ \braket{S} $
+\end{notation}
+
+\begin{props}
+	\item Идеал $ \braket{S} $ существует и единственный \\
+	Он состоит из элементов вида $ t_1s_1 + ... + t_ks_k, \qquad s_i \in S, \quad t_i \in A $
+\end{props}
+
+\begin{definition}
+	Идеал, порождённый одним элементом, называется главным
+\end{definition}
+
+\begin{exmpls}
+	\item $ \Z $ \\
+	$ m\Z = \braket{m} $ -- главный
+	\item $ A $ -- любое коммутативное ассоциативное кольцо с единицей
+	$$ \braket{0} = \set{0}, \qquad \braket{1} = A $$
+	\begin{remark}
+		Если идеал содержит единицу, то это всё кольцо:
+		$$ a \cdot 1 \in I \quad \forall a \in A $$
+	\end{remark}
+	\item $ A = \Z[x] $ \\
+	$ I $ -- множество многочленов с чётным свободным членом
+	$$ I = \braket{2, x} $$
+	\item $ K $ -- поле, $ \quad K[x, y] $ -- кольцо многочленов от двух переменных, т. е. многочленов вида $ \sum a_{ij}x^iy^j $, только конечное число $ a_{ij} $ отлично от нуля \\
+	$ I $ -- мноежство многочленов таких, что $ a_{00} = 0 $ \\
+	$ I = \braket{x, y} $ -- не главный
+\end{exmpls}
+
+\begin{definition}
+	Если все идеалы главные, то $ A $ назыавется кольцом главных идеалов
+\end{definition}
+
+\begin{theorem}[примеры колец главных идеалов]
+	\hfill
+	\begin{enumerate}
+		\item $ \Z $ -- кольцо главных идеалов
+		\begin{proof}
+			$ I $ -- идеал
+			\begin{itemize}
+				\item Если $ I = \set{0} $, то $ I = \braket{0} $ -- главный
+				\item Пусть $ I \ne \set{0}, \qquad a $ -- наименьшее положительное число из $ I $ \\
+				Докажем, что $ I = \braket{a} $: \\
+				$ \braket{a} $ -- мноежство чисел, делящихся на $ a $ \\
+				\bt{Допустим}, что это не весь идеал, т. е. $ \exist b : b \in I, \quad b \ndivby a $ \\
+				Поделим с остатком:
+				$$ b = aq + r, \qquad a < r < a $$
+				$$ r = b - aq = \underbrace{b}_{\in I} + (-q)\underbrace{a}_{\in I} \in I \quad \contra $$
+			\end{itemize}
+		\end{proof}
+		\item $ K $ -- поле $ \implies K[x] $ -- кольцо главных идеалов
+		\begin{proof}
+			Аналогично:
+			\begin{itemize}
+				\item $ \set{0} = \braket{0} $
+				\item Если $ I \ne \set{0} $, то $ I = \braket{p} $, где $ p $ -- многочлен наименьшей степени, лежащий в $ I $
+			\end{itemize}
+		\end{proof}
+	\end{enumerate}
+\end{theorem}
+
+\begin{remark}
+	Любое евклидово кольцо -- кольцо главных идеалов \\
+	Не доказываем, т. к. долго вспоминать, что такое евклидово кольцо \\
+	Доказательство то же (берём элемент с наименьшей евклидовой нормой)
+\end{remark}
+
+\begin{definition}
+	$ A $ -- коммутативное ассоциативное кольцо, $ \qquad I $ -- идеал \\
+	$ I $ называется простым, если
+	$$ \forall a, b \in A \quad ab \in I \implies a \in I \quad \text{ или } \quad b \in I $$
+\end{definition}
+
+\begin{eg}
+	\item $ \Z, \qquad I = \braket{k\Z} $ \\
+	$ I $ простой $ \iff k \in \Prime $
+	\begin{proof}
+		$$ a, b \in I \stackrel?\implies a \in I \quad \text{ или } \quad b \in I $$
+		$$ ab \divby k \stackrel?\implies
+		\begin{vars}
+			a \divby k \\
+			b \divby k
+		\end{vars} $$
+		Это верно для простого $ k $ и не верно для составного
+	\end{proof}
+	\item $ K $ -- поле, $ \qquad A = K[x] $ \\
+	$ \braket{p(x)} $ простой $ \iff p(x) $ неприводим
+	\item $ K $ -- поле, $ \qquad A = K[x, y] $
+	$$ I = \braket{x}, \qquad J = \braket{x, y} $$
+	Оба простые
+\end{eg}
+
+\begin{definition}
+	$ A $ -- коммутативное ассоциативное кольцо, $ \qquad I $ -- идеал \\
+	$ I $ называется максимальным, если не существует такого идеала $ J $, что $ I \sub J, ~ J \ne I, ~ J \ne A $
+\end{definition}
+
+\begin{exmpls}
+	\item $ A = \Z, \qquad I = \braket{k} $ \\
+	$ I $ -- максимальный $ \iff k \in \Prime $ \\
+	Например,
+	\begin{enumerate}
+		\item $ k = 10 $
+		$$ \braket{10} \sub \braket2 $$
+		\item $ k = 5 $ \\
+		Пусть $ \braket5 \sub J $ \\
+		$ J = \braket{d} $, т. к. все идеалы главные
+		$$ \braket5 \sub \braket{d} \implies 5 \divby d \implies
+		\begin{vars}
+			d = \pm 5 \implies J = I \\
+			d = \pm 1 \implies J = A
+		\end{vars} $$
+	\end{enumerate}
+	\item $ K[x, y] $ \\
+	$ \braket{x} $ -- не максимальный, $ \braket{x} \sub \braket{x, y} $ \\
+	$ \braket{x, y} $ -- максимальный
+\end{exmpls}
+
+\begin{remark}
+	Любой максимальный идеал простой
+\end{remark}
+
+\section{Факторкольцо}
+
+\begin{definition}
+	$ A $ -- коммутативное ассоциативое кольцо с единицей, $ \qquad I $ -- идеал \\
+	Элементы $ a $ и $ b $ называются сравнимыми по модулю $ I $, если $ a - b \in I $
+\end{definition}
+
+\begin{notation}
+	$ a \equiv b \pmod I \qquad a \comp{I} b $
+\end{notation}
+
+\begin{exmpls}
+	\item $ \Z, \qquad I = \braket{k} $
+	$$ a \comp{\braket{k}} b \iff a \comp{k} b $$
+	\item $ \Z[x], \qquad I = \braket{2, x} $ \\
+	$ P(x) \comp{I} Q(x) $, если свободные коэффициенты одной чётности
+\end{exmpls}
+
+\begin{property}
+	$ \comp{I} $ является отношением эквивалентности
+\end{property}
+
+\begin{proof}
+	\hfill
+	\begin{enumerate}
+		\item Рефлексивность:
+		$$ a - a = 0 \in I $$
+		\item Симметричность:
+		$$ a - b \in I \implies b - a = -(a - b) \in I $$
+		\item Транзитивность:
+		$$ a - b \in I, b - c \in I \implies a - c = (a - b) + (b - c) \in I $$
+	\end{enumerate}
+\end{proof}
+
+\begin{definition}
+	$ A $ -- коммутативное кольцо, $ \qquad I $ -- идеал \\
+	На множестве классов эквивалентности по отношению $ \comp{I} $ введём операции сложения и умножения:
+	$$ \ol{x} + \ol{y} = \ol{x + y}, \qquad \ol{x} \cdot \ol{y} = \ol{xy} $$
+\end{definition}
+
+\begin{theorem}[корректность]
+	$ A $ -- коммутативное ассоциативное кольцо, $ \qquad I $ -- идеал \\
+	Тогда
+	\begin{enumerate}
+		\item операции сложения и умножения на классах эквивалентности определены корректно, то есть не зависят от выбора представителей
+		\begin{proof}
+			$$
+			\begin{rcases}
+				x_1, x_2 \text{ в одном классе }
+			\end{rcases} \stackrel?\implies
+			\begin{cases}
+				x_1 + y_1 \text{ и } x_2 + y_2 \text{ в одном классе} \\
+				x_1y_1 \text{ и } x_2y_2 \text{ в одном классе}
+			\end{cases} $$
+			Пусть $ x \define x_1 - x_2, \quad y \define y_1 - y_2 \quad \implies x, y \in I $
+			$$ (x_1 + y_1) - (x_2 + y_2) = x + y \in I $$
+			$$ x_1y_1 - x_2y_2 = (x + x_2)(y + y_2) - x_2y_2 = xy + ... $$
+			\TODO{надо дописать}
+		\end{proof}
+		\item множество классов эквивалентности является ассоциативным коммутативным кольцом. Если в $ A $ была единица, то и в кольце классов эквивалентности будет единица
+	\end{enumerate}
+\end{theorem}
+
+\begin{definition}
+	Кольцо классов эквивалентности называется факторкольцом по идеалу $ I $
+\end{definition}
+
+\begin{notation}
+	$ \faktor{A}{I} $
+\end{notation}
+
+\begin{exmpls}
+	\item $ \faktor{\Z}{\braket{m}} = \Z_m $
+	\item $ \faktor{A}{\braket0} \simeq A $ \\
+	$ \faktor{A}A $ -- кольцо из одного элемента
+	\item $ \faktor{\R[x]}{\braket{x^2 + 1}} $
+	\begin{statement}
+		Классы вычетов имеют вид $ \ol{ax + b} = \ol{a} \cdot \ol{x} + \ol{b} $
+	\end{statement}
+	\begin{proof}
+		Рассмотрим класс $ T, \qquad P(x) \in T $ \\
+		Поделим $ P(x) $ на $ x^2 + 1 $ с остатком:
+		$$ P(x) = (x^2 + 1)Q(x) + (ax + b), \qquad a, b \in \R $$
+		$$ P(x) - (ax + b) = (x^2 + 1)Q(x) \in \braket{x^2 + 1} $$
+		$$ P(x) \comp{\braket{x^2 + 1}} ax + b \implies ax + b \in T $$
+	\end{proof}
+	Значит, в каждом классе можно выбрать представителя вида $ ax + b $, причём единственным образом
+	$$ \ol{x} \cdot \ol{x} = \ol{x^2} = \ol{x^2 - (x^2 + 1)} = \ol{-1} $$
+	Если обозначить $ \ol{x} $ за $ i $, то $ i^2 = 1 $. Получаем $ \Co $
+\end{exmpls}
+
+Теперь можно строить поля в огромных количествах, беря такие факторкольца
+
+
+\chapter{Кольца и поля}
+
+\section{Факторкольцо}
+
+\begin{remind}
+	$ A $ -- кольцо, $ \faktor{A}I $ -- множество классов вычетов
+\end{remind}
+
+Продолжаем доказательство:
+
+\begin{proof}
+	$ \faktor{A}I $ -- абелева группа (по т. о факторгруппе) \\
+	Нужно доказать, что $ (\ol{x} + \ol{y})\ol{z} = \ol{x}\ol{z} + \ol{y}\ol{z} $ \\
+	Выберем $ x \in \ol{x}, \quad y \in \ol{y}, \quad z \in \ol{z} $
+	$$ (\ol{x} + \ol{y})\ol{z} = \ol{x}\ol{z} + \ol{y}\ol{z} \quad \impliedby \quad \ol{(x + y)z} = \ol{xz + yz} $$
+	Остальное -- аналогично \\
+	Если $ A $ -- кольцо с единицей, то $ \ol1 $ -- единица в $ \faktor{A}I $
+\end{proof}
+
+\begin{theorem}[факторкольцо по простому идеалу]
+	$ A $ -- коммутативное ассоциативное кольцо, $ I $ -- идеал. Следующие условия равносильны:
+	\begin{enumerate}
+		\item\label{en:fak:1} $ I $ -- простой
+		\item\label{en:fak:2} $ \frac{A}I $ -- область целостности
+	\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+	Пусть $ X \in \faktor{A}I, \quad x \in X $ \\
+	Тогда $ X = 0 \quad \iff \quad \ol{x} = \ol0 \quad \iff \quad x \comp{I} 0 \quad \iff \quad x - 0 \in I \quad \iff \quad x \in I $
+	\begin{itemize}
+		\item (\ref{en:fak:1}) $ \implies $ (\ref{en:fak:2}) \\
+		Пусть $ X, Y \in \faktor{A}I, \qquad XY = \ol0 $ \\
+		Пусть $ x \in X, \quad y \in Y \implies \ol{xy} = \ol0 \implies xy \in I \underimp{I \text{ простой}}
+		\begin{vars}
+			x \in I \implies X = \ol0 \\
+			y \in I \implies Y = \ol0
+		\end{vars} $
+		\item (\ref{en:fak:2}) $ \implies $ (\ref{en:fak:1}) \\
+		Пусть $ xy \in I \implies \ol{xy} = \ol0 \implies \ol{x} \cdot \ol{y} = \ol0 \underimp{\text{обл. цел.}}
+		\begin{vars}
+			\ol{x} = 0 \implies x \in I \\
+			\ol{y} = 0 \implies y \in I
+		\end{vars} $
+	\end{itemize}
+\end{proof}
+
+\begin{theorem}[факторкольцо по максимальному идеалу]
+	$ A $ -- коммутативное ассоциативное кольцо с единицей, $ I $ -- идеал. Следующие условия равносильны:
+	\begin{enumerate}
+		\item\label{en:max:1} $ I $ -- максимальный
+		\item\label{en:max:2} $ \faktor{A}I $ -- поле
+	\end{enumerate}
+\end{theorem}
+
+\begin{iproof}
+	\item (\ref{en:max:1}) $ \implies $ (\ref{en:max:2}) \\
+	$ \faktor{A}I $ -- коммутативное ассоциативное кольцо с единицей \\
+	Осталось доказать, что $ \forall X \in \faktor{A}I, ~ X \ne \ol0 \quad \exist X^{-1} $
+	$$ \ol0 = I \implies X \ne I $$
+	Пусть $ x \in X \implies x \in I $ \\
+	Пусть $ J \define \braket{x, I} $ (он существует, это обсуждалось в прошлый раз)
+	$$ J \supset I, ~ J \ne I \underimp{I \text{ -- макс.}} J = A \implies A \in J $$
+	$$ 1 \in \braket{I, x} \implies 1 = \underbrace{a_1s_1 + ... + a_ks_k}_{\in I} + bx \text{ для некоторых } s_i \in I, \quad a_i, b \in A $$
+	$$ \implies 1 \equiv bx \pmod I \implies \ol1 = \ol b \cdot \ol x = \ol b X \implies \ol b = X^{-1} $$
+	\item (\ref{en:max:2}) $ \implies $ (\ref{en:max:1}) \\
+	Пусть $ J $ -- идеал, $ I \sub J, ~ I \ne J $ \\
+	Докажем, что $ J = A $: \\
+	Пусть $ x \in J \setminus I $
+	$$ \ol x \in \faktor AI, \qquad \ol x \ne \ol0 \quad \implies \exist Y : \ol x Y = \ol 1 $$
+	Пусть $ \ol y \in Y \implies \ol x \cdot \ol y = \ol 1 \implies xy - 1 \in I $
+	$$
+	\begin{rcases}
+		x \in J \\
+		xy - 1 \in I
+	\end{rcases} \implies 1 = \underbrace{xy}_{\in J} - \underbrace{(xy - 1)}_{\in I} \in J \implies J = A $$
+\end{iproof}
+
+\begin{remark}
+	Поле является областью целостности $ \implies $ в кольце с единицей максимальный идеал является простым
+\end{remark}
+
+\begin{theorem}[факторкольцо кольца многочленов]
+	$ K $ -- поле, $ \qquad A = K[x], \qquad P(x) \in A, \qquad I = \braket{P(x)} $ (это не условие, а обозначение -- известно, что все идеалы такие), $ \qquad B = \faktor AI $ \\
+	Тогда равносильны условия:
+	\begin{enumerate}
+		\item $ P $ неприводим $ \iff \faktor AI $ -- поле
+	\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+	Правая часть равносильна тому, что $ I $ максимальный
+	\begin{itemize}
+		\item $ \implies $ \\
+		Пусть $ I \in J, \quad Q(x) $ -- такой, что $ J = \braket{Q(x)} $
+		\begin{multline*}
+			\braket{P(x)} \sub \braket{Q(x)} \implies P(x) \divby Q(x) \underimp{P \text{ неприводимый}} \\
+			\implies
+			\begin{vars}
+				Q(x) = cP(x), \quad c \in K, \quad c \ne 0 \implies J = I \\
+				Q(x) = c, \quad c \in K, \quad c \ne 0 \implies J = A
+			\end{vars} \implies I \max
+		\end{multline*}
+		\item $ \impliedby $ \\
+		Пусть $ P $ приводим
+		$$ \implies \exist Q(x) : \quad P(x) \divby Q(x), \qquad Q(x) \ne cP(x), \quad Q(x) \ne c $$
+		$$ \implies \braket{P(x)} \subsetneq \braket{Q(x)} \subsetneq A \implies I \text{ не } \max $$
+	\end{itemize}
+\end{proof}
+
+\section{Гомоморфизм колец}
+
+\begin{definition}
+	$ (A, +_A, \cdot_A), ~ (B, +_B, \cdot_B) $ -- кольца \\
+	Отображение $ f : A \to B $ называется гомоморфизмом, если
+	$$ f(x +_A y) = f(x) +_B f(y) $$
+	$$ f(x \cdot_A y) = f(a) \cdot_B f(y) $$
+\end{definition}
+
+\begin{definition}
+	Отображение $ f : A \to B $ называется изоморфизмом, если $ f $ -- гомоморфизм и биекция
+\end{definition}
+
+\begin{definition}
+	Если существует изоморфизм из $ A $ в $ B $, то $ A $ и $ B $ называются изоморфными
+\end{definition}
+
+\begin{notation}
+	$ A \simeq B $
+\end{notation}
+
+Все тривиальные свойства верны: про обратный, про композицию, про отношение ``эквивалентности'' (настоящей эквивалентности здесь нет -- нет множества всех колец)
+
+\begin{definition}
+	$ A $, $ B $ -- цольцо, $ f : A \to B $ -- гомоморфизм \\
+	Ядро: $ \set{x \in A | f(x) = 0} $
+	\begin{notation}
+		$ \ker f $
+	\end{notation}
+	Образ: $ \set{f(x) | x \in A} $
+	\begin{notation}
+		$ \Img A $
+	\end{notation}
+\end{definition}
+
+\begin{properties}
+	$ A, B $ -- коммутативные, $ f : A \to B $ - гомоморфизм
+	\begin{enumerate}
+		\item $ f(0) = 0 $
+		\begin{proof}
+			Следует из аналогичного свойства для гомоморфизма групп
+		\end{proof}
+		\begin{remark}
+			Коммутативность здесь не нужна
+		\end{remark}
+		\begin{remark}
+			Для единицы не верно
+		\end{remark}
+		\item $ \ker f $ -- идеал
+		\begin{proof}
+			$ \ker f \ne 0 $, т. к. $ 0_A \in \ker f $
+			\begin{itemize}
+				\item $ x, y \in \ker f \implies f(x + y) = \underbrace{f(x)}_0 + \underbrace{f(y)}_0 = 0 + 0 = 0 $
+				\item $ \underbrace{f(0)}_0 = f \big( x + (-x) \big) = \underbrace{f(x)}_0 + f(x) \implies f(-x) = 0 $
+				\item $ a \in A \qquad f(ax) = f(a)f(x) = f(a) \cdot 0 = 0 $
+			\end{itemize}
+		\end{proof}
+		\item $ \Img f $ -- подкольцо $ B $
+		\begin{proof}
+			$ \Img f \sub B $ \\
+			Нужно преверить, что $ \Img f $ замкнут относительно операции \\
+			Для сложения -- можно сослаться на группы \\
+			Для умножения:
+			$$ x, y \in \Img f \implies a, b \in A : \quad f(a) = x, \quad f(b) = y $$
+			$$ \implies xy = f(a)f(b) = f(ab) \in \Img f $$
+		\end{proof}
+	\end{enumerate}
+\end{properties}
+
+\begin{theorem}[о гомомрфизме колец]
+	$ A, B $ -- коммутативные ассоциативные кольца \\
+	$ \qquad f : A \to B $ -- гомоморфизм \\
+	Тогда $ \faktor{A}{\ker f} \simeq \Img f $
+\end{theorem}
+
+\begin{proof}
+	Определим $ \vphi : \faktor{A}{\ker f} \to \Img f $ \\
+	Пусть $ X \in \faktor{A}{\ker f}, \quad x \in X $ \\
+	Положим $ \vphi(X) \define f(x) $
+	$$ x \in X \implies X = \ol x \implies \vphi(\ol x) = f(x) $$
+	\begin{itemize}
+		\item Корректность: \\
+		Пусть $ x, x' \in X $ \\
+		Проверим, что $ f(x') = f(x) $
+		$$ \ol x = \ol{x'} \implies x \comp{\ker f} x' \implies x - x' \in \ker f \implies f(x) = f \big( x' + (x - x') \big) = f(x') + \underbrace{f(x - x')}_{0 ~ (x - x' \in \ker f)} $$
+		\item Гомоморфизм:
+		$$ X, Y \in \faktor{A}{\ker f}, \qquad x \in, \quad y \in Y $$
+		$$ X = \ol x, \quad Y = \ol y, \qquad X + Y = \ol{x + y}, \quad XY = \ol{xy} $$
+		$$ \vphi(X + Y) = \vphi(\ol{x + y}) = f(x + y) \undereq{f \text{ гомомрф.}} f(x) + f(y) = \vphi(\ol x) + \vphi(\ol y) = \vphi(\ol x + \ol y) $$
+		Для умножения -- то же самое
+		\item Сюръективность: \\
+		Пусть $ b \in \Img f $
+		$$ \implies \exist x \in A : \quad f(x) = b \implies \vphi(\ol x) = b $$
+		\item Инъективность: \\
+		Пусть $ \vphi(X) = \vphi(Y), \quad x \in X, ~ y \in Y $
+		$$ \implies f(x) = f(y) \implies f(x - y) = 0 \implies x - y \in \ker f \implies \ol x \comp{\ker f} y \implies \ol x = \ol y \implies X = Y $$
+	\end{itemize}
+\end{proof}
+
+\section{Классификация простых полей}
+
+\begin{definition}
+	$ A $ -- кольцо \\
+	Характеристикой $ A $ называется называется наименьшее $ n \in \N $ такое, что
+	$$ \underbrace{a + a + ... + a}_n = 0 \quad \forall a \in A $$
+	Если такого $ n $ не существует, то характеристика равна нулю
+\end{definition}
+
+\begin{definition}
+	$ \chara A $
+\end{definition}
+
+\begin{egs}
+	$ \R, \Z, \Q $ -- $ \chara = 0 $ \\
+	$ \chara (\Z_2) = 2 $
+\end{egs}
+
+\begin{property}
+	Если $ A $ кольцо с единицей, то $ \chara A $ -- ниаменьшее $ n \in \N $ такое, что
+	$$ \underbrace{1 + 1 + ... + 1}_n = 0 $$
+\end{property}
+
+\begin{proof}
+	Нужно доказать, что
+	$$ \underbrace{a + a + ... + a}_n = 0 \quad \forall a \in A \qquad \iff \qquad \underbrace{1 + 1 + ... + 1}_n = 0 $$
+	\begin{itemize}
+		\item $ \implies $ \\
+		Подставим $ a = 1 $
+		\item $ \impliedby $
+		$$ a + a + ... + a = a(1 + ... + 1) = a \cdot 0 = 0 $$
+	\end{itemize}
+\end{proof}
+
+\begin{property}
+	$ A $ -- поле \\
+	Тогда $ \chara A = 0 $ или $ \chara A \in \Prime $
+\end{property}
+
+\begin{proof}
+	Пусть \bt{это не так} и $ \chara A $ -- составное
+	$$ \chara A = n = mk, \qquad 1 < m, \quad k < n $$
+	$$ 0 = \underbrace{1 + ... + 1}_n = (\underbrace{1 + ... + 1}_m)(\underbrace{1 + .... + 1}_k) \implies
+	\begin{vars}
+		\underbrace{1 + ... + 1}_m = 0 \\
+		\underbrace{1 + .... + 1}_k = 0
+	\end{vars} $$
+	Получили противоречие с минимальностью $ n $
+\end{proof}
+
+\begin{note}
+	Достаточно области целостности с единицей
+\end{note}
+
+\begin{definition}
+	$ L $ -- поле, $ \qquad K \sub L, \qquad K $ является полем с теми же операциями \\
+	Тогда $ K $ назыается подполем $ L $ \\
+	$ L $ называется расширением $ K $
+\end{definition}
+
+\begin{exmpls}
+	\item $ \R $ -- подполе $ \Co $
+	\item $ \R(x) $ -- расширение $ \R $
+\end{exmpls}
+
+\begin{definition}
+	Поле $ K $ называется простым, если оно не содержит подполей, отличных от $ K $ \\
+	(считаем, что поле не может состоять из одного элемента, т. е. $ 0 \ne 1 $)
+\end{definition}
+
+
+\chapter{Кольца и поля}
+
+\section{Факторкольцо}
+
+\begin{remind}
+	$ A $ -- кольцо, $ \faktor{A}I $ -- множество классов вычетов
+\end{remind}
+
+Продолжаем доказательство:
+
+\begin{proof}
+	$ \faktor{A}I $ -- абелева группа (по т. о факторгруппе) \\
+	Нужно доказать, что $ (\ol{x} + \ol{y})\ol{z} = \ol{x}\ol{z} + \ol{y}\ol{z} $ \\
+	Выберем $ x \in \ol{x}, \quad y \in \ol{y}, \quad z \in \ol{z} $
+	$$ (\ol{x} + \ol{y})\ol{z} = \ol{x}\ol{z} + \ol{y}\ol{z} \quad \impliedby \quad \ol{(x + y)z} = \ol{xz + yz} $$
+	Остальное -- аналогично \\
+	Если $ A $ -- кольцо с единицей, то $ \ol1 $ -- единица в $ \faktor{A}I $
+\end{proof}
+
+\begin{theorem}[факторкольцо по простому идеалу]
+	$ A $ -- коммутативное ассоциативное кольцо, $ I $ -- идеал. Следующие условия равносильны:
+	\begin{enumerate}
+		\item\label{en:fak:1} $ I $ -- простой
+		\item\label{en:fak:2} $ \frac{A}I $ -- область целостности
+	\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+	Пусть $ X \in \faktor{A}I, \quad x \in X $ \\
+	Тогда $ X = 0 \quad \iff \quad \ol{x} = \ol0 \quad \iff \quad x \comp{I} 0 \quad \iff \quad x - 0 \in I \quad \iff \quad x \in I $
+	\begin{itemize}
+		\item (\ref{en:fak:1}) $ \implies $ (\ref{en:fak:2}) \\
+		Пусть $ X, Y \in \faktor{A}I, \qquad XY = \ol0 $ \\
+		Пусть $ x \in X, \quad y \in Y \implies \ol{xy} = \ol0 \implies xy \in I \underimp{I \text{ простой}}
+		\begin{vars}
+			x \in I \implies X = \ol0 \\
+			y \in I \implies Y = \ol0
+		\end{vars} $
+		\item (\ref{en:fak:2}) $ \implies $ (\ref{en:fak:1}) \\
+		Пусть $ xy \in I \implies \ol{xy} = \ol0 \implies \ol{x} \cdot \ol{y} = \ol0 \underimp{\text{обл. цел.}}
+		\begin{vars}
+			\ol{x} = 0 \implies x \in I \\
+			\ol{y} = 0 \implies y \in I
+		\end{vars} $
+	\end{itemize}
+\end{proof}
+
+\begin{theorem}[факторкольцо по максимальному идеалу]
+	$ A $ -- коммутативное ассоциативное кольцо с единицей, $ I $ -- идеал. Следующие условия равносильны:
+	\begin{enumerate}
+		\item\label{en:max:1} $ I $ -- максимальный
+		\item\label{en:max:2} $ \faktor{A}I $ -- поле
+	\end{enumerate}
+\end{theorem}
+
+\begin{iproof}
+	\item (\ref{en:max:1}) $ \implies $ (\ref{en:max:2}) \\
+	$ \faktor{A}I $ -- коммутативное ассоциативное кольцо с единицей \\
+	Осталось доказать, что $ \forall X \in \faktor{A}I, ~ X \ne \ol0 \quad \exist X^{-1} $
+	$$ \ol0 = I \implies X \ne I $$
+	Пусть $ x \in X \implies x \in I $ \\
+	Пусть $ J \define \braket{x, I} $ (он существует, это обсуждалось в прошлый раз)
+	$$ J \supset I, ~ J \ne I \underimp{I \text{ -- макс.}} J = A \implies A \in J $$
+	$$ 1 \in \braket{I, x} \implies 1 = \underbrace{a_1s_1 + ... + a_ks_k}_{\in I} + bx \text{ для некоторых } s_i \in I, \quad a_i, b \in A $$
+	$$ \implies 1 \equiv bx \pmod I \implies \ol1 = \ol b \cdot \ol x = \ol b X \implies \ol b = X^{-1} $$
+	\item (\ref{en:max:2}) $ \implies $ (\ref{en:max:1}) \\
+	Пусть $ J $ -- идеал, $ I \sub J, ~ I \ne J $ \\
+	Докажем, что $ J = A $: \\
+	Пусть $ x \in J \setminus I $
+	$$ \ol x \in \faktor AI, \qquad \ol x \ne \ol0 \quad \implies \exist Y : \ol x Y = \ol 1 $$
+	Пусть $ \ol y \in Y \implies \ol x \cdot \ol y = \ol 1 \implies xy - 1 \in I $
+	$$
+	\begin{rcases}
+		x \in J \\
+		xy - 1 \in I
+	\end{rcases} \implies 1 = \underbrace{xy}_{\in J} - \underbrace{(xy - 1)}_{\in I} \in J \implies J = A $$
+\end{iproof}
+
+\begin{remark}
+	Поле является областью целостности $ \implies $ в кольце с единицей максимальный идеал является простым
+\end{remark}
+
+\begin{theorem}[факторкольцо кольца многочленов]
+	$ K $ -- поле, $ \qquad A = K[x], \qquad P(x) \in A, \qquad I = \braket{P(x)} $ (это не условие, а обозначение -- известно, что все идеалы такие), $ \qquad B = \faktor AI $ \\
+	Тогда равносильны условия:
+	\begin{enumerate}
+		\item $ P $ неприводим $ \iff \faktor AI $ -- поле
+	\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+	Правая часть равносильна тому, что $ I $ максимальный
+	\begin{itemize}
+		\item $ \implies $ \\
+		Пусть $ I \in J, \quad Q(x) $ -- такой, что $ J = \braket{Q(x)} $
+		\begin{multline*}
+			\braket{P(x)} \sub \braket{Q(x)} \implies P(x) \divby Q(x) \underimp{P \text{ неприводимый}} \\
+			\implies
+			\begin{vars}
+				Q(x) = cP(x), \quad c \in K, \quad c \ne 0 \implies J = I \\
+				Q(x) = c, \quad c \in K, \quad c \ne 0 \implies J = A
+			\end{vars} \implies I \max
+		\end{multline*}
+		\item $ \impliedby $ \\
+		Пусть $ P $ приводим
+		$$ \implies \exist Q(x) : \quad P(x) \divby Q(x), \qquad Q(x) \ne cP(x), \quad Q(x) \ne c $$
+		$$ \implies \braket{P(x)} \subsetneq \braket{Q(x)} \subsetneq A \implies I \text{ не } \max $$
+	\end{itemize}
+\end{proof}
+
+\section{Гомоморфизм колец}
+
+\begin{definition}
+	$ (A, +_A, \cdot_A), ~ (B, +_B, \cdot_B) $ -- кольца \\
+	Отображение $ f : A \to B $ называется гомоморфизмом, если
+	$$ f(x +_A y) = f(x) +_B f(y) $$
+	$$ f(x \cdot_A y) = f(a) \cdot_B f(y) $$
+\end{definition}
+
+\begin{definition}
+	Отображение $ f : A \to B $ называется изоморфизмом, если $ f $ -- гомоморфизм и биекция
+\end{definition}
+
+\begin{definition}
+	Если существует изоморфизм из $ A $ в $ B $, то $ A $ и $ B $ называются изоморфными
+\end{definition}
+
+\begin{notation}
+	$ A \simeq B $
+\end{notation}
+
+Все тривиальные свойства верны: про обратный, про композицию, про отношение ``эквивалентности'' (настоящей эквивалентности здесь нет -- нет множества всех колец)
+
+\begin{definition}
+	$ A $, $ B $ -- цольцо, $ f : A \to B $ -- гомоморфизм \\
+	Ядро: $ \set{x \in A | f(x) = 0} $
+	\begin{notation}
+		$ \ker f $
+	\end{notation}
+	Образ: $ \set{f(x) | x \in A} $
+	\begin{notation}
+		$ \Img A $
+	\end{notation}
+\end{definition}
+
+\begin{properties}
+	$ A, B $ -- коммутативные, $ f : A \to B $ - гомоморфизм
+	\begin{enumerate}
+		\item $ f(0) = 0 $
+		\begin{proof}
+			Следует из аналогичного свойства для гомоморфизма групп
+		\end{proof}
+		\begin{remark}
+			Коммутативность здесь не нужна
+		\end{remark}
+		\begin{remark}
+			Для единицы не верно
+		\end{remark}
+		\item $ \ker f $ -- идеал
+		\begin{proof}
+			$ \ker f \ne 0 $, т. к. $ 0_A \in \ker f $
+			\begin{itemize}
+				\item $ x, y \in \ker f \implies f(x + y) = \underbrace{f(x)}_0 + \underbrace{f(y)}_0 = 0 + 0 = 0 $
+				\item $ \underbrace{f(0)}_0 = f \big( x + (-x) \big) = \underbrace{f(x)}_0 + f(x) \implies f(-x) = 0 $
+				\item $ a \in A \qquad f(ax) = f(a)f(x) = f(a) \cdot 0 = 0 $
+			\end{itemize}
+		\end{proof}
+		\item $ \Img f $ -- подкольцо $ B $
+		\begin{proof}
+			$ \Img f \sub B $ \\
+			Нужно преверить, что $ \Img f $ замкнут относительно операции \\
+			Для сложения -- можно сослаться на группы \\
+			Для умножения:
+			$$ x, y \in \Img f \implies a, b \in A : \quad f(a) = x, \quad f(b) = y $$
+			$$ \implies xy = f(a)f(b) = f(ab) \in \Img f $$
+		\end{proof}
+	\end{enumerate}
+\end{properties}
+
+\begin{theorem}[о гомомрфизме колец]
+	$ A, B $ -- коммутативные ассоциативные кольца \\
+	$ \qquad f : A \to B $ -- гомоморфизм \\
+	Тогда $ \faktor{A}{\ker f} \simeq \Img f $
+\end{theorem}
+
+\begin{proof}
+	Определим $ \vphi : \faktor{A}{\ker f} \to \Img f $ \\
+	Пусть $ X \in \faktor{A}{\ker f}, \quad x \in X $ \\
+	Положим $ \vphi(X) \define f(x) $
+	$$ x \in X \implies X = \ol x \implies \vphi(\ol x) = f(x) $$
+	\begin{itemize}
+		\item Корректность: \\
+		Пусть $ x, x' \in X $ \\
+		Проверим, что $ f(x') = f(x) $
+		$$ \ol x = \ol{x'} \implies x \comp{\ker f} x' \implies x - x' \in \ker f \implies f(x) = f \big( x' + (x - x') \big) = f(x') + \underbrace{f(x - x')}_{0 ~ (x - x' \in \ker f)} $$
+		\item Гомоморфизм:
+		$$ X, Y \in \faktor{A}{\ker f}, \qquad x \in, \quad y \in Y $$
+		$$ X = \ol x, \quad Y = \ol y, \qquad X + Y = \ol{x + y}, \quad XY = \ol{xy} $$
+		$$ \vphi(X + Y) = \vphi(\ol{x + y}) = f(x + y) \undereq{f \text{ гомомрф.}} f(x) + f(y) = \vphi(\ol x) + \vphi(\ol y) = \vphi(\ol x + \ol y) $$
+		Для умножения -- то же самое
+		\item Сюръективность: \\
+		Пусть $ b \in \Img f $
+		$$ \implies \exist x \in A : \quad f(x) = b \implies \vphi(\ol x) = b $$
+		\item Инъективность: \\
+		Пусть $ \vphi(X) = \vphi(Y), \quad x \in X, ~ y \in Y $
+		$$ \implies f(x) = f(y) \implies f(x - y) = 0 \implies x - y \in \ker f \implies \ol x \comp{\ker f} y \implies \ol x = \ol y \implies X = Y $$
+	\end{itemize}
+\end{proof}
+
+\section{Классификация простых полей}
+
+\begin{definition}
+	$ A $ -- кольцо \\
+	Характеристикой $ A $ называется называется наименьшее $ n \in \N $ такое, что
+	$$ \underbrace{a + a + ... + a}_n = 0 \quad \forall a \in A $$
+	Если такого $ n $ не существует, то характеристика равна нулю
+\end{definition}
+
+\begin{definition}
+	$ \chara A $
+\end{definition}
+
+\begin{egs}
+	$ \R, \Z, \Q $ -- $ \chara = 0 $ \\
+	$ \chara (\Z_2) = 2 $
+\end{egs}
+
+\begin{property}
+	Если $ A $ кольцо с единицей, то $ \chara A $ -- ниаменьшее $ n \in \N $ такое, что
+	$$ \underbrace{1 + 1 + ... + 1}_n = 0 $$
+\end{property}
+
+\begin{proof}
+	Нужно доказать, что
+	$$ \underbrace{a + a + ... + a}_n = 0 \quad \forall a \in A \qquad \iff \qquad \underbrace{1 + 1 + ... + 1}_n = 0 $$
+	\begin{itemize}
+		\item $ \implies $ \\
+		Подставим $ a = 1 $
+		\item $ \impliedby $
+		$$ a + a + ... + a = a(1 + ... + 1) = a \cdot 0 = 0 $$
+	\end{itemize}
+\end{proof}
+
+\begin{property}
+	$ A $ -- поле \\
+	Тогда $ \chara A = 0 $ или $ \chara A \in \Prime $
+\end{property}
+
+\begin{proof}
+	Пусть \bt{это не так} и $ \chara A $ -- составное
+	$$ \chara A = n = mk, \qquad 1 < m, \quad k < n $$
+	$$ 0 = \underbrace{1 + ... + 1}_n = (\underbrace{1 + ... + 1}_m)(\underbrace{1 + .... + 1}_k) \implies
+	\begin{vars}
+		\underbrace{1 + ... + 1}_m = 0 \\
+		\underbrace{1 + .... + 1}_k = 0
+	\end{vars} $$
+	Получили противоречие с минимальностью $ n $
+\end{proof}
+
+\begin{note}
+	Достаточно области целостности с единицей
+\end{note}
+
+\begin{definition}
+	$ L $ -- поле, $ \qquad K \sub L, \qquad K $ является полем с теми же операциями \\
+	Тогда $ K $ назыается подполем $ L $ \\
+	$ L $ называется расширением $ K $
+\end{definition}
+
+\begin{exmpls}
+	\item $ \R $ -- подполе $ \Co $
+	\item $ \R(x) $ -- расширение $ \R $
+\end{exmpls}
+
+\begin{definition}
+	Поле $ K $ называется простым, если оно не содержит подполей, отличных от $ K $ \\
+	(считаем, что поле не может состоять из одного элемента, т. е. $ 0 \ne 1 $)
+\end{definition}
+
+
+\chapter{Кольца и поля}
+
+\section{Классификация простых полей}
+
+\begin{theorem}[классификация простых полей]
+	\hfill
+	\begin{enumerate}
+		\item Поля $ \Q $ и $ \Z_p $ при $ p \in \Prime $ -- простые
+		\begin{proof}
+			\hfill
+			\begin{itemize}
+				\item $ \Q $ \\
+				Пусть $ \Q $ \bt{не простое}, и $ K $ -- подполе $ \Q \quad \implies 0, 1 \in K $
+				$$ \underbrace{1 + 1 + \dots + 1}_n \in K \quad \forall n \quad \implies \N \sub K $$
+				Если $ n \in K $, то $ (-1) \in K \quad \implies \Z \sub K $ \\
+				Если $ n \in K, ~ n \ne 0 $, то $ \frac1n \in K \quad \implies \frac1n \in K \quad \forall n \in \N $
+				$$ m \in \Z, ~ n \in \N \implies \frac mn = m \cdot \frac1n \in K \quad \implies \Q = K $$
+				\item $ \Z_p $ \\
+				Аналогично, пусть $ K $ -- подполе $ \Z_p $
+				$$ \ol1 \in K $$
+				$$ \underbrace{\ol1 + \ol1 + \dots + \ol1}_n \in K \quad \forall n \quad \implies \ol n \in K \quad \forall n \quad \implies \Z_p = K $$
+			\end{itemize}
+		\end{proof}
+		\item Любое простое поле изоморфно $ \Q $ или $ \Z_p $ для некоторого $ p \in \Prime $
+		\begin{proof}
+			Пусть $ K $ "--- поле \\
+			Докажем, что $ K $ содержит подполе, изоморфное $ \Q $ или $ \Z_p $ \\
+			Возьмём $ A $ "--- минимальное подкольцо $ K $, содержащее 1 \\
+			Докажем, что $ A \simeq \Z $ (взяв все частные из $ A $, получим множество дробей) или $ A \simeq \Z_p $: \\
+			Пусть $ f : \Z \to A $ такое, что
+			$$ f(n) \define
+			\begin{cases}
+				\underbrace{1 + 1 + \dots + 1}_n, \qquad n > 0 \\
+				-(\underbrace{1 + 1 + \dots + 1}_n), \qquad n < 0 \\
+				0, \qquad n = 0
+			\end{cases} $$
+			\begin{itemize}
+				\item Докажем, что $ f $ "--- гомоморфизм:
+				\begin{itemize}
+					\item Докажем, что $ f(n) + f(k) = f(n + k) $: \\
+					Кольцо "--- это группа по сложению. Умножение $ n $ единиц "--- это возведение в $ n $ степень. Знаем, что $ 1^n * 1^k = 1^{n + k} $, где $ * $ "--- это $ + $
+					\item $ f(nk) = f(n) \cdot f(k) $:
+					\begin{itemize}
+						\item $ n, k > 0 $
+						$$ (\underbrace{1 + \dots + 1}_n)(\underbrace{1 + \dots + 1}_k) = \underbrace{1 \cdot 1 + \dots + 1 \cdot 1}_{nk} = \underbrace{1 + \dots + 1}_{nk} $$
+						\item $ n = 0 $
+						$$ f(0) = f(0) f(k) $$
+						\item $ n > 0, ~ k < 0 $ \\
+						Положим $ k_1 \define -k $
+						$$ f \bigg( n(-k_1) \bigg) = f(n) f(-k_1) \quad \impliedby \quad -f(nk_1) = f(n) \bigg( -f(k_1) \bigg) $$
+					\end{itemize}
+					По теореме о гомомрфизме $ \Img f \simeq \faktor\Z{\ker f} $ \\
+					$ \Img f $ "--- подкольцо $ A $ \\
+					$ \ker f $ "--- идеал $ \implies \ker f = \braket m $
+					\begin{itemize}
+						\item $ m = 0 $
+						$$ \ker f = \set0 \implies \faktor\Z{\ker f} = \faktor\Z{\set0} \simeq \Z $$
+						\item $ m \ne 0 $
+						$$ \Img f \simeq \faktor\Z{\braket m} \simeq \Z_m $$
+						$ \Img f $ "--- подкольцо поля $ K \implies \Img f $ "--- область целостности \\
+						$ \implies \braket m $ "--- простой идеал $ \implies m \in \Prime $
+					\end{itemize}
+				\end{itemize}
+			\end{itemize}
+		\end{proof}
+	\end{enumerate}
+\end{theorem}
+
+\begin{remark}
+	Характеристику можно определять по простому полю:
+	$$ K \simeq \faktor\Z{\braket m} \implies \chara \Z = m $$
+	Отсюда видно, почему характеристика 0, если не существует нужной степени
+\end{remark}
+
+\section{Степень расширения}
+
+\begin{lemma}
+	$ K $ "--- поле, $ \qquad L $ "--- расширение $ K $ \\
+	Тогда $ L $ является векторным пространством над $ K $
+\end{lemma}
+
+\begin{iproof}
+	\item Операции:
+	\begin{itemize}
+		\item $ l_1 + l_2, \quad l_1, l_2 \in L $
+		\item $ kl, \quad k \in K, ~ l \in L $
+	\end{itemize}
+	$ k, l $ "--- элементы $ L $, для них операции определены
+	\item $ L $ "--- абелева группа по сложению:
+	$$ (k_1k_2)l = k_1(k_2l) $$
+\end{iproof}
+
+\begin{exmpls}
+	\item $ \R \sub \Co $ \\
+	Базис "--- $ \set{1, i} $
+	\item $ \R(x) $ "--- бесконечномерное векторное пространство над $ \R $
+\end{exmpls}
+
+\begin{definition}
+	$ L $ "--- расширение $ K $ \\
+	Степенью расширения $ L $ над $ K $ называется $ \dim_K L $
+\end{definition}
+
+\begin{notation}
+	$ |L : K|, \qquad (L : K), \qquad [L : K] $
+\end{notation}
+
+Если $ |L : K| $, то $ L $ "--- конечное расширение $ K $ ($ L $ конечно над $ K $) \\
+Иначе "--- бесконечное
+
+\begin{exmpls}
+	\item $ |\Co : \R| = 2 $
+	\item $ |\R(x) : \R| = \infty $
+	\item $ |K : K| = 1 $ \\
+	Базис "--- $ \set1 $ ($ k \cdot 1 $ "--- множество всех $ k \in K $) \\
+	Если $ K \sub L, ~ |L : K| = 1 $, то $ L = K $
+	\item $ \Q(\sqrt2) $ "--- наименьшее поле, содержащее $ \Q $ и $ \sqrt2 $ \\
+	Такое поле существует, т.~к. $ \Q \sub \R, ~ \sqrt2 \in \R $, можно взять наименьшее подполе $ \R $, которое содержит $ \Q $ и $ \sqrt2 $ \\
+	Оно состоит из чисел вида $ a + b\sqrt2 $ \\
+	Проверим, что это поле:
+	$$ (a + b\sqrt2)(c + d\sqrt2) = (ac + 2db) + (ad + bc)\sqrt2 $$
+	$$ \frac1{a + b\sqrt2} = \frac{a - b\sqrt2}{a^2 - 2b^2} = \frac{a}{a^2 - 2b^2} + \frac{-b}{a^2 - 2b^2}\sqrt2 $$
+	$$ |\Q(\sqrt2) : \Q| = 2 $$
+	Базис "--- $ \set{1, \sqrt2} $
+	\item $ \Q(\sqrt2, i) $ "--- наименьшее поле, содержащее $ \Q, \sqrt2, i $ \\
+	Оно аналогично является подполем $ \Co $
+	\begin{statement}
+		$ |\Q(\sqrt2, i) : \Q| = 4 $
+	\end{statement}
+	\begin{proof}
+		$$ \Q(\sqrt2, i) = \set{a + bi \mid a, b \in \Q(\sqrt2)} $$
+		$ |\Q(\sqrt2, i) : \Q(\sqrt2)| = 2 $, базис "--- $ \set{1, i} $ \\
+		Базис $ \Q(\sqrt2, i) $ над $ \Q $: $ \set{1 \cdot 1, 1 \cdot i, \sqrt2 \cdot 1, \sqrt2 \cdot i} $
+	\end{proof}
+\end{exmpls}
+
+\begin{theorem}[мультипликативность степени]
+	$ K \sub M \sub L $ "--- поля с общими операциями \\
+	Тогда $ |L : K| = |L : M| \cdot |M : K| $
+\end{theorem}
+
+\begin{note}
+	Если $ M $ конечно над $ K $ и $ L $ конечно над $ M $, то $ L $ конечно над $ K $ и выполнено равенство \\
+	Иначе $ L $ бесконечно над $ K $
+\end{note}
+
+\begin{iproof}
+	\item Докажем, что если $ e_1, \dots, e_r \in M $ ЛНЗ над $ K $ и $ f_1, \dots, f_s \in L $ ЛНЗ над $ M $, то $ g_{ij} \define e_if_j $ ЛНЗ над $ K $: \\
+	Пусть $ a_{ij} \in K : \sum a_{ij}g_{ji} = 0 $
+	$$ a_{11}e_1f_1 + a_{12}e_1f_2 + \dots + a_{21}e_2f_1 + a_{22}e_2f_2 + \widedots[4em] = 0 $$
+	Сгруппируем по элементам $ f $:
+	$$ \bigg( a_{11}e_1f_1 + a_{21}e_2f_1 + \dots \bigg) + \bigg( a_{12}e_1f_2 + a_{22}e_2f_2 + \dots \bigg) + \widedots[4em] = 0 $$
+	$$ \underbrace{(a_{11}e_1 + a_{21}e_2 + \dots)}_{\in M}f_1 + \underbrace{(a_{12}e_1 + a_{22}e_2 + \dots)}_{\in M}f_2 + \widedots[4em] = 0 $$
+	Пусть $ b_j \define a_{1j}e_1 + a_{2j}e_2 + \dots + a_{rj}e_r $ \\
+	Тогда $ b_j \in M, \quad b_1f_1 + \dots b_sf_s = 0 $ \\
+	$ f_1, \dots f_s $ ЛНЗ над $ M \implies b_1 = b_2 = \dots = b_s = 0 $
+	$$ a_{1j}e_1 + \dots + a_{rj}e_r = b_j = 0 $$
+	$ e_1, \dots, e_r $ ЛНЗ над $ K \implies a_{ij} = 0 \quad \forall i, j $
+	\item Конечный случай \\
+	Пусть $ e_1, \dots, e_r $ "--- базис $ M $ над $ K, \quad f_1, \dots, f_s $ "--- базис $ L $ над $ M $ \\
+	Докажем, что $ g_{ij} \define e_if_j $ "--- базис $ L $ над $ K $: \\
+	ЛНЗ уже доказана. Осталось доказать, что любой элемент порождается $ g_{ij} $: \\
+	Пусть $ c \in L \quad \implies \exist b_i \in M : \quad c = b_1f_1 + \dots + b_sf_s $
+	$$ b_j \in M, \quad e_i \text{ порожд. } M \text{ над } K \implies \forall j \quad \exist a_{ij} : \quad b_j = a_{1j}e_1 + \dots + a_{rj}e_r $$
+	$$ \implies c = \sum a_{ij}eIf_j = \sum a_{ij}g_{ij} $$
+	\item Бесконечный случай \\
+	Нужно доказать, что $ \forall N \quad \exist N $ ЛНЗ элементов $ L $ над $ K $ (т.~е. существует сколь угодно большая ЛНЗ система) \\
+	Можно выбрать $ e_1, \dots e_N $ ЛНЗ, или $ f_1, \dots f_N $ ЛНЗ \\
+	Тогда $ e_if_j $ ЛНЗ над $ K $
+\end{iproof}
+
+\begin{implication}
+	$ L $ "--- конечное расширение над $ K, \qquad K \sub M \sub L $ \\
+	Тогда $ |M : K| $ и $ |L : M| $ "--- делители $ |L : K| $
+\end{implication}
+
+\begin{implication}
+	$ L $ "--- конечное расширение $ K, \qquad |L : K| $ "--- простое число
+	$$ \implies \not\exist M : \quad K \sub M \sub L, \quad M \ne K, ~ M \ne L $$
+\end{implication}
+
+\begin{eg}
+	Не существует поля $ M : \quad \R \sub M \sub \Co $, отличного от них \\
+	По основной теореме алгебры поле $ \Co $ большое "--- в нём есть корень любого многочлена \\
+	С другой стороны, оно маленькое "--- только что мы выяснили, что оно довольно близко к $ \R $
+\end{eg}
+
+\begin{implication}
+	$ K \sub M \sub L $ \\
+	Тогда
+	\begin{itemize}
+		\item если $ |M : K| = |L : K| $, то $ M = L $
+		\item если $ |L : M| = |L : K| $, то $ M = K $
+	\end{itemize}
+\end{implication}
+
+\begin{implication}
+	$ K \sub M \sub L, \qquad L $ бесконечно над $ K $ \\
+	Тогда $ M $ бесконечно над $ K $ или $ L $ бесконечно над $ M $
+\end{implication}
+
+\begin{eg}
+	$ \R(x) $ над $ \R $ бесконечно \\
+	Значит, не существует $ M : \quad \R \sub M \sub \R(x) $, и $ M $ кончено над $ \R $, и $ \R(x) $ конечно над $ M $
+\end{eg}
+
+\begin{remark}
+	Нельзя построить ``башню'' из любого количества полей так, чтобы все шаги были конечны
+\end{remark}
+
+
+\chapter{Кольца и поля}
+
+\section{Алшебраические расширения}
+
+\begin{definition}
+	$ L $ "--- расширение $ K, \qquad \alpha \in L $ \\
+	$ \alpha $ называется алгебраическим над $ K $, сели $ \exist P(x) \in K[x] $ такой, что $ P(\alpha) = 0, \quad P(x) $ "--- не нулевой. \\
+	Если такого $ P(x) $ не существует, то $ \alpha $ называется трансцендентным.
+\end{definition}
+
+\begin{definition}
+	$ \alpha $ "--- алгебраическое над $ K, \qquad P(x) \in K[x], \qquad P(\alpha) = 0 $. \\
+	Тогда
+	\begin{itemize}
+		\item $ P(x) $ "--- алгебраический над $ \alpha $
+		\item $ P(x) $ аннулирует $ \alpha $
+	\end{itemize}
+	Минимальным многочленом $ \alpha $ над $ K $ называется ненулевой аннулирующий многочлен наименьшей степени со старшим коэффициентом, равным 1
+\end{definition}
+
+\begin{definition}
+	Алгебраическим числом называется комплексное число, алгебраическое над $ \Q $
+\end{definition}
+
+\begin{egs}
+	$ K = \Q, \quad L = \Co $
+	\begin{enumerate}
+		\item $ \alpha = i $ "--- алгебраическое \\
+		Минимальный многочлен $ P(x) = x^2 + 1 $
+		\item $ \alpha = \sqrt[3]5 $ \\
+		$ P(x) = x^3 - 5 $ "--- аннулирующий, минимальный
+		\item $ \alpha = 1 + \sqrt[3]5 $ "--- алгебраическое \\
+		Найдём аннулирующий многочлен:
+		$$ (\alpha - i)^3 = 5 $$
+		$$ \alpha^3 - 3\alpha^2i + 3\alpha i^2 - i^3 = 5 $$
+		$$ (\alpha^3 - 3\alpha - 5) + (-3\alpha + 1)i = 0 $$
+		$$ \alpha^3 - 3\alpha - 5 = (-3\alpha + 1)i $$
+		$$ (\alpha^2 - 3\alpha - 5)^2 = -(-3\alpha + 1)^2 $$
+		$$ (\alpha^3 - 3\alpha + 5)^2 + (3\alpha + 1)^2 = 0 $$
+		$$ P(x) = (x^3 - 3x + 5)^2 + (3x + 1)^2 $$
+		\item $ \alpha = \sqrt[3]{2 + 4\sqrt[4]5} $ "--- алгераич.
+		$$ \alpha^3 = 2 + 4\sqrt[4]5 $$
+		$$ \alpha^3 - 2 = 4\sqrt[4]5 $$
+		$$ (\alpha^3 - 2)^4 = 4^4 \cdot 5 $$
+		$$ (\alpha^3 - 2)^4 - 4^4 \cdot 5 = 0 $$
+		$$ P(x) = (x^3 - 2)^4 - 4^4 \cdot 5 $$
+		\item $ e, \pi $ "--- трансцендентные
+	\end{enumerate}
+\end{egs}
+
+\begin{properties}[минимального многочлена]
+	$ K $ "--- поле, $ \qquad L $ "--- расширение $ K, \qquad \alpha \in L, \qquad \alpha $ алг. над $ K $
+	\begin{enumerate}
+		\item \label{en:prop:1} Пусть $ P(x) $ "--- минимальный для $ \alpha $. \\
+		Тогда
+		$$ F(\alpha) = 0 \quad \iff \quad F(x) \divby P(x) $$
+		\begin{proof}
+			$$ F(x) = P(x)Q(x) + R(x), \qquad \deg R < \deg P $$
+			\begin{itemize}
+				\item $ \impliedby $
+				$$ F(x) \divby P(x) \implies R(x) = 0 $$
+				$$ F(x) = P(x)Q(x) $$
+				Подставим $ \alpha $:
+				$$ F(\alpha) = \underbrace{P(\alpha)}_0Q(x) = 0 $$
+				\item $ \implies $
+				$$ \underbrace{P(\alpha)}_0Q(\alpha) + R(\alpha) = 0 $$
+				$$ R(\alpha) = 0 \implies R \text{ "--- нулевой} $$
+			\end{itemize}
+		\end{proof}
+		\item Минимальный многочлен для $ \alpha $ единственен
+		\begin{proof}
+			Пусть $ P_1 P_2 $ "--- минимальные
+			$$ \underimp{\text{св-во \ref{en:prop:1}}}
+			\begin{cases}
+				P_1(x) \divby P_2(x) \\
+				P_2(x) \divby P_1(x)
+			\end{cases} \quad \implies P_1(x) = P_2(x) $$
+		\end{proof}
+		\item Минимальный многочлен неприводим над $ K $
+		\begin{proof}
+			Пусть $ P(x) = S(x)T(x), \quad 0 < \deg S, \deg T < \deg P $
+			$$ 0 = P(\alpha) = \underbrace{S(\alpha)}_{\in L}\underbrace{T(\alpha)}_{\in L} \underbrace{L \text{ "--- поле}}
+			\begin{vars}
+				S(\alpha) = 0 \\
+				T(\alpha) = 0
+			\end{vars} \quad \contra \quad \deg S, \deg T < \deg P $$
+		\end{proof}
+		\item Если $ P(x) $ неприводим над $ K, \quad P(x) \ne 0, \quad P(\alpha) = 0 $
+		$$ \implies P(x) \text{ "--- минимальный для } \alpha $$
+		\begin{proof}
+			$$
+			\begin{rcases}
+				P(x) \divby \text{ миним.} \\
+				P(x) \text{ "--- непривод.}
+			\end{rcases} \implies P(x) \text{ "--- миним.} $$
+		\end{proof}
+	\end{enumerate}
+\end{properties}
+
+\begin{eg}
+	$ x^3 - 5 $ "--- минимальный для $ \sqrt[3]5 $ над $ \Q $, \as он неприводим над $ \Q $
+\end{eg}
+
+\begin{definition}
+	Расширение $ L $ над $ K $ называется алгебраическим, если любой элемент $ L $ является алгебраическим над $ K $ \\
+	Иначе "--- тренсцендентным
+\end{definition}
+
+\begin{theorem}
+	Конечное расширение полей является алгебраическим
+\end{theorem}
+
+\begin{proof}
+	Пусть $ L $ "--- конечное расширение $ K, \quad n \define |L : K|, \quad \alpha \in L $. \\
+	Докажем, что $ \alpha $ "--- алгебраическое: \\
+	Элементы $ \underbrace{1, \alpha, \dots, \alpha^{n - 1}, \alpha^n}_{n + 1} \in L $ ЛЗ над $ K $, \ie
+	$$ \exist k_0, k_1, \dots, k_{n - 1} k_n \in K \nin \bigodot : \quad k_0 \cdot 1 + k_1 \alpha + \dots + k_{n - 1}\alpha^{n - 1} + k_n\alpha^n = 0 $$
+	Пусть $ P(x) = k_0 + k_1x + \dots + k_{n - 1}x^{n - 1} + k_nx^n $. \\
+	Тогда $ P(x) \in K[x], \quad P(x) $ "--- ненулевой, $ \quad P(\alpha) = 0 \quad \implies \alpha $ "--- алгебраичсекое.
+\end{proof}
+
+\begin{definition}
+	$ L $ "--- поле, $ \qquad K $ "--- подполе $ L, \qquad \alpha_1, \dots \alpha_n \in L $ \\
+	Через $ K(\alpha_1, \dots, \alpha_n) $ будем обозначать наимеьшее подполе $ L $, содержащее $ K $ и $ \alpha_1, \dots, \alpha_n $. \\
+	Если $ M = K(\alpha_1, \dots \alpha_n) $, то говорят, что $ M $ получено из $ K $ присоединением $ \alpha_1, \dots, \alpha_n $. \\
+	Поле, полученное из $ K $ присоединением оного элемента, называется простым расширением $ K $.
+\end{definition}
+
+\begin{eg}
+	$ \Q(\sqrt2) $ "--- простое расширение $ \Q $
+\end{eg}
+
+\begin{theorem}[строение простого алгебраического расширения]
+	$ L $ "--- поле, $ \qquad K $ "--- подполе $ L, \qquad \alpha \in L, \qquad \alpha $ алг. над $ K, \qquad P(x) $ "--- минимальный многочлен для $ \alpha $ над $ K $ \\
+	Тогда
+	\begin{enumerate}
+		\item $ K(\alpha) \simeq \faktor{K[x]}{\braket{P(x)}} $ \\
+		$ \ol{F(x)} \mapsto F(\alpha) $ является изоморфизмом.
+		\item $ K(\alpha) $ конечно над $ K, \quad |K(\alpha) : K| = \deg P $ \\
+		$ 1, \alpha, \dots, \alpha^{n - 1} $ образуют базис $ K(\alpha) $ над $ K $.
+	\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+	Определим $ f : K[x] \to K(\alpha) $ как $ f(F) \define F(\alpha) $ ($ x \mapsto \alpha $), \as
+	$$ f(c_0 + c_1x + \dots c_kx^k) = c_0 + c_1\alpha + \dots c_k\alpha^k, \qquad c_i \in K $$
+	\begin{itemize}
+		\item Проверим, что $ f $ "--- гомоморфизм:
+		$$ f(F + G) = (F + G)(\alpha) = F(\alpha) + G(\alpha) = f(F) + f(G) $$
+		$$ f(FG) = (FG)(\alpha) = F(\alpha)G(\alpha) = f(F)f(G) $$
+		\item Найдём $ \ker f $:
+		$$ F(x) \in \ker f \iff f(F) = 0 \iff F(\alpha) = 0 \iff F(x) \divby P(x) $$
+		$$ \implies \ker f = \braket{P(x)} $$
+		\item Применим теорему о гомомрфизме:
+		$$ \Img f \simeq \faktor{K[x]}{\ker f} $$
+		Изоморфизм $ \vphi(\ol F) = f(F) = F(\alpha) $ \\
+		Получили изоморфизм $ \faktor{K[x]}{\braket{P(x)}} \to \Img f $
+		\item Проверим, что $ \Img f \iseq K(\alpha) $:
+		$$
+		\begin{rcases}
+			\alpha \in \Img f, \text{ \as } \alpha = f(x) \\
+			K \sub \Img f, \text{ \as } \underset{\in K}k = f(k)
+		\end{rcases} \underimp{\Img f \text{ "--- поле}} \Img f \supset K(\alpha) $$
+		\item Проверим, что $ 1, \alpha, \dots, \alpha^{\deg P - 1} $ "--- базис: \\
+		Пусть $ n \define \deg P $
+		\begin{itemize}
+			\item ЛНЗ: \\
+			\bt{Пусть} ЛЗ:
+			$$ a_0 \cdot 1 + a_1 \alpha + \dots + a_{n - 1}\alpha^{n - 1} = 0, \quad a_i \in K $$
+			Пусть $ F(x) \define a_0 + a_1x + \dots + a_{n - 1}x^{n - 1} \implies F(\alpha) = 0 $
+			$$ \implies F(x) \divby P(x) \underimp{F(x) \text{ "--- ненулевой}} \deg F \ge \deg P = n \quad \contra $$
+			\item Попрождающий:
+			$$ K(\alpha) = \Img f $$
+			Пусть $ u \in K(\alpha) \implies \exist F \in K[x] : \quad f(F) = u \quad \implies F(\alpha) = u $ \\
+			Делим с остатком:
+			$$ F(x) = Q(x)P(x) + R(x), \qquad \deg R < \deg P $$
+			$$ \implies \deg R \le n + 1 $$
+			$$ F(\alpha) = Q(\alpha)\underbrace{P(\alpha)}_0 + R(\alpha) = R(\alpha) $$
+			$$ R(x) = a_0 + a_1x + \dots a_{n - 1}x^{n - 1} \implies F(\alpha) = a_0 + a_1\alpha + \dots a_{n - 1}\alpha^{n - 1} $$
+		\end{itemize}
+	\end{itemize}
+\end{proof}
+
+\begin{exmpls}
+	\item $ \Q(\sqrt[3]2), \quad \alpha = \sqrt[3]2 $ \\
+	$ 1, \sqrt[3]2, (\sqrt[3]2)^2 $ "--- базис $ \faktor{\Q(\sqrt[3]2)}\Q $. \\
+	Любой элемент можно представить в виде $ a + b\sqrt[3]2 + c(\sqrt[3]2)^2, \quad a, b, c \in \Q $. \\
+	Пример сложения:
+	$$ \bigg( 1 + 2\sqrt[3]2 + 3(\sqrt[3]2)^2 \bigg) + (-1 + \sqrt[3]2) = 3\sqrt[3]2 + 3(\sqrt[3]2)^2 $$
+	Пример умножения:
+	$$ (1 + \sqrt[3]2)(2\sqrt[3]2 + 3\sqrt[3]2)^2 = 2\sqrt[3]2 + 3(\sqrt[3]2)^2 + 2\sqrt[3]2^2 + 3(\sqrt[3]2)^3 = 2\sqrt[3]2 + 5(\sqrt[3]2)^2 + 6 $$
+	\item $ P(x) = x^5 - 5x^4 + 5 $ "--- неприводимый над $ \Q $ по критерию Эйзенштейна
+	$$ x^5 - \underset{\divby 5}{5x^4} + \underset{\divby 5}{0x^3} + \underset{\divby 5}{0x^2} + \underset{\divby 5}{0x} + \underset{\divby 5}5 $$
+	$ \alpha $ "--- комплексный корень
+	$$ K = \Q, \quad L = \Co $$
+	Рассмотрим $ \Q(\alpha) $:
+	$$ |\Q(\alpha) : \Q| = 5 $$
+	$ 1, \alpha, \alpha^2, \alpha^3, \alpha^4 $ "--- базис $ \Q(L) $ над $ \Q $.
+\end{exmpls}
+
+\begin{implication}
+	$ \alpha $ "--- алгебраический над $ K, \qquad F, G \in K[x], \qquad G(\alpha) \ne 0, \qquad \beta = \frac{F(\alpha)}{G(\alpha)} $ \\
+	Тогда $ \beta $ "--- алгебраический над $ K $
+\end{implication}
+
+\begin{proof}
+	$ L $ "--- расширение $ K, \qquad \alpha \in L $
+	$$ \implies \beta \sub L $$
+	Существует поле $ K(\beta) $. \\
+	При этом $ \beta \in K(\alpha) $.
+	$$ K \sub K(\beta) \sub K(\alpha) $$
+	Применим одно из следствий из теоремы о мультипликативности расширения: \\
+	$ K(\alpha) $ над $ K $ конечно $ \implies K(\beta) $ над $ K $ конечно \\
+	$ \implies $ все элементы $ K(\beta) $ алгебраичны над $ K $
+\end{proof}
+
+\begin{exmpls}
+	\item $ \alpha $ "--- алг. над $ K $. \\
+	Тогда $ \frac{\alpha^2 + 3}{\alpha + 1} $ "--- алг. над $ K $
+	\item $ \dfrac{\sqrt[3]2 + 1}{(\sqrt[3]2)^2 + 5} $ "--- алг. число
+\end{exmpls}
+
+\begin{implication}
+	$ \alpha_1, \dots, \alpha_n $ алгебраичны над $ K $ \\
+	Тогда $ K(\alpha_1, \dots, \alpha_n) $ конечно над $ K $
+\end{implication}
+
+\begin{proof}
+	$$ K \sub K(\alpha_1) \sub K(\alpha_1, \alpha_2) \sub \dots \sub K(\alpha_1, \dots, \alpha_n) $$
+	Достаточно доказать, что $ K(\alpha_1, \dots, \alpha_i, \alpha_{i + 1}) $ кончено над $ K(\alpha_1, \dots, \alpha_i) $: \\
+	\widedots[5cm]
+	\TODO{Дописать доказательство}
+\end{proof}
+
+\begin{implication}
+	$ \alpha, \beta $ алгебраичны над $ K $ \\
+	$ \implies \alpha + \beta, \quad \alpha - \beta, \quad \alpha \beta, \quad \faktor\alpha\beta $ алгебраичны над $ K $
+\end{implication}
+
+\begin{proof}
+	\TODO{Дописать доказательство}
+\end{proof}
+
+
+\chapter{Кольца и поля}
+
+\section{Присоединение корней многочлена}
+
+Этот параграф более-менее по ван дер Вардену.
+
+\begin{theorem}[существование простого расширения]
+	$ K $ "--- поле, $ \qquad P(x) \in K[x] $ "--- неприводимый. \\
+	Тогда существует расширение поля $ K $ такое, что $ P(x) $ имеет в $ L $ корень $ \alpha $ и $ L = K(\alpha) $.
+\end{theorem}
+
+\begin{proof}
+	Рассмотрим множество формальных сумм вида
+	$$ a_0 + a_1X + a_2X^2 + \dots + a_nX^n, \quad a_i \in K $$
+	Введём отношение эквивалентности: \\
+	Если
+	$$ s = a_0 + a_1X + \dots, \qquad t = b_0 + b_1X + \dots $$
+	$$ S(x) \define a_0 + a_1x + \dots, \qquad T(x) \define b_0 + b_1x + \dots $$
+	и $ S(x) - T(x) \divby P(x) $, то $ s \sim t $. \\
+	Определим на множестве классов элквивалентности сложение и умножение: \\
+	Если
+	$$ s = a_0 + a_1X + \dots, \qquad t = b_0 + b_1X + \dots, \qquad u = c_0 + c_1X + \dots $$
+	$$ S(x) = a_0 + a_1x + \dots, \qquad T(x) = b_0 + b_1x + \dots, \qquad U(x) = c_0 + c_1x + \dots $$
+	и $ S(x)T(x) - U(x) \divby P(x) $, то положим $ u \define st $. \\
+	Сложение "--- аналогично. \\
+	Получается поле, изоморфное $ \faktor{K[x]}{\braket{P(x)}} $ \\
+	Изоморфизм: $ \ol{a_0 + a_1X + \dots} \mapsto \ol{a_0 + a_1x + \dots} $ \\
+	$ \ol X $ подойдёт в качестве $ \alpha $ (\as $ P(x) \mapsto \ol{P(x)} = 0 $).
+\end{proof}
+
+\begin{eg}
+	$ K = \Z_3 $ \\
+	$ p(x) = x^3 + 2x + 1 $ "--- неприводимый над $ \Z_3 $ \\
+	$ \alpha $ "--- корень. Существует поле $ K(\alpha) $. \\
+	Теперь знаем, что $ K(\alpha) $ алгебраическое над $ K, \quad |K(\alpha) : K| = 3 $ \\
+	Элементы имеют вид $ a + b\alpha + c\alpha^2, \quad a, b, c \in \Z_3 $ \\
+	Знаем, что $ \alpha^3 + 2\alpha + 1 = 0 $ \\
+	\bt{Пример умножения}.
+	$$ a = 1 + 2\alpha + \alpha^2, \qquad b = 2 + \alpha + \alpha^2 $$
+	$$ ab = (1 + 2\alpha + \alpha^2)(2 + \alpha + \alpha^2) = 2 + (1 + 1) \alpha + (2 + 2 + 1)\alpha^2 + (2 + 1)\alpha^3 + \alpha^4 \comp3 2 + 2\alpha + \alpha^2 + \alpha^4 $$
+	Поделим $ x^4 + x^2 + 2x + 2 $ на $ x^3 + 2x + 1 $:
+	$$ \widedots[5cm] $$
+	$$ ab = (\underbrace{\alpha^3 + \alpha + 2}_0) \cdot \alpha + 2 = 2 $$
+	\bt{Пример деления}.
+	$$ \frac1{\alpha^2 + 1} $$
+	$ x^2 + 1 $ и $ P(x) $ взаимно просты. Значит есть линейное представление НОД:
+	$$ (x + 2)P(x) + (2x^2 + x + 2)(x^2 + 1) = 1 $$
+	Подставим $ x = \alpha $:
+	$$ (\alpha + 2) \cdot 0 + (2\alpha + \alpha + 2)(\alpha^2 + 1) = 1 \quad \implies \quad \frac1{\alpha^2 + 1} = 2\alpha^2 + \alpha + 2 $$
+\end{eg}
+
+\begin{definition}
+	Расширения $ L_1, L_2 $ поля $ K $ называются эквивалентными \nimp[(относительно $ K $)], если $ L_1 \simeq L_2 $ и существует изоморфизм $ f : L_1 \to L_2 $ такой, что $ f\clamp{K} = \operatorname{id} $.
+\end{definition}
+
+\begin{theorem}[эквивалентные простые расширения]
+	$ \alpha, \beta $ "--- алгебраические над $ K $, их минимальные многочлены совпадают. \\
+	Тогда $ K(\alpha) $ и $ K(\beta) $ эквивалентны $ K $, причём существует изоморфизм $ f : K(\alpha) \to K(\beta) $ такой, что
+	$$ f\clamp{K} = \operatorname{id}, \quad (\alpha) = f(\beta) $$
+\end{theorem}
+
+\begin{proof}
+	Пусть $ P(x) $ "--- минимальный многочлен для $ \alpha $ и $ \beta, \quad n \define \deg P $. \\
+	Элементы $ K(\alpha) $ "--- это $ u_0 + u_1\alpha + \dots + u_{n - 1}\alpha^{n - 1} $. \\
+	Положим
+	$$ f(u_0 + u_1 \alpha + \dots + u_{n - 1}\alpha^{n - 1}) \define u_0 + u_1\beta + \dots + u_{n - 1}\beta^{n - 1} $$
+	Пусть
+	$$ s = u_0 + u_1\alpha + \dots, \qquad t = v_0 + v_1\alpha + \dots $$
+	$$ S(x) = u_0 + u_1 x + \dots, \qquad T(x) = v_0 + v_1x + \dots $$
+	Пусть $ R(x) = w_0 + w_1x + \dots + w_{n - 1}x^{n - 1} $ "--- такой, что $ S(x)T(x) - R(x) \divby P(x) $
+	$$ r = w_0 + w_1\alpha + \dots + w_{n - 1}\alpha^{n - 1} $$
+	Тогда $ s = S(\alpha), \quad t = T(\alpha), \quad r = R(\alpha) $
+	$$ f(s) = S(\beta), \qquad f(t) = T(\beta), \qquad f(r) = R(\beta) $$
+	$$ st = S(\alpha) T(\alpha) \undereq{ST - R \divby P} R(\alpha) = r^2 $$
+	$$ f(ST) = f(r) = R(\beta) $$
+	$$ f(s)f(t) = S(\beta)T(\beta) = R(\beta) $$
+	Сложение "--- аналогично. \\
+	Биективность:
+	\begin{itemize}
+		\item Инъективность:
+		$$ u_0 + u_1\alpha + \dots \to 0 $$
+		$$ u_0 + u_1\beta + \dots = 0 $$
+		$$ \implies u_i = 0 $$
+		\item Сюръективность: \\
+		Любой элемент $ K(\beta) $ "--- это $ u_0 + u_1\beta + \dots $
+	\end{itemize}
+\end{proof}
+
+\begin{exmpls}
+	\item $ \Q, \quad P(x) = x^3 - 2 $ \\
+	Корни $ P(x) $:
+	$$ \alpha = \sqrt[3]2, \qquad \bigg( -\frac12 + \frac{\sqrt3}2i \bigg)\sqrt[3]2, \qquad \gamma = \bigg( -\frac12 - \frac{\sqrt3}2i \bigg)\sqrt[3]2 $$
+	$$ L_1 = K(\alpha), \qquad L_2 = K(\beta) $$
+	$$ a + b\sqrt[3]2 + c(\sqrt[3]2)^2 \quad \mapsto \quad a + b \bigg( -\frac12 + \frac{\sqrt3}2i \bigg) \sqrt[3]2 + c \bigg( \dots \bigg)^2, \qquad a, b, c \in \Q $$
+	Это "--- изоморфизм $ L_1 \to L_2 $ \\
+	Аналогично, $ K(\beta) \to K(\gamma) $ "--- сужение комплексного сопряжения.
+	\item $ \Q, \quad P(x) = x^2 - 2 $
+	$$ \alpha = \sqrt2, \qquad \beta = -\sqrt2 $$
+	$$ \Q(\alpha) = \Q(\beta) $$
+	По теореме, существует изоморфизм $ f : \Q(\sqrt2) \to \Q(\sqrt2) $ такой, что $ f\clamp Q = \operatorname{id}, \quad f(\sqrt2) = -\sqrt 2 $
+\end{exmpls}
+
+\begin{definition}
+	$ K $ "--- поле, $ \qquad P(x) \in K[x] $. \\
+	Полем разложениия $ P(x) $ называется такое расширение $ L $ поля $ K $, что в $ L $ многочлен $ P(x) $ раскладывается на линейные множители
+	$$ P(x) = a(x - \alpha_1)(x - \alpha_2)\dots(x - \alpha_n), \qquad a \in K, \quad \alpha_i \in L $$
+	и $ L = K(\alpha_1, \dots, \alpha_n) $.
+\end{definition}
+
+\begin{theorem}[существование поля разложения]
+	$ K $ "--- поле, $ \qquad P(x) \in K[x] $. \\
+	Тогда
+	\begin{enumerate}
+		\item существует поле разложения;
+		\item любое поле разложения является конечным расширением $ K $.
+	\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+	Будем считать, что старший коэффициент $ P $ равен 1. \\
+	Докажем, что существует $ M $, в котором $ P(x) $ раскладывается на линейные множители. \\
+	\bt{Индукцией} по $ n $ (не фиксируя $ K $) докажем, что для любого $ n $ выполнено утверждение:
+	\begin{quote}
+		Для любого $ K $, для любого многочлена степени не выше $ n $ существует поле $ M $, в котором $ P(x) $ раскладывается на линейные множители
+	\end{quote}
+	\begin{itemize}
+		\item \bt{База}. $ n = 1 $ \\
+		$ P(x) $ "--- линейный, есть корень в $ K, \quad M = K $
+		\item \bt{Переход} к $ n $: \\
+		Разложим $ P(x) $ на неприводимые над $ K $:
+		$$ P(x) = P_1(x)\dots P_k(x) $$
+		Присоединим корень $ \alpha $ многочлена $ P_1(x) $, получим $ K(\alpha) $. \\
+		$ K(\alpha) $ "--- поле, в нём верна теорема Безу:
+		$$ P_1(x) \divby x - \alpha \text{ в } K(\alpha)[x] $$
+		$$ P_1(x) = (x - \alpha)Q(x) $$
+		$$ P(x) = (x- \alpha)\underbrace{Q(x)P_2(x)\dots P_k(x)}_{H(x)} = (x - \alpha)H(x) $$
+		Применим \bt{предположение индукции} к $ K(\alpha) $ и $ H(x) $: \\
+		Существует $ M $, в котором $ H(x) $ раскладывается на линейные множиетели, $ K(\alpha) \sub M $. \\
+		Это $ M $ подходит для $ K $ и $ P(x) $. \\
+		Поле разложения "--- линейное подполе $ L $, содержащее $ K $ и $ \alpha_1, \dots, \alpha_n $.
+	\end{itemize}
+\end{proof}
+
+\begin{exmpls}
+	\item $ \Q, \quad P(x) = x^2 - 2 $ \\
+	Поле разложения: $ \Q(\sqrt2, -\sqrt2) = \Q(\sqrt2) $
+	$$ |\Q(\sqrt2) : \Q | = 2 $$
+	\item $ K = \Q, \qquad P(x) = x^3 - 2, \qquad L $ "--- поле разложения $ P(x) $
+	$$ \alpha = \sqrt[3]2, \qquad \beta = \bigg( -\frac12 + \frac{\sqrt3}2i \bigg)\sqrt[3]2, \qquad \gamma = \bigg( -\frac12 - \frac{\sqrt3}2i \bigg) \sqrt[3]2 $$
+	\begin{itemize}
+		\item $ \Q(\alpha) \ne L $ (\as $ \Q(\alpha) \sub \R, \quad L \not\sub \R $)
+		\item $ Q(\beta), ~ \Q(\gamma) $
+		$$ |\Q(\alpha) : \Q| = \deg (x^3 - 2) = 3, \qquad |\Q(\alpha) : \Q| = |\Q(\beta) : \Q| = |\Q(\gamma) : \Q| $$
+		$$ \Q(\alpha) \sub L, \quad \Q(\alpha) \ne L \quad \implies |L : \Q| > 3 \implies L \ne \Q(\beta), \quad L \ne \Q(\gamma) $$
+		\item $ L = \Q(\alpha, \beta) $ \as $ \gamma = -\alpha - \beta $
+	\end{itemize}
+	$$ \Q \sub \Q(\alpha) \sub \Q(\alpha, \beta) = L $$
+	$$ |\Q(\alpha, \beta) : \Q| = \underbrace{|\Q(\alpha, \beta) : \Q(\alpha)|}_2 \cdot \underbrace{|\Q(\alpha) : \Q|}_3 = 6 $$
+	$ \beta $ "--- корень уравнения
+	$$ \frac{x^3 - 2}{x - \alpha} = \frac{x^3 - 2}{x - \sqrt[3]2} = \frac{x^3 - \alpha^3}{x - \alpha} = x^2 + \alpha x + \alpha^2 $$
+\end{exmpls}
+
+\begin{theorem}[эквивалентность полей разложения многочлена]
+	$ K $ "--- поле, $ \qquad P \in K[x], \qquad L, M $ "--- поля разложения. \\
+	Тогда
+	\begin{enumerate}
+		\item $ L $ и $ M $ эквивалентны над $ K $;
+		\item можно выбрать такие $ \alpha_i \in L_i \quad \beta_i \in M $ такие, что
+		$$ P(x) = \underset{\in K}a(x - \alpha_1)\dots (x - \alpha_n), \qquad P(x) = \underset{\in K}b(x - \beta_1)\dots(x - \beta_n) $$
+		для которых существует изоморфизм $ f : L \to M, \quad f(\alpha_i) = \beta_i, \quad f\clamp K = \operatorname{id} $
+	\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+	Строим последовательно $ \alpha_1, \dots, \alpha_s, \quad \beta_1, \dots, \beta_s $.
+	$$ f_s : K(\alpha_1, \dots, \alpha_s) \to K(\beta_1, \dots, \beta_s) : \quad f(\alpha_i) = \beta_i $$
+	Пусть построены $ \alpha_1, \dots, \alpha_s, \quad \beta_1, \dots, \beta_s, \quad f_s $. \\
+	Положим $ L' = K(\alpha_1, \dots, \alpha_s), \quad M' = K(\beta_1, \dots, \beta_s) $ \\
+	(на первом шаге считаем, что $ L' = M' = K, \quad f_0 = \operatorname{id} $) \\
+	Разложение $ P(x) $ на неприводимые над $ L' $
+	$$ P(x) = (x - \alpha_1)\dots(x - \alpha_s) Q_1(x)Q_2(x)\dots $$
+	$$ f_s = L' \to M' $$
+	$$ P(x) = f_s(P(x)) = (x - \beta_1)\dots(x - \beta_s)R_1(x)R_2(x)\dots, \qquad R_i(x) = f_s(Q_i(x)) $$
+	$ R_i(x) $ неприводимы
+	\begin{itemize}
+		\item Если $ Q_i(x) $ "---линейный, обозначим его корень $ \alpha_{s + 1}, \quad \beta_{s + 1} \define f(\alpha_{s + 1}) $
+		$$ f_s \big( Q_i(x) \big) = (x - \beta_{s + 1}) $$
+		$$ f_{s + 1} \define f_s $$
+		\item Если нет линейных, то воложим $ \alpha_{s + 1} $ "--- корень $ Q(x), \quad \beta_{s + 1} $ "--- корень $ R_1(x) $
+		$$ L'(\alpha_{s + 1}) \simeq \faktor{L'(x)}{\braket{Q_1(x)}} = \simeq \faktor{M'(x)}{\braket{R_1(x)}} \simeq M'(\beta_{s + 1}) $$
+	\end{itemize}
+\end{proof}
+
+\begin{remark}
+	Порядок важен:
+	$$ P(x) = (x^2 + 1)(x^2 + 4) $$
+	Корни: $ i $, $ -i $, $ 2i $, $ -2i $ \\
+	\bt{Нет} изоморфизма над $ \Q $:
+	$$ i \to 2i, \qquad i^2 \to (2i)^2, \qquad -1 \to -4 $$
+\end{remark}

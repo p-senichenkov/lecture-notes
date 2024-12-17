@@ -1,0 +1,242 @@
+\chapter{Кольца и поля}
+
+\section{Корни из единицы}
+
+\begin{definition}
+	$ K $ "--- поле, $ \qquad \veps \in K, \qquad n \in \N $ \\
+	$ \veps $ называется корнем $ n $-й степени из единицы, если $ \veps^n = 1 $. \\
+	$ \veps $ "--- примитивный корень степени $ n $, если $ \veps^n = 1, \quad \veps^k \ne 1 $ при $ 1 \le k < n $
+\end{definition}
+
+\begin{eg}
+	$ K = \Z_5(\alpha), \quad \alpha^2 - 3 = 0 $
+	$$ \alpha^8 = 3^4 = 81 = 1 \implies \alpha \text{ "--- корень 8-й степени из единицы} $$
+\end{eg}
+
+\begin{props}
+	\item Корни $ n $-й степени из 1 образуют абелеву группу по умножению
+	\begin{proof}
+		Пусть $ U $ "--- множество корней $ n $-й степени.
+		\begin{itemize}
+			\item $ \veps_1, \veps_2 \in U \implies (\veps_1\veps_2)^n = \veps_1^n\veps_2^n = 1 \cdot 1 = 1 \implies \veps_1\veps_2 \in U $
+			\item $ \veps \in U \implies \bigg( \frac1\veps \bigg)^n = \frac{1^n}{\veps^n} = \frac11 = 1 \implies \veps^{-1} \in U $
+		\end{itemize}
+	\end{proof}
+	\item $ \chara k = p \in \Prime \ne 0, \qquad n = p^mh, \quad h \ndivby p, \qquad \veps $ "--- корень $ n $-й степени из 1. \\
+	Тогда $ \veps $ "--- корень $ h $-й степени из 1.
+	\begin{proof}
+		Докажем, что если $ \veps^{ps} = 1 $, то $ \veps^s = 1 $:
+		$$ C_p^i = \frac{p!}{(p - i)! \cdot i!} \quad \divby p \text{ при } 1 \le i \le p - 1 \text{ в } \Z $$
+		(\as $ p! \divby p, \quad (p - i)! \cdot i! \ndivby p $)
+		$$ \chara K = p \implies C_p^i = 0 \text{ при } 1 \le i \le p $$
+		$$ (\veps^s - 1)^p = (\veps^s)^p + 0 \cdot (\veps^s)^{p - 1} \cdot (-1) + \dots + 0 \cdot \veps^s \cdot (-1)^{p - 1} + (-1)^p = \veps^{sp} - 1 = 1 - 1 = 0 \underimp{\text{обл. цел.}} \veps^s - 1 $$
+	\end{proof}
+\end{props}
+
+\begin{eg}
+	$ K + \Z_5(\alpha), \quad \alpha^2 - 3 = 0 $ \\
+	Проверим, что $ \alpha $ "--- примитивный корень 8-й степени:
+	$$ \alpha^8 = 1 \implies 8 \divby \ord \alpha \implies \ord \alpha =
+	\begin{vars}
+		8 \\
+		4 \\
+		2 \\
+		1
+	\end{vars} $$
+	Если $ \ord \alpha =
+	\begin{vars}
+		4 \\
+		2 \\
+		1
+	\end{vars} $, то $ \alpha^4 = 1 $
+	$$ \alpha^4 = 3^2 = 9 = 4 \ne 1 $$
+\end{eg}
+
+\begin{theorem}[существование примитивного корня]
+	$ K $ "--- поле, $ \qquad h \in \N $ \\
+	$ x^h - 1 $ раскладывается в $ K $ на линейные множители, $ \qquad h \ndivby \chara K $
+
+	Тогда
+	\begin{enumerate}
+		\item в $ K $ есть $ h $ различных корней $ n $-й степени из единицы;
+		\item существует примитивный корень $ h $-й степени из единицы;
+		\item группа корней $ h $-й степени является циклической и порождается любым примитивным корнем.
+	\end{enumerate}
+\end{theorem}
+
+\begin{eproof}
+	\item $ p(x) = x^h - 1 $ имеет $ h $ корней с учётом кратности \\
+	$ p'(x) = hx^{h - 1} $ "--- единственный корень "--- 0 "--- не является корнем $ p(x) $
+	\item $ U $ "--- группа корней $ h $-й степени из единицы, $ \quad |U| = h $
+
+	Нужно доказать, что $ \exist \veps \in U : \quad \ord \veps = h $
+
+	Пусть $ h = p_1^{a_1} \cdot \dots \cdot p_k^{a_k}, \quad p_i \in \Prime $
+
+	Докажем, что $ \exist x_1, \dots, x_k \in U : \quad \ord (x_i) = p_i^{a_i} $:
+
+	Докажем для $ i = 1 $ (остальное "--- аналогично):
+	$$ x_1 : \ord x_1 \iseq p_1^{a_1} $$
+	Докажем, что $ \exist y : \quad \ord y \divby p_1^{a_1} $:
+
+	\bt{Пусть} $ \forall y \in U \quad \ord y \ndivby p_1^{a_1} $
+	$$
+	\begin{rcases}
+		p_1^{a_1}p_2^{a_2} \dots p_k^{a_k} \divby \ord y \\
+		\ord y \ndivby p_1^{a_1}
+	\end{rcases} \implies \underbrace{p_1^{a_1 - 1}p_2^{a_2} \dots p_k^{a_k}}_{h'} \divby \ord y $$
+	$$ h' \divby \ord y \implies y^{h'} = 1 \quad \forall y \in U $$
+	$ y $ "--- корень кногочлена $ x^{h'} - 1 \quad \forall y \in U $
+
+	У него $ h > h' $ корней "--- \contra
+	$$ \ord y = p_1^{a_1} \cdot t \implies \ord(y^t) = p_1^{a_1} $$
+	Подойдёт $ x_1 = y^t $. Аналогично $ x_i $
+
+	Докажем, что для $ \veps = x_1x_2 \dots x_k $ выполнено $ \ord \veps = h $:
+
+	Положими $ b_i \define \frac{h}{p_i} $, \ie $ b_i = p_1^{a_1} \dots p_i^{a_i - 1} \dots p_k^{a_k} $
+
+	$ x_i^{b_i} \ne 1 $ \as $ b_i \ndivby \ord x_i $
+	$$ x_i^{b_i} - 1, \qquad j \ne i $$
+	$ x_j^{b_i} = 1 $ при $ i \ne j $
+	$$ \veps^{b_i} = \underbrace{x_1^{b_i}}_1 \dots \underbrace{x_i^{b_i}}_{\ne 1} \dots \underbrace{x_k^{b_i}}_1 \ne 1 $$
+	$$ h \divby \ord \veps, \qquad b_i \ndivby \veps \quad \forall i \quad \implies \ord \veps = h $$
+	\item $ \veps $ "--- примитивный
+
+	$ 1, \veps, \veps^2, \dots, \veps^{h - 1} $ различны $ \implies 1, \veps, \dots, \veps^{h - 1} $ "--- все элементы $ U $ ($ \veps^i = \veps^j \implies \veps^{i - j} = 1 $)
+\end{eproof}
+
+\begin{lemma}[количество примитивных корней]
+	$ K $ "--- поле, $ \qquad h \in \N, \quad h \ndivby \chara K $ \\
+	$ x^h - 1 $ раскладывается на линейные множители
+
+	Тогда в $ K $ есть $ \vphi(h) $ примитивных корней из единицы.
+\end{lemma}
+
+\begin{proof}
+	$ \veps $ "--- примитивный корень \\
+	Все корни: $ \veps^0 = 1, \quad \veps^1 = \veps, \quad \veps^2, \quad \dots, \quad \veps^{n - 1} $
+
+	Докажем, что $ \veps^s $ примитивный $ \iff \NOD(s, h) = 1 $:
+	\begin{itemize}
+		\item Пусть $ \NOD(s, h) = 1, \quad (\veps^s)^k = 1 \implies \veps^{sk} = 1 \implies sk \divby h 	\implies k \divby h $
+		$$ \ord \veps^s = h $$
+		\item Пусть $ \NOD(s, h) = d \ne 1 $
+		$$ (\veps^s)^{\frac hd} = \veps^{\frac{sh}d} = (\underset{= 1}{\veps^h})^{\frac sd} = 1 \implies \ord \veps^s = \frac hd \implies \veps^s \text{ не примитивный} $$
+	\end{itemize}
+\end{proof}
+
+\begin{definition}
+	$ K $ "--- поле, $ \qquad h \in \N, \quad h \ndivby \chara K $ \\
+	$ x^h - 1 $ раскладывается на линейные множители \\
+	$ \veps_1, \dots, \veps_{\vphi(h)} $ "--- все примитивные корни степени $ h $
+
+	Многочлен деления круга (круговой многочлен) "--- это
+	$$ \Phi_h(x) = (x - \veps_1)(x - \veps_2) \dots (x - \veps_{\vphi(h)}) $$
+\end{definition}
+
+\begin{eg}
+	$ \Co $
+	$$ \Phi_1(x) = x - 1 $$
+	$$ \Phi_2(x) = x + 1 $$
+	$$ \Phi_3(x) = (x - \veps_1)(x - \veps_2) = \frac{(x - 1)(x - \veps_1)(x - \veps_2)}{x - 1} = \frac{x^3 - 1}{x - 1} = x^2 + x + 1 $$
+	$$ \forall p \in \Prime \quad \Phi_p = \frac{x^p - 1}{x - 1} = x^{p - 1} + x^{p - 2} + \dots + x + 1 $$
+	$$ \Phi_4(x) = (x - i)(x + i) = x^2 + 1 $$
+	$$ \Phi_4(x) = \frac{x^4 - 1}{\underbrace{(x - 1)}_{\Phi_1}\underbrace{(x + 1)}_{\Phi_2}} = x^2 + 1 $$
+\end{eg}
+
+\begin{theorem}[многочлен деления круга]
+	$ K $ "--- поле, $ \qquad h \in \N, \quad h \ndivby \chara K $ \\
+	$ x^h - 1 $ раскладывается на линейные множители
+
+	Тогда
+	\begin{enumerate}
+		\item
+		$$ x^h - 1 = \prod_{d | h} \Phi_d(x); $$
+		\item если $ K = \Co $, то коэффициенты $ \Phi_h(x) $ "--- целые числа.
+	\end{enumerate}
+\end{theorem}
+
+\begin{eproof}
+	\item
+	$$ x^h - 1 = \prod_{\veps \in U}(x - \veps), \qquad U \text{ "--- группа корней $ h $-й степени из 1} $$
+	$$ \prod_{d | h} \Phi_d(x) \iseq \prod_{\veps \in U}(x - \veps) $$
+	\begin{itemize}
+		\item Пусть $ x - \veps $ входит в $ \Phi_d(x) \implies \veps^d = 1, \quad \veps^k \ne 1 $ при $ k < d \quad \implies \veps^h = 1 $ (\as $ h \divby d $), $ \quad \veps \in U $
+		\item Пусть $ x - \veps $ входит в правую часть \\
+		Тогда $ \veps \in U $
+
+		Пусть $ \ord \veps = d \implies x - \veps $ входит в $ \Phi_d(x) $, не входит в $ \Phi_{\vawe d}(x), \quad \vawe d \ne d $
+	\end{itemize}
+	\item \bt{Индукция.}
+	\begin{itemize}
+		\item \bt{База} "--- проверено в примерах.
+		\item \bt{Переход} к $ h $ от меньших чисел.
+		$$ \Phi_h(x) = \frac{x^h - 1}{\Phi_{d_1}(x) \dots \Phi_{d_k}(x)}, \qquad d_1, \dots, d_k \text{ "--- делители } h \text{, не равные } h $$
+		Знаменатель "--- многочлен с целыми коэффициентами, старший коэффициент равен 1. При делении на такой многочлен получаем целые коэффициенты.
+	\end{itemize}
+\end{eproof}
+
+\section{Конечные поля}
+
+\begin{theorem}[строение конечного поля]
+	$ K $ "--- конечное поле
+
+	Существует $ p \in \Prime, \quad n \in \N $ такие, что
+	\begin{enumerate}
+		\item $ K $ содержит простое поле $ F \simeq \Z_p $;
+		\item $ \chara K = p $;
+		\item $ |K| = p^n $;
+		\item $ K $ является полем разложения многочлена $ x^{p^n} - x $ над $ F $.
+	\end{enumerate}
+\end{theorem}
+
+\begin{eproof}
+	\item $ F $ "--- минимальное подполе $ \implies F $ простое $ \implies $ оно изоморфно $ \Q $ или $ \Z_p $ \\
+	$ \Q $ бесконечно, значит $ \exist p : \quad F \simeq \Z_p $
+	\item $ \chara k = \min\set{n | \underbrace{1 + \dots + 1}_n = 0} $
+	$$ 1, \quad 1 + 1, \quad 1 + 1 + 1, \quad \dots \in F \implies \chara k = \chara F = p $$
+	\item $ K $ конечно над $ F $, \as есть $ \le |K| $ ЛНЗ над $ F $ элементов. \\
+	Пусть $ n = |K : F| $ \\
+	$ e_1, \dots, e_n $ "--- базис $ K $ над $ F $. \\
+	$ \implies $ элементы $ K $ имеют вид $ a_1e_1 + a_2e_2 + \dots a_ne_n \in F $ \\
+	$ |K| $ "--- количество наборов $ a_1, \dots, a_n \in F \implies |K| = p^n $
+	\item Пусть $ U = K^* $ \nimp[(группа ненулевых элементов $ K $ по умножению)]
+	$$ \implies |U| = p^n - 1 $$
+	$$ \forall x \in U \quad p^n - 1 \divby \ord x \implies x^{p^n - 1} = 1 \quad \forall x \in K \setminus \set{0} \implies x^{p^n} - x = 0 \quad \forall x \in K $$
+	$ \implies $ все элементы $ K $ "--- корни $ x^{p^n} - x = 0 $
+	$$ \deg(x^{p^n} - x) = p^n = |K| \implies \text{ других корней нет} $$
+\end{eproof}
+
+\begin{implication}[единственность]
+	Любые два конечных поля с одинаковым числом элементов изоморфны.
+\end{implication}
+
+\begin{proof}
+	$ |K| = p^n \implies K $ изоморфно полю разложения $ x^{p^n} - x $ над $ \Z_p $.
+\end{proof}
+
+\begin{theorem}[сущетсвование]
+	Для любых $ p \in \Prime, \quad n \in \N $ существует поле из $ p^n $ элементов
+\end{theorem}
+
+\begin{proof}
+	Пусть $ L $ "--- поле разложения $ P(x) = x^{p^n} - x $ над $ \Z_p $, $ \quad K $ "--- подмножество $ L $, состоящее из корней $ P(x) $.
+	$$ P'(x) = \underset0{p^n}x^{p^n - 1} - 1 = -1 \text{ не имеет корней } \implies \text{ у } P, P' \text{ нет общих корней} $$
+	$ \implies $ у $ P $ нет кратных корней $ \implies $ у $ P $ ровно $ p^n $ корней $ \implies |K| = p^n $
+
+	Докажем, что $ K $ "--- поле: \\
+	$ K $ "--- подмножество поля. Достаточно доказать, то $ 0, 1 \in K, \quad K $ замкнуто относительно $ =, \cdot $, взятия обратного по $ +, \cdot $:
+	\begin{itemize}
+		\item $ P(0) = 0^{P^n} - 0 = 0, \qquad P(1) = 1 - 1 \quad \implies 0, 1 \in K $
+		\item $ x, y \in K \implies x^{p^n} - x = 0, \quad y^{p^n} - y = 0 $
+		$$ (x = y)^{p^n} = \bigg( (x = y)^p \bigg)^{p^n - 1} = (x^p + y^p)^{x^{p^{n - 1}}} = \bigg( (x^p + y^p)^p \bigg)^{p^{n - p}} = (x^{p^2} + y^{p^2})^{p^{n - p}} = \dots = x^{p^n} + y^{p^n} = x + y $$
+		$$ (x + y)^{p^n} - (x + y) = 0 $$
+		\item $ P(-x) = (-x)^{p^n} - (-x) = -(x^{p^n} - x) = \dots = -P(x) $
+		$$ x \in K \implies p(x) = 0 \implies p (-x) = 0 \implies -x \in K $$
+		\item $ x, y \in K \implies x^{p^n} = x, \quad y^{p^n} = y $
+		$$ P(xy) = (xy)^{p^n} - xy = x^{p^n}y^{p^n} - xy = 0 \implies xy \in K $$
+		\item $ x \in K $
+		$$ x^{p^n} = x \implies \bigg( \frac1x \bigg)^{p^n} = \frac1{x^{p^n}} = \frac1x $$
+	\end{itemize}
+\end{proof}

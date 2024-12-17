@@ -11,6 +11,8 @@
 \setotherlanguage{english}
 \setkeys{russian}{babelshorthands=true, mathfunctions=true}
 
+\usepackage{ifthen}
+
 %% polyglossia shorthands:
 %   "-   -- additional hypen point, does *not* disable others
 %   ""   -- *allows* linebrak, *without* hypen sign
@@ -36,6 +38,12 @@
 
 \usepackage{braket}
 
+% fancy vectors
+\usepackage[e]{esvect}
+
+% space that doesn't disappear at the end of text commands, but is ommited when needed (e. g. before comma)
+\usepackage{xspace}
+
 % typeset pseudocode (algo2e option -- change env. name algorithm to algorithm2e)
 \usepackage[algo2e]{algorithm2e}
 
@@ -60,7 +68,7 @@
 \SetSymbolFont{stmry}{bold}{U}{stmry}{m}{n}
 
 \usepackage{tikz}
-\usetikzlibrary{intersections, angles, calc, positioning, arrows.meta, decorations.pathreplacing}
+\usetikzlibrary{intersections, angles, calc, positioning, arrows.meta, decorations.pathreplacing, quotes, 3d, babel}
 
 % multiple images in one figure
 \usepackage{subcaption}
@@ -73,6 +81,8 @@
 
 % xlongequal
 \usepackage{extarrows}
+
+\usepackage{emoji}
 
 % bold font in maths, that preserve spacing (should be loaded *last*)
 \usepackage{bm}
@@ -123,9 +133,19 @@
 % ring's characteristics
 \DeclareMathOperator{\chara}{char}
 
+% Re and Im
+\newcommand\oldRe\Re
+\newcommand\oldIm\Im
+
+\AtBeginDocument{\renewcommand\Re{\ensuremath{\mathfrak{Re}\,}}}
+\AtBeginDocument{\renewcommand\Im{\ensuremath{\mathfrak{Im}\,}}}
+
 %%      numerating
 % labeled equation
 \newenvironment{equ}[1]{\begin{equation} \label{eq:#1}}{\end{equation}}
+% shorthands for multline:
+\newenvironment{ml}[1]{\begin{multline} \label{eq:#1}}{\end{multline}}
+\newenvironment{ml*}{\begin{multline*}}{\end{multline*}}
 % multiline equation with *every* line numbered
 \newenvironment{mequ}[1][\empheqlbrace]
 {
@@ -156,8 +176,11 @@
 \let\vawe\widetilde
 % long \vec (DEPRECATED)
 \newcommand*\vect[1]{\overrightarrow{#1}}
-% long \vec
-\let\vec\overrightarrow
+% long \vec (DEPRECATED -- use \vv and \vv*)
+\AtBeginDocument{\renewcommand\vec\vv}
+% long hat
+\newcommand\smallhat\hat
+\AtBeginDocument{\renewcommand\hat\widehat}
 
 % ?=
 \newcommand\iseq{\stackrel?=}
@@ -168,9 +191,15 @@
 \let\mc\mathcal
 
 \let\bt\textbf
+\let\it\textit
 
-% partial derivative
+% n-th partial derivative
 \newcommand*\pder[2]{\ensuremath{\frac{\partial {#1}}{\partial {#2}}}}
+
+% n-th derivative
+\newcommand*\nder[2][n]{\ensuremath{{#2}^{({#1})}}}
+
+%%      arrows
 
 % arrows with text below `em
 \newcommand\underarr[1]{\ensuremath\xrightarrow[#1]{}}
@@ -191,11 +220,20 @@
 
 % custom extensible arrows
 \makeatletter
+% xrightrightarrow
 \newdimen\@temp
 \settowidth\@temp{$ \m@th \relbar $}
 \def\@highRelbar{\raisebox{-0.1675em}{$ \relbar $}\hspace{-\@temp}\raisebox{0.1675em}{$ \relbar $}}
 \def\xrightrightarrowsfill@{\arrowfill@\@highRelbar\@highRelbar\rightrightarrows}
 \newcommand\xrightrightarrows[2][]{\ext@arrow 0099\xrightrightarrowsfill@{#1}{#2}}
+
+% xequiv
+\let\equv@\equiv
+\newcommand\xequivfill@{\arrowfill@\equiv@\equiv@\equiv@}
+\newcommand\xequiv[2][]{\ext@arrow 0099\xequivfill@{#1}{#2}}
+% equiv with domain
+\AtBeginDocument{\renewcommand\equiv[1][]{\xequiv{#1}}}
+
 \makeatother
 
 % special cases
@@ -203,6 +241,16 @@
 \newcommand\infarr[1]{\ensuremath\limarr{#1}\infty}
 \newcommand\zarr[1]{\ensuremath\limarr{#1}0}
 \newcommand\uniarr[2][n \to \infty]{\ensuremath\xrightrightarrows[#1]{#2}}
+
+% other custom arrows
+
+\newcommand\curveddownarrowright{\rotatebox{180}{\curvearrowleft}}
+\newcommand\curveddownarrowleft{\rotatebox{180}{\curvearrowright}}
+
+% 1 is left-to-right
+\newcommand\curvedir[2][1]{\ifthenelse{\isodd{#1}}
+    {\ensuremath{\overset{\curveddownarrowright}{#2}}}
+    {\ensuremath{\overset{\curveddownarrowleft}{#2}}}}
 
 % labels and references
 \newcommand*\lbl[1]{\label{eq:#1}}
@@ -222,8 +270,11 @@
 % integrals
 \newcommand\uint[2][x]{\ensuremath{\int {#2} \, \operatorname{d} {#1}}}
 \newcommand\ufint[2][x]{ \ensuremath{ \int{ \dfrac{\operatorname{d} {#1}}{{#2}} } } }
+
 \newcommand\dint[4][x]{\ensuremath{\int_{#2}^{#3} {#4} \, \operatorname{d} {#1}}}
 \newcommand\dfint[4][x]{\ensuremath{\int_{#2}^{#3} \dfrac{\operatorname{d} {#1}}{{#4}}}}
+
+\newcommand\cint[3][l(M)]{\ensuremath{\int\limits_{#2} {#3} \, \operatorname{d} {#1}}}
 
 % Riman's integral
 \newcommand\Ri{\ensuremath{\mathcal{R}}}
@@ -238,7 +289,7 @@
 \newcommand\fed\eqqcolon
 % :{#1}
 \newcommand*\definerel[1]{\mathrel{:{#1}}}
-% by definition (default is =) (DEPRECATED)
+% by definition (default is =)
 \newcommand*\bydef[1][=]{\ensuremath{\stackrel{\text{def}}{#1}}}
 % by definition with NECESSARY text:
 \newcommand*\bdef[2][=]{\ensuremath{\stackrel{\text{def }{#2}}{#1}}}
@@ -265,11 +316,9 @@
 % Ball
 \newcommand\B{\ensuremath{\mathtt{B}}}
 
-% a line of dots (13em by default)
-\newcommand*\widedots[1][13em]
-{
-    \tikz\draw[loosely dotted] (0, 0) -- (#1, 0pt);
-}
+% a line of dots (3cm by default)
+% https://tex.stackexchange.com/a/332124/358925
+\newcommand\widedots[1][3cm]{\makebox[#1]{\dotfill}}
 
 % sequence
 \newcommand\seq[3][\infty]{\ensuremath{\Set{#2}_{#3=1}^{#1}}}
@@ -286,13 +335,21 @@
     }}
 
 % clamp function
-\newcommand\clamp[2][]{\ensuremath{\bigg|_{#2}^{#1}}}
+\newcommand\clamp[2][]{\ensuremath{\big|_{#2}^{#1}}}
 
 % continuous function
 \newcommand\Cont[2][]{\ensuremath{\mathcal{C}^{#1} \bigg( {#2} \bigg) }}
 
 % norm in R^n
 \newcommand\norm[1]{\ensuremath{\left\|{#1}\right\|}}
+
+%%      text commands:
+%%  russian non-breaking abbrevations
+\newcommand\as{\text{т.~к.}\xspace}
+\newcommand\As{\text{Т.~к.}\xspace}
+\newcommand\ie{\text{т.~е.}\xspace}
+% so-called
+\newcommand\soc{\text{т.~н.}\xspace}
 
 %%      decorations
 % divisible by
@@ -309,11 +366,11 @@
 \newcommand\contra{~\scalebox{1.2}{$\lightning$}~}
 
 % consider
-\newcommand\consider{\bigg)\hskip{0.3em}<}
+\newcommand\consider{\scalebox{1.3}{\big)\hspace{-0.7em}<}}
 
 % roman numbers
 \makeatletter
-\newcommand*{\rom}[1]{\expandafter\@slowromancap\romannumeral #1@}
+\newcommand*{\rom}[1]{\text{\expandafter\@slowromancap\romannumeral #1@}}
 \makeatother
 
 % GCD and LCM (DEPRECATED -- now polyglossia handles them)
@@ -324,7 +381,7 @@
 \newcommand\trile{\ensuremath{\stackrel\vartriangle\le}}
 \newcommand\trige{\ensuremath{\stackrel\vartriangle\ge}}
 
-% 1 / 2 or [x] / 2
+% 1 / 2 or [x] / 2 (DEPRECATED -- this command is broken)
 \newcommand\half[1][1]{\ensuremath{\frac{#1}2}}
 
 \newcommand\TODO[1]{\textcolor{red}{{\Huge TODO:} {#1}} \message{LaTeX Warning: TODO on line \the\inputlineno}}
@@ -432,6 +489,21 @@
     qed=\qedsymbol
 ]{thmproofbox}
 
+% \makeatletter
+\newcommand\chevron{\square\hspace{-0.82em}\raisebox{0.41em}{\resizebox{0.85em}{0.25em}{\triangledown}}}
+
+\declaretheoremstyle[
+    headfont=\bfseries\sffamily,
+    bodyfont=\normalfont,
+    numbered=yes,
+    mdframed={
+        linewidth=2pt,
+        rightline=false, topline=false, bottomline=false,
+        linecolor=Black, backgroundcolor=Black!1,
+    },
+    qed=\chevron
+]{thproblembox}
+
 \declaretheorem[style=thmgreenbox, name=Определение]{definition}
 
 \declaretheorem[style=thmbluebox, numbered=no, name=Пример]{eg}
@@ -454,11 +526,13 @@
 \newenvironment{restate}{\vspace{-.5em}\begin{restatebase}}{\end{restatebase}}
 
 \declaretheorem[style=thmblueline, numbered=no, name=Замечание]{remark}
-\declaretheorem[style=thmblueline, numbered=no, name=Примечание]{note}
+\declaretheorem[style=thmblueline, numbered=no, name=NB]{note}
 
 % Basov's control point. It's green, because it's commonly used inside of algorithm, which is blue
 \declaretheorem[style=thmgreenbox, numbered=no, name=Контрольная точка]{control}
 \declaretheorem[style=thmgreenbox, numbered=no, name=Ответ]{answerbase}
+
+\declaretheorem[style=thproblembox, name=Задача]{problem}
 
 % numbered theorems
 \newenvironment{props}[1][ ]{\begin{properties}[{#1}]\hfill\begin{enumerate}}{\end{enumerate}\end{properties}}
@@ -467,16 +541,22 @@
 \newenvironment{algo}[1][ ]{\begin{algorithm}[{#1}]\hfill\begin{enumerate}}{\end{enumerate}\end{algorithm}}
 
 \newenvironment{iproof}[1][ ]{\begin{proof}[{#1}]\hfill\begin{itemize}}{\end{itemize}\end{proof}}
+\newenvironment{eproof}[1][ ]{\begin{proof}[{#1}]\hfill\begin{enumerate}}{\end{enumerate}\end{proof}}
 
 \declaretheorem[style=thmproofbox, name=Доказательство]{replacementproof}
 % proof, moved 0.5em up
 \renewenvironment{proof}{\vspace{-.5em}\begin{replacementproof}}{\end{replacementproof}}
 
+\makeatletter
+\declaretheorem[style=thmproofbox, name=Без доказательства]{noproof@base}
+% Reasons can be written inside
+\newenvironment{noproof}{\vspace{-.5em}\begin{noproof@base}}{\end{noproof@base}}
+\makeatother
+
 \newenvironment{answer}{\vspace{-.5em}\begin{answerbase}}{\end{answerbase}}
 
 % no-style theorems
 \newtheorem*{notation}{Обозначение}
-\newtheorem*{problem}{Задача}
 \newtheorem*{intuition}{Очевидно, что}
 \newtheorem*{remind}{Напоминание}
 

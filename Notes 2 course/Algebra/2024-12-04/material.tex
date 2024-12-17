@@ -1,0 +1,200 @@
+\chapter{Кольца и поля}
+
+\section{Присоединение корней многочлена}
+
+Этот параграф более-менее по ван дер Вардену.
+
+\begin{theorem}[существование простого расширения]
+	$ K $ "--- поле, $ \qquad P(x) \in K[x] $ "--- неприводимый. \\
+	Тогда существует расширение поля $ K $ такое, что $ P(x) $ имеет в $ L $ корень $ \alpha $ и $ L = K(\alpha) $.
+\end{theorem}
+
+\begin{proof}
+	Рассмотрим множество формальных сумм вида
+	$$ a_0 + a_1X + a_2X^2 + \dots + a_nX^n, \quad a_i \in K $$
+	Введём отношение эквивалентности: \\
+	Если
+	$$ s = a_0 + a_1X + \dots, \qquad t = b_0 + b_1X + \dots $$
+	$$ S(x) \define a_0 + a_1x + \dots, \qquad T(x) \define b_0 + b_1x + \dots $$
+	и $ S(x) - T(x) \divby P(x) $, то $ s \sim t $. \\
+	Определим на множестве классов элквивалентности сложение и умножение: \\
+	Если
+	$$ s = a_0 + a_1X + \dots, \qquad t = b_0 + b_1X + \dots, \qquad u = c_0 + c_1X + \dots $$
+	$$ S(x) = a_0 + a_1x + \dots, \qquad T(x) = b_0 + b_1x + \dots, \qquad U(x) = c_0 + c_1x + \dots $$
+	и $ S(x)T(x) - U(x) \divby P(x) $, то положим $ u \define st $. \\
+	Сложение "--- аналогично. \\
+	Получается поле, изоморфное $ \faktor{K[x]}{\braket{P(x)}} $ \\
+	Изоморфизм: $ \ol{a_0 + a_1X + \dots} \mapsto \ol{a_0 + a_1x + \dots} $ \\
+	$ \ol X $ подойдёт в качестве $ \alpha $ (\as $ P(x) \mapsto \ol{P(x)} = 0 $).
+\end{proof}
+
+\begin{eg}
+	$ K = \Z_3 $ \\
+	$ p(x) = x^3 + 2x + 1 $ "--- неприводимый над $ \Z_3 $ \\
+	$ \alpha $ "--- корень. Существует поле $ K(\alpha) $. \\
+	Теперь знаем, что $ K(\alpha) $ алгебраическое над $ K, \quad |K(\alpha) : K| = 3 $ \\
+	Элементы имеют вид $ a + b\alpha + c\alpha^2, \quad a, b, c \in \Z_3 $ \\
+	Знаем, что $ \alpha^3 + 2\alpha + 1 = 0 $ \\
+	\bt{Пример умножения}.
+	$$ a = 1 + 2\alpha + \alpha^2, \qquad b = 2 + \alpha + \alpha^2 $$
+	$$ ab = (1 + 2\alpha + \alpha^2)(2 + \alpha + \alpha^2) = 2 + (1 + 1) \alpha + (2 + 2 + 1)\alpha^2 + (2 + 1)\alpha^3 + \alpha^4 \comp3 2 + 2\alpha + \alpha^2 + \alpha^4 $$
+	Поделим $ x^4 + x^2 + 2x + 2 $ на $ x^3 + 2x + 1 $:
+	$$ \widedots[5cm] $$
+	$$ ab = (\underbrace{\alpha^3 + \alpha + 2}_0) \cdot \alpha + 2 = 2 $$
+	\bt{Пример деления}.
+	$$ \frac1{\alpha^2 + 1} $$
+	$ x^2 + 1 $ и $ P(x) $ взаимно просты. Значит есть линейное представление НОД:
+	$$ (x + 2)P(x) + (2x^2 + x + 2)(x^2 + 1) = 1 $$
+	Подставим $ x = \alpha $:
+	$$ (\alpha + 2) \cdot 0 + (2\alpha + \alpha + 2)(\alpha^2 + 1) = 1 \quad \implies \quad \frac1{\alpha^2 + 1} = 2\alpha^2 + \alpha + 2 $$
+\end{eg}
+
+\begin{definition}
+	Расширения $ L_1, L_2 $ поля $ K $ называются эквивалентными \nimp[(относительно $ K $)], если $ L_1 \simeq L_2 $ и существует изоморфизм $ f : L_1 \to L_2 $ такой, что $ f\clamp{K} = \operatorname{id} $.
+\end{definition}
+
+\begin{theorem}[эквивалентные простые расширения]
+	$ \alpha, \beta $ "--- алгебраические над $ K $, их минимальные многочлены совпадают. \\
+	Тогда $ K(\alpha) $ и $ K(\beta) $ эквивалентны $ K $, причём существует изоморфизм $ f : K(\alpha) \to K(\beta) $ такой, что
+	$$ f\clamp{K} = \operatorname{id}, \quad (\alpha) = f(\beta) $$
+\end{theorem}
+
+\begin{proof}
+	Пусть $ P(x) $ "--- минимальный многочлен для $ \alpha $ и $ \beta, \quad n \define \deg P $. \\
+	Элементы $ K(\alpha) $ "--- это $ u_0 + u_1\alpha + \dots + u_{n - 1}\alpha^{n - 1} $. \\
+	Положим
+	$$ f(u_0 + u_1 \alpha + \dots + u_{n - 1}\alpha^{n - 1}) \define u_0 + u_1\beta + \dots + u_{n - 1}\beta^{n - 1} $$
+	Пусть
+	$$ s = u_0 + u_1\alpha + \dots, \qquad t = v_0 + v_1\alpha + \dots $$
+	$$ S(x) = u_0 + u_1 x + \dots, \qquad T(x) = v_0 + v_1x + \dots $$
+	Пусть $ R(x) = w_0 + w_1x + \dots + w_{n - 1}x^{n - 1} $ "--- такой, что $ S(x)T(x) - R(x) \divby P(x) $
+	$$ r = w_0 + w_1\alpha + \dots + w_{n - 1}\alpha^{n - 1} $$
+	Тогда $ s = S(\alpha), \quad t = T(\alpha), \quad r = R(\alpha) $
+	$$ f(s) = S(\beta), \qquad f(t) = T(\beta), \qquad f(r) = R(\beta) $$
+	$$ st = S(\alpha) T(\alpha) \undereq{ST - R \divby P} R(\alpha) = r^2 $$
+	$$ f(ST) = f(r) = R(\beta) $$
+	$$ f(s)f(t) = S(\beta)T(\beta) = R(\beta) $$
+	Сложение "--- аналогично. \\
+	Биективность:
+	\begin{itemize}
+		\item Инъективность:
+		$$ u_0 + u_1\alpha + \dots \to 0 $$
+		$$ u_0 + u_1\beta + \dots = 0 $$
+		$$ \implies u_i = 0 $$
+		\item Сюръективность: \\
+		Любой элемент $ K(\beta) $ "--- это $ u_0 + u_1\beta + \dots $
+	\end{itemize}
+\end{proof}
+
+\begin{exmpls}
+	\item $ \Q, \quad P(x) = x^3 - 2 $ \\
+	Корни $ P(x) $:
+	$$ \alpha = \sqrt[3]2, \qquad \bigg( -\frac12 + \frac{\sqrt3}2i \bigg)\sqrt[3]2, \qquad \gamma = \bigg( -\frac12 - \frac{\sqrt3}2i \bigg)\sqrt[3]2 $$
+	$$ L_1 = K(\alpha), \qquad L_2 = K(\beta) $$
+	$$ a + b\sqrt[3]2 + c(\sqrt[3]2)^2 \quad \mapsto \quad a + b \bigg( -\frac12 + \frac{\sqrt3}2i \bigg) \sqrt[3]2 + c \bigg( \dots \bigg)^2, \qquad a, b, c \in \Q $$
+	Это "--- изоморфизм $ L_1 \to L_2 $ \\
+	Аналогично, $ K(\beta) \to K(\gamma) $ "--- сужение комплексного сопряжения.
+	\item $ \Q, \quad P(x) = x^2 - 2 $
+	$$ \alpha = \sqrt2, \qquad \beta = -\sqrt2 $$
+	$$ \Q(\alpha) = \Q(\beta) $$
+	По теореме, существует изоморфизм $ f : \Q(\sqrt2) \to \Q(\sqrt2) $ такой, что $ f\clamp Q = \operatorname{id}, \quad f(\sqrt2) = -\sqrt 2 $
+\end{exmpls}
+
+\begin{definition}
+	$ K $ "--- поле, $ \qquad P(x) \in K[x] $. \\
+	Полем разложениия $ P(x) $ называется такое расширение $ L $ поля $ K $, что в $ L $ многочлен $ P(x) $ раскладывается на линейные множители
+	$$ P(x) = a(x - \alpha_1)(x - \alpha_2)\dots(x - \alpha_n), \qquad a \in K, \quad \alpha_i \in L $$
+	и $ L = K(\alpha_1, \dots, \alpha_n) $.
+\end{definition}
+
+\begin{theorem}[существование поля разложения]
+	$ K $ "--- поле, $ \qquad P(x) \in K[x] $. \\
+	Тогда
+	\begin{enumerate}
+		\item существует поле разложения;
+		\item любое поле разложения является конечным расширением $ K $.
+	\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+	Будем считать, что старший коэффициент $ P $ равен 1. \\
+	Докажем, что существует $ M $, в котором $ P(x) $ раскладывается на линейные множители. \\
+	\bt{Индукцией} по $ n $ (не фиксируя $ K $) докажем, что для любого $ n $ выполнено утверждение:
+	\begin{quote}
+		Для любого $ K $, для любого многочлена степени не выше $ n $ существует поле $ M $, в котором $ P(x) $ раскладывается на линейные множители
+	\end{quote}
+	\begin{itemize}
+		\item \bt{База}. $ n = 1 $ \\
+		$ P(x) $ "--- линейный, есть корень в $ K, \quad M = K $
+		\item \bt{Переход} к $ n $: \\
+		Разложим $ P(x) $ на неприводимые над $ K $:
+		$$ P(x) = P_1(x)\dots P_k(x) $$
+		Присоединим корень $ \alpha $ многочлена $ P_1(x) $, получим $ K(\alpha) $. \\
+		$ K(\alpha) $ "--- поле, в нём верна теорема Безу:
+		$$ P_1(x) \divby x - \alpha \text{ в } K(\alpha)[x] $$
+		$$ P_1(x) = (x - \alpha)Q(x) $$
+		$$ P(x) = (x- \alpha)\underbrace{Q(x)P_2(x)\dots P_k(x)}_{H(x)} = (x - \alpha)H(x) $$
+		Применим \bt{предположение индукции} к $ K(\alpha) $ и $ H(x) $: \\
+		Существует $ M $, в котором $ H(x) $ раскладывается на линейные множиетели, $ K(\alpha) \sub M $. \\
+		Это $ M $ подходит для $ K $ и $ P(x) $. \\
+		Поле разложения "--- линейное подполе $ L $, содержащее $ K $ и $ \alpha_1, \dots, \alpha_n $.
+	\end{itemize}
+\end{proof}
+
+\begin{exmpls}
+	\item $ \Q, \quad P(x) = x^2 - 2 $ \\
+	Поле разложения: $ \Q(\sqrt2, -\sqrt2) = \Q(\sqrt2) $
+	$$ |\Q(\sqrt2) : \Q | = 2 $$
+	\item $ K = \Q, \qquad P(x) = x^3 - 2, \qquad L $ "--- поле разложения $ P(x) $
+	$$ \alpha = \sqrt[3]2, \qquad \beta = \bigg( -\frac12 + \frac{\sqrt3}2i \bigg)\sqrt[3]2, \qquad \gamma = \bigg( -\frac12 - \frac{\sqrt3}2i \bigg) \sqrt[3]2 $$
+	\begin{itemize}
+		\item $ \Q(\alpha) \ne L $ (\as $ \Q(\alpha) \sub \R, \quad L \not\sub \R $)
+		\item $ Q(\beta), ~ \Q(\gamma) $
+		$$ |\Q(\alpha) : \Q| = \deg (x^3 - 2) = 3, \qquad |\Q(\alpha) : \Q| = |\Q(\beta) : \Q| = |\Q(\gamma) : \Q| $$
+		$$ \Q(\alpha) \sub L, \quad \Q(\alpha) \ne L \quad \implies |L : \Q| > 3 \implies L \ne \Q(\beta), \quad L \ne \Q(\gamma) $$
+		\item $ L = \Q(\alpha, \beta) $ \as $ \gamma = -\alpha - \beta $
+	\end{itemize}
+	$$ \Q \sub \Q(\alpha) \sub \Q(\alpha, \beta) = L $$
+	$$ |\Q(\alpha, \beta) : \Q| = \underbrace{|\Q(\alpha, \beta) : \Q(\alpha)|}_2 \cdot \underbrace{|\Q(\alpha) : \Q|}_3 = 6 $$
+	$ \beta $ "--- корень уравнения
+	$$ \frac{x^3 - 2}{x - \alpha} = \frac{x^3 - 2}{x - \sqrt[3]2} = \frac{x^3 - \alpha^3}{x - \alpha} = x^2 + \alpha x + \alpha^2 $$
+\end{exmpls}
+
+\begin{theorem}[эквивалентность полей разложения многочлена]
+	$ K $ "--- поле, $ \qquad P \in K[x], \qquad L, M $ "--- поля разложения. \\
+	Тогда
+	\begin{enumerate}
+		\item $ L $ и $ M $ эквивалентны над $ K $;
+		\item можно выбрать такие $ \alpha_i \in L_i \quad \beta_i \in M $ такие, что
+		$$ P(x) = \underset{\in K}a(x - \alpha_1)\dots (x - \alpha_n), \qquad P(x) = \underset{\in K}b(x - \beta_1)\dots(x - \beta_n) $$
+		для которых существует изоморфизм $ f : L \to M, \quad f(\alpha_i) = \beta_i, \quad f\clamp K = \operatorname{id} $
+	\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+	Строим последовательно $ \alpha_1, \dots, \alpha_s, \quad \beta_1, \dots, \beta_s $.
+	$$ f_s : K(\alpha_1, \dots, \alpha_s) \to K(\beta_1, \dots, \beta_s) : \quad f(\alpha_i) = \beta_i $$
+	Пусть построены $ \alpha_1, \dots, \alpha_s, \quad \beta_1, \dots, \beta_s, \quad f_s $. \\
+	Положим $ L' = K(\alpha_1, \dots, \alpha_s), \quad M' = K(\beta_1, \dots, \beta_s) $ \\
+	(на первом шаге считаем, что $ L' = M' = K, \quad f_0 = \operatorname{id} $) \\
+	Разложение $ P(x) $ на неприводимые над $ L' $
+	$$ P(x) = (x - \alpha_1)\dots(x - \alpha_s) Q_1(x)Q_2(x)\dots $$
+	$$ f_s = L' \to M' $$
+	$$ P(x) = f_s(P(x)) = (x - \beta_1)\dots(x - \beta_s)R_1(x)R_2(x)\dots, \qquad R_i(x) = f_s(Q_i(x)) $$
+	$ R_i(x) $ неприводимы
+	\begin{itemize}
+		\item Если $ Q_i(x) $ "---линейный, обозначим его корень $ \alpha_{s + 1}, \quad \beta_{s + 1} \define f(\alpha_{s + 1}) $
+		$$ f_s \big( Q_i(x) \big) = (x - \beta_{s + 1}) $$
+		$$ f_{s + 1} \define f_s $$
+		\item Если нет линейных, то воложим $ \alpha_{s + 1} $ "--- корень $ Q(x), \quad \beta_{s + 1} $ "--- корень $ R_1(x) $
+		$$ L'(\alpha_{s + 1}) \simeq \faktor{L'(x)}{\braket{Q_1(x)}} = \simeq \faktor{M'(x)}{\braket{R_1(x)}} \simeq M'(\beta_{s + 1}) $$
+	\end{itemize}
+\end{proof}
+
+\begin{remark}
+	Порядок важен:
+	$$ P(x) = (x^2 + 1)(x^2 + 4) $$
+	Корни: $ i $, $ -i $, $ 2i $, $ -2i $ \\
+	\bt{Нет} изоморфизма над $ \Q $:
+	$$ i \to 2i, \qquad i^2 \to (2i)^2, \qquad -1 \to -4 $$
+\end{remark}

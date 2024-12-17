@@ -1,0 +1,242 @@
+\chapter{Кольца и поля}
+
+\section{Алшебраические расширения}
+
+\begin{definition}
+	$ L $ "--- расширение $ K, \qquad \alpha \in L $ \\
+	$ \alpha $ называется алгебраическим над $ K $, сели $ \exist P(x) \in K[x] $ такой, что $ P(\alpha) = 0, \quad P(x) $ "--- не нулевой. \\
+	Если такого $ P(x) $ не существует, то $ \alpha $ называется трансцендентным.
+\end{definition}
+
+\begin{definition}
+	$ \alpha $ "--- алгебраическое над $ K, \qquad P(x) \in K[x], \qquad P(\alpha) = 0 $. \\
+	Тогда
+	\begin{itemize}
+		\item $ P(x) $ "--- алгебраический над $ \alpha $
+		\item $ P(x) $ аннулирует $ \alpha $
+	\end{itemize}
+	Минимальным многочленом $ \alpha $ над $ K $ называется ненулевой аннулирующий многочлен наименьшей степени со старшим коэффициентом, равным 1
+\end{definition}
+
+\begin{definition}
+	Алгебраическим числом называется комплексное число, алгебраическое над $ \Q $
+\end{definition}
+
+\begin{egs}
+	$ K = \Q, \quad L = \Co $
+	\begin{enumerate}
+		\item $ \alpha = i $ "--- алгебраическое \\
+		Минимальный многочлен $ P(x) = x^2 + 1 $
+		\item $ \alpha = \sqrt[3]5 $ \\
+		$ P(x) = x^3 - 5 $ "--- аннулирующий, минимальный
+		\item $ \alpha = 1 + \sqrt[3]5 $ "--- алгебраическое \\
+		Найдём аннулирующий многочлен:
+		$$ (\alpha - i)^3 = 5 $$
+		$$ \alpha^3 - 3\alpha^2i + 3\alpha i^2 - i^3 = 5 $$
+		$$ (\alpha^3 - 3\alpha - 5) + (-3\alpha + 1)i = 0 $$
+		$$ \alpha^3 - 3\alpha - 5 = (-3\alpha + 1)i $$
+		$$ (\alpha^2 - 3\alpha - 5)^2 = -(-3\alpha + 1)^2 $$
+		$$ (\alpha^3 - 3\alpha + 5)^2 + (3\alpha + 1)^2 = 0 $$
+		$$ P(x) = (x^3 - 3x + 5)^2 + (3x + 1)^2 $$
+		\item $ \alpha = \sqrt[3]{2 + 4\sqrt[4]5} $ "--- алгераич.
+		$$ \alpha^3 = 2 + 4\sqrt[4]5 $$
+		$$ \alpha^3 - 2 = 4\sqrt[4]5 $$
+		$$ (\alpha^3 - 2)^4 = 4^4 \cdot 5 $$
+		$$ (\alpha^3 - 2)^4 - 4^4 \cdot 5 = 0 $$
+		$$ P(x) = (x^3 - 2)^4 - 4^4 \cdot 5 $$
+		\item $ e, \pi $ "--- трансцендентные
+	\end{enumerate}
+\end{egs}
+
+\begin{properties}[минимального многочлена]
+	$ K $ "--- поле, $ \qquad L $ "--- расширение $ K, \qquad \alpha \in L, \qquad \alpha $ алг. над $ K $
+	\begin{enumerate}
+		\item \label{en:prop:1} Пусть $ P(x) $ "--- минимальный для $ \alpha $. \\
+		Тогда
+		$$ F(\alpha) = 0 \quad \iff \quad F(x) \divby P(x) $$
+		\begin{proof}
+			$$ F(x) = P(x)Q(x) + R(x), \qquad \deg R < \deg P $$
+			\begin{itemize}
+				\item $ \impliedby $
+				$$ F(x) \divby P(x) \implies R(x) = 0 $$
+				$$ F(x) = P(x)Q(x) $$
+				Подставим $ \alpha $:
+				$$ F(\alpha) = \underbrace{P(\alpha)}_0Q(x) = 0 $$
+				\item $ \implies $
+				$$ \underbrace{P(\alpha)}_0Q(\alpha) + R(\alpha) = 0 $$
+				$$ R(\alpha) = 0 \implies R \text{ "--- нулевой} $$
+			\end{itemize}
+		\end{proof}
+		\item Минимальный многочлен для $ \alpha $ единственен
+		\begin{proof}
+			Пусть $ P_1 P_2 $ "--- минимальные
+			$$ \underimp{\text{св-во \ref{en:prop:1}}}
+			\begin{cases}
+				P_1(x) \divby P_2(x) \\
+				P_2(x) \divby P_1(x)
+			\end{cases} \quad \implies P_1(x) = P_2(x) $$
+		\end{proof}
+		\item Минимальный многочлен неприводим над $ K $
+		\begin{proof}
+			Пусть $ P(x) = S(x)T(x), \quad 0 < \deg S, \deg T < \deg P $
+			$$ 0 = P(\alpha) = \underbrace{S(\alpha)}_{\in L}\underbrace{T(\alpha)}_{\in L} \underbrace{L \text{ "--- поле}}
+			\begin{vars}
+				S(\alpha) = 0 \\
+				T(\alpha) = 0
+			\end{vars} \quad \contra \quad \deg S, \deg T < \deg P $$
+		\end{proof}
+		\item Если $ P(x) $ неприводим над $ K, \quad P(x) \ne 0, \quad P(\alpha) = 0 $
+		$$ \implies P(x) \text{ "--- минимальный для } \alpha $$
+		\begin{proof}
+			$$
+			\begin{rcases}
+				P(x) \divby \text{ миним.} \\
+				P(x) \text{ "--- непривод.}
+			\end{rcases} \implies P(x) \text{ "--- миним.} $$
+		\end{proof}
+	\end{enumerate}
+\end{properties}
+
+\begin{eg}
+	$ x^3 - 5 $ "--- минимальный для $ \sqrt[3]5 $ над $ \Q $, \as он неприводим над $ \Q $
+\end{eg}
+
+\begin{definition}
+	Расширение $ L $ над $ K $ называется алгебраическим, если любой элемент $ L $ является алгебраическим над $ K $ \\
+	Иначе "--- тренсцендентным
+\end{definition}
+
+\begin{theorem}
+	Конечное расширение полей является алгебраическим
+\end{theorem}
+
+\begin{proof}
+	Пусть $ L $ "--- конечное расширение $ K, \quad n \define |L : K|, \quad \alpha \in L $. \\
+	Докажем, что $ \alpha $ "--- алгебраическое: \\
+	Элементы $ \underbrace{1, \alpha, \dots, \alpha^{n - 1}, \alpha^n}_{n + 1} \in L $ ЛЗ над $ K $, \ie
+	$$ \exist k_0, k_1, \dots, k_{n - 1} k_n \in K \nin \bigodot : \quad k_0 \cdot 1 + k_1 \alpha + \dots + k_{n - 1}\alpha^{n - 1} + k_n\alpha^n = 0 $$
+	Пусть $ P(x) = k_0 + k_1x + \dots + k_{n - 1}x^{n - 1} + k_nx^n $. \\
+	Тогда $ P(x) \in K[x], \quad P(x) $ "--- ненулевой, $ \quad P(\alpha) = 0 \quad \implies \alpha $ "--- алгебраичсекое.
+\end{proof}
+
+\begin{definition}
+	$ L $ "--- поле, $ \qquad K $ "--- подполе $ L, \qquad \alpha_1, \dots \alpha_n \in L $ \\
+	Через $ K(\alpha_1, \dots, \alpha_n) $ будем обозначать наимеьшее подполе $ L $, содержащее $ K $ и $ \alpha_1, \dots, \alpha_n $. \\
+	Если $ M = K(\alpha_1, \dots \alpha_n) $, то говорят, что $ M $ получено из $ K $ присоединением $ \alpha_1, \dots, \alpha_n $. \\
+	Поле, полученное из $ K $ присоединением оного элемента, называется простым расширением $ K $.
+\end{definition}
+
+\begin{eg}
+	$ \Q(\sqrt2) $ "--- простое расширение $ \Q $
+\end{eg}
+
+\begin{theorem}[строение простого алгебраического расширения]
+	$ L $ "--- поле, $ \qquad K $ "--- подполе $ L, \qquad \alpha \in L, \qquad \alpha $ алг. над $ K, \qquad P(x) $ "--- минимальный многочлен для $ \alpha $ над $ K $ \\
+	Тогда
+	\begin{enumerate}
+		\item $ K(\alpha) \simeq \faktor{K[x]}{\braket{P(x)}} $ \\
+		$ \ol{F(x)} \mapsto F(\alpha) $ является изоморфизмом.
+		\item $ K(\alpha) $ конечно над $ K, \quad |K(\alpha) : K| = \deg P $ \\
+		$ 1, \alpha, \dots, \alpha^{n - 1} $ образуют базис $ K(\alpha) $ над $ K $.
+	\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+	Определим $ f : K[x] \to K(\alpha) $ как $ f(F) \define F(\alpha) $ ($ x \mapsto \alpha $), \as
+	$$ f(c_0 + c_1x + \dots c_kx^k) = c_0 + c_1\alpha + \dots c_k\alpha^k, \qquad c_i \in K $$
+	\begin{itemize}
+		\item Проверим, что $ f $ "--- гомоморфизм:
+		$$ f(F + G) = (F + G)(\alpha) = F(\alpha) + G(\alpha) = f(F) + f(G) $$
+		$$ f(FG) = (FG)(\alpha) = F(\alpha)G(\alpha) = f(F)f(G) $$
+		\item Найдём $ \ker f $:
+		$$ F(x) \in \ker f \iff f(F) = 0 \iff F(\alpha) = 0 \iff F(x) \divby P(x) $$
+		$$ \implies \ker f = \braket{P(x)} $$
+		\item Применим теорему о гомомрфизме:
+		$$ \Img f \simeq \faktor{K[x]}{\ker f} $$
+		Изоморфизм $ \vphi(\ol F) = f(F) = F(\alpha) $ \\
+		Получили изоморфизм $ \faktor{K[x]}{\braket{P(x)}} \to \Img f $
+		\item Проверим, что $ \Img f \iseq K(\alpha) $:
+		$$
+		\begin{rcases}
+			\alpha \in \Img f, \text{ \as } \alpha = f(x) \\
+			K \sub \Img f, \text{ \as } \underset{\in K}k = f(k)
+		\end{rcases} \underimp{\Img f \text{ "--- поле}} \Img f \supset K(\alpha) $$
+		\item Проверим, что $ 1, \alpha, \dots, \alpha^{\deg P - 1} $ "--- базис: \\
+		Пусть $ n \define \deg P $
+		\begin{itemize}
+			\item ЛНЗ: \\
+			\bt{Пусть} ЛЗ:
+			$$ a_0 \cdot 1 + a_1 \alpha + \dots + a_{n - 1}\alpha^{n - 1} = 0, \quad a_i \in K $$
+			Пусть $ F(x) \define a_0 + a_1x + \dots + a_{n - 1}x^{n - 1} \implies F(\alpha) = 0 $
+			$$ \implies F(x) \divby P(x) \underimp{F(x) \text{ "--- ненулевой}} \deg F \ge \deg P = n \quad \contra $$
+			\item Попрождающий:
+			$$ K(\alpha) = \Img f $$
+			Пусть $ u \in K(\alpha) \implies \exist F \in K[x] : \quad f(F) = u \quad \implies F(\alpha) = u $ \\
+			Делим с остатком:
+			$$ F(x) = Q(x)P(x) + R(x), \qquad \deg R < \deg P $$
+			$$ \implies \deg R \le n + 1 $$
+			$$ F(\alpha) = Q(\alpha)\underbrace{P(\alpha)}_0 + R(\alpha) = R(\alpha) $$
+			$$ R(x) = a_0 + a_1x + \dots a_{n - 1}x^{n - 1} \implies F(\alpha) = a_0 + a_1\alpha + \dots a_{n - 1}\alpha^{n - 1} $$
+		\end{itemize}
+	\end{itemize}
+\end{proof}
+
+\begin{exmpls}
+	\item $ \Q(\sqrt[3]2), \quad \alpha = \sqrt[3]2 $ \\
+	$ 1, \sqrt[3]2, (\sqrt[3]2)^2 $ "--- базис $ \faktor{\Q(\sqrt[3]2)}\Q $. \\
+	Любой элемент можно представить в виде $ a + b\sqrt[3]2 + c(\sqrt[3]2)^2, \quad a, b, c \in \Q $. \\
+	Пример сложения:
+	$$ \bigg( 1 + 2\sqrt[3]2 + 3(\sqrt[3]2)^2 \bigg) + (-1 + \sqrt[3]2) = 3\sqrt[3]2 + 3(\sqrt[3]2)^2 $$
+	Пример умножения:
+	$$ (1 + \sqrt[3]2)(2\sqrt[3]2 + 3\sqrt[3]2)^2 = 2\sqrt[3]2 + 3(\sqrt[3]2)^2 + 2\sqrt[3]2^2 + 3(\sqrt[3]2)^3 = 2\sqrt[3]2 + 5(\sqrt[3]2)^2 + 6 $$
+	\item $ P(x) = x^5 - 5x^4 + 5 $ "--- неприводимый над $ \Q $ по критерию Эйзенштейна
+	$$ x^5 - \underset{\divby 5}{5x^4} + \underset{\divby 5}{0x^3} + \underset{\divby 5}{0x^2} + \underset{\divby 5}{0x} + \underset{\divby 5}5 $$
+	$ \alpha $ "--- комплексный корень
+	$$ K = \Q, \quad L = \Co $$
+	Рассмотрим $ \Q(\alpha) $:
+	$$ |\Q(\alpha) : \Q| = 5 $$
+	$ 1, \alpha, \alpha^2, \alpha^3, \alpha^4 $ "--- базис $ \Q(L) $ над $ \Q $.
+\end{exmpls}
+
+\begin{implication}
+	$ \alpha $ "--- алгебраический над $ K, \qquad F, G \in K[x], \qquad G(\alpha) \ne 0, \qquad \beta = \frac{F(\alpha)}{G(\alpha)} $ \\
+	Тогда $ \beta $ "--- алгебраический над $ K $
+\end{implication}
+
+\begin{proof}
+	$ L $ "--- расширение $ K, \qquad \alpha \in L $
+	$$ \implies \beta \sub L $$
+	Существует поле $ K(\beta) $. \\
+	При этом $ \beta \in K(\alpha) $.
+	$$ K \sub K(\beta) \sub K(\alpha) $$
+	Применим одно из следствий из теоремы о мультипликативности расширения: \\
+	$ K(\alpha) $ над $ K $ конечно $ \implies K(\beta) $ над $ K $ конечно \\
+	$ \implies $ все элементы $ K(\beta) $ алгебраичны над $ K $
+\end{proof}
+
+\begin{exmpls}
+	\item $ \alpha $ "--- алг. над $ K $. \\
+	Тогда $ \frac{\alpha^2 + 3}{\alpha + 1} $ "--- алг. над $ K $
+	\item $ \dfrac{\sqrt[3]2 + 1}{(\sqrt[3]2)^2 + 5} $ "--- алг. число
+\end{exmpls}
+
+\begin{implication}
+	$ \alpha_1, \dots, \alpha_n $ алгебраичны над $ K $ \\
+	Тогда $ K(\alpha_1, \dots, \alpha_n) $ конечно над $ K $
+\end{implication}
+
+\begin{proof}
+	$$ K \sub K(\alpha_1) \sub K(\alpha_1, \alpha_2) \sub \dots \sub K(\alpha_1, \dots, \alpha_n) $$
+	Достаточно доказать, что $ K(\alpha_1, \dots, \alpha_i, \alpha_{i + 1}) $ кончено над $ K(\alpha_1, \dots, \alpha_i) $: \\
+	\widedots[5cm]
+	\TODO{Дописать доказательство}
+\end{proof}
+
+\begin{implication}
+	$ \alpha, \beta $ алгебраичны над $ K $ \\
+	$ \implies \alpha + \beta, \quad \alpha - \beta, \quad \alpha \beta, \quad \faktor\alpha\beta $ алгебраичны над $ K $
+\end{implication}
+
+\begin{proof}
+	\TODO{Дописать доказательство}
+\end{proof}

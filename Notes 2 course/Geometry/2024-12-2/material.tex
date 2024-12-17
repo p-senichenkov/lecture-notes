@@ -1,0 +1,115 @@
+\section{Деривационные формулы}
+
+\begin{theorem}
+	$$ |n_u \times n_v | = \frac{LN - M^2}{\sqrt{EG - F^2}} $$
+\end{theorem}
+
+\begin{proof}
+	$$ n_u = Ar_u + Br_v $$
+	$$ n_v = Cr_u + Dr_v $$
+	$$ n_u \times n_v = (Ar_u + Br_v) \times (Cr_u + Dr_v) = r_u \times r_v(AD - BC) $$
+	$$ |n_u \times n_v| = |\underbrace{r_u \times r_v}| \cdot |AD - BC| $$
+	$$ 0 \undereq{\text{касательный вектор на нормальный}} (\vec{r}_u \cdot \vec n)_u = r_{uu} \cdot n + r_u \cdot n_u \bdefeq L L + r_u \cdot n_u $$
+	Аналогично,
+	$$ 0 = (r_v \cdot n)_u \bdefeq M M + r_v \cdot n_u $$
+	$$ \implies
+	\begin{cases}
+		AE + DF = n_u \cdot r_u = -L \\
+		AF + BG = n_u \cdot r_v = -M
+	\end{cases} $$
+	$$ A = \frac{FM - GL}{EG - F^2}, \qquad B = \frac{FL - EM}{EG - F^2} $$
+	Аналогично найдём $ C $ и $ D $:
+	$$
+	\begin{cases}
+		CE + DF = n_v \cdot r_u = -M \\
+		CF + DG = n_v \cdot r_v = -N
+	\end{cases} $$
+	$$ C = \frac{FN - GM}{EG - F^2}, \qquad D = \frac{FM - EN}{EG - F^2} $$
+	\begin{multline*}
+		AD - BC = \frac1{(EG - F^2)^2} \bigg( (FM - GL)(FM - FN) - (FL - EM)(FN - GM) \bigg) = \\
+		= \frac1{(EG - F^2)^2} \bigg( F^2M^2 - \cancel{FMEN} - \cancel{GFLM} + GLEN - F^2LN + \cancel{FGLM} + \cancel{EFMN} - EGM^2 \bigg) = \\
+		= \frac{EG - F^2)(LN - M^2)}{(EG - F^2)^2}
+	\end{multline*}
+\end{proof}
+
+\section(Уравнения Петерсона--Майнарди--Кодаци){Уравнения Петерсона"--~Майнарди"--~Кодаци}
+
+Вспомним, как мы вводили симолы Кристофеля:
+$$ r_{uu} = \Gamma_{11}^1 r_u + \Gamma_{11}^2 r_v + Ln $$
+$$ r_{uv} = \Gamma_{12}^1r_u + \Gamma_{12}^2 + Mn $$
+$$ r_{uuv} = \Gamma_{11v}^1vr_u + \Gamma_{11}^1r_{uv} + \Gamma_{11v}^2r_v + \Gamma_{11}^2r_{vv} + L_vn + Ln_v $$
+$$ = r_{uvu} = \Gamma_{12u}^1r_u + \Gamma_{12}^1r_{uu} + \Gamma_{12u}^2r_v + \Gamma_{12}^2r_{uv} + M_un + Mn_u $$
+Домножим последние два выражения скалярно на $ n $ и приравняем:
+$$ \Gamma_{11}^1 \cdot M + \Gamma_{11}^2 \cdot N + L_v = \Gamma_{12}^1 \cdot L + \Gamma_{12}^2M + M_u $$
+Обычно это записывается как
+$$ \boxed{L_v - M_u = \Gamma_{12}^1L + \Gamma_{12}^2M - \Gamma_{11}^1M - \Gamma_{11}^2N} $$
+Аналогично,
+$$ r_{uv} = \Gamma_{12}^1r_u + \Gamma_{12}^2r_v + M_n, \qquad r_{vv} = \Gamma_{22}^1r_u + \Gamma_{22}^2r_v + M_n $$
+Дифференцируем первое по $ v $, второе "--- по $ u $, домножаем оба на $ n $, приравниваем:
+$$ \Gamma_{12}^1M + \Gamma_{12}^2N + M_v = \Gamma_{22}^1L + \Gamma_{22}^2M + N_u $$
+$$ \boxed{M_v - N_u = \Gamma_{22}^1L + \Gamma_{22}^2M - \Gamma_{12}^1M - \Gamma_{12}^2N} $$
+
+\begin{theorem}
+	$ \Gamma_{ij}^k $ относятся к внутренней геометрии.
+\end{theorem}
+
+\begin{proof}
+	$$ r_{uu} = \Gamma_{11}^1r_u + \Gamma_{11}^2 r_v + Ln \qquad \bigg| \cdot r_u \qquad \bigg| \cdot r_v $$
+	$$
+	\begin{cases}
+		r_{uu} \cdot r_v = \Gamma_{11}^1E + \Gamma_{11}^2F \\
+		r_{uu} \cdot r_v = \Gamma_{11}^1 \cdot F + \Gamma_{11}^2 \cdot G
+	\end{cases} $$
+	$$ E_u = (r_u \cdot r_u)_u = 2r_{uu} \cdot r_u $$
+	$$ F_u = (r_u \cdot r_v)_u = r_{uu} r_v + r_ur_{uv} $$
+	$$ E_v = (r_u \cdot r_u)_v = 2r_{uv}r_u $$
+	$$ r_{uu}r_v = F_u - \frac12 E_v $$
+	$$
+	\begin{cases}
+		\Gamma_{11}^1E + \Gamma_{11}^2F = \frac12 E_u \\
+		\Gamma_{11}^1F + \Gamma_{11}^2G = F_u - \frac12 E_v
+	\end{cases} $$
+	$$ \boxed{\Gamma_{11}^1 = \frac{
+			\begin{vmatrix}
+				\frac12E_u & F \\
+				F_u - \frac12 E_v & G
+			\end{vmatrix}}{EG - F^2}} $$
+	Остальные "--- аналогично.
+\end{proof}
+
+\chapter{Геодезическая кривизна}
+
+Есть поверхность. Есть кривая на поверхности. Есть вектор кривизны (вектор нормали умножить на кривизну). Есть картинка.
+
+\begin{definition}
+	$ k_g $ "--- проекция $ \vec k $ на касательную плоскость. \\
+	Можно рассматривать как скаляр или как вектор.
+\end{definition}
+
+\begin{statement}
+	$ k^2 = k_n^2 + k_g^2 $
+\end{statement}
+
+\begin{proof}
+	См. картинку.
+\end{proof}
+
+\begin{theorem}
+	$ k_g $ относится к внутренней геометрии.
+\end{theorem}
+
+\begin{proof}
+	$$ u = u(s), \qquad v = v(s) $$
+	$ S $ "--- постоянный параметр
+	\begin{multline*}
+		\vec k = \frac{\di[2] r \big( u(s); v(s) \big)}{\di s^2} = \frac{\di}{\di s}(r_u \cdot u_s + r_v \cdot v_s) = \vec{r}_{uu} u_s^2 + 2\vec{r}_{uv}u_sv_v + \vec{r}_{vv}(v_s)^2 = \\
+		= (\Gamma_{11}^1 r_u + \Gamma_{11}^2r_v + Ln)u_s^2 + 2(\Gamma_{12}^1r_u + \Gamma_{12}^2r_v + Mn)u_sv_s + (\Gamma_{22}^1 r_u + \Gamma_{22}^2r_v + Nn)v_s^2
+	\end{multline*}
+	$$ \vec{k}_g = \underbrace{(\Gamma_{11}^1u_s^2 + 2\Gamma_{12}^1u_sv_s + \Gamma_{22}^1v_s^2)}_{\text{зависит от \rom1}} \cdot r_u + \underbrace{(\Gamma_{11}^2u_s^2 + 2\Gamma_{12}^2u_sv_s + \Gamma_{22}^2v_s^2)}_{\text{зависит от \rom2}}r_v $$
+\end{proof}
+
+\section{Вычисление \texorpdfstring{$ k_g $}{kg}}
+
+$$ r(u, u), \qquad u(t), \quad v(t) $$
+$ \vec n $ "--- нормаль к поверхности.
+$$ (r_t', r_t'', n) (r_uu' + r_vv'; r_{uu}u') \widedots[3cm] $$

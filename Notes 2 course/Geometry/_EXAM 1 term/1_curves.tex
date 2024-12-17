@@ -1,0 +1,601 @@
+\part{Дифференциальная геометрия кривых}
+
+\section{Вектор-функции. Пределы, производные}
+
+\begin{definition}
+	$ f : [a, b] \to \R^3 $ "--- вектор-функция. \\
+    $ f([a, b]) $ "--- кривая, $ \quad f(a) $ "--- начало, $ \quad f(b) $ "--- конец.
+\end{definition}
+
+\begin{definition}
+    $ \liml{t \to t_\circ} f(t) = A \in \R^3 $, если
+    $$ \forall \veps > 0 \quad \exist \delta > 0 : \quad |t - t_\circ| < \delta \implies |\vv f(t) - A| < \veps $$
+\end{definition}
+
+\begin{undefthm}{Операции с вектор-функциями.}
+	\hfill
+    \begin{itemize}
+    	\item $ (\vv f + \vv g)(t) = \vv f(t) + \vv g(t) $
+        \item $ (\alpha \cdot \vv f)(t) = \alpha \vv f(t) $
+        \item
+        \begin{itemize}
+        	\item $ (\vv f \cdot \vv g) (t) = \bigg( \vv f(t), \vv g(t) \bigg) $
+            \item $ (\vv f \times \vv g)(t) = \vv f(t) \times \vv g(t) $
+            \item $ (\vv f, \vv g, \vv h)(t) = \bigg( \vv f(t), \vv g(t), \vv h(t) \bigg) $
+        \end{itemize}
+    \end{itemize}
+\end{undefthm}
+
+\begin{statement}
+	Эти операции перестановочны с пределом.
+\end{statement}
+
+\begin{proof}
+	Докажем для векторного произведения:
+    $$ \vv f(t) = \bigg( f_1(t), f_2(t), f_3(t) \bigg), \qquad \vv g(t) = \bigg( \vv g_1(t), \vv g_2(t), \vv g_3(t) \bigg) $$
+    $$ f \times g = \big( f_2g_3 - f_3g_2, ~ f_3g_1 - f_1g_3, ~ f_1g_2 - f_2g_1 \big) $$
+    $$ \liml{t \to t_\circ}(f \times g)(t) \iseq \bigg( \liml{t \to t_\circ}(f_2g_3 - f_3g_2)(t), \dots, \dots \bigg) = (\vawe f_2 \vawe g_3 - \vawe f_3 \vawe g_2, \dots, \dots) = (\vawe f_1, \vawe f_2, \vawe f_3) \times (\vawe g_1, \vawe g_2, \vawe g_3) $$
+    $$ \liml{t \to t_\circ} \bigg( f_2(t)g_3(t) - g_2(t)f_3(t) \bigg) = \underbrace{\liml{t \to t_\circ} f_2(t)}_{\vawe f_2} \liml{t \to t_\circ}g_3(t) - \liml{t \to t_\circ}(t) \liml{t \to t_\circ}f_3g_3(t) $$
+\end{proof}
+
+\begin{statement}
+	Предел можно брать по координатам:
+    $$ \liml{t \to t_0} f(t) = A = (A_1, A_2, A_3) \iff \liml{t \to t_0} f_i(t) = A_i \iff \forall \veps > 0 \quad \exist \delta > 0 : |t - t_0| < \delta \implies |f_i(t) - A_i| < \frac\veps3 $$
+\end{statement}
+
+\begin{iproof}
+	\item $ \impliedby $
+	$$ |\vv{f(t)} - A| = \sqrt{\bigg( \underbrace{f_1(t) - A_1}_{< \frac\veps3} \bigg)^2 + \bigg(\underbrace{f_2(t) - A_2}_{< \frac\veps3} \bigg)^2 + \bigg( \underbrace{f_3(t) - A_3}_{< \frac\veps3} \bigg)^2} < \sqrt{\frac{\veps^2}3} < \veps $$
+	\item $ \implies $
+    $$ |\vv f(t) - A| = \sqrt{\big( f_1(t) - A_1 \big)^2 + \big( f_2(t) - A_2 \big)^2 + \big( f_3(t) - A_3 \big)^2 } \ge |f_i(t) - A_i| $$
+    $$ \forall \veps \quad \exist \delta : \quad |f_i(t) - A_i| \le |\vv f(t) - A| < \veps $$
+\end{iproof}
+
+\begin{definition}
+    $ \vv f(t) $ непрерывна в $ t_\circ $, если $ f(t_0) = \liml{t \to t_\circ}f(t) $
+\end{definition}
+
+\begin{definition}
+    $$ \vv f'(t_\circ) \define \liml{t \to t_\circ} \frac{f(t) - f(t_\circ)}{t - t_\circ} $$
+\end{definition}
+
+\begin{stmts}
+	\item $ (f + g)' = f' + g' $
+    \item $ (\alpha f)' = \alpha' f + \alpha f' $
+    \item $ (fg)' = f'g + fg' $
+    \item $ (f \times g)' = f' \times g + f \times g' $
+    \begin{proof}
+        Аналогично произведению скалярных функций:
+        \begin{multline*}
+        	(f \times g)'(t_0) = \liml{t \to t_0} \frac{f(t) \times g(t) - f(t_0) \times g(t_0)}{t - t_0} = \\
+			= \liml{t \to t_0} \frac{f(t) \times g(t) - f(t_0) \times g(t) + f(t_0) \times g(t) - f(t_0) \times g(t_0)}{t - t_0} = \\
+			= \liml{t \to t_0} \bigg( \frac{f(t) - f(t_0)}{t - t_0} \times g(t) \bigg) + f(t_0) \times \liml{t \to t_0} \frac{g(t) - g(t_0)}{t - t_0} = f'(t_0) \times g(t_0) + f(t_0) \times g'(t_0)
+        \end{multline*}
+    \end{proof}
+    \item $ (f, g, h)' = (f', g, h) + (f, g', h) + (f, g, h') $
+\end{stmts}
+
+\section{Лемма о производной вектор-функции с постоянным модулем}
+
+\begin{lemma}\label{lm:useful}
+	$ |\vv f| = \const \iff \vv f' \perp \vv f $
+\end{lemma}
+
+\begin{proof}
+    $$ |\vv f| = \const \iff (\vv f, \vv f) = \const \iff (f, f)' = 0 \iff 2(f, f') = 0 \iff f' \perp f $$
+\end{proof}
+
+\section{Касательная прямая к кривой. (Не)зависимость от параметризации}
+
+\begin{definition}[перепараметризация]
+	$ f : [a, b] \to \R^3, \qquad g : [c, d] \to \R^3 $ \\
+    $ \vv f, \vv g $ "--- параметризации одной кривой, если
+    $$ \exist \underset{
+        \begin{subarray}{c}
+        	\alpha \in C \\
+            \alpha(a) = c, \quad \alpha(b) = d \\
+            \alpha \text{ строго возрастает}
+        \end{subarray}}{\alpha : [a, b] \to [c, d]} : \quad f(t) = g \big( \alpha(t) \big) \quad \forall t \in [a, b] $$
+
+    Кривая "--- класс эквивалентности вектор-функций.
+\end{definition}
+
+\begin{definition}
+	$ \vv f'(t_\circ) $ называется касательным вектором.
+\end{definition}
+
+\begin{statement}
+	$ f \sim g \implies f'(t_\circ) \parallel g' \big( \alpha(t_\circ) \big) $
+\end{statement}
+
+\begin{proof}
+	$$ \vv f(t) = \vv g \big( \alpha(t) \big) $$
+    $$ \vv f'(t) = \vv g' \big( \alpha(t) \big) \cdot \underbrace{\alpha'(t)}_{> 0} \implies \vv f'(t) \upuparrows \vv g' \big( \alpha(t) \big) $$
+\end{proof}
+
+\begin{definition}
+	Касательная "--- сововкупность касательных векторов, противоположных им, и $ \vv 0 $.
+\end{definition}
+
+\section{Касательная прямая к кривой. Степень приближения}
+
+\begin{undefthm}{Уравнение касательной}
+	$ \vv v(t) = \vv f'(t_\circ) \cdot \tau + \vv f(t_\circ) $
+\end{undefthm}
+
+\begin{theorem}
+	Если $ \delta $ "--- расстояние от $ f(t) $ до касательной, то
+    $$ \liml{t \to t_\circ} \frac\delta{|\vv f(t) - \vv f(t_\circ)|} = 0 $$
+    Касательная "--- единтсвенная прямая, обладающая таким свойством.
+\end{theorem}
+
+\begin{remark}
+    Под пределом стоит синус зелёного угла на рис. \ref{tikz:tangent}
+\end{remark}
+
+\begin{figure}[!ht]
+	\centering
+    \begin{tikzpicture}{>=Stealth}
+        \draw[name path=tangent] (-3, 0) -- (3, 0);
+        \draw[name path=f] (-3, -1) .. controls (-2, 0) and (-1, 0) .. (0, 0) .. controls (1, 0) and (2, -1) .. (3, -2);
+
+        \fill (0, 0) circle[radius=0.08] node [above] {$ f(t_\circ) $};
+
+        \path[name path=vert] (2, -2) -- (2, 0.3);
+
+        \fill[name intersections={of=f and vert, by=x}] (x) coordinate (A) circle[radius=0.08] node [anchor=north east] {$ f(t) $};
+
+        \draw (A) -- (2, 0) node [anchor=north west] {$ \vartriangle x $};
+        \draw (0, 0) -- (A);
+
+        \draw (A) -- (0, 0) coordinate (B) -- (1, 0) coordinate (C) pic [fill=green!80!black, angle radius=10mm] {angle};
+    \end{tikzpicture}
+    \caption{Теорема о касательной.}
+    \label{tikz:tangent}
+\end{figure}
+
+\begin{proof}
+    $$ \delta = \frac{\bigg| \bigg( \big( f(t) - f(t_\circ) \big) \times f'(t_\circ) \bigg) \times f'(t_\circ) \bigg|}{|f'(t_\circ)|^2} $$
+    Введём такую систему координат, чтобы касательная была осью $ OX $:
+    $$ \vv f(t) = \bigg( f_1(t), f_2(t), f_3(t) \bigg) $$
+    $$ f'(t) = (1, 0, 0), \qquad f(t_\circ) = (0, 0, 0) $$
+    Посчитаем двойное векторное произведение:
+    $$ \bigg( f(t) - f(t_\circ) \bigg) \times f'(t_\circ) = \bigg( f_1(t), f_2(t), f_3(t) \bigg) \times (1, 0, 0) = (0, f_3, -f_2) $$
+    $$ (0, f_3, -f_2) \times (1, 0, 0) = (0, -f_2, f_3) $$
+    $$ \delta = \frac{\sqrt{f_2^2 + f_3^2}}1 $$
+    $$ \liml{t \to t_\circ} \frac{\delta^2}{|f(t) - f(t_\circ)|^2} = \liml{t \to t_\circ} \frac{f_2^2(t) + f_3^2(t)}{f_1^2(t) + f_2^2(t) + f_3^2(t)} $$
+    Неопределённость "--- $ (0, 0, 0) $
+    \begin{multline*}
+        \lim \dots \undereq{\text{Лопиталь}} \liml{t \to t_\circ} \frac{2f_2f_2' + 2f_3f_3'}{2(f_1f_1' + f_2f_2' + f_3f_3')} \undereq{\text{Лопиталь}} \\
+        = \liml{t \to t_\circ} \frac{f_2'^2 + f_2f_2'' + f_3'^2 + f_3f_3''}{\underbrace{f_1'^2}_{\to 1} + \underbrace{f_1f_1'' + f_2'^2 + f_2f_2''}_{\to 0} + \underbrace{f_3'^2}_{\to 0} + \underbrace{f_3f_3''}_{\to 0}} = 0 \iff \vv f'(t) \parallel (1, 0, 0)
+    \end{multline*}
+\end{proof}
+
+\section{Длина кривой}
+
+$ \Teq $ "--- разбиение:
+$$ a = t_0 < t_1 < \dots < t_n = b $$
+Найдём длину ломаной:
+$$ \sum_{i = 1}^n |\vv f(t_i) - \vv f(t_{i - 1})| \text{ "--- интегральаня сумма} $$
+Длина кривой "--- предел интегральных сумм:
+
+\begin{definition}
+    $$ l \define \liml{\max\set{t_i - t_{i - 1}} \to 0} \sum_{i = 1}^n |\vv f(t_i) - \vv f(t_{i - 1})| $$
+    $$ l \define \sup \sum_{i = 1}^n |\vv f(t_i) - \vv f(t_{i - 1})| $$
+\end{definition}
+
+\begin{statement}
+	Определения равносильны (если предел существует)
+\end{statement}
+
+\begin{iproof}
+	\item $ \sup \ge \lim $ "--- очевидно
+    \item $ \lim \ge \sup $ \\
+    $ \sup $ "--- тоже какой-то частичный предел. \\
+    Пусть есть подпоследоваетльность разбиений таких, что длина ломаной стремится к $ \sup $. \\
+    Разобьём максимальную (по длине) $ t_i $ на $ n $ равных частей. \\
+    При этом по неравенству треугольника, длина ломаной не уменьшилась, а $ \max\set{t_i - t_{i - 1}} $ теперь стремится к нулю.
+\end{iproof}
+
+\begin{definition}
+	Кривая называется спрямляемой, если $ l < \infty $.
+\end{definition}
+
+\begin{theorem}
+    $ f \in \Cont[1]{[a, b]} \implies f $ спрямляема и
+    $$ l = \dint[t]ab{|f'(t)|} $$
+\end{theorem}
+
+\begin{proof}
+	Докажем формулу. Из неё будет следовать, что кривая спрямляема. \\
+    Обозначим
+    $$ \vartriangle_it \define t_i -t_{i - 1}, \qquad \vartriangle_i f \define f(t_i) - f(t_{i - 1}), \qquad \tau_i \in [t_{i - 1}, t_i] $$
+    \begin{multline*}
+        \bigg| \dint[t]ab{|\vv f'(t)} - \sum_{i = 1}^n |\vv f(t_i) - \vv f(t_{i - 1}) \bigg| \undereq{\mp \sum |f'(\tau_i)\vartriangle_it} \\
+        = \bigg| \dint[t]ab{|f'(t)|} - \sum_{i - 1}^n|f'(\tau_i)|\vartriangle_it + \sum_{i = 1}^n |f'(\tau_i)|\vartriangle_it - \sum_{i = 1}^n |f(t_i) - f(t_{i - 1})| \bigg| \trile \\
+        \le \underbrace{\bigg| \dint[t]ab{|f'(t)} - \sum_{i = 1}^n|f'(\tau_i)|\vartriangle_i t \bigg|}_{\rom1} + \underbrace{ \bigg| \sum_{i = 1}^n \big( f'(\tau_i) \vartriangle_it - |\vartriangle_if| \big) \bigg|}_{\rom2}
+    \end{multline*}
+    \begin{itemize}
+    	\item $ \rom1 < \veps $ (фиксируем $ \veps $ и по нему подбираем мелкость разбиения)
+        \item
+        \begin{multline*}
+            \rom2 = \sum_{i = 1}^n \bigg( |f'(\tau_i) \vartriangle_i t - |\vartriangle_i f| \bigg) \trile \sum_{i = 1}^n \bigg| f'(\tau_i) \vartriangle_it - \vartriangle_i f \bigg| \undereq{\text{Н."--~Л.}} \\
+            = \sum_{i = 1}^n \bigg| \dint[t]{t_{i - 1}}{t_i}{f'(\tau_i)} - \dint[t]{t_{i - 1}}{t_i}{f'(t)} \bigg| \le \sum_{i = 1}^n \dint[t]{t_{i - 1}}{t_i}{\bigg| f'(\tau_i) - f'(t)} \underset{\text{при достаточно мелком разбиении}}< \\
+            < \sum_{i = 1}^n \dint[t]{t_{i - 1}}{t_i}\veps = \sum \veps \cdot \vartriangle_it = \veps(b - a)
+        \end{multline*}
+    \end{itemize}
+\end{proof}
+
+\section{Длина кривой в различных координатах}
+
+\begin{undefthm}{Способы задания кривой}
+	\begin{enumerate}
+		\item Явно: \\
+		$ y = f(x) $ (плоская кривая)
+		$$ l = \dint{x_0}{x_1}{\sqrt{1 + f'^2(x)}} $$
+		\item Явно в полярных координатах:
+		$$ r = r(\vphi) $$
+		$$ x = r(\vphi)\cos \vphi, \qquad y = r(\vphi)\sin \vphi $$
+		$$ x_\vphi' = r'\cos \vphi - r\sin \vphi, \qquad y_\vphi' = r'\sin \vphi + r\cos\vphi $$
+		\begin{multline*}
+			\sqrt{x'^2 + y'^2} = \sqrt{(r'\cos\vphi - r\sin\vphi)^2 + (r'\sin\vphi + r\cos\vphi)^2} = \\
+			= \sqrt{r'^2\cos^2 - \cancel{2r'r\cos\vphi\sin\vphi} + r^2\sin^2\vphi + r'^2\sin^2\vphi + \cancel{2r'r\sin\vphi\cos\vphi} + r^2\cos^2\vphi} = \sqrt{r'^2 + r^2}
+		\end{multline*}
+		$$ l = \dint[\vphi]{\vphi_0}{\vphi_1}{\sqrt{r'^2 + r^2}} $$
+		\item Неявно:
+		$$ x^2 + y^2 - 1 = 0 $$
+		$$ F(x, y) = 0 $$
+		Воспользуемся теоремой о неявной функции:
+		$$ y = \pm \sqrt{1 - x^2}, \qquad \text{кроме } x = \pm 1, ~ y = 0 $$
+		$$ l = \dint{x_0}{x_1}{\sqrt{1 + f'^2(x)}} $$
+		$$ f'(x) = y_x' = -\frac{F_x'}{F_y'} $$
+		$$ l = \dint{x_0}{x_1}{\sqrt{1 + \frac{F_x'^2}{F_y'^2}}} $$
+	\end{enumerate}
+\end{undefthm}
+
+\section{Натуральная параметризация кривой}
+
+\begin{definition}
+	Параметризация $ \vv f(t) $ называется натуральной, если $ |f'(t)| = 1 $
+\end{definition}
+
+\begin{theorem}\label{th:natural_par}
+	Натуральная параметризация существует и единственна (с точностью до начальной точки и направления обхода кривой).
+\end{theorem}
+
+\begin{iproof}
+	\item Существование
+	$$ s(t) \define \dint[\tau]{t_0}{\bm{t}}{|f'(\tau)|} \implies s'(t) = |f'(t)| $$
+	Пусть $ t(s) \define \vphi(s), \qquad \vphi = s^{-1} $
+	$$ t'(s) = \vphi'(s) = \frac1{s'(t)} = \frac1{|f'(t)|} $$
+	Пусть $ \vv{g}(s) \define \vv{f}(\vphi(s)) $
+	$$ g'(s) = f'(\vphi(s)) \cdot \vphi'(s) = \frac{f'(\vphi(s))}{|f'(t)|} = \frac{f'(\vphi(s))}{|f'(\vphi(s))|} $$
+    $$ |g'(s)| = \bigg| \frac\dots\dots \bigg| = 1 \implies s \text{ "--- натур. параметр }, \quad g(s) \text{ "--- натур. параметризация} $$
+	\item Единственность \\
+	Пусть $ s $ и $ t $ "--- натуральные параметры
+	$$ g(s) = f \big( \vphi(s) \big), \qquad t = \vphi(s) $$
+	$$ 1 = |g'(s)| = |f'(t) \cdot \vphi'(s)| = |f'(t)| \cdot |\vphi'(s)| $$
+	При этом, $ |f'(t)| = 1 $, \as $ t $ "--- натур.
+	$$ \implies |\vphi'(s)| = 1 \implies \vphi'(s) = \pm 1 \implies \vphi(s) = \pm s + \const $$
+\end{iproof}
+
+\section{Репер Френе. Формулы Френе}
+
+Пусть $ s $ "--- натуральный параметр
+$$ \vv v \define f'(s), \qquad |\vv v(s)| = 1 $$
+$$ \vv n \define \frac{\vv v'}{|\vv v'|} \text{ "--- единичный} $$
+По полезной лемме (лемма \ref{lm:useful}) $ n \perp v $
+$$ \vv b \define v \times n $$
+
+\begin{definition}
+	Репер Френе: $ (\vv v, \vv n, \vv b) $ (зависит от $ t $ или $ s $)
+    \begin{itemize}
+    	\item $ \vv v $ "--- касательный вектор;
+        \item $ \vv n $ "--- вектор главной нормали;
+        \item $ \vv b $ "--- вектор бинормали.
+    \end{itemize}
+\end{definition}
+
+\begin{remark}
+	Репер Френе существует только если $ \dot v \ne \vv 0 $. \\
+    В таком случае говорят, что кривая бирегулярна.
+\end{remark}
+
+Из определения $ \vv n $ полчаем первую формулу Френе:
+$$ \boxed{\dot v = k \cdot \vv n} $$
+
+\begin{definition}
+	$ k(s) $ называется кривизной.
+\end{definition}
+
+\begin{remark}
+    $ k = |\dot v| $ \\
+    Это верно \bt{только} в натуральной параметризации.
+\end{remark}
+
+\begin{theorem}
+	$ \dot b \parallel n $
+\end{theorem}
+
+\begin{proof}
+	$ n \perp v $, а $ b \perp \dot b $ по полезной лемме. \\
+    Докажем, что $ \dot b \perp v $:
+    $$ \dot b = (v \times n)' = \underbrace{\dot v \times n}_0 + \underbrace{v \times \dot n}_{\perp v} \perp v $$
+\end{proof}
+
+Получаем вторую формулу Френе:
+$$ \boxed{\dot b = -\text\ae n} $$
+
+\begin{definition}
+    \ae{} называется кручением.
+\end{definition}
+
+\begin{theorem}
+	Кривая плоская $ \iff \text\ae = 0 $.
+\end{theorem}
+
+\begin{proof}
+    $$ \text\ae = 0 \underiff{n \ne 0} \dot b = 0 \iff b = \const \iff \text{ репер свободно ``крутится'' вокруг кривой} $$
+\end{proof}
+
+$$ \dot n = (b \times v)' = \dot b \times v + b \times \dot v = -\text\ae \underbrace{n \times v}_{-b} + \underbrace{b \times kn}_{-kv} = \text\ae b - kv $$
+Получаем третью формулу Френе:
+$$ \boxed{\dot n = \text\ae b - kv} $$
+
+Все формулы Френе:
+
+\begin{tabular}{c | c | c | c}
+	& $ v $ & $ n $ & $ b $ \\
+    \hline
+    $ \dot v $ & 0 & $ k $ & 0 \\
+    $ \dot n $ & $ -k $ & 0 & \ae \\
+    $ \dot b $ & 0 & $ -\text\ae $ & 0
+\end{tabular}
+
+\section{Плоскости, связанные с кривой. Уравнения этих плоскостей}
+
+\begin{itemize}
+    \item $ \braket{v, n} $ "--- соприкасающаяся плоскость;
+    \item $ \braket{b, n} $ "--- нормальная плоскость;
+    \item $ \braket{v, b} $ "--- спрямляющая плоскость.
+\end{itemize}
+
+\begin{theorem}
+	$ f(t) $ "--- произвольная регулярная параметризация бирегулярной кривой.
+    $$ \implies f''(t) \in \braket{v, n} $$
+\end{theorem}
+
+\begin{proof}
+	Пусть $ s $ -- натуральный параметр
+	$$ \frac{\di f}{\di t} = \frac{\di f}{\di s} \cdot \frac{\di s}{\di t} = \dot{r} \cdot s' $$
+	$$ r'' = \frac{\di[2] f}{\di t^2} = \frac{\di \dot f}{\di t} s' + \dot f \cdot s'' = \ddot f \cdot (s')^2 + \dot f s'' = k \vv{n} \cdot (s')^2 + vs'' $$
+	$$ f'' = k(s')^2 \cdot \vv{n} + s''\vv{v} $$
+	То есть, $ f'' $ раскладывается по векторам $ v $ и $ n $ \\
+	Причём, если параметризация бирегулярна, то $ k(s')^2 \ne 0 $
+\end{proof}
+
+\begin{implication}
+    $ \braket{v, n} = \braket{f'(t), f''(t)} $
+\end{implication}
+
+\begin{problem}
+    Вычислить $ v, n, b $ и плоскости для произвольной параметризации $ f(t) $.
+\end{problem}
+
+$$ \vv v = \frac{f'(t)}{|f'(t)|}, \qquad \underset{\text{по следствию}}{\vv b = \frac{f'' \times f'}{|f' \times f''|},} \qquad \vv n = \vv b \times \vv n = \frac{(f' \times f'') \times f'}{|f'| \cdot |f' \times f''|} $$
+
+Пусть $ f(t) = \big( x(t), y(t), z(t) \big) $ \\
+$ \vv v \parallel (x', y', z') = f' $ "--- вектор нормали к нормальной плоскости \\
+Тогда нормальная плоскость пишется так:
+$$ \boxed{x'\clamp{t_\circ}(x - x_\circ) + y'\clamp{t_\circ}(y - y_\circ) + z'\clamp{t_\circ}(z - z_\circ)} = 0 $$
+
+Соприкасающаяся плоскость "--- аналогично, но нормальный вектор параллелен $ \vv b $, \ie $ f'' \times f' $:
+$$ \boxed{
+    \begin{vmatrix}
+        x'\clamp{t_\circ} & y'\clamp{t_\circ} & z'\clamp{t_\circ} \\
+        x''\clamp{t_\circ} & y'' \clamp{t_\circ} & z''\clamp{t_\circ} \\
+        x - x_\circ & y - y_\circ & z - z_\circ
+    \end{vmatrix} = 0} $$
+(это "--- смешанное произведение)
+
+Нормаль к спрямляющей плоскости параллельна $ \vv n $, \ie $ (r' \times r'') \times r' $:
+
+$$ \bigg( (f' \times f''), ~ f', ~ f \bigg) = 0 $$
+$$ (f' \times f'') =
+\begin{vmatrix}
+	i & j & k \\
+    x' & y' & z' \\
+    x'' & y'' & z''
+\end{vmatrix} = (y'z'' - y''z', ~ z'x'' - z''x', ~ x'y'' - x''y') $$
+$$ \boxed{
+    \begin{vmatrix}
+        y'\clamp{t_\circ}z''\clamp{t_\circ} - y''\clamp{t_\circ}z'\clamp{t_\circ} & z'\clamp{t_\circ}x''\clamp{t_\circ} - z'\clamp{t_\circ}x''\clamp{t_\circ} & x'\clamp{t_\circ}y''\clamp{t_\circ} & x''\clamp{t_\circ}y'\clamp{t_\circ} \\
+        x'\clamp{t_\circ} & y'\clamp{t_\circ} & z'\clamp{t_\circ} \\
+        x - x_\circ & y - y_\circ & z - z_\circ
+    \end{vmatrix} = 0} $$
+
+\section{Соприкасающаяся плоскость. Порядок её приближения к \n кривой}
+
+\begin{theorem}
+	$ f(t) $ "--- бирегулярная параметризация, $ \quad \delta $ "--- расстояние от $ f(t) $ до соприкасающейся плоскости.
+    $$ \liml{t \to t_\circ} \frac\delta{|f(t) - f(t_\circ)|^2} = 0 $$
+    Соприкасающаяся плоскость "--- единственная, обладающая таким свойством.
+\end{theorem}
+
+\begin{figure}[!ht]
+    \begin{tikzpicture}[>=Stealth]
+        \coordinate (O) at (0, 0);
+
+        \draw (O) rectangle (3, 2) node[anchor=north east] {сопр.};
+
+        \draw[->] (O) -- (3.5, 0) node[below] {$ x $};
+        \draw[->] (O) -- (0, 2.5) node[left] {$ y $};
+
+        \draw[name path=r] (O) parabola (2, 3) node[right] {$ f(t) $};
+
+        \draw[name path=tangent, blue, thick, ->] (O) -- (1, 0) node[below] {$ f'(t) $};
+
+        \path[name path = vert] (1, 0) -- (1, 3);
+        \fill[name intersections={of=r and vert, by=x}] (x) coordinate (rt0) circle[radius=0.08] node[anchor=north west] {$ f(t_0) $};
+
+        \draw[green!30!black, dotted] (rt0) -- +(120:0.5);
+    \end{tikzpicture}
+    \caption{Удобная система координат}
+    \label{tikz:tangent_plane}
+\end{figure}
+
+\begin{proof}
+    Введём удобную систему координат (рис. \ref{tikz:tangent_plane}):
+    \begin{itemize}
+    	\item Соприкасающаяся плоскость "--- $ XOY $;
+        \item Касательная "--- $ OX $;
+        \item $ f(t_\circ) $ "--- начало координат;
+        \item $ t_\circ = 0 $;
+        \item $ y''(t) \ne 0 $;
+        \item $ x'(0) \ne 0 $.
+    \end{itemize}
+
+    Пусть $ f(t) = \bigg( x(t), y(t), z(t) \bigg) $. Тогда
+    \begin{itemize}
+    	\item $ x(0) = y(0) = z(0) = 0, \quad $ \as $ f(t_\circ) = r(0) $ "--- начало координат;
+        \item $ y'(0) = z'(0) = 0, \quad $ \as $ OX $ "--- касательная;
+        \item $ z''(0) = 0, \quad $ \as $ XOY $ "--- соприкасающаяся.
+    \end{itemize}
+
+    Нужно сосчитать предел
+    $$ \limz t \frac{z(t)}{x^2 + y^2 + z^2} $$
+    Разложим по Тейлору:
+    $$ x(t) = x'(0)t + \frac{x''}2t^2 + o(t^2), \qquad y = \underbrace{y'(0)}_0t + \frac{y''}2t^2 + o(t^2) = \frac{y''}2t^2 + o(t^2), \qquad z(t) = \dots = o(t^2) $$
+    $$ \limz t \frac{z(t)}{x^2 + y^2 + z^2} = \limz t \frac{o(t^2)}{x'^2(0)t^2 + o(t^2)} = 0 $$
+\end{proof}
+
+\section{Вычисление кривизны}
+
+\begin{problem}
+	$ f = \vv f(t) $ \\
+    Вычислить кривизну в этой параметризации.
+\end{problem}
+
+Есть перепараметризация $ \vv f(t) = \vv g(s) $, где $ s $ "--- натуральный параметр.
+
+$$ | g'(s)| = 1, \qquad k \bydef |g''(s)| $$
+По теореме о натуральной параметризации (теор. \ref{th:natural_par}),
+$$ s(t) = \dint[\tau]{t_\circ}t{|f'(\tau)|} \quad \implies \quad s'(t) = |f'(t)| $$
+$$ f(t) = g \big( s(t) \big) $$
+$$ f'(t) = g' \big( s(t) \big) \cdot s'(t) $$
+$$ f''(t) = g'' \cdot s'^2 + g' \cdot s'' $$
+Это почти то, что нам нужно, но мешает $ s'' = |f'|' $. \\
+Домножим векторно на $ f' = g's' $:
+$$ f'' \times f' = (g''s'^2) \times (g's') + \underbrace{(g's'') \times (g's')}_{= s'' \cdot s' \cdot (g' \times g') = 0} $$
+$ s' $ "--- скалярная функция, её можно вынести за скобки:
+$$ f'' \times f' = s'^3 \cdot (g'' \times g') $$
+$$ |f'' \times f'| = |s'|^3 \cdot \underbrace{|g''|}_k \cdot \underbrace{|g'|}_1 \cdot \underbrace{\sin(\hat{g'', g'})}_1 $$
+$$ |f'' \times f'| = |f'|^3 \cdot k $$
+$$ \boxed{K = \frac{|f' \times f''|}{|f'|^3}} $$
+
+\section{Вычисление кривизны в явном виде и в полярных координатах}
+
+\begin{exmpls}[общие формулы для разных способов задания кривой]
+	\item Кривая задана на плоскости, в явном виде: $ y = f(x) $
+	$$
+	\begin{cases}
+		x = t \\
+		y = f(t) \\
+		z = 0
+	\end{cases} $$
+	$$ \vv{r} = \big( t, ~ f(t), ~ 0 \big) $$
+	$$ \vv{r'} = (1, ~ f', ~ 0), \qquad \vv{r''} = (0, ~ f'', ~ 0), \qquad r' \times r'' = (0, ~ 0, ~ f'') $$
+	$$ \boxed{k = \frac{|f''|}{(1 + f'^2)^{\faktor32}}} $$
+	\item В полярных координатах: $ r = r(\vphi) $
+	$$
+	\begin{cases}
+		x = r(\vphi)\cos\vphi \\
+		y = r(\vphi)\sin\vphi \\
+		z = 0
+	\end{cases} $$
+	$$ \vv{f}(t) = (r\cos\vphi, ~ r\sin\vphi, ~ 0), \qquad f' = (r'\cos\vphi - r\sin\vphi, ~ r'\sin\vphi + r\cos\vphi, ~ 0) $$
+	$$ |f'| = \sqrt{r^2 + r'^2} $$
+	\begin{remind}
+		$ (f \cdot g)'' = f''g + 2f'g' + f'g'' $
+		$$ (f \cdot g)^{(n)} = f^{(n)}g + \ln^1 f^{(n - 1)}g' + \ln^2 f^{(n - 2)}g'' + ... $$
+	\end{remind}
+	$$ f'' = (r''\cos \vphi - 2r'\cos\vphi - r\cos\vphi, ~ r''\sin\vphi + 2r'\cos\vphi - r\cos\vphi, ~ 0) $$
+	Векторно умножаем два вектора с нулевой третьей координатой, получаем вектор с единественной третьей ненулевой координатой:
+	\begin{multline*}
+		f' \times f'' = \bigg( 0, ~ 0, \\
+		(r'\cos\vphi - r\sin\vphi)(r''\sin\vphi + 2r'\cos\vphi - r\sin\vphi) - (r'\sin\vphi + r\cos\vphi)(r''\cos\vphi - 2r'\sin\vphi - r\cos\vphi)\bigg)
+	\end{multline*}
+	\begin{multline*}
+		|f' \times f''| = \\
+		= |\cancel{r'r''\cos\vphi\sin\vphi} + 2r'^2\cos^2\vphi - \cancel{r'r\cos\vphi\sin\vphi} - r''r\sin^2\vphi - \cancel{2r'r\cos\vphi\sin\vphi} + \\
+		+ r^2\sin^2\vphi - \cancel{r''r'\cos\vphi\sin\vphi} + 2r'^2\sin^2\vphi + \cancel{r'r\sin\vphi\cos\vphi} - rr''\cos^2\vphi + \cancel{2rr'\cos\vphi\sin\vphi} + r^2\cos\vphi| = \\
+		= 2r'^2 - r''r + r^2
+	\end{multline*}
+	$$ \boxed{k = \frac{r''r - 2r'^2 - r^2}{(r^2 + r'^2)^{\faktor32}}} $$
+	\item $ f(t) = \bigg(x(t), y(t), z(t) \bigg) $
+	$$ f' = (x', y', z'), \qquad f'' = (x'', y'', z''), \qquad f'' \times f' = (y''z' - z''y'; z''x' - x''z'; x''y' - y''x') $$
+	$$ \boxed{k =\frac{\sqrt{(y''z' - z''y')^2 + (z''x' - x''z')^2 + (x''y' - y''x')^2}}{(x'^2 + y'^2 + z'^2)^{\faktor32}}} $$
+\end{exmpls}
+
+\section{Вычисление кручения}
+
+\begin{undefthm}{Вычисление кручения в натуральной параметризации.}
+    $$ g' = v, \qquad g'' = v' = k \vv n, \qquad g''' = k'n + kn' \undereq{\text{\rom3 Френе}} k'n + k(-k \vv v + \text\ae \vv b) $$
+    $$ (g', g'', g''') = (\vv{v}, k\vv{n}, \cancel{k'\vv{n}} - k^2\vv{v} + k\text\ae\vv{b}) = k^2 \text\ae\underbrace{(v, n, b)}_{= 1} $$
+	$$ \boxed{\text\ae = \frac{(g', g'', g''')}{k^2}} $$
+\end{undefthm}
+
+$$ v = \vv{f}(t) = \vv{g}(s) = g \bigg( s(t) \bigg) $$
+$$ f' = g' \cdot s' $$
+$$ f'' = g''s'^2 + g's'' $$
+\begin{remind}
+	$ (g')' = g''s' $ (как сложная функция)
+\end{remind}
+$$ f''' = g''' \cdot s'^3 + g''2s' \cdot s'' + g''s's'' + g's''' = g'''s'^3 + 3g''s''s' + g's''' $$
+Избавимся от $ s'' $ и $ s''' $:
+\begin{remind}
+	$ (\vv{a}, \vv{b}, \vv{c}) = (\vv{a}, \vv{b} + \lambda \vv{c}, \vv{c}) $
+\end{remind}
+$$ (f', f'', f''') = \bigg( \vv{g'}s', ~ g''s'^2 + \cancel{\vv{g'}s''}, ~ g'''s'^3 + \cancel{3g''s''s'} + \cancel{g's'''} \bigg) = |\underbrace{f'}_{s'}|^6 (g', g'', g''') = |f'|^6k^2\text\ae $$
+$$ \text\ae = \frac{(f', f'', f''')}{k^2|f'|^6} $$
+\begin{remind}
+	$$ k = \frac{|f' \times f''|}{|f'|^3} $$
+\end{remind}
+$$ \boxed{\text\ae = \frac{(f', f'', f''')}{|f' \times f''|^2}} $$
+
+\begin{remark}
+	Кручение определено только для бирегулярной кривой ($ \iff k \ne 0 $)
+\end{remark}
+
+\section{Натуральные уравнения кривой}
+
+\begin{theorem}
+	Кривая задаётся кривизной и кручением (с точностью до положения в пространстве)
+\end{theorem}
+
+\begin{proof}
+	Пусть есть две кривые, у которых $ k_1 = k_2 $ и $ \text\ae_1 = \text\ae_2 $ \\
+	Рассмотрим $ \vv{g_1}(s); \vv{g_2}(s) $ -- натуральные параметризации \\
+	Совместим так, чтобы
+	$$
+	\begin{cases}
+		v_1(s_0) = v_2(s_0) \\
+		n_1(s_0) = n_2(s_0) \\
+		b_1(s_0) = b_2(s_0)
+	\end{cases} $$
+	Это и означает ``с точностью до положения в пространстве'' \\
+	Рассмотрим функцию
+	$$ f(s) = \vv{v_1}(s) \cdot \vv{v_2}(s) + \vv{n_1}(s) \cdot \vv{n_2}(s) + \vv{b_1}(s) \cdot \vv{b_2}(s) $$
+	$ f(s_0) = 3 $ (скалярное произведение соотв. функций равно 1) \\
+	При этом, $ f(s) \le 3 $ (по тем же сооражениям) \\
+	$ f(s) = 3 \iff v_1 = v_2, n_1 = n_2, b_1 = b_2 $ в точке $ s $ \\
+	Хотим доказать, что $ f(s) = 3 $ везде \\
+	Возьмём производную:
+	$$ f'(s) = v_1'v_2 + v_1v_2' + n_1'n_2 + n_1n_2' + b_1'b_2 + b_1b_2' $$
+	Распишем по формуле Френе:
+	$$ f'(s) = k_1n_1v_2 + k_2v_1n_2 - k_1v_1n_2 + \text\ae_1b_1n_2 - k_2n_1v_2 + \text\ae_2n_1b_2 - \text\ae_1n_1b_2 - \text\ae_2b_1n_2 \underset{
+		\begin{subarray}{c}
+			k_1 = k_2 \\
+			\text\ae_1 = \text\ae_2
+		\end{subarray}}= 0 $$
+\end{proof}

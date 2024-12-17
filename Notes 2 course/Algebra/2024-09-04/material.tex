@@ -3,7 +3,6 @@
 \section{Определения}
 
 \begin{definition}
-	$ V $ -- векторное пространство, $ \mathcal{A} : V \to V $
 	Жорданова клетка:
 	$$ Jr(\lambda) =
 	\begin{pmatrix}
@@ -24,7 +23,7 @@
 \end{eg}
 
 \begin{definition}
-	Жорданова форма -- матрица, у которой на главной диагонали жордановы клетки
+	Жорданова форма "--- матрица, у которой на главной диагонали жордановы клетки
 	$$
 	\begin{pmatrix}
 		Jr(\lambda_1) & 0 & 0 & . \\
@@ -37,37 +36,37 @@
 \subsection{Напоминание: собственные числа}
 
 \begin{definition}
-	$ \mathcal{A} $ -- оператор на $ V $ \\
+	$ \mathcal{A} $ "--- оператор на $ V $ \\
 	Число $ \lambda $ называется собственным для $ \mathcal{A} $, если
-	$$ \exist \underset{v \ne 0}{v \in V} : \mathcal{A}v = \lambda v $$
+	$$ \exist \underset{v \ne 0}{v \in V} : \quad \mathcal{A}v = \lambda v $$
 	$ v $ называется собственным вектором, соответствующим $ \lambda $
 \end{definition}
 
 \begin{definition}
-	$ A $ -- квадратная матрица \\
+	$ A $ "--- квадратная матрица \\
 	Число $ \lambda $ называется собственным, если
-	$$ \exist \underset{X \ne 0}{\text{ столбец } X} : \mathcal{A}X = \lambda X $$
+	$$ \exist \underset{X \ne 0}{\text{ столбец } X} : \quad \mathcal{A}X = \lambda X $$
 	$ X $ называется собственным столбцом
 \end{definition}
 
 \begin{definition}
-	$ A $ -- квадратная матрица \\
+	$ A $ "--- квадратная матрица \\
 	Характеристическим многочленом $ A $ называется $ \chi_A(t) = \det(A - tE) $
 \end{definition}
 
 \begin{theorem}
-	Собственные числа $ A $ -- корни $ \chi_A(t) $
+	Собственные числа $ A $ "--- корни $ \chi_A(t) $
 \end{theorem}
 
 \begin{definition}
-	$ \mathcal{A} $ -- оператор, $ A $ -- его матрица в некотором базисе \\
+	$ \mathcal{A} $ "--- оператор, $ A $ "--- его матрица в некотором базисе \\
 	Характеристическим многочленом $ \mathcal{A} $ называется $ \chi_A(t) $
 \end{definition}
 
 \section{Собственные подпространства}
 
 \begin{definition}
-	$ V $ -- векторное пространство, $ \mathcal{A} $ -- оператор на $ V $, $ \lambda $ -- с. ч. \\
+	$ V $ "--- векторное пространство, $ \mathcal{A} $ "--- оператор на $ V $, $ \lambda $ "--- с. ч. \\
 	Собственным подпространством, соответствующим $ \lambda $, называется множество с. в., соответствующих $ \lambda $
 \end{definition}
 
@@ -76,13 +75,13 @@
 \end{notation}
 
 \begin{definition}
-	$ U $ -- подпространство $ V $ \\
+	$ U $ "--- подпространство $ V $ \\
 	$ U $ называется инвариантным относительно $ \mathcal{A} $, если
 	$$ \forall x \in U \quad \mathcal{A}x \in U $$
 \end{definition}
 
 \begin{statement}
-	$ V_\lambda $ -- инвариантное подпространство
+	$ V_\lambda $ "--- инвариантное подпространство
 \end{statement}
 
 \begin{iproof}
@@ -100,36 +99,36 @@
 \end{iproof}
 
 \begin{theorem}[о сумме собственных подпространств]
-	$ \lambda_1, ..., \lambda_k $ -- различные собственные числа \\
-	Тогда сумма $ V_{\lambda_1} + ... + V_{\lambda_k} $ является прямой
+	$ \lambda_1, \dots, \lambda_k $ "--- различные собственные числа \\
+	Тогда сумма $ V_{\lambda_1} + \dots + V_{\lambda_k} $ является прямой
 \end{theorem}
 
 \begin{proof}
 	\textbf{Индукция} по $ k $
 	\begin{itemize}
-		\item \textbf{База.} $ k = 1 $ -- очевидно
+		\item \textbf{База.} $ k = 1 $ "--- очевидно
 		\item \textbf{Переход}. $ k - 1 \to k $ \\
-		Пусть $ U_1 + ... + U_{k - 1} + U_k = 0, \qquad U_i \in V_{\lambda_i} $
+		Пусть $ u_1 + \dots + u_{k - 1} + u_k = 0, \qquad u_i \in V_{\lambda_i} $
 		\begin{multline*}
-			0 = \mathcal{A}(\underbrace{U_1 + ... + U_{k - 1} + U_k}_{= 0 }) - \lambda_k(\underbrace{U_1 + ... + U_{k - 1} + U_k}_{= 0 }) = \\
-			= \lambda_1U_1 + ... + \lambda_{k - 1}U_{k - 1} + \cancel{\lambda_kU_k} - \lambda_kU_1 - ... - \lambda_kU_{k - 1} - \cancel{\lambda_kU_k} = \underbrace{(\lambda_1 - \lambda_k)}_{\ne 0}U_1 + ... + \underbrace{(\lambda_{k - 1} - \lambda_k)}_{\ne 0}U_{k - 1}
+			0 = \mathcal{A}(\underbrace{u_1 + \dots + u_{k - 1} + u_k}_{= 0 }) - \lambda_k(\underbrace{u_1 + \dots + u_{k - 1} + u_k}_{= 0 }) = \\
+			= \lambda_1u_1 + \dots + \lambda_{k - 1}u_{k - 1} + \cancel{\lambda_ku_k} - \lambda_ku_1 - \dots - \lambda_ku_{k - 1} - \cancel{\lambda_ku_k} = \underbrace{(\lambda_1 - \lambda_k)}_{\ne 0}u_1 + \dots + \underbrace{(\lambda_{k - 1} - \lambda_k)}_{\ne 0}u_{k - 1}
 		\end{multline*}
 		(т. к. по условию собственные числа различны)
-		$$ (\lambda_1 - \lambda_k)U_1 \in V_{\lambda_1}, \quad \widedots[5em], \quad (\lambda_{k - 1} - \lambda_k)U_{k - 1} \in V_{\lambda_{k - 1}} $$
-		По \textbf{индукционному предположению}, $ V_{\lambda_1} \oplus ... \oplus V_{\lambda_{k - 1}} $ \\
+		$$ (\lambda_1 - \lambda_k)u_1 \in V_{\lambda_1}, \quad \dots, \quad (\lambda_{k - 1} - \lambda_k)u_{k - 1} \in V_{\lambda_{k - 1}} $$
+		По \textbf{индукционному предположению}, $ V_{\lambda_1} \oplus \dots \oplus V_{\lambda_{k - 1}} $ \\
 		А мы представили 0 в виде суммы. Значит, все слагаемые нулевые:
-		$$ (\lambda_1 - \lambda_k)U_1 = ... = (\lambda_{k - 1} - \lambda_k)U_{k - 1} = 0 \implies U_1 = ... = U_{k - 1} = 0 \implies U_k = 0 $$
+		$$ (\lambda_1 - \lambda_k)u_1 = \dots = (\lambda_{k - 1} - \lambda_k)u_{k - 1} = 0 \implies u_1 = \dots = u_{k - 1} = 0 \implies u_k = 0 $$
 	\end{itemize}
 \end{proof}
 
 \begin{implication}
-	$ \lambda_1, ..., \lambda_k $ -- различные с. ч., $ U_i \in V_{\lambda_i} $, $ U_i \ne 0 $ \\
-	Тогда $ U_1, ..., U_k $ ЛНЗ
+	$ \lambda_1, \dots, \lambda_k $ "--- различные с. ч., $ \qquad u_i \in V_{\lambda_i}, \qquad u_i \ne 0 $ \\
+	Тогда $ u_1, \dots, u_k $ ЛНЗ
 \end{implication}
 
 \begin{proof}
-	Пусть $ a_1U_1 + ... + a_kU_k = 0 $
-	$$ a_1U_1 \in V_{\lambda_1}, ..., a_kU_k \in V_{\lambda_k} \implies a_1U_1 = ... = a_kU_k = 0 \implies a_1 = ... = a_k = 0 $$
+	Пусть $ a_1u_1 + \dots + a_ku_k = 0 $
+	$$ a_1u_1 \in V_{\lambda_1}, \dots, a_ku_k \in V_{\lambda_k} \implies a_1u_1 = \dots = a_ku_k = 0 \implies a_1 = \dots = a_k = 0 $$
 \end{proof}
 
 \section{Операторы с диагональными и блочно-диагональными матрицами}
@@ -141,7 +140,7 @@
 \end{definition}
 
 \begin{definition}
-	$ \mathcal{A} $ -- оператор, $ \lambda $ -- с. ч.
+	$ \mathcal{A} $ "--- оператор, $ \lambda $ "--- с. ч.
 	\begin{itemize}
 		\item Геометрической кратностью $ \lambda $ называется $ \dim V_\lambda $
 		\item Арифметической кратностью $ \lambda $ называется кратность $ \lambda $ как корня $ \chi_{\mathcal{A}}(t) $
@@ -149,49 +148,51 @@
 \end{definition}
 
 \begin{theorem}[критерий диагонализуемости в терминах геометрической кратности]
+	\hfill \\
 	(\rom1) $ \mathcal{A} $ диагонализуем $ \iff $ (\rom2) сумма геометрических кратностей всех с. ч. равна $ \dim V $
 \end{theorem}
 
 \begin{proof}
-	$ \mathcal{A} $ диагонализуем $ \iff $ в нек. базисе $ e_1, ..., e_n $ матрица $ \mathcal{A} $ имеет вид $ A =
+	\hfill \\
+	$ \mathcal{A} $ диагонализуем $ \iff $ в нек. базисе $ e_1, \dots, e_n $ матрица $ \mathcal{A} $ имеет вид $ A =
 	\begin{pmatrix}
 		a_1 & 0 & . \\
 		0 & a_2 & . \\
 		. & . & .
 	\end{pmatrix} $ \\
-	$ \iff $ для некоторого базиса $ e_1, ..., e_n $ выполнено
-	$$ \mathcal{A}e_i = 0 e_1 + ... + a_ie_i + ... + 0 e_n = a_ie_i $$
+	$ \iff $ для некоторого базиса $ e_1, \dots, e_n $ выполнено
+	$$ \mathcal{A}e_i = 0 e_1 + \dots + a_ie_i + \dots + 0 e_n = a_ie_i $$
 	$ \iff $ (\rom1') существует базис из с. в. \\
 	Докажем, что (\rom1') $ \iff $ (\rom2): \\
-	Пусть $ U = V_{\lambda_1} + ... + V_{\lambda_k} $
+	Пусть $ U = V_{\lambda_1} + \dots + V_{\lambda_k} $
 	$$ n \define \dim V, \qquad d_i \define \dim V_{\lambda_i} $$
 	\begin{itemize}
 		\item (\rom2) $ \implies $ (\rom1') \\
-		Имеем $ d_1 + ... + d_k = n $
-		$$ V_{\lambda_1} + V_{\lambda_k} \text{ прямая } \implies \dim U = n \underimp{U \text{ -- подпр-во } V} U = V $$
-		$$ V_{\lambda_1} + V_{\lambda_k} \text{ прямая } \implies \text{ объединение базисов } V_\lambda \text{ является базисом } U = V $$
+		Имеем $ d_1 + \dots + d_k = n $
+		$$ V_{\lambda_1} \oplus \dots \oplus V_{\lambda_k} \implies \dim U = n \underimp{U \text{ "--- подпр-во } V} U = V $$
+		$$ V_{\lambda_1} \oplus \dots \oplus V_{\lambda_k} \implies \text{ объединение базисов } V_\lambda \text{ является базисом } U = V $$
 		Эти базисы состоят из с. в. \\
 		Объединение базисов состоит из с. в. \\
 		Это базис $ V $
 		\item (\rom1') $ \implies $ (\rom2) \\
 		Сущетсвует базис $ V $ из с. в. \\
 		Они распределяются по $ V_\lambda $ (но не обязательно для каждого $ V_\lambda $ представлен весь его базис):
-		$$ \underbrace{e_1^{(1)}, ..., e_{t_1}^{(1)}}_{
+		$$ \underbrace{e_1^{(1)}, \dots, e_{t_1}^{(1)}}_{
 			\begin{subarray}{c}
 				\text{соотв. } \lambda_1 \\
 				\in V_{\lambda_1}
-			\end{subarray}}, \underbrace{e_1^{(2)}, ..., e_{t_2}^{(2)}}_{
+			\end{subarray}}, \underbrace{e_1^{(2)}, \dots, e_{t_2}^{(2)}}_{
 			\begin{subarray}{c}
 				\text{соотв. } \lambda_2 \\
 				\in V_{\lambda_2}
 			\end{subarray}}, \widedots $$
-		$$ \underset{\text{(т. к. они лежат в большом-большом базисе)}}{e_1^{(i)}, ..., e_{t_i}^{(i)} \text{ ЛНЗ }} \implies t_i \le d_i \quad \forall i $$
+		$$ \underset{\text{(т. к. они лежат в большом-большом базисе)}}{e_1^{(i)}, \dots, e_{t_i}^{(i)} \text{ ЛНЗ }} \implies t_i \le d_i \quad \forall i $$
 		Сложим все эти неравенства:
 		$$
 		\begin{rcases}
-			d_1 + d_2 + ... + d_k \ge t_1 + ... + t_k = n \\
-			n \ge \dim U \undereq{U = V_{\lambda_1} \oplus ... \oplus V_{\lambda_k}} d_1 + ... + d_k
-		\end{rcases} \implies n = d_1 + ... + d_k $$
+			d_1 + d_2 + \dots + d_k \ge t_1 + \dots + t_k = n \\
+			n \ge \dim U \undereq{U = V_{\lambda_1} \oplus \dots \oplus V_{\lambda_k}} d_1 + \dots + d_k
+		\end{rcases} \implies n = d_1 + \dots + d_k $$
 	\end{itemize}
 \end{proof}
 
@@ -202,7 +203,7 @@
 
 \begin{proof}
 	$ \dim V_{\lambda_i} \ge 1 $
-	$$ n \ge \dim(V_{\lambda_1} + ... + V_{\lambda_k}) \undereq{\text{пр. сумма}} \dim V_{\lambda_1} + ... + \dim V_{\lambda_k} \ge n $$
+	$$ n \ge \dim(V_{\lambda_1} + \dots + V_{\lambda_k}) \undereq{\text{пр. сумма}} \dim V_{\lambda_1} + \dots + \dim V_{\lambda_k} \ge n $$
 	Значит, достигается равенство
 \end{proof}
 
@@ -211,20 +212,20 @@
 	\begin{pmatrix}
 		A & B \\
 		0 & C
-	\end{pmatrix}, A, C \text{ -- кв. } \implies |M| = |A| \cdot |C| $$
+	\end{pmatrix}, \quad A, C \text{ "--- кв. } \implies |M| = |A| \cdot |C| $$
 \end{remind}
 
 \begin{theorem}[арифм. и геом. кратности]
-	$ \lambda $ -- с. ч. $ \mathcal{A} $ \\
+	$ \lambda $ "--- с. ч. $ \mathcal{A} $ \\
 	Геом. кратность $ \lambda \le $ арифм. кратности $ \lambda $
 \end{theorem}
 
 \begin{proof}
-	Пусть $ n = \dim V, \quad k $ -- геом. кр. $ \lambda $ \\
-	Выберем базис $ e_1, ..., e_k $ пространства $ V_{\lambda} $ \\
-	Дополним его до базиса $ V $: $ e_1, ..., e_k, ...., e_n $ \\
-	При $ i \le k $ выполнено $ \mathcal{A} e_i = \lambda e_i = 0e_1 + ... + \lambda e_i + ... + 0e_n $ \\
-	Матрица $ \mathcal{A} $ в базисе $ e_1, ..., e_n $:
+	Пусть $ n = \dim V, \quad k $ "--- геом. кр. $ \lambda $ \\
+	Выберем базис $ e_1, \dots, e_k $ пространства $ V_{\lambda} $ \\
+	Дополним его до базиса $ V $: $ e_1, \dots, e_k, \dots., e_n $ \\
+	При $ i \le k $ выполнено $ \mathcal{A} e_i = \lambda e_i = 0 \cdot e_1 + \dots + \lambda e_i + \dots + 0 \cdot e_n $ \\
+	Матрица $ \mathcal{A} $ в базисе $ e_1, \dots, e_n $:
 	$$ A =
 	\begin{pmatrix}
 		\lambda & . & & B \\
@@ -242,7 +243,7 @@
 \end{proof}
 
 \begin{implication}[критерий диагонализуемости в терминах арифметических и геометрических кратностей]
-	Опреатор $ \mathcal{A} $ диагонализуем $ \iff $
+	Оператор $ \mathcal{A} $ диагонализуем $ \iff $
 	\begin{enumerate}
 		\item $ \chi_{\mathcal{A}}(t) $ раскладывается на линейные множители
 		\item $ \forall $ с. ч. $ \lambda \quad $ арифм. кр. = геом. кр.
@@ -250,8 +251,8 @@
 \end{implication}
 
 \begin{proof}
-	Пусть $ \lambda_i $ -- с. ч., $ d_i $ -- геом. кр., $ a_i $ -- арифм. кр., $ n = \dim C $
-	$$ \chi(t) - (t - \lambda_1)^{a_1} ...(t - \lambda_k)^{a_k} \cdot f(t) $$
-	$$ n = \deg \chi(t) \ge a_1 + ... + a_k \ge d_1 + ... + d_k $$
-	Диагонал. $ \iff n = d_1 + ... + d_k \iff $ везде достигаются равенства
+	Пусть $ \lambda_i $ "--- с. ч., $ d_i $ "--- геом. кр., $ a_i $ "--- арифм. кр., $ n = \dim C $
+	$$ \chi(t) - (t - \lambda_1)^{a_1} \dots(t - \lambda_k)^{a_k} \cdot f(t) $$
+	$$ n = \deg \chi(t) \ge a_1 + \dots + a_k \ge d_1 + \dots + d_k $$
+	Диагонал. $ \iff n = d_1 + \dots + d_k \iff $ везде достигаются равенства
 \end{proof}

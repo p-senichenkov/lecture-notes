@@ -1,0 +1,115 @@
+\chapter{Геодезическая кривизна}
+
+
+\begin{theorem}
+	$$ k_g = \frac{(r_{tt}'', r_t', n)}{|r_t'|^3} $$
+\end{theorem}
+
+\begin{proof}
+	Пусть $ r_{tt}'' = r_1'' + r_2'' $, где $ r_1'' \perp n, \quad r_2'' \parallel n $
+	$$ r' \perp n $$
+	$$ r_{tt}'' \times r_t' = \underbrace{r_1'' \times r'}_{\parallel n} + \underbrace{r_2'' \times r'}_{\perp n} $$
+	$$ k = \frac{|r'' \times r'|}{|r'|^3} $$
+	\begin{statement}
+		$$ k_g \iseq \frac{\text{Пр}_{\vec n}(r'' \times r')}{|r'|^3} = \frac{(r'' \times r') \cdot n}{|n| \cdot |r'|^3} = \frac{(r'', r', n)}{|r'|^3} $$
+	\end{statement}
+	\begin{proof}
+		Кривизна "--- проекция $ r'' $ на вектор нормали к кривой, а значит,
+		$$ r'' \times r' \parallel \vec b \quad \implies (r'' \times r') \times r' \perp \vec b, ~ \perp \vec v \quad \implies \perp \vec n $$
+		$$ \implies \vec k = \frac{(r'' \times r') \times r'}{|r'|^4} $$
+		$$ |(r'' \times r') \times r'| = |r'' \times r'| \cdot |r'| \cdot \underbrace{\sin \alpha}_{1, \text{ \as } \alpha = \faktor\pi2} $$
+		$$ \implies k = \frac{|r'' \times r'}{|r'|^3} = \frac{|(r'' \times r') \times r'}{|r'|^4} $$
+		$$ \text{Пр}_{\text{кас. пл.}} \vec k = \frac{\bigg( (r_1'' + r_2'') \times r' \bigg) \times r'}{|r'|^4} = \underbrace{\frac{(r'' \times r') \times r'}{|r'|^4}}_{\perp n} + \underbrace{\frac{\overbrace{(r_2'' \times r')}^{\perp n} \times \overbrace{r'}^{\perp n}}{|r'|^4}}_{\parallel n} = \frac{(r'' \times r') \times r'}{|r'|^4} $$
+		$$ k_g = \bigg| \text{Пр}_{\text{кас. пл.}} \vec k \bigg| = \frac{|r_1'' \times r'| \cdot |r'|}{|r'^4|} = \frac{|r_1'' \times r'}{|r'|^3} = \frac{(r'', r', r)}{|r'|^3} $$
+	\end{proof}
+\end{proof}
+
+\section{Геодезические линии}
+
+\begin{theorem}
+	Задана кривая на поверхности. Следующие определения геодезических линий равносильны:
+	\begin{enumerate}
+		\item\label{en:geo:1} $ k_g = 0 $;
+		\item\label{en:geo:2} вектор главной нормали к кривой параллелен нормали к поверхности;
+		\item\label{en:geo:3} соприкасающаяся плоскость кривой содержит нормаль к поверхности;
+		\item\label{en:geo:4} спрямляющая плоскость кривой является касательной плоскостью к поверхности;
+		\item\label{en:geo:5} $ k $ "--- $ \min $ для всех кривых в данном направлении;
+		\item[(6).]\label{en:geo:6} локально кратчайшие линии.
+	\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+	Очевидно (действительно \emoji{neutral-face}) \\
+	Шестое "--- не доказываем.
+\end{proof}
+
+\begin{eg}[геодезичсекая линия на сфере]
+	Геодезические на сфере "--- большие окружности (те, у которых центр совпадает с центром сферы). \\
+	Самолёты летают по ним.
+\end{eg}
+
+\section{Полугеодезическая параметризация}
+
+\begin{theorem}
+	В любой точке в любом направлении можно провести ровно одну геодезичсекую (локально).
+\end{theorem}
+
+\begin{proof}
+	Условие геодезичсекой "--- $ k_g = 0 $, \ie $ (r_{tt}'', r_t', n) = 0 $ "--- это дифур второго порядка. Надо доказать, что у него существует единственное решение.
+	\begin{statement}[из дифуров]
+		$ y'' = f(x, y, y'), \qquad f $ непр. по каждому аргументу \\
+		$ \implies $ решение существует и единственно (локально).
+	\end{statement}
+	Нам надо разрешить дифур относительно $ r'' $.
+	$$
+	\begin{cases}
+		u = t \\
+		v = \vphi(t)
+	\end{cases} $$
+	Нужно доказать, что существует такая $ \vphi $.
+	$$ r_t' (u, v) = r_u \cdot u' + r_v \cdot v' = r_u + r_v \vphi' $$
+	$$ r_{tt}'' = r_{uu}u'^2 + 2r_{uv}u'v' + r_{vv}v'^2 + r_uu'' + r_vv'' = r_{uu} + 2r_{uv} \vphi' + r_{vv} \vphi'^2 + r_v \vphi'' $$
+	\begin{multline*}
+		0 = (r'', r', n) = (r_{uu} + 2r_{uv}\vphi' + r_{vv}\vphi'^2 + r_v\vphi'', r_u + r_v \vphi', n) = \\
+		= \underbrace{(r_{uu}'' + 2r_{uv}\vphi' + r_{vv}\vphi'^2, r_u + r_v\vphi', n)}_{\rom1} + \underbrace{(r_v \vphi'', r_u + r_v\vphi', n)}_{\rom2}
+	\end{multline*}
+	$$ \rom2 = \vphi'' \cdot (r_v, r_u + \cancel{r_v\vphi'}, n) = -\vphi'' \cdot (r_u, r_v, n) $$
+	(\as $ (r_v, r_u + r_v\vphi', n) = (r_v, r_u, n) + \underbrace{(r_v, r_v\vphi', n)}_{0, \text{ \as } r_v \parallel r_v\vphi'} $)
+	$$ \boxed{\vphi'' = \frac{\rom1}{(r_u, r_v, n)}} $$
+	$ (r_u, r_v, n) \ne 0 $ (\as $ r_u, r_v, n $ "--- базис, \as повехность регулярная). \\
+	Значит, у такого дифура есть ровно одно решение с начальными данными
+	$$
+	\begin{cases}
+		\vphi(t_0) = \vphi_0 \\
+		\vphi'(t_0) = \vphi_1
+	\end{cases} $$
+\end{proof}
+
+Полугеодезическая параметризация: $ E = 1, ~ F = 0, ~ G > 0 $
+
+\begin{theorem}
+	Полугеодезическая параметризация всегда существует (локально).
+\end{theorem}
+
+\begin{proof}
+	$$ (r_u \cdot r_v)_u = \underbrace{r_{uu} \cdot r_v}_0 + r_u \cdot r_{uv} = \cancel{f'' \cdot g'} + f' \cdot r_{uv} = \underbrace{f' \cdot (f')_v}_0 = 0 $$
+	$ r_{uu} = f'' \parallel $ вектору главной нормали для $ f $ (\as $ f $ в натуральной параметризации) $ \parallel $ нормали к поверхности (\as $ f $ "--- геодезическая) \\
+	$ r_v $ "--- касательный вектор. \\
+	На первой лекции доказывали полезную лемму:
+	$$ |f'| = 1 \implies \pder{f'}v \perp f' $$
+	$$ F = r_u \cdot r_v = \const $$
+	Но при $ u = 0 \quad F = 0 $
+	$$ \implies F = 0 \text{ всюду} $$
+\end{proof}
+
+\begin{proof}[пункта (\ref{en:geo:6}) теоремы про геодезические]
+	\hfill \\
+	Рассмотрим полугеодезическую параметризацию. \\
+	Возьмём точки $ A, B $ на геодезической. \\
+	Пусть $ \big( u(t), v(t) \big) $ "--- внутренние координаты некоторой кривой, соединяющей $ A $ и $ B $. Её длина:
+	\begin{multline*}
+		l = \dint[t]{t_0}{t_1}{\sqrt{\underset1Eu'^2 + 2\underset0Fu'v' + Gv'^2}} = \dint[t]{t_0}{t_1}{u'^2 + \underset{> 0}Gv'^2} \ge \dint[t]{t_0}{t_1}{u'^2} = \\
+		= \dint[t]{t_0}{t_1}{u'} = u(t_1) - u(t_0) = \text{ длина геодезической}
+	\end{multline*}
+	Мы доказали, что геодезическая "--- кратчайшая. В другую сторону "--- без доказательства.
+\end{proof}

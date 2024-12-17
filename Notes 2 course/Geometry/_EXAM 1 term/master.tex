@@ -1,0 +1,24 @@
+\documentclass[a4paper]{article}
+\input{../../preamble.tex}
+
+% so that it will be more convenient for questions:
+\titleformat{\section}
+{\normalfont\bfseries\Large}    % font
+{\color{gray}{\thesection.}}  % number
+{0.5em} % separator
+{}  % before-code
+[]  % after-code
+
+\title{Диифференциальная геометрия}
+\author{Курс Солынина А. А.}
+\date{Осень 2024}
+
+\begin{document}
+    \maketitle
+
+    \tableofcontents
+
+    \input{./1_curves.tex}
+    \input{./2_surfaces.tex}
+
+\end{document}

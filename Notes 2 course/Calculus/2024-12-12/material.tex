@@ -1,0 +1,25 @@
+\chapter{Теория функции комплексной переменной}
+
+Косплексная плоскость $ \Co $ является метрическим пространством, поскольку $ |z| = \sqrt{x^2 + y^2} = \norm{(x, y)}_{R^2} $, если $ z = x + i y $. Поэтому определны понятия точки сгущения множества и предела функции:
+
+\begin{definition}
+	$ c $ является \it{точкой сгущения} множетсва $ E \sub \Co $, если
+	$$ \forall \delta > 0 \quad \exist z \in E \setminus \set{c} : \quad |z - c| < \delta $$
+\end{definition}
+
+\begin{definition}
+	$$ f(z) \underarr{z \to c} A \in \Co \iff \forall \veps > 0 \quad \exist \delta > 0 : \quad \forall z \in E \setminus \set{c} : |z - c| < \delta \qquad |f(z) - c| < \veps $$
+\end{definition}
+
+Для $ w = u + iv $ полагаем $ \Re w = u, \quad \Im w = v, \quad \ol w = u - iv $. Множеству $ x + i \cdot 0 $ соспоставим $ \R $. Полагаем, что $ i \cdot 0 = 0 $, и $ \R \sub \Co $.
+
+\begin{statement}
+	Если $ u(z) = \Re f(z), \quad v(z) = \Im f(z) $, то
+	$$ f(z) \underarr{z \to c} A \iff
+	\begin{cases}
+		u(z) \underarr{z \to c} \Re A \\
+		v(z) \underarr{z \to c} \Im A
+	\end{cases} $$
+	Из свойств функций нескольких переменных получаем:
+	$$ f(z) \underarr{z \to c} A \in \Co \implies \exist \delta > 0, ~ M > 0 : \quad \forall z \in E \setminus \set{c} : |z - c| < \delta \qquad |f(z)| \le M $$
+\end{statement}

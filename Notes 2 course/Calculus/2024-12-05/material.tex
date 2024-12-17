@@ -1,0 +1,212 @@
+\chapter{Криволинейный интеграл}
+
+\section{Ориентация кривой}
+
+\begin{definition}
+	$ \Gamma : [a, b] \to \R^{n \ge 2} $ "--- разомкнутая кривая. \\
+	$ \Gamma(a) $ называется началом кривой, $ \quad \Gamma(b) $ "--- концом. \\
+	Начало и конец задают ориентацию кривой.
+	$$ a < c_1 < \dots < c_m < b $$
+	Точки $ \Gamma(a), \Gamma(c_1), \dots, \Gamma(c_m), \Gamma(b) $ проходятся в соответствии с выбранной ориентацией.
+\end{definition}
+
+Рассмотрим образ кривой:
+$$ \Gamma \sub \R^n $$
+$$ \Gamma(a) \fed A, \qquad \Gamma(b) \fed B, \qquad \Gamma(c_k) \fed M_k $$
+Точки $ A, M_1, \dots, M_m, B $ проходятся в соотвествии с выбранной ориентацией.
+
+Можно выбрать \soc обратную ориентацию:
+$$ \Gamma_1 : [a, b] \to \R^n $$
+$$ \Gamma_1(t) \define \Gamma(a + b - t) $$
+$$ \Gamma_1(a) = \Gamma(b), \qquad \Gamma_1(b) = \Gamma(a) $$
+
+Справедливо следующее топологическое утверждение:
+
+\begin{theorem}
+	Если имеется разомкнутая или замкнутая кривая в $ \R^n $ \nimp[(здесь имеется в виду образ)], то на ней можно ввести одну из двух ориентаций.
+\end{theorem}
+
+\begin{noproof}
+
+\end{noproof}
+
+\subsection{Замкнутая кривая}
+
+Для замкнутой кривой всё то же самое.
+
+\subsection{Длина кривой}
+
+При определении длины кривой мы вводили следующие суммы (записанные теперь через образ):
+$$ \sum_{k = 0}^m \norm{M_{k + 1} - M_k} $$
+Рассмотрим противоположную ориентацию:
+$$ M_k' = M_{m + 1 - k} $$
+Поменяем индексы:
+$$ \sum_{k = 0}^m \norm{M_{k + 1} - M_k} = \sum_{k = 0}^m \norm{M_{m + 1 - k} - M_{m - k}} = \sum_{k = 0}^m \norm{M_{k + 1}' - M_k'} $$
+Таким образом мы доказали, что
+
+\begin{statement}
+	Длина кривой не зависит от ориентации.
+\end{statement}
+
+\begin{restate}
+	Длина кривой зависит только от её образа.
+\end{restate}
+
+\subsection{Криволинейный интеграл}
+
+Рассмотрим $ \Gamma \sub \R^n $ "--- образ замкнутой кривой. \\
+Пусть даны разбиение $ \Teq = \set{t_k} $ и оснащение $ \Par = \set{\tau_j} $.
+$$ \Gamma(a) = A, \qquad \Gamma(b) = B, \qquad \Gamma(t_k) = M_k $$
+$$ A = B, \qquad \Gamma(\tau_j) \fed N_j $$
+Можно переписать суммы Римана в новых обозначениях:
+$$ \Sr(f, \Teq, \Par) = \sum_{k = 1}^m f(N_k) l \bigg( \Gamma(M_{k - 1}, M_k) \bigg) $$
+Они (при стремелении диаметра разбиения к нулю) стремились к интегралу первого рода. \\
+Аналогично длине кривой, здесь можно поменять индексы определённым образом. \\
+Таким образом верно следующее:
+
+\begin{statement}
+	Криволинейный интеграл первого рода не зависит от ориентации кривой.
+\end{statement}
+
+\section{Криволинейный интеграл второго рода}
+
+\begin{notation}
+	Ориентирванную кривую будем обозначать $ \curvedir\Gamma([a, b]) $ или $ \curvedir\Gamma $ \\
+	Противоположно ориентированную кривую будем обозначать $ \curvedir[0]\Gamma([a, b]) $ или $ \curvedir[0]\Gamma $
+\end{notation}
+
+\begin{definition}
+	$$ \curvedir\Gamma(t) = \column{\gamma_1(t)}{\gamma_n(t)} \text{ "--- } C^1 \text{-кривая}, \qquad f \in \Cont\Gamma $$
+	Криволинейным интеграл второго рода по ориентированной криивой функции $ f $ называется
+	$$ \cint[x_j]{\curvedir\Gamma}{f(M)} \define \dint[t]ab{f \big( \Gamma(t) \big)\gamma_j'} $$
+\end{definition}
+
+\begin{definition}
+	$$ c_0 = a < c_1 < \dots < cm < b = c_{m + 1} $$
+	$$ \curvedir\Gamma[a, b], \qquad \Gamma([c_{k - 1}, c_k]) \text{ "--- } C^1 \text{-кривая при } k = 1, \dots, m + 1 $$
+	Тогда
+	$$ \cint[x_j]{\curvedir\Gamma}{f(M)} \define \sum_{k = 1}^{m + 1} \cint[x_j]{\curvedir\Gamma([c_{k - 1}, c_k])}{f(M)} $$
+\end{definition}
+
+\begin{definition}
+	$ \Gamma $ "--- $ C^1 $-кривая, $ \qquad f \in \Cont\Gamma, \qquad \Teq = \seqz[m]{t_k}k, \qquad \Par = \seq[m]{\tau_k}k, \qquad \tau_k \in [t_{k - 1}, t_k] $ \\
+	Суммой Римана для интеграла второго рода будем называть
+	$$ \Sr_{\curvedir\Gamma}(f, \Teq, \Par, j) = \sum_{k = 1}^m f \big( \Gamma(\tau_k) \big) \bigg( \gamma_j(t_k) - \gamma_j(t_{k - 1}) \bigg) $$
+\end{definition}
+
+\begin{theorem}
+	$ \curvedir\Gamma $ "--- $ C^1 $-кривая
+	$$ \implies \forall \veps > 0 \quad \exist \delta > 0 : \quad \forall \Teq : t_{k + 1} - t_k < \delta \quad \forall \Par \quad \bigg| \Sr_{\curvedir\Gamma}(f, \Teq, \Par, j) - \cint[x_j]{\curvedir\Gamma}{f(M)} \bigg| < \veps $$
+\end{theorem}
+
+\begin{proof}
+	$ \gamma_\nu' \in \Cont{[a, b]} $
+	\begin{equ}5
+		c_1 > 0 \quad |\gamma_n'(t)| \le c_1 \quad \forall t \in [a, b], \quad \nu = 1, \dots, n
+	\end{equ}
+	\begin{equ}6
+		\dint[t]ab{f \big( \Gamma(t) \big)\gamma_j'(t)} \bydef \sum_{k = 1}^m \dint[t]{t_{k - 1}}{t_k}{f \big( \Gamma(t) \big)}
+	\end{equ}
+	\begin{multline}\lbl7
+		\implies \Sr(\dots) - \dint[t]ab{f \big( \Gamma(t) \big)\gamma_j'(t)} \bdefeq{\Sr} \\
+		= \sum_{k = 1}^m \bigg( f \big( \Gamma(\tau_k) \big) \big( \gamma_j(t_k) - \gamma_j(t_k) \big) - \dint[t]{t_{k - 1}}{t_k}{f \big( \Gamma(t) \big)\gamma_j'(t)} \bigg) \undereq{\text{ф. Ньютона"--~Лейбница}} = \\
+		= \sum_{k = 1}^m \bigg( f \big( \Gamma(\tau_k) \big) \dint[t]{t_{k - 1}}{t_k}{\gamma_j'(t)} - \dint[t]{t_{k - 1}}{t_k}{f \big( \Gamma(t) \big)\gamma_j'(t)}) \undereq{
+			\begin{subarray}{c}
+				\text{в первом слагаемом вносим константу} \\
+				\text{разность интегралов как интеграл разности}
+			\end{subarray}} \\
+		= \sum_{k = 1}^m \dint[t]{t_{k - 1}}{t_k}{ \bigg( f \big( \Gamma(\tau_k) \big) - f \big( \Gamma(t) \big) \bigg) \gamma_j'(t)}
+	\end{multline}
+	По теореме Кантора $ f $ равномерно непрерывна на $ \Gamma $:
+	\begin{equ}8
+		\exist \lambda > 0 : \quad \forall M', M'' \in \Gamma \quad \nimp[\bigg(] \norm{M'' - M'} < \lambda \implies |f(M'') - f(M')| < \veps \nimp[\bigg)]
+	\end{equ}
+	В конце прошлой лекции мы выяснили, что
+	\begin{equ}9
+		|t'' - t'| < \delta \implies \norm{\Gamma(t'') - \Gamma(t')} \le c_1\sqrt n \delta
+	\end{equ}
+	$ c_1 $ играло ту же роль, что сейчас $ \veps $. \\
+	Выберем $ \delta $ так, чтобы выполнялось
+	\begin{equ}{10}
+		c_1\sqrt n \delta = \lambda
+	\end{equ}
+	Если $ t_k - t_{k - 1} < 0 $, то при $ t \in [t_{k - 1}, t_k], \quad \tau \in [t_{k - 1}, t_k] $ выполнено
+	$$ |t - \tau| < \delta, \qquad k = 1, \dots, m $$
+	Тогда
+	\begin{equ}{11}
+		\eref8, \eref9, \eref{10} \implies \bigg| f \big( \Gamma(\tau_k) \big) - f \big( \Gamma(t) \big) \bigg| < \veps
+	\end{equ}
+	\begin{multline*}
+		\underimp{\eref7} \bigg| \Sr_{\curvedir\Gamma}(\dots) - \cint[x_j]{\curvedir\Gamma}{f(M)} \bigg| \trile \sum_{k = 1}^m \bigg| \dint[t]{t_{k - 1}}{t_k}{\bigg( f \big( \Gamma(\tau_k) \big) - f \big( \Gamma(t) \big) \bigg)\gamma_j'} \bigg| \le \\
+		\le \sum_{k = 1}^m \dint[t]{t_{k - 1}}{t_k}{ \bigg| f \big( \Gamma(\tau_k) \big) - f \big( \Gamma(t) \big) \bigg| \cdot |\gamma_j'|} < \sum_{k = 1}^m \dint[t]{t_{k - 1}}{t_k}{\veps|\gamma_j'(t)} = \\
+		= \veps \dint[t]ab{|\gamma_j'(t)} \underset{|\gamma_j'(t)| \le \norm{\mc D\Gamma(t)}_n}\le \veps \dint[t]ab{\norm{\mc D \Gamma(t)}} = \veps l(\Gamma)
+	\end{multline*}
+\end{proof}
+
+\begin{implication}
+	$$ \Gamma(t_k) \fed M_k = \column{x_{1k}}{x_{nk}}, \qquad \Gamma(\tau_k) \fed N_k $$
+	$$ \implies x_{jk} = \gamma_j(t_k) $$
+	$$ \implies \Sr_{\curvedir\Gamma}(f, \Teq, \Par, j) = \sum_{k = 1}^m f(N_k)(x_{jk} - x_{j ~ k - 1}) $$
+	$ N_k $ лежит на дуге $ \Gamma(M_{k - 1}, M_k) $ \\
+	В этой формуле нет отображения. Есть только образ и ориентация. \\
+	Значит, криволинейный интеграл второго рода зависит только от образа и ориентации кривой.
+\end{implication}
+
+\subsection{Важное свойство сумм Римана}
+
+\begin{property}
+	Определим $ t_\nu' \define t_{m - \nu}, \quad \tau_\nu' \define \tau_{m - \nu + 1} $
+	$$ \Teq' \define \seqz[m]{t_k}k, \qquad \Par' \define \seq[m]{\tau_k}m, \qquad M_\nu' = M_{m - \nu}, \qquad N_\nu' = N_{m - \nu + 1} $$
+	В соответствии с выбранной ориентацией проходились точки $ M_0, \dots, M_m $ \\
+	Точки $ M_0', \dots, M_m' $ "--- это те же самые точки, проходимые в обратном порядке. То есть мы имеем дело с противоположной ориентацией $ \curvedir[0]\Gamma $
+	$$ x_{j\nu}' = x_{j ~ m - \nu} $$
+	\begin{multline*}
+		\vawe \Sr = \sum_{k = 1}^m f(N_k') (x_{jk}' - x_{j ~ k - 1}') = \boxed{\Sr_{\curvedir[0]\Gamma}(f, \Teq', \Par', j)} = \sum_{k = 1}^m f(N_{m - k + 1})(x_{j ~ m - k} - x_{j ~ m - k + 1}) = \\
+		= -\sum_{k = 1}^m f(N_{m - k + 1})(x_{j ~ m - k + 1} - x_{j ~ m - k}) \undereq{m - k + 1 \fed \nu} -\sum_{\nu = m}^1 f(N_\nu)(x_{j\nu} - x_{j ~ \nu - 1}) \undereq{k \define \nu} \boxed{-\Sr_{\curvedir\Gamma}(f, \Teq, \Par, j)}
+	\end{multline*}
+\end{property}
+
+\subsection{Свойства криволинейных интегралов второго рода}
+
+\begin{props}
+	\item $ \curvedir\Gamma = \bigcup_{j = 1}^l \curvedir\Gamma_j, \qquad \curvedir\Gamma_j $ "--- $ C^1 $-кривая, $ \qquad f \in \Cont\Gamma $
+	$$ \implies \cint[x_j]{\curvedir[0]\Gamma}{f(M)} = -\cint[x_j]{\curvedir\Gamma}{f(M)} $$
+	\begin{iproof}
+		\item Докажем для $ C^1 $-кривой \nimp[(не кусочной)]:
+		$$ \forall \veps > 0 \quad \exist \delta > 0 : \quad \forall \Teq \quad \forall \Par : t_k - t_{k - 1} < \delta \quad \bigg| \Sr_{\curvedir\Gamma}(f, \Teq, \Par, j) - \cint[x_j]{\curvedir\Gamma}{f(M)} \bigg| < \veps $$
+		В силу важного свойства,
+		$$ \bigg| \Sr_{\curvedir[0]\Gamma}(f, \Teq', \Par', j) - \cint[x_j]{\curvedir[0]\Gamma}{f(M)} \bigg| < \veps $$
+		\begin{multline*}
+			\bigg| \cint[x_j]{\curvedir\Gamma}{f(M)} + \cint[x_j]{\curvedir[0]\Gamma}{f(M)} \bigg| = \\
+			= \bigg| \bigg( \cint[x_j]{\curvedir\Gamma}{f(M)} - \Sr_{\curvedir\Gamma}(f, \Teq, \Par, j) \bigg) + \bigg( \cint[x_j]{\curvedir[0]\Gamma}{f(M)} - \Sr_{\curvedir[0]\Gamma}(f, \Teq', \Par', j) \bigg) \bigg| \trile \\
+			\le \bigg| \cint[x_j]{\curvedir\Gamma}{f(M)} - \Sr_{\curvedir\Gamma}(f, \Teq, \Par, j) \bigg| + \bigg| \cint[x_j]{\curvedir[0]\Gamma}{f(M)} - \Sr_{\curvedir[0]\Gamma}(f, \Teq', \Par', j) \bigg| < \veps + \veps = 2\veps
+		\end{multline*}
+		\item Общий случай:
+		$$ \curvedir\Gamma = \bigcup_{\nu = 1}^l \curvedir\Gamma_\nu \quad \iff \quad \curvedir[0]\Gamma = \bigcup_{\nu = 1}^l \curvedir[0]\Gamma_\nu $$
+		\begin{multline*}
+			\cint[x_j]{\curvedir[0]\Gamma}{f(M)} \bydef \sum_{\nu = 1}^l \cint[x_j]{\curvedir[0]\Gamma_\nu}{f(M)} = \sum_{\nu = 1}^l \bigg( -\cint[x_j]{\curvedir[0]\Gamma_\nu}{f(M)} \bigg) = \\
+			= -\sum_{\nu = 1}^l \cint[x_j]{\curvedir\Gamma}{f(M)} \bydef \cint[x_j]{\curvedir\Gamma}{f(M)}
+		\end{multline*}
+	\end{iproof}
+	\item $ \Gamma : [a, b] \to \R^n, \qquad \Gamma(t) \in \Cont{[a, b]}, \qquad c \in \R $
+	$$ \Gamma(t) = \column{\gamma_1(t)}{\gamma_n(t)} $$
+	$$ \implies \cint[x_j]{\curvedir\Gamma[a, b]}c = c \big( \gamma_j(b) - \gamma_j(a) \big) $$
+	В частности, если $ \Gamma(a) = \Gamma(b) $, то
+	$$ \cint[x_j]{\curvedir\Gamma} = 0 $$
+	\begin{iproof}
+		\item $ C^1 $-кривая
+		$$ \cint[x_j]{\curvedir\Gamma} \bydef \dint[t]ab{c\gamma_j'(t)} \undereq{\text{ф. Ньютона"--~Лейбница}} c \big( \gamma_j(b) - \gamma_j(a) \big) $$
+		\item $ \curvedir\Gamma = \bigcup_{\nu = 1}^l \curvedir\Gamma_\nu, \qquad \Gamma([t_{k - 1}, t_k]) $ "--- $ C^1 $-кривая
+		$$ \cint[x_j]{\curvedir\Gamma}c \bydef \sum_{\nu = 1}^l \cint[x_j]{\curvedir\Gamma[t_{\nu - 1}, t_\nu]} = \sum_{\nu = 1}^l c \big( \gamma(t_\nu) - \gamma(t_{\nu - 1}) \big) = c \big( \gamma(t_l) - \gamma(t_0) \big) \bdefeq{t_0, t_l} c \big( \gamma(b) - \gamma(a) \big) $$
+	\end{iproof}
+	\item $ \curvedir\Gamma = \bigcup_{\nu = 1}^l \curvedir\Gamma_\nu, \qquad f \in \Cont\Gamma $
+	$$ \bigg| \cint[x_j]{\curvedir\Gamma}{f(M)} \bigg| \le \cint\Gamma{|f(M)|} $$
+	\begin{iproof}
+		\item $ \Gamma \in C^1 $
+		$$ \bigg| \cint[x_j]{\curvedir\Gamma}{f(M)} \bigg| \bydef \bigg| \dint[t]ab{f \big( \Gamma(t) \big)\gamma_j'(t)} \bigg| \le \dint[t]ab{|f \big| ( \Gamma(t) \big) \big| \cdot |\gamma_j'(t)|} \le \dint[t]ab{ \big| f \big( \Gamma(t) \big) \big| \norm{\mc D \Gamma(t)}_n} \bydef \cint\Gamma{f(M)} $$
+		\item $ \curvedir\Gamma = \bigcup_{\nu = 1}^l \curvedir\Gamma_\nu, \qquad \curvedir\Gamma_\nu $ "--- $ C^1 $-кривая
+		\begin{multline*}
+			\bigg| \cint[x_j]{\curvedir\Gamma}{f(M)} \bigg| \bydef \bigg| \sum_{\nu = 1}^l \cint[x_j]{\curvedir\Gamma_\nu}{f(M)} \bigg| \le \sum_{\nu = 1}^l \bigg| \cint[x_j]{\curvedir\Gamma_\nu}{f(M)} \bigg| \trile \sum_{\nu = 1}^l \cint{\Gamma_\nu}{|f(M)|} = \cint\Gamma{f(M)}
+		\end{multline*}
+	\end{iproof}
+\end{props}

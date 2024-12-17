@@ -1,0 +1,2170 @@
+\part{Жорданова форма оператора}
+
+\section{Определения}
+
+\begin{definition}
+	Жорданова клетка:
+	$$ Jr(\lambda) =
+	\begin{pmatrix}
+		\lambda & 0 & 0 & . \\
+		1 & \lambda & 0 & . \\
+		0 & 1 & \lambda & . \\
+		. & . & . & .
+	\end{pmatrix} $$
+\end{definition}
+
+\begin{eg}
+	$$
+	\begin{pmatrix}
+		5 & 0 & 0 \\
+		1 & 5 & 0 \\
+		0 & 1 & 5
+	\end{pmatrix} $$
+\end{eg}
+
+\begin{definition}
+	Жорданова форма "--- матрица, у которой на главной диагонали жордановы клетки
+	$$
+	\begin{pmatrix}
+		Jr(\lambda_1) & 0 & 0 & . \\
+		0 & Jr(\lambda_2) & 0 & . \\
+		0 & 0 & Jr(\lambda_3) & . \\
+		. & . & . & .
+	\end{pmatrix} $$
+\end{definition}
+
+\subsection{Напоминание: собственные числа}
+
+\begin{definition}
+	$ \mathcal{A} $ "--- оператор на $ V $ \\
+	Число $ \lambda $ называется собственным для $ \mathcal{A} $, если
+	$$ \exist \underset{v \ne 0}{v \in V} : \quad \mathcal{A}v = \lambda v $$
+	$ v $ называется собственным вектором, соответствующим $ \lambda $
+\end{definition}
+
+\begin{definition}
+	$ A $ "--- квадратная матрица \\
+	Число $ \lambda $ называется собственным, если
+	$$ \exist \underset{X \ne 0}{\text{ столбец } X} : \quad \mathcal{A}X = \lambda X $$
+	$ X $ называется собственным столбцом
+\end{definition}
+
+\begin{definition}
+	$ A $ "--- квадратная матрица \\
+	Характеристическим многочленом $ A $ называется $ \chi_A(t) = \det(A - tE) $
+\end{definition}
+
+\begin{theorem}
+	Собственные числа $ A $ "--- корни $ \chi_A(t) $
+\end{theorem}
+
+\begin{definition}
+	$ \mathcal{A} $ "--- оператор, $ A $ "--- его матрица в некотором базисе \\
+	Характеристическим многочленом $ \mathcal{A} $ называется $ \chi_A(t) $
+\end{definition}
+
+\section{Собственные подпространства}
+
+\begin{definition}
+	$ V $ "--- векторное пространство, $ \mathcal{A} $ "--- оператор на $ V $, $ \lambda $ "--- с. ч. \\
+	Собственным подпространством, соответствующим $ \lambda $, называется множество с. в., соответствующих $ \lambda $
+\end{definition}
+
+\begin{notation}
+	$ V_\lambda $
+\end{notation}
+
+\begin{definition}
+	$ U $ "--- подпространство $ V $ \\
+	$ U $ называется инвариантным относительно $ \mathcal{A} $, если
+	$$ \forall x \in U \quad \mathcal{A}x \in U $$
+\end{definition}
+
+\begin{statement}
+	$ V_\lambda $ "--- инвариантное подпространство
+\end{statement}
+
+\begin{iproof}
+	\item Подпространство
+	\begin{itemize}
+		\item $ u, v \in V_\lambda \implies
+		\begin{Bmatrix}
+			\mathcal{A}u = \lambda u \\
+			\mathcal{A}v = \lambda v
+		\end{Bmatrix} \implies \mathcal{A}(u + v) \undereq{\text{линейность}} \mathcal{A}u + \mathcal{A}v = \lambda u + \lambda v = \lambda (u + v) \implies u + v \in V_\lambda $
+		\item $ u \in V_\lambda, k \in K \implies \mathcal{A}(ku) \undereq{\text{линейность}} k \mathcal{A}(u) = k \lambda u = \lambda(ku) \implies ku \in V_\lambda $
+	\end{itemize}
+	\item Инвариантность
+	$$ u \in V_\lambda \implies \mathcal{A}u = \lambda u \in V_\lambda $$
+\end{iproof}
+
+\begin{theorem}[о сумме собственных подпространств]
+	$ \lambda_1, \dots, \lambda_k $ "--- различные собственные числа \\
+	Тогда сумма $ V_{\lambda_1} + \dots + V_{\lambda_k} $ является прямой
+\end{theorem}
+
+\begin{proof}
+	\textbf{Индукция} по $ k $
+	\begin{itemize}
+		\item \textbf{База.} $ k = 1 $ "--- очевидно
+		\item \textbf{Переход}. $ k - 1 \to k $ \\
+		Пусть $ u_1 + \dots + u_{k - 1} + u_k = 0, \qquad u_i \in V_{\lambda_i} $
+		\begin{multline*}
+			0 = \mathcal{A}(\underbrace{u_1 + \dots + u_{k - 1} + u_k}_{= 0 }) - \lambda_k(\underbrace{u_1 + \dots + u_{k - 1} + u_k}_{= 0 }) = \\
+			= \lambda_1u_1 + \dots + \lambda_{k - 1}u_{k - 1} + \cancel{\lambda_ku_k} - \lambda_ku_1 - \dots - \lambda_ku_{k - 1} - \cancel{\lambda_ku_k} = \underbrace{(\lambda_1 - \lambda_k)}_{\ne 0}u_1 + \dots + \underbrace{(\lambda_{k - 1} - \lambda_k)}_{\ne 0}u_{k - 1}
+		\end{multline*}
+		(т. к. по условию собственные числа различны)
+		$$ (\lambda_1 - \lambda_k)u_1 \in V_{\lambda_1}, \quad \dots, \quad (\lambda_{k - 1} - \lambda_k)u_{k - 1} \in V_{\lambda_{k - 1}} $$
+		По \textbf{индукционному предположению}, $ V_{\lambda_1} \oplus \dots \oplus V_{\lambda_{k - 1}} $ \\
+		А мы представили 0 в виде суммы. Значит, все слагаемые нулевые:
+		$$ (\lambda_1 - \lambda_k)u_1 = \dots = (\lambda_{k - 1} - \lambda_k)u_{k - 1} = 0 \implies u_1 = \dots = u_{k - 1} = 0 \implies u_k = 0 $$
+	\end{itemize}
+\end{proof}
+
+\begin{implication}
+	$ \lambda_1, \dots, \lambda_k $ "--- различные с. ч., $ \qquad u_i \in V_{\lambda_i}, \qquad u_i \ne 0 $ \\
+	Тогда $ u_1, \dots, u_k $ ЛНЗ
+\end{implication}
+
+\begin{proof}
+	Пусть $ a_1u_1 + \dots + a_ku_k = 0 $
+	$$ a_1u_1 \in V_{\lambda_1}, \dots, a_ku_k \in V_{\lambda_k} \implies a_1u_1 = \dots = a_ku_k = 0 \implies a_1 = \dots = a_k = 0 $$
+\end{proof}
+
+\section{Операторы с диагональными и блочно-диагональными матрицами}
+
+В этом параграфе рассматриваем конечномерные пространства
+
+\begin{definition}
+	Оператор $ \mathcal{A} $, действующий на $ V $ называется диагонализуемым, если его матрица в некотором базисе диагональна
+\end{definition}
+
+\begin{definition}
+	$ \mathcal{A} $ "--- оператор, $ \lambda $ "--- с. ч.
+	\begin{itemize}
+		\item Геометрической кратностью $ \lambda $ называется $ \dim V_\lambda $
+		\item Арифметической кратностью $ \lambda $ называется кратность $ \lambda $ как корня $ \chi_{\mathcal{A}}(t) $
+	\end{itemize}
+\end{definition}
+
+\begin{theorem}[критерий диагонализуемости в терминах геометрической кратности]
+	\hfill \\
+	(\rom1) $ \mathcal{A} $ диагонализуем $ \iff $ (\rom2) сумма геометрических кратностей всех с. ч. равна $ \dim V $
+\end{theorem}
+
+\begin{proof}
+	\hfill \\
+	$ \mathcal{A} $ диагонализуем $ \iff $ в нек. базисе $ e_1, \dots, e_n $ матрица $ \mathcal{A} $ имеет вид $ A =
+	\begin{pmatrix}
+		a_1 & 0 & . \\
+		0 & a_2 & . \\
+		. & . & .
+	\end{pmatrix} $ \\
+	$ \iff $ для некоторого базиса $ e_1, \dots, e_n $ выполнено
+	$$ \mathcal{A}e_i = 0 e_1 + \dots + a_ie_i + \dots + 0 e_n = a_ie_i $$
+	$ \iff $ (\rom1') существует базис из с. в. \\
+	Докажем, что (\rom1') $ \iff $ (\rom2): \\
+	Пусть $ U = V_{\lambda_1} + \dots + V_{\lambda_k} $
+	$$ n \define \dim V, \qquad d_i \define \dim V_{\lambda_i} $$
+	\begin{itemize}
+		\item (\rom2) $ \implies $ (\rom1') \\
+		Имеем $ d_1 + \dots + d_k = n $
+		$$ V_{\lambda_1} \oplus \dots \oplus V_{\lambda_k} \implies \dim U = n \underimp{U \text{ "--- подпр-во } V} U = V $$
+		$$ V_{\lambda_1} \oplus \dots \oplus V_{\lambda_k} \implies \text{ объединение базисов } V_\lambda \text{ является базисом } U = V $$
+		Эти базисы состоят из с. в. \\
+		Объединение базисов состоит из с. в. \\
+		Это базис $ V $
+		\item (\rom1') $ \implies $ (\rom2) \\
+		Сущетсвует базис $ V $ из с. в. \\
+		Они распределяются по $ V_\lambda $ (но не обязательно для каждого $ V_\lambda $ представлен весь его базис):
+		$$ \underbrace{e_1^{(1)}, \dots, e_{t_1}^{(1)}}_{
+			\begin{subarray}{c}
+				\text{соотв. } \lambda_1 \\
+				\in V_{\lambda_1}
+			\end{subarray}}, \underbrace{e_1^{(2)}, \dots, e_{t_2}^{(2)}}_{
+			\begin{subarray}{c}
+				\text{соотв. } \lambda_2 \\
+				\in V_{\lambda_2}
+			\end{subarray}}, \widedots $$
+		$$ \underset{\text{(т. к. они лежат в большом-большом базисе)}}{e_1^{(i)}, \dots, e_{t_i}^{(i)} \text{ ЛНЗ }} \implies t_i \le d_i \quad \forall i $$
+		Сложим все эти неравенства:
+		$$
+		\begin{rcases}
+			d_1 + d_2 + \dots + d_k \ge t_1 + \dots + t_k = n \\
+			n \ge \dim U \undereq{U = V_{\lambda_1} \oplus \dots \oplus V_{\lambda_k}} d_1 + \dots + d_k
+		\end{rcases} \implies n = d_1 + \dots + d_k $$
+	\end{itemize}
+\end{proof}
+
+\begin{implication}[достаточное условие диагонализуемости]
+	Пусть $ \dim V = n $ \\
+	Если у $ \mathcal{A} $ есть $ n $ различных с. ч., то $ \mathcal{A} $ диагонализуем
+\end{implication}
+
+\begin{proof}
+	$ \dim V_{\lambda_i} \ge 1 $
+	$$ n \ge \dim(V_{\lambda_1} + \dots + V_{\lambda_k}) \undereq{\text{пр. сумма}} \dim V_{\lambda_1} + \dots + \dim V_{\lambda_k} \ge n $$
+	Значит, достигается равенство
+\end{proof}
+
+\begin{remind}[определитель ступенчатой матрицы]
+	$$ M =
+	\begin{pmatrix}
+		A & B \\
+		0 & C
+	\end{pmatrix}, \quad A, C \text{ "--- кв. } \implies |M| = |A| \cdot |C| $$
+\end{remind}
+
+\begin{theorem}[арифм. и геом. кратности]
+	$ \lambda $ "--- с. ч. $ \mathcal{A} $ \\
+	Геом. кратность $ \lambda \le $ арифм. кратности $ \lambda $
+\end{theorem}
+
+\begin{proof}
+	Пусть $ n = \dim V, \quad k $ "--- геом. кр. $ \lambda $ \\
+	Выберем базис $ e_1, \dots, e_k $ пространства $ V_{\lambda} $ \\
+	Дополним его до базиса $ V $: $ e_1, \dots, e_k, \dots., e_n $ \\
+	При $ i \le k $ выполнено $ \mathcal{A} e_i = \lambda e_i = 0 \cdot e_1 + \dots + \lambda e_i + \dots + 0 \cdot e_n $ \\
+	Матрица $ \mathcal{A} $ в базисе $ e_1, \dots, e_n $:
+	$$ A =
+	\begin{pmatrix}
+		\lambda & . & & B \\
+		. & \lambda & & \\
+		\\
+		0 & 0 & & C \\
+		0 & 0 & &
+	\end{pmatrix} $$
+	Для некоторых $ B_{k \times n - k} $, $ C_{n - k \times n - k} $
+	$$ \chi(t) =
+	\begin{vmatrix}
+		(\lambda - t)E_k & B \\
+		0 & C - tE_{n - k}
+	\end{vmatrix} = \det \bigg( (\lambda - t)E_k \bigg) \cdot \det(C - tE_{n - k}) = (\lambda - t)^k \cdot \det(C - tE_{k - n}) $$
+\end{proof}
+
+\begin{implication}[критерий диагонализуемости в терминах арифметических и геометрических кратностей]
+	Оператор $ \mathcal{A} $ диагонализуем $ \iff $
+	\begin{enumerate}
+		\item $ \chi_{\mathcal{A}}(t) $ раскладывается на линейные множители
+		\item $ \forall $ с. ч. $ \lambda \quad $ арифм. кр. = геом. кр.
+	\end{enumerate}
+\end{implication}
+
+\begin{proof}
+	Пусть $ \lambda_i $ "--- с. ч., $ d_i $ "--- геом. кр., $ a_i $ "--- арифм. кр., $ n = \dim C $
+	$$ \chi(t) - (t - \lambda_1)^{a_1} \dots(t - \lambda_k)^{a_k} \cdot f(t) $$
+	$$ n = \deg \chi(t) \ge a_1 + \dots + a_k \ge d_1 + \dots + d_k $$
+	Диагонал. $ \iff n = d_1 + \dots + d_k \iff $ везде достигаются равенства
+\end{proof}
+
+\begin{eg}[недиагонализуемый оператор]
+	$ \mathcal{A} : \R^2 \to \R^2 $ \\
+	Нужно, чтобы ар. кратность была 2, а геометрическая "--- 1
+	$$ \mathcal{A}
+	\begin{pmatrix}
+		x \\
+		y
+	\end{pmatrix} = A
+	\begin{pmatrix}
+		x \\
+		y
+	\end{pmatrix}, \qquad A =
+	\begin{pmatrix}
+		1 & 0 \\
+		1 & 1
+	\end{pmatrix} $$
+	$$ \chi(t) =
+	\begin{vmatrix}
+		1 - t & 0 \\
+		1 & 1 - t
+	\end{vmatrix} = (1 - t)^2 $$
+	$ \lambda = 1, \qquad $ ар. кратность "--- 2 \\
+	Найдём $ \dim V_1 $
+	$$
+	\begin{pmatrix}
+		1 & 0 \\
+		1 & 1
+	\end{pmatrix}
+	\begin{pmatrix}
+		x \\
+		y
+	\end{pmatrix} = 1
+	\begin{pmatrix}
+		x \\
+		y
+	\end{pmatrix} $$
+	$$
+	\begin{cases}
+		x = x \\
+		x + y = y
+	\end{cases} \quad \iff \quad x = 0 $$
+	$ \dim V_1 = 1 \qquad $ геом. кратность "--- 1
+\end{eg}
+
+\begin{remark}[Возведение в степень диагонализуемого оператора]
+	$ A $ "--- диагонализуемый \\
+	$ e_1, \dots, e_n $ "--- базис из с. в. \\
+	$ \lambda_1, \dots, \lambda_n $ "--- соответствующие с. ч.
+	$$ \mathcal{A}^k(e_i) = \lambda_i^ke_i $$
+	Пусть $ v \in V, \qquad v = a_1e_1 + \dots + a_ne_n $
+	$$ \implies \mathcal{A}^kv = a_1\lambda_1^ke_1 + \dots + a_n\lambda_n^ke_n $$
+	Пусть $ A $ "--- матрица в стандартном базисе
+	$$ C^{-1}AC =
+	\begin{pmatrix}
+		\lambda_1 & . & 0 \\
+		. & . & . \\
+		0 & . & \lambda_n
+	\end{pmatrix}, \qquad C^{-1}A^kC =
+	\begin{pmatrix}
+		\lambda_1^k & . & 0 \\
+		. & . & . \\
+		0 & . & \lambda_n^k
+	\end{pmatrix} $$
+\end{remark}
+
+\begin{definition}
+	Блочной матрицей называется матрица вида
+	$$ A =
+	\begin{pmatrix}
+		A_{11} & A_{12} & \dots & A_{1n} \\
+		. & . & . & . \\
+		A_{m1} & A_{m2} & \dots & A_{mn}
+	\end{pmatrix} $$
+	где $ \forall i \quad A_{ix} $ имеют поровну строк и $ \forall j \quad A_{xj} $ имеют поровну столбцов
+\end{definition}
+
+\begin{eg}
+	$$ \left(
+	\begin{tabular}{c c | c}
+		. & . & . \\
+		\hline
+		. & . & . \\
+		. & . & .
+	\end{tabular} \right) $$
+\end{eg}
+
+\begin{definition}
+	Блочно-диагональной матрицей называется матрица вида
+	$$
+	\begin{pmatrix}
+		A_1 & 0 & . & 0 \\
+		0 & A_2 & . & 0 \\
+		. & . & . & . \\
+		0 & . & 0 & A_n
+	\end{pmatrix} $$
+	где $ A_i $ "--- квадратные
+\end{definition}
+
+\begin{remark}
+	Блочно-диагональная матрица всегда квадратная
+\end{remark}
+
+\begin{eg}
+	$$ \left(
+	\begin{tabular}{c c | c}
+		1 & 2 & 0 \\
+		3 & 4 & 0 \\
+		\hline
+		0 & 0 & 5
+	\end{tabular} \right) $$
+\end{eg}
+
+\begin{definition}
+	$ U $ "--- инвариантное подпространство оператора $ \mathcal{A} $ \\
+	Через $ \mathcal{A}\clamp{U} $ обозначим сужение $ \mathcal{A} $ на $ U $, т. е.
+	$$ \mathcal{A}\clamp{U} : U \to U, \qquad \mathcal{A}\clamp{U}(x) = \mathcal{A}(x) \quad \forall x \in U $$
+\end{definition}
+
+\begin{eg}
+	$ \mathcal{A} : \R^3 \to \R^3 $
+	$$ \mathcal{A}
+	\begin{pmatrix}
+		x \\
+		y \\
+		z
+	\end{pmatrix} =
+	\begin{pmatrix}
+		x - y \\
+		x + y \\
+		2z
+	\end{pmatrix} $$
+	Выпишем его инвариантные пространства:
+	$$ W = \left\langle
+	\begin{pmatrix}
+		0 \\
+		0 \\
+		1
+	\end{pmatrix} \right\rangle, \qquad U = \left\langle
+	\begin{pmatrix}
+		1 \\
+		0 \\
+		0
+	\end{pmatrix},
+	\begin{pmatrix}
+		0 \\
+		1 \\
+		0
+	\end{pmatrix} \right\rangle $$
+	$$ \underset{\in W}{
+	\begin{pmatrix}
+		0 \\
+		0 \\
+		z
+	\end{pmatrix}} \mapsto \underset{\in W}{
+	\begin{pmatrix}
+		0 \\
+		0 \\
+		2z
+	\end{pmatrix}}, \qquad \underset{\in U}{
+	\begin{pmatrix}
+		x \\
+		y \\
+		0
+	\end{pmatrix}} \mapsto \underset{\in U}{
+	\begin{pmatrix}
+		x - y \\
+		x + y \\
+		0
+	\end{pmatrix}} $$
+	$$ \chi_{\mathcal{A}} = \chi_A =
+	\begin{vmatrix}
+		1 - t & 1 & 0 \\
+		1 & 1 - t & 0 \\
+		0 & 0 & 2 - t
+	\end{vmatrix} = (2 - t) \bigg( (1 - t)^2 + 1 \bigg) = (2 - t)(t^2 - 2t + 2) $$
+	$$
+	\begin{pmatrix}
+		1 \\
+		0 \\
+		0
+	\end{pmatrix} \overarr{\mathcal{A}}
+	\begin{pmatrix}
+		1 - 0 \\
+		1 + 0 \\
+		2 \cdot 0
+	\end{pmatrix} $$
+	Рассмотрим $ U $:
+	$$ e_1 =
+	\begin{pmatrix}
+		1 \\
+		0 \\
+		0
+	\end{pmatrix}, \qquad e_2 =
+	\begin{pmatrix}
+		0 \\
+		1 \\
+		0
+	\end{pmatrix} $$
+	Запишем матрицу $ \mathcal{A} $ в базисе $ e_1, e_2 $:
+	$$ \mathcal{A}(e_1) =
+	\begin{pmatrix}
+		1 \\
+		1 \\
+		0
+	\end{pmatrix} = e_1 + e_2, \qquad \mathcal{A}(e_2) =
+	\begin{pmatrix}
+		1 \\
+		1 \\
+		0
+	\end{pmatrix} = -e_1 + e_2 $$
+	$$ A_U =
+	\begin{pmatrix}
+		1 & -1 \\
+		1 & 1
+	\end{pmatrix} $$
+	$$ \chi_{\mathcal{A}\clamp{U}} = (1 - t)^2 + 1 = t^2 - 2t + 2 $$
+	$$ \chi_{\mathcal{A}\clamp{W}} = 2t $$
+\end{eg}
+
+\begin{theorem}[блочные матрицы и инвариантыне подпространства]
+    \hfill \\
+	$ \mathcal{A} $ "--- оператор на конечномерном пространстве $ V $
+	\begin{enumerate}
+		\item $ U $ "--- инвариантное пространство $ \mathcal{A}, \qquad e_1, \dots, e_s $ "--- базис $ U, \qquad e_1, \dots, e_s, \dots, e_n $ "--- базис $ V $ \\
+		$ A_U, A $ "--- матрицы $ \mathcal{A} $ на $ U, V $ в этих базисах
+		$$ \implies A =
+		\begin{pmatrix}
+			\bm{A_U} & B \\
+			\bm0 & C
+		\end{pmatrix} \quad \text{для некоторых } B, C $$
+		\begin{proof}
+			Пусть
+			$$ A_U =
+			\begin{pmatrix}
+				a_{11} & \dots & a_{1s} \\
+				. & . & . \\
+				a_{s1} & \dots & a_{ss}
+			\end{pmatrix} $$
+			Возьмём $ 1 \le i \le s $ \\
+			Посмотрим, как $ \mathcal{A} $ действует на $ e_i $:
+			$$ \mathcal{A}(e_i) = a_{1i}e_1 + \dots + a_{si}e_s = a_{1i}e_1 + \dots + a_{si}e_s + \dots + 0 \cdot e_{s + 1} + \dots + 0 \cdot e_n $$
+			Получили разложение $ \mathcal{A}(e_i) $ по базису $ V $, то есть, столбец матрицы оператора в базисе $ e_1, \dots, e_s, \dots, e_n $:
+			$$
+			\begin{pmatrix}
+				a_{1i} \\
+				. \\
+				. \\
+				e_{si} \\
+				0 \\
+				. \\
+				. \\
+				0
+			\end{pmatrix} \text{ "--- } i \text{-й столбец } A $$
+			$$ \implies A =
+			\begin{pmatrix}
+				a_{11} & a_{21} & \dots & a_{s1} & * & * \\
+				. & . & . & . & * & * \\
+				a_{s1} & a_{s2} & \dots & a_{ss} & . & . \\
+				0 & 0 & \dots & 0 & . & . \\
+				. & . & . & . & . & . \\
+				0 & 0 & \dots & 0 & * & *
+			\end{pmatrix} $$
+		\end{proof}
+		\item $ V = U_1 \oplus \dots \oplus U_k $, где $ U_i $ "--- инвар. для $ \mathcal{A} $ \\
+		$ A_1, \dots, A_k $ "--- матрицы $ \mathcal{A} $ на $ U_1, \dots, U_k $ в некоторых базисах \\
+		$ A $ "--- матрица $ \mathcal{A} $ на $ V $ в базисе, являющемся объединением базисов $ U_i $ (в естественном порядке: базис $ U_1 $, базис $ U_2 $, \dots)
+		$$ \implies A =
+		\begin{pmatrix}
+			A_1 & 0 & . & 0 \\
+			0 & A_2 & . & 0 \\
+			. & . & . & . \\
+			0 & . & 0 & A_k
+		\end{pmatrix} $$
+		Так как $ A_1, \dots, A_K $ "--- квадратные, то $ A $ "--- блочно-диагональная
+		\begin{proof}
+			Пусть $ \dim U_1 = d_1, \quad \dim U_2 = d_2, \quad \widedots[3em] $ \\
+			Рассмотрим столбец матрицы $ A $ с номером $ d_1 + d_2 + d_{i - 1} + t $, где $ 1 \le t \le d_i $ (т. е. $ t $-й столбец $ i $-го набора) \\
+			Обозначим элементы базисов:
+			$$ U_1 : e_1^{(1)}, \dots, e_{d_1}^{(1)} $$
+			$$ U_2 : e_2^{(2)}, \dots, e_{d_2}^{(2)} $$
+			$$ \widedots[6em] $$
+			В этом столбце записаны координаты вектора $ e_t^{(i)} $ в базисе $ V $ \\
+			Разложим его по базису подпространства $ U_i $:
+			$$ e_t^{(i)} = a_1e_1^{(i)} + \dots + a_{d_i}e_{d_i}^{(i)} $$
+			Дополним нулями:
+			$$ \underbrace{0 \cdot e_1^{(1)} + \dots + 0 \cdot d_1^{(1)}}_{d_1} + \underbrace{0 \cdot e_1^{(2)} + \dots}_{d_2} + \widedots[5em] + \underbrace{a_1e_1^{(i)} + \dots + a_{d_i}e_d^{(i)}}_{d_i} + 0 \cdot e_1^{(i + 1)} \widedots[5em] $$
+			Получили разложение $ e_r^{(i)} $ по базису $ V $ \\
+			$ (d_1 + d_2 + \dots + d_{i - 1} + t) $-й столбец равен
+			$$
+			\begin{pmatrix}
+				0 \\
+				. \\
+				. \\
+				0 \\
+				a_1 \\
+				. \\
+				. \\
+				a_{d_i} \\
+				0 \\
+				. \\
+				. \\
+				0
+			\end{pmatrix} $$
+		\end{proof}
+	\end{enumerate}
+\end{theorem}
+
+\begin{implication}[делители характеристического многочлена]
+    \hfill \\
+	$ \mathcal{A} $ "--- оператор на конечномерном пространстве $ V, \qquad \chi(t) $ "--- его характ. многочлен
+	\begin{enumerate}
+		\item $ U $ "--- инвариантное подпространство, $ \chi_U(t) $ "--- характ. многочлен $ \mathcal{A}\clamp{U} $
+		$$ \implies \chi(t) \divby \chi_U(t) $$
+		\item $ V = U_1 \oplus \dots \oplus U_k $, где $ U_i $ "--- инвариатные \\
+		$ \chi_i(t) $ "--- характ. многочлен $ \mathcal{A}\clamp{U_i} $
+		$$ \chi(t) = \chi_1(t) \cdot \dots \cdot \chi_k(t) $$
+	\end{enumerate}
+\end{implication}
+
+\begin{proof}
+	Рассмотрим базисы как в теореме
+	\begin{enumerate}
+		\item
+		\begin{multline*}
+			\chi_{\mathcal{A}}(t) = \chi_A(t) = \left|
+			\begin{pmatrix}
+				A_U & B \\
+				0 & C
+			\end{pmatrix} - t E_n \right| =
+			\begin{vmatrix}
+				A_U - t E_s & B \\
+				0 & C - t E_{n - s}
+			\end{vmatrix} = \\
+			= |A_U - t E_s | \cdot | C - t E_{n -s} | = \chi_{A_U}(t) \cdot \chi_C(t) = \chi_U(t) \cdot \chi_C(t)
+		\end{multline*}
+		\item $ \chi_A(t) = |A - tE| =
+		\begin{vmatrix}
+			A_1 - tE & 0 & . & 0 \\
+			0 & A_2 - tE & . & 0 \\
+			. & . & . & . \\
+			0 & . & 0 & A_k - tE
+		\end{vmatrix} = |A_1 - tE| \cdot |A_2 - tE| \cdot \dots = \chi_1(t) \cdot \chi_2(t) \cdot \dots $
+	\end{enumerate}
+\end{proof}
+
+\begin{lemma}[ранг блочно-диагональной матрицы]
+	$ A $ "--- блочно-диагональная
+	$$ A =
+	\begin{pmatrix}
+		A_1 & 0 & . & 0 \\
+		. & . & . & . \\
+		0 & . & 0 & A_k
+	\end{pmatrix} $$
+	$$ \implies \rk A = \rk A_1 + \dots + \rk A_k $$
+\end{lemma}
+
+\begin{proof}
+	Воспользуемся тем, что ранг "--- это количество ЛНЗ строк \\
+	Пусть для каждой матрицы $ A_i $ выбран набор строк $ s_1^{(i)}, s_2^{(i)}, \dots, s_n^{(i)} $ \\
+	Для строки $ s_j^{(i)} $ обозначим через $ \vawe{s_j}^{(i)} $ соответствующую строку матрицы $ A $ \\
+	Достаточно доказать, что
+	$$ \text{набор } \vawe{s_1}^{(1)}, \dots, \vawe{s_{r_1}}^{(1)}, \vawe{s_1}^{(2)}, \dots, \vawe{s_{r_2}}^{(2)}, \widedots[5em] \text{ ЛНЗ } \iff \text{ все наборы }
+	\begin{cases}
+		s_1^{(1)}, \dots, s_{r_1}^{(1)} \\
+		s_1^{(2)}, \dots, s_{r_2}^{(2)} \\
+		\widedots[4em]
+	\end{cases} \text{ ЛНЗ} $$
+	\begin{itemize}
+		\item $ \implies $ \\
+		Докажем \textbf{от противного}: \\
+		Предположим, что $ s_1^{(i)}, \dots, s_{r_i}^{(i)} $ ЛЗ \\
+		То есть, $ \exist a_1, \dots, a_{r_i} $, не все равные нулю, такие, что $ a_1s_1^{(i)} + \dots + a_{r_i}s_{r_i}^{(i)} = 0 $ \\
+		Дополним нулями:
+		$$ a_1\vawe{s_1}^{(i)} + \dots + a_{r_i}\vawe{s_{r_i}}^{(i)} = 0 $$
+		То есть, $ \vawe{s_1}^{(i)}, \dots, \vawe{s_{r_i}}^{(i)} $ ЛЗ \\
+		А значит, и всеь набор ЛЗ "--- \contra
+		\item $ \impliedby $ \\
+		Докажем \textbf{от противного}: \\
+		Пусть все наборы $ s_1^{(i)}, \dots, s_{r_i}^{(i)} $ ЛНЗ, а $ \vawe{s_1}^{(1)}, \dots, s_{r_i}^{(1)}, \widedots[4em], \vawe{s_{r_k}}^{(k)} $ ЛЗ, то есть
+		$$ \sum_{i, j} a_j^{(i)}\vawe{s_j}^{(i)} = 0, \qquad \text{не все } a_j^{(i)} \text{ равны нулю} $$
+		Положим
+		$$ T_i \define a_1^{(i)}s_1^{(i)} + \dots + a_{r_i}^{(i)}s_{r_i}^{(i)} $$
+		$$ \vawe{T_i} \define a_1^{(i)}\vawe{s_1}^{(i)} + \dots + a_{r_i}^{(i)}\vawe{s_{r_i}}^{(i)} $$
+		$$ \vawe{T_1} + \vawe{T_2} + \dots + \vawe{T_k} = 0 \implies \vawe{T_1} = \vawe{T_2} = \dots = 0 $$
+		Строки $ \vawe{T_1}, \dots, \vawe{T_k} $ \textbf{не} содержат ненулевые элементы в одном столбце (т. е. в нашей записи нет полностью нулевых столбцов)
+		$$ \implies T_1 = 0, \quad T_2 = 0, \quad T_k = 0 $$
+		\begin{remark}
+			Эти нули разной длины
+		\end{remark}
+		$$ \implies \forall i \quad a_1^{(i)}s_1^{(i)} + \dots + a_{r_i}s_{r_i}^{(i)} = 0 $$
+		$$ s_1^{(i)}, \dots, s_{r_i}^{(i)} \text{ ЛНЗ } \implies a_1^{(i)} = \dots = a_{r_i}^{(i)} = 0 $$
+	\end{itemize}
+\end{proof}
+
+\begin{remark}
+	На самом деле, блочно-диагональная матрица "--- избыточное условие (достаточно, чтобы в каждой строке был ЛНЗ набор, и не было полностью нулевых столбцов), однако нам понадобится именно такой случай
+\end{remark}
+
+\begin{implication}
+	$ V = U_1 \oplus \dots \oplus U_k, \qquad U-i $ "--- инвариантно для $ \mathcal{A} $
+	$$ \implies \dim \Img \mathcal{A} = \dim \Img \mathcal{A}\clamp{U_1} + \dots + \dim \Img \mathcal{A}\clamp{U_k} $$
+\end{implication}
+
+\section{Существование жордановой формы нильпотентного оператора}
+
+\begin{definition}
+	Оператор называется нильпотентным, если $ \mathcal{A}^k = 0 $ для некоторого $ k $ \\
+	Показатель нильпотентности "--- это наименьшее $ k $, для которого $ \mathcal{A}^k = 0 $
+\end{definition}
+
+\begin{egs}
+	$ \mathcal{A} : \R^3 \to \R^3, \qquad \mathcal{A} : X \mapsto AX $
+	\begin{itemize}
+		\item $ A =
+		\begin{pmatrix}
+			1 & 2 & -3 \\
+			1 & 2 & -3 \\
+			1 & 2 & -3
+		\end{pmatrix}, \qquad A^2 =
+		\begin{pmatrix}
+			0 & 0 & 0 \\
+			0 & 0 & 0 \\
+			0 & 0 & 0
+		\end{pmatrix} $ \\
+		Нильпотентный, с показателем 2
+		\item $ A =
+		\begin{pmatrix}
+			0 & 0 & 0 \\
+			1 & 0 & 0 \\
+			0 & 1 & 0
+		\end{pmatrix}, \qquad A^2 =
+		\begin{pmatrix}
+			0 & 0 & 0 \\
+			1 & 0 & 0 \\
+			0 & 1 & 0
+		\end{pmatrix}
+		\begin{pmatrix}
+			0 & 0 & 0 \\
+			1 & 0 & 0 \\
+			0 & 1 & 0
+		\end{pmatrix} =
+		\begin{pmatrix}
+			0 & 0 & 0 \\
+			0 & 0 & 0 \\
+			1 & 0 & 0
+		\end{pmatrix} $
+		$$ A^3 = A^2 A =
+		\begin{pmatrix}
+			0 & 0 & 0 \\
+			0 & 0 & 0 \\
+			1 & 0 & 0
+		\end{pmatrix}
+		\begin{pmatrix}
+			0 & 0 & 0 \\
+			1 & 0 & 0 \\
+			0 & 1 & 0
+		\end{pmatrix} =
+		\begin{pmatrix}
+			0 & 0 & 0 \\
+			0 & 0 & 0 \\
+			0 & 0 & 0
+		\end{pmatrix} $$
+		Нильпотентный, с показателем 3
+		\item $ A =
+		\begin{pmatrix}
+			0 & 0 & 0 \\
+			1 & 0 & 0 \\
+			0 & 0 & 2
+		\end{pmatrix} $
+	\end{itemize}
+\end{egs}
+
+\begin{definition}
+	Жордановой клеткой порядка $ r $ с собств. знач. $ 0 $ называется квадратная матрица порядка $ r $ вида
+	$$ J_r(0) =
+	\begin{pmatrix}
+		0 & . & . & 0 \\
+		1 & 0 & . & 0 \\
+		. & . & . & . \\
+		0 & . & 1 & 0
+	\end{pmatrix} $$
+\end{definition}
+
+\begin{definition}
+	Жордановой матрицей с собств. знач. $ 0 $ называется матрица вида
+	$$
+	\begin{pmatrix}
+		J_{r_1}(0) & 0 & . & 0 \\
+		0 & J_{r_2}(0) & . & 0 \\
+		. & . & . & . \\
+		0 & . & F_{r_k}(0) & 0
+	\end{pmatrix} $$
+\end{definition}
+
+\begin{eg}
+	$$ J = \left(
+	\begin{tabular}{c c c | c c}
+		0 & 0 & 0 & 0 & 0 \\
+		1 & 0 & 0 & 0 & 0 \\
+		0 & 1 & 0 & 0 & 0 \\
+		\hline
+		0 & 0 & 0 & 0 & 0 \\
+		0 & 0 & 0 & 1 & 0 \\
+	\end{tabular} \right) $$
+	Пусть это матрица оператора в базисах $ e_1, e_2, e_3, e_4, e_5 $
+	$$ Je_1 = 0e_1 + 1e_2 + 0e_3 + 0e_4 + 0e_5 = e_2 $$
+	$$ Je_2 = e_3, \qquad Je_3 = 0, \qquad Je_4 = e_5, \qquad Je_5 = 0 $$
+\end{eg}
+
+\begin{notation}
+	$ e_1 \to e_2 \to e_3 \to 0, \qquad e_4 \to e_5 \to 0 $
+\end{notation}
+
+\begin{definition}
+	$ \mathcal{A} $ "--- нильпотентный оператор \\
+	Жордановой цепочкой называется такой набор векторов $ e_1, e_2, \dots, e_r $, что $ \mathcal{A}(e_i) = e_{i + 1} $ при $ i < r $ и $ \mathcal{A}(e_r) = 0 $
+\end{definition}
+
+\begin{notation}
+	$ e_1 \to e_2 \to \dots \to e_r \to 0 $
+\end{notation}
+
+\begin{remark}
+	Вектор $ e_r $ является собственным вектором, соотв. $ \lambda = 0 $
+\end{remark}
+
+\begin{eg}
+	$ \mathcal{A} : \R^3 \to \R^3, \qquad X \mapsto AX $
+	$$ A =
+	\begin{pmatrix}
+		1 & 2 & -3 \\
+		1 & 2 & -3 \\
+		1 & 2 & -3
+	\end{pmatrix}, \qquad A^2 = 0 $$
+	\begin{itemize}
+		\item $ e_1 \to e_2 \to e_3 \to 0 $ не бывает, т. к. $ \mathcal{A}^2(e_1) = 0 $
+		\item Построим цепочку $ e_1 \to e_2 \to 0 $ \\
+		Найдём $ \ker \mathcal{A} $
+		$$
+		\begin{pmatrix}
+		1 & 2 & -3 \\
+		1 & 2 & -3 \\
+		1 & 2 & -3
+	\end{pmatrix}
+	\begin{pmatrix}
+		x \\
+		y \\
+		z
+	\end{pmatrix} = 0 \iff x + 2y - 3z = 0 $$
+	$$ \dim \ker \mathcal{A} = 2 $$
+	Найдём $ e_1 $, такой что $ e_1 \to e_2 \to 0 $: \\
+	Любой вектор за 2 шага перейдёт в 0, т. к. $ \mathcal{A}^2 = 0 $ \\
+	Найдём $ e_1 $, который за 1 шаг \textbf{не} перейдёт в 0: \\
+	Возьмём $ e_1 =
+	\begin{pmatrix}
+		1 \\
+		0 \\
+		0
+	\end{pmatrix} $
+	$$ e_2 = \mathcal{A}(e_1) =
+	\begin{pmatrix}
+		1 \\
+		1 \\
+		1
+	\end{pmatrix} $$
+	$$
+	\begin{pmatrix}
+		1 \\
+		0 \\
+		0
+	\end{pmatrix} \to
+	\begin{pmatrix}
+		1 \\
+		1 \\
+		1
+	\end{pmatrix} \to
+	\begin{pmatrix}
+		0 \\
+		0 \\
+		0
+	\end{pmatrix} $$
+	Найдём $ e_1' $, который перейдёт в 0: \\
+	Возьмём $ e_1' $, линейно независимый с $ e_2 $ \\
+	Подойдёт $ e_1' =
+	\begin{pmatrix}
+		-2 \\
+		1 \\
+		0
+	\end{pmatrix} $
+	$$ \underset{e_1}{
+		\begin{pmatrix}
+			1 \\
+			0 \\
+			0
+		\end{pmatrix}} \to \underset{e_2}{
+		\begin{pmatrix}
+			1 \\
+			1 \\
+			1
+		\end{pmatrix}} \to
+	\begin{pmatrix}
+		0 \\
+		0 \\
+		0
+	\end{pmatrix}, \qquad \underset{e_1'}{
+		\begin{pmatrix}
+			-2 \\
+			1 \\
+			0
+		\end{pmatrix}} \to
+	\begin{pmatrix}
+		0 \\
+		0 \\
+		0
+	\end{pmatrix} $$
+	$ e_1, e_2, e_1' $ "--- жорданов базис \\
+	Жорданова форма:
+	$$ \left(
+	\begin{tabular}{c c | c}
+		0 & 0 & 0 \\
+		1 & 0 & 0 \\
+		\hline
+		0 & 0 & 0
+	\end{tabular} \right) $$
+	\end{itemize}
+\end{eg}
+
+\begin{lemma}[ЛНЗ жордановых цепочек]
+	Дано несколько жордановых цепочек:
+	$$ e_1^{(1)} \to e_2^{(1)} \to \dots \to e_{r_1}^{(1)} \to 0 $$
+	$$ \widedots $$
+	$$ e_1^{(k)} \to e_2^{(k)} \to \dots \to e_{r_k}^{(k)} \to 0 $$
+	Если последние векторы цепочек, т. е. $ e_{r_1}^{(1)}, \dots, e_{r_k}^{(k)} $ ЛНЗ, то объединение цепочек ЛНЗ
+\end{lemma}
+
+\begin{proof}
+	\textbf{Индукция} по $ r \define \max\set{r_1, \dots, r_k} $
+	\begin{itemize}
+		\item \textbf{База.} $ r = 1 $ \\
+		Все цепочки длины 1 \\
+		Все векторы "--- последние и, по условию, ЛНЗ
+		\item \textbf{Переход.} $ r - 1 \to r $
+		$$ \mathcal{A}(e_i^{(j)}) =
+		\begin{cases}
+			e_{i + 1}^{(j)}, \qquad i < r_j \\
+			0, \qquad i = r_j
+		\end{cases} $$
+		Применим $ s $ раз:
+		$$ \mathcal{A}^s(e_i^{(j)}) =
+		\begin{cases}
+			e_{i + s}^{(j)}, \qquad i + s \le r_j \\
+			0, \qquad i + s < r_j
+		\end{cases} $$
+		Цепочки бывают двух видов: у некоторых длина $ r $, а у некоторых "--- меньше (по определению $ r $) \\
+		НУО считаем, что цепочки с номерами $ 1, 2, \dots, m $ имеют длину $ r $, а остальные "--- меньше, т. е.
+		$$ r_1 = r_2 = \dots = r_m = r, \qquad r_i < r \text{ при } i > m $$
+		\textbf{От противного:} пусть набор ЛЗ:
+		$$ \sum_{j = 1}^k \sum_{i = 1}^{r_j} a_i^{(j)}e_i^{(j)} = 0, \qquad \text{не все } a_i^{(j)} \text{ равны } 0 $$
+		Применим к этому равентсву $ \mathcal{A}^{r- 1} $:
+		\begin{itemize}
+			\item Если цепочка короче $ r $, то она вся перейдёт в 0
+			\item Иначе "--- останется только поледний вектор
+		\end{itemize}
+		То есть,
+		$$ e_1^{(j)} \to e_r^{(j)}, \qquad a_1^{(j)}e_1^{(j)} \to a_1^{(j)}e_r^{(j)}, \qquad \text{остальные } \to 0 $$
+		Получится сумма:
+		$$ \sum_{j = 1}^m a_1^{(j)} e_r^{(j)} $$
+		Заметим, что это ЛК последних векторов (которые, по условию, ЛНЗ)
+		$$ \implies a_1^{(j)} = 0 \quad \text{при } j \le m $$
+		Уберём слагаемые $ 0 \cdot e_1^{(j)} $ при $ j \le m $
+		$$ \sum_{j \le m} \sum_{i = 2}^r a_i^{(j)} e_i^{(j)} + \sum_{j > m}a_i^{(j)}e_i^{(j)} = 0 $$
+		Это "--- ЛК векторов из цепочек длины $ r - 1 $ с теми же последними векторами \\
+		Применим \textbf{индукционное предположение}. Вместе с условием, что последние векторы ЛНЗ, получаем, что все они ЛНЗ
+	\end{itemize}
+\end{proof}
+
+\begin{lemma}[базис из жордановых цепочек]
+	$ \mathcal{A} $ "--- оператор на $ V $. \\
+    $ e_1, e_2, \dots, e_n $ "--- базис, являющийся объединением жордановых цепочек (в естественном порядке):
+	$$ e_1 \to e_2 \to \dots \to e_{r_1} \to 0 $$
+	$$ e_{r_1 + 1} \to e_{r_2 + 2} \to \dots \to e_{r_1 + r_2} \to 0 $$
+	$$ \widedots $$
+	$$ e_{r_1 + \dots + r_{k - 1} + 1} \to \dots \to e_{r_1 + r_2 + \dots + r_{k - 1} + r_k} \to 0 $$
+	Тогда матрица $ \mathcal{A} $ в этом базисе
+	$$ A =
+	\begin{pmatrix}
+		J_{r_1}(0) & 0 & . & 0 \\
+		0 & J_{r_2}(0) & . & 0 \\
+		. & . & . & . \\
+		0 & . & 0 & J_{r_k}(0)
+	\end{pmatrix} $$
+\end{lemma}
+
+\begin{proof}
+	$$ \mathcal{A}(e_{r_1}) = \mathcal{A}(e_{r_1 + r_2}) = \dots = \mathcal{A}(e_{r_1 + \dots + r_k}) = 0 $$
+	Значит, при $ i = r_1, r_1 + r_2, \widedots[5em], r_1 + \dots + r_k $, $ \quad i $-й столбец "--- нулевой \\
+	При $ i \ne r_1, \widedots[5em], r_1 + \dots + r_k $, $ \quad \mathcal{A}(e_i) = e_{i + 1} \implies i $-й столбец:
+	$$
+	\begin{pmatrix}
+		0 \\
+		0 \\
+		\vdots \\
+		0 \\
+		1 \\
+		0 \\
+		\vdots \\
+		0
+	\end{pmatrix}
+	\begin{matrix}
+		\ \\
+		\ \\
+		\ \\
+		i \\
+		i + 1 \\
+		\ \\
+		\ \\
+		\
+	\end{matrix} $$
+\end{proof}
+
+\begin{theorem}[жорданова форма нильпотентного оператора]
+	Для любого нильпотентного оператора на конечномерном векторном пространстве существует жорданов базис
+\end{theorem}
+
+\begin{proof}
+	Будем доказывать, что существует базис из жордановых цепочек \\
+	Положим $ W \define \ker \mathcal{A} $ \\
+	Если мы возьмём ЛНЗ векторы из ядра и достроим (слева от них) цепочки, то получим жорданов базис \\
+	Положим $ U_i \define \Img \mathcal{A}^i $
+	$$ V = U_0 \supset U_1 \supset U_2 \supset \dots \supset U_{k - 1} \supset U_k = \set{0} $$
+	где $ k $ "--- степень нильпотентности $ \mc{A} $ \\
+	Заметим, что если $ v \in U_t \cap W $, то существует цепочка длины $ t + 1 $ с концом $ v $ \\
+	Построим базис $ W $ (такой, чтобы можно было достроть цепочки): \\
+	Будем пересекать $ W $ с $ U_i $ \\
+	Выберем базис $ W \cap U_{k - 1} $. Он ЛНЗ, значит его можно дополнить до базиса $ W \cap U_{k - 2} $ \\
+	В итоге получим базис $ W \cap U_0 = W $ \\
+	Получили базис $ e_1, e_2, \dots $ пространства $ W $ \\
+	Для $ e_i \in W \cap U_t $ построим цепочку длины $ t + 1 $ с концом $ e_i $:
+	$$ e_1^{(i)} \to e_2^{(i)} \to \dots \to e_{t + 1}^{(i)} = e_i \to 0 $$
+	Объединение цепочек "--- ЛНЗ (по лемме) \\
+	Докажем, что это базис, \ie что набор порождающий: \\
+	Докажем, что если $ \mathcal{A}^s(v) = 0 $, то $ v $ является ЛК векторов цепочек \\
+	Докажем \textbf{индукцией} по $ s $:
+	\begin{itemize}
+		\item \textbf{База.} $ s = 1 $
+		$$ \mathcal{A}^1(v) = 0, \qquad v \in W, \qquad e_1, e_2, \dots \text{ "--- базис } W $$
+		\item \textbf{Переход.} $ s \to s + 1 $ \\
+		Пусть $ \mathcal{A}^{s + 1}(v) = 0, \quad \mathcal{A}^s(v) \ne 0 $ \\
+		Положим $ u = \mathcal{A}^s \implies u \in U_s $
+		$$ \underbrace{\overbrace{v \to \cdot \to \dots \to u}^s \to 0}_{s + 1} $$
+		Значит, $ \mathcal{A}(u) = 0 \implies u \in W $ \\
+		Значит, $ u \in U_s \cap W $ \\
+		Представим его в виде ЛК базиса $ U_s \cap W $ (того, до которого мы дошли на каком-то очередном шагу дополнения базисов):
+		$$ u = \sum_i a_ie_i $$
+		$ \forall e_i $ из этого базиса выбрана цепочка длины хотя бы $ s + 1 $
+		$$ e_i = e_{s + t_i}^{(i)} \text{ "--- последний вектор цепочки} $$
+		Пусть $ e_i' $ "--- вектор цепочки, такой что $ \mathcal{A}^s(e_i') = e_i $ (вектор, который на $ s $ шагов раньше)
+		$$ \mathcal{A}^s \bigg( \sum a_ie_i' \bigg) = \sum a_ie_i = u $$
+		При этом, $ \mathcal{A}^s(v) \bydef u $ \\
+		Получили 2 линейных представления $ u $, значит,
+		$$ \mathcal{A}^s(v) = \mathcal{A}^s \bigg( \sum a_ie_i' \bigg) \implies \mathcal{A}^s \bigg( v - \sum a_ie_i' \bigg) = 0 $$
+		Тогда, \textbf{по индукционному предположению}, $ v - \sum a_ie_i' $ представляется в виде ЛК векторов из цепочек \\
+		Значит, $ v $ представляется в виде ЛК векторов цепочек
+	\end{itemize}
+\end{proof}
+
+\section{Многочлены от оператора}
+
+\begin{notation}
+	$ V $ "--- векторное пространство над $ K $, $ \quad \mathcal{A} $ "--- оператор на $ V $, $ \quad P \in K[x] $
+	$$ P(x) = a_nx^n + \dots + a_1x + a_0 $$
+	Тогда $ P(\mathcal{A}) = a_n\mathcal{A}^n + \dots + a_1\mathcal{A} + a_0\mathcal{E} $, т. е. такой опрератор $ \mathcal{B} $, что
+	$$ \mathcal{B}(v) = a_n \mathcal{A}^n(v) + \dots + a_2\mathcal{A}^2(v) + a_1\mathcal{A}(v) + a_0v $$
+\end{notation}
+
+\begin{lemma}[произведение многочленов от оператора]
+	$ P, Q $ "--- многочлены, $ \mathcal{A} $ "--- оператор
+	$$ \implies (PQ)(\mathcal{A}) = P(\mathcal{A}) \circ Q(\mathcal{A}) $$
+\end{lemma}
+
+\begin{proof}
+	Пусть $ P(t) = \sum p_it^i, \quad Q(t) = \sum q_it^i, \quad R(t) = P(t)Q(t) $
+	$$ R(t) = \sum p_iq_jt^{i + j} $$
+	Положим $ \mathcal{B} = P(\mathcal{A}), \quad \mathcal{C} = Q(\mathcal{A}), \quad \mathcal{D} = R(\mathcal{A}) $ \\
+	Нужно доказать, что $ \mathcal{B} \bigg( \mathcal{C}(v) \bigg) = \mathcal{D}(v) \quad \forall v $ \\
+	Пусть $ w = \mathcal{C}(v) $
+	$$ \implies \mathcal{B}(w) = \sum p_i \mathcal{A}^i(w), \qquad \mathcal{C}(v) = \sum q_j\mathcal{A}^j(v), \qquad \mathcal{D}(v) = \sum p_iq_j \mathcal{A}^{i + j}(v) $$
+	\begin{multline*}
+		\mathcal{B} \bigg( \mathcal{C}(v) \bigg) = \mathcal{B}(w) = \mathcal{B} \bigg( \sum p_j \mathcal{A}^j(v) \bigg) = \sum q_j \mathcal{B} \bigg( \mathcal{A}^j(v) \bigg) = \sum q_j \bigg( \sum p_i \mathcal{A}^i \big( \mathcal{a^j}(v) \big) \bigg) = \\
+		= \sum q_j \bigg( \sum p_i \mathcal{A}^{i _ j} \bigg) = \sum q_jp_i \mathcal{A}^{i + j} = \mathcal{D}(v)
+	\end{multline*}
+\end{proof}
+
+\begin{implication}
+	$ P, Q $ "--- многочлены, $ \quad \mathcal{A}, \mathcal{B}, \mathcal{C} $ "--- операторы, $ \qquad \mathcal{B} = P(\mathcal{A}), \quad \mathcal{C} = Q(\mathcal{A}) $
+	$$ \implies \mathcal{B} \circ \mathcal{C} = \mathcal{C} \circ \mathcal{B} $$
+\end{implication}
+
+\begin{proof}
+	$ PQ = QP \implies (PQ)(A) = (QP)(A) $
+\end{proof}
+
+\begin{notation}
+	$ a_1, .., a_n \ne \bigodot \iff $ \textbf{не} все они равны нулю
+\end{notation}
+
+\begin{theorem}[ядро и образ многочлена от оператора]
+	$ \mathcal{A} $ "--- оператор на $ V, \quad P $ "--- многочлен, $ \quad \mathcal{B} = P(\mathcal{A}) $ \\
+	Тогда $ \ker \mathcal{B} $ и $ \Img \mathcal{B} $ "--- инвариантные подпространства относительно $ \mathcal{A} $
+\end{theorem}
+
+\begin{proof}
+	По лемме,
+	\begin{equ}1
+		\mc{A} \circ \mc{B} = \mc{B} \circ \mc{A}
+	\end{equ}
+	\begin{itemize}
+		\item $ \ker \mc{B} $
+		$$ v \in \ker \mc{B} \implies \mc{B}(v) = 0 \implies \mc{A} \bigg( \mc{B}(v) \bigg) = 0 \underimp{\eref1} \mc{B} \bigg( \mc{A}(v) \bigg) = 0 \implies \mc{A}(v) \in \ker \mc{B} $$
+		\item $ \Img \mc{B} $
+		$$ v \in \Img \mc{B} \implies v = \mc{B}(w) \implies \mc{A}(v) = \mc{A} \bigg( \mc{B}(w) \bigg) \underset{\eref1}= \mc{B} \bigg( \mc{A}(w) \bigg) $$
+	\end{itemize}
+\end{proof}
+
+\begin{definition}
+	$ \mc{A} $ "--- оператор на $ V $, $ \qquad v \in V $
+	\begin{itemize}
+		\item Аннулятором $ v $ называется такой многочлен $ P $, что $ P(\mc{A})(v) = 0 $
+		\item Минимальным аннулятором $ v $ называется многочлен наименьшей степени среди ненулевых аннуляторов
+	\end{itemize}
+\end{definition}
+
+\begin{remark}
+	Минимальный аннулятор задаётся с точностью до умножения на константу
+\end{remark}
+
+\begin{exmpls}
+	\item $ v $ "--- с. в., соответствующие $ \lambda $ (т. е. $ \mc{A}v = \lambda v $)
+	$$ \mc{B} = \mc{A} - \lambda\mc{E} \qquad \mc{B}(v) = \mc{A}(v) - \lambda \mc{E}(v) = \lambda v - \lambda v = 0 $$
+	Найдём $ p $, такой что $ \mc{B} = p(\mc{A}) $:
+	$$ p(t) = t - \lambda $$
+	$ p(t) $ "--- минимальный аннулятор
+	\item $ \mc{A} : \R^2 \to \R^2 $
+	$$ \mc{A} : x \mapsto Ax, \qquad A =
+	\begin{pmatrix}
+		2 & 0 \\
+		1 & 2
+	\end{pmatrix} $$
+	\begin{enumerate}
+		\item Докажем, что $ p(t) = (t - 2)^2 $ "--- аннулятор $ \forall v $: \\
+		Найдём матрицу оператора $ p(\mc{A}) = (\mc{A} - \mc{E})^2 $:
+		$$ (A - 2E)^2 =
+		\begin{pmatrix}
+			0 & 0 \\
+			1 & 0
+		\end{pmatrix}^2 =
+		\begin{pmatrix}
+			0 & 0 \\
+			0 & 0
+		\end{pmatrix} $$
+		\item Возьмём теперь $ Q(t) = t - 2 $ \\
+		Найдём $ v $, такие что $ Q(t) $ "--- аннулятор $ v $:
+		$$ (\mc{A} - 2\mc{E})(v) = 0 $$
+		$$ \mc{A}(v) = 2v $$
+		$$
+		\begin{pmatrix}
+			2 & 0 \\
+			1 & 2
+		\end{pmatrix}
+		\begin{pmatrix}
+			x \\
+			y
+		\end{pmatrix} = 2
+		\begin{pmatrix}
+			x \\
+			y
+		\end{pmatrix} $$
+		$$ v =
+		\begin{pmatrix}
+			0 \\
+			y
+		\end{pmatrix} $$
+	\end{enumerate}
+\end{exmpls}
+
+\begin{props}
+	\item $ V $ "--- конечномерно. Тогда
+	\begin{enumerate}
+		\item у любого вектора существует ненулевой аннулятор
+        \begin{proof}
+        	См. доказательство следующего пункта.
+        \end{proof}
+		\item если $ P_0 $ "--- минимальный аннулятор, то $ \deg P_0 \le \dim V $
+	\end{enumerate}
+	\begin{proof}
+		Пусть $ n \define \dim V $ \\
+		Докажем, что $ \exist P : \deg P \le n , $ $ P $ "--- аннулятор, $ P \ne 0 $ \\
+		Возьмём
+		$$ \underbrace{v, \mc{A}(v), \mc{A}^2(v), \dots, \mc{A}^n(v)}_{n + 1 \text{ вектор}} $$
+		Они ЛЗ, т. к. их больше, чем размерность пространства. Значит,
+		$$ \exist a_i \ne \bigodot : a_0v + a_1\mc{A}(v) + \dots + a_n\mc{A}^n(v) = 0 $$
+		Подойдёт $ P(t) = a_nt^n + \dots + a_1t + a_0 $
+	\end{proof}
+	\item \label{prop:2} $ P_1, \dots, P_k $ "--- аннуляторы $ v $ \\
+	Тогда
+	$$ \forall \text{ многочл. } Q_1, \dots, Q_k \quad \text{ многочлен } S(t) = Q_1(t)P_1(t) + \dots + Q_k(t)P_k(t) \text{ "--- аннулятор} $$
+	\begin{proof}
+		Пусть $ \mc{B}_i \define P_i(\mc{A}), \qquad \mc{C}_i = Q_i(\mc{A}), \qquad \mc{D} = S(\mc{A}) $
+		$$ \mc{D}(v) = \mc{C}_1 \bigg( \underbrace{\mc{B}_1(v)}_{= 0 } \bigg) + \dots + \mc{C}_k \bigg( \underbrace{\mc{B}_k(v)}_{= 0} \bigg) = \mc{C}_1(0) + \dots + \mc{C}_k(0) = 0 $$
+	\end{proof}
+	\item $ P_0(t) $ "--- минимальный аннулятор. Тогда
+	$$ P(t) \text{ "--- аннулятор } \iff P(t) \divby P_0(t) $$
+	\begin{proof}
+		Поделим с остатком:
+		$$ P(t) = Q(t)P_0(t) + R(t), \qquad \deg R < \deg P_0 $$
+		\begin{itemize}
+			\item $ \impliedby $
+			$$ R(t) = 0, \qquad P(t) = \underbrace{P_0(t)}_{\text{аннулятор}}Q(t) \text{ "--- аннулятор (по (\ref{prop:2}.))} $$
+			\item $ \implies $
+			$$ R(t) = \underbrace{P(t)}_{\text{аннул.}} - Q(t)\underbrace{P_0(t)}_{\text{аннул.}} \text{ "--- аннулятор (по (\ref{prop:2}.))} $$
+		\end{itemize}
+	\end{proof}
+	\item Минимальный аннулятор "--- единственный с точностью до ассциированности (умножения на обратимый, т. е. на константу)
+	\begin{proof}
+		$$ \exist P_1, P_2 \text{ "--- мин. аннул. } \implies \underbrace{P_1}_{\text{аннул.}} \divby \underbrace{P_2}_{\text{мин. аннул.}} $$
+	\end{proof}
+\end{props}
+
+\section{Циклические подпространства}
+
+\begin{definition}
+	$ \mc{A} $ "--- оператор на $ V $, $ \qquad v \in V $ \\
+	Циклическим подпространством, порождённым $ v $ называется минимальное по включению инвариантное подпространство, содержащее $ v $
+\end{definition}
+
+\begin{theorem}[базис циклического подпространства]
+	$ k \in \N $ такое, что:
+	\begin{enumerate}
+		\item $ v, \mc{A}(v), \dots, \mc{A}^{k - 1}(v) $ ЛНЗ
+		\item $ v, \mc{A}(v), \dots, \mc{A}^{k - 1}(v), \mc{A}^k(v) $ ЛЗ
+	\end{enumerate}
+	Тогда первый набор является базисом цикического подпространства, порождённого $ v $
+\end{theorem}
+
+\begin{proof}
+	Пусть $ U $ "--- циклическое, порождённое $ v $
+	$$ U \text{ "--- инвар. } \implies v \in U \implies \mc{A}v \in U \implies \underbrace{\mc{A}^2v}_{= \mc{A}(\mc{A}(v))} \in U \implies \widedots[5em] $$
+	$$ v, \mc{A}v, \dots, \mc{A}^{k - 1}v \in U $$
+	Они ЛНЗ. Чтобы доказать, что это базис, надо доказать, что они прождают $ U $: \\
+	Положим $ W = \braket{v, \mc{A}v, \dots, \mc{A}^{k - 1}v} $ \\
+	Докажем, что $ W = U $:
+	\begin{itemize}
+		\item Докажем, что $ W $ "--- инвар.: \\
+		$ \mc{A}^kv $ "--- ЛК $ v, \mc{A}v, \dots, \mc{A}^{k - 1}v $
+		$$ w \in W, \qquad w = a_0v + \dots + a_{k - 1}\mc{A}^{k - 1}v $$
+		$$ \mc{A}(w) = a_0\mc{A}v + \dots + a_{k - 2}\mc{A}^{k - 1}v + \underbrace{a_{k + 1}\mc{A}^kv}_{\text{ЛК } v, \dots, \mc{A}^{k - 1}v} $$
+		Значит, $ w $ является ЛК $ v, \dots, \mc{A}^{k - 1}v $
+		\item Докажем, что $ W $ "--- минимальное: \\
+		Докажем, что если $ W_1 $ инвариантно и $ v \in W_1 $, то $ W \sub W_1 $:
+		\begin{multline*}
+			\begin{rcases}
+				W_1 \text{ инвар. } \\
+				v \in W_1
+			\end{rcases} \implies \mc{A}v \in W_1, \qquad
+			\begin{rcases}
+				W_1 \text{ инвар. } \\
+				\mc{A}v \in W_1
+			\end{rcases} \implies \mc{A}^2v \in W_1, \quad \widedots[3em], \quad \underbrace{\mc{A}^iv}_{\text{порожд.} W} \in W_1 \implies \\
+			\implies W_1 \sub W
+		\end{multline*}
+	\end{itemize}
+\end{proof}
+
+\begin{eg}
+	$ \mc{A} : \R^3 \to \R^3 $
+	$$ \mc{A}
+	\begin{pmatrix}
+		x \\
+		y \\
+		z
+	\end{pmatrix} =
+	\begin{pmatrix}
+		x + y \\
+		y + z \\
+		z
+	\end{pmatrix} $$
+	$$ v_1 =
+	\begin{pmatrix}
+		1 \\
+		0 \\
+		0
+	\end{pmatrix}, \qquad \mc{A}(v_1) = v_1 $$
+	Циклическое подпространство "--- $ \left\langle
+	\begin{pmatrix}
+		1 \\
+		0 \\
+		0
+	\end{pmatrix} \right\rangle $
+	$$ v_2 =
+	\begin{pmatrix}
+		0 \\
+		1 \\
+		0
+	\end{pmatrix}, \qquad \mc{A}(v_2) =
+	\begin{pmatrix}
+		1 \\
+		1 \\
+		0
+	\end{pmatrix}, \qquad \mc{A}^2(v_2) =
+	\begin{pmatrix}
+		2 \\
+		1 \\
+		0
+	\end{pmatrix} $$
+	Они все лежат в плоскости $ XOY $, а их три штуки. Значит, они ЛЗ \\
+	Циклическое подпространство "--- $ \braket{v_2, \mc{A}(v_2)} = \left\langle
+	\begin{pmatrix}
+		x \\
+		y \\
+		0
+	\end{pmatrix} \right\rangle $
+	$$ v_3 =
+	\begin{pmatrix}
+		0 \\
+		0 \\
+		1
+	\end{pmatrix}, \qquad \mc{A}(v_3) =
+	\begin{pmatrix}
+		0 \\
+		1 \\
+		1
+	\end{pmatrix}, \qquad \mc{A}^2(v_3) =
+	\begin{pmatrix}
+		1 \\
+		2 \\
+		1
+	\end{pmatrix} $$
+	Они ЛНЗ. Размерность нашего пространства "--- 3, значит, если добавить четвёртый вектор, они будут ЛЗ \\
+	Циклическое подпространство "--- $ \R^3 $
+\end{eg}
+
+\begin{theorem}[циклическое подпространство и минимальный аннулятор]
+	$ V $ "--- конечномерное \\
+	$ \mc{A} $ "--- оператор на $ V $, $ \qquad v \in V $, $ \qquad U $ "--- цикл. подпр-во, порождённое $ v $ \\
+	$ \chi $ "--- хар. многочлен $ \mc{A} $ на $ U $ \\
+	Тогда $ \chi $ "--- минимальный аннулятор $ v $
+\end{theorem}
+
+\begin{proof}
+	Пусть $ k $ такое, что
+	\begin{enumerate}
+		\item $ v, \mc{A}v, \dots, \mc{A}^{k - 1}v $ ЛНЗ
+		\item $ v, \mc{A}v, \dots, \mc{A}^{k - 1}v, \mc{A}^kv $ ЛЗ
+	\end{enumerate}
+	Путь $ a_i $, не все равные нулю, такие, что
+	$$ a_0v + a_1\mc{A}v + \dots + a_{k - 1}\mc{A}^{k - 1}v + a_k\mc{A}^kv = 0 $$
+	Значит, $ a_k \ne 0 $ (\as $ v \dots, \mc{A}^{k - 1}v $ ЛНЗ) \\
+	Делим на $ a_k $, НУО считая что $ a_k = 1 $:
+	$$ \mc{A}^kv + \dots + a_1\mc{A}v + a_0 v = 0 $$
+	Положим $ P(t) \define t^k + a_{k - 1}t^{k - 1} + \dots + a_1t + a_0 \implies P(t) $ "--- аннулятор
+    \begin{itemize}
+        \item Докажем, что $ P(t) $ "--- минимальный. \bt{Пусть это не так}:
+        $$ \exist Q'(t) = b_mt^m + \dots + t_0, \qquad Q \ne 0, \qquad Q \text{ "--- аннул. }, \qquad m < k $$
+        $$ b_m\mc{A}^mv + \dots + b_0v = 0 $$
+        $ b_i \ne \bigodot \implies \mc{A}^mv, \dots, v $ "--- ЛЗ "--- \contra (это был не первый момент линейной зависимости)
+        \item Докажем, что $ P(t) = \pm \chi $: \\
+        Знаем, что
+        $$ v, \dots, \mc{A}^{k - 1}v \text{ "--- базис } U $$
+        Матрица $ \mc{A}\clamp{U} $ в этом базисе:
+        $$ A =
+        \begin{pmatrix}
+            v & \mc{A}v & \dots & \mc{A}^{k - 2}v & \mc{A}^{k - 1}v \\
+            0 & 0 & \dots & 0 & -a_0 \\
+            1 & 0 & \dots & . & -a_1 \\
+            0 & 1 & \dots & . & . \\
+            . & . & . & . & . \\
+            0 & 0 & \dots & 0 & . \\
+            1 & 1 & \dots & 1 & -a_{k - 1}
+        \end{pmatrix} $$
+        В первом столбце (начиная со второй строки) "--- координаты $ \mc{A}v = 0 \cdot v + 1 \cdot \mc{A}v + 0 \cdot \dots $ \\
+        Во втором столбце "--- координаты $ \mc{A}^2v $ \\
+        \widedots[10em] \\
+        В последнем столбце "--- координаты $ \mc{A}^kv $
+        $$ \chi_A(t) =
+        \begin{vmatrix}
+            -t & 0 & 0 & \dots & 0 & -a_0 \\
+            1 & -t & 0 & \dots & 0 & -a_1 \\
+            . & . & . & . & . & . \\
+            . & . & . & -t & 0 & -a_{k - 2} \\
+            . & . & . & . & . & -a_{k - 1} - t
+        \end{vmatrix} $$
+        Прибавим ко 2-й строке 1-ю, умноженную на $ \faktor1t $ \\
+        Прибавим к 3-й строке 2-ю, умноженную на $ \faktor1t $
+        \widedots[10em]
+        $$ \chi(t) =
+        \begin{vmatrix}
+            -t & 0 & 0 & \dots & 0 & -a_1 \\
+            0 & -t & 0 & \dots & 0 & -a_1 - \frac{a_0}t \\
+            0 & 0 & -t & \dots & 0 & -a_2 - \frac{a_1}t - \frac{a_0}{t^2} \\
+            . & . & . & . & . & . \\
+            0 & . & . & . & 0 & t - a_{k - 1} - \frac{a_{k -2}}t - \dots - \frac{a_1}{t^{k - 2}} - \frac{a_1}{t^{k - 1}}
+        \end{vmatrix} $$
+        Это будет $ (-1)^kP(t) $
+    \end{itemize}
+\end{proof}
+
+\section{Минимальный многочлен оператора}
+
+\begin{definition}
+	Многочлен $ P(t) $ аннулирует $ \mc{A} $, если $ P(\mc{A}) = 0 $
+\end{definition}
+
+\begin{remark}
+	Он является аннулятором для всех векторов
+\end{remark}
+
+\begin{eg}
+	$ \mc{A} : \R^2 \to \R^2 $
+	$$ \mc{A} : X \mapsto
+	\begin{pmatrix}
+		2 & 0 \\
+		1 & 2
+	\end{pmatrix}X $$
+	$$ P(t) = (t - 2)^2 \text{ "--- аннулирует } A $$
+	$ Q(t) = t - 2 $ не аннулирует $ \mc{A} $, т. к. $ \bigg( Q(\mc{A}) \bigg) =
+	\begin{pmatrix}
+		1 \\
+		0
+	\end{pmatrix} \ne
+	\begin{pmatrix}
+		0 \\
+		0
+	\end{pmatrix} $
+\end{eg}
+
+\begin{definition}
+	Минимальным многочленом оператора $ \mc{A} $ называется ненулевой многочлен наименьшей степени, аннулирующий $ \mc{A} $
+\end{definition}
+
+\begin{properties}
+	$ \mc{A} $ "--- оператор на $ V $
+	\begin{enumerate}
+		\item \label{prop:1} $ P_1, \dots, P_k $ аннулируют $ \mc{A} $ \\
+		Тогда для любых многочленов $ Q_1, \dots, Q_k $ многочлен $ S(t) = P_1(t)Q_1(t) + \dots + Pk(t)Q_k(t) $ аннулирует $ \mc{A} $
+		\begin{proof}
+			$ \forall v \quad P_i $ "--- аннулятор $ v \implies S(\mc{A}) $ "--- аннулятор $ v \implies S $ аннулирует $ \mc{A} $
+		\end{proof}
+		\item $ P_0 $ "--- минимальный многочлен для $ \mc{A} $. Тогда
+		$$ P \text{ аннулирует } \mc{A} \iff P \divby P_0 $$
+		\begin{proof}
+			Пусть $ P = P_0Q + R $
+			\begin{itemize}
+				\item Если $ P \divby P_0 $, то $ P = P_0Q \underimp{\ref{prop:1}.} P \text{ аннулирует } \mc{A} $
+				\item Если $ P $ аннулирует $ \mc{A} $, то $ R = P - P_0Q $ аннулирует $ \mc{A} \underimp{\ref{prop:1}.} R = 0 \implies P \divby P_0 $
+			\end{itemize}
+		\end{proof}
+		\item Минимальный многочлен $ \mc{A} $ единственнен с точностью до ассоциирования
+        \item $ e_1, \dots, e_n $ "--- базис $ V, \qquad P_1(t), \dots, P_n(t) $ "--- минимальные аннуляторы для $ e_1, \dots, e_n $ \\
+        Тогда $ \SCM{P_1, \dots, P_n} $ является минимальным многочленом для $ A $
+        \begin{proof}
+            Пусть $ P = \SCM{P_1, \dots, P_n} $
+            \begin{itemize}
+                \item Проверим, что $ P $ аннулирует $ A $: \\
+                Пусть $ v \in V, \qquad v = a_1e_1 + \dots + a_ne_n $ \\
+                Применим $ P $:
+                $$ P(\mc{A})(v) = a_1P(\mc{A})e_1 + \dots + a_nP(\mc{A})e_n $$
+                $$ P \divby P_i \implies P \text{ "--- аннул. для } e_i \implies P(\mc{A})e_i = 0 $$
+                $$ P(\mc{A})(v) = a_1 \cdot 0 + \dots + a_n \cdot 0 = 0 $$
+                \begin{remark}
+                    Тем самым, мы доказали, что аннулятор многочлена существует
+                \end{remark}
+                \item Проверим, что $ P $ минимальный: \\
+                Пусть $ Q(t) $ аннулирует $ \mc{A} $
+                \begin{multline*}
+                    \implies Q(\mc{A})v = 0 \quad \forall v \implies Q(\mc{A})e_i = 0 \quad \forall i \underimp{P_i \text{ "--- мин. аннул.}} \\
+                    \implies Q \divby P_i \quad \forall i \implies Q \divby P \implies \deg Q \ge \deg P
+                \end{multline*}
+            \end{itemize}
+        \end{proof}
+    \end{enumerate}
+\end{properties}
+
+\begin{theorem}[Гамильтона-Кэли]
+	Характеристический многочлен оператора $ \mc{A} $ аннулирует $ \mc{A} $, т. е.
+	$$ \chi_{\mc{A}}(\mc{A}) = 0 $$
+\end{theorem}
+
+\begin{proof}
+	Нужно доказать, что $ \forall v \quad \chi(\mc{A})v = 0 $ \\
+	Докажем, что $ \chi_{\mc{A}} \divby P_0 $, где $ P_0 $ "--- минимальный аннулятор (все аннуляторы делятся на минимальный): \\
+	Пусть $ U $ "--- циклическое подпространство, порождённое $ v $ \\
+	$ \chi_U $ "--- характеристический многочлен $ \mc{A}\clamp{U} $ (он определён, т. к. пространство ивариантно) \\
+	По следствию о делителях характеристического многочлена, $ \chi \divby \chi_U $ \\
+	Знаем, что $ \chi_U $ "--- минимальный аннулятор для $ v $ на $ U $ (по т. о циклическом подпространстве и минимальном аннуляторе)
+	$$
+	\begin{rcases}
+		\chi_U = P_0 \\
+		\chi \divby \chi_U
+	\end{rcases} \implies \chi \divby P_0 $$
+\end{proof}
+
+\begin{eg}
+	$$ A =
+	\begin{pmatrix}
+		1 & 0 \\
+		1 & 1
+	\end{pmatrix} \qquad \chi_{\mc{A}}(t) = (1 - t)^2 = t^2 - 2t + t $$
+	$$ A^2 - 2A + E =
+	\begin{pmatrix}
+		1 & 0 \\
+		2 & 1
+	\end{pmatrix} -
+	\begin{pmatrix}
+		2 & 0 \\
+		2 & 2
+	\end{pmatrix} +
+	\begin{pmatrix}
+		1 & 0 \\
+		0 & 1
+	\end{pmatrix} =
+	\begin{pmatrix}
+		0 & 0 \\
+		0 & 0
+	\end{pmatrix} $$
+\end{eg}
+
+\begin{implication}
+	$ P_0 $ "--- минимальный многочлен $ \mc{A} $ \\
+	Тогда $ \chi \divby P $
+\end{implication}
+
+\section{Примарные и корневые подпространства}
+
+\begin{definition}
+	$ K $ "--- поле, $ \qquad V $ "--- векторное пространство над $ K, \qquad \mc{A} $ "--- оператор на $ V $ \\
+	$ P(t) $ "--- минимальный унитарный многочлен $ \mc{A} $ \nimp[(старший коэффициент $ P $ равен 1)]  \\
+	Пространство $ V $ называется примарным относительно $ \mc{A} $, если $ P(t) = Q^s(t) $ для некоторого $ Q(t) $, неприводимого над $ K $
+\end{definition}
+
+\begin{remark}
+	Если $ s = 0 $, то $ P = \const \implies V = \set{0} $. Можно считать, что оно примарно
+\end{remark}
+
+\begin{exmpls}
+	\item $ K = \R, \qquad V = \R^4, \qquad \mc{A} : X \mapsto AX $
+	$$ A =
+	\begin{pmatrix}
+		2 & & & \\
+		0 & 2 & * & \\
+		0 & 0 & 2 & \\
+		0 & 0 & 0 & 2
+	\end{pmatrix}, \qquad \chi_A = (2 - t)^4 $$
+	$ (2 - t)^4 \divby $ минимальный многочлен $ \implies $ минимальный многочлен $ = (2 - t)^s, \quad s \le 4 $
+	\item $ V = \R^2, \qquad \mc{A} : X \mapsto AX $
+	$$ A =
+	\begin{pmatrix}
+		0 & -1 \\
+		1 & 0
+	\end{pmatrix}, \qquad \chi_{\mc{A}} = t^2 + 1 \text{ "--- неприв. } \implies \text{ примарно} $$
+	\item То же самое, но $ K = \Co $
+	$$ \chi_{\mc{A}} = t^2 + 1 = (t - i)(t + i) $$
+	$$ P_1(t) = t - i, \qquad P_2(t) = t + i $$
+	$ P_1, P_2 $ "--- не аннул. $ \mc{A} $:
+	$$
+	\begin{pmatrix}
+		i & -1 \\
+		1 & i
+	\end{pmatrix} \ne 0, \qquad
+	\begin{pmatrix}
+		-i & -1 \\
+		1 & -i
+	\end{pmatrix} \ne 0 $$
+	$ \implies \chi_{\mc{A}}(t) $ "--- минимальный многочлен. Пространство не примарно
+\end{exmpls}
+
+\begin{properties}[взаимно простых многочленов от оператора]
+	$ \mc{A} $ "--- оператор на $ V $
+	\begin{enumerate}
+		\item $ P_1, P_2, \dots, P_k $ "--- попарно взаимно просты, $ \qquad T(t) = P_1(t)\dots P_k(t), \qquad v \in V, \qquad T $ аннулир. $ v $. \\
+		Тогда $ \exist v_1, \dots, v_k : \quad v = v_1 + \dots + v_k $ и $ P_i $ аннулирует $ v_i $
+		\begin{proof}
+			\textbf{Индукция.}
+			\begin{itemize}
+				\item \textbf{База.} $ k = 2 $ \\
+				$ P, Q $ взаимно просты, $ \qquad v \in V $ \\
+				Докажем, что $ \exist v, w : v = u + w, \qquad P(\mc{A})u = 0, \qquad Q(\mc{A})w = 0 $ \\
+				Т. к. $ P, Q $ взаимно просты, можно разложить их НОД ($ = 1 $):
+				$$ \exist F(t), G(t) : P(t)F(t) + Q(t)G(t) = 1 $$
+				Применим к $ \mc{A} $:
+				$$ P(\mc{A}) \circ F(\mc{A}) + Q(\mc{A}) \circ G(\mc{A}) = \mc{E} $$
+				Применим к $ v $:
+				$$ (PF)(\mc{A})v + (QG)(\mc{A})v = v $$
+				Положим $ u = (QG)(\mc{A})v, \qquad w = (PF)(\mc{A})v $ \\
+				Проверим, что $ P(\mc{A})u = 0 $ (для $ w $ "--- аналогично):
+				\begin{multline*}
+					P(\mc{A}) \circ \bigg( QG(\mc{A}) \bigg)v = \bigg( PQG \bigg)(\mc{A})v \undereq{\text{коммут.}} \bigg( GPQ \bigg)(\mc{A})v = \\
+					= G(\mc{A}) \underbrace{(PQ)(\mc{A})v}_{= 0 \text{ (\as } T = PQ \text{ анн. } v)} = 0
+				\end{multline*}
+				\item \textbf{Переход.} $ k - 1 \to k $
+				$$ T = \underbrace{P_1 \dots P_{k - 1}}_{P}\underbrace{P_k}_Q $$
+				$$ (PQ)(\mc{A})v = 0 \underimp{\text{\textbf{база}}} \exist u, w : v = u + w, \qquad P(\mc{A})u = 0, \quad Q(\mc{A})w = 0 $$
+				По \textbf{индукционному предположению},
+				$$ \exist v_1, \dots, v_{k - 1} : P_i \text{ аннул. } v_i, \qquad u = v_1 + \dots + v_{k - 1} $$
+				$$ v = v_1 + \dots + v_{k - 1} + \underset{\define v_k}w $$
+			\end{itemize}
+		\end{proof}
+		\item $ P, Q $ взаимно просты, $ \qquad P, Q $ аннуляторы $ v \qquad \implies v = 0 $
+		\begin{proof}
+			Пусть $ T $ "--- минимальный аннулятор $ v $
+			$$
+			\begin{rcases}
+				P \divby T \\
+				Q \divby T
+			\end{rcases} \implies T = \const, \qquad T(t) = c \implies cv = 0 \implies v = 0 $$
+		\end{proof}
+	\end{enumerate}
+\end{properties}
+
+\begin{theorem}[разложение пространства в прямую сумму примарных подпространств]
+	$ K $ "--- поле, $ \qquad V $ "--- векторное пространство над $ K, \qquad \mc{A} $ "--- оператор на $ V $ \\
+	$ P(t) $ "--- минимальный моногочлен $ \mc{A} $, он разложен на множители:
+	$$ P(t) = P_1(t) \dots P_k(t), \qquad \text{ где } P_i(t) = Q_i^{s_i}(t), \qquad Q_i \text{ "--- непривод. над } K $$
+	Тогда $ \exist $ подпространства $ U_1, \dots, U_k $, такие что
+	\begin{enumerate}
+		\item все $ U_i $ ивариантны
+		\item $ V = U_1 \oplus \dots \oplus U_k $
+		\item $ P_i(t) $ "--- минимальный многочлен $ \mc{A} $ на $ U_i \quad \forall i $
+	\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+	Положим $ U_i = \ker P_i(\mc{A}) $. Докажем, что они подойдут:
+	\begin{enumerate}
+		\item Ядро многочлена от оператора инвариантно (было такое свойство)
+		\item
+		\begin{enumerate}
+			\item Докажем, что $ V = U_1 + \dots + U_k $ \\
+			$ P_1, \dots, P_k $ попарно взаимно просты, и $ P_1 \cdot \dots \cdot P_k $ аннулируют любой $ v $, значит
+			$$ \forall v \quad \exist v_1, \dots, v_k : v_1 + \dots + v_k, \qquad P_i \text{ аннул. } v_i \implies v_i \in U_i $$
+			\item Докажем, что сумма прямая: \\
+			Нужно проверить, что $ U_s \cap \bigg( U_1 + \dots + U_{s - 1} + U_{s + 1} + \dots + U_k \bigg) = \set{0} \quad \forall s $ \\
+			НУО проверим, что $ (U_1 + \dots + U_k) \cap U_k = \set{0} $ \\
+			Возьмём $ v \in (U_1 + \dots + U_{k - 1}) \cap U_k $
+			$$ v = v_1 + \dots + v_{k - 1}, \qquad v_i \in U_i, \qquad v \in U_k $$
+			По одному из свойств,
+			$$ P_1 \cdot \dots \cdot P_{k - 1} \text{ аннулирует } v_1 + \dots + v_{k - 1} = v $$
+			При этом, $ P_k $ аннулирует $ v $ \\
+			Заметим, что $ (P_1 \cdot \dots \cdot P_{k - 1}, P_k) = 1 $ \\
+			По одному из свойств, это означает, что $ v = 0 $
+		\end{enumerate}
+		\item
+		$$ U_i = \ker P_i(\mc{A}) \implies P_i(\mc{A}) \clamp{U_i} = 0 $$
+		$ P_i $ аннулирует $ \mc{A}\clamp{U_i} $ \\
+		Значит, $ P_i $ делится на минимальный многочлен $ \mc{A}\clamp{U_i} $ \\
+		При этом, $ P_i = Q_i^{s_i} $ \\
+		Отсюда минимальный тоже является $ Q_i^{r_i}, \qquad r_i \le s_i $ \\
+		Хотим доказать, что $ r_i = s_i $ \\
+		Пусть $ T = Q_1^{r_1} \dots Q_k^{r_k} $ \\
+		Т. к. у нас прямая сумма, сущестует $ e_1, \dots, e_n $ "--- базис $ V $, он является объединением базисов $ U_i $
+		$$ \implies T(\mc{A})e_1 = 0, \widedots[10em], T(\mc{A})e_k = 0 $$
+		$$ \implies T \text{ аннулирует } \mc{A} \underimp{P \text{ "--- мин. многочл.}} \underbrace{T}_{\prod Q_i^{r_i}} \divby \underbrace{P}_{\prod Q_i^{s_i}}, \quad r_i \ge s_i \implies r_i = s_i $$
+	\end{enumerate}
+\end{proof}
+
+\begin{definition}
+	$ \lambda $ "--- с. ч. $ \mc{A} $ \\
+	Вектор $ v $ называется корневым вектором, соответствующим $ \lambda $, если для некоторого $ k $ многочлен $ P(t) = (t - \lambda)^k $ является аннулятором $ v $ \\
+	Множество корневых векторов называется корневым подпространством, соотв. $ \lambda $
+\end{definition}
+
+\begin{props}
+	\item Корневое подпространство инвариантно
+	\begin{proof}
+		Пусть $ P(t) = (\lambda - t)^k $ "--- аннул. $ v $, т. е. $ P(\mc{A})v = 0 $
+		$$ P(\mc{A})(\mc{A}v) = \bigg( P(\mc{A}) \circ \mc{A} \bigg)v = \bigg( \mc{A} \circ P(\mc{A}) \bigg)v = \mc{A} \bigg( \underbrace{P(\mc{A})v}_{= 0} \bigg) = \mc{A}(0) = 0 $$
+	\end{proof}
+	\item $ V $ конечномерно, минимальный многочлен $ \mc{A} $ раскладывается на линейные множители
+	$$ P(t) = (\lambda_1 - t)^{s_1}\dots(\lambda_k - t)^{s_k} $$
+	Тогда $ \ker \bigg( (\lambda_i \mc{E} - \mc{A})^{s_i} \bigg) $ "--- корневые подпространства
+	\begin{proof}
+		Пусть $ U_i = \ker \bigg( (\lambda_i \mc{E} - \mc{A})^{s_i} \bigg), \qquad W_i $ "--- корневое подпространство для $ \lambda_i $
+		\begin{itemize}
+			\item $ U_i \sub W_i $ "--- очевидно ($ v \in U_i \implies (\lambda_i \mc{E} - \mc{A})^{s_i}v = 0, \qquad $ подойдёт $ k = s_i $)
+			\item $ W_i \sub U_i $ \\
+			Нужно показать, что если вектор аннулируется, то он это сделает не больше чем за $ s_i $ шагов \\
+			Пусть $ v \in W_i $ \\
+			Пусть $ k $ "--- минимальное число, такое что $ (\lambda_i \mc{E} - \mc{A})^k $ аннулирует $ v $ \\
+			Тогда $ (\lambda - t)^k $ "--- минимальный аннулятор $ v $ \\
+			При этом, $ P(t) $ "--- аннулятор $ v $
+			$$ \implies P(t) \divby (\lambda - t)^k \underimp{(\lambda - t) \text{ входит в } P \text{ только в степени } s_i} k \le s_i \implies v \in U_i $$
+		\end{itemize}
+	\end{proof}
+\end{props}
+
+\section{Существование жордановой формы}
+
+Повторим определения:
+
+\begin{definition}
+	Жордановой клеткой порядка $ r $ с с. ч. $ \lambda $ называется матрица порядка $ r $ вида
+	$$ J_r(\lambda) =
+	\begin{pmatrix}
+		\lambda & 0 & . & 0 \\
+		1 & \lambda & . & 0 \\
+		. & . & . & . \\
+		0 & . & 1 & \lambda
+	\end{pmatrix} $$
+\end{definition}
+
+\begin{definition}
+	Жордановой матрицей называется блочно-диагональная матрица вида
+	$$
+	\begin{pmatrix}
+		J_{r_1}(\lambda_1) & 0 & . & 0 \\
+		0 & J_{r_2}(\lambda_2) & . & 0 \\
+		. & . & . & . \\
+		0 & . & 0 & J_{r_k}(\lambda_k)
+	\end{pmatrix} \qquad \text{(как } r_i \text{, так и } \lambda_i \text{ могут совпадать)} $$
+\end{definition}
+
+\begin{definition}
+	Жорданов базис "--- базис, в котором матрица оператора жорданова
+\end{definition}
+
+\begin{theorem}[существование жордановой формы]
+	$ K $ "--- поле, $ \qquad V $ "--- векторное пространство над $ K $ \\
+	$ \mc{A} $ "--- оператор, $ \qquad \chi_{\mc{A}}(t) $ раскладывается на линейные множители над $ K $ \\
+	Тогда для $ \mc{A} $ существует жорданов базис
+\end{theorem}
+
+
+\section{Существование жордановой формы}
+
+\begin{iproof}[теоремы о существовании жордановый формы]
+	\item Докажем для случая, когда минимальный многочлен $ \mc{A} $ имеет вид $ P(t) = (t - \lambda)^r $ \\
+	Сведём к случаю нильпотентного опреатора: \\
+	Положим $ B = \mc{A} - \lambda\mc{E} $ \\
+	$ \mc{B}^r = 0, \quad \mc{B} $ "--- нильпотентный \\
+	Значит, существует жорданов базис $ \mc{B} $, причём на диагонали жордановой формы стоят нули
+	\item Общий случай
+	$$ \chi_{\mc{A}} = (-1)^n(t - \lambda_1)^{s_1} \cdot \dots \cdot (t - \lambda_m)^{s_m} $$
+	По следствию к теореме Гамильтона-Кэли минимальный многочлен "--- делитель $ \chi \implies $ минимальный многочлен имеет вид
+	$$ P(t) = (t - \lambda_1)^{r_1} \cdot \dots \cdot (t - \lambda_m)^{r_m} $$
+	Применим теорему о разложении в сумму примарных подпространств: \\
+	Пусть $ Q_i \define (t - \lambda_i)^{r_i} $ \\
+	По теореме
+	$$ V = U_1 \oplus \dots \oplus U_k $$
+	$ U_i $ инвариантны \\
+	$ Q_i(t) $ "--- минимальный многочлен $ \mc{A} $ на $ U_i $ \\
+	К $ U_i $ применяем нильпотентный случай: \\
+	Существует жорданов базис $ U_i $ \\
+	Матрица $ \mc{A}\clamp{U_i} $ имеет вид
+	$$ J_i =
+	\begin{pmatrix}
+		J_{r_1}(\lambda_i) & . & . \\
+		. & . & . \\
+		. & . & J_{r_k}(\lambda_1)
+	\end{pmatrix} $$
+	Значит, в базисе, полученном объединением базисов $ U_i $ матрица $ \mc{A} $ имеет вид
+	$$ J =
+	\begin{pmatrix}
+		J_1 & . & . \\
+		. & . & . \\
+		. & . & J_m
+	\end{pmatrix} $$
+\end{iproof}
+
+\begin{props}[возведения в степень жордановой клетки]
+	\item
+	\begin{enumerate}
+		\item $ \bigg( J_r(0) \bigg)^s =
+		\begin{pmatrix}
+			0 & . & . & . & . \\
+			0 & 0 & . & . & . \\
+			. & . & . & . & . \\
+			1 & . & . & . & . \\
+			. & . & . & . & . \\
+			. & 1 & . & 0 & 0
+		\end{pmatrix} \qquad $ при $ s < r $ \\
+		То есть,
+		$$ a_{ij} =
+		\begin{cases}
+			1, \qquad i - j = s \\
+			0, \qquad \text{иначе}
+		\end{cases} $$
+		\item $ \bigg( J_r(0) \bigg)^s 0 \qquad $ при $ s \ge r $
+	\end{enumerate}
+	\begin{eg}
+		$ r = 4 $
+		$$ \bigg( J_4(0) \bigg)^1 =
+		\begin{pmatrix}
+			0 & 0 & 0 & 0 \\
+			1 & 0 & 0 & 0 \\
+			0 & 1 & 0 & 0 \\
+			0 & 0 & 1 & 0
+		\end{pmatrix}, \qquad \bigg( J_4(0) \bigg)^2 =
+		\begin{pmatrix}
+			0 & 0 & 0 & 0 \\
+			0 & 0 & 0 & 0 \\
+			1 & 0 & 0 & 0 \\
+			0 & 1 & 0 & 0
+		\end{pmatrix} $$
+		$$ \bigg( J_4(0) \bigg)^3 =
+		\begin{pmatrix}
+			0 & 0 & 0 & 0 \\
+			0 & 0 & 0 & 0 \\
+			0 & 0 & 0 & 0 \\
+			1 & 0 & 0 & 0
+		\end{pmatrix}, \qquad \bigg( J_4(0) \bigg)^4 =
+		\begin{pmatrix}
+			0 & 0 & 0 & 0 \\
+			0 & 0 & 0 & 0 \\
+			0 & 0 & 0 & 0 \\
+			0 & 0 & 0 & 0
+		\end{pmatrix} $$
+	\end{eg}
+	\begin{proof}
+		Формально "--- \textbf{индукция} по $ s $. На самом деле, повторяем действия из примера
+		\begin{itemize}
+			\item \textbf{База.} $ s = 1 $
+			$$ J_1(0) = (0) $$
+			\item \textbf{Переход.} $ s \to s + 1 $
+			$$ J_r^s(0) = a_{ij}, \qquad J_r(0) = b_{ij}, \qquad J_r^{s + 1}(0) = c_{ij} $$
+			\begin{equ}1
+				c_{ij} = a_{i1}b_{1j} + a_{i2}b_{2i} + \dots + a_{in}b_{ni}
+			\end{equ}
+			Среди $ a_{ij} $ не более одной единицы, остальные нули \\
+			Среди $ b_{xj} $ не более одной единицы, остальные нули \\
+			Значит, $ c_{ij} = 0 $ или $ c_{ij} = 1 $
+			$$ c_{ij} = 1 \iff \exist x :
+			\begin{cases}
+				a_{ix} = 1 \\
+				b_{xi} = 1
+			\end{cases} \qquad \underiff{\eref1} \exist x :
+			\begin{cases}
+				i - x = s \\
+				x - j = 1
+			\end{cases} \qquad \iff i - j = s + 1 $$
+		\end{itemize}
+	\end{proof}
+	\item Пусть $ \lambda \ne 0, \qquad A = \bigg( J_r(\lambda) \bigg)^s $ \\
+	Тогда $ A $ нижнетреугольная
+	$$ a_{ij} =
+	\begin{cases}
+		\lambda^{i - j}C_s^{i - j}, \qquad i > j, i - j \le s \\
+		0, \qquad i > j, i - j > s
+	\end{cases} $$
+	\begin{eg}
+		\begin{multline*}
+			\bigg( J_4(2) \bigg)^5 =
+			\begin{pmatrix}
+				2^5 & 0 & 0 & 0 \\
+				C_5^1 \cdot 2^4 & 2^5 & 0 & 0 \\
+				C_5^2 \cdot 2^3 & C_5^1 \cdot 2^4 & 2^5 & 0 \\
+				C_5^3 \cdot 2^3 & C_5^2 \cdot 2^5 & C_5^1 \cdot 2 & 2^5
+			\end{pmatrix} =
+			\begin{pmatrix}
+				2^5 & 0 & 0 & 0 \\
+				5 \cdot 2^4 & 2^5 & 0 & 0 \\
+				10 \cdot 2^3 & 5 \cdot 2^4 & 2^5 & 0 \\
+				10 \cdot 2^3 & 10 \cdot 2^3 & 5 \cdot 2^4 & 2^5
+			\end{pmatrix} = \\
+			=
+			\begin{pmatrix}
+				32 & 0 & 0 & 0 \\
+				80 & 32 & 0 & 0 \\
+				80 & 80 & 32 & 0 \\
+				40 & 80 & 80 & 32
+			\end{pmatrix}
+		\end{multline*}
+	\end{eg}
+	\begin{proof}
+		$ J_r(\lambda) = \lambda \cdot E + J_r(0) $ \\
+		Возведём в степень и распишем как бином Ньютона (учитывая, что $ \lambda E $ коммутирует с чем угодно, а значит, можно приводить подобные):
+		\begin{multline*}
+			\bigg( J_r(\lambda) \bigg)^s = (\lambda E)^s + C_s^1 (\lambda E)^{s - 1} J_r(0) + \widedots[3em] + C_s^{r - 1}(\lambda E)^{s - r + 1} J_r(0)^{r - 1} + \underbrace{J_r^r(0)}_{= 0}(\dots) \undereq{\text{св-во } 1a} \\
+			= \lambda^s E + C_s^1 \lambda^{s - 1}J_r(0) + \widedots[3em] + C_s^{r - 1}\lambda^{s - r + 1}J_r^{r - 1}(0) = \\
+			=
+			\begin{pmatrix}
+				\lambda^s & . & 0 \\
+				. & . & . \\
+				0 & . & \lambda^s
+			\end{pmatrix} +
+			\begin{pmatrix}
+				0 & . & . & 0 \\
+				\lambda^{s - 1}C_s^1 & . & . & 0 \\
+				. & . & . & . \\
+				0 & . & \lambda^{s - 1}C_s^1 & 0
+			\end{pmatrix} + \widedots[3em] +
+			\begin{pmatrix}
+				0 & . & 0 \\
+				. & . & . \\
+				\lambda^{s - r + 1}C_s^{r - 1} & . & 0
+			\end{pmatrix}
+		\end{multline*}
+	\end{proof}
+	\item $ \rk \bigg( \big( J_r(0) \big)^s \bigg) =
+	\begin{cases}
+		r - s, \qquad s < r \\
+		0, \qquad s \ge r
+	\end{cases} $
+\end{props}
+
+\begin{theorem}[количество клеток и ранг]
+	$ J $ "--- жорданова матрица \\
+	Тогда количество клеток вида $ J_r(\lambda) $ равно
+	$$ \rk \bigg( J - \lambda E \bigg)^{r - 1} - 2 \rk \bigg( J - \lambda E \bigg)^r + \rk \bigg( J - \lambda E \bigg)^{r + 1} $$
+\end{theorem}
+
+\begin{proof}
+	Положим $ f(s) \define \rk (J - \lambda E)^s $
+	$$ J =
+	\begin{pmatrix}
+		J_{r_1}(\lambda_1) & . & . \\
+		. & . & . \\
+		. & . & J_{r_k}(\lambda_k)
+	\end{pmatrix}, \qquad J - \lambda E =
+	\begin{pmatrix}
+		J_{r_1}(\lambda_1 - \lambda) & . & . \\
+		. & . & . \\
+		. & . & J_{r_k}(\lambda_k - \lambda)
+	\end{pmatrix} $$
+	$$ (J - \lambda E)^s =
+	\begin{pmatrix}
+		\bigg( J_{r_1}(\lambda_1 - \lambda) \bigg)^s & . & . \\
+		. & . & . \\
+		. & . & \bigg( J_{r_k}(\lambda_k - \lambda) \bigg)^s
+	\end{pmatrix} $$
+	Какое-то из $ \lambda_i $ совпало с $ \lambda $
+	$$ f(s) = \sum_{i = 1}^k \rk \bigg( \big( J_{r_i}(\lambda_i - \lambda) \big)^s \bigg) $$
+	\begin{itemize}
+		\item Если $ \lambda \ne \lambda_i $, то $ \rk \bigg( \big( J_{r_i}(\lambda - \lambda_i) \big)^s \bigg) = r_i \quad \forall s $
+		$$ f(s) - f(s + 1) = \sum \bigg\lgroup \rk \bigg( J_{r_i}^s(\lambda_i - \lambda) \bigg) - \rk \bigg( J_{r_i}^{s + 1}(\lambda - \lambda_i) \bigg) \bigg\rgroup $$
+		То есть, если $ \lambda_i \ne \lambda_j $, то $ i $-е слагаемое равно $ r_i - r_j = 0 $
+		\item Если $ \lambda_i = \lambda, \quad r_i \le s $, то $ i $-е слагаемое равно $ 0 - 0 = 0 $
+		\item Если $ \lambda_i = \lambda, \quad r_i < s $, то $ i $-е слагаемое равно $ (r_i - s) - \bigg( r_i - (s + 1) \bigg) = 1 $
+	\end{itemize}
+	$ f(s + 1) - f(s) $ "--- количество клесток, для которых $ \lambda_i = \lambda, \quad r_i > s $ \\
+	$ \bigg( f(s + 1) - f(s) \bigg) - \bigg( f(s) - f(s - 1) \bigg) $ "--- количество клеток размера $ s $ \\
+	Применяя три случая, получаем, что это равно $ f(s + 1) - 2f(s) + f(s - 1) $
+\end{proof}
+
+\begin{implication}[единственность жордановой формы]
+	Пусть $ J, J' $ "--- жордановы \\
+	$ J, J' $ "--- матрицы $ \mc{A} $ в некоторых базисах \\
+	Тогда $ J, J' $ совпадают с точностью до перестановки жордановых клеток
+\end{implication}
+
+\begin{proof}
+	$ J, J' $ "--- матрицы $ \mc{A} $ \\
+	$ J - \lambda E, J' - \lambda E $ "--- матрицы $ \mc{A} - \lambda \mc{E} $ \\
+	$ (J - \lambda E)^s, (J' - \lambda E)^s $ "--- матрицы $ (\mc{A} - \lambda \mc{E})^s $ \\
+	$ \rk $ не зависит от выбора базиса
+\end{proof}
+
+\begin{theorem}[минимальный многочлен]
+	$ J $ "--- жоданова матрица, $ \qquad \lambda_1, \dots, \lambda_k $ "--- с. ч. $ J $ \\
+	$ r_i $ "--- максимальный размер жордановой клетки, соотв. $ \lambda_i $ \\
+	Тогда минимальный многочлен равен $ (t - \lambda_1)^{r_1}\dots(t - \lambda_k)^{r_k} $
+\end{theorem}
+
+\begin{proof}
+	Пусть $ e_1, \dots, e_n $ "--- жорданов базис \\
+	$ P_i $ "--- минимальный аннулятор $ e_i $ \\
+	Тогда минимальный многочлен равен $ \SCM{P_1, \dots, P_n} $ \\
+	Пусть $ e_i $ соответстсвует $ j $-му столбцу клетки $ J_r(\lambda) $
+	$$ (\mc{A} - \lambda \mc{E})^{r - i}(e_i) = 0, \qquad (\mc{A} - \lambda \mc{E})^{r - i - 1}(e_i) \ne 0 $$
+	$$ \implies P_i(t) = (t - \lambda)^{r - i} $$
+	Минимальный многочлен "--- это НОК многочленов вида $ (t - \lambda_i)^s, \quad s \le r_i $ \\
+	Среди них есть $ (t - \lambda_1)^{r_1}, \dots, (t - \lambda_k)^{r_k} $ \\
+	Значит, среди них есть $ P_i $, а остальные "--- не делители
+	$$ \implies \text{НОК} = (t - \lambda_1)^{r_1}\dots(t - \lambda_k)^{r_k} $$
+\end{proof}
+
+\section{Комплексификация}
+
+В предыдущем параграфе мы доказали, что жорданова форма существует, если многочлен расладывается на простейшие множители. Это всегда верно над $ \Co $. В этом параграфе рассмотрим жордановы формы над $ \R $
+
+\begin{undefthm}{Идея построения}
+	$ V $ "--- вект. пространство над $ \R $ \\
+	Построим $ \hat{V} $ над $ \Co $, состоящее из $ u + vi, \quad u, v \in \R $ \\
+	Для этого определим сложение и умножение, как в комплексных числах:
+	\begin{itemize}
+		\item $ (u_1 + v_1i) + (u_2 + v_2i) = (u_1 + u_2) + (v_1 + v_2)i $
+		\item $ (a + bi)(u + vi) = au + bui + avi + bvi^2 $
+	\end{itemize}
+\end{undefthm}
+
+\begin{definition}
+	$ V $ "--- векторное пространство над $ \R $ \\
+	Комплексификация $ V $ "--- это множество $ \hat{V} $, состоящее из пар $ (u, v) $ с операцией $ \Co \times \hat{V} \to \hat{V} $, заданной равенством
+	$$ (a + bi) \cdot (u, v) = \big( au - bv, av + bu \big) $$
+	и операцией $ \hat{V} \times \hat{V} $, заданной равенством
+	$$ (u_1, v_1) + (u_2, v_2) = \big( u_1 + u_2, v_1 + v_2 \big) $$
+\end{definition}
+
+\begin{definition}
+	$ w = (u, v) $ \\
+	$ (u, -v) $ называется сопряжённым к $ w $
+\end{definition}
+
+\begin{notation}
+	$ \ol{w} $
+\end{notation}
+
+\begin{theorem}
+	$ \hat{V} $ "--- векторное пространство над $ \Co $
+\end{theorem}
+
+\begin{proof}
+	\hfill
+	\begin{enumerate}
+		\item $ \hat{V} $ "--- абелева группа по сложению
+		\item $ 1 \cdot w = w $
+		\item Ассоциативность умножения
+		\item Две дистрибутивности умножения
+	\end{enumerate}
+	Всё проверяется подстановкой
+\end{proof}
+
+\begin{notation}
+	Пару $ (u, v) $ будем обозначать $ u + vi $
+\end{notation}
+
+\begin{notation}
+	Множество пар $ (u, 0) $ отождествим с $ V $
+\end{notation}
+
+
+\section{Продолжаем комплексификацию}
+
+\begin{remind}
+	Мы ввели элементы вида $ u + vi $, определили для них сложение и умножение, доказали, что это векторное пространство
+\end{remind}
+
+\begin{theorem}[базис комплексификации]
+	Пусть $ e_1, .., e_n $ "--- бизс $ V $ \\
+	Тогда $ e_1 = e_1 + 0 \cdot i, \dots, e_n = e_n + 0 \cdot i $ "--- базс $ \hat{V} $
+\end{theorem}
+
+\begin{iproof}
+	\item Докажем, что система является порождающей: \\
+	Пусть $ w \in \hat{V} $ \\
+	Разложим $ u $ и $ v $ по базису $ e_1, \dots, e_n $ в $ V $:
+	$$ u = a_1e_1 + \dots + a_ne_n, \qquad v = b_1e_1 + \dots + b_ne_n, \qquad a_s, b_s \in \R $$
+	$$ w = (\underbrace{a_1 + b_1i}_{\in \Co})e_1 + \dots + (\underbrace{a_n + b_ni}_{\in \Co})e_n $$
+	\item Докажем ЛНЗ: \\
+	Пусть $ c_1e_1 + \dots + c_ne_n = 0, \quad c_s \in \Co, \quad c_s = a_ + b_si, \quad a_s, b_s \in \R $
+	$$ (a_1 + b_1i)(e_1 + 0i) + \widedots[4em] + (a_n + b_ni)(e_n + 0i) = 0 $$
+	Разделим вещественную и мнимую части:
+	$$ \bigg( (a_1e_1 - b_10) + \widedots[4em] + (a_ne_n - b_n0) \bigg) + \bigg( (a_10 + b_1e_1) + \widedots[4em] + (a_n0 + b_ne_n) \bigg) i = 0 + 0i $$
+	Значит, каждое большое слагаемое равно нулю:
+	$$
+	\begin{cases}
+		a_1e_1 + \dots + a_ne_n = 0 \\
+		b_1e_1 + \dots + b_ne_n = 0
+	\end{cases} \underimp{e_1, \dots, e_n \text{ ЛНЗ в } V}
+	\begin{cases}
+		a_1 = \dots = a_n = 0 \\
+		b_1 = \dots = b_n = 0
+	\end{cases} $$
+\end{iproof}
+
+\begin{implication}
+	$ \dim_\Co\hat{V} = \dim_\R V $
+\end{implication}
+
+\begin{props}[сопряжённых векторов]
+	\item $ \ol{\ol{w}} = w $
+	\begin{proof}
+		$ w = u + vi, \qquad \ol{w} = u - vi, \qquad \ol{\ol{w}} = u - (-v)i = u + vi = w $
+	\end{proof}
+	\item $ \ol{w_1 + w_2} = \ol{w_1} + \ol{w_2}, \qquad \ol{z \cdot w} = \ol{z} \cdot \ol{w} $
+	\begin{proof}
+		Первое равенство "--- упражнение. Проверим второе: \\
+		Пусть $ z = a + bi, \quad w = u + vi $
+		$$ \ol{(a + bi)(u + vi)} = \ol{(au - bv) + (av + bu)i} = (au - bv) - (av + bu)i $$
+		$$ \ol{(a + bi)} \cdot \ol{(u + vi)} = (a - b_i)(u - v_i) = \bigg( \underbrace{au - (-b)(-v)}_{au - bv} \bigg) + \bigg( \underbrace{a(-v) + (-b)u}_{-(av + bu)} \bigg) $$
+	\end{proof}
+	\item $ w_1, \dots, w_n $ ЛНЗ $ \iff \ol{w_1}, \dots, \ol{w_n} $ ЛНЗ
+	\begin{proof}
+		Достаточно доказать в одну сторону ($ \implies $), дальше сошлёмся на первое свойство \\
+		Пусть $ \ol{w_1}, \dots, \ol{w_n} $ ЛЗ, то есть
+		$$ c_1, \dots, c_n \in \Co : \quad c_1\ol{w_1} + \dots + c_n\ol{w_n} = 0, \qquad c_i \neq \bigodot $$
+		$$ 0 = \ol0 = \ol{c_1\ol{w_1} + \dots + c_n\ol{w_n}} \undereq{\text{2 св-во}} \ol{c_1}\ol{\ol{w_1}} + \dots + \ol{c_n}\ol{\ol{w_n}} \undereq{\text{1 св-во}} \ol{c_1}w_1 + \dots + \ol{c_n}w_n $$
+		$$ c_i \neq \bigodot \implies \ol{c_i} \neq \bigodot $$
+		$ w_1, \dots, w_n $ ЛЗ "--- \contra
+	\end{proof}
+\end{props}
+
+\subsection{Операторы}
+
+\begin{definition}
+	$ \mc{A} $ "--- оператор на $ V $ \\
+	Продолжением $ \mc{A} $ на $ \hat{V} $ называется отображение $ \hat{\mc{A}} : \hat{V} \to \hat{V} $, заданный равенством $ \hat{\mc{A}}(u + vi) = \mc{A}(u) = \mc{A}(v)i $
+\end{definition}
+
+\begin{property}
+	$ \hat{\mc{A}} $ линейно
+\end{property}
+
+\begin{proof}
+	Упражнение
+\end{proof}
+
+\subsection{Многочлены от оператора}
+
+\begin{notation}
+	$ P(t) = c_Kt^k + c_{k - 1}t^{k - 1} + \dots + c_0, \qquad c_s \in \Co $ \\
+	Тогда $ \ol{P}(t) = \ol{c_k}t^k + \ol{c_{k - 1}}t^{k - 1} + \dots + \ol{c_0} $ "--- сопряжённый к $ P $
+\end{notation}
+
+\begin{lemma}[применение операторов к сопряжённым векторам]
+	$ \mc{A} $ "--- оператор на $ V $. Тогда
+	\begin{enumerate}
+		\item $ \hat{\mc{A}}(\ol{w}) = \ol{\hat{\mc{A}}(w)} $
+		\begin{proof}
+			Пусть $ w = u + iv, \qquad \ol{w} = u - iv $
+			$$ \hat{\mc{A}}(w) = \mc{A}u + \mc{A}vi, \qquad \mc{A}(\ol{w}) = \mc{A}u + \mc{A}(-v)i = \mc{A}u - \mc{A}vi $$
+		\end{proof}
+		\item $ P(\hat{\mc{A}})(w_1) = w_2 \implies \ol{P}(\hat{\mc{A}})(\ol{w_1}) = \ol{w_2} $
+		\begin{proof}
+			Из первого свойства $ \hat{\mc{A}}^{(s)}(\ol{w_1}) = \ol{\mc{A}^{(s)}(w_1)} $ \\
+			Пусть $ P(t) = c_kt^k + \dots + c_0 $
+			$$ w_2 = c_kP(\hat{\mc{A}})(w_1) + \dots + c_0w_1 $$
+			$$ \ol{w_2} = \ol{c_k}\ol{P}(\hat{\mc{A}})(\ol{w_1}) + \dots + c_0\ol{w_1} = \ol{P}(\hat{\mc{A}})(\ol{w_1}) $$
+		\end{proof}
+		\item Если $ P(t) $ аннулирует $ w $, то $ \ol{P}(t) $ аннулирует $ \ol{w} $
+		\begin{proof}
+			$ P(\hat{\mc{A}})(w) = 0 \implies \ol{P}(\hat{\mc{A}})(\ol{w}) \undereq{\text{2 св-во}} \ol{P(\hat{\mc{A}})(w)} = \ol0 = 0 $
+		\end{proof}
+		\item Если $ w $ "--- корневой вектор, соответствующий $ \lambda $, то $ \ol{w} $ "--- корневой вектор, соответствующий $ \ol{\lambda} $
+		\begin{proof}
+			$ P(t) = (t - \lambda)^k $ аннулирует $ w $ для некоторого $ k $ \\
+			$ \implies \ol{P}(t) $ аннулирует $ \ol{w} $ (из 3 св-ва)
+			$$ \ol{P}(t) = (t - \ol{\lambda})^k $$
+		\end{proof}
+		\item Если $ w_1, \dots, w_n $ "--- (жорданов) базис корневого подпространства, соответствующего $ \lambda $, то $ \ol{w_1}, \dots, \ol{w_n} $ "--- (жорданов) базис корневого подпространства, соответствующего $ \ol{\lambda} $ \nimp[(если один жорданов, то и второй жорданов)]
+		\begin{iproof}
+			\item ЛНЗ доказана
+			\item Докажем, что это порождающая система: \\
+			Пусть $ \ol{w} $ принадлежит пространству, соответстсвующему $ \ol\lambda \implies w $ принадлежит пространству, соотв. $ \lambda $ \\
+			Разложим по базису:
+			$$ \exist c_i : \quad w = c_1e_1 + \dots + c_ne_n $$
+			$$ \implies \ol{w} = \ol{c_1}\ol{e_1} + \dots + \ol{c_n}\ol{e_n} $$
+			\item Докажем, что сопряжённый к жорданову базису жорданов:
+			$$ \hat{\mc{A} - \lambda \mc{E}} = \hat{\mc{A}} - \lambda \hat{\mc{E}} $$
+			$$ (\hat{\mc{A}} - \lambda \hat{\mc{E}})e_i = e_{i - 1} \implies (\hat{\mc{A}} - \ol{\lambda}\mc{E})\ol{e_i} = \ol{e_{i + 1}} $$
+		\end{iproof}
+	\end{enumerate}
+\end{lemma}
+
+\begin{theorem}
+	Пусть $ V $ - конечномерное векторное пространство над $ \R $, $ \quad \mc{A} $ "--- оператор на $ V $ \\
+	Тогда существует базис $ V $, в котором матрица $ \mc{A} $ является блочно-диагональной, и каждый блок "--- либо жорданова клетка, либо имеет вид
+	$$
+	\begin{pmatrix}
+		a & b & . & . & . & . & . & . & . & . \\
+		-b & a & . & . & . & . & . & . & . & . \\
+		1 & 0 & a & b & . & . & . & . & . & . \\
+		0 & 1 & -b & a & . & . & . & . & . & . \\
+		. & . & 1 & 0 & a & b & . & . & . & . \\
+		. & . & 0 & 1 & -b & a & . & . & . & . \\
+		. & . & . & . & . & . & . & . & . & . \\
+		. & . & . & . & . & . & . & . & . & . \\
+		. & . & . & . & . & . & . & . & a & b \\
+		. & . & . & . & . & . & . & . & -b & a
+	\end{pmatrix} $$
+\end{theorem}
+
+\begin{proof}
+	Пусть минимальный многочлен $ \mc{A} $ равен
+	$$ P(t) = (t - a_1)^{m_1}\widedots[3em](t^2 + p_1t + a_1)^{s_1}\widedots[3em] $$
+	где $ t + p_1t + q_1, \widedots[3em] $ не имеют вещественных корней \\
+	Разложим $ V $ в прямую сумму примарных подпространств \\
+	Достаточно доказать для одного подпростанства \\
+	Для пространства, соответствующего $ (t - a)^m $ есть базис, в котором матрица $ \mc{A} $ является блочно-диагональной, и в котром матрица $ \mc{A} $ жорданова \\
+	Рассмотрим подпространство, соответствующе $ t^2 + pt + q)^s $: \\
+	Пусть $ \lambda, \ol\lambda $ "--- комплексные корни $ t^2 + pt  q $
+	$$ (t^2 + pt + q)^s = (t - \lambda)^s(t - \ol\lambda)^s $$
+	Пусть $ P_1 = (t^2 + pt + q)^s $ \\
+	Знаем, что $ P_1(\mc{A}) = 0 $ на корневом подпространстве $ U $ \\
+	Тогда $ P_1(\hat{\mc{A}}) = 0 $ на $ \hat{U} $
+	$$ \hat{U} = \hat{W_1} + \hat{W_2}, \qquad \hat{W_1}, \hat{W_2} \text{ "--- корневые подпространства для } \lambda, \ol\lambda $$
+	Существует жорданов базис $ w_1, \dots, w_k $ для $ \hat{W_1} $ \\
+	Тогда $ \ol{w_1}, \dots, \ol{w_k} $ "--- жорданов базис для $ \hat{W_2} $ \\
+	$ w_1, \dots, w_k, \ol{w_1}, \dots, \ol{w_k} $ "--- базис $ \hat{U} $ \\
+	Пусть $ w_i = u_i + v_i $ \\
+	Докажем, что $ u_1, v_1, u_2, v_2, \dots, u_k, v_k $ "--- базис $ U $: \\
+	$ u_1 + iv_1, u_2 - iv_1, u_2  + iv_2 u_2 - iv_2, \widedots[4em] $ "--- базис $ \hat{U} $ \\
+	$ u_1 + iv_1, (u_1 - iv_1) + (u_1 + iv_1), u_2 + iv_2, (u_2 - iv_2) + (u_2 + iv_2), \widedots[4em] $ "--- базис $ \hat{U} $ \\
+	$ u_1, u_1 + iv_1, u_2, u_2 + iv_2, \widedots[4em] $ "--- базис $ \hat{U} $ \\
+	$ u_1, u_1 + iv_1 - u_1, u_2, u_2 + iv_2 - v_2, \widedots[4em] $ "--- базис $ \hat{U} $ \\
+	$ u_1, v_1, u_2, v_2, \widedots[4em] $ "--- базис $ \hat{U} $, а значит и базис $ U $ \\
+	Проверим, что в этом базисе получается правильная жорданова матрица: \\
+	Рассмотрим жордановы цепочки
+	$$ w_1, \dots, w_{r_1}, w_{r_1 + 1}, \dots, w_{r_1 + r_2}, \widedots[4em] $$
+	Докажем, что им соотвествуют клетки размера $ 2r_1, 2r_2, \dots $: \\
+	Рассмотрим первую цепочку:
+	$$ \hat{\mc{A}}(u_m + iv_m) =
+	\begin{cases}
+		\lambda(u_m + iv_m) + (u_m + iv_m), \qquad m < r_1 \\
+		\lambda(u_r + iv_r), \qquad m = r
+	\end{cases} $$
+	Пусть $ \lambda = a + bi $ \\
+	При $ m < r $,
+	$$ \mc{A}(u_m) + \mc{A}(v_m)i = (au_m - bv_m) + (bu_m + av_m)i = \underbrace{(au_m - bv_m + u_{m + 1})}_{\mc{A}(u_m)} + \underbrace{(bu_m + av_m + v_{m + 1})}_{\mc{A}(v_m)}i $$
+	\textit{тут надо проверить} \\
+	При $ m = r $,
+	$$ \mc{A}(u_m) = (au_m - bv_m) + (bu_m + av_m)i = (au_m - bv_m) + (bu_m + av_m)i $$
+\end{proof}

@@ -1,18 +1,10 @@
 \documentclass[a4paper]{report}
 \input{../../preamble.tex}
-% \usepackage{cmbright}
-
-\graphicspath{{figures/}}
-
-\usepackage[russian]{babel}
-\usepackage{faktor}
-
 
 \begin{document}
+    \let\hat\widehat  % this line somehow works only if placed here (perhaps "report" class breaks it)
 
     \tableofcontents
 
     \input{./material.tex}
-
 \end{document}
-

@@ -1,0 +1,238 @@
+\chapter{Криволинейный интеграл}
+
+\begin{definition}
+	$ \Gamma : [a, b] \to \R^{n \ge 2}, \qquad \Gamma \in \Cont{[a, b]} $ \\
+	$ \Gamma $ будем называть разомкнутой кривой, если оно биективно
+\end{definition}
+
+Образ $ \Gamma([a, b]) $ будем называть кривой и обозначать $ \Gamma $
+$$ \Par \quad a = t_0 < t_1 < \dots < t_m = b $$
+Множество точек $ \seq{\Gamma(t_k)}k $ будем называть разбиением
+
+\section{Спрямляемые кривые}
+
+$$ l \bigg( \seq{\Gamma[m](t_k)}k \bigg) \define \sum_{k = 0}^{m - 1} \norm{\Gamma(t_{k + 1}) - \Gamma(t_k)}_n $$
+Рассмотрим величину
+$$ \sup\limits_{\set{\Gamma(t_k)}} l \bigg( \seq{\Gamma(t_k)}k \bigg) $$
+Если $ \sup < \infty $, то $ \Gamma $ будем называть спрямляемой, а $ \sup $ "--- длиной $ \Gamma $
+$$ \Gamma_{[a, c]}(t) \define \Gamma(t)\clamp{[a, c]}, \qquad \Gamma_{[c, b]} (t) \define \Gamma(t)\clamp{[c, b]} $$
+
+\begin{statement}
+	Если $ \Gamma $ спрямляема, то $ \Gamma_{[a, c]} $ и $ \Gamma_{[c, b]} $ тоже спрямляемы, и
+	$$ l \bigg( \Gamma([a, b]) \bigg) = l \bigg( \Gamma([a, c]) \bigg) + l \bigg( \Gamma([c, b]) \bigg) $$
+\end{statement}
+
+\begin{proof}
+	Возьмём $ c \in (t_{k_0}, t_{k_0 + 1}) $
+	$$ \norm{\Gamma(t_{k + 1}) - \Gamma(t_k)} \le \norm{\Gamma(t_{k + 1}) - \Gamma(c)} + \norm{\Gamma(c) - \Gamma(t_k)} $$
+	$$ l \bigg( \seq[m]{\Gamma(t_k)}k \bigg) \le l \bigg( \seq{\Gamma(t_k) \cup \Gamma(c)}k \bigg) $$
+	$$ l \bigg( \set{\Gamma(t_k) \cup \Gamma(c)} \bigg) = l \bigg( \seq[k_0]{\Gamma(t_k)}k \cup \Gamma(c) \bigg) + l \bigg( \seqv[m]{\Gamma(t_k)}k{k_0} \cup \Gamma(c) \bigg) $$
+	\widedots[10cm] \\
+	\TODO{Дописать доказательство}
+\end{proof}
+
+\begin{definition}
+	$ \Gamma : [a, b] \to \R^n $ \\
+	Будем говорить, что $ \Gamma $ "--- $ C^1 $-кривая, если $ \Gamma \in \Cont[1]{[a, b]} $
+\end{definition}
+
+$$ \Gamma(t) \fed \column{\gamma_1(t)}{\gamma_n(t)} $$
+$ \Gamma $ "--- $ C^1 $ кривая, если $ \gamma_k \in \Cont[1]{[a, b]} \quad \forall k = 1, \dots, n $
+$$ \mc D\Gamma(t) = \column{\gamma_1'(t)}{\gamma_n'(t)} $$
+$$ \norm{\mc D\Gamma(t)} = \norm{\mc D\Gamma(t)}_n $$
+
+\begin{lemma}
+	$ F : [a, b] \to \R^n, \qquad F \in \Cont{[a, b]} $
+	$$ F(t) = \column{f_1(t)}{f_n(t)} $$
+	Определим символ:
+	$$ \dint[t]ab{F(t)} \define \column{\dint[t]ab{f_1(t)}}{\dint[t]ab{f_n(t)}} $$
+	Тогда справедливо соотношение:
+	$$ \norm{\dint[t]ab{F(t)}} \le \dint[t]ab{\norm{F(t)}} $$
+\end{lemma}
+
+\begin{proof}
+	Будем считать, что $ \dint[t]ab{F(t)} \ne \On $ (иначе "--- очевидно) \\
+	Обозначим $ q \define \norm{\dint[t]ab{F(t)}} > 0 $ \\
+	Введём числа
+	$$ \alpha_k \define \dint[t]ab{f_k(t)}, \qquad a_k \define \frac{\alpha_k}q $$
+	Рассмотрим сумму
+	\begin{equ}3
+		\sum_{k = 1}^n a_k \alpha_k \bdefeq{a_k} \sum \frac{\alpha_k}q\alpha_k = \frac1q \sum \alpha_k^2 \bdefeq{\alpha_k, q} \frac{q^2}q = q
+	\end{equ}
+	С другой стороны,
+	\begin{multline}\lbl4
+		\sum_{k = 1}^n a_k\alpha_k \sum a_k \dint[t]ab{f_k(t)} = \dint[t]ab{\sum a_kf_k(t)} \underset{\text{КБШ}}\le \dint[t]ab{ \bigg( \sum a_k^2 \bigg)^\frac12 \bigg( \sum f_k^2(t) \bigg)^\frac12 } = \\
+		= \bigg( \sum a_k^2 \bigg)^\frac12 \cdot \dint[t]ab{ \bigg( \sum f_k^2(t) \bigg)^\frac12 } = \bigg( \sum a_k^2 \bigg)^\frac12 \dint[t]ab{\norm{F(t)}}
+	\end{multline}
+	\begin{equ}5
+		\sum a_k^2 \bdefeq{a_k} \sum \frac{\alpha_k^2}{q^2} = \frac1{q^2} \sum \alpha_k^2 = \frac{q^2}{q^2} = 1
+	\end{equ}
+	$$ \eref3, \eref4, \eref5 \implies \norm{\dint[t]ab{F(t)}} = q \le 1 \cdot \dint[t]ab{F(t)} $$
+\end{proof}
+
+\begin{theorem}
+	$ \Gamma \in \Cont[1]{[a, b]} $
+	$$ \implies l(\Gamma) = \dint[t]ab{\norm{\mc d\Gamma(t)}} $$
+\end{theorem}
+
+\begin{iproof}
+	\item $ l \le \int $ \\
+	Пусть имеется любое разбиение любой $ \Gamma $:
+	$$ \seq{\Gamma(t_k)}k $$
+	Тогда
+	\begin{multline*}
+		\Gamma(t_{k + 1}) - \Gamma(t_k) = \column{\gamma_1(t_{k + 1}) - \gamma_1(t_k)}{\gamma_n(t_[k + 1]) - \gamma_n(t_k)} \undereq{\text{ф. Ньютона"--~Лейбница}} \\
+		= \column{\dint[t]{t_k}{t_{k + 1}}{\gamma_1'(t)}}{\dint[t]{t_k}{t_{k + 1}}{\gamma_n'(t)}} \bdefeq{\int F} \dint[t]{t_k}{t_{k + 1}}{\mc D\Gamma(t)}
+	\end{multline*}
+	\begin{equ}6
+		\underimp{\text{лемма}} \norm{\Gamma(t_{k + 1}) - \Gamma(t_k)} = \norm{\dint[t]{t_k}{t_{k + 1}}{\mc D\Gamma(t)}} \le \dint[t]{t_k}{t_{k + 1}}{\norm{\mc D\Gamma(t)}}
+	\end{equ}
+	$$ \implies \sum_{k = 0}^{m - 1} \norm{\Gamma(t_{k + 1}) - \Gamma(t_k)} \le \sum \dint[t]{t_k}{t_{k + 1}}{\norm{\mc D(t)}} = \dint[t]ab{\norm{\mc D\Gamma(t)}} $$
+	Перепишем в обозначениях длины:
+	$$ l \bigg( \seq{\Gamma(t_k)}k \bigg) \le \dint[t]ab{\norm{\mc D\Gamma(t)}} \implies l(\Gamma) \le \dint[t]ab{\norm{\mc D\Gamma(t)}} $$
+	\item $ l \ge \int $ \\
+	\As $ \Gamma \in C^1 $,
+	$$ \gamma_k' \in \Cont{[a, b]} $$
+	То есть,
+	\begin{equ}9
+		\forall \veps > 0 \quad \exist \delta > 0 : \quad \forall t'', t' \in [a, b] \quad \nimp[\bigg(] |t'' - t'| < \delta \implies |\gamma_1'(t'') - \gamma_k'(t')| < \frac\veps{\sqrt n} \nimp[\bigg)], \qquad k = 1, \dots, n
+	\end{equ}
+	\begin{equ}{10}
+		\implies \sqrt{\bigg( \gamma_1'(t'') - \gamma_1'(t') \bigg)^2 + \dots + \bigg( \gamma_n'(t'') - \gamma_n'(t') \bigg)^2} < \sqrt{\frac{\veps^2}n} \cdot n = \veps
+	\end{equ}
+	$$ \iff \norm{\mc D\Gamma(t'') - \mc D\Gamma(t')} < \veps $$
+	\begin{equ}{10'}
+		\trile \bigg| \norm{\mc D \Gamma(t'')} - \norm{\mc D\Gamma(t')} \bigg| \le \norm{\mc D \Gamma(t'') - \mc D \Gamma(t')} < \veps
+	\end{equ}
+	Возьмём разбиение $ \seq[m]{\Gamma(t_k)}k $ такое, что $ t_{k - 1} - t_k < \delta \quad k = 0, \dots, m - 1 $ \\
+	Рассмотрим выражение
+	\begin{multline}\lbl{11}
+		\Gamma(t_[k + 1]) - \Gamma(t_k) - (t_{k + 1} - t_k)\mc D\Gamma(t_k) = \column{\dint[t]{t_k}{t_{k + 1}}{\gamma_1'(t)}}{\dint[t]{t_k}{t_{k + 1}}{\gamma_n'(t)}} - \column{(t_{k + 1} - t_k)\gamma_1'(t_k)}{(t_{k + 1} - t_k)\gamma_n'(t)} = \\
+		= \column{\dint[t]{t_k}{t_{k + 1}}{ \bigg( \gamma_1'(t) - \gamma_1'(t_k) \bigg)}}{\dint[t]{t_k}{t_{k + 1}}{ \bigg( \gamma_n'(t) - \gamma_n'(t_k) \bigg)}} \bdefeq{\int F} \dint[t]{t_k}{t_{k + 1}}{\mc D\Gamma(t) - \mc D\Gamma(t_k)}
+	\end{multline}
+	Применим лемму:
+	$$ \norm{\Gamma(t_{k + 1}) - \Gamma(t_k) - (t_{k + 1} - t_k)\mc D\Gamma(t_k)} \le \dint[t]{t_k}{t_{k + 1}}{\norm{\mc D\Gamma(t) + \mc D\Gamma(t_k)}} \underset{\eref{10}}\le \dint[t]{t_k}{t_{k + 1}}\veps = \veps(t_{k + 1} + t_k) $$
+	\begin{equ}{13}
+		\implies \norm{\Gamma(t_{k + 1}) - \Gamma(t_k)} \trige \norm{(t_{k + 1} - t_k) \mc D \Gamma(t_k)} - \veps (t_{k + 1} - t_k)
+	\end{equ}
+	\begin{equ}{14}
+		(t_{k + 1} - t_k) \norm{\mc D\Gamma(t_k)} = \sqrt{(t_{k + 1} - t_k)^2 \bigg( \gamma_1'(t_k) \bigg)^2 + \dots + (t_{k + 1} - t_k)^2 \bigg( \gamma_n'(t_k) \bigg)^2}
+	\end{equ}
+	Если взять $ t \in [t_k, t_{k + 1}] $, то
+	$$ \norm{\mc D \Gamma(t_k)} \ge \norm{\mc D\Gamma(t)} - \norm{\mc D\Gamma(t_k) - \mc D \Gamma(t)} > \norm{\mc D \Gamma(t)} - \veps $$
+	Проинтегрируем:
+	$$ \dint[t]{t_k}{t_{k + 1}}{\norm{\mc D\Gamma(t_k)}} > \dint[t]{t_k}{t_{k + 1}}{\norm{ \mc D\Gamma(t)}} - \veps \dint[t]{t_k}{t_{k + 1}}{} $$
+	\begin{equ}{15}
+		(t_{k + 1} - t_k) \norm{\mc D\Gamma(t_k)} \ge \dint[t]{t_k}{t_{k + 1}}{\norm{\mc D\Gamma(t)}} - \veps(t_{k + 1} - t_k)
+	\end{equ}
+	\begin{equ}{16}
+		\eref{13}, \eref{14}, \eref{15} \implies \norm{\Gamma(t_{k + 1}) - \Gamma(t_k)} > \dint[t]{t_k}{t_{k + 1}}{\norm{\mc D\Gamma(t)}} - \veps(t_{k + 1} - t_k)
+	\end{equ}
+	\begin{equ}{17}
+		\implies \sum_{k = 0}^{m - 1} \norm{\Gamma(t_{k + 1}) - \Gamma(t_k)} > \sum_{k = 0}^{m - 1} \dint[t]{t_k}{t_{k + 1}}{\norm{\mc D\Gamma(t)}} - \veps \sum_{k = 0}^{m - 1}(t_{k + 1} - t_k) = \dint[t]ab{\norm{\mc D\Gamma(t)}} - \veps(b - a)
+	\end{equ}
+	$$ \iff l \bigg( \seqz[m]{\Gamma(t_k)}k) > \dint[t]ab{\norm{\mc D\Gamma(t)}} - \veps(b - a) $$
+	$$ \implies l(\Gamma) > \dint[t]ab{\norm{\mc D \Gamma(t)}} - \veps(b - a) $$
+	$$ \implies l(\Gamma) \ge \dint[t]ab{\norm{\mc D \Gamma(t)}} $$
+\end{iproof}
+
+\section{Криволинейный интеграл первого рода}
+
+\begin{definition}
+	$ \Gamma : [a, b] \to \R^n, \qquad \Gamma \in C^1, \qquad f \in \Cont{\underset{\text{\nimp[(образ)]}}\Gamma} $ \\
+	Криволинейным интегралом первого рода по кривой $ \Gamma $ называется
+	$$ \cint[l(M)]{\Gamma f(M)} \define \dint[t]ab{f \big( \Gamma(t) \big)\norm{\mc D\Gamma(t)}} $$
+\end{definition}
+
+\begin{definition}
+	$ \Gamma_\circ : [a, b] \to \R, \qquad c_0 = a < c_1 < \dots < c_m = b $
+	$$ \forall [c_k, c_{k + 1}] \quad \Gamma_\circ([c_k, c_{k + 1}]) \text{ "--- } C^1 \text{-кривая} $$
+	$ f \in \Cont{\Gamma_0} $ \\
+	Криволинейный интеграл первого рода для ``кусочной'' кривой определяется как
+	$$ \cint[l(M)]{\Gamma_0}{f(M)} = \sum_{k = 0}^{m - 1} \cint[l(M)]{\Gamma_0([c_k, c_{k + 1}])}{f(M)} $$
+\end{definition}
+
+\begin{props}
+	\item $ \cint[l(M)]{\Gamma}{A} = Al(\Gamma) $
+	\begin{proof}
+		$$ \Gamma = \bigcup_{k = 1}^m \Gamma_k, \qquad \Gamma_k = \Gamma([c_{k - 1}, c_k]) $$
+		\begin{multline*}
+			\cint[l(M)]\Gamma A = \sum_{k = 1}^m \dint[l(M)]{\Gamma_k}A = \sum_{k = 1}^m \dint[t]{c_{k - 1}}{c_k}{A\norm{\mc D\Gamma_k(t)}} = \sum_{k = 1}^m A \dint[t]{c_{k - 1}}{c_k}{\norm{\mc D\Gamma_k(t)}} = \\
+			= \sum_{k = 1}^mAl(\Gamma_k) = A\sum l(\Gamma_k) = Al(\Gamma)
+		\end{multline*}
+	\end{proof}
+	\item $ \cint[l(M)]\Gamma{cf(M)} = c\cint[l(M)]\Gamma{f(M)} $
+	\begin{proof}
+		$$ \cint[l(M)]\Gamma{cf(M)} = \dint[t]ab{cf \big( \Gamma(t) \big)\norm{\mc D\Gamma(t)}} = c\dint[t]ab{f \big( \Gamma(t) \big) \norm{\mc D\Gamma(t)}} = c \cint[l(M)]\Gamma{f(M)} $$
+	\end{proof}
+	\item $ \cint\Gamma{\bigg( f(M) + g(M) \bigg)} = \cint\Gamma{f(M)} + \cint\Gamma(g(M)) $
+	\item $ f(M) \le g(M) \quad \forall M \in \Gamma $
+	$$ \implies \cint\Gamma{f(M)} \le \cint\Gamma{g(M)} $$
+	\begin{proof}
+		$$ f(M) \le g(M) \implies f \big( \Gamma(t) \big) \norm{\mc D\Gamma(t)} \le g \big( \Gamma(t) \big) \norm{\mc D\Gamma(t)} $$
+	\end{proof}
+	\item $ \bigg| \cint\Gamma{f(M)}\bigg| \le \cint\Gamma{|f(M)|} $
+	\begin{iproof}
+		\item $ C^1 $-кривая
+		\begin{multline*}
+			\bigg| \cint\Gamma{f(M)}\bigg| = \bigg| \dint[t]ab{ f \big( \Gamma(t) \big)\norm{\mc D\Gamma(t)}} \bigg| \le \\
+			\le \dint[t]ab{\big| d \big( \Gamma(t) \big) \big| \cdot \norm{\mc D\Gamma(t)}} = \cint\Gamma{|f(M)|}
+		\end{multline*}
+		\item ``кусочная'' кривая
+		\begin{multline*}
+			\bigg| \cint\Gamma{f(M)} \bigg| = \bigg| \sum_{k = 1}^m \cint{\Gamma_k}{f(M)} \bigg| \le \\
+			\le \sum_{k = 1}^m \bigg| \cint{\Gamma_k}{f(M)}\bigg| \le \sum_{k = 1}^m \cint{\Gamma_k}{|f(M)|} = \cint\Gamma{|f(M)|}
+		\end{multline*}
+	\end{iproof}
+\end{props}
+
+\subsection{Сумма Римана для криволинейного интеграла первого рода}
+
+\begin{definition}
+	$ \Gamma : [a, b] \to \R^n $ "--- $ C^1 $-кривая, $ \qquad f \in \Cont\Gamma, \qquad \Teq = \seq[m]{t_k}k, \quad a = t_0 < t_1 < \dots < t_m = b $ "--- разбиение \\
+	$ \Par[m]{\tau_k}k, \quad \tau_k \in [t_{k - 1}, t_k] $ "--- оснащение
+	$$ \Sr_\Gamma (f, \Teq, \Par) \define \sum_{k = 1}^m f \big( \Gamma(\tau_k) \big) l \big( \Gamma([t_{k - 1}, t_k]) \big) $$
+\end{definition}
+
+\begin{theorem}
+	$$ \forall \veps > 0 \quad \exist \delta > 0 : \quad \forall \Teq : t_k - t_{k - 1} < \delta \quad \forall \Par \quad \bigg| \Sr_\Gamma(f, \Teq, \Par) - \cint\Gamma{f(M)} \bigg| < \veps $$
+\end{theorem}
+
+\begin{proof}
+	$ \Gamma([a, b]) $ "--- компакт в $ \R^n $ \\
+	$ f \in \Cont\Gamma \underimp{\text{т. Кантора}} f $ равномерно непрерывна на $ \Gamma $, \ie
+	\begin{equ}{25}
+		\forall \veps > 0 \quad \exist \lambda > 0 : \quad \forall M', M'' \in \Gamma : \quad \norm{M'' - M'} < \lambda \implies |f(M'') - f(M')| < \veps
+	\end{equ}
+	$$ \Gamma \in \Cont[1]{[a, b]} $$
+	$$ \Gamma(t) = \column{\gamma_1(t)}{\gamma_n(t)}, \qquad \gamma_k'(t) \in \Cont{[a, b]} $$
+	$$ \underimp{\text{\rom1 т. Вейерештрасаа}} \exist c_1 : |\gamma_k'(t)| \le c_1 \quad \forall t \in [a, b] \quad \forall k $$
+	Рассмотрим любые два значения $ t', t'' \in [a, b] $. \\
+	Применим теорему Лагранжа:
+	\begin{equ}{27}
+		|\gamma_k(t'') - \gamma_k(t')| = |\gamma_k'(\vawe t)(t'' - t')| \le c_1|t'' - t'|
+	\end{equ}
+	\begin{equ}{28}
+		\implies \sqrt{\bigg( \gamma_1(t'') - \gamma_1(t') \bigg)^2 + \dots + \bigg( \gamma_n(t'') - \gamma_n(t') \bigg)^2} \le \sqrt{nc^2|t'' - t'|^2} = \sqrt nc_1|t'' - t'|
+	\end{equ}
+	\begin{equ}{29}
+		\iff \norm{\Gamma(t'') - \Gamma(t')} < \sqrt n c_1 |t'' - t'|
+	\end{equ}
+	Выберем $ \delta $:
+	$$ \delta \define \frac\lambda{\sqrt n c_1} $$
+	\begin{equ}{211}
+		\eref{25}, \eref{28}, \eref{29}, \operatorname{def}~\delta \implies \text{ при } |t'' - t'| < \delta \quad \big| f \big( \Gamma(t'') \big) - f \big( \Gamma(t') \big) \big| < \veps
+	\end{equ}
+	Обозначим $ M_k \define \Gamma(\tau_k) $
+	\begin{multline}\lbl{212}
+		\Sr_\Gamma(f, \Teq, \Par) - \cint\Gamma{f(M)} = \sum_{k = 1}^m f \big( \Gamma(c_k) \big) l \big( \Gamma([t_{k - 1}, t_k]) \big) - \sum \cint{\Gamma([t_{k - 1}, t_k])}{f(M)} = \\
+		= \sum \cint{\Gamma([t_{k - 1}, t_k])}{f(M_k)} - \sum \cint{\Gamma([t_{k - 1}, t_k])}{f(M)} = \sum \cint{\Gamma([t_{k - 1}, t_k])}{ \bigg( f(M_k) - f(M) \bigg)}
+	\end{multline}
+	\begin{equ}{213}
+		\eref{211} \implies |f(M_k) - f(M)| < \veps
+	\end{equ}
+	\begin{multline*}
+		\eref{212}, \eref{213} \implies |S_\Gamma(f, \Teq, \Par) - \cint\Gamma{f(M)}| \trile \sum_{k = 1}^m \bigg| \cint{\Gamma([t_{k - 1}, t_k])}{\bigg( f(M_k) - f(M) \bigg)} \le \\
+		\le \sum \cint{\Gamma([t_{k - 1}, t_k])}{|f(M_k) - f(M)|} \le \sum \cint{\Gamma(t_{k - 1}, t_k)}\veps = \veps l \big( \Gamma([t_{k - 1}, t_k]) \big) = \veps l(\Gamma)
+	\end{multline*}
+\end{proof}

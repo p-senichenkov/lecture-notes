@@ -1,0 +1,155 @@
+\section{Блистательная теорема Гаусса (Theorema Egregium)}
+
+Theorema Egregium "--- (лат.) ``Замечательная теорема''
+
+\begin{lemma}[о смешанных произведениях]
+	$$ (\vec u, \vec v, \vec w) \cdot (\vec l, \vec m, \vec n) =
+	\begin{vmatrix}
+		u \cdot l & u \cdot m & u \cdot n \\
+		v \cdot l & v \cdot m & v \cdot n \\
+		w \cdot l & w \cdot m & w \cdot n
+	\end{vmatrix} $$
+\end{lemma}
+
+\begin{proof}
+	Можно доказать в координатах. Мы так делать не будем.
+	$$ \text{Л. ч. } =
+	\begin{vmatrix}
+		u_1 & u_2 & u_3 \\
+		v_1 & v_2 & v_3 \\
+		2_1 & w_2 & w_3
+	\end{vmatrix} \cdot
+	\begin{vmatrix}
+		l_1 & m_1 & n_1 \\
+		l_2 & m_2 & n_2 \\
+		l_3 & m_3 & n_3
+	\end{vmatrix} = \det(\text{произведение матриц}) = \text{ П. ч.} $$
+	Второй определитель транстпонирован, \as он при этом не меняется.
+\end{proof}
+
+\begin{theorem}[Egregium]
+	Гауссова кривизна зависит только от $ E, F, G $ и их производных.
+\end{theorem}
+
+\begin{proof}
+	Достаточно доказать, что $ LN - M^2 $ зависит только от \rom1, \as
+	$$ k = \frac{LN - M^2}{EG - F^2} $$
+	$$ \vec n = \frac{\vec{r_u} \times \vec{r_v}}{|\vec{r_u} \times \vec{r_v}|} $$
+	Уже было вычислено, что $ |r_u \times r_v| = EG - F^2 $
+	$$ L = \vec{r_{uu}} \cdot \vec n = \frac{(r_{uu}; r_u; r_v)}{EG - F^2} $$
+	Аналогично,
+	$$ M = \frac{(r_{uv}; r_u; r_v)}{EG - F^2}, \qquad N = \frac{(r_{vv}; r_u; r_v)}{EG - F^2} $$
+	\begin{multline}\lbl1
+		LN - M^2 = \frac1{(EG - F^2)^2} \cdot \bigg( (r_{uu}; r_u; r_v) \cdot (r_{vv}; r_u; r_v) - (r_{uv}; r_u; r_v)^2 \bigg) \undereq{\text{лемма}} \\
+		=
+		\begin{vmatrix}
+			r_{uu} \cdot r_{vv} & r_{uu}r_u & r_{uu}r_v \\
+			r_ur_{vv} & r_ur_{vv} & r_ur_v \\
+			r_vr_{vv} & r_vr_u & r_vr_v
+		\end{vmatrix} -
+		\begin{vmatrix}
+			r_{uv}^2 & r_{uv}r_u & r_{uv}r_v \\
+			r_{uv}r_u & r_ur_u & r_ur_v \\
+			r_{uv}r_v & r_vr_u & r_vr_v
+		\end{vmatrix} =
+		\begin{vmatrix}
+			r_{uu}r_{vv} & r_{uu}r_u & r_{uu}r_v \\
+			. & E & F \\
+			. & F & G
+		\end{vmatrix} -
+		\begin{vmatrix}
+			. & . & . \\
+			. & E & F \\
+			. & F & G
+		\end{vmatrix}
+	\end{multline}
+	\TODO{Определители надо проверить по лемме}
+	$$ E_u = (r_u \cdot r_u)_u = 2r_ur_{uu} $$
+	$$ G_v = (r_v \cdot r_v)_v = 2r_vr_{vv} $$
+	$$ E_v = 2r_ur_{uv} $$
+	$$ G_u = 2r_vr_{vu} $$
+	$$ F_u = (r_u \cdot r_v)_u = r_{uu}r_v + r_u + r_{uv} $$
+	$$ r_vr_{uu} = F_u - r_ur_{uv} = F_u - \half E_v $$
+	$$ F_v = r_{uv}r_v + r_ur_{vv} $$
+	$$ r_ur_{vv} = F_v - \half G_u $$
+	$$ \eref1 =
+	\begin{vmatrix}
+		r_{uu}r_{vv} & \half E_u & F_u - \half E_v \\
+		F_v - \half G_u & E & F \\
+		\half G_v & F & G
+	\end{vmatrix} -
+	\begin{vmatrix}
+		r_{uv}^2 & \half E_v & \half G_u \\
+		\half E_v & E & F \\
+		\half G_u & F & G
+	\end{vmatrix} = $$
+	$ r_{uu}r_{vv} $ и $ r_{uv}^2 $ \bt{не} вычисляются по-отдельности. Распишем определители по первой строке:
+	$$ = r_{uu} \cdot r_{uv} \cdot
+	\begin{vmatrix}
+		E & F \\
+		F & G
+	\end{vmatrix} - \dots - r_{uv}^2 \cdot
+	\begin{vmatrix}
+		E & F \\
+		F & G
+	\end{vmatrix} + \dots = \underline{(r_{uu}r_{vv} - r_{uv}^2)}
+	\begin{vmatrix}
+		E & F \\
+		F & G
+	\end{vmatrix} - \dots $$
+	Пропущенные члены зависят только от \rom2. Осталось доказать, что скобка зависит только от \rom2:
+	$$ F_{uv} = r_{uuv}r_v + \underline{r_{uu}r_{vv}} + \underline{r_{uv}r_{uv}} + r_ur_{uvv} $$
+	$$ G_{uu} = 2r_{uv}r_{uv} + 2r_vr_{uuv} $$
+	$$ E_{vv} = 2r_{uv}r_{uv} + 2r_ur_{uvv} $$
+	$$ F_{uv} - \half G_{uu} - \half E_{vv} = r_{uu}r_{vv} - r_{uv}r_{uv} $$
+\end{proof}
+
+\begin{remark}
+	Можно вывести формулу гауссовой кривизны, зависящую только от \rom1, но использовать её будет неудобно.
+\end{remark}
+
+\begin{theorem}[Петерсона]
+	Пусть $ E, F, G, L, M, N $ "--- функции от $ u, v $, удовлетворяющие следующим соотношениям:
+	\begin{enumerate}
+		\item $ E > 0, \quad G > 0 $;
+		\item $ EG - F^2 > 0 $;
+		\item теорема Гаусса;
+		\item соотношение Петерсона"--~Майнарди"--~Кодаци (будут получены потом).
+	\end{enumerate}
+	Тогда существует поверхность с такими квадратичными формами.
+\end{theorem}
+
+\begin{noproof}
+\end{noproof}
+
+\section{Деривационные формулы}
+
+Разложим вторые производные по базису из первых и $ n $:
+
+$$ \boxed{r_{uu} = \Gamma_{11}^1 \vec{r_u} + \Gamma_{11}^2 \vec{r_v} + L \vec n} $$
+$$ \boxed{r_{uv} = \Gamma_{12}^1 r_u + \Gamma_{12}^2 r_v + Mn} $$
+$$ \boxed{r_{vv} = \Gamma_{22}^1 r_u + \Gamma_{22}^2 r_v + Nn} $$
+Коэффициенты при $ \vec n $ находятся скалярным умножением на $ \vec n $. \\
+$ \Gamma_{ij}^k $ "--- функции $ u $ и $ v $. Они называются символами Кристофеля. \\
+Производная единичного вектора перпендикулярна самому вектору, так что $ n_u, n_v $ не зависят от $ \vec n $:
+$$ \boxed{n_u = ar_u + br_v} $$
+$$ \boxed{n_v = cr_u + dr_v} $$
+$$
+\begin{cases}
+	n_u \cdot r_u = aE + bF
+	n_u \cdot r_v = aF + bG
+\end{cases} $$
+Решим методом Крамера:
+$$ a = \frac{
+	\begin{vmatrix}
+		n_ur_u & F \\
+		n_ur_v & G
+	\end{vmatrix}}{
+	\begin{vmatrix}
+		E & F \\
+		F & G
+	\end{vmatrix}}, \qquad b = \frac{
+	\begin{vmatrix}
+		E & n_ur_u \\
+		F & n_ur_v
+	\end{vmatrix}}{EG - F^2}, \qquad c = \dots, \qquad d = \dots $$

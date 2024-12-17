@@ -1,0 +1,905 @@
+\part{Дифференциальная геометрия поверхностей}
+
+\section{Касательная плоскость к поверхности}
+
+\begin{undefthm}{Задание кривой на поверхности.}
+	Любая точка кривой лежит на поверхности \\
+	Тогда мы можем применить к ней $ r^{-1} $ и ``спустить'' её на $ D $ \\
+	Получим координаты $ u(t), v(t) $ \\
+	Они называются внутренними координатами кривой на поверхности
+\end{undefthm}
+
+\begin{definition}
+	Пусть $ u(t), v(t) $ -- внутренние координаты кривой на поверхности \\
+	$ \vv f \big( u(t), v(t) \big) $ -- кривая на поверхности \\
+	$ \dfrac{\di \vv f}{\di t}\clamp{t = t_0} $ -- касательный вектор
+\end{definition}
+
+\begin{definition}
+	Касательная плоскость к поверхности -- множество касательных векторов в данной точке
+\end{definition}
+
+\begin{statement}
+	Это плоскость с базисом $ \pder fu $ и $ \pder fv $
+\end{statement}
+
+\begin{proof}
+	Распишем и всё получится: \\
+	Касательный вектор "--- $ \dfrac{\di \vv f}{\di t}\clamp{t = t_0} $
+	$$ \dfrac{\di \vv f}{\di t}\clamp{t = t_0} = \pder fu \cdot \frac{\di u}{\di t} + \pder fv \cdot \frac{\di v}{\di t} $$
+	Это ЛК $ \pder fu $ и $ \pder fv $ \\
+	Верно ли, что $ \alpha f_u + \beta f_v $ является касательным вектором? \\
+	Верно, для кривой
+	$$
+	\begin{cases}
+		u = \alpha(t + t_0) \\
+		v = \beta(t + t_1)
+	\end{cases} \qquad
+	\begin{cases}
+		u_t = \alpha \\
+		v_t = \beta
+	\end{cases} $$
+\end{proof}
+
+\section{Длина кривой на поверхности. Первая квадратичная форма}
+
+Пусть кривая задана регулярной параметризацией:
+$$ r(u, v) = \big( x(u, v), ~ y(u, v), ~ z(u, v) \big), \qquad u = u(t), \quad v = v(t) $$
+$$ r_t' = (x_u'u' + x_v'v', ~ y_u'u' + y_v'v', ~ z_u'u' + z_v'v') = r_u'u' + r_v'v' $$
+$$ |r_t'| = \sqrt{(r_u'u' + r_v'v') \cdot (f_u'u' + f_v'v')} = \sqrt{(r_u')^2(u')^2 + 2r_u'r_v'u'v' + (r_u')^2(v')^2} $$
+
+\begin{definition}
+	Обозначим:
+	$$
+	\begin{cases}
+		E \define |r_u|^2 = (r_u, r_u) \\
+		F \define (r_u, r_v) \\
+		G \define |r_v|^2 = (r_v, r_v)
+	\end{cases} $$
+	Эти коэффициенты зависят от поверхности, а не от кривой.
+\end{definition}
+
+Найдём длину кривой:
+
+\begin{multline*}
+	l = \dint[t]ab{\bigg| \frac{\di r}{\di t} \bigg|} = \dint[t]ab{|r_uu_t + r_vv_t|} = \dint[t]ab{\sqrt{(r_uu_t + r_vv_t; r_uu_t + r_vv_t)}} = \\
+	= \dint[t]ab{\sqrt{(r_u, r_u)u_t^2 + 2(r_u, r_v)u_tv_t + (r_v, r_v)v_t^2}} = \dint[t]ab{\sqrt{Eu_t^2 + 2Fu_tv_t + Gv_t^2}}
+\end{multline*}
+
+\begin{definition}
+	\rom1 форма:
+	$$ \rom1(u', v') = E(u')^2 + 2Fu'v' + G(v')^2 $$
+\end{definition}
+
+\section{Изометрия поверхностей. Внутренняя геометрия}
+
+\begin{definition}
+	Даны поверхности:
+	$$ r_1 : D_1 \to \R^3, \qquad r_2 : D_2 \to \R^3 $$
+	$ \Phi : D_1 \to D_2 $ называется изометрией, если длина кривой на $ r_1(D_1) $ равна длине кривой на $ r_2 \big( \Phi(D_1) \big) $.
+\end{definition}
+
+\begin{theorem}
+	Поверхности изометричны \bt{тогда и только тогда}, когда в некоторой параметризации у них совпадают коэффициенты $ E, F, G $.
+\end{theorem}
+
+\begin{iproof}
+	\item $ \impliedby $:
+
+	Формула длины кривой:
+	$$ l = \dint[t]{a}b{\sqrt{Eu'^2 + 2Fu'v' + Gv'^2}} $$
+	Они должны совпасть
+	$$ \ol{\Phi} \define r_2 \circ r_1^{-1} $$
+	\item $ \implies $: \\
+	Возьмём кривую
+	$$
+	\begin{cases}
+		u(t) = t \\
+		v(t) = t_0
+	\end{cases} $$
+	Можно НУО считать, что поверхности параметризованы одинаково (иначе перепараметризуем).
+	$$ l_1 = \dint[t]{a}b{\sqrt{E_1}} = \sqrt{E_1}(b - a) $$
+	$$ l_2 = \dint[t]{a}b{\sqrt{E_2}} = \sqrt{E_2}(b - a) $$
+	По предположению, они равны \\
+	Тем самым $ E_1 = E_2 $ \\
+	Аналогично, взяв
+	$$
+	\begin{cases}
+		u(t) = t_0 \\
+		v(t) = t
+	\end{cases} $$
+	получаем $ G_1 = G_2 $ \\
+	Взяв
+	$$
+	\begin{cases}
+		u(t) = t + t_0 \\
+		v(t) = t + t_1
+	\end{cases} $$
+	получаем
+	$$ \dint[t]{a}b{\sqrt{E_1 + 2F_1 + G_1}} = \dint[t]{a}b{\sqrt{E_2 + 2F_2 + G_2}} \quad \implies F_1 = F_2 $$
+\end{iproof}
+
+\begin{remark}
+	То, что поверхности изометричны, \bt{не} означает, что первые квадратичные формы совпадут. Это лишь значит, что \bt{сущетсвует} параметризация, в которой они совпали
+\end{remark}
+
+\begin{definition}
+	Говорят, что характеритика поверхности относится к внутренней геометрии поверхности, если он не меняется при изометрии.
+\end{definition}
+
+\section{Контрпример Шварца}
+
+\begin{eg}[сапог Шварца]
+	Есть цилиндр \\
+	Его можно развернуть в прямоугольник и посчитать площадь:
+	$$ S = 2\pi R H $$
+	Разобъём на треугольники:
+	\begin{enumerate}
+		\item Порежем на слои
+		\item В каждый слой впишем правильный $ n $-уголькик
+		\item Построим антипризму \\
+		Антипризма:
+		\begin{enumerate}
+			\item Берём в верхнем и нижнем основании правильный $ n $-угольник
+			\item Поворачиваем одно из оснований так, чтобы напротив вершины оказалась середина стороны
+			\item Соединим вершины
+		\end{enumerate}
+		\item Счиатем, что высоту мы разбили на $ k $ частей, каждая часть представляет собой $ n $-угольную антипризму
+		\begin{quest}
+			Сколько в одном слое треугольников?
+		\end{quest}
+		\begin{answer}
+			$ 2n $
+		\end{answer}
+		Всего $ 2kn $ треугольников
+		\item Посчитаем площадь каждого треугольника:
+		$$ S_\triangle = \half lh $$
+		Найдём $ l $: \\
+		Есть круг радиуса $ R $, мы в него вписали правильный $ n $-угольник, хотим посчитать его сторону.  Угол в центре будет равен $ \dfrac{2\pi}n $. Применим теорему косинусов:
+		$$ l^2 = 2R^2 - 2R^2 \cos \frac{2\pi}n $$
+		$$ l = R \sqrt{2 \bigg( 1 - \cos \frac{2\pi}n \bigg) } = 2R\sin \frac\pi{n} $$
+		Найдём $ h $:
+		\begin{remark}
+			Треугольник немножко наклоняется. Направление его высоты не совпадает с направлением образующей цилиндра. $ h \ne \dfrac{H}k $
+		\end{remark}
+		$$ a = R - R \cos \frac\pi{n} $$
+		$$ h = \sqrt{\frac{H^2}{k^2} + R^2 \bigg(1 - \cos \frac\pi{n} \bigg)^2} = \sqrt{\frac{H^2}{k^2} + R^2 \cdot 4 \sin^4 \frac\pi{2n}} $$
+		$$ S \stackrel?= \limi{\pi n} 2kn \cdot \half \cdot 2R\underbrace{\sin \frac\pi{n}}_{\sim \faktor\pi{n}} \cdot \sqrt{\frac{H^2}{k^2} + 4R^2 \sin^4 \frac\pi{2n}} = 2\pi RH \lim \sqrt{1 + \frac{k^2}{H^2} \cdot 4R^2 \sin^4 \frac\pi{2n}} $$
+		Это равно $ 2\pi RH $ тогда и только тогда, когда
+		$$ \frac{k^2}{H^2} \cdot 4R^2 \sin^4 \frac\pi{2n} \stackrel?\to 0 $$
+		$$ \frac{\pi^4R^2}{4H^2} \cdot \frac{k^2}{n^4} \stackrel?\to 0 $$
+		То есть, $ k \stackrel?= o(n^2) $ \\
+		Значит, разбивая на много низких, крупно нарезанных антипризм, получаем неправильную площадь
+	\end{enumerate}
+\end{eg}
+
+\section{Площадь поверхности. Модуль вектора \texorpdfstring{$ r_u \times r_v $}{ru x rv}}
+
+\begin{definition}
+	Разбиваем поверхность на многоугольники и проецируем их на свои касательные плоскости. Складываем площади и переходим к пределу.
+\end{definition}
+
+\begin{theorem}
+	$$ S = \iint\limits_D \sqrt{r_u \times r_v} \di u \di v $$
+\end{theorem}
+
+\begin{noproof}
+	На самом деле, это определение двойного интеграла.
+\end{noproof}
+
+\begin{theorem}
+	$$ S = \iint\limits_{D} \sqrt{EG - F^2}\di u \di v $$
+\end{theorem}
+
+\begin{proof}
+	Следует из леммы:
+\end{proof}
+
+\begin{lemma}\label{lemma:r_u_x_r_v}
+	$ |r_u \times r_v| = \sqrt{EG - F^2} $
+\end{lemma}
+
+\begin{proof}
+	$$ (r_u \times r_v, r_u \times r_v) = |r_u \times r_v|^2 \iseq EG - F^2 $$
+	$$ r_u = (x_u, y_u, z_u), \qquad r_v = (x_v, y_v, z_v) $$
+	$$ r_u \times r_v = (y_uz_v - z_uy_v, ~ z_ux_v - x_uz_v, ~ x_uy_v - y_ux_v) $$
+	$$ (r_u \times r_v)^2 = (y_uz_v - z_uy_v)^2 + (z_ux_v - x_uz_v)^2 + (x_uy_v - y_ux_v)^2 $$
+	\begin{multline*}
+		EG - F^2 = (x_u^2 + y_u^2 + z_u^2)(x_v^2 + y_v^2 + z_v^2) - (x_ux_v + y_uy_v + z_uz_v)^2 = \\
+		= \underbrace{\cancel{x_u^2x_v^2} + \underline{x_u^2y_v^2} + ... + z_u^2z_v^2}_{\text{9 слагаемых}} - \cancel{x_u^2x_v^2} - \cancel{y_u^2y_v^2} - \cancel{z_u^2z_v^2} - \underline{2x_1x_vy_uy_v} - 2x_ux_vz_uz_v - 2y_uy_vz_uz_v
+	\end{multline*}
+	Подчёркнутые (вместе с ещё одним) запаковываются в квадрат разности. Остальные -- аналогично.
+\end{proof}
+
+\section{Кривизна кривой на поверхности. Вторая квадратичная форма}
+
+Кривая задана внутренним уравнением в натуральной параметризации:
+$$ \vv{r}(s) = \vv{r} \bigg( u(s), v(s) \bigg) $$
+$$ \vv{k} = \vv{r}''(s) \quad (k = |\vv{k}|) $$
+$$ r_s' = r_u'u_s' + r_v'v_s' $$
+$$ r''(s) = r_{uu}u'^2 + 2r_{uv}u'v' + r_{vv}v'^2 + \underline{r_uu'' + r_vv''} $$
+Хотим избавиться от подчёркнутых слагаемых. Домножим равенство на вектор нормали ($ n \perp r_u, ~ n \perp r_v $)
+$$ k\cos \theta = \vv{r}''(s) \cdot \vv{n} = \underbrace{(r_{uu}, n)}_L \cdot u'^2 + 2\underbrace{(r_{uv}, n)}_M \cdot u'v' + \underbrace{(r_{vv}, n)}_N \cdot v'^2 $$
+где $ \theta $ -- угол между вектором кривизны кривой и вектором нормали к поверхности \\
+Получили проекцию кривизны на вектор нормали \\
+$ L, M, N $ зависят только от поверхности (не от кривой) \\
+Получаем следующую формулу:
+
+\begin{theorem}
+	$ k \cos \theta = Lu'^2 + 2Mu'v' + Nv'^2 $, если кривая в натуральной параметризации
+\end{theorem}
+
+\begin{definition}
+	$ L, M, N $ -- коэффициенты второй квадратичной формы
+\end{definition}
+
+\begin{definition}
+	$ k\cos \theta $ называется нормальной кривизной поверхности в направлении $ (u', v') $
+\end{definition}
+
+\section{Теорема Мёнье. Кривизна кривой на поверхности в произвольной параметризации}
+
+\begin{theorem}\label{th:k_cos}
+	$$ k\cos\theta = \frac{\rom2(u', v')}{\rom1(u', v')} = \frac{Lu'^2 + 2Mu'v' + Nv'^2}{Eu'^2 + 2Fu'v' + Gv'^2} $$
+\end{theorem}
+
+\begin{proof}
+	Будем действовать в натуральной параметризациии \\
+	Пусть $ s = \vphi(t) $
+	$$ \vphi'(t) = |r_t'| = |r_uu_t' + r_vv_t'| $$
+	$$ u_t' = u_s's_t' = u_s' \cdot |r_t'| $$
+	$$ u_s' = \frac{u_t'}{|r_t'|}, \qquad v_s' = \frac{v_t'}{|r_t'|} $$
+	$$ k\cos\theta = L \frac{u_t'^2}{|r_t'|^2} + 2M \frac{u_t'v_t'}{|r_t'|^2} + N \frac{v_t'}{|r_t'|^2} = \frac{\rom2(u_t', v_t')}{|r_t'|^2} $$
+	Мы знаем, что $ |r_t'|^2 = \rom1(u_t', v_t') $, так как
+	$$ \uint[t]{|r_t'|} \text{ -- длина кривой } = \uint[t]{\sqrt{Eu_t'^2 + 2Fu_t'v_t' + Gv_t'^2}} $$
+\end{proof}
+
+\begin{definition}
+	Сечение поверхности плоскостью, содержащей нормаль поверхности в заданной точке, образует кривую, которая называется нормальным сеченением.
+\end{definition}
+
+\begin{definition}
+	Пусть $ l $ "--- прямая, лежащая в касательной плоскости.
+
+	Сечение плоскостью, содержащей нормаль и прямую $ l $ образует некую кривую на поверхности.
+
+	Её кривизна $ k_n(l) $ "--- \it{нормальная кривизна} поверхности по направлению $ l $.
+\end{definition}
+
+\begin{definition}
+	Мимнимальная и максимальная нормальные кривизны на поверхности называются \it{главными кривизнами}.
+\end{definition}
+
+\begin{notation}
+	$ k_1, k_2 $
+\end{notation}
+
+\begin{definition}
+	Направления, по которым эти кривизны достигаются, называются \it{главными направлениями}.
+\end{definition}
+
+\begin{definition}
+	\it{Гауссова кривизна} "--- $ K = k_1k_2 $.
+\end{definition}
+
+\begin{definition}
+	\it{Средняя кривизна}:
+	$$ \frac{k_1 + k_2}2 $$
+\end{definition}
+
+\begin{theorem}[Мёнье]
+	Если $ \theta $ "--- угол между нормалью к кривой и нормалью к поверхности, то
+	$$ k_n(l) = k\cos \theta $$
+\end{theorem}
+
+\TODO{}
+
+\section{Соприкасающийся параболоид. Типы точек}
+
+В этом параграфе рассмариваем локальное поведение поверхности в окрестности какой-то точки.
+
+Рассмотрим векторы $ r, r_u, r_v, r_{uu}, r_{uv}, r_{vv} $. \\
+Введём точку $ M = (0, 0, 0) $. \\
+Касательная плокость "--- $ XOY $.
+$$ \vv{n} \parallel OZ $$
+По теореме о неявной функции поверхность в окрестности $ M $ задаётся $ z = f(x, y) $. \\
+Разложим по Тейлору:
+$$ z = f(0, 0) + f_x(0, 0)x + f_y(0, 0)y + \frac{f_{xx}(0, 0)}2x^2 + f_{xy}(0, 0)xy + \frac{f_{yy}(0, 0)}2y^2 + o(x^2 + y^2) $$
+$$ f(0, 0) = 0, \qquad f_x(0, 0) = f_y(0, 0) = 0 $$
+
+\begin{definition}
+	$$ z = \half[A]x^2 + Bxy + \half[C]y^2 $$
+	$$ A = f_{xx}(0, 0), \qquad B = f_{xy}(0, 0), \qquad C = f_{yy}(0, 0) $$
+	Это называется соприкасающийся параболоид
+\end{definition}
+
+Можем сделать поворот $ XOY $ и тогда:
+$$ z = \vawe{A}\vawe{x}^2 + \vawe{C}\vawe{y}^2 $$
+$$ 2\vawe A = f_{xx}(0, 0), \qquad 2\vawe C = f_{yy}(0, 0) $$
+
+\begin{definition}[классификация]
+	\hfill
+	\begin{itemize}
+		\item $ \vawe{A} = \vawe{C} > 0 $ \\
+		Эллиптический параболоид \\
+		Эллиптическая точка
+		\item $ \vawe{A} \cdot \vawe{C} < 0 $ \\
+		Гиперболический параболоид \\
+		Гиперболическая точка
+		\item $ \vawe{A} \cdot \vawe{C} = 0 $
+		\begin{itemize}
+			\item Параболический параболоид \\
+			Параболическая точка
+			\item Плоскость \\
+			Точка уплощения
+		\end{itemize}
+		\item $ \vawe{A} = \vawe{C} $ \\
+		Параболоид вращения \\
+		Точка округления
+	\end{itemize}
+\end{definition}
+
+\section{Совпадение характеристик у поверхности и соприкасающегося параболода}
+
+\begin{theorem}
+	У поверхности и соприкасающегося параболоида одинаковые $ E, F, G, L, M, N $ в точке
+\end{theorem}
+
+\begin{proof}
+	$ z = f(x, y) $ в окрестности точки
+	$$
+	\begin{cases}
+		x = u \\
+		y = v \\
+		z = f(u, v)
+	\end{cases} $$
+	$$ r(u, v) = \bigg( u, v, f(u, v) \bigg) $$
+	$$ r_u = (1, 0, f_u), \qquad r_v = (0, 1, f_v), \qquad r_{uu} = (0, 0, f_{uu}), \qquad \dots $$
+	Это верно как для соприкасающегося параболоида, так и для поверхности
+	$$ \vv{n} = (0, 0, 1) \text{ для обеих поверхностей} $$
+\end{proof}
+
+\section{Теорема Эйлера}
+
+\begin{theorem}[Эйлера]
+	Если $ \theta $ "--- угол между $ l $ и главным направлением $ e_1 $, то
+	$$ k_n(l) = k_1 \cos^2 \theta + k_2 \sin^2 \theta $$
+\end{theorem}
+
+\begin{figure}[!ht]
+	\begin{tikzpicture}[>=Stealth]
+		\draw[->] (0, 0) -- (2.2, 0) node[below] {$ x $};
+		\draw[->] (0, 0) -- (0, 2.2) node[left] {$ y $};
+
+		\draw[->, blue, thick] (0, 0) -- (1, 0) node[below] {$ e_1 $};
+		\draw[->, blue, thick] (0, 0) -- (0, 1) node[left] {$ e_2 $};
+
+		\draw (-1, -0.5) -- (2, 1) node[right] {$ l $};
+		\path (2, 1) coordinate (C) -- (0, 0) coordinate (B) -- (1, 0) coordinate (A) pic [draw=green!50!black, angle radius=10mm, "$ \varphi $", angle eccentricity=1.15] {angle};
+	\end{tikzpicture}
+\end{figure}
+
+\begin{proof}
+	Выберем такую систему координат, что $ k_1, k_2 $ "--- кривизны в направлениях $ OX $ и $ OY $ соостветственно. Тогда $ l $ задаётся как
+	$$
+	\begin{cases}
+		x(t) = t\cos \theta \\
+		y(t) = t \sin \theta
+	\end{cases} \qquad
+	\begin{cases}
+		x' = \cos \theta \\
+		y' = \sin \theta
+	\end{cases} $$
+	\begin{note}
+		$ \theta $ фиксированный.
+	\end{note}
+	$$ k_n(l) \undereq{\text{т. Мёнье}} k \cos \theta \undereq{\text{т. \ref{th:k_cos}}} \frac{\rom2(x', y')}{\rom1(x', y')} = \frac{\rom2(\cos \theta, \sin \theta)}{\rom1(\cos \theta, \sin \theta)} = \frac{L \cos^2 \theta + 2M \cos\theta\sin\theta + N\sin^2 \theta}{E \cos^2 \theta + 2F\cos\theta\sin\theta + G\sin^2 \theta} $$
+	Заменим поверхность на соприкасающийся параболоид:
+	$$ k_n(l) = \frac{2A \cos^2 \theta + 2C \sin^2 \theta}{\cos^2 \theta + \sin^2 \theta} = 2A \cos^2 \theta + 2C \sin^2 \theta $$
+	При разных значениях $ \theta $:
+	\begin{itemize}
+		\item $ \theta = 0 \quad \implies \quad 2A = k_1 $
+		\item $ \theta = \dfrac\pi2 \quad \implies \quad 2C = k_2 $
+	\end{itemize}
+
+	Докажем, что $ k_1, k_2 $ "--- главные кривизны: \\
+	Для этого исследуем $ k_n(l) $ на минимум и максимум:
+	$$ k_n(l) = k_1\cos^2\theta + k_2(1 - \cos^2 \theta) = (k_1 - k_2)\cos^2 \theta + k_2 $$
+	\begin{itemize}
+		\item Если $ k_1 \ge k_2 $:
+		\begin{itemize}
+			\item минимум при $ \cos^2 \theta = 0, \quad k_n = k_2 $;
+			\item максимум при $ \cos^2 \theta = 1, \quad k_n = k_1 $.
+		\end{itemize}
+		\item Если $ k_1 < k_2 $, то максимум и минимум меняются местами.
+	\end{itemize}
+\end{proof}
+
+\section{Следствия из теоремы Эйлера}
+
+\begin{implication}
+	Главные направления перпендикулярны
+\end{implication}
+
+\begin{implication}
+	Направления $ \theta $ и $ \pi - \theta $ имеют одинаковые нормальные кривизны.
+\end{implication}
+
+\section{Вычисление главных кривизн. Формула для гауссовой кривизны}
+
+Пусть $ k \define k_n(l) $ для некоторого $ l $ \\
+Введём замену $ x = \dfrac\xi\mu $ (см следующий вопрос):
+$$ k = \frac{Lx^2 + 2Mx + N}{Ex^2 + 2Fx + G} $$
+$$ Lx^2 + 2Mx + N = k(Ex^2 + 2Fx + G) $$
+При фиксированном $ k $ это "--- квадратное уравнение:
+$$ (L - kE)x^2 + 2(M - kF)x + (N - kG) = 0 $$
+\begin{itemize}
+	\item Если $ k $ "--- не главная кривизна, то у уравнения 2 решения.
+	\item Если $ k $ "--- главная кривизна, то у уравнения 1 решение.
+	\item Если $ k $ не кривизна, то у уравнения нет решений.
+\end{itemize}
+Мы ищем главные кривизны, так что $ \faktor D4 = 0 $, то есть
+$$ (M - kF)^2 - (L - kE)(N - kG) = 0 $$
+$$ k^2(F^2 - EG) - k(2MF - LG - EN) + (M^2 - LN) = 0 $$
+$ k_1, k_2 $ "--- корни соответствующего уравнения
+$$ K = k_1k_2 = \frac{M^2 - LN}{F^2 - EG} = \frac{LN - M^2}{EG - F^2} = \frac{\det \rom 2}{\det \rom 1} $$
+$$ H = \frac{2MF - LG - EN}{2(F^2 - EG)} $$
+
+
+\section{Вычисление главных направлений}
+
+Выберем направление $ (\xi, \mu) $ в области $ \mc D $:
+
+\begin{figure}[!ht]
+	\begin{tikzpicture}[>=Stealth]
+		\draw plot[smooth cycle] coordinates {(-2, -2) (2, -1) (3, 2) (-1, 2)} node[anchor=north west] {$ \mc D $};
+
+		\draw[name path=first] (-1, 0.5) -- (1, 0);
+		\draw[->, name path=second] (0, -0.25) -- (1, 1) node[anchor=north west] {$ (\xi, \mu) $};
+
+		\path[name intersections={of=first and second, by=x}] (1, 0) coordinate (A) -- (x) coordinate (B) -- (1, 1) coordinate (C) pic[draw, "$ \theta $", angle eccentricity=1.5, angle radius=3mm] {angle};
+	\end{tikzpicture}
+\end{figure}
+
+Введём замену $ x \define \dfrac\xi\mu $
+$$ k_n(\xi, \mu) \undereq{\text{т. Мёнье}} \frac{\rom2(\xi, \mu)}{\rom1(\xi, \mu)} = \frac{L\xi^2 + 2M\xi\mu + N\mu^2}{E\xi^2 + 2F\xi\mu + G\mu^2} = \frac{Lx^2 + 2Mx + N}{Ex^2 + 2Fx + G} $$
+
+Хотим вычислить главные направления, то есть понять, при каких $ x $ параметры $ \xi, \mu $ задают главные направления, \as $ x = \tg \theta $. Найдём максимум и минимум:
+$$ \big( k_n(x) \big)' = \frac{(2Lx + 2M)(Ex^2 + 2Fx + G) - (2Ex + 2F)(Lx^2 + 2Mx + N)}{(Ex^2 + 2Fx + G)^2} = 0 $$
+$$ Ex^2 + 2Fx + G > 0, \qquad \as ~ \frac D4 = F^2 - EG < 0, \qquad \as ~ \sqrt{EG - F^2} = |r_u' \times r_v'| $$
+Значит, нас интересует
+$$ (Lx + M)(Ex^2 + 2Fx + G) - (Ex + F)(Lx^2 + 2Mx + N) = 0 $$
+$$ 2LFx^2 + LGx + ME x^2 + 2MFx + MG - 2MEx^2 - NEx - FLx^2 - 2FMx - FN = 0 $$
+$$ (FL - ME)x^2 + (LG - NE)x + (MG - FN) = 0 $$
+Сделаем обратную замену и домножим на $ \mu^2 $:
+$$ (FL - ME)\xi^2 + (LG - NE)\xi\mu + (MG - FN)\mu^2 = 0 $$
+$$
+\begin{vmatrix}
+	\xi^2 & -\xi\mu & \mu^2 \\
+	G & F & E \\
+	N & M & L
+\end{vmatrix} = 0 $$
+
+\section{Лемма о смешанных произведениях}
+
+\begin{lemma}[о смешанных произведениях]
+	$$ (\vv u, \vv v, \vv w) \cdot (\vv l, \vv m, \vv n) =
+	\begin{vmatrix}
+		u \cdot l & u \cdot m & u \cdot n \\
+		v \cdot l & v \cdot m & v \cdot n \\
+		w \cdot l & w \cdot m & w \cdot n
+	\end{vmatrix} $$
+	(в правой части стоят скалярные произведения)
+\end{lemma}
+
+\begin{proof}
+	\begin{multline*}
+		(\vv u, \vv v, \vv w) \cdot (\vv l, \vv m, \vv n) =
+		\begin{vmatrix}
+			u_1 & u_2 & u_3 \\
+			v_1 & v_2 & v_3 \\
+			w_1 & w_2 & w_3
+		\end{vmatrix} \cdot
+		\begin{vmatrix}
+			l_1 & m_1 & n_1 \\
+			l_2 & m_2 & n_2 \\
+			l_3 & m_3 & n_3
+		\end{vmatrix} = \\
+		= \left|
+		\begin{pmatrix}
+			u_1 & u_2 & u_3 \\
+			v_1 & v_2 & v_3 \\
+			w_1 & w_2 & w_3
+		\end{pmatrix} \cdot
+		\begin{pmatrix}
+			l_1 & m_1 & n_1 \\
+			l_2 & m_2 & n_2 \\
+			l_3 & m_3 & n_3
+		\end{pmatrix} \right| =
+		\begin{vmatrix}
+			u \cdot l & u \cdot m & u \cdot n \\
+			v \cdot l & v \cdot m & v \cdot n \\
+			w \cdot l & w \cdot m & w \cdot n
+		\end{vmatrix}
+	\end{multline*}
+	Второй определитель транспонирован, \as он при этом не меняется.
+\end{proof}
+
+\section{Блистательная теорема Гаусса}
+
+\begin{theorem}[Egregium]
+	Гауссова кривизна зависит только от $ E, F, G $ и их производных.
+\end{theorem}
+
+\begin{proof}
+	Достаточно доказать, что $ LN - M^2 $ зависит только от \rom1, \as
+	$$ K = \frac{LN - M^2}{EG - F^2} $$
+	$$ \vv n = \frac{\vv{r_u} \times \vv{r_v}}{|\vv{r_u} \times \vv{r_v}|} $$
+	По лемме \ref{lemma:r_u_x_r_v}, $ |r_u \times r_v| = EG - F^2 $
+	$$ L \bydef \vv{r_{uu}} \cdot \vv n = \frac{(r_{uu}, r_u, r_v)}{EG - F^2} $$
+	Аналогично,
+	$$ M = \frac{(r_{uv}, r_u, r_v)}{EG - F^2}, \qquad N = \frac{(r_{vv}, r_u, r_v)}{EG - F^2} $$
+	\begin{multline}\lbl1
+		LN - M^2 = \frac1{(EG - F^2)^2} \cdot \bigg( (r_{uu}, r_u, r_v) \cdot (r_{vv}, r_u, r_v) - (r_{uv}, r_u, r_v)^2 \bigg) \undereq{\text{лемма}} \\
+		=
+		\begin{vmatrix}
+			r_{uu} r_{vv} & r_{uu}r_u & r_{uu}r_v \\
+			r_ur_{vv} & r_ur_u & r_ur_v \\
+			r_vr_{vv} & r_vr_u & r_vr_v
+		\end{vmatrix} -
+		\begin{vmatrix}
+			r_{uv}r_{uv} & r_{uv}r_u & r_{uv}r_v \\
+			r_ur_{uv} & r_ur_u & r_ur_v \\
+			r_vr_{uv} & r_vr_u & r_vr_v
+		\end{vmatrix} =
+		\begin{vmatrix}
+			r_{uu}r_{vv} & r_{uu}r_u & r_{uu}r_v \\
+			. & E & F \\
+			. & F & G
+		\end{vmatrix} -
+		\begin{vmatrix}
+			. & . & . \\
+			. & E & F \\
+			. & F & G
+		\end{vmatrix}
+	\end{multline}
+	$$ E_u = (r_u \cdot r_u)_u = 2r_ur_{uu} $$
+	$$ G_v = (r_v \cdot r_v)_v = 2r_vr_{vv} $$
+	$$ E_v = 2r_ur_{uv} $$
+	$$ G_u = 2r_vr_{vu} $$
+	$$ F_u = (r_u \cdot r_v)_u = r_{uu}r_v + r_u + r_{uv} $$
+	$$ r_vr_{uu} = F_u - r_ur_{uv} = F_u - \half E_v $$
+	$$ F_v = r_{uv}r_v + r_ur_{vv} $$
+	$$ r_ur_{vv} = F_v - \half G_u $$
+	$$ \eref1 =
+	\begin{vmatrix}
+		r_{uu}r_{vv} & \half E_u & F_u - \half E_v \\
+		F_v - \half G_u & E & F \\
+		\half G_v & F & G
+	\end{vmatrix} -
+	\begin{vmatrix}
+		r_{uv}^2 & \half E_v & \half G_u \\
+		\half E_v & E & F \\
+		\half G_u & F & G
+	\end{vmatrix} = $$
+	$ r_{uu}r_{vv} $ и $ r_{uv}^2 $ \bt{не} вычисляются по-отдельности. Распишем определители по первой строке:
+	$$ = r_{uu} \cdot r_{uv} \cdot
+	\begin{vmatrix}
+		E & F \\
+		F & G
+	\end{vmatrix} - \dots - r_{uv}^2 \cdot
+	\begin{vmatrix}
+		E & F \\
+		F & G
+	\end{vmatrix} + \dots = \underline{(r_{uu}r_{vv} - r_{uv}^2)}
+	\begin{vmatrix}
+		E & F \\
+		F & G
+	\end{vmatrix} - \dots $$
+	Пропущенные члены зависят только от \rom2. Осталось доказать, что скобка зависит только от \rom2:
+	$$ F_{uv} = r_{uuv}r_v + \underline{r_{uu}r_{vv}} + \underline{r_{uv}r_{uv}} + r_ur_{uvv} $$
+	$$ G_{uu} = 2r_{uv}r_{uv} + 2r_vr_{uuv} $$
+	$$ E_{vv} = 2r_{uv}r_{uv} + 2r_ur_{uvv} $$
+	$$ F_{uv} - \half G_{uu} - \half E_{vv} = r_{uu}r_{vv} - r_{uv}r_{uv} $$
+\end{proof}
+
+\section{Деривационные формулы}
+
+Разложим вторые производные по базису из первых и $ \vv n $:
+$$ \boxed{r_{uu} = \Gamma_{11}^1 \vv r_u + \Gamma_{11}^2 \vv r_v + L \vv n} $$
+$$ \boxed{r_{uv} = \Gamma_{12}^1 \vv r_u + \Gamma_{12}^2 \vv r_v + M \vv n} $$
+$$ \boxed{r_{vv} = \Gamma_{22}^1 \vv r_u + \Gamma_{22}^2 \vv r_v + N \vv n} $$
+
+Коэффициенты при $ \vv n $ находятся скалярыным умножением на $ \vv n $, например,
+$$ \underbrace{r_{uu} \cdot \vv n}_L = \underbrace{\Gamma_{11}^1 \vv r_u \cdot \vv n}_0 + \underbrace{\Gamma_{11}^2 \vv r_v \cdot \vv n}_0 + A \underbrace{\vv n \cdot \vv n}_1 \quad \implies A = L $$
+
+$ \Gamma_{ij}^k $ "--- функции $ u $ и $ v $ . Они называются \it{символами Кристоффеля}.
+
+\section{Коэффициенты в разложении \texorpdfstring{$ n_u, n_v $}{nu, nv}}
+
+Разложим производные $ \vv n $ по базису из производных $ \vv r $ и $ \vv n $: \\
+Производная единичного вектора перпендикулярна самому вектору, так что $ n_u, n_v $ не зависят от $ \vv n $:
+$$ \boxed{n_u = ar_u + br_v}, \qquad \boxed{n_v = cr_u + dr_v} $$
+
+Домножим первое уравнение на $ r_u $ и $ r_v $:
+$$
+\begin{cases}
+	n_u \cdot r_u = ar_u^2 + br_ur_v = aE + bF \\
+	n_u \cdot r_v = ar_ur_v + br_v^2 = aF + bG
+\end{cases} $$
+
+Решим методом Крамера:
+
+$$ a = \frac{
+	\begin{vmatrix}
+		n_ur_u & F \\
+		n_ur_v & G
+	\end{vmatrix}}{
+	\begin{vmatrix}
+		E & F \\
+		F & G
+	\end{vmatrix}}, \qquad b = \frac{
+	\begin{vmatrix}
+		E & n_ur_u \\
+		F & n_ur_v
+	\end{vmatrix}}{
+	\begin{vmatrix}
+		E & F \\
+		F & G
+	\end{vmatrix}} $$
+
+Аналогично,
+$$
+\begin{cases}
+	n_v \cdot r_u = cE + dF \\
+	n_v \cdot r_v = cF + dG
+\end{cases} $$
+$$ c = \frac{
+	\begin{vmatrix}
+		n_vr_u & F \\
+		n_vr_v & G
+	\end{vmatrix}}{
+	\begin{vmatrix}
+		E & F \\
+		F & G
+	\end{vmatrix}}, \qquad d = \frac{
+	\begin{vmatrix}
+		E & n_vr_u \\
+		F & n_vr_v
+	\end{vmatrix}}{
+	\begin{vmatrix}
+		E & F \\
+		F & G
+	\end{vmatrix}} $$
+
+\section{Модуль \texorpdfstring{$ n_u \times n_v $}{nu x nv}}
+
+\begin{theorem}
+	$$ |n_u \times n_v | = \frac{LN - M^2}{\sqrt{EG - F^2}} $$
+\end{theorem}
+
+\begin{proof}
+	$$ n_u = Ar_u + Br_v $$
+	$$ n_v = Cr_u + Dr_v $$
+	$$ n_u \times n_v = (Ar_u + Br_v) \times (Cr_u + Dr_v) = r_u \times r_v(AD - BC) $$
+	$$ |n_u \times n_v| = \underbrace{|r_u \times r_v|}_{\sqrt{EG - F^2}} \cdot |AD - BC| $$
+	$$ 0 \undereq{\text{касательный вектор на нормальный}} (\vv{r}_u \cdot \vv n)_u = r_{uu} \cdot n + r_u \cdot n_u \bdefeq L L + r_u \cdot n_u $$
+	Аналогично,
+	$$ 0 = (r_v \cdot n)_u \bdefeq M M + r_v \cdot n_u $$
+	$$ \implies
+	\begin{cases}
+		AE + DF = n_u \cdot r_u = -L \\
+		AF + BG = n_u \cdot r_v = -M
+	\end{cases} $$
+	$$ A = \frac{FM - GL}{EG - F^2}, \qquad B = \frac{FL - EM}{EG - F^2} $$
+	Аналогично найдём $ C $ и $ D $:
+	$$
+	\begin{cases}
+		CE + DF = n_v \cdot r_u = -M \\
+		CF + DG = n_v \cdot r_v = -N
+	\end{cases} $$
+	$$ C = \frac{FN - GM}{EG - F^2}, \qquad D = \frac{FM - EN}{EG - F^2} $$
+	\begin{multline*}
+		AD - BC = \frac1{(EG - F^2)^2} \bigg( (FM - GL)(FM - FN) - (FL - EM)(FN - GM) \bigg) = \\
+		= \frac1{(EG - F^2)^2} \bigg( F^2M^2 - \cancel{FMEN} - \cancel{GFLM} + GLEN - F^2LN + \cancel{FGLM} + \cancel{EFMN} - EGM^2 \bigg) = \\
+		= \frac{(EG - F^2)(LN - M^2)}{(EG - F^2)^2}
+	\end{multline*}
+\end{proof}
+
+\section({Уравнения Петерсона--Майнарди--Кодацци}){Уравнения Петерсона"--~Майнарди"--~Кодацци}
+
+Вспомним, как мы вводили симолы Кристоффеля:
+$$ r_{uu} = \Gamma_{11}^1 r_u + \Gamma_{11}^2 r_v + Ln $$
+$$ r_{uv} = \Gamma_{12}^1r_u + \Gamma_{12}^2 + Mn $$
+$$
+\begin{array}l
+	r_{uuv} = \Gamma_{11v}^1vr_u + \Gamma_{11}^1r_{uv} + \Gamma_{11v}^2r_v + \Gamma_{11}^2r_{vv} + L_vn + Ln_v \\
+	\shortparallel \\
+	r_{uvu} = \Gamma_{12u}^1r_u + \Gamma_{12}^1r_{uu} + \Gamma_{12u}^2r_v + \Gamma_{12}^2r_{uv} + M_un + Mn_u
+\end{array} $$
+Домножим последние два выражения скалярно на $ n $ и приравняем:
+$$ \Gamma_{11}^1 \cdot M + \Gamma_{11}^2 \cdot N + L_v = \Gamma_{12}^1 \cdot L + \Gamma_{12}^2M + M_u $$
+Обычно это записывается как
+$$ \boxed{L_v - M_u = \Gamma_{12}^1L + \Gamma_{12}^2M - \Gamma_{11}^1M - \Gamma_{11}^2N} $$
+Аналогично,
+$$ r_{uv} = \Gamma_{12}^1r_u + \Gamma_{12}^2r_v + M_n, \qquad r_{vv} = \Gamma_{22}^1r_u + \Gamma_{22}^2r_v + M_n $$
+Дифференцируем первое по $ v $, второе "--- по $ u $, домножаем оба на $ n $, приравниваем:
+$$ \Gamma_{12}^1M + \Gamma_{12}^2N + M_v = \Gamma_{22}^1L + \Gamma_{22}^2M + N_u $$
+$$ \boxed{M_v - N_u = \Gamma_{22}^1L + \Gamma_{22}^2M - \Gamma_{12}^1M - \Gamma_{12}^2N} $$
+
+\section{Символы Кристоффеля относятся к внутренней геометрии}
+
+\begin{theorem}
+	$ \Gamma_{ij}^k $ относятся к внутренней геометрии.
+\end{theorem}
+
+\begin{proof}
+	$$ r_{uu} = \Gamma_{11}^1r_u + \Gamma_{11}^2 r_v + Ln \qquad \bigg| \cdot r_u \qquad \bigg| \cdot r_v $$
+	$$
+	\begin{cases}
+		r_{uu} \cdot r_v = \Gamma_{11}^1E + \Gamma_{11}^2F \\
+		r_{uu} \cdot r_v = \Gamma_{11}^1 \cdot F + \Gamma_{11}^2 \cdot G
+	\end{cases} $$
+	$$ E_u = (r_u \cdot r_u)_u = 2r_{uu} \cdot r_u $$
+	$$ F_u = (r_u \cdot r_v)_u = r_{uu} r_v + r_ur_{uv} $$
+	$$ E_v = (r_u \cdot r_u)_v = 2r_{uv}r_u $$
+	$$ r_{uu}r_v = F_u - \frac12 E_v $$
+	$$
+	\begin{cases}
+		\Gamma_{11}^1E + \Gamma_{11}^2F = \frac12 E_u \\
+		\Gamma_{11}^1F + \Gamma_{11}^2G = F_u - \frac12 E_v
+	\end{cases} $$
+	$$ \boxed{\Gamma_{11}^1 = \frac{
+			\begin{vmatrix}
+				\frac12E_u & F \\
+				F_u - \frac12 E_v & G
+			\end{vmatrix}}{EG - F^2}} $$
+	Остальные "--- аналогично.
+\end{proof}
+
+\section{Геодезическая кривизна отностися к внутренней геометрии}
+
+Есть поверхность. На ней есть кривая. Есть вектор кривизны "--- $ \vv k = k \cdot \vv n_1 $ ($ n_1 $ "--- вектор нормали к кривой).
+
+\begin{definition}
+	$ k_g $ "--- проекция $ \vv k $ на касательную плоскость. \\
+	Можно рассматривать вектор или скаляр.
+\end{definition}
+
+\begin{statement}
+	$ k^2 = k_n^2 + k_g^2 $
+\end{statement}
+
+\begin{proof}
+	$ k_n = \text{Пр}_{n_2} k $, где $ n_2 $ "--- вектор нормали к поверхности. \\
+	Тогда утверждение получается по теореме Пифагора.
+\end{proof}
+
+\begin{theorem}
+	$ k_g $ относится к внутренней геометрии.
+\end{theorem}
+
+\begin{proof}
+	$$ u = u(s), \qquad v = v(s) $$
+	$ S $ "--- постоянный параметр
+	\begin{multline*}
+		\vv k = \frac{\di[2] r \big( u(s); v(s) \big)}{\di s^2} = \frac{\di}{\di s}(r_u \cdot u_s + r_v \cdot v_s) = \vv{r}_{uu} u_s^2 + 2\vv{r}_{uv}u_sv_v + \vv{r}_{vv}(v_s)^2 = \\
+		= (\Gamma_{11}^1 r_u + \Gamma_{11}^2r_v + Ln)u_s^2 + 2(\Gamma_{12}^1r_u + \Gamma_{12}^2r_v + Mn)u_sv_s + (\Gamma_{22}^1 r_u + \Gamma_{22}^2r_v + Nn)v_s^2
+	\end{multline*}
+	$$ \vv{k}_g = \underbrace{(\Gamma_{11}^1u_s^2 + 2\Gamma_{12}^1u_sv_s + \Gamma_{22}^1v_s^2)}_{\text{зависит от \rom1}} \cdot r_u + \underbrace{(\Gamma_{11}^2u_s^2 + 2\Gamma_{12}^2u_sv_s + \Gamma_{22}^2v_s^2)}_{\text{зависит от \rom2}}r_v $$
+\end{proof}
+
+\section{Вычисление геодезической кривизны}
+
+\begin{theorem}
+	$$ k_g = \frac{(r_{tt}'', ~ r_t', ~ n)}{|r_t'|^3} $$
+\end{theorem}
+
+\begin{proof}
+	Пусть $ r_{tt}'' = r_1'' + r_2'' $, где $ r_1'' \perp n, \quad r_2'' \parallel n $
+	$$ r' \perp n $$
+	$$ r_{tt}'' \times r_t' = \underbrace{r_1'' \times r'}_{\parallel n} + \underbrace{r_2'' \times r'}_{\perp n} $$
+	$$ k = \frac{|r'' \times r'|}{|r'|^3} $$
+	\begin{statement}
+		$$ k_g \iseq \frac{\text{Пр}_{\vv n}(r'' \times r')}{|r'|^3} = \frac{(r'' \times r') \cdot n}{|n| \cdot |r'|^3} = \frac{(r'', r', n)}{|r'|^3} $$
+	\end{statement}
+	\begin{proof}
+		Кривизна "--- проекция $ r'' $ на вектор нормали к кривой, а значит,
+		$$ r'' \times r' \parallel \vv b \quad \implies (r'' \times r') \times r' \perp \vv b, ~ \perp \vv v \quad \implies \perp \vv n $$
+		$$ \implies \vv k = \frac{(r'' \times r') \times r'}{|r'|^4} $$
+		$$ |(r'' \times r') \times r'| = |r'' \times r'| \cdot |r'| \cdot \underbrace{\sin \alpha}_{1, \text{ \as } \alpha = \faktor\pi2} $$
+		$$ \implies k = \frac{|r'' \times r'}{|r'|^3} = \frac{|(r'' \times r') \times r'}{|r'|^4} $$
+		$$ \text{Пр}_{\text{кас. пл.}} \vv k = \frac{\bigg( (r_1'' + r_2'') \times r' \bigg) \times r'}{|r'|^4} = \underbrace{\frac{(r'' \times r') \times r'}{|r'|^4}}_{\perp n} + \underbrace{\frac{\overbrace{(r_2'' \times r')}^{\perp n} \times \overbrace{r'}^{\perp n}}{|r'|^4}}_{\parallel n} = \frac{(r'' \times r') \times r'}{|r'|^4} $$
+		$$ k_g = \bigg| \text{Пр}_{\text{кас. пл.}} \vv k \bigg| = \frac{|r_1'' \times r'| \cdot |r'|}{|r'^4|} = \frac{|r_1'' \times r'}{|r'|^3} = \frac{(r'', r', r)}{|r'|^3} $$
+	\end{proof}
+\end{proof}
+
+\section{Равносильные определения геодезической}
+
+\begin{theorem}
+	Задана кривая на поверхности. Следующие определения геодезических линий равносильны:
+	\begin{enumerate}
+		\item \label{en:geo:1} $ k_g = 0 $;
+		\item \label{en:geo:2} вектор главной нормали к кривой параллелен нормали к поверхности;
+		\item \label{en:geo:3} соприкасающаяся плоскость кривой содержит нормаль к поверхности;
+		\item \label{en:geo:4} спрямляющая плоскость кривой является касательной плоскостью к поверхности;
+		\item\label{en:geo:5} $ k $ "--- $ \min $ для всех кривых в данном направлении;
+		\item[(6).] локально кратчайшие линии.
+	\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+	\TODO{Очевидно (действительно \emoji{neutral-face})} \\
+	Шестое "--- пока что не доказываем.
+\end{proof}
+
+\section{Существование геодезических в данном направлении}
+
+\begin{statement}[из дифуров]
+	$ y'' = f(x, y, y'), \qquad f $ непр. по каждому аргументу \\
+	$ \implies $ решение существует и единственно (локально).
+\end{statement}
+
+\begin{theorem}
+	В любой точке в любом направлении можно провести ровно одну геодезичсекую (локально).
+\end{theorem}
+
+\begin{proof}
+	Условие геодезичсекой "--- $ k_g = 0 $, \ie $ (r_{tt}'', r_t', n) = 0 $ "--- это дифур второго порядка. Надо доказать, что у него существует единственное решение. \\
+	Нам надо разрешить дифур относительно $ r'' $.
+	$$
+	\begin{cases}
+		u = t \\
+		v = \vphi(t)
+	\end{cases} $$
+	Нужно доказать, что существует такая $ \vphi $.
+	$$ r_t' (u, v) = r_u \cdot u' + r_v \cdot v' = r_u + r_v \vphi' $$
+	$$ r_{tt}'' = r_{uu}u'^2 + 2r_{uv}u'v' + r_{vv}v'^2 + r_uu'' + r_vv'' = r_{uu} + 2r_{uv} \vphi' + r_{vv} \vphi'^2 + r_v \vphi'' $$
+	\begin{multline*}
+		0 = (r'', r', n) = (r_{uu} + 2r_{uv}\vphi' + r_{vv}\vphi'^2 + r_v\vphi'', r_u + r_v \vphi', n) = \\
+		= \underbrace{(r_{uu}'' + 2r_{uv}\vphi' + r_{vv}\vphi'^2, r_u + r_v\vphi', n)}_{\rom1} + \underbrace{(r_v \vphi'', r_u + r_v\vphi', n)}_{\rom2}
+	\end{multline*}
+	$$ \rom2 = \vphi'' \cdot (r_v, r_u + \cancel{r_v\vphi'}, n) = -\vphi'' \cdot (r_u, r_v, n) $$
+	(\as $ (r_v, r_u + r_v\vphi', n) = (r_v, r_u, n) + \underbrace{(r_v, r_v\vphi', n)}_{0, \text{ \as } r_v \parallel r_v\vphi'} $)
+	$$ \boxed{\vphi'' = \frac{\rom1}{(r_u, r_v, n)}} $$
+	$ (r_u, r_v, n) \ne 0 $ (\as $ r_u, r_v, n $ "--- базис, \as повехность регулярная). \\
+	Значит, у такого дифура есть ровно одно решение с начальными данными
+	$$
+	\begin{cases}
+		\vphi(t_0) = \vphi_0 \\
+		\vphi'(t_0) = \vphi_1
+	\end{cases} $$
+\end{proof}
+
+\section{Полугеодезическая параметризация}
+
+Полугеодезическая параметризация: $ E = 1, ~ F = 0, ~ G > 0 $
+
+\begin{theorem}
+	Полугеодезическая параметризация всегда существует (локально).
+\end{theorem}
+
+\begin{proof}
+	$$ (r_u \cdot r_v)_u = \underbrace{r_{uu} \cdot r_v}_0 + r_u \cdot r_{uv} = \cancel{f'' \cdot g'} + f' \cdot r_{uv} = \underbrace{f' \cdot (f')_v}_0 = 0 $$
+	$ r_{uu} = f'' \parallel $ вектору главной нормали для $ f $ (\as $ f $ в натуральной параметризации) $ \parallel $ нормали к поверхности (\as $ f $ "--- геодезическая) \\
+	$ r_v $ "--- касательный вектор. \\
+	На первой лекции доказывали полезную лемму:
+	$$ |f'| = 1 \implies \pder{f'}v \perp f' $$
+	$$ F = r_u \cdot r_v = \const $$
+	Но при $ u = 0 \quad F = 0 $
+	$$ \implies F = 0 \text{ всюду} $$
+\end{proof}
+
+\section{Геодезические как локально кратчайшие}
+
+\begin{proof}
+	\hfill \\
+	Рассмотрим полугеодезическую параметризацию. \\
+	Возьмём точки $ A, B $ на геодезической. \\
+	Пусть $ \big( u(t), v(t) \big) $ "--- внутренние координаты некоторой кривой, соединяющей $ A $ и $ B $. Её длина:
+	\begin{multline*}
+		l = \dint[t]{t_0}{t_1}{\sqrt{\underset1Eu'^2 + 2\underset0Fu'v' + Gv'^2}} = \dint[t]{t_0}{t_1}{u'^2 + \underset{> 0}Gv'^2} \ge \dint[t]{t_0}{t_1}{u'^2} = \\
+		= \dint[t]{t_0}{t_1}{u'} = u(t_1) - u(t_0) = \text{ длина геодезической}
+	\end{multline*}
+	Мы доказали, что геодезическая "--- кратчайшая. В другую сторону "--- без доказательства.
+\end{proof}
