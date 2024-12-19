@@ -11,8 +11,8 @@
 
 \begin{definition}
 	Пусть $ u(t), v(t) $ -- внутренние координаты кривой на поверхности \\
-	$ \vv f \big( u(t), v(t) \big) $ -- кривая на поверхности \\
-	$ \dfrac{\di \vv f}{\di t}\clamp{t = t_0} $ -- касательный вектор
+	$ \vv r \big( u(t), v(t) \big) $ -- кривая на поверхности \\
+	$ \dfrac{\di \vv r}{\di t}\clamp{t = t_0} $ -- касательный вектор
 \end{definition}
 
 \begin{definition}
@@ -20,15 +20,15 @@
 \end{definition}
 
 \begin{statement}
-	Это плоскость с базисом $ \pder fu $ и $ \pder fv $
+	Это плоскость с базисом $ \pder ru $ и $ \pder rv $
 \end{statement}
 
 \begin{proof}
 	Распишем и всё получится: \\
-	Касательный вектор "--- $ \dfrac{\di \vv f}{\di t}\clamp{t = t_0} $
-	$$ \dfrac{\di \vv f}{\di t}\clamp{t = t_0} = \pder fu \cdot \frac{\di u}{\di t} + \pder fv \cdot \frac{\di v}{\di t} $$
-	Это ЛК $ \pder fu $ и $ \pder fv $ \\
-	Верно ли, что $ \alpha f_u + \beta f_v $ является касательным вектором? \\
+	Касательный вектор "--- $ \dfrac{\di \vv r}{\di t}\clamp{t = t_0} $
+	$$ \frac{\di \vv r}{\di t}\clamp{t = t_0} = \pder ru \cdot \frac{\di u}{\di t} + \pder rv \cdot \frac{\di v}{\di t} $$
+	Это ЛК $ \pder ru $ и $ \pder rv $ \\
+	Верно ли, что $ \alpha r_u + \beta r_v $ является касательным вектором? \\
 	Верно, для кривой
 	$$
 	\begin{cases}
@@ -62,7 +62,7 @@ $$ |r_t'| = \sqrt{(r_u'u' + r_v'v') \cdot (f_u'u' + f_v'v')} = \sqrt{(r_u')^2(u'
 Найдём длину кривой:
 
 \begin{multline*}
-	l = \dint[t]ab{\bigg| \frac{\di r}{\di t} \bigg|} = \dint[t]ab{|r_uu_t + r_vv_t|} = \dint[t]ab{\sqrt{(r_uu_t + r_vv_t; r_uu_t + r_vv_t)}} = \\
+	l = \dint[t]ab{\bigg| \frac{\di r}{\di t} \bigg|} = \dint[t]ab{|r_uu_t + r_vv_t|} = \dint[t]ab{\sqrt{(r_uu_t + r_vv_t, ~ r_uu_t + r_vv_t)}} = \\
 	= \dint[t]ab{\sqrt{(r_u, r_u)u_t^2 + 2(r_u, r_v)u_tv_t + (r_v, r_v)v_t^2}} = \dint[t]ab{\sqrt{Eu_t^2 + 2Fu_tv_t + Gv_t^2}}
 \end{multline*}
 
@@ -88,8 +88,8 @@ $$ |r_t'| = \sqrt{(r_u'u' + r_v'v') \cdot (f_u'u' + f_v'v')} = \sqrt{(r_u')^2(u'
 
 	Формула длины кривой:
 	$$ l = \dint[t]{a}b{\sqrt{Eu'^2 + 2Fu'v' + Gv'^2}} $$
-	Они должны совпасть
-	$$ \ol{\Phi} \define r_2 \circ r_1^{-1} $$
+	Они должны совпасть.
+	$$ \Phi \define r_2 \circ r_1^{-1} $$
 	\item $ \implies $: \\
 	Возьмём кривую
 	$$
@@ -165,9 +165,9 @@ $$ |r_t'| = \sqrt{(r_u'u' + r_v'v') \cdot (f_u'u' + f_v'v')} = \sqrt{(r_u')^2(u'
 		$$ a = R - R \cos \frac\pi{n} $$
 		$$ h = \sqrt{\frac{H^2}{k^2} + R^2 \bigg(1 - \cos \frac\pi{n} \bigg)^2} = \sqrt{\frac{H^2}{k^2} + R^2 \cdot 4 \sin^4 \frac\pi{2n}} $$
 		$$ S \stackrel?= \limi{\pi n} 2kn \cdot \half \cdot 2R\underbrace{\sin \frac\pi{n}}_{\sim \faktor\pi{n}} \cdot \sqrt{\frac{H^2}{k^2} + 4R^2 \sin^4 \frac\pi{2n}} = 2\pi RH \lim \sqrt{1 + \frac{k^2}{H^2} \cdot 4R^2 \sin^4 \frac\pi{2n}} $$
-		Это равно $ 2\pi RH $ тогда и только тогда, когда
+		Это равно $ 2\pi RH $ только тогда, когда
 		$$ \frac{k^2}{H^2} \cdot 4R^2 \sin^4 \frac\pi{2n} \stackrel?\to 0 $$
-		$$ \frac{\pi^4R^2}{4H^2} \cdot \frac{k^2}{n^4} \stackrel?\to 0 $$
+		$$ \frac{4\pi^4R^2}{4H^2} \cdot \frac{k^2}{n^4} \stackrel?\to 0 $$
 		То есть, $ k \stackrel?= o(n^2) $ \\
 		Значит, разбивая на много низких, крупно нарезанных антипризм, получаем неправильную площадь
 	\end{enumerate}
@@ -200,7 +200,7 @@ $$ |r_t'| = \sqrt{(r_u'u' + r_v'v') \cdot (f_u'u' + f_v'v')} = \sqrt{(r_u')^2(u'
 \end{lemma}
 
 \begin{proof}
-	$$ (r_u \times r_v, r_u \times r_v) = |r_u \times r_v|^2 \iseq EG - F^2 $$
+	$$ (r_u \times r_v, ~ r_u \times r_v) = |r_u \times r_v|^2 \iseq EG - F^2 $$
 	$$ r_u = (x_u, y_u, z_u), \qquad r_v = (x_v, y_v, z_v) $$
 	$$ r_u \times r_v = (y_uz_v - z_uy_v, ~ z_ux_v - x_uz_v, ~ x_uy_v - y_ux_v) $$
 	$$ (r_u \times r_v)^2 = (y_uz_v - z_uy_v)^2 + (z_ux_v - x_uz_v)^2 + (x_uy_v - y_ux_v)^2 $$
@@ -226,7 +226,8 @@ $ L, M, N $ зависят только от поверхности (не от �
 Получаем следующую формулу:
 
 \begin{theorem}
-	$ k \cos \theta = Lu'^2 + 2Mu'v' + Nv'^2 $, если кривая в натуральной параметризации
+	Если кривая в натуральной параметризации, то
+	$$ k \cos \theta = Lu'^2 + 2Mu'v' + Nv'^2 $$
 \end{theorem}
 
 \begin{definition}
@@ -255,7 +256,7 @@ $ L, M, N $ зависят только от поверхности (не от �
 \end{proof}
 
 \begin{definition}
-	Сечение поверхности плоскостью, содержащей нормаль поверхности в заданной точке, образует кривую, которая называется нормальным сеченением.
+	Сечение поверхности плоскостью, содержащей нормаль поверхности в заданной точке, образует кривую, которая называется \it{нормальным сеченением}.
 \end{definition}
 
 \begin{definition}
@@ -292,7 +293,13 @@ $ L, M, N $ зависят только от поверхности (не от �
 	$$ k_n(l) = k\cos \theta $$
 \end{theorem}
 
-\TODO{}
+\begin{proof}
+	Пусть $ \vv n $ "--- нормаль к кривой, $ \vv m $ "--- нормаль к поверхности.
+
+	По \rom1 формуле Френе $ \dot v = k \vv n $.
+	$$ \rom2(v, v) = \dot v \cdot \vv m = \ddot r \cdot \vv m = k \vv n \vv m = k \cos \theta $$
+	$$ \rom1(v, v) = 1 $$
+\end{proof}
 
 \section{Соприкасающийся параболоид. Типы точек}
 
@@ -302,20 +309,20 @@ $ L, M, N $ зависят только от поверхности (не от �
 Введём точку $ M = (0, 0, 0) $. \\
 Касательная плокость "--- $ XOY $.
 $$ \vv{n} \parallel OZ $$
-По теореме о неявной функции поверхность в окрестности $ M $ задаётся $ z = f(x, y) $. \\
+По теореме о неявной функции поверхность в окрестности $ M $ задаётся $ z = r(x, y) $. \\
 Разложим по Тейлору:
-$$ z = f(0, 0) + f_x(0, 0)x + f_y(0, 0)y + \frac{f_{xx}(0, 0)}2x^2 + f_{xy}(0, 0)xy + \frac{f_{yy}(0, 0)}2y^2 + o(x^2 + y^2) $$
-$$ f(0, 0) = 0, \qquad f_x(0, 0) = f_y(0, 0) = 0 $$
+$$ z = r(0, 0) + r_x(0, 0)x + r_y(0, 0)y + \frac{r_{xx}(0, 0)}2x^2 + r_{xy}(0, 0)xy + \frac{r_{yy}(0, 0)}2y^2 + o(x^2 + y^2) $$
+$$ r(0, 0) = 0, \qquad r_x(0, 0) = r_y(0, 0) = 0 $$
 
 \begin{definition}
 	$$ z = \half[A]x^2 + Bxy + \half[C]y^2 $$
-	$$ A = f_{xx}(0, 0), \qquad B = f_{xy}(0, 0), \qquad C = f_{yy}(0, 0) $$
+	$$ A = r_{xx}(0, 0), \qquad B = r_{xy}(0, 0), \qquad C = r_{yy}(0, 0) $$
 	Это называется соприкасающийся параболоид
 \end{definition}
 
 Можем сделать поворот $ XOY $ и тогда:
 $$ z = \vawe{A}\vawe{x}^2 + \vawe{C}\vawe{y}^2 $$
-$$ 2\vawe A = f_{xx}(0, 0), \qquad 2\vawe C = f_{yy}(0, 0) $$
+$$ 2\vawe A = r_{xx}(0, 0), \qquad 2\vawe C = r_{yy}(0, 0) $$
 
 \begin{definition}[классификация]
 	\hfill
@@ -428,7 +435,7 @@ $$ 2\vawe A = f_{xx}(0, 0), \qquad 2\vawe C = f_{yy}(0, 0) $$
 \section{Вычисление главных кривизн. Формула для гауссовой кривизны}
 
 Пусть $ k \define k_n(l) $ для некоторого $ l $ \\
-Введём замену $ x = \dfrac\xi\mu $ (см следующий вопрос):
+Введём замену $ x = \dfrac\xi\mu $ (см. следующий вопрос):
 $$ k = \frac{Lx^2 + 2Mx + N}{Ex^2 + 2Fx + G} $$
 $$ Lx^2 + 2Mx + N = k(Ex^2 + 2Fx + G) $$
 При фиксированном $ k $ это "--- квадратное уравнение:
@@ -699,6 +706,7 @@ $$ c = \frac{
 		CF + DG = n_v \cdot r_v = -N
 	\end{cases} $$
 	$$ C = \frac{FN - GM}{EG - F^2}, \qquad D = \frac{FM - EN}{EG - F^2} $$
+	\vspace{-1.95em}
 	\begin{multline*}
 		AD - BC = \frac1{(EG - F^2)^2} \bigg( (FM - GL)(FM - FN) - (FL - EM)(FN - GM) \bigg) = \\
 		= \frac1{(EG - F^2)^2} \bigg( F^2M^2 - \cancel{FMEN} - \cancel{GFLM} + GLEN - F^2LN + \cancel{FGLM} + \cancel{EFMN} - EGM^2 \bigg) = \\
@@ -708,7 +716,7 @@ $$ c = \frac{
 
 \section({Уравнения Петерсона--Майнарди--Кодацци}){Уравнения Петерсона"--~Майнарди"--~Кодацци}
 
-Вспомним, как мы вводили симолы Кристоффеля:
+Вспомним, как мы вводили символы Кристоффеля:
 $$ r_{uu} = \Gamma_{11}^1 r_u + \Gamma_{11}^2 r_v + Ln $$
 $$ r_{uv} = \Gamma_{12}^1r_u + \Gamma_{12}^2 + Mn $$
 $$
@@ -800,18 +808,20 @@ $$ \boxed{M_v - N_u = \Gamma_{22}^1L + \Gamma_{22}^2M - \Gamma_{12}^1M - \Gamma_
 	$$ r' \perp n $$
 	$$ r_{tt}'' \times r_t' = \underbrace{r_1'' \times r'}_{\parallel n} + \underbrace{r_2'' \times r'}_{\perp n} $$
 	$$ k = \frac{|r'' \times r'|}{|r'|^3} $$
-	\begin{statement}
-		$$ k_g \iseq \frac{\text{Пр}_{\vv n}(r'' \times r')}{|r'|^3} = \frac{(r'' \times r') \cdot n}{|n| \cdot |r'|^3} = \frac{(r'', r', n)}{|r'|^3} $$
-	\end{statement}
-	\begin{proof}
-		Кривизна "--- проекция $ r'' $ на вектор нормали к кривой, а значит,
-		$$ r'' \times r' \parallel \vv b \quad \implies (r'' \times r') \times r' \perp \vv b, ~ \perp \vv v \quad \implies \perp \vv n $$
-		$$ \implies \vv k = \frac{(r'' \times r') \times r'}{|r'|^4} $$
-		$$ |(r'' \times r') \times r'| = |r'' \times r'| \cdot |r'| \cdot \underbrace{\sin \alpha}_{1, \text{ \as } \alpha = \faktor\pi2} $$
-		$$ \implies k = \frac{|r'' \times r'}{|r'|^3} = \frac{|(r'' \times r') \times r'}{|r'|^4} $$
-		$$ \text{Пр}_{\text{кас. пл.}} \vv k = \frac{\bigg( (r_1'' + r_2'') \times r' \bigg) \times r'}{|r'|^4} = \underbrace{\frac{(r'' \times r') \times r'}{|r'|^4}}_{\perp n} + \underbrace{\frac{\overbrace{(r_2'' \times r')}^{\perp n} \times \overbrace{r'}^{\perp n}}{|r'|^4}}_{\parallel n} = \frac{(r'' \times r') \times r'}{|r'|^4} $$
-		$$ k_g = \bigg| \text{Пр}_{\text{кас. пл.}} \vv k \bigg| = \frac{|r_1'' \times r'| \cdot |r'|}{|r'^4|} = \frac{|r_1'' \times r'}{|r'|^3} = \frac{(r'', r', r)}{|r'|^3} $$
-	\end{proof}
+	$$ k_g \iseq \frac{\text{Пр}_{\vv n}(r'' \times r')}{|r'|^3} = \frac{(r'' \times r') \cdot n}{|n| \cdot |r'|^3} = \frac{(r'', r', n)}{|r'|^3} $$
+\end{proof}
+
+\begin{statement}
+	$$ k_g = \frac{\text{Пр}_{\vv n}(r'' \times r')}{|r'|^3} $$
+\end{statement}
+\begin{proof}
+	Кривизна "--- проекция $ r'' $ на вектор нормали к кривой, а значит,
+	$$ r'' \times r' \parallel \vv b \quad \implies (r'' \times r') \times r' \perp \vv b, ~ \perp \vv v \quad \implies \perp \vv n $$
+	$$ \implies \vv k = \frac{(r'' \times r') \times r'}{|r'|^4} $$
+	$$ |(r'' \times r') \times r'| = |r'' \times r'| \cdot |r'| \cdot \underbrace{\sin \alpha}_{1, \text{ \as } \alpha = \faktor\pi2} $$
+	$$ \implies k = \frac{|r'' \times r'}{|r'|^3} = \frac{|(r'' \times r') \times r'}{|r'|^4} $$
+	$$ \text{Пр}_{\text{кас. пл.}} \vv k = \frac{\bigg( (r_1'' + r_2'') \times r' \bigg) \times r'}{|r'|^4} = \underbrace{\frac{(r'' \times r') \times r'}{|r'|^4}}_{\perp n} + \underbrace{\frac{\overbrace{(r_2'' \times r')}^{\perp n} \times \overbrace{r'}^{\perp n}}{|r'|^4}}_{\parallel n} = \frac{(r'' \times r') \times r'}{|r'|^4} $$
+	$$ k_g = \bigg| \text{Пр}_{\text{кас. пл.}} \vv k \bigg| = \frac{|r_1'' \times r'| \cdot |r'|}{|r'^4|} = \frac{|r_1'' \times r'}{|r'|^3} = \frac{(r'', r', r)}{|r'|^3} $$
 \end{proof}
 
 \section{Равносильные определения геодезической}
@@ -819,19 +829,29 @@ $$ \boxed{M_v - N_u = \Gamma_{22}^1L + \Gamma_{22}^2M - \Gamma_{12}^1M - \Gamma_
 \begin{theorem}
 	Задана кривая на поверхности. Следующие определения геодезических линий равносильны:
 	\begin{enumerate}
-		\item \label{en:geo:1} $ k_g = 0 $;
+		\item $ k_g = 0 $;
 		\item \label{en:geo:2} вектор главной нормали к кривой параллелен нормали к поверхности;
 		\item \label{en:geo:3} соприкасающаяся плоскость кривой содержит нормаль к поверхности;
 		\item \label{en:geo:4} спрямляющая плоскость кривой является касательной плоскостью к поверхности;
 		\item\label{en:geo:5} $ k $ "--- $ \min $ для всех кривых в данном направлении;
-		\item[(6).] локально кратчайшие линии.
+		\item\label{en:geo:6} локально кратчайшие линии.
 	\end{enumerate}
 \end{theorem}
 
-\begin{proof}
-	\TODO{Очевидно (действительно \emoji{neutral-face})} \\
-	Шестое "--- пока что не доказываем.
-\end{proof}
+\begin{eproof}
+	\item[\ref{en:geo:2}.]
+	$$ k^2 = k_n^2 + k_g^2 $$
+	$$ k_n = \text{Пр}_m k, \qquad k = \text{Пр}_n k $$
+	При $ n \parallel m $ выполнено $ k_n = k \quad \iff \quad k_g = 0 $
+
+	\item[\ref{en:geo:3}.] Соприкасающаяся плоскость содержит нормаль к кривой.
+
+	\item[\ref{en:geo:4}.] Нормаль к кривой является нормалью к спрямляющей плоскости. Нормаль к поверхность является нормалью к касательной плоскости.
+
+	\item[\ref{en:geo:5}.] $ k_n(l) $ зависит только от направления $ l $.
+
+	\item[\ref{en:geo:6}.] Пока без доказательства.
+\end{eproof}
 
 \section{Существование геодезических в данном направлении}
 

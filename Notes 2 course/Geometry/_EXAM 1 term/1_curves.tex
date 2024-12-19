@@ -243,10 +243,8 @@ $$ \sum_{i = 1}^n |\vv f(t_i) - \vv f(t_{i - 1})| \text{ "--- интеграль
 		\end{multline*}
 		$$ l = \dint[\vphi]{\vphi_0}{\vphi_1}{\sqrt{r'^2 + r^2}} $$
 		\item Неявно:
-		$$ x^2 + y^2 - 1 = 0 $$
 		$$ F(x, y) = 0 $$
 		Воспользуемся теоремой о неявной функции:
-		$$ y = \pm \sqrt{1 - x^2}, \qquad \text{кроме } x = \pm 1, ~ y = 0 $$
 		$$ l = \dint{x_0}{x_1}{\sqrt{1 + f'^2(x)}} $$
 		$$ f'(x) = y_x' = -\frac{F_x'}{F_y'} $$
 		$$ l = \dint{x_0}{x_1}{\sqrt{1 + \frac{F_x'^2}{F_y'^2}}} $$
@@ -367,8 +365,8 @@ $$ \boxed{\dot n = \text\ae b - kv} $$
 
 \begin{proof}
 	Пусть $ s $ -- натуральный параметр
-	$$ \frac{\di f}{\di t} = \frac{\di f}{\di s} \cdot \frac{\di s}{\di t} = \dot{r} \cdot s' $$
-	$$ r'' = \frac{\di[2] f}{\di t^2} = \frac{\di \dot f}{\di t} s' + \dot f \cdot s'' = \ddot f \cdot (s')^2 + \dot f s'' = k \vv{n} \cdot (s')^2 + vs'' $$
+	$$ \frac{\di f}{\di t} = \frac{\di f}{\di s} \cdot \frac{\di s}{\di t} = \dot f \cdot s' $$
+	$$ f'' = \frac{\di[2] f}{\di t^2} = \frac{\di \dot f}{\di t} s' + \dot f \cdot s'' = \ddot f \cdot (s')^2 + \dot f s'' = k \vv{n} \cdot (s')^2 + vs'' $$
 	$$ f'' = k(s')^2 \cdot \vv{n} + s''\vv{v} $$
 	То есть, $ f'' $ раскладывается по векторам $ v $ и $ n $ \\
 	Причём, если параметризация бирегулярна, то $ k(s')^2 \ne 0 $
@@ -396,7 +394,6 @@ $$ \boxed{
         x''\clamp{t_\circ} & y'' \clamp{t_\circ} & z''\clamp{t_\circ} \\
         x - x_\circ & y - y_\circ & z - z_\circ
     \end{vmatrix} = 0} $$
-(это "--- смешанное произведение)
 
 Нормаль к спрямляющей плоскости параллельна $ \vv n $, \ie $ (r' \times r'') \times r' $:
 
@@ -457,7 +454,7 @@ $$ \boxed{
 
     Пусть $ f(t) = \bigg( x(t), y(t), z(t) \bigg) $. Тогда
     \begin{itemize}
-    	\item $ x(0) = y(0) = z(0) = 0, \quad $ \as $ f(t_\circ) = r(0) $ "--- начало координат;
+    	\item $ x(0) = y(0) = z(0) = 0, \quad $ \as $ f(t_\circ) = f(0) $ "--- начало координат;
         \item $ y'(0) = z'(0) = 0, \quad $ \as $ OX $ "--- касательная;
         \item $ z''(0) = 0, \quad $ \as $ XOY $ "--- соприкасающаяся.
     \end{itemize}
@@ -548,15 +545,12 @@ $$ \boxed{K = \frac{|f' \times f''|}{|f'|^3}} $$
 $$ v = \vv{f}(t) = \vv{g}(s) = g \bigg( s(t) \bigg) $$
 $$ f' = g' \cdot s' $$
 $$ f'' = g''s'^2 + g's'' $$
-\begin{remind}
-	$ (g')' = g''s' $ (как сложная функция)
-\end{remind}
 $$ f''' = g''' \cdot s'^3 + g''2s' \cdot s'' + g''s's'' + g's''' = g'''s'^3 + 3g''s''s' + g's''' $$
 Избавимся от $ s'' $ и $ s''' $:
 \begin{remind}
 	$ (\vv{a}, \vv{b}, \vv{c}) = (\vv{a}, \vv{b} + \lambda \vv{c}, \vv{c}) $
 \end{remind}
-$$ (f', f'', f''') = \bigg( \vv{g'}s', ~ g''s'^2 + \cancel{\vv{g'}s''}, ~ g'''s'^3 + \cancel{3g''s''s'} + \cancel{g's'''} \bigg) = |\underbrace{f'}_{s'}|^6 (g', g'', g''') = |f'|^6k^2\text\ae $$
+$$ (f', f'', f''') = \bigg( \vv{g'}s', ~ g''s'^2 + \cancel{\vv{g'}s''}, ~ g'''s'^3 + \cancel{3g''s''s'} + \cancel{g's'''} \bigg) = \underbrace{|f'|}_{s'}{}^6 (g', g'', g''') = |f'|^6k^2\text\ae $$
 $$ \text\ae = \frac{(f', f'', f''')}{k^2|f'|^6} $$
 \begin{remind}
 	$$ k = \frac{|f' \times f''|}{|f'|^3} $$
@@ -575,7 +569,7 @@ $$ \boxed{\text\ae = \frac{(f', f'', f''')}{|f' \times f''|^2}} $$
 
 \begin{proof}
 	Пусть есть две кривые, у которых $ k_1 = k_2 $ и $ \text\ae_1 = \text\ae_2 $ \\
-	Рассмотрим $ \vv{g_1}(s); \vv{g_2}(s) $ -- натуральные параметризации \\
+	Рассмотрим $ \vv{g_1}(s), ~ \vv{g_2}(s) $ -- натуральные параметризации \\
 	Совместим так, чтобы
 	$$
 	\begin{cases}
@@ -587,8 +581,8 @@ $$ \boxed{\text\ae = \frac{(f', f'', f''')}{|f' \times f''|^2}} $$
 	Рассмотрим функцию
 	$$ f(s) = \vv{v_1}(s) \cdot \vv{v_2}(s) + \vv{n_1}(s) \cdot \vv{n_2}(s) + \vv{b_1}(s) \cdot \vv{b_2}(s) $$
 	$ f(s_0) = 3 $ (скалярное произведение соотв. функций равно 1) \\
-	При этом, $ f(s) \le 3 $ (по тем же сооражениям) \\
-	$ f(s) = 3 \iff v_1 = v_2, n_1 = n_2, b_1 = b_2 $ в точке $ s $ \\
+	При этом, $ f(s) \le 3 $ (по тем же соображениям) \\
+	$ f(s) = 3 \iff v_1 = v_2, ~ n_1 = n_2, ~ b_1 = b_2 $ в точке $ s $ \\
 	Хотим доказать, что $ f(s) = 3 $ везде \\
 	Возьмём производную:
 	$$ f'(s) = v_1'v_2 + v_1v_2' + n_1'n_2 + n_1n_2' + b_1'b_2 + b_1b_2' $$
