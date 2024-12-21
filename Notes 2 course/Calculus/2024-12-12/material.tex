@@ -21,5 +21,66 @@
 		v(z) \underarr{z \to c} \Im A
 	\end{cases} $$
 	Из свойств функций нескольких переменных получаем:
-	$$ f(z) \underarr{z \to c} A \in \Co \implies \exist \delta > 0, ~ M > 0 : \quad \forall z \in E \setminus \set{c} : |z - c| < \delta \qquad |f(z)| \le M $$
+	\begin{equ}3
+		f(z) \underarr{z \to c} A \in \Co \implies \exist \delta > 0, ~ M > 0 : \quad \forall z \in E \setminus \set{c} : |z - c| < \delta \qquad |f(z)| \le M
+	\end{equ}
 \end{statement}
+
+\begin{stmts}
+	\item \label{en:stmt:lim:1} $ f(z) \underarr{z \to c} A, \quad A \ne 0 $
+	$$ \implies \exist \delta > 0 : \quad \forall z \in E \setminus \set{c} : |z - c| < \delta \qquad |f(z)| > \frac{|A|}2 $$
+
+	\item $ f(z) \underarr{z \to c} \quad \implies \quad kf(z) \underarr{z \to c} kA $
+
+	\item $ f(z) \underarr{z \to c}, \quad g(z) \underarr{z \to c} \to B $
+	$$ \implies f(z) + g(z) \underarr{z \to c} A + B $$
+
+	\item $ f(z) \underarr{z \to c} A, \qquad g(z) \underarr{z \to c} B $
+	$$ \implies f(z)g(z) \underarr{z \to c} AB $$
+
+	\item $ f(z) \underarr{z \to c} A, \quad A \ne 0, \quad f(z) \ne 0 $ при $ z \in E \setminus \set c $
+	$$ \implies \frac1{f(z)} \underarr{z \to c} \frac1A $$
+
+	\item $ f(z) \underarr{z \to c} A, \qquad f(z) \ne 0, \quad A \ne 0, \quad g(z) \underarr{z \to c} B $
+	$$ \implies \frac{g(z)}{f(z)} \underarr{z \to c} \frac BA $$
+\end{stmts}
+
+\begin{eproof}
+	\item Положим $ \veps \define \frac{|A|}2 > 0 $. Тогда
+	$$ \exist \delta > 0 : \quad \forall z \in E \setminus \set c : |z - c| < \delta \qquad |f(z) - A| < \frac{|A|}2 $$
+	При таких $ z $ выполнено
+	$$ |f(z)| = |f(z) - A + A| \trige |A| - |f(z) - A| > |A| - \frac12 |A| = \frac12 |A| $$
+
+	\item Следует из линейности и аддитивности предела вещественных функций.
+
+	\item Аналогично.
+
+	\item
+	$$ \exist \delta' > 0, ~ M' > 0, ~ \delta'' > 0, ~ M'' > 0 : \quad \forall z \in E \setminus \set c \quad
+	\begin{cases}
+		|z - c| < \delta' \implies |f(z)| < M' \\
+		|z - c| < \delta'' \implies |g(z)| < M''
+	\end{cases} $$
+	Возьмём $ \veps > 0 $. Тогда
+	$$ \exist \delta_\circ', ~ \delta_\circ'' : \quad \forall z \in E \setminus \set c \quad
+	\begin{cases}
+		|z - c| < \delta_\circ' \implies |f(z) - A| < \veps \\
+		|z - c| < \delta_\circ'' \implies |g(z) - B| < \veps
+	\end{cases} $$
+	Пусть $ |z - c| < \delta_\circ = \min\set{\delta', \delta'', \delta_\circ', \delta_\circ''} $. Тогда
+	\begin{multline*}
+		|f(z)g(z) - AB| = \big| \big( f(z) - A \big)g(z) + A \big( g(z) - B \big) \big| \trile |f(z) - A| \cdot |g(z)| + |A| \cdot |g(z) - B| < \\
+		< \veps \cdot M'' + |A| \cdot \veps = \veps(M'' + |A|)
+	\end{multline*}
+
+	\item Возьмём $ \delta_1 $ из \ref{en:stmt:lim:1}. Выберем $ \forall \veps > 0 $. Тогда
+	\begin{equ}5
+		\exist \delta_2 > 0 : \quad \forall z \in E \setminus \set c \quad |z - c| < \delta_2 \implies |f(z) - A| < \veps
+	\end{equ}
+	Выберем $ \delta_3 \define \min\set{\delta_1, \delta_2} $. Тогда
+	$$ \ref{en:stmt:lim:1}., \eref5 \implies \bigg| \frac1{f(z)} - \frac1A \bigg| = \frac{|A - f(z)|}{|A| \cdot |f(z)|} < \frac\veps{|A| \cdot \frac{|A|}2} = \frac{2\veps}{|A|^2} $$
+	При $ z \in E \setminus \set c, \quad |z - c| < \delta_3 $ это то, что требовалось доказать.
+
+	\item
+	$$ \frac{g(z)}{f(z)} = g(z) \cdot \frac1{f(z)} \to B \cdot \frac1A = \frac BA $$
+\end{eproof}
