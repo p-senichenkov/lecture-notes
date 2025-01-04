@@ -1,0 +1,399 @@
+\part{Теория функции комплексной переменной}
+
+\section{Определение аналитической в области функции}
+
+\begin{definition}
+	$ E \sub \Co $ "--- область, $ \qquad f(z) = u(x, y) + iv(x, y) : E \to \Co, \qquad u, v : E* \to \R $
+
+	Будем говорить, что $ f \in \Cont[1] E $, если $ u \in \Cont[1]{E^*} $ и $ v \in \Cont[1]{E^*} $
+\end{definition}
+
+\begin{statement}
+	$ f \in \Cont[1] E $
+
+	Тогда $ f $ дифференцируема в $ \forall z \in E $.
+\end{statement}
+
+\begin{proof}
+	По определению $ u, v \in \Cont[1]{E^*} $, поэтому по достаточному условию дифференциуемости функции $ u, v $ дифференцируемы для $ \forall (x, y) \in E $. \\
+	Тогда, по определению, $ f^*(x, y) $ дифференцируема $ \forall (x, y) \in E $. \\
+	Значит, $ f $ дифференцируема для $ \forall z \in E $.
+\end{proof}
+
+\begin{definition}
+	$ E \sub \Co $ "--- область, $ \qquad f : E \to \Co $
+
+	Функцию $ f $ будем называть аналитической, если
+	\begin{enumerate}
+		\item $ f \in \Cont[1]E $;
+		\item $ \forall z \in E \quad f_{\ol z}' = 0 $.
+	\end{enumerate}
+\end{definition}
+
+\begin{remark}
+	По предыдущему утверждению $ f(z) $ дифференцируема $ \forall z \in E $, поэтому для $ \forall z \in E $ определены $ f_x'(z), f_y'(z), f_z'(z), f_{\ol z}'(z) $.
+\end{remark}
+
+\begin{notation}
+	Множество всех функций, аналитических в $ E $, будем обозначать $ A(E) $.
+\end{notation}
+
+\section{Свойства частных производных комплекснозначных функций}
+
+\begin{properties}
+	$ E \sub \Co $ "--- область, $ \qquad z \in E, \qquad f, g $ дифференцируемы в $ z $, \\
+	$ \lambda $ "--- любой из символов $ x, y, z, \ol z $.
+	\begin{enumerate}
+		\item $ \bigg( cf(z) \bigg)_\lambda' = cf_\lambda'(z) $
+		\item $ \bigg( f(z) + g(z) \bigg)_\lambda' = f_\lambda'(z) + g_\lambda'(z) $
+		\item $ \bigg( f(z)g(z) \bigg)_\lambda' = f_\lambda'(z)g(z) + f(z)g_\lambda'(z) $
+		\item $ f(z) \ne 0 $
+		$$ \bigg( \frac1{f(z)} \bigg)_\lambda' = -\frac{f_\lambda'(z)}{f^2(z)} $$
+		\item $ f(z) \ne 0 $
+		$$ \bigg( \frac{g(z)}{f(z)} \bigg)_\lambda' = \frac{g_\lambda'(z)f(z) - g(z)f_\lambda'(z)}{f^2(z)} $$
+	\end{enumerate}
+\end{properties}
+
+\begin{proof}
+	Доказательства проводятся проверкой возникающих тождеств. Докажем для примера 4 при $ \lambda = x $ и при $ \lambda = \ol z $.
+
+	Пусть $ f(z) = u(x, y) + iv(x, y), \quad f_x'(z) = u_x' + iv_x' $ (далее не будем писать вргументы).
+	$$ \frac1f = \frac1{u + iv} = \frac{u - iv}{u^2 + v^2} = \frac u{u^2 + v^2} - i \frac v{u^2 + v^2} $$
+	\begin{multline*}
+		\bigg( \frac1f \bigg)_x' = \bigg( \frac u{u^2 + v^2} \bigg)_x' - i \bigg( \frac v{u^2 + v^2} \bigg)_x' = \frac{u_x'(u^2 + v^2) - 2u(uu_x' + vv_x')}{(u^2 + v^2)^2} - i \frac{v_x'(u^2 + v^2) - 2v(uu_x' + vv_x')}{(u^2 + v^2)^2} = \\
+		= \frac{u_x'v^2 - 2uvv_x' - u^2ux' - i(v_x'u^2 - 2uvu_x' - v^2v_x')}{(u^2 + v^2)^2} = \frac{(u_x' + iv_x')(v^2 - u^2) - 2uv(v_x' - iu_x')}{(u^2 + v^2)^2} = \\
+		= \frac{f_x'(v^2 - u^2) + 2uvi(u_x' + iv_x')}{(u^2 + v^2)^2} = f_x' \cdot \frac{v^2 - u^2 + 2uvi}{(u^2 + v^2)^2} = f_x' \cdot \frac{(v + iu)^2}{(u^2 + v^2)^2} = -f_x' \cdot \frac{(u - iv)^2}{(u^2 + v^2)^2} = \\
+		= -f_x' \cdot \frac{((u - iv)^2)}{(u - iv)^2(u + iv)^2} = -f_x' \cdot \frac1{(u + iv)^2} = -\frac{f_x'}{f^2}
+	\end{multline*}
+	$$ \bigg( \frac1f \bigg)_{\ol z}' = \frac12 \bigg\lgroup \bigg( \frac1f \bigg)_x' + i \bigg( \frac1f \bigg)_y' \bigg\rgroup = \frac12 \bigg( -\frac{f_x'}{f^2} - i \frac{f_y'}{f^2} \bigg) = -\frac12 \cdot \frac1{f^2} (f_x' + if_y') = -\frac{f_{\ol z}'}{f^2} $$
+\end{proof}
+
+\section{Формула для дифференцируемой функции}
+
+\begin{definition}
+	Пусть $ E \sub \Co $ "--- область, $ \qquad z_\circ \in E, \qquad f : E \to \Co, \qquad f(z) = u(x, y) + iv(x, y) $ \\
+	$ u, v : E^* \to \R $
+
+	Будем говорить, что $ f $ дифференцируема в точке $ z_\circ $, если $ f^*(x, y) $ дифференцируема в точке $ (x_\circ, y_\circ) $ в следующем смысле: \\
+	функции $ u(x, y) $ и $ v(x, y) $ дифференцируемы в точке $ (x_\circ, y_\circ) $.
+\end{definition}
+
+Пусть $ \sigma \define s + it, \qquad E \sub \Co $ "--- область, $ \qquad z_\circ \in E, \quad z_\circ + \sigma \in E, \qquad z_\circ \leftrightarrow (x_\circ, y_\circ) $ \\
+Предположим, что $ f(z) $ дифференцируема в точке $ z_\circ $.
+
+Тогда
+\begin{equ}{form_diff:11}
+	f(z_\circ + \sigma) - f(z_\circ) = f^*(x_\circ + s, y_\circ + t) - f^*(x_\circ, y_\circ) = \bigg( u(x_\circ + s, y_\circ + t) - u(x_\circ, y_\circ) \bigg) + i \bigg( v(x_\circ + s, y_\circ + t) - v(x_\circ, y_\circ) \bigg)
+\end{equ}
+
+В силу дифференцируемости $ f $
+$$ u(x_\circ + s, y_\circ + t) - u(x_\circ, y_\circ) = u_x'(x_\circ, y_\circ)s + u_y'(x_\circ, y_\circ)t + r_1(s, t), \qquad \frac{|r_1(s, t)|}{\sqrt{s^2 + t^2}} = \frac{|r_1(s, t)|}{|\sigma|} \undereq{\sigma \to 0} 0 $$
+$$ v(x_\circ + s, y_\circ + t) - v(x_\circ, y_\circ) = v_x'(x_\circ, y_\circ)s + v_y'(x_\circ, y_\circ)t + r_2(s, t), \qquad \frac{|r_2(s, t)|}{|\sigma|} \undereq{\sigma \to 0} 0 $$
+
+Отсюда
+\begin{multline*}
+	\eref{form_diff:11} = \bigg( u_x'(x_\circ, y_\circ)s + u_y'(x_\circ, y_\circ)t + r_1(s, t) \bigg) + i \bigg( v_x'(x_\circ, y_\circ)s + v_y'(x_\circ,y_\circ)t + r_2(s, t) \bigg) = \\
+	= \bigg( u_x'(x_\circ, y_\circ) + iv_x'(x_\circ, y_\circ) \bigg)s + \bigg( u_y'(x_\circ, y_\circ) + iv_y'(x_\circ, y_\circ) \bigg)t + r_1(s, t) + ir_2(s, t) = \\
+	= f_x'(z_\circ)s + f_y'(z_\circ)t + r_1(s, t) + ir_2(s, t)
+\end{multline*}
+
+Положим $ \rho(\sigma) \define r_1(s, t) + ir_2(s, t) $. Тогда
+\begin{equ}{form_diff:14}
+	\frac{|\rho(\sigma)|}{|\sigma|} = \frac{\sqrt{r_1^2(s, t) + r_2^2(s, t)}}{|\sigma|} = \sqrt{\bigg( \frac{r_1(s, t)}{|\sigma|} \bigg)^2 + \bigg( \frac{r_2(s, t)}{|\sigma|} \bigg)^2} \underarr{\sigma \to 0} 0
+\end{equ}
+
+Понятно, что
+$$ s = \frac12 (\sigma + \ol \sigma), \qquad t = \frac1{2i}(\sigma - \ol \sigma) = -\frac i2(\ol \sigma - \sigma) $$
+
+Поэтому
+\begin{multline}\lbl{form_diff:15}
+	f(z_\circ + \sigma) - f(z_\circ) = f_x'(z_\circ) \cdot \frac12 (\sigma + \ol \sigma) + \frac i2 f_y'(z_\circ)(\ol \sigma - \sigma) + \rho(\sigma) = \\
+	= \frac12 \bigg( f_x'(z_\circ) - if_y'(z_\circ) \bigg) \sigma + \frac12 \bigg( f_x'(z_\circ) + if_y'(z_\circ) \bigg) \ol \sigma + \rho(\sigma) = f_z'(z_\circ) \sigma + f_{\ol z}(z_\circ) \ol \sigma + \rho(\sigma)
+\end{multline}
+где для $ \rho(\sigma) $ выполнено \eref{form_diff:14}.
+
+\section{Первые свойства и первые примеры аналитических функций}
+
+\begin{properties}
+	$ f, g \in A(E), \qquad c \in E $
+	\begin{enumerate}
+		\item $ cf \in A(E) $
+		\item $ f + g \in A(E) $
+		\item $ fg \in A(E) $
+		\item $ f(z) \ne 0 $
+		$$ \implies \frac1f \in A(E) $$
+		\item $ f(z) \ne 0 $
+		$$ \implies \frac gf \in A(E) $$
+	\end{enumerate}
+\end{properties}
+
+\begin{proof}
+	Следует из свойств частных производных, например, 4:
+	$$ \bigg( \frac1{f(z)} \bigg)_{\ol z}' = -\frac{f_{\ol z}'(z)}{f^2(z)} = \frac 0{f^2(z)} = 0 $$
+\end{proof}
+
+\begin{exmpls}
+	\item $ f(z) \equiv c, \qquad c \in \Co $
+	$$ c_x' = c_y' \equiv 0 \quad \implies c_{\ol z}' \equiv 0 $$
+
+	\item $ f(z) \equiv z $ \\
+	Уже проверено, что $ z_{\ol z}' \equiv 0 $
+
+	\item Пользуясь свойствами аналитических функций 1., 2., 3. и предыдущими примерами, получаем
+	$$ z^2 \in A(\Co), \quad z^3 \in A(\Co), \quad \dots, \quad z^n \in A(\Co) $$
+	$$ P(z) = c_0 + c_1z + \dots + c_nz^n \in A(\Co) $$
+
+	\item Для $ z = x + iy $ положим $ e^z \define e^y \cos y + ie^x \sin y $. Тогда
+	$$ (e^z)_x' = (e^x \cos y)_x' + i(e^x \sin y)_x' = e^x \cos y + ie^x \sin y $$
+	$$ (e^z)_y' = (e^x \cos y)_y' + i(e^x \sin y)_y' = -e^x \sin y + ie^x \cos y $$
+	$$ (e^z)_{\ol z}' = \frac12 \bigg( (e^z)_x' + i(e^z)_y' \bigg) = \frac12 \bigg( e^x\cos y + ie^x \sin y + i(-e^x \sin y + ie^x \cos y) \bigg) = 0 $$
+
+	\item Пусть $ P(z) = c_0 + c_1z + \dots + c_nz^n, \quad Q(z) = b_0 + b_1z + \dots + b_mz^m, \quad m \ge 1, \quad \alpha_1, \dots, \alpha_k \in \Co $ "--- все различные корни уравнения $ Q(z) = 0, \quad k \le m $.
+
+	Тогда по примеру 3. и свойству 5.
+	$$ \frac{P(z)}{Q(z)} \in A \big( \Co \setminus \bigcup_{j = 1}^k \set{\alpha_j} \big) $$
+
+	\item Пусть $ D = \Co \setminus (-\infty, 0], \qquad $ для $ z \in D $ пусть $ \vphi $ "--- аргумент $ z, \quad -\pi < \vphi < \pi $. \\
+	Положим $ \ln z \define \ln|z| + i \vphi $ для $ z \in D $.
+
+	Если $ z = x + iy, \quad |z| > 0, \quad z \in D $, то $ \vphi $ может быть определён разными формулами при $ x > 0 $, при $ y \ge 0 $ или при $ y \le 0 $. \\
+	Например, при $ x > 0 \quad \vphi = \arctg \frac yx $ и тогда
+	$$ \ln z = \ln \sqrt{x^2 + y^2} = i \arctg \frac yx = \frac12 \ln(x^2 + y^2) = i \arctg \frac yx $$
+	Тогда
+	$$ (\ln z)_x' = \bigg( \frac12 \ln(x^2 + y^2) \bigg)_x' + i \bigg( \arctg \frac yx)_x' = \frac x{x^2 + y^2} + i \bigg( -\frac y{x^2} \cdot \frac1{1 + (\frac yx)^2} \bigg) = \frac x{x^2 + y^2} - i \frac y{x^2 + y^2} $$
+	$$ (\ln z)_y' = \bigg( \frac12 \ln(x^2 + y^2) \bigg)_y' + i \bigg( \arctg \frac yx \bigg)_y' = \frac y{x^2 + y^2} + i \bigg( \frac1x \cdot \frac1{1 + (\frac yx)^2} \bigg) = \frac y{x^2 + y^2} + i \frac x{x^2 + y^2} $$
+	$$ (\ln z)_{\ol z}' = \frac12 \bigg( (\ln z)_x' + i(\ln z)_y' \bigg) = \frac12 \bigg( \frac x{x^2 + y^2} - i \frac y{x^2 + y^2} + i \big( \frac y{x^2 + y^2} + i \frac x{x^2 + y^2} \big) \bigg) = 0 $$
+	Аналогично, $ (\ln z)_{\ol z}' = 0 $ при $ y \ge 0 $ и при $ y \le 0 $. Получаем
+	$$ \ln z \in A(D) $$
+\end{exmpls}
+
+\begin{statement}[ещё одно свойство аналитических функций]
+	$ f \in A(E), \qquad E $ "--- область, $ \qquad z \in E, \qquad \sigma \in \Co, \quad z + \sigma \in \Co $
+
+	Тогда
+	\begin{equ}{analyt:16}
+		f(z + \sigma) - f(z) = f_z'(z)\sigma + \rho(\sigma), \qquad \frac{|\rho(\sigma)|}{|\sigma|} \underarr{\sigma \to 0} 0
+	\end{equ}
+\end{statement}
+
+\begin{proof}
+	Из \eref{form_diff:15} и того, что $ f \in A(E) $ следует, что
+	$$ f(z - \sigma) - f(z) = f_z'(z)\sigma + f_{\ol z}'(z)\ol \sigma + \rho(\sigma) = f_z'(z)\sigma + \rho(\sigma) $$
+	где выполнено \eref{form_diff:14}.
+\end{proof}
+
+\section{Эквивалентные определения аналитических функций}
+
+\begin{theorem}
+	$ E \sub \Co $ "--- область, $ \qquad f \in \Cont[1] E, \qquad f(z) = u(x, y) + iv(x, y) $
+
+	Следующие условия эквивалентны:
+	\begin{enumerate}
+		\item $ f_{\ol z}'(z) = 0 \quad \forall z \in E $
+		\item $ f(z + \sigma) = f_z'(z)\sigma + \rho(\sigma) \quad \forall z \in E, \qquad \frac{|\rho(\sigma)|}{|\sigma|} \underarr{\sigma \to 0} 0 $
+		\item $ \forall z = x + iy $ выполнены уравнения Коши"--~Римана:
+		\begin{equ}{analyt:18}
+			\begin{rcases}
+				u_x'(x, y) = v_y'(x, y) \\
+				u_y'(x, y) = -v_x'(x, y)
+			\end{rcases}
+		\end{equ}
+		\item
+		\begin{equ}{analyt:19}
+			\forall z \in E \quad \exist \limz\sigma \frac{f(z + \sigma) - f(z)}\sigma \in \Co
+		\end{equ}
+		Предел в \eref{analyt:19} называется комплексной призводной функции $ f $ в точке $ z $ и обозначается $ f'(z) $.
+	\end{enumerate}
+\end{theorem}
+
+\begin{iproof}
+	\item Из \eref{analyt:16} следует, что 1. $ \implies $ 2.
+	\item Если выполнено 2., то
+	$$ \frac{f(z + \sigma) - f(z)}\sigma = f_z'(z) + \frac{\rho(\sigma)}\sigma \underarr{\sigma \to 0} f_z'(z), $$
+	поэтому 2. $ \implies $ 4., при этом получаем равенство
+	\begin{equ}{analyt:20}
+		f'(z) = f_z'(z)
+	\end{equ}
+	\item Предположим, что выполнено 4. \\
+	Положим
+	$$ \frac{f(z + \sigma) - f(z)}\sigma \define f'(z) = \delta(\sigma) $$
+	$$ \implies f(z + \sigma) - f(z) = f'(z) \sigma + \sigma \delta(\sigma) $$
+	Положим $ \rho_\circ(\sigma) \define \sigma\delta(\sigma) $. Тогда
+	$$ 4. \implies \frac{|\rho_\circ(\sigma)|}{|\sigma|} = |\delta(\sigma)| \underarr{\sigma \to 0} 0 $$
+	Запишем для $ f $ формулу \eref{form_diff:15}:
+	$$ f(z + \sigma) - f(z) = f_z'(z)\sigma + f_{\ol z}'(z) \ol \sigma + \rho(\sigma), \qquad \frac{|\rho(\sigma)|}{|\sigma|} \underarr{\sigma \to 0} 0 $$
+	Вычитая из неё предыдущую формулу, получаем
+	$$ f_z'(z) \sigma + f_z' (z) \ol \sigma + \rho(\sigma) - f'(z)\sigma - \rho_\circ(\sigma) = 0 $$
+	Делим на $ \sigma $:
+	$$ f_z'(z) - f'(z) + f_{\ol z}'(z) \frac{\ol \sigma}\sigma + \frac{\rho(\sigma)}\sigma - \frac{\rho_\circ(\sigma)}\sigma = 0 $$
+	или
+	$$ f_[\ol z]'(z) \frac{\ol \sigma}\sigma = f'(z) - f_z'(z) + \frac{\rho_\circ(\sigma)}\sigma - \frac{\rho(\sigma)}\sigma $$
+	$$ f'(z) - f_z'(z) + \frac{\rho_\circ(\sigma)}\sigma - \frac{\rho(\sigma)}\sigma \underarr{\sigma \to 0} f'(z) - f_z'(z) $$
+	Следовательно, существует $ \limz\sigma f_{\ol z}'(z) \frac{\ol \sigma}\sigma \fed A $.
+
+	Если $ \sigma = s > 0 $, то $ \ol \sigma = \sigma $ и
+	$$ a = \liml{\sigma \to 0^+} f_{\ol z}'(z) \cdot 1 = f_{\ol z}'(z) $$
+
+	Если положить $ \sigma = it, \quad t > 0 $, то $ \ol \sigma = -it $, и
+	$$ A = \liml{t\ to 0^+} f_{\ol z}' \cdot \frac{-it}{it} = -f_{\ol z}' $$
+	$$ \implies f_{\ol z}' = A = 0 $$
+	То есть, 4. $ \implies $ 1. и
+	$$ f_z'(z) = f'(z) $$
+
+	\item Далее,
+	$$ f_x'(z) = u_x'(x, y) + iv_x'(x, y), \qquad f_y'(z) = u_y'(x, y) + iv_y'(x, y) $$
+	\begin{multline*}
+		f_{\ol z}' = \frac12 \bigg( f_x'(z) + if_y'(z) \bigg) = \frac12 \bigg( \big( u_x'(x, y) + iv_x'(x, y) \big) + i \big( u_y'(x, y) + iv_y'(x, y) \big) \bigg) = \\
+		= \frac12 \bigg( \big( u_x'(x, y) - v_y'(x, y) \big) + i \big( v_x'(x, y) + u_y'(x, y) \big) \bigg)
+	\end{multline*}
+	Отсюда 1. $ \iff $ 3.
+\end{iproof}
+
+\begin{implication}
+	$ f \in A(E) $
+	$$ \implies f'(z) = f_x'(z), \qquad z \in E $$
+\end{implication}
+
+\begin{proof}
+	Имеем
+	$$ f_z' = \frac12 \big( f_x' - if_y' \big), \qquad f_{\ol z}' = \frac12 \big( f_x' + if_y' \big) $$
+	$$ \implies f_x' = f_z' + f_{\ol z}' $$
+	$$ f \in A(E) \implies f_z' = f_z' + 0 = f_z' = f' $$
+\end{proof}
+
+\section{Аналитичность суперпозиции аналитических функций; производная суперпозиции}
+
+\begin{theorem}
+	$ E, G \sub \Co $ "--- области, $ \qquad f \in A(E), \quad f(z) \in G \quad \forall z \in E, \qquad \vphi \in A(G) $ \\
+	$ F : E \to \Co, \quad F(z) \define \vphi \big( f(z) \big) $
+
+	Тогда $ F \in A(E) $.
+\end{theorem}
+
+\begin{proof}
+	По определению $ f \in \Cont[1] E, \quad \vphi \in \Cont[1]G $. \\
+	Поэтому, по теореме о матрице Якоби, выполнено соотношение
+	$$ F(z) = \vphi \big( f(z) \big) \in \Cont[1]E $$
+	Фиксируем $ \forall z \in E $. \\
+	Пусть $ \sigma \in \Co, \quad \sigma \ne 0, \quad z + \sigma \in E $. \\
+	Пусть $ w \define f(z), \quad w \in G $.
+
+	Будем использовать теорему об эквивалентных определениях аналитических функций. \\
+	Пусть $ \lambda \in \Co, \quad \lambda \ne 0, \quad w + \lambda \in G $. \\
+	Из условия следует соотношение
+	$$ \vphi(w + \lambda) - \vphi(w) = \vphi'(w) \lambda + r(\lambda), \qquad \frac{|r(\lambda)|}{|\lambda|} \underarr{\lambda \to 0} 0 $$
+	Положим $ r(\lambda) \fed \lambda \delta(\lambda) $. Тогда $ \delta(\lambda) \underarr{\lambda \to 0} 0 $. \\
+	Положим $ \delta(0) \define 0 $. Тогда можно не рассматривать ограничение $ \lambda \ne 0 $ при следующей записи:
+	$$ \vphi(w + \lambda) - \vphi(w) = \vphi'(w)\lambda + \lambda \delta(\lambda) $$
+	(в этих формулах мы пользовались соотношением $ \vphi_w'(w) = \vphi'(w) $). \\
+	Положим $ \lambda \define f(z + \sigma) - f(z) $. Тогда $ f(z + \sigma) = f(z) + \lambda = w + \lambda $
+	\begin{multline*}
+		F(z + \sigma) - F(z) = \vphi \big( f(z + \sigma) \big) - \vphi \big( f(z) \big) = \vphi(w + \lambda) - \vphi(w) = \vphi'(w) \lambda + \lambda \delta(\lambda) = \\
+		= \vphi'(w)\lambda + \bigg( f(z + \sigma) - f(z) \bigg) \delta \bigg( f(z + \sigma) - f(z) \bigg)
+	\end{multline*}
+	$$ \lambda = f(z + \sigma) - f(z) = f'(z)\sigma + \rho(\sigma), \qquad \frac{|\rho(\sigma)|}{|\sigma|} $$
+	Получаем:
+	\begin{multline*}
+		F(z + \sigma) - F(z) = \vphi'(w) \bigg( f'(z) \sigma + \rho(\sigma) \bigg) + \bigg( f(z + \sigma) - f(z) \bigg) \delta \bigg( f(z + \sigma) - f(z) \bigg) = \\
+		= \vphi'(2)f'(z) \sigma + \underbrace{\vphi'(w)\rho(\sigma) + \bigg( f(z + \sigma) - f(z) \bigg) \delta \bigg( f(z + \sigma) - f(z) \bigg)}_{R(\sigma)}
+	\end{multline*}
+	$$ \frac{R(\sigma)}\sigma = \vphi'(w) \frac{\rho(\sigma)}\sigma + \frac{f(z + \sigma) - f(z)}\sigma \delta \bigg( f(z + \sigma) - f(z) \bigg) \underarr{\sigma \to 0} \vphi'(w) \cdot 0 + f'(z) \cdot 0 = 0 $$
+	Значит, $ F \in A(E) $.
+\end{proof}
+
+\begin{implication}
+	Из последних двух выражений и теоремы о равносильных определениях аналитичности получаем равенство
+	\begin{equ}{analyt:9}
+		F'(z) = \bigg( \vphi \big( f(z) \big) \bigg)' = \vphi' \big( f(z) \big) \cdot f'(z)
+	\end{equ}
+\end{implication}
+
+\section({Вычисление (e\tcir{}z)', (ln z)', (z\tcir{}a)'}){Вычисление $ (e^z)' $, $ (\ln z)' $, $ (z^\alpha)' $}
+
+\begin{exmpls}
+	\item Если $ P(z) = c_0 + c_1z + \dots + c_nz^n $, то $ e^{P(z)} \in A(\Co) $
+
+	\item Пусть $ D = \Co \setminus (-\infty, 0], \quad \alpha \in \Co, \quad \alpha \ne 0 $ \\
+	Уже проверено, что
+	$$ \ln z \in A(D) \implies \alpha \ln z \in A(D) \implies e^{\alpha \ln z} \in A(D) $$
+
+	Далее полагаем при $ z \in D \quad z^\alpha \define e^{\alpha \ln z} $.
+
+	Рассмотрим случай $ \alpha = 1 $.
+	$$ \ln z \bydef \ln |z| + i\vphi $$
+	$$ e^{\ln z} = e^{\ln |z| + i\vphi} \bydef e^{\ln|z|} \cdot (\cos \vphi + i \sin \vphi) = |z|(\cos \vphi + i \sin \vphi) = z $$
+
+	Полагая $ \ln z = f(z), \quad e^w = \vphi(w) $, из \eref{analyt:9} находим
+	$$ (e^{\ln z})' = (e^w)' \cdot (\ln z)' $$
+	Пусть $ w = u + iv $
+	$$ (e^w)' = (e^w)_u' = (e^u \cos v + ie^u \sin v)_u' = e^u \cos v + ie^u \sin v = e^w $$
+	Если $ w = \ln z $, то
+	$$ (e^w)' = e^w = e^{\ln z} = z $$
+	$$ \implies (e^{\ln z})' = z(\ln z)' $$
+	Но $ e^{\ln z} = z $
+	$$ \implies (e^{\ln z})' = z' = z_x' = (x + iy)_x' = 1 $$
+	Поэтому
+	\begin{equ}{analyt:16}
+		z(\ln z)' = 1, \qquad (\ln z)' = \frac1z, \qquad z \in D
+	\end{equ}
+
+	Находим при $ \alpha \ne 0, 1, \quad z \in D $:
+	\begin{multline}\lbl{analyt:17}
+		(z^\alpha)' = (e^{\alpha \ln z})' = (e^w)_{w = \alpha \ln z}' \cdot (\alpha \ln z)' = e^{\alpha \ln z} \cdot (\alpha \ln z)_x' = \alpha e^{\alpha \ln z} \cdot (\ln z)_x' = \alpha e^{\alpha \ln z} \cdot (\ln z)' = \\
+		= \alpha e^{\alpha \ln z} \cdot \frac1z = \alpha e^{\alpha \ln z} \cdot e^{-\ln z} = \alpha \cdot e^{(\alpha - 1)\ln z} = \alpha z^{\alpha - 1}
+	\end{multline}
+
+	Здесь использовалась формула $ \dfrac1{e^w} = e^{-w} $. Действительно, если $ w = u + iv $, то
+	\begin{multline*}
+		\frac1{e^w} = \frac1{e^u(\cos v + i\sin v)} = e^{-u} \cdot \frac1{\cos v + i \sin v} = e^{-u} \cdot \frac{\cos v - i \sin v}{\cos^2 v + \sin^2 v} = \\
+		= e^{-u} \big(\cos (-v) + i \sin (-v) \big) = e^{-u - iv} = e^{-w}
+	\end{multline*}
+\end{exmpls}
+
+\section{Аналитичность суммы степенного ряда}
+
+\begin{theorem}
+	Пусть дан степенной ряд
+	\begin{equ}{analyt:18}
+		f(z) = \sum_{n = 0}^\infty c_n(z - z_\circ)^n
+	\end{equ}
+	$ R > 0 $ "--- его радиус сходимости, $ \quad \B $ "--- круг сходимости, $ \quad z \in \B $.
+
+	Тогда $ f \in A(\B) $. \\
+	Существует комплексная производная $ f'(z) $:
+	\begin{equ}{analyt:19}
+		f'(z) = \sum_{n = 0}^\infty nc_n(z - z_\circ)^{n - 1}
+	\end{equ}
+\end{theorem}
+
+\begin{iproof}
+	\item Рассмотрим сначала случай, когда $ z_\circ = 0 $.
+
+	Поскольку $ |z| < R $, $ \quad \exist r : \quad |r| + r < R $. Зафиксируем $ z $ и $ r $. \\
+	Так как $ |z| + r < R $,
+	\begin{equ}{analyt:20}
+		\sum_{n = 0}^\infty |c|(|z| + r)^n < \infty
+	\end{equ}
+	и $ \ol \B_r(z) \sub \B $, то есть
+	$$ \forall w \in \Co : |w| \le r \quad z + w \in \B \quad \implies f(z + w) \text{ абс. сходится} $$
+
+	Докажем, что при $ w \to 0 $ дробь $ \frac{f(z + w) - f(z)}w $ стремится к правой части \eref{analyt:19} с $ z_\circ = 0 $, то есть к сумме $ A \define \sum nc_nz^{n - 1} $. \\
+	Для этого надо показать, что при $ w \to 0 $ бесконечно мала разность
+	$$ \Delta w \define \frac{f(z + w) - f(z)}w - A = \frac1w \sum c_n \big( (z + w)^n - z^n \big) - A = \sum c_n \bigg( \frac{(z + w)^n - z^n}w - nz^{n - 1} \bigg) $$
+	В полученном ряде слагаемы, соответсвующие $ n = 0, 1 $, нулевые. Поэтому
+	$$ |\Delta w| = \bigg| \sum_{n = 2}^\infty c_n \bigg( \frac{(z + w)^n - z^n}w - nz^{n - 1} \bigg) \bigg| \le \sum_{n = 2}^\infty |c_n| \cdot \bigg| \underbrace{\frac{(z + w)^n - z^n}w - nz^{n - 1}}_{\rho_n(w)} \bigg| $$
+	Теперь надо оценить разности $ \rho_n(w) $ при $ n \ge 2 $. Воспользуемся биномом Ньютона:
+	$$ \rho_n(w) = \frac1w \bigg( \sum_{k = 0}^n C_n^k z^{n - k}w^k - z^n \bigg) - nz^{n - 1} = \frac1w \sum_{k = 1}^n C_n^kz^{n - k}w^k - nz^{n- 1} = \frac1w \sum_{k = 2}^n C_n^k z^{n - k}w^k $$
+	Поскольку $ |w| \le r $, отсюда следует нужная нам оценка:
+	$$ |rho_n(w)| = \bigg| w \sum_{k = 2}^n C_n^k z^{n - k}w^{k - 2} \bigg| \le |w| \sum_{k = 2}^n C_n^k|z|^{n - k}|w|^{k - 2} \le |w| \sum_{k = 2}^n C_n^k |z|^{n - k}r^{k - 2} \le \frac{|w|}{r^2}(|z| + r)^n $$
+	Таким образом,
+	$$ |\Delta w| \le \sum_{n = 0}^\infty |c_n| \cdot |\rho_n(w)| \le \frac{|w|}{r^2} \sum_{n = 0}^\infty |c_n| \cdot (|z| + r)^n $$
+	Благодаря неравенству \eref{analyt:20}, отсюда вытекает, что $ \Delta w \underarr{w \to 0} 0 $.
+
+	\item Пусть теперь $ z_\circ \ne 0 $.
+
+	Положим $ \vawe z \define z - \vawe z_\circ $.
+	$$ f(z) = \sum_{n = 0}^\infty c_n(z - z_0)^n = \sum_{n = 0}^\infty c_n \vawe z^n \fed \vawe f(\vawe z), \qquad f(z + w) = \vawe(\vawe z + w) $$
+	Ряд $ \vawe f(\vawe z) $ "--- это первый случай. Продиффиренцируем его:
+	$$ \frac{f(z + w) - f(z)}w = \frac{\vawe f(\vawe z + w) - \vawe f (\vawe z)}w \underarr{w \to 0} \vawe f'(\vawe z) = \sum_{n = 0}^\infty nc_n\vawe z^{n - 1} = \sum_{n = 0}^\infty nc_n(z - z_0)^{n - 1} $$
+\end{iproof}

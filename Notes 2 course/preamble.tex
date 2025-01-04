@@ -1,3 +1,6 @@
+% add file names in logs
+\usepackage{structuredlog}
+
 % basics
 \usepackage[a4paper, portrait, margin=.75in]{geometry}
 
@@ -31,6 +34,12 @@
     linkcolor=black, %choose some color if you want links to stand out
 }
 \urlstyle{same}      % links will be the same font as other text
+
+% russian names for autoref:
+\AtBeginDocument{\renewcommand\figureautorefname{рис.}}
+\AtBeginDocument{\renewcommand\theoremautorefname{теор.}}
+\AtBeginDocument{\renewcommand\lemmaautorefname{лемма}}
+\AtBeginDocument{\renewcommand\definitionautorefname{опр.}}
 
 \usepackage{graphicx}
 \usepackage{multicol}
@@ -316,9 +325,9 @@
 % Ball
 \newcommand\B{\ensuremath{\mathtt{B}}}
 
-% a line of dots (3cm by default)
+% a line of dots (3em by default)
 % https://tex.stackexchange.com/a/332124/358925
-\newcommand\widedots[1][3cm]{\makebox[#1]{\dotfill}}
+\newcommand\widedots[1][3em]{\makebox[#1]{\dotfill}}
 
 % sequence
 \newcommand\seq[3][\infty]{\ensuremath{\Set{#2}_{#3=1}^{#1}}}
@@ -338,7 +347,7 @@
 \newcommand\clamp[2][]{\ensuremath{\big|_{#2}^{#1}}}
 
 % continuous function
-\newcommand\Cont[2][]{\ensuremath{\mathcal{C}^{#1} \bigg( {#2} \bigg) }}
+\newcommand\Cont[2][]{\ensuremath{\mathcal{C}^{#1} \big( {#2} \big) }}
 
 % norm in R^n
 \newcommand\norm[1]{\ensuremath{\left\|{#1}\right\|}}
@@ -384,7 +393,11 @@
 % 1 / 2 or [x] / 2 (DEPRECATED -- this command is broken)
 \newcommand\half[1][1]{\ensuremath{\frac{#1}2}}
 
-\newcommand\TODO[1]{\textcolor{red}{{\Huge TODO:} {#1}} \message{LaTeX Warning: TODO on line \the\inputlineno}}
+\newcommand\TODO[1]{\textcolor{red}{{\Huge TODO:} {#1}} \message{LaTeX Warning: TODO on line \the\inputlineno%
+%
+}}
+
+\newcommand\comment[1]{\textcolor{magenta}{\textit{#1}}}
 
 % "not important"
 \newcommand\nimp[1][\text{если не оговорено иное}]{\textcolor{gray}{#1}}
@@ -394,6 +407,12 @@
 \newcommand\mstring[1]{\texorpdfstring{$ {#1} $}{#1}}
 % \\
 \newcommand\n{\texorpdfstring\\{}}
+
+% polyglossia shorthands
+\AtBeginDocument{\newcommand\compname{\texorpdfstring{"--~}{--}}}
+
+\newcommand\tcir\textasciicircum
+\newcommand\tpst\texorpdfstring
 
 %% set package shorthands
 \let\tset\set
@@ -526,7 +545,7 @@
 \newenvironment{restate}{\vspace{-.5em}\begin{restatebase}}{\end{restatebase}}
 
 \declaretheorem[style=thmblueline, numbered=no, name=Замечание]{remark}
-\declaretheorem[style=thmblueline, numbered=no, name=NB]{note}
+\declaretheorem[style=thmblueline, numbered=no, name=Примечание]{note}
 
 % Basov's control point. It's green, because it's commonly used inside of algorithm, which is blue
 \declaretheorem[style=thmgreenbox, numbered=no, name=Контрольная точка]{control}

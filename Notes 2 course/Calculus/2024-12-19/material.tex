@@ -1,0 +1,136 @@
+\section{Аналитичность суперпозиции аналитических функций}
+
+\begin{theorem}
+	$ E, G \sub \Co $ "--- области, $ \qquad f \in A(E), \quad f(z) \in G \quad \forall z \in E, \qquad \vphi \in A(G) $ \\
+	$ F : E \to \Co, \quad F(z) \define \vphi \big( f(z) \big) $
+
+	Тогда $ F \in A(E) $.
+\end{theorem}
+
+\begin{proof}
+	По определению $ f \in \Cont[1] E, \quad \vphi \in \Cont[1]G $. \\
+	Поэтому, по теореме о матрице Якоби, выполнено соотношение
+	$$ F(z) = \vphi \big( f(z) \big) \in \Cont[1]E $$
+	Фиксируем $ \forall z \in E $. \\
+	Пусть $ \sigma \in \Co, \quad \sigma \ne 0, \quad z + \sigma \in E $. \\
+	Пусть $ w \define f(z), \quad w \in G $.
+
+	Будем использовать теорему об эквивалентных определениях аналитических функций. \\
+	Пусть $ \lambda \in \Co, \quad \lambda \ne 0, \quad w + \lambda \in G $. \\
+	Из условия следует соотношение
+	$$ \vphi(w + \lambda) - \vphi(w) = \vphi'(w) \lambda + r(\lambda), \qquad \frac{|r(\lambda)|}{|\lambda|} \underarr{\lambda \to 0} 0 $$
+	Положим $ r(\lambda) \fed \lambda \delta(\lambda) $. Тогда $ \delta(\lambda) \underarr{\lambda \to 0} 0 $. \\
+	Положим $ \delta(0) \define 0 $. Тогда можно не рассматривать ограничение $ \lambda \ne 0 $ при следующей записи:
+	$$ \vphi(w + \lambda) - \vphi(w) = \vphi'(w)\lambda + \lambda \delta(\lambda) $$
+	(в этих формулах мы пользовались соотношением $ \vphi_w'(w) = \vphi'(w) $). \\
+	Положим $ \lambda \define f(z + \sigma) - f(z) $. Тогда $ f(z + \sigma) = f(z) + \lambda = w + \lambda $
+	\begin{multline*}
+		F(z + \sigma) - F(z) = \vphi \big( f(z + \sigma) \big) - \vphi \big( f(z) \big) = \vphi(w + \lambda) - \vphi(w) = \vphi'(w) \lambda + \lambda \delta(\lambda) = \\
+		= \vphi'(w)\lambda + \bigg( f(z + \sigma) - f(z) \bigg) \delta \bigg( f(z + \sigma) - f(z) \bigg)
+	\end{multline*}
+	$$ \lambda = f(z + \sigma) - f(z) = f'(z)\sigma + \rho(\sigma), \qquad \frac{|\rho(\sigma)|}{|\sigma|} $$
+	Получаем:
+	\begin{multline*}
+		F(z + \sigma) - F(z) = \vphi'(w) \bigg( f'(z) \sigma + \rho(\sigma) \bigg) + \bigg( f(z + \sigma) - f(z) \bigg) \delta \bigg( f(z + \sigma) - f(z) \bigg) = \\
+		= \vphi'(2)f'(z) \sigma + \underbrace{\vphi'(w)\rho(\sigma) + \bigg( f(z + \sigma) - f(z) \bigg) \delta \bigg( f(z + \sigma) - f(z) \bigg)}_{R(\sigma)}
+	\end{multline*}
+	$$ \frac{R(\sigma)}\sigma = \vphi'(w) \frac{\rho(\sigma)}\sigma + \frac{f(z + \sigma) - f(z)}\sigma \delta \bigg( f(z + \sigma) - f(z) \bigg) \underarr{\sigma \to 0} \vphi'(w) \cdot 0 + f'(z) \cdot 0 = 0 $$
+	Значит, $ F \in A(E) $.
+\end{proof}
+
+\begin{implication}
+	Из последних двух выражений и теоремы о равносильных определениях аналитичности получаем равенство
+	\begin{equ}9
+		F'(z) = \bigg( \vphi \big( f(z) \big) \bigg)' = \vphi' \big( f(z) \big) \cdot f'(z)
+	\end{equ}
+\end{implication}
+
+Доказананная теорема, вместе со следствием, позволяют расширить список примеров аналитических функций:
+
+\subsection{Дальнейшие примеры аналитических функций}
+
+\begin{exmpls}
+	\item Если $ P(z) = c_0 + c_1z + \dots + c_nz^n $, то $ e^{P(z)} \in A(\Co) $
+
+	\item Пусть $ D = \Co \setminus (-\infty, 0], \quad \alpha \in \Co, \quad \alpha \ne 0 $ \\
+	Уже проверено, что
+	$$ \ln z \in A(D) \implies \alpha \ln z \in A(D) \implies e^{\alpha \ln z} \in A(D) $$
+
+	Далее полагаем при $ z \in D \quad z^\alpha \define e^{\alpha \ln z} $.
+
+	Рассмотрим случай $ \alpha = 1 $.
+	$$ \ln z \bydef \ln |z| + i\vphi $$
+	$$ e^{\ln z} = e^{\ln |z| + i\vphi} \bydef e^{\ln|z|} \cdot (\cos \vphi + i \sin \vphi) = |z|(\cos \vphi + i \sin \vphi) = z $$
+
+	Полагая $ \ln z = f(z), \quad e^w = \vphi(w) $, из \eref9 находим
+	$$ (e^{\ln z})' = (e^w)' \cdot (\ln z)' $$
+	Пусть $ w = u + iv $
+	$$ (e^w)' = (e^w)_u' = (e^u \cos v + ie^u \sin v)_u' = e^u \cos v + ie^u \sin v = e^w $$
+	Если $ w = \ln z $, то
+	$$ (e^w)' = e^w = e^{\ln z} = z $$
+	$$ \implies (e^{\ln z})' = z(\ln z)' $$
+	Но $ e^{\ln z} = z $
+	$$ \implies (e^{\ln z})' = z' = z_x' = (x + iy)_x' = 1 $$
+	Поэтому
+	\begin{equ}{16}
+		z(\ln z)' = 1, \qquad (\ln z)' = \frac1z, \qquad z \in D
+	\end{equ}
+
+	Находим при $ \alpha \ne 0, 1, \quad z \in D $:
+	\begin{multline}\lbl{17}
+		(z^\alpha)' = (e^{\alpha \ln z})' = (e^w)_{w = \alpha \ln z}' \cdot (\alpha \ln z)' = e^{\alpha \ln z} \cdot (\alpha \ln z)_x' = \alpha e^{\alpha \ln z} \cdot (\ln z)_x' = \alpha e^{\alpha \ln z} \cdot (\ln z)' = \\
+		= \alpha e^{\alpha \ln z} \cdot \frac1z = \alpha e^{\alpha \ln z} \cdot e^{-\ln z} = \alpha \cdot e^{(\alpha - 1)\ln z} = \alpha z^{\alpha - 1}
+	\end{multline}
+
+	Здесь использовалась формула $ \dfrac1{e^w} = e^{-w} $. Действительно, если $ w = u + iv $, то
+	\begin{multline*}
+		\frac1{e^w} = \frac1{e^u(\cos v + i\sin v)} = e^{-u} \cdot \frac1{\cos v + i \sin v} = e^{-u} \cdot \frac{\cos v - i \sin v}{\cos^2 v + \sin^2 v} = \\
+		= e^{-u} \big(\cos (-v) + i \sin (-v) \big) = e^{-u - iv} = e^{-w}
+	\end{multline*}
+\end{exmpls}
+
+\begin{theorem}
+	Пусть дан степенной ряд
+	\begin{equ}{18}
+		f(z) = \sum_{n = 0}^\infty c_n(z - z_\circ)^n
+	\end{equ}
+	$ R > 0 $ "--- его радиус сходимости, $ \quad \B $ "--- круг сходимости, $ \quad z \in \B $.
+
+	Тогда $ f \in A(\B) $. \\
+	Существует комплексная производная $ f'(z) $:
+	\begin{equ}{19}
+		f'(z) = \sum_{n = 0}^\infty nc_n(z - z_\circ)^{n - 1}
+	\end{equ}
+\end{theorem}
+
+\begin{iproof}
+	\item Рассмотрим сначала случай, когда $ z_\circ = 0 $.
+
+	Поскольку $ |z| < R $, $ \quad \exist r : \quad |r| + r < R $. Зафиксируем $ z $ и $ r $. \\
+	Так как $ |z| + r < R $,
+	\begin{equ}{20}
+		\sum_{n = 0}^\infty |c|(|z| + r)^n < \infty
+	\end{equ}
+	и $ \ol \B_r(z) \sub \B $, то есть
+	$$ \forall w \in \Co : |w| \le r \quad z + w \in \B \quad \implies f(z + w) \text{ абс. сходится} $$
+
+	Докажем, что при $ w \to 0 $ дробь $ \frac{f(z + w) - f(z)}w $ стремится к правой части \eref{19} с $ z_\circ = 0 $, то есть к сумме $ A \define \sum nc_nz^{n - 1} $. \\
+	Для этого надо показать, что при $ w \to 0 $ бесконечно мала разность
+	$$ \Delta w \define \frac{f(z + w) - f(z)}w - A = \frac1w \sum c_n \big( (z + w)^n - z^n \big) - A = \sum c_n \bigg( \frac{(z + w)^n - z^n}w - nz^{n - 1} \bigg) $$
+	В полученном ряде слагаемы, соответсвующие $ n = 0, 1 $, нулевые. Поэтому
+	$$ |\Delta w| = \bigg| \sum_{n = 2}^\infty c_n \bigg( \frac{(z + w)^n - z^n}w - nz^{n - 1} \bigg) \bigg| \le \sum_{n = 2}^\infty |c_n| \cdot \bigg| \underbrace{\frac{(z + w)^n - z^n}w - nz^{n - 1}}_{\rho_n(w)} \bigg| $$
+	Теперь надо оценить разности $ \rho_n(w) $ при $ n \ge 2 $. Воспользуемся биномом Ньютона:
+	$$ \rho_n(w) = \frac1w \bigg( \sum_{k = 0}^n C_n^k z^{n - k}w^k - z^n \bigg) - nz^{n - 1} = \frac1w \sum_{k = 1}^n C_n^kz^{n - k}w^k - nz^{n- 1} = \frac1w \sum_{k = 2}^n C_n^k z^{n - k}w^k $$
+	Поскольку $ |w| \le r $, отсюда следует нужная нам оценка:
+	$$ |rho_n(w)| = \bigg| w \sum_{k = 2}^n C_n^k z^{n - k}w^{k - 2} \bigg| \le |w| \sum_{k = 2}^n C_n^k|z|^{n - k}|w|^{k - 2} \le |w| \sum_{k = 2}^n C_n^k |z|^{n - k}r^{k - 2} \le \frac{|w|}{r^2}(|z| + r)^n $$
+	Таким образом,
+	$$ |\Delta w| \le \sum_{n = 0}^\infty |c_n| \cdot |\rho_n(w)| \le \frac{|w|}{r^2} \sum_{n = 0}^\infty |c_n| \cdot (|z| + r)^n $$
+	Благодаря неравенству \eref{20}, отсюда вытекает, что $ \Delta w \underarr{w \to 0} 0 $.
+
+	\item Пусть теперь $ z_\circ \ne 0 $.
+
+	Положим $ \vawe z \define z - \vawe z_\circ $.
+	$$ f(z) = \sum_{n = 0}^\infty c_n(z - z_0)^n = \sum_{n = 0}^\infty c_n \vawe z^n = \fed \vawe f(\vawe z), \qquad f(z + w) = \vawe(\vawe z + w) $$
+	Ряд $ \vawe f(\vawe z) $ "--- это первый случай. Продиффиренцируем его:
+	$$ \frac{f(z + w) - f(z)}w = \frac{\vawe f(\vawe z + w) - \vawe f (\vawe z)}w \underarr{w \to 0} \vawe f'(\vawe z) = \sum_{n = 0}^\infty nc_n\vawe z^{n - 1} = \sum_{n = 0}^\infty nc_n(z - z_0)^{n - 1} $$
+\end{iproof}
