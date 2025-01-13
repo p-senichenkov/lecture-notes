@@ -171,7 +171,7 @@ $$ s = \frac12 (\sigma + \ol \sigma), \qquad t = \frac1{2i}(\sigma - \ol \sigma)
 	$ f \in A(E), \qquad E $ "--- область, $ \qquad z \in E, \qquad \sigma \in \Co, \quad z + \sigma \in \Co $
 
 	Тогда
-	\begin{equ}{analyt:16}
+	\begin{equ}{analyt_props:16}
 		f(z + \sigma) - f(z) = f_z'(z)\sigma + \rho(\sigma), \qquad \frac{|\rho(\sigma)|}{|\sigma|} \underarr{\sigma \to 0} 0
 	\end{equ}
 \end{statement}
@@ -192,28 +192,23 @@ $$ s = \frac12 (\sigma + \ol \sigma), \qquad t = \frac1{2i}(\sigma - \ol \sigma)
 		\item $ f_{\ol z}'(z) = 0 \quad \forall z \in E $
 		\item $ f(z + \sigma) = f_z'(z)\sigma + \rho(\sigma) \quad \forall z \in E, \qquad \frac{|\rho(\sigma)|}{|\sigma|} \underarr{\sigma \to 0} 0 $
 		\item $ \forall z = x + iy $ выполнены уравнения Коши"--~Римана:
-		\begin{equ}{analyt:18}
-			\begin{rcases}
-				u_x'(x, y) = v_y'(x, y) \\
-				u_y'(x, y) = -v_x'(x, y)
-			\end{rcases}
-		\end{equ}
+		$$
+		\begin{rcases}
+			u_x'(x, y) = v_y'(x, y) \\
+			u_y'(x, y) = -v_x'(x, y)
+		\end{rcases} $$
 		\item
-		\begin{equ}{analyt:19}
-			\forall z \in E \quad \exist \limz\sigma \frac{f(z + \sigma) - f(z)}\sigma \in \Co
-		\end{equ}
-		Предел в \eref{analyt:19} называется комплексной призводной функции $ f $ в точке $ z $ и обозначается $ f'(z) $.
+		$$ \forall z \in E \quad \exist \limz\sigma \frac{f(z + \sigma) - f(z)}\sigma \in \Co $$
+		Этот предел называется комплексной призводной функции $ f $ в точке $ z $ и обозначается $ f'(z) $.
 	\end{enumerate}
 \end{theorem}
 
 \begin{iproof}
-	\item Из \eref{analyt:16} следует, что 1. $ \implies $ 2.
+	\item Из \eref{analyt_props:16} следует, что 1. $ \implies $ 2.
 	\item Если выполнено 2., то
 	$$ \frac{f(z + \sigma) - f(z)}\sigma = f_z'(z) + \frac{\rho(\sigma)}\sigma \underarr{\sigma \to 0} f_z'(z), $$
 	поэтому 2. $ \implies $ 4., при этом получаем равенство
-	\begin{equ}{analyt:20}
-		f'(z) = f_z'(z)
-	\end{equ}
+	$$ f'(z) = f_z'(z) $$
 	\item Предположим, что выполнено 4. \\
 	Положим
 	$$ \frac{f(z + \sigma) - f(z)}\sigma \define f'(z) = \delta(\sigma) $$
@@ -333,15 +328,13 @@ $$ s = \frac12 (\sigma + \ol \sigma), \qquad t = \frac1{2i}(\sigma - \ol \sigma)
 	Но $ e^{\ln z} = z $
 	$$ \implies (e^{\ln z})' = z' = z_x' = (x + iy)_x' = 1 $$
 	Поэтому
-	\begin{equ}{analyt:16}
-		z(\ln z)' = 1, \qquad (\ln z)' = \frac1z, \qquad z \in D
-	\end{equ}
+	$$ z(\ln z)' = 1, \qquad (\ln z)' = \frac1z, \qquad z \in D $$
 
 	Находим при $ \alpha \ne 0, 1, \quad z \in D $:
-	\begin{multline}\lbl{analyt:17}
+	\begin{multline*}
 		(z^\alpha)' = (e^{\alpha \ln z})' = (e^w)_{w = \alpha \ln z}' \cdot (\alpha \ln z)' = e^{\alpha \ln z} \cdot (\alpha \ln z)_x' = \alpha e^{\alpha \ln z} \cdot (\ln z)_x' = \alpha e^{\alpha \ln z} \cdot (\ln z)' = \\
 		= \alpha e^{\alpha \ln z} \cdot \frac1z = \alpha e^{\alpha \ln z} \cdot e^{-\ln z} = \alpha \cdot e^{(\alpha - 1)\ln z} = \alpha z^{\alpha - 1}
-	\end{multline}
+	\end{multline*}
 
 	Здесь использовалась формула $ \dfrac1{e^w} = e^{-w} $. Действительно, если $ w = u + iv $, то
 	\begin{multline*}
@@ -380,7 +373,7 @@ $$ s = \frac12 (\sigma + \ol \sigma), \qquad t = \frac1{2i}(\sigma - \ol \sigma)
 	Докажем, что при $ w \to 0 $ дробь $ \frac{f(z + w) - f(z)}w $ стремится к правой части \eref{analyt:19} с $ z_\circ = 0 $, то есть к сумме $ A \define \sum nc_nz^{n - 1} $. \\
 	Для этого надо показать, что при $ w \to 0 $ бесконечно мала разность
 	$$ \Delta w \define \frac{f(z + w) - f(z)}w - A = \frac1w \sum c_n \big( (z + w)^n - z^n \big) - A = \sum c_n \bigg( \frac{(z + w)^n - z^n}w - nz^{n - 1} \bigg) $$
-	В полученном ряде слагаемы, соответсвующие $ n = 0, 1 $, нулевые. Поэтому
+	В полученном ряде слагаемые, соответствующие $ n = 0, 1 $, нулевые. Поэтому
 	$$ |\Delta w| = \bigg| \sum_{n = 2}^\infty c_n \bigg( \frac{(z + w)^n - z^n}w - nz^{n - 1} \bigg) \bigg| \le \sum_{n = 2}^\infty |c_n| \cdot \bigg| \underbrace{\frac{(z + w)^n - z^n}w - nz^{n - 1}}_{\rho_n(w)} \bigg| $$
 	Теперь надо оценить разности $ \rho_n(w) $ при $ n \ge 2 $. Воспользуемся биномом Ньютона:
 	$$ \rho_n(w) = \frac1w \bigg( \sum_{k = 0}^n C_n^k z^{n - k}w^k - z^n \bigg) - nz^{n - 1} = \frac1w \sum_{k = 1}^n C_n^kz^{n - k}w^k - nz^{n- 1} = \frac1w \sum_{k = 2}^n C_n^k z^{n - k}w^k $$

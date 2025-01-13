@@ -32,5 +32,4 @@
 - Computer Science -- Соловьёв И. П.
 - Calculus -- Широков Н. А.
 - Differential equations -- Басов В. В.
-- Educational practice -- Литвинов Ю. В.
 - Geometry -- Солынин А. А.

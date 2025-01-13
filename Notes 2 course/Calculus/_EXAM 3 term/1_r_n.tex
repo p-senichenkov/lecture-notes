@@ -32,8 +32,7 @@
 	\end{multline*}
 
 	\item Возьмём $ \forall X \in \R^m $, такое, что $ \norm{X}_m \le 1 $
-	$$ \norm{AX}_n \le c \cdot \norm{X}_m \bydef[\le] c $$
-	$$ \bdef[\iff]\sup \sup\limits_{\norm{X} \le 1} \norm{AX}_n \le c $$
+	$$ \norm{AX}_n \le c \cdot \norm{X}_m \bydef[\le] c \quad \bdef[\iff]\sup \quad \sup\limits_{\norm{X} \le 1} \norm{AX}_n \le c $$
 \end{eproof}
 
 \section({||A + B|| <= ...; ||AX|| <= ||A|| * ||X||}){$ \norm{A + B} \le \dots $; $ \norm{AX} \le \norm{A} \cdot \norm X $}
@@ -92,14 +91,14 @@
 	\item Пусть
 	$$ X \define \column{x_1}{x_m}, \qquad \norm{X}_m \le 1 $$
 	Тогда
-	\begin{equ}7
-		AX = \column{a_{11}x_1 + ... + a_{1m}x_m}{a_{n1}x_1 + ... + a_{nm}x_m}
+	\begin{equ}{oper_norm:7}
+		AX = \column{a_{11}x_1 + \dots + a_{1m}x_m}{a_{n1}x_1 + \dots + a_{nm}x_m}
 	\end{equ}
 	\begin{remind}
 		Неравенство КБШ:
-		$$ |(A, X)| \le |a_1| \cdot |x_1| + ... + |a_n| \cdot |x_n| \le \sqrt{a_1^2 + ... + a_n^2} \cdot \sqrt{x_1^2 + ... + x_n^2} = \norm{Y} \cdot \norm{X} $$
+		$$ |(A, X)| \le |a_1| \cdot |x_1| + \dots + |a_n| \cdot |x_n| \le \sqrt{a_1^2 + \dots + a_n^2} \cdot \sqrt{x_1^2 + \dots + x_n^2} = \norm{Y} \cdot \norm{X} $$
 	\end{remind}
-	$$ \norm{AX}_n^2 \undereq{\eref7} \sum_{i = 1}^n \bigg( \sum_{j = 1}^m a_{ij}x_j \bigg)^2 \underset{\text{КБШ}}\le \sum_{i = 1}^n \bigg( \sum_{j = 1}^m a_{ij}^2 \bigg) \bigg( \sum_{j = 1}^m \underbrace{x_j^2}_{\bydef[\le] 1} \bigg) \le \sum_{i = 1}^n \sum_{j = 1}^m a_{ij}^2 $$
+	$$ \norm{AX}_n^2 \undereq{\eref{oper_norm:7}} \sum_{i = 1}^n \bigg( \sum_{j = 1}^m a_{ij}x_j \bigg)^2 \underset{\text{КБШ}}\le \sum_{i = 1}^n \bigg( \sum_{j = 1}^m a_{ij}^2 \bigg) \bigg( \sum_{j = 1}^m \underbrace{x_j^2}_{\bydef[\le] 1} \bigg) \le \sum_{i = 1}^n \sum_{j = 1}^m a_{ij}^2 $$
 
 	\item Возьмём $ X \in \R^m $, такой, что $ \norm{X}_m \le 1 $ \\
 	Пусть $ Y = AX \in \R^n $ \\
@@ -117,7 +116,7 @@
 \section{Определение частных производных второго и последующих порядков; теорема о смешанных производных в \tpst{$ \R^2 $}{R\tcir2}}
 
 \begin{definition}
-	$ \Omega \sub \R^{n \ge 2} $ -- открытое, $ \Omega \ne \O, \qquad f : \Omega \to \R, \qquad 1 \le i \le n, \qquad \exist f_{x_i}'(X) \quad \forall X \in \Omega $ \\
+	$ \Omega \sub \R^{n \ge 2} $ "--- открытое, $ \Omega \ne \O, \qquad f : \Omega \to \R, \qquad 1 \le i \le n, \qquad \exist f_{x_i}'(X) \quad \forall X \in \Omega $ \\
 	$ X_0 \in \Omega, \qquad 1 \le j \le n $ \\
 	Получается новая функция $ f_{x_i}' : \Omega \to \R $ \\
 	Пусть $ \exist (f_{x_i}')_{x_j}'(X_0) $ \\
@@ -222,16 +221,16 @@
 \begin{implication}[для $ n > 2 $]
 	$ X_0 \in \R^{n \ge 3}, \qquad X_0 = (x_1^0, ..., x_i^0, ..., x_j^0, ..., x_n^0) $ \\
 	$ f : B_r(X_0) \to \R, \qquad f \in \Cont{B_r(X_0)}, \qquad \forall X \in B_r(X_0) \quad \exist f_{x_i}'(X), f_{x_j}'(X) \in \Cont{B_r(X_0)} $ \\
-	$ \forall X \in B_r(X_0) \quad \exist f_{x_ix_j}''(X), f_{x_jx_i}''(X) $ -- непр. в $ X_0 $
+	$ \forall X \in B_r(X_0) \quad \exist f_{x_ix_j}''(X), f_{x_jx_i}''(X) $ "--- непр. в $ X_0 $
 	$$ \implies f_{x_ix_j}''(X_0) = f_{x_jx_i}''(X_0) $$
 \end{implication}
 
 \begin{proof}
 	$$ F(x_i, x_j) \define f(x_1^0, ..., x_i, ..., x_j, ..., x_n^0) $$
-	$$ F_{x_ix_j}''(X_i, x_j) = f_{x_ix_j}''(x_1^0, ..., x_i, ..., x_j, ..., x_n^0) $$
+	$$ f_{x_ix_j}''(X_i, x_j) = f_{x_ix_j}''(x_1^0, ..., x_i, ..., x_j, ..., x_n^0) $$
 \end{proof}
 
-\begin{statement}
+\begin{statement}\label{stmt:mixed_der:1}
 	$ \Omega \sub \R^{n \ge 2}, \qquad i \ne j, \qquad f \in \Cont{\Omega}, \qquad \forall X \in \Omega \quad f_{x_i}'(X), f_{x_j}'(X) \in \Cont{\Omega} $ \\
 	$ \forall X \in \Omega \quad \exist f_{x_ix_j}''(X), f_{x_jx_i}''(X) \in \Cont{\Omega} $ \\
 	По следствию,
@@ -253,7 +252,7 @@
 
 \section{Классы гладкости}
 
-\begin{definition}[$ \mathcal{C}^r(E) $]
+\begin{definition}
 	$ r \in \N, \qquad E \sub \R^{n \ge 2}, \qquad E $ открыто, $ \qquad f \in \Cont{E} $
 	$$ \forall x_1, ..., x_n \quad \forall X \in E \quad \exist f_{x_j}'(X) $$
 	\begin{itemize}
@@ -272,7 +271,7 @@
 \begin{proof}
 	Докажем \textbf{по индукции}
 	\begin{itemize}
-		\item \textbf{База.} $ r = 2 $ -- доказано в конце прошлой лекции
+		\item \textbf{База.} $ r = 2 $ "--- доказано в \autoref{stmt:mixed_der:1}.
 		\item \textbf{Переход.}
 		Пусть $ f \in \Cont[r + 1]{E} $ \\
 		$ j_k \ne j_{k + 1} $ \\
@@ -298,7 +297,7 @@
 		\begin{equ}{cont:7}
 			\eref{cont:4}, \eref{cont:5}, \eref{cont:6} \implies f_{x_{j_1}...x_{j_k}x_{j_{k + 1}}...x_{j_{r + 1}}}^{(r + 1)}(X) = f_{x_{j_1}...x_{j_{k + 1}}x_{j_k}...x_{j_{r + 1}}}^{(r + 1)}(X) \quad \forall X \in E
 		\end{equ}
-		$ i_1, ..., i_n, \qquad j_k = i_1, \qquad j_k $ -- минимальный \\
+		$ i_1, ..., i_n, \qquad j_k = i_1, \qquad j_k $ "--- минимальный \\
 		Рассмотрим две ситуации:
 		\begin{itemize}
 			\item $ k = 1 $
@@ -317,13 +316,13 @@
 
 \section{Теорема о производных сложной функции специального вида}
 \begin{theorem}
-	$ E \sub \R^{n \ge 2} $ -- открытое, $ \qquad f \in \Cont[r \ge 1]{E}, \qquad Y \in E, \qquad \underset{H \ne \On}{H \in \R^n}, \qquad t \in (-a, a) $ \\
+	$ E \sub \R^{n \ge 2} $ "--- открытое, $ \qquad f \in \Cont[r \ge 1]{E}, \qquad Y \in E, \qquad \underset{H \ne \On}{H \in \R^n}, \qquad t \in (-a, a) $ \\
 	$ Y + tH \in E \quad \forall t \in (-a, a) $
 	\begin{equ}{r_order:10}
 		g(t) \define f(Y + tH)
 	\end{equ}
 	\begin{equ}{r_order:11}
-		\implies g^{(r)}(0) = \sum_{\alpha : |\alpha| = r} C_r^\alpha \partial^\alpha f(Y) H^\alpha
+		\implies g^{(r)}(0) = \sum_{|\alpha| = r} C_r^\alpha \partial^\alpha f(Y) H^\alpha
 	\end{equ}
 \end{theorem}
 
@@ -332,7 +331,7 @@
 	\begin{itemize}
 		\item \textbf{База.} $ r = 1 $ \\
 		То есть, $ |\alpha| = 1 $ \\
-		Если $ \alpha = (\alpha_1, ..., \alpha_n) $, то $ \alpha_1 + ... + \alpha_n = 1, \qquad \alpha_i \in \Z, \quad \alpha_i \ge 0 $ \\
+		Если $ \alpha = (\alpha_1, ..., \alpha_n) $, то $ \alpha_1 + \dots + \alpha_n = 1, \qquad \alpha_i \in \Z, \quad \alpha_i \ge 0 $ \\
 		Значит,
 		$$ \exist \nu :
 		\begin{cases}
@@ -341,7 +340,7 @@
 		\end{cases} $$
 		$$ \alpha = (0, ..., \underset\nu1, ..., 0) \define e_\nu, \qquad 1 \le \nu \le n $$
 		\begin{equ}{r_order:12}
-			C_1^{e_\nu} = \frac{1!}{0! \cdot ... \cdot 1! \cdot ... \cdot 0} = 1
+			C_1^{e_\nu} = \frac{1!}{0! \cdot \dots \cdot 1! \cdot \dots \cdot 0} = 1
 		\end{equ}
 		\begin{equ}{r_order:13}
 			\partial^{e_\nu} f(X) = f_{x_\nu}'(X)
@@ -361,11 +360,11 @@
 		\begin{equ}{r_order:18}
 			\mathcal{D}g(t) = \mathcal{D}f(V)\clamp{V = Y + tH} \cdot \mathcal{D}\Psi(t)
 		\end{equ}
-		Матрица Якоби для отображения $ \R^1 \to \R^1 $ -- матрица $ 1 \times 1 $:
+		Матрица Якоби для отображения $ \R^1 \to \R^1 $ "--- матрица $ 1 \times 1 $:
 		\begin{equ}{r_order:19'}
 			\mathcal{D}g(t) = g'(t)
 		\end{equ}
-		$ f : \R^n \to \R^1 $, значит, её матрица Якоби -- это вектор-строка:
+		$ f : \R^n \to \R^1 $, значит, её матрица Якоби "--- это вектор-строка:
 		\begin{equ}{r_order:19}
 			\mathcal{D}f(V)\clamp{V = Y + tH} = \bigg( f_{x_1}'(Y + tH), ..., f_{x_n}'(Y + tH) \bigg)
 		\end{equ}
@@ -380,7 +379,7 @@
 		$ f \in \Cont[r + 1]E $ \\
 		Рассмотрим мультииндекс $ \beta = (\beta_1, ..., \beta_n), \qquad |\beta| = r + 1 $
 		$$ \beta = (0, ..., \beta_{i_1}, 0, ..., \beta_{i_l}, ..., 0), \qquad \beta_{i_k} \ne 0, \qquad 1 \le k \le l $$
-		То есть, некоторые члены не равны нулю, остальные -- нули \\
+		То есть, некоторые члены не равны нулю, остальные "--- нули \\
 		Пусть
 		$$ \alpha^{(1)} = (0, ..., 0, \beta_{i_1} - 1, \beta_{i_2}, ..., \beta_{i_l}, ..., 0) $$
 		$$ \alpha^{(2)} = (0, ...., \beta_{i_1}, 0, ..., \beta_{i_2} - 1, ..., \beta_{i_l}, ..., 0) $$
@@ -427,7 +426,7 @@
 \section{Формула Тейлора для функции нескольких переменных с ос\tpst{"-}{}татком в форме Лагранжа}
 
 \begin{theorem}
-	$ E \sub \R^{n \ge 2} $ -- открытое, $ \qquad X_0 \in E, \qquad B_\delta(X_0) \sub E, \qquad f \in \Cont[r + 1]E $ \\
+	$ E \sub \R^{n \ge 2} $ "--- открытое, $ \qquad X_0 \in E, \qquad \B_\delta(X_0) \sub E, \qquad f \in \Cont[r + 1]{\B_\delta} $ \\
 	$ H \in \R^n, \qquad \norm{H} < \delta $
 	$$ \implies \exist 0 < c < 1 : f(X_0 + H) = f(X_0) + \sum_{k = 1}^r \sum_{|\alpha| = k} \frac1{\alpha!} \partial^\alpha f(X_0) H^\alpha + \sum_{|\alpha| = r + 1} \frac1{\alpha!} \partial^\alpha f(X_0 + cH) H^\alpha $$
 \end{theorem}
@@ -449,7 +448,7 @@
 \section{Формула Тейлора для функций нескольких переменных с остатком в форме Пеано}
 
 \begin{theorem}
-	$ f : E \to \R^, \qquad E \sub \R^{n \ge 2}, \qquad X_0 \in E, \qquad X_0 \in \omega \sub E, \qquad f \in \Cont[r \ge 1]{\omega} $
+	$ f : E \to \R^, \qquad E \sub \R^{n \ge 2}, \qquad X_0 \in \omega \sub E, \qquad f \in \Cont[r \ge 1]{\omega} $
 	\begin{equ}{taylor_peano:1}
 		\implies f(X_0 + H) = f(X_0) + \sum_{k = 1}^r \sum_{|\alpha| = k} \frac1{\alpha!} \partial^\alpha f(X_0)H^\alpha + \rho(H)
 	\end{equ}
@@ -493,10 +492,10 @@
 	$$ \di[1] f(X, H) \define \di f(X, H) \bydef \sum_{k = 1}^n f_{x_k}'(X)h_k $$
 	$$ \widedots $$
 	Пусть для некоторого $ r \ge 1 $ для функции $ f \in \Cont[r]\omega $ для любых $ X $ и $ \omega $ определена функция
-	$$ \di[r]f(X, H) = \sum_{|\alpha| = r} A_{r,\alpha} \partial^\alpha f(X)H^\alpha, \qquad A_{r,\alpha} \text{ -- некоторые \textbf{определённые} коэффициенты} $$
+	$$ \di[r]f(X, H) = \sum_{|\alpha| = r} A_{r,\alpha} \partial^\alpha f(X)H^\alpha, \qquad A_{r,\alpha} \text{ "--- некоторые \textbf{определённые} коэффициенты} $$
 	$$ A_{1,\alpha} = 1 \quad \forall \alpha : |\alpha| = 1 $$
 	Пусть $ f \in \Cont[r]\omega $. Определим дифференциал порядка $ r + 1 $:
-	$$ \di[r + 1]f(X, H) \define \sum_{|\alpha| = r} A_{r,\alpha} \di \bigg( \partial^\alpha f(X), H \bigg)H^\alpha = \sum_{|\alpha| = r + 1}A_{r + 1,\alpha} \partial^\alpha f(X)H^\alpha $$
+	$$ \di[r + 1]f(X, H) \define \sum_{|\alpha| = r} A_{r,\alpha} \di \bigg( \partial^\alpha f(X, H) \bigg)H^\alpha = \sum_{|\alpha| = r + 1}A_{r + 1,\alpha} \partial^\alpha f(X)H^\alpha $$
 \end{definition}
 
 \section{Вычисление второго дифференциала; положительно и\n отрицательно определённые квадратичные формы, их\n свойства; неопределённые формы}
@@ -530,11 +529,11 @@
 \begin{proof}
 	Будем доказывать \textbf{индукцией} по $ r $:
 	\begin{itemize}
-		\item \textbf{База.} $ r = 1, 2 $ -- только что проверили
+		\item \textbf{База.} $ r = 1, 2 $ "--- только что проверили
 		\item \textbf{Переход.} Пусть это верно для $ r \ge 2 $. Докажем для $ r + 1 $: \\
 		По \textbf{предположению индукции},
 		\begin{equ}{diff_high_order:12}
-			\di[r + 1] f(X, H) \bdefeq{\di[r + 1]} \sum_{|\alpha = 1}C_r^\alpha \di \bigg( \partial^\alpha f(X), H \bigg) H^\alpha = \sum_{|\alpha| = r} C_r^\alpha \bigg( \sum_{\nu = 1}^n (\partial^\alpha f)_{x_\nu}'(X) h_\nu \bigg) H^\alpha
+			\di[r + 1] f(X, H) \bdefeq{\di[r + 1]} \sum_{|\alpha| = 1}C_r^\alpha \di \bigg( \partial^\alpha f(X), H \bigg) H^\alpha = \sum_{|\alpha| = r} C_r^\alpha \bigg( \sum_{\nu = 1}^n (\partial^\alpha f)_{x_\nu}'(X) h_\nu \bigg) H^\alpha
 		\end{equ}
 		В доказательстве формулы для производной порядка $ r $ (в предыдущей лекции, формулы с \eref{r_order:23''} до конца доказательства) было доказано, что
 		$$ \eref{diff_high_order:12} = \sum_{|\alpha| = r + 1} C_{r + 1}^\alpha \partial^\alpha f(X) H^\alpha $$
@@ -554,9 +553,7 @@
 
 \begin{eg}
 	Применим формулу Тейлора с остатком в форме Лагранжа при $ r = 2 $:
-	\begin{equ}{diff_high_order:14}
-		f(X_0 + H) = f(X_0) + \di f(X_0, H) + \half \di[2]f(X_0, H) + \rho(H), \qquad \frac{\rho(H)}{\norm{H}^2} \underarr{H \to \On} 0
-	\end{equ}
+	$$ f(X_0 + H) = f(X_0) + \di f(X_0, H) + \half \di[2]f(X_0, H) + \rho(H), \qquad \frac{\rho(H)}{\norm{H}^2} \underarr{H \to \On} 0 $$
 	Перепишем через двойные суммы (как мы это делали при переходе к дифференциалу порядка 2):
 	$$ f(X_0 + H) = f(X_0) + \sum_{k = 1}^n f_{x_k}'(X_0)h_k + \half \sum_{k = 1}^n \sum_{l = 1}^n f_{x_kx_l}''(X_0)h_kh_l + \rho(H) $$
 	Рассмотрим квадратичную форму
@@ -584,7 +581,7 @@
 \begin{proof}
 	Достаточно доказать \eref{diff_high_order:21}, т. к. для полож. определённой $ B $, форма $ -B(H) $ отрицательно определена \\
 	Рассмотрим единичную сферу $ S \define \set{H \in \R^n | \norm{H} = 1} $ \\
-	$ S $ -- компакт в пространстве $ \R^n $ (это доказывалось, когда рассматривались компакты в $ \R^n $)
+	$ S $ "--- компакт в пространстве $ \R^n $
 	\begin{intuition}
 		$ A(H) \in \Cont{\R^n} $
 	\end{intuition}
@@ -611,15 +608,15 @@
 \section{Достаточное условие наличия или отсутствия локального экстремума функции}
 
 \begin{theorem}
-	$ \omega \sub \R^n $ -- открытое, $ \qquad X_0 \in \omega, \qquad f \in \Cont[2]\omega $ \\
+	$ \omega \sub \R^n $ "--- открытое, $ \qquad X_0 \in \omega, \qquad f \in \Cont[2]\omega $ \\
 	Выполнено необходимое условие локального экстремума, то есть $ f_{x_j}'(X_0) = 0, \quad 1 \le j \le n $
 	\begin{remark}
 		$ \implies \di f(X_0, H) = 0 \quad \forall H $
 	\end{remark}
 	\begin{enumerate}
-		\item\label{th:extremum:4} если $ \di[2] f(X_0, H) $ положтельно определён, то $ X_0 $ -- строгий локальный минимум
+		\item\label{th:extremum:4} если $ \di[2] f(X_0, H) $ положтельно определён, то $ X_0 $ "--- строгий локальный минимум
 
-		\item\label{th:extremum:5} если $ \di[2] f(X_0, H) $ отрицательно определён, то $ X_0 $ -- строгий локальный максимум
+		\item\label{th:extremum:5} если $ \di[2] f(X_0, H) $ отрицательно определён, то $ X_0 $ "--- строгий локальный максимум
 
 		\item\label{th:extremum:6} если $ \di[2] f(X_0, H) $ неопределён, то нет локального экстремума
 	\end{enumerate}
@@ -643,8 +640,9 @@
 	\begin{equ}{extremum:211}
 		\exist \delta > 0 : \forall 0 < \norm{H} < \delta \quad \bigg| \frac{\rho(H)}{\norm{H}^2} \bigg| < \frac{m_1}4 \qquad \iff |\rho(H)| < \frac{m_1}4 \norm{H}^2
 	\end{equ}
+	СНова применим формулу Тейлора с остатком в форме Пеано:
 	\begin{multline*}
-		f(X_0 + H) \undereq{\eref{diff_high_order:14}} f(X_0) + \half\di[2] f(X_0, H) + \rho(H) \ge f(X_0) + \half \di[2] f(X_0, H) - |\rho(H)| \underset{\eref{extremum:29}, \eref{extremum:211}}> \\
+		f(X_0 + H) \undereq T f(X_0) + \half\di[2] f(X_0, H) + \rho(H) \ge f(X_0) + \half \di[2] f(X_0, H) - |\rho(H)| \underset{\eref{extremum:29}, \eref{extremum:211}}> \\
 		> f(X_0) + \half[m_1]\norm{H}^2 - \frac{m_1}4\norm{H}^2 = f(X_0) + \frac{m_1}4\norm{H}^2 > f(X_0)
 	\end{multline*}
 
@@ -680,19 +678,13 @@
 	Рассмотрим
 	$$ f(X_0 + H_2^*) \underset{\eref{extremum:212}, \eref{extremum:214}}\le f(X_0) - \half[p_2]t^2 + |\rho(H)| < f(X_0) - \half[p_2]t^2 + \frac{p_2}4t^2 = f(X_0) - \frac{p_2}4t^2 < f(X_0) $$
 	При этом, $ X_0 + tH_2^* $ тоже лежит в любой окрестности $ X_0 $ \\
-	Значит, локального экстремума нет (по определению локального экстремума)
+	Значит, локального экстремума нет (по определению локального экстремума).
 \end{eproof}
 
 \section{Неравенство Лагранжа для вектор функции}
 
 \begin{statement}
-	$ F : (a, b) \to \R^{n \ge 2}, \qquad F(t) = \column{f_1(t)}{f_n(t)}, \qquad t_0 \in (a, b) $
-	\begin{remind}
-		По теореме из прошлого семестра, $ F $ дифференцируема в $ t_0 $ тогда и только тогда, когда $ f_j(t) $ дифф. в $ t_0 \quad j = 1, ..., n $
-	\end{remind}
-	\begin{remind}
-		$ f_j(t) $ дифф. в $ t_0 $ тогда и только тогда, когда $ \exist f_j'(t_0) $
-	\end{remind}
+	$ F : (a, b) \to \R^{n \ge 2}, \qquad F(t) = \column{f_1(t)}{f_n(t)}, \qquad t_0 \in (a, b), \qquad F $ диффер. в $ t_\circ $
 	$$ \mc{D}F(t_0) = \column{f_1'(t_0)}{f_n'(t_0)} $$
 	\begin{multline*}
 		\underset{\text{(как линейного отображения)}}{\norm{\mc{D}F(t_0)}} = \sup\limits_{
@@ -705,11 +697,10 @@
 \end{statement}
 
 \begin{theorem}[Лагранжа]
-	$ F : [a, b] \to \R^{n \ge 2}, \qquad F \in \Cont{[a, b]} $
+	$ F : [a, b] \to \R^{n \ge 2}, \qquad F \in \Cont{[a, b]}, \qquad \forall t \in (a, b) \quad F $ дифф. в $ t $
 	\begin{remind}
 		$ F \in \Cont{[a, b]} \iff f_j \in \Cont{[a, b]} \quad j = 1, ..., n $
 	\end{remind}
-	$ \forall t \in (a, b) \quad F $ дифф. в $ t $
 	\begin{equ}{mean_value:1}
 		\implies \exist c \in (a, b) : \norm{F(b) - F(a)}_n \le \norm{\mc{D}F(c)}_n(b - a)
 	\end{equ}
@@ -717,28 +708,26 @@
 
 \begin{proof}
 	Возьмём
-	\begin{equ}{mean_value:2}
-		\vphi(t) \define F(t)^T \bigg( F(b) - F(a) \bigg) = f_1(t) \bigg( f_1(b) - f_1(a) \bigg) + ... + f_n(t) \bigg( f_n(b) - f_n(a) \bigg)
-	\end{equ}
-	Будем считать, что $ F(b) \ne F(a) $ (иначе -- очевидно) \\
+	$$ \vphi(t) \define F(t)^T \bigg( F(b) - F(a) \bigg) = f_1(t) \bigg( f_1(b) - f_1(a) \bigg) + \dots + f_n(t) \bigg( f_n(b) - f_n(a) \bigg) $$
+	Будем считать, что $ F(b) \ne F(a) $ (иначе "--- очевидно). \\
 	По напоминанию из условия теоремы, $ \vphi \in \Cont{[a, b]} $. Значит, $ \forall t \in (a, b) \quad \exist \vphi'(t) $
 	\begin{equ}{mean_value:4}
-		\vphi'(t) = f_1'(t) \bigg( f_1(b) - f_1(a) \bigg) + ... + f_n'(t) \bigg( f_n(b) - f_n(a) \bigg)
+		\vphi'(t) = f_1'(t) \bigg( f_1(b) - f_1(a) \bigg) + \dots + f_n'(t) \bigg( f_n(b) - f_n(a) \bigg)
 	\end{equ}
 	К $ \vphi $ можно применить теорему Лагранжа из первого семестра:
 	\begin{equ}{mean_value:5}
-		\exist c \in (a, b) : \vphi(b) - \vphi(a) = \vphi'(c)(b - a)
+		\exist c \in (a, b) : \quad \vphi(b) - \vphi(a) = \vphi'(c)(b - a)
 	\end{equ}
 	\begin{multline}\lbl{mean_value:7}
-		\vphi(b) - \vphi(a) \undereq{\eref{mean_value:2}} \bigg\lgroup f_1(b) \bigg(f_1(b) - f_1(a) \bigg) + \widedots[4em] \bigg\rgroup - \bigg\lgroup f_1(a) \bigg( f_1(b) - f_1(a) \bigg) + \widedots[4em] \bigg\rgroup = \\
-		= \bigg( f_1(b) - f_1(a) \bigg)^2 + ... + \bigg( f_n(b) - f_n(a) \bigg)^2 = \norm{F(b) - F(a)}_n^2
+		\vphi(b) - \vphi(a) \bdefeq\vphi \bigg\lgroup f_1(b) \bigg(f_1(b) - f_1(a) \bigg) + \dots \bigg\rgroup - \bigg\lgroup f_1(a) \bigg( f_1(b) - f_1(a) \bigg) + \dots \bigg\rgroup = \\
+		= \bigg( f_1(b) - f_1(a) \bigg)^2 + \dots + \bigg( f_n(b) - f_n(a) \bigg)^2 = \norm{F(b) - F(a)}_n^2
 	\end{multline}
 	Применим к \eref{mean_value:4} неравенство КБШ:
-	\begin{multline}\lbl{mean_value:8}
-		|\vphi'(c)| \le \bigg\lgroup \bigg( f_1'(c) \bigg)^2 + ... + \bigg(f_n'(c) \bigg)^2 \bigg\rgroup^\frac12 \cdot \bigg\lgroup \bigg( f_1(b) - f_1(a) \bigg)^2 + ... + \bigg( f_n(b) - f_n(a) \bigg)^2 \bigg\rgroup^\frac12 = \\
+	\begin{multline*}
+		|\vphi'(c)| \le \bigg\lgroup \bigg( f_1'(c) \bigg)^2 + \dots + \bigg(f_n'(c) \bigg)^2 \bigg\rgroup^\frac12 \cdot \bigg\lgroup \bigg( f_1(b) - f_1(a) \bigg)^2 + \dots + \bigg( f_n(b) - f_n(a) \bigg)^2 \bigg\rgroup^\frac12 = \\
 		= \norm{\mc{D}F(c)} \cdot \norm{F(b) - F(a)}
-	\end{multline}
-	$$ \eref{mean_value:7}, \eref{mean_value:8} \implies \norm{F(b) - F(a)}^2 \le \norm{\mc{D}F(c)} \cdot \norm{F(b) - F(a)} \implies \eref{mean_value:1} $$
+	\end{multline*}
+	$$ \underimp{\eref{mean_value:7}} \norm{F(b) - F(a)}^2 \le \norm{\mc{D}F(c)} \cdot \norm{F(b) - F(a)} \implies \eref{mean_value:1} $$
 \end{proof}
 
 \section{Теорема об обратимости линейного оператора, близкого по норме разности к обратимому оператору}
@@ -754,10 +743,10 @@
 \end{remind}
 
 \begin{theorem}
-	$ \mc{A} : \R^{n \ge 2} \to \R^n $ -- линейное, т. е. $ \mc{A}(X) = AX, \quad X \in \R^n $ \\
-	$ A $ обратимо, т. е. $ \exist D : AD = I $ и $ DA = I $ ($ D $ называется обратной матрицей и обозначается $ D = A^{-1} $) \\
-	$ \norm{A^{-1}} = \frac1\alpha, \quad \alpha > 0, \qquad \norm{B - A} = \beta, \quad 0 < \beta < \alpha $ \\
-	Тогда $ B $ обратима и $ \norm{A^{-1} - B^{-1}} \le \dfrac{\beta}{\alpha(\beta - \alpha)} $
+	$ \mc{A} : \R^{n \ge 2} \to \R^n $ "--- линейное, \ie $ \mc{A}(X) = AX, \quad X \in \R^n, \qquad A $ обратима
+	$$ \norm{A^{-1}} = \frac1\alpha, \quad \alpha > 0, \qquad \norm{B - A} = \beta, \quad 0 < \beta < \alpha $$
+	Тогда $ B $ обратима и
+	$$ \norm{A^{-1} - B^{-1}} \le \dfrac{\beta}{\alpha(\beta - \alpha)} $$
 \end{theorem}
 
 \begin{iproof}
@@ -774,7 +763,7 @@
 		\norm{BX - AX} = \norm{(B - A)X} \le \norm{B - A}\norm{X}_n
 	\end{equ}
 	\begin{equ}{reversible_close:12}
-		\norm{BX}_n \underset{\eref{reversible_close:10}}\ge \underbrace{\alpha \norm{X}}_{\eref{reversible_close:9}} - \underbrace{\norm{B - A}\norm{X}}_{\eref{reversible_close:11}} = \underbrace{(\alpha - \beta)}_{> 0} \norm{X}
+		\norm{BX}_n \underset{\eref{reversible_close:10}}\ge \underbrace{\alpha \norm{X}}_{\eref{reversible_close:9}} - \underbrace{\norm{B - A}\norm{X}}_{\eref{reversible_close:11}} \bdefeq\beta \underbrace{(\alpha - \beta)}_{> 0} \norm{X}
 	\end{equ}
 	Это означает, что $ B $ обратима (по второй теореме из алгебры)
 	\item Докажем соотношение для $ \norm{A^{-1} - B^{-1}} $: \\
@@ -804,8 +793,8 @@
 
 \begin{theorem}
 	$ E \sub \R^{n \ge 2}, \qquad E $ открыто, $ \qquad X_0 \in E, \qquad F : E \to \R^1 $ \\
-	$ F \in \Cont[1]E $, т. е. все координатные функции $ \in \mc{C}^{1}, \qquad Y_0 = F(X_0), \qquad \mc{D}F(X_0) $ обратима
-	$$ \implies \exist U \text{ -- окрестность } X_0, V \text{ -- окрестность } Y_0 :
+	$ \bm{F \in \Cont[1]E}, \qquad Y_0 = F(X_0), \qquad \bm{\mc{D}F(X_0)} $ \bt{обратима}
+	$$ \implies \exist U \text{ "--- окрестность } X_0, ~ V \text{ "--- окрестность } Y_0 :
 	\begin{cases}
 		F\clamp{U} \text{ обратимо} \\
 		F(U) = V \\
@@ -819,15 +808,15 @@
 	Обозначим $ F = \column{f_1}{f_n} $
 	$$ \mc{D}F(X) =
 	\begin{bmatrix}
-		f_{1x_1}'(X) & ... & f_{1x_n}'(X) \\
+		f_{1x_1}'(X) & \dots & f_{1x_n}'(X) \\
 		. & . & . \\
-		f_{1x_1}'(X) & ... & f_{nx_n}'(X)
+		f_{1x_1}'(X) & \dots & f_{nx_n}'(X)
 	\end{bmatrix} $$
 	$$ \mc{D}F(X) - \mc{D}F(X_0) =
 	\begin{bmatrix}
-		f_{1x_1}'(X) - f_{1x_1}'(X_0) & ... & f_{1x_n}'(X) - f_{1x_n}'(X_0) \\
+		f_{1x_1}'(X) - f_{1x_1}'(X_0) & \dots & f_{1x_n}'(X) - f_{1x_n}'(X_0) \\
 		. & . & . \\
-		f_{nx_1}'(X) - f_{nx_1}'(X_0) & ... & f_{nx_n}'(X) - f_{nx_n}'(X_0)
+		f_{nx_1}'(X) - f_{nx_1}'(X_0) & \dots & f_{nx_n}'(X) - f_{nx_n}'(X_0)
 	\end{bmatrix} $$
 	По свойству \eref{matr_norm:6} нормы матрицы,
 	$$ \norm{\mc{D}F(X) - A} \bdefeq{A} \norm{\mc{D}F(X) - \mc{D}F(X_0)} \le \bigg\lgroup \sum_{
@@ -837,17 +826,17 @@
 		\end{subarray}} \bigg( f_{ix_j}'(X) - f_{ix_j}'(X_0) \bigg)^2 \bigg\rgroup^{\frac12} $$
 	$$ \underimp{F \in \mc{C}^1} \norm{\mc{D}F(X) - \mc{D}F(X_0)} \underarr{X \to X_0} 0 $$
 	\begin{equ}{reversible:25}
-		\implies \exist r > 0 : \forall X \in B_r(X_0) \quad \norm{\mc{D}F(X) - A} < 2\lambda
+		\implies \exist r > 0 : \quad \forall X \in \B_r(X_0) \quad \norm{\mc{D}F(X) - A} < 2\lambda
 	\end{equ}
-	Положим $ U \define B_r(X_0) $
+	Положим $ U \define \B_r(X_0) $
 \end{proof}
 
 \section{Теорема об обратимом отображении: взаимная однозначность \tpst{$ F \clamp U $}{F|U}}
 
 \begin{theorem}
 	$ E \sub \R^{n \ge 2}, \qquad E $ открыто, $ \qquad X_0 \in E, \qquad F : E \to \R^1 $ \\
-	$ F \in \Cont[1]E $, т. е. все координатные функции $ \in \mc{C}^{1}, \qquad Y_0 = F(X_0), \qquad \mc{D}F(X_0) $ обратима
-	$$ \implies \exist U \text{ -- окрестность } X_0, V \text{ -- окрестность } Y_0 :
+	$ \bm{F \in \Cont[1]E}, \qquad Y_0 = F(X_0), \qquad \bm{\mc{D}F(X_0)} $ \bt{обратима}
+	$$ \implies \exist U \text{ "--- окрестность } X_0, ~ V \text{ "--- окрестность } Y_0 :
 	\begin{cases}
 		F\clamp{U} \text{ обратимо} \\
 		F(U) = V \\
@@ -869,7 +858,7 @@
 		\path[name path=circ] (0, 0) circle [radius=1];
 
 		\draw[->, blue, thick, name intersections={of=X_1 and circ}] (0, 0) -- (intersection-1) node[anchor=north west]{$ tX_1 $};
-		\draw[->, blue, thick, name intersections={of=X_1 and circ}] (intersection-1) -- +(150:0.6) node[above]{$ (1 - t)X_2 $};
+		\draw[->, blue, thick, name intersections={of=X_1 and circ}] (intersection-1) -- +(150:0.7) node[above]{$ (1 - t)X_2 $};
 	\end{tikzpicture}
 	\caption{Выпуклость шара}
 	\label{fig:1}
@@ -880,10 +869,6 @@
 	$$ \implies tX_1 + (1 - t)X_2 \in U $$
 	(см. \autoref{fig:1})
 \end{statement}
-
-\begin{remark}
-	Используем наши обозначения (т. е. $ U = B_r(X_0) $)
-\end{remark}
 
 \begin{proof}
 	\begin{multline*}
@@ -902,22 +887,23 @@
 	$$ tx_1 + (1 - t)X_2 = tX + tH + (1 - t)X = X + tH $$
 \end{proof}
 
-\begin{proof}[Инъективность\comment? $ F $]
+% so that `proof`s don't "stick" to each other:
+\begin{replacementproof}[Инъективность $ F $]
+	\hfill \\
+	\TODO{А где сюръективность?} \\
 	Далее будем рассматривать $ F $ только на $ U $ (т. е. будем писать $ F \define F\clamp{U} $) \\
 	Возьмём $ X \in U $ и $ H \ne \On $, такие что $ X + H \in U $ \\
 	Докажем, что $ F(X + H) - F(X) \stackrel?\ne \On $. Это и будет означать инъективность \\
 	Возьмём $ t \in [0, 1] $ и $ P(t) \define F(X + tH) - tAH $ \\
 	Это вектор-функция $ P : [0, 1] \to \R^n $
-	\begin{equ}{reversible:26}
-		\mc{D}P(t) \bdefeq{P} \mc{D} \bigg( F(X + tH) \bigg) - \mc{D}(tAH)
-	\end{equ}
+	$$ \mc{D}P(t) \bdefeq{P} \mc{D} \bigg( F(X + tH) \bigg) - \mc{D}(tAH) $$
 	Положим $ q(t) \define X + tH $ \\
-	Теперь можно переписать \eref{reversible:26}:
+	Теперь можно переписать последнее соотношение:
 	\begin{equ}{reversible:27}
 		\mc{D}P(t) = \mc{D} \bigg( F \big( q(t) \big) \bigg) - \mc{D}(tAH)
 	\end{equ}
 	\begin{remind}
-		Мы уже \comment{где-то} доказали, что для $ Y \in \R^n $ и отображения $ t \mapsto tY $ выполнено $ \mc{D}(tY) = Y $
+		Мы уже доказали, что для $ Y \in \R^n $ и отображения $ t \mapsto tY $ выполнено $ \mc{D}(tY) = Y $
 	\end{remind}
 	$$ \mc{D}(tAH) = AH, \qquad \mc{D}q(t) = H $$
 	$$ \mc{D}F \bigg( q(t) \bigg) = \mc{D}F \bigg( q(t) \bigg)\mc{D}q(t) = \mc{D}F(X + tH)H $$
@@ -946,14 +932,14 @@
 		\norm{F(X + H) - F(X)} = \norm{AH + \bigg( F(X + H) - F(X) - AH \bigg)} \ge \\
 		\ge \norm{AH} - \norm{F(X + H) - F(X) - AH} \underset{\eref{reversible:213}}> \norm{AH} - \half\norm{AH} = \half\norm{AH} \underset{\eref{reversible:29}}\ge 2\lambda \norm{H} > 0
 	\end{multline}
-\end{proof}
+\end{replacementproof}
 
 \section{Теорема об обратимом отображении: отображение \mstring F открыто}
 
 \begin{theorem}
 	$ E \sub \R^{n \ge 2}, \qquad E $ открыто, $ \qquad X_0 \in E, \qquad F : E \to \R^1 $ \\
-	$ F \in \Cont[1]E $, т. е. все координатные функции $ \in \mc{C}^{1}, \qquad Y_0 = F(X_0), \qquad \mc{D}F(X_0) $ обратима
-	$$ \implies \exist U \text{ -- окрестность } X_0, V \text{ -- окрестность } Y_0 :
+	$ \bm{F \in \Cont[1]E}, \qquad Y_0 = F(X_0), \qquad \bm{\mc{D}F(X_0)} $ \bt{обратима}
+	$$ \implies \exist U \text{ "--- окрестность } X_0, ~ V \text{ "--- окрестность } Y_0 :
 	\begin{cases}
 		F\clamp{U} \text{ обратимо} \\
 		F(U) = V \\
@@ -962,19 +948,15 @@
 \end{theorem}
 
 \begin{lemma}
-	$ U = B_r(X_0), \qquad X_1 \in U, \qquad 0 < \rho < r - \norm{X_0 - X_1}, \qquad S = B_\rho(X_1) $
+	$ U = B_r(X_0), \qquad X_1 \in U, \qquad 0 < \rho < r - \norm{X_0 - X_1}, \qquad S = \B_\rho(X_1) $
 	\begin{remark}
-		В силу последних двух условий, $ S \sub U $ (т. к. $ U \bydef B_r(X_0) $)
+		В силу последних двух условий, $ S \sub U $.
 	\end{remark}
 	$ Y_1 = F(X_1) $
 	\begin{equ}{reversible:1}
-		\implies B_{\lambda\rho}(Y_1) \sub F(S)
+		\implies \B_{\lambda\rho}(Y_1) \sub F(S)
 	\end{equ}
 \end{lemma}
-
-\begin{note}
-	$ r, \lambda, X_0, F $ из теоремы и первых двух шагов доказательства
-\end{note}
 
 \begin{figure}[!ht]
 	\begin{tikzpicture}[>=Stealth]
@@ -1004,9 +986,9 @@
 	\end{equ}
 	По условию, $ Y_1 \in F(S) $ (т. к. это образ $ X_1 $) \\
 	Возьмём $ Y \ne Y_1, \quad Y \in B_{\lambda\rho}(Y_1) $ \\
-	$ S $ -- открытый шар \\
+	$ S $ "--- открытый шар \\
 	Рассмотрим функцию $ k(X) \define \norm{F(X) - Y}, \qquad X \in \ol{S} $ \\
-	$ \ol{S} $ -- замкнутый шар, а значит, компакт. Поэтому $ k \in \Cont{\ol{S}} $ \\
+	$ \ol{S} $ "--- замкнутый шар, а значит, компакт. Поэтому $ k \in \Cont{\ol{S}} $ \\
 	По второй теореме Вейерштрасса, $ k $ достигает минимального значения:
 	\begin{equ}{reversible:4}
 		\exist X_* \in \ol{S} : k(X_*) \le k(X) \quad \forall X \in \ol{S}
@@ -1086,12 +1068,12 @@
 	\begin{proof}
 		$$ \mc{D}F(X_*) =
 		\begin{pmatrix}
-			f_{1x_1}'(X_*) & ... & f_{1x_n}'(X_*) \\
+			f_{1x_1}'(X_*) & \dots & f_{1x_n}'(X_*) \\
 			. & . & . \\
-			f_{nx_1}'(X_*) & ... & f_{nx_n}'(X_*)
+			f_{nx_1}'(X_*) & \dots & f_{nx_n}'(X_*)
 		\end{pmatrix} $$
 		\begin{multline*}
-			A\mc{D}F(X_*) = \left[ \bigg( f_1(X_*) - y_1 \bigg) f_{1x_1}'(X_*) + ... + \bigg( f_n(X_*) - y_n \bigg) f_{nx_1}'(X_*), \widedots[3em] \right] = \\
+			A\mc{D}F(X_*) = \left[ \bigg( f_1(X_*) - y_1 \bigg) f_{1x_1}'(X_*) + \dots + \bigg( f_n(X_*) - y_n \bigg) f_{nx_1}'(X_*), \widedots[3em] \right] = \\
 			= \left[ \sum_{i = 1}^n \bigg( f_i(X_*) - y_i \bigg)f_{ix_1}(X_*), \widedots[3em] \right] = \eref{reversible:17'}
 		\end{multline*}
 	\end{proof}
@@ -1121,15 +1103,15 @@
 \end{proof}
 
 \begin{definition}
-	$ \Lambda \sub \R^n $ -- открытое, $ \qquad M : \Lambda \to \R^n $ \\
-	Будем говорить, что $ M $ -- открытое отображение, если
-	$$ \forall \underset{\omega \text{ -- откр.}}{\omega \sub \Lambda} \quad M(\omega) \text{ открытое} $$
+	$ \Lambda \sub \R^n $ "--- открытое, $ \qquad M : \Lambda \to \R^n $ \\
+	Будем говорить, что $ M $ "--- открытое отображение, если
+	$$ \forall \underset{\omega \text{ "--- откр.}}{\omega \sub \Lambda} \quad M(\omega) \text{ открытое} $$
 	(то есть, открытые отображения переводятся в открытые)
 \end{definition}
 
 Приведём определение непрерывного отображения, которое используется в топологии (частный его случай для евклидова пространства):
 \begin{definition}
-	$ \Lambda \sub \R^n $ -- открытое, $ \qquad M : \Lambda \to \R^n $ \\
+	$ \Lambda \sub \R^n $ "--- открытое, $ \qquad M : \Lambda \to \R^n $ \\
 	$ M $ непрерывно, если прообраз любого открытого множества открыт
 \end{definition}
 
@@ -1143,17 +1125,17 @@
 
 \begin{proof}[$ F $ открыто]
 	Применяем лемму \\
-	Докажем, что $ F $ -- открытое отображение:
+	Докажем, что $ F $ "--- открытое отображение:
 	\begin{itemize}
-		\item По условию, $ V = F(U) $. Докажем, что $ V $ -- открытое множество: \\
+		\item По условию, $ V = F(U) $. Докажем, что $ V $ "--- открытое множество: \\
 		Возьмём $ Y_1 \in F(U) $. Тогда $ \exist X_1 \in U : F(X_1) = Y_1 $ \\
 		Возьмём $ 0 < \rho < r - \norm{X_1 - X_0} $ \\
 		Пусть $ S \define B_{\rho}(X_1) $ \\
 		Тогда, по шагу 3,
 		$$ B_{\lambda\rho}(Y_1) \sub F \bigg( B_\rho(X_1) \bigg) \sub V = F(U) $$
 		Это и есть определение открытого множества
-		$$ \implies V \text{ -- откр.} $$
-		\item Возьмём $ \omega \in U $ -- открытое. Нужно доказать, что $ F(\omega) $ открыто: \\
+		$$ \implies V \text{ "--- откр.} $$
+		\item Возьмём $ \omega \in U $ "--- открытое. Нужно доказать, что $ F(\omega) $ открыто: \\
 		Возьмём $ Y_2 \in F(\omega) $ \\
 		Тогда $ \exist X_2 : F(X_2) = Y_2 $ \\
 		Поскольку $ X_2 \in \omega $,
@@ -1168,8 +1150,8 @@
 
 \begin{theorem}
 	$ E \sub \R^{n \ge 2}, \qquad E $ открыто, $ \qquad X_0 \in E, \qquad F : E \to \R^1 $ \\
-	$ F \in \Cont[1]E $, т. е. все координатные функции $ \in \mc{C}^{1}, \qquad Y_0 = F(X_0), \qquad \mc{D}F(X_0) $ обратима
-	$$ \implies \exist U \text{ -- окрестность } X_0, V \text{ -- окрестность } Y_0 :
+	$ \bm{F \in \Cont[1]E}, \qquad Y_0 = F(X_0), \qquad \bm{\mc{D}F(X_0)} $ \bt{обратима}
+	$$ \implies \exist U \text{ "--- окрестность } X_0, ~ V \text{ "--- окрестность } Y_0 :
 	\begin{cases}
 		F\clamp{U} \text{ обратимо} \\
 		F(U) = V \\
@@ -1178,7 +1160,7 @@
 \end{theorem}
 
 \begin{proof}[непрерывность $ \Phi $]
-	На втором шаге мы выяснили, что $ F\clamp{U} $ -- биекция. Для любой биекции можно определить обратное отображение:
+	На втором шаге мы выяснили, что $ F\clamp{U} $ "--- биекция. Для любой биекции можно определить обратное отображение:
 	$$ \exist \Phi : V \to \R^n :
 	\begin{cases}
 		\Phi(V) = U \\
@@ -1186,10 +1168,10 @@
 		\Phi \bigg( F(X) \bigg) = X \quad \forall X \in V
 	\end{cases} $$
 	Проверим, что $ \Phi \in \Cont{V} $: \\
-	По определнию из топологии, нужно доказать, что $ \forall \omega \sub U $ -- откр. $ \quad $ прообраз $ \omega $ открыт \\
+	По определнию из топологии, нужно доказать, что $ \forall \omega \sub U $ "--- откр. $ \quad $ прообраз $ \omega $ открыт \\
 	Напишем определение прообраза $ \omega $ при $ \Phi $:
 	$$ \omega^{-1} = \set{ Y \in V : \Phi(Y) \in \omega } $$
-	Если $ F $ -- биекция, то и $ \Phi $ -- биекция:
+	Если $ F $ "--- биекция, то и $ \Phi $ "--- биекция:
 	$$ \Phi(Y) \in \omega \underiff{\text{биективность } \Phi} F \bigg( \Phi(Y) \bigg) \in F(\omega) \iff Y \in F(\omega) $$
 	Теперь можно переписать определение прообраза:
 	$$ \omega^{-1} = \set{Y : Y \in F(\omega)} $$
@@ -1247,8 +1229,8 @@
 
 \begin{theorem}
 	$ E \sub \R^{n \ge 2}, \qquad E $ открыто, $ \qquad X_0 \in E, \qquad F : E \to \R^1 $ \\
-	$ F \in \Cont[1]E $, т. е. все координатные функции $ \in \mc{C}^{1}, \qquad Y_0 = F(X_0), \qquad \mc{D}F(X_0) $ обратима
-	$$ \implies \exist U \text{ -- окрестность } X_0, V \text{ -- окрестность } Y_0 :
+	$ \bm{F \in \Cont[1]E}, \qquad Y_0 = F(X_0), \qquad \bm{\mc{D}F(X_0)} $ \bt{обратима}
+	$$ \implies \exist U \text{ "--- окрестность } X_0, ~ V \text{ "--- окрестность } Y_0 :
 	\begin{cases}
 		F\clamp{U} \text{ обратимо} \\
 		F(U) = V \\
@@ -1266,12 +1248,10 @@
 	Матрица Якоби состоит из частных производных. Все они непрерывны по условию. Значит,
 	$$ \det \mc{D}F(X) \in \Cont{U} $$
 	Два последних выражения означают, что
-	\begin{equ}{reverse:29}
-		\frac1{\det\mc{D}F(X)} \in \Cont{U}
-	\end{equ}
-	В силу шага 5,
+	$$ \frac1{\det\mc{D}F(X)} \in \Cont{U} $$
+	В силу предыдущего шага,
 	\begin{equ}{reverse:30}
-		\eref{reverse:29} \implies \frac1{\det\mc{D}F \bigg( \Phi(Y) \bigg)} \in \Cont{V}
+		\implies \frac1{\det\mc{D}F \bigg( \Phi(Y) \bigg)} \in \Cont{V}
 	\end{equ}
 	Алгебраические дополнения состоят из сумм и произведений частных производных в точке $ Y $. Значит, они (дополнения) непрерывны, а значит
 	$$ \eref{reverse:28}, \eref{reverse:30} \implies \mc{D}F(Y) \in \Cont{V} \iff \Phi \in \Cont[1]{V} $$
@@ -1280,21 +1260,17 @@
 \section{Теорема об открытом отображении}
 
 \begin{theorem}
-	$ G \sub \R^n $ -- открыто, $ \qquad F : G \to \R^n, \qquad F \in \Cont[1]G, \qquad \det \mc{D}F(X) \ne 0 \quad \forall X \in G $ \\
+	$ G \sub \R^n $ "--- открыто, $ \qquad F : G \to \R^n, \qquad F \in \Cont[1]G, \qquad \det \mc{D}F(X) \ne 0 \quad \forall X \in G $ \\
 	Тогда $ F $ открыто
 \end{theorem}
 
-\begin{remark}
-	Ничего о взаимной однозначности $ F $ не говорится
-\end{remark}
-
 \begin{proof}
-	Пусть $ \omega \sub G $ -- открыто \\
+	Пусть $ \omega \sub G $ "--- открыто \\
 	Пусть $ S = F(\omega) $ \\
 	Нужно доказать, что $ S $ открыто \\
 	Возьмём $ \forall Y \in S $ \\
-	Поскольку $ S $ -- это образ $ \omega $,
-	$$ \exist X \in \omega : F(X) = Y \qquad (X \text{ не обязательно единственный -- берём любой)} $$
+	Поскольку $ S $ "--- это образ $ \omega $,
+	$$ \exist X \in \omega : F(X) = Y \qquad (X \text{ не обязательно единственный "--- берём любой)} $$
 	Поскольку $ \omega $ открыто,
 	$$ \exist r_0 > 0 : B_{r_0}(X) \sub \omega $$
 	Определим $ \lambda $ такое, что
@@ -1311,9 +1287,512 @@
 
 \section{Теорема о неявной функции (отображении): линейный вариант}
 
-\TODO{Надо выяснить, где там линейный вариант}
+Рассматриваем пространства $ \R^{n \ge 1}, ~ \R^{m \ge 1}, ~ \R^{n + m} $. \\
+Введём обозначения:
+$$ X \define \column{x_1}{x_n}, \qquad Y \define \column{y_1}{y_n}, \qquad Z \define
+\begin{bmatrix}
+	X \\
+	Y
+\end{bmatrix} =
+\begin{bmatrix}
+	x_1 \\
+	\vdots \\
+	x_n \\
+	y_1 \\
+	\vdots \\
+	y_n
+\end{bmatrix} $$
+
+Введём обозначение для матриц:
+$$ A =
+\begin{bmatrix}
+	a_{11} & \dots & a_{1n} \\
+	. & . & . \\
+	a_{n1} & \dots & a_{nn}
+\end{bmatrix}, \qquad B =
+\begin{bmatrix}
+	b_{11} & \dots & b_{1m} \\
+	. & . & . \\
+	b_{n1} & \dots & b_{nm}
+\end{bmatrix}, \qquad [AB] \define
+\begin{bmatrix}
+	a_{11} & \dots & a_{1n} & b_{11} & \dots & b_{1m} \\
+	. & . & . & . & . & . \\
+	a_{n1} & \dots & a_{nm} & b_{1n} & \dots & b_{nm}
+\end{bmatrix} $$
+
+Пусть $ \det A \ne 0 $ и пусть выполнено
+\begin{equ}{implicit_lin:1}
+	[AB]
+	\begin{bmatrix}
+		X \\
+		Y
+	\end{bmatrix} = \On
+\end{equ}
+То есть, $ AX + BY = \On $
+\begin{equ}{implicit_lin:3}
+	\underimp{\det A \ne 0} X = -(A^{-1}B)Y
+\end{equ}
+
+Положим $ C \define -A^{-1}B $ и пусть $ C(Y) = CY $
+$$ \eref{implicit_lin:1}, \eref{implicit_lin:3} \implies [AB]
+\begin{bmatrix}
+	C(Y) \\
+	Y
+\end{bmatrix} = \On $$
+
+Таким образом, найдено линейное отображение $ C : \R^m \to \R^n $, удовлетворяющее этому условию.
+
+Говорят, что равенство \eref{implicit_lin:1} задаёт $ X $ как \it{неявную функцию от} $ Y $, в данном случае равную $ C(Y) $.
 
 \section{Общий случай теоремы о неявной функции (отображении)}
+
+\begin{theorem}
+	$ \R^{n \ge 1}, \qquad \R^{m \ge 1}, \qquad \R^{n + m} $
+	$$ X = \column{x_1}{x_n} \sub \R^n, \qquad Y = \column{y_1}{y_m} \sub \R^m, \qquad Z =
+	\begin{bmatrix}
+		x_1 \\
+		\cdots \\
+		x_n \\
+		y_1 \\
+		\cdots \\
+		y_m
+	\end{bmatrix} \fed
+	\begin{bmatrix}
+		X \\
+		Y
+	\end{bmatrix} \sub \R^{n + m} $$
+	$ E \sub \R^{n + m} $ -- откр., $ \qquad F : E \to \R^n, \qquad F = \column{f_1}{f_n}, \qquad \bm{F \in \Cont[1]E} $ \\
+	$ Z_0 =
+	\begin{bmatrix}
+		X_0 \\
+		Y_0
+	\end{bmatrix} \in E $ такая, что $ \bm{F(Z_0) = \mathbb{O}_n}, \qquad f_j(Z) = f_j
+	\begin{barg}
+		X \\
+		Y
+	\end{barg}, \qquad \bm{\det\mc{D}F(Z_0) \ne 0} $
+	$$ \implies \exist \underset{\text{окрестность}}{W(Y_0) \sub \R^n}, \quad \exist! g : W \to \R^n :
+	\begin{cases}
+		g \in \Cont[1]W \\
+		g(Y_0) = X_0 \\
+		\foral Y \in W \quad
+		\begin{cases}
+			\begin{bmatrix}
+				g(Y) \\
+				Y
+			\end{bmatrix} \in E \\
+			F
+			\begin{barg}
+				g(Y) \\
+				Y
+			\end{barg} = \On
+		\end{cases}
+	\end{cases} $$
+\end{theorem}
+
+\begin{proof}
+	Выпишем матрицу Якоби для $ F $:
+	$$ \mc{D}F(Z_0) =
+	\begin{bmatrix}
+		f_{1x_1}'(Z_0) & ... & f_{1x_n}'(Z_0) & f_{1y_1}'(Z_0) & ... & f_{1y_m}'(Z_0) \\
+		. & . & . & . & . & . \\
+		f_{nx_1}'(Z_0) & ... & f_{nx_n}'(Z_0) & f_{ny_1}'(Z_0) & ... & f_{ny_m}'(Z_0)
+	\end{bmatrix} $$
+	\begin{enumerate}
+		\item Построение $ g, W, E $ \\
+		Определим отображение $ \Phi(Z) \define
+		\begin{bmatrix}
+			F(Z) \\
+			Y
+		\end{bmatrix} $
+		$$ \Phi : E \to \R^{n + m} $$
+		$$ \Phi(Z) = \Phi
+		\begin{barg}
+			X \\
+			Y
+		\end{barg} =
+		\begin{bmatrix}
+			F \left(
+			\begin{bmatrix}
+				X \\
+				Y
+			\end{bmatrix} \right) \\
+			Y
+		\end{bmatrix} \fed \column{\vphi_1(Z)}{\vphi_{n + m}(Z)} $$
+		$$ \vphi_k
+		\begin{barg}
+			X \\
+			Y
+		\end{barg} =
+		\begin{cases}
+			y_{k - n}, \qquad k > n \\
+			f_k \left(
+		\begin{bmatrix}
+			X \\
+			Y
+		\end{bmatrix} \right), \qquad 1 \le k \le n
+		\end{cases} $$
+		$$ \Phi \in \Cont[1]{E} $$
+		Временно обозначим $ x_{n + k} \define y_k $ \\
+		Напишем матрицу Якоби для $ \Phi $:
+		\begin{multline*}
+			\mc{D}\Phi
+			\begin{barg}
+				X \\
+				\hline
+				Y
+			\end{barg} =
+			\begin{bmatrix}
+				\vphi_{1x_1}'(Z) & ... & \vphi_{1x_{n + m}}(Z) \\
+				. & . & . \\
+				\hline
+				. & . & . \\
+				\vphi_{n + mx_1}'(Z) & ... & \vphi_{n + m}{x_{n + m}}'(Z)
+			\end{bmatrix} = \\
+			=
+			\begin{bmatrix}
+				f_{1x_1}'(Z) & ... & f_{1x_n}'(Z) & f_{1y_1}'(Z) & ... & ... & f_{1y_m}'(Z) \\
+				. & . & . & . & . & . & . \\
+				f_{nx_1}'(Z) & ... & f_{nx_n}'(Z) & f_{ny_1}'(Z) & ... & ... & f_{ny_m}'(Z) \\
+				\hline
+				0 & ... & 0 & 1 & 0 & ... & 0 \\
+				. & . & . & . & . & . & . \\
+				0 & ... & 0 & 0 & ... & 0 & 1
+			\end{bmatrix}
+		\end{multline*}
+		(черта стоит после $ n $-го ряда) \\
+		Обозначим
+		$$ A(Z) \define
+		\begin{bmatrix}
+			f_{1x_1}'(Z) & ... & f{1x_n}'(Z) \\
+			. & . & . \\
+			f_{nx_1}'(Z) & ... & f_{nx_n}'(Z)
+		\end{bmatrix}, \qquad B(Z) \define
+		\begin{bmatrix}
+			f_{1y_1}'(Z) & ... & f_{1y_m}'(Z) \\
+			. & . & . \\
+			f_{ny_1}'(Z) & ... & f_{ny_m}'(Z)
+		\end{bmatrix} $$
+		В этих обозначениях
+		$$ \mc{D}F(Z) = \bigg[ A(Z)B(Z) \bigg], \qquad \mc{D}\Phi(Z) =
+		\begin{bmatrix}
+			A(Z) & B(Z) \\
+			\On[m \times n] & I_m
+		\end{bmatrix} $$
+		Найдём Якобиан $ \Phi $: \\
+		Раскладвыая по последней строке, получаем новую матрицу поряка $ (m - 1) \times (n - 1) $ \\
+		Будем так делать, пока внизу стоит $ I_m $ (т. е. $ m $ раз) \\
+		Останется $ A(Z) $:
+		$$ \det \mc{D}F(Z) = \det A(Z), \qquad \text{в частности, } \det \mc{D}F(Z_0) = \det A(Z_0) \underset{\text{по усл.}}\ne 0 $$
+		То есть, матрица Якоби в $ Z_0 $ обратима. Значит, к $ \Phi $ можно применить теорему об обратном отображении \\
+		Будем верхним индексом к шарам обозначать, в каком пространстве они находятся
+		$$ \exist \B_r^{n + m}(Z_0), \quad V \define \Phi \bigg( \B_r^{n + m}(Z_0) \bigg), \qquad \exist \Psi : V \to B_r^{n + m}(Z_0) \text{, такое что:} $$
+		$$ \Psi \in \Cont[1]V $$
+		\begin{equ}2
+			\Phi \left\lgroup \Psi
+			\begin{barg}
+				S \\
+				T
+			\end{barg} \right\rgroup =
+			\begin{bmatrix}
+				S \\
+				T
+			\end{bmatrix} \qquad \forall
+			\begin{bmatrix}
+				S \\
+				T
+			\end{bmatrix} \in V, \qquad S \in \R^n, \quad T \in \R^m
+		\end{equ}
+		\begin{equ}3
+			\Psi \left\lgroup \Phi
+			\begin{barg}
+				X \\
+				Y
+			\end{barg} \right\rgroup =
+			\begin{bmatrix}
+				X \\
+				Y
+			\end{bmatrix} \qquad \forall
+			\begin{bmatrix}
+				X \\
+				Y
+			\end{bmatrix} \in B_r^{n + m}(Z_0)
+		\end{equ}
+		Обозначим
+		$$ \Psi \left(
+		\begin{bmatrix}
+			S \\
+			T
+		\end{bmatrix} \right) \fed
+		\begin{bmatrix}
+			\psi
+			\begin{barg}
+				S \\
+				T
+			\end{barg} \\
+			\lambda
+			\begin{barg}
+				S \\
+				T
+			\end{barg}
+		\end{bmatrix} $$
+		(где $ \psi $ задаёт первые $ n $ столбцов, а $ \lambda $ -- оставшиеся $ m $)
+		\begin{equ}5
+			\Phi \left(
+			\begin{bmatrix}
+				\psi \left(
+				\begin{bmatrix}
+					S \\
+					T
+			\end{bmatrix} \right) \\
+			\lambda \left(
+				\begin{bmatrix}
+					S \\
+					T
+				\end{bmatrix} \right)
+			\end{bmatrix} \right) \bdefeq\Phi
+			\begin{bmatrix}
+				F \left(
+				\begin{bmatrix}
+					\psi \left(
+					\begin{bmatrix}
+						S \\
+						T
+				\end{bmatrix} \right) \\
+				\lambda \left(
+					\begin{bmatrix}
+						S \\
+						T
+					\end{bmatrix} \right)
+				\end{bmatrix} \right) \\
+				\lambda \left(
+				\begin{bmatrix}
+					S \\
+					T
+				\end{bmatrix} \right)
+			\end{bmatrix} \undereq{\eref2}
+			\begin{bmatrix}
+				S \\
+				T
+			\end{bmatrix}
+		\end{equ}
+		\begin{equ}6
+			\eref5 \implies \lambda \left(
+			\begin{bmatrix}
+				S \\
+				T
+			\end{bmatrix} \right) = T
+		\end{equ}
+		\begin{equ}7
+			\Psi
+			\begin{barg}
+				S \\
+				T
+			\end{barg} \bdefeq{\Psi, \eref{6}}
+			\begin{bmatrix}
+				\psi
+				\begin{barg}
+					S \\
+					T
+				\end{barg} \\
+				T
+			\end{bmatrix}
+		\end{equ}
+		Рассмотрим случай, когда $ S = \On $:
+		$$ \Phi
+		\begin{barg}
+			\psi
+			\begin{barg}
+				\On \\
+				T
+			\end{barg} \\
+			T
+		\end{barg} \undereq{\eref7} \Phi \left\lgroup \Psi
+		\begin{barg}
+			\On \\
+			T
+		\end{barg} \right\rgroup \undereq{\eref2}
+		\begin{bmatrix}
+			\On \\
+			T
+		\end{bmatrix} $$
+		При этом,
+		$$ \Phi
+		\begin{barg}
+			\psi
+			\begin{barg}
+				\On \\
+				T
+			\end{barg} \\
+			T
+		\end{barg} \bdefeq\Phi
+		\begin{bmatrix}
+			F \left(
+			\begin{bmatrix}
+				\psi \left(
+				\begin{bmatrix}
+					\On \\
+					T
+				\end{bmatrix} \right) \\
+				T
+			\end{bmatrix} \right) \\
+			T
+		\end{bmatrix} $$
+		Из последних двух выражений следует, что
+		\begin{equ}8
+			F \left(
+			\begin{bmatrix}
+				\psi \left(
+				\begin{bmatrix}
+					\On \\
+					T
+				\end{bmatrix} \right) \\
+				T
+			\end{bmatrix} \right) = \On
+		\end{equ}
+		Из того, что $ V $ открытое и $
+		\begin{bmatrix}
+			\On \\
+			Y_0
+		\end{bmatrix} \in V $, следует, что
+		$$ \exist \rho > 0 : \quad \B_\rho^{n + m}
+		\begin{barg}
+			\On \\
+			Y_0
+		\end{barg} \sub V $$
+		При этом, если $ Y \in \B_\rho^m(Y_0) $, то
+		$$
+		\begin{bmatrix}
+			\On \\
+			Y
+		\end{bmatrix} \in \B_\rho^{n + m} \left(
+		\begin{bmatrix}
+			\On \\
+			Y_0
+		\end{bmatrix} \right) $$
+		Поэтому \eref8 выполнено при $ T \in \B_\rho^m(Y_0) $ \\
+		Вспомним про отображение $ g $ из формулировки теоремы. Оно действует из некоторого $ W $ \\
+		Возьмём
+		$$ W \define \B_\rho^m(Y_0), \qquad E \define \B_\rho^{n + m}
+		\begin{barg}
+			\On \\
+			Y_0
+		\end{barg}, \qquad g(Y) \define \psi
+		\begin{barg}
+			\On \\
+			Y
+		\end{barg} $$
+		Тогда мы действительно имеем $ g : W \to \R^n $
+		$$ F
+		\begin{barg}
+			g(Y) \\
+			Y
+		\end{barg} \bdefeq{g} F
+		\begin{barg}
+			\psi
+			\begin{barg}
+				\On \\
+				Y
+			\end{barg} \\
+			Y
+		\end{barg} \undereq{\eref8} \On $$
+		\item Теперь надо выяснить, чему равно $ g(Y_0) $
+		\begin{equ}{12}
+			\Phi \left(
+			\begin{bmatrix}
+				X_0 \\
+				Y_0
+			\end{bmatrix} \right) =
+			\begin{bmatrix}
+				F \left(
+				\begin{bmatrix}
+					X_0 \\
+					Y_0
+				\end{bmatrix} \right) \\
+				Y_0
+			\end{bmatrix} =
+			\begin{bmatrix}
+				\On \\
+				Y_0
+			\end{bmatrix}
+		\end{equ}
+		$$
+		\begin{rcases}
+			\Psi \left\lgroup \Phi
+			\begin{barg}
+				X_0 \\
+				Y_0
+			\end{barg} \right\rgroup \undereq{\eref3}
+			\begin{bmatrix}
+				X_0 \\
+				Y_0
+			\end{bmatrix} \\
+			\Psi \left\lgroup \Phi
+			\begin{barg}
+				X_0 \\
+				Y_0
+			\end{barg} \right\rgroup \undereq{\eref{12}}
+			\Psi
+			\begin{barg}
+				\On \\
+				Y_0
+			\end{barg} \bdefeq\Psi
+			\begin{bmatrix}
+				\psi
+				\begin{barg}
+					\On \\
+					Y_0
+				\end{barg} \\
+				Y_0
+			\end{bmatrix} \bdefeq{g}
+			\begin{bmatrix}
+				g(Y_0) \\
+				Y_0
+			\end{bmatrix}
+		\end{rcases} \implies g(Y_0) = X_0 $$
+		\item Оталось проверить единственность $ g $ \\
+		\textbf{Пусть есть другое} $ g_1 \in \Cont[1]{B_\rho^m(Y_0)} $, такое что
+		$$ g_1(Y_0) = X_0, \qquad F \left(
+		\begin{bmatrix}
+			g_1(Y) \\
+			Y
+		\end{bmatrix} \right) = \On $$
+		$$ \eref3 \implies \Psi
+		\begin{barg}
+			F
+			\begin{barg}
+				g_1(Y) \\
+				Y
+			\end{barg} \\
+			Y
+		\end{barg} =
+		\begin{bmatrix}
+			g_1(Y) \\
+			Y
+		\end{bmatrix} $$
+		При этом,
+		$$ \Psi
+		\begin{barg}
+			\On \\
+			Y
+		\end{barg} =
+		\begin{bmatrix}
+			\psi
+			\begin{barg}
+				\On \\
+				Y
+			\end{barg} \\
+			Y
+		\end{bmatrix} =
+		\begin{bmatrix}
+			g(Y) \\
+			Y
+		\end{bmatrix} $$
+		Правые части равны, а значит, и левые части равны \\
+		Значит, $ g_1(Y) = g(Y) $
+	\end{enumerate}
+\end{proof}
 
 \section{Вычисление матрицы Якоби отображения, заданного неявно}
 
@@ -1351,19 +1830,19 @@ $$ \underimp{\eref{implicit:16}} A(Z)\mc{D}g(Y) + B(Z) = \On[n \times m] \implie
 
 \begin{definition}
 	$ E \sub \R^{n \ge 2}, \qquad M \sub E, \qquad X_0 \in M, \qquad f : E \to \R $ \\
-	Говорят, что $ X_0 $ -- точка локального экстремума $ f $ при условии $ M $, если $ X_0 $ -- точка локального экстремума функции $ f\clamp{M} $
+	Говорят, что $ X_0 $ "--- точка локального экстремума $ f $ при условии $ M $, если $ X_0 $ "--- точка локального экстремума функции $ f\clamp{M} $
 \end{definition}
 
 \begin{definition}
-	$ E \sub \R^{n + m} $ -- открытое, $ \qquad F : E \to \R^n, \qquad X_0 \in E, \qquad f(X_0) = \On, \qquad f : E \to R $ \\
-	Говорят, что $ X_0 $ -- точка локального экстремума $ f $ при условии $ F(X) = \On $, если $ X_0 $ -- точка локального экстремума $ f $ при условии $ \ker F $
+	$ E \sub \R^{n + m} $ "--- открытое, $ \qquad F : E \to \R^n, \qquad X_0 \in E, \qquad f(X_0) = \On, \qquad f : E \to R $ \\
+	Говорят, что $ X_0 $ "--- точка локального экстремума $ f $ при условии $ F(X) = \On $, если $ X_0 $ "--- точка локального экстремума $ f $ при условии $ \ker F $
 \end{definition}
 
 \begin{theorem}[о множителях Лагранжа]
-	$ E \sub \R^{n + m} $ -- открытое, $ \qquad F \in \Cont[1]E $ \\
+	$ E \sub \R^{n + m} $ "--- открытое, $ \qquad F \in \Cont[1]E $ \\
 	$ \rk \mc{D}F(X) = n \quad \forall X \in E, \qquad X_0 \in E : \quad F(X_0) = \On $
 	\begin{equ}{lagrange_mult:21}
-		\implies \exist! \Lambda = (\lambda_1, ..., \lambda_n) : \quad \text{для } \vphi(X, \Lambda) \define f(X) + \underset{\text{строка}}\Lambda \underset{\text{столбец}}{F(X)} \qquad \nabla \vphi(X_0, \Lambda) = \underset{\text{строка}}{\On[n + m]^T}
+		\implies \exist! \Lambda = (\lambda_1, ..., \lambda_n) : \quad \text{для } \vphi(X, \Lambda) \define f(X) + \Lambda F(X) \qquad \nabla \vphi(X_0, \Lambda) = \On[n + m]^T
 	\end{equ}
 \end{theorem}
 
@@ -1377,16 +1856,16 @@ $$ \underimp{\eref{implicit:16}} A(Z)\mc{D}g(Y) + B(Z) = \On[n \times m] \implie
 	Запишем матрицу Якоби для $ F $:
 	$$ \mc{D}F(X) =
 	\begin{bmatrix}
-		F_{1x_1}'(X) & ... & F_{1x_{n + m}}'(X) \\
+		F_{1x_1}'(X) & \dots & F_{1x_{n + m}}'(X) \\
 		. & . & . \\
-		F_{nx_1}'(X) & ... & F_{nx_{n + m}}'(X)
+		F_{nx_1}'(X) & \dots & F_{nx_{n + m}}'(X)
 	\end{bmatrix} $$
 	По условию, её ранг равен $ n $ при любом $ X $. НУО считаем, что не равен нулю ``верхний левый'' минор, в том числе при $ X_0 $:
 	\begin{equ}{lagrange_mult:22}
 		\begin{vmatrix}
-			F_{1x_1}'(X_0) & ... & F_{1x_n}'(X_0) \\
+			F_{1x_1}'(X_0) & \dots & F_{1x_n}'(X_0) \\
 			. & . & . \\
-			F_{nx_1}'(X_0) & ... & F_{nx_n}'(X_0)
+			F_{nx_1}'(X_0) & \dots & F_{nx_n}'(X_0)
 		\end{vmatrix} \ne 0
 	\end{equ}
 	Обозначим $ X' \define \column{x_1}{x_n}, \quad Y = \column{x_{n + 1}}{x_{n + m}} $ \\
@@ -1410,7 +1889,7 @@ $$ \underimp{\eref{implicit:16}} A(Z)\mc{D}g(Y) + B(Z) = \On[n \times m] \implie
 	$ X $ из условия теоремы подходит под правое условие, значит,
 	$$ \vphi(X, \Lambda) \bdefeq\vphi f(X) + \Lambda F(x) = f(X) + \Lambda \On = f(X) $$
 	\begin{equ}{lagrange_mult:26}
-		\text{То есть, } X_0 \text{ -- т. лок. экстеремума функции } \vphi(X, \Lambda) \quad \forall \Lambda \text{ при условии } F(X) = \On
+		\text{То есть, } X_0 \text{ "--- т. лок. экстеремума функции } \vphi(X, \Lambda) \quad \forall \Lambda \text{ при условии } F(X) = \On
 	\end{equ}
 	Возьмём $ Y \in W $ \\
 	Рассмотрим функцию
@@ -1434,7 +1913,7 @@ $$ \underimp{\eref{implicit:16}} A(Z)\mc{D}g(Y) + B(Z) = \On[n \times m] \implie
 		g(Y) \\
 		Y
 	\end{bmatrix} $$
-	Вместе с \eref{lagrange_mult:26} это означает, что $ Y_0 $ -- точка локального экстремума $ h(Y) $ \nimp[(без условий)] \\
+	Вместе с \eref{lagrange_mult:26} это означает, что $ Y_0 $ "--- точка локального экстремума $ h(Y) $ \nimp[(без условий)] \\
 	Для $ h $ действует необходиомое условие локального экстремума:
 	$$ \nabla h(Y_0, \Lambda) = \On[m]^T $$
 	Рассмотрим теперь $ h $ как отображение в $ \R^1 $ \\
@@ -1505,455 +1984,3 @@ $$ \underimp{\eref{implicit:16}} A(Z)\mc{D}g(Y) + B(Z) = \On[n \times m] \implie
 	$$ \nabla_1 f(X_0) + \Lambda A(X_0) = \On[n]^T $$
 	Так мы определяли $ \Lambda $, а значит она единственна.
 \end{iproof}
-
-\subsection{-----------------------------}
-
-\begin{theorem}
-	$ \R^{n \ge 1}, \qquad \R^{m \ge 1}, \qquad \R^{n + m} $
-	$$ X = \column{x_1}{x_n} \sub \R^n, \qquad Y = \column{y_1}{y_m} \sub \R^m, \qquad Z =
-	\begin{bmatrix}
-		x_1 \\
-		\cdots \\
-		x_n \\
-		y_1 \\
-		\cdots \\
-		y_m
-	\end{bmatrix} \define
-	\begin{bmatrix}
-		X \\
-		Y
-	\end{bmatrix} \sub \R^{n + m} $$
-	$ E \sub \R^{n + m} $ -- откр., $ \qquad F : E \to \R^n, \qquad F = \column{f_1}{f_n}, \qquad \bm{F \in \Cont[1]E} $ \\
-	$ Z_0 =
-	\begin{bmatrix}
-		X_0 \\
-		Y_0
-	\end{bmatrix} \in E $ такая, что $ \bm{F(Z_0) = \mathbb{O}_n}, \qquad f_j(Z) = f_j
-	\begin{barg}
-		X \\
-		Y
-	\end{barg}, \qquad \bm{\det\mc{D}F(Z_0) \ne 0} $
-	$$ \implies \exist \underset{\text{окрестность}}{W(Y_0) \sub \R^n}, \quad \exist! g : W \to \R^n :
-	\begin{cases}
-		g \in \Cont[1]W \\
-		g(Y_0) = X_0 \\
-		\foral Y \in W \quad
-		\begin{cases}
-			\begin{bmatrix}
-				g(Y) \\
-				Y
-			\end{bmatrix} \in E \\
-			F
-			\begin{barg}
-				g(Y) \\
-				Y
-			\end{barg} = \On
-		\end{cases}
-	\end{cases} $$
-\end{theorem}
-
-\begin{proof}
-	Выпишем матрицу Якоби для $ F $:
-	$$ \mc{D}F(Z_0) =
-	\begin{bmatrix}
-		f_{1x_1}'(Z_0) & ... & f_{1x_n}'(Z_0) & f_{1y_1}'(Z_0) & ... & f_{1y_m}'(Z_0) \\
-		. & . & . & . & . & . \\
-		f_{nx_1}'(Z_0) & ... & f_{nx_n}'(Z_0) & f_{ny_1}'(Z_0) & ... & f_{ny_m}'(Z_0)
-	\end{bmatrix} $$
-	\begin{enumerate}
-		\item Построение $ g, W, E $ \\
-		Определим отображение $ \Phi(Z) \define
-		\begin{bmatrix}
-			F(Z) \\
-			Y
-		\end{bmatrix} $
-		$$ \Phi : E \to \R^{n + m} $$
-		$$ \Phi(Z) = \Phi
-		\begin{barg}
-			X \\
-			Y
-		\end{barg} =
-		\begin{bmatrix}
-			F \left(
-			\begin{bmatrix}
-				X \\
-				Y
-			\end{bmatrix} \right) \\
-			Y
-		\end{bmatrix} \fed \column{\vphi_1(Z)}{\vphi_{n + m}(Z)} $$
-		\begin{remind}
-			$ Y = \column{y_1}{y_m} $
-		\end{remind}
-		$$ \vphi_k
-		\begin{barg}
-			X \\
-			Y
-		\end{barg} =
-		\begin{cases}
-			y_{k - n}, \qquad k > n \\
-			f_k \left(
-		\begin{bmatrix}
-			X \\
-			Y
-		\end{bmatrix} \right), \qquad 1 \le k \le n
-		\end{cases} $$
-		$$ \Phi \in \Cont[1]{E} $$
-		Временно обозначим $ x_{n + k} \define y_k $ \\
-		Напишем матрицу Якоби для $ \Phi $:
-		\begin{multline*}
-			\mc{D}\Phi
-			\begin{barg}
-				X \\
-				\hline
-				Y
-			\end{barg} =
-			\begin{bmatrix}
-				\vphi_{1x_1}'(Z) & ... & \vphi_{1x_{n + m}}(Z) \\
-				. & . & . \\
-				\hline
-				. & . & . \\
-				\vphi_{n + mx_1}'(Z) & ... & \vphi_{n + m}{x_{n + m}}'(Z)
-			\end{bmatrix} = \\
-			=
-			\begin{bmatrix}
-				f_{1x_1}'(Z) & ... & f_{1x_n}'(Z) & f_{1y_1}'(Z) & ... & ... & f_{1y_m}'(Z) \\
-				. & . & . & . & . & . & . \\
-				f_{nx_1}'(Z) & ... & f_{nx_n}'(Z) & f_{ny_1}'(Z) & ... & ... & f_{ny_m}'(Z) \\
-				\hline
-				0 & ... & 0 & 1 & 0 & ... & 0 \\
-				. & . & . & . & . & . & . \\
-				0 & ... & 0 & 0 & ... & 0 & 1
-			\end{bmatrix}
-		\end{multline*}
-		(черта стоит после $ n $-го ряда) \\
-		Обозначим
-		$$ A(Z) \define
-		\begin{bmatrix}
-			f_{1x_1}'(Z) & ... & f{1x_n}'(Z) \\
-			. & . & . \\
-			f_{nx_1}'(Z) & ... & f_{nx_n}'(Z)
-		\end{bmatrix}, \qquad B(Z) \define
-		\begin{bmatrix}
-			f_{1y_1}'(Z) & ... & f_{1y_m}'(Z) \\
-			. & . & . \\
-			f_{ny_1}'(Z) & ... & f_{ny_m}'(Z)
-		\end{bmatrix} $$
-		В этих обозначениях
-		$$ \mc{D}F(Z) = \bigg[ A(Z)B(Z) \bigg], \qquad \mc{D}\Phi(Z) =
-		\begin{bmatrix}
-			A(Z) & B(Z) \\
-			\On[m \times n] & I_m
-		\end{bmatrix} $$
-		Найдём Якобиан $ \Phi $: \\
-		Раскладвыая по последней строке, получаем новую матрицу поряка $ (m - 1) \times (n - 1) $ \\
-		Будем так делать, пока внизу стоит $ I_m $ (т. е. $ m $ раз) \\
-		Останется $ A(Z) $:
-		$$ \det \mc{D}F(Z) = \det A(Z), \qquad \text{в частности, } \det \mc{D}F(Z_0) = \det A(Z_0) \underset{\text{по усл.}}\ne 0 $$
-		То есть, матрица Якоби в $ Z_0 $ обратима. Значит, к $ \Phi $ можно применить теорему об обратном отображении \\
-		Будем верхним индексом к шарам обозначать, в каком пространстве они находятся
-		$$ \exist \B_r^{n + m}(Z_0), \quad V \define \Phi \bigg( \B_r^{n + m}(Z_0) \bigg), \qquad \exist \Psi : V \to B_r^{n + m}(Z_0) \text{, такое что:} $$
-		$$ \Psi \in \Cont[1]V $$
-		\begin{equ}{implicit:2}
-			\Phi \left\lgroup \Psi
-			\begin{barg}
-				S \\
-				T
-			\end{barg} \right\rgroup =
-			\begin{bmatrix}
-				S \\
-				T
-			\end{bmatrix} \qquad \forall
-			\begin{bmatrix}
-				S \\
-				T
-			\end{bmatrix} \in V, \qquad S \in \R^n, \quad T \in \R^m
-		\end{equ}
-		\begin{equ}{implicit:3}
-			\Psi \left\lgroup \Phi
-			\begin{barg}
-				X \\
-				Y
-			\end{barg} \right\rgroup =
-			\begin{bmatrix}
-				X \\
-				Y
-			\end{bmatrix} \qquad \forall
-			\begin{bmatrix}
-				X \\
-				Y
-			\end{bmatrix} \in B_r^{n + m}(Z_0)
-		\end{equ}
-		Обозначим
-		$$ \Psi \left(
-		\begin{bmatrix}
-			S \\
-			T
-		\end{bmatrix} \right) \fed
-		\begin{bmatrix}
-			\psi
-			\begin{barg}
-				S \\
-				T
-			\end{barg} \\
-			\lambda
-			\begin{barg}
-				S \\
-				T
-			\end{barg}
-		\end{bmatrix} $$
-		(где $ \psi $ задаёт первые $ n $ столбцов, а $ \lambda $ -- оставшиеся $ m $)
-		\begin{equ}{implicit:5}
-			\Phi \left(
-			\begin{bmatrix}
-				\psi \left(
-				\begin{bmatrix}
-					S \\
-					T
-			\end{bmatrix} \right) \\
-			\lambda \left(
-				\begin{bmatrix}
-					S \\
-					T
-				\end{bmatrix} \right)
-			\end{bmatrix} \right) \bdefeq\Phi
-			\begin{bmatrix}
-				F \left(
-				\begin{bmatrix}
-					\psi \left(
-					\begin{bmatrix}
-						S \\
-						T
-				\end{bmatrix} \right) \\
-				\lambda \left(
-					\begin{bmatrix}
-						S \\
-						T
-					\end{bmatrix} \right)
-				\end{bmatrix} \right) \\
-				\lambda \left(
-				\begin{bmatrix}
-					S \\
-					T
-				\end{bmatrix} \right)
-			\end{bmatrix} \undereq{\eref{implicit:2}}
-			\begin{bmatrix}
-				S \\
-				T
-			\end{bmatrix}
-		\end{equ}
-		\begin{equ}{implicit:6}
-			\implies \lambda \left(
-			\begin{bmatrix}
-				S \\
-				T
-			\end{bmatrix} \right) = T
-		\end{equ}
-		\begin{equ}{implicit:7}
-			\Psi
-			\begin{barg}
-				S \\
-				T
-			\end{barg} \bdefeq{\Psi, \eref{implicit:6}}
-			\begin{bmatrix}
-				\psi
-				\begin{barg}
-					S \\
-					T
-				\end{barg} \\
-				T
-			\end{bmatrix}
-		\end{equ}
-		Рассмотрим случай, когда $ S = \On $:
-		$$ \Phi
-		\begin{barg}
-			\psi
-			\begin{barg}
-				\On \\
-				T
-			\end{barg} \\
-			T
-		\end{barg} \undereq{\eref{implicit:7}} \Phi \left\lgroup \Psi
-		\begin{barg}
-			\On \\
-			T
-		\end{barg} \right\rgroup \undereq{\eref{implicit:2}}
-		\begin{bmatrix}
-			\On \\
-			T
-		\end{bmatrix} $$
-		При этом,
-		$$ \Phi
-		\begin{barg}
-			\psi
-			\begin{barg}
-				\On \\
-				T
-			\end{barg} \\
-			T
-		\end{barg} \bdefeq\Phi
-		\begin{bmatrix}
-			F \left(
-			\begin{bmatrix}
-				\psi \left(
-				\begin{bmatrix}
-					\On \\
-					T
-				\end{bmatrix} \right) \\
-				T
-			\end{bmatrix} \right) \\
-			T
-		\end{bmatrix} $$
-		Из последних двух выражений следует, что
-		\begin{equ}{implicit:8}
-			F \left(
-			\begin{bmatrix}
-				\psi \left(
-				\begin{bmatrix}
-					\On \\
-					T
-				\end{bmatrix} \right) \\
-				T
-			\end{bmatrix} \right) = \On
-		\end{equ}
-		Из того, что $ V $ открытое и $
-		\begin{bmatrix}
-			\On \\
-			Y_0
-		\end{bmatrix} \in V $, следует, что
-		$$ \exist \rho > 0 : \quad \B_\rho^{n + m}
-		\begin{barg}
-			\On \\
-			Y_0
-		\end{barg} \sub V $$
-		При этом, если $ Y \in \B_\rho^m(Y_0) $, то
-		$$
-		\begin{bmatrix}
-			\On \\
-			Y
-		\end{bmatrix} \in \B_\rho^{n + m} \left(
-		\begin{bmatrix}
-			\On \\
-			Y_0
-		\end{bmatrix} \right) $$
-		Поэтому \eref{implicit:8} выполнено при $ T \in \B_\rho^m(Y_0) $ \\
-		Вспомним про отображение $ g $ из формулировки теоремы. Оно действует из некоторого $ W $ \\
-		Возьмём
-		$$ W \define \B_\rho^m(Y_0), \qquad E \define \B_\rho^{n + m}
-		\begin{barg}
-			\On \\
-			Y_0
-		\end{barg}, \qquad g(Y) \define \psi
-		\begin{barg}
-			\On \\
-			Y
-		\end{barg} $$
-		Тогда мы действительно имеем $ g : W \to \R^n $
-		$$ F
-		\begin{barg}
-			g(Y) \\
-			Y
-		\end{barg} \bdefeq{g} F
-		\begin{barg}
-			\psi
-			\begin{barg}
-				\On \\
-				Y
-			\end{barg} \\
-			Y
-		\end{barg} \undereq{\eref{implicit:8}} \On $$
-		\item Теперь надо выяснить, чему равно $ g(Y_0) $
-		\begin{equ}{implicit:12}
-			\Phi \left(
-			\begin{bmatrix}
-				X_0 \\
-				Y_0
-			\end{bmatrix} \right) =
-			\begin{bmatrix}
-				F \left(
-				\begin{bmatrix}
-					X_0 \\
-					Y_0
-				\end{bmatrix} \right) \\
-				Y_0
-			\end{bmatrix} =
-			\begin{bmatrix}
-				\On \\
-				Y_0
-			\end{bmatrix}
-		\end{equ}
-		$$
-		\begin{rcases}
-			\Psi \left\lgroup \Phi
-			\begin{barg}
-				X_0 \\
-				Y_0
-			\end{barg} \right\rgroup \undereq{\eref{implicit:3}}
-			\begin{bmatrix}
-				X_0 \\
-				Y_0
-			\end{bmatrix} \\
-			\Psi \left\lgroup \Phi
-			\begin{barg}
-				X_0 \\
-				Y_0
-			\end{barg} \right\rgroup \undereq{\eref{implicit:12}}
-			\Psi
-			\begin{barg}
-				\On \\
-				Y_0
-			\end{barg} \bdefeq\Psi
-			\begin{bmatrix}
-				\psi
-				\begin{barg}
-					\On \\
-					Y_0
-				\end{barg} \\
-				Y_0
-			\end{bmatrix} \bdefeq{g}
-			\begin{bmatrix}
-				g(Y_0) \\
-				Y_0
-			\end{bmatrix}
-		\end{rcases} \implies g(Y_0) = X_0 $$
-		\item Оталось проверить единственность $ g $ \\
-		\textbf{Пусть есть другое} $ g_1 \in \Cont[1]{B_\rho^m(Y_0)} $, такое что
-		$$ g_1(Y_0) = X_0, \qquad F \left(
-		\begin{bmatrix}
-			g_1(Y) \\
-			Y
-		\end{bmatrix} \right) = \On $$
-		$$ \eref{implicit:3} \implies \Psi
-		\begin{barg}
-			F
-			\begin{barg}
-				g_1(Y) \\
-				Y
-			\end{barg} \\
-			Y
-		\end{barg} =
-		\begin{bmatrix}
-			g_1(Y) \\
-			Y
-		\end{bmatrix} $$
-		При этом,
-		$$ \Psi
-		\begin{barg}
-			\On \\
-			Y
-		\end{barg} =
-		\begin{bmatrix}
-			\psi
-			\begin{barg}
-				\On \\
-				Y
-			\end{barg} \\
-			Y
-		\end{bmatrix} =
-		\begin{bmatrix}
-			g(Y) \\
-			Y
-		\end{bmatrix} $$
-		Правые части равны, а значит, и левые части равны \\
-		Значит, $ g_1(Y) = g(Y) $
-	\end{enumerate}
-\end{proof}

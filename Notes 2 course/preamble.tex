@@ -40,11 +40,27 @@
 \AtBeginDocument{\renewcommand\theoremautorefname{теор.}}
 \AtBeginDocument{\renewcommand\lemmaautorefname{лемма}}
 \AtBeginDocument{\renewcommand\definitionautorefname{опр.}}
+\AtBeginDocument{\renewcommand\statementautorefname{утв.}}
+
+% BibTeX month names:
+% \def\bbljan{Jan}
+% \def\bblfeb{Feb}
+% \def\bblmar{Mar}
+% \def\bblapr{Apr}
+% \def\bblmay{May}
+% \def\bbljun{Jun}
+% \def\bbljul{Jul}
+% \def\bblaug{Aug}
+% \def\bblsep{Sep}
+% \def\bbloct{Oct}
+% \def\bblnov{Nov}
+% \def\bbldec{Dec}
 
 \usepackage{graphicx}
 \usepackage{multicol}
 \usepackage[dvipsnames]{xcolor}
 
+% \set and \braket
 \usepackage{braket}
 
 % fancy vectors
@@ -77,6 +93,7 @@
 \SetSymbolFont{stmry}{bold}{U}{stmry}{m}{n}
 
 \usepackage{tikz}
+% XXX: are all these libraries needed?
 \usetikzlibrary{intersections, angles, calc, positioning, arrows.meta, decorations.pathreplacing, quotes, 3d, babel}
 
 % multiple images in one figure
@@ -85,13 +102,13 @@
 % figure, wrapped in text
 \usepackage{wrapfig}
 
-% fractions like 2/a
+% fractions like 2/a and faktorgroups
 \usepackage{faktor}
 
 % xlongequal
 \usepackage{extarrows}
 
-\usepackage{emoji}
+% \usepackage{emoji}
 
 % bold font in maths, that preserve spacing (should be loaded *last*)
 \usepackage{bm}
@@ -115,7 +132,7 @@
 % exterior
 \DeclareMathOperator{\Ext}{Ext}
 
-% frame
+% frame (DEPRECATED -- use \partial instead)
 \DeclareMathOperator{\Fr}{Fr}
 
 % closure
@@ -133,7 +150,7 @@
 % differential
 \newcommand\di[1][]{\ensuremath{\operatorname{d}^{#1}}}
 
-% partition diameter
+% partition diameter (DEPRECATED -- use \di instead)
 \DeclareMathOperator{\diam}{d}
 
 % sign
@@ -141,13 +158,6 @@
 
 % ring's characteristics
 \DeclareMathOperator{\chara}{char}
-
-% Re and Im
-\newcommand\oldRe\Re
-\newcommand\oldIm\Im
-
-\AtBeginDocument{\renewcommand\Re{\ensuremath{\mathfrak{Re}\,}}}
-\AtBeginDocument{\renewcommand\Im{\ensuremath{\mathfrak{Im}\,}}}
 
 %%      numerating
 % labeled equation
@@ -253,8 +263,8 @@
 
 % other custom arrows
 
-\newcommand\curveddownarrowright{\rotatebox{180}{\curvearrowleft}}
-\newcommand\curveddownarrowleft{\rotatebox{180}{\curvearrowright}}
+\newcommand\curveddownarrowright{\rotatebox{180}{$ \curvearrowleft $}}
+\newcommand\curveddownarrowleft{\rotatebox{180}{$ \curvearrowright $}}
 
 % 1 is left-to-right
 \newcommand\curvedir[2][1]{\ifthenelse{\isodd{#1}}
@@ -285,7 +295,7 @@
 
 \newcommand\cint[3][l(M)]{\ensuremath{\int\limits_{#2} {#3} \, \operatorname{d} {#1}}}
 
-% Riman's integral
+% Riemann's integral
 \newcommand\Ri{\ensuremath{\mathcal{R}}}
 
 % comparable by modulo
