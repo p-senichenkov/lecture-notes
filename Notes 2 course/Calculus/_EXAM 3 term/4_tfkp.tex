@@ -57,7 +57,7 @@
 \begin{proof}
 	Доказательства проводятся проверкой возникающих тождеств. Докажем для примера 4 при $ \lambda = x $ и при $ \lambda = \ol z $.
 
-	Пусть $ f(z) = u(x, y) + iv(x, y), \quad f_x'(z) = u_x' + iv_x' $ (далее не будем писать вргументы).
+	Пусть $ f(z) = u(x, y) + iv(x, y), \quad f_x'(z) = u_x' + iv_x' $ (далее не будем писать аргументы).
 	$$ \frac1f = \frac1{u + iv} = \frac{u - iv}{u^2 + v^2} = \frac u{u^2 + v^2} - i \frac v{u^2 + v^2} $$
 	\begin{multline*}
 		\bigg( \frac1f \bigg)_x' = \bigg( \frac u{u^2 + v^2} \bigg)_x' - i \bigg( \frac v{u^2 + v^2} \bigg)_x' = \frac{u_x'(u^2 + v^2) - 2u(uu_x' + vv_x')}{(u^2 + v^2)^2} - i \frac{v_x'(u^2 + v^2) - 2v(uu_x' + vv_x')}{(u^2 + v^2)^2} = \\
@@ -74,14 +74,12 @@
 	Пусть $ E \sub \Co $ "--- область, $ \qquad z_\circ \in E, \qquad f : E \to \Co, \qquad f(z) = u(x, y) + iv(x, y) $ \\
 	$ u, v : E^* \to \R $
 
-	Будем говорить, что $ f $ дифференцируема в точке $ z_\circ $, если $ f^*(x, y) $ дифференцируема в точке $ (x_\circ, y_\circ) $ в следующем смысле: \\
+	Будем говорить, что $ f $ дифференцируема в точке $ z_\circ $, если $ f^*(x, y) $ \it{дифференцируема} в точке $ (x_\circ, y_\circ) $ в следующем смысле: \\
 	функции $ u(x, y) $ и $ v(x, y) $ дифференцируемы в точке $ (x_\circ, y_\circ) $.
 \end{definition}
 
 Пусть $ \sigma \define s + it, \qquad E \sub \Co $ "--- область, $ \qquad z_\circ \in E, \quad z_\circ + \sigma \in E, \qquad z_\circ \leftrightarrow (x_\circ, y_\circ) $ \\
 Предположим, что $ f(z) $ дифференцируема в точке $ z_\circ $.
-
-Тогда
 \begin{equ}{form_diff:11}
 	f(z_\circ + \sigma) - f(z_\circ) = f^*(x_\circ + s, y_\circ + t) - f^*(x_\circ, y_\circ) = \bigg( u(x_\circ + s, y_\circ + t) - u(x_\circ, y_\circ) \bigg) + i \bigg( v(x_\circ + s, y_\circ + t) - v(x_\circ, y_\circ) \bigg)
 \end{equ}
@@ -120,10 +118,8 @@ $$ s = \frac12 (\sigma + \ol \sigma), \qquad t = \frac1{2i}(\sigma - \ol \sigma)
 		\item $ cf \in A(E) $
 		\item $ f + g \in A(E) $
 		\item $ fg \in A(E) $
-		\item $ f(z) \ne 0 $
-		$$ \implies \frac1f \in A(E) $$
-		\item $ f(z) \ne 0 $
-		$$ \implies \frac gf \in A(E) $$
+		\item $ f(z) \ne 0 \quad \implies \quad \dfrac1f \in A(E) $
+		\item $ f(z) \ne 0 \quad \implies \quad \dfrac gf \in A(E) $
 	\end{enumerate}
 \end{properties}
 
@@ -167,7 +163,7 @@ $$ s = \frac12 (\sigma + \ol \sigma), \qquad t = \frac1{2i}(\sigma - \ol \sigma)
 	$$ \ln z \in A(D) $$
 \end{exmpls}
 
-\begin{statement}[ещё одно свойство аналитических функций]
+\begin{statement}
 	$ f \in A(E), \qquad E $ "--- область, $ \qquad z \in E, \qquad \sigma \in \Co, \quad z + \sigma \in \Co $
 
 	Тогда
@@ -222,7 +218,7 @@ $$ s = \frac12 (\sigma + \ol \sigma), \qquad t = \frac1{2i}(\sigma - \ol \sigma)
 	Делим на $ \sigma $:
 	$$ f_z'(z) - f'(z) + f_{\ol z}'(z) \frac{\ol \sigma}\sigma + \frac{\rho(\sigma)}\sigma - \frac{\rho_\circ(\sigma)}\sigma = 0 $$
 	или
-	$$ f_[\ol z]'(z) \frac{\ol \sigma}\sigma = f'(z) - f_z'(z) + \frac{\rho_\circ(\sigma)}\sigma - \frac{\rho(\sigma)}\sigma $$
+	$$ f_{\ol z}'(z) \frac{\ol \sigma}\sigma = f'(z) - f_z'(z) + \frac{\rho_\circ(\sigma)}\sigma - \frac{\rho(\sigma)}\sigma $$
 	$$ f'(z) - f_z'(z) + \frac{\rho_\circ(\sigma)}\sigma - \frac{\rho(\sigma)}\sigma \underarr{\sigma \to 0} f'(z) - f_z'(z) $$
 	Следовательно, существует $ \limz\sigma f_{\ol z}'(z) \frac{\ol \sigma}\sigma \fed A $.
 
@@ -261,8 +257,7 @@ $$ s = \frac12 (\sigma + \ol \sigma), \qquad t = \frac1{2i}(\sigma - \ol \sigma)
 \begin{theorem}
 	$ E, G \sub \Co $ "--- области, $ \qquad f \in A(E), \quad f(z) \in G \quad \forall z \in E, \qquad \vphi \in A(G) $ \\
 	$ F : E \to \Co, \quad F(z) \define \vphi \big( f(z) \big) $
-
-	Тогда $ F \in A(E) $.
+	$$ \implies F \in A(E) $$
 \end{theorem}
 
 \begin{proof}
@@ -347,9 +342,7 @@ $$ s = \frac12 (\sigma + \ol \sigma), \qquad t = \frac1{2i}(\sigma - \ol \sigma)
 
 \begin{theorem}
 	Пусть дан степенной ряд
-	\begin{equ}{analyt:18}
-		f(z) = \sum_{n = 0}^\infty c_n(z - z_\circ)^n
-	\end{equ}
+	$$ f(z) = \sum_{n = 0}^\infty c_n(z - z_\circ)^n $$
 	$ R > 0 $ "--- его радиус сходимости, $ \quad \B $ "--- круг сходимости, $ \quad z \in \B $.
 
 	Тогда $ f \in A(\B) $. \\

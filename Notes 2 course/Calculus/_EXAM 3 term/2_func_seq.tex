@@ -3,57 +3,6 @@
 \section{Определение равномерной сходимости функциональной последовательности и функционального ряда}
 
 \begin{definition}
-	$ X, d(x, y) $ "--- метрическое пространство \\
-	$ f_1(x), f_2(x), ..., f_n(x), \dots $ "--- функции, $ \quad f_n : X \to \R, \quad n = 1, \dots $ \\
-	$ \seq{f_n(x)}n $ "--- функциональная последовательность
-\end{definition}
-
-\begin{definition}
-	$ \seq{v_n(x)}n $ \\
-	Функциональным рядом будем называть символ
-	$$ \sum_{n = 1}^\infty v_n(x) $$
-\end{definition}
-
-\begin{definition}
-	$ x_0 \in X $ \\
-	Будем называть $ x_0 $ точкой сходимости последовательности $ \seq{f_n(x)}n $, если
-	$$ \exist \liml{n \to \infty}f_n(x_0) \in \R $$
-	Точку $ x_1 \in X $ будем называть точкой расходимости последовательности $ \seq{f_n(x)}n $, если предел $ \limi{n} f_n(x_1) $ не существует или бесконечен
-\end{definition}
-
-\begin{definition}
-	Определим сумму ряда $ \sum v_n(x) $:
-	$$ S_n(x) = v_1(x) + \dots + v_n(x) $$
-	Будем называть точку $ x_0 \in X $ точкой сходимости ряда, если существует конечный предел последовательности $ \seq{S_n(x)}n $ \\
-	Аналогично определяется точка расходимости ряда
-\end{definition}
-
-\begin{remark}
-	Любая точка для фиксированной последовательности или фиксированного ряда является либо точкой сходимости, либо точкой расходиомости
-\end{remark}
-
-\begin{definition}
-	Множество всех точек сходимости функциональной последовательности или ряда будем называть \it{множеством сходимости}.
-	\begin{notation}
-		$ E_0 $
-	\end{notation}
-	Множество точек расходимости "--- множеством расходимости
-	\begin{notation}
-		$ E_1 $
-	\end{notation}
-\end{definition}
-
-\begin{definition}
-	$ f : X \to \R, \qquad \forall x \in X \quad f_n(x) \infarr{n} f(x) $ \\
-	Говорят, что функциональная последовательность \bt{поточечно} сходится к $ f(x) $
-\end{definition}
-
-\begin{definition}
-	$ S : X \to \R, \qquad \forall x \in X \quad S_n(x) \infarr{n} S(x) $ \\
-	Говорят, что функциональный ряд \bt{поточечно} сходится к $ S $
-\end{definition}
-
-\begin{definition}
 	$ f_n(x) $ \bt{равномерно} на $ X $ сходится (стремится) к $ f(x) $, если
 	$$ \forall \veps > 0 \quad \exist N : \quad \forall n > N \quad \forall x \in X \quad |f_n(x) - f(x)| < \veps $$
 \end{definition}
@@ -72,7 +21,7 @@
 \section{Критерий Коши равномерной сходимости функциональной последовательности и функционального ряда}
 
 \begin{theorem}
-	Для того чтобы функцональная последовательность \bt{равномерно} сходилась на $ X $ к некоторой функции $ f $, \bt{необходимо и достаточно}, чтобы
+	Для того, чтобы функциональная последовательность \bt{равномерно} сходилась на $ X $ к некоторой функции $ f $, \bt{необходимо и достаточно}, чтобы
 	$$ \forall \veps > 0 \quad \exist N : \quad \forall n > N, ~ m > N \quad \forall x \in X \quad |f_n(x) - f_m(x)| < \veps $$
 \end{theorem}
 
@@ -105,16 +54,14 @@
 	Имеется ряд
 	$$ \sum_{n = 1}^\infty v_n(x), \qquad x \in X $$
 	Для того чтобы он \bt{равномерно} сходился, \bt{необходимо и достаточно}, чтобы
-	\begin{equ}{cauchy_seq:11}
-		\forall \veps > 0 \quad \exist N : \quad \forall m > n > N \quad \forall x \in X \quad \bigg| \sum_{k = n + 1}^m v_k(x) \bigg| < \veps
-	\end{equ}
+	$$ \forall \veps > 0 \quad \exist N : \quad \forall m > n > N \quad \forall x \in X \quad \bigg| \sum_{k = n + 1}^m v_k(x) \bigg| < \veps $$
 \end{theorem}
 
 \begin{proof}
 	По определению равномерная сходимость функционального ряда означает, что равномерно сходится последовательность $ \seq{S_n(x)}n $ \\
 	Применяя к ней критерий Коши, получаем, что для её равномерной сходимости необходимо и достаточно, чтобы
 	$$ \forall \veps > 0 \quad \exist N : \quad \forall m > n > N \quad \forall x \in X \quad |S_n(x) - S_m(x)| < \veps $$
-	Это и есть условие \eref{cauchy_seq:11}
+	Это и есть условие теоремы.
 \end{proof}
 
 \section{Признак Вейерштрасса равномерной сходимости функциональных рядов}
@@ -152,19 +99,19 @@
 \begin{theorem}
 	Имеется ряд
 	\begin{equ}{dirichle_series:19}
-		\sum_{n = 1}^\infty b_n(x)v_n
+		\sum_{n = 1}^\infty b_n(x)v_n(x)
 	\end{equ}
 	\begin{equ}{dirichle_series:20}
-		b_n \text{ монотонна по } n \quad \forall \text{ фиксированного } x \in X
+		\bm{b_n} \text{ \bt{монотонна} по } n \quad \forall \text{ фиксированного } x \in X
 	\end{equ}
 	\begin{equ}{dirichle_series:21}
-		b_n(x) \uniarr{x \in X} 0
+		\bm{b_n(x) \uniarr{x \in X} 0}
 	\end{equ}
 	\begin{note}
 		Имеется в виду функция $ 0_X : X \to \R $ такая, что $ 0_X(x) = 0 \quad \forall x \in X $
 	\end{note}
 	\begin{equ}{dirichle_series:22}
-		\exist c > 0 : \quad \forall n \quad \forall x \in X \quad \bigg| \sum_{k = 1}^n v_k(x) \bigg| \le c
+		\exist c > 0 : \quad \forall n \quad \forall x \in X \quad \bigg| \bm{\sum_{k = 1}^n v_k(x)} \bigg| \bm\le c
 	\end{equ}
 	Тогда ряд \eref{dirichle_series:19} \bt{равномерно} сходится на $ X $
 \end{theorem}
@@ -188,15 +135,19 @@
 	Перепишем нашу сумму:
 	\begin{multline}\lbl{dirichle_series:25}
 		\sum_{k = n + 1}^m b_k(x)v_k(x) = \sum_{k = n + 1}^m b_k(x) \bigg( V_k(x) - V_{k - 1}(x) \bigg) = \\
-		= \sum_{k = n + 1}^m b_k(x) V_k(x) - \sum_{k = n + 1}^m b_k(x) V_{k - 1}(x) \undereq{\text{во второй сумме заменим } k - 1 \text{ на } k} \\
-		= \sum_{k = n + 1}^m b_k(x) V_k(x) - \sum_{k = n}^{m - 1}b_{k + 1}(x) V_k(x) \undereq{V_n \bydef 0} b_m(x)V_m(x) + \sum_{k = n + 1}^{m - 1} \bigg( b_k(x) - b_{k + 1}(x) \bigg)V_k(x)
+		= \sum_{k = n + 1}^m b_k(x) V_k(x) - \sum_{k = n + 1}^m b_k(x) V_{k - 1}(x) \undereq{
+			\begin{subarray}c
+				k \define k + 1 \\
+				\text{во второй сумме}
+			\end{subarray}} \sum_{k = n + 1}^m b_k(x) V_k(x) - \sum_{k = n}^{m - 1}b_{k + 1}(x) V_k(x) \undereq{V_n \bydef 0} \\
+		= b_m(x)V_m(x) + \sum_{k = n + 1}^{m - 1} \bigg( b_k(x) - b_{k + 1}(x) \bigg)V_k(x)
 	\end{multline}
 	\begin{equ}{dirichle_series:26}
 		\eref{dirichle_series:24} \implies |V_k(x)| \le 2c \quad \forall k
 	\end{equ}
 	Возьмём $ N $ из \eref{dirichle_series:23}, $ m > n > N $ и $ \forall x \in X $
 	\begin{multline*}
-		\eref{dirichle_series:25} \implies \bigg| \sum_{k = n + 1}^m b_k(x)v_k(x) \bigg| \le |b_m(x)| \cdot |V_m(x)| + \sum_{k = n + 1}^{m - 1} |b_k(x) - b_{k + 1}(x)| \cdot |V_k(x)| < \\
+		\eref{dirichle_series:25} \implies \bigg| \sum_{k = n + 1}^m b_k(x)v_k(x) \bigg| \le |b_m(x)| \cdot |V_m(x)| + \sum_{k = n + 1}^{m - 1} |b_k(x) - b_{k + 1}(x)| \cdot |V_k(x)| \underset{\eref{dirichle_series:26}}< \\
 		< \veps \cdot 2c + 2c \sum_{k = n + 1}^{m - 1} |b_k(x) - b_{k + 1}(x)| \undereq{\eref{dirichle_series:20}} 2c\veps + 2c \bigg| \sum_{k = n + 1}^{m - 1} \bigg( b_k(x) - b_{k + 1}(x) \bigg) \bigg| = 2c\veps + 2c|b_{n + 1}(x) - b_m(x)| \le \\
 		\le 2c\veps + 2c \bigg( \underbrace{|b_{n + 1}(x)|}_{< \veps} + \underbrace{|b_m(x)|}_{< \veps} \bigg) < 6c\veps
 	\end{multline*}
@@ -210,18 +161,12 @@
 	\begin{equ}{abel_series:27}
 		\sum_{n = 1}^\infty b_n(x)v_n(x)
 	\end{equ}
-	\begin{equ}{abel_series:28}
-		b_n(x) \text{ монотонна по } n \quad \forall x \in X
-	\end{equ}
-	\begin{equ}{abel_series:29}
-		\exist c > 0 : \quad |b_n(x)| \le c \quad \forall n \quad \forall x \in X
-	\end{equ}
+	$$ \bm{b_n(x)} \text{ \bt{монотонна} по } n \quad \forall x \in X $$
+	$$ \exist c > 0 : \quad |\bm{b_n(x)}| \bm\le c \quad \forall n \quad \forall x \in X $$
 	\begin{equ}{abel_series:30}
-		\sum_{n = 1}^\infty v_n(x) \text{ равномерно сходится на } X
+		\bm{\sum_{n = 1}^\infty v_n(x)} \text{ равномерно \bt{сходится} на } X
 	\end{equ}
-	\begin{equ}{abel_series:31}
-		\implies \text{ ряд \eref{abel_series:31} равномерно сходится}
-	\end{equ}
+	$$ \implies \text{ ряд \eref{abel_series:27} равномерно сходится} $$
 \end{theorem}
 
 \begin{proof}
@@ -233,13 +178,11 @@
 	Соотношение \eref{abel_series:32} действует при $ m = n + 1, ..., m_0 $ \\
 	Определим функции $ V_k(x) $ так же, как в доказательстве признака Дирихле \\
 	Там было доказано, что
-	\begin{equ}{abel_series:33}
-		\sum_{k = 1}^{m_0} b_k(s)v_k(x) = \sum_{k = n + 1}^{m_0 - 1}V_k(x) \bigg( b_k(x) - b_{k + 1}(x) \bigg) + b_{m_0}(x)V_{m_0}(x)
-	\end{equ}
+	$$ \sum_{k = 1}^{m_0} b_k(s)v_k(x) = \sum_{k = n + 1}^{m_0 - 1}V_k(x) \bigg( b_k(x) - b_{k + 1}(x) \bigg) + b_{m_0}(x)V_{m_0}(x) $$
 	\begin{multline*}
-		\eref{abel_series:33}, \eref{abel_series:32} \implies \bigg| \sum_{k = n + 1}^{m_0} b_k(x)v_k(x) \bigg| \le \bigg| \sum_{k = n + 1}^{m_0 - 1} V_k(x) \bigg( b_k(x) - b_{k + 1}(x) \bigg) \bigg| + |b_{m_0}(x)| \cdot |V_{m_0}(x)| \le \\
-		\le \sum_{k = n + 1}^{m_0 - 1} |V_k(x)| \cdot \bigg| b_k(x) - b_{k + 1} \bigg| + |b_{m_0}(x)V_{m_0}(x)| \le \underbrace{|b_{m_0}(x)|}_{\le c} \veps + \veps \sum_{k = n + 1}^{m_0 - 1} |b_k(x) - b_{k + 1}(x)| \le \\
-		\le c\veps + \veps \bigg| \sum_{k = n + 1}^{m_0 - 1} \bigg( b_k(x) - b_{k + 1} \bigg) \bigg| = c\veps + \veps |b_{n + 1}(x) - b_{m_0}(x)| \le 3c\veps \implies \eref{abel_series:31}
+		\implies \bigg| \sum_{k = n + 1}^{m_0} b_k(x)v_k(x) \bigg| \trile \bigg| \sum_{k = n + 1}^{m_0 - 1} V_k(x) \bigg( b_k(x) - b_{k + 1}(x) \bigg) \bigg| + |b_{m_0}(x)| \cdot |V_{m_0}(x)| \le \\
+		\le \sum_{k = n + 1}^{m_0 - 1} |V_k(x)| \cdot \bigg| b_k(x) - b_{k + 1} \bigg| + |b_{m_0}(x)V_{m_0}(x)| \underset{\eref{abel_series:32}}\le \underbrace{|b_{m_0}(x)|}_{\le c} \veps + \veps \sum_{k = n + 1}^{m_0 - 1} |b_k(x) - b_{k + 1}(x)| \le \\
+		\le c\veps + \veps \bigg| \sum_{k = n + 1}^{m_0 - 1} \bigg( b_k(x) - b_{k + 1} \bigg) \bigg| = c\veps + \veps |b_{n + 1}(x) - b_{m_0}(x)| \le 3c\veps
 	\end{multline*}
 \end{proof}
 
@@ -256,30 +199,24 @@
 	\end{equ}
 	\begin{mequ}[\implies \empheqlbrace]
 		\lbl{lim_seq:43} \exist \limi{n} a_n = A \in \R \\
-		\lbl{lim_seq:44} \exist \liml{x \to x_0} f(x) \\
-		\lbl{lim_seq:45} \liml{x \to x_0} f(x) = A
+		\lbl{lim_seq:45} \exist \bm{\liml{x \to x_0} f(x) = A}
 	\end{mequ}
 \end{theorem}
 
-\begin{proof}
+\begin{iproof}
+	\item \eref{lim_seq:43}
+
 	Применим критерий Коши к \eref{lim_seq:41}:
-	\begin{equ}{lim_seq:46}
-		\implies \forall \veps > 0 \quad \exist N : \quad \forall m, n > N \quad \forall x \in X \quad |f_m(x) - f_n(x)| < \veps
-	\end{equ}
+	$$ \implies \forall \veps > 0 \quad \exist N : \quad \forall m, n > N \quad \forall x \in X \quad |f_m(x) - f_n(x)| < \veps $$
 	Зафиксируем всё, кроме $ x $, а $ x $ устремим к $ x_0 $:
-	\begin{equ}{lim_seq:47}
-		\implies \liml{x \to x_0} |f_m(x) - f_n(x)| \le \veps
-	\end{equ}
-	\begin{equ}{lim_seq:48}
-		\underimp{\eref{lim_seq:42}} |a_m - a_n| \le \veps
-	\end{equ}
-	$$ \implies \exist \limi{n} a_n = A \in \R $$
-	\eref{lim_seq:43} доказано \\
-	Докажем \eref{lim_seq:45} (из него будет следовать \eref{lim_seq:44}): \\
+	$$ \implies \liml{x \to x_0} |f_m(x) - f_n(x)| \le \veps \quad \underimp{\eref{lim_seq:42}} \quad |a_m - a_n| \le \veps \quad \implies \quad \exist \limi{n} a_n = A \in \R $$
+
+	\item \eref{lim_seq:45}
+
 	Возьмём $ \forall \veps > 0 $ \\
 	Выберем $ N_1 $ такое, что
 	\begin{equ}{lim_seq:49}
-		\forall n > N \quad \forall x \in X \setminus \set{x_0} \quad |f_n(x) - f(x)| < \veps
+		\forall n > N_1 \quad \forall x \in X \setminus \set{x_0} \quad |f_n(x) - f(x)| < \veps
 	\end{equ}
 	Выберем $ N_2 $ такое, что
 	\begin{equ}{lim_seq:410}
@@ -291,7 +228,7 @@
 	\end{remark}
 	Выберем $ \delta > 0 $ такое, что
 	\begin{equ}{lim_seq:411}
-		\forall y \in X \setminus \set{x_0} \quad \nimp[\bigg(] \diam(y, x_0) < \delta \implies |f_{N_0}(y) - A_{N_0}| < \veps \nimp[\bigg)]
+		\forall y \in X \setminus \set{x_0} \quad \nimp[\bigg(] \diam(y, x_0) < \delta \implies |f_{N_0}(y) - a_{N_0}| < \veps \nimp[\bigg)]
 	\end{equ}
 	\begin{remark}
 		$ \delta $ зависит \bt{только} от $ \veps $
@@ -301,54 +238,51 @@
 			\pm f_{N_0}(y) \\
 			\pm a_{N_0}
 		\end{subarray}} f(y) - f_{N_0}(y) + f_{N_0}(y) - a_{N_0} + a_{N_0} - A $$
-	$$ \implies |f(y) - A| \trile \underbrace{|f(y) - f_{N_0}(y)|}_{\underset{\eref{lim_seq:41}}< \veps} + \underbrace{|f_{N_0}(y) - a_{N_0}|}_{\underset{\eref{lim_seq:411}}< \veps} + \underbrace{|a_{N_0} - A|}_{\underset{\eref{lim_seq:410}}< \veps} < 3\veps \implies \eref{lim_seq:45} $$
-\end{proof}
+	$$ \implies |f(y) - A| \trile \underbrace{|f(y) - f_{N_0}(y)|}_{\eref{lim_seq:49}} + \underbrace{|f_{N_0}(y) - a_{N_0}|}_{\eref{lim_seq:411}} + \underbrace{|a_{N_0} - A|}_{\eref{lim_seq:410}} < 3\veps \implies \eref{lim_seq:45} $$
+\end{iproof}
 
 \section{Теорема о непрерывности в точке предела равномерно сходящейся функциональной последовательности и суммы равномерно сходящегося функционального ряда}
 
-\begin{implication}[о непрерывности предельной функции равномерно сходящейся функциональной последовательности]
-	$ X, \qquad x_0 \in X, \qquad f_n : X \to \R, \qquad f_n(x) $ непрерывна в $ x_0 \quad \forall n $
+\begin{implication}[о непрерывности в точке]
+	$ x_0 \in X, \qquad f_n : X \to \R, \qquad f_n(x) $ \bt{непрерывна в} $ \bm{x_0} \quad \forall n $
 	\begin{equ}{lim_seq:412}
 		f_n(x) \uniarr{x \in X} f(x)
 	\end{equ}
-	\begin{equ}{lim_seq:414}
-		\implies f(x) \text{ непрерывна в } x_0 \quad \forall n
-	\end{equ}
+	$$ \implies f(x) \bt{ непрерывна в } \bm{x_0} \quad \forall n $$
 \end{implication}
 
 \begin{proof}
 	Непрерывность $ f_n $ означает, что
 	$$ \liml{x \to x_0} f_n(x) = \underbrace{f_n(x_0)}_{a_n} \in \R $$
-	То есть, выполнено второе условие из теоремы
-	\begin{equ}{lim_seq:415}
-		\eref{lim_seq:412} \implies f_n(x_0) \infarr{n} f(x_0)
-	\end{equ}
-	$$ \exist \limi{n} a_n = \limi{n} f_n(x_0) \undereq{\eref{lim_seq:415}} f(x_0) $$
+	То есть, выполнено второе условие из теоремы.
+	$$ \eref{lim_seq:412} \implies f_n(x_0) \infarr{n} f(x_0) $$
+	$$ \implies  \exist \limi{n} a_n = \limi{n} f_n(x_0) = f(x_0) $$
 	$$ \exist \liml{x \to x_0} f(x) = \limi{n} a_n = f(x_0) $$
 \end{proof}
 
 \begin{implication}
-	$ X $ всюду плотно, $ \qquad f_n \in \Cont{X}, \qquad f_n(x) \uniarr{x \in X} f(x) $
-	$$ \implies f \in \Cont{X} $$
+	$ X $ всюду плотно, $ \qquad \bm{f_n \in \Cont{X}}, \qquad f_n(x) \uniarr{x \in X} f(x) $
+	$$ \implies \bm{f \in \Cont{X}} $$
 \end{implication}
 
 \begin{theorem}
-	$ X $ "--- метрическое пространство, $ \qquad \seq{v_n(x)}n, \qquad $ имеется ряд
+	$ X $ "--- метрическое пространство, $ \qquad \seq{v_n(x)}n, \qquad x_\circ $ "--- т. сг., $ \qquad $ имеется ряд
 	\begin{equ}{lim_series:1}
 		\sum_{n = 1}^\infty v_n(x) = S(x)
 	\end{equ}
 	\begin{enumerate}
-		\item $ x_0 \in X $ "--- точка сгущения, $ \qquad \eref{lim_series:1} $ сходится равномерно на $ X \setminus \set{x_0}, \qquad \forall n \quad \exist \liml{x \to x_0} v_n(x) = c_n $
+		\item $ \eref{lim_series:1} $ сходится \bt{равномерно} на $ X \setminus \set{x_0}, \qquad \forall n \quad \bm{\exist \liml{x \to x_0} v_n(x)} = c_n $
 		$$ \implies
 		\begin{cases}
 			\sum_{n = 1}^\infty c_n \text{ сходится } \\
-			\exist \liml{x \to x_0} S(x) \\
-			\sum_{n = 1}^\infty c_n = \liml{x \to x_0} S(x)
+			\exist \liml{x \to x_0} S(x) = \sum_{n = 1}^\infty c_n
 		\end{cases} $$
-		\item \eref{lim_series:1} сходится равномерно на всём $ X, \qquad v_n $ непр. в $ x_0 \quad \forall n $
-		$$ \implies S(x) \text{ непр. в } x_0 $$
-		\item $ X $ всюду плотно, $ \qquad \eref{lim_series:1} $ сходится равномерно на всём $ X, \qquad v_n \in \Cont{X} \quad \forall n $
-		$$ \implies S \in \Cont{X} $$
+
+		\item \eref{lim_series:1} сходится равномерно на всём $ X, \qquad v_n $ \bt{непр. в} $ \bm{x_0} \quad \forall n $
+		$$ \implies S(x) \bt{ непр. в } \bm{x_0} $$
+
+		\item $ X $ всюду плотно, $ \qquad \eref{lim_series:1} $ сходится равномерно на всём $ X, \qquad \bm{v_n \in \Cont{X}} \quad \forall n $
+		$$ \implies \bm{S \in \Cont{X}} $$
 	\end{enumerate}
 \end{theorem}
 
@@ -356,7 +290,7 @@
 	$ S_n(x) = v_1(x) + \dots + v_n(x) $ \\
 	Равномерная сходимость ряда \eref{lim_series:1} по определению означает, что
 	$$ S_n(x) \uniarr{x \in X \setminus \set{x_0}} S(x) $$
-	Применима аналогичная теорема для функциональных последовательностей
+	Применимы теоремы для функциональных последовательностей.
 \end{proof}
 
 % hyphenation here doesn't work fine
@@ -372,16 +306,13 @@
 
 \begin{proof}
 	Равномерная сходимость означает, что
-	\begin{equ}{int_seq:3}
-		\forall \veps > 0 \quad \exist N : \quad \forall n > N \quad \forall x \in [a, b] \quad |f_n(x) - f(x)| < \veps
-	\end{equ}
-	$$ \bigg| \dint{a}b{f_n(x)} - \dint{a}b{f(x)} \bigg| = \bigg| \dint{a}b{\bigg( f_n(x) - f(x) \bigg)} \bigg| \le \dint{a}b{\big| f_n(x) - f(x) \big|} \undereq{\eref{int_seq:3}} \dint{a}b\veps = \veps(b - a) $$
+	$$ \forall \veps > 0 \quad \exist N : \quad \forall n > N \quad \forall x \in [a, b] \quad |f_n(x) - f(x)| < \veps $$
+	$$ \bigg| \dint{a}b{f_n(x)} - \dint{a}b{f(x)} \bigg| = \bigg| \dint{a}b{\bigg( f_n(x) - f(x) \bigg)} \bigg| \le \dint{a}b{\big| f_n(x) - f(x) \big|} < \dint{a}b\veps = \veps(b - a) $$
 	Это и есть определение сходимости требуемой числовой последовательности
 \end{proof}
 
-\begin{theorem}[интегрирование функционального ряда]
-	$ \seq{v_n(x)}n, \qquad v_n \in \Cont{[a, b]} $ \\
-	$ \sum_{n = 1}^\infty v_n(x) $ равномерно сходится на $ [a, b] $
+\begin{theorem}
+	$ \seq{v_n(x)}n, \qquad v_n \in \Cont{[a, b]}, \qquad \sum_{n = 1}^\infty v_n(x) $ равномерно сходится на $ [a, b] $
 	$$ \implies \dint{a}b{\sum_{n = 1}^\infty v_n(x)} = \sum_{n = 1}^\infty \dint{a}b{v_n(x)} $$
 \end{theorem}
 
@@ -401,10 +332,7 @@
 \section{Дифференцирование равномерно сходящейся функциональной последовательности и равномерно сходящегося функционального ряда}
 
 \begin{theorem}
-	$ \seq{f_n(x)}n $
-	\begin{equ}{deriv_seq:10}
-		\forall n \quad \forall x \in [a, b] \quad \exist f_n'(x)
-	\end{equ}
+	$ \seq{f_n(x)}n, \qquad \forall n \quad \forall x \in [a, b] \quad \exist f_n'(x) $
 	\begin{equ}{deriv_seq:11}
 		\exist \vphi(x) : [a, b]  \to \R : \quad f_n'(x) \uniarr{x \in [a, b]} \vphi(x)
 	\end{equ}
@@ -413,8 +341,7 @@
 	\end{equ}
 	\begin{mequ}[{\implies \exist f : [a, b] \to \R : \quad \empheqlbrace}]
 		&f_n(x) \uniarr{x \in [a, b]} f(x) \\
-		\lbl{deriv_seq:14} &\forall x \in [a, b] \quad \exist f'(x) \\
-		\lbl{deriv_seq:15} &f'(x) = \vphi(x)
+		\lbl{deriv_seq:14} &\forall x \in [a, b] \quad \exist \bm{f'(x) = \vphi(x)}
 	\end{mequ}
 \end{theorem}
 
@@ -422,12 +349,13 @@
 	\item Возьмём $ m \ne n $ \\
 	Определим функции:
 	$$ P_{mn}(x) \define f_m(x) - f_n(x) $$
+	Так как $ f_n $ дифференцируемы,
 	\begin{equ}{deriv_seq:16}
-		\eref{deriv_seq:10} \implies \exist P_{mn}'(x) = f_m'(x) - f_n'(x)
+		\exist P_{mn}'(x) = f_m'(x) - f_n'(x)
 	\end{equ}
 	Значит, к $ P_{mn} $ можно применить теорему Лагранжа:
 	\begin{multline}\lbl{deriv_seq:17}
-		\forall x \in [a, b] : x \ne x_0 \quad \exist c \in (x \between x_0) : \quad P_{mn}(x) - P_{mn}(x_0) = P_{mn}'(c)(x - x_0) \undereq{\eref{deriv_seq:16}} \\
+		\forall x \in [a, b] : x \ne x_0 \quad \exist c \in (x \between x_0) : \quad P_{mn}(x) - P_{mn}(x_0) = P_{mn}'(c)(x - x_0) = \\
 		= \bigg( f_m'(c) - f_n'(c) \bigg)(x - x_0)
 	\end{multline}
 	К функциональной последовательности производных применим необходимую часть критерия Коши:
@@ -470,10 +398,7 @@
 		g_m(y) - g_n(y) = P_{mn}'(c_1)
 	\end{equ}
 	$$ P_{mn}'(c_1) \undereq{\eref{deriv_seq:16}} f_m'(c_1) - f_n'(c_1) $$
-	$$ \forall \veps > 0 \quad \exist N_1 : \quad \text{ выполнено } \eref{deriv_seq:18} $$
-	\begin{equ}{deriv_seq:27}
-		\underimp{\eref{deriv_seq:26}} \forall y \in [a, b] \setminus \set{x} \quad \forall m > n > N_1 \quad |g_m(y) - g_n(y)| < \veps|y - x| \le \veps(b - a)
-	\end{equ}
+	$$ \eref{deriv_seq:18}, \eref{deriv_seq:26} \implies \forall y \in [a, b] \setminus \set{x} \quad \forall m > n > N_1 \quad |g_m(y) - g_n(y)| < \veps|y - x| \le \veps(b - a) $$
 	Применим критерий Коши:
 	\begin{equ}{deriv_seq:28}
 		\exist h : [a, b] \setminus \set{x} : \quad g_n(y) \uniarr{y \in [a, b] \setminus \set{x}} h(y)
@@ -482,59 +407,38 @@
 	\begin{equ}{deriv_seq:29}
 		\implies g_n(y) \infarr{n} h(y)
 	\end{equ}
-	$$ g_n(y) \bdefeq{g_n} \frac{f_n(y) - f_n(x)}{y - x} $$
-	\begin{equ}{deriv_seq:30}
-		\eref{deriv_seq:13} \implies
-		\begin{cases}
-			f_n(y) \infarr{n} f(y) \\
-			f_n(x) \infarr{n} f(x)
-		\end{cases}
-	\end{equ}
-	\begin{equ}{deriv_seq:31}
-		\eref{deriv_seq:30} \implies g_n(y) \infarr{n} \frac{f(y) - f(x)}{y - x}
-	\end{equ}
-	\begin{equ}{deriv_seq:32}
-		\eref{deriv_seq:29}, \eref{deriv_seq:31} \implies h(y) = \frac{f(y) - f(x)}{y - x}
-	\end{equ}
-	\begin{equ}{deriv_seq:33}
-		\eref{deriv_seq:28}, \eref{deriv_seq:32} \implies \frac{f_n(y) - f_n(x)}{y - x} \uniarr{y \in [a, b] \setminus \set{x}} \frac{f(y) - f(x)}{y - x}
-	\end{equ}
-	Вспомним, как мы определяли $ g_n(y) $ и $ g(y) $:
-	$$ \implies g_n(y) \uniarr{y \in [a, b] \setminus \set{x}} g(y) $$
-	\begin{equ}{deriv_seq:34}
-		\eref{deriv_seq:10} \bdef[\iff]{g_n} \forall n \quad \exist \liml{y \to x} g_n(y) = f_n'(x)
-	\end{equ}
+	$$
+	\eref{deriv_seq:13} \implies
+	\begin{cases}
+		f_n(y) \infarr{n} f(y) \\
+		f_n(x) \infarr{n} f(x)
+	\end{cases} $$
+	$$ \underimp{\operatorname{def} g_n} g_n(y) \infarr{n} \frac{f(y) - f(x)}{y - x} $$
+	$$ \underimp{\eref{deriv_seq:29}} h(y) = \frac{f(y) - f(x)}{y - x} $$
+	$$ \underimp{\eref{deriv_seq:28}} \frac{f_n(y) - f_n(x)}{y - x} \uniarr{y \in [a, b] \setminus \set{x}} \frac{f(y) - f(x)}{y - x} $$
+	$$ \underimp{\operatorname{def} g_n, g} g_n(y) \uniarr{y \in [a, b] \setminus \set{x}} g(y) $$
+	$$ \exist f_n' \bdef[\iff]{g_n} \forall n \quad \exist \liml{y \to x} g_n(y) = f_n'(x) $$
 	К последним двум выражениям можно применить теорему о предельном переходе в функциональной последовательности:
-	\begin{equ}{deriv_seq:35}
-		\exist \liml{y \to x} g(y) = A, \qquad \exist \limi{n} f_n'(x)
-	\end{equ}
-	\begin{equ}{deriv_seq:36}
-		A = \limi{n} f_n'(x)
-	\end{equ}
-	$$ \eref{deriv_seq:35} \bdef[\implies]{g(y)} \exist \liml{y \to x} \frac{f(y) - f(x)}{y - x} = f'(x) = A $$
+	$$ \exist \liml{y \to x} g(y) = A, \qquad \exist \limi{n} f_n'(x), \qquad A = \limi{n} f_n'(x) $$
+	$$ \bdefimp{g} \exist \liml{y \to x} \frac{f(y) - f(x)}{y - x} = f'(x) = A $$
 	$$
 	\begin{rcases}
-		\eref{deriv_seq:35}, \eref{deriv_seq:36} \implies \exist f'(x) = \limi{n} f_n'(x) \\
+		\implies \exist f'(x) = \limi{n} f_n'(x) \\
 		\eref{deriv_seq:11} \implies \text{ для фиксированного } x \in [a, b] \quad f_n'(x) \infarr{n} \vphi(x)
 	\end{rcases} \implies \vphi(x) = f'(x) $$
 \end{iproof}
 
 У этой теоремы имеется вариант для функциональных рядов:
 
-\begin{theorem}[о производной функционального ряда]
-	$ \seq{v_n(x)}, \qquad v_n \in \Cont{[a, b]} $ \\
-	$ \forall x \in [a, b] \quad \exist v_n'(x) $
+\begin{theorem}
+	$ \seq{v_n(x)}, \qquad v_n \in \Cont{[a, b]}, \qquad \forall x \in [a, b] \quad \exist v_n'(x) $
 	\begin{equ}{deriv_seq:40}
 		\sum_{n = 1}^\infty v_n'(x) \text{ равномерно сходится на } [a, b]
 	\end{equ}
 	\begin{equ}{deriv_seq:41}
 		\exist x_0 \in [a, b] : \quad \sum_{n = 1}^\infty v_n(x_0) \text{ сходится}
 	\end{equ}
-	$$ \implies \left\{
-	\begin{aligned}
-		\forall x \in [a, b] \quad \exist \bigg( \sum_{n = 1}^\infty v_n(x) \bigg)' \\
-		\bigg( \sum_{n = 1}^\infty v_n(x) \bigg)' = \sum_{n = 1}^\infty v_n'(x)
-	\end{aligned} \right. $$
+	$$ \implies \forall x \in [a, b] \quad \exist \bigg( \sum_{n = 1}^\infty v_n(x) \bigg)' = \sum_{n = 1}^\infty v_n' $$
 \end{theorem}
 
 \begin{proof}
@@ -552,12 +456,10 @@
 	$ \exist f \in \Cont\R : \quad \forall x \in \R \quad \not\exist f'(x) $
 \end{theorem}
 
-\begin{proof}[построение ван дер Вардена]
+\begin{proof}
 	Рассмотрим функцию $ \vphi(x) \define 1 - |x - 1| $ при $ x \in [0, 2] $ (\autoref{tikz:van_der_varden:1.a}) \\
 	При $ x \in [2k, 2k + 2] $, где $ k \ne 0 \in \Z $, полагаем $ \vphi(x) \define \vphi(x - 2k) $ (\autoref{tikz:van_der_varden:1.b})
-	\begin{equ}{van_der_varden:43}
-		f(x) \define \sum_{n = 0}^\infty \bigg( \frac34 \bigg)^n \vphi(4^n x)
-	\end{equ}
+	$$ f(x) \define \sum_{n = 0}^\infty \bigg( \frac34 \bigg)^n \vphi(4^n x) $$
 	\begin{itemize}
 		\item Проверим непрерывность $ f(x) $: \\
 		Воспользуемся признаком Вейерштрасса:
@@ -567,36 +469,35 @@
 		При этом, $ 0 \le \vphi(x) \le 1 $
 		$$ \implies \bigg( \frac34 \bigg)^n |\vphi(4^n x) | = \bigg( \frac34 \bigg)^n \vphi(4^n x) \le \bigg( \frac34 \bigg)^n $$
 		$$ \sum_{n = 0}^\infty \bigg( \frac34 \bigg)^n = \frac1{1 - \frac34} = 4 $$
-		Значит, ряд \eref{van_der_varden:43} равномерно сходится на $ \R $ \\
+		Значит, ряд $ f(x) $ равномерно сходится на $ \R $ \\
 		Значит, и его сумма непрерывна
 		\item Докажем, что производной не существует: \\
 		Доказывать будем \bt{от противного}. Пусть есть точка, в которой существует производная:
 		\begin{equ}{van_der_varden:44}
 			\exist x \in \R : \quad \exist f'(x)
 		\end{equ}
-		Это эквивалентно тому, что она дифференцируема в этой точке:
+		Это эквивалентно тому, что $ f $ дифференцируема в этой точке:
 		\begin{equ}{van_der_varden:45}
-			f(y) - f(x) = f'(x)(y - x) + r(y)
+			f(y) - f(x) = f'(x)(y - x) + r(y),
 		\end{equ}
-		\begin{equ}{van_der_varden:46}
-			\text{где } \frac{|r(y)|}{|y - x|} \underarr{y \in x} 0
-		\end{equ}
+		где $ \dfrac{|r(y)|}{|y - x|} \underarr{y \in x} 0 $, то есть
 		\begin{equ}{van_der_varden:47}
-			\eref{van_der_varden:46} \bdef[\implies]{\lim} \exist \delta > 0 : \quad \forall y \in [x - \delta, x + \delta] \quad \frac{|r(y)|}{|y - x|} \le 1
-		\end{equ}
-		\begin{multline}\lbl{van_der_varden:48}
-			\eref{van_der_varden:45}, \eref{van_der_varden:47} \implies \forall y \in [x - \delta, x + \delta] \quad |f(y) - f(x)| \le |f'(x)| \cdot |y - x| + |r(y)| \le \\
-			\le \bigg( \underbrace{|f'(x)| + 1 \bigg)}_{\fed A}|y - x| = A|y - x|
-		\end{multline}
-		Рассмотрим $ x - \delta \le y_1 \le x \le y_2 \le x + \delta $
-		\begin{equ}{van_der_varden:49}
-			\eref{van_der_varden:48} \implies |f(y_2) - f(x)| \le A(y_2 - x)
-		\end{equ}
-		\begin{equ}{van_der_varden:410}
-			\eref{van_der_varden:48} \implies |f(x) - f(y_1)| \le A(x - y_1)
+			\exist \delta > 0 : \quad \forall y \in [x - \delta, x + \delta] \quad \frac{|r(y)|}{|y - x|} \le 1
 		\end{equ}
 		\begin{multline*}
-			\eref{van_der_varden:49}, \eref{van_der_varden:410} \implies |f(y_2) - f(y_1)| = \bigg| \bigg( f(y_2) - f(x) \bigg) + \bigg( f(x) - f(y_1) \bigg) \bigg| \trile \\
+			\underimp{\eref{van_der_varden:45}} \forall y \in [x - \delta, x + \delta] \quad |f(y) - f(x)| \le |f'(x)| \cdot |y - x| + |r(y)| \le \\
+			\le \bigg( \underbrace{|f'(x)| + 1 \bigg)}_{\fed A}|y - x| = A|y - x|
+		\end{multline*}
+		Рассмотрим $ x - \delta \le y_1 \le x \le y_2 \le x + \delta $
+		\begin{equ}{van_der_varden:48}
+			\implies
+			\begin{cases}
+				|f(y_2) - f(x)| \le A(y_2 - x) \\
+				|f(x) - f(y_1)| \le A(x - y_1)
+			\end{cases}
+		\end{equ}
+		\begin{multline*}
+			\implies |f(y_2) - f(y_1)| = \bigg| \bigg( f(y_2) - f(x) \bigg) + \bigg( f(x) - f(y_1) \bigg) \bigg| \trile \\
 			\le |f(y_2) - f(x)| + |f(x) - f(y_1)| \le A(y_2 - x) + A(x - y_1) = A(y_2 - y_1)
 		\end{multline*}
 		Выберем $ m \ge 1 $ так, что
@@ -604,24 +505,22 @@
 		Рассмотрим число $ 4^mx $ \\
 		Так как это какое-то конкретное вещественное число, то
 		$$ \exist k \in \Z : \quad k \le 4^mx < k + 1 $$
-		\begin{equ}{van_der_varden:415}
-			\implies \underbrace{k \cdot 4^{-m}}_{\fed a_m} \le x < \underbrace{(k + 1) \cdot 4^{-m}}_{\fed b_m}
-		\end{equ}
+		$$ \implies \underbrace{k \cdot 4^{-m}}_{\fed a_m} \le x < \underbrace{(k + 1) \cdot 4^{-m}}_{\fed b_m} $$
 		\begin{equ}{van_der_varden:416}
-			b_m - a_m \bydef 4^{-m}
+			b_m - a_m = 4^{-m}
 		\end{equ}
+		$$ 4^nx = 4^{n - m} \cdot 4^mx $$
+		Рассмотрим числа $ 4^na_m $ и $ 4^nb_m $
 		\begin{itemize}
-			\item Возьмём $ n > m $
-			$$ 4^nx = 4^{n - m} \cdot 4^mx $$
-			(это справедливо для любого $ n $) \\
-			Рассмотрим числа $ 4^na_m $ и $ 4^nb_m $
+			\item Пусть $ n > m $
 			$$ 4^na_m = 4^{n - m} \cdot 4^ma_m = 4^{n - m} \cdot k $$
 			$$ 4^nb_m = 4^{n - m} \cdot 4^mb_m = 4^{n - m}(k + 1) = \underbrace{4^{n - m}k}_{4^na_m} + \underbrace{4^{n - m}}_{\text{чётное}} $$
 			\begin{equ}{van_der_varden:418}
 				\implies \vphi(4^nb_m) = \vphi(4^na_m + \text{ чётное}) = \vphi(4^na_m)
 			\end{equ}
 			(т. к. у функциии $ \vphi $ период 2)
-			\item Если $ n = m $
+
+			\item Пусть $ n = m $
 			$$ 4^ma_m = k, \qquad 4^mb_m = k + 1 $$
 			\begin{equ}{van_der_varden:419}
 				\vphi(4^mb_m) - \vphi(4^ma_m) = \vphi(k + 1) - \vphi(k)
@@ -630,11 +529,12 @@
 			\begin{equ}{van_der_varden:420}
 				|\vphi(k + 1) - \vphi(k)| = 1
 			\end{equ}
+
 			\item Пусть $ 0 < n < m $
 			\begin{equ}{van_der_varden:421}
 				4^nb_m - 4^na_n = 4^{n - m}4^m(b_m - a_m) = 4^{n - m}
 			\end{equ}
-			Запишем некоторые свойства $ \vphi(x) $, которые видно из графика, но можно доказать и аналитически:
+			Запишем свойство $ \vphi(x) $, которое видно из графика, но можно доказать и аналитически:
 			\begin{equ}{van_der_varden:422}
 				\forall y_1, y_2 \in \R \quad |\vphi(y_2) - \vphi(y_1)| \le |y_2 - y_1|
 			\end{equ}
@@ -703,13 +603,10 @@
 	$ f(x, y) \uniarr[y \to y_0]{x \in E} f_0(x) $
 \end{notation}
 
-\begin{theorem}[Критерий Коши равномерной сходимости семейства функций]
-	\hfill \\
+\begin{theorem}[Критерий Коши]
 	$ f : E \times Y \to \R, \qquad y_0 $ "--- т. сг. $ Y $ \\
 	Для того, чтобы семейство функций равномерно сходилось к некоторой функции $ f_0 $ \bt{необходимо и достаточно}, чтобы
-	\begin{equ}{family:2}
-		\forall \veps > 0 \quad \exist \text{окрест. } U(y_0) : \quad \forall y_1, y_2 \in \bigg( U(y_0) \cap Y \bigg) \setminus \set{y_0} \quad \forall x \in E \quad |f(x, y_2) - f(x, y_1)| < \veps
-	\end{equ}
+	$$ \forall \veps > 0 \quad \exist \text{окрест. } U(y_0) : \quad \forall y_1, y_2 \in \bigg( U(y_0) \cap Y \bigg) \setminus \set{y_0} \quad \forall x \in E \quad |f(x, y_2) - f(x, y_1)| < \veps $$
 \end{theorem}
 
 \begin{iproof}
@@ -734,7 +631,7 @@
 	$ f : E \times Y \to \R, \quad Y \sub \R^{n \ge 1}, \quad y_\circ \in \R^n $ "--- т. сг. $ Y, \quad E $ "--- метр. пр-во, $ \qquad x_\circ \in E $ "--- т. сг. $ E $
 	$$ f(x, y) \uniarr[y \to y_0]{x \in E} f_0(x), \qquad \forall y \in Y \quad \exist \liml{x \to x_0} f(x, y) = \vphi(y) $$
 	Тогда $ \exist \liml{y \to y_0} \vphi(y) $ и $ \exist \liml{x \to x_0} f_0(x) $ и справедливо
-	$$ \liml{y \to y_0} \vphi(y) = \liml{x \to x_0} f_0(x) $$
+	$$ \bm{\liml{y \to y_0} \vphi(y) = \liml{x \to x_0} f_0(x)} $$
 \end{theorem}
 
 \begin{proof}
@@ -743,17 +640,17 @@
 	$$ f(x, y) \uniarr[y \to y_0]{x \in E} f_0(x) \quad \implies \quad f_n(x) \uniarr{x \in E} f_0(x) $$
 	При этом, по условию теоремы для любого $ n $ имеем
 	$$ \vphi(y_n) = \liml{x \to x_0} f(x, y_n) \bdefeq{f_n} \liml{x \to x_0}f_n(x) $$
-	Значит, можно применить теорему о переходе к пределу в равномерно сходящейся функциональной последовательности:
+	Значит, можно применить аналогичную теорему для функциональной последовательности:
 	$$ \exist \limi{n}\vphi(y_n) \in \R, \qquad \exist \liml{x \to x_0} f_0(x), \qquad \limi{n}\vphi(y_n) = \liml{x \to x_0}f_0(x) $$
-	В силу произвольности $ \seq{y_n}n $ и условий, наложенных на $ y_n $ в начале, последнее утверждение доказывает теорему.
+	В силу произвольности $ \seq{y_n}n $ последнее утверждение доказывает теорему.
 \end{proof}
 
 \section{Непрерывность предельной функции равномерно сходящегося семейства функций}
 
 \begin{theorem}
 	$ E, d $ "--- метрическое пространство, $ \qquad x_0 \in E $ "--- т. сг., $ \qquad y_0 $ "--- т. сг. $ Y \sub \R^n $ \\
-	$ f(x, y) \uniarr[y \to y_0]{x \in E} f_0(x), \qquad \forall y \in Y \quad f(x, y) $ непр. в $ x_0 $ \\
-	Тогда $ f_0(x) $ непр. в $ x_0 $
+	$ f(x, y) \uniarr[y \to y_0]{x \in E} f_0(x), \qquad \forall y \in Y \quad f(x, y) $ \bt{непр. в} $ \bm{x_0} $ \\
+	Тогда $ f_0(x) $ \bt{непр. в} $ \bm{x_0} $
 \end{theorem}
 
 \begin{proof}
@@ -765,8 +662,8 @@
 \end{proof}
 
 \begin{implication}
-	$ f : E \times Y \to \R, \qquad f(x, y) \uniarr[y \to y_0]{x \in E} f_0(x), \qquad \forall y \in Y \quad f(x, y) \in \Cont{E} $
-	$$ \implies f_0 \in \Cont{E} $$
+	$ f : E \times Y \to \R, \qquad f(x, y) \uniarr[y \to y_0]{x \in E} f_0(x), \qquad \forall y \in Y \quad \bm{f(x, y) \in \Cont{E}} $
+	$$ \implies \bm{f_0 \in \Cont{E}} $$
 \end{implication}
 
 \section{Теорема о непрерывности интеграла, зависящего от параметра}
@@ -774,13 +671,11 @@
 \begin{theorem}
 	$ y_0 $ "--- т. сг. $ Y, \qquad f(x, y) \uniarr[y \to y_0]{x \in [a, b]} f_0(x) $ \\
 	Тогда $ f_0 \in \Cont{[a, b]} $ и
-	\begin{equ}{par_int:15}
-		I(y) = \dint{a}b{f(x, y)} \underarr{y \to y_0} \dint{a}b{f_0(x)}
-	\end{equ}
+	$$ I(y) \define \dint{a}b{f(x, y)} \underarr{y \to y_0} \dint{a}b{f_0(x)} $$
 \end{theorem}
 
 \begin{proof}
-	Непрерывность $ f_0 $ следует из следствия к предыдущей теореме, поэтому интеграл в правой части \eref{par_int:15} определён \\
+	Непрерывность $ f_0 $ следует из следствия к предыдущей теореме, поэтому интеграл в правой части определён \\
 	По определению равномерной сходимости,
 	$$ \forall \veps > 0 \quad \exist U(y_0) : \quad \forall y \in \bigg( U(y_0) \cap Y \bigg) \setminus \set{y_0} \quad |f(x, y) - f_0(x)| < \veps $$
 	При таких $ y $ имеем
@@ -795,13 +690,13 @@
 \section{Теорема о производной интеграла, зависящего от параметра}
 
 \begin{theorem}
-	$ f : [a, b] \times Y \to \R, \qquad Y = [p, q], \qquad f \in \Cont{[a, b] \times Y} $
-	$$ \foral (x, y) \in [a, b] \times Y \quad \exist f'(x, y), \qquad f_y'(x, y) \in \Cont{[a, b] \times Y} $$
-	$$ \implies \quad \forall y \in [p, q] \quad \exist I'(y), \qquad I'(y) = \dint{a}b{f_y'(x, y)} $$
+	$ f : [a, b] \times [p, q] \to \R, \qquad \bm{f \in} \Cont{[a, b] \times [p, q]} $
+	$$ \foral (x, y) \in [a, b] \times [p, q] \quad \exist f_y'(x, y), \qquad \bm{f_y'(x, y) \in} \Cont{[a, b] \times [p, q]} $$
+	$$ \implies \quad \forall y \in [p, q] \quad \exist \bm{I'(y) =} \dint{a}b{f_y'(x, y)} $$
 \end{theorem}
 
 \begin{proof}
-	Поскольку $ f_y' $ непрерывна, к нейц применима терема Кантора:
+	Поскольку $ f_y' $ непрерывна, к ней применима терема Кантора:
 	$$ \forall \veps > 0 \quad \exist \delta > 0 : \quad \forall (x_1, y_1), (x_2, y_2) : \sqrt{(x_2 - x_1)^2 + (y_2 - y_1)^2} < \delta \qquad |f_y'(x_2, y_2) - f_y'(x_1, y_1)| < \veps $$
 	Пусть $ 0 < |h| < \delta $, тогда
 	$$ \exist c \in (y \between y + h) : \quad f(x, y + h) - f(x, y) = f_y'(x, c)h $$
@@ -819,8 +714,8 @@
 \section{Теорема об интегрировании по параметру интеграла, зависящего от параметра}
 
 \begin{theorem}
-	$ f \in \Cont{[a, b] \times [p, q]}, \qquad I(y) \define \dint{a}b{f(x, y)}, \quad K(x) \define \dint[y]{p}q{f(x, y)} $
-	$$ \implies \dint[y]pq{I(y)} = \dint{a}b{K(x)} $$
+	$ \bm{f \in} \Cont{[a, b] \times [p, q]}, \qquad I(y) \define \dint{a}b{f(x, y)}, \quad K(x) \define \dint[y]{p}q{f(x, y)} $
+	$$ \implies \dint[y]pq{I(y)} \bm= \dint{a}b{K(x)} $$
 \end{theorem}
 
 \begin{proof}
@@ -828,7 +723,7 @@
 	Положим
 	$$ \vphi(y_0) \define \dint[y]{p}{y_0}{I(y)}, \qquad v(y) \define \dint{a}b{l(x, y_0)}, \qquad l(x, y_0) \define \dint[y]{p}{y_0}{f(x, y)} $$
 	$ \vphi \in \Cont{[p, q]} $, поскольку $ I(y) \in \Cont{[p, q]} $ \\
-	Поскольку $ f \in \Cont{[a, b] \times [p, q]} $, то она ограничена (по первой теореме Вейерштрасса), т. е.
+	Поскольку $ f \in \Cont{[a, b] \times [p, q]} $, то она ограничена (по первой теореме Вейерштрасса), \ie
 	$$ \exist M : \quad \forall (x, y) \in [a, b] \times [p, q] \quad |f(x, y)| \le M $$
 	Поэтому при $ y_1, y_2 \in [p, q] $ имеем
 	\begin{multline}\lbl{par_int:24}
@@ -838,8 +733,7 @@
 	При фиксированном $ y_0 $ функция $ l(x, y_0) \in \Cont{[a, b]} $, поэтому, с учётом \eref{par_int:24} имеем
 	$$ l(x, y_0) \in \Cont{[a, b] \times [p, q]} $$
 	По определению $ l $, при фиксированном $ x $ получаем
-	$$ l_{y_0}'(x, y) = f(x, y_0) $$
-	$$ \implies l_{y_0}'(x, y) \in \Cont{[a, b] \times [p, q]} $$
+	$$ l_{y_0}'(x, y) = f(x, y_0) \quad \implies \quad l_{y_0}'(x, y) \in \Cont{[a, b] \times [p, q]} $$
 	$$ \implies \exist v'(y_0), \qquad v'(y_0) = \dint{a}b{l_{y_0}'(x, y_0)} = \dint{a}b{f(x, y_0)} = I(y_0) $$
 	По определению $ \vphi $,
 	$$ \exist \vphi'(y_0), \qquad \vphi'(y_0) = I(y_0) $$
@@ -859,7 +753,7 @@
 Пусть $ Y \sub \R^{n \ge 1}, \qquad f : [a, \infty) \times Y \to \R $ "--- семейство функций \\
 Предположим, что $ f \in \Cont{[a, \infty) \times Y} $ и пусть $ A > a $ \\
 Определим функцию $ F : Y \times [a, \infty) $:
-$$ f(y, A) \define \dint{a}A{f(x, y)}, \qquad y \in Y, \quad A > a $$
+$$ F(y, A) \define \dint{a}A{f(x, y)}, \qquad y \in Y, \quad A > a $$
 Пусть
 $$ \forall y \in Y \quad \exist \limi{A} F(y, A) \fed F_0(y) $$
 
@@ -868,7 +762,7 @@ $$ \forall y \in Y \quad \exist \limi{A} F(y, A) \fed F_0(y) $$
 	$$ F(y, A) \uniarr[A \to \infty]{y \in Y} F_0(y) $$
 \end{definition}
 
-Применяя критерий Коши равномерной сходимости семейства функций, получаем следующее утверждение:
+Применяя критерий Коши для семейства функций, получаем следующее утверждение:
 
 \begin{theorem}
 	Для того, чтобы несобственнный интеграл $ \dint{a}\infty{f(x, y)} $, зависящий от параметра, равномерно сходился при $ y \in Y $, \bt{необходимо и достаточно}, чтобы
@@ -885,10 +779,10 @@ $$ \forall y \in Y \quad \exist \limi{A} F(y, A) \fed F_0(y) $$
 \begin{theorem}
 	$ f \in \Cont{[a, \infty) \times Y} $
 	\begin{equ}{par_int:35}
-		\forall y \in Y \quad |f(x, y)| \le g
+		\forall y \in Y \quad \bm{|f(x, y)| \le g}
 	\end{equ}
-	$$ \dint{a}\infty{g(x)} < \infty $$
-	Тогда несобственный интеграл $ \dint{a}\infty{f(x, y)} $ сходится равномерно при $ y \in Y $
+	$$ \dint{a}\infty{g(x)} \bm{< \infty} $$
+	Тогда несобственный интеграл $ \dint{a}\infty{f(x, y)} $ \bt{сходится равномерно} при $ y \in Y $
 \end{theorem}
 
 \begin{proof}
@@ -903,13 +797,13 @@ $$ \forall y \in Y \quad \exist \limi{A} F(y, A) \fed F_0(y) $$
 \begin{theorem}
 	$ f : [a, \infty) \times Y, \qquad Y \sub \R^n, \qquad f \in \Cont{[a, \infty) \times Y}, \qquad g : [a, \infty) \times Y \to \R $
 	\begin{equ}{abel_par_int:1}
-		\exist M : \quad |g(x, y)| \le M \quad \forall x \in [a, \infty)
+		\exist M : \quad \bm{|g(x, y)| \le M} \quad \forall x \in [a, \infty)
 	\end{equ}
-	$ g(x, y) $ монотонна по $ x $ при $ \forall y \in Y $
+	$ \bm{g(x, y)} $ \bt{монотонна} по $ x $ при $ \forall y \in Y $
 	\begin{equ}{abel_par_int:3}
-		\dint{a}\infty{f(x, y)} \text{ равномерно сх. при } y \in Y
+		\dint{a}\infty{f(x, y)} \text{ \bt{равномерно сх.} при } y \in Y
 	\end{equ}
-	$$ \implies \dint{a}\infty{f(x, y)g(x, y)} \text{ равномерно сх. при } y \in Y $$
+	$$ \implies \dint{a}\infty{f(x, y)g(x, y)} \text{ \bt{равномерно сх.} при } y \in Y $$
 \end{theorem}
 
 \begin{proof}
@@ -932,14 +826,14 @@ $$ \forall y \in Y \quad \exist \limi{A} F(y, A) \fed F_0(y) $$
 \section{Признак Дирихле равномерной сходимости несобственного интеграла от параметра}
 
 \begin{theorem}
-	$ f \in \Cont{[a, \infty) \times Y}, \qquad g : [a, \infty) \times Y \to \R, \qquad g $ монотонна по $ x $ при $ \forall y \in Y $
+	$ f \in \Cont{[a, \infty) \times Y}, \qquad g : [a, \infty) \times Y \to \R, \qquad \bm g $ \bt{монотонна} по $ x $ при $ \forall y \in Y $
 	\begin{equ}{dirichle_par_int:7}
 		g(x, y) \uniarr[x \to \infty]{y \in Y} 0
 	\end{equ}
 	\begin{equ}{dirichle_par_int:8}
-		\exist L > 0 : \quad \forall A > a \quad \forall y \in Y \quad \bigg| \dint{a}A{f(x, y)} \bigg| \le L
+		\exist L > 0 : \quad \forall A > a \quad \forall y \in Y \quad \bigg| \dint{a}A{f(x, y)} \bigg| \bm{\le L}
 	\end{equ}
-	$$ \implies \dint{a}\infty{f(x, y)g(x, y)} \text{ сходится равномерно при } y \in Y $$
+	$$ \implies \dint{a}\infty{f(x, y)g(x, y)} \text{ \bt{сходится равномерно} при } y \in Y $$
 \end{theorem}
 
 \begin{proof}
@@ -965,89 +859,44 @@ $$ \forall y \in Y \quad \exist \limi{A} F(y, A) \fed F_0(y) $$
 \begin{theorem}
 	$ Y \sub \R^n, \qquad y_0 $ "--- т. сг. $ Y $ \nimp[(не обязательно $ \in Y $)], $ \qquad f \in \Cont{[a, \infty) \times Y} $
 	\begin{equ}{uni_int:14}
-		I(y) \define \dint{a}\infty{f(x, y)} \text{ равномерно сходится при } y \in Y
+		\bm{I(y)} \define \dint{a}\infty{f(x, y)} \text{ \bt{равномерно сходится} при } y \in Y
 	\end{equ}
 	\begin{equ}{uni_int:15}
-		\forall x \in [a, \infty) \quad \exist \vphi(x) : \quad f(x, y) \uniarr[y \to y_0]{x \in [a, \infty)} \vphi(x)
+		\forall x \in [a, \infty) \quad \exist \vphi(x) : \quad \bm{f(x, y)} \uniarr[y \to y_0]{x \in [a, \infty)} \bm{\vphi(x)}
 	\end{equ}
-	$$ \implies \dint{a}\infty{\vphi(x)} \text{ сходится}, \qquad I(y) \underarr{y \to y_0} \dint{a}\infty{\vphi(x)} $$
+	$$ \implies \dint{a}\infty{\vphi(x)} \bt{ сходится}, \qquad \bm{I(y) \underarr{y \to y_0}} \dint{a}\infty{\vphi(x)} $$
 \end{theorem}
-
-\begin{remark}
-	Требование \eref{uni_int:15} можно ослабить:
-	$$ \forall A > a, \quad f(x, y) \uniarr[y \to y_0]{x \in [a, A]} \vphi(x) $$
-\end{remark}
 
 \begin{proof}
 	Рассмотрим функции:
 	$$ F(A, y) \define \dint{a}{A}{f(x, y)}, \qquad \Phi(A) \define \dint{a}{A}{\vphi(x)} $$
-	\begin{equ}{uni_int:18}
-		\eref{uni_int:15} \implies \vphi \in \Cont{[a, \infty)}
-	\end{equ}
-	Значит, функция $ \Phi $ корректно определена
+	$ \eref{uni_int:15} \implies \vphi \in \Cont{[a, \infty)}, $ значит, функция $ \Phi $ корректно определена
 	\begin{equ}{uni_int:14'}
 		\eref{uni_int:14} \iff F(a, y) \uniarr[A \to \infty]{y \in Y} I(y)
 	\end{equ}
 	Можно применить теорему о функциональной сходимости функционального семейства:
-	\begin{equ}{uni_int:19}
-		\eref{uni_int:15} \implies \forall A > a \quad \dint{a}{A}{f(x, y)} \underarr{y \to y_0} \dint{a}{A}{\vphi(x)}
-	\end{equ}
+	$$ \eref{uni_int:15} \implies \forall A > a \quad \dint{a}{A}{f(x, y)} \underarr{y \to y_0} \dint{a}{A}{\vphi(x)} $$
 	В обозначениях $ F, \Phi $ это означает, что
 	\begin{equ}{uni_int:19'}
 		F(A, y) \underarr{y \to y_0} \Phi(A)
 	\end{equ}
 	Можно применить теорему о предельном переходе в функциональном семействе:
-	$$ \eref{uni_int:14'}, \eref{uni_int:19'} \implies \exist \liml{y \to y_0} I(y) $$
-	и
-	$$ \exist \liml{A \to \infty} \Phi(A), \qquad \limi{A} \Phi(A) = \liml{y \to y_0} I(y) $$
+	$$ \eref{uni_int:14'}, \eref{uni_int:19'} \implies \exist \liml{y \to y_0} I(y), \qquad \exist \liml{A \to \infty} \Phi(A), \qquad \limi{A} \Phi(A) = \liml{y \to y_0} I(y) $$
 	При этом,
 	$$ \dint{a}\infty{\vphi(x)} \bdefeq{\Phi} \limi{A} \Phi(A) $$
-\end{proof}
-
-\begin{implication}[непрерывность в точке]
-	$ f \in \Cont{[a, \infty) \times Y}, \qquad y_0 \in Y $ "--- т. сг. $ Y $
-	$$ f(x, y) \uniarr[y \to y_0]{x \in [a, \infty)} f(x, y_0) $$
-	$$ I(y) \define \dint{a}\infty{f(x, y)} \text{ равномерно сходится при } y \in Y $$
-	$$ \implies I(y) \text{ непр. в } y_0 $$
-\end{implication}
-
-\begin{implication}
-	$ f \in \Cont{[a, \infty) \times Y}, \qquad I(y) $ равномерно сходится при $ y \in Y $
-	$$ \implies I(y) \in \Cont{Y} $$
-\end{implication}
-
-Рассмотрим $ Y = [p, q] $, а равномерную сходимость функционального семейства требовать не будем:
-
-\begin{statement}[частный случай]
-	$ f \in \Cont{Y = [p, q]} $ \\
-	$ I(y) \define \dint{a}\infty{f(x, y)} $ равномерно сходится при $ y \in [p, q] $
-	$$ \implies I(y) \to I(y_0) $$
-\end{statement}
-
-\begin{proof}
-	Рассмотрим
-	$$ F(A, y) \define \dint{a}{A}{f(x, y)} $$
-	Пусть $ y_0 \in [p, q] $ \\
-	$ f $ непрерывна на всём произведении, в частности $ f(x, y) \in \Cont{[a, A] \times [p, q]} $ \\
-	Это "--- компакт. Значит, $ f $ равномерно непрерывна на $ [p, q] $
-	$$ \implies f(x, y) \uniarr[y \to y_0]{x \in [a, A]} f(x, y_0) $$
-	Применяя те же рассуждения, что и в доказательстве теоремы, получаем, что
-	$$ I(y) \to I(y_0) $$
 \end{proof}
 
 \section{Определённый интеграл от интеграла, зависящего от параметра}
 
 \begin{theorem}
 	$ f \in \Cont{[a, \infty) \times [p, q]} $
-	$$ I(y) \define \dint{a}\infty{f(x, y)} \text{ равномерно сх. при } y \in [p, q] $$
+	$$ I(y) \define \dint{a}\infty{f(x, y)} \text{ \bt{равномерно сх.} при } y \in [p, q] $$
 	По последнему следствию, $ I(y) \in \Cont{[p, q]} $, и  можно рассматривать $ \dint[y]pq{I(y)} $
 	$$ K(y) \define \dint[y]{p}{q}{f(x, y)} $$
 	$ K(y) $ "--- собственный интеграл от параметра, значит $ k \in \Cont{[a, \infty)} $
-	$$ \implies \dint{a}\infty{K(x)} \text{ сходится} $$
-	и
-	$$ \implies \dint[y]{p}{q}{I(y)} = \dint{a}\infty{K(x)} $$
+	$$ \implies \dint{a}\infty{K(x)} \bt{ сходится}, \qquad \dint[y]{p}{q}{I(y)} \bm= \dint{a}\infty{K(x)}, $$
 	или
-	$$ \dint[y]{p}q{\bigg( \dint{a}\infty{f(x, y)} \bigg)} = \dint{a}\infty{ \bigg( \dint[y]pq{f(x, y)} \bigg)} $$
+	$$ \dint[y]{p}q{\bigg( \dint{a}\infty{f(x, y)} \bigg)} \bm= \dint{a}\infty{ \bigg( \dint[y]pq{f(x, y)} \bigg)} $$
 \end{theorem}
 
 \begin{proof}
@@ -1063,32 +912,34 @@ $$ \forall y \in Y \quad \exist \limi{A} F(y, A) \fed F_0(y) $$
 \section{Производная несобственного интеграла, зависящего от параметра}
 
 \begin{theorem}
-	$ f \in \Cont{[a, \infty) \times [p, q]}, \qquad \forall x \in [a, \infty) \quad \forall y \in [p, q] \quad \exist f_y'(x, y) $
-	$$ f_y'(x, y) \in \Cont{[a, \infty) \times [p, q]} $$
+	$ f \in \Cont{[a, \infty) \times [p, q]}, \qquad \forall x \in [a, \infty) \quad \forall y \in [p, q] \quad \exist \bm{f_y'(x, y) \in} \Cont{[a, \infty) \times [p, q]} $
 	$$ \forall y \in [p, q] \quad \bt{ сходится } I(y) \define \dint{a}\infty{f(x, y)} $$
 	\begin{equ}{der_int:38}
 		\dint{a}\infty{f_y'(x, y)} \text{ \bt{равномерно сходится} при } y \in [p, q]
 	\end{equ}
-	$$ \implies \forall y \in [p, q] \quad \exist I'(y), \qquad I'(y) = \dint{a}\infty{f_y'(x, y)} $$
+	$$ \implies \forall y \in [p, q] \quad \exist \bm{I'(y) =} \dint{a}\infty{f_y'(x, y)} $$
 \end{theorem}
 
 \begin{proof}
 	Зафиксируем $ y_0 \in [p, q] $ \\
-	Обозначим $ Y \define [p, q] \setminus \set{y_0} $ \\
+	Обозначим $ Y \define [p, q] \setminus \set{y_0} $
+
 	Рассмотрим функции
 	$$ F(A, y) \define \dint{a}A{f(x, y)}, \qquad G(A, y) \define \frac{F(A, y) - F(A, y_0)}{y - y_0} $$
+
 	$ f $ удовлетворяет требованиям, которые накладывались на функцию в теореме о производной интеграла от параметра:
 	\begin{equ}{der_int:312}
 		\exist \liml{y \to y_0} G(A, y) \bydef \liml{y \to y_0} \frac{F(A, y) - F(A, y_0)}{y - y_0} \bdefeq{F_y'} F_y'(A, y_0) \undereq{\text{упомятнутая теорема}} \dint{a}A{f_y'(x, y_0)}
 	\end{equ}
 	(для любого фиксированного $ A > a $)
+
 	\begin{statement}
 		\begin{equ}{der_int:314}
 			\exist \Phi(y), \quad y \in Y : \quad G(A, y) \uniarr[A \to \infty]{y \in Y} \Phi(y)
 		\end{equ}
 	\end{statement}
 	\begin{proof}
-		Докажем, используя критерий Коши (применяя его к условию \eref{der_int:38}):
+		Применим критерий Коши к условию \eref{der_int:38}:
 		\begin{equ}{der_int:315}
 			\forall \veps > 0 \quad \exist A > a : \quad \forall A_2 > A_1 > A \quad \forall y \in [p, q] \quad \bigg| \dint{A_1}{A_2}{f_y'(x, y)} \bigg| < \veps
 		\end{equ}
@@ -1108,13 +959,13 @@ $$ \forall y \in Y \quad \exist \limi{A} F(y, A) \fed F_0(y) $$
 		$$ G(A_2, y) - G(A_1, y) \xlongequal[\eref{der_int:316}]{\operatorname{def} V} \frac{V(y) - V(y_0)}{y - y_0} \undereq{\eref{der_int:318}} \frac{V'(c)(y - y_0)}{y - y_0} = V'(c) \undereq{\eref{der_int:317}} \dint{A_1}{A_2}{f_y'(x, c)} $$
 		$$ \implies |G(A_2, y) - G(A_1, y)| = \bigg| \dint{A_1}{A_2}{f_y'(x, c)} \bigg| \underset{\eref{der_int:315}}< \veps $$
 	\end{proof}
+
 	Применим теорему о предельном переходе в функциональном семействе:
 	\begin{equ}{der_int:323}
 		\eref{der_int:312}, \eref{der_int:314} \implies
 		\begin{cases}
-			\exist \liml{y \to y_0} \Phi(y) \\
-			\exist \limi{A} \dint{a}A{f_y'(x, y_0)} = \dint{a}\infty{f_y'(x, y_0)} \\
-			\liml{y \to y_0} \Phi(y) = \dint{a}\infty{f_y'(x, y_0)}
+			\exist \liml{y \to y_0} \Phi(y) = \dint{a}\infty{f_y'(x, y_0)} \\
+			\exist \limi{A} \dint{a}A{f_y'(x, y_0)} = \dint{a}\infty{f_y'(x, y_0)}
 		\end{cases}
 	\end{equ}
 	$$ G(A, y) \xrightarrow[A \to \infty]{\operatorname{def} G, F} \frac{I(y) - I(y_0)}{y - y_0} $$
@@ -1129,12 +980,12 @@ $$ \forall y \in Y \quad \exist \limi{A} F(y, A) \fed F_0(y) $$
 	$ f \in \Cont{[a, \infty) \times [p, \infty)}, \qquad f(x, y) \ge 0 $
 	$$ \forall y \in [p, \infty) \quad \exist I(y) \define \dint{a}\infty{f(x, y)} $$
 	$$ \forall x \in [a, \infty) \quad \exist K(x) = \dint[y]p\infty{f(x, y)} $$
-	Существует по крайней мере один из интегралов:
+	\bt{Существует} по крайней мере \bt{один из интегралов}:
 	$$ \dint[y]p\infty{I(y)}, \qquad \dint{a}\infty{K(y)} $$
-	Тогда существует и второй, и справедливо равенство:
-	$$ \dint[y]p\infty{I(y)} = \dint{a}\infty{K(x)} $$
+	Тогда \bt{существует и второй}, и справедливо равенство:
+	$$ \dint[y]p\infty{I(y)} \bm= \dint{a}\infty{K(x)} $$
 	то есть,
-	$$ \dint[y]p\infty{\bigg( \dint{a}\infty{f(x, y)} \bigg)} = \dint{a}\infty{\bigg( \dint[y]p\infty{f(x, y)} \bigg)} $$
+	$$ \dint[y]p\infty{\bigg( \dint{a}\infty{f(x, y)} \bigg)} \bm= \dint{a}\infty{\bigg( \dint[y]p\infty{f(x, y)} \bigg)} $$
 \end{theorem}
 
 \begin{remark}
@@ -1155,51 +1006,28 @@ $$ \forall y \in Y \quad \exist \limi{A} F(y, A) \fed F_0(y) $$
 	Применим признак Абеля к
 	$$ f(x, y) \define \frac{\sin x}x, \qquad x \in [0, \infty), \quad y \in [0, \infty) $$
 	Интеграл, не зависящий от $ y $ равномерно сходится:
-	\begin{equ}{dirichle_int:41}
-		\dint0\infty{f(x, y)} = \dint0\infty{\frac{\sin x}x} \text{ равн. сх. при } y \in [0, \infty)
-	\end{equ}
-	\begin{equ}{dirichle_int:42}
-		g(x, y) \define e^{-xy} \text{ монот. по } x \text{ при } y \in [0, \infty)
-	\end{equ}
-	\begin{equ}{dirichle_int:43}
-		0 < e^{-xy} \le 1
-	\end{equ}
-	\begin{equ}{dirichle_int:44}
-		\eref{dirichle_int:41}, \eref{dirichle_int:42}, \eref{dirichle_int:43} \implies I(y) \define \dint0\infty{\frac{\sin x}xe^{-xy}} \text{ равн. сх. при } y \in [0, \infty)
-	\end{equ}
-	\begin{equ}{dirichle_int:45}
-		h(x, y) \define \frac{\sin x}xe^{-xy} \in \Cont{[0, \infty) \times [0, \infty)}
-	\end{equ}
-	По частному случаю перехода к пределу в интеграле от параметра
-	\begin{equ}{dirichle_int:46}
-		\eref{dirichle_int:44}, \eref{dirichle_int:45} \implies I(0) = \liml{y \to +0} I(y)
-	\end{equ}
+	$$ \dint0\infty{f(x, y)} = \dint0\infty{\frac{\sin x}x} \text{ равн. сх. при } y \in [0, \infty) $$
+	$$ g(x, y) \define e^{-xy} \text{ монот. по } x \text{ при } y \in [0, \infty) $$
+	$$ 0 < e^{-xy} \le 1 $$
+	Всё это означает, что
+	$$ I(y) \define \dint0\infty{\frac{\sin x}xe^{-xy}} \text{ равн. сх. при } y \in [0, \infty) $$
+	$$ h(x, y) \define \frac{\sin x}xe^{-xy} \in \Cont{[0, \infty) \times [0, \infty)} $$
+	Применим частный случай перехода к пределу к последним двум выражениям:
+	$$ I(0) = \liml{y \to +0} I(y) $$
 	Возьмём $ y \ge \delta > 0 $
-	\begin{equ}{dirichle_int:47}
-		\bigg| \frac{\sin x}xe^{-xy} \bigg| \le e^{-\delta x}
-	\end{equ}
-	$$ \implies h_y'(x, y) = -\sin xe^{-xy} $$
-	\begin{equ}{dirichle_int:48}
-		|h_y'(x, y)| \le e^{-xy} \le e^{-\delta x}
-	\end{equ}
-	По только что доказанной теореме
-	\begin{mequ}[\eref{dirichle_int:47}, \eref{dirichle_int:48} \implies \empheqlbrace]
-		\lbl{dirichle_int:49} \dint0\infty{\frac{\sin x}xe^{-xy}} \text{ сходится} \\
-		\lbl{dirichle_int:410} \dint0\infty{h_y'(x, y)} \text{ равномерно сходится}
-	\end{mequ}
-	То есть
-	$$ \forall A > \delta \quad \exist I'(y) \text{ при } y \in [\delta, A] $$
-	\begin{equ}{dirichle_int:411}
-		\implies \forall y \ge \delta \quad \exist I'(y), \qquad I'(y) = \dint0\infty{h_y'(x, y)} = -\dint0\infty{\sin xe^{-xy}}
-	\end{equ}
+	$$ \bigg| \frac{\sin x}xe^{-xy} \bigg| \le e^{-\delta x} $$
+	$$ \implies h_y'(x, y) = -\sin xe^{-xy} \quad \implies |h_y'(x, y)| \le e^{-xy} \le e^{-\delta x} $$
+	Применим теорему о производной несобственного интеграла от параметра:
+	$$ \dint0\infty{\frac{\sin x}xe^{-xy}} \text{ сходится}, \qquad \dint0\infty{h_y'(x, y)} \text{ равномерно сходится} $$
+	То есть, $ \forall A > \delta \quad \exist I'(y) $ при $ y \in [\delta, A] $
+	$$ \implies \forall y \ge \delta \quad \exist I'(y), \qquad I'(y) = \dint0\infty{h_y'(x, y)} = -\dint0\infty{\sin xe^{-xy}} $$
 	Проинтегрируем по частям:
 	\begin{multline*}
 		-\dint0\infty{\sin xe^{-xy}} = \dint0\infty{e^{-xy}(\cos x)'} = e^{-xy}\cos \clamp[\infty]0 - \dint0\infty{\cos x(e^{-xy})_x'} = \\
 		= -1 + y\dint0\infty{e^{-xy}\cos x} \undereq{\text{по частям}} -1 + y\dint0\infty{e^{-xy}(\sin x)'} = \\
 		= -1 + y \bigg( \underbrace{e^{-xy}\sin x \clamp[\infty]0}_{=0} - \dint0\infty{\sin x(e^{-xy})'} \bigg) = -1 + y^2\dint0\infty{e^{-xy}\sin x}
 	\end{multline*}
-	$$ \implies -(1 + y^2)\dint0\infty{e^{-xy}\sin x} = -1 $$
-	$$ -\dint0\infty{e^{-xy}\sin x} = -\frac1{1 + y^2} $$
+	$$ \implies -(1 + y^2)\dint0\infty{e^{-xy}\sin x} = -1 \quad \implies \quad -\dint0\infty{e^{-xy}\sin x} = -\frac1{1 + y^2} $$
 	\begin{equ}{dirichle_int:412}
 		\iff I'(y) = -\frac1{1 + y^2}
 	\end{equ}
@@ -1209,8 +1037,7 @@ $$ \forall y \in Y \quad \exist \limi{A} F(y, A) \fed F_0(y) $$
 	\end{equ}
 	При $ B \to \infty $
 	$$ |I(B)| \le \dint0\infty{e^{-Bx}} = \frac1B \infarr{B} 0 $$
-	$$ \eref{dirichle_int:413} \implies 0 - I(\delta) = \arctg \delta - \half[\pi] $$
-	$$ \implies I(\delta) = \half[\pi] - \arctg \delta $$
+	$$ \eref{dirichle_int:413} \implies 0 - I(\delta) = \arctg \delta - \half[\pi] \quad \implies \quad \implies I(\delta) = \half[\pi] - \arctg \delta $$
 	$$ \dint0\infty{\sin x} = I(0) = \liml{\delta \to +0} I(\delta) = \lim \bigg( \half[\pi] - \arctg \delta \bigg) = \half[\pi] $$
 \end{proof}
 
@@ -1306,23 +1133,19 @@ $$ \forall y \in Y \quad \exist \limi{A} F(y, A) \fed F_0(y) $$
 \end{proof}
 
 \begin{theorem}[признак Вейерштрасса]
-	\begin{equ}{comp_series:21}
-		\seq{a_n}n, \quad a_n > 0 : \quad |\gamma_n(x)| \le a_n \quad \forall n \quad \forall x \in E
-	\end{equ}
-	Ряд $ a_n $ сходится
+	$ \seq{a_n}n, \quad a_n > 0 : \quad \bm{|\gamma_n(x)| \le a_n} \quad \forall n \quad \forall x \in E $ \\
+	$ \bm{\sum a_n} $ \bt{сходится}
 	\begin{equ}{comp_series:22}
 		\sum_{n = 1}^\infty a_n < \infty
 	\end{equ}
-	$$ \implies \sum_{n = 1}^\infty \gamma_n \text{ сходится равномерно} $$
+	$$ \implies \sum_{n = 1}^\infty \gamma_n \bt{ сходится равномерно} $$
 \end{theorem}
 
 \begin{proof}
 	Возьмём $ \forall \veps > 0 $
-	\begin{equ}{comp_series:23}
-		\eref{comp_series:22} \implies \exist N : \quad \forall m > n > N \quad a_{n + 1} + \dots + a_n < \veps
-	\end{equ}
-	$$ |\gamma_{n + 1}(x) + \dots + \gamma_n(x)| \le |\gamma_{n + 1}(x)| + \dots + |\gamma_m(x)| \underset{a_n > 0}\le a_{n + 1} + \dots + a_m \underset{\eref{comp_series:23}}< \veps $$
-	По критерию Коши получаем равномерную сходимость
+	$$ \eref{comp_series:22} \implies \exist N : \quad \forall m > n > N \quad a_{n + 1} + \dots + a_n < \veps $$
+	$$ |\gamma_{n + 1}(x) + \dots + \gamma_n(x)| \le |\gamma_{n + 1}(x)| + \dots + |\gamma_m(x)| \underset{a_n > 0}\le a_{n + 1} + \dots + a_m < \veps $$
+	По критерию Коши получаем равномерную сходимость.
 \end{proof}
 
 \section{Степенные ряды; лемма Абеля}
@@ -1332,7 +1155,7 @@ $$ E = \Co, \qquad \seqz{c_n}n, \qquad c_n \in \Co, \qquad z_0 \in \Co $$
 \begin{equ}{comp_power_series:32}
 	c_0 + \sum_{n = 1}^\infty c_n(z - z_0)^n
 \end{equ}
-Такое выражение будем называть комплексным степенным рядом с центром $ z_0 $ (рядом по степеням $ (z - z_0) $)
+Такое выражение будем называть \it{комплексным степенным рядом} с центром $ z_0 $.
 
 \begin{remark}
 	$ \seq{c_n}n, \qquad c_n \to c \in \Co $
@@ -1346,7 +1169,7 @@ $$ E = \Co, \qquad \seqz{c_n}n, \qquad c_n \in \Co, \qquad z_0 \in \Co $$
 \end{proof}
 
 \begin{remark}[необходимый признак сходимости комплексных числовых рядов]
-	$$ \sum_{n = 1}^\infty \text{ сх. } \implies \gamma_n \infarr{n} 0 $$
+	$$ \sum_{n = 1}^\infty \gamma_n \text{ сх. } \implies \gamma_n \infarr{n} 0 $$
 \end{remark}
 
 \begin{proof}
@@ -1359,12 +1182,11 @@ $$ E = \Co, \qquad \seqz{c_n}n, \qquad c_n \in \Co, \qquad z_0 \in \Co $$
 \end{proof}
 
 \begin{implication}
-	$$ \exist M : \quad |\gamma_n| \le M \quad \forall n $$
+	$ \exist M : \quad |\gamma_n| \le M \quad \forall n $
 \end{implication}
 
 \begin{lemma}[Абеля]
-	$$ \exist z_1 \ne z_0 : \quad \eref{comp_power_series:32} \text{ сходится при } z_1 $$
-	Обозначим $ R \define |z_1 - z_0| $
+	$ \exist z_1 \ne z_0 : \quad \eref{comp_power_series:32} \text{ сходится при } z_1, \qquad R \define |z_1 - z_0| $
 	$$ \implies \eref{comp_power_series:32} \text{ сх. } \quad \forall z : |z - z_0| < R $$
 	\begin{equ}{comp_power_series:34}
 		\implies \forall 0 < r < R \quad \eref{comp_power_series:32} \text{ равн. сх. при } |z - z_0| \le r
@@ -1374,7 +1196,7 @@ $$ E = \Co, \qquad \seqz{c_n}n, \qquad c_n \in \Co, \qquad z_0 \in \Co $$
 \begin{proof}
 	Докажем \eref{comp_power_series:34}: \\
 	Обозначим $ 0 < q \define \frac r R < 1 $ \\
-	Сходимость при $ z_1 $, по первому замечанию, означает, что
+	Сходимость при $ z_1 $, по необходимому признаку, означает, что
 	$$ c_n(z_1 - z_0)^n \infarr{n} 0 $$
 	Тогда, по следствию,
 	\begin{equ}{comp_power_series:37}
@@ -1458,12 +1280,10 @@ $$ R \ge r_1 > 0 $$
 		Пусть
 		$$ \veps_0 \define R_0 - |z_1 - z_0|, \quad \delta_0 \define \half \cdot \frac{\veps_0t^2}{1 - \veps_0t} $$
 		По свойствам верхнего предела
-		$$ \exist N : \quad \forall n > N \quad \sqrt[n]{|c_n|} < t + \delta_0 $$
-		$$ \iff |c_n| < (t + \delta_0)^n $$
+		$$ \exist N : \quad \forall n > N \quad \sqrt[n]{|c_n|} < t + \delta_0 \quad \iff \quad |c_n| < (t + \delta_0)^n $$
 		$$ \implies \forall n > N \quad |c_n(z_1 - z_0)^n| = |c_n| \cdot |z_1 - z_0|^n < (t + \delta_0)^n \cdot (R_0 - \veps_0)^n = \bigg( (t - \delta_0)(R_0 - \veps_0) \bigg)^n $$
 		$$ (t + \delta_0)(R_0 - \veps_0) \bdefeq{\delta} \bigg( t + \half \cdot \frac{\veps_0t^2}{1 - \veps_0t} \bigg) \bigg( \frac1t - \veps_0 \bigg) = \frac{t - \veps_0t^2 + \half\veps_0t^2}{1 - \veps_0t} \cdot \frac{1 - \veps_0t}{t} = 1 - \half\veps_0t $$
-		$$ 0 < q \define 1 -\half \veps_0t < 1 $$
-		$$ \implies |c_n(z_1 - z_0)^n| < q^n < 1 $$
+		$$ 0 < q \define 1 -\half \veps_0t < 1 \quad \implies \quad |c_n(z_1 - z_0)^n| < q^n < 1 $$
 		Значит, ряд сходится при $ z_1 $
 	\end{itemize}
 \end{proof}
@@ -1473,13 +1293,17 @@ $$ R \ge r_1 > 0 $$
 	Тогда этот предел и равен радиусу сходимости
 \end{theorem}
 
+\begin{proof}
+	Аналогично.
+\end{proof}
+
 \section{Интервал сходимости вещественного степенного ряда, его\n свойства}
 
 \begin{definition}
 	\begin{equ}{real_power_series:1}
-		\sum_{n = 1}^\infty a_n(x - x_0)^n
+		S(x) \define \sum_{n = 1}^\infty a_n(x - x_0)^n
 	\end{equ}
-	Будем называть \eref{real_power_series:1} вещественным степенным рядом, если $ x_0 \in \R, \quad a_n \in \R, ~ n \ge 1, \quad x \in \R $
+	Будем называть $ S(x) $ вещественным степенным рядом, если $ x_0 \in \R, \quad a_n \in \R, ~ n \ge 1, \quad x \in \R $
 \end{definition}
 
 Можно найти радиус сходимости и круг сходимости соответствующего комплексного степенного ряда:
@@ -1508,7 +1332,7 @@ $$ \sum_{n = 1}^\infty |a_n(x - x_0)^n| $$
 Бывает, что при $ r = R $ ряд сходится
 
 \begin{theorem}[Абеля]
-	Ряд \eref{real_power_series:1} сходится при $ x_0 - R $ или при $ x_0 + R $
+	Ряд $ S(x) $ сходится при $ x_0 - R $ или при $ x_0 + R $
 	$$ S(x) \define \sum_{n = 1}^\infty a_n(x - x_0)^n $$
 	Тогда ряд сходится равномерно на $ [x_0 - R, x_0] $ или $ [x_0, x_0 + R] $, и
 	$$ \implies
@@ -1527,7 +1351,7 @@ $$ \sum_{n = 1}^\infty |a_n(x - x_0)^n| $$
 	Положим
 	$$ u_n(x) \define a_n(-R)^n, \qquad v_n(x) \define \bigg( \frac{x_0 - x}R \bigg)^n $$
 	Тогда $ \sum u_n(x) $ равномерно сходится на $ [x_0 - R, x_0] $ (т.~к. он не зависит от $ x $)
-	$$ 0 \le v_n(x) \le 1, \qquad v_n(x) \text{ монотонн. по } n \quad \forall x \in [x_0 - R, x_0] $$
+	$$ 0 \le v_n(x) \le 1, \qquad v_n(x) \text{ монотонна по } n \quad \forall x \in [x_0 - R, x_0] $$
 	По признаку Абеля, последние два утверждения влекут, что
 	$$ S(x) \bdefeq{u_n, v_n} \sum_{n = 1}^\infty u_n(x)v_n(x) \text{ равномерно сходится при } x \in [x_0 - R, x_0] $$
 	$$ a_n(x - x_0)^n \in \Cont{[x_0 - R, x_0]} $$
@@ -1594,13 +1418,36 @@ $$ \sum_{n = 1}^\infty |a_n(x - x_0)^n| $$
 Это можно продолжать. Получаем следующую теорему:
 
 \begin{theorem}
-	$$ \forall m \quad \forall x \in I \quad \exist S^{(m)}(x) = \sum_{n = 1}^\infty \bigg( a_n(x - x_0)^n \bigg)^{(m)} $$
+	\begin{equ}{higher_der:1}
+		\forall m \quad \forall x \in I \quad \exist S^{(m)}(x) = \sum_{n = 1}^\infty \bigg( a_n(x - x_0)^n \bigg)^{(m)}
+	\end{equ}
 \end{theorem}
+
+Заметим, что справедливы равенства:
+$$ \big( (x - x_0)^n \big)' = n(x - x_0)^{n - 1}, \quad \big( (x - x_0)^n \big)'' = n(n - 1)(x - x_0)^{n - 2}, \quad \dots $$
+$$
+\begin{cases}
+	\nder[m]{\big( (x - x_0)^n \big)} = n(n - 1)\cdots(n - m + 1)(x - x_0)^{n - m}, \qquad m < n \\
+	\nder{\big( (x - x_0)^n \big)} = n! \\
+	\nder[n + k]{\big( (x - x_0)^n \big)} = 0, \qquad k \ge 1
+\end{cases} $$
+Отсюда следует, что
+$$ \nder[m]{\big( (x - x_0)^n \big)}\clamp{x = x_0} =
+\begin{cases}
+	0, \qquad n \ne m \\
+	n!, \qquad n \ne m
+\end{cases} $$
+Рассмотрим
+$$ S(x) \define c_0 + \sum_{n = 1}^\infty c_n(x - x_0)^n, \qquad x \in I $$
+Понятно, что $ S(x_0) = c_0 $ \\
+Если $ m \ge 1 $, то, по формуле \eref{higher_der:1},
+$$ \nder[m]S(x_0) = 0 + c_m \cdot m!, \qquad c_m = \frac{\nder[m]S(x_0)}{m!} $$
+$$ \implies S(x) = S(x_0) + \sum_{n = 1}^\infty \frac{\nder S(x_0)}{n!}(x - x_0)^n $$
+Этот ряд называется \it{рядом Тейлора} для функции $ S(x) $.
 
 \section{Интегрирование вещественного степенного ряда}
 
-\begin{theorem}[об интегрируемости вещественного степенного ряда]
-	\hfill \\
+\begin{theorem}
 	По-прежнему рассматриваем ряд $ S(x), \qquad p, q \in I $ \nimp[(не обязательно $ p < q $)]
 	$$ \implies \dint pq{S(x)} = a_0(q - p) + \sum_{n = 1}^\infty a_n \frac{(q - x_0)^{n + 1} - (p - x_0)^{n + 1}}{n + 1} $$
 \end{theorem}
@@ -1649,7 +1496,7 @@ $$ \boxed{\sum_{n = 1}^\infty \frac{(-1)^{n - 1}}{2n - 1}} = \liml{y \to 1^-} \a
 		\item \bt{Переход.} $ n \to n + 1 $
 		$$ f \in \Cont[n + 1]{(a, b)} $$
 		Проинтегрируем по частям по $ t $:
-		$$ \bigg( -\frac{x - t)^n}n \bigg)_t' = (x - t)^{n - 1} $$
+		$$ \bigg( -\frac{(x - t)^n}n \bigg)_t' = (x - t)^{n - 1} $$
 		\begin{multline*}
 			\dint[t]{x_0}x{ \bigg( -\frac{(x - t)^n}n \bigg)'}f^{(n)}(t) = \bigg( -\frac{(x - t)^n}n f^{(n)}(t) \bigg) \clamp[x]{x_0} - \dint[t]{x_0}x{\bigg( -\frac{(x - t)^n}n \bigg)f^{(n + 1)}(t)} = \\
 			= \frac{(x - x_0)^n}nf^{(n)}(x_0) + \frac1n \dint[t]{x_0}x{\frac{(x - t)^n}n f^{(n + 1)}(t)}
@@ -1677,7 +1524,6 @@ $$ \boxed{\sum_{n = 1}^\infty \frac{(-1)^{n - 1}}{2n - 1}} = \liml{y \to 1^-} \a
 	$$ \underimp{\eref{series_expans:45}} \boxed{e^x = 1 + \sum_{n = 1}^\infty \frac{x^n}{n!}, \qquad x \in \R} $$
 	При $ x = 1 $ получаем
 	$$ e = 2 + \sum_{n = 2}^\infty \frac1{n!} $$
-	Взяв сумму до пятого слагаемого, получаем очень хорошее приближение "--- с точностью до $ \frac1{720} $
 	\item $ \cos x $
 	$$ (\cos x)' = -\sin x $$
 	$$ (\cos x)'' = -\cos x $$
