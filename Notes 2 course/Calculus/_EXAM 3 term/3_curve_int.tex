@@ -9,11 +9,11 @@
 
 Образ $ \Gamma([a, b]) $ будем называть кривой и обозначать $ \Gamma $
 $$ \Par \quad a = t_0 < t_1 < \dots < t_m = b $$
-Множество точек $ \seq{\Gamma(t_k)}k $ будем называть разбиением
+Множество точек $ \seq[m]{\Gamma(t_k)}k $ будем называть разбиением
 
-$$ l \bigg( \seq{\Gamma[m](t_k)}k \bigg) \define \sum_{k = 0}^{m - 1} \norm{\Gamma(t_{k + 1}) - \Gamma(t_k)}_n $$
+$$ l \bigg( \seq[m]{\Gamma(t_k)}k \bigg) \define \sum_{k = 0}^{m - 1} \norm{\Gamma(t_{k + 1}) - \Gamma(t_k)}_n $$
 Рассмотрим величину
-$$ \sup\limits_{\set{\Gamma(t_k)}} l \bigg( \seq{\Gamma(t_k)}k \bigg) $$
+$$ \sup\limits_{\set{\Gamma(t_k)}} l \bigg( \seq[m]{\Gamma(t_k)}k \bigg) $$
 Если $ \sup < \infty $, то $ \Gamma $ будем называть спрямляемой, а $ \sup $ "--- длиной $ \Gamma $
 $$ \Gamma_{[a, c]}(t) \define \Gamma(t)\clamp{[a, c]}, \qquad \Gamma_{[c, b]} (t) \define \Gamma(t)\clamp{[c, b]} $$
 
@@ -26,7 +26,7 @@ $$ \Gamma_{[a, c]}(t) \define \Gamma(t)\clamp{[a, c]}, \qquad \Gamma_{[c, b]} (t
 	Возьмём $ c \in (t_{k_0}, t_{k_0 + 1}) $
 	$$ \norm{\Gamma(t_{k + 1}) - \Gamma(t_k)} \le \norm{\Gamma(t_{k + 1}) - \Gamma(c)} + \norm{\Gamma(c) - \Gamma(t_k)} $$
 	$$ l \bigg( \seq[m]{\Gamma(t_k)}k \bigg) \le l \bigg( \seq{\Gamma(t_k) \cup \Gamma(c)}k \bigg) $$
-	$$ l \bigg( \set{\Gamma(t_k) \cup \Gamma(c)} \bigg) = l \bigg( \seq[k_0]{\Gamma(t_k)}k \cup \Gamma(c) \bigg) + l \bigg( \seqv[m]{\Gamma(t_k)}k{k_0} \cup \Gamma(c) \bigg) $$
+	$$ l \bigg( \seq[m]{\Gamma(t_k)}k \cup \Gamma(c) \bigg) = l \bigg( \seq[k_0]{\Gamma(t_k)}k \cup \Gamma(c) \bigg) + l \bigg( \seqv[m]{\Gamma(t_k)}k{k_0} \cup \Gamma(c) \bigg) $$
 	Далее нужно перейти к супремуму в левой и правой частях.
 \end{proof}
 
@@ -83,7 +83,7 @@ $$ \Gamma_{[a, c]}(t) \define \Gamma(t)\clamp{[a, c]}, \qquad \Gamma_{[c, b]} (t
 \begin{iproof}
 	\item $ l \le \int $ \\
 	Пусть имеется любое разбиение любой $ \Gamma \quad \seq{\Gamma(t_k)}k $
-	$$ \Gamma(t_{k + 1}) - \Gamma(t_k) = \column{\gamma_1(t_{k + 1}) - \gamma_1(t_k)}{\gamma_n(t_[k + 1]) - \gamma_n(t_k)} \undereq{\text{ф. Н."--~Лейбница}} \column{\dint[t]{t_k}{t_{k + 1}}{\gamma_1'(t)}}{\dint[t]{t_k}{t_{k + 1}}{\gamma_n'(t)}} \bdefeq{\int F} \dint[t]{t_k}{t_{k + 1}}{\mc D\Gamma(t)} $$
+	$$ \Gamma(t_{k + 1}) - \Gamma(t_k) = \column{\gamma_1(t_{k + 1}) - \gamma_1(t_k)}{\gamma_n(t_{k + 1}) - \gamma_n(t_k)} \undereq{\text{ф. Н."--~Лейбница}} \column{\dint[t]{t_k}{t_{k + 1}}{\gamma_1'(t)}}{\dint[t]{t_k}{t_{k + 1}}{\gamma_n'(t)}} \bdefeq{\int F} \dint[t]{t_k}{t_{k + 1}}{\mc D\Gamma(t)} $$
 	$$ \underimp{\text{лемма}} \norm{\Gamma(t_{k + 1}) - \Gamma(t_k)} = \norm{\dint[t]{t_k}{t_{k + 1}}{\mc D\Gamma(t)}} \le \dint[t]{t_k}{t_{k + 1}}{\norm{\mc D\Gamma(t)}} $$
 	$$ \implies \sum_{k = 0}^{m - 1} \norm{\Gamma(t_{k + 1}) - \Gamma(t_k)} \le \sum \dint[t]{t_k}{t_{k + 1}}{\norm{\mc D(t)}} = \dint[t]ab{\norm{\mc D\Gamma(t)}} $$
 	Перепишем в обозначениях длины:
@@ -238,12 +238,12 @@ $$ \Sr(f, \Teq, \Par) = \sum_{k = 1}^m f(N_k) l \bigg( \Gamma(M_{k - 1}, M_k) \b
 
 \begin{definition}
 	$$ \curvedir\Gamma(t) = \column{\gamma_1(t)}{\gamma_n(t)} \text{ "--- } C^1 \text{-кривая}, \qquad f \in \Cont\Gamma $$
-	Криволинейным интеграл второго рода по ориентированной кривой функции $ f $ называется
+	Криволинейным интегралом второго рода по ориентированной кривой функции $ f $ называется
 	$$ \cint[x_j]{\curvedir\Gamma}{f(M)} \define \dint[t]ab{f \big( \Gamma(t) \big)\gamma_j'} $$
 \end{definition}
 
 \begin{definition}
-	$$ c_0 = a < c_1 < \dots < cm < b = c_{m + 1} $$
+	$$ c_0 = a < c_1 < \dots < c_ m < b = c_{m + 1} $$
 	$$ \curvedir\Gamma[a, b], \qquad \Gamma([c_{k - 1}, c_k]) \text{ "--- } C^1 \text{-кривая при } k = 1, \dots, m + 1 $$
 	Тогда
 	$$ \cint[x_j]{\curvedir\Gamma}{f(M)} \define \sum_{k = 1}^{m + 1} \cint[x_j]{\curvedir\Gamma([c_{k - 1}, c_k])}{f(M)} $$

@@ -70,14 +70,6 @@
 
 \section{Формула для дифференцируемой функции}
 
-\begin{definition}
-	Пусть $ E \sub \Co $ "--- область, $ \qquad z_\circ \in E, \qquad f : E \to \Co, \qquad f(z) = u(x, y) + iv(x, y) $ \\
-	$ u, v : E^* \to \R $
-
-	Будем говорить, что $ f $ дифференцируема в точке $ z_\circ $, если $ f^*(x, y) $ \it{дифференцируема} в точке $ (x_\circ, y_\circ) $ в следующем смысле: \\
-	функции $ u(x, y) $ и $ v(x, y) $ дифференцируемы в точке $ (x_\circ, y_\circ) $.
-\end{definition}
-
 Пусть $ \sigma \define s + it, \qquad E \sub \Co $ "--- область, $ \qquad z_\circ \in E, \quad z_\circ + \sigma \in E, \qquad z_\circ \leftrightarrow (x_\circ, y_\circ) $ \\
 Предположим, что $ f(z) $ дифференцируема в точке $ z_\circ $.
 \begin{equ}{form_diff:11}
@@ -106,7 +98,7 @@ $$ s = \frac12 (\sigma + \ol \sigma), \qquad t = \frac1{2i}(\sigma - \ol \sigma)
 Поэтому
 \begin{multline}\lbl{form_diff:15}
 	f(z_\circ + \sigma) - f(z_\circ) = f_x'(z_\circ) \cdot \frac12 (\sigma + \ol \sigma) + \frac i2 f_y'(z_\circ)(\ol \sigma - \sigma) + \rho(\sigma) = \\
-	= \frac12 \bigg( f_x'(z_\circ) - if_y'(z_\circ) \bigg) \sigma + \frac12 \bigg( f_x'(z_\circ) + if_y'(z_\circ) \bigg) \ol \sigma + \rho(\sigma) = f_z'(z_\circ) \sigma + f_{\ol z}(z_\circ) \ol \sigma + \rho(\sigma)
+	= \frac12 \bigg( f_x'(z_\circ) - if_y'(z_\circ) \bigg) \sigma + \frac12 \bigg( f_x'(z_\circ) + if_y'(z_\circ) \bigg) \ol \sigma + \rho(\sigma) = f_z'(z_\circ) \sigma + f_{\ol z}'(z_\circ) \ol \sigma + \rho(\sigma)
 \end{multline}
 где для $ \rho(\sigma) $ выполнено \eref{form_diff:14}.
 
@@ -226,7 +218,7 @@ $$ s = \frac12 (\sigma + \ol \sigma), \qquad t = \frac1{2i}(\sigma - \ol \sigma)
 	$$ a = \liml{\sigma \to 0^+} f_{\ol z}'(z) \cdot 1 = f_{\ol z}'(z) $$
 
 	Если положить $ \sigma = it, \quad t > 0 $, то $ \ol \sigma = -it $, и
-	$$ A = \liml{t\ to 0^+} f_{\ol z}' \cdot \frac{-it}{it} = -f_{\ol z}' $$
+	$$ A = \liml{t \to 0^+} f_{\ol z}' \cdot \frac{-it}{it} = -f_{\ol z}' $$
 	$$ \implies f_{\ol z}' = A = 0 $$
 	То есть, 4. $ \implies $ 1. и
 	$$ f_z'(z) = f'(z) $$
@@ -249,14 +241,14 @@ $$ s = \frac12 (\sigma + \ol \sigma), \qquad t = \frac1{2i}(\sigma - \ol \sigma)
 	Имеем
 	$$ f_z' = \frac12 \big( f_x' - if_y' \big), \qquad f_{\ol z}' = \frac12 \big( f_x' + if_y' \big) $$
 	$$ \implies f_x' = f_z' + f_{\ol z}' $$
-	$$ f \in A(E) \implies f_z' = f_z' + 0 = f_z' = f' $$
+	$$ f \in A(E) \implies f_x' = f_z' + 0 = f_z' = f' $$
 \end{proof}
 
 \section{Аналитичность суперпозиции аналитических функций; производная суперпозиции}
 
 \begin{theorem}
 	$ E, G \sub \Co $ "--- области, $ \qquad f \in A(E), \quad f(z) \in G \quad \forall z \in E, \qquad \vphi \in A(G) $ \\
-	$ F : E \to \Co, \quad F(z) \define \vphi \big( f(z) \big) $
+	$ F : E \to \Co, \qquad F(z) \define \vphi \big( f(z) \big) $
 	$$ \implies F \in A(E) $$
 \end{theorem}
 

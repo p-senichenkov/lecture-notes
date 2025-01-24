@@ -63,7 +63,7 @@
 				U \in \R^m \\
 				\norm{U} \le 1
 			\end{subarray}} \norm{AU}_n = \norm{A} $$
-		$$ \norm{AX}_n \undereq{X = tY} \norm{A(tY)}_n = t \cdot \norm{AY} \le t \norm{A} \underset{t > 0}\le \norm{A} $$
+		$$ \norm{AX}_n \undereq{X = tY} \norm{A(tY)}_n = t \cdot \norm{AY} \le t \norm{A} \bdefeq t \norm A \cdot \norm X $$
 	\end{itemize}
 \end{eproof}
 
@@ -100,13 +100,11 @@
 	\item Возьмём $ X \in \R^m $, такой, что $ \norm{X}_m \le 1 $ \\
 	Пусть $ Y = AX \in \R^n $ \\
 	Тогда $ BA(X) \bdefeq{BA} B(AX) \bdefeq{X} BY $
-	\begin{equ}{oper_norm:9}
-		\norm{BA(X)}_k = \norm{BY}_k \underset{\text{св-во \eref{oper_norm:prop:2}}}\le \norm{B} \cdot \norm{Y}_n
-	\end{equ}
-	\begin{equ}{oper_norm:10}
+	$$
+	\begin{rcases}
+		\norm{BA(X)}_k = \norm{BY}_k \underset{\text{св-во \eref{oper_norm:prop:2}}}\le \norm{B} \cdot \norm{Y}_n \\
 		\norm{Y}_n \bdefeq{Y} \norm{AX}_n \underset{\text{св-во \eref{oper_norm:prop:2}}}\le \norm{A} \cdot \norm{X}_m \underset{\norm{X} \le 1}\le \norm{A}
-	\end{equ}
-	$$ \eref{oper_norm:9}, \eref{oper_norm:10} \implies \norm{BA(X)}_k \le \underbrace{\norm{B} \cdot \norm{A}}_{\define c_0} $$
+	\end{rcases} \implies \norm{BA(X)}_k \le \underbrace{\norm{B} \cdot \norm{A}}_{\define c_0} $$
 	Применяя свойство \eref{oper_norm:prop:1.5}, получаем нужное утверждение.
 \end{eproof}
 
@@ -136,21 +134,14 @@
 	$$ f_{x_i \dots x_s, x_t}^{(l + 1)}(X_0) \define (f_{x_i \dots x_s}^{(l)})_{x_t}'(X_0) $$
 \end{definition}
 
-\begin{notation}
-	Исторически более распространено обозначение
-	$$ \frac{\partial^l f(x)}{\partial x_s \cdots \partial x_i} $$
-	В знаменателе $ x_j $ расположены в обратном порядке, т. к.
-	$$ \frac{\partial^2f(x)}{\partial x_j \partial x_i} = \frac{\partial \bigg( \dfrac{\partial f}{\partial x_i} \bigg)}{\partial x_j} = \frac\partial{\partial x_j} \frac{\partial f}{\partial x_i} $$
-\end{notation}
-
-\begin{theorem}[о смешанных производных]
+\begin{theorem}
 	$ G = \B_r(x_1^0, x_2^0), \qquad X_0 =
 	\begin{bmatrix}
 		x_1^0 \\
 		x_2^0
-	\end{bmatrix}, \qquad f : G \to \R, \qquad f \in \Cont{G} $ \\
-	$ \forall X \in G \quad \exist f_{x_1}'(X), ~ f_{x_2}'(X) \in \Cont{G}, \qquad \forall X \in G \quad \exist f_{x_1x_2}''(X), ~ f_{x_2x_1}''(X) \text{ непрерывные в } X_0 $
-	$$ \implies f_{x_1x_2}''(X_0) = f_{x_2x_1}''(X_0) $$
+	\end{bmatrix}, \qquad f : G \to \R, \qquad \bm{f \in \Cont{G}} $ \\
+	$ \forall X \in G \quad \exist \bm{f_{x_1}'(X), ~ f_{x_2}'(X) \in \Cont{G}}, \qquad \forall X \in G \quad \exist \bm{f_{x_1x_2}''(X), ~ f_{x_2x_1}''(X)} \bt{ непрерывные в } \bm{X_0} $
+	$$ \implies \bm{f_{x_1x_2}''(X_0) = f_{x_2x_1}''(X_0)} $$
 \end{theorem}
 
 \begin{proof}
@@ -160,7 +151,7 @@
 	$$ g(h) \define \frac{f(x_1^0 + h, x_2^0 + h) - f(x_1^0 + h, x_2^0) - f(x_1^0, x_2^0 - h) + f(x_1^0, x_2^0)}{h^2} $$
 	Определим
 	$$ \vphi(x_2) \define \frac{f(x_1^0 + h, x_2) - f(x_1^0, x_2)}h, \qquad x_2 \in [x_2^0, x_2^0 + h] $$
-	Рассмотрим выражение
+	Заметим, что
 	\begin{equ}{partial:24}
 		\frac{\vphi(x_2^0 + h) - \vphi(x_2^0)}h \bdefeq\vphi \frac{f(x_1^0 + h, x_2^0 + h) - f(x_1^0, x_2^0 + h) - f(x_1^0 + h, x_2^0) + f(x_1^0, x_2^0)}{h^2} = g(h)
 	\end{equ}
@@ -174,8 +165,7 @@
 	\end{multline}
 	Рассмотрим отдельно выражение $ f_{x_2}'(x_1^0 + h, x_2^0 + h_2) - f_{x_2}'(x_1^0, x_2^0 + h_2) $ \\
 	Рассмотрим функцию $ l(x_1) \define f_{x_2}'(x_1, x_2^0 + h_2) $ \\
-	По условию, наложенному на первые производные, она непрерывна при $ x \in [x_1^0, x_1^0 + h] $ \\
-	По условию,
+	По условию, наложенному на первые производные, она непрерывна при $ x \in [x_1^0, x_1^0 + h] $ и
 	\begin{equ}{partial:27}
 		\forall x_1 \in [x_1^0, x_1^0 + h] \quad \exist l'(x_1) = f_{x_2x_1}''(x_1, x_2^0 + h_2)
 	\end{equ}
@@ -216,22 +206,22 @@
 \section{Теорема о смешанных производных для функций на множествах \tpst{$ E \sub \R^{n \ge 2} $}{E из R\tcir{}n, n >= 2}}
 
 \begin{implication}[для $ n > 2 $]
-	$ X_0 \in \R^{n \ge 3}, \qquad X_0 = (x_1^0, ..., x_i^0, ..., x_j^0, ..., x_n^0) $ \\
-	$ f : B_r(X_0) \to \R, \qquad f \in \Cont{B_r(X_0)}, \qquad \forall X \in B_r(X_0) \quad \exist f_{x_i}'(X), f_{x_j}'(X) \in \Cont{B_r(X_0)} $ \\
-	$ \forall X \in B_r(X_0) \quad \exist f_{x_ix_j}''(X), f_{x_jx_i}''(X) $ "--- непр. в $ X_0 $
-	$$ \implies f_{x_ix_j}''(X_0) = f_{x_jx_i}''(X_0) $$
+	$ X_0 \in \R^{n \ge 3}, \qquad X_0 = (x_1^0, ..., x_i^0, ..., x_j^0, ..., x_n^0), \qquad f : B_r(X_0) \to \R $
+	$$ \qquad \bm{f \in \Cont{B_r(X_0)}}, \qquad \forall X \in B_r(X_0) \quad \exist \bm{f_{x_i}'(X), ~ f_{x_j}'(X) \in \Cont{B_r(X_0)}} $$
+	$$ \forall X \in B_r(X_0) \quad \exist f_{x_ix_j}''(X), f_{x_jx_i}''(X) \text{ "--- непр. в } X_0 $$
+	$$ \implies \bm{f_{x_ix_j}''(X_0) = f_{x_jx_i}''(X_0)} $$
 \end{implication}
 
 \begin{proof}
 	$$ F(x_i, x_j) \define f(x_1^0, ..., x_i, ..., x_j, ..., x_n^0) $$
-	$$ f_{x_ix_j}''(X_i, x_j) = f_{x_ix_j}''(x_1^0, ..., x_i, ..., x_j, ..., x_n^0) $$
+	$$ F_{x_ix_j}''(x_i, x_j) = f_{x_ix_j}''(x_1^0, ..., x_i, ..., x_j, ..., x_n^0) $$
 \end{proof}
 
 \begin{statement}\label{stmt:mixed_der:1}
-	$ \Omega \sub \R^{n \ge 2}, \qquad i \ne j, \qquad f \in \Cont{\Omega}, \qquad \forall X \in \Omega \quad f_{x_i}'(X), f_{x_j}'(X) \in \Cont{\Omega} $ \\
-	$ \forall X \in \Omega \quad \exist f_{x_ix_j}''(X), f_{x_jx_i}''(X) \in \Cont{\Omega} $ \\
+	$ \Omega \sub \R^{n \ge 2}, \qquad i \ne j, \qquad \bm{f \in \Cont{\Omega}}, \qquad \forall X \in \Omega \quad \bm{f_{x_i}'(X), f_{x_j}'(X) \in \Cont{\Omega}} $
+	$$ \forall X \in \Omega \quad \exist \bm{f_{x_ix_j}''(X), ~ f_{x_jx_i}''(X) \in \Cont{\Omega}} $$
 	По следствию,
-	$$ \forall X \in \Omega \quad f_{x_ix_j}''(X) = f_{x_jx_i}''(X) $$
+	$$ \forall X \in \Omega \quad \bm{f_{x_ix_j}''(X) = f_{x_jx_i}''(X)} $$
 \end{statement}
 
 \begin{statement}
@@ -259,8 +249,8 @@
 \end{definition}
 
 \begin{theorem}
-	$ r \ge 2, \qquad E \sub \R^{n \ge 2}, \qquad E $ открытое, $ \qquad f \in \Cont[r]{E}, \qquad i_1, ..., i_r, \quad j_1, ..., j_r $
-	$$ \forall X \in E \quad f_{x_{i_1}...x_{i_r}}^{(r)}(X) = f_{x_{j_1}...x_{j_r}}^{(r)}(X) $$
+	$ r \ge 2, \qquad E \sub \R^{n \ge 2}, \qquad E $ открытое, $ \qquad \bm{f \in \Cont[r]{E}}, \qquad i_1, ..., i_r, \quad j_1, ..., j_r $
+	$$ \forall X \in E \quad \bm{f_{x_{i_1} \dots x_{i_r}}^{(r)}(X) = f_{x_{j_1} \dots x_{j_r}}^{(r)}(X)} $$
 \end{theorem}
 
 \begin{proof}
@@ -274,14 +264,14 @@
 		$$ f_{x_{j_1}...\bm{x_{j_k}x_{j_{k + 1}}}...x_{j_{r + 1}}}^{(r + 1)}(X), \qquad f_{x_{j_1}...\bm{x_{j_{k + 1}}x_{j_k}}...x_{j_{r + 1}}}^{(r + 1)}(X) $$
 		Обозначим $ g(X) \define f_{x_{j_1}...x_{j_{k - 1}}}^{(k - 1)}(X) $
 		\begin{equ}{cont:2}
-			f_{x_{j_1}...x_{j_{k - 1}}x_{j_k}x_{j_{k + 1}}}^{(k + 1)}(X) = g_{x_{j_k}x_{j_{k + 1}}}''(X)
+			f_{x_{j_1}...x_{j_{k - 1}}x_{j_k}x_{j_{k + 1}}}^{(k + 1)}(X) = g_{x_{j_k}x_{j_{k + 1}}}''(X), \qquad
 		\end{equ}
 		\begin{equ}{cont:3}
 			f_{x_{j_1}...x_{j_{k + 1}}x_{j_k}}^{(k + 1)}(X) = g_{x_{j_{x + 1}}x_{j_k}}''(X)
 		\end{equ}
 		По следствию к теореме о смешанных производных, получаем
 		\begin{equ}{cont:4}
-			\eref{cont:2}, \eref{cont:3} \implies  g_{x_{j_k}x_{j_{k + 1}}} = g_{x_{j_{k + 1}}x_{j_k}}''(X)
+			\eref{cont:2}, \eref{cont:3} \implies  g_{x_{j_k}x_{j_{k + 1}}}'' = g_{x_{j_{k + 1}}x_{j_k}}''(X)
 		\end{equ}
 		\begin{equ}{cont:5}
 			\eref{cont:2} \implies f_{x_{j_1}...x_{j_k}x_{j_{k + 1}}...x_{j_{r + 1}}}^{(r + 1)}(X) = g_{x_{j_k}x_{j_{k + 1}}...x_{j_{r + 1}}}^{(r - k + 2)} \quad \forall X \in E
@@ -289,30 +279,15 @@
 		\begin{equ}{cont:6}
 			\eref{cont:3} \implies f_{x_{j_1}...x_{j_{k + 1}}x_{j_k}...x_{j_{r + 1}}}^{(r + 1)}(X) = g_{x_{j_{k + 1}}x_{j_k}...x_{j_{r + 1}}}^{(r - k + 2)} \quad \forall X \in E
 		\end{equ}
-		\begin{equ}{cont:7}
-			\eref{cont:4}, \eref{cont:5}, \eref{cont:6} \implies f_{x_{j_1}...x_{j_k}x_{j_{k + 1}}...x_{j_{r + 1}}}^{(r + 1)}(X) = f_{x_{j_1}...x_{j_{k + 1}}x_{j_k}...x_{j_{r + 1}}}^{(r + 1)}(X) \quad \forall X \in E
-		\end{equ}
-		$ i_1, ..., i_n, \qquad j_k = i_1, \qquad j_k $ "--- минимальный \\
-		Рассмотрим две ситуации:
-		\begin{itemize}
-			\item $ k = 1 $
-			$$ i_1, ..., i_{r + 1} $$
-			$$ i_1, j_2, ..., j_{r + 1} $$
-			Тогда индексы $ i_2, ..., i_{r + 1} $ и $ j_2, ..., j_{r + 1} $ получаются друг из друга перестановкой. А тогда, по индукции,
-			$$ f_{x_{i_1}x_{i_2}...x_{i_{r + 1}}}^{(r + 1)}(X) = \bigg( f_{x_{i_1}}' \bigg)_{x_{i_2}...x_{i_{r + 1}}}^{(r)} \underset{\text{инд. предполож.}}= \bigg( f_{x_{i_1}}' \bigg)^{(r)}_{x_{j_2}...x_{j_{r + 1}}}(X) = f_{x_{j_1}x_{j_2}...x_{j_{r + 1}}}^{(r + 1)}(X) $$
-			\item $ k > 1 $ \\
-			Тогда $ j_1, ..., j_{k - 1} \ne i_1 $ \\
-			Тогда,
-			$$ \eref{cont:7} \implies f_{...x_{j_{k - 1}}x_{j_k}}^{(r + 1)} = f_{...x_{j_k}x_{j_{k - 1}}}^{(r + 1)} = f_{...x_{j_k}x_{j_{k - 2}}x_{j_{k - 1}}}^{(r + 1)} = \widedots[4em] = f_{x_{j_k}x_{j_2}...}^{(r + 1)} $$
-			Теперь можно применить первый случай.
-		\end{itemize}
+		$$ \eref{cont:4}, \eref{cont:5}, \eref{cont:6} \implies f_{x_{j_1}...x_{j_k}x_{j_{k + 1}}...x_{j_{r + 1}}}^{(r + 1)}(X) = f_{x_{j_1}...x_{j_{k + 1}}x_{j_k}...x_{j_{r + 1}}}^{(r + 1)}(X) \quad \forall X \in E $$
+		Всякая перестановка индексов есть произведение транспозиций $ (j_k, j_{k + 1}) \to (j_{k + 1}, j_k) $. Каждый раз будет справедливо последнее равенство, а значит, все частные производные будут равны.
 	\end{itemize}
 \end{proof}
 
 \section{Теорема о производных сложной функции специального вида}
 \begin{theorem}
-	$ E \sub \R^{n \ge 2} $ "--- открытое, $ \qquad f \in \Cont[r \ge 1]{E}, \qquad Y \in E, \qquad \underset{H \ne \On}{H \in \R^n}, \qquad t \in (-a, a) $ \\
-	$ Y + tH \in E \quad \forall t \in (-a, a), \qquad g(t) \define f(Y + tH) $
+	$ E \sub \R^{n \ge 2} $ "--- открытое, $ \qquad \bm{f \in \Cont[r \ge 1]{E}}, \qquad Y \in E, \qquad \underset{H \ne \On}{H \in \R^n}, \qquad t \in (-a, a) $ \\
+	$ \bm{Y + tH \in E} \quad \forall t \in (-a, a), \qquad \bm{g(t) \define f(Y + tH)} $
 	$$ \implies g^{(r)}(0) = \sum_{|\alpha| = r} C_r^\alpha \partial^\alpha f(Y) H^\alpha $$
 \end{theorem}
 
@@ -329,7 +304,7 @@
 			\alpha_j = 0, \quad j \ne \nu
 		\end{cases} $$
 		$$ \alpha = (0, ..., \underset\nu1, ..., 0) \define e_\nu, \qquad 1 \le \nu \le n $$
-		$$ C_1^{e_\nu} = \frac{1!}{0! \cdot \dots \cdot 1! \cdot \dots \cdot 0} = 1 $$
+		$$ C_1^{e_\nu} = \frac{1!}{0! \cdots 1! \cdots 0!} = 1 $$
 		$$ \partial^{e_\nu} f(X) = f_{x_\nu}'(X) $$
 		Если $ H = \column{h_1}{h_n} $, то $ H^{e_\nu} = h_\nu $
 
@@ -337,7 +312,7 @@
 		\begin{equ}{r_order:15}
 			g'(0) \iseq \sum_{\nu = 1}^n f_{x_\nu}'(Y) h_\nu
 		\end{equ}
-		По условию, $ f \in \Cont[1]{E} $, а значит, применяя теорему о достаточном условии дифференцируемости, $ f $ дифф. в $ X \quad \forall X \in E $ \\
+		По условию, $ f \in \Cont[1]{E} $, а значит, по достаточному условию, $ f $ диффер. в $ X \quad \forall X \in E $ \\
 		Рассмотрим отображение
 		$$ \Psi : (-a, a) \to \R^n, \qquad \Psi(t) = Y + tH $$
 		$$ g(t) \bydef f(\Psi(t)), \qquad f : E \to \R^1 $$
@@ -398,7 +373,7 @@
 		\begin{equ}{r_order:25''}
 			\eref{r_order:25'} = \sum_{|\beta| = r + 1} \partial^\beta f(Y + tH) H^\beta \sum_{\alpha, \nu : \alpha + e_\nu = \beta} C_r^\alpha
 		\end{equ}
-		$$ \alpha^{(\mu)} \define (0, ..., \beta_{i_1}, 0, ..., \beta_{i_\mu} - 1, 0, ..., \beta_{i_l}, 0, ...) $$
+		$$ \alpha^{(\mu)} \define (0, \dots, \beta_{i_1}, 0, ..., \beta_{i_\mu} - 1, 0, ..., \beta_{i_l}, 0, ...) $$
 		$$ \alpha^{(\mu)} + e_{i_\mu} = \beta, \qquad 1 \le \mu \le l $$
 		\begin{multline*}
 			\implies \sum_{\alpha + e_\nu = \beta} C_r^\alpha = \sum_{\mu = 1}^l C_r^{\alpha^{(\mu)}} \bydef \sum_{\mu = 1}^l \frac{r!}{\beta_{i_1}!...(\beta_{i_\mu} - 1)!...\beta_{i_l}!} = \frac{r!}{\beta_{i_1}!...\beta_{i_l}!} \sum_{\mu = 1}^l \beta_{i_\mu} \bydef \\
@@ -443,15 +418,7 @@
 	\end{equ}
 \end{theorem}
 
-\begin{iproof}
-	\item $ r = 1 $ \\
-	По достаточному условию дифференцируемости, $ f $ дифф. в $ X_0 $, что, по определению, означает, что
-	$$ f(X_0 + H) = f(X_0) + \sum_{\nu = 1}^n f_{x_\nu}'(X_0) h_\nu + \rho(H), \qquad \frac{\rho(H)}{\norm{H}} \underarr{H \to \On} 0, \qquad H = \column{h_1}{h_n} $$
-	Перепишем эту сумму, используя мультииндексы. Возьмём $ \alpha : |\alpha| = 1 $, то есть $ \alpha = (0, ..., \underset\nu1, ..., 0) $
-	$$ C_1^\alpha = \frac{0!...1!...0!}{1!} = 1 $$
-	$$ \sum_{n = 1}^n f_{x_\nu}'(X_0)h_\nu = \sum_{|\alpha| = 1}C_1^\alpha \partial^\alpha f(X_0) H^\alpha $$
-	Значит, ранее введённое определение дифференцируемости соотносится с обозначениями через мультииндексы.
-	\item $ r \ge 2 $ \\
+\begin{proof}
 	Применим к функции $ f $ формулу Тейлора с остатком в форме Лагранжа для $ r - 1 $:
 	\begin{multline}\lbl{taylor_peano:6}
 		\exist c \in (0, 1) : f(X_0 + H) = \\
@@ -463,32 +430,32 @@
 		f \in \Cont[r]\omega \bdef[\implies]{\mc{C}} \partial^\alpha f(X_0 + H) - \partial^\alpha f(X_0) \underarr{H \to \On} 0 \qquad \forall \alpha : |\alpha| = r
 	\end{equ}
 	\begin{equ}{taylor_peano:7}
-		H^\alpha \bdefeq{x^\alpha} h_1^{\alpha_1}...h_n^{\alpha_n} \implies |H^\alpha| \le \norm{H}^{\alpha_1}...\norm{H}^{\alpha_n} = \norm{H}^{|\alpha|} = \norm{H}^r \implies \frac{|H^\alpha|}{\norm{H}^r} \le 1
+		H^\alpha \bdefeq{x^\alpha} h_1^{\alpha_1} \cdots h_n^{\alpha_n} \implies |H^\alpha| \le \norm{H}^{\alpha_1} \cdots \norm{H}^{\alpha_n} = \norm{H}^{|\alpha|} = \norm{H}^r \implies \frac{|H^\alpha|}{\norm{H}^r} \le 1
 	\end{equ}
 	$$ \bigg| \frac{\rho(H)}{\norm{H}^r} \bigg| \undereq{\eref{taylor_peano:6}} \bigg| \frac{\bigg( \partial^\alpha f(X_0 + H) - \partial^\alpha f(X_0) \bigg)H^\alpha}{\norm{H}^r} \bigg| \underset{\eref{taylor_peano:7}}\le \bigg| \partial^\alpha f(X_0 + cH) - \partial^\alpha f(X_0) \bigg| \xrightarrow[H \to \On]{\eref{taylor_peano:7'}} 0 $$
-\end{iproof}
+\end{proof}
 
 \section{Дифференциалы функции порядка \tpst{$ \ge 2 $}{>= 2}; их вид}
 
 Будем иметь дело с некоторым открытым $ \Omega \sub \R^{n \ge 1} $
 
 \begin{definition}
-	$ f \in \Cont[1]\omega, \qquad X \in \omega, \qquad H \in \R^n, \qquad H = \column{h_1}{h_n} $
+	$ f \in \Cont[1]\Omega, \qquad X \in \omega, \qquad H \in \R^n, \qquad H = \column{h_1}{h_n} $
 	$$ \di[1] f(X, H) \define \di f(X, H) \bydef \sum_{k = 1}^n f_{x_k}'(X)h_k $$
 	$$ \widedots $$
-	Пусть для некоторого $ r \ge 1 $ для функции $ f \in \Cont[r]\omega $ для любых $ X $ и $ \omega $ определена функция
+	Пусть для некоторого $ r \ge 1 $ для функции $ f \in \Cont[r]\Omega $ для любых $ X $ и $ \omega $ определена функция
 	$$ \di[r]f(X, H) = \sum_{|\alpha| = r} A_{r,\alpha} \partial^\alpha f(X)H^\alpha, \qquad A_{r,\alpha} \text{ "--- некоторые \textbf{определённые} коэффициенты} $$
 	$$ A_{1,\alpha} = 1 \quad \forall \alpha : |\alpha| = 1 $$
-	Пусть $ f \in \Cont[r]\omega $. Определим дифференциал порядка $ r + 1 $:
-	$$ \di[r + 1]f(X, H) \define \sum_{|\alpha| = r} A_{r,\alpha} \di \bigg( \partial^\alpha f(X, H) \bigg)H^\alpha = \sum_{|\alpha| = r + 1}A_{r + 1,\alpha} \partial^\alpha f(X)H^\alpha $$
+	Определим дифференциал порядка $ r + 1 $:
+	$$ \di[r + 1]f(X, H) \define \sum_{|\alpha| = r} A_{r,\alpha} \di \bigg( \partial^\alpha f(X), H \bigg)H^\alpha = \sum_{|\alpha| = r + 1}A_{r + 1,\alpha} \partial^\alpha f(X)H^\alpha $$
 \end{definition}
 
 \section{Вычисление второго дифференциала; положительно и\n отрицательно определённые квадратичные формы, их\n свойства; неопределённые формы}
 
-\begin{eg}[переход от дифференциала пордяка 1 к дифференциалу порядка 2]
+\begin{eg}[переход от дифференциала порядка 1 к дифференциалу порядка 2]
 	\hfill \\
 	Воспользуемся тем, что $ C_1^\alpha = 1 \quad \forall \alpha : |\alpha| = 1 $ \\
-	Выпишем дифференциал перого порядка:
+	Выпишем дифференциал первого порядка:
 	$$ \di[1] f(X, H) = \sum_{k = 1}^n f_{x_k}'(X)h_k $$
 	\begin{multline}\lbl{diff_high_order:10'}
 		\di[2] f(X, H) \bdefeq{\di[r + 1]} \sum_{k = 1}^n \di \bigg( f_{x_k}'(X), H \bigg)h_k \bdefeq\di \sum_{k = 1}^n \bigg( \sum_{l = 1}^n f_{x_kx_l}''(X)h_l \bigg)h_k = \\
@@ -526,26 +493,6 @@
 	\end{itemize}
 \end{proof}
 
-\begin{statements}
-	Теперь можно переписать формулы Тейлора:
-	\begin{enumerate}
-		\item с остатком в форме Лагранжа:
-		$$ f(X_0 + H) = f(X_0) + \sum_{k = 1}^r \frac1{k!} \di[k] f(X_0, H) + \frac1{(r + 1)!} \di[r + 1]f(X_0 + cH, H) $$
-		\item с остатком в форме Пеано:
-		$$ f(X_0 + H) = f(X_0) + \sum_{k = 1}^r \frac1{k!}\di[k] f(X_0, H) + \rho(H) $$
-		$$ \frac{\rho(H)}{\norm{H}^r} \underarr{H \to \On} 0 $$
-	\end{enumerate}
-\end{statements}
-
-\begin{eg}
-	Применим формулу Тейлора с остатком в форме Лагранжа при $ r = 2 $:
-	$$ f(X_0 + H) = f(X_0) + \di f(X_0, H) + \half \di[2]f(X_0, H) + \rho(H), \qquad \frac{\rho(H)}{\norm{H}^2} \underarr{H \to \On} 0 $$
-	Перепишем через двойные суммы (как мы это делали при переходе к дифференциалу порядка 2):
-	$$ f(X_0 + H) = f(X_0) + \sum_{k = 1}^n f_{x_k}'(X_0)h_k + \half \sum_{k = 1}^n \sum_{l = 1}^n f_{x_kx_l}''(X_0)h_kh_l + \rho(H) $$
-	Рассмотрим квадратичную форму
-	$$ A(H) = \sum_{k = 1}^n \sum_{l = 1}^n a_{kl}h_kh_l, \qquad a_{kl} = \half f_{x_kx_l}''(X_0), \quad a_{kl} = a_{lk} $$
-\end{eg}
-
 \begin{remind}[классификация квадратичных форм]
 	Квадратичная форма называется:
 	\begin{enumerate}
@@ -578,7 +525,7 @@
 	Рассмотрим $ \forall H \ne \On $ \\
 	Пусть $ t \define \norm{H} > 0 $ (т. к. $ H \ne \On $) \\
 	Зафиксируем $ H^* = \frac1t H $
-	$$ \norm{H*} = \norm{\frac1tH} = \frac1t\norm{H} = \frac{t}t = 1 $$
+	$$ \norm{H^*} = \norm{\frac1tH} = \frac1t\norm{H} = \frac{t}t = 1 $$
 	То есть, $ H^* \in S $ \\
 	Тогда, в силу выбора $ H_0 $, получаем, что $ A(H^*) \ge m_1 $
 	\begin{remark}
@@ -611,7 +558,7 @@
 	\begin{equ}{extremum:28}
 		\text{где } \frac{\rho(H)}{\norm{H}^2} \underarr{H \to \On} 0
 	\end{equ}
-	Перепишем, применив замечание:
+	По замечанию, первого дифференциала нет:
 	\begin{equ}{extremum:27'}
 		f(X_0 + H) = f(X_0) + \half \di[2] f(X_0, H) + \rho(H)
 	\end{equ}
@@ -623,9 +570,8 @@
 	\begin{equ}{extremum:211}
 		\exist \delta > 0 : \forall 0 < \norm{H} < \delta \quad \bigg| \frac{\rho(H)}{\norm{H}^2} \bigg| < \frac{m_1}4 \qquad \iff |\rho(H)| < \frac{m_1}4 \norm{H}^2
 	\end{equ}
-	Снова применим формулу Тейлора с остатком в форме Пеано:
 	\begin{multline*}
-		f(X_0 + H) \undereq T f(X_0) + \half\di[2] f(X_0, H) + \rho(H) \ge f(X_0) + \half \di[2] f(X_0, H) - |\rho(H)| \underset{\eref{extremum:29}, \eref{extremum:211}}> \\
+		\eref{extremum:27'} \ge f(X_0) + \half \di[2] f(X_0, H) - |\rho(H)| \underset{\eref{extremum:29}, \eref{extremum:211}}> \\
 		> f(X_0) + \half[m_1]\norm{H}^2 - \frac{m_1}4\norm{H}^2 = f(X_0) + \frac{m_1}4\norm{H}^2 > f(X_0)
 	\end{multline*}
 
@@ -668,21 +614,15 @@
 
 \begin{statement}
 	$ F : (a, b) \to \R^{n \ge 2}, \quad F(t) = \column{f_1(t)}{f_n(t)}, \quad F $ диффер. в $ t_\circ \in (a, b), \quad \mc{D}F(t_0) = \column{f_1'(t_0)}{f_n'(t_0)} $
-	\begin{multline*}
-		\underset{\text{(как линейного отображения)}}{\norm{\mc{D}F(t_0)}} = \sup\limits_{
-			\begin{subarray}{c}
-				|h| \le 1 \\
-				h \in \R
-			\end{subarray}} \norm{\mc{D}F(t_0)h}_n = \sup\norm{h\mc{D}F(t_0)}_n = \sup |h| \norm{\mc{D}F(t_0)}_n = \\
-		= \norm{\mc{D}F(t_0)}_n = \norm{\column{f_1'(t_0)}{f_n'(t_0)}}_n
-	\end{multline*}
+	$$ \underset{\text{(как лин. опер.)}}{\norm{\mc{D}F(t_0)}} = \sup\limits_{
+		\begin{subarray}{c}
+			|h| \le 1 \\
+			h \in \R
+		\end{subarray}} \norm{\mc{D}F(t_0)h}_n = \sup\norm{h\mc{D}F(t_0)}_n = \sup |h| \norm{\mc{D}F(t_0)}_n = \norm{\mc{D}F(t_0)}_n = \norm{\column{f_1'(t_0)}{f_n'(t_0)}}_n $$
 \end{statement}
 
 \begin{theorem}[Лагранжа]
 	$ F : [a, b] \to \R^{n \ge 2}, \qquad F \in \Cont{[a, b]}, \qquad \forall t \in (a, b) \quad F $ дифф. в $ t $
-	\begin{remind}
-		$ F \in \Cont{[a, b]} \iff f_j \in \Cont{[a, b]} \quad j = 1, ..., n $
-	\end{remind}
 	$$ \implies \exist c \in (a, b) : \norm{F(b) - F(a)}_n \le \norm{\mc{D}F(c)}_n(b - a) $$
 \end{theorem}
 
@@ -690,7 +630,7 @@
 	Возьмём
 	$$ \vphi(t) \define F(t)^T \bigg( F(b) - F(a) \bigg) = f_1(t) \bigg( f_1(b) - f_1(a) \bigg) + \dots + f_n(t) \bigg( f_n(b) - f_n(a) \bigg) $$
 	Будем считать, что $ F(b) \ne F(a) $ (иначе "--- очевидно). \\
-	По напоминанию из условия теоремы, $ \vphi \in \Cont{[a, b]} $. Значит, $ \forall t \in (a, b) \quad \exist \vphi'(t) $
+	$ F \in \Cont{[a, b]} \implies \vphi \in \Cont{[a, b]} $. Значит, $ \forall t \in (a, b) \quad \exist \vphi'(t) $
 	\begin{equ}{mean_value:4}
 		\vphi'(t) = f_1'(t) \bigg( f_1(b) - f_1(a) \bigg) + \dots + f_n'(t) \bigg( f_n(b) - f_n(a) \bigg)
 	\end{equ}
@@ -1034,23 +974,6 @@
 	Значит, $ F(X_*) = Y $ и $ Y \in F(S) $
 \end{proof}
 
-\begin{definition}
-	$ \Lambda \sub \R^n $ "--- открытое, $ \qquad M : \Lambda \to \R^n $ \\
-	Будем говорить, что $ M $ "--- открытое отображение, если
-	$$ \forall \underset{\omega \text{ "--- откр.}}{\omega \sub \Lambda} \quad M(\omega) \text{ открытое} $$
-	(то есть, открытые множества переводятся в открытые)
-\end{definition}
-
-Приведём определение непрерывного отображения, которое используется в топологии (частный его случай для евклидова пространства):
-\begin{definition}
-	$ \Lambda \sub \R^n $ "--- открытое, $ \qquad M : \Lambda \to \R^n $ \\
-	$ M $ непрерывно, если прообраз любого открытого множества открыт
-\end{definition}
-
-\begin{statement}
-	Приведённое определение непрерывности эквивалентно определению непрерывности, приведённому во втором семестре
-\end{statement}
-
 \begin{replacementproof}[$ F $ открыто]
 	Применяем лемму \\
 	Докажем, что $ F $ "--- открытое отображение:
@@ -1127,12 +1050,8 @@
 			\norm{ \bigg( \mc{D}F(X) \bigg)^{-1}} \le \frac1{2\lambda}
 		\end{equ}
 	\end{remind}
-	Обозначим $ B \define \bigg( \mc{D}F(X) \bigg)^{-1} $
-	\begin{equ}{reverse:21}
-		K = \eref{reverse:21'} = \mc{D}F(X)H + t(H)
-	\end{equ}
-	$$ \text{где } \frac1{\norm{H}}t(H) \underarr{H \to \On} \On $$
-	Домножим \eref{reverse:21} на $ B $ слева:
+	$$ K = \eref{reverse:21'} = \mc{D}F(X)H + t(H), \qquad \text{где } \frac1{\norm{H}}t(H) \underarr{H \to \On} \On $$
+	Домножим на слева на $ B \define \bigg( \mc{D}F(X) \bigg)^{-1} $:
 	$$ BK = B \bigg( \mc{D}F(X)H \bigg) + Bt(H) \bdefeq{B} IH + Bt(H) = H + Bt(H) $$
 	\begin{equ}{reverse:24}
 		\implies BK - Bt(H) = H \undereq{\eref{reverse:21'}} \Phi(Y + K) - \Phi(Y)
@@ -1169,10 +1088,8 @@
 \end{theorem}
 
 \begin{proof}[гладкость $ \Phi $]
-	Пользуясь формулой \eref{reverse:26}, запишем матрицу Якоби $ \Phi $ в следующем виде:
-	\begin{equ}{reverse:28}
-		\mc{D}\Phi(Y) = \bigg( \mc{D}F \big( \Phi(Y) \big) \bigg)^{-1}
-	\end{equ}
+	Пользуясь формулой \eref{reverse:26}, запишем матрицу Якоби $ \Phi $:
+	$$ \mc{D}\Phi(Y) = \bigg( \mc{D}F \big( \Phi(Y) \big) \bigg)^{-1} $$
 	Из курса алгебры знаем, что обратимы только неособенные матрицы:
 	$$ \det \mc{D}F(X) \ne 0 \quad \forall X \in U $$
 	Матрица Якоби состоит из частных производных. Все они непрерывны по условию. Значит,
@@ -1180,11 +1097,9 @@
 	Два последних выражения означают, что
 	$$ \frac1{\det\mc{D}F(X)} \in \Cont{U} $$
 	В силу предыдущего шага,
-	\begin{equ}{reverse:30}
-		\implies \frac1{\det\mc{D}F \bigg( \Phi(Y) \bigg)} \in \Cont{V}
-	\end{equ}
+	$$ \implies \frac1{\det\mc{D}F \bigg( \Phi(Y) \bigg)} \in \Cont{V} $$
 	Алгебраические дополнения состоят из сумм и произведений частных производных в точке $ Y $. Значит, они (дополнения) непрерывны, а значит
-	$$ \eref{reverse:28}, \eref{reverse:30} \implies \mc{D}F(Y) \in \Cont{V} \iff \Phi \in \Cont[1]{V} $$
+	$$ \mc D \Phi(Y) = \frac{\dots}{\det \mc D F \big( \Phi(Y) \big)} \in \Cont V \quad \implies \quad \Phi \in \Cont[1] V $$
 \end{proof}
 
 \section{Теорема об открытом отображении}
@@ -1216,6 +1131,8 @@
 \end{proof}
 
 \section{Теорема о неявной функции (отображении): линейный вариант}
+
+\textcolor{blue}{\huge Этого вопроса нет.}
 
 Рассматриваем пространства $ \R^{n \ge 1}, ~ \R^{m \ge 1}, ~ \R^{n + m} $. \\
 Введём обозначения:
@@ -1753,21 +1670,15 @@ $$ \underimp{\eref{implicit:16}} A(Z)\mc{D}g(Y) + B(Z) = \On[n \times m] \implie
 \end{definition}
 
 \begin{definition}
-	$ E \sub \R^{n + m} $ "--- открытое, $ \qquad F : E \to \R^n, \qquad X_0 \in E, \qquad f(X_0) = \On, \qquad f : E \to R $ \\
+	$ E \sub \R^{n + m} $ "--- открытое, $ \qquad F : E \to \R^n, \qquad X_0 \in E, \qquad f(X_0) = \On, \qquad f : E \to \R $ \\
 	Говорят, что $ X_0 $ "--- точка локального экстремума $ f $ при условии $ F(X) = \On $, если $ X_0 $ "--- точка локального экстремума $ f $ при условии $ \ker F $
 \end{definition}
 
 \begin{theorem}[о множителях Лагранжа]
 	$ E \sub \R^{n + m} $ "--- открытое, $ \qquad F \in \Cont[1]E $ \\
-	$ \rk \mc{D}F(X) = n \quad \forall X \in E, \qquad X_0 \in E : \quad F(X_0) = \On $
-	\begin{equ}{lagrange_mult:21}
-		\implies \exist! \Lambda = (\lambda_1, ..., \lambda_n) : \quad \text{для } \vphi(X, \Lambda) \define f(X) + \Lambda F(X) \qquad \nabla \vphi(X_0, \Lambda) = \On[n + m]^T
-	\end{equ}
+	$ \bm{\rk \mc{D}F(X) = n} \quad \forall X \in E, \qquad X_0 \in E : \quad \bm{F(X_0) =} \On $
+	$$ \implies \exist! \Lambda = (\lambda_1, ..., \lambda_n) : \quad \text{для } \vphi(X, \Lambda) \define f(X) + \Lambda F(X) \qquad \nabla \vphi(X_0, \Lambda) = \On[n + m]^T $$
 \end{theorem}
-
-\begin{remark}
-	Числа $ \lambda_i $ называются множителями Лагранжа
-\end{remark}
 
 \begin{iproof}
 	\item Существование \\

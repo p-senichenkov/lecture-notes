@@ -1,22 +1,18 @@
 \part{Линейные отображения в евклидовых и унитарных пространствах}
 
-\section{Изоморфизм векторного пространства и двойственного к не\hyph{}му}
+\section{Изоморфизм векторного пространства и двойственного к не\tpst{"-}{}му}
 
 \begin{definition}
-	$ V $ -- векторное пространство над полем $ K $ \\
-	Линейным функционалом на $ V $ называется линейное отображение $ V \to K $
+	$ V $ "--- векторное пространство над полем $ K $ \\
+	\it{Линейным функционалом} на $ V $ называется линейное отображение $ V \to K $
 \end{definition}
 
 \begin{property}
-	Линейные функционалы пространства $ V $ над $ K $ образуют веторное пространство над $ K $
+	Линейные функционалы пространства $ V $ над $ K $ образуют векторное пространство над $ K $
 \end{property}
 
-\begin{proof}
-	Очевидно
-\end{proof}
-
 \begin{definition}
-	Пространство функционалов называется двойственным или сопряжённым
+	Пространство функционалов называется \it{двойственным} или \it{сопряжённым}.
 \end{definition}
 
 \begin{notation}
@@ -26,10 +22,10 @@
 \begin{theorem}[изоморфизм пространства и двойственного к нему]
 	\hfill
 	\begin{enumerate}
-		\item $ V $ -- конечномерное пространство над $ K $
+		\item $ V $ "--- конечномерное пространство над $ K $
 		$$ V^* \simeq V $$
 
-		\item $ V $ -- евклидово пространство \\
+		\item $ V $ "--- евклидово пространство \\
 		Для любого $ v \in V $ определим $ y_v \in V^* $ как $ y_v(x) = (x, v) $ \\
 		Тогда отображение $ v \mapsto y_v $ является изоморфизмом
 	\end{enumerate}
@@ -39,25 +35,21 @@
 	\item Пусть $ n \define \dim V $ \\
 	Достаточно доказать, что $ \dim V^* = n $ (тогда можно будет построить изоморфизм из базиса в базис) \\
 	Зафиксируем базис: \\
-	Пусть $ e_1, ..., e_n $ -- базис $ V $ \\
+	Пусть $ e_1, ..., e_n $ "--- базис $ V $ \\
 	Пусть $ \vphi : V^* \to K^n $ такое, что $ \vphi(y) = \bigg( \underbrace{y(e_1)}_{\in K}, ..., \underbrace{y(e_n)}_{\in K} \bigg) $ \\
-	Мы знаем, что протранства одной размерности изоморфны, так что $ K^n \simeq V $ \\
+	Мы знаем, что пространства одной размерности изоморфны, так что $ K^n \simeq V $ \\
 	Докажем, что это изоморфизм:
 	\begin{itemize}
 		\item Линейность:
-		\begin{itemize}
-			\item Надо проверить, что $ \vphi(y_1 + y_2) \iseq \vphi(y_1) + \vphi(y_2) $
-			\begin{multline*}
-				\vphi(y_1 + y_2) = \bigg( (y_1 + y_2)(e_1), \widedots[5em], (y_1 + y_2)(e_n) \bigg) = \\
-				= \bigg( y_1(e_1) + y_2(e_1), \widedots[5em], y_1(e_n) + y_2(e_n) \bigg) \undereq{\text{сложение в } K^n \text{ покомпонентно}} \\
-				= \bigg( y_1(e_1), ..., y_1(e_n) \bigg) + \bigg( y_2(e_1), ..., y_2(e_n) \bigg) = \vphi(y_1) + \vphi(y_2)
-			\end{multline*}
-			\item Надо проверить, что $ \vphi(ky) \iseq k\vphi(y) $
-			\begin{multline*}
-				\vphi(ky) = \bigg( (ky)(e_1), \widedots[3em], (ky)(e_n) \bigg) = \bigg( ky(e_1), \widedots[3em], ky(e_n) \bigg) = \\
-				\undereq{\text{умножение в } K^n \text{ покомпонентно}} k \bigg( y(e_1), \widedots[3em], y(e_n) \bigg) = k\vphi(y)
-			\end{multline*}
-		\end{itemize}
+		\begin{multline*}
+			\vphi(y_1 + y_2) = \bigg( (y_1 + y_2)(e_1), \widedots[5em], (y_1 + y_2)(e_n) \bigg) = \\
+			= \bigg( y_1(e_1) + y_2(e_1), \widedots[5em], y_1(e_n) + y_2(e_n) \bigg) \undereq{\text{сложение в } K^n \text{ покомпонентно}} \\
+			= \bigg( y_1(e_1), ..., y_1(e_n) \bigg) + \bigg( y_2(e_1), ..., y_2(e_n) \bigg) = \vphi(y_1) + \vphi(y_2)
+		\end{multline*}
+		\begin{multline*}
+			\vphi(ky) = \bigg( (ky)(e_1), \widedots[3em], (ky)(e_n) \bigg) = \bigg( ky(e_1), \widedots[3em], ky(e_n) \bigg) = \\
+			\undereq{\text{умножение в } K^n \text{ покомпонентно}} k \bigg( y(e_1), \widedots[3em], y(e_n) \bigg) = k\vphi(y)
+		\end{multline*}
 		\item Биективность: \\
 		Пусть $ a \in K^n, \qquad a = (a_1, ..., a_n), \quad a_i \in K $
 		$$ \exist ! y \in V^* : \quad \vphi(y) = a $$
@@ -69,10 +61,10 @@
 	\begin{itemize}
 		\item Проверим, что $ y_v \in V^* $, т. е. что $ y_v $ линейно:
 		\begin{itemize}
-			\item $ y_v(x_1 + x_2) = (x_1 + x_2, v) \undereq{\text{скалярное произведение линейно по первой координате}} (x_1, v) + (x_2, v) = y_v(x_1) + y_v(x_2) $
+			\item $ y_v(x_1 + x_2) = (x_1 + x_2, v) \undereq{\text{лин. скал. произв.}} (x_1, v) + (x_2, v) = y_v(x_1) + y_v(x_2) $
 			\item $ y_v(kx) = (kx, v) = k(x, v) = ky_v(x) $
 		\end{itemize}
-		\item Пусть $ \vphi(v) = y_v $. Докажем, что $ \vphi $ -- изоморфизм $ V \to V^* $:
+		\item Пусть $ \vphi(v) = y_v $. Докажем, что $ \vphi $ "--- изоморфизм $ V \to V^* $:
 		\begin{itemize}
 			\item Линейность:
 			\begin{itemize}
@@ -82,9 +74,6 @@
 					\iff \quad y_{u + v}(x) \iseq y_u(x) + y_v(x) \quad \forall x \quad \iff \\
 					\iff \quad (x, u + v) \undereq{\text{лин. скалярного произв.}} (x, u) + (x, v)
 				\end{multline*}
-				\begin{remark}
-					В унитарном пространстве не будет этого равенства
-				\end{remark}
 
 				\item $ \vphi(kv) \iseq k\vphi(v) $
 				\begin{multline*}
@@ -102,21 +91,21 @@
 \end{eproof}
 
 \begin{definition}
-	Изоморфизм из пункта 2 называется каноническим изоморфизмом из $ V $ в $ V^* $
+	Изоморфизм из пункта 2 называется \it{каноническим изоморфизмом} из $ V $ в $ V^* $
 \end{definition}
 
 \section{Дважды двойственное пространство}
 
-\begin{theorem}[дважды двойственное пространство]
-	$ V $ -- векторное пространство над $ K $ \\
-	Для любого $ x \in V $ обозначим через $ z_x $ отображение $ V^* \to K $, заданное формулой $ z_x(\underset{\in V^*}{y}) = \underbrace{y(x)}_{\in K} $ \\
-	Тогда:
+\begin{theorem}
+	$ V $ "--- векторное пространство над $ K $ \\
+	Для любого $ x \in V $ обозначим через $ z_x $ отображение $ V^* \to K $, заданное формулой $ z_x(y) = y(x) $
+
 	\begin{enumerate}
-		\item $ \forall x \in K \quad z_x \in (V^*)^* $, т. е. $ z_x $ -- линейный функционал на $ V^* $
+		\item $ \forall x \in K \quad z_x \in (V^*)^* $, т. е. $ z_x $ "--- линейный функционал на $ V^* $
 
 		\item отображение $ \vphi : V \to (V^*)^* $, заданное формулой $ \vphi(x) = z_x $ является линейным
 
-		\item если $ V $ конечномерно, то $ \vphi $ -- изоморфизм
+		\item если $ V $ конечномерно, то $ \vphi $ "--- изоморфизм
 	\end{enumerate}
 \end{theorem}
 
@@ -145,10 +134,10 @@
 	\end{itemize}
 
 	\item Размерности равны, так что достаточно доказать инъективность: \\
-	$ \vphi $ инъективно $ \iff \vphi(x) = 0 $ только при $ x = 0 \quad \iff z_x $ -- нулевое отображение только при $ x = 0 \quad \iff z_x(y) = 0 \quad \forall y \quad \iff y(x) = 0 \quad \forall y $ \\
+	$ \vphi $ инъективно $ \iff \vphi(x) = 0 $ только при $ x = 0 \quad \iff z_x $ "--- нулевое отображение только при $ x = 0 \quad \iff z_x(y) = 0 \quad \forall y $ только при $ x = 0 \quad \iff y(x) = 0 \quad \forall y $ только при $ x = 0 $ \\
 	Нужно проверить, что $ \forall x \ne 0 \quad \exist $ линейное отображение $ y : \quad y(x) \ne 0 $ \\
 	Дополним до базиса: \\
-	Пусть $ x, e_2, ..., e_n $ -- базис $ V $ \\
+	Пусть $ x, e_2, ..., e_n $ "--- базис $ V $ \\
 	Определим $ y : y(x) = 1, \quad y(e_i) = 0 $
 	$$ y(\alpha x + \beta_2e_2 + ... + \beta_ne_n) = \alpha $$
 	Оно линейно, $ y(x) \ne 0 $
@@ -157,79 +146,72 @@
 \section{Двойственный базис. Матрица перехода для двойственного базиса}
 
 \begin{lemma}
-	$ V $ -- конечномерное векторное пространство, $ \quad e_1, ..., e_n $ -- базис $ V $ \\
-	$ f_1, ..., f_n \in V^* $ такие, что $ f_i(e_i) = 1, \quad f_i(e_j) = 0 $ при $ i \ne j \quad $ \nimp[(здесь существование не утверждается, но понятно, что их всегда можно построить)] \\
-	Тогда $ f_1, .., f_n $ -- базис $ V^* $
+	$ V $ "--- конечномерное векторное пространство, $ \quad e_1, ..., e_n $ "--- базис $ V $ \\
+	$ f_1, ..., f_n \in V^* $ такие, что $ f_i(e_i) = 1, \quad f_i(e_j) = 0 $ при $ i \ne j $ \\
+	Тогда $ f_1, .., f_n $ "--- базис $ V^* $
 \end{lemma}
 
 \begin{proof}
 	Знаем, что $ \dim V = \dim V^* $ \\
 	Достаточно доказать ЛНЗ: \\
 	Возьмём ЛК: \\
-	Пусть $ a_1, ..., a_n \in K $ такие, что $ f = a_1f_1 + ... + a_nf_n $ -- нулевой функционал
+	Пусть $ a_1, ..., a_n \in K $ такие, что $ f = a_1f_1 + ... + a_nf_n $ "--- нулевой функционал
 	$$ 0 = f(e_i) = a_1\underbrace{f_1(e_i)}_0 + ... + a_i\underbrace{f_i(e_i)}_1 + ... + a_n\underbrace{f_n(e_i)}_0 = a_i \quad \forall i $$
 \end{proof}
 
 \begin{definition}
-	$ e_1, ..., e_n $ -- базис $ V, \qquad f_1, ..., f_n $ -- базис $ V^*, \qquad f_i(e_i) = 1, \quad f_i(e_j) = 0 $ при $ i \ne j $ \\
-	Тогда $ f_1, ..., f_n $ называется двойственным базисом к $ e_1, ..., e_n $
+	$ f_1, \dots, f_n $ называется \it{двойственным базисом} к $ e_1, \dots, e_n $.
 \end{definition}
 
-\begin{remind}
-	$ e_i, e_i' $ -- базисы $ V $ \\
-	Матрицей перехода от $ e_i $ к $ e_i' $ называется такая матрица $ C $, что в $ i $-м столбце записаны координаты $ e_i' $ в $ e_1, ..., e_n $ \\
-	Пусть $ X, X' $ -- координаты $ c $ в $ e_i, e_i' $. Тогда $ X = CX' $
-\end{remind}
-
 \begin{theorem}
-	$ e_i, e_i' $ -- базисы $ V, \qquad C $ -- матрица перехода от $ e_i $ к $ e_i' $ \\
-	$ f_i, f_i' $ -- соответствующие двойственные базисы \\
-	Тогда:
-	\begin{enumerate}
-		\item Матрица перехода от $ f_i $ к $ f_i' $ равна $ (C^{-1})^T \nimp[~ = ~ (C^T)^{-1}] $
+	$ e_i, e_i' $ "--- базисы $ V, \qquad C $ "--- матрица перехода от $ e_i $ к $ e_i' $ \\
+	$ f_i, f_i' $ "--- соответствующие двойственные базисы
 
-		\item Пусть $ Y, Y' $ -- строки координат $ y \in V^* $ в базисах $ f_i, f_i' $ \\
+	\begin{enumerate}
+		\item Матрица перехода от $ f_i $ к $ f_i' $ равна $ (C^{-1})^T $
+
+		\item Пусть $ Y, Y' $ "--- строки координат $ y \in V^* $ в базисах $ f_i, f_i' $ \\
 		Тогда $ Y' = YC $
 	\end{enumerate}
 \end{theorem}
 
 \begin{eproof}
-	\item Пусть $ D = (d_{ij}) $ -- матрица перехода от $ f_i $ к $ f_i' $
+	\item Пусть $ D = (d_{ij}) $ "--- матрица перехода от $ f_i $ к $ f_i' $
 	$$ U = (u_{ij}), \qquad U = D^TC $$
 	Докажем, что $ U = E $
-	$$ e_i' = c_{1i}e_1 + c_{2i}e_2 + ..., \qquad f_j' = d_{1j}f_1 + d_{2j}f_2 + ... $$
+	$$ e_i' = c_{1i}e_1 + c_{2i}e_2 + \dots, \qquad f_j' = d_{1j}f_1 + d_{2j}f_2 + \dots $$
 	Применим одно к другому:
 	\begin{multline*}
 		\begin{rcases}
 			1, \quad i = j \\
 			0, \quad i \ne j
-		\end{rcases} = f_j'(e_i') = d_{1j}f_1(c_{1i}e_1 + c_{2i}e_2 + ...) + d_{2j}f_2(c_{1i}e_i + c_{2i}e_2 + ...) + \widedots[5em] = \\
-		= d_{1j}c_{1i} \cdot 1 + d_{1j}c_{2i} \cdot 0 + \widedots[3em] + d_{2j}c_{1i} \cdot 0 + d_{2j}c_{2i} \cdot 1 + \widedots[3em] = d_{1j}c_{1i} + d_{2j}c_{2i} + \widedots[3em]
+		\end{rcases} = f_j'(e_i') = d_{1j}f_1(c_{1i}e_1 + c_{2i}e_2 + \dots) + d_{2j}f_2(c_{1i}e_i + c_{2i}e_2 + \dots) + \dots = \\
+		= d_{1j}c_{1i} \cdot 1 + d_{1j}c_{2i} \cdot 0 + \dots + d_{2j}c_{1i} \cdot 0 + d_{2j}c_{2i} \cdot 1 + \dots = d_{1j}c_{1i} + d_{2j}c_{2i} + \dots
 	\end{multline*}
-	$ d $ -- этой $ j $-я строка $ D^T, \quad c $ -- $ i $-й столбец $ C $ \\
+	$ d $ "--- этой $ j $-я строка $ D^T, \quad c $ "--- $ i $-й столбец $ C $ \\
 	Значит, $ f_j'(e_i') = u_{ji} $
 
-	\item $ (C^{-1})^T $ -- матрица перехода от $ f_i $ к $ f_i' $ \\
-	$ Y^T, Y'^T $ -- столбцы координат $ y $ \\
-	$ Y^T = (C^{-1})^TY'^T $ -- транспонированный
+	\item $ (C^{-1})^T $ "--- матрица перехода от $ f_i $ к $ f_i' $ \\
+	$ Y^T, Y'^T $ "--- столбцы координат $ y $ \\
+	$ Y^T = (C^{-1})^TY'^T $ "--- транспонированный
 	$$ Y = Y'C^{-1} \implies YC = Y' $$
 \end{eproof}
 
 \section{Собственные числа самосопряжённого оператора. Лемма об эрмитовой матрице}
 
 \begin{definition}
-	$ \mc{A} $ -- оператор в евклидовом или унитарном пространстве \\
-	$ \mc{B} $ называется сопряжённым к $ \mc{A} $, если $ (\mc{A}x, y) = (x, \mc{B}y) \quad \forall x, y $
+	$ \msc{A} $ "--- оператор в евклидовом или унитарном пространстве \\
+	$ \msc{B} $ называется \it{сопряжённым} к $ \msc{A} $, если $ (\msc{A}x, y) = (x, \msc{B}y) \quad \forall x, y $
 \end{definition}
 
 \begin{notation}
-	$ \mc{A}^* $
+	$ \msc{A}^* $
 \end{notation}
 
 \begin{props}
-	\item $ (\mc{A}^*)^* = \mc{A} $
-	\item Пусть $ A, A^* $ -- матрицы $ \mc{A}, \mc{A}^* $ в некотором ОНБ \\
-	Тогда
+	\item $ \msc{A}^{**} = \msc{A} $
+	\item Пусть $ A, A^* $ "--- матрицы $ \msc{A}, \msc{A}^* $ в некотором ОНБ
+
 	\begin{itemize}
 		\item $ A^* = A^T $ в евклидовом пространстве
 		\item $ A^* = \ol{A}^T $ в унитарном пространстве
@@ -237,75 +219,61 @@
 \end{props}
 
 \begin{definition}
-	Оператор в веклидовом или унитарном пространстве назвыается
+	Оператор в евклидовом или унитарном пространстве называется
 	\begin{itemize}
-		\item нормальным, если $ \mc{A}^*\mc{A} = \mc{A}\mc{A}^* $
-		\item ортогональным (унитарным), если $ \mc{A}\mc{A}^* = \mc{A}^*\mc{A} = \mc{E} $
-		\item самосопряжённым, если $ \mc{A}^* = \mc{A} $
+		\item \it{нормальным}, если $ \msc{A}^*\msc{A} = \msc{A}\msc{A}^* $
+		\item \it{ортогональным} (\it{унитарным}), если $ \msc{A}\msc{A}^* = \msc{A}^*\msc{A} = \msc{E} $
+		\item \it{самосопряжённым}, если $ \msc{A}^* = \msc{A} $
 	\end{itemize}
 \end{definition}
 
 \begin{definition}
 	Квадратная матрица называется
 	\begin{itemize}
-		\item симметричной (симметрической), если $ A = A^T $
-		\item эрмитовой, если $ A = \ol{A}^T $
+		\item \it{симметричной} (\it{симметрической}), если $ A = A^T $
+		\item \it{эрмитовой}, если $ A = \ol{A}^T $
 	\end{itemize}
 \end{definition}
 
 \begin{property}
-	$ \mc{A} $ -- оператор в евлидовом/унитарном пространстве, $ \quad A $ -- его матрица \bt{в ОНБ} \\
-	Тогда \\
-	$ \mc{A} $ самосопряжённый $ \iff A $ симметрична/эрмитова
+	$ \msc{A} $ "--- оператор в евклидовом/унитарном пространстве, $ \quad A $ "--- его матрица \bt{в ОНБ}
+
+	$ \msc{A} $ самосопряжённый $ \iff A $ симметрична/эрмитова
 \end{property}
 
-\begin{theorem}
-	$ \mc{A} $ -- нормальный оператор в унитарном пространстве \\
-	Тогда
-	\begin{enumerate}
-		\item если $ \lambda $ -- с. ч. $ \mc{A} $, то $ \ol\lambda $ -- с. ч. $ \mc{A}^* $
-		\item с. в. $ \mc{A}^* $, соответствующие разным с. ч. ортогональны
-		\item Существует ОНБ, состоящий из с. в. $ \mc{A} \quad $ \nimp[$ \implies $ он диагонализуем]
-	\end{enumerate}
-\end{theorem}
-
 \begin{lemma}
-	$ \mc{A} $ -- самосопряжённый оператор на унитарном пространстве \\
-	Тогда $ (\mc{A}x, x) \in \R \quad \forall x $
+	$ \msc{A} $ "--- самосопряжённый оператор на унитарном пространстве \\
+	Тогда $ (\msc{A}x, x) \in \R \quad \forall x $
 \end{lemma}
 
 \begin{proof}
-	$$ (\mc{A}x, x) \undereq{\text{самосопр.}} (x, \mc{A}^*x) = (x, \mc{A}x) $$
-	$$ (\mc{A}x, x) \undereq{\text{полуторалинейность}} \ol{(x, \mc{A}x)} $$
-	$$ \implies (x, \mc{A}x) \in \R \implies (\mc{A}x, x) \in \R $$
+	$$ (\msc{A}x, x) \undereq{\text{самосопр.}} (x, \msc{A}^*x) = (x, \msc{A}x) $$
+	$$ (\msc{A}x, x) \undereq{\text{полуторалинейность}} \ol{(x, \msc{A}x)} $$
+	$$ \implies (x, \msc{A}x) \in \R \implies (\msc{A}x, x) \in \R $$
 \end{proof}
 
 \begin{definition}
-	Самосопряжённый оператор назвыается положительно определённым, если
-	$$ (\mc{A}x, x) > 0 \quad \forall x \ne 0 $$
+	Самосопряжённый оператор называется \it{положительно определённым}, если
+	$$ (\msc{A}x, x) > 0 \quad \forall x \ne 0 $$
 \end{definition}
-
-\begin{notation}
-	$ a_i \in \bigodot \quad \iff a_1 = \dots = a_n = 0 $
-\end{notation}
 
 \begin{theorem}[о собственных числах самосопряжённого оператора]
 	\hfill \\
-	$ \mc{A} $ -- оператор на унитарном пространстве
+	$ \msc{A} $ "--- оператор на унитарном пространстве
 	\begin{enumerate}
-		\item $ \mc{A} $ -- нормальный \\
-		$ \mc{A} $ самоспряжённый $ \quad \iff \quad $ все с. ч. $ \mc{A} $ вещественные
+		\item $ \msc{A} $ "--- нормальный \\
+		$ \msc{A} $ самоспряжённый $ \quad \iff \quad $ все с. ч. $ \msc{A} $ вещественные
 
-		\item $ \mc{A} $ -- самосопряжённый \\
-		$ \mc{A} $ положительно определён $ \quad \iff \quad $ все с. ч. положительны
+		\item $ \msc{A} $ "--- самосопряжённый \\
+		$ \msc{A} $ положительно определён $ \quad \iff \quad $ все с. ч. положительны
 	\end{enumerate}
 \end{theorem}
 
 \begin{eproof}
 	\item Знаем, что существует ОНБ из с. в. \\
-	Пусть $ \lambda_i $ -- с. ч. \\
-	$ A, A^* $ -- матрицы $ \mc{A} $ и $ \ol{\mc{A}^*} $ в этом базисе $ \quad \implies A^* = A^T $ \\
-	$ \mc{A} $ -- самосопряжённый $ \iff A = A^* \iff A = \ol{A^T} \iff $
+	Пусть $ \lambda_i $ "--- с. ч. \\
+	$ A, A^* $ "--- матрицы $ \msc{A} $ и $ \ol{\msc{A}^*} $ в этом базисе $ \quad \implies A^* = A^T $ \\
+	$ \msc{A} $ "--- самосопряжённый $ \iff A = A^* \iff A = \ol{A^T} \iff $
 	$$
 	\begin{pmatrix}
 		\lambda_1 & & 0 \\
@@ -318,197 +286,168 @@
 		0 & . & \ol{\lambda_n}
 	\end{pmatrix}^T \quad \iff \lambda_i = \ol{\lambda_i} \quad \forall i \quad \iff \lambda_i \in \R $$
 
-	\item Пусть $ e_i $ -- ОНБ из с. в., $ \qquad \lambda_i $ -- с. ч., $ \qquad \lambda_i \in \R $ (т. к. самосопр. -- частный случай нормального) \\
+	\item Пусть $ e_i $ "--- ОНБ из с. в., $ \qquad \lambda_i $ "--- с. ч., $ \qquad \lambda_i \in \R $ \\
 	Пусть $ x = a_1e_1 + ... + a_ne_n $
 	\begin{multline*}
-		(\mc{A}x, x) = (a_1\lambda_1e_1 + ... + a_n\lambda_ne_n, \quad a_1e_1 + ... + a_ne_n) = \sum \lambda_ia_i\ol{a_j}\underbrace{(e_i, e_j)}_{0 \text{ или } 1} = \\
+		(\msc{A}x, x) = (a_1\lambda_1e_1 + ... + a_n\lambda_ne_n, \quad a_1e_1 + ... + a_ne_n) = \sum \lambda_ia_i\ol{a_j}\underbrace{(e_i, e_j)}_{0 \text{ или } 1} = \\
 		= \sum \lambda_ia_i\ol{a_i} = \sum \lambda_i |a_i|^2 \nimp[\in \R]
 	\end{multline*}
 	\begin{itemize}
 		\item Если $ \lambda_i > 0 \quad \forall i $, то $ \sum \underbrace{\lambda_i}_{> 0} |a_i|^2 \ge 0 $ \\
 		Равенство достигается только при $ |a_i|^2 \in \bigodot $, то есть $ a_i \in \bigodot $. Значит, $ x = 0 $
 		\item Пусть не все $ \lambda_i > 0, \qquad \lambda_{i_0} \le 0 $ \\
-		Для $ x = e_{i_0} \quad x \ne 0, \quad (\mc{A}x, x) = \lambda_{i_0} \le 0 $ -- \contra
+		Для $ x = e_{i_0} \quad x \ne 0, \quad (\msc{A}x, x) = \lambda_{i_0} \le 0 $ "--- \contra
 	\end{itemize}
 \end{eproof}
 
 \section{Ортогональность собственных векторов. Самосопряжённый оператор на \texorpdfstring{$ \R^n $}{R\textasciicircum{}n}}
 
 \begin{lemma}\label{lemma:ermit}
-	$ A $ -- эрмитова матрица \\
+	$ A $ "--- эрмитова матрица \\
 	Тогда все корни $ \chi_A(t) $ вещественны
 \end{lemma}
 
 \begin{proof}
-	$ A $ -- матрица порядка $ n $ \\
-	Определим оператор $ \mc{A} : \Co^n $ как $ X \mapsto AX $ \\
-	Тогда $ A $ -- матрица $ \mc{A} $ в стандартном базисе \\
-	$ A $ -- эрмитова; станд. базис является ОНБ $ \quad \implies \mc{A} $ -- самосопряжённый \\
-	Все с. ч. $ \mc{A} $ вещественны, это и есть корни $ \chi_A(t) $
+	$ A $ "--- матрица порядка $ n $ \\
+	Определим оператор $ \msc{A} : \Co^n $ как $ X \mapsto AX $ \\
+	Тогда $ A $ "--- матрица $ \msc{A} $ в стандартном базисе \\
+	$ A $ "--- эрмитова; станд. базис является ОНБ $ \quad \implies \msc{A} $ "--- самосопряжённый \\
+	Все с. ч. $ \msc{A} $ вещественны, это и есть корни $ \chi_A(t) $
 \end{proof}
 
-\begin{lemma}[ортогональность с. в.]
-	$ \mc{A} $ самосопряжённый на $ \R^n, \qquad \mu, \lambda $ -- различные с. ч., $ \quad x, y $ -- соостветсвующие с. в. \\
+\begin{lemma}[ортогональность с. в.]\label{lemma:ort_eigenvec}
+	$ \msc{A} $ самосопряжённый на $ \R^n, \qquad \mu, \lambda $ "--- различные с. ч., $ \quad x, y $ "--- соостветсвующие с. в. \\
 	Тогда $ (x, y) = 0 $
 \end{lemma}
 
-\begin{remark}
-	Доказательство для $ \Co^n $ здесь не пожходит
-\end{remark}
-
 \begin{proof}
-	$$ \lambda(x, y) \undereq{\text{линейность}} (\lambda x, y) \undereq{\text{с. в.}} (\mc{A}x, y) \bdefeq{\mc{A}^*} (x, \mc{A}^*y) \undereq{\text{самоспр.}} (x, \mc{A}y) \undereq{\text{с. в.}} (x, \mu x) \undereq{\text{линейность}} \mu(x, y) $$
+	$$ \lambda(x, y) \undereq{\text{линейность}} (\lambda x, y) \undereq{\text{с. в.}} (\msc{A}x, y) \bdefeq{\msc{A}^*} (x, \msc{A}^*y) \undereq{\text{самоспр.}} (x, \msc{A}y) \undereq{\text{с. в.}} (x, \mu x) \undereq{\text{линейность}} \mu(x, y) $$
 \end{proof}
 
 \begin{theorem}
-	$ \mc{A} $ -- самосопряжённый оператор на $ \R^n $ \\
-	Тогда
+	$ \msc{A} $ "--- самосопряжённый оператор на $ \R^n $
+
 	\begin{enumerate}
 		\item $ \chi_A(t) $ раскладывается на линейные множители над $ \R $
-		\item Существует ОНБ $ \R^n $, состоящий из с. в. $ \mc{A} $
+		\item Существует ОНБ $ \R^n $, состоящий из с. в. $ \msc{A} $
 	\end{enumerate}
 \end{theorem}
 
 \begin{eproof}
 	\item Разложим $ \chi_A(t) $ на линейные множиетли над $ \Co $:
 	$$ \chi_A(t) = (-1)^n(t - \lambda_1)...(t - \lambda_n), \qquad \lambda_i \in \Co $$
-	Пусть $ A $ -- матрица $ \mc{A} $ в стандартном базисе $ \quad \implies A = A^T \quad \underimp{A \text{ вещ.}} A = \ol{A^T} \quad \implies $ \\
+	Пусть $ A $ "--- матрица $ \msc{A} $ в стандартном базисе $ \quad \implies A = A^T \quad \underimp{A \text{ вещ.}} A = \ol{A^T} \quad \implies $ \\
 	$ \implies A $ эрмитова $ \quad \underimp{\text{лемма \ref{lemma:ermit}}} \lambda_i \in \R \quad \forall i $
 
-	\item $ \chi_A(t) $ раскладывается на линейные множители над $ \R $ \\
-	$ \mc{A} $ диагонализуем над $ \Co $. Есть базис из с. в. в $ \Co^n $ \\
-	$ \implies $ есть базис из с. в. в $ \R^n $ (т. к. $ \R $ -- поле, там неоткуда взяться комплексным числам, а коэффициенты изначально были вещественные, \textit{надо нормально это записать}) \\
-	$ \implies \dim U_{\lambda_i} = r_i $ \\
-	Выберем ОНБ в каждом подпространстве $ U_{\lambda_i} $ \\
-	По лемме об ортогональный с. в. объединение этих базисов -- ОНБ $ \R^n $
+	\item $ \msc{A} $ диагонализуем над $ \Co $. \\
+	Рассмотрим $ V_{\lambda_i} $ "--- собственные подпространства в $ \R^n, \quad V_{\lambda_i}' $ "--- собств. подпр-ва в $ \Co^n $.
+	$$ \dim_\R V_{\lambda_i} = \dim_\Co V_{\lambda_i}' $$
+	По критерию диагонализуемости в терминах кратностей,
+	$$ \sum \dim_\R V_{\lambda_i} = \sum \dim_\Co V_{\lambda_i}' = n $$
+	Значит, объединение базисов $ V_{\lambda_i} $ будет базисом $ V $. \\
+	Выберем в каждом из них ОНБ.
 \end{eproof}
 
 \section{Корень из самосопряжённого оператора. Полярное разложение}
 
 \begin{theorem}[корень из самосопряжённого оператора]
 	\hfill \\
-	$ \mc{A} $ -- положительно определённый самосопряжённый \\
-	Тогда существует положиетльно определённый самосопряжённый $ \mc{B} : \quad \mc{A} = \mc{B}^2 $ \nimp[в смысле композиции]
+	$ \msc{A} $ "--- положительно определённый самосопряжённый \\
+	Тогда существует положительно определённый самосопряжённый $ \msc{B} : \quad \msc{A} = \msc{B}^2 $
 \end{theorem}
 
 \begin{proof}
-	$ \mc{A} $ -- самосопряжённый $ \implies \mc{A} $ -- нормальный $ \implies \exist $ ОНБ из с. в. $ \mc{A} $ \\
-	Пусть $ e_1, ..., e_n $ -- ОНБ из с. в., $ \qquad \lambda_1, ... \lambda_n $ -- с. ч. \\
-	$ \mc{A} $ -- самоспряжённый $ \implies \lambda_i \in \R $ \\
-	$ \mc{A} $ -- полож. опред. $ \implies \lambda_i > 0 $ \\
-	Определим $ \mc{B} $ как $ \mc{B}(e_i) = \sqrt{\lambda_i}e_i $ \\
+	$ \msc{A} $ "--- самосопряжённый $ \implies \msc{A} $ "--- нормальный $ \implies \exist $ ОНБ из с. в. $ \msc{A} $ \\
+	Пусть $ e_1, ..., e_n $ "--- ОНБ из с. в., $ \qquad \lambda_1, ... \lambda_n $ "--- с. ч. \\
+	$ \msc{A} $ "--- самоспряжённый $ \implies \lambda_i \in \R $ \\
+	$ \msc{A} $ "--- полож. опред. $ \implies \lambda_i > 0 $ \\
+	Определим $ \msc{B} $ как $ \msc{B}(e_i) = \sqrt{\lambda_i}e_i $ \\
 	Проверим, что он подойдёт: \\
-	Рассмотрим матрицу $ \mc{B} $ в базисе $ e_1, ..., e_n $:
-	$$ B =
-	\begin{pmatrix}
-		\sqrt{\lambda_1} & . & . \\
-		. & . & . \\
-		. & . & \sqrt{\lambda_n}
-	\end{pmatrix} $$
-	Она эрмитова $ \implies \mc{B} $ самоспряжённый \\
-	$ \sqrt{\lambda_i} > 0 \implies \mc{B} $ положиетльно определён
-	$$ \mc{B} \big( \mc{B}(e_i) \big) = \mc{B}(\sqrt{\lambda_i}e_i) = \lambda_ie_i = \mc{A}(e_i) \quad \forall i \quad \implies \mc{B}^2 = \mc{A} $$
+	Рассмотрим матрицу $ \msc{B} $ в базисе $ e_1, ..., e_n $:
+	$$ B = \diagmatrix{\sqrt{\lambda_1}}{\sqrt{\lambda_n}} $$
+	Она эрмитова $ \implies \msc{B} $ самоспряжённый \\
+	$ \sqrt{\lambda_i} > 0 \implies \msc{B} $ положиетльно определён
+	$$ \msc{B} \big( \msc{B}(e_i) \big) = \msc{B}(\sqrt{\lambda_i}e_i) = \lambda_ie_i = \msc{A}(e_i) \quad \forall i \quad \implies \msc{B}^2 = \msc{A} $$
 \end{proof}
 
 \begin{lemma}
-	$ \mc{A} $ невырожденный \\
-	Тогда $ \mc{A}\mc{A}^* $ - самосопряжённый положительно определённый
+	$ \msc{A} $ невырожденный \\
+	Тогда $ \msc{A}\msc{A}^* $ "--- самосопряжённый положительно определённый
 \end{lemma}
 
 \begin{proof}
-	$$ \bigg( \mc{A}\mc{A}^* \bigg)^* = \bigg( \mc{A}^* \bigg)^* \mc{A}^* = \mc{A}\mc{A}^* $$
-	$$ \bigg( \mc{A}^*\mc{A}x, x \bigg) = \bigg( \mc{A}^*(\mc{A}x), x \bigg) = \bigg( \mc{A}x, (\mc{A}^*)^*x \bigg) = (\mc{A}x, \mc{A}x) \underset{\mc{A}x \ne 0 \text{, т. к. } \mc{A} \text{ невырожд.}}> 0 $$
+	$$ \bigg( \msc{A}\msc{A}^* \bigg)^* = \bigg( \msc{A}^* \bigg)^* \msc{A}^* = \msc{A}\msc{A}^* $$
+	$$ \bigg( \msc{A}^*\msc{A}x, x \bigg) = \bigg( \msc{A}^*(\msc{A}x), x \bigg) = \bigg( \msc{A}x, (\msc{A}^*)^*x \bigg) = (\msc{A}x, \msc{A}x) \underset{\msc{A}x \ne 0 \text{, т. к. } \msc{A} \text{ невырожд.}}> 0 $$
 \end{proof}
 
 \begin{theorem}[полярное разложение оператора]
 	\hfill \\
-	$ \mc{A} $ -- невырожденный \nimp[(обратимый)] оператор на унитарном пространстве \\
-	Тогда $ \exist \mc{U}, \mc{B} $ такие, что:
+	$ \msc{A} $ "--- невырожденный оператор на унитарном пространстве \\
+	Тогда $ \exist \msc{U}, \msc{B} $ такие, что:
 	\begin{enumerate}
-		\item $ \mc{U} $ унитарный
-		\item $ \mc{B} $ -- самосопряжённый положительно определённый
-		\item $ \mc{A} = \mc{U}\mc{B} $
+		\item $ \msc{U} $ унитарный
+		\item $ \msc{B} $ "--- самосопряжённый положительно определённый
+		\item $ \msc{A} = \msc{U}\msc{B} $
 	\end{enumerate}
 \end{theorem}
 
 \begin{proof}
-	$ \mc{A}\mc{A}^* $ самосопряжённый положительно определённый (по лемме). Значит
-	$$ \exist \mc{B} : \quad \mc{B}^2 = \mc{A}^*\mc{A}, \qquad \mc{B} \text{ полож. опр. самосопряж.} $$
-	$ \mc{A}^*, \mc{A} $ невырожденные $ \implies \mc{A}^*\mc{A} $ невырожденный $ \implies \mc{B} $ невырожденный $ \implies \exist \mc{B}^{-1} $ \\
-	Положим $ \mc{U} = \mc{A}\mc{B}^{-1} $ \\
-	Докажем, что эти $ \mc{U}, \mc{B} $ подойдут: \\
-	Осталось проверить только унитарность, т. е. что $ \mc{U}^* \iseq \mc{U} $
-	$$ \mc{U}^* = \bigg( \mc{A}\mc{B}^{-1} \bigg)^* = \bigg( \mc{B}^{-1} \bigg)^* \mc{A}^* \undereq{\text{видно из матрицы}} \bigg( \mc{B}^* \bigg)^{-1}\mc{A}^* \undereq{\mc{B} \text{ самоспр.}} \mc{B}^{-1} \mc{A}^* $$
-	$$ \mc{U}^*\mc{U} = \bigg( \mc{B}^{-1}\mc{A}^* \bigg) \bigg( \mc{A}\mc{B}^{-1} \bigg) = \mc{B}^{-1} \bigg( \mc{A}^*\mc{A} \bigg)\mc{B}^{-1} = \mc{B}^{-1}\mc{B}^2\mc{B}^{-1} = \mc{E} $$
+	$ \msc{A}\msc{A}^* $ самосопряжённый положительно определённый (по лемме). Значит
+	$$ \exist \msc{B} : \quad \msc{B}^2 = \msc{A}^*\msc{A}, \qquad \msc{B} \text{ полож. опр. самосопряж.} $$
+	$ \msc{A}^*, \msc{A} $ невырожденные $ \implies \msc{A}^*\msc{A} $ невырожденный $ \implies \msc{B} $ невырожденный $ \implies \exist \msc{B}^{-1} $ \\
+	Положим $ \msc{U} = \msc{A}\msc{B}^{-1} $ \\
+	Докажем, что эти $ \msc{U}, \msc{B} $ подойдут: \\
+	Осталось проверить только унитарность, т. е. что $ \msc{U}^* \iseq \msc{U} $
+	$$ \msc{U}^* = \bigg( \msc{A}\msc{B}^{-1} \bigg)^* = \bigg( \msc{B}^{-1} \bigg)^* \msc{A}^* \undereq{\text{видно из матрицы}} \bigg( \msc{B}^* \bigg)^{-1}\msc{A}^* \undereq{\msc{B} \text{ самоспр.}} \msc{B}^{-1} \msc{A}^* $$
+	$$ \msc{U}^*\msc{U} = \bigg( \msc{B}^{-1}\msc{A}^* \bigg) \bigg( \msc{A}\msc{B}^{-1} \bigg) = \msc{B}^{-1} \bigg( \msc{A}^*\msc{A} \bigg)\msc{B}^{-1} = \msc{B}^{-1}\msc{B}^2\msc{B}^{-1} = \msc{E} $$
 \end{proof}
 
 \begin{implication}[перестановка сомножителей]
-	$ \mc{A} $ -- невырожденный оператор \\
-	Тогда $ \exist $ уинтарный $ \mc{U} $ и самосопряжённый положиетльно определённый $ \mc{B} $ такие, что $ \mc{A} = \mc{B}\mc{U} $
+	$ \msc{A} $ "--- невырожденный оператор \\
+	Тогда $ \exist $ унитарный $ \msc{U} $ и самосопряжённый положительно определённый $ \msc{B} $ такие, что $ \msc{A} = \msc{B}\msc{U} $
 \end{implication}
 
 \begin{proof}
-	Применим теорему у $ \mc{A}^* $: \\
-	$ \mc{A}^* = \mc{U}_1\mc{B}, \qquad \mc{U}_1 $ -- унитарный, $ \quad \mc{B} $ -- самосопряжённый пол. опред.
-	$$ \mc{A} = \bigg( \mc{A}^* \bigg)^* = \bigg( \mc{B}\mc{U}_1 \bigg)^* = \mc{U}_1^* \mc{B}^* = \mc{U}_1^*\mc{B} $$
-	Подойдёт $ \mc{U} = \mc{U}_1 $
+	Применим теорему к $ \msc{A}^* $: \\
+	$ \msc{A}^* = \msc{U}_1\msc{B}, \qquad \msc{U}_1 $ "--- унитарный, $ \quad \msc{B} $ "--- самосопряжённый пол. опред.
+	$$ \msc{A} = \bigg( \msc{A}^* \bigg)^* = \bigg( \msc{B}\msc{U}_1 \bigg)^* = \msc{U}_1^* \msc{B}^* = \msc{U}_1^*\msc{B} $$
+	Подойдёт $ \msc{U} = \msc{U}_1 $
 \end{proof}
 
 \section{Квадратичные формы: ортогональное преобразование, преобразование двух форм}
-
-$ A $ -- симметрическая матрица, $ \quad A = (a_{ij}) $ \\
-Соответствующая квадратичная форма $ f(x_1, ..., x_n) = \sum a_{ij}x_ix_j $ \\
-Матричная запись: $ f(x_1, ..., x_n) = X^TAX $ \\
-Линейное преобразование $ X = CY \quad \implies \quad A \mapsto C^TAC $ \\
-Неособое преобразование: $ C $ обратима \\
-Диагональный (канонический) вид -- если $ A $ -- диагональна
 
 \begin{theorem}[ортогональное преобразование квадратичной формы]
 	\hfill
 	\begin{enumerate}
 		\item Вещественная квадратичная форма может быть приведена к диагональному виду ортогональным преобразованием
 
-		\item Если $ C $ -- ортогональная матрица, $ C^TAC $ -- диагональная, то на диагонали матрицы $ C^TAC $ записаны с. ч. матрицы $ A $
+		\item Если $ C $ "--- ортогональная матрица, $ C^TAC $ "--- диагональная, то на диагонали матрицы $ C^TAC $ записаны с. ч. матрицы $ A $
 	\end{enumerate}
 \end{theorem}
 
-\begin{eg}
-	$$ \underbrace{2x_1^2 + x_2^@ - 4x_1x_2 - 4x_2x_3}_{Q} + 12x_1 - 8x_2 + 8x_3 + 6 = 0 $$
-	Приведём $ Q $ к диагональному виду:
-	$$ C =
-	\begin{pmatrix}
-		\faktor23 & \faktor23 & \faktor13 \\
-		-\faktor23 & \faktor13 & \faktor23 \\
-		\faktor13 & -\faktor23 & \faktor23
-	\end{pmatrix} $$
-	С. ч.: $ \lambda_1 = 4, \quad \lambda_2 = 1, \quad \lambda_3 = -2 $
-	$$ 4y_1^2 + 1y_2^2 - 2y_3^2 + 12 \bigg( \frac23 y_1 + \frac23 y_2 + \frac13 y_3 \bigg) - 8 $$
-	$$ 4y_1^2 + 16y_1 = 4(y_1 + 2)^2 - 16 $$
-	\TODO{Этот пример есть в Боревиче. Надо посмотреть}
-\end{eg}
-
 \begin{eproof}
-	\item $ \mc{A} $ -- оператор на $ \R^n $, матрица в стандартном базисе \TODO{что-то} \\
-	$ \mc{A} $ самосопряжённый $ \implies \exist $ ОНБ $ T_1, ..., T_n $ из с. в. \\
-	Пусть $ \lambda_1, ..., \lambda_n $ -- с. ч. \\
-	Матрица $ \mc{A} $ в $ T_1, ..., T_n $ является диагональной \\
-	Матрица $ \mc{A} $ в $ T_1, ..., T_n $ равна $ C^{-1}AC $, где $ C $ -- матрица перехода \\
-	$ C $ состоит из столбцов $ T_i $, т. к. это матрица перехода от стандартного базиса к $ T_i $ \\
-	Значит, $ C $ -- ортогональная матрица \\
+	\item $ \msc{A} $ "--- оператор на $ \R^n $, $ \quad A $ "--- его матрица в стандартном базисе \\
+	$ \msc{A} $ самосопряжённый $ \implies \exist $ ОНБ $ T_1, ..., T_n $ из с. в. \\
+	Пусть $ \lambda_1, ..., \lambda_n $ "--- с. ч. \\
+	Матрица $ \msc{A} $ в $ T_1, ..., T_n $ является диагональной \\
+	Матрица $ \msc{A} $ в $ T_1, ..., T_n $ равна $ C^{-1}AC $, где $ C $ "--- матрица перехода \\
+	$ C $ состоит из столбцов $ T_i $, \as это матрица перехода от стандартного базиса к $ T_i $ \\
+	Значит, $ C $ "--- ортогональная матрица \\
 	$ C^{-1}AC = C^TAC $, т. к. $ C $ ортогональна
 
-	\item Пусть $ B = C^TAC, $ она диагональна, $ \qquad \mu_1, ..., \mu_n $ -- числа на диагонали \\
-	$ S_1, ..., S_n $ -- столбцы $ B \quad \implies B = C^{-1}AC \implies B $ -- матрица $ \mc{A} $ в ОНБ $ S_1, ..., S_n \implies \mc{A}S_i = \mu_iS_i \implies \mu_i $ -- с. ч.
+	\item Пусть $ B = C^TAC, $ она диагональна, $ \qquad \mu_1, \dots, \mu_n $ "--- числа на диагонали \\
+	$ S_1, ..., S_n $ "--- столбцы $ B \quad \implies B = C^{-1}AC \implies B $ "--- матрица $ \msc{A} $ в ОНБ $ S_1, ..., S_n \implies \msc{A}S_i = \mu_iS_i \implies \mu_i $ "--- с. ч.
 \end{eproof}
 
 \begin{theorem}[преобразование двух форм]
 	\hfill \\
-	$ f(x_1, ..., x_n), \quad g(x_1, ..., x_n) $ -- вещественные квадратичные формы, $ \qquad f $ положительно определена \\
-	Тогда существует неособое преобразование, при котором обе формы приводятся к диагональному виду
+	$ f(x_1, ..., x_n), \quad g(x_1, ..., x_n) $ "--- вещественные квадратичные формы, $ \qquad \bm f $ \bt{положительно определена} \\
+	Тогда существует неособое преобразование, при котором \bt{обе} формы приводятся к диагональному виду.
 \end{theorem}
 
 \begin{proof}
-	Композиция неособенных преобразований -- неособенное преобразование, так что можно сделать несколько шагов:
+	Композиция неособенных преобразований "--- неособенное преобразование, так что \\
+	можно сделать несколько шагов:
 	\begin{enumerate}
 		\item Приведём $ f $ к диагональному виду $ f_1 $:
 		$$ f_1(y_1, ..., y_n) = \lambda_1y_1^2 + ... + \lambda_ny_n^2, \qquad \lambda_i > 0 $$
@@ -518,7 +457,7 @@ $ A $ -- симметрическая матрица, $ \quad A = (a_{ij}) $ \\
 		При этом, $ g_2 $ тоже как-то изменилась:
 		$$ g_2(z_1, ..., z_n) $$
 		Нужно доказать, что форму $ f_2 = z_1^2 + ... + z_n^2 $ и любую форму $ g_2 $ можно одновеременно привести к диагоналному виду
-		\item Приведём $ g_2 $ к диагональному виду ортогональным перобразованием $ C $ \\
+		\item Приведём $ g_2 $ к диагональному виду ортогональным преобразованием $ C $ \\
 		Матрица $ f_2 $ равна $ E $
 		$$ E \to C^TEC = C^TC = E $$
 		Значит, $ f $ приведена к диагональному виду

@@ -105,11 +105,8 @@
 		\bm{b_n} \text{ \bt{монотонна} по } n \quad \forall \text{ фиксированного } x \in X
 	\end{equ}
 	\begin{equ}{dirichle_series:21}
-		\bm{b_n(x) \uniarr{x \in X} 0}
+		\bm{b_n(x)} \uniarr{x \in X} 0
 	\end{equ}
-	\begin{note}
-		Имеется в виду функция $ 0_X : X \to \R $ такая, что $ 0_X(x) = 0 \quad \forall x \in X $
-	\end{note}
 	\begin{equ}{dirichle_series:22}
 		\exist c > 0 : \quad \forall n \quad \forall x \in X \quad \bigg| \bm{\sum_{k = 1}^n v_k(x)} \bigg| \bm\le c
 	\end{equ}
@@ -192,7 +189,7 @@
 	$ X, \diam(x, y) $ "--- метрическое пространство, $ \qquad x_0 \in X $ "--- точка сгущения $ X $ \\
 	$ \seq{f_n(x)}n, \qquad f_n : X \setminus \set{x_0} \to \R, \qquad f : X \setminus \set{x_0} \to \R $
 	\begin{equ}{lim_seq:41}
-		f_n(x) \uniarr{x \in X \setminus \set{x_0}} f(x)
+		\bm{f_n(x)} \uniarr{x \in X \setminus \set{x_0}} \bm{f(x)}
 	\end{equ}
 	\begin{equ}{lim_seq:42}
 		\forall x \in X \setminus \set{x_0} \quad \exist \liml{x \to x_0} f_n(x) = a_n
@@ -222,17 +219,11 @@
 	\begin{equ}{lim_seq:410}
 		\forall n > N_2 \quad |a_n - A| < \veps
 	\end{equ}
-	Выберем $ N_0 \define \max\set{N_1, N_2} + 1 $
-	\begin{remark}
-		$ N_1, N_2, N_0 $ зависят от $ \veps $
-	\end{remark}
+	Выберем $ N_0 \define \max\set{N_1, N_2} + 1 $ \\
 	Выберем $ \delta > 0 $ такое, что
 	\begin{equ}{lim_seq:411}
 		\forall y \in X \setminus \set{x_0} \quad \nimp[\bigg(] \diam(y, x_0) < \delta \implies |f_{N_0}(y) - a_{N_0}| < \veps \nimp[\bigg)]
 	\end{equ}
-	\begin{remark}
-		$ \delta $ зависит \bt{только} от $ \veps $
-	\end{remark}
 	$$ f(y) - A \undereq{
 		\begin{subarray}{c}
 			\pm f_{N_0}(y) \\
@@ -669,7 +660,7 @@
 \section{Теорема о непрерывности интеграла, зависящего от параметра}
 
 \begin{theorem}
-	$ y_0 $ "--- т. сг. $ Y, \qquad f(x, y) \uniarr[y \to y_0]{x \in [a, b]} f_0(x) $ \\
+	$ y_0 $ "--- т. сг. $ Y, \qquad f(x, y) \uniarr[y \to y_0]{x \in [a, b]} f_0(x), \qquad f(x, y) \in \Cont{[a, b]} \quad \forall y \in Y $ \\
 	Тогда $ f_0 \in \Cont{[a, b]} $ и
 	$$ I(y) \define \dint{a}b{f(x, y)} \underarr{y \to y_0} \dint{a}b{f_0(x)} $$
 \end{theorem}
@@ -750,8 +741,8 @@
 
 \section{Равномерная сходимость несобственного интеграла, зависящего от параметра; критерий Коши равномерной сходимости несобственного интеграла от параметра}
 
-Пусть $ Y \sub \R^{n \ge 1}, \qquad f : [a, \infty) \times Y \to \R $ "--- семейство функций \\
-Предположим, что $ f \in \Cont{[a, \infty) \times Y} $ и пусть $ A > a $ \\
+Пусть $ Y \sub \R^{n \ge 1}, \qquad f : [a, \infty) \times Y \to \R $ "--- семейство функций, $ \qquad f \in \Cont{[a, \infty) \times Y} $
+
 Определим функцию $ F : Y \times [a, \infty) $:
 $$ F(y, A) \define \dint{a}A{f(x, y)}, \qquad y \in Y, \quad A > a $$
 Пусть
@@ -779,7 +770,7 @@ $$ \forall y \in Y \quad \exist \limi{A} F(y, A) \fed F_0(y) $$
 \begin{theorem}
 	$ f \in \Cont{[a, \infty) \times Y} $
 	\begin{equ}{par_int:35}
-		\forall y \in Y \quad \bm{|f(x, y)| \le g}
+		\forall y \in Y \quad \bm{|f(x, y)| \le g(x)}
 	\end{equ}
 	$$ \dint{a}\infty{g(x)} \bm{< \infty} $$
 	Тогда несобственный интеграл $ \dint{a}\infty{f(x, y)} $ \bt{сходится равномерно} при $ y \in Y $
@@ -811,12 +802,8 @@ $$ \forall y \in Y \quad \exist \limi{A} F(y, A) \fed F_0(y) $$
 	\begin{equ}{abel_par_int:4}
 		\exist A > a : \quad \forall A_2 > A_1 > A \quad \forall y \in Y \quad \bigg| \dint{A_1}{A_2}{f(x, y)} \bigg| < \veps
 	\end{equ}
-	\begin{statement}
-		Вторая теорема о среднем справедлива, если $ f $ монотонна, а $ g $ интегрируема \\
-		Мы требовали дифференцируемости $ g $ для упрощения доказательства
-	\end{statement}
-	Применим её:
-	$$ \dint{A_1}{A_2}{f(x, y)g(x, y)} g(A, y) \dint{A_1}c{f(x, y)} + g(A_2, y)\dint{c}{A_2}{f(x, y)} $$
+	Применим вторую теорему о среднем:
+	$$ \dint{A_1}{A_2}{f(x, y)g(x, y)} = g(A, y) \dint{A_1}c{f(x, y)} + g(A_2, y)\dint{c}{A_2}{f(x, y)} $$
 	\begin{multline*}
 		\implies \bigg| \dint{A_1}{A_2}{f(x, y)g(x, y)} \bigg| \le |g(A, y)| \cdot \bigg| \dint{A_1}c{F(x, y)} \bigg| + |g(A_2, y)| \cdot \bigg| \dint{c}{A_2}{f(x, y)}\bigg| \underset{\eref{abel_par_int:1}, \eref{abel_par_int:4}}\le \\
 		\le M \cdot \veps + M \cdot \veps = 2M\veps
@@ -872,9 +859,9 @@ $$ \forall y \in Y \quad \exist \limi{A} F(y, A) \fed F_0(y) $$
 	$$ F(A, y) \define \dint{a}{A}{f(x, y)}, \qquad \Phi(A) \define \dint{a}{A}{\vphi(x)} $$
 	$ \eref{uni_int:15} \implies \vphi \in \Cont{[a, \infty)}, $ значит, функция $ \Phi $ корректно определена
 	\begin{equ}{uni_int:14'}
-		\eref{uni_int:14} \iff F(a, y) \uniarr[A \to \infty]{y \in Y} I(y)
+		\eref{uni_int:14} \iff F(A, y) \uniarr[A \to \infty]{y \in Y} I(y)
 	\end{equ}
-	Можно применить теорему о функциональной сходимости функционального семейства:
+	Можно применить теорему о пределе интеграла от параметра:
 	$$ \eref{uni_int:15} \implies \forall A > a \quad \dint{a}{A}{f(x, y)} \underarr{y \to y_0} \dint{a}{A}{\vphi(x)} $$
 	В обозначениях $ F, \Phi $ это означает, что
 	\begin{equ}{uni_int:19'}
@@ -977,9 +964,8 @@ $$ \forall y \in Y \quad \exist \limi{A} F(y, A) \fed F_0(y) $$
 \section{Несобственный интеграл по параметру от несобственного интеграла от параметра}
 
 \begin{theorem}
-	$ f \in \Cont{[a, \infty) \times [p, \infty)}, \qquad f(x, y) \ge 0 $
-	$$ \forall y \in [p, \infty) \quad \exist I(y) \define \dint{a}\infty{f(x, y)} $$
-	$$ \forall x \in [a, \infty) \quad \exist K(x) = \dint[y]p\infty{f(x, y)} $$
+	$ f \in \Cont{[a, \infty) \times [p, \infty)} $
+	$$ I(y) \define \dint{a}\infty{f(x, y)}, \qquad K(x) = \dint[y]p\infty{f(x, y)} $$
 	\bt{Существует} по крайней мере \bt{один из интегралов}:
 	$$ \dint[y]p\infty{I(y)}, \qquad \dint{a}\infty{K(y)} $$
 	Тогда \bt{существует и второй}, и справедливо равенство:
@@ -1003,13 +989,12 @@ $$ \forall y \in Y \quad \exist \limi{A} F(y, A) \fed F_0(y) $$
 \end{theorem}
 
 \begin{proof}
-	Применим признак Абеля к
 	$$ f(x, y) \define \frac{\sin x}x, \qquad x \in [0, \infty), \quad y \in [0, \infty) $$
 	Интеграл, не зависящий от $ y $ равномерно сходится:
 	$$ \dint0\infty{f(x, y)} = \dint0\infty{\frac{\sin x}x} \text{ равн. сх. при } y \in [0, \infty) $$
 	$$ g(x, y) \define e^{-xy} \text{ монот. по } x \text{ при } y \in [0, \infty) $$
 	$$ 0 < e^{-xy} \le 1 $$
-	Всё это означает, что
+	Применяем признак Абеля:
 	$$ I(y) \define \dint0\infty{\frac{\sin x}xe^{-xy}} \text{ равн. сх. при } y \in [0, \infty) $$
 	$$ h(x, y) \define \frac{\sin x}xe^{-xy} \in \Cont{[0, \infty) \times [0, \infty)} $$
 	Применим частный случай перехода к пределу к последним двум выражениям:
@@ -1403,7 +1388,7 @@ $$ \sum_{n = 1}^\infty |a_n(x - x_0)^n| $$
 	Если взять $ \forall 0 < r < R $, то ряд $ T(x) $ сходится равномерно при $ x \in [x_0 - r, x_0 + r] $ \\
 	Ряд $ S(x) $ сходится равномерно там же
 	$$ \implies \forall x \in [x_0 - r, x_0 + r] \quad \exist S'(x) = T(x) $$
-	Это верно при $ \forall x \in I $ (т. к. можно обозначить $ |x - x_0| \fed r < R $)
+	Это верно при $ \forall x \in \B $ (т. к. можно обозначить $ |x - x_0| \fed r < R $)
 \end{implication}
 
 \section{Старшие производные вещественного степенного ряда; степенной ряд как ряд Тейлора своей суммы}
@@ -1472,13 +1457,12 @@ $$ 1 + \sum_{n = 1}^\infty (-1)^nx^n = \frac1{1 + x}, \qquad x \in (-1, 1) $$
 Возьмём $ |y| \le r $ и проинтегрируем по формуле \eref{int_power_series:33}:
 $$ \boxed{\ln (1 + y)} = \dfint0y{1 + x} = y + \sum_{n = 1}^\infty (-1)^n \frac{y^{n + 1}}{n + 1} = \boxed{\sum_{n = 1}^\infty (-1)^{n - 1} \frac{y^n}n} $$
 Радиус сходимости этого ряда равен 1. При $ y = 1 $ он сходится. По теореме Абеля он сходится равномерно на $ [0, 1] $.
-$$ \implies \boxed{\sum_{n = 1}^\infty \frac{(-1)^{n - 1}}n} = \liml{y \to 1} \ln(1 + y) = \boxed{\ln 2} $$
+
 Напишем в этом равенстве $ x^2 $ вместо $ x $:
 $$ 1 + \sum_{n = 1}^\infty (-1)^n x^{2n} = \frac1{1 + x^2} $$
 Рассмотрим $ |y| < 1 $:
 $$ \boxed{\arctg y} = \dfint0y{1 + x^2} = y + \sum_{n = 1}^\infty (-1)^n \frac{y^{2n + 1}}{2n + 1} = \boxed{\sum_{n = 1}^\infty \frac{y^{2n - 1}}{2n - 1}} $$
 При $ y = 1 $ этот рад сходится как знакочередующийся. По теореме Абеля он непрерывен на $ [0, 1] $
-$$ \boxed{\sum_{n = 1}^\infty \frac{(-1)^{n - 1}}{2n - 1}} = \liml{y \to 1^-} \arctg y = \boxed{\frac\pi4} $$
 
 \section{Формула Тейлора с интегральным остатком}
 
@@ -1502,8 +1486,8 @@ $$ \boxed{\sum_{n = 1}^\infty \frac{(-1)^{n - 1}}{2n - 1}} = \liml{y \to 1^-} \a
 			= \frac{(x - x_0)^n}nf^{(n)}(x_0) + \frac1n \dint[t]{x_0}x{\frac{(x - t)^n}n f^{(n + 1)}(t)}
 		\end{multline*}
 		\begin{multline*}
-			\underimp{\bt{предп.}} f(x) = \\
-			= f(x_0) \frac{f'(x_0)}{1!}(x - x_0) + \dots + \frac{f^{(n - 1)}(x_0)}{(n - 1)!}(x - x_0)^{n - 1} + \frac{f^{(n)}(x_0)}{n!}(x - x_0)^n + \frac1{n!} \dint[t]{x_0}x{\frac{(x - t)^n}nf^{(n + 1)}(t)}
+			\underimp{\bt{предп.}} f(x) = f(x_0) + \\
+			+ \frac{f'(x_0)}{1!}(x - x_0) + \dots + \frac{f^{(n - 1)}(x_0)}{(n - 1)!}(x - x_0)^{n - 1} + \frac{f^{(n)}(x_0)}{n!}(x - x_0)^n + \frac1{n!} \dint[t]{x_0}x{\frac{(x - t)^n}nf^{(n + 1)}(t)}
 		\end{multline*}
 	\end{itemize}
 \end{proof}
@@ -1569,7 +1553,7 @@ $$ (x - t)^n(1 + t)^{-n} = \bigg( \frac{x - t}{1 + t} \bigg)^n $$
 $$ \bigg| \frac{x - t}{1 + t} \bigg| \le |x|, \qquad \text{при } |t| \le |x|, \quad tx \ge 0 $$
 \begin{multline*}
 	\implies |I_n| \le \frac{|r(r - 1)\dots(r - n)|}{n!} \bigg| \dint[t]0x{\bigg| \frac{x - t}{1 + t} \bigg|^n \cdot (1 + t)^{r - 1}} \bigg| \le \\
-	\le \frac{|r(r - 1)\dots(r - n)|}{n!}|x^n| \bigg| \underbrace{\dint[t]0x{(1 + t)^{r - 1}}}_{M(x)} \bigg|
+	\le \frac{|r(r - 1)\dots(r - n)|}{n!}|x^n| \bigg| \dint[t]0x{(1 + t)^{r - 1}} \bigg|
 \end{multline*}
 Обозначим
 $$ \alpha_n \define \frac{|r(r - 1)\dots(r - n)|}{n!}|x|^n $$
@@ -1594,6 +1578,8 @@ $$ \underimp{\eref{series_expans:420}} \alpha = \alpha|x| \implies \alpha = 0 $$
 \end{equ}
 
 \section{Разложение в степенной ряд \tpst{$ \arcsin x $}{arcsin x}}
+
+\textcolor{blue}{\huge Этого вопроса нет.}
 
 Подставим в \eref{series_expans:39} $ x = -y^2, \quad 0 < |y| < 1, \quad r = \frac12 $:
 \begin{multline*}
