@@ -503,13 +503,14 @@
 	\begin{itemize}
 		\item \textbf{База.} $ s = 1 $
 		$$ \ker \msc{A}^1 = W, \qquad v \in W, \qquad e_1, e_2, \dots \text{ "--- базис } W $$
+
 		\item \textbf{Переход.} $ s \to s + 1 $ \\
 		Пусть $ \msc{A}^{s + 1}(v) = 0, \quad \msc{A}^s(v) \ne 0 $ \\
-		Положим $ u = \msc{A}^s \implies u \in U_s $
+		Положим $ u = \msc{A}^s v \implies u \in U_s $
 		$$ \underbrace{\overbrace{v \to \dots \to \dots \to u}^s \to 0}_{s + 1} $$
 		Значит, $ \msc{A}(u) = 0 \implies u \in W $ \\
 		Значит, $ u \in U_s \cap W $ \\
-		Представим его в виде ЛК базиса $ U_s \cap W $ (того, до которого мы дошли на каком-то очередном шаге дополнения базисов):
+		Разложим его по базису $ U_s \cap W $ (тому, до которого мы дошли на каком-то очередном шаге дополнения базисов):
 		$$ u = \sum_i a_ie_i $$
 		$ \forall e_i $ из этого базиса выбрана цепочка длины хотя бы $ s + 1 $
 		$$ e_i = e_{s + t_i}^{(i)} \text{ "--- последний вектор цепочки} $$
@@ -689,42 +690,32 @@
         $$ b_m\msc{A}^mv + \dots + b_0v = 0 $$
         $ b_i \ne \bigodot \implies \msc{A}^mv, \dots, v $ "--- ЛЗ "--- \contra (это был не первый момент линейной зависимости)
         \item Докажем, что $ P(t) = \pm \chi $: \\
-        Знаем, что
-        $$ v, \dots, \msc{A}^{k - 1}v \text{ "--- базис } U $$
-        Матрица $ \msc{A}\clamp{U} $ в этом базисе:
+        Знаем, что $ v, \dots, \msc{A}^{k - 1}v $ "--- базис $ U $. Образы этих векторов:
+		$$ \msc A \big( \msc A^i(v) \big) = \msc A^{i + 1}(v), \quad 0 \le i < k - 1 $$
+		$$ \msc A \big( A^{k - 1}(v) \big)(v) = \msc A^k(v) = -a_0v - a_1 \msc A(v) - \dots - a_{k - 1} \msc A^{k - 1}(v) $$
+        Значит, матрица $ \msc{A}\clamp{U} $ в этом базисе:
         $$ A =
-        \begin{pmatrix}
-            v & \msc{A}v & \dots & \msc{A}^{k - 2}v & \msc{A}^{k - 1}v \\
-            0 & 0 & \dots & 0 & -a_0 \\
-            1 & 0 & \dots & . & -a_1 \\
-            0 & 1 & \dots & . & . \\
-            . & . & . & . & . \\
-            0 & 0 & \dots & 0 & . \\
-            1 & 1 & \dots & 1 & -a_{k - 1}
-        \end{pmatrix} $$
-        В первом столбце (начиная со второй строки) "--- координаты $ \msc{A}v = 0 \cdot v + 1 \cdot \msc{A}v + 0 \cdot \dots $ \\
-        Во втором столбце "--- координаты $ \msc{A}^2v $ \\
-        \widedots[10em] \\
-        В последнем столбце "--- координаты $ \msc{A}^kv $
+		\begin{pNiceMatrix}
+			0 & 		\Cdots & 	0 & 		-a_0 \\
+			1 & 		& 			\Vdots & 	\\
+			\Vdots & 	\Ddots & 	& 			\Vdots \\
+			0 & 		\Cdots & 	1 & 		-a_{k - 1}
+		\end{pNiceMatrix} $$
         $$ \chi_A(t) =
-        \begin{vmatrix}
-            -t & 0 & 0 & \dots & 0 & -a_0 \\
-            1 & -t & 0 & \dots & 0 & -a_1 \\
-            . & . & . & . & . & . \\
-            . & . & . & -t & 0 & -a_{k - 2} \\
-            . & . & . & . & . & -a_{k - 1} - t
-        \end{vmatrix} $$
-        Прибавим ко 2-й строке 1-ю, умноженную на $ \faktor1t $ \\
-        Прибавим к 3-й строке 2-ю, умноженную на $ \faktor1t $
-        \widedots[10em]
-        $$ \chi(t) =
-        \begin{vmatrix}
-            -t & 0 & 0 & \dots & 0 & -a_1 \\
-            0 & -t & 0 & \dots & 0 & -a_1 - \frac{a_0}t \\
-            0 & 0 & -t & \dots & 0 & -a_2 - \frac{a_1}t - \frac{a_0}{t^2} \\
-            . & . & . & . & . & . \\
-            0 & . & . & . & 0 & t - a_{k - 1} - \frac{a_{k -2}}t - \dots - \frac{a_1}{t^{k - 2}} - \frac{a_1}{t^{k - 1}}
-        \end{vmatrix} $$
+		\begin{vNiceMatrix}[last-col=6]
+			-t &	 	\Cdots & & 	0 & 		-a_0 & 				\\
+			1 & 	 	\Ddots & & 	\Vdots & 	\Vdots & 			+ \faktor{\rom1}t \\
+			\Vdots & 	\Ddots & & 	& 			& 					+ \faktor{\rom2}t \\
+			& 		 	& 		 & 	-t & 		-a_{k - 2} & 		\Vdots \\
+			0 & 	 	\Cdots & & 	1 & 		-a_{k - 1} - t & 	\Vdots
+		\end{vNiceMatrix} \quad =
+		\begin{vNiceMatrix}[cell-space-limits=1pt]
+			-t & 		\Cdots & 	& 0 & 		-a_1 \\
+			\Vdots & 	\Ddots & 	& \Vdots & 	-a_1 - \frac{a_0}t \\
+			& 			& 			& & 		-a_2 - \frac{a_1}t - \frac{a_0}{t^2} \\
+			& 			& 			& -t & 		\Vdots \\
+			0 & 		\Cdots & 	& 0 & 		-t - a_{k - 1} - \frac{a_{k - 2}}t - \dots - \frac{a_1}{t^{k - 2}} - \frac{a_0}{t^{k - 1}}
+		\end{vNiceMatrix} $$
         Это будет $ (-1)^kP(t) $
     \end{itemize}
 \end{proof}
@@ -832,10 +823,7 @@
 		$$ (PF)(\msc{A})v + (QG)(\msc{A})v = v $$
 		Положим $ u = (QG)(\msc{A})v, \qquad w = (PF)(\msc{A})v $ \\
 		Проверим, что $ P(\msc{A})u = 0 $ (для $ w $ "--- аналогично):
-		\begin{multline*}
-			P(\msc{A}) \circ \bigg( QG(\msc{A}) \bigg)v = \bigg( PQG \bigg)(\msc{A})v \undereq{\text{коммут.}} \bigg( GPQ \bigg)(\msc{A})v = \\
-			= G(\msc{A}) \underbrace{(PQ)(\msc{A})v}_{= 0 \text{ (\as } T = PQ \text{ анн. } v)} = 0
-		\end{multline*}
+		$$ \bigg( P(\msc A) \circ QG(\msc{A}) \bigg)v = \bigg( PQG \bigg)(\msc{A})v = \bigg( GPQ \bigg)(\msc{A})v = G(\msc{A}) \underbrace{(PQ)(\msc{A})v}_{0 \text{ (это анн. } v)} = 0 $$
 		\item \textbf{Переход.} $ k - 1 \to k $
 		$$ T = \underbrace{P_1 \dots P_{k - 1}}_{P}\underbrace{P_k}_Q $$
 		$$ (PQ)(\msc{A})v = 0 \underimp{\text{\textbf{база}}} \exist u, w : v = u + w, \qquad P(\msc{A})u = 0, \quad Q(\msc{A})w = 0 $$
@@ -1019,7 +1007,7 @@
 	$$ a_{ij} =
 	\begin{cases}
 		\lambda^{s - (i - j)}C_s^{i - j}, \qquad 0 \le i - j \le s \\
-		0, \qquad i > j, i - j > s
+		0, \qquad \text{иначе}
 	\end{cases} $$
 
 	\item $ \rk \bigg( \big( J_r(0) \big)^s \bigg) =
@@ -1190,7 +1178,7 @@
 	$$ u = a_1e_1 + \dots + a_ne_n, \qquad v = b_1e_1 + \dots + b_ne_n, \qquad a_s, b_s \in \R $$
 	$$ w = (\underbrace{a_1 + b_1i}_{\in \Co})e_1 + \dots + (\underbrace{a_n + b_ni}_{\in \Co})e_n $$
 	\item Докажем ЛНЗ: \\
-	Пусть $ c_1e_1 + \dots + c_ne_n = 0, \quad c_s \in \Co, \quad c_s = a_ + b_si, \quad a_s, b_s \in \R $
+	Пусть $ c_1e_1 + \dots + c_ne_n = 0, \quad c_s \in \Co, \quad c_s = a_s + b_si, \quad a_s, b_s \in \R $
 	$$ (a_1 + b_1i)(e_1 + 0i) + \dots + (a_n + b_ni)(e_n + 0i) = 0 $$
 	Разделим вещественную и мнимую части:
 	$$ \bigg( (a_1e_1 - b_10) + \dots + (a_ne_n - b_n0) \bigg) + \bigg( (a_10 + b_1e_1) + \dots + (a_n0 + b_ne_n) \bigg) i = 0 + 0i $$
@@ -1312,8 +1300,8 @@
 
 \begin{proof}
 	Пусть минимальный многочлен $ \msc{A} $ равен
-	$$ P(t) = (t - a_1)^{m_1} \cdots (t^2 + p_1t + a_1)^{s_1} \cdots $$
-	где $ t + p_1t + q_1, \dots $ не имеют вещественных корней \\
+	$$ P(t) = (t - a_1)^{m_1} \cdots (t^2 + p_1t + q_1)^{s_1} \cdots, $$
+	где $ t^2 + p_it + q_i $ не имеют вещественных корней \\
 	Разложим $ V $ в прямую сумму примарных подпространств \\
 	Достаточно доказать для одного подпространства \\
 	Для подпространства, соответствующего $ (t - a)^m $ есть базис, в котором матрица $ \msc{A} $ жорданова \\
@@ -1327,13 +1315,10 @@
 	Существует жорданов базис $ w_1, \dots, w_k $ для $ \hat{W_1} $ \\
 	Тогда $ \ol{w_1}, \dots, \ol{w_k} $ "--- жорданов базис для $ \hat{W_2} $ \\
 	$ w_1, \dots, w_k, \ol{w_1}, \dots, \ol{w_k} $ "--- базис $ \hat{U} $ \\
-	Пусть $ w_i = u_i + v_i $ \\
+	Пусть $ w_i = u_i + iv_i $ \\
 	Докажем, что $ u_1, v_1, u_2, v_2, \dots, u_k, v_k $ "--- базис $ U $: \\
-	$ u_1 + iv_1, u_2 - iv_1, u_2  + iv_2 u_2 - iv_2, \widedots[4em] $ "--- базис $ \hat{U} $ \\
-	$ u_1 + iv_1, (u_1 - iv_1) + (u_1 + iv_1), u_2 + iv_2, (u_2 - iv_2) + (u_2 + iv_2), \widedots[4em] $ "--- базис $ \hat{U} $ \\
-	$ u_1, u_1 + iv_1, u_2, u_2 + iv_2, \widedots[4em] $ "--- базис $ \hat{U} $ \\
-	$ u_1, u_1 + iv_1 - u_1, u_2, u_2 + iv_2 - v_2, \widedots[4em] $ "--- базис $ \hat{U} $ \\
-	$ u_1, v_1, u_2, v_2, \widedots[4em] $ "--- базис $ \hat{U} $, а значит и базис $ U $ \\
+	Следующие элементарные преобразования переводят базис $ \hat U $ в базис $ \hat U $, а значит, и в базис $ U $:
+	$$ u_i \pm iv_i \quad \to \quad (u_i + iv_i) + (u_i - iv_i), ~ u_i - iv_i \quad \to \quad u_i, ~ u_i - v_i \quad \to \quad u_i, ~ (u_i - iv_i) - u_i \quad \to \quad u_i, v_i $$
 	Проверим, что в этом базисе получается правильная жорданова матрица: \\
 	Рассмотрим жордановы цепочки
 	$$ w_1, \dots, w_{r_1}, w_{r_1 + 1}, \dots, w_{r_1 + r_2}, \widedots[4em] $$

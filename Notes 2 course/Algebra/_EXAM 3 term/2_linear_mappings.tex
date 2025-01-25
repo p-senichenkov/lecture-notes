@@ -33,28 +33,20 @@
 
 \begin{eproof}
 	\item Пусть $ n \define \dim V $ \\
-	Достаточно доказать, что $ \dim V^* = n $ (тогда можно будет построить изоморфизм из базиса в базис) \\
-	Зафиксируем базис: \\
-	Пусть $ e_1, ..., e_n $ "--- базис $ V $ \\
-	Пусть $ \vphi : V^* \to K^n $ такое, что $ \vphi(y) = \bigg( \underbrace{y(e_1)}_{\in K}, ..., \underbrace{y(e_n)}_{\in K} \bigg) $ \\
+	Пусть $ e_1, \dots, e_n $ "--- базис $ V $ \\
+	Рассмотрим $ \vphi : V^* \to K^n : \quad \vphi(y) = \big( y(e_1), \dots, y(e_n) \big) $ \\
 	Мы знаем, что пространства одной размерности изоморфны, так что $ K^n \simeq V $ \\
-	Докажем, что это изоморфизм:
+	Докажем, что $ \vphi $ "--- изоморфизм:
 	\begin{itemize}
-		\item Линейность:
+		\item Линейность (сложение и умножение в $ K^n $ "--- покомпонентно):
 		\begin{multline*}
-			\vphi(y_1 + y_2) = \bigg( (y_1 + y_2)(e_1), \widedots[5em], (y_1 + y_2)(e_n) \bigg) = \\
-			= \bigg( y_1(e_1) + y_2(e_1), \widedots[5em], y_1(e_n) + y_2(e_n) \bigg) \undereq{\text{сложение в } K^n \text{ покомпонентно}} \\
-			= \bigg( y_1(e_1), ..., y_1(e_n) \bigg) + \bigg( y_2(e_1), ..., y_2(e_n) \bigg) = \vphi(y_1) + \vphi(y_2)
+			\vphi(y_1 + y_2) = \bigg( (y_1 + y_2)(e_1), \dots, (y_1 + y_2)(e_n) \bigg) = \bigg( y_1(e_1) + y_2(e_1), \dots, y_1(e_n) + y_2(e_n) \bigg) = \\
+			= \bigg( y_1(e_1), \dots, y_1(e_n) \bigg) + \bigg( y_2(e_1), \dots, y_2(e_n) \bigg) = \vphi(y_1) + \vphi(y_2)
 		\end{multline*}
-		\begin{multline*}
-			\vphi(ky) = \bigg( (ky)(e_1), \widedots[3em], (ky)(e_n) \bigg) = \bigg( ky(e_1), \widedots[3em], ky(e_n) \bigg) = \\
-			\undereq{\text{умножение в } K^n \text{ покомпонентно}} k \bigg( y(e_1), \widedots[3em], y(e_n) \bigg) = k\vphi(y)
-		\end{multline*}
+		$$ \vphi(ky) = \bigg( (ky)(e_1), \dots, (ky)(e_n) \bigg) = \bigg( ky(e_1), \dots, ky(e_n) \bigg) = k \bigg( y(e_1), \dots, y(e_n) \bigg) = k\vphi(y) $$
 		\item Биективность: \\
 		Пусть $ a \in K^n, \qquad a = (a_1, ..., a_n), \quad a_i \in K $
-		$$ \exist ! y \in V^* : \quad \vphi(y) = a $$
-		так как
-		$$ \exist ! y \in V^* : y(e_1) = a_1, \widedots[4em], y(e_n) = a_n $$
+		$$ \exist ! y \in V^* : \quad y(e_1) = a_1, ~ \dots, ~ y(e_n) = a_n \quad \implies \quad \exist ! y \in V^* : \quad \vphi(y) = a $$
 	\end{itemize}
 
 	\item
@@ -328,7 +320,7 @@
 	$ \msc{A} $ "--- самосопряжённый оператор на $ \R^n $
 
 	\begin{enumerate}
-		\item $ \chi_A(t) $ раскладывается на линейные множители над $ \R $
+		\item $ \chi_{\msc A}(t) $ раскладывается на линейные множители над $ \R $
 		\item Существует ОНБ $ \R^n $, состоящий из с. в. $ \msc{A} $
 	\end{enumerate}
 \end{theorem}
@@ -351,8 +343,7 @@
 \section{Корень из самосопряжённого оператора. Полярное разложение}
 
 \begin{theorem}[корень из самосопряжённого оператора]
-	\hfill \\
-	$ \msc{A} $ "--- положительно определённый самосопряжённый \\
+	$ \msc{A} $ "--- положительно определённый самосопряж. \\
 	Тогда существует положительно определённый самосопряжённый $ \msc{B} : \quad \msc{A} = \msc{B}^2 $
 \end{theorem}
 
