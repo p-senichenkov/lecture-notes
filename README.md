@@ -4,20 +4,26 @@
 ### Volumes:
 - Algebra:
   - 1 term:
-    - [EXAM](https://github.com/Petua41/lecture-notes/tree/main/Notes%201%20course/Algebra%20EXAM)
+    - [EXAM](https://github.com/p-senichenkov/lecture-notes/tree/main/Notes%201%20course/Algebra%20EXAM)
   - 2 term:
-    - [COLLOC](https://github.com/Petua41/lecture-notes/tree/main/Notes%201%20course/Algebra%20COLLOC)
-    - [EXAM](https://github.com/Petua41/lecture-notes/tree/main/Notes%201%20course/Algebra%20EXAM%202%20term)
+    - [COLLOC](https://github.com/p-senichenkov/lecture-notes/tree/main/Notes%201%20course/Algebra%20COLLOC)
+    - [EXAM](https://github.com/p-senichenkov/lecture-notes/tree/main/Notes%201%20course/Algebra%20EXAM%202%20term)
+  - 3 term:
+    - [EXAM](https://github.com/p-senichenkov/lecture-notes/tree/main/Notes%202%20course/Algebra/_EXAM%203%20term)
 - Calculus:
   - 1 term:
-    - [EXAM](https://github.com/Petua41/lecture-notes/tree/main/Notes%201%20course/Calculus%20EXAM)
+    - [EXAM](https://github.com/p-senichenkov/lecture-notes/tree/main/Notes%201%20course/Calculus%20EXAM)
   - 2 term:
-    - [EXAM](https://github.com/Petua41/lecture-notes/tree/main/Notes%201%20course/Calculus%20EXAM%202%20term)
+    - [EXAM](https://github.com/p-senichenkov/lecture-notes/tree/main/Notes%201%20course/Calculus%20EXAM%202%20term)
+  - 3 term:
+    - [EXAM](https://github.com/p-senichenkov/lecture-notes/tree/main/Notes%202%20course/Calculus/_EXAM%203%20term)
 - Geometry:
   - 1 term:
-    - [EXAM](https://github.com/Petua41/lecture-notes/tree/main/Notes%201%20course/Geometry%20EXAM)
+    - [EXAM](https://github.com/p-senichenkov/lecture-notes/tree/main/Notes%201%20course/Geometry%20EXAM)
   - 2 term:
-    - [EXAM](https://github.com/Petua41/lecture-notes/tree/main/Notes%201%20course/Geometry%20EXAM%202%20term)
+    - [EXAM](https://github.com/p-senichenkov/lecture-notes/tree/main/Notes%201%20course/Geometry%20EXAM%202%20term)
+  - 3 term:
+    - [EXAM](https://github.com/p-senichenkov/lecture-notes/tree/main/Notes%202%20course/Geometry/_EXAM%203%20term)
 
 ### List of lecturers:
 - Algebra -- Иванова О. Ю.

@@ -141,7 +141,7 @@
 	Значит, достигается равенство
 \end{proof}
 
-\section{Теорема об арифметической и геометрической кратности.\n Следствие о диагоналиуемом операторе}
+\section{Теорема об арифметической и геометрической кратности.\n Следствие о диагонализуемом операторе}
 
 \begin{remind}[определитель ступенчатой матрицы]
 	$$ M =
@@ -196,16 +196,16 @@
 	Диагонал. $ \iff n = d_1 + \dots + d_k \iff $ везде достигаются равенства
 \end{proof}
 
-\section{Блочные матрицы и инвариантные подпространства. Делители характеристичсекого многочлена}
+\section{Блочные матрицы и инвариантные подпространства. Делители характеристического многочлена}
 
 \begin{definition}
 	\it{Блочной матрицей} называется матрица вида
 	$$ A =
-	\begin{pmatrix}
-		A_{11} & A_{12} & \dots & A_{1n} \\
-		. & . & . & . \\
-		A_{m1} & A_{m2} & \dots & A_{mn}
-	\end{pmatrix} $$
+	\begin{pNiceMatrix}
+		A_{11} & \Cdots & A_{1n} \\
+		\Vdots & & \Vdots \\
+		A_{m1} & \Cdots & A_{mn}
+	\end{pNiceMatrix} $$
 	где $ \forall i \quad A_{ix} $ имеют поровну строк и $ \forall j \quad A_{xj} $ имеют поровну столбцов
 \end{definition}
 
@@ -307,26 +307,21 @@
 \begin{proof}
 	Рассмотрим базисы как в теореме
 	\begin{enumerate}
-		\item
-		\begin{multline*}
-			\chi_{\msc{A}}(t) = \chi_A(t) = \left|
-			\begin{pmatrix}
-				A_U & B \\
-				0 & C
-			\end{pmatrix} - t E_n \right| =
-			\begin{vmatrix}
-				A_U - t E_s & B \\
-				0 & C - t E_{n - s}
-			\end{vmatrix} = \\
-			= |A_U - t E_s | \cdot | C - t E_{n -s} | = \chi_{A_U}(t) \cdot \chi_C(t) = \chi_U(t) \cdot \chi_C(t)
-		\end{multline*}
-		\item $ \chi_A(t) = |A - tE| =
+		\item $ \chi_A(t) = \left|
+		\begin{pmatrix}
+			A_U & B \\
+			0 & C
+		\end{pmatrix} - t E_n \right| =
 		\begin{vmatrix}
-			A_1 - tE & 0 & . & 0 \\
-			0 & A_2 - tE & . & 0 \\
-			. & . & . & . \\
-			0 & . & 0 & A_k - tE
-		\end{vmatrix} = |A_1 - tE| \cdot |A_2 - tE| \cdots = \chi_1(t) \cdot \chi_2(t) \cdots $
+			A_U - t E_s & B \\
+			0 & C - t E_{n - s}
+		\end{vmatrix} = |A_U - t E_s | \cdot | C - t E_{n -s} | = \chi_U(t) \cdot \chi_C(t) $\
+		\item $ \chi_A(t) = |A - tE| =
+		\begin{vNiceMatrix}
+			A_1 - tE & \Block[r]{2-2}<\LARGE>{0} & \\
+			\Block[l, b]{2-2}<\LARGE>{0} & \Ddots & \\
+			& & A_k - tE
+		\end{vNiceMatrix} = |A_1 - tE| \cdot |A_2 - tE| \cdots = \chi_1(t) \cdot \chi_2(t) \cdots $
 	\end{enumerate}
 \end{proof}
 
@@ -565,7 +560,7 @@
 	\item $ \ker \msc{B} $
 	$$ v \in \ker \msc{B} \implies \msc{B}(v) = 0 \implies \msc{A} \bigg( \msc{B}(v) \bigg) = 0 \underimp{\text{лемма}} \msc{B} \bigg( \msc{A}(v) \bigg) = 0 \implies \msc{A}(v) \in \ker \msc{B} $$
 	\item $ \Img \msc{B} $
-	$$ v \in \Img \msc{B} \implies v = \msc{B}(w) \implies \msc{A}(v) = \msc{A} \bigg( \msc{B}(w) \bigg) \underset{\text{лемма}}= \msc{B} \bigg( \msc{A}(w) \bigg) $$
+	$$ v \in \Img \msc{B} \implies v = \msc{B}(w) \implies \msc{A}(v) = \msc{A} \bigg( \msc{B}(w) \bigg) \undereq{\text{лемма}} \msc{B} \bigg( \msc{A}(w) \bigg) $$
 \end{iproof}
 
 \section{Свойства аннулятора вектора}
@@ -793,8 +788,7 @@
 \end{proof}
 
 \begin{implication}
-	$ P_0 $ "--- минимальный многочлен $ \msc{A} $ \\
-	Тогда $ \chi \divby P $
+	Если $ P $ "--- минимальный многочлен $ \msc{A} $, то $ \chi \divby P $.
 \end{implication}
 
 \section{Свойства взаимно простых многочленов от оператора}

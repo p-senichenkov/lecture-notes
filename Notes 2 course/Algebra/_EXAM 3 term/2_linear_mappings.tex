@@ -292,8 +292,6 @@
 	\end{itemize}
 \end{eproof}
 
-\section{Ортогональность собственных векторов. Самосопряжённый оператор на \texorpdfstring{$ \R^n $}{R\textasciicircum{}n}}
-
 \begin{lemma}\label{lemma:ermit}
 	$ A $ "--- эрмитова матрица \\
 	Тогда все корни $ \chi_A(t) $ вещественны
@@ -308,13 +306,15 @@
 \end{proof}
 
 \begin{lemma}[ортогональность с. в.]\label{lemma:ort_eigenvec}
-	$ \msc{A} $ самосопряжённый на $ \R^n, \qquad \mu, \lambda $ "--- различные с. ч., $ \quad x, y $ "--- соостветсвующие с. в. \\
+	$ \msc{A} $ самосопряжённый на $ \R^n, \qquad \mu, \lambda $ "--- различные с. ч., $ \quad x, y $ "--- соответствующие с. в. \\
 	Тогда $ (x, y) = 0 $
 \end{lemma}
 
 \begin{proof}
 	$$ \lambda(x, y) \undereq{\text{линейность}} (\lambda x, y) \undereq{\text{с. в.}} (\msc{A}x, y) \bdefeq{\msc{A}^*} (x, \msc{A}^*y) \undereq{\text{самоспр.}} (x, \msc{A}y) \undereq{\text{с. в.}} (x, \mu x) \undereq{\text{линейность}} \mu(x, y) $$
 \end{proof}
+
+\section{Ортогональность собственных векторов. Самосопряжённый оператор на \texorpdfstring{$ \R^n $}{R\textasciicircum{}n}}
 
 \begin{theorem}
 	$ \msc{A} $ "--- самосопряжённый оператор на $ \R^n $
