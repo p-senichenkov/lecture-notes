@@ -15,7 +15,7 @@
 \usepackage{polyglossia}
 \setmainlanguage{russian}
 \setotherlanguage{english}
-\setkeys{russian}{babelshorthands=true, mathfunctions=true}
+% \setkeys{russian}{babelshorthands=true, mathfunctions=true}
 
 \usepackage{ifthen}
 
@@ -100,7 +100,7 @@
 \SetSymbolFont{stmry}{bold}{U}{stmry}{m}{n}
 
 \usepackage{tikz}
-\usetikzlibrary{intersections, angles, arrows.meta, decorations.pathreplacing, quotes}
+\usetikzlibrary{intersections, angles, arrows.meta, decorations.pathreplacing, quotes, positioning, chains}
 
 % multiple images in one figure
 \usepackage{subcaption}
@@ -268,10 +268,6 @@
 \newcommand\ulim{\ensuremath{\varlimsup\limits}}
 \newcommand\dlim{\ensuremath{\varliminf\limits}}
 
-% DEPRECATED -- aren't used
-\let\liminf\varliminf
-\let\limsup\varlimsup
-
 \newcommand\liml[1]{\lim\limits_{#1}}
 \newcommand\limz[1]{\lim\limits_{#1\to0}}
 \newcommand\limi[1]{\lim\limits_{#1\to\infty}}
@@ -287,9 +283,10 @@
 
 % curve (and other figures)
 \newcommand\cint[3][l(M)]{\ensuremath{\int\limits_{#2} {#3} \, \operatorname{d} {#1}}}
+\newcommand\acint[3][z]{\ensuremath{\int\limits_{#2} {#3} \, |\operatorname{d} {#1}|}}
 
-% Riemann's integral (DEPRECATED -- isn't used often)
-\newcommand\Ri{\ensuremath{\mathcal{R}}}
+% "short" integral
+\newcommand\sint[2][x]{\ensuremath{\int {#2} \, \operatorname{d} {#1}}}
 
 % comparable by modulo
 \newcommand*\comp[1]{\ensuremath{\underset{#1}{\equiv}}}
@@ -318,16 +315,6 @@
 \newcommand\Co{\ensuremath{\mathbb{C}}}     % because /C is already taken
 \newcommand\Prime{\ensuremath{\mathbb{P}}}     % prime numbers
 \newcommand\On[1][n]{\ensuremath{\mathbb{O}_{#1}}}  % (0, ..., 0)
-
-% Darboux and Riemann (all DEPRECATED -- too specific case)
-\newcommand\Par{\ensuremath{\mathtt{P}}}
-\newcommand\Teq{\ensuremath{\mathtt{T}}}
-\newcommand\Ud{\ensuremath{\mathtt{U}}}
-\newcommand\Ld{\ensuremath{\mathtt{L}}}
-\newcommand\Sr{\ensuremath{\mathtt{S}}}
-
-% Ball (DEPRECATED -- use \ttm)
-\newcommand\B{\ensuremath{\mathtt{B}}}
 
 % a line of dots (3em by default) (not desired -- use \dots wherewher possible)
 % https://tex.stackexchange.com/a/332124/358925
@@ -386,8 +373,8 @@
 \newcommand\trile{\ensuremath{\stackrel\vartriangle\le}}
 \newcommand\trige{\ensuremath{\stackrel\vartriangle\ge}}
 
-% 1 / 2 or [x] / 2 (DEPRECATED -- this command is broken)
-\newcommand\half[1][1]{\ensuremath{\frac{#1}2}}
+% math &
+\newcommand\amp{\ensuremath{\mathrel\&}}
 
 \newcommand\TODO[1]{\textcolor{red}{{\Huge TODO:} {#1}} \message{LaTeX Warning: TODO on line \the\inputlineno%
 %
@@ -590,8 +577,6 @@
 
 \newenvironment{undefthm}[1]{\begin{undefinedtheorem}\textbf{#1 }}{\end{undefinedtheorem}}
 
+% markdown quote
 \newmdenv[linewidth=2pt, rightline=false, topline=false, bottomline=false, linecolor=black!25,
-backgroundcolor=black!2]{quotebase}
-
-\newenvironment{plainquote}{\begin{quote}}{\end{quote}}
-\renewenvironment{quote}{\begin{quotebase}}{\end{quotebase}}
+backgroundcolor=black!2]{mquote}

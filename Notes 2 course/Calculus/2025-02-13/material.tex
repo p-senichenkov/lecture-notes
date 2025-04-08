@@ -1,0 +1,158 @@
+\chapter{ТФКП}
+
+\section{Криволинейные интегралы от комплекснозначных функций}
+
+\begin{definition}
+	$ \curvedir \Gamma([a, b]) \sub \R^2, \qquad u, v \in \Cont \Gamma, \qquad u : \Gamma \to \R, \quad v : \Gamma \to \R, \qquad f(x, y) = u(x, y) + iv(x, y) \quad \in \Cont \Gamma $
+	$$ \cint[x]{\curvedir \Gamma}{f(x, y)} \define \cint[x]{\curvedir \Gamma}{u(x, y)} + i \cint[x]{\curvedir \Gamma}{v(x, y)} $$
+	$$ \cint[y]{\curvedir \Gamma}{f(x, y)} \define \cint[y]{\curvedir \Gamma}{u(x, y)} + i \cint[y]{\curvedir \Gamma}{v(x, y)} $$
+\end{definition}
+
+\begin{props}
+	\item $ \cint[x]{\curvedir \Gamma}{f + g} = \cint[x]{\curvedir \Gamma}f + \cint[x]{\curvedir \Gamma}g, \qquad $ аналогично для $ \di y $
+	\item $ c \in \Co $
+	$$ \cint[x]{\curvedir \Gamma}{cf} = c \cint[x]{\curvedir \Gamma}f, \qquad \dots \di y $$
+	\item $ \cint[x]{\curvedir[0] \Gamma}f = - \cint[x]{\curvedir \Gamma}f, \qquad \dots \di y $
+	\item $ \ttm T = \seqz[m]{t_\nu}\nu, \quad a = t_0 < \dots < t_m = b, \qquad \ttm P = \seq[m]{\tau_\nu}\nu, \quad \tau_\nu \in [t_{\nu - 1}, t_\nu] $
+	$$ \Gamma(t) =
+	\begin{bmatrix}
+		x(t) \\
+		y(t)
+	\end{bmatrix}, \qquad x(t_\nu) \fed x_\nu, \quad x(t_\nu) \fed y_\nu, \qquad M(\tau_\nu) =
+	\begin{bmatrix}
+		x(\tau_\nu) \\
+		y(\tau_\nu)
+	\end{bmatrix} $$
+	$$ \ttm S_x(f, \ttm T, \ttm P) \define \sum_{\nu = 1}^m f \big( M(\tau_\nu) \big) (x_\nu - x_{\nu - 1}) $$
+	$$ \ttm S_y(f, \ttm T, \ttm P) \define \sum_{\nu = 1}^m f \big( M(\tau_\nu) \big) (y_\nu - y_{\nu - 1}) $$
+	$$ \forall \veps > 0 \quad \exist \delta > 0 : \quad \forall \ttm P \quad t_\nu - t_{\nu - 1} < \delta, \quad \nu = 1, \dots, m \quad \implies \bigg| \cint[x]{\curvedir\Gamma}f - \ttm S_x \bigg| < \veps, \quad \bigg| \cint[y]{\curvedir\Gamma}f - \ttm S_y \bigg| < \veps $$
+\end{props}
+
+\begin{eproof}
+	\item Очевидно.
+	\item $ c = a + bi, \qquad f = u + iv $
+	$$ cf = au - bv + i(av + bu) $$
+	\begin{multline*}
+		\cint[x]{\curvedir \Gamma}{cf} = \cint[x]{\curvedir \Gamma}{(au - bv)} + i \cint[x]{\curvedir \Gamma}{(av + bu)} = a \cint[x]{\curvedir \Gamma}u - b \cint[x]{\curvedir \Gamma}v + i \bigg( a \cint[x]{\curvedir \Gamma}v + b \cint[x]{\curvedir \Gamma}u \bigg) = \\
+		= a \bigg( \sint[x]u + i \sint[x]v \bigg) + b \bigg( - \sint[x]v + i \sint[x]u \bigg) = a \sint[x]f + bi \sint f = c \sint f
+	\end{multline*}
+	\item Очевидно.
+	\item Следует из аналогичной теоремы для вещественных криволинейных интегралов второго рода.
+\end{eproof}
+
+Сопоставим комплексной кривой кривую на вещественной плоскости:
+$$ \Gamma : [a, b] \to \Co \qquad \iff \qquad \Gamma^* : [a, b] \to \R^2 $$
+$$ \Gamma(t) = x(t) + iy(t) \qquad \Gamma^*(t) =
+\begin{bmatrix}
+	x(t) \\
+	y(t)
+\end{bmatrix} $$
+
+Ориентацией $ \Gamma $ будем по определению считать ориентацию $ \Gamma^* $.
+
+$$ M \define
+\begin{bmatrix}
+	x(t) \\
+	y(t)
+\end{bmatrix} $$
+$$ \cint[x]{\curvedir \Gamma}{f(z)} \define \cint[x]{\curvedir{\Gamma^*}}{f(M)}, \qquad \cint[y]{\curvedir \Gamma}{f(z)} \define \cint[y]{\curvedir{\Gamma^*}}{f(M)} $$
+Считаем, что
+$$ f(x + iy) = f^*
+\begin{barg}
+	x \\
+	y
+\end{barg} $$
+Далее звёздочку ставить не будем.
+
+\section{Теорема Жордана}
+
+\begin{theorem}
+	$ \Gamma \to \R^2 $ "--- замкнутая.
+
+	Тогда она делит плоскость на две области: внутреннюю $ G $ и внешнюю $ \Omega $, то есть $ \R^2 = G \cup \Omega \cup \Gamma $ и
+	\begin{enumerate}
+		\item любые две точки, лежащие в $ G $, можно соединить кривой, лежащей в $ G $;
+		\item любые две точки, лежащие в $ \Omega $, можно соединить кривой, лежащей в $ \Omega $;
+		\item если соединить любые две точки, одна из $ G $, другая из $ \Omega $, кривой $ l $, то $ l $ пересекает $ \Gamma $.
+	\end{enumerate}
+	То есть, $ G $ и $ \Omega $ линейно связны, а $ G \cup \Omega $ линейно \bt{не}связно.
+\end{theorem}
+
+\begin{noproof}
+\end{noproof}
+
+$ \Gamma(t) \define
+\begin{bmatrix}
+	x(t) \\
+	y(t)
+\end{bmatrix}, \qquad t \in [a, b] $
+
+Возьмём точку $ t_0 $. Пусть $ \exist x'(t_0), y'(t_0) $
+$$ \bigg( x'(t_0) \bigg)^2 + \bigg( y'(t_0) \bigg)^2 > 0 $$
+$$ \vv v(t_0) =
+\begin{bmatrix}
+	-y'(t_0) \\
+	x'(t_0)
+\end{bmatrix}, \qquad M(t_0) \define
+\begin{bmatrix}
+	x(t_0) \\
+	y(t_0)
+\end{bmatrix} $$
+
+\begin{definition}
+	Будем говорить, что $ \Gamma $ ориентированна \it{положительно}, если
+	$$ \exist \veps > 0 : \quad M(t_0) + \veps \vv v(t_0) \in G $$
+	Тогда это свойство (при другом $ \veps $) будет выполняться для любого $ t $, в котором $ \Gamma $ дифференцируема.
+\end{definition}
+
+\begin{definition}
+	Говорят, что $ \Gamma $ ориентирована \it{отрицательно}, если
+	$$ \exist \veps > 0 : \quad M(t_0) + \veps \Gamma(t_0) \in \Omega $$
+\end{definition}
+
+\begin{remark}
+	Это соответствует положительному и отрицательному направлениям на окружности.
+\end{remark}
+
+\section{Криволинейный интеграл второго рода по комплекснозначной кривой}
+
+\begin{definition}
+	$$ \cint[z]{\curvedir\Gamma}{f(z)} \define \cint[x]{\curvedir\Gamma}{f(z)} + i \cint[y]{\curvedir\Gamma}{f(z)} $$
+\end{definition}
+
+\begin{props}
+	\item $ \cint[z]{\curvedir\Gamma}{(f + g)} = \cint[z]{\curvedir\Gamma}f + \cint[z]{\curvedir\Gamma}g $
+
+	\item $ \cint[z]{\curvedir\Gamma}{cf} = c \cint[z]{\curvedir\Gamma}f $
+
+	\item $ \cint[z]{\curvedir[0]\Gamma}f = - \cint{\curvedir\Gamma}f $
+
+	\item $ \curvedir\Gamma : z(t), \quad t \in [a, b], \qquad f : \curvedir\Gamma \to \Co, \qquad \ttm T = \seqz[m]{t_\nu}\nu, \qquad \ttm P = \seq[m]{\tau_\nu}\nu $
+	$$ z_\nu \define z(t_\nu) = x(t_\nu) + iy(t_\nu), \qquad x_\nu \define x(t_\nu), \quad y_\nu \define y(t_\nu), \qquad \hat z_\nu \define z(\tau_\nu) $$
+	$$ \ttm S(f, \ttm T, \ttm P) \define \sum_{\nu = 1}^m f(\hat z_\nu) (z_\nu - z_{\nu - 1}) $$
+	$ f \in \Cont \Gamma $
+
+	Тогда
+	$$ \forall \veps > 0 \quad \exist \delta > 0 : \quad \forall \ttm T : t_\nu - t_{\nu - 1} < \delta, \quad \nu = 1, \dots, m \quad \forall \ttm P \quad \bigg| \cint[z]{\curvedir\Gamma}f - \ttm S(f, \ttm T, \ttm P) \bigg| < \veps $$
+
+	\item $ \curvedir\Gamma : [a, b] \to \Co, \qquad z(a) = A, \quad z(b) = B, \qquad c \in \Co $
+	$$ \cint[z]{\curvedir\Gamma}c = c(B - A) $$
+\end{props}
+
+\begin{eproof}
+	\item Очевидно.
+
+	\item $ c = a + bi $
+	$$ \cint[z]{\curvedir\Gamma}{cf} \bydef \cint[x]{\curvedir\Gamma}{cf} + i \cint[y]{\curvedir\Gamma}{cf} = c \cint[x]{\curvedir\Gamma}f + ic \cint[y]{\curvedir\Gamma}f = c \bigg( \cint[x]{\curvedir\Gamma}f + i \cint[y]{\curvedir\Gamma}f \bigg) \bydef c \cint[z]{\curvedir\Gamma}f $$
+
+	\item $ \cint[z]{\curvedir[0]\Gamma}f = \cint[x]{\curvedir[0]\Gamma}f + i \cint[y]{\curvedir[0]\Gamma}f = \dots $
+
+	\item $ \ttm S(f, \ttm T, \ttm P) = \ttm S_x(f, \ttm T, \ttm P) + i \ttm S_y(f, \ttm T, \ttm P) $ \\
+	Воспользуемся аналогичным свойством для $ \ttm S_x, \ttm S_y $. Пусть
+	$$ \bigg| \sint[y]f - \ttm S_x \bigg| < \frac\veps2, \qquad \bigg| \sint[y]f - \ttm S_y \bigg| < \frac\veps2 $$
+	$$ \bigg| \sint[z]f - \ttm S \bigg| = \bigg| (\dots x) + i(\dots y) \bigg| \le |\dots x| + |\dots y| < \frac\veps2 + \frac\veps2 = \veps $$
+
+	\item Применим св-во 4. Рассмотрим любые $ \ttm T, \ttm P $. \\
+	Рассмотрим интегральную сумму
+	$$ \ttm S(c, \ttm T, \ttm P) \bydef \sum_{\nu = 1}^m c(z_\nu - z_{\nu - 1}) = c \sum (z_\nu - z_{\nu - 1}) = c(B - A) $$
+\end{eproof}

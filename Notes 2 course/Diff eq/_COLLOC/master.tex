@@ -1,0 +1,18 @@
+\documentclass[a4paper]{article}
+\input{../../preamble.tex}
+
+% so that it will be more convenient for questions:
+\titleformat{\section}
+{\normalfont\bfseries\Large}    % font
+{\color{gray}{\thesection.}}  % number
+{0.5em} % separator
+{}  % before-code
+[]  % after-code
+
+\begin{document}
+    \tableofcontents
+
+    \input{./1_equations.tex}
+    \input{./2_symm_equations.tex}
+    \input{./3_normal_systems.tex}
+\end{document}

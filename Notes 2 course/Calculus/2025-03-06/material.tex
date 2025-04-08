@@ -1,0 +1,165 @@
+\chapter{ТФКП}
+
+\section{Теорема Коши для конечносвязной области, ограниченной кусочно-гладкой кривой}
+
+\begin{theorem}
+	$ G \sub \Co, \qquad \ol D \sub G, \qquad \partial D = \bigcup_{k = 1}^m \Gamma_k, \qquad \Gamma_k $ кусочно-гладкие, $ \qquad f \in \mc A(G) $
+	$$ \cint[z]{\curvedir\partial D}{f(z)} = 0 $$
+\end{theorem}
+
+\begin{proof}
+	Пусть $ \Gamma_k : [a, b] \to \Co $.
+	$$ \exist \delta_0 > 0 : \quad \forall \zeta \in \partial D \quad \ol{\ttm B}(\zeta) = \set{ z \mid |z - \zeta| \le \delta_0} \sub G $$
+	$$ T_{\delta_0} \define \bigcup_{\zeta \in \partial D} \ol{\ttm B_{\delta_0}(\zeta)} $$
+	\begin{statement}
+		$ T_{\delta_0} $ "--- компакт
+	\end{statement}
+	\begin{proof}
+		Упражнение.
+	\end{proof}
+	Значит, по теореме Кантора, \\
+	$ f \in \Cont{T_{\delta_0}} \implies f $ равномерно непрерывна на $ T_{\delta_0} $. То есть,
+	\begin{equ}1
+		\forall \veps > 0 \quad \exist 0 < \delta_1 \le \delta_0 : \quad \forall z_1, z_2 \in T_{\delta_0} : |z_1 - z_2| < \delta_1 \quad |f(z_1) - f(z_2)| < \veps
+	\end{equ}
+	Обозначим $ \ttm P_k = \seqz[N_k]{t_{kj}}j, \quad t_{k0} = a_k, \quad t_{kN_k} = b_k, \quad k = 1, \dots, m $. \\
+	Выберем его так, чтобы
+	\begin{equ}2
+		\forall t \in [t_{kj}, t_{k~j + 1}] \quad |\Gamma(t) - \Gamma(t_{kj})| < \delta_1
+	\end{equ}
+	Такое разбиение можно выбрать в силу равномерной непрерывности.
+
+	Обозначим многоугольник $ S_k = \seqz[M_k]{\Gamma(t_{kj})}j $.
+
+	Обозначим $ \vawe D $ так, что $ \partial \vawe D = \bigcup_{k = 1}^m S_k $. По определению $ \vawe D \sub G $. Применим к $ \vawe D $ аналогичную теорему для многоугольников:
+	\begin{equ}3
+		\cint[z]{\curvedir\partial\vawe D}{f(z)} = 0
+	\end{equ}
+	\begin{equ}4
+		\implies \cint[z]{\curvedir[0]\partial\vawe D}{f(z)} = 0
+	\end{equ}
+	\begin{equ}5
+		\implies \cint[z]{\curvedir\partial D}{f(z)} = \cint[z]{\curvedir\partial D}{f(z)} + \cint[z]{\curvedir[0]\partial\vawe D}{f(z)}
+	\end{equ}
+	Рассмотрим некоторую кривую $ \Gamma_k $ (ориентация согласована с общей ориентацией границы). \\
+	Обозначим $ \Gamma(t_{kj}) \fed z_{kj}, \quad 0 \le j \le N_k $.
+
+	Рассмотрим случай, когда $ k = 1 $ (остальные "--- аналогично). Это внешняя кривая. \As кривая замкнутая, $ z_{k0} = z_{kN_k} $.
+
+	Рассмотрим точки $ z_{1j}, z_{1~j + 1}, z_{1~j + 2} $. Они обходятся в положительном направлении. Но, если рассматривать многоугольник $ S_1 $, то на нём эти же точки обходятся в противоположном направлении.
+
+	Обозначим $ \curvedir\gamma_{1j} \define \Gamma([t_{1j}, t_{1~j + 1}]) $. По одному из свойств,
+	\begin{equ}6
+		\cint[z]{\curvedir\Gamma_1}{f(z)} = \sum_{j = 0}^{N_1 - 1} \cint[z]{\curvedir{\gamma_{1j}}}{f(z)}
+	\end{equ}
+	Обозначим $ \sigma_{1j} $ "--- отрезок с концами $ z_{1j}, z_{1~j + 1} $. Тогда
+	\begin{equ}7
+		\cint[z]{\curvedir{S_1}}{f(z)} = \sum_{j = 0}^{N_1 - 1} \cint[z]{\curvedir[0]{\sigma_{1j}}}{f(z)}
+	\end{equ}
+	Из последних двух выражений получаем, что
+	\begin{equ}{7'}
+		\cint[z]{\curvedir{\Gamma_1}}{f(z)} + \cint[z]{\curvedir[0]{S_1}}{f(z)} = \sum_{j = 0}^{N_1 - 1} \bigg( \cint[z]{\curvedir{\gamma_{1j}}}{f(z)} + \cint[z]{\curvedir[0]{\sigma_{1j}}}{f(z)} \bigg)
+	\end{equ}
+	Возьмём $ c \in \Co $.
+	\begin{equ}8
+		\cint[z]{\curvedir{\sigma_{1j}}}c + \cint[z]{\curvedir[0]{\sigma_{1j}}}c = c(z_{1~j + 1} - z_{1j}) + c(z_{1j} - z_{1~j + 1}) = 0 \quad \forall c
+	\end{equ}
+	Возьмём в качестве $ c $ выражение $ f(z) - f(z_{1j}) $
+	\begin{equ}9
+		\eref{7'} = \sum_{j = 0}^{N_1 - 1} \bigg( \cint[z]{\curvedir{\gamma_{1j}}}{ \big( f(z) - f(z_{1j}) \big) } + \cint[z]{\curvedir[0]{\sigma_{1j}}}{\big( f(z) - f(z_{1j}) \big) } \bigg)
+	\end{equ}
+	Выберем разбиения такие, чтобы
+	\begin{equ}{10}
+		\forall k \quad \forall j \quad \forall y \in [t_{kj}, t_{k~j + 1}] \quad |\Gamma_k(t) - \Gamma_k(t_{kj})| < \delta_1
+	\end{equ}
+	Тогда при $ z \in \gamma_{kj} $ выполнено
+	\begin{equ}{11}
+		|z - z_{kj}| < \delta_1
+	\end{equ}
+	В частности,
+	\begin{equ}{11'}
+		|z_{k~j + 1} - z_{kj}| < \delta_1
+	\end{equ}
+	По одному из свойств криволинейных интегралов,
+	\begin{equ}{12}
+		\bigg| \cint[z]{\curvedir{\gamma_{1j}}}{f(z) - f(z_{1j})} \bigg| \le \acint{\gamma_{1j}}{|f(z) - f(z_{1j})|} \underset{\eref1, \eref{11}}\le \acint[z]{\gamma_{1j}}\veps = \veps \cdot l ~ \gamma_{1j}
+	\end{equ}
+
+	Если $ z \in \sigma_{1j} $, то
+	$$ |z - z_{1j}| \le |z_{1~j + 1} - z_{1j}| \underset{\eref{11'}}< \delta_1 $$
+	\begin{equ}{13}
+		\implies \bigg| \cint[z]{\curvedir{\sigma_{1j}}}{f(z) - f(z_{1j})} \bigg| \le \acint{\sigma_{1j}}{|f(z) - f(z_{1j})|} < \veps \cdot |z_{j + 1} - z_{1j}| \le \veps \cdot l ~ \gamma_{1j}
+	\end{equ}
+
+	\begin{equ}{14}
+		\eref{9}, \eref{12}, \eref{13} \implies \bigg| \cint[z]{\curvedir{\gamma_{1j}}}{f(z)} + \cint[z]{\curvedir[0]{\sigma_{1j}}}{f(z)} \bigg| < 2\veps \cdot l ~ \gamma_{1j}
+	\end{equ}
+	\begin{equ}{15}
+		\underimp{\eref9} \bigg| \cint[z]{\curvedir{\gamma_{1j}}}{f(z)} + \cint[z]{\curvedir[0]{\sigma_{1j}}}{f(z)} \bigg| < 2\veps \sum_{j = 0}^{N_1 - 1} l ~ \gamma_{1j} = 2 \veps l \Gamma_1
+	\end{equ}
+	При остальных $ k $ "--- аналогично.
+
+	$$ \eref5, \eref{15} \implies \bigg| \cint[z]{\curvedir\partial D}{f(z)} \bigg| < 2\veps \sum l \Gamma_k $$
+	$$ \implies \cint[z]{\curvedir\partial D}{f(z)} = 0 $$
+\end{proof}
+
+\section{Формула Коши}
+
+\begin{theorem}
+	$ G \sub \Co, \qquad D = \ttm B_r(z_0), \qquad \ol D \sub G, \qquad f \in \mc A(G), \qquad z \in D $
+	\begin{equ}{21}
+		f(z) = \frac1{2\pi i} \cint[\zeta]{\curvedir\partial D}{\frac{f(\zeta)}{\zeta - z}}
+	\end{equ}
+\end{theorem}
+
+\begin{figure}[!h]
+	\begin{tikzpicture}
+		\draw (0, 0) circle[radius=5];
+
+		\fill (0, 0) circle[radius=0.03] node[below] {$ z_0 $};
+		\fill (2, 2) circle[radius=0.03] node[below] {$ z $};
+
+		\draw (2, 2) -- (5, 5) node[below] {$ r $};
+		\draw (2, 2) circle[radius=1] node[below] {$ \ttm B_\delta $};
+	\end{tikzpicture}
+	\caption{\comment{Картинку надо дорисовать.}}
+\end{figure}
+
+\begin{proof}
+	Возьмём $ \delta > 0 $ так, чтобы $ \delta < r - |z - z_0| $. \\
+	Рассмотрим $ \ttm B_\delta = \set{\zeta \mid |\zeta - z| < \delta} $. Понятно, что $ \ol{\ttm B}_\delta \sub D $.
+
+	Рассмотрим
+	\begin{equ}{22}
+		\vphi(\zeta) = \frac{f(\zeta)}{\zeta - z}
+	\end{equ}
+	Она аналитична в $ D \setminus \set z $.
+
+	Рассмотрим область $ D_\delta = D \setminus \ol{\ttm B}_\delta $.
+	$$ \ol D_\delta \sub G \setminus \set z $$
+	По теореме Коши,
+	\begin{equ}{23}
+		\cint[\zeta]{\curvedir\partial D_\delta}{\vphi(\zeta)} = 0
+	\end{equ}
+	Обозначим $ S = \set{\zeta \mid |\zeta - z| = r}, \quad \sigma_\delta = \set{\zeta \mid |\zeta - z| = \delta} $.
+	\begin{equ}{24}
+		\eref{23} \implies \cint[\zeta]{\curvedir S}{\vphi(\zeta)} + \cint[\zeta]{\curvedir[0]{\sigma_\delta}} = 0 \quad \iff \quad \cint[\zeta]{\curvedir S}{\vphi(\zeta)} = - \cint[\zeta]{\curvedir[0]{\sigma_\delta}}{\vphi(\zeta)} = \cint[\zeta]{\curvedir{\sigma_\delta}}{\vphi(\zeta)}
+	\end{equ}
+	\begin{equ}{25}
+		\cint[\zeta]{\curvedir{\sigma_\delta}}{\vphi(\zeta)} \undereq{\eref{21}} \cint[\zeta]{\curvedir{\sigma_\delta}}{\frac{f(\zeta)}{\zeta - z}} = \cint[\zeta]{\curvedir{\sigma_\delta}}{\frac{f(\zeta)}{\zeta - z}} + \cint[\zeta]{\curvedir{\sigma_\delta}}{\frac{f(z)}{\zeta - z}}
+	\end{equ}
+	\begin{equ}{26}
+		\cint[\zeta]{\curvedir{\sigma_\delta}}{\frac{f(z)}{\zeta - z}} = f(z) \cint[\zeta]{\curvedir{\sigma_\delta}}{\frac1{\zeta - z}}
+	\end{equ}
+	$$ \curvedir{\sigma_\delta} = \set{\zeta \mid \zeta = z + \delta e^{i\theta}, \quad \theta \in [0, 2\pi]} $$
+	$$ \bigg( \delta e^{i\theta} \bigg)_\theta' = i \delta e^{i\theta} $$
+	\begin{equ}{27}
+		\cint[\zeta]{\curvedir{\sigma_\delta}}{\frac1{\zeta - z}} = \dint[\theta]0{2\pi}{\frac{\big( \delta e^{i\theta} \big)'}{\delta e^{i\theta}}} = 2\pi i
+	\end{equ}
+	\begin{equ}{28}
+		\eref{26}, \eref{27} \implies \cint[\zeta]{\curvedir{\sigma_\delta}}{\frac{f(z)}{\zeta - z}} = 2\pi i f(z)
+	\end{equ}
+	\begin{equ}{29}
+		\eref{25}, \eref{28} \implies \cint[\zeta]{\curvedir S}{ \frac{\vphi(\zeta)}{\zeta - z}} = \cint[\zeta]{\curvedir{\sigma_\delta}}{\frac{f(z)}{\zeta - z}} + 2\pi i f(z)
+	\end{equ}
+\end{proof}

@@ -1,0 +1,152 @@
+\chapter{ТФКП}
+
+\section{Теорема о единственности значения аналитической функции}
+
+\begin{theorem}
+	$ D \sub \Co, \qquad E \sub D, \qquad z_0 $ ~--- т. сг. $ E, \qquad z_0 \in D, \qquad f \in \mc A(D), \qquad f(z) = 0 \quad \forall z \in E $
+	$$ \implies f(z) \equiv 0 $$
+\end{theorem}
+
+\begin{proof}
+	$$ f(z) \underarr{
+		\begin{subarray}{c}
+			z \in E \\
+			z \to z_0
+		\end{subarray}} f(z_0) $$
+	$$ 0 \to f(z_0) $$
+	То есть, $ f(z_0) = 0 $. \bt{Пусть} $ f(z) \not\equiv 0 $. Тогда
+	$$ \exist \vphi(z) \quad \exist n_0 \in \N \quad \exist \delta > 0 : \quad
+	\begin{cases}
+		f(z) = (z - z_0)^{n_0} \vphi(z) \\
+		|z - z_0| < \delta \quad \implies \quad \vphi(z) \ne 0
+	\end{cases} $$
+	\begin{equ}3
+		\implies \text{ если } |z - z_0| < \delta, \quad f(z) = 0 \implies z = z_0
+	\end{equ}
+	$$ z_0 \text{~--- т. сг. } E \implies \exist z_1 \in E : \quad |z_1 - z_0| < \delta $$
+	\begin{equ}5
+		z_1 \in E \implies f(z_1) = 0
+	\end{equ}
+	\eref3 и \eref5 противоречивы.
+\end{proof}
+
+\begin{implication}
+	$ f \in \mc A(D), \quad g \in \mc A(D), \qquad \forall z \in E \quad f(z) = g(z) $
+	$$ \implies f(z) \equiv[D] g(z) $$
+\end{implication}
+
+\begin{proof}
+	Рассмотрим функцию $ h(z) = g(z) - f(z) $. В силу аналитичности $ f $ и $ g $ получаем $h(z) \in \mc A(D) $.
+	$$ h(z) = 0 \quad \forall z \in E \implies h(z) \equiv 0 $$
+\end{proof}
+
+\section{Аналитическое продолжение функции}
+
+\begin{definition}
+	$ D_1, D_2 \in \Co, \qquad D_1 \cap D_2 \fed G \ne \O, \qquad f_1 \in \mc A(D_1), \quad f_2 \in \mc A(D_2) $
+	$$ \forall z \in G \quad f_1(z) = f_2(z) $$
+
+	Говорят, что функция $ f_1 $ \it{аналитически продолжена} в область $ D_2 $ функцией $ f_2 $.
+\end{definition}
+
+\begin{theorem}
+	Пусть имеется два аналитических продолжения функции $ f_1 $ в область $ D_2 $: $ f_2 $ и $ \vawe{f_2} $.
+	$$ \implies \vawe{f_2}(z) \equiv[D_2] f_2(z) $$
+\end{theorem}
+
+\begin{proof}
+	$ G $ открыто, $ \quad \forall z_0 \in G $ ~--- т. сг. $ G $. Рассмотрим область $ D_2 $:
+	$$ f_2(z) = \vawe{f_2}(z) \quad \forall z \in G $$
+	Можно применить следствие из теоремы о единственности.
+\end{proof}
+
+\begin{definition}
+	\it{Путём} $ \Gamma(t) : [a, b] \to \Co $ называется непрерывное отображение отрезка $ [a, b] $ в $ \Co $.
+\end{definition}
+
+\begin{remark}
+	Нет требований к инъективности или сюръективности.
+\end{remark}
+
+\begin{definition}
+	\it{Системой кругов, связанных с путём} $ \Gamma(t) $ будем называть следующее:
+	$$ a = t_0 < t_1 < \dots < t_n = b, \qquad r_0, r_1, \dots, r_n > 0 $$
+	Рассматриваем круги $ \ttm B_{r_k} \big( \Gamma(t_k) \big) $.
+	Будем называть их системой кругов, если выполнено
+	$$ \ttm B_{r_k} \big( \Gamma(t_k) \big) \cap \ttm B_{r_{k - 1}} \big( \Gamma(t_{k - 1}) \big) \ne \O, \qquad k = 1, \dots, n $$
+\end{definition}
+
+\begin{definition}
+	Пусть имеется путь $ \Gamma(t) $ и система кругов, связанных им.
+	$$ f \in \mc A \bigg( \ttm B_{r_0} \big( \Gamma(t_0) \big) \bigg) = \ttm B_{r_0} \big( \Gamma(a) \big) $$
+	Будем говорить, что функция $ f $ аналитически продолжена вдоль пути $ \Gamma(t) $ в круг $ \ttm B_{r_n} \big( \Gamma(t_n) \big) = \ttm B_{r_n} \big( \Gamma(b) \big) $, если функция $ f $ аналитически продолжается из круга $ r_0 $ в круг $ r_1 $, далее из него в круг $ r_2 $, и так далее до круга $ r_n $.
+\end{definition}
+
+\begin{theorem}
+	Аналитическое продолжение вдоль пути единственно.
+\end{theorem}
+
+\begin{proof}
+	Следует из единственности аналитического продолжения в область.
+\end{proof}
+
+\section{Функции, продолжимые по любому пути}
+
+\begin{definition}
+	$ D \sub \Co, \qquad B = \ttm B_r(z_0) \sub D, \qquad f \in \mc A \big( B_r(z_0) \big) $
+
+	Будем говорить, что функция $ f $ продолжима из круга $ B $ по любому пути в области $ D $, если
+	$$ \forall \Gamma(t) : [a, b] \to D : ~ \Gamma(a) = z_0 \quad f \text{ аналитически продолжается вдоль этого пути}, $$
+	причём в качестве первого круга мы берём круг $ B $.
+\end{definition}
+
+\begin{eg}
+	$ D = \Co \setminus \set0, \qquad B = \ttm B_1(1) $
+
+	Рассмотрим функцию $ f(z) = \log z, \quad z \in B $.
+	$$ \log z = |z| + i \operatorname{arg} z, \qquad z \in \Co \setminus (-\infty, 0] $$
+	Зададим $ \operatorname{Arg} z = \operatorname{arg} z + 2\pi k $.
+
+	Рассмотрим теперь любой круг $ \vawe B $. Хотим задать $ \operatorname{Arg} $ так, чтобы он был в этом круге непрерывен. Положим $ \log z \define \log |z| + i \operatorname{Arg} z $ при $ z \in \vawe B $. Эта функция аналитична в $ \vawe B $.
+\end{eg}
+
+\begin{definition}
+	Область называется \it{односвязной}, если любой замкнутый путь можно непрерывно деформировать в точку, оставаясь в этой области.
+\end{definition}
+
+\begin{eg}
+	$ \Co \setminus \set 0 $ \bt{не} является односвязной.
+\end{eg}
+
+\section{Теорема о монодромии}
+
+\begin{theorem}
+	$ D $ ~--- односвязная область, $ \qquad B = \set{z \mid |z - z_0| < r} \sub D, \qquad f \in \mc A(B), \qquad f $ продолжима в $ D $ по любому пути.
+
+	Тогда $ f $ аналитична в $ D $, то есть
+	$$ \exist F \in \mc A(D) : \quad F(z) \equiv[B] f(z) $$
+\end{theorem}
+
+\begin{proof}
+	Тут какие-то интуитивные рассуждения.
+\end{proof}
+
+\section{Ряды Лорана}
+
+\begin{definition}
+	$ 0 \le r \le R \le +\infty $
+	$$ D_{r, R}(a) = \set{z \mid r < |z - a| < R} $$
+	Будем называть $ D_{r, R} $ \it{кольцом}.
+\end{definition}
+
+\begin{theorem}
+	$ f \in \mc A \big(D_{r, R}(a) \big) $
+	\begin{equ}{11}
+		\implies \exist c_n \in \Z : \quad \forall z \in D_{r, R}(a) \quad f(z) = \sum_{n = 1}^\infty c_{-n}(z - a)^{-n} + c_0 + \sum_{n = 1}^\infty c_n(z - a)^n,
+	\end{equ}
+	где ряды сходятся.
+
+	Если $ r < r_1 < R_1 < R $, то каждый из рядов сходится равномерно и абсолютно при $ z \in \ol{D_{r, R}(a)} $.
+
+	Эта формула называется разложением функции в \it{ряд Лорана}.
+\end{theorem}

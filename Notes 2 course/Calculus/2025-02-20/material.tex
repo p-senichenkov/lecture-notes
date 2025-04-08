@@ -1,0 +1,125 @@
+\chapter{ТФКП}
+
+\section{Продолжаем свойства криволинейных интегралов}
+
+\begin{property}[6]
+	$ \curvedir \Gamma \in \Co, \qquad f \in \Cont \Gamma, \qquad c \in \curvedir \Gamma, \qquad \curvedir \Gamma = \curvedir \Gamma_1 \cup \curvedir \Gamma_2, \qquad \curvedir\Gamma_1 \cap \curvedir\Gamma_2 = \set c $
+	$$ \cint[z]{\curvedir \Gamma}{f(z)} = \cint[z]{\curvedir\Gamma_1}{f(z)} + \cint[z]{\curvedir\Gamma_2}{f(z)} $$
+\end{property}
+
+\begin{proof}
+	Докажем для случая, когда $ \Gamma $ "--- гладкая кривая.
+	$$ \curvedir\Gamma([a, b]) : [a, b] \to \Co \quad \iff \curvedir\Gamma^*([a, b]) $$
+	$$ t \in [a, b], \qquad \Gamma^* : M(t), \qquad M(t) =
+	\begin{bmatrix}
+		x(t) \\
+		y(t)
+	\end{bmatrix} $$
+	$$ z(t) = x(t) + iy(t) $$
+	\begin{multline*}
+		\cint[z]{\curvedir \Gamma}{f(z)} = \cint[x]{\curvedir\Gamma^*}{f \big( M(t) \big)} + i \cint[y]{\curvedir\Gamma^*}{f \big( M(t) \big)} = \dint[t]ab{ f^* \big( M(t) \big)x'(t)} + i \dint[t]ab{f^* \big( M(t) \big) y'(t)} = \\
+		= \dint[t]ab{ f^* \big( M(t) \big) \big( x'(t) + iy'(t) \big)} = \dint[t]ab{f \big( z(t) \big) \big( x'(t) + iy'(t) \big)} = \\
+		= \dint[t]a{t_0}{ f \big( z(t) \big) \big( x'(t) + iy'(t) \big)} + \dint[t]{t_0}b{ f \big( z(t) \big) \big( x'(t) + iy'(t) \big)}
+	\end{multline*}
+	Прочитывая эти равенства теперь в обратном порядке, получаем, что это равно
+	$$ \cint[z]{\curvedir\Gamma_1}{f(z)} + \cint[z]{\curvedir\Gamma_2}{f(z)} $$
+	Случай для кусочно-гладких кривых доказывается аналогично.
+\end{proof}
+
+По индукции получаем следующее утверждение:
+
+\begin{property}
+	$ c_1, \dots, c_n \in \curvedir\Gamma $
+	$$ \cint[z]{\curvedir\Gamma}{f(z)} = \sum_{j = 1}^{n + 1} \curvedir[z]{\curvedir\Gamma_j}{f(z)} $$
+\end{property}
+
+\begin{property}[7]
+	$ \curvedir\Gamma \sub \Co, \qquad f : \Gamma \to \Co, \qquad f \in \Cont \Gamma, \qquad \Gamma \leftrightarrow \Gamma^* $
+	$$ \bigg| \cint[z]{\curvedir\Gamma}{f(z)} \bigg| \le \cint{\Gamma^*}{|f^*(M)|} $$
+	В дальнейшем мы будем такой интеграл называть обозначать $ \acint\Gamma{|f(z)|} $.
+\end{property}
+
+\begin{proof}
+	$ \curvedir\Gamma ([a, b]) \to \Co, \qquad \ttm T = \seqz[n]{t_j}j, \qquad \ttm P = \seq[n]{\tau_j}, \qquad z_j = z(t_j), \qquad z_j' = z(\tau_j) $
+	$$ \ttm S (f, \ttm T, \ttm P) \bydef \sum_{j = 1}^n f(z_j')(z_j - z_{j - 1}) $$
+	$$ |\ttm S| \le \sum_{j = 1}^n |f(z_j') |z_j - z_{j - 1}| $$
+	Перейдём к плоскости $ \R^2 $:
+	$$ z(t) = x(t) + iy(t), \qquad M_j =
+	\begin{bmatrix}
+		x(t_j) \\
+		y(t_j)
+	\end{bmatrix}, \qquad x_j(t) = x(t_j), \quad y_j = y(t_j) $$
+	$$ M_j' =
+	\begin{bmatrix}
+		x(\tau_j) \\
+		y(\tau_j)
+	\end{bmatrix}, \qquad x_j' = x(\tau_j), \quad y_j' = y(\tau_j) $$
+	$$ \norm{\ol{M_j ~ M_{j - 1}}} \rightleftharpoons \norm{\dist(M_j, M_{j - 1})} = |z_j - z_{j - 1}| $$
+	$$ \norm{\ol{M_{j - 1} ~ M_{j}}} \le l \Gamma^*(M_{j - 1}, M_j) \quad \implies \quad \sum_{j = 1}^n |f(z_j')| \cdot |z - z_{j - 1}| \le \sum_{j = 1}^n |f^*(M_j')| \cdot l \Gamma(M_{j - 1}, M_j) \fed \ttm S^*(|f|, \ttm T, \ttm P) $$
+	$$ |\ttm S| \le \ttm S^* $$
+	Перейдём к пределу:
+	$$ \bigg| \cint[z]{\curvedir\Gamma}{f(z)} \bigg| \le \acint\Gamma{|f(z)|} $$
+\end{proof}
+
+\begin{property}[8]
+	$ \curvedir\Gamma \sub \Co, \qquad f \in \Cont \Gamma, \qquad \theta \in (0, 2\pi) $
+	$$ \curvedir\Gamma_\theta \define e^{i\theta}\curvedir\Gamma $$
+	То есть,
+	$$ \curvedir\Gamma_\theta = \set{z \in \Co \mid z = e^{i\theta}\zeta, \quad \zeta \in \Gamma} $$
+	$$ f_\theta(z) \define f \big( e^{-i\theta}z), \quad z \in \Gamma_\theta $$
+	$$ \implies \cint[\zeta]{\curvedir\Gamma}{f(\zeta)} = e^{-i\theta} \cint[z]{\curvedir\Gamma_\theta}{f_\theta(z)} $$
+\end{property}
+
+\begin{proof}
+	$ \curvedir\Gamma ([a, b]) : [a, b] \to \Co, \qquad \ttm T = \seqz[n]{t_j}, \quad \ttm P = \seq[n]{\tau_j}j, \qquad z_j = z(t_j), \quad z_j' = z(\tau_j) $
+	\begin{multline*}
+		\ttm S_\Gamma(f, \ttm T, \ttm P) \bydef \sum_{j = 1}^n f(z_j')(z_j - z_{j - 1}) = e^{-i\theta} \sum_{j = 1}^n f \bigg( e^{-i\theta}(e^{i\theta}) \bigg) (e^{i\theta}z_j - e^{i\theta}z_{j - 1}) = \\
+		= e^{-i\theta} \sum_{j = 1}^n f_\theta(e^{i\theta}z_j')(e^{i\theta}z_j - e^{i\theta}z_{j - 1}) = e^{-i\theta} \ttm S_{\Gamma_\theta}(f_\theta, \ttm T, \ttm P)
+	\end{multline*}
+\end{proof}
+
+\section{Серия более общих утверждений}
+
+\subsection{Теорема Коши для прямоугольника}
+
+\begin{theorem}
+	$ G \sub \Co, \qquad f \in A(G), \qquad Q = \set{z = x + iy \mid a \le x \le b, \quad p \le y \le q} \sub G $ \\
+	Граница $ Q $ ориентирована в положительном направлении: $ \curvedir{\partial Q} $.
+	\begin{equ}1
+ 		\implies \cint[z]{\curvedir{\partial Q}}{f(z)} = 0
+	\end{equ}
+\end{theorem}
+
+\begin{note}
+	Здесь ориентация роли не играет.
+\end{note}
+
+\begin{proof}
+	Обозначим
+	$$ A = a + pi, \qquad B = b + pi, \qquad C = b + qi, \qquad D = a + qi $$
+	$$ \int\limits_{\curvedir{\partial Q}}\dots = \int\limits_{\overrightarrow{AB}} + \int\limits_{\overrightarrow{BC}} + \int\limits_{\overrightarrow{CD}} + \int\limits_{\overrightarrow{DA}} = \bigg( \int\limits_{\overrightarrow{AB}} - \int\limits_{\overrightarrow{DC}} \bigg) + \bigg( \int\limits_{\overrightarrow{BC}} - \int\limits_{\overrightarrow{AD}} \bigg) $$
+	Рассмотрим параметризацию $ AB $:
+	$$ \overrightarrow{AB} = \set{t + pi \mid t \in [a, b]} $$
+	$$ \cint[z]{\overrightarrow{AB}}{f(z)} = \dint[t]ab{f(t + pi)} $$
+	Аналогично,
+	$$ \overrightarrow{DC} = \set{t + qi}, \qquad \overrightarrow{BC} = \set{b + it}, \qquad \overrightarrow{AD} = {a + ti} $$
+	$$ \cint[z]{\overrightarrow{DC}}{f(z)} = \dint[t]ab{f(t + qi)}, \qquad \cint[z]{\overrightarrow{BC}}{f(z)} = i\dint[t]pq{f(b + ti)}, \qquad \cint[z]{\overrightarrow{AD}}{f(z)} = i\dint[t]pq{f(a + ti)} $$
+	Всё это означает, что
+	\begin{equ}7
+		\cint[z]{\curvedir{\partial Q}}{f(z)} = \bigg( \dint[t]ab{f(t + pi)} - \dint[t]ab{f(t + qi)} \bigg) + \bigg( i \dint[t]pq{f(b + ti)} - i\dint[t]pq{f(a + ti)} \bigg)
+	\end{equ}
+	Перейдём к плоскости $ \R^2 $:
+	$$ \dint[t]ab{f^*(t, q)} - \dint[t]ab{f^*(t, p)} = \dint[x]ab{ \bigg( f^*(x, q) - f^*(x, p) \bigg) } $$
+	$ f^* \in \Cont[1]{G^*} $, значит, можно применить формулу Ньютона"--~Лейбница:
+	\begin{equ}8
+		= \dint ab{ \bigg( \dint[y]pq{f_y^*{}'(x, y)} \bigg)}
+	\end{equ}
+	Аналогично,
+	\begin{equ}9
+		\dint[y]pq{f^*(b, y) - f^*(a, y)} = \dint[y]pq{ \bigg( \dint ab{f_x^*{}'(x, y)} \bigg) }
+	\end{equ}
+	\begin{multline*}
+		\eref7, \eref8, \eref9 \implies \cint[z]{\curvedir{\partial Q}}{f(z)} = -\dint ab{ \dint[y]pq{ f_y^*{}'(x, y))}} + i \dint[y]pq{ \dint ab{f_x^*{}'(x, y)}} = \\
+		= \dint ab{ \dint[y]pq{ -f_y^*{}' + if_x^*{}'}} = 2i \dint ab{ \dint[y]pq {\frac12 \bigg( f_x^*{}' + if_x^*{}' \bigg)}} \bydef 2i \dint ab { \dint[y]pq{ \underbrace{f_{\ol z}'}_0}} = 0
+	\end{multline*}
+\end{proof}

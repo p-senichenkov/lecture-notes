@@ -1,0 +1,122 @@
+\chapter{ТФКП}
+
+\section{Разложение аналитической функции в степенной ряд}
+
+В прошлый раз мы доказали, что $ f \in A(D) \implies f' \in A(D) \implies f \in \Cont[\infty]D $.
+
+$$ D = \set{z \mid |z - z_0| < R}, \qquad 0 < \rho < r < R, \qquad f \in \mc A(D), \qquad S = \set{z \mid |z - z_0| = r} $$
+$$ f''(z) = \frac2{2\pi i} \cint[\zeta]{\curvedir S}{\frac{f(\zeta)}{(\zeta - z)^3}} $$
+
+\begin{notation}
+	Начиная с этого момента, все кривые полагаются положительно ориентированными.
+\end{notation}
+
+\begin{equ}1
+	f'''(z) = (f'')'(z) = (f'')_x'(z) = \frac2{2\pi i} \cint[\zeta]S{f(\zeta) \bigg( \frac1{(\zeta - z)^3} \bigg)_x'} = \frac{2 \cdot 3}{2 \pi i} \cint[\zeta]S{\frac{f(\zeta)}{(\zeta - z)^4}}
+\end{equ}
+
+\begin{statement}
+	\begin{equ}2
+		\nder[n]f (z) = \frac{n!}{2\pi i} \cint[\zeta]S{\frac{f(\zeta)}(\zeta - z)^{n + 1}}
+	\end{equ}
+\end{statement}
+
+\begin{proof}
+	Доказывать будем по \bt{индукции}. \bt{База} уже доказана. \bt{Переход}:
+	\begin{multline*}
+		\nder[n + 1]f(z) = \big( \nder f \big)'(z) = \frac{n!}{2\pi i} \cint[\zeta]S{f(\zeta) \bigg( \frac1{(\zeta - z)^{n + 1}} \bigg)'} = \frac{n! \cdot (n + 1)}{2\pi i} \cint[\zeta]S{\frac{f(z)}{(\zeta - z)^{n + 2}}} = \\
+		= \frac{(n + 1)!}{2\pi i} \cint[\zeta]S{\frac{f(\zeta)}{(\zeta - a)^{n + 2}}}
+	\end{multline*}
+\end{proof}
+
+\begin{theorem}
+	$ f \in \mc A(D) $
+	\begin{equ}4
+		\implies f(z) = f(z_0) + \sum_{n = 1}^\infty \frac{\nder f(z_0)}{n!} (z - z_0)^n
+	\end{equ}
+	То есть,
+	$$ c_n = \frac{\nder f(z_0)}{n!}, \qquad f(z) = f(z_0) + \sum_{n = 1}^\infty c_n(z - z_0)^n $$
+	где ряд сходится в $ D $ и $ \forall \rho_1 < \rho < R $ ряд сходится равномерно на $ \ol D_\rho = \set{z \mid |z - z_0| \le \rho} $.
+\end{theorem}
+
+\begin{proof}
+	$ S_r = \set{z \mid |z - z_0| = r} $
+	$$ f(z) = \frac1{2\pi i} \cint[\zeta]{S_r}{\frac{f(\zeta)}{\zeta - z}} $$
+	\begin{equ}5
+		\frac1{\zeta - z} = \frac1{(\zeta - z_0) - (z - z_0)} = \frac1{\zeta - z_0} \cdot \frac1{1 - \frac{z - z_0}{\zeta - z_0}}
+	\end{equ}
+	Обозначим $ q(\zeta, z) = \frac{z - z_0}{\zeta - z_0} $.
+	$$ |q| = \frac{|z - z_0|}{|\zeta - z_0|} \le \frac\rho r \fed q_0 < 1 $$
+	\begin{equ}6
+		\frac1{1 - q} = 1 + \sum_{n = 1}^\infty q^n = \sum_{n = 0}^\infty q^n
+	\end{equ}
+	\begin{equ}7
+		\sum_{n = 1}^\infty |q^n| \le \sum_{n = 1}^\infty q_0^n = \frac{q_0}{1 - q_0}
+	\end{equ}
+	$$ \eref6, \eref7 \implies 1 + \sum_{n = 1}^\infty q^n(z, \zeta) \text{ равномерно сходится при } \zeta \in S_r, ~ z \in \ol D_\rho $$
+	\begin{multline*}
+		f(z) = \frac1{2\pi i} \cint[\zeta]{S_r}{f(\zeta) \frac1{\zeta - z_0} \bigg\lgroup 1 + \sum_{n = 1}^\infty \bigg( \frac{z - z_0}{\zeta - z_0} \bigg)^n \bigg\rgroup} = \\
+		\frac1{2\pi i} \cint[\zeta]{S_r}{\frac{f(\zeta)}{\zeta - z_0}} + \sum_{n = 1}^\infty (z - z_0)^n \frac1{2\pi i} \cint[\zeta]{S_r}{\frac{f(\zeta)}{(\zeta - z_0)^{n + 1}}} = f(z_0) + \sum_{n = 1}^\infty (z - z_0)^n \frac{\nder f(z_0)}{n!}
+	\end{multline*}
+
+	Обозначим $ M(r) = \max\limits_{z \in S_r}|f(z)| $.
+	\begin{multline*}
+		|c_n| = \bigg| \frac{\nder f(z_0)}{n!} \bigg| = \bigg| \frac1{2\pi i} \cint[\zeta]{S_r}{\frac{f(\zeta)}{(\zeta - z)^{n + 1}}} \bigg| \le \frac1{2\pi} \acint[\zeta]{S_r}{\frac{|f(\zeta)}{|\zeta - z_0|^{n + 1}}} \le \frac1{2\pi} \acint[\zeta]{S_r}{\frac{M(r)}{r^{n + 1}}} = \\
+		= \frac1{2\pi} \cdot 2 \pi r \cdot \frac{M(r)}{r^{n + 1}} = \frac{M(r)}{r^n}
+	\end{multline*}
+	$$ \implies |z - z_0|^n \cdot |c_n| \le \rho^n \cdot \frac{M(r)}{r^n} = M(r) q_0^n $$
+\end{proof}
+
+\section{Теорема Лиувилля}
+
+\begin{theorem}
+	\begin{equ}{11}
+		\exist M : \quad |f(z)| \le M \quad \forall z \in \Co
+	\end{equ}
+	$$ \implies f(z) \equiv f(0) $$
+\end{theorem}
+
+\begin{proof}
+	$$ c_n = \frac{\nder f(0)}{n!} $$
+	$$ \forall R > 1 \quad f \in \mc A(\set{ z \mid |z| < R}), \qquad r = \frac R2 < R $$
+	\begin{equ}{12}
+		f(z) = f(0) + \sum_{n = 1}^\infty c_nz^n
+	\end{equ}
+	Воспользуемся неравенством Коши:
+	\begin{equ}{13}
+		M(r) \le M \quad \forall r
+	\end{equ}
+	\begin{equ}{14}
+		|c_n| \le \frac{M}{r^n} = \frac{2^nM}{R^n}
+	\end{equ}
+	$$ \limi[R] |c_n| \le \limi[R] \frac{2^n M}{R^n} = 0 \qquad \implies \qquad |c_n| = 0 \quad n \ge 1 $$
+	$$ \underimp{\eref{12}} f(z) = 0 $$
+\end{proof}
+
+\begin{theorem}
+	$ P(z) = z^n + a_1z^{n - 1} + \dots + a_n, \qquad a_j \in \Co $
+	\begin{equ}{17}
+		\implies \exist z_0 \in \Co : \quad P(z_0) = 0
+	\end{equ}
+\end{theorem}
+
+\begin{proof}
+	Предположим, что \bt{это не так}. Пусть $ P(z) \ne 0 \quad \forall z \in \Co $. Полином "--- это аналитическая функция.
+
+	Обозначим $ f(z) = \frac1{p(z)} $.
+	\begin{equ}{19}
+		\implies f \in \mc A(\Co)
+	\end{equ}
+	Возьмём $ R_0 \ge 1 $, $ |z| \ge R_0 $. Тогда
+	$$ |z|^k \ge |z| \text{ при } k \ge 1, \quad |z| \ge 1 $$
+	$$ |P(z)| = |z|^n \bigg| 1 + \frac{a_1}z + \dots + \frac{a_n}{z^n} \bigg| \ge |z|^n \bigg( 1 - \frac{|a_1|}{|z|} - \dots - \frac{|a_n|}{|z|^n} \bigg) \ge |z|^n \bigg( 1 - \frac{|a_1| + \dots + |a_n|}{R_0} \bigg) $$
+	$$ 1 - \frac{|a_1| + \dots + |a_n|}{R_0} \ge \frac12 $$
+	\begin{equ}{20}
+		\implies \forall |z| \ge R_0 \quad |f(z)| = \frac1{|P(z)|} \le \frac2{|z|^n} \le \frac2{R_0^n}
+	\end{equ}
+	Возьмём $ M_1 = \max\limits_{|z| \le R_0}|f(z)|, \quad M = \max \set{M_1, \frac2{R_0^n}} $.
+	\begin{equ}{22}
+		\eref{20} \implies |f(z)| \le M \quad \forall z \in \Co
+	\end{equ}
+	По теореме Лиувилля $ f(z) \equiv f(0) $. То есть, $ P(z) \equiv P(0) $.
+\end{proof}

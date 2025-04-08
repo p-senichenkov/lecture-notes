@@ -310,3 +310,8 @@ TSWLatexianTemp*
 
 # Don't upload courseworks
 Coursework
+
+# There're only lecture materials in Math Logic
+Math Logic
+
+Программирование введение.md

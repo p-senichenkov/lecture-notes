@@ -1,0 +1,128 @@
+\chapter{ТФКП}
+
+\section{Разложение элементарных функций в степенной ряд}
+
+Мы уже выяснили, что аналитические функции раскладываются в ряд Тейлора:
+$$ f(z) = f(z_0) + \sum_{n = 1}^\infty \frac{\nder f(z_0)}{n!}(z - z_0)^n $$
+
+Будем рассматривать $ z_0 = 0 $.
+\begin{enumerate}
+	\item $ e^z \in \mc A(\Co) $
+	$$ e^0 = 1, \qquad \nder{\big(e^z \big)}\clamp{z = 0} = \nder{(e^z)}_{\underbrace{x\dots x}_n}\clamp{z = 0} = \nder{e^x}\clamp{x = 0} = 1 $$
+	$$ e^z = 1 + \sum_{n = 1}^\infty \frac{z^n}{n!} \quad \forall z \in \Co $$
+	\item $ \cos z = 1 + \sum \frac{(-1)^n}{(2n)!} z^{2n} $
+	\item $ \sin z = \sum \frac{(-1)^{n - 1}}{(2n - 1)!} z^{2n - 1} $
+	\item $ \log (1 + z) $ аналитична при $ |z| < 1 $ и на $ \Co \setminus (-\infty, -1] $.
+
+	В этой области достаточно рассмотреть функцию $ \log (1 + x) $.
+	$$ \log(1 + z) = \sum_{n = 1}^\infty \frac{(-1)^n}{n}z^n $$
+	\item $ r \in \R \setminus (\N \cup \set 0) $
+	$$ (1 + z)^r = e^{r \log(1 + z)} $$
+	Она аналитична при $ |z| < 1 $. Рассмотрим $ (1 + x)^r $.
+	$$ (1 + z)^r = e^{r \log(1 + z)} = 1 + rz + \frac{r(r - 1)}{2!}z^2 + \dots + \frac{r(r - 1) \cdots (r - n + 1)}{n!} z^n + \cdots $$
+	\item $ \alpha \in \Co \setminus \R $
+	$$ (1 + z)^\alpha = e^{\alpha \log(1 + z)} \in \mc A(|z| < 1) $$
+	Здесь нельзя сослаться на вещественный случай "--- $ (1 + x)^\alpha \in \Co $.
+	$$ 1^\alpha = 1 $$
+	\begin{multline*}
+		\qquad \bigg( (1 + z)^\alpha \bigg) = \bigg( e^{\alpha \log(1 + z)} \bigg)' = (e^w)'\clamp{w = \alpha \log(1 + z)} \cdot \big( \alpha \log(1 + z) \big)' = e^{\alpha \log(1 + z)} \cdot \frac\alpha{1 + z} = \\
+		= \alpha e^{\alpha \log(1 + z)} e^{-\log(1 + z)} = \alpha e^{(\alpha - 1) \log(1 + z)} = \alpha(1 + z)^{\alpha - 1}
+	\end{multline*}
+	$$ \bigg( (1 + z)^\alpha \bigg)'' = \alpha(\alpha - 1)(1 + z)^{\alpha - 2} $$
+	$$ \bigg( (1 + z)^\alpha \bigg)^{(n)} = \alpha(\alpha - 1) \cdots (\alpha - n + 1)(1 + z)^{\alpha - n} $$
+	$$ (1 + z)^\alpha = 1 + \alpha z + \frac{\alpha(\alpha - 1)}{2!} z^2 + \dots + \frac{\alpha(\alpha - 1) \cdots (\alpha - n + 1)}{n!} z^n + \cdots $$
+\end{enumerate}
+
+\section{Теорема о единственности аналитической функции с применением аналитических функций}
+
+\begin{theorem}
+	$ D \sub \Co $ "--- область, $ \qquad f \in \mc A(D), \qquad z_0 \in D, \qquad \nder f(z_0) = 0, \qquad n \ge 1 $
+	\begin{equ}1
+		\implies f(z) \equiv 0 \text{ в } D
+	\end{equ}
+\end{theorem}
+
+\begin{proof}
+	Пусть
+	\begin{equ}2
+		E = \set{\zeta \in D \mid f(\zeta) = 0, \quad \nder f(\zeta) = 0 \quad \forall n \ge 1}
+	\end{equ}
+	По условию $ z_0 \in E \implies E \ne \O $.
+	\begin{statement}
+		$ E $ \it{относительно замкнуто} в $ D $, то есть если есть набор точек $ \seq{\zeta_m}m, \quad \zeta_m \ne \zeta_l $ при $ m \ne l, \quad \zeta_m \in E \quad \forall m, \quad \zeta_m \underarr{m \to \infty} z_*, \quad z_* \in D $
+		\begin{equ}3
+			\implies z_* \in E
+		\end{equ}
+	\end{statement}
+	\begin{proof}
+		$ f \in \mc C(D) $.
+		\begin{equ}5
+			\implies \bigg( \zeta_m \to z_* \implies f(\zeta_m) \to f(z_*))
+		\end{equ}
+		\begin{equ}6
+			\zeta_m \in E \quad \forall m \quad \underimp{\eref5} 0 \to f(z_*) \implies f(z_*) = 0
+		\end{equ}
+		$$ \nder f \in \mc A(D) \implies \nder f \in \mc C(D) $$
+		$$ \implies \nder f(\zeta_m) \to \nder f(z_*) $$
+		$$ \implies 0 \to \nder f(z_*) \implies \nder f(z_*) = 0 $$
+		$$ \implies z_* \in E $$
+	\end{proof}
+	\begin{statement}
+		Множество $ E $ \it{относительно открыто} в $ D $, то есть
+		$$ z_* \in E \implies \exist \delta > 0 : \quad \ttm B_\delta (z_*) \sub E, \quad \ttm B_\delta (z_*) = \set{\zeta \mid |\zeta - z_*| < \delta} $$
+	\end{statement}
+	\begin{proof}
+		$$ z_* \in E \implies \exist \delta > 0 : \quad \ttm B_\delta(z_*) \sub D $$
+		$$ \implies f \in \mc A \big( \ttm B_\delta(z_*) \big) $$
+		$$ \implies \forall z \in \ttm B_\delta (z_*) \quad f(z) = f(z_*) + \sum_{n = 1}^\infty \frac{\nder f(z_*)}{n!} (z - z_*)^n $$
+		$$ \underimp{\eref2} f(z) = 0 + \sum 0 = 0 \quad \forall z \in \ttm B_\delta (z_*) $$
+		$$ \implies \nder f(z_*) \equiv 0, \quad z \in \ttm B_\delta (z_*), \quad n \ge 1 $$jjdd
+	\end{proof}
+	По теореме из топологии, $ E $ пусто или $ E = D $. Мы уже проверили, что $ E $ не пусто.
+\end{proof}
+
+\section{Локальная мультипликативная структура аналитических \tpst\\{}функций в окрестности нуля}
+
+\begin{theorem}
+	$ D \sub \Co, \qquad f \in \mc A(D), \qquad f \not\equiv 0, \qquad a \in D, \qquad f(a) = 0 $
+	\begin{equ}{15}
+		\implies \exist n \in \N : \quad f(z) = (z = a)^n v(z)
+	\end{equ}
+	\begin{equ}{16}
+		\text{где } v \in \mc A(D)
+	\end{equ}
+	\begin{equ}{17}
+		\text{и } \exist \delta > 0 : \quad \forall z \in \ttm B_\delta(a) \quad v(z) \ne 0
+	\end{equ}
+\end{theorem}
+
+\begin{proof}
+	Рассмотрим $ \nder[m]f(a) $. По предыдущей теореме она не может быть везде равна нулю. Значит,
+	$$ \exist m : \nder[m]f(a) \ne 0 $$
+	Возьмём $ n = \min \set{m \mid \nder[m]f(a) \ne 0} $. Пусть $ \delta_1 > 0 $ такое, что $ \ttm B_{\delta_1}(a) \sub D $. Тогда $ f \in \mc A \big( \ttm B_{\delta_1}(a) \big) $.
+	\begin{equ}{19}
+		f(z) = f(a) + \frac{f'(a)}{1!}(z - a) + \dots + \frac{\nder[n - 1]f(a)}{(n - 1)!}(z - a)^{n - 1} + \frac{\nder f(a)}{n!}(z - a)^n + \frac{\nder[n + 1]f(a)}{(n + 1)!}(z - a)^{n + 1} + \cdots
+	\end{equ}
+	\begin{equ}{20}
+		\implies f(z) = \frac{\nder f(a)}{n!}(z - a)^n + \frac{\nder[n + 1]f(a)}{(n + 1)!}(z - a)^{n + 1} + \cdots = (z - a)^n \bigg( \frac{\nder f(a)}{n!} + \frac{\nder[n + 1]f(a)}{(n + 1)!}(z - a) + \cdots \bigg)
+	\end{equ}
+	Возьмём $ z \ne a, \quad z \in \ttm B_{\delta_1}(a), \qquad (z - a)^n \ne 0 $. Тогда
+	\begin{equ}{21}
+		\frac{f(z)}{(z - a)^n} = \frac{\nder f(a)}{n!} + \frac{\nder[n + 1]f(a)}{(n + 1)!}(z - a) + \cdots
+	\end{equ}
+	Обозначим
+	$$ \frac{\nder f(a)}{n!} + \frac{\nder[n + 1]f(a)}{(n + 1)!}(z - a) + \frac{\nder[n + 2]f(a)}{(n + 2)!}(z - a)^2 + \dots = v(z) $$
+	$ v(z) $ "--- степенной ряд, сходящийся в $ \ttm B_{\delta_1}(a) $.
+	$$ \implies v \in \mc A \big( \ttm B_{\delta_1}(a) \big) $$
+	Если $ z \ne a $, положим $ v(z) = \frac{f(z)}{(z - a)^n} $.
+	$$ \implies v \in \mc A(D \setminus \set a) $$
+	Если $ z \in \ttm B_{\delta_1}(a) $ и $ z \ne a $, то
+	$$ v(z) = \frac{\nder f(a)}{n!} + \frac{\nder[n + 1]f(a)}{(n + 1)!}(z - a) + \cdots $$
+	$$ \implies f \in \mc A \bigg( (D \setminus \set a) \cup \ttm B_{\delta_1}(a) \bigg) = \mc A(D) $$
+	Обозначим
+	$$ c_1 = \frac{\nder f(a)}{n!}, \quad c_2 = \frac{\nder[n + 1]f(a)}{(n + 1)!}, \quad \dots, \quad c_{k + 1} = \frac{\nder[n + k]f(a)}{(n + k)!}, \quad \dots $$
+	$$ v(z) = c_1 + c_2(z - a) + \dots + c_k(z - a)^{k - 1} + \cdots $$
+	$$ z \in \ttm B_{\delta_1}(a), \qquad c_1 \ne 0, \quad c_1 = v(a), \qquad v \in \mc C \big( \ttm B_{\delta_1}(a) \big), \qquad v(a) \ne 0 $$
+	$$ \implies \exist 0 < \delta \le \delta_1 : \quad v(z) \ne 0 \quad \forall z \in \ttm B_\delta(a) $$
+	При этом, $ f(z) = (z - a)^nv(z) $.
+\end{proof}

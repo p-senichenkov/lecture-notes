@@ -1,0 +1,139 @@
+\chapter{ТФКП}
+
+\section{Продолжаем доказывать теорему Коши для конечносвязной области, ограниченной кусочно-гладкой кривой}
+
+\begin{proof}
+	Последняя формула была:
+	\begin{equ}9
+		\cint[\zeta]{\curvedir S}{\frac{f(\zeta)}{\zeta - z}} = \cint[\zeta]{\curvedir{\sigma_\delta}}{\frac{f(\zeta) - f(z)}{\zeta - z}} + 2\pi i f(z)
+	\end{equ}
+	В силу непрерывности
+	\begin{equ}{10}
+		\forall \veps > 0 \quad \exist \delta > 0 : \quad \forall \zeta \in \sigma_\delta \quad |f(\zeta) - f(z)| < \veps
+	\end{equ}
+	\begin{equ}{11}
+		\bigg| \cint[\zeta]{\curvedir{\sigma_\delta}}{\frac{f(\zeta) - f(z)}{\zeta - z}} \bigg| \le \acint[\zeta]{\sigma_\delta}{\frac{|f(\zeta) - f(z)|}{|\zeta - z|}} \le \acint[\zeta]{\sigma_\delta}{\frac\veps\delta} = \frac\veps\delta \cdot 2\pi \delta = 2\pi \veps
+	\end{equ}
+	\begin{equ}{12}
+		\underimp{\eref9} \bigg| \cint[\zeta]{\curvedir S}{ \frac{f(\zeta)}{\zeta - z}} - 2 \pi i f(z) \bigg| = \bigg| \cint[\zeta]{\curvedir{\sigma_\delta}}{\frac{f(\zeta) - f(z)}{\zeta - z}} \le 2\pi \veps
+	\end{equ}
+	$$ \implies \cint[\zeta]{\curvedir S}{\frac{f(\zeta)}{\zeta - z}} - 2\pi i f(z) = 0 $$
+\end{proof}
+
+\begin{remark}[о прошедшем рассуждении]
+	$$ (e^{i\theta})' = ie^{i\theta} $$
+	$$ \cos \theta + i \sin \theta $$
+	$$ z_0 = a + bi $$
+	$$ \zeta = z_0 + re^{i\theta} = (a + r\cos \theta) + i(b + r \sin \theta) $$
+	$$ (a + r\cos \theta)' + i(b + r\sin \theta)' = r(\cos \theta)' + ir(\sin \theta)' = -r \sin \theta + i r \cos \theta = ir (\cos \theta + i \sin \theta) = ire^{i\theta} $$
+\end{remark}
+
+\begin{remark}[о предстоящем рассуждении]
+	$$ f_z' = \frac12(f_x' - if_y'), \qquad f_{\ol z}' = \frac12(f_x' + if_y') = 0 $$
+	$$ f' = f_z' = f'_z + f_{\ol z}' = f_x', \qquad f' = f_z' = f_z' - f_{\ol z}' = if_y' $$
+	$$ f_y' = if' $$
+	$$ z^\alpha, \qquad z \in \Co \setminus (-\infty, 0], \qquad \alpha \in \Co $$
+	$$ z^\alpha \bydef e^{\alpha \ln z} $$
+	$ z^n, \quad n \in \N $ определено при $ z \in \Co $ \\
+	$ z^{-n} $ определено при $ z \in \Co \setminus \set 0 $
+	$$ (z^n)' = nz^{n - 1} $$
+	$$ (z^{-n})' = -nz^{-n - 1} $$
+	$$ \bigg( (z - a)^{-n} \bigg)' = -n(z - a)^{-n - 1} $$
+	$$ \bigg( (z - a)^{-n} \bigg)_x' = -n(z - a)^{-n - 1}, \qquad \bigg( (z - a)^{-n} \bigg)_y' = -in(z - a)^{-n - 1} $$
+	$$ \bigg( \frac1{z - a} \bigg)_x' = - \frac1{(z - a)^2}, \qquad \bigg( \frac1{z - a} \bigg)_y' = -i \frac1{(z - a)^2} $$
+	$$ \implies \bigg( \frac1{a - z} \bigg)_x' = \frac1{(a - z)^2}, \qquad \bigg( \frac1{a - z} \bigg)_y' = \frac{i}{(a - z)^2} $$
+	$$ \bigg( \frac1{a - z} \bigg)_{xx}'' = \bigg( \frac1{(a - z)^2} \bigg)_x' = \frac2{(a - z)^3}, \qquad \bigg( \frac1{a - z} \bigg)_{xy}'' = i \bigg( \frac1{(a - z)^2} \bigg) = \frac{2i}{(a - z)^3} $$
+	$$ \bigg( \frac1{a - z} \bigg)_{yy}'' = i \bigg( \frac1{(a - z)^2} \bigg)_y' = \frac{2i^2}{(a - z)^3} $$
+	$$ \widedots[5cm] $$
+	\begin{equ}{21}
+		\bigg( \frac1{a - z} \bigg)_{\underbrace{x \dots x}_m \underbrace{y \dots y}_n} = \frac{(m + n)!i^n}{(a - z)^{m + n + 1}}
+	\end{equ}
+\end{remark}
+
+\section{Бесконечная гладкость аналитической функции}
+
+\begin{definition}
+	$ D \sub \Co, \qquad f(z) = u(x, y) + iv(x, y) $
+
+	Будем говорить, что $ f \in \Cont[r] D $, где $ r \ge 1 $, если $ u \in \Cont[r]D $ и $ v \in \Cont[r]D $.
+
+	Будем говорить, что $ f \in \Cont[\infty]D $, если $ f \in \Cont[r]D \quad \forall r \ge 1 $.
+\end{definition}
+
+\begin{theorem}
+	$ D \sub \Co, \qquad f \in \mc A (D) \qquad \implies \qquad f \in \Cont[\infty] D $
+\end{theorem}
+
+\begin{eproof}
+	\item $ D = \set{z \mid |z - a| < R} $
+
+	Выберем $ 0 < \rho < R $ и $ \rho < r < R $. Обозначим $ S = \set{z \mid |z - a| = r} $. Применим формулу Коши:
+	$$ f(z) = \frac1{2\pi i} \cint[\zeta]{\curvedir S}{\frac{f(\zeta)}{\zeta - z}} $$
+	При этом, $ S = \set{z = a + re^{i\theta}} $. Значит,
+	\begin{equ}{22}
+		f(z) = \frac1{2\pi i} \dint[\theta]0{2\pi}{\frac{f(a + re^{i\theta})}{{a + re^{i\theta} - z}}ire^{i\theta}}
+	\end{equ}
+	При этом, $ z = x + iy $.
+	\begin{statement}
+		Теоремы о непрерывности интегралов от параметра и о производной интеграла от параметра остаются справедливыми, если функции комплекснозначные, а параметров несколько.
+	\end{statement}
+	Применим их и воспользуемся формулой \eref{21}:
+	\begin{multline}\lbl{23}
+		\bigg( f(z) \bigg)_{\underbrace{x \dots x}_m \underbrace{y \dots y}_n}^{(m + n)} = (m + n)!i^n \cdot \frac1{2\pi i} \dint[\theta]0{2\pi}{\frac{f(a + re^{i\theta})ir}{(a + re^{i\theta} - z)^{m + n + 1}}} = \\
+		= (m + n)!i^n \cdot \frac1{2\pi i} \cint[\zeta]{\curvedir S}{\frac{f(\zeta)}{(\zeta - z)^{m + n + 1}}}
+	\end{multline}
+	\begin{equ}{24}
+		\implies \big( f(z) \big)_{\underbrace{x \dots x}_m \underbrace{{y \dots y}_n}}^{(m + n)} \in \Cont{ \set{z \mid |z - a| \le \rho }}
+	\end{equ}
+	В силу произвольности $ \rho $ это означает, что $ f \in \Cont[m + n]{\set{z \mid |z - a| < R}} $. \\
+	Значит, $ f \in \Cont[\infty]{|z - a| < R} $.
+	\item Произвольная область $ D \sub \Co $
+
+	Возьмём $ a \in D $
+	$$ \exist R : \quad \set{z \mid |z - a| < R} \sub D $$
+	По только что доказанному $ f \in \Cont[\infty]{\set{ z \mid |z - a| < R}} $.
+
+	Поскольку класс $ \mc C^\infty $ определяется локально, теорема доказана.
+\end{eproof}
+
+\section{Аналитичность производной аналитичной функции}
+
+\begin{theorem}
+	$ D \sub \Co, \qquad f \in \mc A(D) \qquad \implies \qquad f' \in A(D) $
+\end{theorem}
+
+\begin{proof}
+	$ f' = f_x' $
+
+	У $ f $ были все производные, а значит, и у $ f_x' $ есть все производные, то есть $ f' \in \Cont[\infty]D $.
+
+	Рассмотрим $ D = \set{z \mid |z - a| < R}, \quad 0 < \rho < r < R $.
+	$$ f(z) = \frac1{2\pi i} \cint[\zeta]{\curvedir S}{\frac{f(\zeta)}{\zeta - z}} $$
+	\begin{equ}{25}
+		\implies f'(z) = f_x'(z) = \frac1{2\pi i} \cint[\zeta]{\curvedir S}{\frac{f(\zeta)}{(\zeta - z)^2}}
+	\end{equ}
+	Применим формулу \eref{21}:
+	\begin{equ}{26}
+		\implies \big( f_x'(z) \big)_x' = 2 \cdot \frac1{2\pi i} \cint[\zeta]{\curvedir S}{\frac{f(\zeta)}{(\zeta - z)^3}}
+	\end{equ}
+	\begin{equ}{27}
+		\eref{25} \implies \big( f_x'(z) \big)_y' = 2i \cdot \frac1{\pi i} \cint[\zeta]{\curvedir S}{\frac{f(\zeta)}{(\zeta - z)^3}}
+	\end{equ}
+	\begin{equ}{28}
+		\eref{26}, \eref{27} \implies \big( f_x' \big)_{\ol z}' = 0
+	\end{equ}
+	$$ \underimp{\eref{25}} \big( f'(z) \big)_{\ol z}' \equiv 0 \quad \text{ при } |z - a| < \rho $$
+	В силу произвольности $ \rho $
+	$$ \big( f'(z) \big)_{\ol z}' = 0 \quad \text{ при } |z - a| < R $$
+
+	Пусть теперь $ D $ "--- произвольная область
+	$$ \exist R : \quad \set{z \mid |z - a| < R} \sub D $$
+\end{proof}
+
+$$ f \in \mc A(z \mid |z - a| < R), \qquad \rho < r < R, \qquad f_x' = f' $$
+Но $ f' $ тоже аналитична.
+$$ (f')_x' = (f')' $$
+Это называется второй комплексной производной: $ f''(z) $.
+\begin{equ}{211}
+	\eref{26} \implies f''(z) = \frac2{2\pi i} \cint[\zeta]{\curvedir S}{\frac{f(\zeta)}{\zeta - z}}
+\end{equ}

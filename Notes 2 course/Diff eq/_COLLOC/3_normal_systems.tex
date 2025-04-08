@@ -1,0 +1,323 @@
+\part{Нормальные системы ОДУ}
+
+\begin{quote}
+	\flushright
+	Ааа! Нормальные системы!
+\end{quote}
+
+\begin{equ}{3.1}
+    \begin{cases}
+        y_1' = f_1(x, y_1, \dots, y_n) \\
+        \widedots \\
+        y_n' = f_n(x, y_1, \dots, y_n)
+    \end{cases}, \qquad f_1, \dots, f_n \in \Cont G, \qquad G \sub \R^{n + 1}
+\end{equ}
+
+\section{Лемма о связи между локальным и глобальным условиями Липшица, достаточные условия для выполнения локального условия Липшица}
+
+\begin{definition}
+	Функция $ f(x, y) $ удовлетворяет условиб Липшица глобально по $ y $ на множестве $ B \sub G $, если найдётся такая константа $ L = L_B > 0 $, что
+    \begin{equ}{3.8}
+        \forall (x, \vawe y), (x, \hat y) \in B \quad \norm{f(x, \hat y) - f(x, \vawe y)} \le L \norm{\hat y - \vawe y}
+    \end{equ}
+\end{definition}
+
+\begin{notation}
+    $ f \in \operatorname{Lip}_y^{gl}(B) $
+\end{notation}
+
+\begin{definition}
+    Функция $ f(x, y) $ удовлетворяет условию Липшица локально по $ y $ в области $ G $, если для любой точки $ (x_\circ, y^\circ) \in G $ существуют окрестность $ V(x_\circ, y^\circ) \sub G $ и константа Липшица $ L = L_V > 0 $ такие, что для любых двух точек $ (x, \vawe y), (x, \hat y) \in V(x_\circ, y^\circ) $ выолняется неравенство \eref{3.8}.
+\end{definition}
+
+\begin{notation}
+    $ f \in \operatorname{Lip}_y^{loc}(G) $
+\end{notation}
+
+\begin{lemma}[о связи между локальным и глобальным условиями Липшица]\label{lm:Lip:gl_and_loc}
+    Если $ f(x, y) \in \operatorname{Lip}_y^{loc}(G) $, то для любого компакта $ \ol H \sub G $ выполнено $ f(x, y) \in \operatorname{Lip}_y^{gl}(\ol H) $
+\end{lemma}
+
+\begin{proof}
+    Рассуждая \bt{от противного}, допустим, что существует компакт $ \ol H \in G $, в котором $ f(x, y) \nin \operatorname{Lip}_y^{gl}(\ol H) $. \\
+    Это значит, что найдутся такие последовательности точек $ (x_k, \vawe{y}^{(k)}), (x_k, \hat{y}^{(k)}) \in \ol H $ и костант $ L_k \infarr{k} \infty $, что
+    \begin{equ}{3.9}
+        \forall k \ge 1 \quad \norm{f(x_k, \hat{y}^{(k)}) - f(x_k, \vawe{y}^{(k)})} \ge L_k \norm{\hat{y}^{(k)} - \vawe{y}^{(k)}}
+    \end{equ}
+    Надо показать, что при каком-то $ k $ это неравенство нарушается. \\
+    Разряжая при необходимости два раза подряд последовательность инексов $ k $ и пользуясь принципом выбора Больцано"--~Вейерштрасса, выберем такую подпоследовательность индексов $ k_l \infarr{l} \infty $, что $ (x_k, \vawe{y}^{(k_l)}) \to (x_\circ, \vawe{y}^{(\circ)}), \quad (x_{k_l}, \hat{y}^{(k_l)}) \to (x_\circ, \hat{y}^{(\circ)}) $. При этом обе точки $ (x_\circ, \vawe{y}^{(\circ)}), (x_\circ, \hat{y}^{(\circ)}) \in \ol H $, поскольку замкнутое множество содержит все свои предельные точки. \\
+    В результате векторы $ \vawe{y}^{(0)} $ и $ \hat{y}^{(0)} $ либо совпадают, либо нет.
+    \begin{itemize}
+        \item $ \vawe{y}^{(0)} \ne \hat{y}^{(0)} $ \\
+        Тогда можно ввести в рассмотрение функцию
+        $$ h(x, \vawe y, \hat y) \define \frac{\norm{f(x, \hat y) - f(x, \vawe y)}}{\norm{\hat y - \vawe y}} $$
+        определённую в некоторой окрестности точки $ (x_\circ, \vawe{y}^{(0)}, \hat{y}^{(0)}) $. \\
+        Положим $ h(x_\circ, \vawe{y}^{(0)}, \hat{y}^{(0)}) \fed L_\circ $. Тогда существует окрестность $ V(x_0, \vawe{y}^{(0)}, \hat{y}^{(0)}) $, в которой $ h $ непрерывна и $ h(x, \vawe{y}, \hat y) < L_\circ + 1 $.
+        $$ \implies \exist K > 0 : \quad \forall k_l > K \quad (x_{k_l}, \vawe{y}^{(k_l)}, \vawe{y}^{(k_l)}) \in V(x_\circ, \vawe{y}^{(0)}, \vawe{y}^{(0)}) $$
+        а значит, $ h(x_{k_l}, \vawe{y}^{(k_l)}, \hat{y}^{(k_l)}) < L_\circ + 1 $, или
+        $$ \norm{f(x_{k_l}, \hat{y}^{(k_l)}) - f(x_{k_l}, \vawe{y}^{(k_l)})} < (L_\circ + 1)\norm{\hat{y}^{(k_l)} - \vawe{y}^{(k_l)}} $$
+        Однако это неравенство при $ l = l^* $ противоречит неравенству \eref{3.9}, поскольку всегда найдётся индекс $ l^* $ такой, что $ L_{k_{l^*}} > L_\circ + 1 $, \as $ L_{k_l} \infarr{l} +\infty $.
+        \item $ y^{(0)} \define \vawe{y}^{(0)} = \hat{y}^{(0)} $ \\
+        Тогда точка $ (x_\circ, y^{(0)}) \in \ol H \sub G $. В этом случае используем предположение о том, что функция $ f $ удовлетворяет локальному условию Липшица. \\
+        По определению для точки $ (x_\circ, y^{(0)}) $ существуют лежащая в $ G $ окрестность $ V(x_\circ, y^{(0)}) $ и константа Липшица $ L > 0 $ такие, что для любых двух точек $ (x, \vawe y), (x, \hat y) \in V(x_\circ, y^{(0)}) $ верно неравенство \eref{3.8}. При этом обе подпоследовательности --- $ (x_{k_l}, \vawe{y}^{(k_l)}) $ и $ (x_{k_l}, \hat{y}^{(k_l)}) $ --- имеют общий предел --- точку $ (x_\circ, y^{(0)}) $. \\
+        Поэтому найдётся такое число $ K > 0 $, что для всякого $ k_l > K $ точки $ (x_{k_l}, \vawe{y}^{(k_l)}) $ и $ (x_{k_l}, \hat{y}^{(k_L)}) \in V(x_\circ, y^{(0)}) $, а значит, выполняется неарвенство \eref{3.8}. Но существует такой индекс $ l^* $, что $ L_{k_{l^*}} > L $. Следовтельно, неравенства \eref{3.8} и \eref{3.9} несовместны при $ l = l^* $.
+    \end{itemize}
+\end{proof}
+
+\begin{lemma}[о достаточном условии локальной липшицевости]
+	Если вектор-функция $ f(x, y) $ непрерывна всесте со своими частными производными по $ y_1, \dots, y_n $ в области $ G $, то она удовлетворяет условию Липшица по $ y $ локально в $ G $.
+\end{lemma}
+
+\begin{proof}
+	Пусть $ V $ --- окрестнгость произвольной точки из области $ G $. Очевидно, что её можно выбрать выпуклой по $ y $ и такой, что $ \ol V \sub G $. Для этого достаточно в качестве $ V $ взять куб с центром в выбранной точке и достаточно маленьким ребром. \\
+    Покажем, что $ f(x, y) \in \operatorname{Lip}_y^{gl}(V) $: \\
+    По формуле конечных приращений имеем:
+    $$ \forall (x, \vawe y), (x, \hat y) \in V \quad f(x, \hat y) - f(x, \vawe y) = \sum_{j = 1}^nh^{(j)}(x, \vawe y, \hat y) \cdot (\hat{y}_j - \vawe{y}_j) $$
+    где
+    $$ h^{(j)} \define \dint[s]01{\pder{f \big( x, u(s) \big)}{y_j}}, \qquad u(s) \define \vawe y + s(\hat y - \vawe y) \quad \forall s \in [0, 1] $$
+    При этом $ \big( x, u(s) \big) \in V $ в силу выпуклостти окрестности по $ y $. \\
+    Поскольку чатсные производные $ f $ по $ y $ непрерывны в $ g $ и их конечное число, а компакт $ \ol V \sub G $ по построению, то
+    $$ \exist M > 0 : \quad \forall s \in [0, 1] \quad \forall j = \ol{1, n} \quad \norm{\pder{f \big( x, u(s) \big)}{y_j}} \le M $$
+    Поэтому
+    \begin{multline*}
+        \norm{f(x, \hat y) - f(x, \vawe y)} \le \sum_{j = 1}^n \norm{ \dint[s]01{\pder{f \big( x, u(s) \big)}{y_j}} \cdot (\hat{y}_j - \vawe{y}_j)} \le \sum_{j = 1}^n \dint[s]01{\norm{ \pder{f \big( x, u(s) \big)}{y_j}}} \cdot |\hat{y}_j - \vawe{y}_j| \le \\
+        \le Mn \cdot \max\limits{j = \ol{1, n}}|\hat{y}_j - \vawe{y}_j| = nM\norm{\hat y - \vawe y}
+    \end{multline*}
+    и верно неравенство \eref{3.8} с глобальной константой Липшица $ L = nM $, обслуживающей окрестность $ V $ произвольной точки из области $ G $.
+\end{proof}
+
+\section{Теорема Пикара}
+
+Введём $ (k + 1) $-е приближение по Пикару:
+
+\begin{equ}{3.10}
+    y^{(k + 1)}(x) = y^\circ + \dint[s]{x_0}x{f \big( s, y^{(k)}(s) \big)}.
+\end{equ}
+
+\begin{theorem}[Пикара]
+    $ f(x, y) \in \Cont G, \quad f(x, y) \in \operatorname{Lip}_y^{loc}(G) $
+
+    Для любой точки $ (x_\circ, y^\circ) \in G $ последовательные приближения Пикара $ y^{(k)}(x) $ ($ k = 0, 1, \dots) $ с начальными данными $ x_\circ, y^\circ $ определены на некотором отрезке $ [\alpha, \beta] $, причём существует такой компакт $ \ol H \sub G $, что для любых $ k \ge 0 $ и $ x \in [\alpha, \beta] $ точка $ \big( x, y^{(k)}(x) \big) \in \ol H $.
+
+    Тогда функции $ y^{(k)}(x) $ равномерно относительно $ [\alpha, \beta] $ стремятся при $ k \to \infty $ к предельной функции $ y(x) $, являющейся решением \caupr[\eref{3.1}]{x_\circ, y^\circ} на отрезке $ [\alpha, \beta] $.
+\end{theorem}
+
+\begin{proof}
+	Возьмём произвольную точку $ (x_\circ, y^\circ) \in G $
+
+    По условию теоремы для этой точки надётся отрезок $ [\alpha, \beta] \ni x_\circ $ и компакт $ \ol H \sub G $ такие, что можно построить последовательные пикаровские приближения
+    $$ y^{(k)}(x) = y^\circ + \dint[s]{x_\circ}x{ f \big( s, y^{(k - 1)}(s) \big)}, \qquad k = 1, 2, \dots, $$
+    определённые для всякого $ x \in [\alpha, \beta] $ такие, что их графики, \ie точки $ \big( x, y^{(k)}(x) \big) $, при всех $ x $ и $ k $ принадлежат $ \ol H $.
+
+    Наличие компакта позволяет ввести на нём две глобальные константы:
+    \begin{itemize}
+        \item Обозначим через $ L > 0 $ константу Липшица, обслуживающую $ \ol H $. Она существует по лемме о связи между условиями Липшица (лемма \ref{lm:Lip:gl_and_loc}), согласно которой $ f(x, y) \in \operatorname{Lip}_y^{gl}(\ol H) $.
+        \item Положим $ M \define \max\limits_{\ol H}\norm{f(x, y)} $.
+    \end{itemize}
+
+    Нужно установить равномерную сходимость последовательности пикаровских отображений. Сделаем это при помощи функциональных рядов:
+
+    Введём последовательность функций $ \vphi^{(k)}(x) $, определённых на отрезке $ [\alpha, \beta] $:
+    $$ \vphi^{(0)}(x) \define y^{(0)}(x), \quad \vphi^{(1)}(x) \define y^{(1)}(x) - y^{(0)}(x), \quad \dots, \quad \vphi^{(k)}(x) \define y^{(k)}(x) - y^{(k - 1)}(x), \quad \dots $$
+
+    Рассмотрим функциональный ряд
+    $$ \vphi(x) = \sum_{k = 0}^\infty \vphi^{(k)}(x) $$
+
+    По определению $ \vphi^{(k)} $,
+    $$ S_n(x) = \sum_{k = 0}^n \vphi^{(k)}(x) = y^{(n)}(x) $$
+    Поэтому сходимость ряда $ \vphi(x) $ равносильна сходимости последовательности пикаровских приближений $ y^{(k)}(x) $.
+
+    Построим для ряда $ \vphi(x) $ мажорантный ряд, оценив сверху по норме методом \bt{индукции} члены $ \vphi^{(k)}(x) $:
+
+    \begin{itemize}
+        \item \bt{База.}
+
+        Для всякого $ x \in [\alpha, \beta] $ имеем:
+        $$ \norm{\vphi^{(0)}(x)} = \norm{y^{(0)}(x)}, $$
+        $$ \norm{\vphi^{(1)}(x)} = \norm{y^{(1)}(x) - y^{(0)}(x)} = \norm{\dint[s]{x_\circ}x{f \big( s, y^{(0)}(s) \big)}} \le \bigg| \dint[s]{x_\circ}x{\norm{f \big( s, y^{(0)}(s) \big)}} \bigg| $$
+
+        Но по условию теоремы любая точка $ \big( s, y^{(0)}(s) \big) $ лежит в $ \ol H $, \as $ [x_\circ \between x] \sub [\alpha, \beta] $. Следовательно,
+        $$ \norm{y^{(1)}(x)} \le M|x - x_\circ|. $$
+        Далее,
+        \begin{multline*}
+            \bm{\norm{\vphi^{(2)}(x)}} \le \bigg| \dint[s]{x_\circ}x{L \norm{y^{(1)}(s) - y^{(0)}(s)}} \bigg| = L \bigg| \dint[s]{x_\circ}x{\norm{\vphi^{(1)}(s)}} \bigg| \le \\
+            \le L \bigg| \dint[s]{x\circ}x{M|s - x_\circ|} \bigg| \le LM \frac{|x - x_\circ|^2}2 = \bm{\frac ML \cdot \frac{(L|x - x_\circ|)^2}{2!}}
+        \end{multline*}
+        \item \bt{Предположим}, что для любых $ k \ge 2 $ и $ x \in [\alpha, \beta] $
+        \begin{equ}{3.11}
+            \norm{\vphi^{(k)}(x)} \le \frac ML \cdot \frac{(L|x - x_\circ|)^2}{2!}.
+        \end{equ}
+        \item \bt{Переход.} Оценим $ \vphi^{(k + 1)}(x) $:
+        \begin{multline*}
+            \norm{\vphi^{(k + 1)}(x)} = \norm{\nder[k + 1]y(x) - \nder[k]y(x)} = \norm{\dint[s]{x_\circ}x{f \big( s, \nder[k]y(s) \big)} - \dint[s]{x_\circ}x{f \big( s, \nder[k - 1]y(s) \big)}} \le \\
+            \le \bigg| \dint[s]{x_\circ}x{f \big( s, \nder[k]y(s) \big) - f \big( s, \nder[k - 1]y(s) \big) } \bigg|.
+        \end{multline*}
+
+        Поскольку аргументы $ f \in \ol H $, используем для оценок глобальное условие Липшица:
+        \begin{multline*}
+            \norm{\nder[k + 1]\vphi(x)} \underset{\operatorname{Lip}}\le \bigg| \dint[s]{x_\circ}x{L \norm{\nder[k]y(s) - \nder[k - 1]y(s)}} \bigg| = L \bigg| \dint[s]{x_\circ}x{\norm{\nder[k]\vphi(s)}} \bigg| \underset{\bt{предп.}}\le \\
+            \le L \bigg| \dint[s]{x_\circ}x{\frac MN \cdot \frac{(L|s - x_\circ|)^k}{k!}} \bigg| \le \frac MN \cdot \frac{(L|x - x_\circ|^{k + 1})}{(k + 1)!}
+        \end{multline*}
+
+        Таким образом, \bt{индукцонное предположение} доказано.
+    \end{itemize}
+
+    Поскольку $ |x - x_\circ| \le \beta - \alpha $, справедлива равномерная оценка членов ряда $ \vphi(x) $:
+    $$ \norm{\nder[k]\vphi(x)} \le \frac MN \cdot \frac{ \big( L(\beta - \alpha) \big)^k}{k!} \quad \forall x \in [\alpha, \beta] $$
+
+    Мажорантный для $ \vphi(x) $ числовой ряд
+    $$ \norm{y^\circ} + \frac ML \cdot \sum_{k = 1}^\infty \frac{\big( L(\beta - \alpha) \big)^k}{k!} $$
+    сходится при любых конечных $ \alpha, \beta $.
+
+    По признаку Вейерштрасса функциональный ряд $ \sum \nder[k]\vphi(x) $ сходится равномерно на $ [\alpha, \beta] $, а значит, последовательноть $ \nder[k]y \uniarr[k \to \infty]{[\alpha, \beta]} y(x) $.
+
+    Для всякого $ x \in [\alpha, \beta] $ предельная функция $ y(x) $ непрерывна по теореме Стокса"--~Зайделя и точка $ \big( x, y(x) \big) $, являясь предельной, содержится в $ \ol H $. Следовательно, $ \dint[s]{x_\circ}x{f \big( s, y(s) \big)} $ существует.
+
+    Рассмотрим равенство \eref{3.10}, устремив в нём $ k $ к бесконечности. Тогда слева получим $ y(x) $, а справа
+    $$ \dint[s]{x_\circ}x{f \big( s, \nder[k]y(s) \big)} \to \dint[s]{x_\circ}x{f \big( s, y(s) \big)}, $$
+    \ie возможен переход к пределу под знаком интеграла.
+
+    Таким образом, в правой части \eref{3.10} тоже можно перейти к пределу, получая формулу
+    $$ y(x) = y^\circ + \dint[s]{x_\circ}x{f \big( s, y(s) \big)} \quad \forall x \in [\alpha, \beta], $$
+    \ie $ y(x) $ удовлетворяет интегральному уравнению, что равносильно тому, что $ y(x) \in $ \nimp[(является решением)] \caupr[\eref{3.1}]{x_\circ, y^\circ} на отрезке $ [\alpha, \beta] $.
+\end{proof}
+
+\section{Теорема о существовании и единственности решений нормальной системы}
+
+\begin{theorem}[о существовании и единственности решения]
+    Пусть в системе \eref{3.1} $ f(x, y) $ непрерывна и $ f \in \operatorname{Lip}_y^{loc}(G) $.
+
+    Тогда для любой точки $ (x_0, y^0) \in G $ и для любого отрезка Пеано $ P_h(x_0, y^0) $ на этом отрезке существует и единственно решение \caupr{x_0, y^0}.
+\end{theorem}
+
+\begin{iproof}
+	\item Существование.
+
+    Возьмём любую точку $ (x_0, y^0) \in G $ и найдём для неё отрезок $ [\alpha, \beta] $ и компакт $ \ol H $ из теоремы Пикара.
+
+    Сначала построим отрезок Пеано с центром в т. $ x_0 $. Для этого возьмём такие $ a, b > 0 $, что компакт $ \ol R = \set{(x, y) \mid |x - x_0| < a, ~ \norm{y - y^0} \le b} \sub G $.
+
+    Положим
+    $$ M = \max\limits_{(x, y) \in \ol R} \norm{f(x, y)}, \quad h = \min \set{a, \frac b M}, \alpha = x_0 - h, \quad \beta = x_0 + h $$
+    Тогда $ [\alpha, \beta] $ --- это искомый отрезок Пеано $ P_h(x_0, y^0) $.
+
+    Выберем $ \ol H = \set{(x, y) | \alpha \le x \le \beta, ~ \norm{y - y^0} \le b} $. Тогда $ \ol H \sub \ol R $.
+
+    Докажем \bt{индукцией} по $ k = 0, 1, \dots $, что
+    \begin{equ}{3.13}
+        \forall x \in [\alpha, \beta] \quad \norm{\nder[k]y(x) - y^0} \le b
+    \end{equ}
+    Тогда точка $ \big( x, \nder[k]y(x) \big) $ попадёт в компакт $ \ol H $, что позволит определить пикаровское приближение $ \nder[k + 1]y $ на всём отрезке Пеано $ [\alpha, \beta] $.
+
+    \begin{itemize}
+        \item По определению, $ \nder[0](x) \equiv y^0 $, поэтому \bt{база} очевидна.
+        \item Допустим, что неравенство \eref{3.13} верно. Тогда для любого $ x \in [\alpha, \beta] $
+        $$ \norm{\nder[k + 1]y(x) - y^0} = \norm{\dint[s]{x_0}x{f \big( s, \nder[k]y(s) \big)}} \le \bigg| \dint[s]{x_0}x{ \norm{f \big( s, \nder[k]y(s) \big)}} \bigg| $$
+        Но согласно \eref{3.13} точка $ \big( s, \nder[k]y(s) \big) \in \ol H \sub \ol R $, поэтому под знаком интеграла $ \norm f \le M $ и $ \norm{ \nder[k + 1]y(x) - y^0} \le M|x - x_0| \le Mh \le b $.
+    \end{itemize}
+
+    \item Единственность \\
+    Докажем \bt{от противного}. \\
+    Предположим, что существует ещё одно решение $ \vawe y(x) $ с теми же начальными данными, \ie $ \vawe y(x_0) = y^0 $, определённое на некотором интервале $ (\vawe \alpha, \vawe \beta) \ni x_0 $.
+
+    Пусть $ [a, b] $ --- отрезок, на котором определены оба решения. Достаточно показать, что на $ (a, b) $ решения $ y(x) $ и $ \vawe y(x) $ совпадают.
+
+    Используя интегральную формулу для любого $ x \in (a, b) $ запишем разность этих решений:
+    $$ y(x) - \vawe y(x) = \dint[s]{x_0}x{ \bigg( f \big( s, y(s) \big) - f \big( s, \vawe y(s) \big) \bigg)} $$
+    При этом, существует такой компакт $ \ol H \sub G $, что для всякого $ s \in [a, b] $ точки $ \big( s, y(s) \big), ~ \big( s, \vawe y(s) \big) \in \ol H $.
+
+    По условию теоремы в области $ G $ для функции $ f(x, y) $ выполняется локальное условие Липшица. А значит, по лемме о связи между локальным и глобальным условиями Липшица функция $ f \in \operatorname{Lip}_y^{gl}(\ol H) $ и $ L $ --- глобальная константа Липшица. Поэтому
+    $$ \norm{y(x) - \vawe y(x)} \le \bigg| \dint[s]{x_0}x{\norm{ f \big( s, y(s) \big) - f \big( s, \vawe y(s) \big)}} \bigg| \le L \bigg| \dint[s]{x_0}x{\norm{ y(s) - \vawe y(s)}} \bigg| $$
+
+    Применяя следствие из теоремы Гронуолла с $ \mu = L $ заключаем, что $ \norm{ y(x) - \vawe y(x)} \equiv[(a, b)] 0 $. Тогда $ y(x) - \vawe y(x) \equiv[(a, b)] 0 $.
+\end{iproof}
+
+\begin{implication}
+	$ G $ является областью единственности.
+\end{implication}
+
+\section{Линейные системы, теоремы о существовании, единственности и продолжимости решений линейных систем}
+
+\begin{definition}
+    Система \eref{3.1} называется \it{линейной}, если она имеет вид
+    \begin{equ}{3.14}
+        \begin{cases}
+            y_1' = p_{11}(x)y_1 + \dots + p_{1n}(x)y_n + q_1(x) \\
+            \dots \\
+            y_n' = p_{n1}(x)y_1 + \dots + p_{nn}(x)y_n + q_n(x)
+        \end{cases}
+    \end{equ}
+    или в векторной записи
+    $$ y' = P(x)y + q(x) $$
+    где функции $ p_{ij}(x) $ и $ q_i(x) \in \Cont{(a, b)} $.
+\end{definition}
+
+\begin{restate}
+	Нормальная система является линейной, если $ f(x, y) = P(x)y + q(x) $, а $ G = (a, b) \times \R^n $.
+\end{restate}
+
+\begin{theorem}[о существовании и единственности решений линейных систем]
+    Для любой точки $ x_0 \in (a, b) $, для любого вектора $ y^0 \in \R^n $ и для любого отрезка Пеано $ P_h(x_0, y^) $ существует и единственно решение \caupr[\eref{3.14}]{x_0, y^0}, определённое на $ P_h(x_0, y^0) $.
+\end{theorem}
+
+\begin{proof}
+    Поскольку функция $ f(x, y) \in \Cont G $ и $ f_y'(x, y) = P(x) \in \Cont G $, а значит, $ f \in \operatorname{Lip}_y^{loc}(G) $, к системе \eref{3.14} применима предыдущая теорема.
+\end{proof}
+
+\begin{theorem}[о продолжимости решений почти линейных систем]
+	Любое решение почти линейной системы продолжимо на интервал $ (a, b) $.
+\end{theorem}
+
+\begin{proof}
+    Рассмотрим произвольное решение почти линейной системы $ y = \vphi(x) $, заданное на максимальном интервале существования $ (\alpha, \beta) $. Для всякого $ x_0 \in (\alpha, \beta) $ по интегральной формуле,
+    $$ \vphi(x) \equiv[(\alpha, \beta)] \vphi(x_0) + \dint[s]{x_0}x{f \big( s, \vphi(s) \big)} $$
+    $$ \implies \norm{\vphi(x_0)} + \bigg| \dint[s]{x_0}x{\norm{f \big( s, \vphi(s) \big)}} \bigg| < \norm{\vphi(x_0)} + \bigg| \dint[s]{x_0}x{\bigg( L(s) + M(s) \norm{\vphi(s)} \bigg)} \bigg| $$
+    Если $ \beta < b $, то отрезок $ [x_0, \beta] \sub (a, b) $, и в силу непрерывности функций $ L $ и $ M $ имеем:
+    $$ L(x) \le L_0, \quad M(x) \le M_0 \qquad \forall x \in [x_0, \beta] $$
+    Поэтому
+    $$ \norm{\vphi(x)} \le \norm{\vphi(x_0)} + L_0(\beta - x_0) + M_0 \bigg| \dint[s]{x_0}x{\norm{\vphi(s)}} \bigg| $$
+    По лемме Гронуолла
+    $$ \norm{\vphi(x)} \le \bigg( \norm{\vphi(x_0)} + L_0(\beta - x_0) \bigg)e^{M_0(\beta - x_0)} \quad \forall x \in [x_0, \beta], $$
+    что \bt{противоречит} теореме о поведении интегральной кривой полного решения.
+
+    Аналогично рассматривается случай, когда $ \alpha > a $.
+\end{proof}
+
+\begin{theorem}[о продолжимости решений линейных систем]
+    Любое решение линейной системы \eref{3.14} продолжимо на интервал $ (a, b) $.
+\end{theorem}
+
+\begin{proof}
+	Покажем, что линейная система является почти линейной. Положим
+    $$ p_0(x) \define \max\limits_{i, j = \ol{1, n}} \set{|p_{ij}(x)|}, \qquad q_0 \define \max\limits_{i = \ol{1, n}} \set{|q_i(x)|} $$
+    Тогда функции $ p_0(x), q_0(x) \in \Cont{a, b} $.
+
+    Оценим сверху компоненты правой части системы \eref{3.14}:
+    \begin{multline*}
+        |f_i(x, y)| = |p_{i1}(x)y_1 + \dots + p_{in}(x)y_n + q_i(x)| \le \sum_{j = 1}^n |p_{ij}(x)| \cdot |y_j| + |q_i(x)| \le \\
+        \le \sum_{j = 1}^n p_0(x) |y_j| + q_0(x) \le np_0(x) \max\limits_{j = \ol{1, n}}|y_j| + q_0(x)
+    \end{multline*}
+    По определению нормы $ \norm{f(x, y)} \le np_0(x)\norm y + q_0(x) $, \ie система \eref{3.14} почти линейна.
+\end{proof}
+
+\section{Малые возмущения начальных данных по параметру, рассуждение о сдвиге}
+
+\TODO{Понять эти бредни о сдвиге}
+
+\TODO{Дальше нет\dots}
+
+\section{Теорема о непрерывной зависимости решений от начальных данных и параметра}
+
+\section{Теорема о дифференцируеости решений по начальным данным}
+
+\section{Теорема о дифференцируемости решений по вектору параметров}
+
+\section{Теорема о многократной дифференцируемости решения по начальным данным и параметру}
+
+\section{Теорема Ляпунова--Пуанкаре о разложении решения в ряд по степеням начальных данных и параметра}
+
+\section{Теорема о разложении решения в ряд по степеням малого параметра}
+
+\section{Теорема Коши об аналитичности решения по независимой переменной}
+
+\section{Теорема об аналитичности решения ЛНС по независимой переменной}
