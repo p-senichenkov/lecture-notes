@@ -1,0 +1,164 @@
+\chapter{ТФКП}
+
+\section{Доказываем теорему о разложении в ряд Лорана}
+
+\begin{proof}
+	$$ f \in \mc A \bigg( D_{r, R}(a) \bigg), \qquad r_1 < r_2 < R_2 < R_1, \qquad r < r_1 < R_1 < R $$
+	Введём $ S_\rho = \set{ z \mid |z - a| = \rho} $.
+	\begin{itemize}
+		\item Пусть $ z \in \ol D_{r, R}(a) $. \\
+		Возьмём $ \veps < \min\set{ r_2 - r_1, R_1 - R_2} $. \\
+		Обозначим $ \sigma_\veps = \set{\zeta \mid |\zeta - z| = \veps} $. \\
+		Рассмотрим функцию
+		$$ \vphi(\zeta) = \frac{f(\zeta)}{\zeta - z}, \qquad \vphi \in \mc A \bigg( D_{r, R}(a) \setminus \set{z} \bigg) $$
+		$$ G_\veps = D_{r_1, R_1}(a) \setminus \set{\zeta \mid |\zeta - z| \le \veps} $$
+		\begin{equ}1
+			\cint[\zeta]{\curvedir \partial G_\veps}{\vphi(\zeta)} = 0
+		\end{equ}
+		$$ \eref1 \iff \cint[\zeta]{S_{R_1}}{\vphi(\zeta)} - \cint[\zeta]{S_{r_1}}{\vphi(\zeta)} - \cint[\zeta]{\sigma_\veps}{\vphi(\zeta)} = 0 $$
+		\begin{equ}2
+			\implies \frac1{2\pi i} = \cint[\zeta]{\sigma_\veps}{\frac{f(\zeta)}{\zeta - z}} = \cint[\zeta]{S_{R_1}}{\frac{f(\zeta)}{\zeta - z}} - \cint[\zeta]{S_{r_1}}{\frac{f(\zeta)}{\zeta - z}}
+		\end{equ}
+		$$ \set{\zeta \mid |\zeta - z| \le \veps} \sub D_{r, R}(a) $$
+		\begin{equ}3
+			\frac1{2\pi i}\cint[\zeta]{\sigma_\veps}{\frac{f(\zeta)}{\zeta - z}} = f(z)
+		\end{equ}
+		\begin{equ}4
+			\eref2, \eref3 \implies f(z) = \frac1{2\pi i} \cint[\zeta]{S_{R_1}}{\frac{f(\zeta)}{\zeta - z}} - \frac1{2\pi i}\cint[\zeta]{S_{r_1}}{\frac{f(\zeta)}{\zeta - z}}
+		\end{equ}
+		$$ \frac1{\zeta - z} = \frac1{(\zeta - a) - (z - a)} = \frac1{\zeta - a} \cdot \frac1{1 - \frac{z - a}{\zeta - a}} $$
+		Обозначим $ q_1(z, \zeta) = \frac{z - a}{\zeta - a} $.
+		\begin{equ}5
+			|q_1(z, \zeta)| \le \frac{R_2}{R_1} = Q_1 < 1
+		\end{equ}
+		\begin{multline}\lbl6
+			\implies \frac1{2\pi i} \cint[\zeta]{S_{R_1}}{\frac{f(\zeta)}{\zeta - z}} = \frac1{2\pi i}\cint[\zeta]{S_{R_1}}{\frac{f(\zeta)}{\zeta - a} \cdot \frac1{1 - \frac{z - a}{\zeta - a}}} = \frac1{2\pi i}\cint[\zeta]{S_{R_1}}{\frac{f(\zeta)}{\zeta - a} \sum_{n = 0}^\infty \bigg( \frac{z - a}{\zeta - a} \bigg)^n} = \\
+			= \sum_{n = 0}^\infty \frac1{2\pi i}(z - a)^n \cint[\zeta]{S_{R_1}}{\frac{f(\zeta)}{(\zeta - a}^{n + 1})}
+		\end{multline}
+		Обозначим $ c_n(R_1) = \frac1{2\pi i}\cint[\zeta]{S_{R_1}}{\frac{f(\zeta)}{(\zeta - a)^{n + 1}}} $.
+		$$ \eref6 \implies \frac1{2\pi i} \cint[\zeta]{S_{R_1}}{\frac{f(\zeta)}{\zeta - z}} = c_0(R_1) + \sum_{n = 1}^\infty c_n(R_1)(z - a)^n $$
+		\item Пусть $ z $ лежит на окружности.
+		\begin{equ}9
+			-\frac1{\zeta - z} = -\frac1{(\zeta - a) - (z - a)} = -\frac1{z - a} \cdot \frac1{\frac{\zeta - a}{z - a} - 1} = \frac1{z - a} \cdot \frac1{1 - \frac{\zeta - a}{z - a}}
+		\end{equ}
+		$$ \comment{\widedots[10cm]} $$
+		\begin{equ}{12}
+			c_{-n - 1}(r_1) = \frac1{2\pi i} \cint[\zeta]{S_{r_1}}{f(\zeta)(\zeta - a)^n}
+		\end{equ}
+		$$ \implies -\frac1{2\pi i}\cint[\zeta]{S_{r_1}}{\frac{f(\zeta)}{\zeta - z}} = \sum_{n = 1}^\infty c_{-n}(r_1) (z - a)^{-n} $$
+	\end{itemize}
+
+	Воспользуемся леммой:
+	\begin{equ}{15}
+		\iff -\cint[\zeta]{S_{\rho_1}}{\vphi(\zeta)} + \cint[\zeta]{S_{\rho_2}}{\vphi(\zeta)} = 0 \iff \frac1{2\pi i}\cint[\zeta]{S_{R_1}}{\frac{f(\zeta)}{(\zeta - a)^{n + 1}}} = \frac1{2\pi i} \cint[\zeta]{S_{\rho_0}}{\frac{f(\zeta)}{(\zeta - a)^{n + 1}}} \bydef c_n
+	\end{equ}
+	\begin{equ}{16}
+		\frac1{2\pi i} \cint[\zeta]{S_{r_1}}{f(\zeta)(\zeta - a)^n} = \frac1{2\pi i}\cint[\zeta]{S_{\rho_0}}{f(\zeta)(\zeta - a)^n} \bydef c_{-n - 1}
+	\end{equ}
+	$$ \eref4, \eref{15}, \eref{16} \implies f(z) = \sum_{n = 1}^\infty c_{-n}(z - a)^{-n} + c_0 + \sum_{n = 1}^\infty c_n(z - a)^n $$
+\end{proof}
+
+\begin{lemma}
+	$ r < \rho_1 < \rho_2 < R, \qquad m \in \Z $
+	\begin{equ}{14}
+		\implies \frac1{2\pi i} \cint[\zeta]{S_{\rho_1}}{f(\zeta)(\zeta - a)^m} = \frac1{2\pi i}\cint[\zeta]{S_{\rho_2}}{f(\zeta)(\zeta - a)^m}
+	\end{equ}
+\end{lemma}
+
+\begin{proof}
+	Возьмём $ \vphi(\zeta) = f(\zeta)(\zeta - a)^m \quad \in \mc A \big( D_{r, R}(a) \big) $
+
+	По теореме Коши,
+	$$ \cint[\zeta]{\partial D_{\rho_1, \rho_2}(a)}{\vphi(\zeta)} = 0 $$
+	$$ \comment{\widedots[5cm]} $$
+\end{proof}
+
+\section{Особые точки аналитических функций}
+
+\begin{definition}
+	$ f \in \mc A \big( D_{0, R}(a) \big) $
+
+	Говорят, что $ a $ --- \it{особая точка} функции $ f $.
+\end{definition}
+
+\subsection{Классификация особых точек}
+
+Доказано, что
+\begin{equ}{21}
+	f(z) = \sum_{n = 1}^\infty c_{-n}(z - a)^{-n} + c_0 + \sum_{n = 1}^\infty c_n(z - a)^n
+\end{equ}
+
+Говорят, что
+\begin{enumerate}
+	\item $ a $ --- устранимая особая точка, если $ c_{-n} = 0 \quad \forall n \ge 1 $;
+	\item функция $ f $ имеет в $ a $ \it{полюс}, если
+	$$ \exist n_0 \ge 1 : \quad c_{-n_0} \ne 0, \quad c_n = 0 \quad \forall n > n_0 $$
+	\item функция $ f $ имеет \it{\dots}, если
+	$$ \exist \seq{n_k} : \quad c_{-n_k} \ne 0 $$
+\end{enumerate}
+
+\subsection{Характеристика устранимой особой точки}
+
+\begin{theorem}
+	Чтобы точка $ a $ была устранимой особой точкой, \bt{необхдимо и достаточно}, чтобы
+	\begin{equ}{26}
+		\exist 0 < r < R, \quad \exist M : \quad |f(z)| \le M \quad \forall z \in D_{0, r}(a)
+	\end{equ}
+\end{theorem}
+
+\begin{eproof}
+	\item Необходимость
+
+	Из условия на устранимую особую точку и \eref{21} следует, что
+	$$ f(z) \in \dots $$
+	(по последней теореме предыдущего семетра)
+	\item Достаточность
+
+	Возьмём $ 0 < \veps < r $ и $ \veps < |z - a| < r $.
+	$$ f(z) = \frac1{2\pi i} \cint[\zeta]{S_r}{\frac{f(\zeta)}{\zeta - z}} - \frac1{2\pi i}\cint[\zeta]{S_\veps}{\frac{f(\zeta)}{\zeta - z}} $$
+	\begin{equ}{27}
+		\bigg| -\frac1{2\pi i} \cint[\zeta]{S_\veps}{\frac{f(\zeta)}{\zeta - z}} \bigg| \le \frac1{2\pi} \acint[\zeta]{S_\veps}{\frac{|f(\zeta)|}{|\zeta - z|}}
+	\end{equ}
+	\begin{equ}{28}
+		|\zeta - z| \ge |z - a| - |\zeta - a| = |z - a| - \veps \ge \frac12|z - a|
+	\end{equ}
+	\begin{equ}{29}
+		\eref{26}, \eref{27}, \eref{28} \implies \bigg| %-\frac1{\2pi i} \cint[\zeta]{S_\veps}{\frac{f(\zeta)}{\zeta - z}} \le \frac1{2\pi} \cdot \frac M{\frac12 |z - a|} \cdot 2\pi \veps = \frac{2 M \veps}{|z - a|}
+	\end{equ}
+	$$ \eref{27}, \eref{29} \implies f(z) = \liml{\veps \to 0} \bigg( \frac1{2\pi i} \cint[\zeta]{S_r}{\frac{f(\veps)}{\zeta - z}} - \frac1{2\pi i} \cint[\zeta]{S_\veps}{\frac{f(\zeta)}{\zeta - z}} \bigg) = \frac1{2\pi i} \cint[\zeta]{S_r}{\frac{f(\zeta)}{\zeta - a}} = f(a) + \sum_{n = 1}^\infty \frac{\nder f(a)}{n!} (z - a)^n $$
+\end{eproof}
+
+\subsection{Характеристика полюса}
+
+\begin{theorem}
+	Для того, чтобы $ a $ была полюсом \bt{необходимо и достаточно}, чтобы
+	\begin{equ}{210}
+		|f(z)| \underarr{z \to a} +\infty
+	\end{equ}
+\end{theorem}
+
+\begin{eproof}
+	\item Достаточность
+	\begin{equ}{211}
+		f(z) = \sum_{n = 1}^{n_0} c_{-n}(z - a)^{-n} + c_0 + \sum_{n = 1}^\infty (z - a)^n
+	\end{equ}
+	$$ \implies f(z) = (z - a)^{-n_0} \bigg( \sum_{n = 1}^\infty c_{-n}(z - a)^{n_0 - n} + c_0(z - a)^{n_0} + \sum_{n = 1}^\infty c_n(z - a)^{n + n_0} \bigg) = (z - a)^{-n_0} \bigg( c_{-n_0} + c_{-n_0 + 1}(z - a) + \dots \bigg) $$
+	\begin{equ}{212}
+		\exist \delta_0 > 0 : \quad |c_{-n_0} + c_{-n_0 + 1}(z - a) + \dots| \ge \frac12 |c_{-n_0}| \quad \text{ при } |z - a| < \delta_0
+	\end{equ}
+	$$ \implies |f(z)| \ge |z - a|^{-n_0} \cdot \frac{|c - n_0|}2 \underarr{z \to a} +\infty $$
+
+	\item Необходимость
+	$$ \eref{210} \implies \exist \delta_1 : \quad |f(z)| > 1 \quad \text{ при } |z - a| < \delta_1 $$
+	$$ \implies f(z) \ne 0 \quad \text{ при } z \in D_{0, \delta_1}(a) \quad \implies \quad \vphi(z) \define \frac1{f(z)} \in \mc A \big( D_{0, \delta_1}(a) \big) $$
+	$$ \vphi(z) \not\equiv 0 $$
+	$$ \eref{210} \implies |\vphi(z)| \underarr{z \to 0} 0 $$
+	$$ |\vphi(z)| < 1 $$
+	$$ \implies \vphi \in \mc A \big( \ttm B_{\delta_1}(a) \big) $$
+	$$ \implies \vphi(a) = 0 $$
+	$$ \implies \exist n_0 \in \N, \quad \exist h \in \mc A \big( \ttm B_{\delta_1}(a) \big) : \quad \psi(z) = (z - a)^{n_0}h(z), \quad h(z) \ne 0, \quad z \in \ttm B_{\delta_2}(a) $$
+	$$ \implies f(z) = \frac1{(z - a)^{n_0}} \cdot \frac1{h(z)} $$
+	$$ \implies g(z) = \frac1{h(z)} \in \mc A \big( \ttm B_{\delta_2}(a) \big) $$
+	$$ \implies g(z) = c_0 + c_1(z - a) + c_2(a - a)^2 + \dots $$
+	$$ \implies f(z) = \frac1{(z - a)^{n_0}} \bigg( c_0 + c_1(z - a) + \dots \bigg) = c_0(z - a)^{-n_0} + c_1(z - a)^{-n_0 + 1} + \dots $$
+\end{eproof}
