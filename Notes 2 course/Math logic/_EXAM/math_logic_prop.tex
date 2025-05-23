@@ -1,0 +1,362 @@
+\chapter{Математическая логика}
+
+\section{Пропозициональные формулы}
+
+\begin{definition}
+	\emph{Высказыванием} называется утверждение, относительно которого однозначно можно сказать, истинно оно или ложно.
+\end{definition}
+
+\begin{definition}
+	\emph{Пропозициональной переменной} называется переменная для высказываний.
+\end{definition}
+
+\begin{definition}
+	\hfill
+	\begin{enumerate}
+		\item логические константы являются \emph{пропозициональными формулами};
+		\item пропозициональные переменные являются \emph{пропозициональными формулами};
+		\item если $ A $ "--- пропозициональная формула, то $ \neg A $ является \emph{пропозициональной формулой};
+		\item Если $ A $ и $ B $ "--- пропозициональные формулы, $ * $ "--- бинарная логическая связка, то $ (A * B) $ является \emph{пропозициональной формулой};
+		\item никакие другие выражения не являются \emph{пропозициональными формулами}.
+	\end{enumerate}
+\end{definition}
+
+\begin{definition}
+	Пропозициональная формула называется \emph{тавтологией}, если она истинна при всех наборах значений своих переменных.
+\end{definition}
+
+\begin{definition}
+	Пропозициональная формула называется \emph{противоречием}, если она ложна при всех наборах значений своих переменных.
+\end{definition}
+
+\begin{definition}
+	Пропозициональная формула называется \emph{выполнимой}, если она истинна хоть на одном наборе своих переменных.
+\end{definition}
+
+\begin{definition}
+	Пропозициональные формулы называются \emph{равносильными}, если их значения совпадают при всех наборах значений их переменных.
+\end{definition}
+
+\subsection{Основные равносильности}
+
+Пусть $ T $ "--- тавтология, $ F $ "--- противоречие.
+
+\begin{figure}[!ht]
+	\centering
+	\begin{tabular}{l | r c l}
+		Идемпотентность & $ A \amp A $ & $ \iff $ & $ A $ \\
+						& $ A \vee A $ & $ \iff $ & $ A $ \\
+		Коммутативность & $ A \amp B $ & $ \iff $ & $ B \amp A $ \\
+						& $ A \vee B $ & $ \iff $ & $ B \vee A $ \\
+		Ассоциативность & $ (A \amp B) \amp C $ & $ \iff $ & $ A \amp (B \amp C) $ \\
+					   & 					 & 	   & $ A \amp B \amp C $ \\
+					   & $ (A \vee B) \vee C $ & $ \iff $ & $ A \vee (B \vee C) $ \\
+					   & 			   & 	 & $ A \vee B \vee C $ \\
+		Дистрибутивность & $ A \amp (B \vee C) $ & $ \iff $ & $ A \amp B \vee A \amp C $ \\
+		Дистрибутивность & $ A \vee B \amp C $ & $ \iff $ & $ (A \vee B) \amp (A \vee C) $ \\
+		Поглощение & $ A \amp (A \vee B) $ & $ \iff $ & $ A $ \\
+				   & $ A \vee A \amp B $ & $ \iff $ & $ A $ \\
+		Правило де~Моргана & $ \neg (A \amp B) $ & $ \iff $ & $ \neg A \vee \neg B $ \\
+						   & $ \neg (A \vee B) $ & $ \iff $ & $ \neg A \amp \neg B $ \\
+		Склеивание & $ A \amp B \vee \neg A \amp C $ & $ \iff $ & $ A \amp B \vee \neg A \amp C \vee B \amp C $ \\
+				   & $ (A \vee B) \amp (\neg A \vee C) $ & $ \iff $ & $ (A \vee B) \amp (\neg A \vee C) \amp (B \vee C) $ \\
+		Двойное отрицание & $ \neg\neg A $ & $ \iff $ & $ A $ \\
+						  & $ A \to B $ & $ \iff $ & $ \neg A \vee B $ \\
+						  & $ A \leftrightarrow B $ & $ \iff $ & $ (A \to B) \amp (B \to A) $ \\
+						  & 		&	  & $ (\neg A \vee B) \amp (\neg B \vee A) $ \\
+						  & 		&	  & $ (A \amp B) \vee (\neg A \amp \neg B) $ \\
+						  & $ A \oplus B $ & $ \iff $ & $ \neg (A \leftrightarrow B) $ \\
+						  &			&	  & $ (\neg A \amp B) \vee (A \amp \neg B) $ \\
+						  & 		&	  & $ (A \vee B) \amp (\neg B \vee \neg A) $ \\
+						  & $ A \mathrel| B $ & $ \iff $ & $ \neg(A \amp B) $ \\
+						  & $ A \downarrow B $ & $ \iff $ & $ \neg (A \vee B) $ \\
+						  & $ A \amp T $ & $ \iff $ & $ A $ \\
+						  & $ A \vee T $ & $ \iff $ & $ T $ \\
+						  & $ A \amp F $ & $ \iff $ & $ F $ \\
+						  & $ A \vee F $ & $ \iff $ & $ A $ \\
+						  & $ A \to T $ & $ \iff $ & $ T $ \\
+						  & $ A \to F $ & $ \iff $ & $ \neg A $ \\
+						  & $ T \to A $ & $ \iff $ & $ A $ \\
+						  & $ F \to A $ & $ \iff $ & $ F $ \\
+						  & $ A \leftrightarrow T $ & $ \iff $ & $ A $ \\
+						  & $ A \leftrightarrow F $ & $ \iff $ & $ \neg A $
+	\end{tabular}
+\end{figure}
+
+\subsection{Дизъюнктивная и конъюнктивная формы}
+
+\begin{definition}
+	\emph{Элементарной конъюнкцией} называется многократная конъюнкция переменных и их отрицаний.
+\end{definition}
+
+\begin{definition}
+	\emph{Дизъюнктивной нормальной формой} называется пропозициональная формула, являющаяся многократной дизъюнкцией элементарных конъюнкций.
+\end{definition}
+
+\begin{theorem}[о ДНФ]
+	По всякой пропозициональной формуле, не являющейся противоречием, можно построить равносильную ей в ДНФ.
+\end{theorem}
+
+\begin{undefthm}{Идея доказательства.}
+	В таблице истинности для формулы есть хоть одна строка, в столбце значений которой стоит И.
+	Для каждой такой строки, соответствующей набору значений $ (\alpha_1^i, \dots, \alpha_n^i) $, выписываем элементарную конъюнкцию $ K_i = x_1^{\alpha_1^i} \amp \dots \amp x_n^{\alpha_n^i} $, значение которой равно И на наборе $ (\alpha_1^i, \dots, \alpha_n^i) $ и только на нём.
+	Формула в ДНФ $ K_1 \vee \dots \vee K_m $ принимает значение И на выбранных строках и только на них.
+\end{undefthm}
+
+Так построенная формула называется совершенной ДНФ.
+
+\begin{definition}
+	\emph{Элементарной дизъюнкцией} называется многократная дизъюнкция переменных и их отрицаний.
+\end{definition}
+
+\begin{definition}
+	\emph{Конъюнктивной нормальной формой} называется пропозициональная формула, являющаяся многократной конъюнкцией элементарных дизъюнкций.
+\end{definition}
+
+\begin{theorem}[о КНФ]
+	По всякой формуле, не являющейся тавтологией, можно построить равносильную ей в КНФ.
+\end{theorem}
+
+\begin{undefthm}{Идея доказательства.}
+	Отрицание формулы не является противоречием, следовательно можно построить формулу в ДНФ.
+	Отрицание формулы в ДНФ, после применения правил де Моргана, является формула в КНФ.
+\end{undefthm}
+
+\section{Исчисления высказываний}
+
+Для того, чтобы задать исчисление, достаточно задать
+\begin{enumerate}
+	\item \emph{Алфавит} "--- конечное множество символов $ A = \set{a_1, \dots, a_n} $.
+	\item Множество \emph{формул} "--- слов в алфавите, для которых существует эффективная процедура проверки, является ли слово формулой.
+	\item Множество \emph{аксиом} "--- эффективно проверяемое подмножество множества формул.
+	\item \emph{Правила вывода} "--- конечное множество отношений над формулами, для каждого из которых все аргументы, кроме последнего, называются \emph{посылками правила}, а последний аргумент "--- заключением правила.
+\end{enumerate}
+
+\begin{definition}
+	Формула $ B $ \emph{непосредственно выводима} из формул $ A_1, \dots, A_n $, если имеется $ n + 1 $-местное отношение $ R $, задающее одно из правил вывода, такое, что $ R(A_1, \dots, A_n, B) $.
+\end{definition}
+
+\begin{definition}
+	\emph{Выводом} в исчислении называется последовательность формул, каждая из которых либо является аксиомой, либо непосредственно выводима из некоторых предыдущих.
+\end{definition}
+
+\begin{definition}
+	Последняя формула любого вывода в заданном исчислении называется \emph{выводимой} в нём (\emph{теоремой} этого исчисления).
+\end{definition}
+
+\begin{notation}
+	$ \models_C P $ "--- $ P $ выводима в исчислении $ C $
+\end{notation}
+
+\begin{definition}
+	Формула $ B $ \emph{выводима из множества формул} $ \Sigma $, если найдётся последовательность формул, заканчивающихся формулой $ B $, каждая из которых либо является аксиомой, либо входит в множество $ \Sigma $, либо непосредственно выводима из некоторых предыдущих.
+\end{definition}
+
+\begin{notation}
+	$ \Sigma \models_C P $ "--- $ P $ выводима из $ \Sigma $ в исчислении $ C $
+\end{notation}
+
+\begin{definition}
+	Исчисление называется \emph{полным}, если всякая истинная формула этого исчисления выводима в нём.
+\end{definition}
+
+\begin{definition}
+	Исчисление называется \emph{непротиворечивым}, если не существует такой формулы этого исчисления, что выводима она сама и её отрицание.
+\end{definition}
+
+\subsection{Секвенциальное исчисление высказываний}
+
+\begin{definition}
+	\emph{Секвенцией} называется выражение вида $ \Gamma \vdash \Delta $, где $ \Gamma, \Delta $ "--- списки (возможно, пустые) формул, $ \vdash $ "--- знак секвенции.
+
+	$ \Gamma $ называется \emph{антецедентом} секвенции, $ \Delta $ "--- сукцедентом (консеквентом) секвенции.
+\end{definition}
+
+Каждой секвенции можно поставить в соответствие формулу, которая называется \emph{формульным} образом секвенции:
+$$ \Phi(A_1 \dots A_n \vdash B_1 \dots B_m) = A_1 \amp \dots \amp A_n \to (B_1 \vee \dots \vee B_m) $$
+
+Формальное описание:
+\begin{enumerate}
+	\item Алфавит: множество символов для записи имён пропозициональных переменных, объединённое с множеством логических связок $ \set{\amp, \neg} $, символа секвенции и скобок.
+	\item Формулы исчисления: секвенции, содержащие пропозициональные формулы в выбранном алфавите.
+	\item Аксиомы исчисления: единственная схема аксиом
+		$$ \Gamma_1~A~\Gamma_2 \vdash \Delta_1~A~\Delta_2 $$
+	\item Правила вывода
+\end{enumerate}
+
+$$ (\vdash \neg) ~ \frac{\Gamma_1~A~\Gamma_2 \vdash \Delta_1~\Delta_2}{\Gamma_1~\Gamma_2 \vdash \Delta_1~\neg A~\Delta_2} \qquad (\neg \vdash) ~ \frac{\Gamma_1~\Gamma_2 \vdash \Delta_1~A~\Delta_2}{\Gamma_1~\neg A~\Gamma_2 \vdash \Delta_1~\Delta_2} $$
+$$ (\vdash \amp) ~ \frac{\Gamma \vdash \Delta_1~A~\Delta_2 \qquad \Gamma \vdash \Delta_1~B~\Delta_2}{\Gamma \vdash \Delta_1~(A \amp B)~\Delta_2} \qquad (\amp \vdash) ~ \frac{\Gamma_1~A~B~\Gamma_2 \vdash \Delta}{\Gamma_1~(A \amp B)~\Gamma_2 \vdash \Delta} $$
+$$ (\vdash \vee) ~ \frac{\Gamma \vdash \Delta_1~A~B~\Delta_2}{\Gamma \vdash \Delta_1~(A \vee B)~\Delta_2} \qquad (\vee \vdash) ~ \frac{\Gamma_1~A~\Gamma_2 \vdash \Delta \qquad \Gamma_1~B~\Gamma_2 \vdash \Delta}{\Gamma_1~(A \vee B)~\Gamma_2 \vdash \Delta} $$
+$$ (\vdash \to) ~ \frac{\Gamma_1~A~\Gamma_2 \vdash \Delta_1~B~\Delta_2}{\Gamma_1~\Gamma_2 \vdash \Delta_1~(A \to B)~\Delta_2} \qquad (\to \vdash) ~ \frac{\Gamma_1~\Gamma_2 \vdash \Delta_1~A~\Delta_2 \qquad \Gamma_1~B~\Gamma_2 \vdash \Delta_1~\Delta_2}{\Gamma_1~(A \to B)~\Gamma_2 \vdash \Delta_1~\Delta_2} $$
+$$ (\vdash \leftrightarrow) ~ \frac{\Gamma_1~A~\Gamma_2 \vdash \Delta_1~B~\Delta_2 \qquad \Gamma_1~B~\Gamma_2 \vdash \Delta_1~A~\Delta_2}{\Gamma_1~\Gamma_2 \vdash \Delta_1~(A \leftrightarrow B)~\Delta_2} \qquad (\leftrightarrow \vdash) ~ \frac{\Gamma_1~\Gamma_2 \vdash \Delta_1~A~B~\Delta_2 \qquad \Gamma_1~A~B~\Gamma_2 \vdash \Delta_1~\Delta_2}{\Gamma_1~(A \leftrightarrow B)~\Gamma_2 \vdash \Delta_1~\Delta_2} $$
+$$ (\vdash \oplus) ~ \frac{\Gamma_1~\Gamma_2 \vdash \Delta_1~A~B~\Delta_2 \qquad \Gamma_1~A~B~\Gamma_2 \vdash \Delta_1~\Delta_2}{\Gamma_1~\Gamma_2 \vdash \Delta_1~(A \oplus B)~\Delta_2} \qquad (\oplus \vdash) ~ \frac{\Gamma_1~A~\Gamma_2 \vdash \Delta_1~B~\Delta_2 \qquad \Gamma_1~B~\Gamma_2 \vdash \Delta_1~A~\Delta_2}{\Gamma_1~(A \oplus B)~\Gamma_2 \vdash \Delta_1~\Delta_2} $$
+
+\begin{theorem}\label{th:axiom}
+	Формульный образ аксиомы является тавтологией.
+\end{theorem}
+
+\begin{proof}
+	Пусть аксиома имеет вид $ P_1 \dots P_k~A~Q_1 \dots Q_l \vdash R_1 \dots R_m~A~T_1 \dots T_n $.
+	Её формульным образом является формула
+	$$ P_1 \amp \dots \amp P_k \amp A \amp Q_1 \amp \dots \amp Q_l \vdash R_1 \vee \dots \vee R_m \vee A \vee T_1 \vee \dots \vee T_n, $$
+	которая равносильна элементарной дизъюнкции
+	$$ \neg P_1 \vee \dots \vee \neg P_k \vee \neg A \vee \neg Q_1 \vee \dots \vee \neg Q_l \vee R_1 \vee \dots \vee R_m \vee A \vee T_1 \vee \dots \vee T_n, $$
+	содержащей контрарную пару $ \neg A \vee A $ и, следовательно, являющейся тавтологией.
+\end{proof}
+
+\begin{theorem}\label{th:infer_rule}
+	Для каждого правила вывода формульный образ его заключения равносилен конъюнкции формульных образов посылок этого правила.
+\end{theorem}
+
+\begin{proof}
+	Доказательство проведём для правила $ (\vdash \amp) $. Формульные образы посылок:
+	$$ P_1 \dots P-k \vdash R_1 \dots R_m ~ A ~ T_1 \dots T_n, \qquad P_1 \dots P_k \vdash R_1 \dots R_m ~ B ~ T-1 \dots T_n $$
+	равносильны соответственно
+	$$ \neg P_1 \vee \dots \vee \neg P-k \vee R_1 \vee \dots \vee R_m \vee A \vee T_1 \dots \vee T_n $$
+	$$ \neg P_1 \vee \dots \vee \neg P_k \vee R_1 \vee \dots \vee R_m \vee B \vee T_1 \vee \dots \vee T_n $$
+	Воспользуемся коммутативностью дизъюнкции:
+	$$ \neg P_1 \vee \dots \neg P-k \vee R_1 \vee \dots \vee R_m \vee T_1 \vee \dots \vee T_n \vee A $$
+	$$ \neg P_1 \vee \dots \vee \neg P_k \vee R_1 \vee \dots \vee R_m \vee T_1 \vee \dots \vee T_n \vee B $$
+	С учётом дистрибутивности дизъюнкции имеем
+	$$ \neg P_1 \vee \dots \vee \neg P_k \vee R_1 \vee \dots \vee R_m \vee T_1 \vee \dots \vee T_n \vee A \amp B, $$
+	что является формульным образом секвенции
+	$$ P_1 \dots P_k \vdash R_1 \dots R_m~A \amp B ~T_1 \dots T_n $$
+\end{proof}
+
+\begin{theorem}
+	Секвенция выводима в секвенциальном исчислении тогда и только тогда, когда её формульный образ является тавтологией.
+\end{theorem}
+
+\begin{iproof}
+	\item Необходимость: $ (\models S) \quad \implies \quad \Phi(S) $ является тавтологией
+
+		Доказательство по \bt{индукции} по длине вывода секвенции $ S $:
+		\begin{itemize}
+			\item \bt{База}. Длина вывода = 1. Секвенция является аксиомой, и по \autoref{th:axiom} её формульный образ "--- тавтология.
+			\item \bt{Переход}. Пусть формульный образ любой секвенции, длина вывода которой меньше $ n $ является тавтологией. Докажем, что формульный образ секвенции, длина вывода которой равна $ n $, является тавтологией.
+
+				Рассмотрим последнее применение правила вывода, по которому была получена секвенция $ n $. Пусть она была получена из $ S_1 $(или из $ S_1 $ и $ S_2 $).
+				Длина вывода $ S_1 $ (и $ S_2 $) меньше $ n $, \as они находятся раньше $ S $ в последовательности, определяющей вывод.
+				По \bt{индукционному предположению} формульный образ $ S_1 $ (и $ S_2 $) "--- тавтология.
+				По \autoref{th:infer_rule} $ \Phi(S) \iff \Phi(S_1) $ (или $ \Phi(S) \iff \Phi(S_1) \amp \Phi(S_2) $).
+				Следовательно, $ \Phi(S) $ является тавтологией.
+		\end{itemize}
+
+	\item Достаточность: $ \Phi(S) $ является тавтологией $ \quad \implies \quad (\models S) $
+
+		Доказательство по \bt{индукции} по количеству логических связок в секвенции $ S $:
+		\begin{itemize}
+			\item \bt{База}. Секвенция не содержит логических связок.
+				В этом случае $ S $ имеет вид $ p_1 \dots p_k \models q_1 \dots q_m $, где $ p_1, \dots, p_k, q_1, \dots, q_m $ "--- пропозициональные переменные.
+				Формульный образ этой секвенции равносилен $ \neg p_1 \vee \dots \vee \neg p_k \vee q_1 \vee \dots \vee q_m $ и является тавтологией.
+				Если каждая переменная $ p_1, \dots, p_k $ отлична от любой переменной $ q_1, \dots, q_m $, то на наборе значений $ (\text И, \dots, \text И, \text Л, \dots, \text Л) $ этот формульный образ имеет значение Л, что противоречит тому что он "--- тавтология.
+				Значит, среди переменных $ p_1, \dots, p_k $ имеется переменная, входящая в $ q_1, \dots, q_m $, $ S $ является аксиомой и, следовательно, выводима.
+			\item \bt{Переход}. Пусть для всякой секвенции, содержащей $ n $ логических связок, и чей формульный образ является тавтологией, она выводима.
+				Докажем, что всякая секвенция $ S $, содержащая $ n + 1 $ логическую связку, и чей формульный образ является тавтологией, выводима.
+
+				Рассмотрим произвольную внешнюю связку $ * $ секвенции $ S $.
+				Секвенция $ S $ может быть получена по правилу $ (\vdash *) $ или $ (* \vdash) $ из одной $ S_1 $ или двух $ S_1 $ и $ S_2 $ секвенций, содержащих $ n $ логических связок.
+				При этом по \autoref{th:infer_rule} $ \Phi(S) \iff \Phi(S_1) \amp \Phi(S_2) $ и, следовательно, $ \Phi(S_1) \amp \Phi(S_2) $ "--- тавтология.
+				Отсюда $ \Phi(S_1) $ "--- тавтология и $ \Phi(S_2) $ "--- тавтология.
+				По \bt{индукционному предположению} они выводимы.
+		\end{itemize}
+\end{iproof}
+
+\begin{definition}
+	Пропозициональная формула $ P $ называется \emph{выводимой} в секвенциальном исчислении высказываний, если в нём выводима секвенция $ \vdash P $.
+\end{definition}
+
+\begin{implication}
+	Секвенциальное исчисление высказываний полно и непротиворечиво.
+\end{implication}
+
+\begin{iproof}
+	\item \bt{Полнота} секвенциального исчисления высказываний следует из достаточности:
+
+		Пусть $ P $ "--- тавтология. Так как $ P \iff \Phi(\vdash P) $, то $ \Phi(\vdash P) $ тоже тавтология и, следовательно, $ \vdash P $ выводима.
+
+	\item \bt{Непротиворечивость} секвенциального исчисления высказываний следует из необходимости:
+
+		Пусть в секвенциальном исчислении высказываний выводимы секвенции $ \vdash P $ и $ \vdash \neg P $.
+		Тогда их формульные образы $ P $ и $ \neg P $ являются тавтологиями, что невозможно.
+\end{iproof}
+
+Кроме того, по аналогии с теоремой можно доказать следующее утверждение.
+
+\begin{statement}
+	Формульный образ секвенции равносилен конъюнкции формульных образов секвенций, из которых она выводима.
+\end{statement}
+
+\begin{definition}
+	Правило вывода называется \emph{допустимым} в исчислении, если по всякому выводу, содержащему применение этого правила, можно построить вывод с той же конечной формулой, не содержащий применения этого правила.
+\end{definition}
+
+\begin{statement}
+	Если в языке секвенциального исчисления высказываний имеется только две логические связки $ \neg $ и $ \amp $ и основными правилами вывода в нём являются $ (\vdash \neg), ~ (\neg, \vdash), ~ (\vdash \amp), ~ (\amp \vdash) $, то остальные правила вывода являются допустимыми в нём.
+\end{statement}
+
+\begin{proof}
+	Покажем допустимость остальных правил вывода на примере правила $ (\to \vdash) $.
+
+	Так как в языке нет логической связки $ \to $, формула $ A \to B $ будет записана в виде $ \neg (A \amp \neg B) $.
+	Поэтому правило $ (\to \vdash) $ примет вид
+	$$ \frac{\Gamma_1 ~\Gamma_2 \vdash \Delta_1 ~ A ~ \Delta_2 \qquad \Gamma_1 ~ B ~ \Gamma_2 \vdash \Delta_1 ~ \Delta_2}{\Gamma_1 ~ \neg(A \amp \neg B) ~ \Gamma_2 \vdash \Delta_1 ~ \Delta_2} $$
+
+	Пусть имеется вывод с применением правила $ (\to \vdash) $.
+	Количество применений этого правила конечно, \as сам вывод конечен.
+	Для каждого применения правила $ (\to \vdash) $ обозначим 3 секвенции в правиле $ S_1, S_2 $ и $ S_3 $ соответственною
+	То есть в выводе имеется конечная последовательность секвенций вида $ S_1, \dots, S_2, \dots, S_3 $.
+
+	Но $ S_3 $ может быть получена по правилу $ (\neg \vdash) $ из
+	$$ S' \text{ вида } \Gamma_1 ~\Gamma_2 \vdash \Delta_1 ~ (A \amp \neg B) ~ \Delta_2 $$
+	$ S' $ может быть получена по правилу $ (\vdash \amp) $ из $ S_1 $ и
+	$$ S'' \text{ вида } \Gamma_1~\Gamma_2 \vdash \Delta_1~\neg B~\Delta_2 $$
+	$ S'' $ может быть получена по правилу $ (\vdash \neg) $ из $ S_2 $.
+
+	Таким образом для каждого применения правила $ (\to \vdash) $ последовательность секвенций $ S_1, \dots, S_2, $ $ \dots, S_3 $ будет заменена на $ S_1, \dots, S_2, S'', \dots, S', S_3 $.
+\end{proof}
+
+\begin{statement}
+	Следующие правила являются допустимыми в секвенциальном исчислении высказываний:
+	\begin{itemize}
+		\item Правила перестановки.
+			$$ \frac{\Gamma_1~P~\Gamma_2~Q~\Gamma_3 \vdash \Delta}{\Gamma_1~Q~\Gamma_2~P~\Gamma_3 \vdash \Delta} \qquad \frac{\Gamma \vdash \Delta_1~P~\Delta_2~Q~\Delta_3}{\Gamma \vdash \Delta_1~Q~\Delta_2~P~\Delta_3} $$
+
+		\item Правила добавления.
+			$$ \frac{\Gamma_1~\Gamma_2 \vdash \Delta}{\Gamma_1~P~\Gamma_2 \vdash \Delta} \qquad \frac{\Gamma \vdash \Delta_1 ~ \Delta_2}{\Gamma \vdash \Delta_1~P~\Delta_2} $$
+
+		\item Правила сокращения повторений.
+			$$ \frac{\Gamma_1~P~\Gamma_2~P~\Gamma_3 \vdash \Delta}{\Gamma_1~P~\Gamma_2~\Gamma_3 \vdash \Delta} \qquad \frac{\Gamma \vdash \Delta_1~P~\Delta_2~P~\Delta_3}{\Gamma \vdash \Delta_1~P~\Delta_2~\Delta_3} $$
+
+		\item Правила исключения логических связок, например, для $ \amp $:
+			$$ (\vdash \amp_1^-) ~ \frac{\Gamma \vdash \Delta_1 ~ (A \amp B) ~ \Delta_2}{\Gamma \vdash \Delta_1 ~ A ~ \Delta_2} \qquad (\vdash \amp_2^-) ~ \frac{\Gamma \vdash \Delta_1~ (A \amp B) ~ \Delta_2}{\Gamma \vdash \Delta_1 ~ B ~ \Delta_2} \qquad (\amp^- \vdash) ~ \frac{\Gamma_1 ~ (A \amp B) ~ \Gamma_2 \vdash \Delta}{\Gamma_1 ~ A ~ B ~ \Gamma_2 \vdash \Delta} $$
+	\end{itemize}
+\end{statement}
+
+\subsection{Метод резолюций для исчисления высказываний}
+
+\emph{Предложением} в методе резолюций для исчисления высказываний называется элементарная дизъюнкция.
+
+Формальное описание метода резолюций:
+\begin{enumerate}
+	\item Алфавит: множество символов для записи имён пропозициональных переменных, объединённое с множеством из двух логических связок $ \vee $ и $ \neg $.
+	\item Формулы: предложения.
+	\item Аксиомы: отсутствуют.
+	\item Правила вывода:
+		\begin{itemize}
+			\item правило сокращения повторений:
+				$$ \frac{D_1 \vee x \vee D_2 \vee x \vee D_3}{D_1 \vee x \vee D_2 \vee D_3} $$
+			\item правило резолюции
+				$$ \frac{D_1 \vee x \vee D_2 \qquad D_3 \vee \neg x \vee D_4}{D_1 \vee D2 \vee D_3 \vee D_4} $$
+		\end{itemize}
+\end{enumerate}
+
+\begin{definition}
+	Множество предложений называется \emph{неудовлетворимым}, если из него выводимо пустое предложение $ nill $.
+\end{definition}
+
+Следующая теорема может быть доказана \bt{индукцией} по количеству применения правила резолюции (необходимость) и по количеству предложений (достаточность).
+
+\begin{theorem}
+	Для того, чтобы множество предложений было неудовлетворимо необходимо и достаточно, чтобы их конъюнкция являлась противоречием.
+\end{theorem}

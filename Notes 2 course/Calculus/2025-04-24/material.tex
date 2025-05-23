@@ -1,0 +1,237 @@
+\chapter{Мера Лебега}
+
+Все утверждения, приведённые здесь без доказательств, легко проверяются в случае $ \R $ при помощи картинок.
+
+Мера в нашем случае будет обозначать меру Лебега.
+
+\begin{definition}
+	Имеется некоторое непустое множество множеств $ \msc R $. Будем называть его \it{кольцом}, если
+	\begin{enumerate}
+		\item $ A \in \msc R, ~ B \in \msc R \implies A \cup B \in \msc R $;
+		\item $ \dots \implies A \setminus B \in \msc R $.
+	\end{enumerate}
+\end{definition}
+
+В частности, $ A \setminus A = \O \in \msc R $.
+
+Вследствие того, что $ A \cap B = A \setminus (A \setminus B) $, $ A \cap B \in \msc R $.
+
+\begin{definition}
+	$ \msc R $ называется $ \sigma $-\it{кольцом}, если
+	$$ \set{A_n}_{n = 1}^\infty, \quad A_n \in \msc R \implies \bigcup_{n = 1}^\infty A_n \in \msc R $$
+\end{definition}
+
+Можно проверить, что
+$$ A_1 \setminus \bigg( \bigcup_{n = 2}^\infty (A_1 \setminus A_n) \bigg) = \cap_{n = 1}^\infty A_n $$
+$$ \implies \bigcap_{n = 1}^\infty A_n \in \msc R $$
+
+$ \R^{m \ge 1}, \qquad a, b \in \R, \qquad a \le b $ \\
+Будем обозначать $ \braket{a, b} $, где $ \langle $ "--- это ( или [, а $ \rangle $ "--- это ) или ].
+
+Рассмотрим $ m \ge 2, \qquad A \in \R^m, \quad B \in \R^m $. $ \braket{A, B} $ будем также называть \it{промежутком} в $ \R^m $, где $ A = (a_1, \dots, a_m), ~ B = (b_1, \dots, b_m), \quad a_j \le b_j $.
+
+\begin{remark}
+	Вообще, это параллелепипед.
+\end{remark}
+
+\begin{definition}
+	\it{Мерой} промежутка будем называть
+	$$ \operatorname m \big( \braket{A, B} \big) = \prod_{j = 1}^m (b_j - a_j) $$
+\end{definition}
+
+\begin{definition}
+	\it{Элементарным множеством} будем называть конечное объединение промежутков:
+	$$ I = \bigcup_{k = 1}^N \braket{A_k, B_k} $$
+\end{definition}
+
+\begin{notation}
+	$ \msc E $ "--- множество всех элементарных множеств.
+\end{notation}
+
+\begin{statement}
+	$ I \sub \msc E $. Тогда $ I $ можно представить в виде объединения промежутков, таких что
+	$$ \braket{A_k, B_k} \cap \braket{A_l, B_l} = \O \quad \forall k \ne l $$
+\end{statement}
+
+\begin{definition}
+	\it{Мерой} элементарного множества будем называть
+	$$ \operatorname m I = \sum_{k = 1}^N \operatorname m \big( \braket{A_k, B_k} \big) $$
+\end{definition}
+
+\begin{statement}
+	Определение множества элементарного множества \bt{корректно}, то есть, мера не зависит от способа разбиения.
+\end{statement}
+
+\begin{definition}
+	Промежуток будем называть \it{открытым}, если все символы $ \langle $ и $ \rangle $ обозначают $ ($ и $ ) $.
+\end{definition}
+
+\begin{notation}
+	$ (a_k, b_k) $
+\end{notation}
+
+\begin{definition}
+	Элементарное множество будем называть \it{открытым}, если $ I = \bigcup (a_k, b_k) $.
+\end{definition}
+
+Пусть имеется некоторое множество $ E \sub \R^m $. Обозначим через $ U(E) $ множество следующих открытых элементарных множеств:
+$$ U(E) = \set{ \set{A_n}_{n = 1}^\infty }, \qquad A_n \text{ "--- открытое элементарное множество}, $$
+таких, что $ E \sub \bigcup_{n = 1}^\infty A_n $.
+
+\begin{remark}
+	Объединение может оказаться конечным.
+\end{remark}
+
+\begin{definition}
+	\it{Внешней мерой} множества $ E $ называется
+	$$ \operatorname m^* E = \inf\limits_{\set{A_n}_{n = 1}^\infty \in U(E)} \sum_{n = 1}^\infty \operatorname m A_n \quad \le +\infty $$
+	Если ряд расходится, приписываем внешней мере значение $ \infty $.
+\end{definition}
+
+Понятно, что $ \operatorname m^* $ определена для любого множества. Также очевидно, что $ \operatorname m^* \O = 0 $.
+
+\begin{props}
+	\item $ \operatorname m^* E \ge 0 $;
+	\item $ E_1 \sub E_2 \implies \operatorname m^* E_1 \le \operatorname m^* E_2 $;
+	\item $ I \in \msc E \implies \operatorname m^* I = \operatorname m I $;
+	\item
+	\begin{equ}1
+		E \sub \bigcup_{n = 1}^\infty E_n \implies \operatorname m^* E \le \sum_{n = 1}^\infty \operatorname m^* E_n.
+	\end{equ}
+\end{props}
+
+\begin{eproof}
+	\item Очевидно.
+	\item $ U(E_2) \sub U(E_1) $.
+	\item Очевидно.
+	\item Будем считать, что $ \operatorname m^* E_n < \infty \quad \forall n $.
+
+	Выберем $ \forall \veps > 0 $, $ \set{A_{n_k}}_{k = 1}^\infty, \quad A_{n_k} \in \msc E, \quad \set{A_{n_k}} \sub U(E_n) $ такие, что
+	\begin{equ}2
+		\sum_{k = 1}^\infty \operatorname m A_{n_k} < \operatorname m^* E_n + \frac\veps{2^n}
+	\end{equ}
+	Тогда
+	$$ \set{A_{n_k}}_{n = 1~k = 1}^{\infty~\infty} \in U(E) $$
+	$$ \implies \operatorname m^* E \le \sum_{n = 1}^\infty \left( \sum_{k = 1}^\infty \operatorname mA_{n_k} \right) $$
+	(т. к. внешняя мера "--- это инфимум)
+
+	Применим теперь \eref2:
+	$$ \sum \sum \operatorname m A_{n_k} \le \sum_{n = 1}^\infty \left( \operatorname m^* E_n + \frac\veps{2^n} \right) = \sum_{n = 1}^\infty \operatorname m^* E_n + \veps $$
+\end{eproof}
+
+\begin{remind}
+	$ A \sub \R^m, \quad B \sub \R^m $
+	$$ A \vartriangle B = (A \setminus B) \cup (B \setminus A) $$
+\end{remind}
+
+Определим неотрицательное число
+$$ \operatorname d(A, B) = \operatorname m^* (A \vartriangle B) \ge 0 $$
+
+Понятно, что $ A \vartriangle \O = A $, поэтому $ \operatorname d(A, \O) = \operatorname m^* A $.
+
+\begin{props}
+	\item $ \operatorname d(A, B) = \operatorname d(B, A) $;
+	\item $ \operatorname d(A, B) \le \operatorname d(A, C) + \operatorname d(C, B) $;
+	\item $ \operatorname d(A_1 \cup A_2, ~ B_1 \cup B_2) \le \operatorname d(A_1, B_1) + \operatorname d(A_2, B_2) $;
+	\item $ \operatorname d(A_1 \cap A_2, ~ B_1 \cap B_2) \le \operatorname d(A_1, B_1) + \operatorname d(A_2, B_2) $;
+	\item $ \operatorname d(A_1 \setminus A_2, ~ B_1 \setminus B_2) \le \operatorname d(A_1, B_1) + \operatorname d(A_2, B_2) $.
+\end{props}
+
+\begin{proof}
+	Все свойства основаны на теоретико-множественных соображениях. Например, 3 основано на включении
+	$$ A \vartriangle B \sub (A \vartriangle C) \cup (C \vartriangle B) $$
+	Далее нужно воспользоваться свойством \eref1 внешней меры.
+\end{proof}
+
+\begin{definition}
+	Будем говорить, что множество $ A \sub \R^m $ \it{конечно-измеримо (по Лебегу)}, если
+	\begin{equ}5
+		\exist \set{A_n}_{n = 1}^\infty, \quad A_n \in \msc E : \quad \operatorname d(A_n, A) \underarr{n \to \infty} 0
+	\end{equ}
+\end{definition}
+
+\begin{notation}
+	$ \mathfrak M_F $ "--- множество всех конечно-измеримых множеств.
+\end{notation}
+
+Понятно, что $ \msc E \sub \mathfrak M_F $.
+
+\begin{definition}
+	Множество $ B \sub \R^m $ будем называть \it{измеримым (по Лебегу)}, если
+	\begin{equ}6
+		\exist \set{A_n}_{n = 1}^\infty, \quad A_n \in \fm M_F : \quad B = \bigcup_{n = 1}^\infty A_n
+	\end{equ}
+\end{definition}
+
+Понятно, что $ \fm M_F \sub \fm M $.
+
+\begin{remark}
+	В множестве $ \R^m $ \bt{не все} подмножества измеримы: $ 2^{R^m} \neq \fm M $ (в отличие от внешней меры).
+\end{remark}
+
+Для $ B \in \fm M $ будем рассматривать $ \operatorname m^* B $.
+
+\begin{theorem}
+	Совокупность всех измеримых множеств является $ \sigma $-кольцом.
+
+	Внешняя мера, определённая на $ \fm M $ обладает свойством \it{счётной аддитивности} ($ \sigma $-\it{аддитивности}):
+	\begin{equ}7
+		\set{B_n}_{n = 1}^\infty, \quad B_n \in \fm M, \quad B_n \cap B_k = \O \quad \implies \operatorname m^* \bigcup_{n = 1}^\infty B_n = \sum_{n = 1}^\infty \operatorname m^* B_n
+	\end{equ}
+\end{theorem}
+
+Доказывать теорему не будем. Докажем, что $ \fm M_{\bt F} $ является кольцом, и мера на нём аддитивна.
+
+\begin{proof}[$ \fm M_F $ "--- кольцо]
+	Пусть есть $ A \in \fm M_F $ и $ B \in \fm M_F $. Тогда
+	$$ \exist A_n \in \msc E : \quad \operatorname d(A_n, A) \to 0 $$
+	$$ \exist B_n \in \msc E : \quad \operatorname d(B_n, B) \to 0 $$
+	Тогда, по одному из свойств d,
+	$$ \operatorname d(A_n \cup B_n, ~ A \cup B) \le \operatorname d(A_n, A) + \operatorname d(B_n, B) \to 0 $$
+	$$ \op (A_n \setminus B_n, ~ A \setminus B) \le \op d(A_n, A) + \op d(B_n, B) \to 0 $$
+	Отсюда $ A_n \cup B_n \in \msc E, \quad A_n \setminus B_n \in \msc E $.
+	$$ \implies A \cup B \in \fm M_F, \quad A \setminus B \in \fm M_F $$
+\end{proof}
+
+\begin{statement}
+	$ A, B \in \msc E $
+	\begin{equ}8
+		\implies \op m(A \cup B) + \op m(A \cap B) = \op m A + \op m B
+	\end{equ}
+\end{statement}
+
+В частности, при $ A \cap B = \O $,
+$$ \op m(A \cup B) = \op m A + \op m B $$
+
+\begin{proof}[аддитивность меры]
+	Пусть $ A, B \in \fm M_F, \quad A \cap B = \O $. Тогда
+	$$ \exist \set{A_n}, \set{B_n} : \quad \op d(A_n, A) \to 0, \quad \op d(B_n, B) \to 0 $$
+	Отдельно будет доказано, что
+	\begin{statement}\label{st:9}
+		Если $ \op d(C_n, C) \to 0 $, то $ \operatorname m^* C_n \to \operatorname m^* C $
+	\end{statement}
+	В соотношении \eref8 можно поставить внешнюю меру вместо меры:
+	$$ \operatorname m^*(A_n \cup B_n) + \op m^*(A_n \cap B_n) = \op m^* A_n + \op m^* B_n $$
+	Из \autoref{st:9}, $ \op m^*(A_n \cup B_n) \to \op m^*(A \cup B) $.
+	$$ \op m^*(A_n \cap B_n) \to \op m^*(A \cap B) = 0 $$
+	$$ \op m^* A_n \to \op m^* A, \qquad \op m^* B_n \to \op m^* B $$
+	Это всё влечёт, что
+	$$ \op m^*(A \cup B) = \op m^* A + \op m^* B $$
+\end{proof}
+
+\begin{statement}
+	$ |\op m^* A - \op m^* B| \le \op d(A, B) $
+\end{statement}
+
+\begin{proof}
+	Пусть $ \op m^* A < \op m^* B $. Тогда
+	$$ \op m^* B = d(B, \O) \le \op d(B, A) + \op d(A, \O) = \op d(B, A) + \op m^* A $$
+\end{proof}
+
+\vspace{0.5em}
+
+\begin{proof}[\autoref{st:9}]
+	$ |\op m^* C_n - \op m^* C| \le \op d(C_n, C) \to 0 $
+\end{proof}
+
+Теперь для $ E \in \fm M $ будем полагать $ \op m E = \op m^* E $. Это \it{мера Лебега}.

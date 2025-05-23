@@ -1,0 +1,185 @@
+\chapter{Теория меры}
+
+\section{Ряды Фурье}
+
+\begin{definition}
+	$ f : \R \to \R, \quad f \in \mathfrak M(\R), \quad f(x + 2\pi) = f(x) \quad \forall x, \quad f \in \msc L([0, 2\pi]) $
+
+	Функции $ f $ сопоставляются \emph{коэффициенты Фурье} и \emph{ряд Фурье}
+	$$ a_0 = \frac1{2\pi} \int\limits_{[0, 2\pi]} f \di \op m = \frac1{2\pi} \int_0^{2\pi} f(x) \di \op m $$
+	$$ a_n = \frac1\pi \int_0^{2\pi} f(x) \cos n x \di \op m $$
+	$$ b_n = \frac1\pi \int_0^{2\pi} f(x) \sin nx \di \op m $$
+	$$ f \sim a_0 + \sum_{n = 1}^\infty (a_n \cos nx + b_n \sin nx) $$
+\end{definition}
+
+\begin{note}
+	Мы не пишем $ \di x $, чтобы подчеркнуть, что это интеграл Лебега.
+\end{note}
+
+\begin{note}
+	По поводу равенства "--- это отдельный разговор.
+\end{note}
+
+Рассмотрим частичную сумму
+\begin{multline*}
+	S_n(x) = a_0 + \sum_{k = 1}^\infty (a_k \cos kx + b_k \sin kx) = \\
+	= \frac1{2\pi} \int_0^{2\pi} f(y) \di \op m + \sum_{k = 1}^n \frac1\pi \int_0^\pi f(y) \bigl( \cos ky \cdot \cos kx + \sin ky \cdot \sin kx \bigr) \di \op m = \\
+	\frac1\pi \int_0^{2\pi} f(y) \Bigl( \frac12 + \sum_{k = 1} \bigl( \cos ky \cdot \cos kx + \sin ky \cdot \sin kx \bigr) \Bigr) \di \op m =
+	\frac1\pi \int_0^{2\pi} f(y) \Bigl( \frac12 + \sum_{k = 1}^n \cos k(y - x) \Bigr) \di \op m
+\end{multline*}
+
+Сумму вычислим отдельно:
+$$ D_n(t) = \frac12 + \sum_{k = 1}^n \cos kt, \qquad D_n(2\pi l) = n + \frac12 $$
+Будем считать, что $ t \ne \pi n $. Тогда $ \sin \frac t2 \ne 0 $.
+$$ \sin \frac t2 D_n(t) = \sin \frac t2 + \sum_{k = 1}^n \sin \frac t2 \cdot \cos kt $$
+При этом,
+$$ \sin \frac t2 \cdot \cos kt = \frac12 \Bigl( \sin (k + \frac12) t - \sin (k - \frac12) t \Bigr) $$
+
+Тогда
+$$ \sin \frac t2 D_n(t) = \sin \frac t2 + \sum_{k = 1}^n \frac12 \Bigl( \sin (k + \frac12) t - \sin (k - \frac12) t \Bigr) $$
+
+$$ D_n(t) = \frac{\sin(n + \frac12)t}{2 \sin \frac t2} $$
+Пусть $ y - x = t $. \\
+Теперь
+\begin{equ}1
+	S_n(x) = \frac1{2\pi} \int_0^{2\pi} f(y) \frac{\sin (n + \frac12)(y - x)}{\sin \frac{y - x}2} \di \op m
+\end{equ}
+
+\begin{statement}
+	$ \phi \in \mathfrak M(\R), \quad \phi(x) = \phi(x + 2\pi) \quad \forall x, \quad \phi(x) \in \msc L([0, 2\pi]) $
+	$$ \implies \forall a \in \R \quad \phi \in \msc L([a, a + 2\pi]) $$
+	$$ \int\limits_{[0, 2\pi]} \phi \di \op m = \int\limits_{[a, a + 2\pi]} \phi \di \op m $$
+\end{statement}
+
+Применим это утверждение:
+\begin{multline*}
+	S_n(x) = \frac1{2\pi} \int_x^{x + 2\pi} f(y) \frac{\sin (n + \frac12)(y - x)}{\sin \frac{y - x}2} \di \op m = \frac1{2\pi} \int_0^{2\pi} f(x + t) \frac{\sin(n + \frac12)t}{\sin \frac t2} \di t = \\
+	= \frac1{2\pi} \int_{-\pi}^\pi f(x + t) \frac{\sin(n + \frac12)t}{\sin \frac t2} \di \op m(t)
+\end{multline*}
+
+\begin{lemma}[Римана"--~Лебега]
+	$ E \sub \R, \quad E \in \mathfrak M(\R), \quad \psi $ измерима на $ E \quad \phi \in \msc L(E) $
+	$$ \implies \int\limits_E \cos A x \psi(x) \di \op m \underarr{|A| \to \infty} $$
+	$$ \int\limits_E \sin A x \psi(x) \di \op m \underarr{|A| \to \infty} $$
+\end{lemma}
+
+\subsection{Признак Дини}
+
+\begin{theorem}
+	$ f(x) = f(x + 2\pi), \quad f \in \msc L([0, 2\pi]), \quad x \in (-\pi, \pi), \quad \phi(t) = \frac{f(x + t) - f(x)}t \in \msc L(-\eps, \eps), \quad 0 < \eps < \frac \pi 2 $
+	\begin{equ}3
+		\implies S_n(x) \underarr{n \to \infty} f(x)
+	\end{equ}
+\end{theorem}
+
+\begin{proof}
+	\begin{equ}4
+		\frac1{2\pi} \int_{-\pi}^\pi D_n(t) \di \op m = \frac1 \pi \int_{-\pi}^\pi \Bigl( \frac12 + \sum_{k = 1}^n \cos kt \Bigr) \di \op m = \frac1 \pi \int_{-\pi}^\pi \bigl( \frac12 + \sum_{k = 1}^n \cos kt \bigr) \di \op t = 1
+	\end{equ}
+\end{proof}
+
+Отсюда
+$$ S_n(x) - f(x) = \frac1{2\pi} \int_{-\pi}^\pi \bigl( f(x + t) - f(x) \bigr) \frac{\sin(n + \frac12)t}{\sin \frac t2} \di \op m =
+\frac1{2\pi} \int_{-\pi}^{-\eps} \dots + \frac1{2\pi} \int_{-\eps}^\eps \dots + \frac1{2\pi} \int_\eps^\pi \dots $$
+Рассмотрим первый интеграл:
+$$ \frac1{2\pi} \int_{-\pi}^{-\eps} \frac{f(x + t) - f(x)}{\sin \frac t2} \cdot \sin (n + \frac12)t \di \op m $$
+$$ |\sin \frac t2 | \ge \frac 2\pi \cdot \frac{|t|}2 = \frac{|t|}\pi \ge \frac \eps \pi \quad \implies \quad \frac{f(x + t) - f(x)}{2 \sin \frac t2} \in \msc L(-\pi, -\eps), \quad \in \msc L(\eps, \pi) $$
+
+Теперь
+$$ \frac1{2\pi} \int_{-\pi}^{-\eps} \frac{f(x + t) - f(x)}{\sin \frac t2} \sin(n + \frac12)t \underarr{n \to \infty} 0 $$
+$$ \\frac1{2\pi} \int_\eps^\pi \dots \to 0 $$
+\begin{multline*}
+	\frac1{2\pi} \int_{-\eps}^\eps \Bigl( f(x + t) - f(x) \Bigr) \frac{\sin(n + \frac12)t}{\sin \frac t2} \di \op m = \\
+	= \frac1 \pi \int_{-\eps}^\eps \frac{f(x + t) - f(x)}{\sin \frac t2} \cdot \sin (n + \frac12) t \di \op m + \frac1{2\pi} \int_{-\eps}^\eps \Bigl( f(x + t) - f(x) \Bigr) \Bigl( \frac1{\sin \frac t2} - \frac 2t \Bigr) \sin(n + \frac12)t \di \op m
+\end{multline*}
+
+Напомним, что
+$$ \frac1{\sin \tau} \cdot \frac1\tau = \frac{\tau - \sin \tau}{\tau \cdot \sin \tau} = \frac{-\frac{\tau^3}\tau + \dots}{\tau \sin \tau} \in \mc C \Bigl( [-\frac\pi 2, \frac\pi2] \Bigr) $$
+
+$$ \implies \eref4 $$
+
+\subsection{Равенство Парсеваля}
+
+\begin{theorem}
+	$ f^2 \in \msc L([0, 2\pi]) $
+	$$ \implies \int f^2 \di \op m = 2 \pi a_0^2 + \pi \sum_{n = 1}^\infty (a_n^2 + b_n^2) $$
+\end{theorem}
+
+\subsection{Теорема о единственности рядов Фурье}
+
+\begin{theorem}
+	$ f, g $ измеримы на $ \R, \quad f(x) = f(x + 2\pi), ~ g(x) = g(x + 2\pi), \quad f, g \in \msc L(0, 2\pi) $
+	$$ a_0(f) = a_0(g), \quad a_n(f) = a_n(g), \quad b_n(f) = b_n(g) \quad \forall n \ge 1 $$
+	$$ \implies f \sim g $$
+\end{theorem}
+
+\begin{remind}
+	$ f \sim g \iff E = \set{x \in \R \mid f(x) = g(x)} \implies \op m E = 0 $
+\end{remind}
+
+\section{Преобразование Фурье}
+
+Рассматриваем функции $ \R \to \Co $.
+
+\begin{definition}
+	$ u \in \msc L(\R), \quad v \in \msc L(\R), \quad f = u + iv $
+	\begin{remind}
+		$$ \int\limits_\R f \di \op m \bydef \int\limits_\R u \di \op m + i \int\limits_\R v \di \op m $$
+	\end{remind}
+
+	Будем говорить, что $ f $ \emph{суммируема} на всей оси, если $ u $ и $ v $ суммируемы на всей оси.
+\end{definition}
+
+\begin{definition}
+	$ f \in \msc L(\R) $
+
+	Её \emph{преобразованием Фурье} называется
+	$$ \hat f(t) = \frac1{\sqrt{2\pi}} \int\limits_\R f(x) e^{-xt} \di \op m (x) $$
+\end{definition}
+
+\begin{note}
+	\emph{Нормировка} $ \frac1{\sqrt{2\pi}} $ не общепринята, однако она будет удобна в дальнейших преобразованиях.
+\end{note}
+
+\begin{definition}
+	$ \phi \in \msc L(\R) $
+
+	Её \emph{обратным преобразованием Фурье} называется
+	$$ \vawe \phi(x) = \frac1{\sqrt{2\pi}} \int\limits_\R \phi(t) e^{ixt} \di \op m(t) $$
+\end{definition}
+
+\subsection{Равенство Планшереля}
+
+\begin{theorem}
+	$ f \in \msc L(\R), \quad |f|^2 \in \msc L(\R) $
+
+	$$ \implies |\hat f|^2 \in \msc L(\R) $$
+	$$ \int\limits_\R |f|^2 \di \op m = \int\limits_\R |\hat f|^2 \di \op m $$
+\end{theorem}
+
+\begin{statement}
+	$ f \in \msc L(\R), \quad \hat f \in \msc L(\R), \quad |f|^2, |\hat f|^2 \in \msc L(\R) $
+
+	Для почти всех $ x \in \R $ справедливо
+	$$ \vawe{(\hat f)}(x) = f(x) $$
+\end{statement}
+
+\begin{note}
+	Требование $ f, \hat f \in \msc L $ избыточно, если более обще определить преобразование Фурье.
+\end{note}
+
+$$ \hat{ \bigl( e^{-\frac{x^2}2} \bigr)}(t) = e^{-\frac{t^2}2} $$
+
+Следующие формулы верны для широкого класса функций, который получается, если обосновать все шаги.
+
+$$ \hat f(t) = \frac1{\sqrt{2\pi}} \int_{-\infty}^\infty f(x) e^{-itx}\di \op m(x) $$
+$$ \hat f'(t) = \frac1{\sqrt{2\pi}} \int_{-\infty}^\infty f(x) \cdot (-ix) e^{-itx} \di \op m(x) = \hat{ \bigl( -ixf(x) \bigr)}(t) $$
+По лемме Римана"--~Лебега $ \hat{f}(t) \underarr{|t| \to \infty} 0 $.
+
+Рассмотрим преобразование Фурье от производной.
+\begin{multline*}
+	\hat{(f')}(t) = \frac1{\sqrt{2\pi}} \int_{-\infty}^\infty f'(x) e^{-itx} \di \op m(x) =
+	\frac1{\sqrt{2\pi}} \int_{-\infty}^\infty f'(x) e^{-itx}\di x = \\
+	= \frac1{2\pi} \lim\limits_{A \to \infty} \underbrace{\Bigl( f(x) e^{-itA} -f(-A) e^{itA} \Bigr)}_0 - \frac1{\sqrt{2\pi}} \int_{-\infty}^\infty (-it) f(x) e^{-itx} \di x =
+	\frac1{\sqrt{2\pi}} it \int_{-\infty}^\infty f(x) e^{-itx} \di x = it \hat f(t)
+\end{multline*}

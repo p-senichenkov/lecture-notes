@@ -1,0 +1,295 @@
+\chapter{Формальные теории}
+
+Для того, чтобы задать формальную теорию необходимо задать
+\begin{itemize}
+	\item множество констант $ D $;
+	\item множество функциональных символов $ F $;
+	\item множество предикатных символов $ P $;
+	\item множество аксиом, определяющих ``смысл'' констант, функциональных и предикатных символов.
+\end{itemize}
+
+При этом говорят, что задана \emph{формальная теория в сигнатуре} $ \braket{D, F, P} $.
+
+Кроме того, для определения ФТ требуется выбрать исчисление, в котором будут доказываться формулы ФТ.
+Следовательно, в определение ФТ входят аксиомы соответствующего исчисления.
+
+\subsection*{Формальные теории с равенством}
+
+\begin{definition}
+	ФТ называется ФТ с равенством, если множество предикатных символов содержит выделенных двухместный предикат $ = $ и для любой формулы $ A(x) $ выводимы следующие формулы
+	\begin{itemize}
+		\item $ \forall x (x = x) $
+		\item $ \forall x ~ y \Bigl(x = y \to \bigl(A(x) \leftrightarrow A(y) \bigr) \Bigr) $
+	\end{itemize}
+
+	Это равносильно тому, что ФТ с равенством содержит следующие \bt{аксиомы для равенства}:
+	\begin{enumerate}
+		\item[\bt{ER}] (рефлексивность равенства). $ \forall x (x = x) $;
+		\item[\bt{ES}] (симметричность равенства). $ \forall x ~ y (x = y \to y = x) $;
+		\item[\bt{ET}] (транзитивность равенства). $ \forall x~y~z (x = y \amp y = z \to x = z) $.
+	\end{enumerate}
+	и \bt{аксиомы согласования с равенством} для любого функционального символа из сигнатуры:
+	$$ \forall x~y \Bigl(x = y \to \bigl( f(\ol u, x, \ol v) = f(\ol u, y, \ol v) \bigr) \Bigr) $$
+\end{definition}
+
+\section*{Теории множеств}
+
+\subsection*{Парадокс Рассела в наивной теории множеств}
+
+Рассмотрим множество
+$$ A = \set{x : \neg (x \in x)} $$
+Доказано, что ни $ A \in A $, ни $ A \not\in A $.
+
+При этом,
+$$ \forall x \bigl( x \in A \leftrightarrow \neg (x \in x) \bigr) $$
+В частности, при $ x = A $ получаем
+$$ A \in A \leftrightarrow \neg (A \in A) $$
+Эта формула заведомо ложна. Следовательно, в наивной теории множеств доказуема ложная формула.
+Таким образом, наивная теория множеств противоречива.
+
+\subsection*{Теория типов Рассела}
+
+Рассматриваются множества различных типов:
+\begin{enumerate}
+	\item Индивиды, \ie множества, не имеющие элементов, обозначаются $ x_1, y_1, \dots $
+	\item Классы индивидов, \ie множества, элементами которых являются индивиды, обозначаются $ x_2, y_2, \dots $
+		$$ \dots $$
+	\item[i + 1.] Классы объектов типа $ i $, обозначаются $ x_{i + 1}, y_{i + 1}, \dots $
+		$$ \dots $$
+\end{enumerate}
+
+При таких ограничениях парадокс Рассела невозможен, \as нельзя написать $ x \in x $, а только $ x_i \in x_{i + 1} $.
+
+\begin{definition}
+	\emph{Упорядоченная пара} двух множеств $ i $-го типа "--- это множество $ i + 2 $-го типа: $ (x_i, y_i) = \set{\set{x_i}, \set{x_i, y_i}} $.
+\end{definition}
+
+\begin{definition}
+	\emph{Бинарное отношение} "--- это множество упорядоченных пар, \ie \emph{бинарное отношение} между множествами $ i $-го типа "--- это множество $ i + 3 $-го типа.
+\end{definition}
+
+\begin{undefthm}{Формальное определение теории типов.}
+	Теория типов "--- это формальная теория в сигнатуре $ \braket{;; \in, =} $.
+	Так как в сигнатуре имеется предикат равенства, в \bt T присутствуют аксиомы для равенства и аксиомы согласования с равенством для предиката $ \in $.
+
+	Собственные аксиомы теории типов:
+	\begin{enumerate}
+		\item Аксиома объёмности. \\
+			Два множества равны, если они равны поэлементно.
+			$$ \forall y_{i + }z_{i + 1} \Bigl( \forall x_i \bigl( x_i \in y_{i + 1} \leftrightarrow x_i \in z_{i + 1} \bigr) \to y_{i + 1} = z_{i + 1} \Bigr) $$
+			
+		\item Схема аксиом выделения. \\
+			Для всякой формулы в терминах \bt T со свободное переменной $ i $-го типа существует множество $ i + 1 $-го типа, все элементы которого и только они удовлетворяют этой формуле.
+
+			Если $ F(x_i) $ "--- формула в терминах \bt T со свободной переменной $ x_i $, то
+			$$ \exists y_{i + 1} \forall x_i \bigl( x_i \in y_{i + 1} \leftrightarrow F(x_i) \bigr) $$
+
+		\item Аксиома бесконечности. \\
+			В \bt T имеется бесконечное множество индивидов.
+			\begin{multline*}
+				\forall w_4 \Bigl( \forall x_1 ~\neg w_4(x_1, x_1) \quad \amp \quad \forall x_1 ~ \exists y_1~ w_4(x_1, y_1) \quad \amp \\
+				\forall x_1 ~ \forall y_1 ~ \forall z_1 \bigl( w_4(x_1, y_1) \amp w_4(y_1, z_1) \to w_4(x_1, z_1) \bigr) \Bigr)
+			\end{multline*}
+	\end{enumerate}
+\end{undefthm}
+
+\subsection*{Аксиоматическая теория множеств Цермело\tpst{"--~}{--}Френкеля}
+
+\begin{undefthm}{Формальное определение аксиоматической теории множеств}
+	\emph{Аксиоматическая теория множеств Цермело"--~Френкеля} \bt{ZF} "--- это формальная теория в сигнатуре $ \braket{;; \in, =} $.
+	В \bt{ZF} присутствуют аксиомы для равенства и аксиомы согласования с равенством для $ \in $.
+
+	Собственные аксиомы \textbf{ZF}:
+	\begin{enumerate}
+		\item \textbf{Аксиома объёмности.} \\
+			Два множества равны, если они равны поэлементно.
+			$$ \forall x y \bigl( \forall u (u \in x \leftrightarrow u \in y) \to x = y \bigr) $$
+
+		\item \textbf{Аксиома пары.} \\
+			Двухэлементное множество является множеством.
+			$$ \forall xy \exists w \forall z \bigl( z \in w \leftrightarrow (z = x \wedge z = y) \bigr) $$
+			$$ w = \set{x, y} $$
+
+		\item \textbf{Аксиома суммы (объединения).} \\
+			Для всякого множества множеств объединение всех входящих в него множеств является множеством.
+			$$ \forall x \exists w \forall y \bigl( y \in w \leftrightarrow \exists z (z \in x \amp y \in z) \bigr) $$
+			$$ w = \bigcup_{z \in x} $$
+
+		\item \textbf{Аксиома булеана.}
+			$$ \forall x \exists w \forall y \bigl( y \in w \leftrightarrow \forall z (z \in y \to z \in x) \bigr) $$
+			$$ w = P(x) = 2^x $$
+
+		\item \textbf{Схема аксиом выделения.} \\
+			Для всякой формулы $ \phi $ с одной свободной переменной $ v $
+			$$ \forall x \exists w \forall y (y \in w \leftrightarrow y \in x \amp [\phi]_y^v) $$
+			$$ w = \set{v \in x : \phi(v)} $$
+
+		\item \textbf{Аксиома бесконечности.} \\
+			Существуют бесконечные множества.
+			$$ \exists y \bigl( \O \in y \amp \forall x ( x \in y \to \set{x} \in y) \bigr) $$
+
+		\item \textbf{Аксиома ограничения (фундирования).} \\
+			У непустого множества имеется элемент, не пересекающийся с ним.
+			$$ \forall y \bigl( \neg (y = \O) \to \exists x(x \in y \amp x \cap y = \O) \bigr) $$
+
+		\item \textbf{Аксиома подстановки.} \\
+			Образ множества является множеством (даже если функция $ F $ не является множеством).
+			$$ \forall x \exists y \forall z \Bigl( \exists u \bigl( u \in x \amp (u, z) \in F \bigr) \leftrightarrow z \in y \Bigr) $$
+
+		\item \textbf{Аксиома выбора.} \\
+			Для любого множества $ S $ непустых множеств существует функция $ f $, определённая на всех элементах множества $ S $, что
+			$$ \forall S \exists f \forall x \bigl( x \in S \to f(x) \in x \bigr) $$
+	\end{enumerate}
+\end{undefthm}
+
+\begin{definition}
+	\emph{Ординалом} называется множество, вполне упорядоченное отношением включения $ \sub $, каждый элемент которого является его подмножеством.
+\end{definition}
+
+\subsubsection*{Конечные ординалы}
+
+\begin{itemize}
+	\item Пустое множество $ \O $ является \emph{нулевым ординалом}.
+	\item \emph{Первый ординал} $ \set{\O} $.
+	\item \emph{Второй ординал} $ \set{\O, \set{\O}} $.
+		$$ \dots $$
+	\item Пусть $ \set{X} $ "--- $ n $-й ординал. Тогда $ n + 1 $-\emph{й ординал} $ \set{X, \set{X}} $.
+\end{itemize}
+
+\subsubsection*{Бесконечные ординалы}
+
+По аксиоме бесконечности
+$$ w = \set{ \underbrace{\O}_0, \underbrace{\set{\O}}_1, \underbrace{\set{\O, \set{\O}}}_2, \dots, \underbrace{\set{X}}_n, \underbrace{\set{X, \set{X}}}_{n + 1}, \dots} $$
+является множеством. Это \emph{первый бесконечный ординал}.
+
+Далее последовательность бесконечных ординалов строится следующим образом.
+$$ 2w = \set{ \underbrace{w}_w, ~ \underbrace{w \cup \set{w}}_{w + 1}, \underbrace{w \cup \set{w, \set{w}}}_{w + 2}, \underbrace{\dots, w \cup \set{X}}_{w + n}, \underbrace{w \cup \set{X, \set{X}}}_{w + n + 1}, \dots} $$
+$$ 3w = \set{\underbrace{2w}_{2w}, \underbrace{2w \cup \set{w}}_{2w + 1}, \underbrace{2w \cup \set{w, \set{w}}}_{2w + 2}, \dots, \underbrace{2w \cup \set{X}}_{2w + n}, \underbrace{2w \cup \set{X, \set{X}}}_{2w + n + 1}, \dots} $$
+$$ \dots $$
+$$ (k + 1)w = \set{\underbrace{kw}_{kw}, \underbrace{kw \cup \set{w}}_{kw + 1}, \underbrace{kw \cup \set{w, \set{w}}}_{kw + 2}, \dots, \underbrace{kw \cup \set{X}}_{kw + n}, \underbrace{kw \cup \set{X, \set{X}}}_{kw + n + 1}, \dots} $$
+$$ \dots $$
+$$ w^2 = \bigcup_{k = 1}^w kw $$
+Аналогичным образом строятся $ w^2 + 1, w^2 + 2, \dots, w^3, \dots, w^w = \eps_0 $. \\
+Ординал $ \eps_0 $ "--- первый несчётный ординал. К нему таким же образом можно прибавлять по единице.
+
+\section*{Формальная арифметика}
+
+Формальная арифметика "--- это ФТ в сигнатуре $ \braket{0; S, +, \cdot, \text\textasciicircum; =} $.
+
+Так как в сигнатуре присутствует знак $ = $, то для каждого функционального символа требуются аксиомы согласования с равенством.
+Например, для $ S $ она имеет вид
+$$ \forall x~y \Bigl(x = y \to \bigl(S(x) = S(y) \bigr) \Bigr) $$
+Для двухместного функционального символа можно написать две аксиомы
+$$ \forall x~y~z \bigl( x = y \to (x + z = y + z) \bigr) \qquad \forall x ~ y ~ z \bigl( x = y \to (z + x = z + y) \bigr) $$
+или одну аксиому
+$$ \forall x ~ y ~ u ~ v \bigl( x = y \amp u = v \to (x + u = y + v) \bigr) $$
+
+\begin{undefthm}{Собственные аксиомы FA.}
+	\hfill
+	\begin{enumerate}
+		\item $ \forall x \neg \bigl( S(x) = 0 \bigr) $
+		\item $ \forall xy \bigl( S(x) = S(y) \to x = y \bigr) $
+		\item $ \forall x (x + 0 = x) \qquad \forall xy \bigl( x + S(y) = S(x + y) \bigr) $
+		\item $ \forall x (x \cdot 0 = 0) \qquad \forall xy \bigl( x \cdot S(y) = x \cdot y + x \bigr) $
+		\item $ \forall x \bigl(x^0 = S(0) \bigr) \qquad \forall xy \bigl( x^{S(y)} = x^y \cdot x \bigr) $
+		\item \emph{Аксиома индукции}. Для любой формулы $ A(x) $
+			$$ A(0) \quad \amp \quad \forall x \Bigl(A(x) \to A \bigl( S(x) \bigr) \Bigr) \quad \to \quad \forall x A(x) $$
+	\end{enumerate}
+\end{undefthm}
+
+\subsubsection*{Полнота и непротиворечивость}
+
+\begin{definition}
+	\emph{Номером буквы} $ a_i $ называется цифра $ i $ $ (p + 1) $-чной системы счисления.
+\end{definition}
+
+\begin{notation}
+	$ \# a_i = i $
+\end{notation}
+
+\begin{definition}
+	\emph{Номером слова} $ a_{i_1} \dots a_{i_n} $ называется число $ (\ol{i_1 \dots i_n})_{p + 1} $.
+\end{definition}
+
+Поскольку вывод "--- это последовательность формул, то вывод "--- это тоже слово в том же алфавите и имеет номер.
+
+Гёдель ввёл в рассмотрение предикат $ \models (X, \#\phi) $ "--- ``число $ X $ является номером вывода формулы $ \phi $'', для которого явно выписал формулу на языке \bt{FA} и доказал, что выводимость такой формулы равносильна её истинности.
+
+Кроме того, Гёдель рассмотрел формулу
+$$ G(\#\phi) \iff \forall X \Bigl( \models (X, \#\phi) \to \exists Y \bigl( Y < X \amp \models (Y, \#\neg \phi) \bigr) \Bigr) $$
+Для этой формулы справедливо следующее утверждение.
+
+\begin{statement}
+	Если формальная арифметика непротиворечива, то $ \phi $ выводима тогда и только тогда, когда $ G(\# \phi) $ ложна.
+\end{statement}
+
+Обозначим номер $ G(\# \phi) $ как $ \#G $.
+
+\subsubsection*{Теоремы Гёделя о неполноте}
+
+\begin{theorem}[первая Гёделя]
+	\hfill
+	\begin{enumerate}
+		\item Если FA непротиворечива, то она не полна.
+		\item Если FA непротиворечива, то в ней существует замкнутая формула, для которой не выводима ни она сама, ни её отрицание.
+		\item Если FA непротиворечива, то в ней не выводимы ни формула $ G(\# G) $, ни её отрицание $ \neg G(\#G) $.
+	\end{enumerate}
+\end{theorem}
+
+\begin{lemma}
+	FA противоречива тогда и только тогда, когда в ней выводима формула $ S(0) = 0 $.
+\end{lemma}
+
+\begin{iproof}
+	\item $ \implies $
+
+		Это можно доказать, например, в секвенциальном исчислении предикатов с использованием правил добавления и сечения.
+	\item $ \impliedby $
+
+		В FA имеется аксиома $ \forall x \neg \bigl( S(x) = 0 \bigr) $ и, следовательно, $ \neg \bigl( S(0) = 0 \bigr) $ выводима.
+\end{iproof}
+
+\begin{theorem}[вторая Гёделя]
+	\hfill
+	\begin{enumerate}
+		\item Если средствами FA можно доказать, что она непротиворечива, то она противоречива.
+		\item Если в FA выводима формула
+			$$ \forall x \neg \models \Bigl( x, \# \bigl( S(0) = 0 \bigr) \Bigr), $$
+			то в ней выводима формула $ S(0) = 0 $.
+	\end{enumerate}
+\end{theorem}
+
+\subsection*{Консервативное расширение FA}
+
+Построим нестандартное расширение *FA, в котором присутствуют бесконечно большие натуральные числа.
+Для этого заменим аксиому 6 на *6 и введём схему аксиом *7, декларирующую, что $ w $ больше любого натурального числа.
+\begin{enumerate}
+	\item[*6.] Для всякой формулы $ A(x) $ с одной свободной переменной $ x $
+	$$ A(0) \amp \forall x \Bigl( \forall y \bigl( y < x \amp A(y) \bigr) \to A(x) \Bigr) \to \forall x A(x) $$
+	\item[*7.]
+		$$ w > 0 $$
+		$$ w > S(0) $$
+		$$ \dots $$
+		$$ w > \underbrace{S(\dots S(}_n 0) \dots) $$
+		$$ \dots $$
+\end{enumerate}
+
+Для нестандартного расширения *FA можно доказать аналог принципа переноса Лейбница, который означает консервативность такого расширения.
+
+\begin{theorem}
+	Всякая замкнутая формула аксиоматической теории чисел одновременно выводима в FA и *FA.
+\end{theorem}
+
+\begin{iproof}
+	\item Пусть замкнутая формула выводима в FA.
+		Это означает, что в построенном выводе нет константы $ w $, не используется аксиома *7, и может использоваться аксиома 6, которая следует из *6.
+		Следовательно, имеется вывод и в *FA.
+
+	\item Пусть замкнутая формула выводима в *FA.
+		В выводе может присутствовать константа $ w $.
+		Найдём самое большое натуральное число $ n $, присутствующее в выводе.
+		Все вхождения $ w $ в выводе заменим на константу $ n + 1 $.
+
+		Если в выводе присутствует аксиома *7 вида $ k < w $, она заменится на выводимую формулу $ k < n + 1 $.
+		Использование трансфинитной индукции *6 заменим на использование аксиомы индукции 6.
+\end{iproof}

@@ -13,15 +13,14 @@
 \usepackage{mathrsfs}
 
 \usepackage{polyglossia}
-\setmainlanguage{russian}
+\setmainlanguage[babelshorthands=true, mathfunctions=true]{russian}
 \setotherlanguage{english}
-% \setkeys{russian}{babelshorthands=true, mathfunctions=true}
 
 \usepackage{ifthen}
 
 %% polyglossia shorthands:
 %   "-   -- additional hypen point, does *not* disable others
-%   ""   -- *allows* linebrak, *without* hypen sign
+%   ""   -- *allows* linebreak, *without* hypen sign
 %   "--- -- normal dash ( -- )
 %   "--~ -- dash for compound names (--)
 %   "--* -- dash for direct speech (--  )
@@ -145,6 +144,9 @@
 % ring's characteristics
 \DeclareMathOperator{\chara}{char}
 
+% Residue in Laurent series
+\DeclareMathOperator{\res}{res}
+
 %%      numerating
 % labeled equation
 \newenvironment{equ}[1]{\begin{equation} \label{eq:#1}}{\end{equation}}
@@ -172,7 +174,10 @@
 \let\vphi\varphi
 \let\tphi\phi
 \let\phi\varphi
+% short for varepsilon -- DEPRECATED
 \let\veps\varepsilon
+\let\teps\epsilon
+\let\eps\varepsilon
 
 % small triangle
 \let\vtri\vartriangle
@@ -199,6 +204,9 @@
 \newcommand\mc\mathcal
 \newcommand\msc\mathscr
 \newcommand\ttm\mathtt
+\newcommand\fm\mathfrak
+
+\newcommand\op\operatorname
 
 % text
 \newcommand\bt\textbf

@@ -1,0 +1,170 @@
+\chapter{Мера Лебега}
+
+\section{Продолжение чего-то}
+
+Видимо, ещё конспекты потерялись. \TODO{Надо поискать в конспектах Якова(?).} Тут не хватает реально большого куска.
+
+\begin{props}
+	\item[1,2.] \dots
+
+	\item $ 0 \le f \le +\infty, \quad f $ измерима. Пусть $ f_0 \in B(f) $. Тогда по предыдущему пункту
+	$$ I_A(f_0) = \int\limits_A f_0 \di \op m = \sum_{n = 1}^\infty \int\limits_{A_n} f_0 \di \op m \le \sum \phi(A_n), $$
+	если в этом пункту имеем в виду $ \phi(A) = \int\limits_A f \di \op m $
+	\begin{equ}{17}
+		\implies \phi(A) = \sup \set{I_a(f_0) \mid f_0 \in B(f)} \le \sum \phi(A_n)
+	\end{equ}
+
+	Поскольку $ f \in \msc L(E) $, то $ \phi(A) < +\infty $, $ \phi(A_n) < +\infty $. \\
+	Возьмём $ \forall N $ и фиксируем $ r > 0 $. Напомним, что $ f $ определяется на всём множестве $ E $. \\
+	Выберем $ f_1, \dots, f_n $ "--- простые функции, $ f_j \in B(f) $, удовлетворяющие условию
+	\begin{equ}{18}
+		I_{A_j}(f_j) > \int\limits_{A_j} f \di \op m - \frac\veps N, \quad j = 1, \dots, N
+	\end{equ}
+	Определим функцию $ f_0 : E \to \R $:
+	$$ f_0(x) =
+	\begin{cases}
+		f_j(x), \quad j \ge 2, \quad x \in A, \\
+		f_1(x), \quad x \in E \setminus \bigcup_{n = 2}^N A_n
+	\end{cases} $$
+	Тогда $ f_0 \in B(f) $, $ \bigcup_{n = 1}^N A_n \sub A $ и по предыдущему пункту и \eref{18}
+	$$ \phi(A) \ge \phi \Bigl( \bigcup_{n = 1}^N A_n \Bigr) \ge I_{\bigcup A_n} (f_0) = \sum_{n = 1}^N I_{A_n} (f_0) = \sum I_{A_n} (f_n) > \sum \Bigl( \phi(A_n) - \frac\veps N \Bigr) = \sum \phi(A_n) - \veps $$
+	В силу произвольности $ N $ и $ \eps > 0 $
+	$$ \implies \phi(A) \ge \sum \phi(A_n) $$
+	$ \underimp{\eref{17}} \eref{10} $ для $ f(x) \in \msc L(E), \quad f(x) \ge 0 $, а тогда и для $ \forall f \in \msc L(E) $.
+\end{props}
+
+\begin{eproof}
+	\item \dots
+
+	\item \dots
+
+	Тогда
+	$$ \phi(A) = \int\limits_A \sum_{j = 1}^N c_j x_{F_j} \di \op m = I_A \Bigl( \sum_{j = 1}^N c_j x_{F_j} \Bigr) = \sum_{j = 1}^N c_j \op m(F_j \cap A) $$
+	$$ \phi(A_n) = I_{A_n} \Bigl( \sum c_j X_{F_j} \Bigr) = \sum c_j \op m (F_j \cap A_n) $$
+\end{eproof}
+
+Из последнего свойства $ \int\limits_E f \di \op m = 0 $, если $ \op m E = 0 $. Получаем важное следствие:
+\begin{implication}
+	Пусть $ f_1, f_2 \in \msc L(E) $ и $ \op m \set{x \in E \mid f_1(x) \ne f_2(x)} = 0 $. Тогда
+	$$ \int\limits_E f_1 \di \op m = \int\limits_E f_2 \di \op m $$
+\end{implication}
+
+\begin{proof}
+	Пусть $ F = \set{x \in E \mid f_1(x) \ne f_2(x)} $, тогда
+	$$ \int\limits_E f_1 \di \op m = \int\limits_{E \setminus F} f_1 \di \op m + \int\limits_F f_1 \di \op m = \int\limits_{E \setminus F} f_1 \di \op m = \int\limits_{E \setminus F} f_2 \di \op m = \int\limits_{E \setminus F} f_2 \di \op m + \int\limits_F f_2 \di \op m = \int\limits_E f_2 \di \op m $$
+\end{proof}
+
+\begin{definition}
+	Пусть функции $ f_1, f_2 $ измеримы на $ E $.
+
+	Говорят, что $ f_1 $ \it{эквивалентна} $ f_2 $, пишут $ f_1 \sim f_2 $, если $ \op m \set{x \in E \mid f_1(x) \ne f_2(x) } = 0 $.
+\end{definition}
+
+\begin{note}
+	Иногда говорят, что функции \it{равны почти всюду}.
+\end{note}
+
+\begin{theorem}
+	Пусть $ f \in \msc L(E) $, тогда $ |f| \in \msc L(E) $ и
+	$$ \Bigl( \int\limits_E f \di \op m \Bigr) \le \int\limits_E |f| \di \op m $$
+\end{theorem}
+
+\begin{proof}
+	Пусть $ E_+ = \set{x \in E \mid f(x) \ge 0}, \quad E_- = \set{x \in E \mid f(x) < 0} $. \\
+	Тогда $ \int\limits_E f \di \op m = \int\limits_{E_+} + \int\limits_{E_-} = \int\limits_E f^+ \di \op m - \int\limits_E f^- \di \op m $,
+	$$ \int\limits_E |f| \di \op m = \int \limits_{E_+} + \int \limits_{E_-} = \int\limits_{E_+} f^+ \di \op m + \int \limits_{E_-} f^- \di \op m = \int \limits_E f^+ \di \op m + \int \limits_E f^- \di \op m $$
+\end{proof}
+
+\section{Дальнейшие свойства интеграла Лебега}
+
+Первых, видимо, не было.
+
+\begin{props}
+	\item Пусть $ \exist c < \infty $ такая, что $ |f(x)| \le c, \quad x \in E, \quad f $ измерима на $ E $ и $ \op m E < +\infty $.
+
+	Тогда $ f \in \msc L(E) $.
+
+	\item Если $ f $ измерима, $ \op m E < \infty, \quad a \le f(x) \le b, \quad x \in E $, то
+	$$ a \op m E \le \int_E f \di m \le b \op m E $$
+
+	\item Если $ f, g \in \msc L(E) $ и $ f(x) \le g(x), \quad x \in E $, то
+	$$ \int_E f \di \op m \le \int g \di \op m $$
+
+	\item $ f \in \op L(E), \quad c \in \R $
+	$$ \implies
+	\begin{cases}
+		cf \in \msc L(E), \\
+		\int\limits_E cf \di \op m = c \int\limits_E f \di \op m
+	\end{cases} $$
+
+	\item Если $ \op m E = 0, \quad f $ измерима, то
+	$$ \lim\limits_E \di \op m = 0 $$
+
+	\item Если $ f \in \msc L(E), \quad F \sub E, \quad F $ измеримо, то $ f \in \msc L(F) $.
+
+	В частности, если $ E = E_0 \cup S, \quad E_0 \cap S = 0, \quad \op m S = 0 $, то
+	$$ \int\limits_E f \di \op m = \int\limits_{E_0} f \di \op m + \int\limits_S f \di \op m = \int\limits_{E_0} f \di \op m, $$
+	поскольку $ \int\limits_S f \di \op m = 0 $.
+
+	Отсюда следует важное свойство интеграла Лебега:
+
+	\item Пусть $ f \sim h, \qquad f \in \msc L(E) $. Тогда
+	$$ \int\limits_E f \di \op m = \int\limits_E g \di \op m $$
+
+	\item Пусть $ f, g \in \msc L(E) $. Тогда $ f + g \in \msc L(E) $ и
+	$$ \int\limits_E (f + g) \di \op m = \int\limits_E f \di \op m + \int\limits_E g \di \op m $$
+\end{props}
+
+\begin{eproof}
+	\item Следует из того, что $ f \in \msc L(E) \iff |f| \in \msc l(E) $ для любой простой функции $ s : ~ 0 \le s(x) \le |f(x) $ справедливо $ s(x) \le c $, поэтому
+	$$ \int\limits_E s \di \op m \le \int\limits_E c \di \op m = c \op m E, \qquad \int |f| \di \op m \le c \op m E $$
+
+	\item Аналогично.
+
+	\item Без доказательства.
+
+	\item Докажем для $ f(x) \ge 0, \quad x \in E, \quad c > 0 $. Пусть $ s \in \mc A(F) $, \ie $ s $ "--- простая функция, $ \quad 0 \le s(x) \le f(x) \quad \forall x \in E $. \\
+	Тогда $ cs \in \mc A(cf) $,
+	$$ \int\limits_{E} cs \di \op m = \sum_{j = 1}^n ca_j \op m F_j = c \sum_{j = 1}^n a_j \op m F_j = c \int\limits_E s \di \op m, $$
+	если $ s(x) = \sum a_j \xi_{F_j}(x), \quad F_j \cap F_k = \O $. \\
+	Переходя к супремуму, получаем нужное свойство.
+
+	\item Если $ F_j \sub E $, то $ 0 \le \op m F_j \le \op m E = 0 $, для любой простой функции $ s \in \mc A(|f|) $ имеем $ 0 \le s(x) \le |f(1)| = 0, \quad s(x) = 0, \quad \int\limits_E s \di \op m = 0 $, поэтому $ \int\limits_E |f| \di \op m = 0 $
+	$$ 0 \le \int\limits_E f^+ \di \op m \le \int\limits_E |f| \di \op m = 0, \qquad 0 \le \int\limits_E f^- \di \op m \le \int |f| \di \op m = 0 $$
+	$$ \int\limits_E \di \op m = \int\limits_E f^+ \di \op m - \int\limits_E f^- \di \op m = 0 $$
+
+	\item Для $ \forall s \in \mc A(|f|) $ на множестве $ F $ положим
+	$$ s_0(x) =
+	\begin{cases}
+		s(x), \quad x \in F, \\
+		0, \quad x \in E \setminus F
+	\end{cases} $$
+	$$ \int\limits_E s_0 \di \op m = \int\limits_F s \di \op m \le \int\limits_E |f| \di \op m $$
+	$$ \int \limits_F |f| \di \op m \le \int\limits_E |f| \di \op m, \qquad |f| \in \msc L(F) $$
+
+	\item Пусть $ E_0 = \set{x \in E \mid f(x) = g(x)}, \quad S = E \setminus E_0 $. Тогда $ \op m S = 0 $,
+	$$ \int\limits_E f \di \op m = \int\limits_{E_0} f \di \op m, \qquad \int\limits_E g \di \op m = \int\limits_{E_0} g \di \op m $$
+\end{eproof}
+
+\section{Приложения интеграла Лебега}
+
+\begin{theorem}[связь интеграла Римана и интеграла Лебега]
+	Пусть функция $ f $ интегрируема по Риману на промежутке $ (a, b) $.
+
+	Тогда она измерима по Лебегу на множестве $ E = (a, b) $, суммируема, и справедливо равенство
+	$$ \int_a^b f(x) \di x = \int\limits_{[a, b]} f \di \op m $$
+\end{theorem}
+
+\begin{noproof}
+\end{noproof}
+
+При этом, существуют функции, не интегрируемые по Риману, но интегрируемые по Лебегу. Например, функция Дирихле:
+$$ f_0(x) =
+\begin{cases}
+	1, \quad x \in (a, b) \cap \Q, \\
+	0, \qquad x \in (a, b) \setminus \Q
+\end{cases} $$
+$ \op m \Q = 0 $, поэтому $ f_0 \sim 0 $ на $ (a, b) $
+$$ \int\limits_{(a, b)} f_0 \di \op m = \int\limits_{(a, b)} 0 \di \op m = 0 $$
+
+\section{Пространства \tpst{$ \mc L^p(E) $}{Lp(E)}}

@@ -311,7 +311,10 @@ TSWLatexianTemp*
 # Don't upload courseworks
 Coursework
 
-# There're only lecture materials in Math Logic
-"Math Logic"
+# Exclude Math logic lecture materials
+"Math logic/Lectures"
+
+# There're only presentations in OS
+OS
 
 "Программирование введение.md"

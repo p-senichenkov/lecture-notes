@@ -1,0 +1,234 @@
+\chapter{ТФКП}
+
+\section{Особые точки аналитической функции (продолжение)}
+
+\begin{theorem}
+	$ f \in \mc A \big( D_{0, R}(a) \big) $
+
+	Для того, чтобы $ a $ была существенной особой точкой $ f $, \bt{необходимо и достаточно}, чтобы
+	$$ \exist \seq{z_n}n, ~ z_n \ne a, ~ z_n \to a, \quad \exist \seq{\zeta_n}n, ~ \zeta_n \ne a, ~ \zeta_n \to a, \quad \exist M : \quad
+	\begin{cases}
+		|f(z_n)| \le M \quad \forall n, \\
+		|f(\zeta_n)| \underarr{n \to \infty} +\infty
+	\end{cases} $$
+\end{theorem}
+
+\begin{iproof}
+	\item Пусть $ \not\exist \set{\zeta_n} : ~ \zeta_n \to a, ~ |f(\zeta_n)| \to +\infty $.
+	$$ \implies \exist M_1, \quad \exist \delta_0 > 0 : \quad \forall z \in D_{0, \delta_0}(a) \quad |f(z)| \le M_1 $$
+	Тогда $ a $~--- устранимая особая точка по характеристическому свойству устранимой особой точки.
+
+	\item Пусть $ \exist \set{\zeta_n}, ~ \zeta_n \to a, ~ |f(\zeta_n)| \to +\infty $.
+	\begin{itemize}
+		\item Если бы выполнялось $ |f(z)| \underarr{z \to a} +\infty $, то по характеристике полюса, $ a $~--- полюс $ f $.
+		\item Если неверно, что $ |f(z)| \to +\infty $, то
+		$$ \exist M, \quad \exist \set{z_n}, ~ z_n \to a : \quad |f(z_n)| \le M $$
+	\end{itemize}
+
+	Итак, при наличии последовательностей $ \set{z_n} $ и $ \set{\zeta_n} $ $ a $ "--- не устранимая особоая точка и не полюс.
+\end{iproof}
+
+\section{Вычеты}
+
+\begin{definition}
+	$ f \in \mc A(D_{0, R}(a) \big), \qquad f(z) = \sum_{n = 1}^\infty c_{-n}(z - a)^{-n} + \sum_{n = 0}^\infty c_nO(z - a)^n, \qquad z \in D_{0, R}(a) $
+
+	Коэффициент $ c_{-1} $ называется вычетом функции $ f $ в точке $ a $.
+\end{definition}
+
+\begin{notation}
+	$ c_{-1} = \operatorname{res}_f a, \qquad c_{-1} = \operatorname{res} f $
+\end{notation}
+
+В соответствии с формулой (1.8) из доказательства теоремы о разложении в ряд Лорана
+$$ \res_f a = c_{-1} = \frac1{2\pi i} \int\limits_{\gamma_\rho} f(z) \di z, \qquad 0 < \rho < R, $$
+где $ \gamma_\rho $ "--- окружность $ \set{z \mid |z - a| = \rho} $.
+
+Если $ \Omega \sub \Co $ "--- область, $ E \sub \Omega $ "--- некоторое множество, то для $ \forall a \in E $ выберем $ R_a > 0 $ так, чтобы $ \set{z \mid |z - a| < R_a} \cap E = \set a $. \\
+Тогда положим $ \res_f a $ "--- вычет функции $ f $, определяемый по множеству $ D_{0, R_a}(a) $.
+
+\subsection{Теорема о вычетах}
+
+\begin{theorem}
+	Пусть $ \Omega, E $ определены выше, $ \qquad \ol G \sub \Omega, \quad E \sub G, \qquad \Gamma = \partial G $ состоит из конечного числа кусочно-гладких кривых.
+
+	Тогда для $ f \in \mc A (\Omega \setminus E) $ справедлива формула
+	\begin{equ}3
+		\frac1{2\pi i} \int\limits_{\curvedir \Gamma} f(z) \di z = \sum_{a \in E} \res_f a
+	\end{equ}
+\end{theorem}
+
+\begin{proof}
+	Выберем $ R_a, ~ a \in E $ как раньше. \\
+	Пусть $ \rho_a \le \frac13 R_a $ и $ \ol D_{\rho_a}(a) \sub G $. Тогда для $ a_1, a_2 \in E, ~ a_1 \ne a_2 $ имеем
+	$$ \ol D_{\rho_{a_1}}(a) \cap \ol D_{\rho_{a_2}}(a) \ne \O $$
+	Пусть $ U = G \setminus \bigcup_{a \in E} \ol D_{\rho_a}(a) $.
+	Тогда $ f \in \mc A \big( \Omega \setminus \bigcup_{a \in E} \ol D_{\rho_a}(a) \big) $, поэтому по теореме Коши имеем соотношение
+	\begin{equ}4
+		\frac1{2\pi i} \int\limits_{\partial U} f(z) \di z = 0
+	\end{equ}
+
+	Обозначим через $ \gamma(a) $ окружность $ \set{z \mid |z - a| = \rho_a} $. Тогда $ \curvedir \partial U = \curvedir \partial G \cup \bigcup_{a \in E} \curvedir[0] \gamma(a) $, поэтому
+	\begin{multline*}
+		\eref4 \implies \frac1{2\pi i} \int\limits{\curvedir\partial G} f(z) \di z + \sum_{a \in E} 	\frac1{2\pi i} \int\limits_{\curvedir[0]\gamma(a)} f(z) \di z = 0 \quad \implies \quad \frac1{2\pi i} \int\limits_{\partial G} f(z) \di z = \\
+		= - \sum_{a \in E} \frac1{2\pi i} \int\limits_{\curvedir[0]\gamma(a)} f(z) \di z = \sum_{a \in E} \frac1{2\pi i} \int\limits_{\curvedir \gamma(a)} f(z) \di z = \sum_{a \in E} \res_f a
+	\end{multline*}
+\end{proof}
+
+\subsection{Некоторые формулы для вычисления вычетов}
+
+\begin{statement}
+	$ \phi, \psi \in \mc A \big( D_r(a) \big), \qquad \psi(a) = 0, \quad \psi'(a) \ne 0, \qquad f(z) = \frac{\phi(z)}{\psi(z)} $
+	\begin{equ}{5}
+		\implies \res_f a = \frac{\phi(a)}{\psi'(a)}
+	\end{equ}
+\end{statement}
+
+\begin{proof}
+	Выберем $ r_a > 0 $ так, чтобы при $ z \in D_{0, r}(a) \setminus \set{a} $ выполнялось $ \psi(z) \ne 0 $. Пусть $ v(z) = \frac{\psi(z)}{z - a} $.
+
+	Поскольку $ \psi(z) = \psi(a) + \psi'(a) (z - a) + \dots $, то
+	$$ \psi(a) = 0 \implies v(z) = \psi'(a) + \frac12 \psi''(a)(z - a) + \dots, \qquad v \in \mc A \big( D_R(a) \big) $$
+
+	Пусть $ g(z) = \frac{\phi(z)}{v(z)}, \quad g \in \mc A \big( D_{0, r_0}(0) \big) $, поскольку $ v(z) \ne 0 $, $ z \in D_{r_a}(a) $.
+
+	$$ f(z) = \frac{g(z)}{z - a} = \frac1{z - a} \big( g(a) + g'(a)(z - a) + \cdots) = \frac{g(a)}{z - a} + g'(a) + \frac12g''(a) \cdot (z - a) + \cdots $$
+	$$ \implies \res_f a = g(a) = \frac{\phi(a)}{v(a)} $$
+
+	При этом,
+	$$ \psi(z) = (z - a)v(z), \qquad \psi'(z) = v(z) + (z - a)v'(z), \qquad \psi'(a) = v(a) $$
+\end{proof}
+
+\begin{statement}\label{stmt:2}
+	$ \phi(a) \in \mc A \big( D_R(a) \big), \qquad n \ge 2, \qquad f(z) = \frac{\phi(z)}{(z - a)^n} $
+	$$ \implies \res_f a = \frac1{(n - 1)!}\phi^{(n - 1)}(a) $$
+\end{statement}
+
+\begin{proof}
+	$$ \phi(z) = \phi(a) + \sum_{k = 1}^\infty \frac{\phi^{(k)}(a)}{k!}(z - a)^k, \qquad z \in D_R(a) $$
+	Тогда
+	$$ f(z) = \frac{\phi(a)}{(z - a)^n} + \sum_{k = 1}^{n - 2} \frac{\phi^{(k)}(a)}{k!}(z - a)^{k - n} + \frac{\phi^{(n - 1)}(a)}{(n - 1)!} \cdot \frac1{z - a} + \sum_{k = n}^\infty \frac{\phi^{(k)}(a)}{k!}(z - a)^{k - n} $$
+\end{proof}
+
+\subsection{Вычисление несобственных интегралов с помощью вычетов}
+
+\begin{theorem}
+	Пусть $ \Co^+ = \set{z = x + iy \mid y > 0 }, \quad \Co^- = \set{z = x + iy \mid y < 0 } $ \\
+	Пусть $ G^+ \supset \ol \Co^+, ~ G^- \supset \ol \Co^- $ "--- области.
+	\begin{enumerate}
+		\item Пусть $ f_+ \in \mc A(G^+ \setminus E^+) $, где $ E^+ \sub \Co^+ $ "--- конечное множество. Предположим, что $ \veps_+(R) \underarr{R \to +\infty} 0 $, и что $ |f_+(z)| \le \veps_+(R) \cdot R^{-1}, \quad |z| = R, \quad z \in \ol \Co^+ $
+		\begin{equ}9
+			\implies \liml{R \to +\infty} \int_{-R}^R f_+(x) \di x = 2 \pi i \sum_{a \in E^+} \res_{f_+} a
+		\end{equ}
+
+		\item Пусть $ f_- \in \mc A(G^- \setminus E^-), \quad E^- \sub \Co^- $ "--- конечное множество. Предположим, что $ \veps_-(R) \underarr{R \to +\infty} 0 $, и что $ |f_-(z)| \le \veps_-(R) \cdot R^{-1}, \quad |z| = R, \quad z \in \ol \Co^- $.
+		\begin{equ}{10}
+			\implies \liml{R \to +\infty} \int_{-R}^R f_-(x) \di x = - 2 \pi i \sum_{a \in E^-} \res_{f_-}a
+		\end{equ}
+	\end{enumerate}
+\end{theorem}
+
+\begin{figure}[!h]
+	\centering
+	\begin{tikzpicture}[>=Stealth]
+		\draw[->] (-1.3, 0) -- (1.3, 0);
+		\draw[->] (0, -0.3) -- (0, 1.3);
+
+		\draw (1, 0) arc[start angle=0, end angle=180, radius=1];
+		\node at (1, 1) {$ \Gamma_R^+ $};
+
+		\draw[->] (0, 0) -- (0.5, 0);
+
+		\draw[->] (2.7, 0) -- (5.3, 0);
+		\draw[->] (4, -1.3) -- (4, 0.3);
+
+		\draw (3, 0) arc[start angle=180, end angle=360, radius=1];
+		\node at (5, -1) {$ \Gamma_R^- $};
+
+		\draw[->] (4, 0) -- (4.5, 0);
+	\end{tikzpicture}
+\end{figure}
+
+\begin{proof}
+	Пусть
+	$$ \Gamma_R^+ = [-R, R] \cup \set{z \mid |z| = R, \quad z \in \Co^+}, \qquad \Gamma_R^- = [-R, R] \cup \set{z \mid |z| = R, \quad z \in \Co^-} $$
+
+	Обход $ \curvedir\Gamma_R^+ $ в положительном направлении, $ \curvedir[0]\Gamma_R^- $ "--- в отрицательном.
+
+	Выберем $ R $ так, чтобы $ E^+ $ лежала в области, ограниченной $ \Gamma_R^- $, а $ R^- $ "--- $ \Gamma_R^- $. Тогда по теореме о вычетах
+	\begin{equ}{11}
+		\int\limits_{\curvedir\Gamma_R^+} f(z) \di z = 2 \pi i \sum_{a \in E^+} \res_{f^+} a, \qquad \int\limits_{\curvedir[0]\Gamma_R^-} f(z) \di z = -2\pi i \sum_{a \in E^-}\res_{f_-} a
+	\end{equ}
+
+	Пусть $ \gamma_R^\pm = \set{z \mid |z| = R, \quad z \in \ol \Co^\pm} $. Тогда
+	$$ \int\limits_{\Gamma_R^+}f_+(z) \di z = \int_{-R}^R f_+(x) \di x + \int\limits_{\curvedir\gamma_R^+} f(z) \di z, \qquad \int\limits_{\Gamma_R^-}f_-(z)\di z = \int_{-R}^R f_-(x) \di x + \int\limits_{\curvedir[0]\gamma_R^-} f(z) \di z $$
+	Далее, условие теоремы влечёт
+	$$ \bigg| \int\limits_{\curvedir\gamma_R^+}f(z) \di z \bigg| \le \int\limits_{\gamma_R^+}|f_+(M)| \di l(M) \le \veps_+(R) R^{-1} \cdot l(\gamma_R^+) = \pi \veps_+(R) $$
+	$$ \bigg| \int\limits_{\curvedir[0]\gamma_R^-}f(z) \di z \bigg| \le \int\limits_{\gamma_R^-}|f_-(M)| \di l(M) \le \veps_-(R) \cdot R^{-1} l(\gamma_R^-) = \pi \veps_-(a) $$
+
+	Утверждения, начиная с \eref{11}, влекут утверждения теоремы.
+\end{proof}
+
+\begin{eg}
+	Пусть
+	$$ I = \int_{-\infty}^\infty \frac{e^{ix}}{(1 + x^2)^2}\di x $$
+	Возьмём $ f(z) = \frac{e^{iz}}{(1 + z^2)^2} \in \mc A \big( \Co \setminus (\set{-i} \cup \set i) \big) $.
+
+	Если $ z = x + iy, \quad y \ge 0 $, о $ e^{iz} = e^{i(x + iy)} = e^{-y} \cdot e^{ix}, \quad |e^{iz}| = e^{-y} \le 1 $.
+	$$ \bigg| \frac{e^{iz}}{(1 + z^2)^2} \bigg| \le \frac2{|z|^4} \quad \text{ при } |z| \ge 2 $$
+
+	Применим первое утверждение теоремы, тогда
+	$$ \int_{-\infty}^\infty \frac{e^{ix}}{(1 + x^2)^2}\di x = \liml{R \to \infty} \int_{-R}^R \frac{e^{ix}}{(1 + x^2)^2} \di x = 2\pi i \res_f i $$
+	$$ f(z) = \frac{e^{iz}}{(z + i)^2(z - i)^2} $$
+	По \autoref{stmt:2} для $ n = 2 $, $ \phi(z) = \frac{e^{iz}}{(z + i)^2} $, имеем
+	$$ \res_f i = \phi'(i) = \bigg( i \frac{e^{iz}}{(z + i)^2} - 2\frac{e^{iz}}{(z + i)^2} \bigg) \bigg|_{z = i} = -i \frac{e^{-1}}4 + 2 \frac{e^{-1}}8 = -i \frac{e^{-1}}2 $$
+	$$ 2\pi i \res_f i = \pi e^{-1} \qquad \implies \qquad I = \pi e^{-1} $$
+\end{eg}
+
+\section{Конформные отображения}
+
+\begin{definition}
+	$ G \sub \Co $ "--- область, $ \qquad f \in \mc A(G), \qquad \Omega = \set{\omega \in \Co \mid \omega = f(z), \quad z \in \Omega} $ "--- образ $ f $.
+
+	Если отображение $ f $ инъективно, то говорят, что $ f $ является \it{конформным отображением} $ G $ на $ \Omega $ ($ f $ \it{конформно отображает} $ G $ на $ \Omega $).
+
+	Функцию $ f $ называют \it{одноместной функцией}.
+\end{definition}
+
+\subsection{Конформное отображение \tpst{$ \ttm D_1(0) $}{D1(0)} на себя}
+
+\begin{theorem}
+	$ \alpha \in \R, \qquad a \in \ttm D_1(0) $
+
+	Тогда функция
+	$$ b(z) = e^{i\alpha} \frac{z - a}{1 - \ol az}, \qquad z \in \ttm D_1(0) $$
+	конформно отображает $ \ttm D_1(0) $ на $ \ttm D_1(0) $.
+
+	Если $ b_1(z) $ "--- какое-то конформное отображение $ \ttm D_1(0) $ на $ D_1(0) $, то можно найти $ \alpha_1 \in \R, \quad a_1 \in \ttm D_1(0) $ такие, что $ b_1(z) $ будет построено по той же формуле с $ \alpha_1 $ и $ a_1 $.
+\end{theorem}
+
+\begin{proof}
+	Докажем только первую часть.
+
+	Поскольку $ |a| < 1 $, то при $ |z| < 1 $ имеем $ |1 - \ol az| \ge 1 - |a| \cdot |z| \ge 1 - |a| > 0 $, \ie $ b \in \mc A \big( D_1(0) \big) $.
+
+	Если $ z_1, z_2 \in D_1(0) $, $ z_1 \ne z_2 $, то
+	$$ b(z_2) - b(z_1) = e^{i\alpha} \frac{(z_2 - a)(1 - \ol a z_1) - (z_1 - a)(1 - \ol az)}{(1 - \ol az_1)(1 - \ol az_2)} = e^{i\alpha} \frac{(z_2 - z_1)(1 - |a|^2)}{(a1 - \ol az_1)(1 0 \ol az_2)} \ne 0, $$
+	\ie функция $ b $ "--- одноместная в $ D_1(0) $. Если $ |z| = 1 $, то $ \frac1z = \ol z $, поэтому при $ |z| = 1 $ имеем соотношение
+	$$ \bigg| \frac{z - a}{1 - \ol az} \bigg| = \bigg| \frac1z \bigg| \cdot \bigg| \frac{z - a}{\frac1z - \ol a} \bigg| = \bigg| \frac{z - a}{\ol z - \ol a} = 1 $$
+
+	Если $ \omega \in D_1(0) $, то
+	$$ \omega = e^{i\alpha} \frac{z - a}{1 - \ol az} \iff z = \frac{\omega e^{-i\alpha} + a}{1 + \ol a \cdot e^{-i\alpha}\omega} = e^{i\alpha} \frac{\omega + e^{i\alpha}a}{1 + e^{i\alpha}a\omega} $$
+	$$ |z|^2 = |e^{i\alpha}|^2 \cdot \bigg| \frac{\omega + e^{i\alpha}a}{1 + \ol{e^{i\alpha}a}\omega } \bigg|^2 = \frac{|\omega|^2 + 2 \Re( \ol{e^{i\alpha}}a \cdot \omega) + |e^{i\alpha}a|^2}{1 + 2 \Re(\ol{e^{i\alpha}a}\omega) + |\ol{e^{i\alpha}a}\omega|^2} = \frac{|\omega|^2 + 2\Re(\ol{e^{i\alpha}a}\omega) + |a|^2}{1 + 2\Re(\ol{e^{i\alpha}a}\omega) + |a|^2|\omega|^2} < 1, $$
+	\as $ |\omega|^2 + |a|^2 < 1 + |a|^2|\omega|^2 $.
+
+	Из последних трёх выражений следует утверждение теоремы.
+\end{proof}
+
+\subsection{Теорема Римана}
+
+\begin{theorem}
+	$ G $ "--- односвязная область, $ \qquad a \in G $
+
+	Тогда существует единственное конформное отображение $ f : G \to \ttm D_1(0) $ такое, что $ f(a) = 0 $ и $ f'(a) > 0 $.
+\end{theorem}

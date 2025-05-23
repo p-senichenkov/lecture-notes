@@ -1,0 +1,163 @@
+\chapter{ТФКП}
+
+\section{Теорема Фубини}
+
+\begin{notation}
+	$ m $-почти всюду $ \equiv $ всюду, за исключением множеств меры 0, для меры Лебега размерности $ m $.
+\end{notation}
+
+\begin{theorem}
+	Имеется некое множество $ E \sub \R^{m + n}, \quad m, n \ge 1, \quad E \sub \mathfrak M_{m + n} $
+	$$ \quad M \in \R^{m + n}, \quad M = (X, Y), \quad X \in \R^m, ~ Y \in \R^n $$
+	Возьмём $ \forall X \in \R^m $. Определим множества
+	$$ E (X, \cdot) = \set{ Y \in \R^n \mid (X, Y) \in E}, \qquad E(\cdot, Y) = \set{X \in \R^m \mid (X, Y) \in E} $$
+
+	Тогда
+	\begin{enumerate}
+		\item
+			\begin{itemize}
+			\item Для $ m $-п.~в. $ X \qquad E(X, \cdot) \in \mathfrak M_n $.
+			\item Для $ n $-п.~в. $ Y \qquad E(\cdot, Y) \in \mathfrak M_m $
+		\end{itemize}
+		\item Пусть $ \mu_k $ "--- мера Лебега в $ \R^k $. Тогда
+			$$ \mu_{m + n} E = \int\limits_{\R^{m + n}} \mu_n E(X, \cdot) \di \mu_m(X) = \int\limits_{\R^{m + n}} \mu_m E(\cdot, Y) \di \mu_n(X) $$
+		\item $ f : E \to \R $
+			$$ \forall X \in \R^m \quad f_X : E(X, \cdot) \to \R : \quad f_X(Y) = f(X, Y) $$
+			$$ \forall Y \in \R^n \quad f_Y : E(\cdot, Y) \to \R : \quad f_Y(X) = f(X, Y) $$
+
+			Для $ m $-п.~в. $ X \qquad f_X $ измерима по $ Y $ на $ E(X, \cdot) $. \\
+			Для $ n $-п.~в. $ Y \qquad f_Y $ измерима по $ X $ на $ E(\cdot, Y) $.
+			
+		\item $ f \in \msc L(E) $. Тогда
+			\begin{itemize}
+				\item для $ m $-п.~в. $ X \qquad f_X \in \msc L \bigl( E(X, \cdot) \bigr) $;
+				\item для $ n $-п.~в. $ Y \qquad f_Y \in \msc L \bigl( E(\cdot, Y) \bigr) $;
+				\item
+					$$ \int\limits_E f \di \mu_{m + n} = \int\limits_{\R^m} \Bigl( \int\limits_{E(X, \cdot)} f_X \di \mu_n \Bigr) \di \mu_m(X) = \int\limits_{\R^n} \Bigr(\int\limits_{E(\cdot, Y)} f_Y \di \mu_m \Bigr) \di \mu_n(Y), $$
+					или
+					$$ \int\limits_E f \di \mu_{m + n} = \int\limits_{\R^m} \Bigl( f(X, Y) \di \mu_n(Y) \Bigr) \di \mu_m(X) = \int\limits_{\R^n} \Bigl( \int\limits_{E(\cdot, Y)} f(X, Y) \di \mu_m(X) \Bigr) \di \mu_n(Y) $$
+			\end{itemize}
+	\end{enumerate}
+\end{theorem}
+
+\begin{note}
+	В прошлом семестре обещали доказать теорему об интегралах по параметру. Она следует из теоремы Фубини.
+\end{note}
+
+\section{Поверхностный интеграл \rom1 рода}
+
+\begin{definition}
+	$ D \sub \R^n $ "--- открыто, связно, $ \quad m > n $.
+
+	$ \mc C^1 $-поверхностью будем называть отображение $ F : D \to \R^n $ такое, что $ F \in \mc C^1(D) $, \ie
+	$$ F = \column{f_1}{f_m}, \quad f_k \in \mc C^1(D), $$
+	$ F $ "--- биекция, $ \quad \op{rank} \mc DF(X) = n \quad \forall X \in D $.
+\end{definition}
+
+\begin{definition}
+	$ S = F(D), \quad E \sub S $
+
+	Будем говорить, что $ E ~ S $-\emph{измеримо}, если $ F^{-1}(E) \sub \mathfrak M_n $
+
+	Определим $ S $-\emph{меру}:
+	$$ \mu_S E \coloneq \int\limits_{F^{-1}(E)} \sqrt{\det \Bigl( \bigl( \mc DF(X) \bigr)^T \mc DF(X) \Bigr)} \di \mu_n(X) $$
+\end{definition}
+
+\begin{definition}
+	$ F : S \to \R $
+
+	Будем говорить, что $ f ~ S $-\emph{измерима}, если $ \phi(X) = f \bigl( F(X) \bigr) $ измерима на $ F^{-1}(E) $.
+\end{definition}
+
+\begin{definition}
+	$ f \in \msc L_S(E) $
+	$$ \int\limits_E f \di \mu_S \coloneq \int\limits_{F^{-1}(E)} f \bigl( F(X) \bigr) \sqrt{ \det \Bigl( \bigl(  \mc DF(X) \bigr)^T \mc DF(X) \Bigr)} \di \mu_n(X) $$
+\end{definition}
+
+\begin{definition}
+	\emph{Кусочно-гладкой} поверхностью будем называть $ S = \bigcup_{k = 1}^N S_k $, \\
+	где $ S_k $ "--- $ \mc C^1 $-поверхность, при этом $ S_k \cap S_l = \O $ или $ \mu_{S_k}(S_k \cap S_l) = 0 $.
+\end{definition}
+
+\begin{definition}
+	$ E \sub S $
+
+	Будем говорить, что $ E ~ S $-\emph{измеримо}, если $ E \cap S_k \quad S_k $ измеримо $ \forall k $
+	$$ \mu_S E = \sum_{k = 1}^N \mu_{S_k}(E \cap S_k) $$
+\end{definition}
+
+\begin{definition}
+	$ f : E \to \R $
+
+	Будем говорить, что $ f ~ S $-\emph{измерима}, если $ f\big|_{S_k} ~ S_k $-измерима $ \forall k $.
+\end{definition}
+
+\begin{definition}
+	$ f \in \msc L_S(E) \iff f\big|_{S_k} \in \msc L_{S_k}(E \cap S_k) $
+	$$ \int\limits_E f \di \mu_S = \sum_{k = 1}^N \int\limits_{E \cap S_k} f\big|_{S_k} \di \mu_{S_k} $$
+\end{definition}
+
+\section{Ориентированные поверхности в \tpst{$ \R^3 $}{R3}}
+
+\begin{definition}
+	$ D \sub \R^2 $ открыто, связно, $ \quad F : D \to \R^3 $ "--- $ \mc C^1 $-поверхность в $ \R^3 $ \\
+	$ S = F(D), \quad F =
+	\begin{bmatrix}
+		f_1 \\
+		f_2 \\
+		f_3
+	\end{bmatrix}, \quad X \in D, \quad T_1(X) =
+	\begin{bmatrix}
+		f_{1~x_1}'(X) \\
+		f_{2~x_2}'(X) \\
+		f_{3~x_3}'(X)
+	\end{bmatrix}, \quad T_2(X) =
+	\begin{bmatrix}
+		f_{1~x_2}'(X) \\
+		f_{2~x_2}'(X) \\
+		f_{3~x_2}'(X)
+	\end{bmatrix} $ \\
+	Рассмотрим ориентацию $ \curvedir S \quad \bigl(T_1(X), T_2(X) \bigr) $.
+	$$ f \in \msc L_S(E), \quad E \sub S, \quad i \ne j, \quad i, j \in \set{1, 2, 3} $$
+	$$ \int\limits_{\curvedir S \cap E} f(Y) \di y_i \wedge \di y_j \define \int\limits_{F^{-1}(E)} f \bigl(F(X) \bigr)
+	\begin{vmatrix}
+		f_{i~x_1}'(X) & f_{i~x_2}'(X) \\
+		f_{j~x_1}'(X) & f_{j~x_2}'(X)
+	\end{vmatrix} \di \mu_2(X) $$
+\end{definition}
+
+\begin{definition}
+	$ \curvedir S = \bigcup_{k = 1}^N \curvedir S_k $ "--- \emph{ориентированная кусочно-гладкая} поверхность в $ \R^3, \quad E \sub S $.
+	
+	$$ \int\limits_{\curvedir S \cap E} f(Y) \di y_i \wedge \di y_j \define \sum_{k = 1}^N \int f\big|_{S_k}\di y_i \wedge \di y_j $$
+\end{definition}
+
+\section{Формула Гаусса\tpst{"--~}{--}Остроградского}
+
+\begin{theorem}
+	$ V \sub \R^3 $ ограничено, связно, $ \quad \partial V = \bigcup_{k = 1}^N \ol S_k, \quad S_k \cap S_l = \O $ \\
+	$ \curvedir S_k, \quad y \in S_k \quad \bigl( T_1(Y), T_2(Y) \bigr), \quad T_1(Y) \times T_2(Y) $ направлен вне $ V $.
+
+	$ \phi \in \mc C(\ol V), \quad i \in \set{1, 2, 3}, \quad \phi_{y_i}' \in \mc C(\ol V) $
+	$$ \sigma =
+	\begin{cases}
+		1, \quad (i, j, k) \text{ "--- чётная},
+		-1, \quad \text{иначе}
+	\end{cases} $$
+
+	Тогда
+	$$ \int\limits_{\curvedir \partial V} \phi(Y) \di y_i \wedge \di y_j \wedge \di y_k = \sigma \cdot \int\limits_V \phi_{y_i}'(Y) \di \mu_3(Y) $$
+
+	В частности, при $ \phi(Y) = y_1 $,
+	$$ \int\limits_{\curvedir \partial V} x_1 \di x_2 \wedge \di x_3 = \int\limits_V 1 \di \mu_3 = \mu_3 V $$
+\end{theorem}
+
+\section{Формула Грина}
+
+\begin{theorem}
+	$ D \sub \R^2 $ "--- область, $ \quad \partial D, \quad \curvedir \partial D, \quad f \in \mc C(\ol D), f_{x_1}' \in \mc C(\ol D), \quad M = (x_1, x_2) $. Тогда
+	$$ \int\limits_{\curvedir \partial D} f(M) \di x_2 = \int\limits_D f_{x_1}'(M) \di \mu_2(M) $$
+
+	$ g \in \mc C(\ol D), \quad g_{x_2}' \in \mc C(\ol D) $. Тогда
+	$$ \int\limits_{\curvedir \partial D} g(M) \di x_1 = - \int\limits_D g_{x_2}'(M) \di \mu_2(M) $$
+\end{theorem}
