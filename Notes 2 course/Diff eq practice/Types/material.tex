@@ -134,9 +134,9 @@ $$ y' + p(x)y + r(x)y^2 = q(x) $$
         	x = t^{\faktor12 - k} \nimp[= t^\frac1{\sigma + 2}], \qquad t = x^{\frac2{1 - 2k}} > 0 \\
             u = z(t)t^{k - \faktor12} \nimp[= zt^{-\frac1{\sigma + 2}}], \qquad z = ux
         \end{cases} $$
-        $$ \frac{\di u}{\di x} = \frac{\di (zt^{k - \half})}{\di t} \cdot \frac{\di t}{\di x} = \frac{t^{k - \half}\dot{z} + (k - \faktor12)t^{k - \faktor32}z}{(\faktor12 - k)t^{-\faktor12 - k}} = \frac{t^{2k}}{\faktor12 - k}\dot{z} - t^{2k - 1}z $$
+        $$ \frac{\di u}{\di x} = \frac{\di (zt^{k - \frac12})}{\di t} \cdot \frac{\di t}{\di x} = \frac{t^{k - \frac12}\dot{z} + (k - \faktor12)t^{k - \faktor32}z}{(\faktor12 - k)t^{-\faktor12 - k}} = \frac{t^{2k}}{\faktor12 - k}\dot{z} - t^{2k - 1}z $$
         Получаем уравнение
-        $$ t\dot{z} + \bigg( k - \half \bigg) z + a_0z^2 = c_0t, \qquad a_0 \define \bigg( \half - k \bigg) a, \quad c_0 \define \bigg( \half - k \bigg) c $$
+        $$ t\dot{z} + \bigg( k - \frac12 \bigg) z + a_0z^2 = c_0t, \qquad a_0 \define \bigg( \frac12 - k \bigg) a, \quad c_0 \define \bigg( \frac12 - k \bigg) c $$
         Это уравнение сводится к уравнению с разделяющимися переменными, если коэффициент при линейном члене равен $ -\faktor12 $
         \item ``Обнуляем'' $ k $: \\
         В зависимости от знака $ k $ используется одна из замен, сохраняющих структуру уравнения и позволяющих уменьшать $ |k| $ на 1:
@@ -145,10 +145,10 @@ $$ y' + p(x)y + r(x)y^2 = q(x) $$
             $$ z = a^{-1} + tv_1^{-1}, \qquad \dot{z} = v_1^{-1} - tv_1^{-2}\dot{v_1}, \qquad v_1 = t(x - a^{-1})^{-1} $$
             \item $ k < 0 $:
             $$ z = t(v_1 + d)^{-1}, \qquad \dot{z} = (v_1 + d)^{-1} - t(v_1 + d)^{-2}\dot{v_1}, \qquad v_1 = tz^{-1} - d $$
-            $$ d \define \bigg( \half + k \bigg) \bigg( \half - k \bigg)^{-1}c^{-1} $$
+            $$ d \define \bigg( \frac12 + k \bigg) \bigg( \frac12 - k \bigg)^{-1}c^{-1} $$
         \end{itemize}
         В результате нескольких таких замен придём к уравнению
-        $$ t\dot{v_k} + \bigg( -\half \bigg)v_k + a_kv_k^2 = c_kt $$
+        $$ t\dot{v_k} + \bigg( -\frac12 \bigg)v_k + a_kv_k^2 = c_kt $$
         \item Завершающая замена
         $$ v_k = t^{\faktor12}w, \qquad \dot{v_k} = \frac{t^{-\faktor12}w}2 - t^{\faktor12}\dot{w}, \qquad w = t^{-\faktor12}v_k $$
         приводит уравнение к уравнению с разделяющимися переменными
@@ -341,8 +341,6 @@ $$ \mu(\omega) = 1 \cdot e^{\uint[\omega]{A(\omega)}} $$
 
 \part{Уравнения, не разрешённые относительно \n производной}
 
-\section{Уравнение, не разрешённое относительно производной}
-
 $$ F(x, y, y') = 0, \qquad D \in \Cont{W}, \qquad W \text{ связно} $$
 Варианты решения:
 \begin{enumerate}
@@ -436,7 +434,9 @@ $$ F(x, y, y') = 0, \qquad D \in \Cont{W}, \qquad W \text{ связно} $$
     \end{enumerate}
 \end{enumerate}
 
-\section{Уравнения высокого пордяка}
+\part{Уравнения высокого пордяка}
+
+\section{Общий случай}
 
 $$ F(x, y, y', \dots, y^{(n)}), \qquad y^{(n)} = f(x, y, y', \dots, y^{(n - 1)}) $$
 Существует 4 способа понизить порядок:
@@ -453,7 +453,7 @@ $$ F(x, y, y', \dots, y^{(n)}), \qquad y^{(n)} = f(x, y, y', \dots, y^{(n - 1)})
     $$ F(y, y', \dots, y^{(n)}) = 0 $$
     $ y $ становится независимой переменной:
     $$ y'(x) = p(y) $$
-    Обязательно пишем ОДЗ на замену: $ y \stackrel?\equiv C $ \\
+    Обязательно пишем ОДЗ на замену: $ y \stackrel?\equiv C $
     $$ y''(x) = \frac{\di y'(x)}{\di x} = \frac{\di p(y)}{\di y} \cdot \frac{\di y}{\di x}= p'(y) \cdot p(y) $$
     $$ y'''(x) = \widedots[5em] = \bigg( p''(y)p(y) + p'^2(y) \bigg) \cdot p(y) $$
     Получаем уравнение на порядок ниже:
@@ -492,3 +492,80 @@ $$ F(x, y, y', \dots, y^{(n)}), \qquad y^{(n)} = f(x, y, y', \dots, y^{(n - 1)})
     \end{control}
     Получаем случай 2
 \end{enumerate}
+
+\section{Линейное однородное уравнение с постоянными коэффициентами}
+
+$$ \underbrace{\nder y + a_1 \nder[n - 1]y + \dots + a_{n - 1}y' + a_n y}_{L(y)} = 0 $$
+Его \emph{характеристическое уравнение}:
+$$ \lambda^n + a_1 \lambda^{n - 1} + \dots + a_{n - 1}\lambda + a_n \equiv 0 $$
+Нам нужны $ n $ различных вещественных ЛНЗ решений $ \phi_i $.
+
+Характеристическое уравнение имеет $ n $ корней.
+Однако, некоторые из них могут совпасть:
+\begin{enumerate}
+	\item $ \lambda_{1,2} = \alpha \pm \ii \beta, \quad \beta > 0 $ "--- пара комплексно-сопряжённых корней.
+		Тогда существует 2 вещественных ЛНЗ решения:
+		$$ e^{\alpha x}\cos \beta x, \quad e^{\alpha x}\sin \beta x $$
+
+	\item $ \lambda $ "--- корень кратности $ k $.
+		Тогда существует $ k $ ЛНЗ решений:
+		$$ e^{\lambda x}, \quad x e^{\lambda x}, \quad \dots, \quad x^{k - 1}e^{\lambda x} $$
+
+	\item $ \set{\lambda_i} $ "--- различные вещественные ЛНЗ корни.
+		Тогда $ \phi_i = e^{\lambda_i x} $.
+\end{enumerate}
+
+Имея $ n $ различных ЛНЗ вещественных корней, можем выписать решение ЛОУ:
+$$ y = C_1 \phi_1 + \dots + C_n \phi_n $$
+
+\section{Линейное неоднородное уравнение с постоянными коэффициентами}
+
+$$ Ly = q(x) $$
+
+\subsection*{Метод вариации}
+
+$ phi_1(x), \dots, phi_n(x) $ "--- фундаментальная система решений ЛОУ.
+Будем искать решение ЛНУ в виде
+$$ y_{\text{чн}} = y_{\text{оо}} + \psi(x), \qquad \psi(x) = C_1(x) \phi_1(x) + \dots + C_n(x) \phi_n(x) $$
+
+Находим $ C_i(x) $ из системы
+$$
+\begin{cases}
+	C_1' \phi_1 + \dots + C_n'\phi_n = 0 \\
+	C_1 \phi_1' + \dots + C_n' \phi_n' = 0 \\
+	\dots \\
+	C_1' \nder[n - 2]\phi_1 + \dots + C_n' \nder[n - 2]\phi_n = 0 \\
+	C_1' \nder[n - 1]\phi_1 + \dots + C_n' \psi[n - 1]\phi_n \equiv q(x)
+\end{cases} $$
+
+\subsection*{Метод неопределённых коэффициентов}
+
+Можно применить, если
+$$ q(x) = e^{\alpha x} \bigl( P_k(x) \cos \beta x + Q_l(x) \sin \beta x \bigr) $$
+Находим \emph{характеристическое число} $ \lambda_0 = \alpha + \ii \beta, \quad m = \max \set{k, l}, \quad s $ "--- кратность $ \lambda_0 $ как корня характеристического уравнения.
+Частное решение будет иметь вид
+$$ \psi(x) = x^s e^{\alpha x} \bigl( \vawe P_m(x) \cos \beta x + \vawe Q_m \sin \beta x \bigr) $$
+
+При этом, неоднородность делим на части, к некоторым применяем метод неопределённых коэффициентов, к оставшемуся "--- вариацию.
+
+\section{Уравнение Эйлера}
+
+$$ x^n \nder y + a_1 x^{n - 1} \nder[n - 1] y + \dots + a_{n - 1} x y' + a_n y = q(x) $$
+
+Делаем замену $ x = e^t > 0, \quad y(x) = y(t) $.
+$$ y' = \dot y e^{-t}, \quad y'' = (\ddot y - \dot y) e^{-2t} $$
+
+Если $ x $ может принимать отрицательные значения, действуем по-другому:
+\begin{enumerate}
+	\item Если $ q(x) $ "--- чётная функция, то можно сделать ту же замену, но в ответе вместо $ x $ написать $ |x| $.
+	\item Если $ q(x) $ "--- нечётная функция, то введём обозначение: $ x = \sigma |x| $.
+		Тогда замена $ |x| = e^t, \quad t = \ln |x| $ приведёт уравнение к такому же, но с параметром $ \sigma $.
+		\begin{control}
+			В ответе $ \sigma $ не останется, так как она умножится на $ |x| $.
+		\end{control}
+	\item Иначе придётся сделать дополнительную замену $ x = -e^t $.
+\end{enumerate}
+
+\part{Системы ОДУ}
+
+\TODO{Системы}

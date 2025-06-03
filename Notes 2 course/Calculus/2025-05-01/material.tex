@@ -1,0 +1,217 @@
+\chapter{Теория меры}
+
+\section{Интеграл Лебега}
+
+\begin{definition}
+	$ E \sub \R^m, \quad E \ne \O $.
+	\emph{Характеристической функцией} множества $ E $ называется функция $ K_E(x) : \R^m \to \R $,
+	$$ K_e(x) =
+	\begin{cases}
+		1, \quad x \in E, \\
+		0, \quad x \not\in E
+	\end{cases} $$
+\end{definition}
+
+\begin{definition}
+	\emph{Простой функцией} $ f_0 : E \to \R $ будем называть функцию, множество значений которой конечно.
+\end{definition}
+
+Если $ c_1, \dots, c_n $ "--- все различные значения функции $ f_0, \quad E_j = \set{x \in E \mid f_0(x) = c_j} $, то $ E_j \cap E_k = \O, $ \\
+$ \bigcup E_j = E $.
+Полагая $ \chi_{E_j}(x) = K_{E_j}(x) \big|_E $, имеем соотношение
+\begin{equ}{lebeg_int:1}
+	f_0(x) = \sum_{j = 1}^n c_j \chi_{E_j}(x)
+\end{equ}
+
+\begin{theorem}
+	$ f : E \to \R $
+
+	\begin{enumerate}
+		\item Тогда существует последовательность простых функций, определённых на $ E $ таких, что
+			$$ \forall x \in \quad f_n(x) \underarr{n \to \infty} f(x) $$
+
+		\item Если множество $ E $ измеримо по Лебегу и функция $ f $ измерима, то все функции $ f_n $ можно выбрать измеримыми.
+
+		\item Если $ f(x) \ge 0, \quad x \in E $, то можно выбрать функции $ f_n(x) $, которые при $ \forall x $ монотонно возрастают по $ n $.
+	\end{enumerate}
+\end{theorem}
+
+\begin{eproof}
+	\item Пусть $ f(x) \ge 0 \quad \forall x $. \\
+		Положим для $ n = 1, 2, \dots, \quad i = 1, \dots, n \cdot 2^n $
+		$$ E_{n~i} = \set{x \in E \mid \frac{i - 1}{2^n} \le f(x) < \frac i{2^n}} $$
+		$$ E_{n~0} = \set{x \in E \mid f(x) \ge n} $$
+		Далее пусть $ \chi_{E_{n~i}}(x) = K_{E_{n~i}}(x) \big|_E, \qquad i = 0, 1, \dots, n \cdot 2^n $, и пусть
+		\begin{equ}{lebeg_int:2}
+			f_n(x) = \sum_{i = 1}^{n2^n} \frac{i - 1}{2^n} \chi_{E_{n~i}}(x) + n \chi_{E_{n~0}}(x)
+		\end{equ}
+		Тогда для $ x \in \bigcup E_{n~i} $ имеем
+		\begin{equ}{lebeg_int:3}
+			|f_n(x) - f(x)| \le \frac1{2^n}
+		\end{equ}
+		Для $ \forall x \in E $ возьмём $ N > f(x) $, тогда $ \forall n > N $ выполнено \eref{lebeg_int:3} и $ f_n(x) \to f(x) $.
+
+	\item Если $ f $ измерима, то множества $ E_{n~i} $ измеримы из \eref{lebeg_int:2} следует измеримость $ f_n $.
+
+	\item Монотонность $ f_n $ также следует из \eref{lebeg_int:2}.
+
+	\item Для произвольной функции $ f $ положим $ f = f^+ - f^- $ и \eref{lebeg_int:2} применим к $ f^+ $ и $ f^- $.
+\end{eproof}
+
+\begin{remark}
+	Пусть $ E_j \sub E, $ не предполагаем условия $ E_j \cap E_k = \O, \quad E = \bigcup E_j $, числа $ c_j $ не обязательно различны,
+	\begin{equ}{lebeg_int:4}
+		f_1(x) = \sum_{j = 1}^n c_j \chi_{E_j}(x)
+	\end{equ}
+
+	Тогда $ f_1 $ "--- простая функция, которую можно записать в виде \eref{lebeg_int:1} с какими-то множествами $ E_l' $ и числами $ c_l' $.
+\end{remark}
+
+\subsection{Примеры измеримых по Лебегу множеств}
+
+\begin{exmpls}
+	\item Любое элементарное множество $ A $ измеримо.
+	\item $ \R^m $ измеримо.
+	\item Открытые множества измеримы.
+	\item Замкнутые множества измеримы.
+\end{exmpls}
+
+\begin{eproof}
+	\item По определению.
+
+	\item $ \R^m = \bigcup_{n = 1}^\infty (a_n, b_n) $, где $ a_n = (-n, \dots, -n), ~ b_n = (n, \dots, n) $.
+
+	\item Пусть $ \Q^m $ "--- множество всех точек с рациональными координатами в $ \R^m, \quad G \sub \R^m $ открыто, $ \quad G \ne \O $. \\
+		Для любой точки $ M \in G \cap \Q^m $ обозначим через $ I(M) $ максимальный промежуток $ \bigl( a(M), b(M) \bigr) $ со следующими свойствами:
+		\begin{itemize}
+			\item $ a(M) = \bigl( a_1(M), \dots, a_m(M) \bigr) $;
+			\item $ b(M) = \bigl( b_1(M), \dots, b_m(M) \bigr) $;
+			\item если $ M = (M_1, \dots, M_m) $, то $ a_j(M) = M_j - \delta(M) $;
+			\item $ b_j = M_j + \delta(M) $;
+			\item $ \bigl( a(M), b(M) \bigr) \sub G $.
+		\end{itemize}
+		Тогда
+		$$ G = \bigcup_{M \in G \cap \Q^m} \bigl( a(M), b(M) \bigr) $$
+
+	\item Если $ F \sub \R^m $ замкнуто, то $ F = \R^m \setminus \bigl( \R^m \setminus F \bigr) $, множество $ \R^m \setminus F $ открыто.
+\end{eproof}
+
+\subsection{Определение интеграла Лебега}
+
+\begin{definition}
+	Пусть $ E, E_j $ измеримы, $ \quad E = \bigcup E_j, \quad c_{j_0} = 0 $, если $ \op m E_{j_0} = +\infty $.
+	Положим
+	\begin{equ}{lebeg_int:7}
+		I_E \Bigl( \sum_{j = 1}^n c_j \chi_{E_j} \Bigr) \coloneq \sum_{j = 1}^n c_j \op m E_j
+	\end{equ}
+	В этой формуле считаем, что $ 0 \cdot +\infty = 0 $.
+\end{definition}
+
+\begin{properties}
+	$ f_1 $ "--- простая функция, записанная в виде \eref{lebeg_int:4}.
+	\begin{enumerate}
+		\item $ a \le f_1(x) \le b, \quad \op m E < +\infty $
+			$$ \implies a \op m E \le I_E(f_1) \le b \op m E $$
+
+		\item Если $ f_1(x) \le g_1(x), \quad x \in E $, то $ I_E(f_1) \le I_E(g_1) $.
+
+		\item Если $ c \in \R $, то $ I_E(cf_1) = cI_E(f_1) $.
+
+		\item \label{en:lebeg_int:4} Если $ \op m E = 0 $, то $ I_E(f_1) = 0 $.
+
+		\item \label{en:lebeg_int:6} $ F_1 \cap F_2 = \O, \quad F_1 \cup F_2 = E $
+			\begin{equ}{lebeg_int:6}
+				I_{F_1}(f_1) + I_{F_2}(f_1) = I_E(f_1)
+			\end{equ}
+	\end{enumerate}
+\end{properties}
+
+\begin{proof}[\ref{en:lebeg_int:6}]
+	Пусть $ f_1(x) = \sum c_j \chi_{E_j} $, пусть $ E_j' = E_j \cap F_1, \quad E_j'' = F_j \cap F_2 $. \\
+	Тогда $ \op m E_j' + \op m E_j'' = \op m E_j $,
+	$$ I_{F_1}(f_1) = \sum c_j \op m E_j', \qquad I_{F_2}(f_1) = \sum c_j \op m E_j'', \qquad I_E(f) = \sum c_j \op m E_j $$
+	Отсюда следует свойство \eref{lebeg_int:6}.
+\end{proof}
+
+\begin{definition}
+	Пусть $ E \sub \R^m $ "--- измеримо, $ \quad E \ne \O, \quad f : E \to \R \cup \set{+\infty}, \quad f(x) \ge 0 \quad \forall x \in E, \quad f $ измерима.
+
+	Через $ \mathtt B(f) $ обозначим множество всех простых функций $ f_0 : E \to \R $, удовлетворяющих условиям:
+	\begin{itemize}
+		\item $ f_0(x) \ge 0 $;
+		\item $ f_0 $ измерима;
+		\item $ f_0(x) \le f(x) \quad \forall x \in E $.
+	\end{itemize}
+
+	\emph{Интегралом Лебега} назовём следующую величину
+	\begin{equ}{lebeg_int:8}
+		\int\limits_E f \di \op m \coloneq \sup \set{I_E(f_0) \mid f_0 \in \mathtt B(f)}
+	\end{equ}
+\end{definition}
+
+\begin{definition}
+	Если $ \int\limits_E f \di \op m < +\infty $, то функцию $ f $ называют \emph{суммируемой} на множестве $ E $.
+\end{definition}
+
+\begin{notation}
+	$ f \in \msc L(E) $
+\end{notation}
+
+\begin{definition}
+	Если $ f : E \to \R \cup \set{-\infty, +\infty} $ может принимать значения разных знаков, считаем $ f = f^+ - f^- $ и называем $ f $ \emph{суммируемой}, если $ f^+ \in \msc L(E) $ и $ f^- \in \msc L(E) $.
+	Тогда полагаем
+	\begin{equ}{lebeg_int:9}
+		\int\limits_E f \di \op m \coloneq \int\limits_E f^+ \di \op m - \int\limits_E f^- \di \op m
+	\end{equ}
+\end{definition}
+
+\begin{theorem}
+	$ f \in \msc L(E), \quad A \in \mathfrak M, \quad A \sub E, \quad \phi(A) = \int\limits_A f \di \op m $.
+
+	Тогда $ \phi $ счётно-аддитивна на $ \mathfrak M $, суженном на $ E $.
+\end{theorem}
+
+\begin{proof}
+	Требуется установить равенство
+	\begin{equ}{lebeg_int:10}
+		\phi(A) = \sum_{n = 1}^\infty \phi(A_n), \quad \text{ если } A_n \sub E, \quad A_n \cap A_k = \O
+	\end{equ}
+
+	Из \eref{lebeg_int:9} следует, что достаточно установить \eref{lebeg_int:10} для $ f(x) \ge 0, \quad x \in E $.
+	\begin{enumerate}
+		\item Пусть $ f(x) = \chi_F(x), \quad F \sub E $, тогда
+			$$ \phi(A) = \int\limits \chi_F(x) \di \op m = I_E(\chi_{F \cap A}) = \op m (F \cap A) $$
+			$$ \phi(A_n) = I_E(\chi_{F \cap A_n}) = \op m (F \cap A_n) $$
+			В силу счётной аддитивности меры Лебега имеем $ \op m(F \cap A) = \sum \op m(F \cap A_n) $, откуда следует \eref{lebeg_int:10}.
+
+		\item \label{en:lebeg_int:2} $ f(x) = \sum_{j = 1}^N c_j \chi_{F_j}(x) $.
+			$$ \phi(A) = \int\limits_A \sum_{j = 1}^N c_j \chi_{F_j} \di \op m = I_A \bigl( \sum c_j \chi_{F_j} \bigr) = \sum c_j \op m(F_j \cap A) $$
+			$$ \phi(A_n) = I_{A_n} \bigl( \sum c_j \chi_{F_j} \bigr) = \sum c_j \op m (F_j \cap A_n) $$
+			Отсюда следует \eref{lebeg_int:10}.
+
+		\item $ 0 \le f(x) \le +\infty, \quad f $ измерима. Пусть $ f_0 \in \mathtt B(f) $. Тогда, по пункту \ref{en:lebeg_int:2},
+			$$ I_A(f_0) = \int\limits_A f_0 \di \op m = \sum_{n = 1}^\infty \int\limits_{A_n} f_0 \di \op m \le \sum \phi(A_n) $$
+			$$ \implies \phi(A) = \sup \set{I_A(f_0) \mid f_0 \in \mathtt B(f)} \le \sum_{n = 1}^\infty \phi(A_n) $$
+			Поскольку $ f \in \msc L(E) $, то $ \phi(A) < +\infty, \quad \phi(A_n) < +\infty $. \\
+			Возьмём $ \forall N $ и зафиксируем $ \eps > 0 $. \\
+			Выберем $ f_1, \dots, f_N $ "--- простые функции, $ f_j \in \mathtt B(f) $, удовлетворяющие условию
+			$$ I_{A_j}(f_j) > \int\limits_{A_j} d \di \op m - \frac\eps N, \quad j = 1, \dots, N $$
+			Определим функцию $ f_0 : E \to \R $:
+			$$ f_0(x) =
+			\begin{cases}
+				f_j(x), \quad j \ge 2, \quad x \in A, \\
+				f_1(x), \quad x \in E \setminus \bigcup_{n = 2}^N A_n
+			\end{cases} $$
+			Тогда $ f_0 \in \mathtt B(f), \quad \bigcup_{n = 1}^N A_n \sub A $ и по пункту \ref{en:lebeg_int:2}
+			$$ \phi(A) \ge \phi \Bigl( \bigcup_{n = 1}^N A_n \Bigr) \ge I_{\bigcup A_n} (f_0) = \sum_{n = 1}^N I_{A_n} (f_0) = \sum_{n = 1}^N I_{A_n}(f_n) > \sum \Bigl( \phi(A_n) - \frac\eps N \Bigr) = \sum \phi(A_n) - \eps $$
+			В силу произвольности $ N $ и $ \eps > 0 $
+			$$ \implies \phi(A) \ge \sum_{n = 1}^\infty \phi(A_n) $$
+	\end{enumerate}
+\end{proof}
+
+Поскольку из свойства \ref{en:lebeg_int:4} следует, что $ \int\limits_E f \di \op m = 0 $, если $ \op m E = 0 $, то из теоремы получаем важное следствие.
+
+\begin{implication}
+	Пусть $ f_1, f_2 \in \msc L(E), \quad \op m \set{x \in E \mid f_1(x) \ne f_2(x)} = 0 $. Тогда
+	$$ \int\limits_E f_1 \di \op m = \int\limits_E f_2 \di \op m $$
+\end{implication}

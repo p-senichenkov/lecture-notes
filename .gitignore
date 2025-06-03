@@ -312,9 +312,9 @@ TSWLatexianTemp*
 Coursework
 
 # Exclude Math logic lecture materials
-"Math logic/Lectures"
+**/Math logic/Lectures
 
 # There're only presentations in OS
 OS
 
-"Программирование введение.md"
+Программирование введение.md
