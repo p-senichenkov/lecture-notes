@@ -19,7 +19,7 @@
 	\begin{bmatrix}
 		x(t) \\
 		y(t)
-	\end{bmatrix}, \qquad x(t_\nu) \fed x_\nu, \quad x(t_\nu) \fed y_\nu, \qquad M(\tau_\nu) =
+	\end{bmatrix}, \qquad x(t_\nu) \fed x_\nu, \quad y(t_\nu) \fed y_\nu, \qquad M(\tau_\nu) =
 	\begin{bmatrix}
 		x(\tau_\nu) \\
 		y(\tau_\nu)
@@ -53,7 +53,7 @@
 
 	\item $ \cint[z]{\curvedir\Gamma}{cf} = c \cint[z]{\curvedir\Gamma}f $
 
-	\item $ \cint[z]{\curvedir[0]\Gamma}f = - \cint{\curvedir\Gamma}f $
+	\item $ \cint[z]{\curvedir[0]\Gamma}f = - \int\limits_{\curvedir \Gamma} f \di z $
 
 	\item $ \curvedir\Gamma : z(t), \quad t \in [a, b], \qquad f : \curvedir\Gamma \to \Co, \qquad \mathtt T = \seqz[m]{t_\nu}\nu, \qquad \mathtt P = \seq[m]{\tau_\nu}\nu $
 	$$ z_\nu \define z(t_\nu) = x(t_\nu) + iy(t_\nu), \qquad x_\nu \define x(t_\nu), \quad y_\nu \define y(t_\nu), \qquad \hat z_\nu \define z(\tau_\nu) $$
@@ -87,7 +87,7 @@
 	\item $ c = a + bi $
 	$$ \cint[z]{\curvedir\Gamma}{cf} \bydef \cint[x]{\curvedir\Gamma}{cf} + i \cint[y]{\curvedir\Gamma}{cf} = c \cint[x]{\curvedir\Gamma}f + ic \cint[y]{\curvedir\Gamma}f = c \bigg( \cint[x]{\curvedir\Gamma}f + i \cint[y]{\curvedir\Gamma}f \bigg) \bydef c \cint[z]{\curvedir\Gamma}f $$
 
-	\item $ \cint[z]{\curvedir[0]\Gamma}f = \cint[x]{\curvedir[0]\Gamma}f + i \cint[y]{\curvedir[0]\Gamma}f = \dots $
+	\item $ \cint[z]{\curvedir[0]\Gamma}f = \cint[x]{\curvedir[0]\Gamma}f + i \cint[y]{\curvedir[0]\Gamma}f = -\int\limits_{\curvedir \Gamma} f \di x - \int\limits_{\curvedir \Gamma} f \di y = -\int\limits_{\curvedir \Gamma} f \di z $
 
 	\item $ \mathtt S(f, \mathtt T, \mathtt P) = \mathtt S_x(f, \mathtt T, \mathtt P) + i \mathtt S_y(f, \mathtt T, \mathtt P) $ \\
 	Воспользуемся аналогичным свойством для $ \mathtt S_x, \mathtt S_y $. Пусть
@@ -129,9 +129,9 @@
 			x(\tau_j) \\
 			y(\tau_j)
 		\end{bmatrix}, \qquad x_j' = x(\tau_j), \quad y_j' = y(\tau_j) $$
-		$$ \| \ol{M_j ~ M_{j - 1}} \| \rightleftharpoons \norm{\dist(M_j, M_{j - 1})} = |z_j - z_{j - 1}| $$
+		$$ \norm{\dist(M_j, M_{j - 1})} = |z_j - z_{j - 1}| $$
 		\begin{multline*}
-			\| \ol{M_{j - 1} ~ M_{j}} \| \le l \Gamma^*(M_{j - 1}, M_j) \quad \implies \quad \sum_{j = 1}^n |f(z_j')| \cdot |z - z_{j - 1}| \le \\
+			\| \dist(M_{j - 1} ~ M_{j}) \| \le l \Gamma^*(M_{j - 1}, M_j) \quad \implies \quad \sum_{j = 1}^n |f(z_j')| \cdot |z - z_{j - 1}| \le \\
 			\le \sum_{j = 1}^n |f^*(M_j')| \cdot l \Gamma(M_{j - 1}, M_j) \fed \mathtt S^*(|f|, \mathtt T, \mathtt P)
 		\end{multline*}
 		$$ |\mathtt S| \le \mathtt S^* $$
@@ -149,7 +149,7 @@
 
 \begin{property}
 	$ c_1, \dots, c_n \in \curvedir\Gamma $
-	$$ \cint[z]{\curvedir\Gamma}{f(z)} = \sum_{j = 1}^{n + 1} \curvedir[z]{\curvedir\Gamma_j}{f(z)} $$
+	$$ \cint[z]{\curvedir\Gamma}{f(z)} = \sum_{j = 1}^{n + 1} \int\limits_{\curvedir{\Gamma_j}} f(z) \di z $$
 \end{property}
 
 \section{Теорема Коши для прямоугольника}
@@ -185,7 +185,7 @@
 	$$ \dint[y]pq{f^*(b, y) - f^*(a, y)} = \dint[y]pq{ \bigg( \dint ab{f_x^*{}'(x, y)} \bigg) } $$
 	Подставляя последние две выкладки в \eref{cauchy_rect:7}, получаем
 	\begin{multline*}
-		\cint[z]{\curvedir{\partial Q}}{f(z)} = -\dint ab{ \dint[y]pq{ f_y^*{}'(x, y))}} + i \dint[y]pq{ \dint ab{f_x^*{}'(x, y)}} = \\
+		\cint[z]{\curvedir{\partial Q}}{f(z)} = -\dint ab{ \dint[y]pq{ f_y^*{}'(x, y)}} + i \dint[y]pq{ \dint ab{f_x^*{}'(x, y)}} = \\
 		= \dint ab{ \dint[y]pq{ -f_y^*{}' + if_x^*{}'}} = 2i \dint ab{ \dint[y]pq {\frac12 \bigg( f_x^*{}' + if_x^*{}' \bigg)}} \bydef 2i \dint ab { \dint[y]pq{ \underbrace{f_{\ol z}'}_0}} = 0
 	\end{multline*}
 \end{proof}
@@ -270,17 +270,32 @@
 
 \section{Теорема Коши для произвольного треугольника}
 
-\begin{figure}[!h]
+\begin{figure}[!ht]
 	\centering
-	\begin{tikzpicture}
-		\draw (0, 0) -- (2, 0) node[below] {$ B $};
-		\draw (0, 0) -- (1, 1) node[above] {$ C $};
-		\draw (1, 1) -- (1, 0) node[below] {$ D $};
-		\draw (0, 0) node[below] {$ A $};
-		\draw (2, 0) -- (1, 1);
-	\end{tikzpicture}
-	\caption{}
-	\label{pic:2}
+	\begin{subfigure}{0.4\textwidth}
+		\centering
+		\begin{tikzpicture}
+			\draw (0, 0) -- (2, 0) node[below] {$ B $};
+			\draw (0, 0) -- (1, 1) node[above] {$ C $};
+			\draw (1, 1) -- (1, 0) node[below] {$ D $};
+			\draw (0, 0) node[below] {$ A $};
+			\draw (2, 0) -- (1, 1);
+		\end{tikzpicture}
+		\caption{}
+		\label{pic:2}
+	\end{subfigure}
+	\begin{subfigure}{0.4\textwidth}
+		\centering
+		\begin{tikzpicture}
+			\draw (0, 0) node[below] {$ A $};
+			\draw (0, 0) -- (2, 1) node[right] {$ B $};
+			\draw (0, 0) -- (1, 2) node[above] {$ C $};
+			\draw (1, 2) -- (1.5, 0.75) node[below] {$ D $};
+			\draw (1, 2) -- (2, 1);
+		\end{tikzpicture}
+		\caption{}
+		\label{pic:3}
+	\end{subfigure}
 \end{figure}
 
 \begin{theorem}
@@ -288,19 +303,6 @@
 	$$ A = a + pi, \quad B = b + pi, \quad C = d + qi, \qquad a < d < l, \qquad q > p $$
 	$$ \underbrace{\int\limits_{\curvedir{\partial \vartriangle}ADC}}_0 + \underbrace{\int\limits_{\curvedir{\partial\vartriangle}DBC}}_0 = \int\limits_{\curvedir{\partial\vartriangle}ABC} = 0 $$
 \end{theorem}
-
-\begin{figure}[!ht]
-	\centering
-	\begin{tikzpicture}
-		\draw (0, 0) node[below] {$ A $};
-		\draw (0, 0) -- (2, 1) node[right] {$ B $};
-		\draw (0, 0) -- (1, 2) node[above] {$ C $};
-		\draw (1, 2) -- (1.5, 0.75) node[below] {$ D $};
-		\draw (1, 2) -- (2, 1);
-	\end{tikzpicture}
-	\caption{}
-	\label{pic:3}
-\end{figure}
 
 \begin{theorem}
 	Рассматриваем треугольник $ ABC $ (\autoref{pic:3}). Считаем, что наибольшая сторона "--- это $ AB $.
@@ -341,7 +343,7 @@
 	Каждый из них представим в виде суммы интегралов по трём сторонам. В результате:
 	\begin{enumerate}
 		\item каждый внутренний отрезок мы пройдём дважды в разных направлениях;
-		\item все ``внутренние'' границы (многоугольники) проходятся полностью в отрицательном (относительно самого многоугольника) направлении;
+		\item все ``внутренние'' границы (многоугольники) проходятся полностью в отрицательном (относительно внешнего многоугольника) направлении;
 		\item остаётся только ``внешняя'' граница.
 	\end{enumerate}
 	$$ \sum = 0 $$
@@ -349,7 +351,27 @@
 
 \section{Лемма об оценке интеграла}
 
-\comment{Не знаю, где тут лемма.}
+\begin{figure}[!h]
+	\centering
+	\includegraphics[width=0.75\textwidth]{integral_lemma}
+	\caption{Лемма из конспектов прошлых лет.}
+	\label{fig:integral_lemma}
+\end{figure}
+
+\begin{note}
+	Эту лемму я найти не смог, так что исхожу из предположения, что она отдельно не выделялась и спрятана в следующей теореме.
+	Также, предполагаю, что на \autoref{fig:integral_lemma} приведена эта лемма\footnote{\href{https://drive.google.com/drive/folders/1yCcFWKQGFlAZvy61gvlXTFQ4SfuWRc6I}{Источник}. Низкий поклон этим людям.}.
+	Возможно, лемма об оценке интеграла "--- это вообще другое.
+\end{note}
+
+\begin{lemma}
+	$$ \Bigl| \int\limits_{\curvedir \Gamma} f(z) \di z \Bigr| \le \max\limits_{z \in \Gamma} |f(z)| \cdot l \Gamma $$
+\end{lemma}
+
+\begin{proof}
+	По свойству \ref{it:curve_int:7} криволинейных интегралов,
+	$$ \Bigl| \int\limits_{\curvedir \Gamma} f(z) \di z \Bigr| \le \int\limits_\Gamma |f(z)|~|\di z| \le \int\limits_\Gamma \max |f(z)|~|\di z| \underset{\text{св-во \ref{it:curve_int:6}}}\le \max |f(z)| \cdot l \Gamma $$
+\end{proof}
 
 \section{Теорема Коши для области с кусочно-гладкими границами}
 
@@ -402,33 +424,17 @@
 		\cint[z]{\curvedir{\Gamma_1}}{f(z)} + \cint[z]{\curvedir[0]{S_1}}{f(z)} = \sum_{j = 0}^{N_1 - 1} \bigg( \cint[z]{\curvedir{\gamma_{1j}}}{f(z)} + \cint[z]{\curvedir[0]{\sigma_{1j}}}{f(z)} \bigg)
 	\end{equ}
 	Возьмём $ c \in \Co $.
-	$$ \cint[z]{\curvedir{\sigma_{1j}}}c + \cint[z]{\curvedir[0]{\sigma_{1j}}}c = c(z_{1~j + 1} - z_{1j}) + c(z_{1j} - z_{1~j + 1}) = 0 \quad \forall c $$
-	Возьмём в качестве $ c $ выражение $ f(z) - f(z_{1j}) $
+	$$ \cint[z]{\curvedir{\gamma_{1j}}}c + \cint[z]{\curvedir[0]{\sigma_{1j}}}c = c(z_{1~j + 1} - z_{1j}) + c(z_{1j} - z_{1~j + 1}) = 0 \quad \forall c $$
+	Пусть теперь $ c = -f(z_{1j}) $
 	\begin{equ}{cauchy_domain:9}
 		\eref{cauchy_domain:7'} = \sum_{j = 0}^{N_1 - 1} \bigg( \cint[z]{\curvedir{\gamma_{1j}}}{ \big( f(z) - f(z_{1j}) \big) } + \cint[z]{\curvedir[0]{\sigma_{1j}}}{\big( f(z) - f(z_{1j}) \big) } \bigg)
 	\end{equ}
 	Выберем разбиения такие, чтобы
 	$$ \forall k \quad \forall j \quad \forall y \in [t_{kj}, t_{k~j + 1}] \quad |\Gamma_k(t) - \Gamma_k(t_{kj})| < \delta_1 $$
-	Тогда при $ z \in \gamma_{kj} $ выполнено
-	\begin{equ}{cauchy_domain:11}
-		|z - z_{kj}| < \delta_1
-	\end{equ}
-	В частности,
-	\begin{equ}{cauchy_domain:11'}
-		|z_{k~j + 1} - z_{kj}| < \delta_1
-	\end{equ}
-	По свойству \ref{it:curve_int:7} криволинейных интегралов,
-	\begin{equ}{cauchy_domain:12}
-		\bigg| \cint[z]{\curvedir{\gamma_{1j}}}{f(z) - f(z_{1j})} \bigg| \le \acint{\gamma_{1j}}{|f(z) - f(z_{1j})|} \underset{\eref{cauchy_domain:1}, \eref{cauchy_domain:11}}\le \acint[z]{\gamma_{1j}}\eps = \eps \cdot l ~ \gamma_{1j}
-	\end{equ}
+	Тогда при $ z \in \gamma_{1j} $ и $ z \in \sigma_{1j} $ можно применить лемму:
+	$$ \Bigl| \int\limits_{\curvedir{\gamma_{1j}}} f(z) - f(z_{1j}) \di z \Bigr| \le \eps \cdot l \gamma_{1j}, \quad \Bigl| \int\limits_{\curvedir{\sigma_{1j}}} f(z) - f(z_1) \di z \Bigr| \le \eps \cdot l \sigma_{1j} $$
 
-	Если $ z \in \sigma_{1j} $, то
-	$$ |z - z_{1j}| \le |z_{1~j + 1} - z_{1j}| \underset{\eref{cauchy_domain:11'}}< \delta_1 $$
-	\begin{equ}{cauchy_domain:13}
-		\implies \bigg| \cint[z]{\curvedir{\sigma_{1j}}}{f(z) - f(z_{1j})} \bigg| \le \acint{\sigma_{1j}}{|f(z) - f(z_{1j})|} < \eps \cdot |z_{j + 1} - z_{1j}| \le \eps \cdot l ~ \gamma_{1j}
-	\end{equ}
-
-	$$ \eref{cauchy_domain:9}, \eref{cauchy_domain:12}, \eref{cauchy_domain:13} \implies \bigg| \cint[z]{\curvedir{\gamma_{1j}}}{f(z)} + \cint[z]{\curvedir[0]{\sigma_{1j}}}{f(z)} \bigg| < 2\eps \cdot l ~ \gamma_{1j} $$
+	$$ \implies \bigg| \cint[z]{\curvedir{\gamma_{1j}}}{f(z)} + \cint[z]{\curvedir[0]{\sigma_{1j}}}{f(z)} \bigg| < 2\eps \cdot l ~ \gamma_{1j} $$
 	$$ \underimp{\eref{cauchy_domain:9}} \bigg| \cint[z]{\curvedir{\gamma_{1j}}}{f(z)} + \cint[z]{\curvedir[0]{\sigma_{1j}}}{f(z)} \bigg| < 2\eps \sum_{j = 0}^{N_1 - 1} l ~ \gamma_{1j} = 2 \eps l \Gamma_1 $$
 	При остальных $ k $ "--- аналогично.
 
@@ -480,10 +486,10 @@
 	\begin{equ}{cauchy_formula:23}
 		\cint[\zeta]{\curvedir\partial D_\delta}{\vphi(\zeta)} = 0
 	\end{equ}
-	Обозначим $ S = \set{\zeta \mid |\zeta - z| = r}, \quad \sigma_\delta = \set{\zeta \mid |\zeta - z| = \delta} $.
+	Обозначим $ S = \set{\zeta \mid |\zeta - z_0| = r}, \quad \sigma_\delta = \set{\zeta \mid |\zeta - z| = \delta} $.
 	$$ \eref{cauchy_formula:23} \implies \cint[\zeta]{\curvedir S}{\vphi(\zeta)} + \cint[\zeta]{\curvedir[0]{\sigma_\delta}}{\phi(\zeta)} = 0 \quad \iff \quad \cint[\zeta]{\curvedir S}{\vphi(\zeta)} = - \cint[\zeta]{\curvedir[0]{\sigma_\delta}}{\vphi(\zeta)} = \cint[\zeta]{\curvedir{\sigma_\delta}}{\vphi(\zeta)} $$
 	\begin{equ}{cauchy_formula:25}
-		\cint[\zeta]{\curvedir{\sigma_\delta}}{\vphi(\zeta)} \bdefeq\phi \cint[\zeta]{\curvedir{\sigma_\delta}}{\frac{f(\zeta)}{\zeta - z}} = \cint[\zeta]{\curvedir{\sigma_\delta}}{\frac{f(\zeta)}{\zeta - z}} + \cint[\zeta]{\curvedir{\sigma_\delta}}{\frac{f(z)}{\zeta - z}}
+		\cint[\zeta]{\curvedir{\sigma_\delta}}{\vphi(\zeta) + \phi(z)} \bdefeq\phi \cint[\zeta]{\curvedir{\sigma_\delta}}{\frac{f(\zeta)}{\zeta - z}} + \int\limits_{\curvedir{\sigma_\delta}} \frac{f(z)}{\zeta - z} \di \zeta
 	\end{equ}
 	\begin{equ}{cauchy_formula:26}
 		\cint[\zeta]{\curvedir{\sigma_\delta}}{\frac{f(z)}{\zeta - z}} = f(z) \cint[\zeta]{\curvedir{\sigma_\delta}}{\frac1{\zeta - z}}
@@ -493,22 +499,14 @@
 	$$ \cint[\zeta]{\curvedir{\sigma_\delta}}{\frac1{\zeta - z}} = \dint[\theta]0{2\pi}{\frac{\big( \delta e^{i\theta} \big)'}{\delta e^{i\theta}}} = 2\pi i $$
 	$$ \underimp{\eref{cauchy_formula:26}} \cint[\zeta]{\curvedir{\sigma_\delta}}{\frac{f(z)}{\zeta - z}} = 2\pi i f(z) $$
 	\begin{equ}{cauchy_formula:29}
-		\underimp{\eref{cauchy_formula:25}} \cint[\zeta]{\curvedir S}{ \frac{\vphi(\zeta)}{\zeta - z}} = \cint[\zeta]{\curvedir{\sigma_\delta}}{\frac{f(z)}{\zeta - z}} + 2\pi i f(z)
+		\underimp{\eref{cauchy_formula:25}} \cint[\zeta]{\curvedir S}{ \frac{f(\zeta) + f(z)}{\zeta - z}} = \cint[\zeta]{\curvedir{\sigma_\delta}}{\frac{f(\zeta)}{\zeta - z}} + 2\pi i f(z)
 	\end{equ}
 	В силу непрерывности
 	$$ \forall \eps > 0 \quad \exists \delta > 0 : \quad \forall \zeta \in \sigma_\delta \quad |f(\zeta) - f(z)| < \eps $$
 	$$ \bigg| \cint[\zeta]{\curvedir{\sigma_\delta}}{\frac{f(\zeta) - f(z)}{\zeta - z}} \bigg| \le \acint[\zeta]{\sigma_\delta}{\frac{|f(\zeta) - f(z)|}{|\zeta - z|}} \le \acint[\zeta]{\sigma_\delta}{\frac\eps\delta} = \frac\eps\delta \cdot 2\pi \delta = 2\pi \eps $$
-	$$ \underimp{\eref{cauchy_formula:29}} \bigg| \cint[\zeta]{\curvedir S}{ \frac{f(\zeta)}{\zeta - z}} - 2 \pi i f(z) \bigg| = \bigg| \cint[\zeta]{\curvedir{\sigma_\delta}}{\frac{f(\zeta) - f(z)}{\zeta - z}} \le 2\pi \eps $$
+	$$ \underimp{\eref{cauchy_formula:29}} \bigg| \cint[\zeta]{\curvedir S}{ \frac{f(\zeta)}{\zeta - z}} - 2 \pi i f(z) \bigg| = \bigg| \cint[\zeta]{\curvedir{\sigma_\delta}}{\frac{f(\zeta) - f(z)}{\zeta - z}} \bigg| \le 2\pi \eps $$
 	$$ \implies \cint[\zeta]{\curvedir S}{\frac{f(\zeta)}{\zeta - z}} - 2\pi i f(z) = 0 $$
 \end{proof}
-
-\begin{remark}[о прошедшем рассуждении]
-	$$ (e^{i\theta})' = ie^{i\theta} $$
-	$$ \cos \theta + i \sin \theta $$
-	$$ z_0 = a + bi $$
-	$$ \zeta = z_0 + re^{i\theta} = (a + r\cos \theta) + i(b + r \sin \theta) $$
-	$$ (a + r\cos \theta)' + i(b + r\sin \theta)' = r(\cos \theta)' + ir(\sin \theta)' = -r \sin \theta + i r \cos \theta = ir (\cos \theta + i \sin \theta) = ire^{i\theta} $$
-\end{remark}
 
 \section{Бесконечная гладкость аналитической функции}
 
@@ -554,7 +552,7 @@
 		\bigg( f(z) \bigg)_{\underbrace{x \dots x}_m \underbrace{y \dots y}_n}^{(m + n)} = (m + n)!i^n \cdot \frac1{2\pi i} \dint[\theta]0{2\pi}{\frac{f(a + re^{i\theta})ir}{(a + re^{i\theta} - z)^{m + n + 1}}} = \\
 		= (m + n)!i^n \cdot \frac1{2\pi i} \cint[\zeta]{\curvedir S}{\frac{f(\zeta)}{(\zeta - z)^{m + n + 1}}}
 	\end{multline*}
-	$$ \implies \big( f(z) \big)_{\underbrace{x \dots x}_m \underbrace{{y \dots y}_n}}^{(m + n)} \in \Cont{ \set{z \mid |z - a| \le \rho }} $$
+	$$ \implies \big( f(z) \big)_{\underbrace{x \dots x}_m \underbrace{y \dots y}_n}^{(m + n)} \in \Cont{ \set{z \mid |z - a| \le \rho }} $$
 	В силу произвольности $ \rho $ это означает, что $ f \in \Cont[m + n]{\set{z \mid |z - a| < R}} $. \\
 	Значит, $ f \in \Cont[\infty]{|z - a| < R} $.
 
@@ -578,21 +576,23 @@
 
 	У $ f $ были все производные, а значит, и у $ f_x' $ есть все производные, то есть $ f' \in \Cont[\infty]D $.
 
-	Рассмотрим $ D = \set{z \mid |z - a| < R}, \quad 0 < \rho < r < R $.
-	$$ f(z) = \frac1{2\pi i} \cint[\zeta]{\curvedir S}{\frac{f(\zeta)}{\zeta - z}} $$
-	$$ f'(z) = f_x'(z) = \frac1{2\pi i} \cint[\zeta]{\curvedir S}{\frac{f(\zeta)}{(\zeta - z)^2}} $$
-	Применим формулу \eref{infinite_smooth:21}:
-	$$ \left.
-		\begin{aligned}
-			\big( f_x'(z) \big)_x' = 2 \cdot \frac1{2\pi i} \cint[\zeta]{\curvedir S}{\frac{f(\zeta)}{(\zeta - z)^3}} \\
-			\big( f_x'(z) \big)_y' = 2i \cdot \frac1{\pi i} \cint[\zeta]{\curvedir S}{\frac{f(\zeta)}{(\zeta - z)^3}}
-		\end{aligned} \right\} \implies \big( f_x' \big)_{\ol z}' = 0 $$
-	$$ \implies \big( f'(z) \big)_{\ol z}' \equiv 0 \quad \text{ при } |z - a| < \rho $$
-	В силу произвольности $ \rho $
-	$$ \big( f'(z) \big)_{\ol z}' = 0 \quad \text{ при } |z - a| < R $$
+	\begin{enumerate}
+		\item Рассмотрим $ D = \set{z \mid |z - a| < R}, \quad 0 < \rho < r < R $.
+			$$ f(z) = \frac1{2\pi i} \cint[\zeta]{\curvedir S}{\frac{f(\zeta)}{\zeta - z}} $$
+			$$ f'(z) = f_x'(z) = \frac1{2\pi i} \cint[\zeta]{\curvedir S}{\frac{f(\zeta)}{(\zeta - z)^2}} $$
+			Применим формулу \eref{infinite_smooth:21}:
+			$$ \left.
+				\begin{aligned}
+					\big( f_x'(z) \big)_x' = 2 \cdot \frac1{2\pi i} \cint[\zeta]{\curvedir S}{\frac{f(\zeta)}{(\zeta - z)^3}} \\
+					\big( f_x'(z) \big)_y' = 2i \cdot \frac1{2\pi i} \cint[\zeta]{\curvedir S}{\frac{f(\zeta)}{(\zeta - z)^3}}
+				\end{aligned} \right\} \implies \big( f_x' \big)_{\ol z}' = 0 $$
+			$$ \implies \big( f'(z) \big)_{\ol z}' \equiv 0 \quad \text{ при } |z - a| < \rho $$
+			В силу произвольности $ \rho $
+			$$ \big( f'(z) \big)_{\ol z}' = 0 \quad \text{ при } |z - a| < R $$
 
-	Пусть теперь $ D $ "--- произвольная область
-	$$ \exists R : \quad \set{z \mid |z - a| < R} \sub D $$
+		\item Пусть теперь $ D $ "--- произвольная область
+			$$ \exists R : \quad \set{z \mid |z - a| < R} \sub D $$
+	\end{enumerate}
 \end{proof}
 
 $$ f \in \mathcal A(z \mid |z - a| < R), \qquad \rho < r < R, \qquad f_x' = f' $$
@@ -622,32 +622,30 @@ $$ f'''(z) = (f'')'(z) = (f'')_x'(z) = \frac2{2\pi i} \cint[\zeta]S{f(\zeta) \bi
 
 \begin{theorem}
 	$ f \in \mathcal A(D) $
-	$$ \implies f(z) = f(z_0) + \sum_{n = 1}^\infty \frac{\nder f(z_0)}{n!} (z - z_0)^n $$
-	То есть,
-	$$ c_n = \frac{\nder f(z_0)}{n!}, \qquad f(z) = f(z_0) + \sum_{n = 1}^\infty c_n(z - z_0)^n $$
+	$$ \implies f(z) = f(z_0) + \sum_{n = 1}^\infty \frac{\nder f(z_0)}{n!} (z - z_0)^n, $$
 	где ряд сходится в $ D $ и $ \forall \rho_1 < \rho < R $ ряд сходится равномерно на $ \ol D_\rho = \set{z \mid |z - z_0| \le \rho} $.
 \end{theorem}
 
 \begin{proof}
-	$ S_r = \set{z \mid |z - z_0| = r} $
-	$$ f(z) = \frac1{2\pi i} \cint[\zeta]{S_r}{\frac{f(\zeta)}{\zeta - z}} $$
+	$ S = \set{z \mid |z - z_0| = R} $
+	$$ f(z) = \frac1{2\pi i} \cint[\zeta]{S}{\frac{f(\zeta)}{\zeta - z}} $$
 	$$ \frac1{\zeta - z} = \frac1{(\zeta - z_0) - (z - z_0)} = \frac1{\zeta - z_0} \cdot \frac1{1 - \frac{z - z_0}{\zeta - z_0}} $$
 	Обозначим $ q(\zeta, z) = \frac{z - z_0}{\zeta - z_0} $.
-	$$ |q| = \frac{|z - z_0|}{|\zeta - z_0|} \le \frac\rho r \fed q_0 < 1 $$
+	$$ |q| = \frac{|z - z_0|}{|\zeta - z_0|} \le \frac\rho R \fed q_0 < 1 $$
 	$$ \frac1{1 - q} = 1 + \sum_{n = 1}^\infty q^n = \sum_{n = 0}^\infty q^n $$
 	$$ \sum_{n = 1}^\infty |q^n| \le \sum_{n = 1}^\infty q_0^n = \frac{q_0}{1 - q_0} $$
 	Значит, $ 1 + \sum q^n(z, \zeta) $ равномерно сходится при $ \zeta \in S_r, ~ z \in \ol D_\rho $
 	\begin{multline*}
 		f(z) = \frac1{2\pi i} \cint[\zeta]{S_r}{f(\zeta) \frac1{\zeta - z_0} \bigg\lgroup 1 + \sum_{n = 1}^\infty \bigg( \frac{z - z_0}{\zeta - z_0} \bigg)^n \bigg\rgroup} = \\
-		\frac1{2\pi i} \cint[\zeta]{S_r}{\frac{f(\zeta)}{\zeta - z_0}} + \sum_{n = 1}^\infty (z - z_0)^n \frac1{2\pi i} \cint[\zeta]{S_r}{\frac{f(\zeta)}{(\zeta - z_0)^{n + 1}}} = f(z_0) + \sum_{n = 1}^\infty (z - z_0)^n \frac{\nder f(z_0)}{n!}
+		= \frac1{2\pi i} \cint[\zeta]{S_r}{\frac{f(\zeta)}{\zeta - z_0}} + \sum_{n = 1}^\infty (z - z_0)^n \frac1{2\pi i} \cint[\zeta]{S_r}{\frac{f(\zeta)}{(\zeta - z_0)^{n + 1}}} = f(z_0) + \sum_{n = 1}^\infty (z - z_0)^n \frac{\nder f(z_0)}{n!}
 	\end{multline*}
 
-	Обозначим $ M(r) = \max\limits_{z \in S_r}|f(z)| $.
+	Обозначим $ M = \max\limits_{z \in S}|f(z)| $.
 	\begin{multline*}
-		|c_n| = \bigg| \frac{\nder f(z_0)}{n!} \bigg| = \bigg| \frac1{2\pi i} \cint[\zeta]{S_r}{\frac{f(\zeta)}{(\zeta - z)^{n + 1}}} \bigg| \le \frac1{2\pi} \acint[\zeta]{S_r}{\frac{|f(\zeta)}{|\zeta - z_0|^{n + 1}}} \le \frac1{2\pi} \acint[\zeta]{S_r}{\frac{M(r)}{r^{n + 1}}} = \\
-		= \frac1{2\pi} \cdot 2 \pi r \cdot \frac{M(r)}{r^{n + 1}} = \frac{M(r)}{r^n}
+		|c_n| = \bigg| \frac{\nder f(z_0)}{n!} \bigg| = \bigg| \frac1{2\pi i} \cint[\zeta]{S}{\frac{f(\zeta)}{(\zeta - z)^{n + 1}}} \bigg| \le \frac1{2\pi} \acint[\zeta]{S}{\frac{|f(\zeta)}{|\zeta - z_0|^{n + 1}}} \le \frac1{2\pi} \acint[\zeta]{S}{\frac{M}{R^{n + 1}}} = \\
+		= \frac1{2\pi} \cdot 2 \pi R \cdot \frac{M}{R^{n + 1}} = \frac{M}{R^n}
 	\end{multline*}
-	$$ \implies |z - z_0|^n \cdot |c_n| \le \rho^n \cdot \frac{M(r)}{r^n} = M(r) q_0^n $$
+	$$ \implies |z - z_0|^n \cdot |c_n| \le \rho^n \cdot \frac{M}{R^n} = M q_0^n $$
 \end{proof}
 
 \section{Разложение элементарных функций в степенной ряд}
@@ -686,7 +684,7 @@ $$ f(z) = f(z_0) + \sum_{n = 1}^\infty \frac{\nder f(z_0)}{n!}(z - z_0)^n $$
 \section{Теорема единственности для аналитических функций с производными}
 
 \begin{theorem}
-	$ D \sub \Co $ "--- область, $ \qquad f \in \mathcal A(D), \qquad z_0 \in D, \qquad \nder f(z_0) = 0, \qquad n \ge 1 $
+	$ D \sub \Co $ "--- область, $ \qquad f \in \mathcal A(D), \qquad z_0 \in D, \qquad \nder f(z_0) = 0 \quad \forall n \ge 1, \quad f(z_0) = 0 $
 	$$ \implies f(z) \equiv[D] 0 $$
 \end{theorem}
 
@@ -699,7 +697,7 @@ $$ f(z) = f(z_0) + \sum_{n = 1}^\infty \frac{\nder f(z_0)}{n!}(z - z_0)^n $$
 
 	\begin{enumerate}
 		\item Докажем, что $ E $ \emph{относительно замкнуто} в $ D $, то есть
-			\begin{statement}
+			\begin{statement}\label{stmt:rel_cl}
 				$ \seq{\zeta_m}m, \quad \zeta_m \ne \zeta_l, \quad \zeta_m \in E \quad \forall m, \quad \zeta_m \underarr{m \to \infty} z_*, \quad z_* \in D $
 				$$ \implies z_* \in E $$
 			\end{statement}
@@ -727,11 +725,20 @@ $$ f(z) = f(z_0) + \sum_{n = 1}^\infty \frac{\nder f(z_0)}{n!}(z - z_0)^n $$
 	По теореме из топологии, $ E $ пусто или $ E = D $. Мы уже проверили, что $ E $ не пусто.
 \end{proof}
 
+\begin{remark}
+	В метрических пространствах \autoref{stmt:rel_cl} эквивалентно замкнутости $ E $.
+	Это не какое-то особое свойство.
+\end{remark}
+
 \section{Теорема единственности для аналитических функций со значениями функции}
 
+\begin{note}
+	Эта теорема была после теоремы о структуре аналитической функции в окрестности её нуля, так что в доказательстве используется та теорема.
+\end{note}
+
 \begin{theorem}
-	$ D \sub \Co, \qquad E \sub D, \qquad z_0 $ ~--- т. сг. $ E, \qquad z_0 \in D, \qquad f \in \mathcal A(D), \qquad f(z) = 0 \quad \forall z \in E $
-	$$ \implies f(z) \equiv 0 $$
+	$ D \sub \Co, \qquad E \sub D, \qquad z_0 $ ~--- т. сг. $ E, \qquad z_0 \in D, \qquad f \in \mathcal A(D), \qquad f(z) \equiv[E] 0 $
+	$$ \implies f(z) \equiv[D] 0 $$
 \end{theorem}
 
 \begin{proof}
@@ -776,7 +783,7 @@ $$ f(z) = f(z_0) + \sum_{n = 1}^\infty \frac{\nder f(z_0)}{n!}(z - z_0)^n $$
 \end{theorem}
 
 \begin{proof}
-	Рассмотрим $ \nder[m]f(a) $. По предыдущей теореме она не может быть везде равна нулю. Значит,
+	Рассмотрим $ \nder[m]f(a) $. По теореме единственности с производными она не может быть везде равна нулю. Значит,
 	$$ \exists m : \nder[m]f(a) \ne 0 $$
 	Возьмём $ n = \min \set{m \mid \nder[m]f(a) \ne 0} $. Пусть $ \delta_1 > 0 $ такое, что $ \mathtt B_{\delta_1}(a) \sub D $. Тогда $ f \in \mathcal A \big( \mathtt B_{\delta_1}(a) \big) $.
 	$$ f(z) = f(a) + \frac{f'(a)}{1!}(z - a) + \dots + \frac{\nder[n - 1]f(a)}{(n - 1)!}(z - a)^{n - 1} + \frac{\nder f(a)}{n!}(z - a)^n + \frac{\nder[n + 1]f(a)}{(n + 1)!}(z - a)^{n + 1} + \cdots $$
@@ -803,7 +810,7 @@ $$ f(z) = f(z_0) + \sum_{n = 1}^\infty \frac{\nder f(z_0)}{n!}(z - z_0)^n $$
 \section{Аналитическое продолжение вдоль пути}
 
 \begin{definition}
-	$ D_1, D_2 \in \Co, \qquad D_1 \cap D_2 \fed G \ne \O, \qquad f_1 \in \mathcal A(D_1), \quad f_2 \in \mc A(D_2) $
+	$ D_1, D_2 \sub \Co, \qquad D_1 \cap D_2 \fed G \ne \O, \qquad f_1 \in \mathcal A(D_1), \quad f_2 \in \mc A(D_2) $
 	$$ \forall z \in G \quad f_1(z) = f_2(z) $$
 
 	Говорят, что функция $ f_1 $ \emph{аналитически продолжена} в область $ D_2 $ функцией $ f_2 $.
@@ -815,9 +822,7 @@ $$ f(z) = f(z_0) + \sum_{n = 1}^\infty \frac{\nder f(z_0)}{n!}(z - z_0)^n $$
 \end{theorem}
 
 \begin{proof}
-	$ G $ открыто, $ \quad \forall z_0 \in G $ ~--- т. сг. $ G $. Рассмотрим область $ D_2 $:
-	$$ f_2(z) = \vawe{f_2}(z) \quad \forall z \in G $$
-	Можно применить следствие из теоремы о единственности.
+	следует из следствия к теореме единственности.
 \end{proof}
 
 \begin{definition}
@@ -837,7 +842,7 @@ $$ f(z) = f(z_0) + \sum_{n = 1}^\infty \frac{\nder f(z_0)}{n!}(z - z_0)^n $$
 
 \begin{definition}
 	Пусть имеется путь $ \Gamma(t) $ и система кругов, связанных им.
-	$$ f \in \mathcal A \bigg( \mathtt B_{r_0} \big( \Gamma(t_0) \big) \bigg) = \mathtt B_{r_0} \big( \Gamma(a) \big) $$
+	$$ f \in \mathcal A \bigg( \mathtt B_{r_0} \big( \Gamma(t_0) \big) \bigg) $$
 	Будем говорить, что функция $ f $ \emph{аналитически продолжена вдоль пути} $ \Gamma(t) $ \emph{в круг} $ \mathtt B_{r_n} \big( \Gamma(t_n) \big) = \mathtt B_{r_n} \big( \Gamma(b) \big) $, если функция $ f $ аналитически продолжается из круга $ r_0 $ в круг $ r_1 $, далее из него в круг $ r_2 $, и так далее до круга $ r_n $.
 \end{definition}
 
@@ -852,7 +857,7 @@ $$ f(z) = f(z_0) + \sum_{n = 1}^\infty \frac{\nder f(z_0)}{n!}(z - z_0)^n $$
 \section{Функции, продолжимые по любому пути}
 
 \begin{definition}
-	$ D \sub \Co, \qquad B = \mathtt B_r(z_0) \sub D, \qquad f \in \mathcal A \big( B_r(z_0) \big) $
+	$ D \sub \Co, \qquad B = \mathtt B_r(z_0) \sub D, \qquad f \in \mathcal A(B) $
 
 	Будем говорить, что функция $ f $ \emph{продолжима из круга} $ B $ \emph{по любому пути в области} $ D $, если
 	$$ \forall \Gamma(t) : [a, b] \to D : ~ \Gamma(a) = z_0 \quad f \text{ аналитически продолжается вдоль этого пути}, $$
@@ -865,12 +870,12 @@ $$ f(z) = f(z_0) + \sum_{n = 1}^\infty \frac{\nder f(z_0)}{n!}(z - z_0)^n $$
 	$ D = \Co \setminus \set0, \qquad B = \mathtt B_1(1) $
 
 	Рассмотрим функцию $ f(z) = \log z, \quad z \in B $.
-	$$ \log z = |z| + i \operatorname{arg} z, \qquad z \in \Co \setminus (-\infty, 0] $$
+	$$ \log z = \ln |z| + i \operatorname{arg} z, \qquad z \in \Co \setminus (-\infty, 0] $$
 	Зададим $ \operatorname{Arg} z = \operatorname{arg} z + 2\pi k $.
 
 	Рассмотрим теперь любой круг $ \vawe B $.
 	Хотим задать $ \operatorname{Arg} $ так, чтобы он был в этом круге непрерывен.
-	Положим $ \log z \define \log |z| + i \operatorname{Arg} z $ при $ z \in \vawe B $.
+	Положим $ \log z \define \ln |z| + i \operatorname{Arg} z $ при $ z \in \vawe B $.
 	Эта функция аналитична в $ \vawe B $.
 \end{eg}
 
@@ -888,8 +893,8 @@ $$ f(z) = f(z_0) + \sum_{n = 1}^\infty \frac{\nder f(z_0)}{n!}(z - z_0)^n $$
 \end{theorem}
 
 \begin{proof}
-	\TODO{Доказательство теоремы о монодромии.}
-	Тут какие-то интуитивные рассуждения.
+	Можно взять путь, который (вместе с кругами) полностью покроет $ D $.
+	По определению, вдоль этого пути функция будет аналитична.
 \end{proof}
 
 \section{Ряд Лорана}
@@ -902,7 +907,7 @@ $$ f(z) = f(z_0) + \sum_{n = 1}^\infty \frac{\nder f(z_0)}{n!}(z - z_0)^n $$
 
 \begin{theorem}
 	$ f \in \mathcal A \big(D_{r, R}(a) \big) $
-	$$ \implies \exists c_n \in \Z : \quad \forall z \in D_{r, R}(a) \quad f(z) = \sum_{n = 1}^\infty c_{-n}(z - a)^{-n} + c_0 + \sum_{n = 1}^\infty c_n(z - a)^n, $$
+	$$ \implies \exists c_n \in \Co : \quad \forall z \in D_{r, R}(a) \quad f(z) = \sum_{n = 1}^\infty c_{-n}(z - a)^{-n} + c_0 + \sum_{n = 1}^\infty c_n(z - a)^n, $$
 	где ряды сходятся.
 
 	Если $ r < r_1 < R_1 < R $, то каждый из рядов сходится равномерно и абсолютно при $ z \in \ol{D_{r, R}(a)} $.
@@ -913,42 +918,43 @@ $$ f(z) = f(z_0) + \sum_{n = 1}^\infty \frac{\nder f(z_0)}{n!}(z - z_0)^n $$
 \begin{proof}
 	$$ f \in \mathcal A \bigg( D_{r, R}(a) \bigg), \qquad r_1 < r_2 < R_2 < R_1, \qquad r < r_1 < R_1 < R $$
 	Введём $ S_\rho = \set{ z \mid |z - a| = \rho} $.
+	Пусть $ z \in \ol D_{r, R}(a) $. \\
+	Возьмём $ \eps < \min\set{ r_2 - r_1, R_1 - R_2} $. \\
+	Обозначим $ \sigma_\eps = \set{\zeta \mid |\zeta - z| = \eps} $. \\
+	Рассмотрим функцию
+	$$ \vphi(\zeta) = \frac{f(\zeta)}{\zeta - z}, \qquad \vphi \in \mathcal A \bigg( D_{r, R}(a) \setminus \set{z} \bigg) $$
+	$$ G_\eps = D_{r_1, R_1}(a) \setminus \set{\zeta \mid |\zeta - z| \le \eps} $$
+	$$ \cint[\zeta]{\curvedir \partial G_\eps}{\vphi(\zeta)} = 0 \quad
+	\iff \quad \cint[\zeta]{S_{R_1}}{\vphi(\zeta)} - \cint[\zeta]{S_{r_1}}{\vphi(\zeta)} - \cint[\zeta]{\sigma_\eps}{\vphi(\zeta)} = 0 $$
+	\begin{equ}{laurent:2}
+		\implies \frac1{2\pi i} = \cint[\zeta]{\sigma_\eps}{\frac{f(\zeta)}{\zeta - z}} = \cint[\zeta]{S_{R_1}}{\frac{f(\zeta)}{\zeta - z}} - \cint[\zeta]{S_{r_1}}{\frac{f(\zeta)}{\zeta - z}}
+	\end{equ}
+	$$ \set{\zeta \mid |\zeta - z| \le \eps} \sub D_{r, R}(a) $$
+	\begin{equ}{laurent:3}
+		\frac1{2\pi i}\cint[\zeta]{\sigma_\eps}{\frac{f(\zeta)}{\zeta - z}} = f(z)
+	\end{equ}
+	\begin{equ}{laurent:4}
+		\eref{laurent:2}, \eref{laurent:3} \implies f(z) = \frac1{2\pi i} \cint[\zeta]{S_{R_1}}{\frac{f(\zeta)}{\zeta - z}} - \frac1{2\pi i}\cint[\zeta]{S_{r_1}}{\frac{f(\zeta)}{\zeta - z}}
+	\end{equ}
 	\begin{itemize}
-		\item Пусть $ z \in \ol D_{r, R}(a) $. \\
-		Возьмём $ \eps < \min\set{ r_2 - r_1, R_1 - R_2} $. \\
-		Обозначим $ \sigma_\eps = \set{\zeta \mid |\zeta - z| = \eps} $. \\
-		Рассмотрим функцию
-		$$ \vphi(\zeta) = \frac{f(\zeta)}{\zeta - z}, \qquad \vphi \in \mathcal A \bigg( D_{r, R}(a) \setminus \set{z} \bigg) $$
-		$$ G_\eps = D_{r_1, R_1}(a) \setminus \set{\zeta \mid |\zeta - z| \le \eps} $$
-		$$ \cint[\zeta]{\curvedir \partial G_\eps}{\vphi(\zeta)} = 0 \quad
-		\iff \quad \cint[\zeta]{S_{R_1}}{\vphi(\zeta)} - \cint[\zeta]{S_{r_1}}{\vphi(\zeta)} - \cint[\zeta]{\sigma_\eps}{\vphi(\zeta)} = 0 $$
-		\begin{equ}{laurent:2}
-			\implies \frac1{2\pi i} = \cint[\zeta]{\sigma_\eps}{\frac{f(\zeta)}{\zeta - z}} = \cint[\zeta]{S_{R_1}}{\frac{f(\zeta)}{\zeta - z}} - \cint[\zeta]{S_{r_1}}{\frac{f(\zeta)}{\zeta - z}}
-		\end{equ}
-		$$ \set{\zeta \mid |\zeta - z| \le \eps} \sub D_{r, R}(a) $$
-		\begin{equ}{laurent:3}
-			\frac1{2\pi i}\cint[\zeta]{\sigma_\eps}{\frac{f(\zeta)}{\zeta - z}} = f(z)
-		\end{equ}
-		\begin{equ}{laurent:4}
-			\eref{laurent:2}, \eref{laurent:3} \implies f(z) = \frac1{2\pi i} \cint[\zeta]{S_{R_1}}{\frac{f(\zeta)}{\zeta - z}} - \frac1{2\pi i}\cint[\zeta]{S_{r_1}}{\frac{f(\zeta)}{\zeta - z}}
-		\end{equ}
-		$$ \frac1{\zeta - z} = \frac1{(\zeta - a) - (z - a)} = \frac1{\zeta - a} \cdot \frac1{1 - \frac{z - a}{\zeta - a}} $$
-		Обозначим $ q_1(z, \zeta) = \frac{z - a}{\zeta - a} $.
-		$$ |q_1(z, \zeta)| \le \frac{R_2}{R_1} = Q_1 < 1 $$
-		\begin{multline}\lbl{laurent:6}
-			\implies \frac1{2\pi i} \cint[\zeta]{S_{R_1}}{\frac{f(\zeta)}{\zeta - z}} = \frac1{2\pi i}\cint[\zeta]{S_{R_1}}{\frac{f(\zeta)}{\zeta - a} \cdot \frac1{1 - \frac{z - a}{\zeta - a}}} = \frac1{2\pi i}\cint[\zeta]{S_{R_1}}{\frac{f(\zeta)}{\zeta - a} \sum_{n = 0}^\infty \bigg( \frac{z - a}{\zeta - a} \bigg)^n} = \\
-			= \sum_{n = 0}^\infty \frac1{2\pi i}(z - a)^n \cint[\zeta]{S_{R_1}}{\frac{f(\zeta)}{(\zeta - a}^{n + 1})}
-		\end{multline}
-		Обозначим $ c_n(R_1) = \frac1{2\pi i}\cint[\zeta]{S_{R_1}}{\frac{f(\zeta)}{(\zeta - a)^{n + 1}}} $.
-		$$ \eref{laurent:6} \implies \frac1{2\pi i} \cint[\zeta]{S_{R_1}}{\frac{f(\zeta)}{\zeta - z}} = c_0(R_1) + \sum_{n = 1}^\infty c_n(R_1)(z - a)^n $$
-		\item Пусть $ z $ лежит на окружности.
-		$$ -\frac1{\zeta - z} = -\frac1{(\zeta - a) - (z - a)} = -\frac1{z - a} \cdot \frac1{\frac{\zeta - a}{z - a} - 1} = \frac1{z - a} \cdot \frac1{1 - \frac{\zeta - a}{z - a}} $$
-		$$ \comment{\widedots[10cm]} $$
-		% NOTE: this equation is referenced later in "residues" topic
-		\begin{equ}{laurent:14}
-			c_{-n - 1}(r_1) = \frac1{2\pi i} \cint[\zeta]{S_{r_1}}{f(\zeta)(\zeta - a)^n}
-		\end{equ}
-		$$ \implies -\frac1{2\pi i}\cint[\zeta]{S_{r_1}}{\frac{f(\zeta)}{\zeta - z}} = \sum_{n = 1}^\infty c_{-n}(r_1) (z - a)^{-n} $$
+		\item Рассмотрим $ S_{R_1} $
+			$$ \frac1{\zeta - z} = \frac1{(\zeta - a) - (z - a)} = \frac1{\zeta - a} \cdot \frac1{1 - \frac{z - a}{\zeta - a}} $$
+			Обозначим $ q_1(z, \zeta) = \frac{z - a}{\zeta - a} $.
+			$$ |q_1(z, \zeta)| \le \frac{R_2}{R_1} = Q_1 < 1 $$
+			\begin{multline}\lbl{laurent:6}
+				\implies \frac1{2\pi i} \cint[\zeta]{S_{R_1}}{\frac{f(\zeta)}{\zeta - z}} = \frac1{2\pi i}\cint[\zeta]{S_{R_1}}{\frac{f(\zeta)}{\zeta - a} \cdot \frac1{1 - \frac{z - a}{\zeta - a}}} = \frac1{2\pi i}\cint[\zeta]{S_{R_1}}{\frac{f(\zeta)}{\zeta - a} \sum_{n = 0}^\infty \bigg( \frac{z - a}{\zeta - a} \bigg)^n} = \\
+				= \sum_{n = 0}^\infty \frac1{2\pi i}(z - a)^n \cint[\zeta]{S_{R_1}}{\frac{f(\zeta)}{(\zeta - a)^{n + 1}}}
+			\end{multline}
+			Обозначим $ c_n(R_1) = \frac1{2\pi i}\cint[\zeta]{S_{R_1}}{\frac{f(\zeta)}{(\zeta - a)^{n + 1}}} $.
+			$$ \eref{laurent:6} \implies \frac1{2\pi i} \cint[\zeta]{S_{R_1}}{\frac{f(\zeta)}{\zeta - z}} = c_0(R_1) + \sum_{n = 1}^\infty c_n(R_1)(z - a)^n $$
+		\item Рассмотрим $ S_{r_1} $
+			$$ -\frac1{\zeta - z} = -\frac1{(\zeta - a) - (z - a)} = -\frac1{z - a} \cdot \frac1{\frac{\zeta - a}{z - a} - 1} = \frac1{z - a} \cdot \frac1{1 - \frac{\zeta - a}{z - a}} $$
+			Аналогично,
+			% NOTE: this equation is referenced later in "residues" topic
+			\begin{equ}{laurent:14}
+				c_{-n - 1}(r_1) = \frac1{2\pi i} \cint[\zeta]{S_{r_1}}{f(\zeta)(\zeta - a)^n}
+			\end{equ}
+			$$ \implies -\frac1{2\pi i}\cint[\zeta]{S_{r_1}}{\frac{f(\zeta)}{\zeta - z}} = \sum_{n = 1}^\infty c_{-n}(r_1) (z - a)^{-n} $$
 	\end{itemize}
 
 	Воспользуемся леммой:
@@ -971,7 +977,7 @@ $$ f(z) = f(z_0) + \sum_{n = 1}^\infty \frac{\nder f(z_0)}{n!}(z - z_0)^n $$
 
 	По теореме Коши,
 	$$ \cint[\zeta]{\partial D_{\rho_1, \rho_2}(a)}{\vphi(\zeta)} = 0 $$
-	$$ \comment{\widedots[5cm]} $$
+	При этом, $ \partial D_{\rho_1, \rho_2} = S_{\rho_1} \cup S_{\rho_2} $.
 \end{proof}
 
 \section{Классификация особых точек аналитических функций; характеристика устранимой особой точки}
@@ -991,9 +997,9 @@ $$ f(z) = f(z_0) + \sum_{n = 1}^\infty \frac{\nder f(z_0)}{n!}(z - z_0)^n $$
 \begin{enumerate}
 	\item $ a $ --- \emph{устранимая особая точка}, если $ c_{-n} = 0 \quad \forall n \ge 1 $;
 	\item функция $ f $ имеет в $ a $ \emph{полюс}, если
-	$$ \exists n_0 \ge 1 : \quad c_{-n_0} \ne 0, \quad c_n = 0 \quad \forall n > n_0 $$
+		$$ \exists n_0 \ge 1 : \quad c_{-n_0} \ne 0, \quad c_{-n} = 0 \quad \forall n > n_0 $$
 	\item $ a $ "--- \emph{существенная особая точка}, если
-	$$ \exists \seq{n_k} : \quad c_{-n_k} \ne 0 $$
+	$$ \exists \seq{n_k}k : \quad c_{-n_k} \ne 0 $$
 \end{enumerate}
 
 \begin{theorem}
@@ -1043,7 +1049,7 @@ $$ f(z) = f(z_0) + \sum_{n = 1}^\infty \frac{\nder f(z_0)}{n!}(z - z_0)^n $$
 	$$ \eref{singul_char:210} \implies |\vphi(z)| \underarr{z \to 0} 0 $$
 	Пусть $ |\vphi(z)| < 1 $
 	$$ \implies \vphi \in \mathcal A \big( \mathtt B_{\delta_1}(a) \big) \quad \implies \quad \vphi(a) = 0 $$
-	$$ \implies \exists n_0 \in \N, \quad \exists h \in \mathcal A \big( \mathtt B_{\delta_1}(a) \big) : \quad \psi(z) = (z - a)^{n_0}h(z), \quad h(z) \ne 0, \quad z \in \mathtt B_{\delta_2}(a) $$
+	$$ \implies \exists n_0 \in \N, \quad \exists h \in \mathcal A \big( \mathtt B_{\delta_1}(a) \big) : \quad \phi(z) = (z - a)^{n_0}h(z), \quad h(z) \ne 0, \quad z \in \mathtt B_{\delta_2}(a) $$
 	$$ \implies f(z) = \frac1{(z - a)^{n_0}} \cdot \frac1{h(z)} $$
 	$$ \implies g(z) = \frac1{h(z)} \in \mathcal A \big( \mathtt B_{\delta_2}(a) \big) $$
 	$$ \implies g(z) = c_0 + c_1(z - a) + c_2(a - a)^2 + \dots $$
@@ -1070,8 +1076,8 @@ $$ f(z) = f(z_0) + \sum_{n = 1}^\infty \frac{\nder f(z_0)}{n!}(z - z_0)^n $$
 
 	\item Пусть $ \exists \set{\zeta_n}, ~ \zeta_n \to a, ~ |f(\zeta_n)| \to +\infty $.
 	\begin{itemize}
-		\item Если бы выполнялось $ |f(z)| \underarr{z \to a} +\infty $, то по характеристике полюса, $ a $~--- полюс $ f $.
-		\item Если неверно, что $ |f(z)| \to +\infty $, то
+		\item Если бы выполнялось $ |f(z_n)| \underarr{z \to a} +\infty $, то по характеристике полюса, $ a $~--- полюс $ f $.
+		\item Если неверно, что $ |f(z_n)| \to +\infty $, то
 		$$ \exists M, \quad \exists \set{z_n}, ~ z_n \to a : \quad |f(z_n)| \le M $$
 	\end{itemize}
 
@@ -1081,7 +1087,7 @@ $$ f(z) = f(z_0) + \sum_{n = 1}^\infty \frac{\nder f(z_0)}{n!}(z - z_0)^n $$
 \section{Определение вычета; формулы для вычисления вычетов}
 
 \begin{definition}
-	$ f \in \mathcal A(D_{0, R}(a) \big), \qquad f(z) = \sum_{n = 1}^\infty c_{-n}(z - a)^{-n} + \sum_{n = 0}^\infty c_nO(z - a)^n, \qquad z \in D_{0, R}(a) $
+	$ f \in \mathcal A(D_{0, R}(a) \big), \qquad f(z) = \sum_{n = 1}^\infty c_{-n}(z - a)^{-n} + \sum_{n = 0}^\infty c_n(z - a)^n, \qquad z \in D_{0, R}(a) $
 
 	Коэффициент $ c_{-1} $ называется \emph{вычетом} функции $ f $ в точке $ a $.
 \end{definition}
@@ -1098,7 +1104,7 @@ $$ \res_f a = c_{-1} = \frac1{2\pi i} \int\limits_{\gamma_\rho} f(z) \di z, \qqu
 Тогда положим $ \res_f a $ "--- вычет функции $ f $, определяемый по множеству $ D_{0, R_a}(a) $.
 
 \begin{statement}
-	$ \phi, \psi \in \mathcal A \big( D_r(a) \big), \qquad \psi(a) = 0, \quad \psi'(a) \ne 0, \qquad f(z) = \frac{\phi(z)}{\psi(z)} $
+	$ \phi, \psi \in \mathcal A \big( D_{0, r}(a) \big), \qquad \psi(a) = 0, \quad \psi'(a) \ne 0, \qquad f(z) = \frac{\phi(z)}{\psi(z)} $
 	$$ \implies \res_f a = \frac{\phi(a)}{\psi'(a)} $$
 \end{statement}
 

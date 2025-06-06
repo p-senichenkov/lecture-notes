@@ -47,7 +47,7 @@ $ \R^{m \ge 1}, \qquad a, b \in \R, \qquad a \le b $ \\
 \end{notation}
 
 \begin{statement}
-	$ I \sub \msc E $. Тогда $ I $ можно представить в виде объединения промежутков, таких что
+	$ I \in \msc E $. Тогда $ I $ можно представить в виде объединения промежутков, таких что
 	$$ \braket{A_k, B_k} \cap \braket{A_l, B_l} = \O \quad \forall k \ne l $$
 \end{statement}
 
@@ -57,7 +57,7 @@ $ \R^{m \ge 1}, \qquad a, b \in \R, \qquad a \le b $ \\
 \end{definition}
 
 \begin{statement}
-	Определение множества элементарного множества \bt{корректно}, то есть, мера не зависит от способа разбиения.
+	Определение меры элементарного множества \bt{корректно}, то есть, мера не зависит от способа разбиения.
 \end{statement}
 
 \begin{definition}
@@ -68,11 +68,11 @@ $ \R^{m \ge 1}, \qquad a, b \in \R, \qquad a \le b $ \\
 	Элементарное множество будем называть \emph{открытым}, если $ I = \bigcup (a_k, b_k) $.
 \end{definition}
 
+\section{Внешняя мера \tpst{$ \op m^* E $}{m*E} множества \tpst{$ E $}{E}}
+
 Пусть имеется некоторое множество $ E \sub \R^m $. Обозначим через $ U(E) $ множество следующих открытых элементарных множеств:
 $$ U(E) = \set{ \set{A_n}_{n = 1}^\infty }, \qquad A_n \text{ "--- открытое элементарное множество}, $$
 таких, что $ E \sub \bigcup_{n = 1}^\infty A_n $.
-
-\section{Внешняя мера \tpst{$ \op m^* E $}{m*E} множества \tpst{$ E $}{E}}
 
 \begin{definition}
 	\emph{Внешней мерой} множества $ E $ называется
@@ -88,7 +88,7 @@ $$ U(E) = \set{ \set{A_n}_{n = 1}^\infty }, \qquad A_n \text{ "--- открыт�
 	\item $ \operatorname m^* E \ge 0 $;
 	\item $ E_1 \sub E_2 \implies \operatorname m^* E_1 \le \operatorname m^* E_2 $;
 	\item $ I \in \msc E \implies \operatorname m^* I = \operatorname m I $;
-	\item
+	\item \label{en:outer_meas:4}
 	$$ E \sub \bigcup_{n = 1}^\infty E_n \implies \operatorname m^* E \le \sum_{n = 1}^\infty \operatorname m^* E_n. $$
 \end{props}
 
@@ -129,7 +129,7 @@ $$ \operatorname d(A, B) = \operatorname m^* (A \vartriangle B) \ge 0 $$
 \begin{proof}
 	Все свойства основаны на теоретико-множественных соображениях. Например, 3 основано на включении
 	$$ A \vartriangle B \sub (A \vartriangle C) \cup (C \vartriangle B) $$
-	Далее нужно воспользоваться свойством \eref1 внешней меры.
+	Далее нужно воспользоваться свойством \ref{en:outer_meas:4} внешней меры.
 \end{proof}
 
 \begin{statement}
@@ -184,8 +184,8 @@ $$ \operatorname d(A, B) = \operatorname m^* (A \vartriangle B) \ge 0 $$
 	$$ \exist B_n \in \msc E : \quad \operatorname d(B_n, B) \to 0 $$
 	Тогда, по одному из свойств d,
 	$$ \operatorname d(A_n \cup B_n, ~ A \cup B) \le \operatorname d(A_n, A) + \operatorname d(B_n, B) \to 0 $$
-	$$ \op (A_n \setminus B_n, ~ A \setminus B) \le \op d(A_n, A) + \op d(B_n, B) \to 0 $$
-	Отсюда $ A_n \cup B_n \in \msc E, \quad A_n \setminus B_n \in \msc E $.
+	$$ \op m (A_n \setminus B_n, ~ A \setminus B) \le \op d(A_n, A) + \op d(B_n, B) \to 0 $$
+	При этом, $ A_n \cup B_n \in \msc E, \quad A_n \setminus B_n \in \msc E $.
 	$$ \implies A \cup B \in \fm M_F, \quad A \setminus B \in \fm M_F $$
 \end{proof}
 
@@ -198,17 +198,14 @@ $$ \operatorname d(A, B) = \operatorname m^* (A \vartriangle B) \ge 0 $$
 	$$ \set{B_n}_{n = 1}^\infty, \quad B_n \in \fm M, \quad B_n \cap B_k = \O \quad \implies \operatorname m^* \bigcup_{n = 1}^\infty B_n = \sum_{n = 1}^\infty \operatorname m^* B_n $$
 \end{theorem}
 
-Доказывать теорему не будем. Докажем, что $ \fm M_{\bt F} $ является кольцом, и мера на нём аддитивна.
+Доказывать теорему не будем. Докажем, что $ \fm M_{\bt F} $ является кольцом, и внешняя мера на нём аддитивна.
 
 \begin{statement}
 	$ A, B \in \msc E $
 	\begin{equ}{caratheodory:8}
-		\implies \op m(A \cup B) + \op m(A \cap B) = \op m A + \op m B
+		\op m(A \cup B) + \op m(A \cap B) = \op m A + \op m B
 	\end{equ}
 \end{statement}
-
-В частности, при $ A \cap B = \O $,
-$$ \op m(A \cup B) = \op m A + \op m B $$
 
 \begin{proof}[аддитивность меры]
 	Пусть $ A, B \in \fm M_F, \quad A \cap B = \O $. Тогда
@@ -219,7 +216,7 @@ $$ \op m(A \cup B) = \op m A + \op m B $$
 	\end{statement}
 	В соотношении \eref{caratheodory:8} можно поставить внешнюю меру вместо меры:
 	$$ \operatorname m^*(A_n \cup B_n) + \op m^*(A_n \cap B_n) = \op m^* A_n + \op m^* B_n $$
-	Из \autoref{st:9}, $ \op m^*(A_n \cup B_n) \to \op m^*(A \cup B) $.
+	Из \autoref{st:caratheodory:9}, $ \op m^*(A_n \cup B_n) \to \op m^*(A \cup B) $.
 	$$ \op m^*(A_n \cap B_n) \to \op m^*(A \cap B) = 0 $$
 	$$ \op m^* A_n \to \op m^* A, \qquad \op m^* B_n \to \op m^* B $$
 	Это всё влечёт, что
@@ -239,7 +236,7 @@ $$ \op m(A \cup B) = \op m A + \op m B $$
 \begin{definition}
 	$ E \sub \R^m, \quad E \ne \O $.
 	\emph{Характеристической функцией} множества $ E $ называется функция $ K_E(x) : \R^m \to \R $,
-	$$ K_e(x) =
+	$$ K_E(x) =
 	\begin{cases}
 		1, \quad x \in E, \\
 		0, \quad x \not\in E
@@ -262,7 +259,7 @@ $ \bigcup E_j = E $.
 
 	\begin{enumerate}
 		\item Тогда существует последовательность простых функций, определённых на $ E $ таких, что
-			$$ \forall x \in \quad f_n(x) \underarr{n \to \infty} f(x) $$
+			$$ \forall x \in E \quad f_n(x) \underarr{n \to \infty} f(x) $$
 
 		\item Если множество $ E $ измеримо по Лебегу и функция $ f $ измерима, то все функции $ f_n $ можно выбрать измеримыми.
 
@@ -273,17 +270,15 @@ $ \bigcup E_j = E $.
 \begin{eproof}
 	\item Пусть $ f(x) \ge 0 \quad \forall x $. \\
 		Положим для $ n = 1, 2, \dots, \quad i = 1, \dots, n \cdot 2^n $
-		$$ E_{n~i} = \set{x \in E \mid \frac{i - 1}{2^n} \le f(x) < \frac i{2^n}} $$
-		$$ E_{n~0} = \set{x \in E \mid f(x) \ge n} $$
-		Далее пусть $ \chi_{E_{n~i}}(x) = K_{E_{n~i}}(x) \big|_E, \qquad i = 0, 1, \dots, n \cdot 2^n $, и пусть
+		$$ E_{ni} = \set{x \in E \mid \frac{i - 1}{2^n} \le f(x) < \frac i{2^n}} $$
+		$$ E_{n0} = \set{x \in E \mid f(x) \ge n} $$
+		Далее пусть $ \chi_{E_{ni}}(x) = K_{E_{ni}}(x) \big|_E, \qquad i = 0, 1, \dots, n \cdot 2^n $, и пусть
 		\begin{equ}{lebeg_int:2}
-			f_n(x) = \sum_{i = 1}^{n2^n} \frac{i - 1}{2^n} \chi_{E_{n~i}}(x) + n \chi_{E_{n~0}}(x)
+			f_n(x) = \sum_{i = 1}^{n2^n} \frac{i - 1}{2^n} \chi_{E_{ni}}(x) + n \chi_{E_{n0}}(x)
 		\end{equ}
-		Тогда для $ x \in \bigcup E_{n~i} $ имеем
-		\begin{equ}{lebeg_int:3}
-			|f_n(x) - f(x)| \le \frac1{2^n}
-		\end{equ}
-		Для $ \forall x \in E $ возьмём $ N > f(x) $, тогда $ \forall n > N $ выполнено \eref{lebeg_int:3} и $ f_n(x) \to f(x) $.
+		Тогда для $ x \in \bigcup E_{ni} $ имеем
+		$$ |f_n(x) - f(x)| \le \frac1{2^n} $$
+		Для $ \forall x \in E $ возьмём $ N > f(x) $, тогда $ \forall n > N \quad f_n(x) \to f(x) $.
 
 	\item Если $ f $ измерима, то множества $ E_{n~i} $ измеримы из \eref{lebeg_int:2} следует измеримость $ f_n $.
 
@@ -316,7 +311,7 @@ $ \bigcup E_j = E $.
 	\item $ \R^m = \bigcup_{n = 1}^\infty (a_n, b_n) $, где $ a_n = (-n, \dots, -n), ~ b_n = (n, \dots, n) $.
 
 	\item Пусть $ \Q^m $ "--- множество всех точек с рациональными координатами в $ \R^m, \quad G \sub \R^m $ открыто, $ \quad G \ne \O $. \\
-		Для любой точки $ M \in G \cap \Q^m $ обозначим через $ I(M) $ максимальный промежуток $ \bigl( a(M), b(M) \bigr) $ со следующими свойствами:
+		Для любой точки $ M \in G \cap \Q^m $ выберем максимальный промежуток $ \bigl( a(M), b(M) \bigr) $ со следующими свойствами:
 		\begin{itemize}
 			\item $ a(M) = \bigl( a_1(M), \dots, a_m(M) \bigr) $;
 			\item $ b(M) = \bigl( b_1(M), \dots, b_m(M) \bigr) $;
@@ -341,7 +336,7 @@ $ \bigcup E_j = E $.
 \end{definition}
 
 \begin{definition}
-	Будем говорить, что функция $ f : E \to \hat\R, \quad E \sub \mathfrak M $ \emph{измерима по Лебегу}, если $ \forall a \in \R $ имеем
+	Будем говорить, что функция $ f : E \to \ol \R, \quad E \sub \mathfrak M $ \emph{измерима по Лебегу}, если $ \forall a \in \R $ имеем
 	$$ E_{<a}(f), E_{\le a}(f), E_{>a}(f), E_{\ge a} \in \mathfrak M $$
 \end{definition}
 
@@ -352,7 +347,7 @@ $ \bigcup E_j = E $.
 \begin{proof}
 	Имеем следующие соотношения:
 	$$ E_{\ge a} = \bigcap_{n = 1}^\infty \set{x \in E \mid f(x) > a - \frac1n}, \qquad E_{<a} = E \setminus E_{\ge a} $$
-	$$ E_{\le a} = \bigcap_{x \in E \mid f(x) < a + \frac1n}, \qquad E_{>a} = E \setminus E_{\le a} $$
+	$$ E_{\le a} = \bigcap {x \in E \mid f(x) < a + \frac1n}, \qquad E_{>a} = E \setminus E_{\le a} $$
 	Поскольку $ \mathfrak M $ "--- кольцо, $ E \in \mathfrak M $,
 	$$ E_{>a} \in \mathfrak M \quad \forall a \implies E_{\ge a} \in \mathfrak M \quad \forall a $$
 	$$ E_{\ge a} \in \mathfrak M \quad \forall a \implies E_{<a} \in \mathfrak M \quad \forall a $$
@@ -381,7 +376,7 @@ $ \bigcup E_j = E $.
 \begin{proof}
 	Имеем соотношение
 	$$ E_{>a}(g_+) = \bigcup_{n = 1}^\infty E_{>a}(f_n) $$
-	Положим $ g_m(s_{n \ge m} f_n(x) $, тогда $ g_m $ измеримы и $ h(x) = \inf\limits_m g_m(x) $.
+	Положим $ g_m = \sup\limits_{n \ge m} f_n(x) $, тогда $ g_m $ измеримы и $ h(x) = \inf\limits_m g_m(x) $.
 \end{proof}
 
 \section{Измеримость \tpst{$ \varliminf\limits_{n \to \infty} f_n(x), ~ \inf\limits_n f_n(x) $}{нижнего предела fn(x), inf fn(x)}}
@@ -409,7 +404,7 @@ $ \bigcup E_j = E $.
 \begin{proof}
 	Пусть $ f, g $ измеримы. \\
 	Положим $ f_{2n - 1}(x) = f(x), \quad f_{2n}(x) = g(x) $, тогда
-	$$ \sup\limits_{n \ge 1} f_n(x) = \max \set{f(x), g(x)}, \quad \int\limits_{n \ge 1} f_n(x) = \min \set{f(x), g(x)} $$
+	$$ \sup\limits_{n \ge 1} f_n(x) = \max \set{f(x), g(x)}, \quad \inf\limits_{n \ge 1} f_n(x) = \min \set{f(x), g(x)} $$
 	То есть, $ \max\set{f(x), g(x)} $ и $ \min \set{(x), g(x)} $ измеримы.
 
 	Если $ c \in \R, \quad f $ измерима, то и $ cf $ измерима:
@@ -429,7 +424,7 @@ $ \bigcup E_j = E $.
 \end{property}
 
 \begin{proof}
-	Имеем $ \lim\limits_{n \to \infty} f_n(x) = \varlimsup_{n \to \infty} f_n(x) $, утверждение следует из \ref{en:meas_prop:2}.
+	$ \lim\limits_{n \to \infty} f_n(x) = \varlimsup\limits_{n \to \infty} f_n(x) $.
 \end{proof}
 
 \section{Измеримость \tpst{$ f_n + g_n, ~ f_ng_n $}{fn + gn, fn gn}}
@@ -471,35 +466,33 @@ $ \bigcup E_j = E $.
 \end{definition}
 
 \begin{properties}
-	$ f_1 $ "--- простая функция, записанная в виде \eref{lebeg_int:4}.
+	$ f $ "--- простая функция, записанная в виде \eref{lebeg_int:4}.
 	\begin{enumerate}
-		\item $ a \le f_1(x) \le b, \quad \op m E < +\infty $
-			$$ \implies a \op m E \le I_E(f_1) \le b \op m E $$
+		\item $ a \le f(x) \le b, \quad \op m E < +\infty $
+			$$ \implies a \op m E \le I_E(f) \le b \op m E $$
 
-		\item Если $ f_1(x) \le g_1(x), \quad x \in E $, то $ I_E(f_1) \le I_E(g_1) $.
+		\item Если $ f(x) \le g(x), \quad x \in E $, то $ I_E(f) \le I_E(g) $.
 
-		\item Если $ c \in \R $, то $ I_E(cf_1) = cI_E(f_1) $.
+		\item Если $ c \in \R $, то $ I_E(cf) = cI_E(f) $.
 
-		\item \label{en:lebeg_int:4} Если $ \op m E = 0 $, то $ I_E(f_1) = 0 $.
+		\item \label{en:lebeg_int:4} Если $ \op m E = 0 $, то $ I_E(f) = 0 $.
 
 		\item \label{en:lebeg_int:6} $ F_1 \cap F_2 = \O, \quad F_1 \cup F_2 = E $
-			\begin{equ}{lebeg_int:6}
-				I_{F_1}(f_1) + I_{F_2}(f_1) = I_E(f_1)
-			\end{equ}
+			$$ I_{F_1}(f) + I_{F_2}(f) = I_E(f) $$
 	\end{enumerate}
 \end{properties}
 
 \begin{proof}[\ref{en:lebeg_int:6}]
-	Пусть $ f_1(x) = \sum c_j \chi_{E_j} $, пусть $ E_j' = E_j \cap F_1, \quad E_j'' = F_j \cap F_2 $. \\
+	Пусть $ f(x) = \sum c_j \chi_{E_j} $, пусть $ E_j' = E_j \cap F_1, \quad E_j'' = E_j \cap F_2 $. \\
 	Тогда $ \op m E_j' + \op m E_j'' = \op m E_j $,
-	$$ I_{F_1}(f_1) = \sum c_j \op m E_j', \qquad I_{F_2}(f_1) = \sum c_j \op m E_j'', \qquad I_E(f) = \sum c_j \op m E_j $$
-	Отсюда следует свойство \eref{lebeg_int:6}.
+	$$ I_{F_1}(f) = \sum c_j \op m E_j', \qquad I_{F_2}(f) = \sum c_j \op m E_j'', \qquad I_E(f) = \sum c_j \op m E_j $$
+	Отсюда следует свойство.
 \end{proof}
 
 \section{Определение интеграла Лебега для \tpst{$ f(x) \ge 0 $}{f(x) >= 0}}
 
-\begin{definition}
-	Пусть $ E \sub \R^m $ "--- измеримо, $ \quad E \ne \O, \quad f : E \to \R \cup \set{+\infty}, \quad f(x) \ge 0 \quad \forall x \in E, \quad f $ измерима.
+\begin{definition}\hfill \\
+	$ E \sub \R^m $ измеримо, $ \quad E \ne \O, \quad f : E \to \R \cup \set{+\infty}, \quad f(x) \ge 0 \quad \forall x \in E, \quad f $ измерима.
 
 	Через $ \mathtt B(f) $ обозначим множество всех простых функций $ f_0 : E \to \R $, удовлетворяющих условиям:
 	\begin{itemize}
@@ -548,7 +541,7 @@ $ \bigcup E_j = E $.
 
 	\begin{enumerate}
 		\item Пусть $ f(x) = \chi_F(x), \quad F \sub E $, тогда
-			$$ \phi(A) = \int\limits \chi_F(x) \di \op m = I_E(\chi_{F \cap A}) = \op m (F \cap A) $$
+			$$ \phi(A) = \int\limits_A \chi_F(x) \di \op m = I_E(\chi_{F \cap A}) = \op m (F \cap A) $$
 			$$ \phi(A_n) = I_E(\chi_{F \cap A_n}) = \op m (F \cap A_n) $$
 			В силу счётной аддитивности меры Лебега имеем $ \op m(F \cap A) = \sum \op m(F \cap A_n) $, откуда следует \eref{lebeg_int:10}.
 
@@ -574,11 +567,11 @@ $ \bigcup E_j = E $.
 	Поскольку $ f \in \msc L(E) $, то $ \phi(A) < +\infty, \quad \phi(A_n) < +\infty $. \\
 	Возьмём $ \forall N $ и зафиксируем $ \eps > 0 $. \\
 	Выберем $ f_1, \dots, f_N $ "--- простые функции, $ f_j \in \mathtt B(f) $, удовлетворяющие условию
-	$$ I_{A_j}(f_j) > \int\limits_{A_j} d \di \op m - \frac\eps N, \quad j = 1, \dots, N $$
+	$$ I_{A_j}(f_j) > \int\limits_{A_j} f \di \op m - \frac\eps N, \quad j = 1, \dots, N $$
 	Определим функцию $ f_0 : E \to \R $:
 	$$ f_0(x) =
 	\begin{cases}
-		f_j(x), \quad j \ge 2, \quad x \in A, \\
+		f_j(x), \quad j \ge 2, \quad x \in A_j, \\
 		f_1(x), \quad x \in E \setminus \bigcup_{n = 2}^N A_n
 	\end{cases} $$
 	Тогда $ f_0 \in \mathtt B(f), \quad \bigcup_{n = 1}^N A_n \sub A $ и по пункту \ref{en:lebeg_int:2}
@@ -614,7 +607,7 @@ $ \bigcup E_j = E $.
 
 \begin{proof}
 	Пусть $ E_+ = \set{x \in E \mid f(x) \ge 0}, \quad E_- = \set{x \in E \mid f(x) < 0} $. \\
-	Тогда $ \int\limits_E f \di \op m = \int\limits_{E_+} + \int\limits_{E_-} = \int\limits_E f^+ \di \op m - \int\limits_E f^- \di \op m $,
+	Тогда $ \int\limits_E f \di \op m = \int\limits_{E_+} f \di \op m + \int\limits_{E_-} f \di \op m = \int\limits_E f^+ \di \op m - \int\limits_E f^- \di \op m $,
 	$$ \int\limits_E |f| \di \op m = \int \limits_{E_+} + \int \limits_{E_-} = \int\limits_{E_+} f^+ \di \op m + \int \limits_{E_-} f^- \di \op m = \int \limits_E f^+ \di \op m + \int \limits_E f^- \di \op m $$
 \end{proof}
 
@@ -626,12 +619,12 @@ $ \bigcup E_j = E $.
 	Тогда $ f \in \msc L(E) $.
 
 	\item Если $ f $ измерима, $ \op m E < \infty, \quad a \le f(x) \le b, \quad x \in E $, то
-	$$ a \op m E \le \int_E f \di m \le b \op m E $$
+	$$ a \op m E \le \int\limits_E f \di m \le b \op m E $$
 
 	\item Если $ f, g \in \msc L(E) $ и $ f(x) \le g(x), \quad x \in E $, то
-	$$ \int_E f \di \op m \le \int g \di \op m $$
+	$$ \int\limits_E f \di \op m \le \int g \di \op m $$
 
-	\item $ f \in \op L(E), \quad c \in \R $
+	\item $ f \in \msc L(E), \quad c \in \R $
 	$$ \implies
 	\begin{cases}
 		cf \in \msc L(E), \\
@@ -639,52 +632,39 @@ $ \bigcup E_j = E $.
 	\end{cases} $$
 
 	\item Если $ \op m E = 0, \quad f $ измерима, то
-	$$ \lim\limits_E \di \op m = 0 $$
+	$$ \int\limits_E f \di \op m = 0 $$
 
-	\item Если $ f \in \msc L(E), \quad F \sub E, \quad F $ измеримо, то $ f \in \msc L(F) $.
-
-	В частности, если $ E = E_0 \cup S, \quad E_0 \cap S = 0, \quad \op m S = 0 $, то
-	$$ \int\limits_E f \di \op m = \int\limits_{E_0} f \di \op m + \int\limits_S f \di \op m = \int\limits_{E_0} f \di \op m, $$
-	поскольку $ \int\limits_S f \di \op m = 0 $.
-
-	Отсюда следует важное свойство интеграла Лебега:
-
-	\item Пусть $ f \sim h, \qquad f \in \msc L(E) $. Тогда
-	$$ \int\limits_E f \di \op m = \int\limits_E g \di \op m $$
+	\item \label{en:lebeg_int_props:6} Если $ f \in \msc L(E), \quad F \sub E, \quad F $ измеримо, то $ f \in \msc L(F) $.
 
 	\item Пусть $ f, g \in \msc L(E) $. Тогда $ f + g \in \msc L(E) $ и
 	$$ \int\limits_E (f + g) \di \op m = \int\limits_E f \di \op m + \int\limits_E g \di \op m $$
 \end{props}
 
 \begin{eproof}
-	\item Следует из того, что $ f \in \msc L(E) \iff |f| \in \msc l(E) $ для любой простой функции $ s : ~ 0 \le s(x) \le |f(x) $ справедливо $ s(x) \le c $, поэтому
+	\item $ f \in \msc L(E) \iff |f| \in \msc L(E) $ и для любой простой функции $ s : ~ 0 \le s(x) \le |f(x)| $ справедливо $ s(x) \le c $, поэтому
 	$$ \int\limits_E s \di \op m \le \int\limits_E c \di \op m = c \op m E, \qquad \int |f| \di \op m \le c \op m E $$
 
 	\item Аналогично.
 
 	\item Без доказательства.
 
-	\item Докажем для $ f(x) \ge 0, \quad x \in E, \quad c > 0 $. Пусть $ s \in \mc A(F) $, \ie $ s $ "--- простая функция, $ \quad 0 \le s(x) \le f(x) \quad \forall x \in E $. \\
-	Тогда $ cs \in \mc A(cf) $,
+	\item Докажем для $ f(x) \ge 0, \quad x \in E, \quad c > 0 $.
+		Пусть $ s \in \mathtt B(F) $ \\
+	Тогда $ cs \in \mathtt B(cf) $,
 	$$ \int\limits_{E} cs \di \op m = \sum_{j = 1}^n ca_j \op m F_j = c \sum_{j = 1}^n a_j \op m F_j = c \int\limits_E s \di \op m, $$
-	если $ s(x) = \sum a_j \xi_{F_j}(x), \quad F_j \cap F_k = \O $. \\
+	если $ s(x) = \sum a_j \chi{F_j}(x), \quad F_j \cap F_k = \O $. \\
 	Переходя к супремуму, получаем нужное свойство.
 
-	\item Если $ F_j \sub E $, то $ 0 \le \op m F_j \le \op m E = 0 $, для любой простой функции $ s \in \mc A(|f|) $ имеем $ 0 \le s(x) \le |f(1)| = 0, \quad s(x) = 0, \quad \int\limits_E s \di \op m = 0 $, поэтому $ \int\limits_E |f| \di \op m = 0 $
-	$$ 0 \le \int\limits_E f^+ \di \op m \le \int\limits_E |f| \di \op m = 0, \qquad 0 \le \int\limits_E f^- \di \op m \le \int |f| \di \op m = 0 $$
-	$$ \int\limits_E \di \op m = \int\limits_E f^+ \di \op m - \int\limits_E f^- \di \op m = 0 $$
+	\item Для любой простой функции $ s \in \mathtt B(|f|) $ имеем
+		$$ I_E(s) = 0 \quad \implies \quad \int\limits_E |f| \di \op m = 0 \quad \implies \quad \int\limits_E f \di \op m = 0 $$
 
-	\item Для $ \forall s \in \mc A(|f|) $ на множестве $ F $ положим
-	$$ s_0(x) =
-	\begin{cases}
-		s(x), \quad x \in F, \\
-		0, \quad x \in E \setminus F
-	\end{cases} $$
-	$$ \int\limits_E s_0 \di \op m = \int\limits_F s \di \op m \le \int\limits_E |f| \di \op m $$
-	$$ \int \limits_F |f| \di \op m \le \int\limits_E |f| \di \op m, \qquad |f| \in \msc L(F) $$
-
-	\item Пусть $ E_0 = \set{x \in E \mid f(x) = g(x)}, \quad S = E \setminus E_0 $. Тогда $ \op m S = 0 $,
-	$$ \int\limits_E f \di \op m = \int\limits_{E_0} f \di \op m, \qquad \int\limits_E g \di \op m = \int\limits_{E_0} g \di \op m $$
+	\item Для $ \forall s \in \mathtt B(|f|) $ на множестве $ F $ положим $ s_0(x) =
+		\begin{cases}
+			s(x), \quad x \in F \\
+			0
+		\end{cases} $. Тогда
+		$$ \int\limits_E s_0 \di \op m = \int\limits_F s \di \op m \le \int \limits_E |f| \di \op m $$
+		$$ \int\limits_F |f| \di \op m \le \int\limits_E |f| \di \op m $$
 \end{eproof}
 
 \section{Интеграл Римана и интеграл Лебега}
@@ -692,8 +672,8 @@ $ \bigcup E_j = E $.
 \begin{theorem}
 	Пусть функция $ f $ интегрируема по Риману на промежутке $ (a, b) $.
 
-	Тогда она измерима по Лебегу на множестве $ E = (a, b) $, суммируема, и справедливо равенство
-	$$ \int_a^b f(x) \di x = \int\limits_{[a, b]} f \di \op m $$
+	Тогда она измерима по Лебегу на множестве $ (a, b) $, суммируема, и справедливо равенство
+	$$ \int_a^b f(x) \di x = \int\limits_{(a, b)} f \di \op m $$
 \end{theorem}
 
 \begin{noproof}
@@ -704,7 +684,7 @@ $ \bigcup E_j = E $.
 \begin{theorem}
 	Имеется некое множество $ E \sub \R^{m + n}, \quad m, n \ge 1, \quad E \sub \mathfrak M_{m + n} $
 	$$ \quad M \in \R^{m + n}, \quad M = (X, Y), \quad X \in \R^m, ~ Y \in \R^n $$
-	Возьмём $ \forall X \in \R^m $. Определим множества
+	Определим множества
 	$$ E (X, \cdot) = \set{ Y \in \R^n \mid (X, Y) \in E}, \qquad E(\cdot, Y) = \set{X \in \R^m \mid (X, Y) \in E} $$
 
 	Тогда
@@ -715,7 +695,7 @@ $ \bigcup E_j = E $.
 			\item Для $ n $-п.~в. $ Y \qquad E(\cdot, Y) \in \mathfrak M_m $
 		\end{itemize}
 		\item Пусть $ \mu_k $ "--- мера Лебега в $ \R^k $. Тогда
-			$$ \mu_{m + n} E = \int\limits_{\R^{m + n}} \mu_n E(X, \cdot) \di \mu_m(X) = \int\limits_{\R^{m + n}} \mu_m E(\cdot, Y) \di \mu_n(X) $$
+			$$ \mu_{m + n} E = \int\limits_{\R^{m + n}} \mu_n E(X, \cdot) \di \mu_m(X) = \int\limits_{\R^{m + n}} \mu_m E(\cdot, Y) \di \mu_n(Y) $$
 		\item $ f : E \to \R $
 			$$ \forall X \in \R^m \quad f_X : E(X, \cdot) \to \R : \quad f_X(Y) = f(X, Y) $$
 			$$ \forall Y \in \R^n \quad f_Y : E(\cdot, Y) \to \R : \quad f_Y(X) = f(X, Y) $$
@@ -738,9 +718,9 @@ $ \bigcup E_j = E $.
 \section{Параметризованная поверхность в \tpst{$ \R^m $}{R\textasciicircum m}; измеримые множества на параметризованной поверхности}
 
 \begin{definition}
-	$ D \sub \R^n $ "--- открыто, связно, $ \quad m > n $.
+	$ D \sub \R^n $ открыто, связно, $ \quad m > n $.
 
-	$ \mc C^1 $-поверхностью будем называть отображение $ F : D \to \R^n $ такое, что $ F \in \mc C^1(D) $, \ie
+	$ \mc C^1 $-поверхностью будем называть отображение $ F : D \to \R^m $ такое, что $ F \in \mc C^1(D) $, \ie
 	$$ F = \column{f_1}{f_m}, \quad f_k \in \mc C^1(D), $$
 	$ F $ "--- биекция, $ \quad \op{rank} \mc DF(X) = n \quad \forall X \in D $.
 \end{definition}
@@ -764,7 +744,7 @@ $ \bigcup E_j = E $.
 	Будем говорить, что $ f ~ S $-\emph{измерима}, если $ \phi(X) = f \bigl( F(X) \bigr) $ измерима на $ F^{-1}(E) $.
 \end{definition}
 
-\section{Кусочно-гладкие поверхности \tpst{$ S $}{S}; \tpst{мера}{$ \mu_S(E) $}}
+\section{Кусочно-гладкие поверхности \tpst{$ S $}{S}; \tpst{$ \mu_S(E) $}{мера}}
 
 \begin{definition}
 	\emph{Кусочно-гладкой} поверхностью будем называть $ S = \bigcup_{k = 1}^N S_k $, \\
@@ -774,7 +754,7 @@ $ \bigcup E_j = E $.
 \begin{definition}
 	$ E \sub S $
 
-	Будем говорить, что $ E ~ S $-\emph{измеримо}, если $ E \cap S_k \quad S_k $ измеримо $ \forall k $
+	Будем говорить, что $ E ~ S $-\emph{измеримо}, если $ E \cap S_k \quad S_k $-измеримо $ \forall k $
 	$$ \mu_S E = \sum_{k = 1}^N \mu_{S_k}(E \cap S_k) $$
 \end{definition}
 
@@ -799,8 +779,8 @@ $ \bigcup E_j = E $.
 \section{Параметризованная ориентированная поверхность в \tpst{$ \R^3 $}{R3}}
 
 \begin{definition}
-	$ D \sub \R^2 $ открыто, связно, $ \quad F : D \to \R^3 $ "--- $ \mc C^1 $-поверхность в $ \R^3 $ \\
-	$ S = F(D), \quad F =
+	$ D \sub \R^2 $ "--- область, $ \quad F : D \to \R^3 $ "--- $ \mc C^1 $-поверхность в $ \R^3 $
+	$$ S = F(D), \quad F =
 	\begin{bmatrix}
 		f_1 \\
 		f_2 \\
@@ -808,59 +788,53 @@ $ \bigcup E_j = E $.
 	\end{bmatrix}, \quad X \in D, \quad T_1(X) =
 	\begin{bmatrix}
 		f_{1~x_1}'(X) \\
-		f_{2~x_2}'(X) \\
-		f_{3~x_3}'(X)
+		f_{2~x_1}'(X) \\
+		f_{3~x_1}'(X)
 	\end{bmatrix}, \quad T_2(X) =
 	\begin{bmatrix}
 		f_{1~x_2}'(X) \\
 		f_{2~x_2}'(X) \\
 		f_{3~x_2}'(X)
-	\end{bmatrix} $ \\
+	\end{bmatrix} $$
 	Рассмотрим ориентацию $ \curvedir S \quad \bigl(T_1(X), T_2(X) \bigr) $.
+\end{definition}
+
+\section{\tpst{$ \int\limits_{\curvedir S} f(M) \di x_i \wedge \di x_j $}{Интеграл \rom2 рода} для параметризованной и кусочно-гладкой ориентированной поверхности в \tpst{$ \R^3 $}{R3}}
+
+\begin{definition}
 	$$ f \in \msc L_S(E), \quad E \sub S, \quad i \ne j, \quad i, j \in \set{1, 2, 3} $$
-	$$ \int\limits_{\curvedir S \cap E} f(Y) \di y_i \wedge \di y_j \define \int\limits_{F^{-1}(E)} f \bigl(F(X) \bigr)
+	$$ \int\limits_{\curvedir S} f(Y) \di y_i \wedge \di y_j \define \int\limits_{F^{-1}(S)} f \bigl(F(X) \bigr)
 	\begin{vmatrix}
 		f_{i~x_1}'(X) & f_{i~x_2}'(X) \\
 		f_{j~x_1}'(X) & f_{j~x_2}'(X)
 	\end{vmatrix} \di \mu_2(X) $$
 \end{definition}
 
-\section{\tpst{Интеграл \rom2 рода}{$ \int\limits_{\curvedir S} f(M) \di x_i \wedge x_j $} для параметризованной и кусочно-гладкой ориентированной поверхности в \tpst{$ \R^3 $}{R3}}
-
 \begin{definition}
 	$ \curvedir S = \bigcup_{k = 1}^N \curvedir S_k $ "--- \emph{ориентированная кусочно-гладкая} поверхность в $ \R^3, \quad E \sub S $.
 	
-	$$ \int\limits_{\curvedir S \cap E} f(Y) \di y_i \wedge \di y_j \define \sum_{k = 1}^N \int f\big|_{S_k}\di y_i \wedge \di y_j $$
+	$$ \int\limits_{\curvedir S} f(Y) \di y_i \wedge \di y_j \define \sum_{k = 1}^N \int\limits_{\curvedir S} f\big|_{S_k}\di y_i \wedge \di y_j $$
 \end{definition}
 
 \section{Формула Гаусса\tpst{"--~}{--}Остроградского}
 
 \begin{theorem}
 	$ V \sub \R^3 $ ограничено, связно, $ \quad \partial V = \bigcup_{k = 1}^N \ol S_k, \quad S_k \cap S_l = \O $ \\
-	$ \curvedir S_k, \quad y \in S_k \quad \bigl( T_1(Y), T_2(Y) \bigr), \quad T_1(Y) \times T_2(Y) $ направлен вне $ V $.
-
-	$ \phi \in \mc C(\ol V), \quad i \in \set{1, 2, 3}, \quad \phi_{y_i}' \in \mc C(\ol V) $
+	$ \curvedir S_k, \quad Y \in S_k \quad \bigl( T_1(Y), T_2(Y) \bigr), \quad T_1(Y) \times T_2(Y) $ направлен вне $ V, \quad \phi \in \mc C(\ol V), \quad \phi_{y_i}' \in \mc C(\ol V) $
 	$$ \sigma =
 	\begin{cases}
 		1, \quad (i, j, k) \text{ "--- чётная},
 		-1, \quad \text{иначе}
 	\end{cases} $$
-
-	Тогда
-	$$ \int\limits_{\curvedir \partial V} \phi(Y) \di y_i \wedge \di y_j \wedge \di y_k = \sigma \cdot \int\limits_V \phi_{y_i}'(Y) \di \mu_3(Y) $$
-
-	В частности, при $ \phi(Y) = y_1 $,
-	$$ \int\limits_{\curvedir \partial V} x_1 \di x_2 \wedge \di x_3 = \int\limits_V 1 \di \mu_3 = \mu_3 V $$
 \end{theorem}
 
 \section{Формула Грина}
 
 \begin{theorem}
-	$ D \sub \R^2 $ "--- область, $ \quad \partial D, \quad \curvedir \partial D, \quad f \in \mc C(\ol D), f_{x_1}' \in \mc C(\ol D), \quad M = (x_1, x_2) $. Тогда
-	$$ \int\limits_{\curvedir \partial D} f(M) \di x_2 = \int\limits_D f_{x_1}'(M) \di \mu_2(M) $$
+	$ D \sub \R^2 $ "--- область, $ \quad f \in \mc C(\ol D), \quad f_{x_1}' \in \mc C(\ol D), \quad g \in \mathcal C(\ol D), \quad g_{x_2}' \in \mathcal C(\ol D), \quad M = (x_1, x_2) $.
 
-	$ g \in \mc C(\ol D), \quad g_{x_2}' \in \mc C(\ol D) $. Тогда
-	$$ \int\limits_{\curvedir \partial D} g(M) \di x_1 = - \int\limits_D g_{x_2}'(M) \di \mu_2(M) $$
+	Тогда
+	$$ \int\limits_{\curvedir \partial D} f(M) \di x_2 = \int\limits_D f_{x_1}'(M) \di \mu_2(M), \quad \int\limits_{\curvedir \partial D} g(M) \di x_1 = - \int\limits_D g_{x_2}'(M) \di \mu_2(M) $$
 \end{theorem}
 
 \section{Коэффициенты Фурье; формула для частичной суммы ряда Фурье}
@@ -869,29 +843,28 @@ $ \bigcup E_j = E $.
 	$ f : \R \to \R, \quad f \in \mathfrak M(\R), \quad f(x + 2\pi) = f(x) \quad \forall x, \quad f \in \msc L([0, 2\pi]) $
 
 	Функции $ f $ сопоставляются \emph{коэффициенты Фурье} и \emph{ряд Фурье}
-	$$ a_0 = \frac1{2\pi} \int\limits_{[0, 2\pi]} f \di \op m = \frac1{2\pi} \int_0^{2\pi} f(x) \di \op m $$
-	$$ a_n = \frac1\pi \int_0^{2\pi} f(x) \cos n x \di \op m $$
-	$$ b_n = \frac1\pi \int_0^{2\pi} f(x) \sin nx \di \op m $$
+	$$ a_0 = \frac1{2\pi} \int_0^{2\pi} f(x) \di \op m, \quad a_n = \frac1\pi \int_0^{2\pi} f(x) \cos n x \di \op m, \quad b_n = \frac1\pi \int_0^{2\pi} f(x) \sin nx \di \op m $$
 	$$ f \sim a_0 + \sum_{n = 1}^\infty (a_n \cos nx + b_n \sin nx) $$
 \end{definition}
 
 Рассмотрим частичную сумму
 \begin{multline*}
-	S_n(x) = a_0 + \sum_{k = 1}^\infty (a_k \cos kx + b_k \sin kx) = \\
-	= \frac1{2\pi} \int_0^{2\pi} f(y) \di \op m + \sum_{k = 1}^n \frac1\pi \int_0^\pi f(y) \bigl( \cos ky \cdot \cos kx + \sin ky \cdot \sin kx \bigr) \di \op m = \\
-	\frac1\pi \int_0^{2\pi} f(y) \Bigl( \frac12 + \sum_{k = 1} \bigl( \cos ky \cdot \cos kx + \sin ky \cdot \sin kx \bigr) \Bigr) \di \op m =
+	S_n(x) = a_0 + \sum_{k = 1}^n (a_k \cos kx + b_k \sin kx) = \\
+	= \frac1{2\pi} \int_0^{2\pi} f(y) \di \op m + \sum_{k = 1}^n \frac1\pi \int_0^{2\pi} f(y) \bigl( \cos ky \cdot \cos kx + \sin ky \cdot \sin kx \bigr) \di \op m = \\
+	= \frac1\pi \int_0^{2\pi} f(y) \Bigl( \frac12 + \sum_{k = 1} \bigl( \cos ky \cdot \cos kx + \sin ky \cdot \sin kx \bigr) \Bigr) \di \op m =
 	\frac1\pi \int_0^{2\pi} f(y) \Bigl( \frac12 + \sum_{k = 1}^n \cos k(y - x) \Bigr) \di \op m
 \end{multline*}
 
 Сумму вычислим отдельно:
 $$ D_n(t) = \frac12 + \sum_{k = 1}^n \cos kt, \qquad D_n(2\pi l) = n + \frac12 $$
 Будем считать, что $ t \ne \pi n $. Тогда $ \sin \frac t2 \ne 0 $.
-$$ \sin \frac t2 D_n(t) = \sin \frac t2 + \sum_{k = 1}^n \sin \frac t2 \cdot \cos kt $$
+$$ \sin \frac t2 D_n(t) = \frac 12 \sin \frac t2 + \sum_{k = 1}^n \sin \frac t2 \cdot \cos kt $$
 При этом,
 $$ \sin \frac t2 \cdot \cos kt = \frac12 \Bigl( \sin (k + \frac12) t - \sin (k - \frac12) t \Bigr) $$
 
 Тогда
-$$ \sin \frac t2 D_n(t) = \sin \frac t2 + \sum_{k = 1}^n \frac12 \Bigl( \sin (k + \frac12) t - \sin (k - \frac12) t \Bigr) $$
+$$ \sin \frac t2 D_n(t) = \frac 12 \sin \frac t2 + \sum_{k = 1}^n \frac12 \Bigl( \sin (k + \frac12) t - \sin (k - \frac12) t \Bigr) =
+\frac12 \sin \frac t2 + \frac12 \Bigl( \sin \frac{3t}2 - \sin \frac t 2 + \sin \frac{5t}2 - \dots + \sin (n + \frac12)t \Bigr) $$
 
 $$ D_n(t) = \frac{\sin(n + \frac12)t}{2 \sin \frac t2} $$
 Пусть $ y - x = t $. \\
@@ -913,51 +886,50 @@ $$ S_n(x) = \frac1{2\pi} \int_0^{2\pi} f(y) \frac{\sin (n + \frac12)(y - x)}{\si
 \section{Лемма Римана\tpst{"--~}{--}Лебега}
 
 \begin{lemma}
-	$ E \sub \R, \quad E \in \mathfrak M(\R), \quad \psi $ измерима на $ E \quad \phi \in \msc L(E) $
-	$$ \implies \int\limits_E \cos A x \psi(x) \di \op m \underarr{|A| \to \infty} $$
-	$$ \int\limits_E \sin A x \psi(x) \di \op m \underarr{|A| \to \infty} $$
+	$ E \sub \R, \quad E \in \mathfrak M(\R), \quad \psi $ измерима на $ E, \quad \psi \in \msc L(E) $
+	$$ \implies \int\limits_E \cos A x \psi(x) \di \op m \underarr{|A| \to \infty} 0 $$
+	$$ \int\limits_E \sin A x \psi(x) \di \op m \underarr{|A| \to \infty} 0 $$
 \end{lemma}
 
 \section{Признак Дини сходимости ряда Фурье}
 
 \begin{theorem}
-	$ f(x) = f(x + 2\pi), \quad f \in \msc L([0, 2\pi]), \quad x \in (-\pi, \pi), \quad \phi(t) = \frac{f(x + t) - f(x)}t \in \msc L(-\eps, \eps), \quad 0 < \eps < \frac \pi 2 $
+	$ f(x) = f(x + 2\pi), \quad f \in \msc L([0, 2\pi]), \quad x \in (-\pi, \pi) $
+	$$ \phi(t) = \frac{f(x + t) - f(x)}t \in \msc L(-\eps, \eps), \quad 0 < \eps < \frac \pi 2 $$
 	$$ \implies S_n(x) \underarr{n \to \infty} f(x) $$
 \end{theorem}
 
 \begin{proof}
-	\begin{equ}{dini:4}
-		\frac1{2\pi} \int_{-\pi}^\pi D_n(t) \di \op m = \frac1 \pi \int_{-\pi}^\pi \Bigl( \frac12 + \sum_{k = 1}^n \cos kt \Bigr) \di \op m = \frac1 \pi \int_{-\pi}^\pi \bigl( \frac12 + \sum_{k = 1}^n \cos kt \bigr) \di \op t = 1
-	\end{equ}
+	$$ \frac1{2\pi} \int_{-\pi}^\pi D_n(t) \di \op m = \frac1 \pi \int_{-\pi}^\pi \Bigl( \frac12 + \sum_{k = 1}^n \cos kt \Bigr) \di \op m = \frac1 \pi \int_{-\pi}^\pi \Bigl( \frac12 + \sum_{k = 1}^n \cos kt \Bigr) \di t = 1 $$
+
+	Отсюда
+	\begin{multline*}
+		S_n(x) - f(x) =
+		\frac1{2\pi} \int_{-\pi}^\pi f(x + t) D_n(t) \di \op m - f(x) \cdot 1 =
+		\frac1{2\pi} \int_{-\pi}^\pi \bigl( f(x + t) - f(x) \bigr) \frac{\sin(n + \frac12)t}{\sin \frac t2} \di \op m = \\
+		= \frac1{2\pi} \int_{-\pi}^{-\eps} \dots + \frac1{2\pi} \int_{-\eps}^\eps \dots + \frac1{2\pi} \int_\eps^\pi \dots
+	\end{multline*}
+	Рассмотрим первый интеграл:
+	$$ \frac1{2\pi} \int_{-\pi}^{-\eps} \frac{f(x + t) - f(x)}{\sin \frac t2} \cdot \sin (n + \frac12)t \di \op m $$
+	$$ \bigl| \sin \frac t2 \bigr| \ge \frac 2\pi \cdot \frac{|t|}2 = \frac{|t|}\pi \ge \frac \eps \pi \quad \implies \quad \frac{f(x + t) - f(x)}{2 \sin \frac t2} \in \msc L(-\pi, -\eps), \quad \in \msc L(\eps, \pi) $$
+
+	Теперь
+	$$ \frac1{2\pi} \int_{-\pi}^{-\eps} \frac{f(x + t) - f(x)}{\sin \frac t2} \sin(n + \frac12)t \underarr{n \to \infty} 0 $$
+	$$ \frac1{2\pi} \int_\eps^\pi \dots \to 0 $$
+	\begin{multline*}
+		\frac1{2\pi} \int_{-\eps}^\eps \Bigl( f(x + t) - f(x) \Bigr) \frac{\sin(n + \frac12)t}{\sin \frac t2} \di \op m = \\
+		= \frac1 \pi \int_{-\eps}^\eps \underbrace{\frac{f(x + t) - f(x)}t}_\phi \cdot \frac{\sin (n + \frac12) t}{\sin \frac t2} \di \op m + \frac1{2\pi} \int_{-\eps}^\eps \Bigl( f(x + t) - f(x) \Bigr) \Bigl( \frac1{\sin \frac t2} - \frac 2t \Bigr) \sin(n + \frac12)t \di \op m
+	\end{multline*}
+
+	Напомним, что
+	$$ \frac1{\sin \tau} - \frac1\tau = \frac{\tau - \sin \tau}{\tau \sin \tau} = \frac{-\frac{\tau^3}\tau + \dots}{\tau \sin \tau} \in \mc C \Bigl[ -\frac\pi 2, \frac\pi2 \Bigr] $$
 \end{proof}
-
-Отсюда
-$$ S_n(x) - f(x) = \frac1{2\pi} \int_{-\pi}^\pi \bigl( f(x + t) - f(x) \bigr) \frac{\sin(n + \frac12)t}{\sin \frac t2} \di \op m =
-\frac1{2\pi} \int_{-\pi}^{-\eps} \dots + \frac1{2\pi} \int_{-\eps}^\eps \dots + \frac1{2\pi} \int_\eps^\pi \dots $$
-Рассмотрим первый интеграл:
-$$ \frac1{2\pi} \int_{-\pi}^{-\eps} \frac{f(x + t) - f(x)}{\sin \frac t2} \cdot \sin (n + \frac12)t \di \op m $$
-$$ |\sin \frac t2 | \ge \frac 2\pi \cdot \frac{|t|}2 = \frac{|t|}\pi \ge \frac \eps \pi \quad \implies \quad \frac{f(x + t) - f(x)}{2 \sin \frac t2} \in \msc L(-\pi, -\eps), \quad \in \msc L(\eps, \pi) $$
-
-Теперь
-$$ \frac1{2\pi} \int_{-\pi}^{-\eps} \frac{f(x + t) - f(x)}{\sin \frac t2} \sin(n + \frac12)t \underarr{n \to \infty} 0 $$
-$$ \\frac1{2\pi} \int_\eps^\pi \dots \to 0 $$
-\begin{multline*}
-	\frac1{2\pi} \int_{-\eps}^\eps \Bigl( f(x + t) - f(x) \Bigr) \frac{\sin(n + \frac12)t}{\sin \frac t2} \di \op m = \\
-	= \frac1 \pi \int_{-\eps}^\eps \frac{f(x + t) - f(x)}{\sin \frac t2} \cdot \sin (n + \frac12) t \di \op m + \frac1{2\pi} \int_{-\eps}^\eps \Bigl( f(x + t) - f(x) \Bigr) \Bigl( \frac1{\sin \frac t2} - \frac 2t \Bigr) \sin(n + \frac12)t \di \op m
-\end{multline*}
-
-Напомним, что
-$$ \frac1{\sin \tau} \cdot \frac1\tau = \frac{\tau - \sin \tau}{\tau \cdot \sin \tau} = \frac{-\frac{\tau^3}\tau + \dots}{\tau \sin \tau} \in \mc C \Bigl( [-\frac\pi 2, \frac\pi2] \Bigr) $$
-
-$$ \implies \eref{dini:4} $$
-
-\TODO{Здесь как-то вперемешку.}
 
 \section{Равенство Парсеваля}
 
 \begin{theorem}
-	$ f^2 \in \msc L([0, 2\pi]) $
-	$$ \implies \int f^2 \di \op m = 2 \pi a_0^2 + \pi \sum_{n = 1}^\infty (a_n^2 + b_n^2) $$
+	$ f^2 \in \msc L[0, 2\pi] $
+	$$ \implies \int_0^{2\pi} f^2 \di \op m = 2 \pi a_0^2 + \pi \sum_{n = 1}^\infty (a_n^2 + b_n^2) $$
 \end{theorem}
 
 \section{Теорема о единственности ряда Фурье}
@@ -973,10 +945,7 @@ $$ \implies \eref{dini:4} $$
 Рассматриваем функции $ \R \to \Co $.
 
 \begin{definition}
-	$ u \in \msc L(\R), \quad v \in \msc L(\R), \quad f = u + iv $
-	\begin{remind}
-		$$ \int\limits_\R f \di \op m \bydef \int\limits_\R u \di \op m + i \int\limits_\R v \di \op m $$
-	\end{remind}
+	$ f = u + iv $
 
 	Будем говорить, что $ f $ \emph{суммируема} на всей оси, если $ u $ и $ v $ суммируемы на всей оси.
 \end{definition}
@@ -985,7 +954,7 @@ $$ \implies \eref{dini:4} $$
 	$ f \in \msc L(\R) $
 
 	Её \emph{преобразованием Фурье} называется
-	$$ \hat f(t) = \frac1{\sqrt{2\pi}} \int\limits_\R f(x) e^{-xt} \di \op m (x) $$
+	$$ \hat f(t) = \frac1{\sqrt{2\pi}} \int\limits_\R f(x) e^{-ixt} \di \op m (x) $$
 \end{definition}
 
 \begin{definition}
@@ -1003,7 +972,6 @@ $$ \hat{ \bigl( e^{-\frac{x^2}2} \bigr)}(t) = e^{-\frac{t^2}2} $$
 
 $$ \hat f(t) = \frac1{\sqrt{2\pi}} \int_{-\infty}^\infty f(x) e^{-itx}\di \op m(x) $$
 $$ \hat f'(t) = \frac1{\sqrt{2\pi}} \int_{-\infty}^\infty f(x) \cdot (-ix) e^{-itx} \di \op m(x) = \hat{ \bigl( -ixf(x) \bigr)}(t) $$
-По лемме Римана"--~Лебега $ \hat{f}(t) \underarr{|t| \to \infty} 0 $.
 
 Рассмотрим преобразование Фурье от производной.
 \begin{multline*}

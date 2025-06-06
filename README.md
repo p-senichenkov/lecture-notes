@@ -39,3 +39,5 @@
 - Calculus -- Широков Н. А.
 - Differential equations -- Басов В. В.
 - Geometry -- Солынин А. А.
+- Parallel programming -- Макаров А. А.
+- Math logic -- Косовская Т. М.
