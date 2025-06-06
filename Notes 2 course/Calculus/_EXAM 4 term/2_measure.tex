@@ -10,13 +10,11 @@
 	Имеется некоторое непустое множество множеств $ \msc R $. Будем называть его \emph{кольцом}, если
 	\begin{enumerate}
 		\item $ A \in \msc R, ~ B \in \msc R \implies A \cup B \in \msc R $;
-		\item $ \dots \implies A \setminus B \in \msc R $.
+		\item $ A \in \msc R, ~ B \in \msc R \implies A \setminus B \in \msc R $.
 	\end{enumerate}
 \end{definition}
 
-В частности, $ A \setminus A = \O \in \msc R $.
-
-Вследствие того, что $ A \cap B = A \setminus (A \setminus B) $, $ A \cap B \in \msc R $.
+В частности, $ \O \in \msc R, ~ A \cap B \in \msc R $.
 
 \begin{definition}
 	$ \msc R $ называется $ \sigma $-\emph{кольцом}, если
@@ -24,17 +22,17 @@
 \end{definition}
 
 Можно проверить, что
-$$ A_1 \setminus \bigg( \bigcup_{n = 2}^\infty (A_1 \setminus A_n) \bigg) = \cap_{n = 1}^\infty A_n $$
-$$ \implies \bigcap_{n = 1}^\infty A_n \in \msc R $$
+$$ A_1 \setminus \bigg( \bigcup_{n = 2}^\infty (A_1 \setminus A_n) \bigg) = \cap_{n = 1}^\infty A_n \quad \implies \quad \bigcap_{n = 1}^\infty A_n \in \msc R $$
 
-$ \R^{m \ge 1}, \qquad a, b \in \R, \qquad a \le b $ \\
-Будем обозначать $ \braket{a, b} $, где $ \langle $ "--- это ( или [, а $ \rangle $ "--- это ) или ].
+\begin{definition}
+	$ A \in \R^{m \ge 2}, ~ B \in \R^m, \quad A = (a_1, \dots, a_m), ~ B = (b_1, \dots, b_m), \quad a_j \le b_j $.
 
-Рассмотрим $ m \ge 2, \qquad A \in \R^m, \quad B \in \R^m $. $ \braket{A, B} $ будем также называть \emph{промежутком} в $ \R^m $, где $ A = (a_1, \dots, a_m), ~ B = (b_1, \dots, b_m), \quad a_j \le b_j $.
+	Будем обозначать $ \braket{a, b} $, где $ \langle $ "--- это ( или [, а $ \rangle $ "--- это ) или ]. $ \braket{A, B} $ будем также называть \emph{промежутком} в $ \R^m $.
+\end{definition}
 
 \begin{definition}
 	\emph{Мерой} промежутка будем называть
-	$$ \operatorname m \big( \braket{A, B} \big) = \prod_{j = 1}^m (b_j - a_j) $$
+	$$ \operatorname m \braket{A, B} = \prod_{j = 1}^m (b_j - a_j) $$
 \end{definition}
 
 \begin{definition}
@@ -70,7 +68,8 @@ $ \R^{m \ge 1}, \qquad a, b \in \R, \qquad a \le b $ \\
 
 \section{Внешняя мера \tpst{$ \op m^* E $}{m*E} множества \tpst{$ E $}{E}}
 
-Пусть имеется некоторое множество $ E \sub \R^m $. Обозначим через $ U(E) $ множество следующих открытых элементарных множеств:
+Пусть имеется некоторое множество $ E \sub \R^m $.
+Обозначим через $ U(E) $ множество наборов
 $$ U(E) = \set{ \set{A_n}_{n = 1}^\infty }, \qquad A_n \text{ "--- открытое элементарное множество}, $$
 таких, что $ E \sub \bigcup_{n = 1}^\infty A_n $.
 
@@ -120,14 +119,14 @@ $$ \operatorname d(A, B) = \operatorname m^* (A \vartriangle B) \ge 0 $$
 
 \begin{props}
 	\item $ \operatorname d(A, B) = \operatorname d(B, A) $;
-	\item $ \operatorname d(A, B) \le \operatorname d(A, C) + \operatorname d(C, B) $;
+	\item \label{en:d_props:2} $ \operatorname d(A, B) \le \operatorname d(A, C) + \operatorname d(C, B) $;
 	\item $ \operatorname d(A_1 \cup A_2, ~ B_1 \cup B_2) \le \operatorname d(A_1, B_1) + \operatorname d(A_2, B_2) $;
 	\item $ \operatorname d(A_1 \cap A_2, ~ B_1 \cap B_2) \le \operatorname d(A_1, B_1) + \operatorname d(A_2, B_2) $;
 	\item $ \operatorname d(A_1 \setminus A_2, ~ B_1 \setminus B_2) \le \operatorname d(A_1, B_1) + \operatorname d(A_2, B_2) $.
 \end{props}
 
 \begin{proof}
-	Все свойства основаны на теоретико-множественных соображениях. Например, 3 основано на включении
+	Все свойства основаны на теоретико-множественных соображениях. Например, \ref{en:d_props:2} основано на включении
 	$$ A \vartriangle B \sub (A \vartriangle C) \cup (C \vartriangle B) $$
 	Далее нужно воспользоваться свойством \ref{en:outer_meas:4} внешней меры.
 \end{proof}
@@ -176,7 +175,7 @@ $$ \operatorname d(A, B) = \operatorname m^* (A \vartriangle B) \ge 0 $$
 	$$ \set{B_n}_{n = 1}^\infty, \quad B_n \in \fm M, \quad B_n \cap B_k = \O \quad \implies \operatorname m^* \bigcup_{n = 1}^\infty B_n = \sum_{n = 1}^\infty \operatorname m^* B_n $$
 \end{theorem}
 
-Доказывать теорему не будем. Докажем, что $ \fm M_{\bt F} $ является кольцом, и мера на нём аддитивна.
+Доказывать теорему не будем. Докажем, что $ \fm M_{\bt F} $ является кольцом, и внешняя мера на нём аддитивна.
 
 \begin{proof}[$ \fm M_F $ "--- кольцо]
 	Пусть есть $ A \in \fm M_F $ и $ B \in \fm M_F $. Тогда
@@ -184,7 +183,7 @@ $$ \operatorname d(A, B) = \operatorname m^* (A \vartriangle B) \ge 0 $$
 	$$ \exist B_n \in \msc E : \quad \operatorname d(B_n, B) \to 0 $$
 	Тогда, по одному из свойств d,
 	$$ \operatorname d(A_n \cup B_n, ~ A \cup B) \le \operatorname d(A_n, A) + \operatorname d(B_n, B) \to 0 $$
-	$$ \op m (A_n \setminus B_n, ~ A \setminus B) \le \op d(A_n, A) + \op d(B_n, B) \to 0 $$
+	$$ \op d (A_n \setminus B_n, ~ A \setminus B) \le \op d(A_n, A) + \op d(B_n, B) \to 0 $$
 	При этом, $ A_n \cup B_n \in \msc E, \quad A_n \setminus B_n \in \msc E $.
 	$$ \implies A \cup B \in \fm M_F, \quad A \setminus B \in \fm M_F $$
 \end{proof}
@@ -200,41 +199,33 @@ $$ \operatorname d(A, B) = \operatorname m^* (A \vartriangle B) \ge 0 $$
 
 Доказывать теорему не будем. Докажем, что $ \fm M_{\bt F} $ является кольцом, и внешняя мера на нём аддитивна.
 
-\begin{statement}
+\begin{statement}\label{stmt:caratheodory:8}
 	$ A, B \in \msc E $
-	\begin{equ}{caratheodory:8}
-		\op m(A \cup B) + \op m(A \cap B) = \op m A + \op m B
-	\end{equ}
+	$$ \op m(A \cup B) + \op m(A \cap B) = \op m A + \op m B $$
 \end{statement}
-
-\begin{proof}[аддитивность меры]
-	Пусть $ A, B \in \fm M_F, \quad A \cap B = \O $. Тогда
-	$$ \exist \set{A_n}, \set{B_n} : \quad \op d(A_n, A) \to 0, \quad \op d(B_n, B) \to 0 $$
-	Отдельно будет доказано, что
-	\begin{statement}\label{st:caratheodory:9}
-		Если $ \op d(C_n, C) \to 0 $, то $ \operatorname m^* C_n \to \operatorname m^* C $
-	\end{statement}
-	В соотношении \eref{caratheodory:8} можно поставить внешнюю меру вместо меры:
-	$$ \operatorname m^*(A_n \cup B_n) + \op m^*(A_n \cap B_n) = \op m^* A_n + \op m^* B_n $$
-	Из \autoref{st:caratheodory:9}, $ \op m^*(A_n \cup B_n) \to \op m^*(A \cup B) $.
-	$$ \op m^*(A_n \cap B_n) \to \op m^*(A \cap B) = 0 $$
-	$$ \op m^* A_n \to \op m^* A, \qquad \op m^* B_n \to \op m^* B $$
-	Это всё влечёт, что
-	$$ \op m^*(A \cup B) = \op m^* A + \op m^* B $$
-\end{proof}
 
 \vspace{0.5em}
 
-\begin{proof}[\autoref{st:caratheodory:9}]
-	$ |\op m^* C_n - \op m^* C| \le \op d(C_n, C) \to 0 $
+\begin{proof}[аддитивность внешней меры]
+	Пусть $ A, B \in \fm M_F, \quad A \cap B = \O $. Тогда
+	$$ \exist \set{A_n}, \set{B_n} : \quad \op d(A_n, A) \to 0, \quad \op d(B_n, B) \to 0 $$
+	В соотношении \ref{stmt:caratheodory:8} можно поставить внешнюю меру вместо меры:
+	$$ \operatorname m^*(A_n \cup B_n) + \op m^*(A_n \cap B_n) = \op m^* A_n + \op m^* B_n $$
+	$$ | \op m^* (A_n \cup B_n) - \op m^* (A \cup B) | \le \di (A_n \cup B_n, A \cup B) \to 0 $$
+	$$ \implies \op m^*(A_n \cup B_n) \to \op m^*(A \cup B) $$
+	$$ \op m^*(A_n \cap B_n) \to \op m^*(A \cap B) = 0 $$
+	$$ \op m^* A_n \to \op m^* A, \qquad \op m^* B_n \to \op m^* B $$
+	Значит,
+	$$ \op m^*(A \cup B) = \op m^* A + \op m^* B $$
 \end{proof}
 
-Теперь для $ E \in \fm M $ будем полагать $ \op m E = \op m^* E $. Это \emph{мера Лебега}.
+Теперь для $ E \in \fm M $ будем полагать $ \op m E = \op m^* E $. Это "--- \emph{мера Лебега}.
 
 \section{Простые функции; аппроксимация простыми функциями}
 
 \begin{definition}
 	$ E \sub \R^m, \quad E \ne \O $.
+
 	\emph{Характеристической функцией} множества $ E $ называется функция $ K_E(x) : \R^m \to \R $,
 	$$ K_E(x) =
 	\begin{cases}
@@ -622,7 +613,7 @@ $ \bigcup E_j = E $.
 	$$ a \op m E \le \int\limits_E f \di m \le b \op m E $$
 
 	\item Если $ f, g \in \msc L(E) $ и $ f(x) \le g(x), \quad x \in E $, то
-	$$ \int\limits_E f \di \op m \le \int g \di \op m $$
+	$$ \int\limits_E f \di \op m \le \int\limits_E g \di \op m $$
 
 	\item $ f \in \msc L(E), \quad c \in \R $
 	$$ \implies
@@ -676,9 +667,6 @@ $ \bigcup E_j = E $.
 	$$ \int_a^b f(x) \di x = \int\limits_{(a, b)} f \di \op m $$
 \end{theorem}
 
-\begin{noproof}
-\end{noproof}
-
 \section{Теорема Фубини}
 
 \begin{theorem}
@@ -695,7 +683,7 @@ $ \bigcup E_j = E $.
 			\item Для $ n $-п.~в. $ Y \qquad E(\cdot, Y) \in \mathfrak M_m $
 		\end{itemize}
 		\item Пусть $ \mu_k $ "--- мера Лебега в $ \R^k $. Тогда
-			$$ \mu_{m + n} E = \int\limits_{\R^{m + n}} \mu_n E(X, \cdot) \di \mu_m(X) = \int\limits_{\R^{m + n}} \mu_m E(\cdot, Y) \di \mu_n(Y) $$
+			$$ \mu_{m + n} E = \int\limits_{\R^m} \mu_n E(X, \cdot) \di \mu_m(X) = \int\limits_{\R^n} \mu_m E(\cdot, Y) \di \mu_n(Y) $$
 		\item $ f : E \to \R $
 			$$ \forall X \in \R^m \quad f_X : E(X, \cdot) \to \R : \quad f_X(Y) = f(X, Y) $$
 			$$ \forall Y \in \R^n \quad f_Y : E(\cdot, Y) \to \R : \quad f_Y(X) = f(X, Y) $$
@@ -709,8 +697,6 @@ $ \bigcup E_j = E $.
 				\item для $ n $-п.~в. $ Y \qquad f_Y \in \msc L \bigl( E(\cdot, Y) \bigr) $;
 				\item
 					$$ \int\limits_E f \di \mu_{m + n} = \int\limits_{\R^m} \Bigl( \int\limits_{E(X, \cdot)} f_X \di \mu_n \Bigr) \di \mu_m(X) = \int\limits_{\R^n} \Bigr(\int\limits_{E(\cdot, Y)} f_Y \di \mu_m \Bigr) \di \mu_n(Y), $$
-					или
-					$$ \int\limits_E f \di \mu_{m + n} = \int\limits_{\R^m} \Bigl( f(X, Y) \di \mu_n(Y) \Bigr) \di \mu_m(X) = \int\limits_{\R^n} \Bigl( \int\limits_{E(\cdot, Y)} f(X, Y) \di \mu_m(X) \Bigr) \di \mu_n(Y) $$
 			\end{itemize}
 	\end{enumerate}
 \end{theorem}
@@ -823,9 +809,12 @@ $ \bigcup E_j = E $.
 	$ \curvedir S_k, \quad Y \in S_k \quad \bigl( T_1(Y), T_2(Y) \bigr), \quad T_1(Y) \times T_2(Y) $ направлен вне $ V, \quad \phi \in \mc C(\ol V), \quad \phi_{y_i}' \in \mc C(\ol V) $
 	$$ \sigma =
 	\begin{cases}
-		1, \quad (i, j, k) \text{ "--- чётная},
+		1, \quad (i, j, k) \text{ "--- чётная}, \\
 		-1, \quad \text{иначе}
 	\end{cases} $$
+
+	Тогда
+	$$ \int\limits_{\curvedir \partial V} \phi(Y) \di y_i \wedge \di y_j \wedge \di y_k = \sigma \int\limits_V \phi_{y_i}'(Y) \di \mu_3(Y) $$
 \end{theorem}
 
 \section{Формула Грина}
