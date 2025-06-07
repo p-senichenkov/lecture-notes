@@ -690,7 +690,7 @@ $ \bigcup E_j = E $.
 
 			Для $ m $-п.~в. $ X \qquad f_X $ измерима по $ Y $ на $ E(X, \cdot) $. \\
 			Для $ n $-п.~в. $ Y \qquad f_Y $ измерима по $ X $ на $ E(\cdot, Y) $.
-			
+
 		\item $ f \in \msc L(E) $. Тогда
 			\begin{itemize}
 				\item для $ m $-п.~в. $ X \qquad f_X \in \msc L \bigl( E(X, \cdot) \bigr) $;
@@ -814,7 +814,7 @@ $ \bigcup E_j = E $.
 	\end{cases} $$
 
 	Тогда
-	$$ \int\limits_{\curvedir \partial V} \phi(Y) \di y_i \wedge \di y_j \wedge \di y_k = \sigma \int\limits_V \phi_{y_i}'(Y) \di \mu_3(Y) $$
+	$$ \int\limits_{\curvedir \partial V} \phi(Y) \di y_j \wedge \di y_k = \sigma \int\limits_V \phi_{y_i}'(Y) \di \mu_3(Y) $$
 \end{theorem}
 
 \section{Формула Грина}
@@ -856,14 +856,12 @@ $$ \sin \frac t2 D_n(t) = \frac 12 \sin \frac t2 + \sum_{k = 1}^n \frac12 \Bigl(
 \frac12 \sin \frac t2 + \frac12 \Bigl( \sin \frac{3t}2 - \sin \frac t 2 + \sin \frac{5t}2 - \dots + \sin (n + \frac12)t \Bigr) $$
 
 $$ D_n(t) = \frac{\sin(n + \frac12)t}{2 \sin \frac t2} $$
-Пусть $ y - x = t $. \\
-Теперь
+Пусть $ y - x = t $.
 $$ S_n(x) = \frac1{2\pi} \int_0^{2\pi} f(y) \frac{\sin (n + \frac12)(y - x)}{\sin \frac{y - x}2} \di \op m $$
 
 \begin{statement}
 	$ \phi \in \mathfrak M(\R), \quad \phi(x) = \phi(x + 2\pi) \quad \forall x, \quad \phi(x) \in \msc L([0, 2\pi]) $
-	$$ \implies \forall a \in \R \quad \phi \in \msc L([a, a + 2\pi]) $$
-	$$ \int\limits_{[0, 2\pi]} \phi \di \op m = \int\limits_{[a, a + 2\pi]} \phi \di \op m $$
+	$$ \implies \forall a \in \R \quad \phi \in \msc L([a, a + 2\pi]), \quad \int\limits_{[0, 2\pi]} \phi \di \op m = \int\limits_{[a, a + 2\pi]} \phi \di \op m $$
 \end{statement}
 
 Применим это утверждение:
