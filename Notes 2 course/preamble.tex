@@ -2,7 +2,9 @@
 \usepackage{structuredlog}
 
 % basics
-\usepackage[a4paper, portrait, margin=.75in]{geometry}
+\usepackage[a4paper, portrait, margin=.75in%
+%	, showframe%
+]{geometry}
 
 \usepackage{fontspec}
 \setmainfont{CMU Serif}
@@ -76,12 +78,6 @@
 % space that doesn't disappear at the end of text commands, but is ommited when needed (e. g. before comma)
 \usepackage{xspace}
 
-% typeset pseudocode (algo2e option -- change env. name algorithm to algorithm2e)
-\usepackage[algo2e]{algorithm2e}
-
-% algorithm2e keywords:
-\SetKw{Define}{:=}
-
 % sections with separate PDF bookmark and toc form
 % \section forms:
 % 	\section{toc, out, text}
@@ -89,6 +85,16 @@
 %	\section(out)[toc]{text}
 %	\section(out){toc, text}
 \usepackage{hypbmsec}
+
+% listings with syntax highlighting
+\usepackage[newfloat]{minted}
+% disable "syntax error" highlighting
+\AtBeginEnvironment{minted}{\dontdofcolorbox}
+\def\dontdofcolorbox{\renewcommand\fcolorbox[4][]{##4}}
+\setminted{autogobble}
+
+\SetupFloatingEnvironment{listing}{name=Листинг}
+\SetupFloatingEnvironment{listing}{listname=Листинги}
 
 % subequations
 \usepackage[ntheorem]{empheq}

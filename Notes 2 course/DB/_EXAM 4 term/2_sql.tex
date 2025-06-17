@@ -1,0 +1,360 @@
+\part{Язык SQL}
+
+\begin{note}
+	В этой части предполагается, что читатель в состоянии самостоятельно сходу написать несколько десятков запросов на каждую конструкцию.
+	В презентации было слайдов 150 только на примеры.
+\end{note}
+
+\section{Язык запросов SQL: операции реляционной алгебры}
+
+Проекция:
+\begin{minted}{SQL}
+	SELECT name FROM person
+\end{minted}
+
+Селекция:
+\begin{minted}{SQL}
+	SELECT name, price FROM items WHERE price >= 100 AND price <= 150
+\end{minted}
+
+Декартово произведение:
+\begin{minted}{SQL}
+	SELECT * FROM person, dept
+\end{minted}
+
+Соединение:
+\begin{itemize}
+	\item Внутреннее:
+		\begin{minted}{SQL}
+			SELECT ... FROM t_1, t_2 WHERE t_1.f_1 = t_2.f_2
+			SELECT ... FROM t_1 [INNER] JOIN t_2 ON t_1.f_1 = t_2.f_2
+		\end{minted}
+	\item Внешнее:
+		\begin{itemize}
+			\item \texttt{JOIN}: строки, в которых есть хотя бы одно совпадение в обеих таблицах;
+			\item \texttt{LEFT JOIN}: строки из левой таблицы, даже если нет совпадения в правой;
+			\item \texttt{RIGHT JOIN}: строки из правой таблицы, даже если нет соединения в левой;
+			\item \texttt{FULL JOIN}: строки из обеих таблиц.
+		\end{itemize}
+	\item Естественное:
+		\begin{minted}{SQL}
+			SELECT group, st FROM S JOIN R ON S.lang = R.lang
+			SELECT * FROM S JOIN R USING (lang)
+			SELECT * FROM S NATURAL JOIN
+		\end{minted}
+\end{itemize}
+
+Теоретико-множественные операции:
+\begin{itemize}
+	\item \texttt{UNION};
+	\item \texttt{INTERSECT};
+	\item \texttt{EXCEPT}.
+\end{itemize}
+Отношения должны быть совместимы, \ie иметь одинаковое количество полей с совместимыми типами данных.
+По-умолчанию все операции \texttt{DISTINCT}.
+
+\section{Язык запросов SQL: вложенные подзапросы}
+
+\begin{definition}
+	\emph{Вложенный SQL-запрос} "--- это отдельный запрос, который используется внутри SQL инструкции.
+
+	Инструкцию, в которой используется вложенный запрос, называют \emph{внешним SQL-запросом}.
+\end{definition}
+
+Вложенные запросы:
+\begin{itemize}
+	\item \texttt{SELECT}:
+		\begin{minted}{SQL}
+			SELECT *, (SELECT name FROM car_owner WHERE inn = owner) FROM car
+		\end{minted}
+	\item \texttt{FROM}:
+		\begin{minted}{SQL}
+			SELECT region FROM (SELECT * FROM car WHERE ...)
+		\end{minted}
+	\item \texttt{WHERE}:
+		\begin{minted}{SQL}
+			SELECT mark FROM T WHERE mark = (SELECT MAX(mark) FROM T)
+		\end{minted}
+\end{itemize}
+
+\section{Язык запросов SQL: агрегирование и упорядочение}
+
+Агрегатные функции:
+\begin{itemize}
+	\item \texttt{COUNT} "--- количество записей в выходном наборе;
+	\item \texttt{MIN, MAX} "--- наименьшее/наибольшее из множества значений;
+	\item \texttt{AVG} "--- среднее значение;
+	\item \texttt{SUM} "--- сумма множества значений.
+\end{itemize}
+
+Упорядочение:
+\begin{minted}{SQL}
+	SELECT name FROM person ORDER BY name [DESC | ASC] [NULLS {FIRST | LAST}]
+\end{minted}
+
+\section{Типы данных SQL}
+
+Типы данных могут различаться в зависимости от реализации SQL.
+Простейшими типами данных в PostgreSQL можно считать:
+\begin{itemize}
+	\item целочисленные значения;
+	\item вещественные значения;
+	\item строки фиксированной длины;
+	\item строки переменной длины;
+	\item дата и время.
+\end{itemize}
+
+Числовые типы: \\
+\begin{tabular}{l | c | l}
+	\textbf{Имя} & \textbf{Размер, байт} & \textbf{Описание} \\
+	\hline
+	\texttt{SMALLINT} & 2 & целое в небольшом диапазоне \\
+	\texttt{INTEGER} & 4 & целое \\
+	\texttt{BIGINT} & 8 & целое в большом диапазоне \\
+	\texttt{DECIMAL}, \texttt{NUMERIC} & переменный & вещественное число с указанной точностью \\
+	\texttt{REAL} & 4 & вещественное число с переменной точностью \\
+	\texttt{DOUBLE PRECISION} & 8 & вещественное число с переменной точностью \\
+	\texttt{SMALLSERIAL} & 2 & небольшое целое с автоувеличением \\
+	\texttt{SERIAL} & 4 & целое с автоувеличением \\
+	\texttt{BIGSERIAL} & 8 & большое целое с автоувеличением
+\end{tabular}
+
+\vspace{1em}
+
+Строковые типы: \\
+\begin{tabular}{l | l}
+	\textbf{Имя} & \textbf{Описание} \\
+	\hline
+	\texttt{CHARACTER VARYING(n)} & строка ограниченной переменной длины \\
+	\texttt{CHARACTER(n)} & строка фиксированной длины, дополненная пробелами \\
+	\texttt{TEXT} & строка неограниченной переменной длины
+\end{tabular}
+
+\vspace{1em}
+
+Типы даты и времени: \\
+\begin{tabular}{l | c | l}
+	\textbf{Имя} & \textbf{Размер, байт} & \textbf{Описание} \\
+	\hline
+	\texttt{TIMESTAMP [(p)] [WITHOUT TIME ZONE]} & 8 & дата и время (без часового пояса) \\
+	\texttt{TIMESTAMP [(p)] WITH TIME ZONE} & 8 & дата и время (с часовым поясом) \\
+	\texttt{DATE} & 4 & дата \\
+	\texttt{TIME [(p)] [WITHOUT TIME ZONE]} & 8 & время суток \\
+	\texttt{TIME [(p)] WITH TIME ZONE} & 12 & время суток (с часовым поясом) \\
+	\texttt{INTERVAL [поля] [(p)]} & 16 & временной интервал
+\end{tabular}
+
+\texttt{p} "--- количество знаков после запятой в поле секунд (от 0 до 6).
+
+Задание пользовательских типов:
+\begin{minted}{SQL}
+	CREATE TYPE mytype AS VARCHAR(11) NOT NULL
+	CREATE TYPE mood AS ENUM ('sad', 'ok', 'happy')
+\end{minted}
+
+Явное преобразование типов:
+\begin{minted}{SQL}
+	SELECT CAST (10.6 AS INT)
+	SELECT CONVERT (INT, 10.6)
+\end{minted}
+
+\section{Временные таблицы и табличные переменные}
+
+\TODO{Временные таблицы и табличные переменные.}
+
+\section{Представления (обычные, с фиксацией схемы, индексируемые)}
+
+Представления используются:
+\begin{itemize}
+	\item для упрощения и настройки восприятия информации в БД каждым пользователем;
+	\item в качестве механизма безопасности;
+	\item для предоставления интерфейса обратной совместимости.
+\end{itemize}
+
+Создание представлений:
+\begin{minted}{SQL}
+	CREATE [OR REPLACE] VIEW citizens AS SELECT client_id, last_name, city FROM client WHERE client = 'Moscow'
+\end{minted}
+
+Изменение данных в представлении возможно, если при его создании:
+\begin{itemize}
+	\item не используется ключевое слово \texttt{DISTINCT};
+	\item данные извлекаются только из одной таблицы;
+	\item в списке полей нет арифметических выражений;
+	\item не используются подзапросы;
+	\item не используется группирование;
+	\item не используется \texttt{UNION};
+\end{itemize}
+
+Создание материализованных представлений:
+\begin{minted}{SQL}
+	CREATE MATERIALIZED VIEW view_name AS select_stmt [WITH [NO] DATA]
+\end{minted}
+\texttt{WITH NO DATA} "--- представление создаётся, но не заполняется данными.
+
+Обновление данных:
+\begin{minted}{SQL}
+	REFRESH MATERIALIZED VIEW view_name
+	REFRESH MATERIALIZED VIEW CONCURRENTLY view_name
+\end{minted}
+Во втором случае необходим уникальный индекс, построенный до обновления.
+
+Создание временных представлений (создаются на действующую сессию):
+\begin{minted}{SQL}
+	CREATE TEMP VIEW view_name AS select_stmt
+\end{minted}
+
+\section{Обобщённые табличные выражения}
+
+\begin{definition}
+	\emph{Обобщённое табличное представление} представляет собой временно именованный результирующий набор (CTE), за которым следуют одиночные инструкции \texttt{SELECT, INSERT, UPDATE} или \texttt{DELETE}.
+\end{definition}
+
+Структура CTE:
+\begin{minted}{SQL}
+	WITH expr_name (col_name[, ...]) AS (CTE_query_definition)
+\end{minted}
+
+Рекурсивные обобщённые табличные выражения:
+\begin{minted}{SQL}
+	WITH RECURSIVE t(n) AS (SELECT 1 UNION ALL SELECT n + 1 FROM t WHERE n < 15) SELECT n FROM t
+	WITH RECURSIVE t(n) AS (SELECT 1 UNION ALL SELECT n + 1 FROM t) SELECT n FROM t LIMIT 100
+\end{minted}
+
+\section{Хранимые процедуры в базе данных}
+
+\begin{definition}
+	\emph{Хранимая процедура} "--- это набор операторов процедурного языка и языка SQL, который компилируется системой в единый ``план исполнения''.
+\end{definition}
+
+Хранимые процедуры хранятся как объекты в базе.
+Они создаются и удаляются операторами \texttt{CREATE} и \texttt{DROP}.
+
+\begin{minted}{SQL}
+	CREATE [OR REPLACE] PROCEDURE my_sql_proc (a INT) LANGUAGE SQL AS
+		$$ INSERT INTO tbl (field_1) VALUES (a) $$
+	CALL my_sql_proc (100)
+\end{minted}
+
+\section{Курсоры в базах данных}
+
+\begin{definition}
+	\emph{Курсор} "--- это область в памяти базы данных, которая предназначена для хранения запроса SQL.
+\end{definition}
+
+В памяти сохраняется и строка данных запроса, называемая \emph{текущим значением}, или \emph{текущей строкой} курсора.
+Указанная область в памяти поименована и доступна для прикладных программ.
+
+Действия с курсорами:
+\begin{itemize}
+	\item \texttt{DECLARE} "--- создание курсора;
+	\item \texttt{OPEN} "--- открытие курсора, \ie наполнение его данными;
+	\item \texttt{FETCH} "--- выборка из курсора и изменение строк данных с его помощью;
+	\item \texttt{CLOSE} "--- закрытие курсора;
+	\item \texttt{DEALLOCATE} "--- освобождение курсора.
+\end{itemize}
+
+\begin{minted}{SQL}
+	DECLARE c_name [[NO] SCROLL] CURSOR [(param)] FOR SELECT ...
+	DECLARE c_name REFCURSOR
+\end{minted}
+
+В схеме со \emph{статическим курсором} информация читается из БД один раз и хранится в виде моментального снимка.
+На время открытия курсора сервер устанавливает блокировку на все строки, включённые его полный результирующий набор.
+Статический курсор не изменяется после создания и всегда отображает тот набор данных, который существовал на момент его открытия.
+
+\begin{minted}{SQL}
+	DECLARE c_name INSENSITIVE [SCROLL] CURSOR FOR select_stmt
+\end{minted}
+
+\emph{Динамические курсоры} отражают все изменения строк в результирующем наборе при прокрутке курсора.
+Значения типа данных, порядок и членство строк в результирующем наборе могут меняться для каждой выборки.
+Обновления видны сразу, если они сделаны посредством курсора.
+
+\begin{minted}{SQL}
+	DECLARE c_name [SCROLL] CURSOR FOR select_stmt
+		[FOR {READ_ONLY | UPDATE [OF col[, ...]]}]
+\end{minted}
+
+Считать текущую строку в переменные:
+\begin{minted}{SQL}
+	DECLARE id INT, name VARCHAR;
+	FETCH FROM c_1 INTO id, name;
+\end{minted}
+
+Прокручиваемый курсор позволяет использовать больше возможностей \texttt{FETCH}:
+\begin{minted}{SQL}
+	FETCH {NEXT | PRIOR | FIRST | LAST | ABSOLUTE n | RELATIVE n} FROM ...
+\end{minted}
+
+\begin{remark}
+	Курсор почти всегда использует дополнительные ресурсы сервера, что ведёт к резкому падению производительности.
+\end{remark}
+
+\section{Скалярные функции, определяемые пользователем}
+
+\begin{minted}{SQL}
+	CREATE [OR REPLACE] FUNCTION name (params) RETURNS res_type {IMMUTABLE | STABLE | VOLATILE} AS
+		$$ ... $$ LANGUAGE plpgsql
+\end{minted}
+
+Функции:
+\begin{itemize}
+	\item \texttt{VOLATILE} "--- может изменять данные в базе; может возвращать различные результаты с одинаковыми аргументами;
+	\item \texttt{STABLE} "--- не может изменять данные в базе; возвращает одинаковый результат для всех вызовов с одинаковыми аргументами в одном операторе;
+	\item \texttt{IMMUTABLE} "--- не может изменять данные в базе; всегда возвращает одинаковые результаты для одних и тех же аргументов.
+\end{itemize}
+
+\begin{minted}{SQL}
+	CREATE FUNCTION fun_1 (a INT) RETURNS INT AS
+		$$ BEGIN
+			RETURN a + 1;
+		END; $$ LANGUAGE plpgsql;
+\end{minted}
+
+\section{Табличные функции, определяемые пользователем}
+
+\begin{minted}{SQL}
+	CREATE FUNCTION get_table (a INTEGER)
+		RETURNS TABLE (
+			new_id INT,
+			new_name TEXT
+		)
+		AS $$ BEGIN
+			RETURN QUERY SELECT id, name FROM table_1 WHERE id > a;
+		END; $$ LANGUAGE plpgsql;
+\end{minted}
+
+\section{Активные базы данных: триггеры}
+
+\begin{definition}
+	\emph{Триггер} "--- это откомпилированная SQL-процедура.
+	Исполнение обусловлено наступлением определённых событий внутри базы.
+\end{definition}
+
+Назначение триггеров:
+\begin{itemize}
+	\item проверка корректности введённых данных и выполнение сложных ограничений целостности;
+	\item накопление аудиторской информации;
+	\item автоматическое оповещение других модулей об изменениях информации;
+	\item реализация бизнес-правил;
+	\item организация каскадных воздействий на таблицы БД;
+	\item поддержка репликации.
+\end{itemize}
+
+\begin{minted}{SQL}
+	CREATE TRIGGER tr BEFORE UPDATE ON table_1 FOR EACH ROW EXECUTE PROCEDURE pt()
+\end{minted}
+
+При запуске триггера есть доступ к двум записям \texttt{NEW} и \texttt{OLD}.
+
+Пример триггерной функции:
+\begin{minted}{SQL}
+	CREATE FUNCTION fun() RETURNS TRIGGER AS
+		$$ BEGIN
+			IF NEW.id IS NULL THEN
+				RAISE EXCEPTION 'id cannot be null';
+			END IF;
+			RETURN NEW;
+		END; $$ LANGUAGE plpgsql;
+\end{minted}
