@@ -92,6 +92,23 @@
 	SELECT name FROM person ORDER BY name [DESC | ASC] [NULLS {FIRST | LAST}]
 \end{minted}
 
+\section{Средства обновления данных в языке запросов SQL}
+
+Вставка:
+\begin{minted}{SQL}
+	INSERT INTO tbl (col1, col2) VALUES ('Data 1', 1), ('Data 2', 2), ...;
+\end{minted}
+
+Изменение:
+\begin{minted}{SQL}
+	UPDATE tbl SET col1 = expr1[, col2 = expr2, ...] [WHERE condition];
+\end{minted}
+
+Удаление:
+\begin{minted}{SQL}
+	DELETE FROM tbl [WHERE condition];
+\end{minted}
+
 \section{Типы данных SQL}
 
 Типы данных могут различаться в зависимости от реализации SQL.
@@ -160,7 +177,21 @@
 
 \section{Временные таблицы и табличные переменные}
 
-\TODO{Временные таблицы и табличные переменные.}
+Временные таблицы автоматически удалятся в конце текущей сессии.
+
+\begin{minted}{SQL}
+	CREATE TEMP TABLE tbl (id INT, name TEXT);
+\end{minted}
+
+Таблицы могут быть переменными в процедурном расширении.
+Например, можно возвращать таблицу из функции:
+\begin{minted}{SQL}
+	CREATE FUNCTION get_table(a INTEGER)
+		RETURNS TABLE (id INT, name TEXT)
+		AS $$ BEGIN
+			RETURN QUERY SELECT id, name FROM table1 WHERE id > a;
+		END; $$ LANGUAGE plpgsql;
+\end{minted}
 
 \section{Представления (обычные, с фиксацией схемы, индексируемые)}
 
@@ -173,7 +204,8 @@
 
 Создание представлений:
 \begin{minted}{SQL}
-	CREATE [OR REPLACE] VIEW citizens AS SELECT client_id, last_name, city FROM client WHERE client = 'Moscow'
+	CREATE [OR REPLACE] VIEW citizens AS
+		SELECT client_id, last_name, city FROM client WHERE client = 'Moscow'
 \end{minted}
 
 Изменение данных в представлении возможно, если при его создании:

@@ -13,7 +13,7 @@
 	\item средства постоянного хранения данных;
 	\item поддержка безопасности данных и защита от несанкционированного доступа;
 	\item обеспечение согласованности данных;
-	\item поддержка высокоуровневых эффективных языков запросов/
+	\item поддержка высокоуровневых эффективных языков запросов.
 \end{itemize}
 
 \section{Модель данных сущность\tpst{"--~}{--}связь: сущности, атрибуты и множества сущностей}
@@ -27,7 +27,7 @@
 
 \begin{definition}
 	\emph{Сущность} "--- это абстрактный объект определённого вида.
-	Любой предмет или понятие, информацию о котором мы будем хранить/
+	Любой предмет или понятие, информацию о котором мы будем хранить.
 \end{definition}
 
 У каждой должно быть уникальное имя.
@@ -99,7 +99,6 @@
 		\end{itemize}
 \end{itemize}
 
-\comment{Есть только такое:} \\
 Шаги при создании ERD:
 \begin{enumerate}
 	\item определить сущности;
@@ -263,6 +262,7 @@
 \end{itemize}
 
 \section{Реляционная модель данных: реляционные операции}
+\label{sec:model:operations}
 
 Специальные реляционные операции:
 \begin{itemize}
@@ -303,8 +303,8 @@ $$ \pi_{(X, Y, \dots, Z)}(R) = \set{x, y, \dots, z : \quad \exists a_1, a_2, \do
 Три операнда: соединяемые отношения и условие.
 Операнды должны быть совместимы по взятию декартова произведения.
 
-\begin{minted}[autogobble, mathescape]{SQL}
-	A JOIN B WHERE f = (A $ \times $ B) WHERE f
+\begin{minted}{SQL}
+	A JOIN B WHERE f = (A x B) WHERE f
 \end{minted}
 
 $$ R \vartriangleright\vartriangleleft_f S = \sigma_f (R \times S) $$
@@ -392,7 +392,7 @@ $$ R \texttt{ DIVIDE BY } S = \pi_{1, 2, \dots, r - s}(R) - \pi_{1, 2, \dots, r 
 Связи также хранятся в отношении.
 Схема данного отношения составляется из ключевых атрибутов, участвующих в связи.
 
-\section{Нормализация: декомпозиция отношений. Нормальные формы}
+\section{Функциональные зависимости и аномалии вставки, обновления, удаления}
 
 \begin{definition}[функциональная зависимость]
 	$ R \set{A_1, A_2, \dots, A_n}, \quad X, Y \sub \set{A_1, A_2, \dots, A_n} $
@@ -404,26 +404,38 @@ $$ R \texttt{ DIVIDE BY } S = \pi_{1, 2, \dots, r - s}(R) - \pi_{1, 2, \dots, r 
 
 $$ X \to Y \iff \left| \pi_Y \bigl( \sigma_{X = x}(R) \bigr) \right| \le 1 $$
 
-% Пусть $ \set{A_1, A_2, \dots, A_n} \to \set{B_1, B_, \dots, B_m} $.
-% Функциональные зависимости:
-% \begin{itemize}
-% 	\item тривиальные:
-% 		$$ \set{B_1, B_2, \dots, B_m} \sub \set{A_1, A_2, \dots, A_n} $$
-% 	\item нетривиальные:
-% 		$$ \set{B_1, B_2, \dots, B_m} \not\sub \set{A_1, A_2, \dots, A_n}, \quad \set{A_1, A_2, \dots, A_n} \cap \set{B_1, B_2, \dots, B_m} \ne \O $$
-% 	\item полностью нетривиальные:
-% 		$$ \set{A_1, A_2, \dots, A_n} \cap \set{B_1, B_2, \dots, B_m} = \O $$
-% \end{itemize}
-%
-% Аксиомы Армстронга:
-% \begin{itemize}
-% 	\item рефлексивность:
-% 		$$ B \sub A \implies A \to B $$
-% 	\item пополнение:
-% 		$$ A \to B \implies AC \to BC $$
-% 	\item транзитивность:
-% 		$$ A \to B, ~ B \to C \implies A \to C $$
-% \end{itemize}
+Пусть $ \set{A_1, A_2, \dots, A_n} \to \set{B_1, B_, \dots, B_m} $.
+Функциональные зависимости:
+\begin{itemize}
+	\item тривиальные:
+		$$ \set{B_1, B_2, \dots, B_m} \sub \set{A_1, A_2, \dots, A_n} $$
+	\item нетривиальные:
+		$$ \set{B_1, B_2, \dots, B_m} \not\sub \set{A_1, A_2, \dots, A_n}, \quad \set{A_1, A_2, \dots, A_n} \cap \set{B_1, B_2, \dots, B_m} \ne \O $$
+	\item полностью нетривиальные:
+		$$ \set{A_1, A_2, \dots, A_n} \cap \set{B_1, B_2, \dots, B_m} = \O $$
+\end{itemize}
+
+Аксиомы Армстронга:
+\begin{itemize}
+	\item рефлексивность:
+		$$ B \sub A \implies A \to B $$
+	\item пополнение:
+		$$ A \to B \implies AC \to BC $$
+	\item транзитивность:
+		$$ A \to B, ~ B \to C \implies A \to C $$
+\end{itemize}
+
+Из аксиом Армстронга можно получить правила вывода:
+\begin{itemize}
+	\item объединение:
+		$$ X \to Y, ~ X \to Z \implies X \to YZ $$
+	\item псевдотранзитивность:
+		$$ X \to Y, ~ WY \to Z \implies WX \to Z $$
+	\item декомпозиция:
+		$$ X \to Y, ~ Z \subseteq Y \implies X \to Z $$
+\end{itemize}
+
+\section{Нормализация: декомпозиция отношений. Нормальные формы}
 
 \begin{definition}
 	\emph{Ключ} "--- минимальный набор атрибутов, который функционально определяет все остальные.
@@ -468,7 +480,7 @@ $$ X \to Y \iff \left| \pi_Y \bigl( \sigma_{X = x}(R) \bigr) \right| \le 1 $$
 \end{notation}
 
 \begin{lemma}[Фейджина]
-	В отношении $ \R \set{A, B, C} $ выполняется MVD $ A \twoheadrightarrow B $ в том и только в том случае, когда выполняется MVD $ A \twoheadrightarrow C $.
+	В отношении $ R \set{A, B, C} $ выполняется MVD $ A \twoheadrightarrow B $ в том и только в том случае, когда выполняется MVD $ A \twoheadrightarrow C $.
 \end{lemma}
 
 \begin{theorem}[Фейджина]
