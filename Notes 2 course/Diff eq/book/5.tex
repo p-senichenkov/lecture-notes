@@ -1,0 +1,307 @@
+\part{Линейные системы}
+
+Рассмотрим вещественную ЛОС
+\begin{equ}{5.1}
+	\begin{cases}
+		y_1' = p_{11}(x)y_1 + \dots + p_{1n}(x)y_n, \\
+		\dots, \\
+		y_n' = p_{n1}(x)y_1 + \dots + p_{nn}(x)y_n,
+	\end{cases} \quad \text{ или } y' = P(x)y,
+\end{equ}
+где матрица $ P = \set{p_{ij}(x)}_{i, j = 1}^n $ непрерывна на $ (a, b) $.
+
+\section{ЛОС: линейная зависимость и независимость решений, связь с ОВ}
+
+\begin{theorem}[о ЛЗ решений ЛОС]
+	Пусть $ \nder[1]\phi(x), \dots, \nder[k]\phi(x) $ "--- решения системы \eref{5.1} и имеется точка $ x_0 \in (a, b) $, в которой векторы $ \nder[1]\phi(x_0), \dots, \nder[k]\phi(x_0) $ ЛЗ.
+
+	Тогда функции $ \nder[1]\phi(x), \dots, \nder[k]\phi(x) $ ЛЗ на $ (a, b) $.
+\end{theorem}
+
+\begin{theorem}
+	Решения ЛОС $ \nder[1]\phi(x), \dots, \nder\phi(x) $ ЛЗ на $ (a, b) $ \textbf{тогда и только тогда}, когда построенный на них $ W(x) $ равен нулю хотя бы в одной точке $ x_0 \in (a, b) $.
+\end{theorem}
+
+\section{ЛОС: фундаментальная система решений, общее решение, овеществление ФСР}
+
+\begin{definition}
+	\emph{Фундаментальной системой решений} называют любые $ n $ ЛНЗ на $ (a, b) $ решений $ \nder[1]\phi(x), \dots, \nder\phi(x) $ системы \eref{5.1}.
+
+	Составленную из ФСР матрицу $ \Phi(x) = \set{\nder[j]\phi_i(x)}_{i, j = 1}^n $ называют \emph{фундаментальной матрицей}.
+\end{definition}
+
+\begin{statement}
+	ФСР ЛОС существует.
+\end{statement}
+
+\begin{definition}
+	ФМ $ \Phi(x) $ называется \emph{нормированной в точке} $ x_0 \in (a, b) $, если $ \Phi(x_0) = E $.
+\end{definition}
+
+\begin{theorem}[об общем решении ЛОС]
+	Пусть $ \nder[1]\phi(x), \dots, \nder\phi(x) $ "--- ФСР.
+
+	Тогда непрерывная функция $ \phi(x, c_1, \dots, c_n) = c_1\nder[1]\phi(x) + \dots + c_n\nder\phi(x) $ является общим решением ЛОС в области $ G = (a, b) \times \R^n $.
+\end{theorem}
+
+\begin{lemma}[об овеществлении ФСР ЛОС]
+	Пусть набор функций
+	$$ \set{\nder[1]\phi(x), \nder[1]{\ol\phi}(x), \dots, \nder[l]\phi(x), \nder[l]{\ol\phi}(x), \nder[2l + 1]\phi(x), \dots, \nder\phi(x)}, \quad 1 \le l \le \frac n2, $$
+	где $ \nder[j]\phi = \nder[j]u + \ii \nder[j]v, \quad \nder[2l + 1]\phi, \dots, \nder\phi \in \R $ образует ФСР ЛОС.
+
+	Тогда набор функций
+	$$ \set{\nder[1]u(x), \nder[1]v(x), \dots, \nder[l]u(x), \nder[l]v(x), \nder[2l + 1]\phi(x), \dots, \nder\phi(x)} $$
+	является вещественной ФСР.
+\end{lemma}
+
+\section{Формула Лиувилля для ЛОС}
+
+$$ W(x) = W(x_0) e^{\int_{x_0}^x \op{Tr} P(s)\di s}, $$
+где $ \op{Tr} P $ "--- след матрицы $ P $ (сумма элементов на главной диагонали).
+
+Таким образом, $ W(x) $ зависит только от диагональных элементов матрицы системы.
+
+\section{Матричные уравнения, теорема о связи между фундаментальными матрицами}
+
+\begin{undefthm}{Дифференцирование матриц.}
+	$ \Phi(x) = \set{\phi_{ij}(x)}_{i, j = 1}^n \quad \implies \quad \Phi'(x) = \set{\phi_{ij}'(x)}_{i, j = 1}^n $
+\end{undefthm}
+
+Матрица $ \Phi(x) $ удовлетворяет уравнению
+\begin{equ}{5.1m}
+	\Theta' = P(x)\Theta,
+\end{equ}
+где $ \Theta(x) $ "--- матрица размерности $ n \times n $.
+
+\begin{definition}
+	Матрица $ \Phi(x) $, которая удовлетворяет уравнению \eref{5.1m}, называется \emph{матричным решением} системы \eref{5.1}.
+\end{definition}
+
+\begin{theorem}[о связи между фундаментальными матрицами ЛОС]
+	Допустим, что $ \Phi(x) $ "--- фундаментальная матрица системы \eref{5.1}.
+	\begin{enumerate}
+		\item для любой постоянной квадратной матрицы $ C $ матрица $ \Psi(x) = \Phi(x)C $ является решением уравнения \eref{5.1m}; при этом, если $ |C| \ne 0 $, то $ \Psi(x) $ "--- фундаментальная матрица;
+		\item для любого матричного решения $ \Psi(x) $ системы \eref{5.1m} существует такая постоянная квадратная матрица $ C $, что $ \Psi(x) = \Phi(x)C $, при этом если $ \Psi(x) $ "--- ФМ, то матрица $ C $ "--- неособая.
+	\end{enumerate}
+\end{theorem}
+
+\section[Матричные степенные ряды, теорема об аналитических функциях от матриц]{Матричные степенные ряды, теорема об аналитических\\ функциях от матриц}
+
+Рассмотрим бесконечную последовательность матриц $ \set{A_k}_{k = 1}^\infty $, в которой $ a_K = \set{\nder[k]a_{ij}}_{i, j = 1}^n $, а элементы $ \nder[k]a_{ij} \in \R $ (или $ \Co $).
+
+\begin{definition}
+	Матричная последовательность $ \set{A_k}_{k = 1}^\infty $ \emph{имеет матричный предел} $ A = \set{a_{ij}}_{i,j = 1}^n $, если $ \nder[k]a_{ij} \underarr{k \to \infty} a_{ij} $ для любых $ i, j = \ol{1, n} $.
+\end{definition}
+
+Пусть степенной ряд $ \mathcal F_z = \sum_{k = 0}^\infty a_kz^k $ скалярного аргумента $ z $ абсолютно сходится при $ |z| < \rho $, где $ \rho $ "--- радиус сходимости $ \mathcal F_z $.
+
+Рассмотрим степенной ряд от матрицы $ A $:
+$$ \mathcal F_A = \sum_{k = 0}^\infty a_kA^k = a_0E + a_1A + a_2A^2 + \dotsb $$
+Тогда матрица $ S_m(A) = \sum_{k = 0}^m a_kA^k $ "--- это его $ m $-я частичная сумма.
+
+\begin{definition}
+	Матричный степенной ряд $ \mathcal F_A $ \emph{сходится}, если сходится последовательность его частичных сумм, \ie существует $ \liml{m \to \infty} S_m(A) = F(A) $, называемый \emph{суммой ряда} $ \mathcal F_A $.
+\end{definition}
+
+\begin{theorem}[об аналитических функциях от матриц]
+	Пусть степенной ряд $ \mathcal F_z = \sum_{k = 0}^\infty a_k z^k $ абсолютно сходится при $ |z| < \rho $, $ A $ "--- произвольная постоянная матрица $ n \times n $, имеющая с. ч. $ \lambda_1, \dot, \lambda_n $.
+
+	Тогда для любого $ x \in \R $ ($ \Co $) такого, что $ |\lambda_kx| < \rho $ при $ k = \ol{1, n} $ матричный степенной ряд $ \mathcal F_{Ax} = \sum_{k = 0}^\infty a_k(Ax)^k $ сходится и его сумма $ F(Ax) = SF(Jx)S^{-1} $, где $ J = S^{-1}AS $ "--- жорданова форма матрицы $ A $.
+
+	Матрица $ F(Jx) $ является верхнетреугольной, её главная диагональ образована значениями функции $ F $ от собственных чисел матрицы $ Jx $.
+\end{theorem}
+
+\section{Общее решение ЛОС с постоянными коэффициентами}
+
+Рассмотрим ЛОС порядка $ n $ с постоянными коэффициентами
+\begin{equ}{5.1c}
+	y' = Ay,
+\end{equ}
+где вектор $ y = (y_1, \dots, y_n), ~ A = \set{a_{ij}}_{i, j = 1}^n $ "--- постоянная матрица.
+
+\begin{theorem}
+	Матрица $ e^{Ax} $ является ФМ для системы \eref{5.1c}.
+\end{theorem}
+
+\begin{implication}
+	Общее решение ЛОС \eref{5.1c} имеет вид $ \phi(x, C) = Ce^{Ax} $.
+\end{implication}
+
+\section{Структура фундаментальной матрицы ЛОС с постоянными коэффициентами}
+
+Пусть $ J $ "--- жорданова форма матрицы $ A $.
+Тогда $ J = S^{-1}AS, ~ A = SJS^{-1} $.
+
+Учитывая свойства степенных рядов, имеем $ e^{Ax}S = Se^{Jx} $.
+
+Рассмотрим матрицу $ \Phi(x) = \bigr( \nder[1]\phi(x), \dots, \nder\phi(x) \bigr) = Se^{Jx} $, в которой $ S = \bigl( \nder[1]s, \dots, \nder s \bigr) $, $ \nder[j]s $ "--- постоянные векторы.
+
+$$ \bigl( \nder[1]\phi(x), \dots, \nder\phi(x) \bigr) = \bigl(\nder[1]s, \dots, \nder s\bigr) \cdot
+\begin{pNiceMatrix}
+	e^{J_0x} & 0 & \Cdots & 0 \\
+	0 & e^{J_1x} & \Cdots & 0 \\
+	\Vdots & & \Ddots & \Vdots \\
+	0 & \Cdots & & e^{J_qx}
+\end{pNiceMatrix}, $$
+где, как было установлено,
+$$ e^{J_0x} =
+\begin{pNiceMatrix}
+	e^{\lambda_1^0 x} & 0 & \Cdots & 0 \\
+	0 & e^{\lambda_2^0x} & \Cdots & 0 \\
+	\Vdots & & \Ddots & \Vdots \\
+	0 & \Cdots & & e^{\lambda_{r_0}^0x}
+\end{pNiceMatrix}, \quad e^{J_1x} =
+\begin{pNiceMatrix}
+	e^{\lambda_1^*x} & xe^{\lambda_1^*x} & \Cdots & \frac{x^{r_1} - 1}{(r_1 - 1)!}e^{\lambda_1^*x} \\
+	0 & \Ddots & \Ddots & \Vdots \\
+	\Vdots & & & xe^{\lambda_1^*x} \\
+	0 & \Cdots & & e^{\lambda_1^*x}
+\end{pNiceMatrix}, \dotsc $$
+
+Отсюда
+$$ \nder[1]\phi(x) = \nder[1]s e^{\lambda_1^0x}, \quad \dots, \quad \nder[r_0]\phi(x) = \nder[r_0]se^{\lambda_{r_0}^0x} $$
+$$ \nder[r_0 + 1]\phi(x) = \nder[r_0 + 1]se^{\lambda_1^*x}, \quad \nder[r_0 + 2]\phi(x) = \bigl( \nder[r_0 + 1]sx + \nder[r_0 + 2]s \bigr)e^{\lambda_1^*x}, \quad \dots $$
+То есть любой элемент ФМ $ \Phi = Se^{Jx} $ имеет вид
+$$ \nder[j]\phi_i (x) = p_{ij}(x) e^{\lambda_kx}, $$
+где $ p_{ij}(x) $ "--- многочлен степени, не превосходящей $ n - 1 $, а $ \lambda_k $ "--- одно из с. ч. матрицы $ A $.
+
+Из равенства $ AS = SJ $ получаем
+$$ A \nder[1]s = \lambda_1^0 \nder[1]s, \quad \dots, \quad A\nder[r_0]s = \lambda_{r_0}^0 \nder[r_0]s, \quad A\nder[r_0 + 1]s = \lambda_1^* \nder[r_0 + 1]s, \quad \dots $$
+
+\section{Оценка нормы фундаментальной матрицы на положительной полуоси}
+
+Введём \emph{норму матрицы} $ A = \set{a_{ij}}_{i, j = 1}^n $ следующим образом:
+$$ \|A\| = \max\limits_{i, j = \ol{1, n}} \set{|a_{ij}|} $$
+
+\begin{theorem}[об оценке нормы фундаментальной матрицы]
+	\hfill \\
+	Пусть $ \lambda_* = \max\set{\Re \lambda_1, \dots, \Re \lambda_n} $, где $ \lambda_1, \dots, \lambda_n $ "--- с. ч. матрицы $ A $ системы \eref{5.1c}.
+
+	Тогда для любого $ \lambda_0 > \lambda_* $ и для любой фундаментальной матрицы $ \Phi(x) $ этой системы
+	$$ \forall x_0 \in \R \quad \exists K > 0 : \quad \forall x \in [x_0, +\infty) \quad \|\Phi(x)\| \le Ke^{\lambda_0x} $$
+\end{theorem}
+
+\begin{implication}
+	Если все с. ч. матрицы $ A $ имеют отрицательные вещественные части, то $ \liml{x \to +\infty} \|\Phi(x)\| = 0 $, где $ \Phi $ "--- произвольная ФМ системы \eref{5.1c}.
+\end{implication}
+
+\section{Теория Флоке: матрица монодромии, структура фундаментальной матрицы}
+
+Рассмотрим ЛОС с периодическими коэффициентами
+\begin{equ}{5.1p}
+	y' = Q(x)y,
+\end{equ}
+где $ Q(x) $ "--- это $ \omega $-периодическая непрерывная на $ \R $ матрица.
+
+Пусть $ \Phi(x) $ "--- ФМ системы \eref{5.1p}.
+Положим $ \Psi(x) = \Phi(x + \omega) $ и подставим её в систему \eref{5.1p}:
+$$ \Psi'(x) = \frac{\di \Phi(x + \omega)}{\di x} = \frac{\di \Phi(x + \omega)}{\di(x + \omega)} = Q(x + \omega) \Phi(x + \omega) = Q(x)\Psi(x) $$
+
+\begin{definition}
+	Постоянная матрица $ M $ с $ |M| \ne 0 $, удовлетворяющая уравнению $ \Phi(x + \omega) = \Phi(x)M $ называется \emph{матрицей монодромии} ФМ $ \Phi(x) $.
+\end{definition}
+
+\begin{theorem}
+	Любая ФМ $ \Phi(x) $ системы \eref{5.1p} может быть записана в виде
+	$$ \Phi(x) = D(x)e^{Rx}, $$
+	где $ D(x) $ "--- $ \omega $-периодическая, а $ R $ "--- постоянная матрица.
+\end{theorem}
+
+\section[Теория Флоке: мультипликаторы, их характеристическое свойство]{Теория Флоке: мультипликаторы, их характеристическое\\ свойство}
+
+\begin{statement}
+	Если $ \Phi(x), \Phi_1(x) $ "--- произвольные фундаментальные матрицы системы \eref{5.1p}, связанные соотношением $ \Phi_1(x) = \Phi(x)S $, то их матрицы монодромии $ M, M_1 $ подобны, причём $ M_1 = S^{-1}MS $.
+\end{statement}
+
+\begin{definition}
+	С. ч. $ \mu_1, \dots, \mu_n $ любой матрицы монодромии ЛОС \eref{5.1p} называются \emph{мультипликаторами}.
+\end{definition}
+
+\begin{theorem}[о характеристическом свойстве мельтупликаторов]
+	Число $ \mu $ является мультипликатором системы \eref{5.1p} \textbf{тогда и только тогда}, когда существует нетривиальное решение $ y = \phi(x) $ системы \eref{5.1p} такое, что $ \phi(x + \omega) \equiv \mu\phi(x) $.
+\end{theorem}
+
+\begin{implication}
+	Система \eref{5.1p} имеет периодическое решение \textbf{тогда и только тогда}, когда хотя бы один из мультипликаторов равен единице.
+\end{implication}
+
+\section{Теория Флоке: структура фундаментальной матрицы, приводимость системы}
+
+\begin{definition}
+	С. ч. матрицы $ R $ называются \emph{характеристическими показателями} ЛОС \eref{5.1p}.
+\end{definition}
+
+Пусть $ \Phi_1(x) = \bigl(\nder[1]\phi(x), \dots, \nder\phi(x) \bigr), ~ D_1(x) = \bigl(\nder[1]d(x), \dots, \nder d(x) \bigr) $, причём все векторы $ \nder[j]d(x) $ "--- $ \omega $-периодические.
+
+Тогда из равенства $ \bigl( \nder[1]\phi(x), \dots, \nder \phi(x) \bigr) = \bigl( \nder[1]d(x), \dots, \nder d(x) \bigr) \cdot e^{Jx} $ получаем
+$$ \nder[1]\phi = \nder[1]de^{\lambda_1^0x}, \quad \dots, \quad \nder[r_0]\phi = \nder[r_0]de^{\lambda_{r_0}^0x}, \quad \dots $$
+То есть любой элемент ФМ $ \Phi_1(x) = D(x) Se^{Jx} $ имеет вид $ \nder[j]\phi_i(x) = p_{ij}(x)e^{\lambda_kx} $, где $ p_{ij}(x) $ "--- многочлен степени, не превосходящей $ n - 1 $, с коэффициентами, являющимися $ \omega $-периодическими функциями $ x $, а $ \lambda_k $ "--- один из характеристических показателей системы.
+
+\begin{definition}
+	ЛОС с непрерывными коэффициентами называется \emph{приводимой}, если существует линейная неособая замена, преобразующая её в систему с постоянными коэффициентами.
+\end{definition}
+
+\section{ЛНС: общее решение, метод вариации, формула Коши}
+
+Рассмотрим линейную неоднородную систему
+\begin{equ}{5.4}
+	y' = P(x)y + q(x),
+\end{equ}
+в которой матрица $ P $ и неоднородность $ q $ непрерывны на $ (a, b) $.
+
+Пусть $ y = \psi(x) $ "--- какое-то частное решение системы \eref{5.4}, \ie $ \psi'(x) \equiv[(a, b)] P(x)\psi(x) + q(x) $.
+
+Сделаем замену $ y = z + \psi(x) $.
+Дифференцируя её по $ x $, получаем $ z' + \psi'(x) = P(x)\psi(x) + q(x) $ или
+\begin{equ}{5.5}
+	z' = P(x)z
+\end{equ}
+
+Пусть $ \Phi(x) $ "--- ФМ системы \eref{5.5}.
+Тогда общее решение ЛНС имеет вид
+$$ y = \Phi(x)c + \psi(x) $$
+
+\begin{theorem}[о нахождении частного решения ЛНС]
+	Пусть $ \Phi(x) = \bigl( \nder[1]\phi(x), \dots, \nder \phi(x) \bigr) $ "--- фундаментальная матрица ЛОС \eref{5.5}.
+
+	Тогда частное решение ЛНС \eref{5.4} может быть найдено в квадратурах от функций $ \nder[j]\phi_i, p_{ij}, q_i $.
+\end{theorem}
+
+Рассмотрим систему
+\begin{equ}{5.7}
+	y' = Ay + q(x),
+\end{equ}
+в которой матрица $ A $ постоянна, а неоднородность $ q \in \mathcal C(a, b) $.
+
+Для любых начальных данных $ x_0 \in (a, b) $ и $ y^0 \in \R^n $ \emph{формула Коши} задаёт решение \caupr{x_0, y^0} на $ (a, b) $:
+\begin{equ}{5.8}
+	y(x, x_0, y^0) = e^{A(x - x_0)}y^0 + \int_{x_0}^x e^{A(x - s)}q(s)\di s, \quad c = e^{-Ax_0}y^0
+\end{equ}
+
+\section{Периодические решения ЛНС с периодическими коэффициентами}
+
+Рассмотрим систему
+\begin{equ}{5.9}
+	y' = Q(x)y + q(x),
+\end{equ}
+в которой матрица $ Q(x) $ и неоднородность $ q(x) $ являются $ \omega $-периодическими и непрерывны на $ \R $.
+
+\begin{theorem}[о периодичсеском решении периодической ЛНС]
+	% Если ЛОС \eref{5.1p} \textbf{не} имеет $ \omega $-периодических решний, а $ \Phi_0(x)  "--- её нормированная МФ, то ЛНС \eref{5.9} имеет \textbf{единственное} $ \omega $-периодическое решение
+	\lbl{5.10}
+	$$ y(x) = \Phi_0(x) \bigl( E - \Phi_0(x) \bigr)^{-1} \int_0^\omega \Phi_0(\omega) \Phi_0^{-1}(s)q(s) \di s + \int_0^x \Phi_0(x)\Phi_0^{-1}(s)q(s) \di s, \quad \Phi_0(0) = E, \quad x \in \R $$
+\end{theorem}
+
+\section{Периодические решения ЛНС с постоянной матрицей и периодической неоднородностью}
+Рассмотрим систему
+\begin{equ}{5.7'}
+	y' = Ay + q(x),
+\end{equ}
+в которой $ q \in \mathcal C(\R) $ и является $ \omega $-периодической функцией.
+
+\begin{statement}
+	Система \eref{5.7'}, с. ч. $ \lambda_1, \dots, \lambda_n $ матрицы $ A $ которой удовлетворяют условию $ \dfrac{\lambda_k\omega}{2\pi\ii} \not\in \Z $, имеет \textbf{единственное} $ \omega $-периодическое решение $ y = \psi(x) $, где
+	$$ \psi(x) = e^{Ax}(E - e^{A\omega})^{-1} \int_0^\omega e^{A(\omega -s)}q(s)\di s + \int_0^x e^{A(x - s)}q(s) \di s, $$
+	или
+	$$ \psi(x) = (E - e^{A\omega})^{-1} \int_{x - \omega}^x e^{A(x - s)}q(s)\di s $$
+\end{statement}

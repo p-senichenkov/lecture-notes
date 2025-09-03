@@ -1,10 +1,30 @@
-\documentclass[a4paper]{report}
+\documentclass[a4paper]{article}
 \input{../../preamble.tex}
+
+% so that it will be more convenient for questions:
+\titleformat{\section}
+{\normalfont\bfseries\Large}    % font
+{\color{gray}{\thesection.}}  % number
+{0.5em} % separator
+{}  % before-code
+[]  % after-code
+
+% Don't display part numbers
+\titleformat{\part}
+{\normalfont\bfseries\LARGE}
+{}{0pt}{}[]
 
 \begin{document}
     \let\hat\widehat  % this line somehow works only if placed here (perhaps "report" class breaks it)
 
     \tableofcontents
 
-    \input{./material.tex}
+	\input{./1.tex}
+	\input{./2.tex}
+    \input{./3.tex}
+	\input{./4.tex}
+	\input{./5.tex}
+	\input{./6.tex}
+	\input{./7.tex}
+	\input{./8.tex}
 \end{document}

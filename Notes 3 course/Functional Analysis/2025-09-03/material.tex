@@ -1,0 +1,33 @@
+\chapter{Метрические пространства}
+
+\begin{implication}
+	$ (X, \rho), \quad \set{x_n}_{n = 1}^\infty $ "--- фундаментальная
+	$$ \implies \exists \set{x_{n_k}}_{k = 1}^\infty : \quad \sum_{k = 1}^\infty \rho(x_{n_{k + 1}}, x_{n_k}) < +\infty $$
+\end{implication}
+
+\begin{proof}
+	Следует из свойства 3 фундаментальных последовательностей
+\end{proof}
+
+\begin{theorem}[о замкнутом подпротранстве]
+	$ (X, \rho), \quad Y \sub X $ ($ Y $ называется \emph{подпространством})
+	\begin{enumerate}
+		\item $ (X, \rho) $ "--- полное, $ Y $ замкнуто.
+
+			Тогда $ (Y, \rho) $ полно.
+		\item $ (Y, \rho) $ "--- полное.
+
+			Тогда $ Y $ замкнуто.
+	\end{enumerate}
+\end{theorem}
+
+\begin{eproof}
+	\item Пусть $ \set{y_n}_{n = 1}^\infty $ фундаментальна в $ Y $.
+		Тогда она фундаментальна и в $ X $, а $ X $ полно.
+		Значит, $ \exists \lim\limits_{n \to \infty} y_n = a \in X $.
+		Так как $ Y $ замкнуто, $ a \in Y \implies (Y, \rho) $ "--- полное.
+	\item Пусть $ \set{y_n}_{n = 1}^\infty, \quad y_n \in Y, \lim\limits_{n \to \infty} y_n = a $.
+		Проверим, что $ a \in Y $.
+
+		$ \set{y_n}_{n = 1}^\infty $ фундаментальна $ \implies \exists \lim y_n \in Y $ (\as $ Y $ "--- полное).
+\end{eproof}

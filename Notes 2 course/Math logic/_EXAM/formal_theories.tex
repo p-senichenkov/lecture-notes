@@ -16,7 +16,7 @@
 \subsection*{Формальные теории с равенством}
 
 \begin{definition}
-	ФТ называется ФТ с равенством, если множество предикатных символов содержит выделенных двухместный предикат $ = $ и для любой формулы $ A(x) $ выводимы следующие формулы
+	ФТ называется \emph{ФТ с равенством}, если множество предикатных символов содержит выделенных двухместный предикат $ = $ и для любой формулы $ A(x) $ выводимы следующие формулы
 	\begin{itemize}
 		\item $ \forall x (x = x) $
 		\item $ \forall x ~ y \Bigl(x = y \to \bigl(A(x) \leftrightarrow A(y) \bigr) \Bigr) $
@@ -39,10 +39,9 @@
 Рассмотрим множество
 $$ A = \set{x : \neg (x \in x)} $$
 Доказано, что ни $ A \in A $, ни $ A \not\in A $.
-
 При этом,
 $$ \forall x \bigl( x \in A \leftrightarrow \neg (x \in x) \bigr) $$
-В частности, при $ x = A $ получаем
+В частности, при $ x = A $, получаем
 $$ A \in A \leftrightarrow \neg (A \in A) $$
 Эта формула заведомо ложна. Следовательно, в наивной теории множеств доказуема ложная формула.
 Таким образом, наивная теория множеств противоречива.
@@ -87,7 +86,7 @@ $$ A \in A \leftrightarrow \neg (A \in A) $$
 		\item Аксиома бесконечности. \\
 			В \bt T имеется бесконечное множество индивидов.
 			\begin{multline*}
-				\forall w_4 \Bigl( \forall x_1 ~\neg w_4(x_1, x_1) \quad \amp \quad \forall x_1 ~ \exists y_1~ w_4(x_1, y_1) \quad \amp \\
+				\exists w_4 \Bigl( \forall x_1 ~\neg w_4(x_1, x_1) \quad \amp \quad \forall x_1 ~ \exists y_1~ w_4(x_1, y_1) \quad \amp \\
 				\forall x_1 ~ \forall y_1 ~ \forall z_1 \bigl( w_4(x_1, y_1) \amp w_4(y_1, z_1) \to w_4(x_1, z_1) \bigr) \Bigr)
 			\end{multline*}
 	\end{enumerate}
@@ -137,7 +136,7 @@ $$ A \in A \leftrightarrow \neg (A \in A) $$
 			$$ \forall x \exists y \forall z \Bigl( \exists u \bigl( u \in x \amp (u, z) \in F \bigr) \leftrightarrow z \in y \Bigr) $$
 
 		\item \textbf{Аксиома выбора.} \\
-			Для любого множества $ S $ непустых множеств существует функция $ f $, определённая на всех элементах множества $ S $, что
+			Для любого множества $ S $ непустых множеств существует функция $ f $, определённая на всех элементах множества $ S $ такая, что
 			$$ \forall S \exists f \forall x \bigl( x \in S \to f(x) \in x \bigr) $$
 	\end{enumerate}
 \end{undefthm}
@@ -171,6 +170,11 @@ $$ \dots $$
 $$ w^2 = \bigcup_{k = 1}^w kw $$
 Аналогичным образом строятся $ w^2 + 1, w^2 + 2, \dots, w^3, \dots, w^w = \eps_0 $. \\
 Ординал $ \eps_0 $ "--- первый несчётный ординал. К нему таким же образом можно прибавлять по единице.
+
+\begin{note}
+	Вообще, во всех источниках
+	$$ \eps_0 = w^{w^{w^{\iddots}}} $$
+\end{note}
 
 \section*{Формальная арифметика}
 

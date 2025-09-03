@@ -1,0 +1,195 @@
+\chapter{Предисловие}
+
+\section{Основные понятия}
+
+\subsection{Объекты}
+
+
+$ \R $ "--- алгебра, $ \quad \R $ "--- топологическое пространство.
+Для математического анализа важны оба свойства:
+\begin{itemize}
+	\item пределы;
+	\item непрерывность;
+	\item $ f' $;
+	\item $ \int f $.
+\end{itemize}
+
+$ X $ "--- линейное топологическое пространство.
+Оно обладает свойствами линейного пространства:
+\begin{itemize}
+	\item $ (x, y) \to x + y $;
+	\item $ (\alpha, x) \to \alpha x $;
+\end{itemize}
+и свойствами топологического пространства: \\
+$ \set{U_\alpha}_{\alpha \in A} $.
+
+Операции линейного пространства \textbf{непрерывны}.
+
+Будем рассматривать нормированные пространства $ (X, \|\cdot\|) $.
+В таком случае непрерывность гарантирована.
+
+\subsection{Отображения}
+
+$$ A : X \to Y $$
+$ A $ "--- линейный непрерывный оператор:
+$$ A(\alpha x + \beta z) = \alpha A x + \beta A z $$
+
+Если $ \dim X < +\infty, \dim Y < +\infty $, то $ X $ "--- линейная алгебра.
+
+Если $ A = A^* $, то существует ОНБ из с. в. $ A $.
+
+\begin{theorem}[Гильберта"--~Шмидта]
+	$ X $ "--- Н-сепарабельное гильбертово пространство, $ A = A^* $, $ A $ компактный.
+
+	Тогда существует ОНБ из с. в.
+\end{theorem}
+
+\begin{definition}
+	Если $ \dim Y = 1 $, \ie $ Y = \Co $ (или $ \R $), то $ A : X \to Y $ называется \emph{линейным функционалом}.
+\end{definition}
+
+\begin{undefthm}{Вопрос анализа.}
+	Пусть $ f $ "--- функция, у неё имеются некоторые свойства.
+	Какие свойства будут у её производной?
+\end{undefthm}
+
+\begin{undefthm}{Вопрос функционального анализа.}
+	$ D : X \to Y, ~ D(f) = f' $ \\
+	Какими свойствами обладает $ D $ (непрерывность, компактность, \dots)?
+\end{undefthm}
+
+\subsection{Почему полезно изучать функциональный анализ}
+
+\begin{enumerate}
+	\item Более общий взгляд на задачу.
+		$$ f \in \mathcal C[a, b], ~ \mathscr P_n = \set{p(x) = \sum_{j = 0}^n a_jx^j, ~ a_j \in \R}, \quad E_n(f) = \inf_{p \in \mathscr P_n} \Bigl( \max_{\gamma \in [a, b]} |f(x) - p(x)| \Bigr) $$
+
+		Существует ли $ p \in \mathscr P_n $ такое, что $ E_n(f) = |f(x) - p(x)|, \quad \dim \mathscr P_n = n + 1 < +\infty $? \\
+		Единственный ли?
+	\item Язык функционального анализа применим во всей математике.
+	\item Математическая физика использует функциональный анализ.
+	\item Функциональный анализ "--- это интересно и важно.
+\end{enumerate}
+
+\chapter{Метрические пространства}
+
+\section{Определения и свойства}
+
+\begin{definition}
+	$ (X, \rho) $, $ X $ "--- множество, $ \rho : X \times X \to \R $, выполняются свойства:
+	\begin{enumerate}
+		\item $ \rho(x, y) \ge 0, \quad \rho(x, y) = 0 \iff x = y $;
+		\item $ \rho(x, y) = \rho(y, x) $;
+		\item $ \rho(x, y) \le \rho(x, z) + \rho(z, y) $.
+	\end{enumerate}
+
+	$ X $ называется \emph{метрическим пространством}.
+\end{definition}
+
+\begin{notation}
+	$ \mathtt B_r(x) = \set{t \in X \mid \rho(x, y) < r} $
+\end{notation}
+
+$ \set{B_r(x)}_{r > 0} $ "--- база топологии в точке $ x $.
+Если не фиксировать $ x $, получим базу топологии $ X $.
+
+\begin{definition}
+	$$ G \sub X, ~ G \text{ \emph{открыто} } \iff \forall x \in G \quad \exists \mathtt B_r(x) \sub G $$
+\end{definition}
+
+\begin{definition}
+	$ F $ \emph{замкнуто}, если $ X \setminus F $ открыто.
+\end{definition}
+
+Для метрических пространств справедливо следующее определение \emph{замкнутого пространства}:
+\begin{definition}
+	$$ \set{x_n}_{n = 1}^\infty, \quad \lim\limits_{n \to \infty} x_n = x_0 \iff \lim\limits_{n \to \infty} \rho(x_n, x_0) = 0 $$
+\end{definition}
+
+\begin{definition}
+	$ A \sub X $
+
+	$ A $ \emph{ограничено}, если $ \exists \mathtt B_r(x_0) $ такой, что $ A \sub \mathtt B_r(x_0) $.
+\end{definition}
+
+\begin{definition}
+	$ \set{x_n}_{n = 1}^\infty $ "--- \emph{фундаментальная}, если
+	$$ \forall \eps > 0 \quad \exists N \in \N : \quad n, m > N \implies \rho(x_n, x_m) < \eps $$
+\end{definition}
+
+\begin{remark}
+	Если $ \exists \lim\limits_{n \to \infty} x_n = a $, то $ \set{x_n}_{n = 1}^\infty $ "--- фундаментальная.
+\end{remark}
+
+\begin{proof}
+	Возьмём $ \eps > 0 $.
+	$$
+	\begin{rcases}
+		\exists N : \quad n > N \implies \rho(x_n, a) < \eps \\
+		\text{ возьмём } m > N \implies \rho(x_m, a) < \eps
+	\end{rcases} \implies \rho(x_n, x_m) \trile 2\eps $$
+\end{proof}
+
+\begin{definition}
+	$ (X, \rho) $ "--- \emph{полное}, если любая фундаментальная последовательность имеет предел.
+\end{definition}
+
+\begin{remark}[о пользе полноты]
+	$ (X, \rho) $ "--- метрическое пространство, $ F : X \to \R $ "--- непрерывное.
+	Требуется определить $ x_0 : F(x_0) = 0 $.
+
+	Построим последовательность $ \set{x_n}_{n = 1}^\infty $ такую, что
+	$$ \lim\limits_{n \to \infty} F(x_n) = 0, \quad \rho(x_n, x_m) \underarr{
+		\begin{subarray}{c}
+			n \to \infty \\
+			m \to \infty
+		\end{subarray}
+	} \quad \implies \exists x_0 : F(x_0) = 0, \quad \lim x_n = 0 $$
+	Это верно только в полном пространстве.
+\end{remark}
+
+\begin{exmpls}
+\item $ \R^n, \Co^n $ "--- полные;
+\item $ \R^n \setminus \set 0, \Q $ "--- не полные.
+\end{exmpls}
+
+\subsection{Теорема о свойствах фундаментальных последовательностей}
+
+\begin{theorem}
+	$ (X, \rho), \quad \set{x_n}_{n = 1}^\infty $ "--- фундаментальная.
+
+	\begin{enumerate}
+		\item $ \set{x_n}_{n = 1}^\infty $ ограничена;
+		\item если существует $ \set{x_{n_k}}_{k = 1}^\infty $ такая, что $ \lim x_{n_k} = a $, то $ \exists \lim x_n = a $;
+		\item $ \set{\eps_k}_{k = 1}^\infty, ~ \eps_k > 0 \quad \implies \quad \exists \set{x_{n_k}}_{k = 1}^\infty : \quad \forall j > k \quad \rho(x_{n_j}, x_{n_k}) < \eps_k $.
+	\end{enumerate}
+\end{theorem}
+
+\begin{eproof}
+\item Возьмём $ \eps = 1 $.
+	$$ \exists N \in \N : \quad \forall n, m \ge N \quad \rho(x_n, x_m) < 1 \quad \implies \rho(x_N, x_m) < 1 \text{ при } m > N $$
+	Пусть $ R = \max\set{\rho(x_1, x_N), \dots, \rho(x_{N - 1}, x_N)} + 1 $.
+	Тогда $ \forall n \in \N \quad x_n \in \mathtt B_R(x_N) $.
+\item Возьмём $ \eps > 0 $.
+	Воспользуемся фундаментальностью:
+	$$ \exists N : \quad \forall n, m > N \quad \rho(x_n, x_m) < \eps $$
+	Зафиксируем $ n_k $ такой, что:
+	\begin{itemize}
+		\item $ n_k > N $;
+		\item $ \rho(x_{n_k}, a) < \eps $.
+	\end{itemize}
+
+	Пусть $ n > N $.
+	Тогда $ \rho(x_n, a) \trile \rho(x_n, x_{n_k}) + \rho(x_{n_k}, a) < 2\eps \implies \lim \rho(x_n, a) = 0 $.
+\item Докажем \textbf{по индукции}:
+	\begin{itemize}
+		\item \textbf{База.} $ \eps_1 $
+			$$ \exists N_1 : \quad \forall n, m \ge N_1 \quad \rho(x_n, x_m) < \eps_1 \implies \rho(x_{N_1}, x_m) < \eps_1 \text{ при } m > N_1 $$
+		\item \textbf{Переход.} Допустим, уже построены $ n_1, \dots, n_{k - 1} $, $ n_j \uparrow $ такие, что
+			$$ \forall m > n_j \quad \rho(x_m, x_{n_j}) < \eps_j, \quad j = 1, 2, \dots, k - 1 $$
+			\begin{multline*}
+				\exists n_k > n_{k - 1} : \quad \forall n, m \ge n_k \quad \rho(x_n, x_m) < \eps_k \implies \rho(x_{n_k}, x_m) < \eps_k \text{ при } m > n_k \\
+				\implies \exists \text{ требуемые } \set{x_{n_k}}
+			\end{multline*}
+	\end{itemize}
+\end{eproof}

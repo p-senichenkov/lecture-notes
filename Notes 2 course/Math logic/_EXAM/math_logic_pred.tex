@@ -99,22 +99,22 @@
 
 Все равносильности, справедливые для пропозициональных формул, справедливы и для предикатных формул. Кроме того, имеют место равносильности для работы с кванторами. Пусть $ x $ не входит свободно в $ B $, а $ y $ не входит в $ C $.
 
-\begin{align*}
-	\neg \forall x A &\iff \exists x \neg A \\
-	\neg \exists x A &\iff \forall x \neg A \\
-	\forall x B &\iff B \\
-	\exists x B &\iff B \\
-	\forall x C &\iff \forall y [C]_y^x \\
-	\exists x C &\iff \exists y [C]_y^x \\
-	\forall x A \amp B &\iff \forall x (A \amp B) \\
-	\exists x A \amp B &\iff \exists x (A \amp B) \\
-	\forall x A \vee B &\iff \forall x (A \vee B) \\
-	\exists x A \vee B &\iff \exists x (A \vee B) \\
-	B \to \forall x A &\iff \forall x(B \to A) \\
-	B \to \exists x A &\iff \exists x (B \to A) \\
-	\forall x A \to B &\iff \exists x (A \to B) \\
-	\exists x A \to B &\iff \forall x (A \to B)
-\end{align*}
+\begin{longtable}{r c l}
+	$ \neg \forall x A $ & $ \iff $ & $ \exists x \neg A $ \\
+	$ \neg \exists x A $ & $ \iff $ & $ \forall x \neg A $ \\
+	$ \forall x B $ & $ \iff $ & $ B $ \\
+	$ \exists x B $ & $ \iff $ & $ B $ \\
+	$ \forall x C $ & $ \iff $ & $ \forall y [C]_y^x $ \\
+	$ \exists x C $ & $ \iff $ & $ \exists y [C]_y^x $ \\
+	$ \forall x A \amp B $ & $ \iff $ & $ \forall x (A \amp B) $ \\
+	$ \exists x A \amp B $ & $ \iff $ & $ \exists x (A \amp B) $ \\
+	$ \forall x A \vee B $ & $ \iff $ & $ \forall x (A \vee B) $ \\
+	$ \exists x A \vee B $ & $ \iff $ & $ \exists x (A \vee B) $ \\
+	$ B \to \forall x A $ & $ \iff $ & $ \forall x(B \to A) $ \\
+	$ B \to \exists x A $ & $ \iff $ & $ \exists x (B \to A) $ \\
+	$ \forall x A \to B $ & $ \iff $ & $ \exists x (A \to B) $ \\
+	$ \exists x A \to B $ & $ \iff $ & $ \forall x (A \to B) $
+\end{longtable}
 
 \begin{definition}
 	Терм $ t $ называется \emph{свободным для подстановки} в формулу $ A $ вместо свободных вхождений предметной переменной $ x $, если он не содержит предметных переменных, в области действия кванторов по которым имеются свободные вхождения предметной переменной $ x $.
