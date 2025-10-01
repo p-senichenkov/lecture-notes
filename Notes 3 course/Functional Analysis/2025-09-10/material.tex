@@ -1,0 +1,229 @@
+\chapter{Пространства}
+
+\section{Несколько простых неравенств}
+
+\subsection{Неравенство Минковского}
+
+\begin{statement}
+	$ (T, \mathscr U, \mu), \quad f, g $ измеримы, $ \quad 1 \le p \le +\infty $
+
+	\begin{equ}1
+		\Bigl( \int\limits_T |f(x) + g(x)|^p \di \mu \Bigr)^{\frac1p} \le \Bigl( \int\limits_T |f|^p \di \mu \Bigr)^{\frac1p} + \Bigl( \int\limits_T |g|^p \di \mu \Bigr)^{\frac1p}
+	\end{equ}
+\end{statement}
+
+\begin{iproof}
+\item $ p = 1 $
+	$$ |f(x) + g(x)| \trile |f(x)| + |g(x)| $$
+	Проинтегрируем:
+	$$ \int\limits_T |f + g| \di \mu \le \int\limits_T |f| \di \mu + \int\limits_T |g| \di \mu $$
+\item $ p > 1 $
+
+	Обозначим
+	$$ A = \Bigl( \int\limits_T |f|^p \di \mu \Bigr)^{\frac1p}, \quad B = \Bigl( \int\limits_T |g|^p \di \mu \Bigr)^{\frac1p}, \quad C = \Bigl( \int\limits_T |f + g|^p \di \mu \Bigr)^{\frac1p} $$
+
+	Рассмотрим отдельно тривиальные случаи:
+	\begin{itemize}
+		\item Если $ A = +\infty $ или $ B = +\infty $ или $ C = 0 $, то \eref1.
+		\item $ A < +\infty, ~ B < +\infty $
+
+			Докажем сначала, что $ C < +\infty $.
+			Возьмём $ a, b \in \R $. Понятно, что $ |a + b| \le 2\max\set{|a|, |b|} $.
+			$$ |a + b|^p \le 2^p \max\set{|a|^p, |b|^p} \le 2^p \bigl( |a|^p + |b|^p \bigr) $$
+			Подставим $ a = f(x), ~ b = g(x) $ (для фиксированного $ x $):
+			$$ |f(x) + g(x)|^p \le 2^p \bigl( |f(x)|^p + |g(x)|^p \bigr) $$
+			Проинтегрируем по $ T $ и $ \mu $:
+			$$ C^p = \int\limits_T |f + g|^p \di \mu \le 2^p \Bigl( \int\limits_T |f|^p \di \mu + \int\limits_T |g|^p \di \mu \Bigr) = 2^p (A^p + B^p) < +\infty $$
+
+			Теперь докажем само неравенство:
+			$$ C^p = \int\limits_T |f + g|^p \di \mu = \int\limits_T |f + g| \cdot |f + g|^{p - 1} \di \mu \le
+			\underbrace{\int\limits_T |f| \cdot |f + g|^{p - 1} \di \mu}_{I_1} + \underbrace{\int\limits_T |g| \cdot |f + g|^{p - 1} \di \mu}_{I_2} $$
+			$$ I_1 = \int\limits_T |f| \cdot |f + g|^{p - 1} \di \mu \underset\le{\text{нер-во Гёльдера}}
+			\Bigl( \int\limits_T |f|^p \di \mu \Bigr)^{\frac1p} \Bigl( \int\limits_T |f + g|^{(p - 1)q} \di \mu \Bigr)^{\frac1q} $$
+			$$ \frac1p + \frac1q = 1 \implies p + q = pq \implies pq - q = p $$
+			$$ I_1 \le A \cdot C^{\frac pq} $$
+			Аналогично, $ I_2 \le B \cdot C^{\frac pq} $.
+			$$ C^p \le A \cdot C^{\frac pq} + B \cdot C^{\frac pq} = (A + B) C^{\frac pq} $$
+			$$ p - \frac pq = p(1 - \frac 1q) = 1 $$
+			Сократим на $ C^{\frac pq} $:
+			$$ C \le A + B $$
+	\end{itemize}
+\end{iproof}
+
+\section{Пространства Лебега}
+
+\begin{definition}
+	$ 1 \le p \le +\infty $
+	$$ \mathscr L^p(T, \mu) = \set{f \mid |f|^p \in \mathscr L(T, \mu)} =
+	\set{f \text{ "--- измерима} \mid \int\limits_T |f|^p \di \mu <+\infty} $$
+	$$ \|f\|_p = \Bigl( \int\limits_T |f|^p \di \mu \Bigr)^{\frac1p} $$
+\end{definition}
+
+\begin{statement}
+	$ \|\cdot\|_p $ "--- полунорма на $ \mathscr L^p(T, \mu) $.
+\end{statement}
+
+\begin{eproof}
+\item $ \|f\|_p = \Bigl( \int\limits_T |f(x)|^p \di \mu \Bigr)^{\frac1p} \ge 0 $;
+\item $ \lambda \in \R \text{ (или $ \Co $)}, \quad \|\lambda f\|_p = |\lambda| \cdot \|f\|_p $;
+\item $ \|f + g\|_p \le \|f\|_p + \|g\|_p $ "--- неравенство Минковского.
+\end{eproof}
+
+$$ \|f\|_p = 0 \iff \int\limits_T |f(x)|^p \di \mu = 0\iff f(x) = 0 ~\ale $$
+
+Обозначим $ N = \set{f \text{ "--- изм.} \mid f(x) = 0 ~\ale} $.
+
+\begin{definition}
+	$$ \mathrm L^p = \faktor{\mathscr L^p}N $$
+
+	То есть, $ f \sim g $, если $ f - g \in N $, то есть $ f(x) = g(x) ~\ale $.
+
+	В пространстве $ \mathscr L^p $ будем рассматривать $ \ol f $ "--- классы эквивалентности $ f $.
+	$$ \|\ol f\|_p = \|f\|_{\mathscr L^p} $$
+\end{definition}
+
+\begin{statement}
+	$ \|\cdot\|_{\mathscr L^p} $ "--- норма.
+\end{statement}
+
+\begin{proof}
+	$$ \|\ol f\| = 0 \iff \Bigl( \int\limits_T |f|^p \di \mu \Bigr)^{\frac1p} = 0 \iff f(x) = 0 ~\ale \implies f \in N $$
+\end{proof}
+
+\begin{definition}
+	$ p = \infty $
+
+	$ \mathscr L^\infty (T, \mu) $ "--- пространство \emph{существенно ограниченных функций}.
+
+	$ f $ "--- измерима
+	$$ f \in \mathscr L^\infty \iff \exists c > 0 : \quad \mu\set{x \in T \mid |f(x)| > c} = 0 $$
+
+	Определим \emph{существенный супремум}:
+	$$ \|f\|_\infty = \inf\set{c > 0 \mid \mu\set{x \mid |f(x)| > c} = 0} $$
+\end{definition}
+
+\begin{notation}
+	$ \|f\|_\infty = \operatorname{vracsup} f = \operatorname{esssup} f $
+\end{notation}
+
+\begin{statement}
+	$$ f \in \mathscr L^\infty(T, \mu) \implies |f(x) \le \|f(x)\|_\infty ~\ale $$
+\end{statement}
+
+\begin{proof}
+	$$ \|f\|_\infty = \inf\set{c \mid \mu\set{x \mid |f(x)| > c} = 0} $$
+	Возьмём $ e_m = \set{x \mid |f(x)| > \|f\|_\infty + \frac1m} \implies \mu e_m = 0 $.
+	$$ e = \set{x \mid |f(x)| > \|f\|_\infty} = \bigcup e_m \implies \mu e = 0 $$
+\end{proof}
+
+\begin{statement}
+	$ \mathscr L^\infty(T, \mu), \quad \|\cdot\|_\infty $ "--- полунорма.
+\end{statement}
+
+\begin{eproof}
+\item $ \lambda \ne 0 \in \R $ (или $ \Co $)
+	$$ \|f(x)\| > c \iff |\lambda f(x)| > |\lambda| \cdot c $$
+\item Пусть $ f, g \in \mathscr L^\infty(T, \mu), \quad x \in T $.
+	$$ |f(x) + g(x)| \le |f(x)| + |g(x)| \underset{\text{п. в.}}\le \|f\|_\infty + \|g\|_\infty $$
+	$$ \implies \|f + g\|_\infty \le \|f\|_\infty + \|g\|_\infty $$
+\item $ \|f\|_\infty = 0 \implies |f(x)| \le 0 ~\ale \implies f(x) = 0 ~\ale $
+\end{eproof}
+
+\begin{definition}
+	$ \mathrm L^\infty(T, \mu) = \faktor{\mathscr L^\infty(T, \mu)}N $, где $ N = \set{f \text{ "--- изм.} \mid f(x) = 0 ~\ale} $.
+
+	$$ \ol f \in \faktor{\mathscr L^\infty}N, \quad \|\ol f\|_\infty = \|f\|_\infty $$
+\end{definition}
+
+$$ \|\ol f\|_\infty = 0 \iff \|f\|_\infty = 0 \iff f(x) = 0 ~\ale \iff f \in N = \On $$
+
+\subsection(Пространства Лебега~--- банаховы){Пространства Лебега "--- банаховы}
+
+\subsubsection{Маленькое воспоминание из анализа}
+
+\begin{theorem}[Фату]
+	$ (T, \mathscr U, \mu), \quad g_n(x) $ измеримы, $ g_n(x) \ge 0, \quad g_n \to g(x) $ \ale на $ T $
+	$$ \int\limits_T g_n(x) \di \mu \le C $$
+	$$ \implies \int\limits_T g(x)\di \mu \le C $$
+\end{theorem}
+
+\begin{theorem}
+	$ (T, \mathscr, \mu), \quad 1 \le p \le \infty $
+
+	$ \mathrm L^p(T, \mu) $ "--- банаховы.
+\end{theorem}
+
+\begin{iproof}
+\item $ p < +\infty $
+
+	Воспользуемся критерием полноты.
+	Возьмём $ \set{f_n}_{n = 1}^\infty, ~ f_n \in \mathrm L^p $ (\ie берём классы, а из классов берём произвольных представителей) такие, что $ \sum_{n = 1}^\infty \|f_n\|_p \le C < +\infty $.
+	$$ S_n(x) = \sum_{k = 1}^n f_k(x) $$
+	Докажем, что $ \exists S(x) = \sum_{k = 1}^\infty f_k(x) $, \ie $ S(x) \in \mathrm L^p, ~ \lim\limits_{n \to \infty} \|S - S_n\|_p = 0 $.
+
+	Рассмотрим для начала сумму модулей:
+	$$ \sigma_n(x) = \sum_{k = 1}^\infty |f_k(x)|, \quad \sigma(x) = \sum_{k = 1}^\infty |f_k(x)| $$
+	Проверим, что $ \sigma(x) $ \ale конечна.
+
+	$$ \|\sigma_n\|_p \trile \sum_{k = 1}^n \|f_k\|_p \le C $$
+	Применим теорему Фату:
+	$$
+	\begin{rcases}
+		\int\limits_T |\sigma_n(x)|^p\di \mu \le C^p \\
+		|\sigma_n(x)|^p \to |\sigma(x)|^p
+	\end{rcases} \implies \int\limits_T |\sigma(x)|^p \di \mu \le C $$
+	$$ \implies \sigma(x) < +\infty ~\ale $$
+	Значит, для \ale $ x \quad \exists \sum_{k = 1}^\infty f_k(x) = S(x) $.
+
+	Воспользуемся критерием Коши для $ \sum_{n = 1}^\infty \|f_n\| \le C $:
+	$$ \forall \eps > 0 \quad \exists N : \quad \forall m > n > N \quad \sum_{k = n + 1}^ \|f_k\|_p < \eps $$
+	$$ \|S_m - S_n\|_p \le \sum_{k = n + 1}^m \|f_k\|_p < \eps $$
+
+	Снова воспользуемся теоремой Фату:
+	$$
+	\begin{rcases}
+		\int\limits_T |S_m(x) - S_n(x)|^p \di \mu < \eps^p \\
+		|S_m(x) - S_n(x)|^p \underarr{m \to \infty} |S(x) - S_m(x)|^p ~\ale
+	\end{rcases} \implies \int\limits_T |S(x) - S_m(x)|^p \di \mu \le \eps^p $$
+
+	$$ S - S_n \in \mathrm L^p, \quad S_n \in \mathrm L^p \implies S = (S - S_n) + S_n \implies S \in \mathrm L^p $$
+	$$ \implies \lim\limits_{n \to \infty} \|S - S_n\|_p = 0 \implies \mathrm L^p \text{ "--- полное} $$
+\item $ p = \infty $
+
+	Рассмотрим $ \set{f_n}_{n = 1}^\infty $ "--- фундаментальная в $ \mathrm L^\infty(T, \mu) $
+
+	$$ |f_n(x)| \le \|f_n\|_\infty \text{ при } x \in T \setminus E_n, \quad \mu E_n = 0 $$
+	$$ E = \bigcup_{n = 1}^\infty E_n, \quad T_1 = T \setminus E \implies f_n \in m(T_1) $$
+	$ \set{f_n}_{n = 1}^\infty $ фундаментальна в $ m(T_1) $, а оно банахово.
+	$$ \implies \exists f \in m(T_1) : \quad \lim\limits_{n \to \infty} \|f_n - f\|_\infty = 0 $$
+	Положим $ f\big|_E = 0 $.
+	$$ \lim\limits_{n \to \infty}\|f - f_n\|_{\mathrm L^\infty(T)} = 0 $$
+\end{iproof}
+
+\subsection{Похожие пространства последовательностей}
+
+\begin{definition}
+	$ n \in \N $ фиксировано, $ \quad 1 \le p < +\infty $
+	$$ l_n^p = \Bigl( \R^n \text{ (или $ \Co^n $)}, \|x\|_p = \bigl( \sum_{j = 1}^n |x_j|^p \bigr)^{\frac1p} \Bigr) $$
+
+	Возьмём $ T = \set{1, 2, \dots, n} $.
+	Функции на $ T $ будут элементами $ \R^n $.
+	$$ \mu(j) = 1, \quad 1 \le j \le n $$
+	$$ l_n^p = \mathrm L^p(T, \mu) \text{ "--- банахово} $$
+
+	\begin{statement}
+		$ \set{\nder[m]x}_{m = 1}^\infty, \quad \nder[m]x \in l_n^p, \quad \nder[m]x = \bigl( \nder[m]x_1, \dots, \nder[m]x_n \bigr), \quad 1 \le p \le +\infty $
+		$$ \lim\limits_{m \to \infty} \|x - \nder[m]x\|_p = 0 \iff \lim\limits_{m \to \infty} \nder[m]x_j = x_j, \quad 1 \le j \le n $$
+	\end{statement}
+
+	\begin{iproof}
+	\item $ \implies $
+		$$ \underset{\Bigl( \sum |x_j - \nder[m]x_j|^p  \Bigr)^{\frac1p}}_{\to 0} \ge |x_j - \nder[m]x_j| \text{ при фиксированном } j $$
+		$$ \implies \lim\limits_{m \to \infty} |x_j - \nder[m]x_j| = 0 $$
+		При $ p = \infty $:
+		$$ \max\limits_{1 \le j \le m} |x_j - \nder[m]x_j| \ge |x_j - \nder[m]x_j| \text{ при фиксированном } j $$
+	\item $ \impliedby $
+		$$ \lim\limits_{m \to \infty} |x_j - \nder[m]x_j| = 0 \implies \Bigl( \sum_{j = 1}^n |x_j - \nder[m]x_j|^p \Bigr)^{\frac1p} $$
+		Для бесконечных так же берём $ \max $.
+	\end{iproof}
+\end{definition}

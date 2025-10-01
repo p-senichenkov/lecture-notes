@@ -1,0 +1,235 @@
+\chapter{Пространства}
+
+\section{Пополнение метрического пространства}
+
+\begin{theorem}[о пополнении метрического пространства]
+	$ (X, \rho) $ "--- метрическое пространство.
+
+	Тогда $ \exists (Z, d) $ "--- пополнение.
+\end{theorem}
+
+\begin{note}
+	Есть естественное доказательство, но оно муторное.
+	Мы же докажем коротко, но неестественно.
+\end{note}
+
+\begin{iproof}
+\item Пусть $ x $ ограничено, \ie $ \exists M \ge 0 : \quad \forall x, y \in X \quad \rho(x, y) \le M $.
+
+	Зафиксируем $ t \in X $.
+	Рассмотрим функцию $ f_t(x) = \rho(t, x) $.
+	Понятно, что она ограничена, \ie $ f_t \in m(X) $.
+
+	Определим отображение $ \phi : X \to m(X): \quad \phi(t) \define f_t $.
+
+	Проверим, что $ \phi $ "--- изометрическое вложение.
+	Для $ s, t \in X \quad \|\phi(t) - \phi(s)\|_\infty = \sup\limits_{x \in X}|\rho(t, x) - \rho(s, x)| $.
+	$$
+	\begin{cases}
+		|\rho(t, x) - \rho(s, x)| \le \rho(t, s) \\
+		\text{Пусть } x = t \implies |\rho(t, t) - \rho(s, t)| = \rho(t, s)
+	\end{cases} \implies \|\phi(t) - \phi(s)\|_\infty = \rho(t, s) $$
+\item $ (X, \rho) $ "--- произвольное.
+
+	Зафиксируем $ a \in X $.
+	Для $ t \in X $ рассмотрим $ f_t(x) = \rho(t, x) - \rho(a, x) $.
+	$$ |f_t(x)| \trile \rho(a, t) \quad \forall x \implies f_t \in m(X) $$
+	$$ \phi : X \to m(X): \quad \phi(t) \define f_t $$
+
+	Возьмём $ t, s \in X $.
+	$$ \|\phi(t) - \phi(s)\|_{m(X)} = \sup\limits_{x \in X}|f_t(x) - f_s(x)| = \sup\limits_{x \in X}|\rho(t, x) - \rho(s, x)| = \rho(t, s) $$
+	Значит, $ \phi $ "--- изометрическое вложение.
+	$$ Z = \ol{\phi(X)} $$
+\end{iproof}
+
+\begin{remark}
+	$ (X, \|\cdot\|) $ "--- нормированное.
+
+	Рассмотрим $ X^* = \set{f : X \to \Co \text{ "--- линейный непрерывный функционал}} $.
+	$ X^* $ всегда полное (это будет доказано позже).
+
+	Рассмотрим $ (X^*)^* $.
+	Существует естественное (каноническое) вложение $ X $ в $ X^{**} $: $ \ol{\bigl( \pi(x) \bigr)}^{X^{**}} $.
+\end{remark}
+
+\begin{remark}
+	Пополнение единственно с точностью до изоморфизма.
+\end{remark}
+
+\subsection{Примеры пополнения}
+
+\begin{exmpls}
+\item Пространства финитных последовательностей: $ (F, \|\cdot\|_p), \quad 1 \le p \le \infty $.
+	\begin{itemize}
+		\item $ p < +\infty $
+
+			Уже знаем, что $ (F, \|\cdot\|_p) \sub l^p $ и оно не замкнуто.
+			$$ \ol F = l^p, \quad \text{ для } x = (x_1, x_2, \dots) \in l^p \quad \nder[m]x = (x_1, \dots, x_m, 0, \dots) $$
+			$$ \|x - \nder[m]x\|_p = \Bigl(\sum|x_k|^p\Bigr)^{\frac1p} \underarr{m \to \infty} 0 $$
+			(\as это остаток сходящегося ряда).
+
+			Таким образом, $ l^p $ "--- пополнение $ F $ по $ \|\cdot\|_p $.
+		\item $ p = +\infty $
+			$$ \ol{(F, \|\cdot\|_\infty)}^{\|\cdot\|_\infty} = C_0 $$
+			$ C_0 $ "--- последовательности, предел которых равен 0.
+			$$ \set{x_j}_{j = 1}^\infty, \quad \lim\limits_{j \to \infty} x_j = 0, \quad \nder[m]x = (x_1, \dots, x_m, 0, \dots) $$
+			$$ \|x - \nder[m]x\|_\infty = \sup\limits_{j > m}|x_j| \underarr{m \to \infty} 0 \implies C_0 \sub \ol{F}^{\|\cdot\|_\infty} $$
+	\end{itemize}
+\item $ \mathscr P = \set{\sum_{k = 0}^n a_kx^k, \quad a_k \in \R, \quad n \ge 0} $
+
+	$ \mathscr P \sub \mathcal C[a, b] $ по теореме Вейерштрасса, которая утверждает, что
+	$$ \forall f \in \mathcal C[a, b] \quad \forall \eps > 0 \quad \exists p \in \mathscr P : \quad \|f - p\|_\infty < \eps $$
+\item $ \mathcal C[a, b], ~ \|f\|_p = \Bigl( \int_a^b |f(x)|^p \di x \Bigr)^{\frac1p}, \quad 1 \le p < +\infty $
+
+	$$ \ol{\mathcal C[a, b]}^{\|\cdot\|_p} = \mathrm L^p[a, b] $$
+\end{exmpls}
+
+\section{Теорема о вложенных шарах}
+
+\begin{notation}
+	$ (X, \rho) $ "--- метрическое пространство, $ \quad r > 0 $
+
+	$$ \mathtt D_r(x) = \set{y \in X \mid \rho(x, y) \le r } $$
+\end{notation}
+
+\begin{theorem}[критерий полноты метрического пространства]
+	$$ (X, \rho) \text{  "--- полное } \iff \Bigl( \forall \set{\mathtt D_n}_{n = 1}^\infty : \mathtt D_n = \mathtt D_{r_n}(x_n), ~ D_{n + 1} \sub D_n, ~ \lim\limits_{n \to \infty} r_n = 0 \implies \bigcap_{n = 1}^\infty \mathtt D_n \ne \O \Bigr) $$
+\end{theorem}
+
+\begin{iproof}
+\item $ \implies $
+
+	Центры шаров образуют фундаментальную последовательность, её предел принадлежит всем шарам.
+\item $ \impliedby $
+
+	Возьмём фундаментальную последовательность $ \set{x_n}_{n = 1}^\infty $.
+
+	Обозначим $ \eps_k = \frac1{2^k} $.
+	В силу фундаментальности $ x_k $
+	$$ \exists \set{x_{n_k}}_{k = 1}^\infty : \quad \rho(x_{n_k}, x_{n_{k + 1}}) < \frac1{2^{k + 1}} $$
+	$$ \mathtt D_k = \mathtt D_{\eps_k} (x_{n_k}) $$
+
+	Проверим, что $ \mathtt D_{k + 1} \sub \mathtt D_k $.
+	Возьмём $ y \in \mathtt D_{k + 1} $.
+	$$ \rho(x_{n_{k + 1}}, y) \le \frac1{2^{k + 1}} $$
+	\begin{multline*}
+		\rho(y, x_{n_k}) \trile \rho(x_{n_k}, x_{n_{k + 1}}) + \rho(x_{n_{k + 1}}, y)
+		< \frac1{2^{k + 1}} + \frac1{2^{k + 1}} = \frac1{2^k} \implies y \in \mathtt D_k \implies \\
+		\implies \mathtt D_{k + 1} \sub \mathtt D_k \implies \exists a \in \bigcap_{k = 1}^\infty \mathtt D_k \implies \lim x_{n_k} = a
+	\end{multline*}
+\end{iproof}
+
+\begin{remark}
+	В условиях теоремы пересечение состоит ровно из одной точки, и это точка $ a = \lim\limits_{n \to \infty} x_n $.
+\end{remark}
+
+\begin{remark}
+	Требование $ \lim r_n = 0 $ существенно.
+\end{remark}
+
+\begin{eg}[подготовительный]
+	$ \set{F_n}_{n = 1}^\infty, \quad F_n \sub \R, \quad F_n = \ol F_n, \quad F_{n + 1} \sub F_n, \quad \bigcup_{n = 1}^\infty F_n = \O $
+
+	Примером таких множеств являются лучи $ F_n = [n, +\infty) $.
+\end{eg}
+
+\begin{eg}[существенность требования]
+	Построим метрическое пространство, в котором шарами будут лучи из предыдущего примера.
+
+	$$ X = [1, +\infty), \quad \rho(x, y) =
+	\begin{cases}
+		1 + \frac1{x + y}, \quad x \ne y \\
+		0, \quad x = y
+	\end{cases} $$
+
+	\begin{enumerate}
+		\item Проверим неравенство треугольника:
+			$$ x \ne y \ne z \in X \quad \rho(x, y) + \rho(y, z) = 1 + \frac1{x + y} + 1 + \frac1{y + z} > 2 > 1 + \frac1{x + z} $$
+		\item Полнота.
+
+			Пусть $ \set{x_n} $ фундаментальна.
+			Докажем, что, начиная с какого-то элемента, она стабилизируется.
+
+			Возьмём $ \eps = \frac12 $
+			$$ \exists N : \quad \forall n, m \ge N \quad \rho(x_n, x_m) < \frac12 \implies \rho(x_m, x_N) < \frac12 \implies x_m = x_N \quad \forall m \ge N $$
+		\item Шары в $ X $.
+
+			Пусть $ r_n = 1 + \frac1{2n}, \quad \mathtt D_n = \mathtt D_{r_n}(n) $.
+			Понятно, что $ n \in \mathtt D_n $.
+
+			\begin{itemize}
+				\item $ x > n $
+					$$ \rho(n, x) = 1 + \frac1{n + x} < 1 + \frac1{2n} = r_n \implies x \in \mathtt D_n $$
+				\item $ x < n \implies x \notin \mathtt D_n $
+			\end{itemize}
+			$$ \mathtt D_n = [n, +\infty), \quad \bigcup_{n = 1}^\infty \mathtt D_n = \O $$
+	\end{enumerate}
+\end{eg}
+
+\begin{remark}
+	Если $ (X, \|\cdot\|) $ нормировано, то требование стремления радиусов к нулю избыточно:
+	$$ \text{полнота } \iff \bigcup_{n = 1}^\infty \mathtt D_n \ne \O \text{ при } \mathtt D_{n + 1} \sub \mathtt D_n $$
+\end{remark}
+
+\begin{proof}
+	Следует из линейности.
+\end{proof}
+
+\section{Сепарабельные пространства}
+
+\begin{quote}
+	\raggedleft
+	Сепарабельность означает некоторую малость.
+\end{quote}
+
+\begin{definition}
+	$ (X, \rho), \quad A, C \sub X $
+
+	$ A $ \emph{плотно в} $ C $, если $ C \sub \ol A $, \ie
+	$$ \forall x \in C \quad \forall \eps > 0 \quad \exists a \in A : \quad \rho(x, a) < \eps $$
+	или
+	$$ C \sub \bigcup_{a \in A} \mathtt B_\eps (a) \quad \forall \eps > 0 $$
+	или
+	$$ \forall x \in C \quad \forall \eps > 0 \mathtt B_\eps(x) \cap A \ne \O $$
+\end{definition}
+
+\begin{definition}
+	$ A $ \emph{всюду плотно в} $ X $, если $ \ol A = X $.
+\end{definition}
+
+\begin{remark}
+	$$
+	\begin{cases}
+		A \text{ плотно в } B \\
+		B \text{ плотно в } C
+	\end{cases} \implies A \text{ плотно в } C $$
+\end{remark}
+
+\begin{definition}
+	$ (X, \rho) $ \emph{сепарабельно}, если в нём существует счётное всюду плотное множество.
+\end{definition}
+
+\begin{theorem}
+	$ l_n^p, \quad n \in \N, \quad 1 \le p \le +\infty $
+
+	$ l_n^p $ сепарабельно.
+\end{theorem}
+
+\begin{proof}
+	Пусть $ l_n^p = (\R^n, \|\cdot\|_p) $.
+	Рассмотрим $ \Q^n = \set{x = (x_1, \dots, x_n), \quad x_j \in \Q} $.
+
+	Знаем, что $ \ol \Q = \R \implies \Q^n $ всюду плотно в $ l_n^p $.
+
+	Для комплексных последовательностей рассмотрим $ \vawe \Q = \set{z = x + \ii y, \quad x, y \in \Q} $.
+\end{proof}
+
+\begin{implication}
+	Пространство финитных последовательностей $ (F, \|\cdot\|_{1 \le p \le +\infty}) $ сепарабельно.
+\end{implication}
+
+\begin{proof}
+	Вложим $ l_n^p $ в $ F $:
+	$$ x = (x_1, \dots, x_n) \in l_n^p \quad \to \quad (x_1, \dots, x_n, 0, \dots) \in F $$
+	$$ \implies F = \bigcup_{n = 1}^\infty l_n^p \implies E = \bigcup_{n = 1}^\infty \Q^n \text{  "--- всюду плотное в } (F, \|\cdot\|_p) $$
+\end{proof}

@@ -1,0 +1,40 @@
+\chapter{Пространства}
+
+\section{Относительно компактные множества в \texorpdfstring{$ \mathcal C(K) $}{C(K)}}
+
+\begin{theorem}[Асколи-Арцела]
+	$ \Phi \sub \mathcal C(K) $.
+
+	$ \Phi $ относительно компактно тогда и только тогда, когда
+	\begin{enumerate}
+		\item $ \Phi $ ограничено в $ \mathcal C(K) $;
+		\item $ \Phi $ равностепенно непрерывно.
+	\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+	$ \mathcal C(K) $ "--- полное.
+	Значит,
+	$$ \Phi \text{ относительно компактно } \iff \Phi \text{ вполне ограничено} $$
+	\begin{itemize}
+		\item $ \implies $
+			\begin{enumerate}
+				\item Ограниченность
+
+					$ \Phi $ вполне ограничено $ \implies \Phi $ ограничено, \ie
+					$$ \exists M > 0 : \quad \forall f \in \Phi \quad \forall x \in K \quad |f(x)| \le M $$
+				\item Равностепенная непрерывность
+
+					Возьмём $ \eps > 0 $
+					$$ \exists \text{ конечная } \eps \text{-сеть } \set{\phi_j}_{j = 1}^n, \quad \phi_j \in \mathcal C(K) $$
+					$$ \phi_j \text{ равном. непр. } \implies \exists \delta_j : \quad \forall x, y \in K : \rho(x, y) < \delta \quad |\phi_j(x) - \phi_j(y)| < \eps \quad 1 \le j \le n $$
+					Положим $ \delta = \min\limits_{1 \le j \le n}\set{\delta_j} $.
+					Проверим условие равностепенной непрерывности с $ \delta $.
+
+					Пусть $ f \in \Phi, \quad x, y \in K : \rho(x, y) < \delta $.
+					$$ \set{\phi_j} \text{ "--- $ \eps $-сеть } \implies \exists 1 \le m \le n : \quad \|f - \phi_m\|_\infty < \eps \implies \max\limits_{x \in K} |f(x) - \phi_m(x)| < \eps $$
+					$$ |f(x) - f(y) \trile |f(x) - \phi_m(x)| + |\phi_m(x) - \phi_m(y)| + |\phi_m(y) - f(y)| < 3\eps $$
+			\end{enumerate}
+		\item $ \impliedby $
+	\end{itemize}
+\end{proof}

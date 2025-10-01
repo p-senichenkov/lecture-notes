@@ -1,0 +1,223 @@
+\chapter{Пространства}
+
+\section{Пространства Лебега}
+
+\subsection{Похожие пространства последовательностей}
+
+\begin{eg}
+	$$ l^p = \set{x = \set{x_j}_{j = 1}^\infty, \quad x \in \R, \Co | \sum_{j = 1}^\infty |x_j|^p < +\infty} $$
+	$$ \|x\|_p = \Bigl( \sum_{j = 1}^\infty |x_j|^p \Bigr)^{\frac1p} $$
+
+	Докажем, что $ l^p $ "--- банахово:
+	$$ T = \N, \quad \mu(j) = 1 \quad \forall j \in \N, \quad L^p(\N, \mu) = l^p, \quad f \in L^p(\N, \mu), \quad f(j) = x_j $$
+\end{eg}
+
+\begin{remark}
+	\hfill
+	\begin{enumerate}
+		\item $ \set{\nder[m]x}_{m = 1}^\infty, \quad \nder[m]x \in l^p, \quad 1 \le p \le +\infty, \quad x \in l^p, \quad \lim\limits_{m \to \infty}\|\nder[m]x - x\|_p = 0 $
+			$$ \implies \lim\limits_{m \to \infty}\nder[m]x_j = x_j \quad \forall j \in \N $$
+		\item В другую сторону \textbf{неверно}.
+	\end{enumerate}
+\end{remark}
+
+\begin{eg}[в другую сторону]
+	Рассмотрим последовательность базисных элементов:
+	$$ e_m = (0, \dots, 0, \underset m 1, 0, \dots, 0) $$
+	$$ e_m = \set{\delta_j^m}_{j = 1}^\infty, \quad \delta_j^m =
+	\begin{cases}
+		1, \quad j = m \\
+		0, \quad j \ne m
+	\end{cases} $$
+	$ \delta_j^m $ называются \emph{символами Кронекера}.
+
+	Для любого фиксированного $ j $ $ \lim\limits_{m \to \infty} \delta_j^m = 0 $.
+	Поккординатный предел равен $ \On $.
+
+	$$ \|e_m - \On\|_p = 1 \quad \forall m \implies \|e_m - \On\|_p \not\to 0 $$
+\end{eg}
+
+\section{Не полные нормированные пространства}
+
+\subsection{Пространство финитных последовательностей}
+
+\begin{definition}
+	$ F $ "--- множество \emph{финитных} последовательностей:
+	$$ F = \set{x = (x_1, x_2, \dots, x_{N(x)}, 0, \dots), \quad x_j \in \R, \Co} $$
+
+	$$ (F, \|\cdot\|_p), \quad 1 \le p \le +\infty $$
+\end{definition}
+
+\begin{statement}
+	$ (F, \|\cdot\|_p) $ не полны.
+\end{statement}
+
+\begin{proof}
+	При фиксированном $ p $ можно считать, что $ (F, \|\cdot\|_p) \sub l^p $ (подпространство в алгебраическом смысле).
+
+	Проверим, что оно не замкнуто.
+	Возьмём
+	$$ x = \set{\frac1{2^k}}_{k = 1}^\infty, \quad x \in l^p \quad \forall 1 \le p \le +\infty $$
+	$$ \sum_{k = 1}^\infty \frac1{2^{kp}} < +\infty $$
+	Положим
+	$$ \nder[m]x = \Bigl( \frac12, \frac1{2^2}, \dots, \frac1{2^m}, 0, \dots \Bigr) \in F $$
+	\begin{itemize}
+		\item $ 1 \le p < +\infty $
+			$$ \|x - \nder[m]x\|_p = \Bigl( \sum_{k = m + 1}^\infty \frac1{2^{pk}} \Bigr)^{\frac1p} \underarr{m \to \infty} 0 $$
+		\item $ p = +\infty $
+			$$ \|x - \nder[m]x\|_\infty = \frac1{2^{m + 1}} \underarr{m \to \infty} 0 $$
+	\end{itemize}
+	Значит, $ F $ не замкнуто.
+\end{proof}
+
+\subsection{Пространство непрерывных функций на отрезке с интегральной нормой}
+
+\begin{eg}
+	$$ \Bigl( \mathcal C[a, b], \|f\|_p = \bigl( \int_a^b |f(x)|^p \di x \bigr)^{\frac1p} \Bigr), \quad 1 \le p < +\infty $$
+\end{eg}
+
+\begin{statement}
+	$ (\mathcal C[a, b], \|\cdot\|_p) $  "--- не полное нормированное пространство.
+\end{statement}
+
+\begin{proof}
+	Возьмём $ f \in \mathcal C[a, b] $.
+	$$ \Bigl( \int_a^b |f(x)|^p \di x \Bigr)^{\frac1p} = 0 \implies f(x) \equiv[{[a, b]}] 0 \implies \|\cdot\|_p \text{  "--- норма} $$
+	Рассмотрим $ \mathrm L^p[a, b], ~ \lambda $ "--- классическая мера Лебега.
+
+	Докажем, что $ (\mathcal C[a, b], \|\cdot\|_p) $ "--- подпространство $ (\mathrm L^p, \lambda) $ в алгебраическом смысле.
+	$$ f \in \mathcal C[a, b] \to \set{g \in \mathrm L^p [a, b], \quad g(x) = f(x) ~ \ale \text{по } \lambda} $$
+
+	Проверим, что $ C[a, b] $ не замкнуто.
+	$$ f_n(x) =
+	\begin{cases}
+		0, \quad -1 \le x \le 0 \\
+		nx, \quad 0 \le x \le \frac1n \\
+		1, \quad \frac1n \le x \le 1 \\
+	\end{cases}, \quad g(x) =
+	\begin{cases}
+		0, \quad -1 \le x \le 0 \\
+		1, \quad 0 < x \le 1
+	\end{cases} $$
+	$$ \Bigl( \int_{-1}^1 |f_n(x) - g(x)|^p \di x \Bigr)^{\frac1p} \underarr{n \to \infty} 0 $$
+
+	Докажем, что $ \not\exists f \in \mathcal C[-1, 1] $ такой, что $ f(x) = g(x) $ \ale на $ [-1, 1] $.
+
+	\textbf{От противного.}
+	Пусть такая $ f $ существует.
+	$$ \int_{-1}^1 |f(x) - g(x)|^p \di \lambda = 0 \implies
+	\begin{cases}
+		\int_{-1}^0 |f(x)|^p \di \lambda = 0 \implies f(x) \equiv[{[-1, 0]}] 0 \\
+		\int_0^1 |f(x) - 1|^p \di \lambda = 0 \implies f(x) \equiv[{[0, 1]}] 1
+	\end{cases} \text{  "--- \contra} $$
+\end{proof}
+
+\subsection{Пространство многочленов}
+
+\begin{eg}
+	$$ \mathscr P = \set{p(x) = \sum_{k = 0}^n a_kx^k, \quad a_k \in \R, \quad n \ge 0}, \quad \forall [a, b] $$
+	$$ \|p(x)\|_\infty = \max\limits_{x \in [a, b]}|p(x)|, \quad \mathscr P \sub \mathcal C[a, b] $$
+\end{eg}
+
+\begin{statement}
+	$ (\mathscr P, \|\cdot\|_\infty) $ не полно.
+\end{statement}
+
+\begin{proof}
+	Ясно, что $ \mathscr P $ "--- подпространство в алгебраическом смысле.
+	Докажем, что оно не замкнуто.
+
+	$$ e^x \notin \mathscr P, \quad \as \nder{(e^x)} = e^x \not\equiv 0 $$
+	$$ P_n(x) = \sum_{k = 0}^n \frac{x^k}{k!}, \quad \lim\limits_{n \to \infty}\max\limits_{x \in [a, b]}|e^x - P_n(x)| = 0 $$
+	$$ \lim\limits_{n \to \infty} \|e^x - P_n\|_\infty = 0 \implies \mathscr P \text{ не замкнуто} $$
+\end{proof}
+
+\section{Пополнение метрического пространства}
+
+\begin{theorem}[простейшие свойства метрики]
+	$ (X, \rho) $ "--- метрическое пространство.
+
+	\begin{enumerate}
+		\item $ x, y, z, u \in X \implies |\rho(x, y) - \rho(z, u)| \le \rho(x, u) + \rho(y, z) $;
+		\item $ \rho : X \times X \to \R $ непрерывна (как функция двух переменных);
+		\item $ A \sub X, \quad \rho(x, A) \define \inf\limits_{a \in A} \rho(x, a) $
+
+			При фиксированном $ A $ функция $ \rho(x, A) $ непрерывна по $ x $;
+		\item $ A $ замкнуто, $ \quad x_0 \notin A \implies \rho(x_0, A) > 0 $.
+	\end{enumerate}
+\end{theorem}
+
+\begin{eproof}
+\item $ \rho(x, y) \trile \rho(y, z) + \rho(x, z) \trile \rho(y, z) + \rho(z, u) + \rho(x, u) $.
+\item Пусть есть две последовательности такие, что $ \lim x_n = x, ~ \lim y_n = y $.
+	Требуется проверить, что $ \lim \rho(x_n, y_n) = \rho(x, y) $.
+
+	$$ |\rho(x, y) - \rho(x_n, y_n)| \underset1\le \underbrace{\rho(x, x_n)}_{\to 0} + \underbrace{\rho(y, y_n)}_{\to 0} $$
+\item $ A \sub X, \quad x, z \in X, \quad y \in A, \quad y $ фиксирован.
+	$$ \rho(x, A) \le \rho(x, y) \trile \rho(x, z) + \rho(z, y) $$
+	В силу произвольности $ y $ можно взять точную нижнюю грань:
+	$$ \rho(x, A) \le \rho(x, z) + \inf\limits_{y \in A}\rho(z, y) = \rho(x, z) + \rho(z, A) \implies \rho(x, A) - \rho(z, A) \le \rho(x, z) $$
+	Аналогично, $ \rho(z, A) - \rho(x, A) \le \rho(x, z) $
+	$$ \implies |\rho(x, A) - \rho(z, A)| \le \rho(x, z) $$
+	Зафиксируем $ x $ и устремим к нему $ z $:
+	$$ \lim\limits_{z \to x} \rho(z, A) = \rho(x, A) $$
+\item $ A = \ol A \implies X \setminus A $ открыто.
+	$$ x_0 \notin A \implies X \setminus A \implies \exists r > 0 : \quad \mathtt B_r(x_0) \in X \setminus A \implies \forall y \in A \quad \rho(x_0, y) \ge r \implies \rho(x_0, A) \ge r $$
+\end{eproof}
+
+\begin{definition}
+	$ (X, \rho), ~ (Y, d) $ "--- метрические пространства, $ \quad T : X \to Y $.
+
+	\begin{enumerate}
+		\item $ T $ называется \emph{изометрическим вложением}, если оно сохраняет расстояния:
+			$$ d(Tx, Tz) = \rho(x, z) \quad \forall x, z \in X $$
+		\item $ T $ называется \emph{изометрией}, если $ T(X) = Y $ и $ d(Tx, Tz) = \rho(x, z) $.
+			Говорят, что $ (X, \rho) $ и $ (Y, d) $ \emph{изометричны}.
+	\end{enumerate}
+\end{definition}
+
+\begin{props}
+\item $ T : X \to Y $ "--- изометрическое вложение.
+
+	Тогда $ T $ инъективно и непрерывно.
+\item $ T $ "--- изометрия.
+
+	Тогда существует $ T^{-1} : Y \to X $ "--- изометрия.
+\item Изометрия "--- отношение эквивалентности на множестве метрических пространств.
+\item $ T $ "--- изометрическое вложение, $ \quad Z = T(X) $.
+
+	Тогда $ T $ "--- изометрия $ X $ и $ Z $.
+\end{props}
+
+\begin{eproof}
+\item Пусть $ x, z \in X, \quad Tx = Tz $.
+	$$ 0 = d(Tx, Tz) = \rho(x, z) \implies x = z $$
+	$$ \lim\limits_{n \to \infty} x_n = x \implies \lim \rho(x_n, x) = 0 \implies \lim d(Tx_n, Tx) = 0 $$
+\item Очевидно.
+\item Следует из предыдущих.
+\item Очевидно.
+\end{eproof}
+
+\begin{definition}
+	$ (X, \rho) $ "--- метрическое пространство, $ \quad (Z, d) $ "--- полное, $ \quad \exists T : X \to Z : \quad T $ "--- изометрическое вложение и $ \ol{T(X)} = Z $.
+
+	Будем говорить, что $ (Z, d) $ "--- \emph{пополнение} $ (X, \rho) $.
+\end{definition}
+
+\begin{remark}
+	$ (U, d) $ "--- полное, $ \quad T : X \to U $ "--- изометрическое вложение.
+
+	Определим $ Z = \ol{T(X)} $ (в $ U $).
+	Замкнутое пространство полно, поэтому $ Z $ будет пополнением.
+\end{remark}
+
+\begin{theorem}[о пополнении метрического пространства]
+	$ (X, \rho) $ "--- метрическое пространство.
+
+	Тогда $ \exists (Z, d) $ "--- пополнение.
+\end{theorem}
+
+\begin{note}
+	Есть естественное доказательство, но оно муторное.
+	Мы же докажем коротко, но неестественно.
+\end{note}

@@ -1,0 +1,135 @@
+\chapter{Транзисторы}
+
+\section{Технологический процесс}
+
+Сейчас это не означает ровным счётом ничего.
+Когда-то оно означало длину затвора транзистора.
+
+Размер атома кремния "--- 130 пикометров.
+
+\section{Про частоты}
+
+Чем выше частота, тем чаще дёргаются транзисторы.
+Транзистор больше нагревается за счёт того, что электроны бегают с гораздо большим энтузиазмом.
+
+\chapter{Логические вентили}
+
+\section{Базовые операции}
+
+\begin{definition}
+	$ f : \mathbb B^n \to \mathbb B^m $ "--- \emph{булева функция}.
+\end{definition}
+
+\begin{figure}[!ht]
+	\centering
+	\begin{subfigure}{0.499\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{not}
+		\caption{NOT}
+	\end{subfigure}
+	\begin{subfigure}{0.19\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{nand}
+		\caption{NAND}
+	\end{subfigure}
+	\begin{subfigure}{0.19\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{nor}
+		\caption{NOR}
+	\end{subfigure}
+	\begin{subfigure}{0.19\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{or}
+		\caption{OR}
+	\end{subfigure}
+	\begin{subfigure}{0.19\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{and}
+		\caption{AND}
+	\end{subfigure}
+	\begin{subfigure}{0.19\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{xor}
+		\caption{XOR}
+	\end{subfigure}
+\end{figure}
+
+Остальные реализации долго рисовать.
+
+$$ X \textsc{xor} Y = X\ol Y + \ol X Y $$
+$$ X \to Y \sim \ol X \vee Y $$
+
+\begin{remind}
+	Транзистор с кружочком открывается при подаче 0 на затвор, транзистор без кружочка "--- при подаче 1.
+\end{remind}
+
+\section{Как построить произвольную булеву функцию?}
+
+Строим AST, каждый узел заменяем на соответствующий вентиль.
+Повторяющиеся блоки можно переиспользовать.
+
+\section{Как построить минимальную схему для функции?}
+
+Задача оптимизации схемы для функции (в каком-то смысле) алгоритмически \textbf{разрешима} (\as количество связок ограничено сверху, значит, все возможные схемы можно перебрать).
+Доказано, что она принадлежит к классу $ \Sigma_2^p $ "--- разрешима на недетерминированной машине Тьюринга с оракулом (МТ может обращаться к оракулу, который умеет за один такт решать любую NP-задачу).
+
+Будем пользоваться эвристиками, например Картами Карно.
+
+\subsection{Карты Карно (Karnaugh)}
+
+\begin{eg}
+	Пусть есть булева функция четырёх аргументов, заданная своей таблицей истинности: \\
+	\begin{tabular}{c c c c | c}
+		$ x_1 $ & $ x_2 $ & $ x_3 $ & $ x_4 $ & $ F $ \\
+		\hline
+		0 & 0 & 0 & 0 & 1 \\
+		. & . & . & . & .
+	\end{tabular}
+
+	Разбиваем аргументы на две группы (в нашем случае по два), рисуем квадратную табличку.
+	Заголовки таблички записываем циклическим кодом Грея (то есть, в таком порядке, чтобы между двумя соседними расстояние Хэмминга было 1).
+	Получаем таблицу истинности для пар битов: \\
+	\begin{tabular}{c | c c c c}
+		& 0 0 & 0 1 & 1 1 & 1 0 \\
+		\hline
+		0 0 & 1 & 1 & 0 & 0 \\
+		0 1 & 0 & 0 & 1 & 1 \\
+		1 1 & 1 & 0 & 1 & 1 \\
+		1 0 & 1 & 1 & 0 & 0
+	\end{tabular}
+
+	Объединяем группы соседних единиц.
+	При этом, группы могут пересекаться.
+
+	$$ x_2 x_3 + \ol x_2 \ol x_3 + x_1 \ol x_3 \ol x_4 $$
+\end{eg}
+
+\section{Шифраторы}
+
+\emph{Шифратор} (энекодером называть нельзя): \\
+Есть несколько входов, на выходе число "--- номер входа, на который подана 1.
+Если на двух ножках единица "--- это некорректный код.
+
+\emph{Дешифратор} "--- наоборот.
+
+\begin{figure}[!h]
+	\centering
+	\begin{subfigure}{0.49\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{encoder}
+		\caption{Шифратор}
+	\end{subfigure}
+	\begin{subfigure}{0.49\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{decoder}
+		\caption{Дешифратор}
+	\end{subfigure}
+\end{figure}
+
+\section{Мультиплексоры}
+
+\emph{Мультиплексор}: \\
+Есть несколько входов, только один выход и два управляющих бита.
+Управляющие сигналы показывают, какой вход слушать.
+
+\emph{Демультиплексор} "--- наоборот.

@@ -1,0 +1,59 @@
+\chapter{Языки и их представление}
+
+\begin{definition}
+	\emph{Грамматикой} называется четвёрка $ G = (V_N, V_T, P, S) $, где $ V_N, V_T $ "--- \emph{алфавиты (словари) нетерминалов} и \emph{терминалов} соответственно, причём $ V_N \cap V_T = \O $, $ P $ "--- конечное \emph{множество правил}, каждое из которых имеет вид $ \alpha \to \beta $, где $ \alpha \in V^*V_NV^*, ~ \beta \in V^*, ~ V = V_N \cup V_T $ "--- \emph{объединённый алфавит} грамматики, $ S $ "--- \emph{начальный терминал}.
+\end{definition}
+
+\begin{definition}
+	Пусть $ \alpha \to \beta \in P $ "--- правило, а $ \gamma, \delta $ "--- любые цепочки из множества $ V^* $.
+
+	Тогда $ \gamma\alpha\delta \underimp\delta \dots $
+\end{definition}
+
+\begin{definition}
+	Пусть $ \alpha_1, \alpha_2, \dots, \alpha_m $ "--- цепочки из множества $ V^* $ и $ \alpha_1 \underimp G \alpha_2, ~ \alpha_2 \underimp G \alpha_3, \dots, \alpha_{m - 1} \underimp G \alpha_m $.
+
+	Тогда пишем $ \alpha_1 \xRightarrow[G]* \alpha_m $ и говорим, что \emph{из $ \alpha_1 $ выводится $ \alpha_m $ в грамматике $ G $}.
+\end{definition}
+
+\begin{definition}
+	\emph{Язык, порождаемый грамматикой} $ G $ определим как \dots
+\end{definition}
+
+\begin{definition}
+	Любая цепочка $ \alpha $ такая, что $ \alpha \in V^* $ и $ S \xRightarrow[G]* \alpha $ называется \emph{сентенциальной формой}.
+\end{definition}
+
+\begin{definition}
+	Грамматики, порождающие один и тот же язык, называются \emph{эквивалентными}.
+\end{definition}
+
+\section{Типы грамматик}
+
+\begin{definition}
+	Грамматику, введённую ранее назовём \emph{грамматикой типа 0}.
+\end{definition}
+
+\begin{definition}
+	Грамматика $ G = (V_N, V_T, P, S) $ называется \emph{грамматикой типа 1} или \emph{контекстно-зависимой}, если \dots
+\end{definition}
+
+\begin{theorem}
+	Классы языков, порождаемых некуорачивающими и НС-грамматиками, равны.
+\end{theorem}
+
+\begin{definition}
+	Грамматика $ G = (V_N, V_T, P, S) $ называется \emph{грамматикой 2 типа} или \emph{контекстно-свободной}, если каждое её правило имеет вид $ A \to \beta \in P $, где $ A \in V_N, ~ \beta \in V^+ $.
+\end{definition}
+
+\begin{definition}
+	Грамматика является \emph{грамматикой типа 3} или \emph{регулярной}, если \dots
+\end{definition}
+
+\begin{lemma}
+	Если грамматика $ G $ контекстно-зависимая, контекстно-свободная или регулярная, то существует другая грамматика $ G_1 $ такого же типа такая, что \dots
+\end{lemma}
+
+\begin{theorem}
+	Если $ L $ "--- контекстно-зависимый, контекстно-свободный или регулярный язык, то языки $ L \cup \set{\eps}, ~ L \setminus \set{\eps} $ также являются контекстно-зависимыми, контекстно-свободными или регулярными.
+\end{theorem}

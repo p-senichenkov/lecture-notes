@@ -1,0 +1,242 @@
+\chapter{Пространства}
+
+\section{Сепарабельные пространства}
+
+\begin{implication}
+	$ l^p, \quad 1 \le p < +\infty, \quad C_0 $ сепарабельны.
+\end{implication}
+
+\begin{proof}
+	$ F $ "--- пространство финитных последовательностей.
+	$$ \ol{(F, \|\cdot\|_p)}^{\|\cdot\|_p} = l^p, \quad 1 \le p < +\infty $$
+	$ E = \set{(x_1, \dots, x_n, 0, \dots) \mid x_j \in Q, ~ h \in \N} $ "--- счётное всюду плотное в $ l^p $.
+
+	$ \ol{(F, \|\cdot\|_\infty)}^{\|\cdot\|_\infty} = C_0 \implies C_0 $ сепарабельно.
+\end{proof}
+
+\begin{remark}
+	$$ T = \set{x = \set{x_j}_{j = 1}^\infty \mid x_j \in Q} \implies \ol T^{\|\cdot\|_p} = l_p, \quad 1 \le p \le +\infty $$
+	Но $ T $ не счётно (это следует из того, что $ 2^\N $ равномощно $ [0, 1] $).
+\end{remark}
+
+\begin{statement}
+	$ C \sub l^\infty $ сепарабельно.
+\end{statement}
+
+\begin{proof}
+	Упражнение.
+\end{proof}
+
+\begin{theorem}
+	$ l^\infty $ не сепарабельно.
+\end{theorem}
+
+\begin{proof}
+	Пусть $ A \sub \N $.
+	Рассмотрим $ x_j^A = 
+	\begin{cases}
+		1, \quad j \in A \\
+		0, \quad j \notin A
+	\end{cases} $.
+	Тогда $ x^A = \set{x_j^A}_{j = 1}^\infty $.
+
+	Заметим, что множество таких последовательностей $ \set{x^A}_{A \sub \N} $ не счётно: \\
+	Пусть $ A, C \sub \N, \quad A \ne C $.
+	$$ x_j^A - x_j^C =
+	\begin{cases}
+		1 \\
+		0 \\
+		-1
+	\end{cases} $$
+	Поскольку $ A \ne C $, $ \|x^A - x^C\|_\infty = 1 $.
+	$$ \implies \mathtt B_{\frac12}(x^A) \cap \mathtt B_{\frac12}(x^C) = \O $$
+
+	Пусть $ E $ всюду плотно в $ l^\infty $.
+	Тогда в каждом таком шарике должен быть его представитель:
+	$$ \forall A \sub \N \quad \exists e_A \in E \cap \mathtt B_{\frac12}(x^A) $$
+	При этом, $ A \ne C \implies e_A \ne e_C $.
+
+	$ \set{e_A}_{A \sub \N} \sub E, \quad \set{e_A}_{A \sub \N} $ не счётно $ \implies E $ не счётно.
+\end{proof}
+
+\begin{theorem}
+	$ (X, \rho) $ "--- метрическое пространство, сепарабельно, $ \quad Y \sub X $.
+
+	Тогда $ Y $ сепарабельно.
+\end{theorem}
+
+\begin{proof}
+	Пусть $ E = \set{x_n}_{n = 1}^\infty, \quad \ol E = X $.
+	$$ \rho(x_n, Y) = \inf\limits_{y \in Y} \rho(x_n, y) $$
+	$$ \exists \set{y_{n, k}}_{k = 1}^\infty : \quad \lim\limits_{k \to \infty} \rho(x_n, y_{n, k}) = \rho(x_n, Y) $$
+	Рассмотрим $ F = \set{y_{n, k}}_{n \in \N, ~ k \in \N} $ "--- счётное.
+	Проверим, что $ F $ всюду плотно в $ Y $.
+
+	Пусть $ y \in Y, ~ \eps > 0, ~ y \in X $.
+	$$ \exists x_n : \quad \rho(x_n, y) < \eps $$
+	$$ \implies \rho(x_n, Y) < \eps \implies \exists y_{n k} : \quad \rho(x_n, y_{n, k}) < \eps $$
+	$$ \implies \rho(y, y_{n k}) \trile \rho(y, x_n) + \rho(x_n, y_{n k}) < 2\eps $$
+\end{proof}
+
+\begin{implication}
+	$ X $ "--- бесконечное множество.
+
+	Тогда $ m(X) $ не сепарабельно.
+\end{implication}
+
+\begin{proof}
+	$$ m(X) = \set{f : X \to \R \text{ (или $ \Co $)} | \sup\limits_{x \in X}|f(x)| < +\infty} $$
+	$ X $ "--- бесконечное $ \implies \exists \set{a_j}_{j = 1}^\infty, \quad a_j \in X, \quad a_j \ne a_k $.
+
+	Рассмотрим $ L = \set{f : X \to \R \mid f(x) \in m(X), \quad f(x) \equiv[x \ne a_j] 0} $.
+	$$ f \in L \quad \|f\| = \sup\limits_{x \in X} |f(x)| = \sup\limits_{j \in \N} |f(a_j)| $$
+	$$ L \xrightarrow \Phi l^\infty : \quad f \in L \quad f \to \set{f(a_j)}_{j = 1}^\infty $$
+	$ \Phi $ "--- изометрия $ \implies L \sub m(X) $.
+	$ l^\infty $ не сепарабельно $ \implies L $ не сепарабельно.
+	Значит, $ m(x) $ не сепарабельно.
+\end{proof}
+
+\section{Нигде не плотные множества}
+
+\begin{quote}
+	\raggedleft
+	Опять некоторый способ рассуждать о том, какие множества большие, а какие "--- маленькие.
+\end{quote}
+
+\begin{definition}
+	$ (X, \rho) $ "--- метрическое пространство, $ \quad A \sub X $.
+
+	$ A $ \emph{нигде не плотно}, если $ A $ не плотно ни в одном шаре:
+	$$ \forall \mathtt B_r(x) : x \in X, ~ r > 0 \quad \exists \mathtt B_{r_1}(x_1) \sub \mathtt B_r(x) : \quad \mathtt B_{r_1}(x_1) \cap A = \O $$
+	$$ \iff \operatorname{Int}(\ol A) = \O $$
+	$$ \iff \forall \mathtt D_r(x) \quad \exists \mathtt D_{r_1}(x_1) \sub \mathtt D_r(x) : \quad \mathtt D_{r_1}(x_1) \cap A = \O $$
+\end{definition}
+
+\begin{definition}
+	$ (X, \rho), \quad M \sub X $ "--- \emph{множество первой категории}, если
+	$$ M = \bigcup_{j = 1}^\infty M_j, \quad M_j \text{ нигде не плотно} $$
+	Все остальные множества называются \emph{множествами второй категории}.
+\end{definition}
+
+\subsection{Теорема Бэра о категориях}
+
+\begin{theorem}
+	$ (X, \rho) $ "--- полное.
+
+	Тогда $ X $ "--- множество второй категории.
+\end{theorem}
+
+\begin{proof}
+	Пусть $ M_j $ "--- нигде не плотные, $ \quad j \in \N, \quad M = \bigcup_{j = 1}^\infty M_j, \quad M_j \sub X $.
+	Докажем, что $ \exists x \in X \setminus M $.
+	Воспользуемся теоремой о вложенных шарах.
+
+	Возьмём $ D_0 = \mathtt D_{r_0}(x_0), \quad r_0 = 1 $.
+	$ M_1 $ нигде не плотно $ \implies \exists D_1 = \mathtt D_{r_1}(x_1) \sub D_0 : \quad D_1 \cap M_1 = \O $.
+	При этом, можно взять $ r_1 < 1 $ (если при большем $ r_1 $ не пересекалось, то и не начнёт).
+
+	$ M_2 $ нигде не плотно $ \implies exists D_2 = \mathtt D_{r_2}(x_2) \sub D_1 : \quad D_2 \cap M_2 = \O, \quad r_2 < \frac12 $.
+	$$ \dots $$
+	$$ \exists D_{n + 1} = \mathtt D_{r_{n + 1}}(x_{n + 1}) \sub D_n : \quad D_{n + 1} \cap M_{n + 1} = \O, \quad r_{n + 1} < \frac1{n + 1} $$
+
+	$ X $ "--- полное $ \underimp{\text{т. о вложенных шарах}} \exists a \in \bigcap_{n = 1}^\infty D_n $, \as $ \lim r_n = 0 $.
+	$$ a \in X, \quad D_n \cap M_n = \O \implies a \notin M_n \quad \forall n \implies a \notin M $$
+\end{proof}
+
+\section{Полные системы элементов}
+
+\begin{definition}
+	\hfill
+	\begin{enumerate}
+		\item $ X $ "--- линейное пространство, $ \quad \set{x_\alpha}_{\alpha \in A}, \quad x_\alpha \in X $.
+
+			$$ \mathscr L\set{x_\alpha} = \set{x = \sum_{j = 1}^n c_jx_{\alpha_j}} $$
+			$ \mathscr L\set{x_\alpha} $ будем называть \emph{линейной оболочкой} $ X $.
+		\item $ (X, \|\cdot\|) $.
+
+			Будем говорить, что $ \set{x_\alpha}_{\alpha \in A} $ "--- \emph{полная система элементов}, если $ \ol{\mathscr L\set{x_\alpha}} = X $, то есть линейная оболочка всюду плотна в $ X $.
+	\end{enumerate}
+\end{definition}
+
+\begin{exmpls}
+\item $ \mathcal C[a, b], \quad \set{x^n}_{n = 0}^\infty $
+	$$ \mathscr L\set{x^n}_{n \ge 0} = \mathcal P = \set{p(x) = \sum_{k = 0}^n a_kx^k}, \quad \ol{\mathcal P} = \mathcal C[a, b] $$
+	$ \implies \set{x^n}_{n = 0}^\infty $ "--- полное семейство.
+\item $ l^p, \quad 1 \le p < +\infty, \quad e_n = (0, \dots, 0, \underset n 1, 0, \dots, 0) $
+
+	$ \set{e_n}_{n = 1}^\infty $ "--- полное семейство в $ l^p $ и в $ C_0 $.
+
+	$ \mathscr L\set{e_n}_{n = 1}^\infty = F $ "--- финитные последовательности $ \implies \ol{(\mathscr L{\set{e_n}})}^{\|\cdot\|_p} = l^p, \quad 1 \le p < +\infty $
+	$$ \ol{\mathscr L\set{e_n}}^{\|\cdot\|_\infty} = C_0 $$
+\end{exmpls}
+
+\begin{statement}
+	$ (X, \|\cdot\|), \quad \set{x_n}_{n = 1}^\infty $ "--- счётное полное семейство.
+
+	Тогда $ (X, \|\cdot\|) $ сепарабельно.
+\end{statement}
+
+\begin{proof}
+	Пусть $ X $ над $ \R $.
+
+	Рассмотрим $ E = \mathscr L\set{x_n}_{n = 1}^\infty $ "--- всюду плотно, но не счётно.
+
+	Возьмём $ H = \set{x = \sum_{j = 1}^n c_jx_j \mid c_j \in \Q} $  "--- счётно, $ E \sub \ol H, \quad \ol E = X $.
+\end{proof}
+
+\begin{implication}
+	$ \mathcal C[a, b] $ сепарабельно.
+\end{implication}
+
+\section{Полные и плотные множества в \texorpdfstring{$ \mathrm L^p(T, \mathcal U, \mu) $}{пространствах Лебега}}
+
+$ e \in \mathcal U, \quad \chi_e(t) =
+\begin{cases}
+	1, \quad t \in e \\
+	0, \quad t \notin e
+\end{cases}, \quad \forall e \in \mathcal U \quad \chi_e \in \mathrm L^\infty $.
+
+Пусть $ 1 \le p < +\infty $.
+$$ \chi_e \in \mathrm L^p \iff \int\limits_T \bigl( \chi_e(x) \bigr)^p \di \mu = \int\limits_e \chi_e(x) \di \mu = \mu(e) < \infty $$
+
+\subsection{Небольшое напоминание}
+
+\begin{theorem}[Лебега, о предельном переходе]
+	$ \set{h_n(x)} $ "--- измеримые, $ \quad h_n(x) \ge 0 \quad \forall n, x $ \\
+	$ h_n(x) \le \Phi(x), \quad \int\limits_T \Phi(x) \di \mu < +\infty, \quad h_n(x) \underarr{n \to \infty} F(x) $ (все утверждения \ale).
+
+	$$ \implies \int\limits_T F(x) \di \mu < +\infty, \quad \lim\limits_{n \to \infty} \int\limits_T h_n(x) \di \mu = \int\limits_T F(x) \di \mu $$
+\end{theorem}
+
+\begin{theorem}
+	$ (T, \mathcal U, \mu) $ "--- пространство с мерой.
+
+	\begin{enumerate}
+		\item $ \set{\chi_e}_{e \in \mathcal U} $ "--- полное семейство в $ \mathrm L^\infty $;
+		\item $ \set{\chi_e}_{e \in \mathcal U, ~ \mu e < +\infty} $ "--- полное семейство в $ \mathrm L^p, \quad 1 \le p \le +\infty $.
+	\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+	Пусть $ f(x) $ "--- измеримая, $ \quad f(x) \ge 0 \quad \forall x \in T $.
+	Возьмём $ n \in \N $.
+	$$ e_k \define \set{x \in T \mid \frac k n \le f(x) < \frac{k + 1}n, \quad k = 0, 1, \dots, n^2 - 1}, \quad e_{n^2} \define \set{x \in T \mid n \le f(x)} $$
+	$$ \implies T = \bigcup_{k = 0}^{n^2} e_k $$
+
+	$$ g_n(x) \define \sum_{k = 1}^{n^2} \frac k n \chi_{e_k} $$
+	$$ g_n(x) \le f(x) < g_n(x) + \frac1n, \quad x \in \bigcup_{k = 0}^{n^2 - 1} e_k $$
+
+	\begin{enumerate}
+		\item $ p = \infty $
+
+			Если $ n > \|f\|_\infty $, то $ e_{n^2} = \set{x \mid f(x) > n} \implies \mu(e_{n^2}) = 0 \implies |f(x) - g_n(x)| \le \frac1n $ \ale на $ T $.
+			$$ g_n \in \mathscr L\set{\chi_e}_{e \in \mathcal U} \implies f \in \ol{\mathscr L\set{\chi_e}}_{e \in \mathcal U} $$
+		\item $ 1 \le p < +\infty $
+
+			$$ |f(x) - g_n(x)|^p \le \bigl( f(x) \bigr)^p, \quad \int\limits_T \bigl( f(x) \bigr)^p \di \mu < +\infty $$
+			$$ \forall x \in T \quad \lim\limits_{n \to \infty} g_n(x) = f(x) \implies |f(x) - g_n(x)|^p \underarr{n \to \infty} 0 ~\ale~ x $$
+			$$ \Bigl( \int\limits_T |f - g_n|^p \di \mu \Bigr)^{\frac1p} \to 0 \implies f \in \ol{\mathscr L\set{\chi_e}_{e \in \mathcal U, ~ \mu e < +\infty}} $$
+
+			Для $ f \in \mathrm L^p $ можно написать $ f = f_+ - f_- $.
+	\end{enumerate}
+\end{proof}

@@ -1,0 +1,226 @@
+\chapter{Пространства}
+
+\section{Экскурс в теорию меры}
+
+\begin{definition}
+	$ T $ "--- множество, $ \quad \mathcal R $ "--- семейство подмножеств $ T $.
+
+	$ \mathcal R $ будем называть \emph{полукольцом}, если
+	\begin{enumerate}
+		\item $ \O \in \mathcal R $;
+		\item $ A, B \in \mathcal R \implies A \cap B \in \mathcal R $;
+		\item $ A, B \in \mathcal R, \quad B \sub A \implies \exists \set{e_j}_{j = 1}^n : \quad e_i \cap e_j = \O, ~ e_j \in \mathcal R, ~ A \setminus B = \bigcup{j = 1}^n e_j $.
+	\end{enumerate}
+\end{definition}
+
+\begin{definition}
+	$ \mu : \mathcal R \to [0, +\infty] $ "--- \emph{мера} на полукольце, если
+	\begin{enumerate}
+		\item $ \mu(\O) = 0 $;
+		\item если $ \set{e_j}_{j = 1}^\infty, \quad e_j \in \mathcal R, \quad e_j \cap e_i = \O, \quad e = \bigcup_{j = 1}^\infty, \quad e \in \mathcal R $, то $ \mu e = \sum_{j = 1}^\infty \mu e_j $.
+	\end{enumerate}
+\end{definition}
+
+\begin{eg}
+	$ \R^n $
+	$$ \mathcal R = \set{e = \prod_{j = 1}^n [a_j, b_j) | a_j < b_j}, \quad \mu e = \prod_{j = 1}^n (b_j - a_j) $$
+\end{eg}
+
+\begin{definition}[стандартное распространение меры с полукольца на $ \sigma $-алгебру]
+	$ E \sub T $
+
+	Определим \emph{внешнюю меру}:
+	$$ \mu^*(E) = \inf \set{\sum_{j = 1}^\infty \mu e_j | E \sub \bigcup_{j = 1}^\infty e_j, \quad e_j \in \mathcal R} $$
+
+	$ \mathcal U $ "--- $ \sigma $-алгебра \emph{измеримых множеств}.
+\end{definition}
+
+\begin{theorem}
+	$ (T, \mathcal U, \mu) $ "--- пространство с мерой, $ \quad \mu $ "--- стандартное распространение с $ \mathcal R, \quad p \le p < +\infty $.
+
+	Тогда $ \set{\chi_e}_{e \in \mathcal R} $ "--- полное семейство в $ \mathrm L^p(T, \mu) $.
+\end{theorem}
+
+\begin{proof}
+	Пусть $ E \in \mathcal U, \quad \mu E < +\infty $.
+	Приблизим $ \chi_E $ линейными комбинациями $ \set{\chi_{e_j}}_{e_j \in \mathcal R} $.
+
+	$$ \mu E = \inf \set{ \sum_{j = 1}^\infty \mu e_j | E \sub \bigcup_{j = 1}^\infty e_j, \quad e_j \cap e_i = \O, \quad e_j \in \mathcal R} $$
+	Возьмём $ \eps > 0 $.
+	По определению $ \inf $,
+	$$ \exists \set{e_j}_{j = 1}^\infty : \quad e_j \in \mathcal R, ~ e_j \cap e_i = \O, \quad \mu E \le \sum_{j = 1}^\infty \mu e_j < \mu E + \eps $$
+
+	Обозначим $ A = \bigcup e_j $.
+
+	Так как ряд сходится, можно отбросить его начало так, чтобы
+	$$ \exists n \in \N : \quad \sum_{j = n + 1}^\infty \mu e_j < \eps $$
+	Обозначим $ B = \bigcup_{j = 1}^n e_j $.
+
+	$$ \chi_B = \sum_{j = 1}^n \chi_{e_j} \in \mathscr L\set{\chi_e}_{e \in \mathcal R} $$
+	При этом, $ \mu (A \setminus B) < \eps, \quad \mu (A \setminus E) < \eps $.
+	$$ \|\chi_E - \chi_B\|_p \trile \|\chi_A - \chi_E\|_p + \|\chi_A - \chi_B\|_p =
+	\Bigl( \int\limits_{A \setminus E} \di \mu \Bigr)^{\frac1p} + \Bigl( \int\limits_{A \setminus B} \di \mu \Bigr)^{\frac1p} < 2\eps^{\frac1p}
+	\implies \chi_E \in \ol{\mathscr L\set{\chi_e}_{e \in \mathcal R}} $$
+	Уже доказано, что
+	$$ \ol{\mathscr L\set{\chi_E}_{E \in \mathcal U, ~ \mu E < +\infty}}^{\|\cdot\|_p} = \mathrm L^p(T, \mu) $$
+	$$ \implies \ol{\mathscr L\set{\chi_e}_{e \in \mathscr R}}^{\|\cdot\|_p} = \mathrm L^p $$
+\end{proof}
+
+\begin{implication}
+	$ \mu $ "--- стандартное распространение с $ \mathcal R $ на $ \mathcal U, \quad 1 \le p < +\infty $.
+
+	Если $ \mathcal R $ счётно, то $ \mathrm L^p(T, \mathcal U, \mu) $ сепарабельно.
+\end{implication}
+
+\begin{implication}
+	$ E \sub \R^n $ измеримо по мере Лебега $ \lambda, \quad 1 \le p < +\infty $.
+
+	Тогда $ L^p(E, \lambda) $ сепарабельно.
+\end{implication}
+
+\begin{proof}
+	$ \mathcal R = \set{e = \prod_{j = 1}^n [a_j, b_j)} $ "--- полукольцо ячеек.
+	Рассмотрим
+	$$ \mathcal R_0 = \set{\prod_{j = 1}^n [a_j, b_j) | a_j, b_j \in \Q} $$
+	Понятно, что $ \mathcal R_0 $ счётно.
+
+	Пусть $ e \in \mathcal R $
+	$$ e = \prod_{j = 1}^\infty [a_j, b_j), \quad a_j, b_j \in \R, \quad a_j < b_j $$
+	Возьмём $ \eps > 0 $.
+	$$ \exists e_0 \in \mathcal R_0 : \quad e \sub e_0, \quad \lambda (e_0 \setminus e) < \eps $$
+	$$ \implies \|\chi_{e_0} - \chi_e\|_p = \Bigl( \int\limits_{e_0 \setminus e} \di \lambda \Bigr)^{\frac1p} < \eps^{\frac1p} $$
+	$$ \implies \ol{\mathscr L\set{\chi_e}_{e \in \mathcal R}} \ni \set{\chi_e}_{e \in \mathcal R} \implies \ol{\mathscr L\set{\chi_e}_{e \in \mathcal R_0}}^{\|\cdot\|_p} = \mathrm L^p(\R^n, \lambda) $$
+	$$ \mathrm L^p(E, \lambda) \sub \mathrm L^p(\R^n, \lambda) $$
+	$$ \implies \mathrm L^p(E, \lambda) \text{ сепарабельно} $$
+\end{proof}
+
+\begin{definition}
+	$ (T, \rho) $ "--- метрическое пространство, $ \quad (T, \mathcal U, \mu) $ "--- пространство с мерой.
+
+	Будем говорить, что $ \mu $ "--- \emph{борелевская мера}, если все открытые множества измеримы.
+\end{definition}
+
+\begin{remark}
+	Все непрерывные функции измеримы.
+\end{remark}
+
+\begin{proof}
+	$ f : T \to \R, \quad f \in \mathcal C(T), \quad f $ непрерывна.
+	Возьмём $ c \in \R $.
+	$$ \set{x \in T | f(x) \in (c, +\infty)} = f^{-1}(c, +\infty) $$
+	$ f $ непрерывна $ \implies f^{-1}(c, +\infty) $ открыто в $ T \implies $ измеримо по $ \mu \implies f $ измеримы.
+\end{proof}
+
+\begin{definition}
+	$ \mu $ "--- борелевская мера.
+
+	Будем говорить, что $ \mu $ \emph{регулярна}, если
+	$$ \forall e \in \mathcal U \quad \mu(e) = \inf\limits_{
+		\begin{subarray}{c}
+			G \text{ открыто} \\
+			e \sub G
+	\end{subarray}} \mu G = \sup\limits_{
+	\begin{subarray}{c}
+		F \text{ замкнуто} \\
+		F \sub e
+	\end{subarray}} \mu F $$
+\end{definition}
+
+\begin{remark}
+	Мера Лебега в $ \R^n $ регулярна.
+\end{remark}
+
+\subsection{Плотность непрерывных функций в \texorpdfstring{$ \mathrm L^p(T, \mu) $}{пространствах Лебега} для регулярных мер}
+
+\begin{theorem}
+	$ (T, \rho), ~ (T, \mathcal U, \mu), \quad \mu $ "--- регулярная, $ \quad 1 \le p < +\infty $.
+
+	Тогда $ \mathcal C(T) \cap \mathrm L^p(T, \mu) $ плотно в $ \mathrm L^p $.
+\end{theorem}
+
+\begin{proof}
+	Пусть $ e \in \mathcal U $ "--- измеримо, $ \mu e < +\infty $.
+	Приблизим $ \chi_e $ непрерывными (по $ \|\cdot\|_p $).
+	Возьмём $ \eps > 0 $.
+	$$ \mu \text{ регулярна } \implies \exists \text{ замкн. } F, \text{ откр. } G : \quad F \sub e \sub G, \quad \mu(G \setminus E) < \eps $$
+
+	$$ \phi(x) \define \frac{\rho(x, T \setminus G)}{\rho(x, T \setminus G) + \rho(x, F} $$
+	Проверим непрерывность: \\
+	Пусть $ \rho(x, F) = 0 \implies x \in F, ~ x \notin T \setminus G \implies \rho(x, T \setminus G) \ne 0 $.
+	$$ \implies \rho \in \mathcal C(T) $$
+	$$ \phi(x) =
+	\begin{cases}
+		0, \quad x \in T \setminus G \\
+		1, \quad x \in F
+	\end{cases} \quad \forall x \in T \implies 0 \le \phi(x) \le 1 $$
+	$$ |\phi(x) - \chi_e(x)| =
+	\begin{cases}
+		0, \quad x \in T \setminus G \\
+		0, \quad x \in F
+	\end{cases} $$
+	$$ |\chi_e(x) - \phi(x)| \le 1 \quad \forall x $$
+	$$ \|\chi_e - \phi\|_p =
+	\Bigl( \int\limits_T |\chi_e - \phi|^p \di \mu \Bigr)^{\frac1p} =
+	\Bigl( \int\limits_{G \setminus F}|\chi_e - \phi|^p \di \mu \Bigr)^{\frac1p} \le \Bigl( \int\limits_{G \setminus F} \di \mu \Bigr)^{\frac1p} =
+	\Bigl( \mu(G \setminus F) \Bigr)^{\frac1p} < \eps^{\frac1p} $$
+	$$ \ol{\mathscr L\set{\chi_e}_{ \in \mathcal U, ~ \mu e < +\infty}}^{\|\cdot\|_p} =
+	\mathrm L^p(T, \mu) \implies
+	\ol{\mathcal C(T) \cap \mathrm L^p}^{\|\cdot\|_p} =
+	\mathrm L^p $$
+\end{proof}
+
+\begin{implication}
+	$ K \sub \R^n, \quad K $ "--- компакт, $ \quad \lambda $ "--- мера Лебега, $ \quad 1 \le p < +\infty $
+
+	$$ \implies \ol{\mathcal C(K)}^{\|\cdot\|_p} =
+	\mathrm L^p(K, \lambda) $$
+\end{implication}
+
+\section{Компакты в метрических пространствах}
+
+\begin{statement}
+	$ (K, \rho) $ "--- метрический компакт.
+
+	$$ \iff \forall \set{x_n}_{n = 1}^\infty : x_n \in K \quad \exists \set{x_{n_j}} : \quad \exists \lim\limits_{j \to \infty} x_{n_j} \in K $$
+	(\emph{секвенциальная компактность})
+\end{statement}
+
+\begin{statement}
+	$ (K, \rho) $ "--- метрический компакт $ \implies K $ ограничено и замкнуто.
+\end{statement}
+
+\begin{remark}
+	Для $ K \sub \R^n $ (или $ \Co^n $) верно и обратное.
+	В общем случае "--- нет.
+\end{remark}
+
+\begin{eg}
+	$$ l^2 = \set{x = \set{x_j}_{j = 1}^\infty | \Bigl( \sum_{j = 1}^\infty |x_k|^2 \Bigr)^{\frac12} = \|x\|_2 < +\infty} $$
+	$$ \mathtt D_1(\On) = \set{x \in l^2 | \|x\|_2 \le 1} $$
+	Покажем, что $ \mathtt D_1 $ не компакт.
+
+	$$ e_j = (0, \dots, 0, \underset j 1, 0, \dots, 0) \in \mathtt D_1(\On) $$
+	$$ \|e_i - e_j\|_2 = \sqrt2 $$
+	$$ \forall \set{e_{n_k}} \text{ не фундаментальна } \implies \not\exists \lim \set{e_{n_k}} $$
+\end{eg}
+
+\begin{definition}
+	$ (A, \rho), \quad A \sub X $.
+
+	$ A $ \emph{относительно компактно}, если $ \ol A $ компактно.
+	$$ \iff \forall \set{x_n}_{n = 1}^\infty, ~ x_n \in A \quad \exists \set{x_{n_j}}_{j = 1}^\infty \quad \exists \lim\limits_{j \to \infty} x_{n_j} \in X $$
+\end{definition}
+
+\begin{definition}
+	$ (X, \rho), \quad A \sub X, \quad \eps > 0, \quad F \sub X $.
+
+	Будем говорить, что $ F $ "--- $ \eps $-\emph{сеть} для множества $ A $, если
+	$$ \forall a \in A \quad \exists b \in F : \quad \rho(a, b) < \eps $$
+	$$ \iff A \sub \bigcup_{b \in F} \mathtt B_\eps(b) $$
+\end{definition}
+
+\begin{definition}
+	$ A \sub X $.
+
+	$ A $ называется \emph{вполне ограниченным}, если $ \forall \eps > 0 $ существует конечная $ \eps $-сеть для $ A $.
+\end{definition}

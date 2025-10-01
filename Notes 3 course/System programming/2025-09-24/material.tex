@@ -1,0 +1,84 @@
+\chapter{Логические вентили}
+
+\section{Сумматоры}
+
+\begin{figure}[!h]
+	\centering
+	\begin{subfigure}{0.32\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{quart_sum}
+		\caption{Четвертьсумматор}
+	\end{subfigure}
+	\begin{subfigure}{0.32\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{half_sum}
+		\caption{Полусумматор}
+	\end{subfigure}
+	\begin{subfigure}{0.32\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{full_sum}
+		\caption{Полный сумматор}
+	\end{subfigure}
+\end{figure}
+
+$ C_{out} $ "--- вычисляемый перенос, $ C_{in} $ "--- входной перенос.
+
+\subsection{Длинные числа}
+
+\begin{figure}[!h]
+	\centering
+	\includegraphics[width=0.3\textwidth]{ripple_carry}
+	\caption{Схема с протаскиванием переноса (ripple-carry)}
+\end{figure}
+
+\subsection{Должок с прошлого раза}
+
+Что такое \emph{комбинационная схема}:
+\begin{enumerate}
+	\item фиксированы входы и выходы;
+	\item схема состоит из вентилей, на каждый из них идёт вход всей схемы или ровно одного вентиля;
+	\item циклы запрещены.
+\end{enumerate}
+
+\begin{remark}
+	Для того, чтобы использовать дерево отрезка достаточно ассоциативности операции.
+\end{remark}
+
+Для того, чтобы вычислять переносы, нужен нейтральный элемент (нулевой перенос).
+Множество с ассоциативной операцией и нейтральным элементом "--- моноид.
+
+\subsubsection{Как это применить в сумматорах?}
+
+Единственное, что нужно научится вычислять быстро "--- это перенос.
+Наша схема "--- это конвейер для переносов.
+
+Схема работы каждого из сумматоров: \\
+\begin{tabular}{c c | c}
+	x & y & $ C_{out} $ ($ g_0 $) \\
+	0 & 0 & 0 (p) \\
+	0 & 1 & $ C_{in} $ (p) \\
+	1 & 0 & $ C_{in} $ ($ g_1 $) \\
+	1 & 1 & 1
+\end{tabular}
+
+$$ C_{out} = g_1(\dots(p(g_1(\dots(C_{in})\dots)))\dots) $$
+
+Таблица умножения: \\
+\begin{tabular}{r | c c c}
+	& p & $ g_0 $ & $ g_1 $ \\
+	\hline
+	p & $ p $ & $ g_0 $ & $ g_1 $ \\
+	$ g_0 $ & $ g_0 $ & $ g_0 $ & $ g_1 $ \\
+	$ g_1 $ & $ g_1 $ & $ g_0 $ & $ g_1 $
+\end{tabular}
+
+Композиция этих операций ассоциативна.
+
+\begin{figure}[!h]
+	\centering
+	\includegraphics[width=0.6\textwidth]{segment_tree_sum}
+	\caption{Сумматор с использованием идеи дерева отрезков}
+\end{figure}
+
+Критический путь сократился до логарифма.
+Элементов стало примерно в два раза больше (по аналогии с деревом отрезков).

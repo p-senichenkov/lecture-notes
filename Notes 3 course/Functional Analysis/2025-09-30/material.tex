@@ -1,0 +1,221 @@
+\chapter{Пространства}
+
+\section{Компакты в метрических пространствах}
+
+\begin{remark}
+	Если $ A $ вполне ограничено, то $ A $ ограничено.
+\end{remark}
+
+\begin{proof}
+	Пусть $ \eps = 1 $.
+	$$ \exists F = \set{x_j}_{j = 1}^n \text{ "--- 1-сеть, \ie } A \sub \bigcup_{j = 1}^n \mathtt B_1(x_j) \implies A \text{ ограничено} $$
+\end{proof}
+
+\begin{exmpls}
+\item $ A \sub \R^n $ (или $ \Co^n $)
+
+	Докажем, что если $ A $ ограничено, то $ A $ вполне ограничено.
+
+	$ A $ ограничено $ \implies \exists M > 0 : \quad \forall x = (x_1, \dots, x_n) \in A \quad |x_j| \le M $.
+	Пусть $ Q = \set{x \in \R^n | \ |x_j| \le M} $.
+	$$ Q = \bigcup_{j = 1}^N Q_j, \quad \operatorname{diam} Q_j < \eps, \quad F = \set{\text{вершины } Q_j} $$
+	$ \implies F $ "--- $ \eps $-сеть.
+\item $ l^2 $
+	$$ D = \set{x = \set{x_j}_{j = 1}^\infty | \|x\|_2 = \Bigl( \sum_{j = 1}^\infty |x_j|^2 \Bigr)^{\frac12} \le 1} $$
+	$ D $ ограничено.
+	Проверим, что оно \textbf{не} вполне ограничено.
+
+	Рассмотрим $ e_j = (0, \dots, 0, \underset j 1, 0 \dots, 0) $.
+	$$ \|e_j - e_i\|_2 = \sqrt 2 $$
+	Возьмём $ \eps = \frac12 $.
+	$$ \mathtt B_{\frac12} (e_j) \cap \mathtt B_{\frac12} (e_i) = \O $$
+	$ F $ "--- $ \frac12 $-сеть для $ D $.
+	$$ \implies \forall j \quad \exists f_j \in F \cap \mathtt B_{\frac12}(e_j) $$
+	$ f \ne f_i \implies \set{f_j}_{j = 1}^\infty \sub F \implies F $ бесконечно "--- \contra (бесконечной $ \eps $-сети не бывает).
+\item $ l^2 $
+	$$ \Pi = \set{x = \set{x_j}_{j = 1}^\infty | \ |x_j| \le \frac1{2^j}} \text{ "--- \emph{гильбертов кирпич}} $$
+	(в $ \R^3 $ так устроены кирпичи).
+	Проверим, что $ \Pi $ вполне ограничено.
+	$$ \forall \eps > 0 \quad \exists N \in \N \quad \Bigl( \sum_{j = N + 1}^\infty \bigl( \frac1{2^j} \bigr) \Bigr)^{\frac12} < \eps $$
+	$$ \Pi^* = \set{x = (x_1, \dots, x_N, 0, \dots) | \ |x_j| \le \frac1{2^j}} $$
+	Можно считать, что $ \Pi^* \sub \R^N $ (если отбросить нулевые координаты).
+	Тогда $ \R^N \sub l^2 \implies \exists F $ "--- конечная $ \eps $-сеть, $ F \sub \R^N $.
+
+	Проверим, что $ F $ "--- $ 2\eps $-сеть для $ \Pi $.
+	Возьмём $ x \in \Pi $.
+	$$ x = (x_1, \dots, x_N, x_{N + 1}, \dots) = \underbrace{(x_1, \dots, x_N, 0, \dots)}_y + \underbrace{(0, \dots, 0, x_{N + 1})}_z $$
+	$$ \|z\|_2 = \Bigl( \sum_{j = N + 1}^\infty |x_j|^2 \Bigr)^{\frac12} < \eps \text{ в силу выбора } N $$
+	$$ \exists f \in F : \quad \|y - f\|_2 < \eps \text{ \as } y \in \Pi^* $$
+	$$ \|x - f\|_2 = \|(y - f) + z\|_2 \trile \|y - f\| + \|z\| < 2\eps $$
+\end{exmpls}
+
+\subsection{Свойства вполне ограниченных множеств}
+
+\begin{properties}
+	$ (X, \rho) $
+	\begin{enumerate}
+		\item $ A \sub X, ~ A $ вполне ограничено $ \implies \ol A $ вполне ограничено.
+		\item $ A \sub Y \sub X, ~ A $ вполне ограничено в $ X \implies A $ вполне ограничено в $ Y $.
+		\item $ A $ вполне ограничено $ \implies A $ сепарабельно.
+	\end{enumerate}
+\end{properties}
+
+\begin{eproof}
+\item Пусть $ \eps > 0, ~ F $ "--- конечная $ \eps $-сеть для $ A $.
+
+	Проверим, что $ F $ "--- $ 2\eps $-сеть для $ \ol A $.
+	Возьмём $ x \in \ol A $.
+	Пусть $ x \in \ol A \implies \exists y \in A ; \quad \rho(x, y) < \eps $.
+	$$ \exists f \in F : \quad \rho(y, f) < \eps \implies \rho(x, f) \trile \rho(x, y) + \rho(y, f) < 2\eps $$
+\item Пусть $ \eps > 0 \implies \exists \set{x_j}_{j = 1}^n $ "--- $ \eps $-сеть для $ A $, \ie $ A \sub \bigcup_{j = 1}^n \mathtt B_\eps(x_j) $.
+
+	Пусть $ y_j \in A \cap \mathtt B_\eps(x_j) $ (если $ A \cap \mathtt B_\eps(x_j) = \O $, то забудем об этом $ j $).
+	$$ E = \set{y_j}_{j = 1}^n \text{ "--- $ 2\eps $-сеть для } A, \quad E \sub A \sub Y $$
+
+	Возьмём $ x \in A $.
+	$$ \exists x_j : \rho(x, x_j) < \eps, \quad \rho(x_j, y_j) < \eps \implies \rho(x, y_j) \le \rho(x, x_j) + \rho(x_j, y_j) < 2\eps $$
+\item Пусть $ F_n $ "--- конечная $ \frac1n $-сеть.
+	Пусть $ E = \bigcup F_n \implies E $ всюду плотно в $ A \implies A $ сепарабельно.
+\end{eproof}
+
+\subsection{Лемма о разбиении}
+
+\begin{lemma}
+	$ (X, \rho), \quad \eps > 0, \quad A \sub X, \quad \exists $ конченая $ \eps $-сеть для $ A $.
+
+	$$ \implies A = \bigcup_{j = 1}^n C_j, \quad C_j \cap C_i = \O, \quad C_j \ne \O, \quad \operatorname{diam} C_j \le 2\eps $$
+	($ \operatorname{diam} B = \sup\limits_{x, y \in B} \rho(x, y) $)
+\end{lemma}
+
+\begin{proof}
+	$$ \exists \set{x_j}_{j = 1}^n : \quad A \sub \bigcup_{j = 1}^n \mathtt B_\eps(x_j) $$
+	$$ C_1 \define A \cap \mathtt B_\eps(x_1) $$
+	$$ C_2 \define \bigl( A \cap \mathtt B_\eps(x_2) \bigr) \setminus C_1 $$
+	$$ \dots $$
+	$$ C_j = \bigl( A \cap \mathtt B_\eps(x_j) \bigr) \setminus \bigl( C_1 \cup C_2 \cup \dots \cup C_{j - 1} \bigr) $$
+	Пустые $ C_j $ не рассматриваем.
+\end{proof}
+
+\subsection{Теорема Хаусдорфа}
+
+\begin{theorem}[описание компактных множеств в терминах вполне ограниченности]
+	$ (X, \rho), \quad A \sub X $
+
+	$$ A \text{ "--- компакт } \iff
+	\begin{cases}
+		(A, \rho) \text{ "--- полное} \\
+		A \text{ вполне ограничено}
+	\end{cases} $$
+\end{theorem}
+
+\begin{iproof}
+\item $ \implies $
+	\begin{itemize}
+		\item Проверим полноту.
+
+			Пусть $ \set{x_n}_{n = 1}^\infty $ фундаментальна в $ A $.
+			\As $ A $ "--- компакт,
+			$$ \exists \set{x_{n_j}}_{j = 1}^\infty : \quad \exists \lim\limits_{j \to \infty} x_{n_j} = a, \quad a \in A $$
+
+			По одному из свойств фундаментальных последовательностей, $ \lim x_n = a \implies (A, \rho) $ "--- полное.
+		\item Проверим вполне ограниченность.
+
+			Возьмём $ \eps > 0 $.
+			$$ A \sub \bigcup_{x \in A} \mathtt B_\eps(x) $$
+			$ A $ "--- компакт $ \implies \exists \set{x_j}_{j = 1}^n, ~ x_j \in A : \quad A \sub \bigcup_{j = 1}^n \mathtt B_\eps(x_j) \implies \set{x_j}_{j = 1}^n $ "--- $ \eps $-сеть.
+	\end{itemize}
+\item $ \impliedby $
+
+		Возьмём $ \set{x_n}_{n = 1}^\infty, ~ x_n \in A $.
+		Докажем, что $ \exists \set{x_{n_j}} : \quad \exists \lim\limits_{j \to \infty} x_{n_j} = A $.
+
+		Возьмём $ \eps_1 = \frac12 $.
+		Воспользуемся леммой о разбиении:
+		$$ \exists \text{ конечная } \frac12 \text{-сеть } \implies \exists \set{\nder[1]C_j}_{j = 1}^{N_1} : \quad A = \bigcup_{j = 1}^{N_1} \nder[1]C_j, \quad \operatorname{diam} \nder[1]C_j \le 1 $$
+		Существует $ \nder[1]C_{j_1} $, содержащая бесконечное число элементов $ \set{x_n}_{n = 1}^\infty $.
+		Обозначим $ A_1 = \nder[1]C_{j_1} $.
+
+		Возьмём $ \eps_2 = \frac13, \quad \exists $ конечная $ \eps_2 $-сеть.
+		$$ A_1 = \bigcup_{j = 1}^{N_2} \nder[2]C_j, \quad \operatorname{diam} \nder[2]C_j \le 2\eps_2 = \frac23 $$
+		Среди них есть $ \nder[2]C_{j_2} $, содержащий бесконечное число элементов $ \set{x_n} $.
+		Обозначим $ A_2 = \nder[2]C_{j_2} $.
+
+		Получим $ \set{A_m}_{m = 1}^\infty $, каждое из которых содержит бесконечное число элементов $ \set{x_n} $.
+		$$ A_{m + 1} \sub A_m, \quad \lim\limits_{m \to \infty} \operatorname{diam} A_m = 0 $$
+
+		Пусть $ x_{n_1} \in A_1 $.
+		$$ \exists n_2 > n_1 : \quad x_{n_2} \in A_2, \quad \dots, \quad \exists n_ > n_{m - 1} : \quad x_{n_m} \in A_m $$
+		$$ \implies \forall j > m \quad x_{n_j} \in A_m \implies \rho(x_{n_j}, x_{n_m}) \le \operatorname{diam} A_m \implies \set{x_{n_m}} \text{ фундаментальна} $$
+		$ A $ "--- полное $ \implies \exists \lim\limits_{m \to \infty} x_{n_m} = a \in A \implies A $ "--- компакт.
+\end{iproof}
+
+\begin{implication}
+	$ (X, \rho), \quad A \sub X, \quad A $ относительно компактно.
+
+	Тогда $ A $ вполне ограничено.
+\end{implication}
+
+\begin{proof}
+	$ A $ относительно компактно $ \implies \ol A $ компактно $ \underimp{\text{теорема}} \ol A $ вполне ограничено $ \implies A $ вполне ограничено.
+\end{proof}
+
+\begin{implication}
+	$ (X, \rho) $ "--- полное, $ \quad A $ вполне ограничено.
+
+	Тогда $ A $ относительно компактно.
+\end{implication}
+
+\begin{proof}
+	$ (X, \rho) $ "--- полное $ \implies \ol A $ "--- полное $ \underimp{\text{теорема, $ A $ вполне ограничено}} \ol A $ "--- компакт $ \implies A $ относительно компактно.
+\end{proof}
+
+\begin{implication}
+	$ (X, \rho) $ "--- полное, $ \quad A \sub X $.
+	$$ \forall \eps > 0 \quad \exists \text{ относительно компактная $ \eps $-сеть для } A $$
+	$$ \implies A \text{ относительно компактно (и вполне ограничено)} $$
+\end{implication}
+
+\begin{proof}
+	Возьмём $ \eps > 0 $.
+	Пусть $ H_\eps $ "--- относительно компактная $ \eps $-сеть для $ A $.
+	\begin{multline*}
+	\implies H_\eps \text{ вполне ограничено } \implies
+	\exists F \text{ "--- конечная $ \eps $-сеть для } H_\eps \implies \\
+	\implies F \text{ "--- $ \eps $-сеть для } A \implies
+	A \text{ вполне ограничено } \iff
+	A \text{ относительно компактно}
+	\end{multline*}
+\end{proof}
+
+\section{Относительно компактные множества в \texorpdfstring{$ \mathcal C(K) $}{C(K)}}
+
+$ (K, \rho) $ "--- метрический компакт, $ \mathcal C(K) = \set{f : K \to \Co \text{ (или $ \R $)} | f \text{ непрерывна}} $
+
+\begin{definition}
+	$ \Phi \sub \mathcal C(K) $.
+
+	$ \Phi $ \emph{равностепенно непрерывно}, если
+	$$ \forall \eps > 0 \quad \exists \delta > 0 : \quad \forall x, y \in K : \rho(x, y) < \delta \quad \forall f \in \Phi \quad |f(x) - f(y)| < \eps $$
+\end{definition}
+
+\begin{theorem}[Асколи-Арцела]
+	$ \Phi \sub \mathcal C(K) $.
+
+	$ \Phi $ относительно компактно тогда и только тогда, когда
+	\begin{enumerate}
+		\item $ \Phi $ ограничено в $ \mathcal C(K) $;
+		\item $ \Phi $ равностепенно непрерывно.
+	\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+	$ \mathcal C(K) $ "--- полное.
+	Значит,
+	$$ \Phi \text{ относительно компактно } \iff \Phi \text{ вполне ограничено} $$
+	\begin{itemize}
+		\item $ \implies $
+
+			$ \Phi $ вполне ограничено $ \implies \Phi $ ограничено, \ie
+			$$ \exists M > 0 : \quad \forall f \in \Phi \quad \forall x \in K \quad |f(x)| \le M $$
+	\end{itemize}
+\end{proof}

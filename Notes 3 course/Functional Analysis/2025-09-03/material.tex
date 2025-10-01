@@ -1,4 +1,6 @@
-\chapter{Метрические пространства}
+\chapter{Пространства}
+
+\section{Метрические пространства}
 
 \begin{implication}
 	$ (X, \rho), \quad \set{x_n}_{n = 1}^\infty $ "--- фундаментальная
@@ -31,3 +33,197 @@
 
 		$ \set{y_n}_{n = 1}^\infty $ фундаментальна $ \implies \exists \lim y_n \in Y $ (\as $ Y $ "--- полное).
 \end{eproof}
+
+\section{Банаховы пространства}
+
+\subsection{Основные понятия}
+
+\begin{definition}
+	$ X $ "--- линейное пространство над полем $ K $ ($ K = \R $ или $ \Co $).
+
+	$ p : X \to \R $ называется \emph{полунормой}, если
+	\begin{enumerate}
+		\item полуаддитивность: $ p(x + y) \le p(x) + p(y) \quad \forall x, y \in X $;
+		\item однородность: $ p(\lambda x) = |\lambda| p(x) \quad \forall \lambda \in K, ~ x \in X $.
+	\end{enumerate}
+\end{definition}
+
+\begin{properties}
+	$ (X, p), \quad p $ "--- полунорма, $ \quad \On $ "--- ноль пространства $ X $
+
+	\begin{enumerate}
+		\item $ p(\On) = 0 $;
+		\item $ p(x) \ge 0 \quad \forall x \in X $.
+	\end{enumerate}
+\end{properties}
+
+\begin{eproof}
+\item $ p(\On) = p(0 \cdot \On) \undereq{\text{однородность}} 0 \cdot p(\On) = 0 $.
+\item Пусть $ x \in X $
+	$$ 0 = p(\On) = p \bigl( x + (-x) \bigr) \le p(x) + p(-x) = 2 p(x) \quad \implies p(x) \ge 0 $$
+\end{eproof}
+
+\begin{definition}
+	$ X $ "--- линейное пространство над $ \R $ или $ \Co $.
+
+	$ p : X \to \R $ называется \emph{нормой}, если
+	\begin{enumerate}
+		\item $ p $ "--- полунорма;
+		\item $ p(x) = 0 \iff x = \On $.
+	\end{enumerate}
+\end{definition}
+
+\begin{notation}
+	$ \|x\| $ "--- норма, $ \quad (X, \|\cdot\|) $ "--- нормированное пространство.
+\end{notation}
+
+Определим метрику, \emph{порождённую нормой}: $ \rho(x, y) \define \|x - y\| $.
+
+\begin{definition}
+	$ (X, \|\cdot\|) $ называется \emph{банаховым}, если оно полное.
+\end{definition}
+
+\subsection{Критерий полноты}
+
+\begin{definition}
+	\hfill
+	\begin{enumerate}
+		\item $ X $ "--- линейное пространство над $ K $.
+
+			$ L \sub X $ называется \emph{подпространством (в алгебраическом смысле)}, если оно является линейным пространством, \ie
+			$$
+			\begin{rcases}
+				x, y \in L \\
+				\alpha, \beta \in K
+			\end{rcases} \implies \alpha x + \beta y \in L $$
+		\item $ (X, \|\cdot\|) $
+
+			$ L \sub X $ называется \emph{(замкнутым) подпространством}, если
+			\begin{enumerate}
+				\item $ L $ "--- подпространство в алгебраическом смысле;
+				\item $ L $ замкнуто.
+			\end{enumerate}
+	\end{enumerate}
+\end{definition}
+
+\begin{definition}
+	$ (X, \|\cdot\|), \quad \set{x_k}_{k = 1}^\infty $
+	$$ S_n \define \sum_{k = 1}^\infty x_k $$
+
+	Говорят, что ряд $ \sum_{k = 1}^\infty x_k $ \emph{сходится}, если $ \exists \lim\limits_{n \to \infty} S_n = S \in X $.
+	Тогда $ S = \sum_{k = 1}^\infty x_k $.
+
+	Говорят, что ряд $ \sum x_k $ \emph{сходится абсолютно}, если $ \sum \|x_k\| $ сходится.
+\end{definition}
+
+\begin{theorem}[критерий полноты нормированного пространства]
+	$ (X, \|\cdot\|) $ "--- полное \textbf{тогда и только тогда}, когда из абсолютной сходимости ряда следует его сходимость.
+\end{theorem}
+
+\begin{iproof}
+\item $ \implies $ ($ X $ "--- полное)
+
+	Возьмём $ \set{x_k}_{k = 1}^\infty $ такую, что $ \sum_{k = 1}^\infty \|x_k\| $ сходится.
+	Применим к этому ряду критерий Коши:
+	$$ \forall \eps > 0 \quad \exists N \in \N : \quad \forall n > N, ~ p \in \N : \quad \|x_{n + 1}\| + \dots + \|x_{n + p}\| < \eps $$
+	$$ S_n = \sum_{k = 1}^n x_k $$
+	Требуется доказать, что $ S_n $ образуют фундаментальную последовательность.
+	Для этого оценим норму разности:
+	$$ \|S_{n + p} - S_n\| = \bigl\| \sum_{k = 1}^p x_{n + k} \bigr\| \trile \sum_{k = 1}^p \|x_{n + k}\| < \eps $$
+\item $ \impliedby $ (абсолютно сходящийся ряд сходится)
+
+	Пусть $ \set{x_n}_{n = 1}^\infty $ фундаментальна.
+	Нужно доказать, что у неё есть предел.
+
+	Воспользуемся следствием из начала лекции:
+	$$ \exists \set{x_{n_k}}_{k = 1}^\infty : \quad \sum_{k = 1}^\infty \|x_{n_{k + 1}} - x_{n_k}\| < +\infty $$
+	$$ \implies \|x_{n_1}\| + \sum_{k = 1}^\infty \|x_{n_{k + 1}} - x_{n_k}\| < +\infty $$
+
+	Рассмотрим ряд без нормы:
+	$$ \exists S = x_{n_1} + \sum_{k = 1}^\infty (x_{n_{k + 1}} - x_{n_k}) $$
+	$$ S_m = x_{n_1} + (x_{n_2} - x_{n_1}) + \dots + (x_{n_m} - x_{n_{m - 1}}) = x_{n_m} $$
+	При этом,
+	$$ \exists \lim\limits_{m \to \infty} S_m = S \quad \implies \exists \lim x_{n_m} = S \underimp{\text{св-во фунд. посл. 2}} \lim x_n = S $$
+\end{iproof}
+
+\section{Пространство ограниченных функций}
+
+\begin{definition}
+	$ X $ "--- множество.
+
+	$ m(X) $ "--- \emph{пространство ограниченных функций}:
+	$$ m(X) = \set{f : X \to \R \text{ (или $ \Co $)} \mid \sup\limits_{x \in X} |f(x)| < +\infty} $$
+
+	Норма на таком пространстве называется \emph{равномерной, чебышёвской или} $ \sup $-\emph{нормой}:
+	$$ \|f\|_\infty = \sup\limits_{x \in X}|f(x)| $$
+\end{definition}
+
+\begin{theorem}
+	$ m(X) $ "--- банахово пространство.
+\end{theorem}
+
+\begin{eproof}
+\item Проверим, что $ \|f\|_\infty $ удовлетворяет аксиомам нормы:
+	$$ \|f\|_\infty = 0 \iff \sup\limits_{x \in X} |f(x)| = 0 \iff f(x) \equiv 0 \iff f = \On $$
+	$$ \lambda \in K, \quad \|\lambda f\|_\infty = \sup\limits_{x \in X}|\lambda f(x)| = |\lambda| \sup\limits_{x \in X} |f(x)| = |\lambda| \cdot \|f\|_\infty $$
+	Пусть $ f, g \in m(X), ~ x $ фиксирован.
+	Тогда $ f(x), g(x) $ "--- числа.
+	$$ \|f\|_\infty + \|g\|_\infty \ge \implies |f(x)| + |g(x)| \trige |f(x) + g(x)| \quad \forall x \in X $$
+	В силу произвольности $ x $,
+	$$ \implies \|f\|_\infty + \|g\|_\infty \sup\limits_{x \in X} |f(x) + g(x)| = \|f + g\|_\infty $$
+\item Проверим полноту.
+
+	Возьмём фундаментальную последовательность $ \set{f_n}_{n = 1}^\infty $ (в смысле нормы $ \|\cdot\|_\infty $).
+	\begin{equ}1
+		\forall \eps > 0 \quad \exists N \in \N : \quad \forall n, m > N \quad \|f_n - f_m\|_\infty < \eps
+	\end{equ}
+	Зафиксируем $ x \in X $.
+	$$ \eref1 \implies |f_n(x) - f_m(x)| < \eps $$
+	Из полноты $ K $ следует, что $ \exists \lim\limits_{n \to \infty} f_n(x) $.
+
+	Обозначим $ f(x) \define \lim\limits_{n \to \infty} f_n(x) $ (\emph{поточечный}).
+
+	$$ |f_n(x) - f_m(x)| < \eps \text{ при фиксированном } x, \quad n, m > N $$
+	Перейдём к пределу по $ n $:
+	$$ |f(x) - f_m(x)| \le \eps \quad \forall x \in X, \quad m >  N $$
+	Воспользуемся произвольностью $ x $:
+	$$ \|f - f_m\|_\infty = \sup\limits_{x \in X} |f(x) - f_m(x)| \le \eps \implies (f - f_m) \in m(X) $$
+	$$ f = (f - f_m) + f_m $$
+	В силу линейности $ m(X) $ это означает, что $ f \in m(X) $, $ \|f - f_m\|_\infty < \eps $ при $ m > N $
+	$$ \implies \lim\limits_{m \to \infty} = f \text{ в пространстве } m(X) $$
+\end{eproof}
+
+\begin{note}
+	Почему молодёжь ностальгирует по советской власти?
+\end{note}
+
+\begin{remark}
+	Сходимость по норме в $ m(X) $ совпадает с равномерной сходимостью.
+	$$ \lim\limits_{n \to \infty} \|f - f_n\|_\infty = 0 \iff \lim\limits_{n \to \infty} \bigl( \sup\limits_{x \in X}|f(x) - f_n(x)| \bigr) = 0 \iff f_n \uniarr{X} f $$
+\end{remark}
+
+\section{Пространства с sup-нормой}
+
+\begin{definition}
+	Зафиксируем $ n \in \N $.
+	Рассмотрим $ l_n^\infty = (\R^n, \|\cdot\|_\infty) $ или $ (\Co^n, \|\cdot\|_\infty) $, где
+	$$ \R^n = \set{x = (x_1, \dots, x_n), ~ x_j \in \R}, \quad \|x\|_\infty = \max\limits_{1 \le j \le n} |x_j| $$
+
+	При этом, $ l_n^\infty = m(X) $, где $ X = \set{1, 2, \dots, n}, ~ f(j) = x_j $.
+	Значит, $ l_n^\infty $ "--- банахово пространство.
+\end{definition}
+
+\begin{definition}
+	$ l^\infty $ "--- \emph{пространство ограниченных последовательностей}, \ie
+	$$ l^\infty = \set{x = \set{x_j}_{j = 1}^\infty, ~ x_j \in \R \text{ или } \Co, ~ \sup\limits{j \ge 1}|x_j| < +\infty} $$
+	$$ l^\infty = m(X), ~ X = \N \implies l^\infty \text{ "--- банахово} $$
+\end{definition}
+
+\begin{definition}
+	$$ C = \set{x = \set{x_j}_{j = 1}^\infty \mid \exists \lim\limits_{j \to \infty} x_j = x_0} $$
+	$$ C_0 = \set{x = \set{x_j}_{j = 1}^\infty \mid \exists \lim x_j = 0} $$
+\end{definition}
+
+\begin{statement}
+	Пространства $ C $ замкнуты.
+\end{statement}

@@ -1,0 +1,87 @@
+\chapter{Введение}
+
+Харриссы. Цифровая схемотехника и архитектура процессора.
+
+Как будет строиться курс:
+Транзисторы $ \to $ вентили $ \to $ комбинаторная логика $ \to $ последовательная логика $ \to $ CPU core $ \to $ SOC
+
+\chapter{Транзисторы}
+
+\section{Транзисторы p-типа и n-типа}
+
+Транзисторы делаются из кремния.
+У каждого из них 4 электрона, каждый кремний может соединиться с четырьмя кремниями.
+Получается у каждого по 8 электронов.
+
+Выкинем какой-нибудь кремний, на его место поставим мышьяк (у которого 5 электронов).
+Получили 1 лишний электрон.
+Это "--- \emph{полупроводник с электронной проводимостью}.
+То есть, полупроводник \emph{n-типа} (n от слова negative).
+
+Теперь заменим кремний на алюминий (у него 3 электрона).
+Получилась дырка "--- $ sp^3 $-орбиталь, на которой нет электрона.
+Это "--- \emph{полупроводник с дырочной проводимостью (p-типа)}.
+
+\begin{remark}
+	Ток течёт от + к -, дырки так же.
+	Электроны бегут от - к +.
+\end{remark}
+
+\begin{figure}[!h]
+	\centering
+	\begin{subfigure}{0.49\textwidth}
+		\centering
+		\includegraphics[width=0.99\textwidth]{transistor-1}
+		\caption{Транзистор p-типа}
+	\end{subfigure}
+	\begin{subfigure}{0.49\textwidth}
+		\centering
+		\includegraphics[width=0.99\textwidth]{transistor-2}
+		\caption{Транзистор n-типа}
+	\end{subfigure}
+\end{figure}
+
+Для p-типа: \\
+Если к затвору подвести +, к базе - "--- ток (от истока к стоку) не течёт.
+Наоборот "--- течёт.
+
+Для n-типа "--- наоборот.
+
+\begin{figure}[!h]
+	\centering
+	\begin{subfigure}{0.49\textwidth}
+		\centering
+		\includegraphics[height=2cm]{trans-icon-1}
+		\caption{p-типа}
+	\end{subfigure}
+	\begin{subfigure}{0.49\textwidth}
+		\centering
+		\includegraphics[height=2cm]{trans-icon-2}
+		\caption{n-типа}
+	\end{subfigure}
+	\caption{Обозначения в схемотехнике}
+\end{figure}
+
+FET "--- Field-effect transistor "--- полевой транзистор.
+
+MOS "--- Metal-oxide semiconductor "--- МОП "--- роль изолятора играет оксид.
+
+CMOS "--- КМОП "--- Complementary MOS "--- способ сделать на одном кристалле и p- и n-транзистор.
+
+\section{Подключение на схемах}
+
+- обозначается GND
+
++ обозначается $ V_{cc}, V_{ss}, V_{dd}, V_{ee}, V_c, V_s, V_d, V_e $.
+\begin{itemize}
+	\item s "--- source
+	\item d "--- drain
+	\item c "--- collector
+	\item e "--- emitter
+\end{itemize}
+Буква удваивается, если этот уровень подключён к источнику напряжения.
+
+Правильные варианты: $ V_{cc} $ (для биполярных транзисторов), $ V_{dd} $ (для полевых транзисторов).
+
+К $ V_{dd} $ подключается исток p-типа или сток n-типа.
+База подключается туда же.

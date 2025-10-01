@@ -1,0 +1,260 @@
+\chapter{Пространства}
+
+\section{Пространства с sup-нормой}
+
+\subsection{Пространство непрерывных функций на компакте}
+
+\begin{definition}
+	$ K $ "--- \emph{топологический компакт}, если:
+	\begin{enumerate}
+		\item $ \forall \set{G_\alpha}_{\alpha \in A} $, $ G_\alpha $ открыты, такие, что $ K \sub \bigcup_{\alpha \in A} G_\alpha \quad \exists \set{\alpha_j}_{j = 1}^n $ такие, что $ K \sub \bigcup_{j = 1}^n G_{\alpha_j} $;
+		\item \emph{Хаусдорфовость}: $ \forall a \ne b \in K \quad \exists U, V $ "--- открытые: $ a \in U, ~ b \in V : \quad U \cap V = \O $.
+	\end{enumerate}
+\end{definition}
+
+\begin{definition}
+	$ K $ "--- топологический компакт.
+
+	Введём \emph{пространство непрерывных функций на компакте}:
+	$$ \mathcal C(K) = \set{f : K \to \Co \text{ (или $ \R $) "--- непрерывны}} $$
+	$$ \|f\|_\infty = \sup\limits_{x \in K}|f(x)| = \max\limits_{x \in K}|f(x)| $$
+\end{definition}
+
+\begin{statement}
+	$ \bigl( \mathcal C(K), \|\cdot\|_\infty \bigr) $ "--- банахово.
+\end{statement}
+
+\begin{proof}
+	$ m(K) $ "--- пространство ограниченных функций с такой же нормой.
+	Уже доказано, что оно банахово.
+
+	Линейная комбинация линейных функций линейна, поэтому $ C(K) $ "--- подпространство в алгебраическом смысле.
+	Осталось проверить замкнутость.
+
+	Возьмём $ \set{f_n}_{n = 1}^\infty, ~ f_n \in C(K), \quad f \in m(K) $ такие, что $ \lim\limits_{n \to \infty} f_n = f $ в $ C(K) $.
+	$$ \implies \lim\limits_{n \to \infty} \|f - f_n\|_\infty = 0 \iff f_n \uniarr{K} f \implies f \in C(K) \implies C(K) \text{ замкнуто} $$
+\end{proof}
+
+\subsection{Пространство непрерывных производных}
+
+\begin{definition}
+	$ n \in \N $ "--- фиксировано.
+
+	Рассмотрим \emph{пространство непрерывных производных}:
+	$$ \mathcal C^{(n)}[a, b] = \set{f : [a, b] \to \R \text{ (или $ \Co $)}, \quad \exists \nder f \in \mathcal C[a, b]} $$
+	$$ \|f\|_{\nder C} \define \max\limits_{0 \le k \le n} \|\nder[k] f\|_\infty, \quad f \define \nder[0] f $$
+\end{definition}
+
+\begin{statement}
+	$ \bigl( \nder{\mathcal C[a, b]}, \|\cdot\|_{\nder{\mathcal C}} \bigr) $ "--- банахово.
+\end{statement}
+
+\begin{statement}
+	Пусть $ \set{f_m}_{m = 1}^\infty $ фундаментальна в $ \nder C[a, b] $.
+	Возьмём $ \eps > 0 $.
+	$$ \exists N \in \N : \quad \forall m, p > N \quad \|f_m - f_p\|_{\nder{\mathcal C}} < \eps $$
+	$$ \implies \forall 0 \le k \le n \quad \|\nder[k]{f_m} - \nder[k]{f_p}\|_\infty < \eps $$
+
+	Рассмотрим $ \set{\nder[k]{f_m}}_{m = 1}^\infty, \quad \nder[k]{f_m} \in \mathcal C[a, b] $.
+
+	$ \mathcal C[a, b] $ "--- банахово $ \implies \phi_k \in \mathcal C[a, b] $.
+	$$ \lim \|\nder[k]f - \phi_k\|_\infty = 0, \quad 0 \le k \le n \implies
+	\begin{cases}
+		f_m \uniarr[m \to \infty]{[a, b]} \phi_0, \\
+		f_m' \uniarr[m \to \infty]{[a, b]} \phi_1 \\
+		\dots \\
+		\nder{f_m} \uniarr[m \to \infty]{[a, b]} \phi_n
+	\end{cases} \underimp{\text{в анализе доказано}}
+	\begin{cases}
+		\phi_1 = \phi_0' \\
+		\phi_2 = \phi_1' = \phi_0'' \\
+		\dots \\
+		\phi_n = \nder{\phi_0}
+	\end{cases} $$
+	$$ \|f_m - \phi_0\|_{\nder{\mathcal C}} = \max\limits_{0 \le k \le n} \|\nder[k]{f_m} - \nder[k]{\phi_0}\|_\infty \underarr{m \to \infty} 0 $$
+	$ \lim\limits_{m \to \infty} f_m = \phi_0 $ в $ \nder{\mathcal C}[a, b] $.
+\end{statement}
+
+\section{Пространства Лебега}
+
+\subsection{Экскурс в теорию меры}
+
+\begin{definition}[пространство с мерой]
+	$ (T, \mathscr U, \mu), \quad T $ "--- множество, $ \quad \mathscr U $ "--- $ \sigma $-алгебра, то есть
+	\begin{enumerate}
+		\item $ \O \in \mathscr U $;
+		\item $ A \in \mathscr U \implies T \setminus A \in \mathscr U $;
+		\item $ \set{A_n}_{n = 1}^\infty, ~ A_n \in \mathscr U, ~ A = \bigcup_{n = 1}^\infty A_n \quad \implies A \in \mathscr U $.
+	\end{enumerate}
+	$ \mu : \mathscr U \to [0, +\infty] $ "--- \emph{мера}, то есть
+	\begin{enumerate}
+		\item $ \mu \O = 0 $;
+		\item $ A_n \in \mathscr U, ~ \set{A_n}_{n = 1}^\infty, ~ A_n \cap A_m = \O \quad \implies \mu A = \sum_{n = 1}^\infty \mu A_n $.
+	\end{enumerate}
+\end{definition}
+
+Будем также предполагать, что верны следующие предположения:
+\begin{enumerate}
+	\item $ \mu $ "--- \emph{полная}, то есть если $ A \in \mathscr U $ и $ \mu A = 0, ~ B \sub A $, то $ B \in \mathscr U $.
+		Отсюда сразу следует, что $ \mu B = 0 $.
+	\item $ \mu $ "--- $ \sigma $-\emph{конечна}, то есть $ T = \bigcup_{j = 1}^\infty T_j $, где $ \mu(T_j) < +\infty $.
+\end{enumerate}
+
+\begin{definition}
+	$ A \in \mathscr U, \quad f : A \to \ol \R $
+
+	$ f $ "--- \emph{измеримая}, если
+	$$ \forall c \in \R \quad \set{x \mid c < f(x) \le +\infty} = f^{-1}(c, +\infty] \in \mathscr U $$
+\end{definition}
+
+\begin{definition}
+	$ f : A \to \Co, \quad f = u + \ii v, \quad u, v : A \to \R $
+
+	$ f $ \emph{измерима}, если $ u $ и $ v $ измеримы.
+\end{definition}
+
+\begin{definition}[интеграл от измеримой функции по мере $ \mu $]
+	\hfill
+	\begin{itemize}
+		\item $ A \in \mathscr U $
+
+			Определим \emph{характеристическую функцию}: $ \chi_A(x) =
+			\begin{cases}
+				1, \quad x \in A \\
+				0, \quad x \notin A
+			\end{cases} $
+
+			Введём множество \emph{простых функций}:
+			$$ S = \set{g(x) = \sum_{k = 1}^n c_k \chi_{A_k}, \quad c_k \in \R, ~ A_k \cap A_j = \O} $$
+			Для $ g(x) \in S $
+			$$ \int\limits_T g(x) \di \mu \define \sum_{k = 1}^n c_k \mu A_k, \quad \text{ если } \mu A_k < +\infty $$
+		\item $ f $ измерима, $ f : T \to \R, ~ f(x) \ge 0 $
+			$$ \int\limits_T f(x) \di \mu \define \sup\limits_{g \in S}\set{\int\limits_T g(x) \di \mu \mu 0 \le g(x) \le f(x)} $$
+		\item $ f : T \to \R $
+
+			Определим
+			$$ f^+(x) =
+			\begin{cases}
+				f(x), \quad f(x) \ge 0 \\
+				0, \quad f(x) < 0,
+			\end{cases} \quad f^-(x) =
+			\begin{cases}
+				-f(x), \quad f(x) < 0 \\
+				0, \quad f(x) \ge 0
+			\end{cases} $$
+			Тогда $ f(x) = f^+(x) - f^-(x) $.
+
+			Если $ \int\limits_T f^+(x) \di \mu < +\infty, ~ \int\limits_T f^-(x)\di \mu < +\infty $, то
+			$$ \int\limits_T f(x) \di \mu \define \int\limits_T f^+ \di \mu - \int\limits_T f^- \di \mu $$
+			Такие функции называются \emph{суммируемыми} или \emph{интегрируемыми}.
+			Их множество обозначим $ \mathscr L(T, \mu) $.
+		\item $ f : T \to \Co $ "--- измеримая
+
+			Пусть $ f = u + \ii v, \quad u, v : T \to \R $.
+			$$ \int\limits_T f \di \mu = \int\limits_T u \di \mu + \ii \int\limits_T v \di \mu $$
+			(если всё конечно).
+	\end{itemize}
+\end{definition}
+
+\begin{exmpls}
+\item $ \lambda $ "--- мера Лебега в $ \R^n, \quad A $ "--- измеримое по $ \lambda $ множество, $ \quad w(x) \ge 0 : A \to \R $.
+
+	Введём новую меру: $ \mu = w \cdot \lambda $, то есть
+	$$ \mu B = \int\limits_B w(x) \di \lambda $$
+	$$ \int\limits_A f\di \mu = \int\limits_A f(x)w(x) \di \lambda $$
+\item $ T $ "--- бесконечное множество, $ \quad \set{a_n}_{n = 1}^\infty, ~ a_n \in T $
+
+	Для $ a \in T $ можно определить \emph{меру с нагрузкой в точке} $ a $:
+	$$ \delta_a(A) =
+	\begin{cases}
+		1, \quad a \in A \\
+		0, \quad a \notin A
+	\end{cases} $$
+
+	Для последовательности $ \set{c_n}_{n = 1}^\infty, ~ c_n > 0 $ можно рассмотреть \emph{дискретную меру}:
+	$$ \mu = \sum_{n = 1}^\infty c_n \delta_{a_n} $$
+	$$ \mu A = \sum_{\set{n \mid a_n \in A}} c_n $$
+	$$ \int\limits_T f \di \mu = \sum_{n = 1}^\infty c_n f(a_n) $$
+\end{exmpls}
+
+\subsection{Несколько простых неравенств}
+
+\subsubsection{Неравенство Юнга}
+
+\begin{statement}
+	$ a, b > 0, \quad p > 1, \quad q : \frac1p + \frac1q = 1 $ ($ q $ называется \emph{сопряжённым показателем}).
+
+	$$ ab \le \frac{a^p}p + \frac{b^q}q, \quad \text{ равенство только при } a^p = b^q $$
+\end{statement}
+
+\begin{proof}
+	Воспользуемся тем, что $ \ln x $ выпукла вверх, \ie $ (\ln x)'' = -\frac1{x^2} < 0 $.
+	Это означает, что график лежит над хордой, \ie
+	$$ \forall x_1 \ne x_2 \forall 0 < \alpha < 1 \forall \beta = 1 - \alpha \quad f\bigl(\alpha x_1 + (1 - \alpha)x_2 \bigr) > \alpha f(x_1) + (1 - \alpha)f(x_2) $$
+	Применим это неравенство к $ \ln $:
+	$$ f(x) = \ln x, \quad x_1 = a^p, \quad x_2 = b^q, \quad \alpha = \frac1p, \quad \beta = \frac1q $$
+	$$ \ln\Bigl(\frac1p \cdot a^p + \frac1q \cdot b^q\Bigr) > \frac1p \cdot \ln(a^p) + \frac1q \ln(b^q) = \ln(ab) $$
+	$$ \frac{a^p}p + \frac{b^q}q > ab $$
+\end{proof}
+
+\subsubsection{Неравенство Гёльдера}
+
+\begin{statement}
+	$ (T, \mathscr U, \mu), \quad f, g $ измеримы, $ \quad p > 1, \quad q : \frac1p + \frac1q = 1 $.
+
+	\begin{equ}1
+		\int\limits_T |fg| \di \mu \le \Bigl( \int\limits_T |f|^p \di \mu \Bigr)^{\frac1q} \cdot \Bigl( \int\limits_T |g|^q \di \mu \Bigr)^{\frac1q}
+	\end{equ}
+\end{statement}
+
+\begin{note}
+	Для $ p = q = 2 $ это неравенство называется \emph{неравенством Коши"--~Буняковского"--~Шварца}.
+\end{note}
+
+\begin{proof}
+	$$ A = \Bigl( \int\limits_T |f(x)|^p \di \mu \Bigr)^{\frac1p}, \quad B = \Bigl( \int\limits_T |g|^q\di \mu \Bigr)^{\frac1q} $$
+
+	\begin{itemize}
+		\item $ A = 0 $
+
+			Докажем, что в таком случае $ f(x) = 0 $ почти всюду:
+
+			Рассмотрим $ e = \set{x \mid f(x) \ne 0} = \set{x \mid |f(x)| > 0} $.
+			$$ e_n = \set{ x \mid |f(x)| > \frac1n} $$
+			$$ 0 = \int\limits_T |f(x)|^p \di \mu \ge \int\limits_{e_n} |f(x)|^p \di \mu \ge \Bigl( \frac1n \Bigr)^p \mu(e_n) \quad \implies \mu e_n = 0 $$
+			При этом, $ e = \bigcup e_n \implies \mu e = 0 $.
+
+			$$ A = 0 \implies f(x) = 0 \text{ п. в. по } \mu \implies f(x) \cdot g(x) = 0 \text{ п. в. } \implies \eref1 $$
+		\item Аналогично, $ B = 0 \implies \eref1 $
+		\item $ A = +\infty \implies \eref1 $
+		\item $ B = +\infty \eref1 $
+		\item $ 0 < A, B < +\infty $
+
+			Рассмотрим нормировку функций $ f $ и $ g $:
+			$$ f_1(x) = \frac{f(x)}A \implies \int\limits_T|f_1|^p \di \mu = \frac1{A^p} \int\limits_T |f(x)|^p \di \mu = \frac{A^p}{A^p} = 1 $$
+			Аналогично,
+			$$ g_1(x) = \frac{g(x)}B \implies \int\limits_T |g_1|^p\di \mu = 1 $$
+
+			Возьмём $ a = |f_1(x)|, ~ b = |g_1(x)| $, применим неравенство Юнга:
+			$$ |f_1(x)| \cdot |g_1(x)| \le \frac{|f_1(x)|^p}p + \frac{|g_1(x)|^q}q \quad \forall x \in T $$
+			Проинтегрируем:
+			$$ \int\limits_T |f_1| \cdot |g_1| \di \mu \le \frac1p \int\limits_T |f_1|^p \di \mu + \frac1q \int\limits_T |g_1|^q \di \mu = \frac1p + \frac1q = 1 $$
+			Подставим изначальные функции и умножим на $ AB $:
+			$$ \int\limits_T \frac{|f| \cdot |g|}{AB} \di \mu \le 1 \implies \int\limits_T |f|\cdot |g| \di \mu \le AB $$
+	\end{itemize}
+\end{proof}
+
+\subsubsection{Неравенство Минковского}
+
+\begin{statement}
+	$ (T, \mathscr U, \mu), \quad f, g $ измеримы, $ \quad 1 \le p \le +\infty $
+
+	$$ \Bigl( \int\limits_T |f(x) + g(x)|^p \di \mu \Bigr)^{\frac1p} \le \Bigl( \int\limits_T |f|^p \di \mu \Bigr)^{\frac1p} + \Bigl( \int\limits_T |g|^p \di \mu \Bigr)^{\frac1p} $$
+\end{statement}
+
+\begin{iproof}
+\item $ p = 1 $
+	$$ |f(x) + g(x)| \trile |f(x)| + |g(x)| $$
+	Проинтегрируем:
+	$$ \int\limits_T |f + g| \di \mu \le \int\limits_T |f| \gi \mu + \int\limits_T |g| \di \mu $$
+\end{iproof}

@@ -1,0 +1,73 @@
+\chapter{Вероятностное пространство}
+
+\emph{Вероятностное пространство}: $ \set{\Omega = \set{\omega}, \mathscr F = \set{A, B, C, \dots}, \mathtt P(A)} $.
+
+$ \Omega $ "--- множество \emph{элементарных исходов}.
+
+$ \mathscr F $ "--- $ \sigma $-алгебра \emph{событий}.
+В $ \mathscr F $ входит $ \Omega $ "--- \emph{достоверное} событие;
+вместе с событиями $ A_1, \dots, A_k $ входит $ \bigcup A_k $;
+вместе с $ A $ входит и $ \ol A = \Omega \setminus A $.
+
+$ \mathtt P $ "--- \emph{вероятностная мера}:
+\begin{enumerate}
+	\item $ \mathtt P(A) \ge 0 $;
+	\item $ \mathtt P(\Omega) = 1 $;
+	\item $ \mathtt P(\bigcup A_k) = \sum \mathtt P(A_k) $ для несовместных событий.
+\end{enumerate}
+
+\begin{props}
+\item $ \mathtt P(A \cup \ol A) = \mathtt P(A) + \mathtt P(\ol A) \implies \mathtt (\ol A) = 1 - \mathtt P(A) $;
+\item Пусть $ A \supset B $.
+
+	$$ A = B \cup (A \setminus B) \ge 0 \implies P(A) \ge P(B) $$
+\item $ \mathtt P(\O) = 1 - \mathtt P(\Omega) = 0 $;
+\item Для двух произвольных событий $ \mathtt P(A \cup B) = \mathtt P(A) + \mathtt P(B) - \mathtt P(AB) $
+	$$ \mathtt P \bigl( \bigcup_{i = 1}^n A_i \bigr) = \sum_{i = 1}^n \mathtt P(A_i) - \sum_{i < j} \mathtt P(A_iA_j) + \sum_{i < j < k} \mathtt P(A_iA_jA_k) - \dots + (-1)^{n + 1} \mathtt P \bigl( \bigcap_{i = 1}^n A_i \bigr) $$
+\item Отсюда следует, что $ \mathtt P(A \cup B) \le \mathtt P(A) + \mathtt P(B) $
+	$$ P \bigl( \bigcup_i A_i \bigr) \le \sum_i \mathtt P(A_i) $$
+\item Пусть $ A_1 \sub A_2 \sub \dots $, и пусть $ A = \bigcup A_i $.
+	Тогда
+	$$ \mathtt P(A) = \lim\limits_{n \to \infty} \mathtt P(A_n) $$
+\item Пусть $ B_1 \supset B_2 \supset \dots $ и $ B = \bigcap B_i $.
+	Тогда
+	$$ \mathtt P(B) = \lim\limits_{n \to \infty} \mathtt P(B_n) $$
+\end{props}
+
+\section{Полная группа событий}
+
+\begin{definition}
+	Говорят, что $ A_1, A_2, \dots $ "--- \emph{полная группа несовместных событий}, если их объединение представляет собой достоверное событие.
+\end{definition}
+
+\begin{property}
+	Если $ A_1, A_2, \dots $ "--- конечный или счётный набор событий, образующих полную группу несовместных событий, то
+	$$ \sum \mathtt P(A_i) = 1 $$
+
+	Также верно \emph{неравенство Бонферрони}:
+	$$ \sum_{k = 1}^n \mathtt P(A_k) - \sum_{1 < k < l < n} \mathtt P(A_kA_l) \le \mathtt P(\sum_{k = 1}^n A_k) \le \sum_{k = 1}^n \mathtt P(A_k) $$
+\end{property}
+
+\section{Условные вероятности}
+
+Требуется найти вероятность события $ A $ при условии $ B $.
+
+Пусть событие $ B $ уже произошло.
+Тогда вероятности остальных событий переопределились (подробнее см. конспект).
+Тогда вероятность $ A $ имеет вид:
+$$ \mathtt P_B(A) = \mathtt P(A \ol B) \cdot 0 + \frac{\mathtt P(AB)}{\mathtt P(B)} = \frac{\mathtt P(AB)}{\mathtt P(B)} $$
+
+\begin{definition}
+	Пусть $ A, B $  "--- события, $ P(B) > 0 $.
+	\emph{Условной вероятностью} $ \mathtt P(A|B) $ называется отношение
+	$$ \mathtt P(A|B) = \frac{\mathtt P(AB)}{\mathtt P(B)} $$
+\end{definition}
+
+Проверим, что условная вероятность действительно является вероятностью:
+\begin{eproof}
+\item Очевидно, что условные вероятности неотрицательны.
+\item
+	$$ \mathtt P(\Omega|B) = \frac{\mathtt P(\Omega B)}{\mathtt P(B)} = \frac{\mathtt P(B)}{\mathtt P(B)} = 1 $$
+\item Пусть $ A_1, A_2, \dots $ "--- набор попарно несовместыных событий.
+	$$ \mathtt P \bigl( \bigcup_k A_k \big| B \bigr) = \frac{\mathtt P \bigl( B \cap (\bigcup_k A_k) \bigr)}{\mathtt P(B)} = \frac{\mathtt P \bigl( \bigcup_k A_kB \bigr)}{\mathtt P(B)} = \frac{\sum_k \mathtt P(A_kB)}{\mathtt P(B)} = \sum_k \mathtt P(A_k |B) $$
+\end{eproof}
