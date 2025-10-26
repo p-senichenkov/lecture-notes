@@ -1,4 +1,10 @@
 # Lecture notes
+
+> [!IMPORTANT]
+> Only "volumes" (their names start with underscore) are being maintained and therefore contain
+> double-checked and pretty-formatted information.
+> "Dated" notes are here just for reference.
+
 ## 1 course (2023-2024)
 
 ### Volumes:
@@ -41,3 +47,12 @@
 - Geometry -- Солынин А. А.
 - Parallel programming -- Макаров А. А.
 - Math logic -- Косовская Т. М.
+
+## 3 course (2025-2026)
+
+### List of lecturers:
+- Calculation methods -- Лебедева А. В.
+- Formal languages -- Федорченко Л. Н.
+- Functional analysis -- Виденский И. В.
+- System programmin -- Смирнов К. К.
+- Theory of probabilities -- Невзоров В. Б.

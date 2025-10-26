@@ -1,0 +1,1858 @@
+\part{Метрические пространства}
+
+\begin{notation}
+	$ \mathbb K = \R $ или $ \Co $
+\end{notation}
+
+\section{Полные метрические пространства.
+Свойства фундаментальных последовательностей.
+Теорема о замкнутом подпространстве}
+
+\begin{definition}
+	$ (X, \rho) $, $ X $ "--- множество, $ \rho : X \times X \to \R $, выполняются свойства:
+	\begin{enumerate}
+		\item $ \rho(x, y) \ge 0, \quad \rho(x, y) = 0 \iff x = y $;
+		\item $ \rho(x, y) = \rho(y, x) $;
+		\item $ \rho(x, y) \le \rho(x, z) + \rho(z, y) $.
+	\end{enumerate}
+
+	$ X $ называется \emph{метрическим пространством}.
+\end{definition}
+
+\begin{definition}
+	$ (X, \rho) $ "--- \emph{полное}, если любая фундаментальная последовательность имеет предел.
+\end{definition}
+
+\begin{properties}
+	$ (X, \rho), \quad \set{x_n}_{n = 1}^\infty $ "--- фундаментальная.
+
+	\begin{enumerate}
+		\item $ \set{x_n}_{n = 1}^\infty $ ограничена;
+		\item если существует $ \set{x_{n_k}}_{k = 1}^\infty $ такая, что $ \lim x_{n_k} = a $, то $ \exists \lim x_n = a $;
+		\item $ \forall \set{\eps_k > 0}_{k = 1}^\infty \quad
+			\exists \set{x_{n_k}}_{k = 1}^\infty : \quad
+			\forall j > k \quad \rho(x_{n_j}, x_{n_k}) < \eps_k $.
+	\end{enumerate}
+\end{properties}
+
+\begin{eproof}
+\item Возьмём $ \eps = 1 $.
+	$$ \exists N \in \N : \quad \forall n, m \ge N \quad \rho(x_n, x_m) < 1 \quad \implies \rho(x_N, x_m) < 1 \text{ при } m > N $$
+	Пусть $ R = \max\set{\rho(x_1, x_N), \dots, \rho(x_{N - 1}, x_N)} + 1 $.
+	Тогда $ \forall n \in \N \quad x_n \in \mathtt B_R(x_N) $.
+\item Возьмём $ \eps > 0 $.
+	Воспользуемся фундаментальностью:
+	$$ \exists N : \quad \forall n, m > N \quad \rho(x_n, x_m) < \eps $$
+	Зафиксируем $ n_k > N $ такой, что $ \rho(x_{n_k}, a) < \eps $.
+
+	Пусть $ n > N $.
+	Тогда $ \rho(x_n, a) \trile \rho(x_n, x_{n_k}) + \rho(x_{n_k}, a) < 2\eps \implies \lim \rho(x_n, a) = 0 $.
+\item Докажем \textbf{по индукции}:
+	\begin{itemize}
+		\item \textbf{База.} $ \eps_1 $
+			$$ \exists N_1 : \quad \forall n, m \ge N_1 \quad \rho(x_n, x_m) < \eps_1 \implies \rho(x_{N_1}, x_m) < \eps_1 \text{ при } m > N_1 $$
+		\item \textbf{Переход.} Допустим, уже построены $ n_1 < \dots < n_{k - 1} < n_j $ такие, что
+			$$ \forall m > n_j \quad \rho(x_m, x_{n_j}) < \eps_j, \quad j = 1, 2, \dots, k - 1 $$
+			\begin{multline*}
+				\exists n_k > n_{k - 1} : \quad \forall n, m \ge n_k \quad \rho(x_n, x_m) < \eps_k \implies \rho(x_{n_k}, x_m) < \eps_k \text{ при } m > n_k \\
+				\implies \exists \text{ требуемые } \set{x_{n_k}}
+			\end{multline*}
+	\end{itemize}
+\end{eproof}
+
+\begin{implication}
+	$ (X, \rho), \quad \set{x_n}_{n = 1}^\infty $ "--- фундаментальная
+	$$ \exists \set{x_{n_k}}_{k = 1}^\infty : \quad \sum_{k = 1}^\infty \rho(x_{n_{k + 1}}, x_{n_k}) < +\infty $$
+\end{implication}
+
+\begin{theorem}[о замкнутом подпротранстве]
+	$ (X, \rho), \quad Y \sub X $
+	\begin{enumerate}
+		\item $ (X, \rho) $ "--- полное, $ Y $ замкнуто.
+
+			Тогда $ (Y, \rho) $ полно.
+		\item $ (Y, \rho) $ "--- полное.
+
+			Тогда $ Y $ замкнуто.
+	\end{enumerate}
+\end{theorem}
+
+\begin{eproof}
+	\item Пусть $ \set{y_n}_{n = 1}^\infty $ фундаментальна в $ Y $.
+		Тогда она фундаментальна и в $ X $, а $ X $ полно.
+		Значит, $ \exists \lim\limits_{n \to \infty} y_n = a \in X $.
+		Так как $ Y $ замкнуто, $ a \in Y \implies (Y, \rho) $ "--- полное.
+	\item Пусть $ \set{y_n}_{n = 1}^\infty, \quad y_n \in Y, \lim\limits_{n \to \infty} y_n = a $.
+		Проверим, что $ a \in Y $.
+
+		$ \set{y_n}_{n = 1}^\infty $ фундаментальна $ \underimp{Y \text{ полно}}
+		\exists \lim y_n \in Y $.
+\end{eproof}
+
+\section{Банаховы пространства.
+Критерий полноты нормированного пространства}
+
+\begin{definition}
+	$ X $ "--- линейное пространство над полем $ \mathbb K $
+
+	$ p : X \to \mathbb K $ называется \emph{полунормой}, если
+	\begin{enumerate}
+		\item полуаддитивность: $ p(x + y) \le p(x) + p(y) \quad \forall x, y \in X $;
+		\item однородность: $ p(\lambda x) = |\lambda| p(x) \quad \forall \lambda \in K, ~ x \in X $.
+	\end{enumerate}
+\end{definition}
+
+\begin{definition}
+	$ X $ "--- линейное пространство над $ \mathbb K $.
+
+	$ p : X \to \mathbb K $ называется \emph{нормой}, если
+	\begin{enumerate}
+		\item $ p $ "--- полунорма;
+		\item $ p(x) = 0 \iff x = \On $.
+	\end{enumerate}
+\end{definition}
+
+\begin{definition}
+	$ (X, \|\cdot\|) $ называется \emph{банаховым}, если оно полное.
+\end{definition}
+
+\begin{definition}
+	\hfill
+	\begin{enumerate}
+		\item $ X $ "--- линейное пространство над $ K $.
+
+			$ L \sub X $ называется \emph{подпространством (в алгебраическом смысле)}, если оно является линейным пространством, \ie
+			$$
+			\begin{rcases}
+				x, y \in L \\
+				\alpha, \beta \in K
+			\end{rcases} \implies \alpha x + \beta y \in L $$
+		\item $ (X, \|\cdot\|) $
+
+			$ L \sub X $ называется \emph{(замкнутым) подпространством}, если
+			\begin{enumerate}
+				\item $ L $ "--- подпространство в алгебраическом смысле;
+				\item $ L $ замкнуто.
+			\end{enumerate}
+	\end{enumerate}
+\end{definition}
+
+\begin{theorem}
+	$ (X, \|\cdot\|) $ "--- полное \textbf{тогда и только тогда}, когда из абсолютной сходимости ряда следует его сходимость.
+\end{theorem}
+
+\begin{iproof}
+\item $ \implies $ ($ X $ "--- полное)
+
+	Возьмём $ \set{x_k}_{k = 1}^\infty $ такую, что $ \sum_{k = 1}^\infty \|x_k\| $ сходится.
+	Применим к этому ряду критерий Коши:
+	$$ \forall \eps > 0 \quad \exists N \in \N : \quad \forall n > N, ~ p \in \N : \quad \|x_{n + 1}\| + \dots + \|x_{n + p}\| < \eps $$
+	$$ S_n = \sum_{k = 1}^n x_k $$
+	Требуется доказать, что $ S_n $ образуют фундаментальную последовательность.
+	Для этого оценим норму разности:
+	$$ \|S_{n + p} - S_n\| = \bigl\| \sum_{k = 1}^p x_{n + k} \bigr\| \trile \sum_{k = 1}^p \|x_{n + k}\| < \eps $$
+\item $ \impliedby $ (абсолютно сходящийся ряд сходится)
+
+	Пусть $ \set{x_n}_{n = 1}^\infty $ фундаментальна.
+	Нужно доказать, что у неё есть предел.
+
+	Воспользуемся следствием из свойств фундаментальных последовательностей:
+	$$ \exists \set{x_{n_k}}_{k = 1}^\infty : \quad \sum_{k = 1}^\infty \|x_{n_{k + 1}} - x_{n_k}\| < +\infty $$
+	$$ \implies \|x_{n_1}\| + \sum_{k = 1}^\infty \|x_{n_{k + 1}} - x_{n_k}\| < +\infty $$
+
+	Рассмотрим ряд без нормы:
+	$$ \exists S = x_{n_1} + \sum_{k = 1}^\infty (x_{n_{k + 1}} - x_{n_k}) $$
+	$$ S_m = x_{n_1} + (x_{n_2} - x_{n_1}) + \dots + (x_{n_m} - x_{n_{m - 1}}) = x_{n_m} $$
+	При этом,
+	$$ \exists \lim\limits_{m \to \infty} S_m = S \quad \implies \exists \lim x_{n_m} = S \underimp{\text{св-во фунд. посл. 2}} \lim x_n = S $$
+\end{iproof}
+
+\section(Полнота пространства ограниченных функций, пространства непрерывных функций, пространства
+гладких функций)
+{Полнота $ m(A), ~ \mathcal C(K), ~ \mathcal C^{(n)}[a, b] $}
+
+\begin{definition}
+	$ X $ "--- множество.
+
+	$ m(X) $ "--- \emph{пространство ограниченных функций}:
+	$$ m(X) = \set{f : X \to \mathbb K | \sup\limits_{x \in X} |f(x)| < +\infty} $$
+
+	Норма на таком пространстве называется \emph{равномерной, чебышёвской или} $ \sup $-\emph{нормой}:
+	$$ \|f\|_\infty = \sup\limits_{x \in X}|f(x)| $$
+\end{definition}
+
+\begin{theorem}
+	$ m(X) $ "--- банахово пространство.
+\end{theorem}
+
+\begin{eproof}
+\item Проверим, что $ \|f\|_\infty $ удовлетворяет аксиомам нормы:
+	$$ \|f\|_\infty = 0 \iff \sup\limits_{x \in X} |f(x)| = 0 \iff f(x) \equiv 0 \iff f = \On $$
+	$$ \lambda \in K, \quad \|\lambda f\|_\infty = \sup\limits_{x \in X}|\lambda f(x)| = |\lambda| \sup\limits_{x \in X} |f(x)| = |\lambda| \cdot \|f\|_\infty $$
+	Пусть $ f, g \in m(X), ~ x $ фиксирован.
+	Тогда $ f(x), g(x) $ "--- числа.
+	$$ \|f\|_\infty + \|g\|_\infty \ge \implies |f(x)| + |g(x)| \trige |f(x) + g(x)| \quad \forall x \in X $$
+	В силу произвольности $ x $,
+	$$ \implies \|f\|_\infty + \|g\|_\infty \ge
+	\sup\limits_{x \in X} |f(x) + g(x)| = \|f + g\|_\infty $$
+\item Проверим полноту.
+
+	Возьмём фундаментальную последовательность $ \set{f_n}_{n = 1}^\infty $ (в смысле нормы $ \|\cdot\|_\infty $).
+	$$ \forall \eps > 0 \quad \exists N \in \N : \quad \forall n, m > N \quad
+	\|f_n - f_m\|_\infty < \eps $$
+	Зафиксируем $ x \in X $.
+	$$ \implies |f_n(x) - f_m(x)| < \eps $$
+	Из полноты $ K $ следует, что $ \exists \lim\limits_{n \to \infty} f_n(x) $.
+
+	Обозначим $ f(x) \coloneq \lim\limits_{n \to \infty} f_n(x) $ (\emph{поточечный}).
+
+	$$ |f_n(x) - f_m(x)| < \eps \text{ при фиксированном } x, \quad n, m > N $$
+	Перейдём к пределу по $ n $:
+	$$ |f(x) - f_m(x)| \le \eps \quad \forall x \in X, \quad m >  N $$
+	Воспользуемся произвольностью $ x $:
+	$$ \|f - f_m\|_\infty = \sup\limits_{x \in X} |f(x) - f_m(x)| \le \eps \implies (f - f_m) \in m(X) $$
+	$$ f = (f - f_m) + f_m $$
+	В силу линейности $ m(X) $ это означает, что $ f \in m(X) $, $ \|f - f_m\|_\infty < \eps $ при $ m > N $
+	$$ \implies \lim\limits_{m \to \infty} = f \text{ в пространстве } m(X) $$
+\end{eproof}
+
+\begin{definition}
+	$ K $ "--- \emph{топологический компакт}, если:
+	\begin{enumerate}
+		\item $ \forall \set{G_\alpha \text{ "--- откр.}}_{\alpha \in A} :
+			K \sub \bigcup_{\alpha \in A} G_\alpha \quad
+			\exists \set{\alpha_j}_{j = 1}^n : \quad
+			K \sub \bigcup_{j = 1}^n G_{\alpha_j} $;
+		\item \emph{Хаусдорфовость}: $ \forall a \ne b \in K \quad \exists U, V $ "--- открытые: $ a \in U, ~ b \in V : \quad U \cap V = \O $.
+	\end{enumerate}
+\end{definition}
+
+\begin{definition}
+	$ K $ "--- топологический компакт.
+
+	Введём \emph{пространство непрерывных функций на компакте}:
+	$$ \mathcal C(K) = \set{f : K \to \mathbb K \text{"--- непрерывны}} $$
+	$$ \|f\|_\infty = \sup\limits_{x \in K}|f(x)| = \max\limits_{x \in K}|f(x)| $$
+\end{definition}
+
+\begin{statement}
+	$ \bigl( \mathcal C(K), \|\cdot\|_\infty \bigr) $ "--- банахово.
+\end{statement}
+
+\begin{proof}
+	$ m(K) $ "--- пространство ограниченных функций с такой же нормой.
+	Уже доказано, что оно банахово.
+
+	Линейная комбинация линейных функций линейна, поэтому $ C(K) $ "--- подпространство в алгебраическом смысле.
+	Осталось проверить замкнутость.
+
+	Возьмём $ \set{f_n}_{n = 1}^\infty, ~ f_n \in C(K), \quad f \in m(K) $ такие, что $ \lim\limits_{n \to \infty} f_n = f $ в $ C(K) $.
+	$$ \implies \lim\limits_{n \to \infty} \|f - f_n\|_\infty = 0 \iff f_n \uniarr{K} f \implies f \in C(K) \implies C(K) \text{ замкнуто} $$
+\end{proof}
+
+\begin{definition}
+	$ n \in \N $ "--- фиксировано.
+
+	Рассмотрим \emph{пространство непрерывных производных}:
+	$$ \mathcal C^{(n)}[a, b] = \set{f : [a, b] \to \mathbb K | \exists \nder f \in \mathcal C[a, b]} $$
+	$$ \|f\|_{\nder C} \define \max\limits_{0 \le k \le n} \|\nder[k] f\|_\infty, \quad \nder[0]f \define f $$
+\end{definition}
+
+\begin{statement}
+	$ \bigl( \nder{\mathcal C[a, b]}, \|\cdot\|_{\nder{\mathcal C}} \bigr) $ "--- банахово.
+\end{statement}
+
+\begin{proof}
+	Пусть $ \set{f_m}_{m = 1}^\infty $ фундаментальна в $ \nder C[a, b] $.
+	Возьмём $ \eps > 0 $.
+	$$ \exists N \in \N : \quad \forall m, p > N \quad \|f_m - f_p\|_{\nder{\mathcal C}} < \eps $$
+	$$ \implies \forall 0 \le k \le n \quad \|\nder[k]{f_m} - \nder[k]{f_p}\|_\infty < \eps $$
+
+	Значит, $ \set{\nder[k]{f_m}}_{m = 1}^\infty $ фундаментальна в $ \mathcal C[a, b] $.
+	$$ \implies \exists \phi_k \text{ "--- непрер. } : \quad
+	\lim\limits_{n \to \infty} \|\nder[k]{f_m} - \phi_k\| = 0 $$
+
+	$ \mathcal C[a, b] $ "--- банахово $ \implies \phi_k \in \mathcal C[a, b] $.
+	$$ \lim \|\nder[k]f - \phi_k\|_\infty = 0, \quad 0 \le k \le n \implies
+	\begin{cases}
+		f_m \uniarr[m \to \infty]{[a, b]} \phi_0, \\
+		f_m' \uniarr[m \to \infty]{[a, b]} \phi_1 \\
+		\dots \\
+		\nder{f_m} \uniarr[m \to \infty]{[a, b]} \phi_n
+	\end{cases} \underimp{\text{в анализе доказано}}
+	\begin{cases}
+		\phi_1 = \phi_0' \\
+		\phi_2 = \phi_1' = \phi_0'' \\
+		\dots \\
+		\phi_n = \nder{\phi_0}
+	\end{cases} $$
+	$$ \|f_m - \phi_0\|_{\nder{\mathcal C}} = \max\limits_{0 \le k \le n} \|\nder[k]{f_m} - \nder[k]{\phi_0}\|_\infty \underarr{m \to \infty} 0 $$
+	$ \lim\limits_{m \to \infty} f_m = \phi_0 $ в $ \nder{\mathcal C}[a, b] $.
+\end{proof}
+
+\section{Неравенства Юнга, Гёльдера, Минковского}
+
+\begin{statement}[неравенство Юнга]
+	$ a, b > 0, \quad p > 1, \quad \frac1p + \frac1q = 1 $ ($ q $ называется \emph{сопряжённым показателем}).
+
+	$$ ab \le \frac{a^p}p + \frac{b^q}q, \quad \text{ равенство только при } a^p = b^q $$
+\end{statement}
+
+\begin{proof}
+	Воспользуемся тем, что $ \ln x $ выпукла вверх, \ie $ (\ln x)'' = -\frac1{x^2} < 0 $.
+	Это означает, что график лежит над хордой, \ie
+	$$ \forall x_1 \ne x_2 \quad \forall 0 < \alpha < 1 \quad
+	\forall \beta = 1 - \alpha \quad f\bigl(\alpha x_1 + (1 - \alpha)x_2 \bigr) > \alpha f(x_1) + (1 - \alpha)f(x_2) $$
+	Применим это неравенство к $ \ln $:
+	$$ f(x) = \ln x, \quad x_1 = a^p, \quad x_2 = b^q, \quad \alpha = \frac1p, \quad \beta = \frac1q $$
+	$$ \ln\Bigl(\frac1p \cdot a^p + \frac1q \cdot b^q\Bigr) > \frac1p \cdot \ln(a^p) + \frac1q \ln(b^q) = \ln(ab) $$
+	$$ \frac{a^p}p + \frac{b^q}q > ab $$
+\end{proof}
+
+\begin{statement}[неравенство Гёльдера]
+	$ (T, \mathscr U, \mu), \quad f, g $ измеримы, $ \quad p > 1, \quad q : \frac1p + \frac1q = 1 $.
+
+	\begin{equ}{ineq:1}
+		\int\limits_T |fg| \di \mu \le \Bigl( \int\limits_T |f|^p \di \mu \Bigr)^{\frac1q} \cdot \Bigl( \int\limits_T |g|^q \di \mu \Bigr)^{\frac1q}
+	\end{equ}
+\end{statement}
+
+\begin{note}
+	Для $ p = q = 2 $ это неравенство называется \emph{неравенством Коши"--~Буняковского}.
+\end{note}
+
+\begin{proof}
+	$$ A = \Bigl( \int\limits_T |f(x)|^p \di \mu \Bigr)^{\frac1p}, \quad B = \Bigl( \int\limits_T |g|^q\di \mu \Bigr)^{\frac1q} $$
+
+	\begin{itemize}
+		\item $ A = 0 $
+
+			Докажем, что в таком случае $ f(x) = 0 $ почти всюду:
+
+			Рассмотрим $ e = \set{x \mid f(x) \ne 0} = \set{x \mid |f(x)| > 0} $.
+			$$ e_n \coloneq \set{ x | \ |f(x)| > \frac1n} $$
+			$$ 0 = \int\limits_T |f(x)|^p \di \mu \ge \int\limits_{e_n} |f(x)|^p \di \mu \ge \Bigl( \frac1n \Bigr)^p \mu(e_n) \quad \implies \mu e_n = 0 $$
+			При этом, $ e = \bigcup e_n \implies \mu e = 0 $.
+
+			$$ A = 0 \implies f(x) = 0 \text{ п. в. по } \mu \implies
+			f(x) \cdot g(x) = 0 \text{ п. в. } \implies \eref{ineq:1} $$
+		\item Аналогично, $ B = 0 \implies \eref{ineq:1} $
+		\item $ A = +\infty \implies \eref1 $
+		\item $ B = +\infty \eref1 $
+		\item $ 0 < A, B < +\infty $
+
+			Рассмотрим нормировку функций $ f $ и $ g $:
+			$$ f_1(x) = \frac{f(x)}A \implies \int\limits_T|f_1|^p \di \mu = \frac1{A^p} \int\limits_T |f(x)|^p \di \mu = \frac{A^p}{A^p} = 1 $$
+			Аналогично,
+			$$ g_1(x) = \frac{g(x)}B \implies \int\limits_T |g_1|^p\di \mu = 1 $$
+
+			Возьмём $ a = |f_1(x)|, ~ b = |g_1(x)| $, применим неравенство Юнга:
+			$$ |f_1(x)| \cdot |g_1(x)| \le \frac{|f_1(x)|^p}p + \frac{|g_1(x)|^q}q \quad \forall x \in T $$
+			Проинтегрируем:
+			$$ \int\limits_T |f_1| \cdot |g_1| \di \mu \le \frac1p \int\limits_T |f_1|^p \di \mu + \frac1q \int\limits_T |g_1|^q \di \mu = \frac1p + \frac1q = 1 $$
+			Подставим изначальные функции и умножим на $ AB $:
+			$$ \int\limits_T \frac{|f| \cdot |g|}{AB} \di \mu \le 1 \implies \int\limits_T |f|\cdot |g| \di \mu \le AB $$
+	\end{itemize}
+\end{proof}
+
+\begin{statement}[неравенство Минковского]
+	$ (T, \mathscr U, \mu), \quad f, g $ измеримы, $ \quad 1 \le p \le +\infty $
+
+	\begin{equ}1
+		\Bigl( \int\limits_T |f(x) + g(x)|^p \di \mu \Bigr)^{\frac1p} \le \Bigl( \int\limits_T |f|^p \di \mu \Bigr)^{\frac1p} + \Bigl( \int\limits_T |g|^p \di \mu \Bigr)^{\frac1p}
+	\end{equ}
+\end{statement}
+
+\begin{iproof}
+\item $ p = 1 $
+	$$ |f(x) + g(x)| \trile |f(x)| + |g(x)| $$
+	Проинтегрируем:
+	$$ \int\limits_T |f + g| \di \mu \le \int\limits_T |f| \di \mu + \int\limits_T |g| \di \mu $$
+\item $ p > 1 $
+
+	Обозначим
+	$$ A = \Bigl( \int\limits_T |f|^p \di \mu \Bigr)^{\frac1p}, \quad B = \Bigl( \int\limits_T |g|^p \di \mu \Bigr)^{\frac1p}, \quad C = \Bigl( \int\limits_T |f + g|^p \di \mu \Bigr)^{\frac1p} $$
+
+	Рассмотрим отдельно тривиальные случаи:
+	\begin{itemize}
+		\item Если $ A = +\infty $ или $ B = +\infty $ или $ C = 0 $, то \eref1.
+		\item $ A < +\infty, ~ B < +\infty $
+
+			Докажем сначала, что $ C < +\infty $.
+			Возьмём $ a, b \in \R $. Понятно, что $ |a + b| \le 2\max\set{|a|, |b|} $.
+			$$ |a + b|^p \le 2^p \max\set{|a|^p, |b|^p} \le 2^p \bigl( |a|^p + |b|^p \bigr) $$
+			Подставим $ a = f(x), ~ b = g(x) $ (для фиксированного $ x $):
+			$$ |f(x) + g(x)|^p \le 2^p \bigl( |f(x)|^p + |g(x)|^p \bigr) $$
+			Проинтегрируем по $ T $ и $ \mu $:
+			$$ C^p = \int\limits_T |f + g|^p \di \mu \le 2^p \Bigl( \int\limits_T |f|^p \di \mu + \int\limits_T |g|^p \di \mu \Bigr) = 2^p (A^p + B^p) < +\infty $$
+
+			Теперь докажем само неравенство:
+			$$ C^p = \int\limits_T |f + g|^p \di \mu = \int\limits_T |f + g| \cdot |f + g|^{p - 1} \di \mu \le
+			\underbrace{\int\limits_T |f| \cdot |f + g|^{p - 1} \di \mu}_{I_1} + \underbrace{\int\limits_T |g| \cdot |f + g|^{p - 1} \di \mu}_{I_2} $$
+			$$ I_1 = \int\limits_T |f| \cdot |f + g|^{p - 1} \di \mu \underset{\text{нер-во Гёльдера}}\le
+			\Bigl( \int\limits_T |f|^p \di \mu \Bigr)^{\frac1p} \Bigl( \int\limits_T |f + g|^{(p - 1)q} \di \mu \Bigr)^{\frac1q} $$
+			$$ \frac1p + \frac1q = 1 \implies p + q = pq \implies pq - q = p $$
+			$$ I_1 \le A \cdot C^{\frac pq} $$
+			Аналогично, $ I_2 \le B \cdot C^{\frac pq} $.
+			$$ C^p \le A \cdot C^{\frac pq} + B \cdot C^{\frac pq} = (A + B) C^{\frac pq} $$
+			$$ p - \frac pq = p\Bigl(1 - \frac 1q\Bigr) = 1 $$
+			Сократим на $ C^{\frac pq} $:
+			$$ C \le A + B $$
+	\end{itemize}
+\end{iproof}
+
+\section{Определение и свойства пространств \texorpdfstring{$ l^p $, $ F $}{}}
+
+\begin{definition}
+	Зафиксируем $ n \in \N $.
+	Рассмотрим $ l_n^\infty = (\mathbb K^n, \|\cdot\|_\infty) $, где
+	$$ \R^n = \set{x = (x_1, \dots, x_n), ~ x_j \in \R}, \quad \|x\|_\infty = \max\limits_{1 \le j \le n} |x_j| $$
+
+	При этом, $ l_n^\infty = m(X) $, где $ X = \set{1, 2, \dots, n}, ~ f(j) = x_j $.
+	Значит, $ l_n^\infty $ "--- банахово пространство.
+\end{definition}
+
+\begin{definition}
+	$ l^\infty $ "--- \emph{пространство ограниченных последовательностей}, \ie
+	$$ l^\infty = \set{x = \set{x_j}_{j = 1}^\infty, ~ x_j \in \mathbb K |
+	\sup\limits_{j \ge 1}|x_j| < +\infty} $$
+	$$ l^\infty = m(\N) \implies l^\infty \text{ "--- банахово} $$
+\end{definition}
+
+\begin{definition}
+	$$ C = \set{x = \set{x_j}_{j = 1}^\infty \mid \exists \lim\limits_{j \to \infty} x_j = x_0} $$
+\end{definition}
+
+\begin{statement}
+	Пространства $ C $ замкнуты.
+\end{statement}
+
+\begin{definition}
+	$ F $ "--- множество \emph{финитных} последовательностей:
+	$$ F = \set{x = (x_1, x_2, \dots, x_{N(x)}, 0, \dots), \quad x_j \in \R, \Co} $$
+
+	$$ (F, \|\cdot\|_p), \quad 1 \le p \le +\infty $$
+\end{definition}
+
+\begin{statement}
+	$ (F, \|\cdot\|_p) $ не полны.
+\end{statement}
+
+\begin{proof}
+	При фиксированном $ p $ можно считать, что $ (F, \|\cdot\|_p) \sub l^p $ (подпространство в алгебраическом смысле).
+
+	Проверим, что оно не замкнуто.
+	Возьмём
+	$$ x = \set{\frac1{2^k}}_{k = 1}^\infty, \quad x \in l^p \quad \forall 1 \le p \le +\infty $$
+	$$ \sum_{k = 1}^\infty \frac1{2^{kp}} < +\infty $$
+	Положим
+	$$ \nder[m]x = \Bigl( \frac12, \frac1{2^2}, \dots, \frac1{2^m}, 0, \dots \Bigr) \in F $$
+	\begin{itemize}
+		\item $ 1 \le p < +\infty $
+			$$ \|x - \nder[m]x\|_p = \Bigl( \sum_{k = m + 1}^\infty \frac1{2^{pk}} \Bigr)^{\frac1p} \underarr{m \to \infty} 0 $$
+		\item $ p = +\infty $
+			$$ \|x - \nder[m]x\|_\infty = \frac1{2^{m + 1}} \underarr{m \to \infty} 0 $$
+	\end{itemize}
+	Значит, $ F $ не замкнуто.
+\end{proof}
+
+\section{Определение и полнота пространств \texorpdfstring{$ \mathrm L^p $}{Лебега},
+пространств последовательностей}
+
+\begin{definition}
+	$ 1 \le p \le +\infty $
+	$$ \mathscr L^p(T, \mu) = \set{f | \ |f|^p \in \mathscr L(T, \mu)} =
+	\set{f \text{ "--- измерима} | \int\limits_T |f|^p \di \mu <+\infty} $$
+	$$ \|f\|_p = \Bigl( \int\limits_T |f|^p \di \mu \Bigr)^{\frac1p} $$
+\end{definition}
+
+\begin{statement}
+	$ \|\cdot\|_p $ "--- полунорма на $ \mathscr L^p(T, \mu) $.
+\end{statement}
+
+\begin{eproof}
+\item $ \|f\|_p = \Bigl( \int\limits_T |f(x)|^p \di \mu \Bigr)^{\frac1p} \ge 0 $;
+\item $ \lambda \in \R \text{ (или $ \Co $)}, \quad \|\lambda f\|_p = |\lambda| \cdot \|f\|_p $;
+\item $ \|f + g\|_p \le \|f\|_p + \|g\|_p $ "--- неравенство Минковского.
+\end{eproof}
+
+$$ \|f\|_p = 0 \iff \int\limits_T |f(x)|^p \di \mu = 0\iff f(x) = 0 ~\ale $$
+
+Обозначим $ N = \set{f \text{ "--- изм.} \mid f(x) = 0 ~\ale} $.
+
+\begin{definition}
+	$$ \mathrm L^p = \faktor{\mathscr L^p}N $$
+
+	То есть, $ f \sim g $, если $ f - g \in N $, то есть $ f(x) = g(x) ~\ale $.
+
+	В пространстве $ \mathscr L^p $ будем рассматривать $ \ol f $ "--- классы эквивалентности $ f $.
+	$$ \|\ol f\|_p = \|f\|_{\mathscr L^p} $$
+\end{definition}
+
+\begin{statement}
+	$ \|\cdot\|_{\mathscr L^p} $ "--- норма.
+\end{statement}
+
+\begin{proof}
+	$$ \|\ol f\| = 0 \iff \Bigl( \int\limits_T |f|^p \di \mu \Bigr)^{\frac1p} = 0 \iff f(x) = 0 ~\ale \implies f \in N $$
+\end{proof}
+
+\begin{definition}
+	$ p = \infty $
+
+	$ \mathscr L^\infty (T, \mu) $ "--- пространство \emph{существенно ограниченных функций}.
+
+	$ f $ "--- измерима
+	$$ f \in \mathscr L^\infty \iff \exists c > 0 : \quad \mu\set{x \in T | \ |f(x)| > c} = 0 $$
+
+	Определим \emph{существенный супремум}:
+	$$ \|f\|_\infty = \inf\set{c > 0 | \mu\set{x | \ |f(x)| > c} = 0} $$
+\end{definition}
+
+\begin{statement}
+	$$ f \in \mathscr L^\infty(T, \mu) \implies |f(x)| \le \|f(x)\|_\infty ~\ale $$
+\end{statement}
+
+\begin{proof}
+	$$ \|f\|_\infty = \inf\set{c \mid \mu\set{x \mid |f(x)| > c} = 0} $$
+	Возьмём $ e_m = \set{x \mid |f(x)| > \|f\|_\infty + \frac1m} \implies \mu e_m = 0 $.
+	$$ e = \set{x \mid |f(x)| > \|f\|_\infty} = \bigcup e_m \implies \mu e = 0 $$
+\end{proof}
+
+\begin{statement}
+	$ \mathscr L^\infty(T, \mu), \quad \|\cdot\|_\infty $ "--- полунорма.
+\end{statement}
+
+\begin{eproof}
+\item $ \lambda \ne 0 \in \R $ (или $ \Co $)
+	$$ \|f(x)\| > c \iff |\lambda f(x)| > |\lambda| \cdot c $$
+\item Пусть $ f, g \in \mathscr L^\infty(T, \mu), \quad x \in T $.
+	$$ |f(x) + g(x)| \le |f(x)| + |g(x)| \underset{\text{п. в.}}\le \|f\|_\infty + \|g\|_\infty $$
+	$$ \implies \|f + g\|_\infty \le \|f\|_\infty + \|g\|_\infty $$
+\item $ \|f\|_\infty = 0 \implies |f(x)| \le 0 ~\ale \implies f(x) = 0 ~\ale $
+\end{eproof}
+
+\begin{definition}
+	$ \mathrm L^\infty(T, \mu) = \faktor{\mathscr L^\infty(T, \mu)}N $, где $ N = \set{f \text{ "--- изм.} \mid f(x) = 0 ~\ale} $.
+
+	$$ \ol f \in \faktor{\mathscr L^\infty}N, \quad \|\ol f\|_\infty = \|f\|_\infty $$
+\end{definition}
+
+$$ \|\ol f\|_\infty = 0 \iff \|f\|_\infty = 0 \iff f(x) = 0 ~\ale \iff f \in N = \On $$
+
+\begin{theorem}[Фату]
+	$ (T, \mathscr U, \mu), \quad g_n(x) $ измеримы, $ g_n(x) \ge 0, \quad g_n \to g(x) $ \ale на $ T $
+	$$ \int\limits_T g_n(x) \di \mu \le C \implies \int\limits_T g(x)\di \mu \le C $$
+\end{theorem}
+
+\begin{theorem}
+	$ (T, \mathscr, \mu), \quad 1 \le p \le \infty $
+
+	$ \mathrm L^p(T, \mu) $ "--- банаховы.
+\end{theorem}
+
+\begin{iproof}
+\item $ p < +\infty $
+
+	Воспользуемся критерием полноты.
+	Возьмём $ \set{f_n}_{n = 1}^\infty, ~ f_n \in \mathrm L^p $ (\ie берём классы, а из классов берём произвольных представителей) такие, что $ \sum_{n = 1}^\infty \|f_n\|_p \le C < +\infty $.
+	$$ S_n(x) = \sum_{k = 1}^n f_k(x) $$
+	Докажем, что $ \exists S(x) = \sum_{k = 1}^\infty f_k(x) $, \ie $ S(x) \in \mathrm L^p, ~ \lim\limits_{n \to \infty} \|S - S_n\|_p = 0 $.
+
+	Рассмотрим для начала сумму модулей:
+	$$ \sigma_n(x) = \sum_{k = 1}^\infty |f_k(x)|, \quad \sigma(x) = \sum_{k = 1}^\infty |f_k(x)| $$
+	Проверим, что $ \sigma(x) $ \ale конечна.
+
+	$$ \|\sigma_n\|_p \trile \sum_{k = 1}^n \|f_k\|_p \le C $$
+	Применим теорему Фату:
+	$$
+	\begin{rcases}
+		\int\limits_T |\sigma_n(x)|^p\di \mu \le C^p \\
+		|\sigma_n(x)|^p \to |\sigma(x)|^p
+	\end{rcases} \implies \int\limits_T |\sigma(x)|^p \di \mu \le C $$
+	$$ \implies \sigma(x) < +\infty ~\ale $$
+	Значит, для \ale $ x \quad \exists \sum_{k = 1}^\infty f_k(x) = S(x) $.
+
+	Воспользуемся критерием Коши для $ \sum_{n = 1}^\infty \|f_n\| \le C $:
+	$$ \forall \eps > 0 \quad \exists N : \quad \forall m > n > N \quad \sum_{k = n + 1}^ \|f_k\|_p < \eps $$
+	$$ \|S_m - S_n\|_p \le \sum_{k = n + 1}^m \|f_k\|_p < \eps $$
+
+	Снова воспользуемся теоремой Фату:
+	$$
+	\begin{rcases}
+		\int\limits_T |S_m(x) - S_n(x)|^p \di \mu < \eps^p \\
+		|S_m(x) - S_n(x)|^p \underarr{m \to \infty} |S(x) - S_m(x)|^p ~\ale
+	\end{rcases} \implies \int\limits_T |S(x) - S_m(x)|^p \di \mu \le \eps^p $$
+
+	$$ S - S_n \in \mathrm L^p, \quad S_n \in \mathrm L^p \implies S = (S - S_n) + S_n \implies S \in \mathrm L^p $$
+	$$ \implies \lim\limits_{n \to \infty} \|S - S_n\|_p = 0 \implies \mathrm L^p \text{ "--- полное} $$
+\item $ p = \infty $
+
+	Рассмотрим $ \set{f_n}_{n = 1}^\infty $ "--- фундаментальная в $ \mathrm L^\infty(T, \mu) $
+
+	$$ |f_n(x)| \le \|f_n\|_\infty \text{ при } x \in T \setminus E_n, \quad \mu E_n = 0 $$
+	$$ E = \bigcup_{n = 1}^\infty E_n, \quad T_1 = T \setminus E \implies f_n \in m(T_1) $$
+	$ \set{f_n}_{n = 1}^\infty $ фундаментальна в $ m(T_1) $, а оно банахово.
+	$$ \implies \exists f \in m(T_1) : \quad \lim\limits_{n \to \infty} \|f_n - f\|_\infty = 0 $$
+	Положим $ f\big|_E = 0 $.
+	$$ \lim\limits_{n \to \infty}\|f - f_n\|_{\mathrm L^\infty(T)} = 0 $$
+\end{iproof}
+
+\begin{definition}
+	$ n \in \N $ фиксировано, $ \quad 1 \le p < +\infty $
+	$$ l_n^p = \Bigl( \mathbb K^n, \|x\|_p = \bigl( \sum_{j = 1}^n |x_j|^p \bigr)^{\frac1p} \Bigr) $$
+
+	Возьмём $ T = \set{1, 2, \dots, n} $.
+	Функции на $ T $ будут элементами $ \R^n $.
+	$$ \mu(j) = 1, \quad 1 \le j \le n $$
+	$$ l_n^p = \mathrm L^p(T, \mu) \text{ "--- банахово} $$
+\end{definition}
+
+\begin{statement}
+	$ \set{\nder[m]x}_{m = 1}^\infty, \quad \nder[m]x \in l_n^p, \quad \nder[m]x = \bigl( \nder[m]x_1, \dots, \nder[m]x_n \bigr), \quad 1 \le p \le +\infty $
+	$$ \lim\limits_{m \to \infty} \|x - \nder[m]x\|_p = 0 \iff \lim\limits_{m \to \infty} \nder[m]x_j = x_j, \quad 1 \le j \le n $$
+\end{statement}
+
+\begin{iproof}
+\item $ \implies $
+	$$ \underbrace{\Bigl( \sum |x_j - \nder[m]x_j|^p  \Bigr)^{\frac1p}}_{\to 0} \ge |x_j - \nder[m]x_j| \text{ при фиксированном } j $$
+	$$ \implies \lim\limits_{m \to \infty} |x_j - \nder[m]x_j| = 0 $$
+	При $ p = \infty $:
+	$$ \max\limits_{1 \le j \le m} |x_j - \nder[m]x_j| \ge |x_j - \nder[m]x_j| \text{ при фиксированном } j $$
+\item $ \impliedby $
+	$$ \lim\limits_{m \to \infty} |x_j - \nder[m]x_j| = 0 \implies \Bigl( \sum_{j = 1}^n |x_j - \nder[m]x_j|^p \Bigr)^{\frac1p} $$
+	Для бесконечных так же берём $ \max $.
+\end{iproof}
+
+\begin{eg}
+	$$ l^p = \set{x = \set{x_j}_{j = 1}^\infty, \quad x \in \mathbb K | \sum_{j = 1}^\infty |x_j|^p < +\infty} $$
+	$$ \|x\|_p = \Bigl( \sum_{j = 1}^\infty |x_j|^p \Bigr)^{\frac1p} $$
+
+	Докажем, что $ l^p $ "--- банахово:
+	$$ T = \N, \quad \mu(j) = 1 \quad \forall j \in \N, \quad L^p(\N, \mu) = l^p, \quad f \in L^p(\N, \mu), \quad f(j) = x_j $$
+\end{eg}
+
+\begin{remark}
+	\hfill
+	\begin{enumerate}
+		\item $ \set{\nder[m]x}_{m = 1}^\infty, \quad \nder[m]x \in l^p, \quad 1 \le p \le +\infty, \quad x \in l^p, \quad \lim\limits_{m \to \infty}\|\nder[m]x - x\|_p = 0 $
+			$$ \implies \lim\limits_{m \to \infty}\nder[m]x_j = x_j \quad \forall j \in \N $$
+		\item В другую сторону \textbf{неверно}.
+	\end{enumerate}
+\end{remark}
+
+\begin{eg}[в другую сторону]
+	Рассмотрим последовательность базисных элементов:
+	$$ e_m = (0, \dots, 0, \underset m 1, 0, \dots, 0) $$
+	$$ e_m = \set{\delta_j^m}_{j = 1}^\infty, \quad \delta_j^m =
+	\begin{cases}
+		1, \quad j = m \\
+		0, \quad j \ne m
+	\end{cases} $$
+	$ \delta_j^m $ называются \emph{символами Кронекера}.
+
+	Для любого фиксированного $ j $ $ \lim\limits_{m \to \infty} \delta_j^m = 0 $.
+	Покоординатный предел равен $ \On $.
+
+	$$ \|e_m - \On\|_p = 1 \quad \forall m \implies \|e_m - \On\|_p \not\to 0 $$
+\end{eg}
+
+\section{Примеры не полных нормированных пространств}
+
+\begin{eg}
+	$$ \Bigl( \mathcal C[a, b], \|f\|_p = \bigl( \int_a^b |f(x)|^p \di x \bigr)^{\frac1p} \Bigr), \quad 1 \le p < +\infty $$
+\end{eg}
+
+\begin{statement}
+	$ (\mathcal C[a, b], \|\cdot\|_p) $  "--- неполное нормированное пространство.
+\end{statement}
+
+\begin{proof}
+	Возьмём $ f \in \mathcal C[a, b] $.
+	$$ \Bigl( \int_a^b |f(x)|^p \di x \Bigr)^{\frac1p} = 0 \implies f(x) \equiv[{[a, b]}] 0 \implies \|\cdot\|_p \text{  "--- норма} $$
+	Рассмотрим $ \mathrm L^p[a, b], ~ \lambda $ "--- классическая мера Лебега.
+
+	Докажем, что $ (\mathcal C[a, b], \|\cdot\|_p) $ "--- подпространство $ (\mathrm L^p, \lambda) $ в алгебраическом смысле.
+	$$ f \in \mathcal C[a, b] \to \set{g \in \mathrm L^p [a, b], \quad g(x) = f(x) ~ \ale \text{ по } \lambda} $$
+
+	Проверим, что $ C[a, b] $ не замкнуто.
+	$$ f_n(x) =
+	\begin{cases}
+		0, \quad -1 \le x \le 0 \\
+		nx, \quad 0 \le x \le \frac1n \\
+		1, \quad \frac1n \le x \le 1 \\
+	\end{cases}, \quad g(x) =
+	\begin{cases}
+		0, \quad -1 \le x \le 0 \\
+		1, \quad 0 < x \le 1
+	\end{cases} $$
+	$$ \Bigl( \int_{-1}^1 |f_n(x) - g(x)|^p \di x \Bigr)^{\frac1p} \underarr{n \to \infty} 0 $$
+
+	Докажем, что $ \not\exists f \in \mathcal C[-1, 1] $ такой, что $ f(x) = g(x) $ \ale на $ [-1, 1] $.
+
+	\textbf{От противного.}
+	Пусть такая $ f $ существует.
+	$$ \int_{-1}^1 |f(x) - g(x)|^p \di \lambda = 0 \implies
+	\begin{cases}
+		\int_{-1}^0 |f(x)|^p \di \lambda = 0 \implies f(x) \equiv[{[-1, 0]}] 0 \\
+		\int_0^1 |f(x) - 1|^p \di \lambda = 0 \implies f(x) \equiv[{[0, 1]}] 1
+	\end{cases} \text{  "--- \contra} $$
+\end{proof}
+
+\begin{eg}
+	$$ \mathscr P = \set{p(x) = \sum_{k = 0}^n a_kx^k, \quad a_k \in \R, \quad n \ge 0}, \quad \forall [a, b] $$
+	$$ \|p(x)\|_\infty = \max\limits_{x \in [a, b]}|p(x)|, \quad \mathscr P \sub \mathcal C[a, b] $$
+\end{eg}
+
+\begin{statement}
+	$ (\mathscr P, \|\cdot\|_\infty) $ не полно.
+\end{statement}
+
+\begin{proof}
+	Ясно, что $ \mathscr P $ "--- подпространство в алгебраическом смысле.
+	Докажем, что оно не замкнуто.
+
+	$$ e^x \notin \mathscr P, \quad \as \nder{(e^x)} = e^x \not\equiv 0 $$
+	$$ P_n(x) = \sum_{k = 0}^n \frac{x^k}{k!}, \quad \lim\limits_{n \to \infty}\max\limits_{x \in [a, b]}|e^x - P_n(x)| = 0 $$
+	$$ \lim\limits_{n \to \infty} \|e^x - P_n\|_\infty = 0 \implies \mathscr P \text{ не замкнуто} $$
+\end{proof}
+
+\section{Свойства метрики.
+Теорема о пополнении метрического пространства.
+Примеры}
+
+\begin{properties}
+	$ (X, \rho) $ "--- метрическое пространство.
+
+	\begin{enumerate}
+		\item $ x, y, z, u \in X \implies |\rho(x, y) - \rho(z, u)| \le \rho(x, u) + \rho(y, z) $;
+		\item $ \rho : X \times X \to \R $ непрерывна (как функция двух переменных);
+		\item $ A \sub X, \quad \rho(x, A) \define \inf\limits_{a \in A} \rho(x, a) $
+
+			При фиксированном $ A $ функция $ \rho(x, A) $ непрерывна по $ x $;
+		\item $ A $ замкнуто, $ \quad x_0 \notin A \implies \rho(x_0, A) > 0 $.
+	\end{enumerate}
+\end{properties}
+
+\begin{eproof}
+\item $ \rho(x, y) \trile \rho(y, z) + \rho(x, z) \trile \rho(y, z) + \rho(z, u) + \rho(x, u) $.
+\item Пусть есть две последовательности такие, что $ \lim x_n = x, ~ \lim y_n = y $.
+	Требуется проверить, что $ \lim \rho(x_n, y_n) = \rho(x, y) $.
+
+	$$ |\rho(x, y) - \rho(x_n, y_n)| \underset1\le \underbrace{\rho(x, x_n)}_{\to 0} + \underbrace{\rho(y, y_n)}_{\to 0} $$
+\item $ A \sub X, \quad x, z \in X, \quad y \in A, \quad y $ фиксирован.
+	$$ \rho(x, A) \le \rho(x, y) \trile \rho(x, z) + \rho(z, y) $$
+	В силу произвольности $ y $ можно взять точную нижнюю грань:
+	$$ \rho(x, A) \le \rho(x, z) + \inf\limits_{y \in A}\rho(z, y) = \rho(x, z) + \rho(z, A) \implies \rho(x, A) - \rho(z, A) \le \rho(x, z) $$
+	Аналогично, $ \rho(z, A) - \rho(x, A) \le \rho(x, z) $
+	$$ \implies |\rho(x, A) - \rho(z, A)| \le \rho(x, z) $$
+	Зафиксируем $ x $ и устремим к нему $ z $:
+	$$ \lim\limits_{z \to x} \rho(z, A) = \rho(x, A) $$
+\item $ A = \ol A \implies X \setminus A $ открыто.
+	$$ x_0 \notin A \implies X \setminus A \implies \exists r > 0 : \quad \mathtt B_r(x_0) \in X \setminus A \implies \forall y \in A \quad \rho(x_0, y) \ge r \implies \rho(x_0, A) \ge r $$
+\end{eproof}
+
+\begin{definition}
+	$ (X, \rho), ~ (Y, d) $ "--- метрические пространства, $ \quad T : X \to Y $.
+
+	\begin{enumerate}
+		\item $ T $ называется \emph{изометрическим вложением}, если оно сохраняет расстояния:
+			$$ d(Tx, Tz) = \rho(x, z) \quad \forall x, z \in X $$
+		\item $ T $ называется \emph{изометрией}, если $ T(X) = Y $ и $ d(Tx, Tz) = \rho(x, z) $.
+			Говорят, что $ (X, \rho) $ и $ (Y, d) $ \emph{изометричны}.
+	\end{enumerate}
+\end{definition}
+
+\begin{props}
+\item $ T : X \to Y $ "--- изометрическое вложение.
+
+	Тогда $ T $ инъективно и непрерывно.
+\item $ T $ "--- изометрия.
+
+	Тогда существует $ T^{-1} : Y \to X $ "--- изометрия.
+\item Изометрия "--- отношение эквивалентности на множестве метрических пространств.
+\item $ T $ "--- изометрическое вложение, $ \quad Z = T(X) $.
+
+	Тогда $ T $ "--- изометрия $ X $ и $ Z $.
+\end{props}
+
+\begin{eproof}
+\item Пусть $ x, z \in X, \quad Tx = Tz $.
+	$$ 0 = d(Tx, Tz) = \rho(x, z) \implies x = z $$
+	$$ \lim\limits_{n \to \infty} x_n = x \implies \lim \rho(x_n, x) = 0 \implies \lim d(Tx_n, Tx) = 0 $$
+\item Очевидно.
+\item Следует из предыдущих.
+\item Очевидно.
+\end{eproof}
+
+\begin{definition}
+	$ (X, \rho) $ "--- метрическое пространство, $ \quad (Z, d) $ "--- полное, $ \quad \exists T : X \to Z : \quad T $ "--- изометрическое вложение и $ \ol{T(X)} = Z $.
+
+	Будем говорить, что $ (Z, d) $ "--- \emph{пополнение} $ (X, \rho) $.
+\end{definition}
+
+\begin{remark}
+	$ (U, d) $ "--- полное, $ \quad T : X \to U $ "--- изометрическое вложение.
+
+	Определим $ Z = \ol{T(X)} $ (в $ U $).
+	Замкнутое пространство полно, поэтому $ Z $ будет пополнением.
+\end{remark}
+
+\begin{theorem}[о пополнении метрического пространства]
+	$ (X, \rho) $ "--- метрическое пространство.
+
+	Тогда $ \exists (Z, d) $ "--- пополнение.
+\end{theorem}
+
+\begin{iproof}
+\item Пусть $ x $ ограничено, \ie $ \exists M \ge 0 : \quad \forall x, y \in X \quad \rho(x, y) \le M $.
+
+	Зафиксируем $ t \in X $.
+	Рассмотрим функцию $ f_t(x) = \rho(t, x) $.
+	Понятно, что она ограничена, \ie $ f_t \in m(X) $.
+
+	Определим отображение $ \phi : X \to m(X): \quad \phi(t) \define f_t $.
+
+	Проверим, что $ \phi $ "--- изометрическое вложение.
+	Для $ s, t \in X \quad \|\phi(t) - \phi(s)\|_\infty = \sup\limits_{x \in X}|\rho(t, x) - \rho(s, x)| $.
+	$$
+	\begin{cases}
+		|\rho(t, x) - \rho(s, x)| \le \rho(t, s) \\
+		\text{Пусть } x = t \implies |\rho(t, t) - \rho(s, t)| = \rho(t, s)
+	\end{cases} \implies \|\phi(t) - \phi(s)\|_\infty = \rho(t, s) $$
+\item $ (X, \rho) $ "--- произвольное.
+
+	Зафиксируем $ a \in X $.
+	Для $ t \in X $ рассмотрим $ f_t(x) = \rho(t, x) - \rho(a, x) $.
+	$$ |f_t(x)| \trile \rho(a, t) \quad \forall x \implies f_t \in m(X) $$
+	$$ \phi : X \to m(X): \quad \phi(t) \define f_t $$
+
+	Возьмём $ t, s \in X $.
+	$$ \|\phi(t) - \phi(s)\|_{m(X)} = \sup\limits_{x \in X}|f_t(x) - f_s(x)| = \sup\limits_{x \in X}|\rho(t, x) - \rho(s, x)| = \rho(t, s) $$
+	Значит, $ \phi $ "--- изометрическое вложение.
+	$$ Z = \ol{\phi(X)} $$
+\end{iproof}
+
+\begin{remark}
+	$ (X, \|\cdot\|) $ "--- нормированное.
+
+	Рассмотрим $ X^* = \set{f : X \to \Co \text{ "--- линейный непрерывный функционал}} $.
+	$ X^* $ всегда полное (это будет доказано позже).
+
+	Рассмотрим $ (X^*)^* $.
+	Существует естественное (каноническое) вложение $ X $ в $ X^{**} $: $ \ol{\bigl( \pi(x) \bigr)}^{X^{**}} $.
+\end{remark}
+
+\begin{remark}
+	Пополнение единственно с точностью до изоморфизма.
+\end{remark}
+
+\begin{exmpls}
+\item Пространства финитных последовательностей: $ (F, \|\cdot\|_p), \quad 1 \le p \le \infty $.
+	\begin{itemize}
+		\item $ p < +\infty $
+
+			Уже знаем, что $ (F, \|\cdot\|_p) \sub l^p $ и оно не замкнуто.
+			$$ \ol F = l^p, \quad \text{ для } x = (x_1, x_2, \dots) \in l^p \quad \nder[m]x = (x_1, \dots, x_m, 0, \dots) $$
+			$$ \|x - \nder[m]x\|_p = \Bigl(\sum|x_k|^p\Bigr)^{\frac1p} \underarr{m \to \infty} 0 $$
+			(\as это остаток сходящегося ряда).
+
+			Таким образом, $ l^p $ "--- пополнение $ F $ по $ \|\cdot\|_p $.
+		\item $ p = +\infty $
+			$$ \ol{(F, \|\cdot\|_\infty)}^{\|\cdot\|_\infty} = C_0 $$
+			$ C_0 $ "--- последовательности, предел которых равен 0.
+			$$ \set{x_j}_{j = 1}^\infty, \quad \lim\limits_{j \to \infty} x_j = 0, \quad \nder[m]x = (x_1, \dots, x_m, 0, \dots) $$
+			$$ \|x - \nder[m]x\|_\infty = \sup\limits_{j > m}|x_j| \underarr{m \to \infty} 0 \implies C_0 \sub \ol{F}^{\|\cdot\|_\infty} $$
+	\end{itemize}
+\item $ \mathscr P = \set{\sum_{k = 0}^n a_kx^k, \quad a_k \in \R, \quad n \ge 0} $
+
+	$ \mathscr P \sub \mathcal C[a, b] $ по теореме Вейерштрасса, которая утверждает, что
+	$$ \forall f \in \mathcal C[a, b] \quad \forall \eps > 0 \quad \exists p \in \mathscr P : \quad \|f - p\|_\infty < \eps $$
+\item $ \mathcal C[a, b], ~ \|f\|_p = \Bigl( \int_a^b |f(x)|^p \di x \Bigr)^{\frac1p}, \quad 1 \le p < +\infty $
+
+	$$ \ol{\mathcal C[a, b]}^{\|\cdot\|_p} = \mathrm L^p[a, b] $$
+\end{exmpls}
+
+\section{Теорема о вложенных шарах с замечаниями}
+
+\begin{theorem}[критерий полноты метрического пространства]
+	$ (X, \rho) $ "--- полное тогда и только тогда, когда
+	$$ \forall \set{\mathtt D_n}_{n = 1}^\infty : \mathtt D_n = \mathtt D_{r_n}(x_n),
+	~ D_{n + 1} \sub D_n, ~ \lim\limits_{n \to \infty} r_n = 0 \quad
+	\bigcap_{n = 1}^\infty \mathtt D_n \ne \O $$
+\end{theorem}
+
+\begin{iproof}
+\item $ \implies $
+
+	Центры шаров образуют фундаментальную последовательность, её предел принадлежит всем шарам.
+\item $ \impliedby $
+
+	Возьмём фундаментальную последовательность $ \set{x_n}_{n = 1}^\infty $.
+
+	Обозначим $ \eps_k = \frac1{2^k} $.
+	В силу фундаментальности $ x_k $
+	$$ \exists \set{x_{n_k}}_{k = 1}^\infty : \quad \rho(x_{n_k}, x_{n_{k + 1}}) < \frac1{2^{k + 1}} $$
+	$$ \mathtt D_k = \mathtt D_{\eps_k} (x_{n_k}) $$
+
+	Проверим, что $ \mathtt D_{k + 1} \sub \mathtt D_k $.
+	Возьмём $ y \in \mathtt D_{k + 1} $.
+	$$ \rho(x_{n_{k + 1}}, y) \le \frac1{2^{k + 1}} $$
+	\begin{multline*}
+		\rho(y, x_{n_k}) \trile \rho(x_{n_k}, x_{n_{k + 1}}) + \rho(x_{n_{k + 1}}, y)
+		< \frac1{2^{k + 1}} + \frac1{2^{k + 1}} = \frac1{2^k} \implies y \in \mathtt D_k \implies \\
+		\implies \mathtt D_{k + 1} \sub \mathtt D_k \implies \exists a \in \bigcap_{k = 1}^\infty \mathtt D_k \implies \lim x_{n_k} = a
+	\end{multline*}
+\end{iproof}
+
+\begin{remark}
+	В условиях теоремы пересечение состоит ровно из одной точки, и это точка $ a = \lim\limits_{n \to \infty} x_n $.
+\end{remark}
+
+\begin{remark}
+	Требование $ \lim r_n = 0 $ существенно.
+\end{remark}
+
+\begin{eg}[подготовительный]
+	$ \set{F_n}_{n = 1}^\infty, \quad F_n \sub \R, \quad F_n = \ol F_n, \quad F_{n + 1} \sub F_n, \quad \bigcup_{n = 1}^\infty F_n = \O $
+
+	Примером таких множеств являются лучи $ F_n = [n, +\infty) $.
+\end{eg}
+
+\begin{eg}[существенность требования]
+	Построим метрическое пространство, в котором шарами будут лучи из предыдущего примера.
+
+	$$ X = [1, +\infty), \quad \rho(x, y) =
+	\begin{cases}
+		1 + \frac1{x + y}, \quad x \ne y \\
+		0, \quad x = y
+	\end{cases} $$
+
+	\begin{enumerate}
+		\item Проверим неравенство треугольника:
+			$$ x \ne y \ne z \in X \quad \rho(x, y) + \rho(y, z) = 1 + \frac1{x + y} + 1 + \frac1{y + z} > 2 > 1 + \frac1{x + z} $$
+		\item Полнота.
+
+			Пусть $ \set{x_n} $ фундаментальна.
+			Докажем, что, начиная с какого-то элемента, она стабилизируется.
+
+			Возьмём $ \eps = \frac12 $
+			$$ \exists N : \quad \forall n, m \ge N \quad \rho(x_n, x_m) < \frac12 \implies \rho(x_m, x_N) < \frac12 \implies x_m = x_N \quad \forall m \ge N $$
+		\item Шары в $ X $.
+
+			Пусть $ r_n = 1 + \frac1{2n}, \quad \mathtt D_n = \mathtt D_{r_n}(n) $.
+			Понятно, что $ n \in \mathtt D_n $.
+
+			\begin{itemize}
+				\item $ x > n $
+					$$ \rho(n, x) = 1 + \frac1{n + x} < 1 + \frac1{2n} = r_n \implies x \in \mathtt D_n $$
+				\item $ x < n \implies x \notin \mathtt D_n $
+			\end{itemize}
+			$$ \mathtt D_n = [n, +\infty), \quad \bigcup_{n = 1}^\infty \mathtt D_n = \O $$
+	\end{enumerate}
+\end{eg}
+
+\begin{remark}
+	Если $ (X, \|\cdot\|) $ нормировано, то требование стремления радиусов к нулю избыточно:
+	$$ \text{полнота } \iff \bigcup_{n = 1}^\infty \mathtt D_n \ne \O \text{ при } \mathtt D_{n + 1} \sub \mathtt D_n $$
+\end{remark}
+
+\begin{proof}
+	Следует из линейности.
+\end{proof}
+
+\section(Всюду плотные множества.
+Сепарабельные пространства.
+Примеры: пространства ограниченных функций, пространства непрерывных функций, пространства
+последовательностей.
+Сепарабельность подпространства)
+[{Всюду плотные множества.
+Сепарабельные пространства.
+Примеры: $ m(A) $, $ \mathcal C[a, b] $, пространства последовательностей.
+Сепарабельность подпространства}]
+{Всюду плотные множества.
+Сепарабельные пространства. \\
+Примеры: $ m(A), ~ \mathcal C[a, b] $, пространства последовательностей. \\
+Сепарабельность подпространства}
+
+\begin{definition}
+	$ (X, \rho), \quad A, C \sub X $
+
+	$ A $ \emph{плотно в} $ C $, если $ C \sub \ol A $, \ie
+	$$ \forall x \in C \quad \forall \eps > 0 \quad \exists a \in A : \quad \rho(x, a) < \eps $$
+	$$ \iff C \sub \bigcup_{a \in A} \mathtt B_\eps (a) \quad \forall \eps > 0 $$
+	$$ \iff \forall x \in C \quad \forall \eps > 0 \quad \mathtt B_\eps(x) \cap A \ne \O $$
+\end{definition}
+
+\begin{definition}
+	$ A $ \emph{всюду плотно в} $ X $, если $ \ol A = X $.
+\end{definition}
+
+\begin{remark}
+	$$
+	\begin{rcases}
+		A \text{ плотно в } B \\
+		B \text{ плотно в } C
+	\end{rcases} \implies A \text{ плотно в } C $$
+\end{remark}
+
+\begin{definition}
+	$ (X, \rho) $ \emph{сепарабельно}, если в нём существует счётное всюду плотное множество.
+\end{definition}
+
+\begin{theorem}
+	$ n \in \N, \quad 1 \le p \le +\infty $
+
+	$ l_n^p $ сепарабельно.
+\end{theorem}
+
+\begin{proof}
+	Пусть $ l_n^p = (\R^n, \|\cdot\|_p) $.
+	Рассмотрим $ \Q^n = \set{x = (x_1, \dots, x_n), \quad x_j \in \Q} $.
+
+	Знаем, что $ \ol \Q = \R \implies \Q^n $ всюду плотно в $ l_n^p $.
+
+	Для комплексных последовательностей рассмотрим $ \vawe \Q = \set{z = x + \ii y, \quad x, y \in \Q} $.
+\end{proof}
+
+\begin{implication}
+	Пространство финитных последовательностей $ (F, \|\cdot\|_{1 \le p \le +\infty}) $ сепарабельно.
+\end{implication}
+
+\begin{proof}
+	Вложим $ l_n^p $ в $ F $:
+	$$ x = (x_1, \dots, x_n) \in l_n^p \quad \to \quad (x_1, \dots, x_n, 0, \dots) \in F $$
+	$$ \implies F = \bigcup_{n = 1}^\infty l_n^p \implies E = \bigcup_{n = 1}^\infty \Q^n \text{  "--- всюду плотное в } (F, \|\cdot\|_p) $$
+\end{proof}
+
+\begin{implication}
+	$ l^p, \quad 1 \le p < +\infty, \quad C_0 $ сепарабельны.
+\end{implication}
+
+\begin{proof}
+	$ F $ "--- пространство финитных последовательностей.
+	$$ \ol{(F, \|\cdot\|_p)}^{\|\cdot\|_p} = l^p, \quad 1 \le p < +\infty $$
+	$ E = \set{(x_1, \dots, x_n, 0, \dots) \mid x_j \in Q, ~ h \in \N} $ "--- счётное всюду плотное в $ l^p $.
+
+	$ \ol{(F, \|\cdot\|_\infty)}^{\|\cdot\|_\infty} = C_0 \implies C_0 $ сепарабельно.
+\end{proof}
+
+\begin{remark}
+	$$ T = \set{x = \set{x_j}_{j = 1}^\infty \mid x_j \in Q} \implies \ol T^{\|\cdot\|_p} = l_p, \quad 1 \le p \le +\infty $$
+	Но $ T $ не счётно (это следует из того, что $ 2^\N $ равномощно $ [0, 1] $).
+\end{remark}
+
+\begin{statement}
+	$ C \sub l^\infty $ сепарабельно.
+\end{statement}
+
+\begin{proof}
+	Упражнение.
+\end{proof}
+
+\begin{theorem}
+	$ l^\infty $ не сепарабельно.
+\end{theorem}
+
+\begin{proof}
+	Пусть $ A \sub \N $.
+	Рассмотрим $ x_j^A = 
+	\begin{cases}
+		1, \quad j \in A \\
+		0, \quad j \notin A
+	\end{cases} $.
+	Тогда $ x^A = \set{x_j^A}_{j = 1}^\infty $.
+
+	Заметим, что множество таких последовательностей $ \set{x^A}_{A \sub \N} $ не счётно: \\
+	Пусть $ A, C \sub \N, \quad A \ne C $.
+	$$ x_j^A - x_j^C =
+	\begin{cases}
+		1 \\
+		0 \\
+		-1
+	\end{cases} $$
+	Поскольку $ A \ne C $, $ \|x^A - x^C\|_\infty = 1 $.
+	$$ \implies \mathtt B_{\frac12}(x^A) \cap \mathtt B_{\frac12}(x^C) = \O $$
+
+	Пусть $ E $ всюду плотно в $ l^\infty $.
+	Тогда в каждом таком шарике должен быть его представитель:
+	$$ \forall A \sub \N \quad \exists e_A \in E \cap \mathtt B_{\frac12}(x^A) $$
+	При этом, $ A \ne C \implies e_A \ne e_C $.
+
+	$ \set{e_A}_{A \sub \N} \sub E, \quad \set{e_A}_{A \sub \N} $ не счётно $ \implies E $ не счётно.
+\end{proof}
+
+\begin{theorem}
+	$ (X, \rho) $ "--- метрическое пространство, сепарабельно, $ \quad Y \sub X $.
+
+	Тогда $ Y $ сепарабельно.
+\end{theorem}
+
+\begin{proof}
+	Пусть $ E = \set{x_n}_{n = 1}^\infty, \quad \ol E = X $.
+	$$ \rho(x_n, Y) = \inf\limits_{y \in Y} \rho(x_n, y) $$
+	$$ \exists \set{y_{n, k}}_{k = 1}^\infty : \quad \lim\limits_{k \to \infty} \rho(x_n, y_{n, k}) = \rho(x_n, Y) $$
+	Рассмотрим $ F = \set{y_{n, k}}_{n \in \N, ~ k \in \N} $ "--- счётное.
+	Проверим, что $ F $ всюду плотно в $ Y $.
+
+	Пусть $ y \in Y, ~ \eps > 0, ~ y \in X $.
+	$$ \exists x_n : \quad \rho(x_n, y) < \eps $$
+	$$ \implies \rho(x_n, Y) < \eps \implies \exists y_{n k} : \quad \rho(x_n, y_{n, k}) < \eps $$
+	$$ \implies \rho(y, y_{n k}) \trile \rho(y, x_n) + \rho(x_n, y_{n k}) < 2\eps $$
+\end{proof}
+
+\begin{implication}
+	$ X $ "--- бесконечное множество.
+
+	Тогда $ m(X) $ не сепарабельно.
+\end{implication}
+
+\begin{proof}
+	$$ m(X) = \set{f : X \to \R \text{ (или $ \Co $)} | \sup\limits_{x \in X}|f(x)| < +\infty} $$
+	$ X $ "--- бесконечное $ \implies \exists \set{a_j}_{j = 1}^\infty, \quad a_j \in X, \quad a_j \ne a_k $.
+
+	Рассмотрим $ L = \set{f : X \to \R \mid f(x) \in m(X), \quad f(x) \equiv[x \ne a_j] 0} $.
+	$$ f \in L \quad \|f\| = \sup\limits_{x \in X} |f(x)| = \sup\limits_{j \in \N} |f(a_j)| $$
+	$$ L \xrightarrow \Phi l^\infty : \quad f \in L \quad f \to \set{f(a_j)}_{j = 1}^\infty $$
+	$ \Phi $ "--- изометрия $ \implies L \sub m(X) $.
+	$ l^\infty $ не сепарабельно $ \implies L $ не сепарабельно.
+	Значит, $ m(x) $ не сепарабельно.
+\end{proof}
+
+\section{Нигде не плотные множества.
+Теорема Бэра о категориях}
+
+\begin{quote}
+	\raggedleft
+	Опять некоторый способ рассуждать о том, какие множества большие, а какие "--- маленькие.
+\end{quote}
+
+\begin{definition}
+	$ (X, \rho) $ "--- метрическое пространство, $ \quad A \sub X $.
+
+	$ A $ \emph{нигде не плотно}, если $ A $ не плотно ни в одном шаре:
+	$$ \forall \mathtt B_r(x) : x \in X, ~ r > 0 \quad \exists \mathtt B_{r_1}(x_1) \sub \mathtt B_r(x) : \quad \mathtt B_{r_1}(x_1) \cap A = \O $$
+	$$ \iff \operatorname{Int}(\ol A) = \O $$
+	$$ \iff \forall \mathtt D_r(x) \quad \exists \mathtt D_{r_1}(x_1) \sub \mathtt D_r(x) : \quad \mathtt D_{r_1}(x_1) \cap A = \O $$
+\end{definition}
+
+\begin{definition}
+	$ (X, \rho), \quad M \sub X $ "--- \emph{множество первой категории}, если
+	$$ M = \bigcup_{j = 1}^\infty M_j, \quad M_j \text{ нигде не плотно} $$
+	Все остальные множества называются \emph{множествами второй категории}.
+\end{definition}
+
+\begin{theorem}
+	$ (X, \rho) $ "--- полное.
+
+	Тогда $ X $ "--- множество второй категории.
+\end{theorem}
+
+\begin{proof}
+	Пусть $ M_j $ "--- нигде не плотные, $ \quad j \in \N, \quad M = \bigcup_{j = 1}^\infty M_j, \quad M_j \sub X $.
+	Докажем, что $ \exists x \in X \setminus M $.
+	Воспользуемся теоремой о вложенных шарах.
+
+	Возьмём $ D_0 = \mathtt D_{r_0}(x_0), \quad r_0 = 1 $.
+	$ M_1 $ нигде не плотно $ \implies \exists D_1 = \mathtt D_{r_1}(x_1) \sub D_0 : \quad D_1 \cap M_1 = \O $.
+	При этом, можно взять $ r_1 < 1 $ (если при большем $ r_1 $ не пересекалось, то и не начнёт).
+
+	$ M_2 $ нигде не плотно $ \implies exists D_2 = \mathtt D_{r_2}(x_2) \sub D_1 : \quad D_2 \cap M_2 = \O, \quad r_2 < \frac12 $.
+	$$ \dots $$
+	$$ \exists D_{n + 1} = \mathtt D_{r_{n + 1}}(x_{n + 1}) \sub D_n : \quad D_{n + 1} \cap M_{n + 1} = \O, \quad r_{n + 1} < \frac1{n + 1} $$
+
+	$ X $ "--- полное $ \underimp{\text{т. о вложенных шарах}} \exists a \in \bigcap_{n = 1}^\infty D_n $, \as $ \lim r_n = 0 $.
+	$$ a \in X, \quad D_n \cap M_n = \O \implies a \notin M_n \quad \forall n \implies a \notin M $$
+\end{proof}
+
+\section{Полные системы элементов, примеры.
+Полнота характеристических функций в \texorpdfstring{$ \mathrm L^p $}{пространствах Лебега}}
+
+\begin{definition}
+	\hfill
+	\begin{enumerate}
+		\item $ X $ "--- линейное пространство, $ \quad \set{x_\alpha}_{\alpha \in A}, \quad x_\alpha \in X $.
+
+			$$ \mathscr L\set{x_\alpha} = \set{x = \sum_{j = 1}^n c_jx_{\alpha_j}} $$
+			$ \mathscr L\set{x_\alpha} $ будем называть \emph{линейной оболочкой} $ X $.
+		\item $ (X, \|\cdot\|) $.
+
+			Будем говорить, что $ \set{x_\alpha}_{\alpha \in A} $ "--- \emph{полная система элементов}, если $ \ol{\mathscr L\set{x_\alpha}} = X $, то есть линейная оболочка всюду плотна в $ X $.
+	\end{enumerate}
+\end{definition}
+
+\begin{exmpls}
+\item $ \mathcal C[a, b], \quad \set{x^n}_{n = 0}^\infty $
+	$$ \mathscr L\set{x^n}_{n \ge 0} = \mathcal P = \set{p(x) = \sum_{k = 0}^n a_kx^k}, \quad \ol{\mathcal P} = \mathcal C[a, b] $$
+	$ \implies \set{x^n}_{n = 0}^\infty $ "--- полное семейство.
+\item $ l^p, \quad 1 \le p < +\infty, \quad e_n = (0, \dots, 0, \underset n 1, 0, \dots, 0) $
+
+	$ \set{e_n}_{n = 1}^\infty $ "--- полное семейство в $ l^p $ и в $ C_0 $.
+
+	$ \mathscr L\set{e_n}_{n = 1}^\infty = F $ "--- финитные последовательности $ \implies \ol{(\mathscr L{\set{e_n}})}^{\|\cdot\|_p} = l^p, \quad 1 \le p < +\infty $
+	$$ \ol{\mathscr L\set{e_n}}^{\|\cdot\|_\infty} = C_0 $$
+\end{exmpls}
+
+\begin{statement}
+	$ (X, \|\cdot\|), \quad \set{x_n}_{n = 1}^\infty $ "--- счётное полное семейство.
+
+	Тогда $ (X, \|\cdot\|) $ сепарабельно.
+\end{statement}
+
+\begin{proof}
+	Пусть $ X $ над $ \R $.
+
+	Рассмотрим $ E = \mathscr L\set{x_n}_{n = 1}^\infty $ "--- всюду плотно, но не счётно.
+
+	Возьмём $ H = \set{x = \sum_{j = 1}^n c_jx_j \mid c_j \in \Q} $  "--- счётно, $ E \sub \ol H, \quad \ol E = X $.
+\end{proof}
+
+\begin{implication}
+	$ \mathcal C[a, b] $ сепарабельно.
+\end{implication}
+
+\begin{theorem}[Лебега, о предельном переходе]
+	$ \set{h_n(x)} $ "--- измеримые, $ \quad h_n(x) \ge 0 \quad \forall n, x $ \\
+	$ h_n(x) \le \Phi(x), \quad \int\limits_T \Phi(x) \di \mu < +\infty, \quad h_n(x) \underarr{n \to \infty} F(x) $ (все утверждения \ale).
+
+	$$ \implies \int\limits_T F(x) \di \mu < +\infty, \quad \lim\limits_{n \to \infty} \int\limits_T h_n(x) \di \mu = \int\limits_T F(x) \di \mu $$
+\end{theorem}
+
+\begin{theorem}
+	$ (T, \mathcal U, \mu) $ "--- пространство с мерой.
+
+	\begin{enumerate}
+		\item $ \set{\chi_e}_{e \in \mathcal U} $ "--- полное семейство в $ \mathrm L^\infty $;
+		\item $ \set{\chi_e}_{e \in \mathcal U, ~ \mu e < +\infty} $ "--- полное семейство в $ \mathrm L^p, \quad 1 \le p \le +\infty $.
+	\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+	Пусть $ f(x) $ "--- измеримая, $ \quad f(x) \ge 0 \quad \forall x \in T $.
+	Возьмём $ n \in \N $.
+	$$ e_k \define \set{x \in T \mid \frac k n \le f(x) < \frac{k + 1}n, \quad k = 0, 1, \dots, n^2 - 1}, \quad e_{n^2} \define \set{x \in T \mid n \le f(x)} $$
+	$$ \implies T = \bigcup_{k = 0}^{n^2} e_k $$
+
+	$$ g_n(x) \define \sum_{k = 1}^{n^2} \frac k n \chi_{e_k} $$
+	$$ g_n(x) \le f(x) < g_n(x) + \frac1n, \quad x \in \bigcup_{k = 0}^{n^2 - 1} e_k $$
+
+	\begin{enumerate}
+		\item $ p = \infty $
+
+			Если $ n > \|f\|_\infty $, то $ e_{n^2} = \set{x \mid f(x) > n} \implies \mu(e_{n^2}) = 0 \implies |f(x) - g_n(x)| \le \frac1n $ \ale на $ T $.
+			$$ g_n \in \mathscr L\set{\chi_e}_{e \in \mathcal U} \implies f \in \ol{\mathscr L\set{\chi_e}}_{e \in \mathcal U} $$
+		\item $ 1 \le p < +\infty $
+
+			$$ |f(x) - g_n(x)|^p \le \bigl( f(x) \bigr)^p, \quad \int\limits_T \bigl( f(x) \bigr)^p \di \mu < +\infty $$
+			$$ \forall x \in T \quad \lim\limits_{n \to \infty} g_n(x) = f(x) \implies |f(x) - g_n(x)|^p \underarr{n \to \infty} 0 ~\ale~ x $$
+			$$ \Bigl( \int\limits_T |f - g_n|^p \di \mu \Bigr)^{\frac1p} \to 0 \implies f \in \ol{\mathscr L\set{\chi_e}_{e \in \mathcal U, ~ \mu e < +\infty}} $$
+
+			Для $ f \in \mathrm L^p $ можно написать $ f = f_+ - f_- $.
+	\end{enumerate}
+\end{proof}
+
+\section{Полнота характеристических функций элементов полукольца в
+\texorpdfstring{$ \mathrm L^p $}{пространствах Лебега}.
+Сепарабельность \texorpdfstring{$ \mathrm L^p $}{пространств Лебега} по мере Лебега}
+
+\begin{definition}
+	$ T $ "--- множество, $ \quad \mathcal R $ "--- семейство подмножеств $ T $.
+
+	$ \mathcal R $ будем называть \emph{полукольцом}, если
+	\begin{enumerate}
+		\item $ \O \in \mathcal R $;
+		\item $ A, B \in \mathcal R \implies A \cap B \in \mathcal R $;
+		\item $ A, B \in \mathcal R, \quad B \sub A \implies \exists \set{e_j}_{j = 1}^n : \quad e_i \cap e_j = \O, ~ e_j \in \mathcal R, ~ A \setminus B = \bigcup{j = 1}^n e_j $.
+	\end{enumerate}
+\end{definition}
+
+\begin{definition}
+	$ \mu : \mathcal R \to [0, +\infty] $ "--- \emph{мера} на полукольце, если
+	\begin{enumerate}
+		\item $ \mu(\O) = 0 $;
+		\item если $ \set{e_j}_{j = 1}^\infty, \quad e_j \in \mathcal R, \quad e_j \cap e_i = \O, \quad e = \bigcup_{j = 1}^\infty, \quad e \in \mathcal R $, то $ \mu e = \sum_{j = 1}^\infty \mu e_j $.
+	\end{enumerate}
+\end{definition}
+
+\begin{eg}
+	$ \R^n $
+	$$ \mathcal R = \set{e = \prod_{j = 1}^n [a_j, b_j) | a_j < b_j}, \quad \mu e = \prod_{j = 1}^n (b_j - a_j) $$
+\end{eg}
+
+\begin{definition}[стандартное распространение меры с полукольца на $ \sigma $-алгебру]
+	$ E \sub T $
+
+	Определим \emph{внешнюю меру}:
+	$$ \mu^*(E) = \inf \set{\sum_{j = 1}^\infty \mu e_j | E \sub \bigcup_{j = 1}^\infty e_j, \quad e_j \in \mathcal R} $$
+
+	$ \mathcal U $ "--- $ \sigma $-алгебра \emph{измеримых множеств}.
+\end{definition}
+
+\begin{theorem}
+	$ (T, \mathcal U, \mu) $ "--- пространство с мерой, $ \quad \mu $ "--- стандартное распространение с $ \mathcal R, \quad p \le p < +\infty $.
+
+	Тогда $ \set{\chi_e}_{e \in \mathcal R} $ "--- полное семейство в $ \mathrm L^p(T, \mu) $.
+\end{theorem}
+
+\begin{proof}
+	Пусть $ E \in \mathcal U, \quad \mu E < +\infty $.
+	Приблизим $ \chi_E $ линейными комбинациями $ \set{\chi_{e_j}}_{e_j \in \mathcal R} $.
+
+	$$ \mu E = \inf \set{ \sum_{j = 1}^\infty \mu e_j | E \sub \bigcup_{j = 1}^\infty e_j, \quad e_j \cap e_i = \O, \quad e_j \in \mathcal R} $$
+	Возьмём $ \eps > 0 $.
+	По определению $ \inf $,
+	$$ \exists \set{e_j}_{j = 1}^\infty : \quad e_j \in \mathcal R, ~ e_j \cap e_i = \O, \quad \mu E \le \sum_{j = 1}^\infty \mu e_j < \mu E + \eps $$
+
+	Обозначим $ A = \bigcup e_j $.
+
+	Так как ряд сходится, можно отбросить его начало так, чтобы
+	$$ \exists n \in \N : \quad \sum_{j = n + 1}^\infty \mu e_j < \eps $$
+	Обозначим $ B = \bigcup_{j = 1}^n e_j $.
+
+	$$ \chi_B = \sum_{j = 1}^n \chi_{e_j} \in \mathscr L\set{\chi_e}_{e \in \mathcal R} $$
+	При этом, $ \mu (A \setminus B) < \eps, \quad \mu (A \setminus E) < \eps $.
+	$$ \|\chi_E - \chi_B\|_p \trile \|\chi_A - \chi_E\|_p + \|\chi_A - \chi_B\|_p =
+	\Bigl( \int\limits_{A \setminus E} \di \mu \Bigr)^{\frac1p} + \Bigl( \int\limits_{A \setminus B} \di \mu \Bigr)^{\frac1p} < 2\eps^{\frac1p}
+	\implies \chi_E \in \ol{\mathscr L\set{\chi_e}_{e \in \mathcal R}} $$
+	Уже доказано, что
+	$$ \ol{\mathscr L\set{\chi_E}_{E \in \mathcal U, ~ \mu E < +\infty}}^{\|\cdot\|_p} = \mathrm L^p(T, \mu) $$
+	$$ \implies \ol{\mathscr L\set{\chi_e}_{e \in \mathscr R}}^{\|\cdot\|_p} = \mathrm L^p $$
+\end{proof}
+
+\begin{implication}
+	$ \mu $ "--- стандартное распространение с $ \mathcal R $ на $ \mathcal U, \quad 1 \le p < +\infty $.
+
+	Если $ \mathcal R $ счётно, то $ \mathrm L^p(T, \mathcal U, \mu) $ сепарабельно.
+\end{implication}
+
+\begin{implication}
+	$ E \sub \R^n $ измеримо по мере Лебега $ \lambda, \quad 1 \le p < +\infty $.
+
+	Тогда $ L^p(E, \lambda) $ сепарабельно.
+\end{implication}
+
+\begin{proof}
+	$ \mathcal R = \set{e = \prod_{j = 1}^n [a_j, b_j)} $ "--- полукольцо ячеек.
+	Рассмотрим
+	$$ \mathcal R_0 = \set{\prod_{j = 1}^n [a_j, b_j) | a_j, b_j \in \Q} $$
+	Понятно, что $ \mathcal R_0 $ счётно.
+
+	Пусть $ e \in \mathcal R $
+	$$ e = \prod_{j = 1}^\infty [a_j, b_j), \quad a_j, b_j \in \R, \quad a_j < b_j $$
+	Возьмём $ \eps > 0 $.
+	$$ \exists e_0 \in \mathcal R_0 : \quad e \sub e_0, \quad \lambda (e_0 \setminus e) < \eps $$
+	$$ \implies \|\chi_{e_0} - \chi_e\|_p = \Bigl( \int\limits_{e_0 \setminus e} \di \lambda \Bigr)^{\frac1p} < \eps^{\frac1p} $$
+	$$ \implies \ol{\mathscr L\set{\chi_e}_{e \in \mathcal R}} \ni \set{\chi_e}_{e \in \mathcal R} \implies \ol{\mathscr L\set{\chi_e}_{e \in \mathcal R_0}}^{\|\cdot\|_p} = \mathrm L^p(\R^n, \lambda) $$
+	$$ \mathrm L^p(E, \lambda) \sub \mathrm L^p(\R^n, \lambda) $$
+	$$ \implies \mathrm L^p(E, \lambda) \text{ сепарабельно} $$
+\end{proof}
+
+\section{Плотность непрерывных функций в \texorpdfstring{$ \mathrm L^p $}{пространствах Лебега}
+для регулярной меры.
+Следствие}
+
+\begin{theorem}
+	$ (T, \rho), ~ (T, \mathcal U, \mu), \quad \mu $ "--- регулярная, $ \quad 1 \le p < +\infty $.
+
+	Тогда $ \mathcal C(T) \cap \mathrm L^p(T, \mu) $ плотно в $ \mathrm L^p $.
+\end{theorem}
+
+\begin{proof}
+	Пусть $ e \in \mathcal U $ "--- измеримо, $ \mu e < +\infty $.
+	Приблизим $ \chi_e $ непрерывными (по $ \|\cdot\|_p $).
+	Возьмём $ \eps > 0 $.
+	$$ \mu \text{ регулярна } \implies \exists \text{ замкн. } F, \text{ откр. } G : \quad F \sub e \sub G, \quad \mu(G \setminus E) < \eps $$
+
+	$$ \phi(x) \define \frac{\rho(x, T \setminus G)}{\rho(x, T \setminus G) + \rho(x, F} $$
+	Проверим непрерывность: \\
+	Пусть $ \rho(x, F) = 0 \implies x \in F, ~ x \notin T \setminus G \implies \rho(x, T \setminus G) \ne 0 $.
+	$$ \implies \rho \in \mathcal C(T) $$
+	$$ \phi(x) =
+	\begin{cases}
+		0, \quad x \in T \setminus G \\
+		1, \quad x \in F
+	\end{cases} \quad \forall x \in T \implies 0 \le \phi(x) \le 1 $$
+	$$ |\phi(x) - \chi_e(x)| =
+	\begin{cases}
+		0, \quad x \in T \setminus G \\
+		0, \quad x \in F
+	\end{cases} $$
+	$$ |\chi_e(x) - \phi(x)| \le 1 \quad \forall x $$
+	$$ \|\chi_e - \phi\|_p =
+	\Bigl( \int\limits_T |\chi_e - \phi|^p \di \mu \Bigr)^{\frac1p} =
+	\Bigl( \int\limits_{G \setminus F}|\chi_e - \phi|^p \di \mu \Bigr)^{\frac1p} \le \Bigl( \int\limits_{G \setminus F} \di \mu \Bigr)^{\frac1p} =
+	\Bigl( \mu(G \setminus F) \Bigr)^{\frac1p} < \eps^{\frac1p} $$
+	$$ \ol{\mathscr L\set{\chi_e}_{ \in \mathcal U, ~ \mu e < +\infty}}^{\|\cdot\|_p} =
+	\mathrm L^p(T, \mu) \implies
+	\ol{\mathcal C(T) \cap \mathrm L^p}^{\|\cdot\|_p} =
+	\mathrm L^p $$
+\end{proof}
+
+\begin{implication}
+	$ K \sub \R^n, \quad K $ "--- компакт, $ \quad \lambda $ "--- мера Лебега, $ \quad 1 \le p < +\infty $
+
+	$$ \implies \ol{\mathcal C(K)}^{\|\cdot\|_p} =
+	\mathrm L^p(K, \lambda) $$
+\end{implication}
+
+\section{Компакты в метрических пространствах.
+Определение и примеры вполне ограниченных множеств}
+
+\begin{statement}[секвенциальная компактность]
+	$ (K, \rho) $ "--- метрический компакт.
+
+	$$ \iff \forall \set{x_n}_{n = 1}^\infty : x_n \in K \quad \exists \set{x_{n_j}} : \quad \exists \lim\limits_{j \to \infty} x_{n_j} \in K $$
+\end{statement}
+
+\begin{statement}
+	$ (K, \rho) $ "--- метрический компакт $ \implies K $ ограничено и замкнуто.
+\end{statement}
+
+\begin{remark}
+	Для $ K \sub \R^n $ (или $ \Co^n $) верно и обратное.
+	В общем случае "--- нет.
+\end{remark}
+
+\begin{eg}
+	$$ l^2 = \set{x = \set{x_j}_{j = 1}^\infty | \Bigl( \sum_{j = 1}^\infty |x_k|^2 \Bigr)^{\frac12} = \|x\|_2 < +\infty} $$
+	$$ \mathtt D_1(\On) = \set{x \in l^2 | \|x\|_2 \le 1} $$
+	Покажем, что $ \mathtt D_1 $ не компакт.
+
+	$$ e_j = (0, \dots, 0, \underset j 1, 0, \dots, 0) \in \mathtt D_1(\On) $$
+	$$ \|e_i - e_j\|_2 = \sqrt2 $$
+	$$ \forall \set{e_{n_k}} \text{ не фундаментальна } \implies \not\exists \lim \set{e_{n_k}} $$
+\end{eg}
+
+\begin{definition}
+	$ (A, \rho), \quad A \sub X $.
+
+	$ A $ \emph{относительно компактно}, если $ \ol A $ компактно.
+	$$ \iff \forall \set{x_n}_{n = 1}^\infty, ~ x_n \in A \quad \exists \set{x_{n_j}}_{j = 1}^\infty \quad \exists \lim\limits_{j \to \infty} x_{n_j} \in X $$
+\end{definition}
+
+\begin{definition}
+	$ (X, \rho), \quad A \sub X, \quad \eps > 0, \quad F \sub X $.
+
+	Будем говорить, что $ F $ "--- $ \eps $-\emph{сеть} для множества $ A $, если
+	$$ \forall a \in A \quad \exists b \in F : \quad \rho(a, b) < \eps $$
+	$$ \iff A \sub \bigcup_{b \in F} \mathtt B_\eps(b) $$
+\end{definition}
+
+\begin{definition}
+	$ A \sub X $.
+
+	$ A $ называется \emph{вполне ограниченным}, если $ \forall \eps > 0 $ существует конечная $ \eps $-сеть для $ A $.
+\end{definition}
+
+\begin{remark}
+	Если $ A $ вполне ограничено, то $ A $ ограничено.
+\end{remark}
+
+\begin{proof}
+	Пусть $ \eps = 1 $.
+	$$ \exists F = \set{x_j}_{j = 1}^n \text{ "--- 1-сеть, \ie } A \sub \bigcup_{j = 1}^n \mathtt B_1(x_j) \implies A \text{ ограничено} $$
+\end{proof}
+
+\begin{exmpls}
+\item $ A \sub \R^n $ (или $ \Co^n $)
+
+	Докажем, что если $ A $ ограничено, то $ A $ вполне ограничено.
+
+	$ A $ ограничено $ \implies \exists M > 0 : \quad \forall x = (x_1, \dots, x_n) \in A \quad |x_j| \le M $.
+	Пусть $ Q = \set{x \in \R^n | \ |x_j| \le M} $.
+	$$ Q = \bigcup_{j = 1}^N Q_j, \quad \operatorname{diam} Q_j < \eps, \quad F = \set{\text{вершины } Q_j} $$
+	$ \implies F $ "--- $ \eps $-сеть.
+\item $ l^2 $
+	$$ D = \set{x = \set{x_j}_{j = 1}^\infty | \|x\|_2 = \Bigl( \sum_{j = 1}^\infty |x_j|^2 \Bigr)^{\frac12} \le 1} $$
+	$ D $ ограничено.
+	Проверим, что оно \textbf{не} вполне ограничено.
+
+	Рассмотрим $ e_j = (0, \dots, 0, \underset j 1, 0 \dots, 0) $.
+	$$ \|e_j - e_i\|_2 = \sqrt 2 $$
+	Возьмём $ \eps = \frac12 $.
+	$$ \mathtt B_{\frac12} (e_j) \cap \mathtt B_{\frac12} (e_i) = \O $$
+	$ F $ "--- $ \frac12 $-сеть для $ D $.
+	$$ \implies \forall j \quad \exists f_j \in F \cap \mathtt B_{\frac12}(e_j) $$
+	$ f \ne f_i \implies \set{f_j}_{j = 1}^\infty \sub F \implies F $ бесконечно "--- \contra (бесконечной $ \eps $-сети не бывает).
+\item $ l^2 $
+	$$ \Pi = \set{x = \set{x_j}_{j = 1}^\infty | \ |x_j| \le \frac1{2^j}} \text{ "--- \emph{гильбертов кирпич}} $$
+	(в $ \R^3 $ так устроены кирпичи).
+	Проверим, что $ \Pi $ вполне ограничено.
+	$$ \forall \eps > 0 \quad \exists N \in \N \quad \Bigl( \sum_{j = N + 1}^\infty \bigl( \frac1{2^j} \bigr) \Bigr)^{\frac12} < \eps $$
+	$$ \Pi^* = \set{x = (x_1, \dots, x_N, 0, \dots) | \ |x_j| \le \frac1{2^j}} $$
+	Можно считать, что $ \Pi^* \sub \R^N $ (если отбросить нулевые координаты).
+	Тогда $ \R^N \sub l^2 \implies \exists F $ "--- конечная $ \eps $-сеть, $ F \sub \R^N $.
+
+	Проверим, что $ F $ "--- $ 2\eps $-сеть для $ \Pi $.
+	Возьмём $ x \in \Pi $.
+	$$ x = (x_1, \dots, x_N, x_{N + 1}, \dots) = \underbrace{(x_1, \dots, x_N, 0, \dots)}_y + \underbrace{(0, \dots, 0, x_{N + 1})}_z $$
+	$$ \|z\|_2 = \Bigl( \sum_{j = N + 1}^\infty |x_j|^2 \Bigr)^{\frac12} < \eps \text{ в силу выбора } N $$
+	$$ \exists f \in F : \quad \|y - f\|_2 < \eps \text{ \as } y \in \Pi^* $$
+	$$ \|x - f\|_2 = \|(y - f) + z\|_2 \trile \|y - f\| + \|z\| < 2\eps $$
+\end{exmpls}
+
+\section{Свойства вполне ограниченных множеств.
+Лемма о разбиении}
+
+\begin{properties}
+	$ (X, \rho) $
+	\begin{enumerate}
+		\item $ A \sub X, ~ A $ вполне ограничено $ \implies \ol A $ вполне ограничено.
+		\item $ A \sub Y \sub X, ~ A $ вполне ограничено в $ X \implies A $ вполне ограничено в $ Y $.
+		\item $ A $ вполне ограничено $ \implies A $ сепарабельно.
+	\end{enumerate}
+\end{properties}
+
+\begin{eproof}
+\item Пусть $ \eps > 0, ~ F $ "--- конечная $ \eps $-сеть для $ A $.
+
+	Проверим, что $ F $ "--- $ 2\eps $-сеть для $ \ol A $.
+	Возьмём $ x \in \ol A $.
+	Пусть $ x \in \ol A \implies \exists y \in A ; \quad \rho(x, y) < \eps $.
+	$$ \exists f \in F : \quad \rho(y, f) < \eps \implies \rho(x, f) \trile \rho(x, y) + \rho(y, f) < 2\eps $$
+\item Пусть $ \eps > 0 \implies \exists \set{x_j}_{j = 1}^n $ "--- $ \eps $-сеть для $ A $, \ie $ A \sub \bigcup_{j = 1}^n \mathtt B_\eps(x_j) $.
+
+	Пусть $ y_j \in A \cap \mathtt B_\eps(x_j) $ (если $ A \cap \mathtt B_\eps(x_j) = \O $, то забудем об этом $ j $).
+	$$ E = \set{y_j}_{j = 1}^n \text{ "--- $ 2\eps $-сеть для } A, \quad E \sub A \sub Y $$
+
+	Возьмём $ x \in A $.
+	$$ \exists x_j : \rho(x, x_j) < \eps, \quad \rho(x_j, y_j) < \eps \implies \rho(x, y_j) \le \rho(x, x_j) + \rho(x_j, y_j) < 2\eps $$
+\item Пусть $ F_n $ "--- конечная $ \frac1n $-сеть.
+	Пусть $ E = \bigcup F_n \implies E $ всюду плотно в $ A \implies A $ сепарабельно.
+\end{eproof}
+
+\begin{notation}
+	$ \operatorname{diam} B = \sup\limits_{x, y \in B} \rho(x, y) $
+\end{notation}
+
+\begin{lemma}
+	$ (X, \rho), \quad \eps > 0, \quad A \sub X, \quad \exists $ конченая $ \eps $-сеть для $ A $.
+
+	$$ \implies A = \bigcup_{j = 1}^n C_j, \quad C_j \cap C_i = \O, \quad C_j \ne \O, \quad \operatorname{diam} C_j \le 2\eps $$
+\end{lemma}
+
+\begin{proof}
+	$$ \exists \set{x_j}_{j = 1}^n : \quad A \sub \bigcup_{j = 1}^n \mathtt B_\eps(x_j) $$
+	$$ C_1 \define A \cap \mathtt B_\eps(x_1) $$
+	$$ C_2 \define \bigl( A \cap \mathtt B_\eps(x_2) \bigr) \setminus C_1 $$
+	$$ \dots $$
+	$$ C_j = \bigl( A \cap \mathtt B_\eps(x_j) \bigr) \setminus \bigl( C_1 \cup C_2 \cup \dots \cup C_{j - 1} \bigr) $$
+	Пустые $ C_j $ не рассматриваем.
+\end{proof}
+
+\section[Теорема Хаусдорфа: критерий компактности в терминах вполне ограниченности.
+Следствия]
+{Теорема Хаусдорфа: критерий компактности в терминах \\
+вполне ограниченности.
+Следствия}
+
+\begin{theorem}
+	$ (X, \rho), \quad A \sub X $
+
+	$$ A \text{ "--- компакт } \iff
+	\begin{cases}
+		(A, \rho) \text{ "--- полное} \\
+		A \text{ вполне ограничено}
+	\end{cases} $$
+\end{theorem}
+
+\begin{iproof}
+\item $ \implies $
+	\begin{itemize}
+		\item Проверим полноту.
+
+			Пусть $ \set{x_n}_{n = 1}^\infty $ фундаментальна в $ A $.
+			\As $ A $ "--- компакт,
+			$$ \exists \set{x_{n_j}}_{j = 1}^\infty : \quad \exists \lim\limits_{j \to \infty} x_{n_j} = a, \quad a \in A $$
+
+			По одному из свойств фундаментальных последовательностей, $ \lim x_n = a \implies (A, \rho) $ "--- полное.
+		\item Проверим вполне ограниченность.
+
+			Возьмём $ \eps > 0 $.
+			$$ A \sub \bigcup_{x \in A} \mathtt B_\eps(x) $$
+			$ A $ "--- компакт $ \implies \exists \set{x_j}_{j = 1}^n, ~ x_j \in A : \quad A \sub \bigcup_{j = 1}^n \mathtt B_\eps(x_j) \implies \set{x_j}_{j = 1}^n $ "--- $ \eps $-сеть.
+	\end{itemize}
+\item $ \impliedby $
+
+		Возьмём $ \set{x_n}_{n = 1}^\infty, ~ x_n \in A $.
+		Докажем, что $ \exists \set{x_{n_j}} : \quad \exists \lim\limits_{j \to \infty} x_{n_j} = A $.
+
+		Возьмём $ \eps_1 = \frac12 $.
+		Воспользуемся леммой о разбиении:
+		$$ \exists \text{ конечная } \frac12 \text{-сеть } \implies \exists \set{\nder[1]C_j}_{j = 1}^{N_1} : \quad A = \bigcup_{j = 1}^{N_1} \nder[1]C_j, \quad \operatorname{diam} \nder[1]C_j \le 1 $$
+		Существует $ \nder[1]C_{j_1} $, содержащая бесконечное число элементов $ \set{x_n}_{n = 1}^\infty $.
+		Обозначим $ A_1 = \nder[1]C_{j_1} $.
+
+		Возьмём $ \eps_2 = \frac13, \quad \exists $ конечная $ \eps_2 $-сеть.
+		$$ A_1 = \bigcup_{j = 1}^{N_2} \nder[2]C_j, \quad \operatorname{diam} \nder[2]C_j \le 2\eps_2 = \frac23 $$
+		Среди них есть $ \nder[2]C_{j_2} $, содержащий бесконечное число элементов $ \set{x_n} $.
+		Обозначим $ A_2 = \nder[2]C_{j_2} $.
+
+		Получим $ \set{A_m}_{m = 1}^\infty $, каждое из которых содержит бесконечное число элементов $ \set{x_n} $.
+		$$ A_{m + 1} \sub A_m, \quad \lim\limits_{m \to \infty} \operatorname{diam} A_m = 0 $$
+
+		Пусть $ x_{n_1} \in A_1 $.
+		$$ \exists n_2 > n_1 : \quad x_{n_2} \in A_2, \quad \dots, \quad \exists n_ > n_{m - 1} : \quad x_{n_m} \in A_m $$
+		$$ \implies \forall j > m \quad x_{n_j} \in A_m \implies \rho(x_{n_j}, x_{n_m}) \le \operatorname{diam} A_m \implies \set{x_{n_m}} \text{ фундаментальна} $$
+		$ A $ "--- полное $ \implies \exists \lim\limits_{m \to \infty} x_{n_m} = a \in A \implies A $ "--- компакт.
+\end{iproof}
+
+\begin{implication}
+	$ (X, \rho), \quad A \sub X, \quad A $ относительно компактно.
+
+	Тогда $ A $ вполне ограничено.
+\end{implication}
+
+\begin{proof}
+	$ A $ относительно компактно $ \implies \ol A $ компактно $ \underimp{\text{теорема}} \ol A $ вполне ограничено $ \implies A $ вполне ограничено.
+\end{proof}
+
+\begin{implication}
+	$ (X, \rho) $ "--- полное, $ \quad A $ вполне ограничено.
+
+	Тогда $ A $ относительно компактно.
+\end{implication}
+
+\begin{proof}
+	$ (X, \rho) $ "--- полное $ \implies \ol A $ "--- полное $ \underimp{\text{теорема, $ A $ вполне ограничено}} \ol A $ "--- компакт $ \implies A $ относительно компактно.
+\end{proof}
+
+\begin{implication}
+	$ (X, \rho) $ "--- полное, $ \quad A \sub X $.
+	$$ \forall \eps > 0 \quad \exists \text{ относительно компактная $ \eps $-сеть для } A $$
+	$$ \implies A \text{ относительно компактно (и вполне ограничено)} $$
+\end{implication}
+
+\begin{proof}
+	Возьмём $ \eps > 0 $.
+	Пусть $ H_\eps $ "--- относительно компактная $ \eps $-сеть для $ A $.
+	\begin{multline*}
+	\implies H_\eps \text{ вполне ограничено } \implies
+	\exists F \text{ "--- конечная $ \eps $-сеть для } H_\eps \implies \\
+	\implies F \text{ "--- $ \eps $-сеть для } A \implies
+	A \text{ вполне ограничено } \iff
+	A \text{ относительно компактно}
+	\end{multline*}
+\end{proof}
+
+\section(Теорема Арцела--Асколи: критерий относительной компактности множества в пространстве
+непрерывных функций)
+[Теорема Арцела"--~Асколи: критерий относительной компактности множества в прост\-ранстве
+$ \mathcal C(K) $]
+{Теорема Арцела"--~Асколи: критерий относительной компактности множества в пространстве
+$ \mathcal C(K) $}
+
+\begin{theorem}
+	$ \Phi \sub \mathcal C(K) $.
+
+	$ \Phi $ относительно компактно тогда и только тогда, когда
+	\begin{enumerate}
+		\item $ \Phi $ ограничено в $ \mathcal C(K) $;
+		\item $ \Phi $ равностепенно непрерывно.
+	\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+	$ \mathcal C(K) $ "--- полное.
+	Значит,
+	$$ \Phi \text{ относительно компактно } \iff \Phi \text{ вполне ограничено} $$
+	\begin{itemize}
+		\item $ \implies $
+			\begin{enumerate}
+				\item Ограниченность
+
+					$ \Phi $ вполне ограничено $ \implies \Phi $ ограничено, \ie
+					$$ \exists M > 0 : \quad \forall f \in \Phi \quad \forall x \in K \quad |f(x)| \le M $$
+				\item Равностепенная непрерывность
+
+					Возьмём $ \eps > 0 $
+					$$ \exists \text{ конечная } \eps \text{-сеть } \set{\phi_j}_{j = 1}^n, \quad \phi_j \in \mathcal C(K) $$
+					$$ \phi_j \text{ равном. непр. } \implies
+					\exists \delta_j : \quad \forall x, y \in K : \rho(x, y) < \delta \quad
+					|\phi_j(x) - \phi_j(y)| < \eps \quad 1 \le j \le n $$
+					Положим $ \delta = \min\limits_{1 \le j \le n}\set{\delta_j} $.
+					Проверим условие равностепенной непрерывности с $ \delta $.
+
+					Пусть $ f \in \Phi, \quad x, y \in K : \rho(x, y) < \delta $.
+					$$ \set{\phi_j} \text{ "--- $ \eps $-сеть } \implies
+					\exists 1 \le m \le n : \quad \|f - \phi_m\|_\infty < \eps \implies
+					\max\limits_{x \in K} |f(x) - \phi_m(x)| < \eps $$
+					$$ |f(x) - f(y) \trile
+					|f(x) - \phi_m(x)| + |\phi_m(x) - \phi_m(y)| + |\phi_m(y) - f(y)| < 3\eps $$
+			\end{enumerate}
+		\item $ \impliedby $
+
+			$ \Phi $ ограничено $ \implies \exists M > 0 : \quad \forall f \in \Phi \quad \forall x \in K \quad |f(x)| \le M $
+
+			Возьмём $ \eps > 0 $.
+
+			Знаем, что $ \mathcal C(K) \sub m(K) $.
+			Проверим, что $ \Phi $ вполне ограничено.
+			Для этого достаточно доказать, что существует компактная $ \eps $-сеть в $ m(K) $
+			(по следствиям из предыдущей лекции).
+
+			Воспользуемся условием равностепенной непрерывности:
+			$$ \exists \delta : \quad \forall \rho(x, y) < \delta, ~ f \in \Phi \quad |f(x) - f(y)| < \eps $$
+
+			По лемме о разбиении,
+			$$ \exists C_j : \quad K = \bigcup_{j = 1}^n C_j, \quad
+			C_j \cap C_i = \O, \quad C_j \ne \O, \operatorname{diam} C_j < \delta $$
+			Для определённости будем считать, что $ \mathcal C(K) = \set{f : K \to \Co} $.
+			$$ \Psi \define \set{g(x) = \sum_{j = 1}^n y_j \chi_{C_j}(x) | y_j \in \Co} $$
+			$$ \| g(x) \|_\infty =
+			\left\| \sum_{j = 1}^n y_j \chi_{C_j}(x) \right\|_\infty =
+			\max\limits_{1 \le j \le n}|y_j| =
+			\|y\|_{l_n^\infty} $$
+
+			Рассмотрим
+			$$ F : l_n^\infty \to \Psi : \quad F(y) = \sum_{j = 1}^n y_i \chi_{C_j}(x) $$
+			$$ \|F(y)\|_{m(K)} = \|y\|_{l_n^\infty}, \quad
+			\|F(y) - F(z)\|_{m(K)} = \|y - z\|_{l_n^\infty} $$
+			$ F $ "--- изометрия.
+			Это означает, что она сохраняет компактность.
+
+			Выберем компакт
+			$$ Q = \set{y = (y_1, \dots, y_n) | \ |y_j| \le M} \implies F(Q) \text{ "--- компакт в } m(K) $$
+			Так как $ Q $ находится в $ \Co^n $, оно является произведением кругов.
+			Это называется \emph{полидиск}.
+			$$ F(Q) = \set{g(x) = \sum_{j = 1}^n y_j \chi_{C_j} | \ |y_j| \le M} $$
+
+			Проверим, что $ F(Q) $ "--- $ \eps $-сеть для $ \Phi $.
+
+			Пусть $ f \in \Phi, \quad C_j \ne \O $.
+			Выберем $ x_j \in C_J $.
+			Рассмотрим $ y_j = f(x_j) $.
+			$$ g(x) = \sum_{j = 1}^n f(x_j)\chi_{C_j} (x) \in F(Q) $$
+
+			Оценим $ \|f - g\|_\infty $.
+			Возьмём произвольный $ x \in K $.
+			\begin{multline*}
+				\implies \exists 1 \le m \le n : \quad x \in C_m \implies
+				g(x) = f(x_m) \implies \\
+				\implies |f(x) - g(x)| = |f(x) - f(x_m)| < \eps \quad
+				\as ~ \rho(x, x_m) < \delta
+			\end{multline*}
+	\end{itemize}
+\end{proof}
+
+\begin{remark}
+	Свойства 1 и 2 независимы.
+\end{remark}
+
+\begin{exmpls}
+\item $ \Phi \sub \mathcal C[0, 1] $
+	$$ f_n(x) = x^2 + n, \quad n \in \N $$
+	$ \set{f_n} $ не ограничено, но равномерно непрерывно.
+\item $ \Phi \sub \mathcal C[0, 1] $
+	$$ f_n = x^n $$
+	$ \set{f_n} $ ограничено, но не равномерно непрерывно.
+\end{exmpls}
+
+\section[Достаточные условия равностепенной непрерывности множества в
+\texorpdfstring{$ \mathcal C(K) $}{пространстве непрерывных функций}]
+{Достаточные условия равностепенной непрерывности множества в $ \mathcal C(K) $}
+
+\begin{theorem}
+	$ f \in \Phi \sub \mathcal C(K) $
+
+	\begin{itemize}
+		\item $ \exists M > 0, ~ \alpha, \beta > 0 : \quad
+			\forall x, y \in K : \rho(x, y) < \beta \quad
+			|f(x) - |f(y)| \le M \bigl( \rho(x, y) \bigr)^\alpha $
+		\item $ K = [a, b], \quad
+			\exists f'(x), \quad
+			\exists L > 0 : \quad
+			|f'(x)| \le L \quad \forall x \in (a, b) $
+		\item $ K \sub G \sub \R^n, \quad
+			K $ "--- компакт, $ \quad
+			G $ "--- открытое, $ \quad
+			\exists \pder f{x_j}(x) $
+			$$ \exists L > 0 : \quad
+			\forall x \in G \quad \Bigl| \pder f{x_j}(x) \Bigr| \le L $$
+		\item $ K \sub G \sub \Co, \quad
+			K $ "--- компакт, $ \quad
+			G $ "--- открытое, $ \quad
+			f $ аналитична в $ G $
+			$$ \exists L > 0 : \quad |f(z)| \le L $$
+	\end{itemize}
+
+	В каждом из этих случаев $ \Phi $ равностепенно непрерывно.
+\end{theorem}
+
+\begin{iproof}
+\item Пусть $ \eps > 0, \quad
+	x, y \in K, \quad
+	f \in \Phi, \quad
+	\rho(x, y) < \delta < \beta $
+	$$ \implies |f(x) - f(y)| \le M \bigl( \rho(x, y) \bigr)^\alpha \underset{\text{выберем $ \delta $ так, чтобы}}<
+	M \delta^\alpha < \eps $$
+	$$ \implies \delta < \Bigl( \frac\eps M \Bigr)^{\frac1\alpha} $$
+	$$ \delta \define \min\set{\beta, \Bigl( \frac\eps M \Bigr)^{\frac1\alpha}} $$
+\item Воспользуемся теоремой о промежуточном значении:
+	$$ \exists c \in (a, b) : \quad f(y) - f(x) = f'(c)(y - x) \implies
+	|f(y) - f(x)| \le L|y - x| $$
+	Получили случай 1 с $ M = L, ~ \alpha = 1, ~ \forall \beta $.
+\item Пусть $ x, y \in K : \quad [y, z] \sub G $
+	Рассмотрим
+	$$ \Gamma(t) : \quad
+	0 \le t \le 1, \quad
+	\Gamma(t) = t \cdot z + (1 - t) \cdot y, \quad
+	\Gamma(0) = y, ~ \Gamma(1) = z $$
+	$$ f(z) - f(y) = f \bigl( \Gamma(1) \bigr) - f \bigl( \Gamma(0) \bigr) $$
+	$ f \bigl( \Gamma(t) \bigr) $ "--- дифференцируемая функция от $ t $.
+	Применим к ней случай 2.
+
+	Теперь рассмотрим $ F = \R^n \setminus G $ "--- компакт.
+	Известно, что $ \rho(x, F) $ непрерывна.
+	$$ h(x) \define \rho(x, F), \quad x \in K $$
+	$$ \forall x \in F \quad h(x) > 0 $$
+	$$ \exists \min\limits_{x \in K} h(x) \fed h(x_0) \fed r > 0 $$
+	Пусть $ x, y \in K : \quad \rho(x, y) < r $.
+	$$ y \in \mathtt B_r(x) \sub G \implies [x, y] \sub G $$
+
+	Возьмём $ \alpha = 1, ~ M = L\sqrt{n}, ~ \beta = r $ и применим случай 1.
+\item
+	$$ \exists r > 0 : \quad \forall z \in K \quad \rho(z, F) \ge r, \quad F = \Co \setminus G $$
+	Возьмём $ \beta = \frac r3 $.
+	$$ \gamma = \set{\zeta | \ |z - \zeta| = 2\beta}, \quad \gamma \sub G $$
+	Возьмём $ z, w \in K : \quad \rho(z, w) < \beta $.
+	$$ f(z) = \frac1{2\pi \ii} \int\limits_{\gamma^+} \frac{f(\zeta)}{\zeta - z}\di \zeta, \quad
+	f(w) = \frac1{2\pi \ii} \int\limits_{\gamma^+} \frac{f(\zeta)}{\zeta - w}\di \zeta $$
+	$$ |f(z) - f(w)| = \frac1{2\pi} \Bigl| \int\limits_{\gamma^+} f(\zeta) \Bigl( \frac1{\zeta - z} - \frac1{\zeta - w} \Bigr)\di \zeta \Bigr| $$
+	Вычислим отдельно:
+	$$ \Bigl| \frac1{\zeta - z} - \frac1{\zeta - w} \Bigr| =
+	\Bigl| \frac{z - w}{(\zeta - z)(\zeta - w)} \Bigr| \underset{\begin{subarray}{c}
+		|\zeta - z| = 2\beta \\
+		|\zeta - w| \ge \beta
+\end{subarray}}<
+	\frac{|z - w|}{2 \beta \cdot \beta} $$
+	Теперь
+	$$ |f(z) - f(w)| \le \frac1{2\pi} \frac{L |z - w|}{2 \beta^2} \cdot 2\pi \cdot 2\beta =
+	\frac L \beta |z - w| $$
+	Применяем случай 1 с $ \alpha, \beta = 1, ~ M = \frac L \beta $.
+\end{iproof}
+
+\begin{undefthm}{Упражнение.}
+	\hfill
+	\begin{enumerate}
+		\item $ 1 \le p < +\infty, \quad A \sub l^p $
+
+			$ A $ относительно компактно (и вполне ограничено) $ \iff $
+			\begin{enumerate}
+				\item $ A $ ограничено в $ l^p $;
+				\item $ \forall \eps > 0 \quad
+					\exists N \in \N : \quad
+					\forall x = \set{x_j}_{j = 1}^\infty \in A \quad
+					\bigl( \sum_{j = n + 1}^\infty |x_j|^p \bigr)^{\frac1p} < \eps $.
+			\end{enumerate}
+		\item $ A \sub C_0 $
+
+			$ A $ относительно компактно $ \iff $
+			\begin{enumerate}
+				\item $ A $ ограничено;
+				\item $ \forall \eps > 0 \quad \exists N > 0 : \quad
+					\forall x = \set{x_j}_{j = 1}^\infty \in A \quad
+					\sup\limits_{j \ge N + 1}|x_j| < \eps $
+			\end{enumerate}
+	\end{enumerate}
+\end{undefthm}

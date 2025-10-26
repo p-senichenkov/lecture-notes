@@ -1,0 +1,241 @@
+\chapter{Линейные пространства}
+
+\begin{definition}
+	$ X $ "--- линейное пространство над полем $ K, \quad B \sub X $.
+
+	$ B $ называется \emph{выпуклым}, если
+	$$ \forall x, y \in B \quad \forall t \in [0, 1] \quad tx + (1 - t)y \in B $$
+\end{definition}
+
+\begin{theorem}
+	$ X, Y $ "--- линейные пространства, $ A \in \mathscr Lin(X, Y) $.
+
+	\begin{enumerate}
+		\item $ L \sub X $ "--- подпространство $ \implies A(L) $ "--- подпространство $ Y $;
+		\item $ M \sub Y $ "--- подпространство $ \implies \underset{\text{(прообраз)}}{A^{-1}(Y)} $ "--- подпространство $ X $;
+		\item $ B \sub X $ "--- выпуклое $ \implies A(B) $ "--- выпуклое в $ Y $;
+		\item $ C \sub Y $ "--- выпуклое $ \implies \underset{\text{(прообраз)}}{A^{-1}(C)} $ "--- выпуклое в $ X $;
+		\item $ A $ "--- биекция $ \implies \exists A^{-1} \in \mathscr Lin(Y, X) $.
+	\end{enumerate}
+\end{theorem}
+
+\begin{note}
+	Не надо думать, что $ A $ "--- биекция (кроме последнего).
+\end{note}
+
+\begin{noproof}
+	Было в алгебре.
+\end{noproof}
+
+\begin{definition}
+	$ A \in \mathscr Lin(X, Y), \quad X, Y $ линейны над $ K $.
+
+	Определим \emph{ядро оператора}:
+	$$ \operatorname{Ker} A = \set{x \in X | Ax = 0} $$
+	и \emph{образ оператора}:
+	$$ \operatorname{Im} A = A(X) = \set{y \in Y | \exists x \in X : \quad y = Ax} $$
+\end{definition}
+
+\begin{implication}
+	$ A \in \mathscr Lin(X, Y) \implies \operatorname{Ker} A $ "--- подпространство $ X, \quad \operatorname{Im} A $ "--- подпространство $ Y $.
+\end{implication}
+
+\begin{definition}
+	$ X, Y, Z $ линейны, $ \quad X \overarr A Y \overarr B Z $.
+
+	$ C = B \cdot A $ называется \emph{произведением операторов}, если $ C(x) = B \bigl( A(x) \bigr) $.
+\end{definition}
+
+\begin{statement}
+	Если $ A, B $ линейны, то $ A \cdot B $ линеен.
+\end{statement}
+
+\section{Линейные операторы в нормированных пространствах}
+
+\begin{definition}
+	$ (X, \|\cdot\|), ~ (Y, \|\cdot\|), \quad A \in \mathscr Lin(X, Y) $.
+
+	$ A $ \emph{ограничен}, если
+	$$ \forall \text{ ограниченного } B \sub X \quad A(B) \text{ ограничено} $$
+\end{definition}
+
+\subsection{Эквивалентность непрерывности и ограниченности линейного оператора}
+
+\begin{theorem}
+	$ (X, \|\cdot\|), ~ (Y, \|\cdot\|), \quad A \in \mathscr Lin(X, Y) $.
+
+	Следующие условия равносильны (FCE):
+	\begin{enumerate}
+		\item $ A $ непрерывен в $ \On $;
+		\item $ A $ непрерывен на $ X $;
+		\item $ \exists c > 0 : \quad \|Ax\|_Y \le c\|x\|_X \quad \forall x \in X $;
+		\item $ A $ ограничен;
+		\item $ \exists r > 0 : \quad A \bigl( \mathtt B_r(\On) \bigr) $ ограничено.
+	\end{enumerate}
+\end{theorem}
+
+\begin{iproof}
+\item 1 $ \implies $ 2
+
+	В силу линейности $ A(\On) = \On $.
+
+	$ A $ непрерывен в $ \On \implies \exists \delta > 0 : \quad \forall \|x\| < \delta \quad \|Ax\| < \eps $.
+
+	Зафиксируем $ x_0 \in X $, обозначим $ y_0 = Ax_0 $.
+	$$ \|x - x_0\| < \delta \underimp{\text{непр. в } \On} \|A(x - x_0) \| < \eps \iff
+	\|Ax - Ax_0\| < \eps \iff \text{ непр. в } x_0 $$
+\item 2 $ \implies $ 1 "--- очевидно.
+\item 1 $ \implies $ 3
+
+	$$ \forall \eps > 0 \exists \delta > 0 : \quad \forall \|x\| \le \delta \quad \|Ax\| < \eps $$
+	Возьмём $ z \in X, ~ z \ne \On $.
+	$$ \Bigl\| \frac z{\|z\|} \Bigr\| = 1 $$
+	\begin{multline*}
+		x = \delta \cdot \frac z{\|z\|} \implies \|x\| = \delta \implies \|Ax\| < \eps \implies
+		\Bigl\| A \Bigl(\delta \cdot \frac z{\|z\|} \Bigr) \Bigr\| < \eps \iff \\
+		\iff \frac{\delta}{\|z\|} \cdot \| Az \| < \eps \iff
+		\|Az\| < \frac\eps\delta \|z\|
+	\end{multline*}
+\item 3 $ \implies $ 4
+
+	Возьмём $ B \sub X $ "--- ограниченное, \ie
+	$$ \exists R > 0 : \quad \forall x \in B \quad \|x\| \le R \implies \|Ax\| \underset{3)}\le c\|x\| \le cR \implies
+	A(B) \text{ ограничено} $$
+\item 4 $ \implies $ 5
+
+	$$ \mathtt B_r(\On) \text{ ограничено } \underimp{\text{очевидно}} A \bigl( \mathtt B_r(0) \bigr) $$
+\item 5 $ \implies 1 $
+
+	$$ \exists R > 0 : \quad A \bigl( \mathtt B_r(0) \bigr) \sub \mathtt B_R(\On) $$
+	\ie $ \|x\| < r \implies \|Ax\| < R $.
+
+	Пусть $ \|Ax\| < \eps $.
+	Найдём $ \delta : \|x\| < \delta $.
+	$$ \delta = \eps \cdot \frac r R $$
+	Пусть $ \|x\| < \delta $
+	$$ \implies \|x\| < \eps \cdot rR \implies \Bigl\| x \cdot \frac R\eps \Bigr\| < r \implies \Bigl\| A \Bigl( x \cdot \frac R\eps \Bigr) \Bigr\| < R \implies \|Ax\| \cdot \frac R\eps < R \iff
+	\|Ax\| < \eps $$
+\end{iproof}
+
+\begin{definition}
+	$ \mathscr B(X, Y) $ "--- множество всех ограниченных линейных операторов из $ X $ в $ Y $ \\
+	($ \iff $ множество всех непрерывных).
+\end{definition}
+
+\begin{remark}
+	$ \mathscr B(X, Y) $ "--- подпространство $ \mathscr Lin(X, Y) $.
+\end{remark}
+
+\begin{definition}
+	$ A \sub \mathscr B(X, Y) $.
+
+	Введём \emph{норму} на $ \mathscr B $:
+	$$ \|A\| = \inf\set{c > 0 | \|Ax\| \le c\|x\| \quad \forall x \in X} $$
+	(по свойству 3 она конечна).
+\end{definition}
+
+\begin{statement}
+	$ (X, \|\cdot\|), ~ (Y, \|\cdot\|) $
+
+	\begin{enumerate}
+		\item $ A \in \mathscr B(X, Y) \implies \|Ax\| \le \|A\| \cdot \|x\| \quad \forall x \in X $;
+		\item $ \|\cdot\|_{\mathscr B(X, Y)} $ удовлетворяет аксиомам нормы.
+	\end{enumerate}
+\end{statement}
+
+\begin{eproof}
+\item Зафиксируем $ x \in X $, возьмём $ c > \|A\| $.
+	$$ \implies \|Ax\| \le c\|X\| \implies \|Ax\| \le \int\set{c > 0 | c > \|A\|}\|x\| \implies \|Ax\| \le \|A\| \cdot \|x\| $$
+\item $ A \in \mathscr B(X, Y) $.
+
+	\begin{enumerate}
+		\item $ \lambda \in K, \quad x \in X $.
+			$$ \bigl\| (\lambda A)x \bigr\| = \bigl\|\lambda \cdot (Ax) \bigr\| =
+			|\lambda| \cdot \|Ax\| \le |\lambda| \cdot \|A\| \cdot \|x\| \quad \forall x $$
+			$$ \implies \|\lambda A\| \le |\lambda| \cdot \|A\| $$
+			Пусть $ \lambda \ne 0 $.
+			$$ \Bigl\| \frac1\lambda (\lambda A) \Bigr\| \le \Bigl| \frac1\lambda \Bigr| \cdot \|\lambda A\| $$
+			$$ \implies \|A\| \cdot |\lambda| \le \|\lambda A\| $$
+		\item Неравенство треугольника
+
+			Пусть $ x \in X $
+			$$ \|(A + B)x\| =
+			\|Ax + Bx\| \le \|Ax\| + \|Bx\| \le \|A\| \cdot \|x\| + \|B\| \cdot \|x\| =
+			(\|A\| + \|B\|) \|x\| \quad \forall x $$
+			$$ \implies \|A + B\| \le \|A\| + \|B\| $$
+		\item $ \|A\| = 0 $
+
+			$$ \implies \forall x \in X \quad \|Ax\| \le \|A\| \cdot \|x\| = 0 $$
+	\end{enumerate}
+\end{eproof}
+
+\subsection{Вычисление нормы непрерывного оператора}
+
+\begin{theorem}
+	$ A \in \mathscr B(X, Y) $
+
+	$$ \|A\| = \sup\limits_{\|x\| \le 1}\|Ax\| =
+	\sup\limits_{\|x\| < 1}\|Ax\| =
+	\sup\limits_{\|x\| = 1}\|Ax\| =
+	\sup\limits_{x \ne 0} \frac{\|Ax\|}{\|x\|} $$
+\end{theorem}
+
+\begin{proof}
+	Обозначим $ a = \sup\limits_{\|x\| \le 1}, \quad b = \sup\limits_{\|x\| < 1}, \quad c = \sup\limits_{\|x\| = 1}, \quad
+	d = \sup\limits_{x \ne 0} $. \\
+	Очевидно, что $ a \le b, \quad d \ge c $.
+
+	Докажем, что
+	$$ \|A\| \ge a \ge b \ge \|A\|, \quad \|A\| \ge d \ge c \ge \|A\| $$
+
+	\begin{enumerate}
+		\item Пусть $ x : \|x\| \le 1 $.
+
+			$$ \|Ax\| \le \|A\| \cdot \|x\| \le \|A\| \implies a \le \|A\| $$
+		\item Пусть $ z \in X \ne 0, \quad \eps > 0 $.
+			Рассмотрим
+			$$ x = \frac z{\|z\| \cdot (1 + \eps)} \quad \implies \|x\| < 1 \implies \|Ax\| \le b $$
+			$$ \implies \Bigl\| A \Bigl( \frac z{\|z\| (1 + \eps)} \Bigr) \Bigr\| \le b \iff
+			\|Az\| \le (1 + \eps)b \cdot \|z\| \quad \forall z \implies
+			\|A\| \le (1 + \eps)b \quad \forall \eps > 0 \implies
+			\|A\| \le b $$
+		\item Пусть $ x \in X \ne 0 $
+			$$ \|Ax\| \le \|A\| \cdot \|x\| \implies \frac{\|Ax\|}{\|x\|} \le \|A\| \implies
+			\sup\limits_{x \ne 0} \frac{\|Ax\|}{\|x\|} \le \|A\| \implies
+			d \le \|A\| $$
+		\item Пусть $ z \in X \ne 0 $
+			$$ \Bigl\| \frac z{\|z\|} \Bigr\| = 1 \implies \Bigl\| A \Bigl( \frac z{\|z\|} \Bigr) \le c \implies
+			\|Az\| \le c\|z\| \implies
+			\|A\| \le c $$
+	\end{enumerate}
+\end{proof}
+
+\begin{exmpls}
+\item $ X = \mathcal C[a, b], \quad h(x) \in \mathcal C[a, b] $
+	$ M_h(f) = h(x) \cdot f(x) $ "--- мультипликатор.
+
+	Проверим, что
+	$$ M_h \in \mathscr B(\mathcal C[a, b]), \quad
+	\|M_h\|_{\mathscr B(\mathcal C[a, b])} = \|h\|_\infty $$
+
+	$$ x \in [a, b] \implies \bigl( M_h(f)(x) \bigr) = h(x)f(x) \implies
+	\|h \cdot f\|_\infty \le \max\limits_{[a, b]} |h(x)| \cdot \max\limits_{[a, b]}|f(x)| =
+	\|h\|_\infty \cdot \|f\|_\infty $$
+
+	$$ \forall f \in \mathcal C[a, b] \quad \|M_h(f)\|_\infty \le \|h\|_\infty \|f\|_\infty \implies
+	\forall M_h \in \mathscr B(\mathcal C[a, b]) \quad \|M_h\|_{\mathscr B(\mathcal C[a, b])} \le \|h\|_\infty $$
+
+	$$ f(x) = \chi_{[a, b]}(x) \in \mathcal C[a, b], \quad \|\chi_{[a, b]}\|_\infty = 1 $$
+	$$ \|M_h\| = \sup\limits_{\|f\| = 1} \|M_h(f)\|_\infty \ge \|M_h(\chi_{[a, b]})\|_\infty =
+	\|h\|_\infty \implies
+	\|M_h\|_{\mathscr B(\mathcal C[a, b])} \|h\|_\infty $$
+\item $ Y = \mathcal C[0, 1], \quad X = \set{f | f' \in \mathcal [0, 1]} $
+
+	$ X $ "--- подпространство $ Y $, \ie $ \|f\|_X = \max\limits_{[0, 1]}|f(x)| $.
+	$$ f \in X, \quad \mathscr D(f) = f', \quad \mathscr D \in \mathscr Lin(X, Y) $$
+	Проверим, что $ \mathscr D $ не является непрерывным.
+	$$ x^n \in \mathcal C[0, 1], \quad \|x^n\|_\infty = 1 \implies
+	\sup\limits_{\|f\| = 1} \|\mathscr D(f)\|_\infty \ge \sup\limits_{n \in \N} \|\mathscr D(x^n)\| $$
+	$$ \mathscr D(x^n) = nx^{n - 1} \implies \|\mathscr D(x^n)\|_\infty = n $$
+	$$ \implies \sup \|\mathscr D(f)\| \ge \sup \set{\mathscr D(x^n)} = +\infty $$
+\end{exmpls}

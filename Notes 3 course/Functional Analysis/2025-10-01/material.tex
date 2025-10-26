@@ -1,8 +1,10 @@
-\chapter{Пространства}
+\chapter{Метрические пространства}
 
 \section{Относительно компактные множества в \texorpdfstring{$ \mathcal C(K) $}{C(K)}}
 
-\begin{theorem}[Асколи-Арцела]
+\subsection(Теорема Асколи--Арцела){Теорема Асколи"--~Арцела}
+
+\begin{theorem}
 	$ \Phi \sub \mathcal C(K) $.
 
 	$ \Phi $ относительно компактно тогда и только тогда, когда
@@ -27,14 +29,234 @@
 
 					Возьмём $ \eps > 0 $
 					$$ \exists \text{ конечная } \eps \text{-сеть } \set{\phi_j}_{j = 1}^n, \quad \phi_j \in \mathcal C(K) $$
-					$$ \phi_j \text{ равном. непр. } \implies \exists \delta_j : \quad \forall x, y \in K : \rho(x, y) < \delta \quad |\phi_j(x) - \phi_j(y)| < \eps \quad 1 \le j \le n $$
+					$$ \phi_j \text{ равном. непр. } \implies
+					\exists \delta_j : \quad \forall x, y \in K : \rho(x, y) < \delta \quad
+					|\phi_j(x) - \phi_j(y)| < \eps \quad 1 \le j \le n $$
 					Положим $ \delta = \min\limits_{1 \le j \le n}\set{\delta_j} $.
 					Проверим условие равностепенной непрерывности с $ \delta $.
 
 					Пусть $ f \in \Phi, \quad x, y \in K : \rho(x, y) < \delta $.
-					$$ \set{\phi_j} \text{ "--- $ \eps $-сеть } \implies \exists 1 \le m \le n : \quad \|f - \phi_m\|_\infty < \eps \implies \max\limits_{x \in K} |f(x) - \phi_m(x)| < \eps $$
-					$$ |f(x) - f(y) \trile |f(x) - \phi_m(x)| + |\phi_m(x) - \phi_m(y)| + |\phi_m(y) - f(y)| < 3\eps $$
+					$$ \set{\phi_j} \text{ "--- $ \eps $-сеть } \implies
+					\exists 1 \le m \le n : \quad \|f - \phi_m\|_\infty < \eps \implies
+					\max\limits_{x \in K} |f(x) - \phi_m(x)| < \eps $$
+					$$ |f(x) - f(y) \trile
+					|f(x) - \phi_m(x)| + |\phi_m(x) - \phi_m(y)| + |\phi_m(y) - f(y)| < 3\eps $$
 			\end{enumerate}
 		\item $ \impliedby $
+
+			$ \Phi $ ограничено $ \implies \exists M > 0 : \quad \forall f \in \Phi \quad \forall x \in K \quad |f(x)| \le M $
+
+			Возьмём $ \eps > 0 $.
+
+			Знаем, что $ \mathcal C(K) \sub m(K) $.
+			Проверим, что $ \Phi $ вполне ограничено.
+			Для этого достаточно доказать, что существует компактная $ \eps $-сеть в $ m(K) $
+			(по следствиям из предыдущей лекции).
+
+			Воспользуемся условием равностепенной непрерывности:
+			$$ \exists \delta : \quad \forall \rho(x, y) < \delta, ~ f \in \Phi \quad |f(x) - f(y)| < \eps $$
+
+			По лемме о разбиении,
+			$$ \exists C_j : \quad K = \bigcup_{j = 1}^n C_j, \quad
+			C_j \cap C_i = \O, \quad C_j \ne \O, \operatorname{diam} C_j < \delta $$
+			Для определённости будем считать, что $ \mathcal C(K) = \set{f : K \to \Co} $.
+			$$ \Psi \define \set{g(x) = \sum_{j = 1}^n y_j \chi_{C_j}(x) | y_j \in \Co} $$
+			$$ \| g(x) \|_\infty =
+			\left\| \sum_{j = 1}^n y_j \chi_{C_j}(x) \right\|_\infty =
+			\max\limits_{1 \le j \le n}|y_j| =
+			\|y\|_{l_n^\infty} $$
+
+			Рассмотрим
+			$$ F : l_n^\infty \to \Psi : \quad F(y) = \sum_{j = 1}^n y_i \chi_{C_j}(x) $$
+			$$ \|F(y)\|_{m(K)} = \|y\|_{l_n^\infty}, \quad
+			\|F(y) - F(z)\|_{m(K)} = \|y - z\|_{l_n^\infty} $$
+			$ F $ "--- изометрия.
+			Это означает, что она сохраняет компактность.
+
+			Выберем компакт
+			$$ Q = \set{y = (y_1, \dots, y_n) | \ |y_j| \le M} \implies F(Q) \text{ "--- компакт в } m(K) $$
+			Так как $ Q $ находится в $ \Co^n $, оно является произведением кругов.
+			Это называется \emph{полидиск}.
+			$$ F(Q) = \set{g(x) = \sum_{j = 1}^n y_j \chi_{C_j} | \ |y_j| \le M} $$
+
+			Проверим, что $ F(Q) $ "--- $ \eps $-сеть для $ \Phi $.
+
+			Пусть $ f \in \Phi, \quad C_j \ne \O $.
+			Выберем $ x_j \in C_J $.
+			Рассмотрим $ y_j = f(x_j) $.
+			$$ g(x) = \sum_{j = 1}^n f(x_j)\chi_{C_j} (x) \in F(Q) $$
+
+			Оценим $ \|f - g\|_\infty $.
+			Возьмём произвольный $ x \in K $.
+			\begin{multline*}
+				\implies \exists 1 \le m \le n : \quad x \in C_m \implies
+				g(x) = f(x_m) \implies \\
+				\implies |f(x) - g(x)| = |f(x) - f(x_m)| < \eps \quad
+				\as ~ \rho(x, x_m) < \delta
+			\end{multline*}
 	\end{itemize}
 \end{proof}
+
+\begin{remark}
+	Свойства 1 и 2 независимы.
+\end{remark}
+
+\begin{exmpls}
+\item $ \Phi \sub \mathcal C[0, 1] $
+	$$ f_n(x) = x^2 + n, \quad n \in \N $$
+	$ \set{f_n} $ не ограничено, но равномерно непрерывно.
+\item $ \Phi \sub \mathcal C[0, 1] $
+	$$ f_n = x^n $$
+	$ \set{f_n} $ ограничено, но не равномерно непрерывно.
+\end{exmpls}
+
+\subsection{Достаточное условие равностепенной непрерывности}
+
+\begin{theorem}
+	\hfill
+	\begin{itemize}
+		\item $ \Phi \sub \mathcal C(K), \quad f \in \Phi $
+			$$ \exists M > 0, ~ \alpha, \beta > 0 : \quad
+			\forall x, y \in K : \rho(x, y) < \beta \quad
+			|f(x) - |f(y)| \le M \bigl( \rho(x, y) \bigr)^\alpha $$
+		\item $ f \in \Phi \sub \mathcal C[a, b], \quad
+			\exists f'(x) $
+			$$ \exists L > 0 : \quad
+			|f'(x)| \le L \quad \forall x \in (a, b) $$
+		\item $ K \sub G \sub \R^n, \quad
+			K $ "--- компакт, $ \quad
+			G $ "--- открытое, $ \quad
+			f \in \Phi \sub \mathcal C(K), \quad
+			\exists \pder f{x_j}(x) $
+			$$ \exists L > 0 : \quad
+			\forall x \in G \quad \Bigl| \pder f{x_j}(x) \Bigr| \le L $$
+		\item $ K \sub G \sub \Co, \quad
+			K $ "--- компакт, $ \quad
+			G $ "--- открытое, $ \quad
+			f \in \Phi \sub \mathcal C(K), \quad
+			f $ аналитична в $ G $
+			$$ \exists L > 0 : \quad |f(z)| \le L $$
+	\end{itemize}
+
+	В каждом из этих случаев $ \Phi $ равностепенно непрерывно.
+\end{theorem}
+
+\begin{iproof}
+\item Пусть $ \eps > 0, \quad
+	x, y \in K, \quad
+	f \in \Phi, \quad
+	\rho(x, y) < \delta < \beta $
+	$$ \implies |f(x) - f(y)| \le M \bigl( \rho(x, y) \bigr)^\alpha \underset{\text{выберем $ \delta $ так, чтобы}}<
+	M \delta^\alpha < \eps $$
+	$$ \implies \delta < \Bigl( \frac\eps M \Bigr)^{\frac1\alpha} $$
+	$$ \delta \define \min\set{\beta, \Bigl( \frac\eps M \Bigr)^{\frac1\alpha}} $$
+\item Воспользуемся теоремой о промежуточном значении:
+	$$ \exists c \in (a, b) : \quad f(y) - f(x) = f'(c)(y - x) \implies
+	|f(y) - f(x)| \le L|y - x| $$
+	Получили случай 1 с $ M = L, ~ \alpha = 1, ~ \forall \beta $.
+\item Пусть $ x, y \in K : \quad [y, z] \sub G $
+	Рассмотрим
+	$$ \Gamma(t) : \quad
+	0 \le t \le 1, \quad
+	\Gamma(t) = t \cdot z + (1 - t) \cdot y, \quad
+	\Gamma(0) = y, ~ \Gamma(1) = z $$
+	$$ f(z) - f(y) = f \bigl( \Gamma(1) \bigr) - f \bigl( \Gamma(0) \bigr) $$
+	$ f \bigl( \Gamma(t) \bigr) $ "--- дифференцируемая функция от $ t $.
+	Применим к ней случай 2.
+
+	Теперь рассмотрим $ F = \R^n \setminus G $ "--- компакт.
+	Известно, что $ \rho(x, F) $ непрерывна.
+	$$ h(x) \define \rho(x, F), \quad x \in K $$
+	$$ \forall x \in F \quad h(x) > 0 $$
+	$$ \exists \min\limits_{x \in K} h(x) \fed h(x_0) \fed r > 0 $$
+	Пусть $ x, y \in K : \quad \rho(x, y) < r $.
+	$$ y \in \mathtt B_r(x) \sub G \implies [x, y] \sub G $$
+
+	Возьмём $ \alpha = 1, ~ M = L\sqrt{n}, ~ \beta = r $ и применим случай 1.
+\item
+	$$ \exists r > 0 : \quad \forall z \in K \quad \rho(z, F) \ge r, \quad F = \Co \setminus G $$
+	Возьмём $ \beta = \frac r3 $.
+	$$ \gamma = \set{\zeta | \ |z - \zeta| = 2\beta}, \quad \gamma \sub G $$
+	Возьмём $ z, w \in K : \quad \rho(z, w) < \beta $.
+	$$ f(z) = \frac1{2\pi \ii} \int\limits_{\gamma^+} \frac{f(\zeta)}{\zeta - z}\di \zeta, \quad
+	f(w) = \frac1{2\pi \ii} \int\limits_{\gamma^+} \frac{f(\zeta)}{\zeta - w}\di \zeta $$
+	$$ |f(z) - f(w)| = \frac1{2\pi} \Bigl| \int\limits_{\gamma^+} f(\zeta) \Bigl( \frac1{\zeta - z} - \frac1{\zeta - w} \Bigr)\di \zeta \Bigr| $$
+	Вычислим отдельно:
+	$$ \Bigl| \frac1{\zeta - z} - \frac1{\zeta - w} \Bigr| =
+	\Bigl| \frac{z - w}{(\zeta - z)(\zeta - w)} \Bigr| \underset{\begin{subarray}{c}
+		|\zeta - z| = 2\beta \\
+		|\zeta - w| \ge \beta
+\end{subarray}}<
+	\frac{|z - w|}{2 \beta \cdot \beta} $$
+	Теперь
+	$$ |f(z) - f(w)| \le \frac1{2\pi} \frac{L |z - w|}{2 \beta^2} \cdot 2\pi \cdot 2\beta =
+	\frac L \beta |z - w| $$
+	Применяем случай 1 с $ \alpha, \beta = 1, ~ M = \frac L \beta $.
+\end{iproof}
+
+\begin{undefthm}{Упражнение.}
+	\hfill
+	\begin{enumerate}
+		\item $ 1 \le p < +\infty, \quad A \sub l^p $
+
+			$ A $ относительно компактно (и вполне ограничено) $ \iff $
+			\begin{enumerate}
+				\item $ A $ ограничено в $ l^p $;
+				\item $ \forall \eps > 0 \quad
+					\exists N \in \N : \quad
+					\forall x = \set{x_j}_{j = 1}^\infty \in A \quad
+					\bigl( \sum_{j = n + 1}^\infty |x_j|^p \bigr)^{\frac1p} < \eps $.
+			\end{enumerate}
+		\item $ A \sub C_0 $
+
+			$ A $ относительно компактно $ \iff $
+			\begin{enumerate}
+				\item $ A $ ограничено;
+				\item $ \forall \eps > 0 \quad \exists N > 0 : \quad
+					\forall x = \set{x_j}_{j = 1}^\infty \in A \quad
+					\sup\limits_{j \ge N + 1}|x_j| < \eps $
+			\end{enumerate}
+	\end{enumerate}
+\end{undefthm}
+
+\chapter{Линейные пространства}
+
+\begin{definition}
+	$ X $ "--- \emph{линейное пространство} над $ K $ ($ K = \R $ или $ \Co $), если
+	\begin{enumerate}
+		\item $ x, y \in X \implies \alpha x + \beta y \in X \quad \forall \alpha, \beta \in K $;
+		\item $ \O \in X $.
+	\end{enumerate}
+\end{definition}
+
+\begin{definition}
+	$ X, Y $ линейны над $ K, \quad A : X \to Y $.
+
+	Будем $ A $ называть \emph{линейным оператором}, если
+	\begin{enumerate}
+		\item $ A(x + z) = Ax + Az $;
+		\item $ A(\alpha x) = \alpha Ax $.
+	\end{enumerate}
+\end{definition}
+
+\begin{notation}
+	$ \mathscr Lin(X, Y) = \set{A : X \to Y | A \text{ "--- линейный}} $
+\end{notation}
+
+\begin{remark}
+	$ \mathscr Lin $ "--- линейное пространство над $ K $.
+\end{remark}
+
+\begin{exmpls}
+\item $ K(s, t) \in \mathcal C \bigl( [a, b] \times [a, b]\bigr) $
+	Определим \emph{интегральный оператор}:
+	$$ ( \mathcal K f)(s) = \int_a^b K(s, t) f(t) \di t $$
+	$ K(s, t) $ называется \emph{ядром интегрального оператора}.
+	$$ \mathcal K \in \mathscr Lin \Bigl( \mathcal C[a, b] \Bigr) $$
+\item $ X = \nder[1]{\mathcal C}[a, b] = \set{f | f' \in \mathcal C[a, b]}, \quad Y = \mathcal C[a, b] $
+	$$ \mathcal D(f) \define f' $$
+	$$ \mathcal D \in \mathscr Lin (X, Y) $$
+\item $ l^1 \hookrightarrow l^2 $
+	$$ \sum_{j = 1}^\infty |x_j| < +\infty \implies \sum_{j = 1}^\infty |x_j|^2 < +\infty $$
+	$ Ax = x $ "--- оператор вложения
+\end{exmpls}

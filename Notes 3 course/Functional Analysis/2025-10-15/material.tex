@@ -1,0 +1,197 @@
+\chapter{Линейные пространства}
+
+\section{Конечномерные пространства}
+
+\subsection{Изоморфность конечномерных пространств одинаковой размерности}
+
+\begin{theorem}
+	$ (X, \|\cdot\|), ~ (Y, \|\cdot\|) $ "--- линейные над $ \R $ (или $ \Co $), $ \quad
+	\dim X = \dim Y = n \in \N $.
+
+	Тогда $ X $ линейно изоморфно $ Y $.
+\end{theorem}
+
+\begin{proof}
+	Рассмотрим $ Z = l_n^2 = (\R^n, \|\cdot\|_2) $.
+	Докажем, что $ l_n^2 $ и $ X $ линейно изоморфны.
+	Этого достаточно в силу транзитивности.
+
+	Пусть $ \set{f_j}_{j = 1}^n $ "--- базис в $ X, \quad
+	e_j = (0, \dots, 0, \underset j 1, 0, \dots, 0) $ "--- базис в $ l_n^2 $.
+
+	Определим $ A : l_n^2 \to X : \quad Ae_j = f_j $.
+	$$ A \Bigl( \sum_{j = 1}^n c_je_j \Bigr) \define \sum_{j = 1}^n c_jf_j \implies
+	A \in \mathscr Lin(l_n^2, X) $$
+	Понятно, что $ A $ "--- биекция.
+	\begin{itemize}
+		\item Проверим непрерывность
+			$$ z \in l_n^2, ~ z = \sum_{j = 1}^n c_je_j \quad \|A(z)\| =
+			\Bigl\| \sum_{j = 1}^n c_jf_j\|_X \le \sum_{j = 1}^n |c_j| \cdot \|f_j\| \underset{\text{КБ}}\le
+			\Bigl( \sum_{j = 1}^n |c_j|^2 \Bigr)^{\frac12} \Bigl( \sum_{j = 1}^n \|f_j\|^2 \Bigr)^{\frac12} =
+			M\|z\|_{l_n^2} $$
+			$$ \implies A \in \mathscr B(l_n^2, X), \quad \|A\| \le M $$
+		\item Найдём $ c > 0 : \quad \|Az\| \ge c\|z\| \quad \forall z \in l_n^2 $
+			$$ g(z) \define \|Az\|, \quad z \in l_n^2 $$
+			$ g(z) $ непрерывна на $ l_n^2 $.
+			$$ S \define \set{z \in l_n^2 | \|z\| = 1} $$
+			$ S $ "--- компакт в $ l_n^2 $.
+			$$ \exists \min\limits_{z \in S} g(z) = g(z_0) = r > 0 \implies
+			\forall z \in S \quad \|Az\| \ge r $$
+			Возьмём $ u \in l_n^2 \ne 0 $.
+			$$ \frac u{\|u\|} \in S \implies
+			\Bigl\| A \Bigl( \frac u{\|u\|} \Bigr)\Bigr\| \ge r \implies
+			\|Au\| \ge r\|u\| \underimp{\text{критерий лин. изоморфности}}
+			l_n^2 \text{ линейно изоморфно } X $$
+	\end{itemize}
+\end{proof}
+
+\begin{implication}
+	$ (X, \|\cdot\|), \quad \dim X < +\infty $
+
+	\begin{enumerate}
+		\item $ X $ "--- банахово;
+		\item $ K \sub X $ "--- компакт $ \iff K $ ограничено и замкнуто;
+		\item $ K \sub X $ относительно компактно $ \iff K $ ограничено.
+	\end{enumerate}
+\end{implication}
+
+\begin{eproof}
+\item $ l_n^2 $ "--- банахово $ \implies X $ "--- банахово.
+\item $ K \sub X, \quad A : X \to l_n^2 $ "--- линейный изоморфизм $ \implies
+	A, A^{-1} $ ограничены.
+
+	$ K $ "--- компакт $ \implies \Bigl( A(K) $ "--- компакт $ \iff
+	K $ ограничено и замкнуто $ \Bigr) $.
+	$$ \implies K = A^{-1} \bigl( A(K) \bigr), \quad
+	K \text{ ограничено и замкнуто} $$
+\end{eproof}
+
+\begin{theorem}
+	$ (X, \|\cdot\|), \quad \dim X < +\infty, \quad (Y, \|\cdot\|) $
+
+	$$ \mathscr Lin(X, Y) = \mathscr B(X, Y) $$
+\end{theorem}
+
+\begin{iproof}
+\item Пусть $ T \in \mathscr Lin(l_n^2, X), \quad z \in l_n^2 $.
+	$$ z = \sum_{j = 1}^n c_je_j, \quad e_j = (0, \dots, 0, \underset j 1, 0 \dots, 0) $$
+	\begin{multline*}
+		\|Tz\| = \Bigl\| \sum_{j = 1}^n c_j Te_j \Bigr\| \le
+		\sum_{j = 1}^n |c_j| \|Te_j\| \underset{\text{К"--~Б}}\le
+		\Bigl( \sum_{j = 1}^n |c_j|^2 \Bigr)^{\frac12} \Bigl( \sum_{j = 1}^n \|Te_j\|^2 \Bigr)^{\frac12} \implies \\
+		\implies \|Tz\| \le M \|z\| \implies
+		T \in \mathscr B(l_n^2, X)
+	\end{multline*}
+\item $ U \in \mathscr Lin(X, Y) $
+
+	Пусть $ l_n^2 \overarr A X \overarr U Y, \quad A $ "--- линейный изоморфизм.
+	Положим $ T = UA $.
+	$$ \implies T \in \mathscr Lin(l_n^2, Y) = \mathrm B(l_n^2, Y) \implies
+	T \in \mathscr B(l_n^2, Y) $$
+	$$ U = TA^{-1} \implies U \in \mathscr B(X, Y) $$
+\end{iproof}
+
+\section{Конечномерные подпространства}
+
+\begin{definition}
+	$ (X, \rho) $ "--- метрическое пространство, $ \quad Y \sub X, \quad a \in X $
+
+	$$ \rho(a, Y) = \inf\limits_{y \in Y} \rho(a, y) $$
+	Если $ \exists y_0 \in Y : \quad \rho(a, Y) = \rho(a, y_0) $, то $ y_0 $ называется
+	\emph{элементом наилучшего приближения}.
+\end{definition}
+
+\begin{remark}
+	Если $ Y $ "--- компакт, то элемент наилучшего приближения существует
+	(\as $ \rho(a, y) $ непрерывна).
+\end{remark}
+
+\begin{theorem}
+	$ (X, \|\cdot\|) $
+	\begin{enumerate}
+		\item $ L \in X, \quad L $ "--- конечномерное подпространство в алгебраическом смысле
+			$ \implies L $ замкнуто;
+		\item $ a \in X \implies $ в $ L $ существует элемент наилучшего приближения.
+	\end{enumerate}
+\end{theorem}
+
+\begin{eproof}
+\item $ \dim L < +\infty \implies L $ "--- банахово $ \implies L $ замкнуто.
+\item $ a \in X, \quad f = \rho(a, L) = \inf\|a - y\| $
+	$$ \exists \set{y_n}_{n = 1}^\infty : \quad d \le \|a - y_n\| \le d + \frac1n $$
+	Проверим, что $ \set{y_n} $ ограничена:
+	$$ \|y_n\| \trile \|a\| + \|y_n - a\| \le \|a\| + d + 1 $$
+	$$ \dim L < +\infty \implies
+	\set{y_n}_{n = 1}^\infty \text{ относительно компактна } \implies
+	\exists \set{y_{n_j}} : \quad \exists \lim\limits_{j \to \infty} y_{n_j} = y_0 \in L $$
+	$$ d \le \|a - y_{n_j}\| \le d + \frac1{n_j} \implies \|a - y_0\| = d $$
+\end{eproof}
+
+\begin{remark}
+	Элемент наилучшего приближения не обязательно единственен.
+\end{remark}
+
+\begin{exmpls}
+	% Set clashes with \| and |
+\item $ l_2^\infty = \{(x, y), \|(x, y)\| = \max\{|x|, |y|\}\} $
+	$ \mathtt B_1(0, 0) $ выглядит в этом пространстве как квадрат.
+
+	$ L = \set{y = kx}, \quad k \ne 0 $.
+	Для $ L $ существует единственный элемент наилучшего приближения.
+\item $ L = \set{y = 0} $.
+	Для $ L $ элемент наилучшего приближения не единственен.
+\item $ l_2^1 = \{ (x, y), \|(x, y)\| = |x| + |y|\} $
+	$ B_1(0, 0) $ выглядит как квадрат, повёрнутый на $ \frac\pi4 $.
+
+	$ L = \set{y = kx}, \quad k \ne \pm 1 $.
+	Для $ L $ существует единственный элемент наилучшего приближения.
+\item $ L = \set{y = x} $.
+	Для $ L $ элементов наилучшего приближения бесконечно много.
+\end{exmpls}
+
+\begin{implication}
+	$ \mathcal C[a, b], \quad \|f\|_\infty = \max|f(x)|, \quad
+	\mathscr P_n = \set{\sum_{j = 0}^n a_jx^j, \quad a_j \in \R} $
+
+	$$ \exists p \in \mathscr P_n : \quad \inf\limits_{q \in \mathscr P_n}\|f - q\|_\infty = \|f - p\| $$
+	$ p $ называется \emph{многочленом наилучшего приближения}
+\end{implication}
+
+\begin{remark}
+	Для $ \mathscr P_n $ существует единственный элемент наилучшего приближения.
+\end{remark}
+
+\section{Добавление в параграф о конечномерных пространствах}
+
+\begin{implication}
+	$ \dim X = n \in \N, \quad \|\cdot\|_1, ~ \|\cdot\|_2 $ "--- нормы на $ X $.
+
+	Тогда $ \|\cdot\|_1 $ и $ \|\cdot\|_2 $ эквивалентны.
+\end{implication}
+
+\section{Почти ортогональные элементы}
+
+\subsection{Лемма Рисса о почти ортогональном элементе}
+
+\begin{lemma}
+	$ (X, \|\cdot\|), \quad L \subsetneq X $ "--- подпространство, $ L = \ol L, \quad 0 < \eps < 1 $
+
+	$$ \exists x_0 : \quad \|x_0\| = 1, \quad \rho(x_0, L) > 1 - \eps $$
+\end{lemma}
+
+\begin{proof}
+	Возьмём $ z \in X \setminus L $.
+	$$ \rho(z, L) = d > 0 \quad \text{ (\as $ L = \ol L $)} $$
+	$$ \rho(z, L) = \inf\limits_{y \in L} \|z - y\| $$
+	$$ \exists y \in L : \quad d \le \|z - y\| < \frac d{1 - \eps} $$
+	Выберем $ x_0 = \frac{z - y}{\|z - y\|} $.
+	Возьмём $ u \in L $.
+	$$ \|x_0 - u\| = \Bigl\| \frac{z - y}{\|z - y\|} - u \Bigr\| =
+	\frac{\bigl\|z - y - u \cdot \|z - y\| \bigr\|}{\|z - y\|} \ge
+	\frac d {\frac d {1 - \eps}} = 1 - \eps $$
+\end{proof}
+
+\begin{remark}
+	Если $ \exists y_0 : \quad \rho(z, y_0) = d $, то $ x_0 = \frac{z - y_0}{\|z - y_0\|} \implies
+	\|x_0 - u\| \ge 1 $
+\end{remark}

@@ -1,0 +1,269 @@
+\chapter{Линейные пространства}
+
+\section{Линейные непрерывные функционалы}
+
+\subsection(Норма интегрального функционала на отрезке)
+{Норма интегрального функционала в $ \mathcal C[a, b] $}
+
+\begin{theorem}
+	$ \phi(x) \in \mathcal [a, b], \quad \phi(x) $ фиксирована, $ \quad f \in \mathcal C[a, b] $.
+	$$ G(f) \define \int_a^b f(x) \cdot \phi(x) \di x $$
+
+	$$ \implies G \in \bigl( C[a, b] \bigr)^*, \quad \|G\| = \int_a^b |\phi(x)| \di x $$
+\end{theorem}
+
+\begin{iproof}
+\item $ f \in \mathcal C[a, b] $
+	\begin{multline*}
+		|G(f)| = \Bigl| \int_a^b \phi(x) \cdot f(x)\di x\Bigr| \le \int_a^b |f(x)| \cdot |\phi(x)| \di x \le
+		\|f\|_\infty \cdot \int_a^b |\phi(x)| \di x \quad \forall x \implies \\
+		\implies G \in \bigl( \mathcal C[a, b] \bigr)^*, \quad
+		\|G\| \le \int_a^b |\phi(x)| \di x
+	\end{multline*}
+\item $ \phi(x) \overset{[a, b]}> 0 $
+
+	Пусть $ f(x) = \chi_{[a, b]} $.
+	$$ \|\chi_{[a, b]} = 1 $$
+	$$ |G(\chi_{[a, b]})| = \Bigl| \int_a^b \phi(x) \di x \Bigr| \undereq{\phi(x) > 0}
+	\int_a^b \phi(x) \di x $$
+\item $ \phi(x) \overset{[a, b]}\le 0 $
+	$$ |G(\chi_{[a, b]})| = \Bigl| \int_a^b \phi(x) \di x \Bigr| = \int_a^b |\phi(x)| \di x $$
+\item $ \phi $ "--- произвольная
+	$$ g(x) \define \operatorname{sign} \phi(x), \quad \|g\|_\infty = 1 $$
+	$$ \int_a^b g\phi = \int_a^b |\phi(x)| \di x $$
+	$ g $ не является непрерывной, поэтому подставить её мы не можем.
+	Приблизим её непрерывными:
+	$$ \eps > 0 \quad \phi(t) \text{ равномерно непрерывна } \implies \exists \delta > 0 : \quad
+	\forall |t - s| < \delta \quad
+	|\phi(t) - \phi(s)| < \eps $$
+	$$ a = t_0 < t_1 < \dots < t_n = b \text{ "--- разбиение } [a, b] : \quad
+	t_k - t_{k - 1} < \delta $$
+	$$ x, t \in [t_{k - 1}, t_k] \implies |\phi(s) - \phi(t)| < \eps $$
+	$$ \mathscr F \define \set{[t_{k - 1}, t_k]}_{k = 1}^n $$
+	Разобьём отрезки на два множества:
+	\begin{enumerate}
+		\item $ \Delta_1, \dots, \Delta_2 $ "--- отрезки такие, что $ \phi(t) \overset{\Delta_j}> 0 $
+			или $ \phi(t) \overset{\Delta_j} < 0 $;
+		\item $ \Delta_{r + 1}, \dots, \Delta_n $ "--- отрезки, на которых
+			$ \exists s \in \Delta_j : \quad \phi(s) = 0 $;
+	\end{enumerate}
+
+	Проверим, что вклад отрезков второго сорта в интеграл очень маленький.
+	Пусть $ r + 1 \le j \le n, \quad t \in \Delta_j, \quad \exists s \in \Delta_j : \quad \phi(s) = 0 $.
+	$$ |\phi(t)| = |\phi(t) - \phi(s)| < \eps \implies
+	\int\limits_{\Delta_j} |\phi(t)| \di t \le \eps |\Delta_j| \implies
+	\int\limits_{\bigcup_{j = r + 1}^n \Delta_j}|\phi(t)| \di t \le
+	\eps \Bigl( \sum_{j = r + 1}^n |\Delta_j| \Bigr) \le
+	\eps(b - a) $$
+	$$ h(t) =
+	\begin{cases}
+		\operatorname{sign} \phi(t), \quad t \in \Delta_j, \quad 1 \le j \le r \\
+		\text{линейная на } \Delta_j, \quad r + 1 \le j \le n \\
+		\text{если } [a, t_1] = \Delta_j, \quad r + 1 \le j \le n, \text{ то } h(a) \define 0 \\
+		\text{если } [t_{n - 1}, b] = \Delta_j, \quad r + 1 \le j \le n, \text{ то } h(b) \define 0
+	\end{cases} $$
+	Понятно, что
+	$$ h(t) \in \mathcal C[a, b], \quad \|h\|_\infty \le 1, \quad
+	f(t) \cdot \phi(t) = |\phi(t)|, \quad
+	t \in \Delta_j, \quad 1 \le j \le r $$
+	$$ |h(t) \cdot \phi(t)| \le |\phi(t)| \quad \forall t \in [a, b] $$
+	\begin{multline*}
+		\|G\| = \sup\limits_{\|f\| \le 1} |G(f)| \ge |G(h)| =
+		\Bigl| \int_a^b \phi(t) \cdot h(t) \di t \Bigr| =
+		\Bigl| \int\limits_{\bigcup_{j = 1}^r \Delta_j} |\phi(t)| \di t + \int\limits_{\bigcup_{j = r + 1}^n \Delta_j} \phi(t) \cdot h(t) \di t \Bigr| \ge \\
+		\ge \int\limits_{\bigcup_{j = 1}^n \Delta_j} |\phi(t)| \di t - \Bigl| \int\limits_{\bigcup_{j = r + 1}^n \Delta_j} |\phi(t)| \cdot |h(t)| \di t \Bigr| \ge
+		\int\limits_{\bigcup_{j = 1}^n \Delta_j} |\phi(t)| \di t - \int\limits_{\bigcup_{j = r + 1}^n \Delta_j} |\phi(t)| \di t = \\
+		= \int_a^b |\phi(t)| \di t - 2 \int\limits_{\bigcup_{j = r + 1}^n \Delta_j} |\phi(t)| \di t \ge
+		\int_a^b |\phi(t)| \di t - 2 \eps(b - a) \quad \forall \eps > 0
+	\end{multline*}
+	$$ \implies \|G\| \ge \int_a^b |\phi(t)| \di t \implies
+	\|G\|_{\mathcal C^*[a, b]} =
+	\int_a^b |\phi(t)| \di t $$
+\end{iproof}
+
+\subsection{Норма интегрального оператора в \texorpdfstring{$ \mathcal C[a, b] $}{пространстве непрерывных функций}}
+
+\begin{theorem}
+	$ K(s, t) \in \mathcal C \bigl( [a, b] \times [a, b] \bigr), \quad f \in \mathcal C[a, b] $
+	$$ (\mathscr Kf)(s) = \int_a^b K(s, t)f(t) \di t $$
+
+	$$ \implies \mathscr K \in \mathscr B \bigl( \mathcal C[a, b] \bigr), \quad
+	\|\mathscr K\|_{\mathscr B(\mathcal C[a, b])} =
+	\underbrace{\max\limits_{a \le s \le b} \int_a^b |K(s, t)| \di t}_M $$
+\end{theorem}
+
+\begin{iproof}
+\item $ \|\mathscr K\| \le M $
+
+	Возьмём $ f \in \mathcal C[a, b], \quad s \in [a, b] $.
+	\begin{multline*}
+		|(\mathscr Kf)(s)| =
+		\Bigl| \int_a^b K(s, t) f(t) \di t \Bigr| \le
+		\|f\|_\infty \int_a^b |K(s, t) \di t \le
+		M \cdot \|f\|_\infty \implies \\
+		\implies \|\mathscr K f\|_\infty = \max\limits_{a \le s \le b} |(\mathscr Kf)(s)| \le
+		M \cdot \|f\|_\infty \implies \mathscr K \in \mathscr B \bigl( \mathcal C[a, b] \bigr), \quad
+		\|\mathscr K\| \le M
+	\end{multline*}
+\item $ \ge $
+
+	$$ g(s) \define \int_a^b |K(s, t)| \di t \implies g \in \mathcal C[a, b] \implies
+	\exists s_0 : \quad \max g(s) = g(s_0) = M $$
+	$$ \phi(t) = K(s_0, t) $$
+	$$ f \in \mathcal C[a, b], \quad \|f\|_\infty \le 1 $$
+	$$ \|\mathscr Kf\| = \max\limits_{a \le s \le b} |(\mathscr Kf)(s)| \ge |(\mathscr Kf)(s_0)| =
+	\Bigl| \int_a^b K(s_0, t)f(t) \di t \Bigr| =
+	|G(f)|, \text{ где } G(f) = \int_a^b f(t) \cdot \phi(t) \di t $$
+	По предыдущей теореме
+	$$ \|G\|_{\mathcal C^* [a, b]} = \int_a^b |K(s_0, t)|\di t = M $$
+
+	$$ \|K\| = \sup\limits_{\|f\| \le 1} \|\mathscr Kf\| \ge
+	\sup\limits_{\|f\| \le 1} |G(f)| = \|G\| = M $$
+\end{iproof}
+
+\section{Изоморфизм линейных пространств}
+
+\begin{definition}
+	$ (X, \|\cdot\|), ~ (Y, \|\cdot\|) $ над $ \R $ (или $ \Co $)
+
+	$ (X, \|\cdot\|) $ \emph{линейно изоморфно} $ (Y, |\cdot\|) $, если
+	$$ \exists A \in \mathscr B(X, Y), \quad \exists A^{-1} \in \mathscr B(Y, X) $$
+	$ A $ называется \emph{линейным изоморфизмом}
+\end{definition}
+
+\begin{remark}
+	Линейная изоморфность "--- отношение эквивалентности.
+\end{remark}
+
+\subsection{Критерий линейного изоморфизма}
+
+\begin{theorem}
+	$ (X, \|\cdot\|), ~ (Y, \|\cdot\|), \quad A : X \to Y $
+
+	$ A $ "--- линейный изоморфизм тогда и только тогда, когда
+	\begin{enumerate}
+		\item $ A \in \mathscr Lin(X, Y) $;
+		\item $ A(X) = Y $ ($ A $ "--- сюръекция);
+		\item $ \exists C_2 > C_1 > 0 : \quad C_1\|x\|_X \le \|Ax\|_Y \le C_2 \|x\|_X \quad \forall x \in X $.
+	\end{enumerate}
+\end{theorem}
+
+\begin{iproof}
+\item $ \implies $
+
+	$$ A \in \mathscr B(X, Y) \implies A \in \mathscr Lin(X, Y) $$
+	$$ \exists A^{-1} \implies A(X) = Y $$
+	$$ A \in \mathscr B(X, Y) \implies
+	\|Ax\| \le \|A\| \cdot \|x\| \quad \forall x \in X \implies C_2 = \|A\| $$
+	$$ A^{-1} \in \mathscr B(Y, X) \implies \|A^{-1}y\| \le \|A^{-1}\| \cdot \|y\| $$
+	Возьмём $ x \in X, \quad y \define Ax $.
+	$$ A^{-1}y = x $$
+	$$ \|x\| \le \|A^{-1}\| \cdot \|Ax\| \implies
+	\frac1{\|A^{-1}\|} \cdot \|x\| \le \|Ax\| \implies
+	C_1 = \frac1{\|A^{-1}\|} $$
+\item $ \impliedby $
+
+	$$ \|Ax\| \le C_2 \|x\| \implies A \in \mathscr B(X, Y), \quad \|A\| \le C_2 $$
+
+	Проверим, что $ A $ "--- инъекция, \ie ядро состоит только из нуля:
+	$$ Ax = 0 \implies C_1\|x\| \le \|Ax\| \implies \|x\| = 0 \implies x = 0 $$
+	$$ \implies \exists A^{-1}, \quad A^{-1} \in \mathscr Lin (Y, X) $$
+
+	Возьмём $ y \in Y $.
+	$$ \exists! x : \quad Ax = y, \quad x = A^{-1}y $$
+	$$ C_1\|x\| \le \|Ax\| \implies C_1\|A^{-1}y\| \le \|y\| \implies
+	\|A^{-1}y\| \le \frac1{C_1}\|y\| \implies
+	A^{-1} \in \mathscr B(Y, X), \quad \|A^{-1}\| \le \frac1{C_1} $$
+\end{iproof}
+
+\begin{implication}[критерий обратимости линейного оператора]
+	$$ (X, \|\cdot\|), ~ (Y, \|\cdot\|), \quad A \in \mathscr Lin(X, Y), \quad
+	A(X) = Y, \quad \exists C_1 > 0 : \quad C_1 \|x\| \le \|Ax\| $$
+
+	$$ \implies \exists A^{-1} \in \mathscr B(Y, X) $$
+\end{implication}
+
+\begin{statement}
+	$ (X, \|\cdot\|), ~ (Y, \|\cdot\|), \quad A $ "--- линейный изоморфизм.
+
+	Тогда
+	\begin{enumerate}
+		\item $ (X, \|\cdot\|) $ банахово $ \iff (Y, \|\cdot\|) $ банахово;
+		\item $ K \sub X $ "--- компакт $ \iff A(K) $ "--- компакт в $ Y $;
+		\item $ K \sub X $ относительно компактно $ \iff A(K) $ относительно компактно в $ Y $.
+	\end{enumerate}
+\end{statement}
+
+\begin{eproof}
+\item $ (X, \|\cdot\|) $ "--- банахово.
+	Проверим, что $ Y $ "--- банахово.
+
+	Возьмём $ \set{y_n}_{n = 1}^\infty $ "--- фундаментальная в $ Y $.
+	Докажем что она имеет предел.
+
+	$$ x_n \define A^{-1}y_n $$
+	$$ \lim\limits_{n, m \to \infty}\|y_n - y_m\| = 0 $$
+	\begin{multline*}
+		\|x_n - x_m\| = \|A^{-1}y_n - A^{-1}y_m\| =
+		\|A^{-1}(y_n - y_m)\| \le \\
+		\le \|A^{-1} \cdot \|y_n - y_m\| \underarr{n, m \to \infty} 0 \implies
+		\set{x_n}_{n = 1}^\infty \text{ фундаментальна}
+	\end{multline*}
+	$ X $ "--- банахово $ \implies \exists \lim x_n = x_0 \implies \lim y_n = Ax_0 \implies
+	Y $ "--- банахово.
+\item $ K $ "--- компакт, $ A $ непрерывно $ \implies A(K) $ "--- компакт.
+\item $ K $ относительно компактно, $ A $ непрерывно $ \implies A(K) $ относительно компактно.
+\end{eproof}
+
+\begin{definition}
+	$ X $ "--- линейное пространство над $ \R $(или $ \Co $), $ \quad
+	\|\cdot\|_1, ~ \|\cdot\|_2 $\ "--- различные нормы на $ X $.
+
+	$ \|\cdot\|_1 $ \emph{эквивалентна} $ \|\cdot\|_2 $, если
+	$$ \forall \set{x_n}_{n = 1}^\infty : x_n \in X, ~ x_0 \in X \quad
+	\lim\limits_{n \to \infty}\|x_n - x_0\|_1 = 0 \iff \lim\limits_{n \to \infty} \|x_n - x_0\|_2 = 0, $$
+	то есть, нормы порождают одну и ту же топологию.
+\end{definition}
+
+\begin{implication}[критерий эквивалентности норм]
+	$ X $ "--- линейное, $ \quad \|\cdot\|_1, ~ \|\cdot\|_1 $ "--- нормы на $ X $.
+
+	$$ \|\cdot\|_1 \text{ эквивалентна } \|\cdot\|_2 \iff
+	\exists 0 < C_1 < C_2 < +\infty : \quad
+	C_1\|x\|_1 \le \|x\|_2 \le C_2\|x\|_1 $$
+\end{implication}
+
+\begin{proof}
+	Обозначим $ X = (X, \|\cdot\|_1), ~ Y = (X, \|\cdot\|_2) $.
+	Определим $ I : X \to Y : \quad Ix = x $
+	$$ \lim\limits_{n \to \infty} \|x_n - x_0\| = 0 \implies
+	\lim\limits_{n \to \infty} \|Ix_n - Ix_0\|_2 = 0 \implies
+	I \in \mathscr B(X, Y) $$
+	\begin{multline*}
+		I \text{ "--- биекция } \iff
+		I \in \mathscr B(Y, X) \implies
+		I \text{  "--- линейный изоморфизм } \underiff{\text{теорема}} \\
+		\iff \exists 0 < C_1 < C_2 : \quad \|Ix\|_2 \le C_2\|x\|_1 \iff
+		C_1\|x\|_1 \le \|x\|_ \le C_2\|x\|_1
+	\end{multline*}
+\end{proof}
+
+\section{Конечномерные пространства}
+
+\begin{definition}
+	$ X $ "--- линейное пространство.
+
+	Говорят, что $ \dim X = n \in \N $, если $ \exists \set{x_1, \dots, x_n} $ "--- ЛНЗ, при этом
+	$ \forall \set{x_j}_{j = 1}^{n + 1} $ "--- ЛЗ.
+
+	Если $ \forall n \in \N \quad \exists \set{x_j}_{j = 1}^n $ "--- ЛНЗ, то $ \dim X = \infty $.
+\end{definition}
+
+\subsection{Изоморфность конечномерных пространств одинаковой размерности}
+
+\begin{theorem}
+	$ (X, \|\cdot\|), ~ (Y, \|\cdot\|) $ "--- линейные над $ \R $ (или $ \Co $), $ \quad
+	\dim X = \dim Y = n \in \N $.
+
+	Тогда $ X $ линейно изоморфно $ Y $.
+\end{theorem}

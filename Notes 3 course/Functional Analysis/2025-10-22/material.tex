@@ -1,0 +1,241 @@
+\chapter{Линейные пространства}
+
+\section{Гильбертовы и предгильбертовы пространства}
+
+\begin{exmpls}
+\item $ l_n^2 = (\Co^n, \|\cdot\|_2) $
+	$$ (x, y) = \sum_{j = 1}^n x_j\ol y_j $$
+	$$ \|x\|^2 = (x, x) = \sum |x_j|^2 $$
+	$ l_n^2 $ "--- полное $ \implies l_n^2 $ "--- гильбертово.
+\item $ l^2 = \set{x = \set{x_j}_{j = 1}^\infty | \ \|x\|_2 = \sqrt{\sum_{j = 1}^\infty |x_j|^2}} $
+	$$ (x, y) = \sum_{j = 1}^\infty x_j \ol y_j $$
+	$ l^2 $ "--- полное $ \implies l^2 $ "--- гильбертово (с нормой,
+	порождённой скалярным произведением)
+\item $ F $ "--- финитные последовательности
+	$$ (x, y) = \sum_{j = 1}^\infty x_j \ol y_j $$
+	(на самом деле, число слагаемых конечно)
+	$$ \|x\|^2 = \sum |x_j|^2 $$
+	$ F $ не полно $ \implies F $ "--- предгильбертово.
+	$ l^2 $ "--- пополнение $ (F, \|\cdot\|_2) $ до гильбертова.
+\item $ (T, \mathcal U, \mu), \quad L^2(T, \mu) $ "--- гильбертово пространство.
+	$$ (f, g) = \int\limits_T f(x) \ol{g(x)} \di \mu $$
+	$$ \|f\|^2 = (f, f) $$
+\item $ \mathcal C_\Co[a, b], \quad f : [a, b] \to \Co $
+	$$ (f, g) = \sum_a^b f(x) \ol{g(x)} \di x $$
+	$$ \|f\| = \Bigl( \int_a^b |f(x)|^2 \di x \Bigr)^{\frac12} $$
+	$ \bigl( \mathcal C[a, b], \|\cdot\|_2 \bigr) $ не полно $ \implies $ оно предгильбертово.
+	Его пополнение до гильбертова "--- $ L^2([a, b], \lambda) $.
+\item $ \mathscr P = \set{p(x) = \sum_{n = 0}^N c_nx^n} $
+	\begin{itemize}
+		\item $ \mathscr P \sub \mathcal C[a, b] $
+			$$ (p, q) = \int_a^b p(x) \ol{q(x)} \di x $$
+			Такое пространство предгильбертово.
+			Пополнение "--- $ (L^2[a, b], \lambda) $.
+		\item $ \mathscr P \sub F $
+			$$ (p, q) = \sum_{n = 0}^N a_n\ol{b_n} $$
+			Предгильбертово пространство. Пополнение "--- $ l^2 $.
+	\end{itemize}
+\item $ H^2 = \set{f(z) = \sum_{n = 0}^\infty a_nz^n | \set{a_n}_{n = 0}^\infty \in l^2} $ "---
+	\emph{пространство Харди}
+	$$ (f, g) = \sum_{n = 0}^\infty a_n\ol{b_n}, \quad \|f\|_{H^2} = \|\set{a_n}\|_2 =
+	\Bigl( \sum_{n = 0}^\infty |a_n|^2 \Bigr)^{\frac12} $$
+	$ H^2 $ "--- гильбертово.
+	$$ \set{a_n}_{n = 0}^\infty \in l^2 = \lim\limits_{n \to \infty} a_n = 0 \implies
+	\ulim\limits_{n \to \infty} \sqrt[n]{|a_n|} \le 1 $$
+	Радиус сходимости $ R = \frac1{\ulim \sqrt[n]{|a_n|}} \ge 1 \implies
+	f $ аналитична в $ \set{z | \ |z| < 1} $.
+\end{exmpls}
+
+\begin{definition}
+	$ H $ "--- предгильбертово, $ \quad x, y \in H $
+
+	Будем говорить, что $ x $ \emph{ортогонально} $ y $ ($ x \perp y $), если $ (x, y) = 0 $.
+\end{definition}
+
+\begin{definition}
+	$ M \sub H $
+
+	$$ M^\perp = \set{y \in H | x \perp y \quad \forall x \in M} $$
+	Если $ M $ "--- подпространство, то $ M^\perp $ называется \emph{ортогональным
+	дополнением}.
+\end{definition}
+
+\begin{statement}
+	$ M \sub H $ (подмножество)
+
+	$ m^\perp $ "--- замкнутое подпространство $ H $.
+\end{statement}
+
+\begin{iproof}
+\item Подпространство
+
+	Возьмём $ y, z \in M^\perp, \quad \alpha, \beta \in \Co $
+	$$ \forall x \in M \quad
+	\begin{rcases}
+		(y, x) = 0 \\
+		z(x) = 0
+	\end{rcases} \implies (\alpha y + \beta z, x) = \alpha(y, x) + \beta(z, x) = 0 \implies
+	\alpha y + \beta z \in M^\perp $$
+\item Замкнутость
+
+	Возьмём $ \set{y_n \in M^\perp}_{n = 1}^\infty ; \quad \lim\limits_{n \to \infty} y_n = y_0 $.
+	Возьмём $ x \in M $.
+	$$ (y_n, x) = 0 $$
+	$$ \lim (y_n, x) = (y_0, x) \implies
+	(y_0, x) = 0 \implies
+	y_0 \in M^\perp $$
+\end{iproof}
+
+\subsection[Существование элемента наилучшего приближения в замкнутом подпространстве
+\texorpdfstring{\\}{}
+гильбертова пространства]
+{Существование элемента наилучшего приближения в замкнутом подпространстве гильбертова
+пространства}
+
+\begin{lemma}
+	$ M $ "--- замкнутое подпространство $ H, \quad
+	u, v \in M, \quad x \in H \setminus M, \quad
+	d = \rho(x, M) = \inf\limits_{z \in M} \|x - z\| $
+	$$ \|u - v\|^2 \le 2 \bigl( \|u - x\|^2 + \|v - x\|^2 \bigr) - 4d^2 $$
+\end{lemma}
+
+\begin{proof}
+	Воспользуемся тождеством параллелограмма для $ (u - x), ~ (v - x) $.
+	$$ 2 \bigl( \|u - x\|^2 + \|v - x\|^2 \bigr) =
+	\|u - v\|^2 + \|u + v - 2x\|^2 $$
+	$$ \|u + v - 2x\| = 2 \Bigl\|x - \frac{u + v}2 \Bigr\| $$
+	$$ u, v \in M \implies \frac{u + v}2 \in M  \implies
+	\Bigl\| x - \frac{u + v}2 \Bigr\| \ge d \implies
+	\|u + v - 2x\|^2 \ge 4d^2 $$
+	$$ \|u - v\|^2 \le \bigl( \|u - x\|^2 + \|v - x\|^2 \bigr)^2 - 4d^2 $$
+\end{proof}
+
+\begin{theorem}
+	$ H $ "--- гильбертово, $ \quad M $ "--- замкнутое подпространство, $ \quad
+	x \in H $
+
+	$$ \exists ! y \in M : \quad \rho(x, M) = \|x - y\|, $$
+	\ie $ y $ "--- элемент наилучшего приближения для $ H $.
+\end{theorem}
+
+\begin{iproof}
+\item Существование
+
+	$ x \in H, \quad M, \quad d = \rho(x, M) $
+	$$ \exists \set{y_n \in M}_{n = 1}^\infty : \quad \lim\limits_{n \to \infty} \|x - y_n\| = d $$
+	Проверим, что $ \set{y_n} $ фундаментальна.
+	Применим лемму.
+	$$ \|y_n - y_m\|^2 \le 2 \bigl( \underbrace{\|y_n - x\|^2}_{\underarr{n \to \infty} d^2}
+	+ \underbrace{\|y_m - x\|^2}_{\underarr{m \to \infty} d^2} \bigr)
+	- 4d^2 \underarr{n, m \to \infty} 0 $$
+	$ \implies \set{y_n} $ фундаментальна, $ M $ замкнуто $ \implies M $ полно $ \implies
+	\exists y \in M : \quad \lim\limits_{n \to \infty} y_n = y \implies
+	\underbrace{\lim\|x - y_n\|}_{d} = \|x - y\| \implies
+	\|x - y\| = d $
+\item Единственность
+
+	Пусть $ \|x - y\| = d, \quad \|x - z\| = d $.
+	По лемме
+	$$ \|y - z\|^2 = 2 \bigl( \|y - x\|^2 + \|z - x\|^2 \bigr) - 4d^2 = 0 \implies y = z $$
+\end{iproof}
+
+\subsection{Разложение элемента гильбертова пространства в сумму ортогональных элементов}
+
+\begin{theorem}
+	$ H $ "--- гильбертово, $ \quad M \sub H, \quad M $ "--- замкнутое подпространство, $ \quad
+	x \in H $
+
+	$$ \exists ! y \in M, ~ z \in M^\perp : \quad x = y + z $$
+\end{theorem}
+
+\begin{iproof}
+\item Существование
+
+	$ d = \rho(x, M) $
+
+	По предыдущей теореме
+	$$ \exists! y \in M : \quad \|x - y\| = d = \inf\limits_{u \in M}\|x - u\| $$
+	$$ z \define x - y $$
+
+	Проверим, что $ z \perp M $.
+	Возьмём $ u \ne 0 \in M $.
+	$$ \set{tu}_{t \in \R} \sub M \implies
+	y + tu \in M \quad \forall t \in \R \implies
+	\|x - (y + tu)\|^2 \ge d^2 \iff
+	\|z - tu\|^2 \ge d^2 $$
+
+	Докажем, что это возможно только при $ z \perp u $:
+	$$ (z - tu, z - tu) = \|z\|^2 + t^2\|u\|^2 - t \bigl( (u, z) + (z, u) \bigr) =
+	\underbrace{\|z\|^2}_{d^2} + t^2 \|u\|^2 - 2t \operatorname{Re} (z, u) \ge d^2 $$
+	$$ \implies t^2\|u\|^2 \ge 2t \operatorname{Re}(z, u) \quad \forall t \in \R $$
+	\begin{itemize}
+		\item $ t > 0 $
+			$$ t\|u\|^2 \ge 2\operatorname{Re}(z, u) \quad \forall t > 0 \implies
+			0 \ge \operatorname{Re}(z, u) $$
+		\item $ t < 0 $
+			$$ t\|u\|^2 \le 2\operatorname{Re}(z, u) \quad \forall t < 0 \implies
+			0 \le \operatorname{Re}(z, u) $$
+	\end{itemize}
+	$$ \implies \operatorname{Re}(z, u) = 0 $$
+
+	Аналогично для мнимой части получаем
+	$$ \operatorname{Im}(z, u) = 0 $$
+\item Единственность
+	$$ x = y + z, ~ x = y_1 + z_1, \quad y, y_1 \in M, ~ z, z_1 \in M^\perp $$
+	$$ u = y - y_1 \implies u = z_1 - z $$
+	$$ \implies u \in M \text{ и } u \in M^\perp \text{ "--- \contra } \implies u = 0 $$
+\end{iproof}
+
+\begin{definition}
+	$ H $ "--- гильбертово пространство, $ \quad X, Y $ "--- замкнутые подпространства
+
+	Будем говорить, что $ H $ "--- \emph{ортогональная сумма} ($ H = X \oplus Y $), если
+	\begin{enumerate}
+		\item $ \forall h \in H \quad \exists x \in X, ~ y \in Y : \quad h = x + y $;
+		\item $ \forall x \in X, ~ y \in Y \quad (x, y) = 0 $.
+	\end{enumerate}
+\end{definition}
+
+\begin{statement}
+	Если $ X \perp Y, \quad X, Y $ "--- подпространства, то $ X \cap Y = \set{0} $
+\end{statement}
+
+\begin{proof}
+	Пусть $ u \in X \cap Y \implies u \in X, ~ u \in Y \implies
+	u \perp u \implies u = 0 $.
+\end{proof}
+
+\begin{remark}
+	Если $ H = X \oplus Y $, то
+	$$ \forall h \in H \quad \exists!x \in X, ~ y \in Y : \quad h = x + y $$
+\end{remark}
+
+\begin{proof}
+	Пусть $ h = x + y, ~ h = x_1 + y_1 $.
+	$$ u = x - x_1 \implies
+	u \in X, ~ u \in Y \implies u = 0 $$
+\end{proof}
+
+\begin{implication}
+	$ H $ "--- гильбертово, $ \quad M $ "--- замкнутое подпространство $ H $
+
+	$$ H = M \oplus M^\perp $$
+\end{implication}
+
+\begin{implication}
+	$ (M^\perp)^\perp = M $
+\end{implication}
+
+\begin{implication}
+	Если $ H = X \oplus Y, \quad X, Y $ "--- замкнутые, то $ Y = X^\perp $.
+\end{implication}
+
+\begin{definition}
+	$ H $ "--- гильбертово, $ \quad M $ "--- замкнутое подпространство
+
+	$$ \forall h \in H \quad \exists !x \in M, ~ y \in M^\perp : \quad h = x + y $$
+	Определим \emph{оператор ортогонального проектирования}:
+	$$ \underset M P h \define x $$
+	($ x $ "--- элемент наилучшего приближения для $ h $ в $ M $).
+	$$ \underset{M^\perp}P h = y $$
+\end{definition}

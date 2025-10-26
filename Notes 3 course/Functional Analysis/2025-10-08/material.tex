@@ -1,0 +1,243 @@
+\chapter{Линейные пространства}
+
+\section{Линейные операторы в нормированных пространствах}
+
+\subsection{Вычисление нормы непрерывного оператора}
+
+\begin{exmpls}
+\item $ Y = \mathcal C[0, 1], \quad X = \nder[1]{\mathcal C}[0, 1] = \set{f | f' \in \mathcal C[0, 1]} $
+	$$ \|f\|_X = \|f\|_{\nder[1]{\mathcal C}} = \max\set{\|f\|_\infty, \|f'\|_\infty} $$
+	$$ \mathcal D(f) = f' $$
+	Проверим, что $ \mathcal D \in \mathscr B(X, Y), ~ \|\mathcal D\|_{\mathscr B(X, Y)} = 1 $.
+
+	\begin{itemize}
+		\item Возьмём $ f \in X $.
+			$$ \mathcal D(f) \in Y, \quad \mathcal D \in \mathscr Lin(X, Y) $$
+			$$ \|\mathcal D(f)\| = \max\limits_{[0, 1]}|f(x)| = \|f\|_\infty \le \max\set{\|f\|_\infty, \|f'\|_\infty} $$
+			$$ \implies \mathcal D \in \mathscr B(X, Y), \quad \|D\| \le 1 $$
+		\item Пусть $ f(x) = x \in X = \nder[1]{\mathcal C[0, 1]} $
+			$$ \|f\|_\infty = 1, \quad \|f'\| = 1 $$
+			$$ \implies \|\mathcal D(f)\| = 1, \quad \|f\|_X = \max\set{\|f\|_\infty, \|f'\|_\infty} = 1 $$
+			$$ \implies \|\mathcal D(f)\| = \sup\limits_{\|g\| = 1}\|\mathcal D(g)\| \ge
+			\|\mathcal D(x)\|_\infty = 1 \implies
+			\|\mathcal D \| = 1 $$
+	\end{itemize}
+\end{exmpls}
+
+\subsection(Вложение пространств последовательностей){Вложение пространств $ l^p, ~ 1 \le p \le +\infty $}
+
+\begin{theorem}
+	$ 1 \le p_1 < p_2 \le \infty, \quad x = \set{x_n}_{n = 1}^\infty \in l^{p_1}, \quad Ax = x $
+
+	$$ \implies A \in \mathscr B(l^{p_1}, l^{p_2}), \quad \|A\|_{\mathscr B(l^{p_1}, l^{p_2})} = 1 $$
+	$ A $ называется \emph{оператором вложения}.
+\end{theorem}
+
+\begin{proof}
+	Пусть $ x = \set{x_n}_{n = 1}^\infty \in l^{p_1}, \quad \|x\|_{p_1} = 1 $, \ie
+	$$ \Bigl( \sum_{n = 1}^\infty |x_n|^{p_1} \Bigr)^{\frac1{p_1}} = 1 $$
+
+	\begin{itemize}
+		\item $ p_2 < +\infty $
+			$$ \frac{p_2}{p_1} > 1, \quad |x_n| \le 1 \quad \forall n \implies
+			|x_n|^{p_2} \le |x_n|^{p_1} \implies
+			\|x\|_{p_2} = \Bigl( \sum_{n = 1}^\infty |x_n|^{p_2} \Bigr)^{\frac1{p_2}} \le
+			\|x\|_{p_1} = 1 $$
+			$$ \|A\| = \sup\limits_{\|x\|_{p_1} = 1}\|Ax\|_{p_2} \le 1 $$
+			$$ \implies A \in \mathscr B(l^{p_1}, l^{p_2}) $$
+		\item $ p_2 = +\infty $
+			$$ x \in l^{p_1}, ~ \|x\|_{p_1} = 1 \implies |x_n| \le 1 \implies
+			\|x\|_\infty = \sup\limits_{n \in \N} |x_n| \le 1 \implies
+			\|A\|_{\mathscr B(l^{p_1}, l^{p_2})} \le 1 $$
+
+			Возьмём $ e = (1, 0, 0, \dotsc) $.
+			$$ \|e\|_p = 1 \quad \forall p $$
+			$$ \|Ae\|_{p_2} = \|e\|_{p_1} \implies \|A\| \ge 1, \quad
+			\|A\|_{\mathscr B(l^{p_1}, l^{p_2})} = 1 $$
+	\end{itemize}
+\end{proof}
+
+\subsection(Вложение пространств Лебега на конечной мере)
+{Вложение пространств $ \mathrm L^p(\mu) $ на конечной мере}
+
+\begin{theorem}
+	$ (T, \mathcal U, \mu), \quad \mu(T) < +\infty, \quad
+	1 \le p_1 < p_2 \le +\infty, \quad
+	f \in \mathrm L^{p_2}(\mu), \quad
+	Af = f $
+
+	$$ \implies A \in \mathscr B(\mathrm L^{p_2}, \mathrm L^{p_1}), \quad
+	\|A\|_{\mathscr B(\mathrm L^{p_2}, \mathrm L^{p_1})} = \Bigl( \mu(T) \Bigr)^{\frac1{p_1} - \frac1{p_2}} $$
+\end{theorem}
+
+\begin{iproof}
+\item $ p_2 = +\infty $
+
+	Пусть $ f \in \mathrm L^\infty(T, \mu) $, \ie
+	$$ |f(x)| \le \|f\|_\infty \text{ \ale по } \mu $$
+	$$ \|Af\|_{p_1} = \Bigl( \int\limits_T |f(x)|^{p_1} \di \mu \Bigr)^{\frac1{p_1}} \le
+	\|f\|_\infty \Bigl( \int\limits_T \di \mu \Bigr)^{\frac1{p_1}} =
+	\|f\|_\infty \Bigl( \mu(T) \Bigr)^{\frac1{p_1}} $$
+	$$ \implies A \in \mathscr B(\mathrm L^\infty, \mathrm L^{p_1}), \quad
+	\|A\| \le \Bigl( \mu(T) \Bigr)^{\frac1{p_1}} $$
+\item $ p_2 < +\infty $
+
+	Пусть $ f \in \mathrm L^{p_2} $
+	\begin{multline*}
+		\|Af\|_{p_1} = \Bigl( \int\limits_T |f|^{p_1} \di \mu \Bigr)^{\frac1{p_1}} \underset{
+			\begin{subarray}{c}
+				\text{нер-во Гёльдера} \\
+				p = \frac{p_2}{p_1} > 1 \\
+				g = 1, ~
+				f = |f|^{p_1}
+			\end{subarray}}\le
+		\Bigl\lgroup \Bigl( \int\limits_T (|f|^{p_1})^{\frac{p_2}{p_1}} \di \mu \Bigr)^{\frac{p_1}{p_2}}
+		\Bigl( \int\limits_T \di \mu \Bigr)^{1 - \frac{p_1}{p_2}} \Bigr\rgroup^{\frac1{p_1}} = \\
+		= \|f\|_{p_2} \cdot \Bigl( \mu(T) \Bigr)^{\frac1{p_1} - \frac1{p_2}} \implies
+		A \in \mathscr B(\mathrm L^{p_2}, \mathrm L^{p_1}), \quad
+		\|A\| \le \bigl( \mu(T) \bigr)^{\frac1{p_1} - \frac1{p_2}}
+	\end{multline*}
+\item $ f = \chi_T(x) \in \mathrm L^p, \quad 1 \le p \le +\infty $
+	$$ \|\chi_T\|_{\mathrm L^p} = \Bigl( \int\limits_T \chi_T(x) \di \mu \Bigr)^{\frac1p} =
+	\bigl( \mu(T) \bigr)^{\frac1p} $$
+	$$ \|A\|_{\mathscr B(\mathrm L^{p_2}, \mathrm L^{p_1})} = \sup\limits_{
+		\begin{subarray}{c}
+			g \in \mathrm L^{p_2} \\
+			g \ne \On
+	\end{subarray}} \frac{\|Ag\|_{p_2}}{\|g\|_{p_2}} =
+	\sup \frac{\|g\|_{p_1}}{\|g\|_{p_2}} \ge
+	\frac{\|\chi_T\|_{p_1}}{\|\chi_T\|_{p_2}} =
+	\bigl( \mu(T) \bigr)^{\frac1{p_1} - \frac1{p_2}} $$
+\end{iproof}
+
+\begin{remark}
+	Если $ \mu(T) = +\infty $, то всё возможно.
+\end{remark}
+
+\begin{eg}
+	$ T = [0, +\infty), \quad \lambda $ "--- мера Лебега.
+
+	Докажем, что $ \mathrm L^1 \not\sub \mathrm L^2, \quad
+	\mathrm L^2 \not\sub L^1 $.
+
+	Возьмём $ f(x) = \frac1{1 + x} $
+	$$ f \notin \mathrm L^1, \quad f \in \mathrm L^2 \quad
+	\implies L^1 \not\sub L^2 $$
+	Возьмём $ g(x) = \frac1{\sqrt x + x^2} $.
+	$$ g \in \mathrm L^1, \quad f \notin \mathrm L^2 \quad
+	\implies \mathrm L^1 \not\sub \mathrm L^2 $$
+\end{eg}
+
+\subsection{Полнота пространства ограниченных операторов, действующих из нормированного
+пространства в банахово}
+
+\begin{theorem}\label{th:full:1}
+	$ (X, \|\cdot\|), \quad (Y, \|\cdot\|) $ "--- банахово.
+
+	Тогда $ \mathscr B(X, Y) $ "--- банахово.
+\end{theorem}
+
+\begin{proof}
+	$ \set{A_n}_{n = 1}^\infty, \quad
+	A_n \in \mathscr B(X, Y), \quad
+	\set{A_n}_{n = 1}^\infty $ фундаментальна.
+
+	$$ \forall \eps > 0 \quad \exists N \in \N : \quad \forall n, m > N \quad \|A_n - A_m\| < \eps $$
+	Зафиксируем $ x \in X $.
+	Проверим, что $ \set{A_nx} $ фундаментальна.
+	$$ \|A_nx - A_mx\| < \|A_n - A_m\| \cdot \|x\| < \eps \|x\| \implies
+	\set{A_nx}_{n = 1}^\infty \text{ фундаментальна в } Y \underimp{Y \text{ банахово}}
+	\exists \lim\limits_{n \to \infty} A_nx $$
+	Положим
+	$$ Ax \define \lim\limits_{n \to \infty} A_nx $$
+	$$ A_n \in \mathscr Lin(X, Y) \implies
+	A \in \mathscr Lin(X, Y) $$
+	Уже знаем, что $ \|A_nx - A_mx\| < \eps \|x\| $.
+	Зафиксируем $ m $ и перейдём к пределу по $ n $:
+	$$ \|Ax - A_mx\| \le \eps \|x\| \implies
+	A - A_m \in \mathscr B(X, Y), \quad \|A - A_m\| \le \eps \implies
+	A \in \mathscr B(X, Y), \quad \lim\limits_{m \to \infty} \|A - A_m\| = 0 $$
+\end{proof}
+
+\section{Линейные непрерывные функционалы}
+
+\begin{definition}
+	$ (X, \|\cdot\|) $ "--- нормированное над полем $ K $ ($ \Co $ или $ \R $).
+
+	$ X^* $ называется \emph{сопряжённым пространством}, если
+	$$ X^* = \mathscr B(X, K) $$
+	То есть $ X^* $ "--- множество линейных непрерывных функционалов.
+
+	$$ f \in X^* \quad \|f\|_{X^*} = \inf\set{C > 0 | \ |f(x)| \le C\|x\|} $$
+\end{definition}
+
+\begin{implication}
+	$ (X, \|\cdot\|) \implies X^* $ "--- банахово.
+\end{implication}
+
+\begin{proof}
+	$ \R, \Co $ "--- полные.
+	Можно воспользоваться \autoref{th:full:1}.
+\end{proof}
+
+\begin{implication}
+	$ f \in X^* $
+
+	$$ \|f\|_{X^*} = \sup\limits_{\|x\| \le 1}|f(x)| = \sup\limits_{\|x\| < 1} |f(x)| =
+	\sup\limits_{\|x\| = 1} |f(x)| = \sup\limits_{x \ne 0} \frac{|f(x)|}{\|x\|} $$
+\end{implication}
+
+\begin{exmpls}
+\item $ l^p, \quad $ зафиксируем $ i \in \N $
+	$$ x = \set{x_n}_{n = 1}^\infty \in l^p, \quad f(x) \define x_i $$
+	Докажем, что $ f \in (l^p)^*, \quad \|f\|_{(l^p)^*} = 1 $.
+	$$ |f(x)| = |x_i| \le \Bigl( \sum_{n = 1}^\infty |x_n|^p \Bigr)^{\frac1p}, \quad 1 \le p < +\infty $$
+	$$ |x_i| < \sup\limits_{n \ge 1}|x_n| = \|x\|_\infty, \quad p = +\infty $$
+	$$ \implies f \in (l^p)^* \implies \|f\|_{(l^p)^*} \le 1 $$
+
+	Возьмём $ e_i = (0, \dots, 0, \underset i 1, 0, \dots, 0) $.
+	$$ \|e_i\|_p = 1, \quad |f(e_i)| = 1 \implies
+	\|f\|_{(l^p)^*} \ge 1 $$
+\item $ X = \mathcal C(K), \quad K $ "--- компакт, $ \quad x_0 \in K $ "--- фиксирована.
+	$$ G : \mathcal C(K) \to \Co : \quad f \in \mathcal C(k) \quad G(f) = f(x_0) \text{ "--- \emph{функционал значения в точке}} $$
+	Докажем, что $ G \in \bigl( \mathcal C(K) \bigr)^*, \quad \|G\| = 1 $.
+	$$ f \in \mathcal C(K) \quad |G(f)| = |f(x_0)| \le \max\limits_{x \in K}|f(x)| =
+	\|f\|_{\mathcal C(K)} $$
+	$$ \implies G \in \bigl( \mathcal C(K) \bigr)^*, \quad \|G\|_{\bigl( \mathcal C(K) \bigr)^*} \le 1 $$
+
+	Пусть $ f(x) = \chi_K $.
+	$$ \chi_K(x) \in \mathcal C(K), \quad \|\chi_K\|_\infty = 1, \quad
+	|G(\chi_K)| = |\chi_K(x_0)| = 1 \implies
+	\|G\| \ge 1 $$
+\end{exmpls}
+
+\subsection(Норма интегрального функционала на отрезке)
+{Норма интегрального функционала в $ \mathcal C[a, b] $}
+
+\begin{theorem}
+	$ \phi(x) \in \mathcal [a, b], \quad \phi(x) $ фиксирована, $ \quad f \in \mathcal C[a, b] $.
+	$$ G(f) \define \int_a^b f(x) \cdot \phi(x) \di x $$
+
+	$$ \implies G \in \bigl( C[a, b] \bigr)^*, \quad \|G\| = \int_a^b |\phi(x)| \di x $$
+\end{theorem}
+
+\begin{iproof}
+\item $ f \in \mathcal C[a, b] $
+	\begin{multline*}
+		|G(f)| = \Bigl| \int_a^b \phi(x) \cdot f(x)\di x\Bigr| \le \int_a^b |f(x)| \cdot |\phi(x)| \di x \le
+		\|f\|_\infty \cdot \int_a^b |\phi(x)| \di x \quad \forall x \implies \\
+		\implies G \in \bigl( \mathcal C[a, b] \bigr)^*, \quad
+		\|G\| \le \int_a^b |\phi(x)| \di x
+	\end{multline*}
+\item $ \phi(x) \overset{[a, b]}> 0 $
+
+	Пусть $ f(x) = \chi_{[a, b]} $.
+	$$ \|\chi_{[a, b]} = 1 $$
+	$$ |G(\chi_{[a, b]})| = \Bigl| \int_a^b \phi(x) \di x \Bigr| \undereq{\phi(x) > 0}
+	\int_a^b \phi(x) \di x $$
+\item $ \phi(x) \overset{[a, b]}\le 0 $
+	$$ |G(\chi_{[a, b]})| = \Bigl| \int_a^b \phi(x) \di x \Bigr| = \int_a^b |\phi(x)| \di x $$
+\item $ \phi $ "--- произвольная
+	$$ g(x) \define \operatorname{sign} \phi(x) $$
+	$$ \int_a^b g\phi = \int_a^b |\phi(x)| \di x $$
+\end{iproof}
