@@ -1,0 +1,56 @@
+\section{Архитектура процессора}
+
+ISA "--- Instruction set Architecture
+
+\begin{enumerate}
+	\item Набор команд
+		\begin{enumerate}
+			\item привилегированные;
+			\item непривилегированные.
+		\end{enumerate}
+	\item Видимое состояние
+		\begin{enumerate}
+			\item регистры;
+			\item базовая периферия;
+		\end{enumerate}
+\end{enumerate}
+
+\begin{exmpls}
+\item RISC-V;
+\item x86;
+\item ARM;
+\item MIPS;
+\item PowerPC;
+\item OpenRISC;
+\item MICROBLAZE;
+\item NIOS;
+\item SPARC.
+\end{exmpls}
+
+Архитектуры бывают двух типов: CISC и RISC.
+Основное различие: RISC "--- load-store architecture, CISC "--- нет.
+
+\subsection{Микроархитектура (\texorpdfstring{\mu}{u}-arch)}
+
+Intel Core "--- это не микроархитектура, а бренд.
+
+Микроархитуктуры:
+\begin{enumerate}
+	\item SCR N;
+	\item *lake (skylake, rocketlake, cometlake, \dots)
+	\item broadwell, \dots
+\end{enumerate}
+
+Процессоры:
+\begin{enumerate}
+	\item Однотактовый.
+	\item Многотактовый (loosely-coupled pipeline):
+		\begin{enumerate}
+			\item fetch;
+			\item decode;
+			\item execute;
+			\item mem;
+			\item write back.
+		\end{enumerate}
+	\item Конвейерная (tightly-coupled pipeline).
+\end{enumerate}

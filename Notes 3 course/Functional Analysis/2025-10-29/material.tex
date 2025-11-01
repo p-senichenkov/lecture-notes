@@ -1,0 +1,222 @@
+\chapter{Ряды Фурье}
+
+\section{Разложение в ряд Фурье элемента из замыкания линейной оболочки ОНС}
+
+\begin{remark}
+	$ (X, \|\cdot\|), \quad \set{e_n}_{n = 1}^\infty $ "--- базис.
+
+	Тогда $ \set{e_n}_{n = 1}^\infty $ "--- полная система (\ie $ \ol{\mathscr L\set{e_n}} = X $).
+\end{remark}
+
+\begin{remark}
+	$ (X, \|\cdot\|), \quad \set{e_n}_{n = 1}^\infty $ "--- базис.
+
+	Тогда $ X $ сепарабельно.
+\end{remark}
+
+\begin{implication}
+	$ H $ "--- гильбертово, $ \quad \set{e_n}_{n = 1}^\infty $ "--- полная ОС.
+
+	Тогда $ \set{e_n}_{n = 1}^\infty $ "--- базис.
+\end{implication}
+
+\begin{proof}
+	Уже доказано, что
+	$$ x \in H, \quad x \in \ol{\mathscr L\set{e_n}} \quad
+	\implies x = \sum_{n = 1}^\infty (x, e_n)e_n $$
+
+	Проверим единственность разложения
+	$$ x = \sum_{j = 1}^\infty \alpha_j e_j $$
+	Рассмотрим частичную сумму:
+	$$ \sigma_n = \sum_{j = 1}^n \alpha_j e_j, \quad \lim \sigma_n = x $$
+	$$ (\sigma_n, e_k) = \alpha_k \text{ при } n \ge k \implies
+	\lim\limits_{n \to \infty}(\sigma_n, e_k) = \alpha_k $$
+
+	При этом,
+	$$ \lim(\sigma_n, e_k) \undereq{\text{непр. ск. произв.}} (x, e_k) \implies
+	\alpha_k = (x, e_k) $$
+\end{proof}
+
+\begin{theorem}
+	$ H $ "--- сепарабельное гильбертово пространство.
+
+	Тогда в $ H $ существует ОНБ.
+\end{theorem}
+
+\begin{proof}
+	Существует всюду плотное $ \set{x_n}_{n = 1}^\infty $, \ie $ \ol{\set{x_n}} = H $.
+	Значит, $ \set{x_n}_{n = 1}^\infty $ "--- полная, \ie $ \ol{\mathscr L\set{x_n}} = H $.
+
+	Положим $ x_1 = \dots = x_{n_1 - 1} = 0, \quad x_{n_1} \ne 0, \quad
+	z_1 \coloneq x_{n_1}, \quad L_1 = \mathscr L\set{z_1} $.
+	$$ L_1 = \mathscr L \set{x_1, \dots, x_{n_1}} $$
+	$$ x_{n_1 + 1} \in L_1, \dots, x_{n_2 - 1} \in L_1, \quad x_{n_2} \notin L_1, \quad
+	z_2 \coloneq x_{n_2}, \quad L_2 = \mathscr L\set{z_1, z_2} $$
+	И так далее по индукции.
+	$$ z_1, z_2, \dots, z_m, \quad z_m = x_{n_m} $$
+	\begin{itemize}
+		\item Если $ x_k \in L_m \quad \forall k > m $, то $ \dim H = m $.
+		\item Если $ x_{n_m + 1}, \dots, x_{n_{m + 1} - 1} \in L_m, \quad
+			\exists x_{n_{m + 1}} \notin L_m $, то $ z_{m + 1} \coloneq x_{n_{m + 1}} $.
+	\end{itemize}
+
+	$ \set{z_m}_{m = 1}^\infty $ ЛНЗ
+	$$ \mathscr L\set{z_1, \dots, z_n} = \mathscr L \set{x_1, \dots, x_{n_m}} \implies
+	\mathscr L\set{z_m} = \mathscr L\set{x_n} $$
+	Значит, $ \set{z_m} $ "--- полная ЛНЗ система.
+	Применим к ней процесс ортогонализации Грама"--~Шмидта, получим набор $ \set{e_j} $.
+	$$ \mathscr L\set{e_j} = \mathscr L\set{z_j} \implies
+	\set{e_j} \text{ "--- полная ОНС} $$
+\end{proof}
+
+\begin{undefthm}{Проблема Банаха (1936).}
+	$ X $ "--- сепарабельное банахово пространство.
+	Верно ли, что в нём существует базис?
+\end{undefthm}
+
+П. Энфло в 1973 году построил контрпример.
+
+\begin{theorem}
+	Все бесконечномерные сепарабельные гильбертовы пространства линейно изометрически (с
+	сохранением нормы) изоморфны друг другу.
+\end{theorem}
+
+\begin{proof}
+	$ H $ "--- сепарабельное гильбертово пространство.
+	Докажем, что оно линейно изометрически изоморфно $ l^2 $.
+
+	Известно, что в $ H $ существует ОНБ $ \set{f_n}_{n = 1}^\infty $.
+	$$ x \in H \quad x = \sum_{n = 1}^\infty (x, f_n)f_n $$
+	Определим оператор $ T : H \to l^2 $:
+	$$ Tx = \set{(x, e_n)}_{n = 1}^\infty $$
+	В $ l^2 $ мы попадаем в силу равенства Парсеваля:
+	$$ \|x\|^2 = \sum_{n = 1}^\infty |(x, e_n)|^2 \implies
+	\begin{cases}
+		Tx \in l^2, \\
+		T \text{ "--- изометрия, \ie~} \|Tx\|_2 = \|x\|_H.
+	\end{cases} $$
+
+	Из свойств скалярного произведения очевидно, что $ T \in \mathscr Lin(H, l^2) $.
+	$$ \|Tx\| = \|x\| \implies \|T\| = 1, \quad T \in \mathscr B(H, l^2) $$
+
+	Проверили, что $ T(H) \sub l^2 $.
+	Докажем равенство.
+
+	Возьмём $ y = \set{y_n}_{n = 1}^\infty \in l^2 $.
+	$$ \sum_{n = 1}^\infty |y_n|^2 = \|y\|_2^2 < +\infty $$
+	$$ g_n \coloneq \sum_{j = 1}^n y_j f_j \in H $$
+	Проверим, что $ \set{g_n} $ фундаментальна.
+
+	Применим критерий Коши к $ \sum |y_n|^2 < +\infty $:
+	$$ \forall \eps > 0 \quad \exists N : \quad \forall m > n \ge N \quad
+	\|y_{n + 1}\|^2 + \dots + \|y_m\|^2 < \eps $$
+	$$ \|g_m - g_n\|^2 = \Bigl\| \sum_{j = n + 1}^m y_jf_j \Bigr\|^2 =
+	\sum_{j = n + 1}^m |y_j|^2 < \eps $$
+	Значит, $ \set{g_n} $ фундаментальна.
+
+	$$ \underimp{H \text{ "--- гильбертово }} \exists g = \lim g_n \implies
+	g = \sum_{j = 1}^\infty y_jf_j \underimp{\text{разложение единственно}}
+	e_j = (g, f_j) \implies T(g) = y $$
+\end{proof}
+
+\section{Классические ряды Фурье}
+
+\begin{theorem}[Вейерштрасс]
+	$ f \in \vawe{\mathcal C}[-\pi, \pi] $, \ie $ f(-\pi) = f(\pi), ~ f \in \mathcal C[-\pi, \pi] $.
+
+	$$ \forall \eps > 0 \quad
+	\exists T_n(x) = \alpha_0 + \sum_{k = 0}^n \bigl( \alpha_k \cos(kx) + \beta_k \sin (kx) \bigr)
+	: \quad \|f - T_n\|_\infty < \eps $$
+\end{theorem}
+
+\begin{noproof}
+\end{noproof}
+
+\begin{exmpls}
+\item $ \mathrm L_\R^2[-\pi, \pi], \quad dx $ "--- мера Лебега
+	$$ (f, g) = \int_{-\pi}^\pi f(x)g(x) \di x $$
+
+	Докажем, что $ \set{1, \cos nx, \sin nx}_{n = 1}^\infty $ "--- полная ОС.
+
+	$$ \int_{-\pi}^\pi \cos(nx) \sin (mx) \di x = 0, \quad
+	\int_{-\pi}^\pi \cos(nx) \cos (mx) \di x =
+	\begin{cases}
+		0, \quad n \ne m, \\
+		\pi, \quad n = m.
+	\end{cases} $$
+	$$ \int_{-\pi}^\pi 1 \di x = 2\pi $$
+
+	$ f \in \mathrm L^2[-\pi, \pi], \quad \mathcal C[-\pi, \pi] $ плотно в $ \mathrm L^2[-\pi, \pi] $
+	$$ \exists g \in \mathcal C[-\pi, \pi] : \quad \|f - g\|_2 < \eps $$
+
+	Утверждается, что $ g $ можно сделать $ 2\pi $-периодической, не сильно испортив её норму
+	в $ l^2 $.
+	$$ \exists \delta > 0 : \quad
+	\Bigl( \in_{\pi - \delta}^\pi |g(x)|^2 \di x \Bigr)^{\frac12} < \eps $$
+	$$ h(x) \coloneq
+	\begin{cases}
+		g(x), \quad x \in [-\pi, \pi - \delta], \\
+		h(\pi) = g(-\pi), \\
+		\text{по непрерывности иначе}
+	\end{cases} $$
+	$$ \exists T_n : \quad \|h - T_n\|_\infty < \eps \implies
+	\Bigl( \int_{-\pi}^\pi \underbrace{|h(x) - T_n(x)|^2}_{< \eps} \di x \Bigr)^{\frac12} \le
+	\eps \sqrt{2\pi} $$
+	$$ \|f - h\|_2 \le \|f - g\|_2 + \|g - h\|^2 $$
+	$$ \|f - T_n\|_2 \le \underbrace{\|f - g\|_2}_{< \eps} + \|g - T_n\|_2 <
+	\eps + \|g - h\|_2 + \|h - T_n\| + \|h - T_n\|_2 < 3\eps + \eps \sqrt{2\pi} $$
+
+	Базис:
+	$$ \set{\frac1{\sqrt{2\pi}}, \frac{\cos(nx)}{\sqrt\pi}, \frac{\sin(nx)}{\sqrt\pi}}_{n \in \N} $$
+	Коэффициенты Фурье:
+	$$ a_k = \frac1\pi \int_{-\pi}^\pi f(x) \cos (kx) \di x, \quad
+	b_k = \frac1\pi \int_{-\pi}^\pi f(x) \sin (kx) \di x, \quad k \in \N $$
+	$$ a_0 = \frac1{2\pi} \int_{-\pi}^\pi f(x) \di x $$
+	$$ S_n(x) = a_0 + \sum_{k = 1}^n \bigl( a_k \cos(kx) + b_k \sin(kx) \bigr) $$
+
+	Ряд Фурье сходится в функции в пространстве $ \mathrm L^2 $:
+	$$ \forall f \in \mathrm L^2 [-\pi, \pi] \quad \|f - S_n\|_2 \underarr{n \to \infty} 0 $$
+	То есть,
+	$$ \lim \Bigl( \int_{-\pi}^\pi |f(x) - S_n(x)|^2 \di x \Bigr)^{\frac12} = 0 $$
+\item $ \mathrm L_\Co^2 [-\pi, \pi], \quad f \in \mathrm L_\Co^2 [-\pi, \pi] $
+	$$ f = u + \ii v, \quad u, v \in \mathrm L_\R^2 [-\pi, \pi] $$
+
+	Аналогично, $ \set{1, \cos(nx), \sin(nx)}_{n \in \N} $ "--- полная ОНС в $ \mathrm L_\Co^2 $.
+\item $ \mathrm L_\Co^2 [-\pi, \pi] $
+
+	Докажем, что $ \set{e^{\ii nx}}_{n \in \Z} $ "--- полная ОС в $ \mathrm L_\Co^2 $.
+
+	$$ (f, g) = \int_{-\pi}^\pi f(x) \ol{g(x)} \di x, \quad
+	\in_{-\pi}^\pi e^{\ii nx}e^{-\ii mx} \di x =
+	\begin{cases}
+		0, \quad n \ne m, \\
+		2\pi, \quad n = m
+	\end{cases} $$
+
+	Получаем коэффициенты:
+	$$ c_n = \frac1{2\pi} \in_{-\pi}^\pi f(x) e^{-\ii nx}\di x, \quad n \in \Z $$
+
+	\begin{itemize}
+		\item $ c_0 = a_0 $;
+		\item $ n \in \N $
+			$$ c_n = \frac12(a_n - \ii b_n); $$
+		\item $ n \in \N $
+			$$ c_{-n} = \frac12(a_n + \ii b_n). $$
+	\end{itemize}
+
+	$$ S_n \coloneq \sum_{k = -n}^n c_ke^{\ii kx} =
+	a_0 + \sum \bigl( a_k \cos(kx) + b_k \sin(kx) \bigr) $$
+
+	ОНБ:
+	$$ \set{\frac{e^{\ii nx}}{\sqrt{2\pi}}}_{n \in \Z} $$
+\item $ \mathrm L_\R^2[0, \pi] $
+
+	Докажем, что $ \set{1, \cos(nx)}_{n \in \Z} $ "--- ОС в $ \mathrm L^2 $.
+
+	$$ f \in \mathrm L_\R^2[0, \pi], \quad f(-x) \coloneq f(x) \implies
+	f \in \mathrm L^2[-\pi, \pi] $$
+	$$ \|f - S_n\|_2 \underarr{n \to \infty} 0 $$
+	$$ b_k = \frac1\pi \int_{-\pi}^\pi f(x) \sin(kx) \di x = 0 $$
+	$$ \int_{-\pi}^\pi |f(x) - \sum a_k \cos(kx)|^2 \di x \to 0 \implies
+	\int_0^\pi |f(x) - \sum a_k\cos(kx)|^2 \di x \to 0 $$
+\end{exmpls}

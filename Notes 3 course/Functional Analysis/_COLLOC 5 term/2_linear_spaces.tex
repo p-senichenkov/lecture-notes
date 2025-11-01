@@ -1290,8 +1290,9 @@
 	y_0 \in M^\perp $$
 \end{iproof}
 
-\section{Существование и единственность ближайшего приближения в подпространстве гильбертова
-пространства. Теорема о проекции на подпространство.
+\section{Существование и единственность элемента ближайшего приближения в подпространстве
+гильбертова пространства.
+Теорема о проекции на подпространство.
 Следствия}
 
 \begin{lemma}
@@ -1430,6 +1431,8 @@
 	Если $ H = X \oplus Y, \quad X, Y $ "--- замкнутые, то $ Y = X^\perp $.
 \end{implication}
 
+\section{Критерий принадлежности множеству ортогональных проекторов}
+
 \begin{definition}
 	$ H $ "--- гильбертово, $ \quad M $ "--- замкнутое подпространство
 
@@ -1440,12 +1443,168 @@
 	$$ \underset{M^\perp}P h = y $$
 \end{definition}
 
-\section{Критерий принадлежности множеству ортогональных проекторов}
+\begin{theorem}
+	$ H $ "--- гильбертово
+	\begin{enumerate}
+		\item $ M \sub H $ "--- замкнутое подпространство, $ \quad
+			P \coloneq P_M $ "--- ортогональный проектор на $ M $
 
-\TODO{Критерий принадлежности множеству ортогональных проекторов}
+			Тогда
+			\begin{enumerate}
+				\item $ P \in \mathscr B(H) $;
+				\item $ P^2 = P $;
+				\item \emph{самосопряжённость}: $ (Px, y) = (x, Py) $.
+			\end{enumerate}
+		\item $ P $ удовлетворяет свойствам (a), (b), (c), $ \quad
+			M \coloneq P(H) $
+
+			Тогда $ P = P_M $, \ie $ P $ "--- ортогональный проектор на $ P(H) $.
+	\end{enumerate}
+\end{theorem}
+
+\begin{eproof}
+\item $ M \sub H, \quad x \in H $
+	$$ \exists ! y, z ; \quad x = y + z, \quad y \in M, ~ z \in M^\perp $$
+	$$ Px = y $$
+	\begin{enumerate}
+		\item Проверим линейность
+
+			Возьмём $ \alpha \in \Co $.
+			$$ \alpha x = \alpha y + \alpha z, \quad \alpha y \in M, ~ \alpha z \in M^\perp $$
+			Значит, разложение единственно.
+			$$ \implies P(\alpha x) = \alpha y = \alpha P(x) $$
+
+			Возьмём $ w \in H $
+			$$ \exists ! u \in M, ~ v \in M^\perp : \quad w = u + v $$
+			$$ \implies x + w = (u + y) + (v + z), \quad (u + y) \in M, ~ (v + z) \in M^\perp $$
+			Разложение единственно.
+			$$ \implies P(x + w) = u + y = Px + Pw $$
+
+			Возьмём $ x \in H, \quad x = y + z, \quad y \in M, ~ z \in M^\perp $
+			$$ \|x\|^2 = (y + z, y + z) = \|y\|^2 + \|z\|^2 \underimp{y = Px}
+			\|Px\|^2 \le \|x\|^2 \implies \|Px\| \le \|x\| \quad \forall x \in H $$
+			$$ P \in \mathscr B(H), \quad \|P\| \le 1 $$
+			$$ M \ne \set{0} \implies \exists x \ne 0 \in M : \quad \|P\| =
+			\sup\limits_{u \ne 0 \in H} \frac{\|Pu\|}{\|u\|} \ge \frac{\|Px\|}{\|x\|} = 1 \implies
+			\|P\| = 1 $$
+		\item $ P^2 = P $
+
+			$$ x \in M \implies Px = x, \quad x \in H \implies Px \in M \implies P(Px) = Px \implies
+			P^2 = P $$
+		\item Самосопряжённость
+
+			$$ x, y \in H, \quad P = P_M, \quad H = M \oplus M^\perp $$
+			Обозначим $ Q = P_{M^\perp} $.
+			$$ x = Px + Qx $$
+			$$ (Px, y) = (Px, Py + Qy) \undereq{Px \perp Qy} (Px, Py) $$
+			$$ (x, Py) = (Px + Qx, Py) = (Px, Py) $$
+	\end{enumerate}
+\item $ M \coloneq P(H) $
+	\begin{enumerate}
+		\item Проверим, что если $ x \in M $, то $ Px = x $.
+			$$ x \in M \implies \exists y \in H : \quad Py = x \implies
+			Px = P(Py) = P^2y = Py = x $$
+		\item Проверим, что $ M $ замкнуто.
+
+			Возьмём $ \set{x_n \in M}_{n = 1}^\infty, \quad \lim x_n = x $.
+			В силу непрерывности $ P $
+			$$ \lim Px_n = Px $$
+			При этом,
+			$$ Px_n = x_n \implies \lim x_n = Px \implies Px = x \implies x \in P(H) $$
+
+			$ P_M $ "--- ортогональный проектор на $ M \implies
+			$ если $ x \in M $, то $ Px = P_Mx = x $
+
+			Возьмём $ y \in M^\perp, \quad P_My = 0 $.
+			$$ \|Py\|^2 = (Py, Py) = \bigl(y, P(Py)\bigr) = (y, Py) \undereq{
+				\begin{subarray}{c}
+					y \in M^\perp \\
+					Py \in M
+				\end{subarray}
+			} 0 \implies Py = 0 $$
+			Возьмём $ x \in H $.
+			$$ x = y + z, \quad y \in M, ~ y = P_Mx \implies Px = P_Mx $$
+	\end{enumerate}
+\end{eproof}
 
 \section{Проектор на конечномерное пространство.
 Критерий полноты семейства элементов.
 Неравенство Бесселя}
 
-\TODO{Проектор на конечномерное пространство}
+\begin{implication}[ортогональный проектор на конечномерное пространство]
+	\hfill \\
+	$ H $ "--- гильбертово, $ \quad M \sub H $ "--- подпространство, $ \quad \dim M = n, \quad
+	\set{e_j}_{j = 1}^n $ "--- ОНБ
+
+	$$ P_Mx = \sum_{j = 1}^n (x, e_j)e_j \quad \forall x \in H $$
+\end{implication}
+
+\begin{proof}
+	$$ S_n \coloneq \sum_{j = 1}^n (x, e_j)e_j \implies S_n \in M $$
+	$$ x = S_n + (x - S_n) $$
+	Возьмём $ w = (x - S_n) $.
+	Проверим, что $ w \in M^\perp $.
+	$$ (S_n, e_j) = (x, e_j) \implies (w, e_j) = (x, e_j) - (x, e_j) = 0 \implies
+	w \perp e_j \implies w \in M^\perp $$
+\end{proof}
+
+\begin{implication}[критерий полноты семейства элементов гильбертова пространства]
+	\hfill \\
+	$ H $ "--- гильбертово, $ \quad \set{x_\alpha \in H}_{\alpha \in A} $ "--- семейство
+
+	$ \set{x_\alpha}_{\alpha \in A} $ "--- полное \textbf{тогда и только тогда}, когда
+	$$ x \in H, \quad x \perp x_\alpha \quad \forall \alpha \in A \implies x = 0 $$
+\end{implication}
+
+\begin{proof}
+	Пусть $ L = \ol{\mathscr L\set{x_\alpha}_{\alpha \in A}} $ "--- замыкание линейной оболочки.
+
+	$ \set{x_\alpha}_{\alpha \in A} $ "--- полное $ \iff L = H \iff L^\perp = \set{0} \iff
+	\Bigl( x \in H \perp x_\alpha \quad \forall \alpha \in A \implies x = 0 \Bigr) $
+\end{proof}
+
+\begin{definition}
+	$ H $ "--- гильбертово, $ \quad
+	\set{e_n}_{n = 1}^\infty $ "--- ОНС (\emph{ортонормированное семейство}), \ie
+	$$ (e_n, e_m) =
+	\begin{cases}
+		1, \quad n = m \\
+		0, \quad n \ne m
+	\end{cases} $$
+	$$ x \in H, \quad L = \set{ce_n}_{c \in \Co}, \quad \dim L = 1 \implies Px = (x, e_n)e_n $$
+
+	Числа $ (x, e_n) $ будем называть \emph{абстрактными коэффициентами Фурье} по системе
+	$ \set{e_n}_{n = 1}^\infty $.
+
+	Будем говорить, что мы каждому $ x $ \textbf{сопоставили} \emph{ряд Фурье}:
+	$$ x \sim \sum_{n = 1}^\infty (x, e_n)e_n $$
+\end{definition}
+
+\begin{definition}
+	$ \set{e_n} $ "--- ОС (\emph{ортогональная система}), $ \quad \|e_n\| > 0 $
+	$$ L = \set{ce_n}_{c \in \Co}, \quad \vawe{e_n} = \frac{e_n}{\|e_n\|}, \quad
+	P_Lx = (x, \vawe{e_n}) = (x, \vawe{e_n})\vawe{e_n} = \frac{(x, e_n)}{\|e_n\|^2}e_n $$
+
+	$$ x \sim \sum_{k = 1}^\infty c_ne_n, \quad c_n = \frac{(x, e_n)}{\|e_n\|^2}
+	\text{ "--- \emph{коэффициенты Фурье по ОС }} \set{e_n}_{n = 1}^\infty $$
+\end{definition}
+
+\begin{implication}[неравенство Бесселя]
+	$ \set{e_n}_{n = 1}^\infty $ "--- ОНС в $ H, \quad x \in H $
+
+	$$ \sum_{n = 1}^\infty |(x, e_n)|^2 \le \|x\|^2 $$
+\end{implication}
+
+\begin{proof}
+	Возьмём $ \alpha_j \in \Co $.
+	Запишем теорему Пифагора:
+	$$ \Bigl\| \sum_{j = 1}^n \alpha_j e_j \Bigr\|^2 =
+	\Bigl( \sum_{j = 1}^n \alpha_j e_j, \sum_{k = 1}^n \alpha_k e_k \Bigr) \undereq{e_j \perp e_k}
+	\sum_{j = 1}^k |\alpha_j|^2 $$
+
+	Пусть $ L_n = \mathscr L \set{e_j}_{j = 1}^\infty $
+	$$ P_{L_n}x = \sum_{j = 1}^n (x, e_j)e_j \implies
+	\|P_{L_n}x\|^2 = \sum_{j = 1}^n |(x, e_j)|^2, \quad \|P_{L_n}\| \le 1 $$
+	$$ \implies \sum_{j = 1}^n |(x, e_j)|^2 \le \|x\|^2 \quad \forall n \implies
+	\sum_{j = 1}^\infty |(x, e_j)|^2 \le \|x\|^2 $$
+\end{proof}

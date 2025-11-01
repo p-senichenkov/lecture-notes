@@ -1,0 +1,70 @@
+\chapter{Равномерное приближение}
+
+\section{Многочлены Чебышёва первого рода}
+
+\begin{quote}
+	\raggedleft
+	Дальше "--- сакральное знание.
+	В конспектах этого нет.
+\end{quote}
+
+\subsection{Свойство наименьшего уклонения от нуля}
+
+\begin{definition}
+	$ \Pi_n $ "--- множество приведённых многочленов степени ровно $ n $.
+\end{definition}
+
+\begin{definition}
+	Рассмотрим приведённый многочлен Чебышёва:
+	$$ \vawe T_n(x) = 2^{1 - n}T_n(x) = x^n + \dotsi $$
+	Можно доказать, что $ \vawe T_n $ среди всех приведённых многочленов степени $ n $ имеет
+	наименьшую норму в пространстве непрерывных функций $ \mathcal C[-1, 1] $.
+	Такой приведённый многочлен будем называть \emph{многочленом, наименее уклоняющимся от нуля}.
+\end{definition}
+
+\subsubsection{Критерий многочлена наименьшего уклонения от нуля в
+\texorpdfstring{$ \mathcal C[a, b] $}{C[a, b]}}
+
+\begin{theorem}\label{th:crit}
+	Для того, чтобы $ Q_n \in \Pi_n $ был МНУ от 0 в $ \mathcal C[-1, 1] $ \textbf{необходимо и
+	достаточно}, чтобы
+	$$ \exists -1 \le t_1 < \dots < t_{n + 1} \le 1 \quad
+	\begin{cases}
+		|Q_n(t_i)| = \|Q_n\|_{\mathcal C[-1, 1]} \\
+		Q_n(t_i) = -Q_n(t_{i + 1})
+	\end{cases} $$
+\end{theorem}
+
+\begin{proof}
+	Рассмотрим $ \mathcal C[-1, 1] $.
+	$$ \forall f \in \mathcal C[-1, 1] \quad \exists ! P_l^* \text{ "--- ПНРПр} $$
+	Пусть $ f(x) = x^n $.
+	$$ \exists ! P_{n - 1}^* \text{ "--- ПНРПр} \underiff{\text{т. Чебышёва}}
+	\exists -1 \le t_1 < t_2 < \dots t_{n + 1} \le 1 $$
+
+	$$ Q_n(x) \coloneq \frac{x^n - P_{n - 1}^*(x)}{|Q_n(t_i)|} = \|Q_n\|_{\mathcal C[-1, 1]} \quad
+	\forall i = 1, \dots, n + 1 $$
+	$$ Q_n(t_i) = -Q_n(t_{i + 1}) $$
+\end{proof}
+
+\begin{theorem}
+	В $ \mathcal C[-1, 1] $ МНУ от 0 является
+	$$ \vawe T_n(x) = \frac{T_n(x)}{2^{n - 1}} $$
+\end{theorem}
+
+\begin{proof}
+	$ \vawe T_n \in \Pi_n $
+
+	Точки экстремума $ T_n $:
+	$$ x_l' \coloneq \cos \Bigl( \frac{\pi l}n \Bigr), \quad l = 0, 1, \dots, n $$
+
+	Известно, что $ T_n(x_l') = (-1)^l $.
+	$$ \|T_n\|_{\mathcal C[-1, 1]} = \max\limits_{x \in [-1, 1]}|T_n(x)| $$
+	$$ \|\vawe T_n\|_{\mathcal C[-1, 1]} = \frac1{2^{n - 1}} $$
+
+	Положим $ t_k = x_{n + 1 - k}, \quad k = 1, \dots, (n + 1) $.
+	Дальше можно воспользоваться \autoref{th:crit}.
+\end{proof}
+
+Если требуется получить МНУ на конечном $ [a, b] $, то можно воспользоваться заменой
+$$ z = \frac{b - a}2x + \frac{b + a}2, \quad x = \frac{2z - (a + b)}{b - a} $$

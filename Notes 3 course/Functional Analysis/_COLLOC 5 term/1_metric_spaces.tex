@@ -9,14 +9,14 @@
 Теорема о замкнутом подпространстве}
 
 \begin{definition}
-	$ (X, \rho) $, $ X $ "--- множество, $ \rho : X \times X \to \R $, выполняются свойства:
+	$ X $ "--- множество, $ \quad \rho : X \times X \to \R $
+
+	$ (X, \rho) $ называется \emph{метрическим пространством}, если выполняются свойства:
 	\begin{enumerate}
 		\item $ \rho(x, y) \ge 0, \quad \rho(x, y) = 0 \iff x = y $;
 		\item $ \rho(x, y) = \rho(y, x) $;
 		\item $ \rho(x, y) \le \rho(x, z) + \rho(z, y) $.
 	\end{enumerate}
-
-	$ X $ называется \emph{метрическим пространством}.
 \end{definition}
 
 \begin{definition}
@@ -65,7 +65,7 @@
 	$$ \exists \set{x_{n_k}}_{k = 1}^\infty : \quad \sum_{k = 1}^\infty \rho(x_{n_{k + 1}}, x_{n_k}) < +\infty $$
 \end{implication}
 
-\begin{theorem}[о замкнутом подпротранстве]
+\begin{theorem}
 	$ (X, \rho), \quad Y \sub X $
 	\begin{enumerate}
 		\item $ (X, \rho) $ "--- полное, $ Y $ замкнуто.
@@ -95,7 +95,7 @@
 \begin{definition}
 	$ X $ "--- линейное пространство над полем $ \mathbb K $
 
-	$ p : X \to \mathbb K $ называется \emph{полунормой}, если
+	$ p : X \to \R $ называется \emph{полунормой}, если
 	\begin{enumerate}
 		\item полуаддитивность: $ p(x + y) \le p(x) + p(y) \quad \forall x, y \in X $;
 		\item однородность: $ p(\lambda x) = |\lambda| p(x) \quad \forall \lambda \in K, ~ x \in X $.
@@ -105,7 +105,7 @@
 \begin{definition}
 	$ X $ "--- линейное пространство над $ \mathbb K $.
 
-	$ p : X \to \mathbb K $ называется \emph{нормой}, если
+	$ p : X \to \R $ называется \emph{нормой}, если
 	\begin{enumerate}
 		\item $ p $ "--- полунорма;
 		\item $ p(x) = 0 \iff x = \On $.
@@ -204,7 +204,7 @@
 	$$ \implies |f_n(x) - f_m(x)| < \eps $$
 	Из полноты $ K $ следует, что $ \exists \lim\limits_{n \to \infty} f_n(x) $.
 
-	Обозначим $ f(x) \coloneq \lim\limits_{n \to \infty} f_n(x) $ (\emph{поточечный}).
+	Обозначим $ f(x) \coloneq \lim\limits_{n \to \infty} f_n(x) $ (поточечный).
 
 	$$ |f_n(x) - f_m(x)| < \eps \text{ при фиксированном } x, \quad n, m > N $$
 	Перейдём к пределу по $ n $:
@@ -213,7 +213,7 @@
 	$$ \|f - f_m\|_\infty = \sup\limits_{x \in X} |f(x) - f_m(x)| \le \eps \implies (f - f_m) \in m(X) $$
 	$$ f = (f - f_m) + f_m $$
 	В силу линейности $ m(X) $ это означает, что $ f \in m(X) $, $ \|f - f_m\|_\infty < \eps $ при $ m > N $
-	$$ \implies \lim\limits_{m \to \infty} = f \text{ в пространстве } m(X) $$
+	$$ \implies \lim\limits_{m \to \infty} f_n = f \text{ в пространстве } m(X) $$
 \end{eproof}
 
 \begin{definition}
@@ -223,7 +223,9 @@
 			K \sub \bigcup_{\alpha \in A} G_\alpha \quad
 			\exists \set{\alpha_j}_{j = 1}^n : \quad
 			K \sub \bigcup_{j = 1}^n G_{\alpha_j} $;
-		\item \emph{Хаусдорфовость}: $ \forall a \ne b \in K \quad \exists U, V $ "--- открытые: $ a \in U, ~ b \in V : \quad U \cap V = \O $.
+		\item \emph{Хаусдорфовость}: $ \forall a \ne b \in K \quad
+			\exists U, V $ "--- открытые: $ \quad
+			a \in U, ~ b \in V, \quad U \cap V = \O $.
 	\end{enumerate}
 \end{definition}
 
@@ -278,15 +280,15 @@
 		f_m \uniarr[m \to \infty]{[a, b]} \phi_0, \\
 		f_m' \uniarr[m \to \infty]{[a, b]} \phi_1 \\
 		\dots \\
-		\nder{f_m} \uniarr[m \to \infty]{[a, b]} \phi_n
+		\nder f_m \uniarr[m \to \infty]{[a, b]} \phi_n
 	\end{cases} \underimp{\text{в анализе доказано}}
 	\begin{cases}
 		\phi_1 = \phi_0' \\
 		\phi_2 = \phi_1' = \phi_0'' \\
 		\dots \\
-		\phi_n = \nder{\phi_0}
+		\phi_n = \nder \phi_0
 	\end{cases} $$
-	$$ \|f_m - \phi_0\|_{\nder{\mathcal C}} = \max\limits_{0 \le k \le n} \|\nder[k]{f_m} - \nder[k]{\phi_0}\|_\infty \underarr{m \to \infty} 0 $$
+	$$ \|f_m - \phi_0\|_{\nder{\mathcal C}} = \max\limits_{0 \le k \le n} \|\nder[k] f_m - \nder[k]{\phi_0}\|_\infty \underarr{m \to \infty} 0 $$
 	$ \lim\limits_{m \to \infty} f_m = \phi_0 $ в $ \nder{\mathcal C}[a, b] $.
 \end{proof}
 
@@ -301,8 +303,8 @@
 \begin{proof}
 	Воспользуемся тем, что $ \ln x $ выпукла вверх, \ie $ (\ln x)'' = -\frac1{x^2} < 0 $.
 	Это означает, что график лежит над хордой, \ie
-	$$ \forall x_1 \ne x_2 \quad \forall 0 < \alpha < 1 \quad
-	\forall \beta = 1 - \alpha \quad f\bigl(\alpha x_1 + (1 - \alpha)x_2 \bigr) > \alpha f(x_1) + (1 - \alpha)f(x_2) $$
+	$$ \forall x_1 \ne x_2 \quad \forall 0 < \alpha < 1, ~
+	\beta = 1 - \alpha \quad f\bigl(\alpha x_1 + (1 - \alpha)x_2 \bigr) > \alpha f(x_1) + (1 - \alpha)f(x_2) $$
 	Применим это неравенство к $ \ln $:
 	$$ f(x) = \ln x, \quad x_1 = a^p, \quad x_2 = b^q, \quad \alpha = \frac1p, \quad \beta = \frac1q $$
 	$$ \ln\Bigl(\frac1p \cdot a^p + \frac1q \cdot b^q\Bigr) > \frac1p \cdot \ln(a^p) + \frac1q \ln(b^q) = \ln(ab) $$
@@ -337,8 +339,8 @@
 			$$ A = 0 \implies f(x) = 0 \text{ п. в. по } \mu \implies
 			f(x) \cdot g(x) = 0 \text{ п. в. } \implies \eref{ineq:1} $$
 		\item Аналогично, $ B = 0 \implies \eref{ineq:1} $
-		\item $ A = +\infty \implies \eref1 $
-		\item $ B = +\infty \eref1 $
+		\item $ A = +\infty \implies \eref{ineq:1} $
+		\item $ B = +\infty \implies \eref{ineq:1} $
 		\item $ 0 < A, B < +\infty $
 
 			Рассмотрим нормировку функций $ f $ и $ g $:
@@ -420,14 +422,6 @@
 \end{definition}
 
 \begin{definition}
-	$$ C = \set{x = \set{x_j}_{j = 1}^\infty \mid \exists \lim\limits_{j \to \infty} x_j = x_0} $$
-\end{definition}
-
-\begin{statement}
-	Пространства $ C $ замкнуты.
-\end{statement}
-
-\begin{definition}
 	$ F $ "--- множество \emph{финитных} последовательностей:
 	$$ F = \set{x = (x_1, x_2, \dots, x_{N(x)}, 0, \dots), \quad x_j \in \R, \Co} $$
 
@@ -439,7 +433,8 @@
 \end{statement}
 
 \begin{proof}
-	При фиксированном $ p $ можно считать, что $ (F, \|\cdot\|_p) \sub l^p $ (подпространство в алгебраическом смысле).
+	При фиксированном $ p $ можно считать, что $ (F, \|\cdot\|_p) \sub l^p $
+	(подпространство в алгебраическом смысле).
 
 	Проверим, что оно не замкнуто.
 	Возьмём
@@ -460,7 +455,7 @@
 пространств последовательностей}
 
 \begin{definition}
-	$ 1 \le p \le +\infty $
+	$ 1 \le p < +\infty $
 	$$ \mathscr L^p(T, \mu) = \set{f | \ |f|^p \in \mathscr L(T, \mu)} =
 	\set{f \text{ "--- измерима} | \int\limits_T |f|^p \di \mu <+\infty} $$
 	$$ \|f\|_p = \Bigl( \int\limits_T |f|^p \di \mu \Bigr)^{\frac1p} $$
@@ -485,12 +480,12 @@ $$ \|f\|_p = 0 \iff \int\limits_T |f(x)|^p \di \mu = 0\iff f(x) = 0 ~\ale $$
 
 	То есть, $ f \sim g $, если $ f - g \in N $, то есть $ f(x) = g(x) ~\ale $.
 
-	В пространстве $ \mathscr L^p $ будем рассматривать $ \ol f $ "--- классы эквивалентности $ f $.
+	В пространстве $ \mathrm L^p $ будем рассматривать $ \ol f $ "--- классы эквивалентности $ f $.
 	$$ \|\ol f\|_p = \|f\|_{\mathscr L^p} $$
 \end{definition}
 
 \begin{statement}
-	$ \|\cdot\|_{\mathscr L^p} $ "--- норма.
+	$ \|\cdot\|_{\mathrm L^p} $ "--- норма.
 \end{statement}
 
 \begin{proof}
@@ -1122,11 +1117,6 @@ $$ \|\ol f\|_\infty = 0 \iff \|f\|_\infty = 0 \iff f(x) = 0 ~\ale \iff f \in N =
 \section{Нигде не плотные множества.
 Теорема Бэра о категориях}
 
-\begin{quote}
-	\raggedleft
-	Опять некоторый способ рассуждать о том, какие множества большие, а какие "--- маленькие.
-\end{quote}
-
 \begin{definition}
 	$ (X, \rho) $ "--- метрическое пространство, $ \quad A \sub X $.
 
@@ -1157,7 +1147,7 @@ $$ \|\ol f\|_\infty = 0 \iff \|f\|_\infty = 0 \iff f(x) = 0 ~\ale \iff f \in N =
 	$ M_1 $ нигде не плотно $ \implies \exists D_1 = \mathtt D_{r_1}(x_1) \sub D_0 : \quad D_1 \cap M_1 = \O $.
 	При этом, можно взять $ r_1 < 1 $ (если при большем $ r_1 $ не пересекалось, то и не начнёт).
 
-	$ M_2 $ нигде не плотно $ \implies exists D_2 = \mathtt D_{r_2}(x_2) \sub D_1 : \quad D_2 \cap M_2 = \O, \quad r_2 < \frac12 $.
+	$ M_2 $ нигде не плотно $ \implies \exists D_2 = \mathtt D_{r_2}(x_2) \sub D_1 : \quad D_2 \cap M_2 = \O, \quad r_2 < \frac12 $.
 	$$ \dots $$
 	$$ \exists D_{n + 1} = \mathtt D_{r_{n + 1}}(x_{n + 1}) \sub D_n : \quad D_{n + 1} \cap M_{n + 1} = \O, \quad r_{n + 1} < \frac1{n + 1} $$
 
