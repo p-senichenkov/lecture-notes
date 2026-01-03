@@ -271,6 +271,8 @@
 % limits
 \newcommand\ulim{\ensuremath{\varlimsup\limits}}
 \newcommand\dlim{\ensuremath{\varliminf\limits}}
+% strong limit
+\DeclareMathOperator{\slim}{s-lim}
 
 \newcommand\liml[1]{\lim\limits_{#1}}
 \newcommand\limz[1]{\lim\limits_{#1\to0}}
@@ -403,7 +405,7 @@
 \newcommand\tcir\textasciicircum
 \newcommand\tpst\texorpdfstring
 
-%% set package shorthands
+%% set package shorthands (DEPRECATED: prefer Set and Braket)
 \let\tset\set
 \let\set\Set
 

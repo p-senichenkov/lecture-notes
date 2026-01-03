@@ -1,0 +1,240 @@
+\chapter{Линейные функционалы}
+
+\section{Продолжение про сопряжённый оператор}
+
+\begin{notation}
+	$ (T^*f)(x) = f(TX) $
+\end{notation}
+
+\begin{definition}
+	$ (X, \|\cdot\|), ~ (Y, \|\cdot\|), \quad x \in X, \quad f \in X^* $
+	$$ \Braket{f, x} \coloneq f(x) $$
+
+	$ T \in \mathscr B(X, Y), \quad T^* : Y^* \to X^* $
+	$$ \Braket{T^*f, x} = \Braket{f, Tx} $$
+
+	$ \pi : X \to X^{**}, \quad f \in X^*, \quad x \in X $
+	$$ f(x) = \Braket{f, x}, \quad \Braket{\pi(x), f} = f(x) $$
+	Можно отождествить $ \pi(X) $ с $ X $:
+	$$ \Braket{x, f} = f(x) $$
+\end{definition}
+
+\begin{eg}
+	$ \mathrm L^p(\mu), \quad \mathrm L^q(\mu), \quad 1 < p < +\infty, \quad
+	\frac1p + \frac1q = 1, \quad f \in \mathrm L^p, \quad g \in \mathrm L^q $
+
+	$$ \Braket{f, g} = \int\limits_X f(x)g(x) \di \mu, \quad
+	\Braket{g, f} = \int\limits_X f(x) g(x) \di \mu $$
+\end{eg}
+
+\subsection{Интегральный оператор в \texorpdfstring{$ \mathrm L^p $}{пространстве Лебега} и
+сопряжённый к нему}
+
+\begin{theorem}
+	$ (\mathbb R^n, \lambda_n), ~ (\mathbb R^m, \lambda_m), \quad
+	K(x, y) \in \mathrm L^p \bigl(\mathbb R^{n + m}, \lambda_{n + m} \bigr), \quad
+	x \in \mathbb R^n, \quad y \in \mathbb R^m $
+	$$ M \coloneq \Bigl( \int\limits_{\mathbb R^n} \int\limits_{\mathbb R^m}
+	|K(x, y)|^p \di x \di y \Bigr)^{\frac1p} < +\infty $$
+	$$ (\mathscr K f)(x) = \int\limits_{\mathbb R^m} K(x, y) f(y) \di y $$
+
+	Тогда
+	\begin{enumerate}
+		\item $ \mathscr K \in
+			\mathscr B \bigl( \mathrm L^q(\mathbb R^m), \mathrm L^p(\mathbb R^n) \bigr), \quad
+			\|\mathscr K\| \le M $;
+		\item $ \mathscr K^* \in
+			\mathscr B \bigl( \mathrm L^q(\mathbb R^m), \mathrm L^p(\mathbb R^m) \bigr) $
+			$$ (\mathscr K^* g)(y) = \int\limits_{\mathbb R^n} K^*(y, x) g(x) \di x $$
+			$$ \implies K^*(y, x) = K(x, y) $$
+	\end{enumerate}
+\end{theorem}
+
+\begin{eproof}
+\item Воспользуемся теоремой Фубини:
+	$$ \int\limits_{\R^n} \Bigl( \int\limits_{\R^m} |K(x, y)|^p \di y \Bigr) \di x < +\infty \implies
+	\text{ для \ale \ } x \quad \int\limits_{\R^m} |K(x, y)|^p \di y < +\infty $$
+
+	Возьмём $ f \in \mathrm L^q(\R^m) $ и $ x $ такой, что внутренний интеграл конечен.
+	$$ |(\mathscr Kf)(x)| = \Bigl| \int\limits_{\R^m} K(x, y)f(y) \di y \Bigr|
+	\underset{\text{нер-во Гёльдера}}\le
+	\Bigl( \int\limits_{\R^m}|K(x, y)|^p \di y \Bigr)^{\frac1q} \cdot \|f\|_q $$
+	Возведём в степень $ p $ и проинтегрируем по $ \R^n $:
+	\begin{multline*}
+		\int\limits_{\R^n}|(\mathscr Kf)(x)|^p \di x \le
+		\|f\|_q^p \int\limits_{\R^n} \Bigl( \int\limits_{\R^m}|K(x, y)|^p \di y \Bigr) \di x =
+		M^p \implies \\
+		\implies \|\mathscr Kf\|_p \le M\|f\|_q \quad \forall f \in \mathrm L^q \implies
+		\|\mathscr K\| \le M, \quad \mathscr K \in \mathscr B(\dots)
+	\end{multline*}
+\item $ \mathscr K^* \in \mathscr B \bigl( \mathrm L^q(\R^n), \mathrm L^p(\R^m) \bigr) $
+	$$ g \in \mathrm L^q(\R^n), \quad f \in \mathrm L^q(\R^m) $$
+	\begin{equ}{int_op:1}
+		\Braket{\mathscr K^* g, f} = \Braket{g, \mathscr Kf} =
+		\int\limits_{\R^n}g(x) \Bigl( \int\limits_{\R^m}K(x, y)f(y) \di y \Bigr) \di x
+		\undereq{\text{т. Фубини}} \int\limits_{\R^m}
+		\Bigl( \int\limits_{\R^n} K(x, y) g(x) \di x \Bigr) f(y) \di y
+	\end{equ}
+	$$ \Braket{ \mathscr K^* g, y} \bydef \int\limits_{\R^n} K^*(y, x) g(x) \di x $$
+	$$ \Braket{\mathscr K^* g, f} = \int\limits_{\R^m}
+	\Bigl( \int\limits_{\R^n} K^*(y, x) g(x) \Bigr) f(y) \di y \underimp{\eref{int_op:1}}
+	K^*(y, x) = K(x, y) $$
+\end{eproof}
+
+\section{Эрмитово-сопряжённый оператор}
+
+$ H $ "--- гильбертово, $ \quad T \in \mathscr B(H), \quad y \in H $ "--- фиксирован,
+$ \quad G_y : H \to \Co, \quad x \in H, \quad G_y(x) \coloneq (Tx, y) $
+
+$$ \implies G_y \in \mathscr Lin(H, \Co) $$
+
+Возьмём $ x \in H $.
+$$ |G_y(x)| = \bigl| (Tx, y) \bigr| \le \|Tx\| \cdot \|y\| \le
+\|T\| \cdot \|y\| \cdot \|x\| \implies
+G_y \in H^*, \quad \|G_y\| \le \|T\| \cdot \|y\| $$
+
+Воспользуемся теоремой Рисса:
+$$ \exists ! z \in H : \quad G_y(x) = (x, z), \quad \|z\| = \|G_y\|_{H^*} $$
+
+\begin{definition}
+	$ T^*y \coloneq z $
+\end{definition}
+
+$$ T^* \in \mathscr B(H), \quad \|T^*\| \le \|T\| $$
+
+\subsection{Простейшие свойства эрмитово-сопряжённого оператора}
+
+\begin{theorem}
+	$ H $ "--- гильбертово, $ \quad T \in \mathscr B(H) $
+
+	\begin{enumerate}
+		\item $ T^{**} = T $;
+		\item $ T^* \in \mathscr B(H), \quad \|T^*\| = \|T\| $;
+		\item $ \alpha \in \Co, \quad (\alpha T)^* = \ol \alpha T^* $;
+		\item $ T, S \in \mathscr B(H) \implies (T + S)^* = T^* + S^* $;
+		\item $ (TS)^* = S^* T^* $;
+		\item если $ T $ "--- биекция, то $ \exists T^{-1} \in \mathscr B(H), \quad
+			\exists (T^*)^{-1} $, при этом $ (T^*)^{-1} = (T^{-1})^* $.
+	\end{enumerate}
+\end{theorem}
+
+\begin{eproof}
+\item $ (Tx, y) = (x, T^*y) $
+	$$ (x, Ty) = \ol{(Ty, x)} = \ol{(y, T^*x)} = (T^*x, y) = (x, T^{**}y) \quad \forall x $$
+	$$ \implies Ty = T^{**}y \quad \forall y \in H $$
+\item $ T^* \in \mathscr B(H), \quad \|T^*\| \le \|T\| \implies
+	\|T^{**}\| \le \|T^*\| \underimp{T^{**} = T} \|T^*\| = \|T\| $
+\item $ \alpha \in \Co $
+	$$ (Tx, y) = (x, T^*y) \implies \bigl( (\alpha T)x, y \bigr) = (x, \ol \alpha T^*y) \implies
+	(\alpha T^*) = \ol \alpha T^* $$
+\item Очевидно.
+\item Очевидно.
+\item $ \exists T^{-1} $
+	$$
+	\begin{rcases}
+		T \cdot T^{-1} = I \underimp{5)} (T^{-1})^* T^* = (I^*) = I \\
+		T^{-1} \cdot T = I \underimp{5)} (T^*) (T^{-1})^* = I
+	\end{rcases} \implies \exists (T^*)^{-1} = (T^{-1})^* $$
+\end{eproof}
+
+\begin{remark}
+	$ X, Y $ "--- банаховы, $ \quad T \in \mathscr B(X, Y), \quad
+	\exists T^{-1} \in \mathscr B(Y, X) $
+
+	$$ \exists (T^*)^{-1} = (T^{-1})^* $$
+\end{remark}
+
+\begin{noproof}
+\end{noproof}
+
+\subsection{Эрмитово-сопряжённый к интегральному оператору}
+
+\begin{theorem}
+	$ \mathrm L^2(\R^n, \lambda_n), \quad K(x, y) \in \mathrm L^2(\R^{2n}), $
+	$$ M = \Bigl( \int\limits_{\R^n} \int\limits_{\R^n} |K(x, y)|^2 \di x \di y \Bigr)^{\frac12} $$
+	$$ (\mathscr Kf)(x) = \int\limits_{\R^n} K(x, y) f(y) \di y $$
+
+	Тогда
+	\begin{enumerate}
+		\item $ \mathscr K \in \mathscr B \bigl( \mathrm L^2(\R^n) \bigr), \quad
+			\|\mathscr K\| \le M $
+		\item $ \mathscr K^* \in \mathscr B \bigl( \mathrm L^2(\R^n) \bigr) $
+			$$ (\mathscr K^*g)(y) = \int\limits_{\R^n} K^*(y, x) g(x) \di x $$
+			$$ \implies K^*(y, x) = \ol{K(x, y)} $$
+	\end{enumerate}
+\end{theorem}
+
+\begin{eproof}
+\item Так же, как в предыдущей теореме.
+\item Возьмём $ f, g \in \mathrm L^2(\R^n) $.
+	$$ (f, g) = \int\limits_{\R^n} f(x)\ol{g(x)} \di x $$
+	\begin{multline*}
+		(\mathscr K^*g, f) = (g, \mathscr Kf) =
+		\int\limits_{\R^n} g(x) \ol{\int\limits_{\R^n} K(x, y)f(y) \di y} \di x
+		\undereq{\text{т. Фубини}}
+		\int\limits_{\R^n} \Bigl( \int\limits_{\R^n} \ol{K(x, y)} g(x) \Bigr) \ol{f(x)} \di y = \\
+		= \Bigl( \int\limits_{\R^n} \ol{K(x, y)} g(x) \di x, f \Bigr)
+	\end{multline*}
+	$$ \implies (\mathscr K^*g)(y) = \int\limits_{\R^n}\ol{K(x, y)}g(x) \di x \implies
+	K^*(y, x) = \ol{K(x, y)} $$
+\end{eproof}
+
+\subsection{Теорема о ядре и образе оператора и его сопряжённого}
+
+\begin{theorem}
+	$ H $ "--- гильбертово, $ \quad T \in \mathscr B(H) $
+
+	$$ H = (\operatorname{Ker} T) \oplus \ol{T^*(H)} $$
+	($ \ol{(T^*(H))} $ "--- замыкание образа $ T^* $)
+	$$ H = (\operatorname{Ker}T^*) \oplus \ol{T(H)} $$
+\end{theorem}
+
+\begin{undefthm}{Общее наблюдение.}
+	$ L $ "--- подпространство в алгебраическом смысле,
+	$$ M = L^\perp = \Set{x \in H | x \perp y \quad \forall y \in L} $$
+	$$ (\ol L)^\perp = M $$
+
+	$$ \implies H = M \oplus \ol L $$
+\end{undefthm}
+
+\hspace{.5em}
+
+\begin{proof}[теоремы]
+	В качестве $ L $ возьмём $ L = T^*(H) $.
+	Возьмём $ x \in L^\perp $.
+	$$ (x, T^*y) = 0 \iff (Tx, y) = 0 \iff Ty = 0 \iff y \in \operatorname{Ker} M $$
+	$$ \implies \bigl( T^*(H) \bigr)^\perp = \operatorname{Ker}T \implies H =
+	\operatorname{Ker} T \oplus \ol{T^*(H)} $$
+
+	Применим эту формулу к $ T^* $ (учитывая, что $ T^{**} = T $):
+	$$ H = \operatorname{Ker} T^* \oplus \ol{T(H)} $$
+\end{proof}
+
+\begin{definition}
+	$ (X, \|\cdot\|), \quad T \in \mathscr B(X), \quad Y \sub X $ "--- подпространство
+	в алгебраическом смысле
+
+	Будем говорить, что $ Y $ "--- \emph{инвариантное подпространство} для $ T $, если
+	$ T(Y) \sub Y $ (\ie $ T\bigr|_Y \in \mathscr B(Y) $).
+\end{definition}
+
+\begin{remark}[проблема инвариантного подпространства]
+	\hfill
+	\begin{enumerate}
+		\item $ X $ "--- сепарабельно, банахово, $ \quad T \in \mathscr B(X) $
+
+			Существует ли нетривиальное замкнутое инвариантное подпространство?
+
+			Энфло построил пример, доказывающий, что нет.
+		\item $ H $ "--- гильбертово, $ \quad T \in \mathscr B(H) $
+
+			Неизвестно.
+	\end{enumerate}
+\end{remark}
+
+\begin{theorem}
+	$ H $ "--- гильбертово, $ \quad T \in \mathscr B(H), \quad Y $ "--- инвариантное
+	подпространство для $ T $
+
+	$$ Y^\perp \text{ "--- инвариантное подпространство для } T^* $$
+\end{theorem}

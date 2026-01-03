@@ -1,0 +1,2246 @@
+\section{Теорема Рисса о представлении линейного функционала для вещественного
+пространства.
+Продолжение линейного функционала с подпространства на линейную оболочку
+подпространства и вектора}
+
+\begin{theorem}[Рисс]
+	$ H $ "--- гильбертово пространство
+
+	\begin{enumerate}
+		\item $ y \in H $ "--- фиксирован, $ \quad f_y : H \to \Co : \quad f_y(x) = (x, y) $
+			$$ f_y \in H^*, \quad \|f_y\|_{H^*} = \|y\|_H $$
+		\item $ f \in H^* $
+			$$ \exists ! y \in H : \quad f = f_y $$
+	\end{enumerate}
+\end{theorem}
+
+\begin{eproof}
+\item $ y \in H $
+	\begin{itemize}
+		\item Проверим, что $ f_y \in \mathscr Lin(H, \Co) $
+
+			$ \alpha \in \Co, \quad x, y \in H $
+			$$ f_y(\alpha x + z) = (\alpha x + z, y) =
+			\alpha (x, y) + (z, y) = \alpha f(x) + f(z) $$
+		\item Оценим $ \|f_y\| $
+			$$ \|f_y\| = |(x, y)| \underset{\text{К"--~Б}}\le \|y\| \cdot \|x\| \implies
+			\|f_y\| \le \|y\| \implies f \in H^* $$
+
+			\begin{itemize}
+				\item Если $ y = 0 $, то $ f_y(x) = 0 \implies f_y = \On[], \quad \|f_y\| = 0 $
+				\item $ y \ne 0 $
+					$$ \|f_y\| = \sup\limits_{x \ne 0} \frac{|f_y(x)|}{\|x\|} \ge
+					\frac{|f_y(y)|}{\|y\|} = \frac{(y, y)}{\|y\|} = \|y\| $$
+			\end{itemize}
+	\end{itemize}
+\item $ f \in H^* $
+	\begin{itemize}
+		\item Если $ f = \On[] $, \ie $ f(x) \equiv 0 $, то $ f = f_0 $
+		\item $ f \ne \On[] $
+
+			Рассмотрим $ N = \operatorname{Ker} f \ne H $
+			$$ H = N \oplus N^\perp, \quad N^\perp \ne \set{0} $$
+			Возьмём $ y_0 \in N^\perp $.
+			Докажем, что $ \dim N^\perp = 1 $.
+
+			$$ f(y_0) \ne 0 $$
+			$$ v \coloneq \frac{y_0}{f(y_0)} \implies f(v) = 1 $$
+
+			Возьмём $ z \in N^\perp $.
+			Докажем, что $ z $ пропорционально $ v $.
+			$$ u \coloneq z - f(z)v \implies u \in N^\perp $$
+			$$ f(u) = f(z) - f(z)\underbrace{f(v)}_1 = 0 \implies u \in N $$
+			Значит, $ u = 0 \implies z = f(z)v $.
+
+			Будем искать $ y $ в виде $ y = \alpha v $, где $ \alpha \in \Co $.
+			$$ 1 = f_y(v) = f_y(v) = (v, \alpha v) = \alpha \|v\|^2 \implies
+			\alpha = \frac1{\|v\|^2} \implies y = \frac{v}{\|v\|^2} $$
+		\item Проверим единственность
+
+			Пусть $ f = f_y, ~ f = f_z $.
+			$$ \forall x \in H \quad f_y(x) = f_z(x) \implies (x, y) = (x, z) \implies
+			(x, y - z) = 0 \implies y - z \in H^\perp = \set{0} $$
+	\end{itemize}
+\end{eproof}
+
+\begin{remark}
+	$ C : H \to H^* : \quad C(y) = f_y $
+
+	Знаем, что $ \|f_y\|_{H^*} = \|y\|_H $.
+
+	$$ C(y + z) = f_{y + z} $$
+	$$ \forall x \in H \quad f_{y + z}(x) = (x, y + z) = (x, y) + (x, z) = f_y + f_z $$
+	$$ C(y + z) = C(y) + C(z) $$
+
+	Возьмём $ \alpha \in \Co $.
+	$$ C(\alpha y) = f_{\alpha y} $$
+	$$ f_{\alpha y}(h) = (x, \alpha y) = \ol\alpha (x, y) $$
+	$ C $ "--- сопряжённо-линейный изометрический изоморфизм между $ H $ и $ H^* $.
+	Говорят, что $ H^* = H, $ при этом имеют в виду, что $ C(H) = H^* $.
+\end{remark}
+
+\begin{exmpls}
+\item $ l^2 $
+	$$ f \in (l^2)^* \iff \exists! y = \set{y_n}_{n = 1}^\infty \in l^2 : \quad
+	\forall x \in l^2 \quad f(x) = f_y(x) = \sum_{n = 1}^\infty x_n \ol y_n $$
+\item $ (T, \mathcal U, \mu), \quad \mathrm L^2(\mu) $
+	$$ \Phi \in \bigl( \mathrm L^2 (T, \mu) \bigr)^* \iff \exists ! g \in \mathrm L^2(\mu) : \quad
+	\forall f \in \mathrm L^2(\mu) \quad \Phi(f) = \int\limits_T f(x) \ol{g(x)} \di \mu $$
+\end{exmpls}
+
+\TODO{Продолжение линейного функционала}
+
+\section{Геометрический смысл линейного функционала.
+Теорема о норме линейного функционала}
+
+\begin{theorem}
+	$ X $ "--- линейное пространство над $ \mathbb K $
+	\begin{enumerate}
+		\item $ f \in \mathscr Lin(X, \mathbb K), \quad
+			f \ne \On[], \quad L = \operatorname{Ker} f $
+			$$ \operatorname{codim} L = \dim \bigl( \faktor X L \bigr) = 1 $$
+			Это называется \emph{коразмерность} $ L $.
+		\item $ L \sub X, \quad \operatorname{codim} L = 1, \quad x_0 \in X \setminus L $
+			$$ \exists ! f \in \mathscr Lin(X, \mathbb K) : \quad L = \operatorname{Ker} f, \quad
+			f(x_0) = 1 $$
+	\end{enumerate}
+\end{theorem}
+
+\begin{eproof}
+\item $ f \ne \On[] \implies \exists y_0 \notin L $
+	$$ v \coloneq \frac{y_0}{f(y_0)} \implies f(v) = 1 $$
+
+	Возьмём $ x \in X $.
+	\begin{multline*}
+		u \coloneq x - f(x)v \implies f(u) = f(x) - f(x)f(v) = 0 \implies u \in L \implies
+		\ol u = \ol 0 \implies \ol 0 = \ol x - f(x) \ol v \implies \\
+		\implies \ol x = f(x) \ol v \implies \ol x = f(x) \ol v \implies
+		\faktor X L = \set{\alpha \ol v | \alpha \in \mathbb K} \implies
+		\dim \bigl( \faktor X L \bigr) = 1
+	\end{multline*}
+\item $ L : \quad \dim \bigl( \faktor X L \bigr) = 1 $
+
+	Возьмём $ x \in X $.
+	$$ \exists \alpha \in \mathbb K : \ol x = \alpha \cdot \ol x_0 $$
+	Определим $ f(x) = \alpha $.
+	$$ \ol x_0 = 1 \cdot \ol x_0 \implies f(x_0) = 1 $$
+
+	Проверим, что $ f \in \mathscr Lin(X, \mathbb K) $.
+	Возьмём $ \alpha \in \mathbb K, \quad x, y \in X $.
+	$$
+	\begin{rcases}
+		\ol x = \beta \ol v \\
+		\ol y = \gamma \ol v
+	\end{rcases} \implies \alpha \ol x + \ol y = (\alpha \beta + \gamma) \ol v \implies
+	f(\alpha x + y) = \alpha \beta + \gamma = \alpha f(x) + f(y) $$
+	$$ f(x) = 0 \iff \ol x = 0 \cdot \ol v = \ol 0 \iff x \in L \implies \operatorname{Ker} f = L $$
+
+	Проверим единственность.
+	Пусть $ \exists g \in \mathscr Lin(X, \mathbb K), \quad \operatorname{Ker} g = L, \quad
+	g(x_0) = 1 $.
+	$$ \forall x \in X \quad x = \alpha \cdot \ol x_0 \implies
+	x = \alpha x_0 + y, \quad y \in L \implies
+	\begin{cases}
+		f(x) = \alpha \\
+		g(x) = \alpha
+	\end{cases} $$
+\end{eproof}
+
+\begin{remark}
+	В условиях второго пункта $ L = \operatorname{Ker} f, \quad f(x_0) = 1 $
+	$$ f^{-1}(1) = x_0 + L = \set{x_0 + y | y \in L} $$
+\end{remark}
+
+\begin{proof}
+	Обозначим $ M = f^{-1}(1) $.
+	\begin{itemize}
+		\item $ z \in x_0 + L $, \ie $ z = x_0 + y, \quad y \in L $
+			$$ f(z) = \underbrace{f(x_0)}_1 + \underbrace{f(y)}_0 = 1 \implies z \in M \implies
+			x_0 + L \sub M $$
+		\item $ z \in M $
+			$$ f(z) = 1 \implies f(z - x_0) = 0 \implies z - x_0 \in L \implies z - x_0 = y \implies
+			z = x_0 + y \in x_0 + L \implies M \sub x_0 + L $$
+	\end{itemize}
+\end{proof}
+
+\begin{theorem}[норма линейного функционала]
+	$ (X, \|\cdot\|), \quad f \in X^*, \quad f \ne \On[], \quad f(x_0) = 1, \quad
+	L = \operatorname{Ker} f $
+	$$ \| f \| = \frac1{\rho(x_0, L)} $$
+\end{theorem}
+
+\begin{proof}
+	Обозначим $ d = \rho(x_0, L) = \inf \|x_0 - y\| $.
+	\begin{itemize}
+		\item
+			$$ 1 = f(x_0) = f(x_0 - y) \le \|f\| \cdot \|x_0 - y\| \quad \forall y \in L \implies
+			1 \le \|f\| \inf \|x_0 - y\| = \|f\|d \implies \frac1d \le \|f\| $$
+		\item $ x \in X \setminus L, \quad f(x) \ne 0 $
+			\begin{multline*}
+				f \Bigl( \frac{x}{f(x)} \Bigr) = 1 \implies
+				f \Bigl( x_0 - \frac{x}{f(x)} \Bigr) \implies x_0 - \frac{x}{f(x)} \in L \implies
+				\Bigl\| x_0 - \Bigl( x_0 - \frac{x}{f(x)} \Bigr) \Bigr\| \ge d \iff \\
+				\iff \frac{\|x\|}{\|f(x)\|} \ge d \implies |f(x)| \le \frac1d \|x\| \implies
+				\|f\| \le \frac1d
+			\end{multline*}
+	\end{itemize}
+\end{proof}
+
+\begin{remark}
+	В обозначениях теоремы $ M = f^{-1}(1) $
+	$$ \rho(x_0, L) = \rho(0, M) $$
+\end{remark}
+
+\begin{proof}
+	$$ \rho(x_0, L) = \inf \|x_0 - y\| $$
+	$$ \rho(0, M) = \rho(0, x_0 + L) = \inf \|x_0 + y\| = \inf \|x_0 - y\| = \rho(x_0, L) $$
+\end{proof}
+
+\section{Формулировка теоремы Хана\texorpdfstring{"--~}{--}Банаха о продолжении
+линейного функционала для вещественного пространства.
+Продолжение линейного функционала с подпространства на линейную оболочку подпространства и
+вектора}
+
+\begin{definition}
+	$ X $ "--- линейное пространство над $ \mathbb K $
+
+	$ p : X \to \mathbb K $ называется \emph{выпуклым функционалом}, если
+	\begin{enumerate}
+		\item $ p(x + y) \le p(x) + p(y) $;
+		\item $ p(tx) = tp(x) \quad \text{ при } t \ge 0 $.
+	\end{enumerate}
+\end{definition}
+
+\begin{theorem}[Хан"--~Банах]
+	$ X $ "--- линейное над $ \R, \quad p : X \to \R $ "--- выпуклый функционал, $ \quad L $ "--- 
+	подпространство $ X, \quad f \in \mathscr Lin(L, \R), \quad f(x) \overset L \le p(x) $
+	(говорят, что $ f $ \emph{подчинён} $ p $)
+
+	$$ \exists g \in \mathscr Lin(X, \R) : \quad
+	\begin{cases}
+		g \bigr|_L = f \\
+		g(x) \overset X \le p(x)
+	\end{cases} $$
+\end{theorem}
+
+\begin{eproof}
+\item Возьмём $ z \in X \setminus L $
+	$$ L_1 \coloneq \mathscr L\set{L, z} = \Set{tx + z | t \in \R} $$
+
+	Построим $ f_1 \in \mathscr Lin(L_1, \R) : \quad
+	f_1 \bigr|_L = f, \quad f_1(y) \overset{L_1}\le p(y) $.
+	$$ f_1(c) \coloneq c $$
+	Докажем, что можно выбрать такой $ c $.
+	$$ f_1(x + tz) = f(x) + tc $$
+	$$ f_1(y) \overset{L_1}\le p(y) \iff f(x) + tc \overset{L} f(x) + tc \iff
+	\begin{cases}
+		f(x) + tc \le p(x + tz), \quad t > 0, \\
+		f(x) - tc \le p(x - tz), \quad t > 0
+	\end{cases} $$
+	Разделим на $ t $:
+	$$
+	\begin{cases}
+		f \bigl( \frac x t \bigr) + c \le p \bigl( \frac x t + z \bigr), \\
+		f \bigl( \frac x t \bigr) - c \le p \bigl( \frac x t - z \bigr)
+	\end{cases} $$
+	Обозначим $ u = \frac x t, ~ v = \frac x t $ (никак друг с другом не связанные).
+	$$
+	\begin{cases}
+		f(u) + c \le p(u + z) \quad \forall u \in L, \\
+		f(v) - c \le p(v - z) \quad \forall v \in L
+	\end{cases} $$
+	$$ f(v) - p(v - z) \le c \le p(u + z) - f(u) $$
+	Рассмотрим $ A = \Set{p(u + z) - f(u)}_{u \in L} \sub \R, \quad
+	B = \Set{f(v) - p(v - z)}_{v \in L} \sub \R $.
+	Проверим, что $ \forall a \in B \quad \forall b \in B \quad b \le a $.
+	$$ b \le a \iff f(v) - p(v - z) \le p(u + z) - f(u) \iff
+	\underbrace{f(u) + f(v)}_{f(u + v) \in L} \le p(u + z) + p(v - z) $$
+	$ f $ подчинён $ p $, значит,
+	$$ f(u + v) \le p(u + v) \underset{\text{выпуклость}}\le p(u + z) + p(v - z) \implies
+	\exists c \in \R : \quad f_1(z) = c $$
+\end{eproof}
+
+\section{Лемма Цорна.
+Доказательство теоремы Хана\texorpdfstring{"--~}{--}Банаха для вещественного
+пространства (без доказательства возможности продолжения линейного функционала с
+подпространства
+на линейную оболочку подпространства и вектора)}
+
+\begin{definition}
+	$ P $ полуупорядочено
+
+	$ x $ "--- \emph{максимальный элемент} $ P $, если
+	$$ \forall y \in P : x \le y \quad x = y $$
+\end{definition}
+
+\begin{lemma}[Цорн]
+	$ P $ частично упорядочено
+
+	Если для любой цепи имеется верхняя грань, то во всём множестве $ P $ существует максимальный
+	элемент.
+\end{lemma}
+
+\begin{theorem}[Хан"--~Банах]
+	$ X $ "--- линейное над $ \R, \quad p : X \to \R $ "--- выпуклый функционал, $ \quad L $ "--- 
+	подпространство $ X, \quad f \in \mathscr Lin(L, \R), \quad f(x) \overset L \le p(x) $
+	(говорят, что $ f $ \emph{подчинён} $ p $)
+
+	$$ \exists g \in \mathscr Lin(X, \R) : \quad
+	\begin{cases}
+		g \bigr|_L = f \\
+		g(x) \overset X \le p(x)
+	\end{cases} $$
+\end{theorem}
+
+\begin{eproof}
+\item $ \mathcal P \coloneq \Set{(M, h)}, \quad L \sub M \sub X, \quad
+	M $ "--- подпр-во, $ \quad h \in \mathscr Lin(M, \R), \quad h \bigr|_L = f, \quad
+	h(x) \overset M \le p(x) $
+
+	Определим порядок:
+	$$ (M, h) \le (M_1, h_1) \iff
+	\begin{cases}
+		M \sub M_1, \\
+		h_1 \bigr|_M = h
+	\end{cases} $$
+
+	Пусть $ A $ "--- цепь в $ \mathcal P $, \ie
+	$$ A = \Set{(M_\alpha, h_\alpha)}_{\alpha \in I} : \quad \forall \alpha, \beta \in I \quad
+	\left[
+	\begin{array}{l}
+		(M_\alpha, h_\alpha) \le (M_\beta, h_\beta) \\
+		(M_\beta, h_\beta) \le (M_\alpha, h_\alpha)
+	\end{array} \right. $$
+
+	Построим верхнюю грань для $ A $.
+	$$ M_0 \coloneq \bigcup_{\alpha \in I} M_\alpha $$
+
+	Проверим, что $ M_0 $ "--- подпространство.
+	Пусть $ x, y \in M_0 $.
+	$$ \exists \alpha, \beta : x \in M_\alpha, ~ y \in M_\beta \implies \left[
+	\begin{array}{l}
+		M_\alpha \sub M_\beta, \\
+		M_\beta \sub M_\alpha
+	\end{array} \right. $$
+	Пусть выполняется первое.
+	$$ \implies x, y \in M_\beta \text{ "--- подпространство } \implies ax + by \in M_\beta \subset
+	M_0 \implies M_0 \text{ "--- подпространство} $$
+
+	Определим $ h_0 : M_0 \to \R $.
+
+	Возьмём $ x \in M_0 $.
+	$$ \exists \alpha : x \in M_\alpha $$
+	Положим $ h_0(x) = h_\alpha(x) $.
+
+	Проверим корректность.
+	Пусть $ x \in M_\beta $.
+	$$ \left[
+	\begin{array}{l}
+		(M_\alpha, H_\alpha) \le (M_\beta, h_\beta), \\
+		(M_\beta, h_\beta) \le (M_\alpha, h_\alpha)
+	\end{array} \right. $$
+	Пусть выполнено первое.
+	$$ x \in M_\alpha, ~ x \in M_\beta \implies h_\beta(x) = h_\alpha(x) = h(x) $$
+
+	Можно проверить, что $ h_0 \in \mathscr Lin(M_0, \R) $.
+	$$ \forall \alpha \in I \quad (M_\alpha, h_\alpha) \le (M_0, h_0) \implies
+	(M_0, h_0) \text{ "---  верхняя грань для } A $$
+	По лемме Цорна, в $ \mathcal P $ существует максимальный элемент $ (M, h) $.
+	$$ L \sub M, \quad h \bigr|_L = f, \quad h(x) \overset M \le p(x) $$
+
+	Докажем, что $ M = X $.
+	\textbf{Пусть} $ \exists z \in X \setminus M $.
+	$$ M_1 \coloneq \mathscr Lin\set{M, z} $$
+	По первой части доказательства
+	$$ \exists h_1 \in \mathscr Lin(M_1, \R) : \quad h_1 \bigr|_M = h, \quad h_1(x) \overset{M_1}\le
+	p(x) $$
+	$$ \implies (M_1, h_1) \in \mathcal P $$
+	$$ (M, h) \le (M_1, h_1), \quad M \subsetneq M_1 $$
+	Это \textbf{противоречит} максимальности $ (M, h) $.
+\end{eproof}
+
+\begin{statement}\label{st:cont:1}
+	$ X $ линейно над $ \R, \quad p $ "--- выпуклый функционал, $ \quad
+	f \in \mathscr Lin(X, \R), \quad f(x) \overset X \le p(x) $
+
+	$$ f(x) \ge -p(-x) $$
+\end{statement}
+
+\begin{proof}
+	$ f(x) \le p(x) \implies f(-x) \le p(-x) \implies -f(x) \le p(-x) $
+\end{proof}
+
+\begin{statement}
+	$ p $ "--- полунорма, $ \quad f(x) \overset X \le p(x) $
+
+	$$ |f(x)| \le p(x) $$
+\end{statement}
+
+\begin{proof}
+	$ p(-x) \undereq{p \text{ "--- полунорма}} p(x) \implies f(x) \ge -p(x) $
+\end{proof}
+
+\section{Обобщённый предел в пространстве ограниченных
+последовательностей}
+
+\begin{theorem}
+	$ l_\R^\infty \coloneq \Set{x = \Set{x_n \in \R}_{n = 1}^\infty |
+	\|x\| = \sup\limits_{n \in \N}|x_n| < +\infty} $
+
+	$$ \exists L \in (l^\infty)^* : \quad \|l\|_{(l^\infty)^*} = 1, \quad
+	\forall x = \Set{x_n}_{n = 1}^\infty \in l^\infty \quad
+	\varliminf\limits_{n \to \infty} x_n \le L(x) \le \varlimsup\limits_{n \to \infty} x_n $$
+
+	В частности, если $ \exists \lim x_n = x_0 $, то $ L(x) = x_0 $.
+\end{theorem}
+
+\begin{proof}
+	Для $ x \in l^\infty $ положим $ p(x) = \varlimsup\limits_{n \to \infty} x_n $.
+
+	Докажем, что $ p $ "--- выпуклый функционал:
+	\begin{itemize}
+		\item $ t > 0 \implies p(tx) = tp(x) $ "--- очевидно;
+		\item $ p(x + y) \le p(x) + p(y) $
+			$$ \varlimsup x_n + \varlimsup y_n \overset?\le \varlimsup(x_n + y_n) $$
+			Вспомним определение верхнего предела:
+			$$ a_n \coloneq \sup\limits_{m \ge n} \Set{x_m} \implies a_n \downarrow \implies
+			\exists \lim a_n = a, \quad \varlimsup x_n \coloneq a $$
+			$$ b_n = \sup\limits_{m \ge n}, \quad b = \varlimsup y_n $$
+			$$ c_n = \sup\Set{x_m + y_m}, \quad c = \varlimsup \Set{x_n + y_n} $$
+			Зафиксируем $ n $.
+			$$ \forall m \ge n \quad x_m + y_m \le a_n + b_n \implies c_n \le a_n + b_n $$
+			Устремим $ n \to \infty $:
+			$$ c \le a + b $$
+	\end{itemize}
+
+	$$ C \sub l^\infty, \quad
+	C \coloneq \Set{x = \Set{x_n}_{n = 1}^\infty | \exists \lim x_n = x_0} $$
+
+	Определим $ f : C \to \R : \quad f(x) = \lim x_n = x_0 $.
+	$$ f(x) = \lim x_n \le \varlimsup x_n \implies f(x) \overset C \le p(x) $$
+	Применим теорему Хана"--~Банаха:
+	$$ \exists g \in \mathscr Lin(l^\infty, \R), \quad g(x) \overset C = f(x), \quad
+	g(x) \overset{l^\infty}\le \varlimsup x_n $$
+	По \autoref{st:cont:1}
+	$$ g(x) \ge -p(-x) = -\varlimsup(-x_n) \undereq{\text{задача из Демидовича}} \varliminf x_n $$
+
+	$ g = L $ "--- в теореме, $ \quad g \in \mathscr Lin(l^\infty, \R) $.
+	$$
+	\begin{rcases}
+		g(x) \le \varlimsup x_n \le \sup|x_n| \\
+		g(x) \ge \varliminf x_n \ge -\sup|x_n|
+	\end{rcases} \implies |g(x)| \le \|x\|_\infty \implies \|g\| \le 1 \implies
+	g \in (l^\infty)^* $$
+
+	Возьмём $ x = \Set{1, 1, \dotsc} $.
+	$$ \|x\| = 1, \quad |g(x)| = 1 \implies \|g\| \ge \frac{|g(x)|}{\|x\|} = 1 \implies \|g\| = 1 $$
+\end{proof}
+
+\section[Теорема Боненблюста\texorpdfstring{"--~}{--}Собчика о
+продолжении линейного функционала для комплексного пространства]
+{Теорема Боненблюста"--~Собчика о продолжении линейного \\
+функционала для комплексного пространства}
+
+\begin{theorem}[Боненблюст"--~Собчик]
+	$ X $ линейно над $ \Co, \quad p $ "--- полунорма, $ \quad L $ "--- подпространство $ X, $ \\
+	$ f \in \mathscr Lin(L, \Co), \quad |f(x)| \overset L \le p(x) $
+
+	$$ \exists g \in \mathscr Lin(X, \Co) : \quad
+	\begin{cases}
+		g \bigr|_L = f, \\
+		|g(x)| \overset X \le p(x)
+	\end{cases} $$
+\end{theorem}
+
+\begin{proof}[овеществление]
+	$ X $ линейно и над $ \R $, \ie
+	$$
+	\begin{rcases}
+		a, b \in \R \\
+		x, y \in X
+	\end{rcases} \implies ax + by \in X $$
+	Также, $ L $ "--- подпространство и в вещественном смысле.
+	$$ f(x) = u(x) + \ii v(x), \quad u(x), v(x) \in \R $$
+
+	Проверим, что $ u, v \in \mathscr Lin(L, \R) $.
+	Пусть $ x, y \in L $.
+	$$ f(x) = u(x) + \ii v(x), \quad f(y) = u(y) + \ii v(y) $$
+	$$ f(x + y) = u(x + y) + \ii v(x + y) $$
+	Сложим первые два равенства:
+	$$ f(x + y) = \bigl( u(x) + u(y) \bigr) + \ii \bigl( v(x) + v(y) \bigr) $$
+	Вещественные и мнимые части равны:
+	$$ u(x+ y) = u(x) + u(y), \quad v(x + y) = v(x) + v(y) $$
+
+	Возьмём $ x \in X, ~ a \in \R $.
+	$$ f(x) = u(x) + \ii v(x) $$
+	$$ f(ax) = u(ax) + \ii v(ax) $$
+	$$ f(ax) = af(x) = a u(x) + \ii a v(x) \implies
+	\begin{cases}
+		u(ax) = au(x) \\
+		v(ax) = av(x)
+	\end{cases} $$
+	$$ \implies u, v \in \mathscr Lin(L, \R) $$
+	$$ f \in \mathscr Lin(X, \Co) \implies f(\ii x) = \ii f(x) \implies u(\ii x) + \ii v(\ii x) =
+	\ii \bigl( u(x) + \ii v(x) \bigr) \implies
+	u(\ii x) = -v(x) $$
+
+	Применим теорему Хана"--~Банаха к $ u $, а $ v $ определим из этого тождества.
+	\begin{multline*}
+		u(x) \le |f(x)| \le p(x) \quad \forall x \in L \underimp{\text{т. Хана"--~Банаха}} \\
+		\implies \exists \phi \in \mathscr Lin(X, \R) : \quad
+		\begin{cases}
+			\phi \bigr|_L = u, \\
+			\phi(x) \overset X \le p(x)
+		\end{cases} \underimp{p \text{ "--- полунорма}} |\phi(x)| \overset L \le p(x)
+	\end{multline*}
+	\begin{equ}{bone-sob:1}
+		x \in X \quad \psi(x) \coloneq -\phi(\ii x) \implies \psi \in \mathscr Lin(X, \R)
+	\end{equ}
+	$$ g(x) \coloneq \phi(x) + \ii \psi(x) \implies g \in \mathscr Lin(X, \R), \quad
+	g(x) \overset L = f(x) $$
+	$$ g(\ii x) =
+	\phi(\ii x) + \ii \psi(\ii x) \ii \bigl( -\ii \phi(\ii x) + \psi(\ii x) \bigr)
+	\undereq{\eref{bone-sob:1}} \ii \bigl(\phi(x) + \ii \psi(x) \bigr) \implies
+	g \in \mathscr Lin(X, \Co) $$
+
+	Проверим подчинение.
+	$$ x \in X, ~ g(x) \in \Co \quad g(x) = re^{\ii \theta}, \quad r \ge 0, ~ \theta \in \R $$
+	$$ \implies |g(x)| = r = g \bigl( xe^{-\ii \theta} \bigr) =
+	\phi \bigl( xe^{-\ii \theta} \bigr) + \ii \psi \bigl( xe^{-\ii \theta} \bigr) $$
+	Слева вещественное число, справа "--- комплексное, значит, мнимая часть равна нулю:
+	$$ |g(x)| = \phi \bigl( xe^{-\ii \theta} \bigr) \le
+	p \bigl( xe^{-\ii \theta} \bigr) \undereq{p \text{ "--- полунорма}} p(x) $$
+\end{proof}
+
+\section[Теорема Хана\texorpdfstring{"--~}{--}Банаха для нормированного пространства.
+Следствия: о достаточном числе линейных функционалов, формула для нормы элемента пространства,
+формула для расстояния до подпространства, критерий полноты системы элементов]
+{Теорема Хана"--~Банаха для нормированного пространства. \\
+Следствия: о достаточном числе линейных функционалов, формула для нормы элемента пространства,
+формула для расстояния до подпространства, критерий полноты системы элементов}
+
+\begin{theorem}
+	$ (X, \|\cdot\|) $ над $ \mathbb K, \quad
+	L $ "--- подпространство $ X $ в алгебраическом смысле, $ \quad f \in L^* $
+
+	$$ \exists g \in X^* : \quad
+	\begin{cases}
+		g \bigr|_L = f, \\
+		\|g\|_{X^*} = \|f\|_{L^*}.
+	\end{cases} $$
+\end{theorem}
+
+\begin{proof}
+	Обозначим $ M = \|f\|_{L^*} $.
+	$$ p(x) \coloneq M \cdot \|x\| \implies p \text{ "--- норма на } X $$
+
+	Возьмём $ x \in L $.
+	$$ |f(x)| \le \|f\|_{L^*}\|x\| = M \|x\| = p(x) \implies f \text{ подчинён } p $$
+	Применяем теорему Хана"--~Банаха или Бонеблюста"--~Собчика:
+	$$ \exists g \in \mathscr Lin(X, \mathbb K) : \quad
+	\begin{cases}
+		g \bigr|_L = f, \\
+		|g(x)| \overset X \le p(x)
+	\end{cases} $$
+	$$ \implies |g(x)| \overset X \le M \cdot \|x\| \implies \|g\|_{X^*} \implies g \in X^* $$
+	$$ \|g\|_{X^*} = \sup\limits_{
+		\begin{subarray}{c}
+			x \in X \\
+			\|x\| \le 1
+		\end{subarray}}|g(x)| \ge \sup\limits_{
+		\begin{subarray}{c}
+			x \in L \\
+			\|x\| \ge 1
+		\end{subarray}}|g(x)| = \|f\|_{L^*} $$
+\end{proof}
+
+\begin{implication}[о достаточном множестве линейных функционалов]
+	$ (X, \|\cdot\|) $ над $ \mathbb K, \quad x_0 \in X $
+
+	\begin{enumerate}
+	\item
+		$$ \exists g \in X^* : \quad
+		\begin{cases}
+			\|g\| = 1, \\
+			g(x_0) = \|x_0\|;
+		\end{cases} $$
+	\item $ \|x_0\| = \max \{|h(x_0)| \mid \|h\|_{X^*} \le 1\} $.
+	\end{enumerate}
+\end{implication}
+
+\begin{iproof}
+\item $ x_0 \ne 0 $
+
+	Рассмотрим $ L = \Set{\alpha x_0}_{\alpha \in \mathbb K} $.
+	Определим $ f : L \to \mathbb K : \quad f(\alpha x_0) = \alpha \|x_0\| $. \\
+	Понятно, что $ f \in \mathscr Lin(L, \mathbb K), \quad f(x_0) = \|x_0\|, \quad
+	|f(\alpha x_0)| = |\alpha| \|x_0\| $.
+	$$ \implies \|f\|_{L^*} = 1 $$
+
+	По теореме
+	$$ \exists g \in X^* : \quad
+	\begin{cases}
+		\|g\|_{X^*} = 1, \\
+		g(x_0) = \|x_0\|.
+	\end{cases} $$
+
+	Рассмотрим $ h \in X^* : \quad \|h\| \le 1 $.
+	$$ |h(x_0)| \le \|h\| \|x_0\| \le \|x_0\| \implies \sup\limits_{\|h\| \le 1}|h(x_0)| \le
+	\|x_0\| $$
+	Но $ \exists g : \quad
+	\begin{cases}
+		\|g\| = 1, \\
+		|g(x_0)| = \|x_0\|.
+	\end{cases} $
+\item $ x_0 = 0 $
+
+	Возьмём $ g \in X^* : \quad \|g\| = 1 $.
+	$$ g(x_0) = 0 $$
+\end{iproof}
+
+\begin{remark}
+	Теперь имеем две похожие формулы:
+	$$ \|f\| = \sup\limits_{\|x\| \le 1}|f(x)| $$
+	$$ \|x\| = \max\limits_{\|f\|_{X^*} \le 1} |f(x)| $$
+\end{remark}
+
+\begin{implication}[расстояние до подпространства]
+	$ (X, \|\cdot\|), \quad L $ "--- замкнутое подпространство $ X, \quad
+	x_0 \in X \setminus L, \quad d \coloneq \rho(x_0, L) $
+
+	\begin{enumerate}
+	\item
+		$$ \exists g \in X^* : \quad
+		\begin{cases}
+			\|g\| = 1, \\
+			g(x_0) = d, \\
+			g \bigr|_L = 0;
+		\end{cases} $$
+	\item $ d = \min\{ |h(x_0)| \mid \|h\| \le 1, ~ h\bigr|_L = 0\} $.
+	\end{enumerate}
+\end{implication}
+
+\begin{proof}
+	$ M \coloneq \mathscr Lin(x_0, L) = \Set{\alpha x_0 + y | y \in L} $
+
+	Определим $ f : M \to \mathbb K : \quad f(\alpha x_0 + y) = \alpha $.
+	$$ \implies f(y) = 0 \quad \forall y \in L $$
+	$$ f(x_0) = 1 $$
+	Понятно, что $ f \in \mathscr Lin(M, \mathbb K) $.
+
+	Воспользуемся теоремой о норме линейного функционала:
+	$$ \|f\|_{M^*} = \frac1d $$
+	$$ f_1 \coloneq df \implies \|f_1\| = 1, \quad f_1(x_0) = d $$
+	$$ \exists g \in X^* : \quad
+	\begin{cases}
+		\|g\| = 1, \\
+		g \bigr|_M = f_1
+	\end{cases} \implies g \bigr|_L = 0, \quad g(x_0) = d $$
+
+	Возьмём $ h \in X* : \quad \|h\| \le 1, ~ h \bigr|_L = 0 $.
+	$$ |h(x_0)| = |h(x_0 - y)| \le \|h\| \cdot \|x_0 - y\| \le \|x_0 - y\| \quad \forall y \in L $$
+	$$ \implies |h(x_0)| \le d \implies \sup\limits_{
+		\begin{subarray}{c}
+			\|h\| \le 1 \\
+			h\bigr|_L = 0
+		\end{subarray}}|h(x_0)| \le d $$
+	$$ \exists g : \quad
+	\begin{cases}
+		g(x_0) = d, \\
+		g \bigr|_L = 0, \\
+		\|g\| \le 1.
+	\end{cases} $$
+	$$ \implies d = \max\limits_{
+		\begin{subarray}{c}
+			\|h\| \le 1 \\
+			h\bigr|_L = 0
+		\end{subarray}}|h(x_0)| $$
+\end{proof}
+
+\begin{remark}
+	Если $ L = \Set{0} $, то получим предыдущее следствие.
+\end{remark}
+
+\begin{implication}[критерий полноты семейства элементов в нормированном пространстве]
+	\hfill \\
+	$ (X, \|\cdot\|), \quad \Set{x_\alpha \in X}_{\alpha \in A} $
+
+	$ \Set{x_\alpha} $ "--- полная система элементов \textbf{тогда и только тогда}, когда
+	$$ \Bigl( f \in X^* \quad f(x_\alpha) = 0 \quad \forall \alpha \in A \Bigr) \implies f = \On[] $$
+\end{implication}
+
+\begin{proof}
+	$ L \coloneq \ol{\mathscr L \Set{x_\alpha}}_{\alpha \in A} $
+	\begin{itemize}
+		\item $ \implies $
+
+			$ \Set{x_\alpha} $ "--- полное, $ \quad f \in X^*, \quad f(x_\alpha) = 0 $
+			$$ x = \sum_{k = 1}^n c_kx_{\alpha_k} \implies f(x) = 0 $$
+			То есть, $ \forall x \in \mathscr L\Set{x_\alpha} \quad f(x) = 0 $.
+
+			Возьмём $ x \in X $.
+			$$ \exists \Set{x_n \in \mathscr L\Set{x_\alpha}}_{n = 1}^\infty : \quad \lim x_n = x $$
+			$ f $ непрерывна $ \implies f(x) = \lim f(x) = 0 \implies f = \On[] $.
+		\item $ \impliedby $
+
+			\textbf{Пусть} $ L \subsetneq X $, \ie $ \exists x_0 \ne 0 \in X \setminus L $.
+			По первому следствию
+			$$ \exists g \in X^* : \quad
+			\begin{cases}
+				\|g\| = 1, \\
+				g(x_0) = \|x_0\|
+			\end{cases} \implies g \ne \On[] $$
+			При этом, $ g \bigr|_L = 0 \implies g(x_\alpha) = 0 $ "--- \contra.
+	\end{itemize}
+\end{proof}
+
+\section{Сепарабельность пространства, у которого сопряжённое пространство сепарабельно}
+
+\begin{theorem}
+	$ (X, \|\cdot\|) $
+
+	Если $ X^* $ сепарабельно, то $ X $ сепарабельно.
+\end{theorem}
+
+\begin{proof}
+	$ X^* $ сепарабельно $ \iff \exists \Set{f_n}_{n = 1}^\infty : \quad
+	f_n $ плотны в $ X^* $, \ie
+	$$ \forall f \in X^* \quad \exists \Set{f_{n_k}}_{k = 1}^\infty : \quad
+	\lim \|f - f_{n_k}\| = 0 $$
+
+	Пусть $ f \in X^* $.
+	$$ \|f\| = \sup\limits_{\|x\| = 1} |f(x)| \implies \exists x :
+	\begin{cases}
+		\|x\| = 1, \\
+		\|f\| \le 2|f(x)|
+	\end{cases} $$
+
+	Пусть теперь $ f \ne \On[] $.
+	$$ \exists x_n : \quad \|x_n\| = 1, \quad \|f_n\| \le 2|f_n(x_n)| $$
+	Проверим, что $ \Set{x_n} $ полна в $ X $ (по следствию 3).
+	Пусть $ f \in X^*, \quad f(x_n) = 0 \quad \forall n $.
+	$$ \exists f_{n_k} \in X^* : \quad \lim \|f - f_{n_k}\| = 0 $$
+	$$ \frac12 \|f_{n_k}\| \le |f_{n_k}(x_{n_k})| =
+	|\underbrace{f(x_{n_k})}_0 - f_{n_k}(x_{n_k})| \le
+	\|f - f_{n_k}\| \cdot \underbrace{\|x_{n_k}\|}_1 $$
+	$$ \implies \lim \|f_{n_k}\| = 0 \implies f = \On[] \implies \Set{x_n} \text{ полна} $$
+\end{proof}
+
+\section
+[Принцип равномерной ограниченности.
+Сильная сходимость линейных операторов, \texorpdfstring{\\}{}
+оценка нормы сильного предела]
+{Принцип равномерной ограниченности.
+Сильная сходимость линейных операторов, оценка нормы сильного предела}
+
+\begin{lemma}
+	$ (X, \|\cdot\|), ~ (Y, \|\cdot\|), \quad U \in \mathscr Lin(X, Y) $
+
+	$$ \exists a \in X ~ \exists \eps > 0 ~ \exists R > 0 : \quad
+	U \bigl( \mathtt B_\eps(a) \bigr) \sub \ol{\mathtt B_R(0)} \implies
+	\begin{cases}
+		U \in \mathscr B(X, Y), \\
+		\|U\| \le \frac{2R}\eps
+	\end{cases} $$
+\end{lemma}
+
+\begin{proof}
+	Возьмём $ z \in X : \quad \|z\| < \eps $.
+	\begin{multline*}
+		a + z \in \mathtt B_\eps(a) \implies U (a + z) \sub \ol{B_R(0)} \implies
+		\begin{cases}
+			\|U(a + z)\| \le R, \\
+			\|U(a)\| \le R
+		\end{cases} \underimp{z = (a + z) - a} \\
+		\implies \|Uz\| \le \|U(a + z)\| + \|U(a)\| \le 2R
+	\end{multline*}
+
+	Возьмём $ x \in X : \quad \|x\| < 1 $.
+	$$ z = \eps x \implies \|\eps x\| < \eps \implies \|U(\eps x)\| \le 2R \implies
+	\|Ux\| \le \frac{2R}\eps \underimp{|U\| = \sup\limits_{\|x\| \le 1}\|Ux\|}
+	\|U\| \le \frac{2R}\eps $$
+\end{proof}
+
+\begin{theorem}
+	$ X $ "--- банахово, $ \quad (Y, \|\cdot\|), \quad
+	\Set{U_\alpha \in \mathscr B(X, Y)}_{\alpha \in A}, \quad \forall x \quad
+	\sup\limits_{\alpha \in A}\|U_\alpha x\| < +\infty $
+
+	$$ \sup\limits_{\alpha \in A}\|U_\alpha\| < +\infty $$
+\end{theorem}
+
+\begin{proof}
+	Нужно доказать, что $ \sup\limits_{\|x\| \le 1}\sup\limits_\alpha \|U_\alpha x\| < +\infty $.
+	$$ Y_n \coloneq \Set{y | \|y\| \le n} \sub Y $$
+	$ U_\alpha^{-1}(Y_n) $ замкнуто, \as $ U_\alpha $ непрерывен.
+	$$ E_n = \bigcap_{\alpha \in A} U_\alpha^{-1}(Y_n) $$
+	$ E_n $ замкнуты.
+
+	Пусть $ x \in X $.
+	$$ \exists n \in \N : \quad \sup\limits_{\alpha \in A}\|U_\alpha x\| < n \implies
+	x \in U_\alpha^{-1}(Y_n) \underimp{\forall \alpha \in A} x \in E_n \implies
+	X = \bigcup_{n = 1}^\infty E_n $$
+
+	Применим теорему Бэра о категориях:
+	$$ \exists n_0 : \quad \operatorname{Int}E_{n_0} \ne \O $$
+	То есть,
+	$$ \exists \mathtt B_\eps(a) \sub E_{n_0} \implies
+	\mathtt B_\eps(a) \in U_\alpha^{-1}(Y_{n_0}) \quad \forall \alpha \in A \implies
+	U_\alpha \bigl( \mathtt B_\eps(a) \bigr) \sub Y_{n_0} \underimp{\text{лемма}}
+	\|U_\alpha\| \le \frac{2n_0}\eps \quad \forall \alpha \in A $$
+\end{proof}
+
+\begin{implication}[Принцип фиксации особенности]
+	$ X $ "--- банахово, $ \quad (Y, \|\cdot\|), \quad \Set{U_\alpha \in \mathscr B(X, Y)}, $ \\
+	$ \sup\limits_{\alpha \in A}\|U_\alpha\| = +\infty $
+
+	$$ \exists x_0 \in X : \quad \sup\limits_{\alpha \in A}\|U_\alpha x_0\| = +\infty $$
+\end{implication}
+
+\begin{definition}
+	$ (X, \|\cdot\|), ~ (Y, \|\cdot\|), \quad \Set{U_n \in \mathscr Lin(X, Y)}_{n = 1}^\infty, \quad
+	\forall x \in X \quad \exists \lim\limits_{n \to \infty}U_n x \eqqcolon Ux $
+
+	$ U = \slim U_n $ "--- \emph{сильный (поточечный) предел} $ U_n $.
+\end{definition}
+
+\begin{props}
+	\item $ U_n \in \mathscr Lin(X, Y) $
+		$$ U = \operatorname{s-lim} U_n \implies U \in \mathscr Lin(X, Y) $$
+	\item $ U_n, U \in \mathscr B(X, Y) $
+		$$ \lim \|U - U_n\| = 0 \implies Ux = \slim U_n x $$
+\end{props}
+
+\begin{proof}
+\item Очевидно.
+\item $ x \in X $
+	$$ \|Ux - U_nx\| \le \underbrace{\|U - U_n\|}_{\to 0} \cdot \|x\| \implies \lim U_nx = Ux $$
+\end{proof}
+
+\begin{remark}
+	Если $ U = \slim U_n, \quad U, U_n \in \mathscr B(X, Y) $, то \textbf{не обязательно}
+	$ \lim \|U - U_n\| = 0 $.
+\end{remark}
+
+\begin{eg}
+	$ X = l^1 $
+	$$ x = \Set{x_n}_{n = 1}^\infty \in l^1 $$
+	$$ f_n(x) \coloneq x_n, \quad \|f_n(x)\| = |x_n| \le \|x_n\|_1 \implies \|f_n\| \le 1 \implies
+	f_n \in (l^1)^* $$
+
+	Пусть $ e_n = (0, \dots, 0, \underset n 1, 0, \dots, 0) $.
+	$$ f_n(e_n) = 1 \implies \|f_n\| \ge 1 $$
+
+	Найдём сильный предел:
+	$$ \lim x_n = 0 \implies \lim f_n(x) = 0 \quad \forall x \in l^1 \implies \On[] = \slim f_n $$
+	$$ \|f - \On[]\| = 1, \quad \lim \|f_n - \On[]\| = 1 \ne 0 $$
+\end{eg}
+
+\begin{implication}
+	$ X $ "--- банахово, $ \quad (Y, \|\cdot\|), \quad \Set{U_n}_{n = 1}^\infty, \quad
+	U_n \in \mathscr B(X, Y), \quad U = \slim U_n $
+
+	$$ U \in \mathscr B(X, Y), \quad \|U\| \le \varliminf \|U_n\| $$
+\end{implication}
+
+\begin{proof}
+	$$ \exists \lim U_n x \implies \sup\limits_{n \in \N} \|U_nx\| < +\infty \underimp{\text{теорема}}
+	\exists M > 0 : \quad \|U_n\| \le M \quad \forall n \in \N $$
+	$$ b \coloneq \varliminf \|U_n\| \in \R, \quad b \le M $$
+	$$ \exists \Set{n_k} : \quad b = \lim\limits_{k \to \infty} \|U_{n_k}\| \implies
+	Ux = \lim U_{n_k} x \quad \forall x \in X $$
+	$$ \|Ux\| = \lim\limits_{k \to \infty} \|U_{n_k}x\| \le \lim\|U_{n_k}\| \cdot \|x\| =
+	b\|x\| \implies \|U\| \le b $$
+\end{proof}
+
+\begin{remark}
+	$ U = \slim U_n $
+
+	Возможно строгое неравенство (в примере так и было).
+\end{remark}
+
+\section{Теоремы Банаха\texorpdfstring{"--~}{--}Штейнгауза:
+критерий сходимости операторов}
+
+\begin{theorem}[Банах"--~Штейнгауз]
+	$ X, Y $ "--- банаховы, $ \quad \Set{U_n \in \mathscr B(X, Y)}_{n = 1}^\infty $
+
+	Существует сильный предел $ U_n $ \textbf{тогда и только тогда}, когда
+	\begin{enumerate}
+		\item $ \exists M > 0 : \quad \|U_n\| \le M \quad \forall n \in \N $;
+		\item $ \Set{U_nx}_{n = 1}^\infty $ фундаментальна для $ \forall x \in E \sub X $, где
+			$ E $ "--- полное в $ X $, \ie $ \ol{\mathscr L\Set{E}} = X $.
+	\end{enumerate}
+\end{theorem}
+
+\begin{iproof}
+\item $ \implies $
+	\begin{enumerate}
+		\item уже доказано;
+		\item очевидно.
+	\end{enumerate}
+\item $ \impliedby $
+
+	Проверим, что $ \forall x \in X \quad \Set{U_nx} $ фундаментальна.
+
+	Обозначим $ L = \mathscr L\Set{E} $.
+	Возьмём $ x \in L $.
+	$$ x = \sum_{k = 1}^m c_kx_k, \quad x_k \in E $$
+	Пусть $ p > q \in \N $.
+	$$ \|U_px - U_qx\| \le
+	\sum_{k = 1}^\infty |c_k| \underbrace{\|U_px_k - U_qx_k\|}_{\to 0} \underarr{p, q \to \infty}
+	0 $$
+	$ \implies \Set{U_nx} $ фундаментальна для $ x \in L $.
+
+	Возьмём произвольный $ x \in X $.
+	$$ \forall \eps > 0 \quad \exists z \in L : \quad \|x - z\| < \eps $$
+	Воспользуемся тем, что $ \Set{U_nz} $ фундаментальна:
+	$$ \exists N \in \N : \quad \forall n > m \ge N \quad \|U_nz - U_mz\| < \eps $$
+	$$ \|Unx - U_mx\| \le
+	\underbrace{\|U_nx - U_nz\|}_{\le \|U_m\| \cdot \|x - z\| \le M\|x - z\| < M\eps} +
+	\underbrace{\|U_nz - U_mz\|}_{< \eps} + \underbrace{\|U_mz - U_mx\|}_{< M\eps} < \eps(2M + 1) $$
+	$ \implies \Set{U_nx}_{n = 1}^\infty $ фундаментальна для $ \forall x \in X $.
+	$$ \underimp{Y \text{ "--- банахово}} \exists \lim U_n x \eqqcolon U \quad
+	\forall x \in X, \quad U = \slim U_n $$
+\end{iproof}
+
+\begin{remark}
+	$ \implies $ верно для банахова $ X $ и нормированного $ Y $. \\
+	$ \impliedby $ верно для нормированного $ X $ и банахова $ Y $.
+\end{remark}
+
+\begin{theorem}[Банах"--~Штейнгауз]
+	$ X $ "--- банахово, $ \quad (Y, \|\cdot\|), \quad
+	\Set{U_n \in \mathscr B(X, Y)}_{n = 1}^\infty, \quad U \in \mathscr B(X, Y) $
+
+	$ U = \slim U_n $ \textbf{тогда и только тогда}, когда
+	\begin{enumerate}
+		\item $ \exists M > 0 : \quad \|U_n\| \le M \quad \forall n \in \N $;
+		\item $ \exists \lim U_nx \quad \forall x \in E \sub X $, где $ E $ "--- полное в $ X $.
+	\end{enumerate}
+\end{theorem}
+
+\begin{iproof}
+\item $ \implies $ "--- уже доказано.
+\item $ L \coloneq \mathscr L\Set{E}, \quad x \in L $
+	$$ x = \sum_{k = 1}^m ck x_k, \quad x_k \in E $$
+	$$ \exists \lim U_n x_k \quad \forall x_k \implies \exists \lim U_n x $$
+
+	Проверим, что $ \forall x \in X \quad \exists \lim U_n x $.
+	$$ \forall \eps > 0 \quad \exists z \in L : \quad \|x - z\| < \eps $$
+	$$ \exists N : \quad \forall n \ge N \quad \|Uz - U_nz\| < \eps $$
+	$$ \|Ux - U_nx\| \le \underbrace{\|Ux - U_z\|}_{\le \|U\| \cdot \|x - z\| < \|U\| \cdot \eps} +
+	\underbrace{\|Uz - U_nz\|}_{< \eps} +
+	\underbrace{\|U_nz - U_nx\|}_{\|U_n\| \cdot \|x - z\| < M\eps} < \eps(\|U\| + 1 + M) $$
+	$$ \implies \exists U_nx = Ux $$
+\end{iproof}
+
+\section{Обратный оператор к \texorpdfstring{$ I - A $}{I - A} , где
+\texorpdfstring{$ A $ "--- }{A~--- } сжатие.
+Множество обратных операторов открыто}
+
+\begin{statement}\label{inv:st:1}
+	$ A, B \in \mathscr B(X) $
+
+	$$ \|AB\| \le \|A\| \cdot \|B\| $$
+\end{statement}
+
+\begin{proof}
+	$$ \|A(Bx)\| \le \|A\| \cdot \|Bx\| \le \|A\| \cdot \|B\| \cdot \|x\| $$
+\end{proof}
+
+\begin{theorem}
+	$ X $ "--- банахово, $ \quad I $ "--- тождественный, $ \quad A \in \mathscr B(X), \quad
+	\|A\| < 1 $
+
+	$$ \exists (I - A)^{-1}, \quad \|(I - A)^{-1}\| \le \frac1{1 - \|A\|}, \quad
+	(I - A)^{-1} = \sum_{k = 0}^\infty A^k $$
+\end{theorem}
+
+\begin{proof}
+	Проверим, что сумма норм операторов сходится.
+	По \autoref{inv:st:1}
+	$$ \|A^k\| \le \|A\|^k \implies \sum_{k = 0}^\infty \|A^k\| \le \sum_{k = 0}^\infty \|A\|^k =
+	\frac1{1 - \|A\|} $$
+	$ X $ "--- банахово $ \implies \mathscr B(X) $ "--- банахово.
+	Воспользуемся критерием полноты:
+	$$ \implies \exists S = \sum_{k = 0}^\infty A^k \in \mathscr B(X) $$
+	$$ S_n \coloneq \sum_{k = 0}^n A^k $$
+	$$ \|S_n\| \le \sum_{k = 0}^n \|A\|^k < \frac1{1 - \|A\|}, \quad
+	\lim\limits_{n \to \infty} \|S - S_n\| = 0 $$
+	$$ \implies \|S\| \le \frac1{1 - \|A\|} $$
+
+	$$ (I - A)S_n = (I - A) \sum_{k = 0}^n A^k = \sum_{k = 0}^n A^k - \sum_{k = 0}^n A^{k + 1} =
+	I - A^{n + 1} $$
+	$$ \lim\limits_{n \to \infty} \|A^{n + 1}\| = 0 \implies \lim (I - A^{n + 1}) = I $$
+	$$
+	\begin{rcases}
+		\begin{rcases}
+			\lim(I - A)S_n = I \\
+			\lim(I - A)S_n = (I - A)S
+		\end{rcases} \implies (I - A)S = I \\
+		S_n(I - A) = I - A^{n + 1} \implies S(I - A) = I
+	\end{rcases} \implies S = (I - A)^{-1} $$
+\end{proof}
+
+\begin{definition}
+	$ (X, \|\cdot\|), ~ (Y, \|\cdot\|) $
+
+	Определим \emph{множество обратимых операторов}:
+	$$ \mathrm{In}(X, Y) = \Set{A \in \mathscr B(X, Y) | \exists A^{-1} \in \mathscr B(Y, X)} $$
+\end{definition}
+
+\begin{theorem}
+	$ X $ "--- банахово, $ \quad (Y, \|\cdot\|) $
+	\begin{enumerate}
+		\item $ U \in \mathrm{In}(X, Y), \quad V \in \mathscr B(X, Y), $
+			$$ \|U - V\| < \frac1{\|U^{-1}\|} $$
+
+			$$ \implies V \in \mathrm{In}(X, Y), $$
+			\begin{equ}1
+				\|V^{-1}\| \le \frac{\|U^{-1}\|}{1 - \|U - V\| \cdot \|U^{-1}\|}
+			\end{equ}
+			\begin{equ}2
+				\|U^{-1} - V^{-1}\| \le \frac{\|U^{-1}\|^2 \|U - V\|}{1 - \|U - V\| \cdot \|U^{-1}\|}
+			\end{equ}
+		\item $ \phi : \mathrm{In}(X, Y) \to \mathrm{In}(Y, X) : \quad \phi(A) = A^{-1} $
+
+			Тогда $ \phi $ непрерывно.
+	\end{enumerate}
+\end{theorem}
+
+\begin{remark}
+	$ \mathtt B_{\frac1{\|U^{-1}\|}}(U) \sub \mathrm{In}(X, Y) \implies \mathrm{In}(X, Y) $ открыто.
+\end{remark}
+
+\begin{eproof}
+\item Рассмотрим оператор $ W = U^{-1}(U - V) $.
+	$$ \|W\| \le \|U^{-1}\| \cdot \|U - V\| < 1, \quad W \in \mathscr B(X) $$
+	Можно применить предыдущую теорему:
+	$$ \exists (I - W)^{-1}, \quad \|(I - W)^{-1}\| \le \frac1{1 - \|W\|} \le
+	\frac1{1 - \|U^{-1}\| \|U - V\|} $$
+	$$ W = U^{-1}(U - V) = I - U^{-1}V \implies I - W = U^{-1}V $$
+	$$ V = U(U^{-1}V) = U(I - W) $$
+	Каждый их них обратим, значит,
+	$$ \exists V^{-1} = (I - W)^{-1}U^{-1} $$
+	$$ \|V^{-1}\| \le \|U^{-1}\| \cdot \|(I - W)^{-1}\| \le
+	\frac{\|U^{-1}\|}{1 - \|U^{-1}\| \cdot \|U - V\|} $$
+	Получили неравенство \eref{1}.
+	Получим из него неравенство \eref{2}:
+	$$ U^{-1} - V^{-1} = U^{-1}(V - U)V^{-1} \implies
+	\|U^{-1} - V^{-1}\| \le \|U^{-1}\| \|V - U\| \|V^{-1}\| \underset{\eref{1}}\le
+	\frac{\|U^{-1}\|^2 \|U - V\|}{1 - \|U^{-1}\| \cdot \|U - V\|} $$
+\item $ \phi(U) = U^{-1} $
+	$$ \phi(U) - \phi(V) = U^{-1} - V^{-1} \underimp{\eref{2}}
+	\lim\limits_{\|U - V\| \to 0}\|\phi(U) - \phi(V)\| = 0 $$
+\end{eproof}
+
+\section{Определение открытого отображения.
+Критерий открытости для линейного оператора.
+Условия существования непрерывного обратного оператора}
+
+\begin{definition}
+	$ (X, \tau_1), ~ (Y, \tau_2) $ "--- топологические пространства
+
+	Отображение $ U : X \to Y $ \emph{открыто}, если оно переводит открытые множества в открытые:
+	$$ G \sub X \text{ открыто } \implies U(G) \text{ открыто} $$
+\end{definition}
+
+\begin{remark}
+	$ U $ непрерывно, если \textbf{прообраз} открытого множества открыт.
+\end{remark}
+
+\begin{statement}
+	$ (X< \tau_1), ~ (Y, \tau_2) $ "--- топологические пространства, $ \quad
+	U : X \to Y $ "--- биекция
+
+	$$ U \text{ открыто } \iff U^{-1} \text{ непрерывно} $$
+\end{statement}
+
+\begin{proof}
+	Очевидно.
+\end{proof}
+
+\begin{statement}
+	$ (X, \|\cdot\|), ~ (Y, \|\cdot\|), \quad U \in \mathscr Lin(X, Y) $
+
+	$$ U \text{ открыт } \iff \exists r > 0 : \quad
+	\mathtt B_r(0) \sub U \bigl( \mathtt B_1(0) \bigr) $$
+\end{statement}
+
+\begin{iproof}
+\item $ \implies $
+	$$
+	\begin{rcases}
+		U(0) = 0 \\
+		U \text{ открыто } \implies U \bigl( \mathtt B_1(0) \bigr) \text{ открыто }
+	\end{rcases} \implies 0 \in U \bigl( \mathtt B_1(0) \bigr) \implies
+	\exists r > 0 : \quad \mathtt B_r(0) \sub U \bigl( \mathtt B_1(0) \bigr) $$
+\item $ \impliedby $
+
+	Возьмём $ G \sub X $ "--- открытое.
+	Пусть $ y_0 \in U(G) $.
+	$$ \exists x_0 \in G : \quad Ux_0 = y_0 $$
+	$$ \exists R > 0 : \quad \mathtt B_R(x_0) \sub G $$
+	$$ \mathtt B_r(0) \sub U \bigl( \mathtt B_1(0) \bigr) \underimp{\text{линейность}}
+	\mathtt B_{rR}(0) \sub U \bigl( \mathtt B_R(0) \bigr) $$
+	Сдвинем на $ U(x_0) $:
+	$$ \underbrace{Ux_0 + \mathtt B_{rR}(0)}_{\mathtt B_{rR}(Ux_0) \sub
+	U(\mathtt B_R(x_0)) \sub U(G)} \sub
+	Ux_0 + U \bigl( \mathtt B_R(0) \bigr) = U \bigl( x_0 + \mathtt B_R(0) \bigr) =
+	U \bigl( \mathtt B_R(x_0) \bigr) $$
+	$ \implies Ux_0 $ "--- внутренняя точка $ U(G) $.
+\end{iproof}
+
+\begin{implication}
+	$ (X, \|\cdot\|), ~ (Y, \|\cdot\|), \quad U \in \mathscr Lin(X, Y) $
+
+	$$ U \text{ открыто } \implies U(X) = Y \text{, \ie $ U $ "--- сюръекция} $$
+\end{implication}
+
+\begin{proof}
+	По критерию $ \exists r > 0 : \quad \mathtt B_r(0) \sub U \bigl( \mathtt B_1(0) \bigr) $.
+	Возьмём $ y \in Y $.
+	$$ \exists n \in \mathbb N : \quad \|y\| < nr \implies y \in \mathtt B_{nr}(0) \sub
+	U \bigl( \mathtt B_n(0) \bigr) \implies y \in U(X) $$
+\end{proof}
+
+\section{Теорема Банаха об открытом отображении}
+
+\begin{lemma}[редукция]
+	$ X $ "--- банахово, $ \quad (Y, \|\cdot\|), \quad U \in \mathscr B(X, Y), \quad
+	\exists r > 0 : \quad \mathtt B_r(0) \sub \ol{U \bigl( \mathtt B_1(0) \bigr)} $
+
+	$$ \mathtt B_{\frac r2}(0) \sub U \bigl( \mathtt B_1(0) \bigr) $$
+\end{lemma}
+
+\begin{proof}
+	Пусть $ y \in \mathtt B_{\frac r2}(0) $, \ie $ \|y\| < \frac r2 $.
+	Докажем, что $ \exists x : \quad \|x\| < 1, \quad Ux = y $.
+	$$ \mathtt B_r(0) \sub \ol{U \bigl( \mathtt B_1(0) \bigr)} \implies
+	\forall k \in \mathbb N \quad \mathtt B_{\frac r {2^k}}(0) \sub
+	\ol{U \bigl( \mathtt B_{\frac1{2^k}}(0) \bigr)} $$
+	\begin{itemize}
+		\item При $ k = 1 $
+			$$ \|y\| < \frac r 2 \implies y \in \mathscr B_{\frac r 2}(0) \sub
+			\ol{U \bigl( \mathtt B_{\frac12}(0) \bigr)} $$
+			$$ \exists x_1 : \quad \|x_1\| < \frac12, \quad \|y - Ux_1\| < \frac r 4 $$
+		\item $ k = 2 $
+			$$ y - Ux_1 \in \mathtt B_{\frac r 4}(0) \sub
+			\ol{U \bigl( \mathtt B_{\frac14}(0) \bigr)} \implies
+			\exists x_2 : \quad \|x_2\| < \frac14, \quad \|y - Ux_1 - Ux_2\| < \frac r {2^3} $$
+			$$ \dots $$
+		\item Построим $ \Set{x_n}_{n = 1}^\infty $ такую, что
+			$$ \|x_n\| < \frac1{2^n}, \quad \|y - Ux_1 - \dots - Ux_n\| < \frac r {2^{n + 1}} $$
+	\end{itemize}
+	$$ \sum_{n = 1}^\infty \|x_n\| < 1 \underimp{\text{критерий полноты}}
+	\exists x = \sum_{n = 1}^\infty x_n \in X, \quad \|x\| < 1 $$
+	$$ S_n \coloneq \sum_{k = 1}^n x_k $$
+	$$
+	\begin{rcases}
+		\lim S_n = x \implies \lim US_n = Ux \\
+		\lim \|y - US_n\| = 0 \implies \lim US_n = y
+	\end{rcases} \implies Ux = y $$
+\end{proof}
+
+\begin{theorem}[Банах]
+	$ X, Y $ "--- банаховы, $ \quad U \in \mathscr B(X, Y) $
+
+	Если $ U(X) = Y $, то $ U $ открыто.
+\end{theorem}
+
+\begin{proof}
+	Обозначим $ B = \mathtt B_1(0) $.
+	$$ X = \bigcup_{n = 1}^\infty (nB) \implies U(X) = Y = \bigcup_{n = 1}^\infty U(nB) $$
+	По теореме Бэра о категориях
+	$$ \exists n_0 \in \mathbb N : \quad \operatorname{Int} \ol{U(n_0B)} \ne \emptyset $$
+	При этом, $ U(n_0B) = n_0U(B) $.
+	$$ \implies \operatorname{Int} \ol{U(B)} \ne \emptyset \implies
+	\exists a \in Y ~ \exists y > 0 : \quad \mathtt B_r(a) \sub \ol{U(B)} $$
+
+	Чтобы воспользоваться леммой, нужно сдвинуть точку $ a $ в 0.
+
+	Возьмём $ z \in X : \quad \|z\| < r $.
+	$$
+	\begin{rcases}
+		a + z \in \mathscr B_r(a) \sub \ol{U(B)} \\
+		a \in \ol{U(B)} \implies -a \in \ol{U(B)}
+	\end{rcases} \implies z = (a + z) + (-a) \in
+	\ol{U(B)} + \ol{U(B)} \sub \ol{U(2B)} $$
+	Воспользуемся подобием:
+	$$ \mathtt B_{\frac r2} \sub \ol{U(B)} \underimp{\text{лемма}}
+	\mathtt B_{\frac r4}(0) \sub U(B) $$
+\end{proof}
+
+\section[Теорема Банаха об обратном операторе.
+Эквивалентность норм, в которых пространство банахово]
+{Теорема Банаха об обратном операторе.
+Эквивалентность \\
+норм, в которых пространство банахово}
+
+\begin{theorem}[Банах]
+	$ X, Y $ "--- банаховы, $ \quad U \in \mathscr B(X, Y) $ "--- биекция
+
+	$$ U^{-1} \in \mathscr B(Y, X) $$
+\end{theorem}
+
+\begin{proof}
+	$$ U(X) = Y \underimp{\text{т. об откр. отобр.}} U \text{ открыто } \underimp{\text{утв.}}
+	U^{-1} \text{непрерывно} $$
+\end{proof}
+
+\begin{theorem}[об эквивалентных нормах]
+	$ (X, \|\cdot\|_1) $ "--- банахово, $ \quad (X, \|\cdot\|_2) $ "--- банахово, $ \quad
+	\exists C > 0 : \quad \|x\|_2 \overset X\le C\|x\|_1 $
+
+	$$ \exists A > 0 : \quad \|x\|_1 \overset X \le A\|x\|_2 $$
+\end{theorem}
+
+\begin{proof}
+	Обозначим $ X = (X, \|\cdot\|_1), \quad Y = (X, \|\cdot\|_2) $.
+
+	Определим оператор $ I : X \to Y : \quad Ix = x $.
+	Понятно, что $ I $ "--- биекция и $ I \in \mathscr Lin(X, Y) $.
+	$$ \|Ix\|_2 \le C\|x\|_1 \implies I \in \mathscr B(X, Y) $$
+
+	По теореме Банаха об обратном операторе
+	$$ I^{-1} \in \mathscr B(Y, X) \implies \|I^{-1}x\|_1 \le A\|x\|_2, \quad A = \|I^{-1}\| $$
+	$$ \iff \|x\|_1 \le A\|x\|_2 $$
+\end{proof}
+
+\section{Замкнутый оператор.
+Теорема о замкнутом графике.
+Пример замкнутого, но не непрерывного оператора}
+
+\begin{definition}
+	$ (X, \|\cdot\|), ~ (Y, \|\cdot\|) $ над $ \mathbb K $
+
+	$ X \times Y $ "--- \emph{линейное пространство}:
+	$$ (x_1, y_1) + (x_2, y_2) \coloneq (x_1 + x_2, y_1 + y_2) $$
+	$$ \alpha (x, y) = (\alpha x, \alpha y) $$
+
+	Определим \emph{норму} на $ X \times Y $:
+	$$ \|(x, y)\|_{X \times Y} = \|x\|_X + \|y\|_Y $$
+\end{definition}
+
+\begin{remark}
+	Сходимость по такой норме "--- покоординатная:
+	$$ \lim\limits_{n \to \infty}(x_n, y_n) = (x, y) \iff
+	\begin{cases}
+		\lim x_n = x \\
+		\lim y_n = y
+	\end{cases} $$
+
+	Если $ X, Y $ "--- банаховы, то $ X \times Y $ "--- банахово.
+\end{remark}
+
+\begin{definition}
+	$ (X, \|\cdot\|), ~ (Y, \|\cdot\|), \quad U \in \mathscr Lin(X, Y) $
+
+	Определим \emph{график} $ U $:
+	$$ G_U = \Set{(x, Ux)}_{x \in X} \sub X \times Y $$
+
+	Оператор $ U $ называется \emph{замкнутым}, если $ G_U $ замкнуто в $ X \times Y $.
+	$$ \iff \Bigl( \lim(x_n, Ux_n) = (x, y) \implies y = Ux \Bigr) $$
+	$$ \iff \left(
+		\begin{rcases}
+			\lim x_n = x \\
+			\lim Ux_n = y
+		\end{rcases} \implies y = Ux \right) $$
+\end{definition}
+
+\begin{remark}
+	Замкнутый оператор "--- это \textbf{не тот}, который переводит замкнутые множества в замкнутые.
+\end{remark}
+
+\begin{remark}
+	$ (X, \|\cdot\|), ~ (Y, \|\cdot\|), \quad U \in \mathscr Lin(X, Y) $
+
+	\begin{enumerate}
+		\item $ \lim x_n = x $;
+		\item $ \lim Ux_n = y $;
+		\item $ y = Ux $.
+	\end{enumerate}
+
+	$$ U \text{ замкнут } \iff \Bigl( 1) + 2) \implies 3) \Bigr) $$
+	$$ U \text{ непрерывен } \iff \Bigl( 1) \implies 2) + 3) \Bigr) $$
+
+	Значит, если $ U $ непрерывен, то он замкнут.
+\end{remark}
+
+\begin{theorem}[о замкнутом графике]
+	$ X, Y $ "--- банаховы, $ \quad U \in \mathscr Lin(X, Y) $ "--- замкнутый
+
+	$$ U \text{ непрерывен} $$
+\end{theorem}
+
+\begin{proof}
+	Определим новую норму пространства $ X $:
+	$$ \|x\|_1 = \|x\|_X + \|Ux\|_Y $$
+
+	Проверим, что $ (X, \|\cdot\|_1) $ банахово.
+	Пусть $ \Set{x_n}_{n = 1}^\infty $ фундаментальна в $ (X, \|\cdot\|_1) $, \ie
+	$$ \lim\limits_{n \to \infty}\|x_m - x_n\|_1 = 0 $$
+	$$ \iff \lim(\|x_m - x_n\|_X + \|Ux_m + Ux_n\|_Y) = 0 $$
+	Значит, $ \Set{x_n} $ фундаментальна в $ (X, \|\cdot\|_X) $, и $ \Set{Ux_n} $ фундаментальна в
+	$ Y $.
+	Оба эти пространства банаховы.
+	$$ \implies \exists x \in X ~ \exists y \in Y : \quad \lim \|x_n - x\|_X = 0 $$
+	$$ \implies
+	\begin{cases}
+		\lim x_n = x \text{ в } (X, \|\cdot\|_X) \\
+		\lim Ux_n = y \text{ в } Y
+	\end{cases} \underimp{U \text{ замкнут}} y = Ux \implies
+	\lim\bigl(\|x_n - x\|_X + \|Ux_n - Ux\|_Y \bigr) = 0 $$
+	\begin{multline*}
+		\implies \lim\|x_n - x\|_1 = 0 \implies (X, \|\cdot\|_1) \text{ банахово}, \quad
+		\|x\|_X \le \|x\|_X + \|Ux\|_Y = \|x\|_1 \underimp{\text{т. об экв. нормах}} \\
+		\implies \exists A > 0 : \quad \|x\|_1 \le A\|x\|_X \implies
+		\|x\|_X + \|Ux\|_Y \le A\|x\|_X \implies \|Ux\| \le A\|x\| \implies U \in \mathscr B(X, Y)
+	\end{multline*}
+\end{proof}
+
+\begin{eg}[$ U $ замкнут, но не непрерывен]
+	$ X = \Set{\exists f' \in \mathcal C[0, 1]}, \quad
+	\|f\|_X = \max\limits_{[0, 1]}|f(x)| $ \\
+	$ X \sub \mathcal C[0, 1] $ в алгебраическом смысле
+
+	$ Y = \mathcal C[0, 1], \quad \|g\|_Y = \max\limits_{[0, 1]}|g(x)| = \|g\|_\infty $
+
+	$$ \mathcal D(f) = f', \quad \mathcal D \in \mathscr Lin(X, Y), \quad
+	\mathcal D \text{ замкнут} $$
+	$$
+	\begin{rcases}
+		\Set{f_n \in X}_{n = 1}^\infty, \quad \lim f_n = f \iff f_n \uniarr{[0, 1]} f \\
+		\mathcal D(f_n) = f_n', \quad \mathcal D(f_n) \to g
+	\end{rcases} \underimp{\text{док. в анализе}} g = f' \implies g = \mathcal D(f) \iff
+	f_n' \uniarr{[0, 1]} g $$
+	$$ x^n \in X : \quad \|x^n\|_X = 1, \quad \mathcal D(x^n) = nx^{n - 1}, \quad
+	\|\mathcal D(x^n)\| = n $$
+	$$ \implies \sup\limits_{\|f\| \le 1} \|D(f)\| = +\infty \implies
+	\mathcal D \not\in \mathscr B(X, Y) $$
+\end{eg}
+
+\section(Сопряжённые пространства к пространствам последовательностей)
+{Сопряжённые пространства к пространствам последовательностей $ C_0 $, $ l^p $, пространству
+$ \mathrm L^p $ для конечных $ p $}
+
+\begin{theorem}[сопряжённые к $ l^p $]
+	$ 1 \le p < +\infty, \quad \frac1p + \frac1q = 1 $
+	\begin{enumerate}
+		\item $ y = \Set{y_n}_{n = 1}^\infty \in l^q, \quad F_y : l^p \to \mathbb K, \quad
+			x = \Set{x_n}_{n = 1}^\infty \in l^p, \quad
+			F_y(x) \coloneq \sum_{n = 1}^\infty x_ny_n $
+
+			$$ F_y \in \bigl( l^p \bigr)^*, \quad \|F_y\|_{(l^p)^*} = \|y\|_q $$
+		\item $ F \in \bigl( l^p \bigr)^* $
+			$$ \exists ! y : \quad F = F_y $$
+	\end{enumerate}
+\end{theorem}
+
+\begin{eproof}
+\item $ y \in l^q, \quad x \in l^p $
+	$$ |F_y(x)| = \Bigl| \sum_{n = 1}^\infty x_ny_n \Bigr| \underset{\text{нер-во Гёльдера}}\le
+	\|x\|_p \cdot \|y\|_q, \quad F_y \in \bigl( l^p, \mathbb K \bigr) $$
+	$$ \implies F_y \in \mathscr B \bigl(l^p, \mathbb K \bigr) = \bigl( l^p \bigr)^*, \quad
+	\|F_y\|_{(l^p)^*} \le \|y\|_q $$
+\item $ F \in \bigl( l^p \bigr)^*, \quad
+	e_n = (0, \dots, 0, \underset n 1, 0, \dots, 0) $ "--- базис $ l^p $
+
+	Определим $ y_n = F(e_n) $.
+	$$ x = \Set{x_n}_{n = 1}^\infty \in l^p \implies
+	x = \sum_{n = 1}^\infty x_ne_n \text{ "--- сходится в } l^p $$
+	\begin{multline*}
+		S_n \coloneq \sum_{k = 1}^n x_ke_k \implies
+		F(S_n) = \sum_{k = 1}^n x_ky_k \underimp{F \text{ непрерывен}} \\
+		\implies \lim S_n = x \implies
+		\lim F(S_n) = F(x) \implies F(x) = \sum_{k = 1}^\infty x_ky_k \implies
+		F = F_y
+	\end{multline*}
+
+	Проверим, что $ y \in l^q $.
+	\begin{itemize}
+		\item $ p > 1 \implies q < +\infty $
+			Рассмотрим пробные функции
+			$$ x_k =
+			\begin{cases}
+				\frac{\ol y_k}{|y_k|} \cdot |y_k|^{q - 1}, \quad y_k \ne 0, \\
+				0, \quad y_k = 0
+			\end{cases} $$
+
+			Рассмотрим последовательности
+			$$ \nder x = \sum_{k = 1}^n x_ke_k = (x_1, \dots, x_n, 0, \dots) $$
+			$$ F \bigl( \nder x \bigr) = \sum_{k = 1}^n x_ky_k = \sum |y_k|^q $$
+			$$ \bigl\| \nder x \bigr\|_p^p = \sum_{k = 1}^n |x_k|^p =
+			\sum |y_k|^{p(q - 1)} \undereq{\frac1p + \frac1q = 1 \implies p + q =
+			pq \implies pq - p = q} \sum_{k = 1}^n |y_k|^q $$
+			\begin{multline*}
+				\|F\| = \sup\limits_{x \ne 0} \frac{|F(x)|}{\|x\|_p} \ge
+				\frac{F(\nder x)}{\|\nder x\|} =
+				\frac{\sum_{k = 1}^n |y_k|^q}{ \bigl( \sum_{k = 1}^n |y_k|^q \bigr)^{\frac 1p}} =
+				\Bigl( \sum_{k = 1}^n |y_k|^q \Bigr)^{1 - \frac1p} =
+				\Bigl( \sum |y_k|^q \Bigr)^{\frac1q} \quad \forall n \implies \\
+				\implies y \in l^q, \quad \|F\| \ge \|y\|_q, \quad F = F_y
+			\end{multline*}
+
+			Докажем единственность: \\
+			\textbf{Пусть} $ F = F_y, ~ F = F_z $.
+			$$ F(e_n) = y_n, \quad F(e_n) = z_n \implies y_n = z_n $$
+		\item $ p = 1 \implies q = \infty $
+			$$ F(e_n) = y_n, \quad \|F\|_{(l^1)^*} \ge |y_n| \implies y \in l^\infty $$
+			$$ \|F\| \ge \sup\limits_{n \in \mathbb N}|y_n| = \|y\|_\infty $$
+	\end{itemize}
+\end{eproof}
+
+\begin{remark}
+	$ T : (l^q) \to \bigl( l^p \bigr)^* : \quad T(y) = F_y $
+
+	Мы доказали, что, при $ 1 \le p < +\infty $, $ T $ "--- линейный изометрический изоморфизм.
+	Говорят, что $ \bigl( l^p \bigr)^* = l^q $.
+\end{remark}
+
+\begin{theorem}[сопряжённое к $ C_0 $]
+	$ C_0 = \Set{ x = \Set{x_n \in \mathbb K}_{n = 1}^\infty |
+	\exists \lim\limits_{n \to \infty} x_n = 0} $
+	\begin{enumerate}
+		\item $ y \in l^1, \quad x \in C_0, \quad F_y(x) \coloneq \sum_{n = 1}^\infty x_ny_n $
+			$$ F_y \in C_0^*, \quad \|F_y\| = \|y\|_1 $$
+		\item $ F \in C_0^* $
+			$$ \exists ! y \in l^1 : \quad F = F_y $$
+	\end{enumerate}
+\end{theorem}
+
+\begin{eproof}
+\item $ y \in l^1, \quad x \in C_0 $
+	$$ |F_y(x)| = \Bigl| \sum_{n = 1}^\infty x_ny_n \Bigr| \le
+	\sup\limits_{n \in \mathbb N}|x_n| \cdot \sum_{n = 1}^\infty |y_n| =
+	\|x\|_\infty \cdot \|y\|_1 $$
+	$$ \implies F_y \in C_0^*, \quad \|F_y\| \le \|y\|_1 $$
+\item $ \Set{e_n}_{n = 1}^\infty $ "--- базис в $ C_0 $.
+	Рассмотрим $ F \in C_0^* $.
+	$$ y_n \coloneq F(e_n) $$
+	$$ x = \Set{x_n}_{n = 1}^\infty \in C_0 \implies x = \sum_{k = 1}^\infty x_ke_k $$
+	$$ S_n \coloneq \sum_{k = 1}^n x_ke_k $$
+	$$ F(S_n) = \sum_{k = 1}^n x_k y_k \underimp{F \text{ непрерывен}}
+	\lim F(S_n) = F(x) \implies F(x) = \sum_{k = 1}^\infty x_ky_k \text{ сходится } \implies
+	F = F_y $$
+
+	Проверим, что $ y \in l^1 $.
+\end{eproof}
+
+\section{Второе сопряжённое пространство.
+Каноническое вложение.
+Рефлексивность.
+Примеры}
+
+\begin{notation}
+	$ (T^*f)(x) = f(TX) $
+\end{notation}
+
+\begin{definition}
+	$ (X, \|\cdot\|), ~ (Y, \|\cdot\|), \quad x \in X, \quad f \in X^* $
+	$$ \Braket{f, x} \coloneq f(x) $$
+
+	$ T \in \mathscr B(X, Y), \quad T^* : Y^* \to X^* $
+	$$ \Braket{T^*f, x} = \Braket{f, Tx} $$
+
+	$ \pi : X \to X^{**}, \quad f \in X^*, \quad x \in X $
+	$$ f(x) = \Braket{f, x}, \quad \Braket{\pi(x), f} = f(x) $$
+	Можно отождествить $ \pi(X) $ с $ X $:
+	$$ \Braket{x, f} = f(x) $$
+\end{definition}
+
+\begin{eg}
+	$ \mathrm L^p(\mu), \quad \mathrm L^q(\mu), \quad 1 < p < +\infty, \quad
+	\frac1p + \frac1q = 1, \quad f \in \mathrm L^p, \quad g \in \mathrm L^q $
+
+	$$ \Braket{f, g} = \int\limits_X f(x)g(x) \di \mu, \quad
+	\Braket{g, f} = \int\limits_X f(x) g(x) \di \mu $$
+\end{eg}
+
+\TODO{Ещё что-то про второе сопряжённое пространство?}
+
+\section{Существование и простейшие свойства эрмитово"=сопряжённого оператора в нормированном
+пространстве}
+
+\TODO{Существование \dots в нормированном пространстве}
+
+\section{Теорема об интегральном операторе с ядром из
+\texorpdfstring{$ \mathrm L^p $}{пространства Лебега} и сопряжённом к нему}
+
+\begin{theorem}
+	$ (\mathbb R^n, \lambda_n), ~ (\mathbb R^m, \lambda_m), \quad
+	K(x, y) \in \mathrm L^p \bigl(\mathbb R^{n + m}, \lambda_{n + m} \bigr), \quad
+	x \in \mathbb R^n, \quad y \in \mathbb R^m $
+	$$ M \coloneq \Bigl( \int\limits_{\mathbb R^n} \int\limits_{\mathbb R^m}
+	|K(x, y)|^p \di x \di y \Bigr)^{\frac1p} < +\infty $$
+	$$ (\mathscr K f)(x) = \int\limits_{\mathbb R^m} K(x, y) f(y) \di y $$
+
+	Тогда
+	\begin{enumerate}
+		\item $ \mathscr K \in
+			\mathscr B \bigl( \mathrm L^q(\mathbb R^m), \mathrm L^p(\mathbb R^n) \bigr), \quad
+			\|\mathscr K\| \le M $;
+		\item $ \mathscr K^* \in
+			\mathscr B \bigl( \mathrm L^q(\mathbb R^m), \mathrm L^p(\mathbb R^m) \bigr) $
+			$$ (\mathscr K^* g)(y) = \int\limits_{\mathbb R^n} K^*(y, x) g(x) \di x $$
+			$$ \implies K^*(y, x) = K(x, y) $$
+	\end{enumerate}
+\end{theorem}
+
+\begin{eproof}
+\item Воспользуемся теоремой Фубини:
+	$$ \int\limits_{\R^n} \Bigl( \int\limits_{\R^m} |K(x, y)|^p \di y \Bigr) \di x < +\infty \implies
+	\text{ для \ale \ } x \quad \int\limits_{\R^m} |K(x, y)|^p \di y < +\infty $$
+
+	Возьмём $ f \in \mathrm L^q(\R^m) $ и $ x $ такой, что внутренний интеграл конечен.
+	$$ |(\mathscr Kf)(x)| = \Bigl| \int\limits_{\R^m} K(x, y)f(y) \di y \Bigr|
+	\underset{\text{нер-во Гёльдера}}\le
+	\Bigl( \int\limits_{\R^m}|K(x, y)|^p \di y \Bigr)^{\frac1q} \cdot \|f\|_q $$
+	Возведём в степень $ p $ и проинтегрируем по $ \R^n $:
+	\begin{multline*}
+		\int\limits_{\R^n}|(\mathscr Kf)(x)|^p \di x \le
+		\|f\|_q^p \int\limits_{\R^n} \Bigl( \int\limits_{\R^m}|K(x, y)|^p \di y \Bigr) \di x =
+		M^p \implies \\
+		\implies \|\mathscr Kf\|_p \le M\|f\|_q \quad \forall f \in \mathrm L^q \implies
+		\|\mathscr K\| \le M, \quad \mathscr K \in \mathscr B(\dots)
+	\end{multline*}
+\item $ \mathscr K^* \in \mathscr B \bigl( \mathrm L^q(\R^n), \mathrm L^p(\R^m) \bigr) $
+	$$ g \in \mathrm L^q(\R^n), \quad f \in \mathrm L^q(\R^m) $$
+	\begin{equ}{int_op:1}
+		\Braket{\mathscr K^* g, f} = \Braket{g, \mathscr Kf} =
+		\int\limits_{\R^n}g(x) \Bigl( \int\limits_{\R^m}K(x, y)f(y) \di y \Bigr) \di x
+		\undereq{\text{т. Фубини}} \int\limits_{\R^m}
+		\Bigl( \int\limits_{\R^n} K(x, y) g(x) \di x \Bigr) f(y) \di y
+	\end{equ}
+	$$ \Braket{ \mathscr K^* g, y} \bydef \int\limits_{\R^n} K^*(y, x) g(x) \di x $$
+	$$ \Braket{\mathscr K^* g, f} = \int\limits_{\R^m}
+	\Bigl( \int\limits_{\R^n} K^*(y, x) g(x) \Bigr) f(y) \di y \underimp{\eref{int_op:1}}
+	K^*(y, x) = K(x, y) $$
+\end{eproof}
+
+\section{Существование и простейшие свойства эрмитово"=сопряжённого оператора в гильбертовом
+пространстве}
+
+$ H $ "--- гильбертово, $ \quad T \in \mathscr B(H), \quad y \in H $ "--- фиксирован,
+$ \quad G_y : H \to \Co, \quad x \in H, \quad G_y(x) \coloneq (Tx, y) $
+
+$$ \implies G_y \in \mathscr Lin(H, \Co) $$
+
+Возьмём $ x \in H $.
+$$ |G_y(x)| = \bigl| (Tx, y) \bigr| \le \|Tx\| \cdot \|y\| \le
+\|T\| \cdot \|y\| \cdot \|x\| \implies
+G_y \in H^*, \quad \|G_y\| \le \|T\| \cdot \|y\| $$
+
+Воспользуемся теоремой Рисса:
+$$ \exists ! z \in H : \quad G_y(x) = (x, z), \quad \|z\| = \|G_y\|_{H^*} $$
+
+\TODO{Оформить существование эомитово-сопряжённого}
+
+\begin{definition}
+	$ T^*y \coloneq z $
+\end{definition}
+
+$$ T^* \in \mathscr B(H), \quad \|T^*\| \le \|T\| $$
+
+\begin{properties}
+	$ H $ "--- гильбертово, $ \quad T \in \mathscr B(H) $
+
+	\begin{enumerate}
+		\item $ T^{**} = T $;
+		\item $ T^* \in \mathscr B(H), \quad \|T^*\| = \|T\| $;
+		\item $ \alpha \in \Co, \quad (\alpha T)^* = \ol \alpha T^* $;
+		\item $ T, S \in \mathscr B(H) \implies (T + S)^* = T^* + S^* $;
+		\item $ (TS)^* = S^* T^* $;
+		\item если $ T $ "--- биекция, то $ \exists T^{-1} \in \mathscr B(H), \quad
+			\exists (T^*)^{-1} $, при этом $ (T^*)^{-1} = (T^{-1})^* $.
+	\end{enumerate}
+\end{properties}
+
+\begin{eproof}
+\item $ (Tx, y) = (x, T^*y) $
+	$$ (x, Ty) = \ol{(Ty, x)} = \ol{(y, T^*x)} = (T^*x, y) = (x, T^{**}y) \quad \forall x $$
+	$$ \implies Ty = T^{**}y \quad \forall y \in H $$
+\item $ T^* \in \mathscr B(H), \quad \|T^*\| \le \|T\| \implies
+	\|T^{**}\| \le \|T^*\| \underimp{T^{**} = T} \|T^*\| = \|T\| $
+\item $ \alpha \in \Co $
+	$$ (Tx, y) = (x, T^*y) \implies \bigl( (\alpha T)x, y \bigr) = (x, \ol \alpha T^*y) \implies
+	(\alpha T^*) = \ol \alpha T^* $$
+\item Очевидно.
+\item Очевидно.
+\item $ \exists T^{-1} $
+	$$
+	\begin{rcases}
+		T \cdot T^{-1} = I \underimp{5)} (T^{-1})^* T^* = (I^*) = I \\
+		T^{-1} \cdot T = I \underimp{5)} (T^*) (T^{-1})^* = I
+	\end{rcases} \implies \exists (T^*)^{-1} = (T^{-1})^* $$
+\end{eproof}
+
+\begin{remark}
+	$ X, Y $ "--- банаховы, $ \quad T \in \mathscr B(X, Y), \quad
+	\exists T^{-1} \in \mathscr B(Y, X) $
+
+	$$ \exists (T^*)^{-1} = (T^{-1})^* $$
+\end{remark}
+
+\begin{noproof}
+\end{noproof}
+
+\section{Теорема об интегральном операторе с ядром из \texorpdfstring{$ \mathrm L^2 $}{пространства
+Лебега} и эрмитово-сопряжённом к нему}
+
+\begin{theorem}
+	$ \mathrm L^2(\R^n, \lambda_n), \quad K(x, y) \in \mathrm L^2(\R^{2n}), $
+	$$ M = \Bigl( \int\limits_{\R^n} \int\limits_{\R^n} |K(x, y)|^2 \di x \di y \Bigr)^{\frac12} $$
+	$$ (\mathscr Kf)(x) = \int\limits_{\R^n} K(x, y) f(y) \di y $$
+
+	Тогда
+	\begin{enumerate}
+		\item $ \mathscr K \in \mathscr B \bigl( \mathrm L^2(\R^n) \bigr), \quad
+			\|\mathscr K\| \le M $
+		\item $ \mathscr K^* \in \mathscr B \bigl( \mathrm L^2(\R^n) \bigr) $
+			$$ (\mathscr K^*g)(y) = \int\limits_{\R^n} K^*(y, x) g(x) \di x $$
+			$$ \implies K^*(y, x) = \ol{K(x, y)} $$
+	\end{enumerate}
+\end{theorem}
+
+\begin{eproof}
+\item Так же, как в предыдущей теореме.
+\item Возьмём $ f, g \in \mathrm L^2(\R^n) $.
+	$$ (f, g) = \int\limits_{\R^n} f(x)\ol{g(x)} \di x $$
+	\begin{multline*}
+		(\mathscr K^*g, f) = (g, \mathscr Kf) =
+		\int\limits_{\R^n} g(x) \ol{\int\limits_{\R^n} K(x, y)f(y) \di y} \di x
+		\undereq{\text{т. Фубини}}
+		\int\limits_{\R^n} \Bigl( \int\limits_{\R^n} \ol{K(x, y)} g(x) \Bigr) \ol{f(x)} \di y = \\
+		= \Bigl( \int\limits_{\R^n} \ol{K(x, y)} g(x) \di x, f \Bigr)
+	\end{multline*}
+	$$ \implies (\mathscr K^*g)(y) = \int\limits_{\R^n}\ol{K(x, y)}g(x) \di x \implies
+	K^*(y, x) = \ol{K(x, y)} $$
+\end{eproof}
+
+\section{Теорема об образе и ядре оператора и его сопряжённого.
+Теорема об ортогональном дополнении инвариантного подпространства.
+Самосопряжённый оператор, примеры}
+
+\begin{theorem}
+	$ H $ "--- гильбертово, $ \quad T \in \mathscr B(H) $
+
+	$$ H = (\operatorname{Ker} T) \oplus \ol{T^*(H)} $$
+	($ \ol{(T^*(H))} $ "--- замыкание образа $ T^* $)
+	$$ H = (\operatorname{Ker}T^*) \oplus \ol{T(H)} $$
+\end{theorem}
+
+\begin{undefthm}{Общее наблюдение.}
+	$ L $ "--- подпространство в алгебраическом смысле,
+	$$ M = L^\perp = \Set{x \in H | x \perp y \quad \forall y \in L} $$
+	$$ (\ol L)^\perp = M $$
+
+	$$ \implies H = M \oplus \ol L $$
+\end{undefthm}
+
+\hspace{.5em}
+
+\begin{proof}[теоремы]
+	В качестве $ L $ возьмём $ L = T^*(H) $.
+	Возьмём $ x \in L^\perp $.
+	$$ (x, T^*y) = 0 \iff (Tx, y) = 0 \iff Ty = 0 \iff y \in \operatorname{Ker} M $$
+	$$ \implies \bigl( T^*(H) \bigr)^\perp = \operatorname{Ker}T \implies H =
+	\operatorname{Ker} T \oplus \ol{T^*(H)} $$
+
+	Применим эту формулу к $ T^* $ (учитывая, что $ T^{**} = T $):
+	$$ H = \operatorname{Ker} T^* \oplus \ol{T(H)} $$
+\end{proof}
+
+\begin{definition}
+	$ (X, \|\cdot\|), \quad T \in \mathscr B(X), \quad Y \sub X $ "--- подпространство
+	в алгебраическом смысле
+
+	Будем говорить, что $ Y $ "--- \emph{инвариантное подпространство} для $ T $, если
+	$ T(Y) \sub Y $ (\ie $ T\bigr|_Y \in \mathscr B(Y) $).
+\end{definition}
+
+\begin{remark}[проблема инвариантного подпространства]
+	\hfill
+	\begin{enumerate}
+		\item $ X $ "--- сепарабельно, банахово, $ \quad T \in \mathscr B(X) $
+
+			Существует ли нетривиальное замкнутое инвариантное подпространство?
+
+			Энфло построил пример, доказывающий, что нет.
+		\item $ H $ "--- гильбертово, $ \quad T \in \mathscr B(H) $
+
+			Неизвестно.
+	\end{enumerate}
+\end{remark}
+
+\begin{theorem}
+	$ H $ "--- гильбертово, $ \quad T \in \mathscr B(H), \quad Y $ "--- инвариантное
+	подпространство для $ T $
+
+	$$ Y^\perp \text{ "--- инвариантное подпространство для } T^* $$
+\end{theorem}
+
+\begin{proof}
+	$ z \in Y^\perp, \quad y \in Y $
+	$$ (y, T^*z) = (Ty, z) \undereq{
+		\begin{subarray}{c}
+			Ty \in Y \\
+			z \in Y^\perp
+		\end{subarray}
+	} 0 \implies T^*z \in Y^\perp \implies T^*(Y^\perp) \sub Y^\perp $$
+\end{proof}
+
+\begin{definition}
+	$ H $ "--- гильбертово, $ \quad T \in \mathscr B(H) $
+
+	$ T $ называется \emph{самосопряжённым}, если $ T = T^* $, то есть
+	$ (Tx, y) = (x, Ty) \quad \forall x \in H $.
+\end{definition}
+
+\begin{implication}
+	$ H $ "--- гильбертово, $ \quad T \in \mathscr B(H), \quad T $ "--- самосопряжённый
+
+	Если $ Y \sub H $ инвариантно для $ T $, то $ Y^\perp $ тоже инвариантно.
+\end{implication}
+
+\begin{eg}
+	$ M = \ol M \sub H, \quad M $ "--- подпространство
+	$$ P \text{ "--- ортопроектор на } M \implies P = P^* $$
+\end{eg}
+
+\section{Определение спектра и резольвенты оператора.
+Теорема о свойствах резольвенты}
+
+\begin{definition}
+	$ X $ "--- банахово, $ T \in \mathscr B(X), \quad I $ "--- тождественный оператор, $ \quad
+	\lambda \in \Co $
+
+	Будем говорить, что $ \lambda $ "--- \emph{регулярная точка}, если
+	$ V(\lambda) \coloneq \lambda I - T $ "--- биекция.
+
+	По теореме Банаха об обратном операторе,
+	$$ V^{-1}(\lambda) \in \mathscr B(X) $$
+	$$ R(\lambda, T) = R(\lambda) = V^{-1}(\lambda) $$
+	$ R $ называется \emph{резольвентой}.
+\end{definition}
+
+\begin{note}[касательно терминологии]
+	Рассмотрим уравнение
+	$$ \lambda x - Tx = h, $$
+	где $ h $ "--- дано, $ x $ "--- неизвестные.
+
+	Если $ \forall h \in X \exists ~ x \in X : \quad \lambda x - Tx = h $, то уравнение разрешимо.
+	То есть, $ x = R(\lambda)h $.
+\end{note}
+
+\begin{definition}
+	Множество всех регулярных точек называется \emph{рещольвентным множеством}:
+	$$ \rho(T) = \Set{\lambda \in \Co | \lambda \text{ "--- регулярная}} $$
+\end{definition}
+
+\begin{definition}
+	Множество всех остальных точек назовём \emph{спектром} $ T $:
+	$$ \sigma(T) = \Co \setminus \rho(T) $$
+\end{definition}
+
+\begin{definition}[части спектра]
+	\hfill
+	\begin{enumerate}
+		\item $ \sigma_p(T) $ "--- \emph{точечный спектр}
+			$$ \sigma_p(T) = \Set{\lambda \in \Co | \lambda T - I \text{ не инъекция}} $$
+			Для линейного оператора это означает, что
+			$ X_\lambda = \operatorname{Ker}(\lambda I - T) \ne \Set{0} $.
+			$$ u \ne 0 \in X \implies Tu = \lambda u $$
+			$ u $ "--- собственный вектор $ T $, соответствующий с. ч. $ \lambda $.
+			$ X_\lambda $ "--- собственное подпространство.
+		\item $ \sigma_c(T) $ "--- \emph{непрерывный спектр}
+			$$ \sigma_c(T) = \Set{\lambda \in \Co | \operatorname{Ker}(\lambda I - T) = \Set{0},
+			\quad \ol{V(\lambda)(X)} = X} $$
+			(\ie образ $ V(\lambda) $ всюду плотен в $ X $).
+		\item $ \sigma_r(T) $ "--- \emph{остаточный спектр}
+			$$ \sigma_r(T) = \Set{\lambda \in \Co | \operatorname{Ker}(\lambda I - T) = \Set{0},
+			\quad \ol{V(\lambda)(X)} \subsetneq X} = \sigma \setminus (\sigma_p \cup \sigma_c) $$
+	\end{enumerate}
+\end{definition}
+
+\begin{remark}
+	В конечномерном случае $ \sigma = \sigma_p $.
+\end{remark}
+
+\begin{properties}
+	$ X $ "--- банахово, $ \quad T \in \mathscr B(H) $
+	\begin{enumerate}
+		\item $ \lambda, \mu \in \rho(T) $
+			$$ \implies R(\lambda) R(\mu) = R(\mu) R(\lambda) $$
+		\item \emph{Тождество Гильберта}: $ \lambda, \mu \in \rho(T) $
+			$$ \implies R(\lambda) - R(\mu) = (\mu - \lambda) R(\lambda) R(\mu) $$
+		\item $ \rho(T) $ открыто в $ \Co $
+
+			Кроме того, если $ \mu \in \rho(T) $, то
+			$$ |\lambda - \mu| < \frac1{\|R(\mu)\|} \implies \lambda \in \rho(T) $$
+		\item $ \lambda \in \Co, \quad |\lambda| > \|T\| $
+			$$ \implies \lambda \in \rho(T) $$
+		\item $ R(\lambda) $ "--- непрерывная функция, \ie если $ \mu \in \rho(T) $, то
+			$$ \lim\limits_{\lambda \to \mu}R(\lambda) = R(\mu), \quad
+			\lim\limits_{\lambda \to \infty} R(\lambda) = 0 $$
+		\item $ F \in \bigl( \mathscr B(X) \bigr)^*, \quad \lambda \in \rho(T), \quad
+			g(\lambda) \coloneq F \bigl( R(\lambda) \bigr) $
+			$$ \implies g(\lambda) \text{ аналитична в } \rho(T), \quad
+			\lim\limits_{\lambda \to \infty} g(\lambda) = 0 $$
+	\end{enumerate}
+\end{properties}
+
+\begin{eproof}
+\item $ \lambda, \mu \in \rho(T) $
+	$$ V(\lambda) V(\mu) = (\lambda I - T)(\mu I - T) = V(\mu) V(\lambda) $$
+	$$ \exists \bigl( V(\lambda) \bigr)^{-1}, ~ \bigl( V(\mu) \bigr)^{-1}, \quad
+	R(\lambda) = \bigl( V(\lambda) \bigr)^{-1}, \quad R(\mu) = \bigl( V(\mu) \bigr)^{-1} $$
+	$$ \implies \bigl( V(\mu) \bigr)^{-1} \bigl( V(\lambda) \bigr)^{-1} =
+	\bigl( V(\lambda) \bigr)^{-1} \bigl( V(\mu) \bigr)^{-1} $$
+\item $ \lambda, \mu \in \rho(T) $
+	$$ V(\lambda) - V(\mu) = (\lambda I - T) - (\mu I - T) = (\lambda - \mu) I $$
+
+	Если $ A, B \in \mathscr B(X), \quad \exists A^{-1}, B^{-1} $, то
+	$$ A^{-1} - B^{-1} = A^{-1}(B - A)B^{-1} $$
+
+	Возьмём $ A = V(\lambda), ~ B = V(\mu) $.
+	$$ R(\lambda) - R(\mu) = R(\lambda) \bigl( (\mu - \lambda) I \bigr) R(\mu) =
+	(\mu - \lambda)R(\lambda)R(\mu) $$
+\item Известно, что $ \operatorname{In}(X) $ (множество обратимых операторов) открыто:
+	$$ \exists A^{-1} \quad \|A - B\| < \frac1{\|A^{-1}\|} \implies \exists B^{-1} $$
+	$$ \mu \in \rho(T), \quad A = V(\mu) \implies \exists R(\mu) = \bigl( V(\mu) \bigr)^{-1} $$
+	$$ V(\lambda) - V(\mu) = (\lambda - \mu)I \implies
+	\|V(\lambda) - V(\mu)\| = |\lambda - \mu| $$
+	$$ |\lambda - \mu| < \frac1{\|R(\mu)\|} \implies \|V(\lambda) - V(\mu) \| < \frac1{\|R(\mu)\|}
+	\implies \exists \bigl( V(\lambda) \bigr)^{-1} \implies \lambda \in \rho(T) $$
+\item $ \lambda \in \Co, \quad |\lambda| > \|T\| $
+
+	Рассмотрим оператор
+	\begin{multline*}
+		\Bigl\| \frac1\lambda T \Bigr\| < 1 \underimp{\text{т. об обр. опер., близкого к тожд.}}
+		\exists \Bigl( I - \frac1\lambda T \Bigr)^{-1} \implies \\
+		\implies V(\lambda) = \lambda I - T = \lambda \Bigl( I - \frac1\lambda T \Bigr) \implies
+		\exists R(\lambda) = \bigl( V(\lambda) \bigr)^{-1} =
+		\frac1\lambda \Bigl( I - \frac1\lambda T \Bigr)^{-1}
+	\end{multline*}
+\item $ \mu \in \rho(T) $
+	$$ \lim\limits_{\lambda \to \mu} \bigl( V(\mu) - V(\lambda) \bigr) =
+	\lim\limits_{\lambda \to \mu} (\mu - \lambda) I = 0 $$
+	По теореме об открытости $ \mathrm{In}(A) $,
+	$$ \phi : A \to A^{-1}, \quad A \in \mathrm{In}(X) \implies \phi \text{ непрерывно} $$
+	$$
+	\begin{rcases}
+		\phi \bigl( V(\lambda) \bigr) = V(\lambda) \\
+		\lim\limits_{\lambda \to \mu} V(\lambda) = V(\mu)
+	\end{rcases} \implies \lim\limits_{\lambda \to \mu} R(\lambda) = R(\mu) $$
+
+	Пусть $ |\lambda| > \|T\| $.
+	$$ \lim\limits_{\lambda \to \infty} \Bigl( I - \frac1\lambda T \Bigr) = I $$
+	$$ R(\lambda) = \frac1\lambda \Bigl( I - \frac1\lambda T \Bigr)^{-1} $$
+	По непрерывности,
+	$$ \lim \Bigl( I - \frac1\lambda T \Bigr)^{-1} = I \implies
+	\lim R(\lambda) = 0 $$
+\item $ \mu \in \rho(T), \quad \lambda $ из некоторой окрестности $ \mu $
+	$$ \frac{R(\lambda) - R(\mu)}{\lambda - \mu} \undereq{\text{т-во Гильберта}}
+	\frac{(\mu - \lambda)R(\lambda)R(\mu)}{\lambda - \mu)} = -R(\lambda)R(\mu) \implies
+	\exists \lim\limits_{\lambda \to \mu} \frac{R(\lambda) - R(\mu)}{\lambda - \mu} =
+	- \bigl( R(\mu) \bigr)^2 $$
+
+	Возьмём $ F \in \bigl( \mathscr B(X) \bigr)^*, \quad F : \mathscr B(X) \to \Co $.
+	Рассмотрим функцию $ g(\lambda) = F \bigl( R(\lambda) \bigr) $ при $ \lambda \in \rho(T) $.
+	$$ \lim\limits_{\lambda \to \mu} \frac{g(\lambda) - g(\mu)}{\lambda - \mu} =
+	\lim\limits_{\lambda \to \mu} \frac{ F \bigl( R(\lambda) \bigr) - F \bigl( R(\mu) \bigr)}
+	{\lambda - \mu} \undereq{\text{лин. } F}
+	\lim F \Bigl( \frac{R(\lambda) - R(\mu)}{\lambda - \mu} \Bigr) \undereq{\text{непр. } F}
+	-F \Bigl( \bigl( R(\mu) \bigr)^2 \Bigr) $$
+	То есть, $ \exists g'(\mu) \quad \forall \mu \in \rho(T) $.
+
+	$$ \lim\limits_{\mu \to \infty} R(\mu) = 0 \underimp{\text{непр. } F}
+	\lim\limits_{\mu \to \infty} F \Bigl( \bigl( R(\mu) \bigr)^2 \Bigr) = 0 $$
+\end{eproof}
+
+\section{Теорема о компактности и непустоте спектра.
+Формула для спектрального радиуса.
+Следствие о спектре сопряжённого оператора}
+
+\begin{implication}
+	$ X $ "--- банахово, $ \quad T \in \mathscr B(X) $
+
+	$$ \sigma(T) \text{ "--- компакт}, \quad \sigma(T) \ne \emptyset $$
+\end{implication}
+
+\begin{eproof}
+\item Компактность
+	$$ \rho(T) \text{ открыто } \implies \sigma(T) \text{ замкнуто } $$
+	$$ |\lambda| > \|T\| \implies \lambda \in \rho(T) $$
+	Значит,
+	$$ \lambda \in \sigma(T) \implies |\lambda| \le \|T\| $$
+	То есть,
+	$$ \sigma(T) \sub \Set{\lambda \in \Co | {} |\lambda| \le \|T\|} \implies
+	\sigma(T) \text{ ограничено } \implies \sigma(T) \text{ "--- компакт} $$
+\item Непустота
+
+	\textbf{Пусть} $ \sigma(T) $ пусто.
+	Тогда $ \rho(T) = \Co $, то есть
+	$$ \forall F \in \bigl( \mathscr B(X) \bigr)^* \quad g(\lambda) = F \bigl( R(\lambda) \bigr)
+	\text{ "--- аналитическая в } \Co \text{ (целая)} $$
+
+	$$ V(0) = -T \implies \exists T^{-1} \in \mathscr B(X) \underimp{\text{сл. из т. Хана"--~Банаха}}
+	\exists F \in \bigl( \mathscr B(X) \bigr) : \quad g(0) \ne 0 $$
+	Выберем $ g(\lambda) = F \bigl( R(\lambda) \bigr) $.
+
+	Таким образом, $ g(z) $ "--- целая, $ g $ ограничена.
+	Значит, по теореме Лиувилля, $ g \equiv \const $ "--- \contra с $ \lim\limits_{g \to 0} = 0 $.
+\end{eproof}
+
+\begin{eg}
+	$ Ix = x $
+	$$ \sigma(I) = \Set{1} = \sigma_p(I) $$
+
+	$$ (\lambda I - I) = (\lambda - 1)I \implies R(\lambda) = \frac1{\lambda - 1}I \quad
+	\forall \lambda \ne 1 $$
+\end{eg}
+
+\begin{theorem}[спектр и резольвента сопряжённого оператора]
+	\hfill
+	\begin{enumerate}
+		\item $ X $ "--- банахово, $ \quad T \in \mathscr B(X) $
+
+			$$ \implies \sigma(T^*) = \sigma(T) $$
+
+			Если $ \lambda \in \rho(T) $, то
+			$$ \bigl( R(\lambda, T) \bigr)^* = R(\lambda, T^*) $$
+		\item $ H $ "--- гильбертово, $ \quad T \in \mathscr B(H), \quad
+			T $ "--- эрмитово-сопряжённый
+
+			$$ \implies \sigma(T^*) = \Set{\lambda | \ol \lambda \in \sigma(T)} $$
+
+			Если $ \lambda \in \rho(T) $, то
+			$$ R(\lambda, T^*) = \bigl( R(\ol \lambda, T) \bigr)^* $$
+	\end{enumerate}
+\end{theorem}
+
+\begin{eproof}
+\item $ X $ "--- банахово, $ \quad \lambda \in \rho(T) $
+	$$ V(\lambda) = \lambda I - T \implies \bigl( V(\lambda) \bigr)^* = \lambda I - T^* $$
+	$$ \Bigl( \bigl( V(\lambda) \bigr)^{-1} \Bigr)^* =
+	\Bigl( \bigl( V(\lambda) \bigr)^* \Bigr)^{-1} $$
+\item $ X $ "--- гильбертово
+	$$ \bigl( V(\lambda) \bigr)^* = \ol \lambda I - T^* $$
+\end{eproof}
+
+\section{Компактные операторы.
+Компактность оператора конечного ранга.
+Размерность замкнутого подпространства образа компактного оператора.
+Следствия}
+
+\begin{definition}
+	$ X, Y $ "--- банаховы, $ \quad T \in \mathscr Lin(X, Y) $
+
+	$ T $ называется \emph{компактным}, если $ T \bigl( \mathtt B_1(0) \bigr) $ относительно
+	компактен.
+\end{definition}
+
+\begin{notation}
+	$ \mathrm{Com}(X, Y) $ "--- множество компактных операторов.
+\end{notation}
+
+\begin{props}
+	\item $ \mathrm{Com}(X, Y) \sub \mathscr B(X, Y) $
+	\item $ T \in \mathrm Com(X, Y), \quad A \sub X $ ограничено
+		$$ T(A) \text{ относительно компактно} $$
+	\item $ T \in \mathrm{Com}(X, Y) $ \textbf{тогда и только тогда}, когда
+		$$ \Set{x_n \in X}_{n = 1}^\infty \text{ "--- ограниченная } \implies \exists
+		\Set{n_k}_{k = 1}^\infty : \quad \exists \lim\limits_{k \to \infty}T_{n_k} \in Y $$
+\end{props}
+
+\begin{eproof}
+\item $ T \in \mathrm{Com}(X, Y) $
+
+	Обозначим $ B = \mathtt B_1^X(0) $.
+	$$ \implies \ol{T(B)} \text{ "--- компакт } \implies T(B) \text{ ограничено } \implies T \in
+	\mathscr B(X, Y) $$
+\end{eproof}
+
+\begin{definition}
+	$ X, Y $ "--- банаховы, $ T \in \mathscr B(X, Y) $
+
+	Если $ \dim T(X) \le +\infty $, то $ T $ называется \emph{оператором конечного ранга}.
+\end{definition}
+
+\begin{eg}
+	$ X, Y $ "--- банаховы, $ \quad f_1, \dots, f_n \in X^*, \quad y_1, \dots, y_n \in Y $
+
+	Для $ x \in X $ определим
+	$$ Tx = \sum_{j = 1}^n f_j(x) y_j $$
+
+	$$ T(x) \sub \mathscr L \Set{y_j}_{j = 1}^n \implies \dim T(X) \le n \implies
+	T \text{ "--- конечного ранга} $$
+
+	Все операторы конечного ранга имеют такой вид.
+\end{eg}
+
+\begin{statement}
+	$ X, Y $ "--- банаховы, $ \quad T $ "--- конечного ранга
+
+	$$ T \in \mathrm{Com}(X, Y) $$
+\end{statement}
+
+\begin{proof}
+	$ B \coloneq \mathtt B_1^X(0) $
+	\begin{multline*}
+		T(B) \sub T(X) \implies T(B) \text{ "--- ограниченное множество в конечномерном пр-ве }
+		\implies \\
+		\implies T(B) \text{ относительно компактно}
+	\end{multline*}
+\end{proof}
+
+\begin{theorem}
+	$ X, Y $ "--- банаховы, $ \quad T \in \mathrm{Com}(X, Y), \quad L \sub T(X) $ "--- замкнутое
+	подпространство
+
+	$$ \dim L < +\infty $$
+\end{theorem}
+
+\begin{iproof}
+\item $ T(X) $ "--- замкнутое подпространство $ Y $
+	\begin{multline*}
+		T \in \mathscr B(X, T(X)), \quad T(X) \text{ "--- банахово } \underimp{\text{т. Банаха об
+		откр. отобр.}} T \text{ открыто } \implies \\
+		\exists r > 0 : \quad \mathtt B_r^{T(x)}(0) \sub \underbrace{T(B)}_{\text{отн. комп.}}
+		\implies \mathtt B_r^{T(x)}(0) \text{ относительно компактно } \underimp{\text{т. Рисса}}
+		\dim T(X) < +\infty
+	\end{multline*}
+\item $ L \sub T(X) $ "--- замкнутое подпространство
+
+	Обозначим $ X_1 = T^{-1}(L) $ (прообраз)
+	$$ T \in \mathscr B(X, Y) \underimp{L \text{ замкнуто}} T^{-1}(L) \text{ замкнуто в } X \implies
+	X_1 \text{ замкнуто } \implies X_1 \text{ "--- банахово} $$
+	По первой части доказательства
+	$$ T(x_1) = L \implies \dim L < +\infty $$
+\end{iproof}
+
+\TODO{Следствия?}
+
+\section{Теорема об арифметических операциях с компактными операторами.
+Предел компактных операторов.
+Компактность эрмитово"=сопряжённого оператора}
+
+\begin{theorem}
+	\hfill
+	\begin{enumerate}
+		\item $ X, Y $ "--- банаховы пространства
+			$$ \mathrm{Com}(X, Y) \text{ "--- замкнутое подпространство } \mathscr B(X, Y) $$
+		\item $ X, Y, Z $ "--- банаховы, $ \quad X \xrightarrow T Y \xrightarrow S Z $
+			\begin{enumerate}
+				\item $ T \in \mathrm{Com}(X, Y), \quad S \in \mathscr B(Y, Z) $
+					$$ ST \in \mathrm{Com}(X, Z) $$
+				\item $ T \in \mathscr B(X, Y), \quad S \in \mathrm{Com}(Y, Z) $
+					$$ ST \in \mathrm{Com}(X, Z) $$
+			\end{enumerate}
+	\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+	Обозначим $ B = \mathtt B_1^X(0) $.
+	\begin{enumerate}
+		\item
+			\begin{itemize}
+				\item $ \alpha \in \Co, \quad T \in \mathrm{Com}(X, Y) \implies
+					\alpha T \in \mathrm{Com}(X, Y) $ "--- очевидно
+				\item Возьмём $ T, S \in \mathrm{Com}(X, Y) $.
+
+					$ T(B) $ относительно компактно $ \implies T(B) $ вполне ограничено.
+					Возьмём $ \eps > 0 $ и рассмотрим $ \eps $-сети:
+					$$ \exists E \sub Y \text{ "--- конечная $ \eps $-сеть для } T(B) $$
+					$$ \exists F \sub Y \text{ "--- конечная $ \eps $-сеть для } S(B) $$
+					\begin{multline*}
+						E + F = \Set{e + f | e \in E, ~ f \in F} \text{ "--- конечное, $ 2\eps $-сеть для }
+						T(B) + S(B) \implies \\
+						\implies T(B) + S(B) \text{ относительно компактно}
+					\end{multline*}
+					$$ (T + S)(B) \sub T(B) + S(B) \implies (T + S)(B) \text{ относительно компактно}
+					\implies T + S \in \mathrm{Com}(X, Y) $$
+				\item $ \Set{T_n \in \mathrm{Com}(X, Y)}_{n = 1}^\infty, \quad
+					\lim\limits_{n \to \infty}\|T_n - T\| = 0 $
+
+					Возьмём $ \eps > 0 $.
+					$$ \exists n \in \N : \quad \|T - T_n\| < \eps $$
+					При этом, $ T_n(B) $ относительно компактно.
+					$$ \implies \exists E \text{ "--- конечная $ \eps $-сеть для } T_n(B) $$
+
+					Проверим, что $ E $ "--- $ \eps $-сеть для $ T(B) $.
+					Возьмём $ x \in B $.
+					$$ \exists e \in E : \quad \|T_nx - e\| < \eps $$
+					$$ \|Tx - e\| \trile \|Tx - T_nx\| + \|T_nx - e\| \le
+					\underbrace{\|T - T_n\|}_{< \eps} \cdot \underbrace{\|x\|}_{< 1} + \eps <
+					2\eps $$
+					Значит, $ T(B) $ вполне ограничено и относительно компактно.
+			\end{itemize}
+		\item $ X, Y, Z $
+			\begin{enumerate}
+				\item $ T \in \mathrm{Com}(X, Y) $
+					$$ T(B) \text{ относительно компактно }, \quad S \in \mathscr B(Y, Z) $$
+					$$ \underimp{\text{непр. } S} S \bigl( T(B) \bigr)
+					\text{ относительно компактно} \implies ST \in \mathrm{Com}(X, Z) $$
+				\item $ T \in \mathscr B(X, Y) $
+					$$ \implies T(B) \text{ ограничено}, \quad S \in \mathrm{Com}(X, Y) $$
+					$$ \implies S \bigl( T(B) \bigr) \text{ относительно компактно} $$
+			\end{enumerate}
+	\end{enumerate}
+\end{proof}
+
+\begin{implication}
+	$ X $ "--- банахово
+
+	Тогда $ \mathrm{Com}(X) $ "--- \emph{двусторонний замкнутый идеал алгебры } $ \mathscr B(X) $.
+\end{implication}
+
+\TODO{Предел компактных операторов}
+
+\begin{theorem}
+	$ H $ "--- гильбертово
+	$$ T \in \mathrm{Com}(H) \iff T^* \in \mathrm{Com}(H) $$
+	($ T^* $ "--- эрмитово сопряжённый)
+\end{theorem}
+
+\begin{iproof}
+\item $ T \in \mathrm{Com}(H) $
+
+	Возьмём $ x \in H $.
+	\begin{equ}{comp_dual:1}
+		\|T^*x\|^2 = (T^*x, T^*x) = (TT^*x, x) \underset{\text{К"--~Б}}\le \|TT^*x\| \cdot \|x\|
+	\end{equ}
+
+	Возьмём $ \Set{x_n \in H}_{n = 1}^\infty $ такую, что
+	$$ \exists M > 0 : \quad \|x_n\| \le \quad \forall n \in \N $$
+
+	Проверим, что $ \exists \Set{n_k} : \quad \exists \lim T^*x_{n_k} $.
+	\begin{multline*}
+		\begin{rcases}
+			T \in \mathrm{Com}(H) \\
+			T^* \in \mathscr B(H)
+		\end{rcases} \implies TT^* \in \mathrm{Com}(H) \implies \exists \Set{n_k} : \quad
+		\exists \lim TT^*x_{n_k} \implies \\
+		\implies \Set{TT^*x_{n_k}} \text{ фундаментальна}
+	\end{multline*}
+	\begin{multline*}
+		\|T^*x_{n_k} - T^*x_{n_j}\|^2 = \bigl\| T^*(x_{n_k} - x_{n_j}) \bigr\|^2
+		\underset{\eref{comp_dual:1}}\le
+		\underbrace{\|(TT^*)(x_{n_k}) - TT^*x_{n_j}\|}_{\underarr{k, j \to \infty} 0} \cdot
+		\underbrace{\|x_{n_k} - x_{n_j}\|}_{\le 2M} \implies \\
+		\implies \Set{T^*x_{n_k}} \text{ фундаментальна } \implies \exists \lim T^*x_{n_k}
+		\implies T^* \in \mathrm{Com}(H)
+	\end{multline*}
+\item $ T^* \in \mathrm{Com}(H) \implies T = T^{**} \in \mathrm{Com}(H) $
+\end{iproof}
+
+\begin{remark}
+	$ X, Y $ "--- банаховы
+
+	$$ T \in \mathrm{Com}(X, Y) \iff T^* \in \mathrm{Com}(Y^*, X^*) $$
+\end{remark}
+
+\begin{noproof}
+\end{noproof}
+
+\section{Конечность числа линейно-независимых собственных векторов компактного оператора,
+соответствующих собственным числам, модули которых равномерно отделены от нуля.
+Следствия}
+
+\begin{remark}[воспоминания из алгебры]
+	$ X $ "--- линейное пространство, $ \quad T \in \mathscr Lin(X), \quad
+	\Set{\lambda_j}_{j = 1}^n $ "--- с. ч., \\
+	$ Tx_j = \lambda_j x_j, \quad \lambda_j \ne \lambda_k, \quad x_j $ "--- с. в. ($ x_j \ne 0 $)
+
+	$$ \implies \Set{x_j} \text{ ЛНЗ} $$
+\end{remark}
+
+\begin{theorem}
+	$ X $ "--- банахово, $ \quad T \in \mathrm{Com}(X), \quad \lambda \in \sigma_p(T) $ "--- с. ч.,
+	$ \quad X_\lambda = \operatorname{Ker}(\lambda I - T) $ "--- собств. подпр-во, \\
+	$ \delta > 0 $
+
+	$$ \sum_{
+		\begin{subarray}{c}
+			\lambda \in \sigma_p(T) \\
+			|\lambda| \ge \delta
+		\end{subarray}
+	} \dim(X_\lambda) < +\infty $$
+
+	То есть, число линейно-независимых собственных векторов $ T $, соответствующих собственным
+	числам $ \lambda $, таких, что $ |\lambda| \ge \delta $, конечно.
+\end{theorem}
+
+\begin{proof}
+	\textbf{Пусть} $ \set{x_n}_{n = 1}^\infty $ "--- ЛНЗ с. в.:
+	$$ Tx_n = \lambda_n x_n, \quad |\lambda_n| \ge \delta $$
+
+	Рассмотрим последовательность подпространств:
+	$$ L_n = \mathscr L\Set{x_j}_{j = 1}^n, \quad L_n \subsetneq L_{n + 1} $$
+	$$ \underimp{\text{лемма Рисса}} \exists \Set{y_n}_{n = 1}^\infty : \quad \|y_n\| = 1, \quad
+	\rho(y_{n + 1}, L_n) = \inf\limits_{x \in L_n} \|y_{n + 1} - x\| \ge \frac12 $$
+	(\as $ \dim L_n = n $, то $ \exists y_{n + 1} : \rho(y_{n + 1}, L_n) = 1 $)
+
+	Проверим, что $ \|Ty_n - Ty_m\| \ge \frac\delta2 $.
+	Тогда не будет существовать фундаментальной подпоследовательности $ \Set{Ty_n} $, а значит,
+	и последовательности $ \Set{n_k} $ такой, что $ \exists \lim T y_{n_k} $ "--- \contra с $ T \in
+	\mathrm{Com}(X) $.
+
+	Пусть $ y_n \in L_n, \quad y_n \notin L_{n - 1} $.
+	Тогда $ y_n = \alpha n x_n + u_n, \quad \alpha_n \ne 0, ~ u_n \in L_{n - 1} $.
+	$$ Tx_n = \lambda_n x_n \implies Ty_n = \alpha_n \lambda_n x_n + Tu_n =
+	\lambda_n(\alpha_n x_n + u_n) -
+	\underbrace{\lambda_n u_n + Tu_n}_{ \eqqcolon v_n \in L_{n - 1}} = \lambda_ny_n + v_n $$
+
+	Пусть $ n > m $.
+	$$ Ty_m \in L_n \sub L_{n - 1} $$
+	$$ \|Ty_n - Ty_m\| = \|\lambda_ny_n + v_n - Ty_m\| =
+	|\lambda_n| \Bigl\| y_n - \underbrace{\frac1{\lambda_n}(-v_n + Ty_m)}_{\in L_{n - 1}} \Bigr\|
+	\ge \frac \delta 2 $$
+	Значит, последовательность $ y_n $ не содержит фундаментальных подпоследовательностей.
+\end{proof}
+
+\begin{implication}
+	$ T \in \mathrm{Com} $
+	\begin{enumerate}
+		\item $ \delta > 0 $
+
+			$$ \bigl|\Set{\lambda \in \sigma_p(T) | {} |\lambda| \ge \delta}\bigr| < +\infty $$
+		\item $ \lambda \in \sigma_p(T), \quad \lambda \ne 0, \quad
+			X_\lambda = \operatorname{Ker}(\lambda I - T) $
+
+			$$ \dim X_\lambda <+\infty $$
+		\item $ N $ "--- число собственных чисел.
+
+			Тогда
+			\begin{enumerate}
+				\item $ 0 \le N \le +\infty $ (\ie $ \sigma_p(T) $ не более, чем счётно);
+				\item если $ N = +\infty $, то $ \lim\limits_{n \to \infty} \lambda_n = 0 $.
+			\end{enumerate}
+
+			Их можно занумеровать в порядке убывания модулей.
+	\end{enumerate}
+\end{implication}
+
+\begin{eproof}
+\item Очевидно.
+\item Очевидно.
+\item $ E_n \coloneq \Set{\lambda \in \sigma_n(T) | {} |\lambda| \ge \frac1n}, \quad |E_n| <+\infty $
+	$$ \sigma_p(T) \setminus \Set{0} = \bigcup_{n = 1}^\infty E_n \implies
+	\sigma_p(T) \text{ не более, чем счётно} $$
+	$$ \forall \delta > 0 \quad \Set{\lambda \in \sigma_p(T) | {} |\lambda| > \delta}
+	\text{ конечно } \implies \lim\limits_{n \to \infty}\lambda_n = 0 $$
+\end{eproof}
+
+\begin{remark}
+	$ 0 \in \sigma_p(T) \iff \operatorname{Ker} T \ne \Set{0} \iff T $ не инъекция.
+
+	Если $ T \in \mathrm{Com}(X), \quad \dim X = +\infty $, то $ 0 \in \sigma(T) $.
+\end{remark}
+
+\begin{proof}
+	$$ 0 \in \rho(T) \iff \exists V(0) = -T, \quad \exists T^{-1} \implies T(X) = X
+	\underimp{T \in \mathrm{Com}(X)} \dim X <+\infty $$
+\end{proof}

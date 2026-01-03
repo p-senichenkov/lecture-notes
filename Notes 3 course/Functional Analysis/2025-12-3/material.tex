@@ -1,0 +1,262 @@
+\chapter{Линейные функционалы}
+
+\section{Эрмитово-сопряжённый оператор}
+
+\subsection{Теорема о ядре и образе оператора и его сопряжённого}
+
+\begin{theorem}
+	$ H $ "--- гильбертово, $ \quad T \in \mathscr B(H), \quad Y $ "--- инвариантное
+	подпространство для $ T $
+
+	$$ Y^\perp \text{ "--- инвариантное подпространство для } T^* $$
+\end{theorem}
+
+\begin{proof}
+	$ z \in Y^\perp, \quad y \in Y $
+	$$ (y, T^*z) = (Ty, z) \undereq{
+		\begin{subarray}{c}
+			Ty \in Y \\
+			z \in Y^\perp
+		\end{subarray}
+	} 0 \implies T^*z \in Y^\perp \implies T^*(Y^\perp) \sub Y^\perp $$
+\end{proof}
+
+\begin{definition}
+	$ H $ "--- гильбертово, $ \quad T \in \mathscr B(H) $
+
+	$ T $ называется \emph{самосопряжённым}, если $ T = T^* $, то есть
+	$ (Tx, y) = (x, Ty) \quad \forall x \in H $.
+\end{definition}
+
+\begin{implication}
+	$ H $ "--- гильбертово, $ \quad T \in \mathscr B(H), \quad T $ "--- самосопряжённый
+
+	Если $ Y \sub H $ инвариантно для $ T $, то $ Y^\perp $ тоже инвариантно.
+\end{implication}
+
+\begin{eg}
+	$ M = \ol M \sub H, \quad M $ "--- подпространство
+	$$ P \text{ "--- ортопроектор на } M \implies P = P^* $$
+\end{eg}
+
+\section{Спектр оператора}
+
+\begin{definition}
+	$ X $ "--- банахово, $ T \in \mathscr B(X), \quad I $ "--- тождественный оператор, $ \quad
+	\lambda \in \Co $
+
+	Будем говорить, что $ \lambda $ "--- \emph{регулярная точка}, если
+	$ V(\lambda) \coloneq \lambda I - T $ "--- биекция.
+
+	По теореме Банаха об обратном операторе,
+	$$ V^{-1}(\lambda) \in \mathscr B(X) $$
+	$$ R(\lambda, T) = R(\lambda) = V^{-1}(\lambda) $$
+	$ R $ называется \emph{резольвентой}.
+\end{definition}
+
+\begin{note}[касательно терминологии]
+	Рассмотрим уравнение
+	$$ \lambda x - Tx = h, $$
+	где $ h $ "--- дано, $ x $ "--- неизвестные.
+
+	Если $ \forall h \in X \exists ~ x \in X : \quad \lambda x - Tx = h $, то уравнение разрешимо.
+	То есть, $ x = R(\lambda)h $.
+\end{note}
+
+\begin{definition}
+	Множество всех регулярных точек называется \emph{рещольвентным множеством}:
+	$$ \rho(T) = \Set{\lambda \in \Co | \lambda \text{ "--- регулярная}} $$
+\end{definition}
+
+\begin{definition}
+	Множество всех остальных точек назовём \emph{спектром} $ T $:
+	$$ \sigma(T) = \Co \setminus \rho(T) $$
+\end{definition}
+
+\begin{definition}[части спектра]
+	\hfill
+	\begin{enumerate}
+		\item $ \sigma_p(T) $ "--- \emph{точечный спектр}
+			$$ \sigma_p(T) = \Set{\lambda \in \Co | \lambda T - I \text{ не инъекция}} $$
+			Для линейного оператора это означает, что
+			$ X_\lambda = \operatorname{Ker}(\lambda I - T) \ne \Set{0} $.
+			$$ u \ne 0 \in X \implies Tu = \lambda u $$
+			$ u $ "--- собственный вектор $ T $, соответствующий с. ч. $ \lambda $.
+			$ X_\lambda $ "--- собственное подпространство.
+		\item $ \sigma_c(T) $ "--- \emph{непрерывный спектр}
+			$$ \sigma_c(T) = \Set{\lambda \in \Co | \operatorname{Ker}(\lambda I - T) = \Set{0},
+			\quad \ol{V(\lambda)(X)} = X} $$
+			(\ie образ $ V(\lambda) $ всюду плотен в $ X $).
+		\item $ \sigma_r(T) $ "--- \emph{остаточный спектр}
+			$$ \sigma_r(T) = \Set{\lambda \in \Co | \operatorname{Ker}(\lambda I - T) = \Set{0},
+			\quad \ol{V(\lambda)(X)} \subsetneq X} = \sigma \setminus (\sigma_p \cup \sigma_c) $$
+	\end{enumerate}
+\end{definition}
+
+\begin{remark}
+	В конечномерном случае $ \sigma = \sigma_p $.
+\end{remark}
+
+\subsection{Свойства резольвенты}
+
+\begin{properties}
+	$ X $ "--- банахово, $ \quad T \in \mathscr B(H) $
+	\begin{enumerate}
+		\item $ \lambda, \mu \in \rho(T) $
+			$$ \implies R(\lambda) R(\mu) = R(\mu) R(\lambda) $$
+		\item \emph{Тождество Гильберта}: $ \lambda, \mu \in \rho(T) $
+			$$ \implies R(\lambda) - R(\mu) = (\mu - \lambda) R(\lambda) R(\mu) $$
+		\item $ \rho(T) $ открыто в $ \Co $
+
+			Кроме того, если $ \mu \in \rho(T) $, то
+			$$ |\lambda - \mu| < \frac1{\|R(\mu)\|} \implies \lambda \in \rho(T) $$
+		\item $ \lambda \in \Co, \quad |\lambda| > \|T\| $
+			$$ \implies \lambda \in \rho(T) $$
+		\item $ R(\lambda) $ "--- непрерывная функция, \ie если $ \mu \in \rho(T) $, то
+			$$ \lim\limits_{\lambda \to \mu}R(\lambda) = R(\mu), \quad
+			\lim\limits_{\lambda \to \infty} R(\lambda) = 0 $$
+		\item $ F \in \bigl( \mathscr B(X) \bigr)^*, \quad \lambda \in \rho(T), \quad
+			g(\lambda) \coloneq F \bigl( R(\lambda) \bigr) $
+			$$ \implies g(\lambda) \text{ аналитична в } \rho(T), \quad
+			\lim\limits_{\lambda \to \infty} g(\lambda) = 0 $$
+	\end{enumerate}
+\end{properties}
+
+\begin{eproof}
+\item $ \lambda, \mu \in \rho(T) $
+	$$ V(\lambda) V(\mu) = (\lambda I - T)(\mu I - T) = V(\mu) V(\lambda) $$
+	$$ \exists \bigl( V(\lambda) \bigr)^{-1}, ~ \bigl( V(\mu) \bigr)^{-1}, \quad
+	R(\lambda) = \bigl( V(\lambda) \bigr)^{-1}, \quad R(\mu) = \bigl( V(\mu) \bigr)^{-1} $$
+	$$ \implies \bigl( V(\mu) \bigr)^{-1} \bigl( V(\lambda) \bigr)^{-1} =
+	\bigl( V(\lambda) \bigr)^{-1} \bigl( V(\mu) \bigr)^{-1} $$
+\item $ \lambda, \mu \in \rho(T) $
+	$$ V(\lambda) - V(\mu) = (\lambda I - T) - (\mu I - T) = (\lambda - \mu) I $$
+
+	Если $ A, B \in \mathscr B(X), \quad \exists A^{-1}, B^{-1} $, то
+	$$ A^{-1} - B^{-1} = A^{-1}(B - A)B^{-1} $$
+
+	Возьмём $ A = V(\lambda), ~ B = V(\mu) $.
+	$$ R(\lambda) - R(\mu) = R(\lambda) \bigl( (\mu - \lambda) I \bigr) R(\mu) =
+	(\mu - \lambda)R(\lambda)R(\mu) $$
+\item Известно, что $ \operatorname{In}(X) $ (множество обратимых операторов) открыто:
+	$$ \exists A^{-1} \quad \|A - B\| < \frac1{\|A^{-1}\|} \implies \exists B^{-1} $$
+	$$ \mu \in \rho(T), \quad A = V(\mu) \implies \exists R(\mu) = \bigl( V(\mu) \bigr)^{-1} $$
+	$$ V(\lambda) - V(\mu) = (\lambda - \mu)I \implies
+	\|V(\lambda) - V(\mu)\| = |\lambda - \mu| $$
+	$$ |\lambda - \mu| < \frac1{\|R(\mu)\|} \implies \|V(\lambda) - V(\mu) \| < \frac1{\|R(\mu)\|}
+	\implies \exists \bigl( V(\lambda) \bigr)^{-1} \implies \lambda \in \rho(T) $$
+\item $ \lambda \in \Co, \quad |\lambda| > \|T\| $
+
+	Рассмотрим оператор
+	\begin{multline*}
+		\Bigl\| \frac1\lambda T \Bigr\| < 1 \underimp{\text{т. об обр. опер., близкого к тожд.}}
+		\exists \Bigl( I - \frac1\lambda T \Bigr)^{-1} \implies \\
+		\implies V(\lambda) = \lambda I - T = \lambda \Bigl( I - \frac1\lambda T \Bigr) \implies
+		\exists R(\lambda) = \bigl( V(\lambda) \bigr)^{-1} =
+		\frac1\lambda \Bigl( I - \frac1\lambda T \Bigr)^{-1}
+	\end{multline*}
+\item $ \mu \in \rho(T) $
+	$$ \lim\limits_{\lambda \to \mu} \bigl( V(\mu) - V(\lambda) \bigr) =
+	\lim\limits_{\lambda \to \mu} (\mu - \lambda) I = 0 $$
+	По теореме об открытости $ \mathrm{In}(A) $,
+	$$ \phi : A \to A^{-1}, \quad A \in \mathrm{In}(X) \implies \phi \text{ непрерывно} $$
+	$$
+	\begin{rcases}
+		\phi \bigl( V(\lambda) \bigr) = V(\lambda) \\
+		\lim\limits_{\lambda \to \mu} V(\lambda) = V(\mu)
+	\end{rcases} \implies \lim\limits_{\lambda \to \mu} R(\lambda) = R(\mu) $$
+
+	Пусть $ |\lambda| > \|T\| $.
+	$$ \lim\limits_{\lambda \to \infty} \Bigl( I - \frac1\lambda T \Bigr) = I $$
+	$$ R(\lambda) = \frac1\lambda \Bigl( I - \frac1\lambda T \Bigr)^{-1} $$
+	По непрерывности,
+	$$ \lim \Bigl( I - \frac1\lambda T \Bigr)^{-1} = I \implies
+	\lim R(\lambda) = 0 $$
+\item $ \mu \in \rho(T), \quad \lambda $ из некоторой окрестности $ \mu $
+	$$ \frac{R(\lambda) - R(\mu)}{\lambda - \mu} \undereq{\text{т-во Гильберта}}
+	\frac{(\mu - \lambda)R(\lambda)R(\mu)}{\lambda - \mu)} = -R(\lambda)R(\mu) \implies
+	\exists \lim\limits_{\lambda \to \mu} \frac{R(\lambda) - R(\mu)}{\lambda - \mu} =
+	- \bigl( R(\mu) \bigr)^2 $$
+
+	Возьмём $ F \in \bigl( \mathscr B(X) \bigr)^*, \quad F : \mathscr B(X) \to \Co $.
+	Рассмотрим функцию $ g(\lambda) = F \bigl( R(\lambda) \bigr) $ при $ \lambda \in \rho(T) $.
+	$$ \lim\limits_{\lambda \to \mu} \frac{g(\lambda) - g(\mu)}{\lambda - \mu} =
+	\lim\limits_{\lambda \to \mu} \frac{ F \bigl( R(\lambda) \bigr) - F \bigl( R(\mu) \bigr)}
+	{\lambda - \mu} \undereq{\text{лин. } F}
+	\lim F \Bigl( \frac{R(\lambda) - R(\mu)}{\lambda - \mu} \Bigr) \undereq{\text{непр. } F}
+	-F \Bigl( \bigl( R(\mu) \bigr)^2 \Bigr) $$
+	То есть, $ \exists g'(\mu) \quad \forall \mu \in \rho(T) $.
+
+	$$ \lim\limits_{\mu \to \infty} R(\mu) = 0 \underimp{\text{непр. } F}
+	\lim\limits_{\mu \to \infty} F \Bigl( \bigl( R(\mu) \bigr)^2 \Bigr) = 0 $$
+\end{eproof}
+
+\subsection{Компактность и непустота спектра}
+
+\begin{implication}
+	$ X $ "--- банахово, $ \quad T \in \mathscr B(X) $
+
+	$$ \sigma(T) \text{ "--- компакт}, \quad \sigma(T) \ne \emptyset $$
+\end{implication}
+
+\begin{eproof}
+\item Компактность
+	$$ \rho(T) \text{ открыто } \implies \sigma(T) \text{ замкнуто } $$
+	$$ |\lambda| > \|T\| \implies \lambda \in \rho(T) $$
+	Значит,
+	$$ \lambda \in \sigma(T) \implies |\lambda| \le \|T\| $$
+	То есть,
+	$$ \sigma(T) \sub \Set{\lambda \in \Co | {} |\lambda| \le \|T\|} \implies
+	\sigma(T) \text{ ограничено } \implies \sigma(T) \text{ "--- компакт} $$
+\item Непустота
+
+	\textbf{Пусть} $ \sigma(T) $ пусто.
+	Тогда $ \rho(T) = \Co $, то есть
+	$$ \forall F \in \bigl( \mathscr B(X) \bigr)^* \quad g(\lambda) = F \bigl( R(\lambda) \bigr)
+	\text{ "--- аналитическая в } \Co \text{ (целая)} $$
+
+	$$ V(0) = -T \implies \exists T^{-1} \in \mathscr B(X) \underimp{\text{сл. из т. Хана"--~Банаха}}
+	\exists F \in \bigl( \mathscr B(X) \bigr) : \quad g(0) \ne 0 $$
+	Выберем $ g(\lambda) = F \bigl( R(\lambda) \bigr) $.
+
+	Таким образом, $ g(z) $ "--- целая, $ g $ ограничена.
+	Значит, по теореме Лиувилля, $ g \equiv \const $ "--- \contra с $ \lim\limits_{g \to 0} = 0 $.
+\end{eproof}
+
+\begin{eg}
+	$ Ix = x $
+	$$ \sigma(I) = \Set{1} = \sigma_p(I) $$
+
+	$$ (\lambda I - I) = (\lambda - 1)I \implies R(\lambda) = \frac1{\lambda - 1}I \quad
+	\forall \lambda \ne 1 $$
+\end{eg}
+
+\subsection{Спектр и резольвента сопряжённого оператора}
+
+\begin{theorem}
+	\hfill
+	\begin{enumerate}
+		\item $ X $ "--- банахово, $ \quad T \in \mathscr B(X) $
+
+			$$ \implies \sigma(T^*) = \sigma(T) $$
+
+			Если $ \lambda \in \rho(T) $, то
+			$$ \bigl( R(\lambda, T) \bigr)^* = R(\lambda, T^*) $$
+		\item $ H $ "--- гильбертово, $ \quad T \in \mathscr B(H), \quad
+			T $ "--- эрмитово-сопряжённый
+
+			$$ \implies \sigma(T^*) = \Set{\lambda | \ol \lambda \in \sigma(T)} $$
+
+			Если $ \lambda \in \rho(T) $, то
+			$$ R(\lambda, T^*) = \bigl( R(\ol \lambda, T) \bigr)^* $$
+	\end{enumerate}
+\end{theorem}
+
+\begin{eproof}
+\item $ X $ "--- банахово, $ \quad \lambda \in \rho(T) $
+	$$ V(\lambda) = \lambda I - T \implies \bigl( V(\lambda) \bigr)^* = \lambda I - T^* $$
+	$$ \Bigl( \bigl( V(\lambda) \bigr)^{-1} \Bigr)^* =
+	\Bigl( \bigl( V(\lambda) \bigr)^* \Bigr)^{-1} $$
+\item $ X $ "--- гильбертово
+	$$ \bigl( V(\lambda) \bigr)^* = \ol \lambda I - T^* $$
+\end{eproof}

@@ -1,0 +1,258 @@
+\chapter{Линейные функционалы}
+
+\section{Продолжение линейных функционалов}
+
+\subsection{Небольшое отступление: трансфинитная индукция}
+
+\begin{definition}
+	$ P $ полуупорядочено, $ A \sub P $
+
+	Будем говорить, что $ A $ "--- \emph{цепь (линейно-упорядоченное подмножество)}, если
+	$$ \forall a, b \in A \quad
+	\begin{cases}
+		a \le b \\
+		b \le a
+	\end{cases} $$
+\end{definition}
+
+\begin{definition}
+	$ P $ полуупорядочено
+
+	$ x $ "--- \emph{максимальный элемент} $ P $, если
+	$$ \forall y \in P : x \le y \quad x = y $$
+\end{definition}
+
+\subsubsection{Лемма Цорна}
+
+\begin{lemma}[Цорн]
+	$ P $ полуупорядочено
+
+	Если для любой цепи имеется верхняя грань, то во всём множестве $ P $ существует максимальный
+	элемент.
+\end{lemma}
+
+\begin{remark}
+	Лемма Цорна \textbf{эквивалентна} аксиоме выбора.
+\end{remark}
+
+\begin{undefthm}{Аксиома выбора.}
+	$ \set{B_\alpha \ne \emptyset}_{\alpha \in A}, \quad B_\alpha $ "--- множества
+
+	$$ \exists \set{b_\alpha}_{\alpha \in A} : \quad b_\alpha \in B_\alpha $$
+\end{undefthm}
+
+\subsection{Возвращаемся в анализ}
+
+\begin{definition}
+	$ X $ "--- линейное пространство над $ \mathbb K $
+
+	$ p : X \to \mathbb K $ называется \emph{выпуклым функционалом}, если
+	\begin{enumerate}
+		\item $ p(x + y) \le p(x) + p(y) $;
+		\item $ p(tx) = tp(x) \quad \text{ при } t \ge 0 $.
+	\end{enumerate}
+\end{definition}
+
+\subsection{Продолжение линейного функционала в вещественном линейном пространстве}
+
+\begin{theorem}[Хан"--~Банах]
+	$ X $ "--- линейное над $ \R, \quad p : X \to \R $ "--- выпуклый функционал, $ \quad L $ "--- 
+	подпространство $ X, \quad f \in \mathscr Lin(L, \R), \quad f(x) \overset L \le p(x) $
+	(говорят, что $ f $ \emph{подчинён} $ p $)
+
+	$$ \exists g \in \mathscr Lin(X, \R) : \quad
+	\begin{cases}
+		g \bigr|_L = f \\
+		g(x) \overset X \le p(x)
+	\end{cases} $$
+\end{theorem}
+
+\begin{eproof}
+\item Возьмём $ z \in X \setminus L $
+	$$ L_1 \coloneq \mathscr L\set{L, z} = \Set{tx + z | t \in \R} $$
+
+	Построим $ f_1 \in \mathscr Lin(L_1, \R) : \quad
+	f_1 \bigr|_L = f, \quad f_1(y) \overset{L_1}\le p(y) $.
+	$$ f_1(c) \coloneq c $$
+	Докажем, что можно выбрать такой $ c $.
+	$$ f_1(x + tz) = f(x) + tc $$
+	$$ f_1(y) \overset{L_1}\le p(y) \iff f(x) + tc \overset{L} f(x) + tc \iff
+	\begin{cases}
+		f(x) + tc \le p(x + tz), \quad t > 0, \\
+		f(x) - tc \le p(x - tz), \quad t > 0
+	\end{cases} $$
+	Разделим на $ t $:
+	$$
+	\begin{cases}
+		f \bigl( \frac x t \bigr) + c \le p \bigl( \frac x t + z \bigr), \\
+		f \bigl( \frac x t \bigr) - c \le p \bigl( \frac x t - z \bigr)
+	\end{cases} $$
+	Обозначим $ u = \frac x t, ~ v = \frac x t $ (никак друг с другом не связанные).
+	$$
+	\begin{cases}
+		f(u) + c \le p(u + z) \quad \forall u \in L, \\
+		f(v) - c \le p(v - z) \quad \forall v \in L
+	\end{cases} $$
+	$$ f(v) - p(v - z) \le c \le p(u + z) - f(u) $$
+	Рассмотрим $ A = \Set{p(u + z) - f(u)}_{u \in L} \sub \R, \quad
+	B = \Set{f(v) - p(v - z)}_{v \in L} \sub \R $.
+	Проверим, что $ \forall a \in B \quad \forall b \in B \quad b \le a $.
+	$$ b \le a \iff f(v) - p(v - z) \le p(u + z) - f(u) \iff
+	\underbrace{f(u) + f(v)}_{f(u + v) \in L} \le p(u + z) + p(v - z) $$
+	$ f $ подчинён $ p $, значит,
+	$$ f(u + v) \le p(u + v) \underset{\text{выпуклость}}\le p(u + z) + p(v - z) \implies
+	\exists c \in \R : \quad f_1(z) = c $$
+\item $ \mathcal P \coloneq \Set{(M, h)}, \quad L \sub M \sub X, \quad
+	M $ "--- подпр-во, $ \quad h \in \mathscr Lin(M, \R), \quad h \bigr|_L = f, \quad
+	h(x) \overset M \le p(x) $
+
+	Определим порядок:
+	$$ (M, h) \le (M_1, h_1) \iff
+	\begin{cases}
+		M \sub M_1, \\
+		h_1 \bigr|_M = h
+	\end{cases} $$
+
+	Пусть $ A $ "--- цепь в $ \mathcal P $, \ie
+	$$ A = \Set{(M_\alpha, h_\alpha)}_{\alpha \in I} : \quad \forall \alpha, \beta \in I \quad
+	\left[
+	\begin{array}{l}
+		(M_\alpha, h_\alpha) \le (M_\beta, h_\beta) \\
+		(M_\beta, h_\beta) \le (M_\alpha, h_\alpha)
+	\end{array} \right. $$
+
+	Построим верхнюю грань для $ A $.
+	$$ M_0 \coloneq \bigcup_{\alpha \in I} M_\alpha $$
+
+	Проверим, что $ M_0 $ "--- подпространство.
+	Пусть $ x, y \in M_0 $.
+	$$ \exists \alpha, \beta : x \in M_\alpha, ~ y \in M_\beta \implies \left[
+	\begin{array}{l}
+		M_\alpha \sub M_\beta, \\
+		M_\beta \sub M_\alpha
+	\end{array} \right. $$
+	Пусть выполняется первое.
+	$$ \implies x, y \in M_\beta \text{ "--- подпространство } \implies ax + by \in M_\beta \subset
+	M_0 \implies M_0 \text{ "--- подпространство} $$
+
+	Определим $ h_0 : M_0 \to \R $.
+
+	Возьмём $ x \in M_0 $.
+	$$ \exists \alpha : x \in M_\alpha $$
+	Положим $ h_0(x) = h_\alpha(x) $.
+
+	Проверим корректность.
+	Пусть $ x \in M_\beta $.
+	$$ \left[
+	\begin{array}{l}
+		(M_\alpha, H_\alpha) \le (M_\beta, h_\beta), \\
+		(M_\beta, h_\beta) \le (M_\alpha, h_\alpha)
+	\end{array} \right. $$
+	Пусть выполнено первое.
+	$$ x \in M_\alpha, ~ x \in M_\beta \implies h_\beta(x) = h_\alpha(x) = h(x) $$
+
+	Можно проверить, что $ h_0 \in \mathscr Lin(M_0, \R) $.
+	$$ \forall \alpha \in I \quad (M_\alpha, h_\alpha) \le (M_0, h_0) \implies
+	(M_0, h_0) \text{ "---  верхняя грань для } A $$
+	По лемме Цорна, в $ \mathcal P $ существует максимальный элемент $ (M, h) $.
+	$$ L \sub M, \quad h \bigr|_L = f, \quad h(x) \overset M \le p(x) $$
+
+	Докажем, что $ M = X $.
+	\textbf{Пусть} $ \exists z \in X \setminus M $.
+	$$ M_1 \coloneq \mathscr Lin\set{M, z} $$
+	По первой части доказательства
+	$$ \exists h_1 \in \mathscr Lin(M_1, \R) : \quad h_1 \bigr|_M = h, \quad h_1(x) \overset{M_1}\le
+	p(x) $$
+	$$ \implies (M_1, h_1) \in \mathcal P $$
+	$$ (M, h) \le (M_1, h_1), \quad M \subsetneq M_1 $$
+	Это \textbf{противоречит} максимальности $ (M, h) $.
+\end{eproof}
+
+\begin{statement}\label{st:cont:1}
+	$ X $ линейно над $ \R, \quad p $ "--- выпуклый функционал, $ \quad
+	f \in \mathscr Lin(X, \R), \quad f(x) \overset X \le p(x) $
+
+	$$ f(x) \ge -p(-x) $$
+\end{statement}
+
+\begin{proof}
+	$ f(x) \le p(x) \implies f(-x) \le p(-x) \implies -f(x) \le p(-x) $
+\end{proof}
+
+\begin{statement}
+	$ p $ "--- полунорма, $ \quad f(x) \overset X \le p(x) $
+
+	$$ |f(x)| \le p(x) $$
+\end{statement}
+
+\begin{proof}
+	$ p(-x) \undereq{p \text{ "--- полунорма}} p(x) \implies f(x) \ge -p(x) $
+\end{proof}
+
+\subsection{Обобщённый предел ограниченной последовательности}
+
+\begin{theorem}
+	$ l_\R^\infty \coloneq \Set{x = \Set{x_n \in \R}_{n = 1}^\infty |
+	\|x\| = \sup\limits_{n \in \N}|x_n| < +\infty} $
+
+	$$ \exists L \in (l^\infty)^* : \quad \|l\|_{(l^\infty)^*} = 1, \quad
+	\forall x = \Set{x_n}_{n = 1}^\infty \in l^\infty \quad
+	\varliminf\limits_{n \to \infty} x_n \le L(x) \le \varlimsup\limits_{n \to \infty} x_n $$
+
+	В частности, если $ \exists \lim x_n = x_0 $, то $ L(x) = x_0 $.
+\end{theorem}
+
+\begin{proof}
+	Для $ x \in l^\infty $ положим $ p(x) = \varlimsup\limits_{n \to \infty} x_n $.
+
+	Докажем, что $ p $ "--- выпуклый функционал:
+	\begin{itemize}
+		\item $ t > 0 \implies p(tx) = tp(x) $ "--- очевидно;
+		\item $ p(x + y) \le p(x) + p(y) $
+			$$ \varlimsup x_n + \varlimsup y_n \overset?\le \varlimsup(x_n + y_n) $$
+			Вспомним определение верхнего предела:
+			$$ a_n \coloneq \sup\limits_{m \ge n} \Set{x_m} \implies a_n \downarrow \implies
+			\exists \lim a_n = a, \quad \varlimsup x_n \coloneq a $$
+			$$ b_n = \sup\limits_{m \ge n}, \quad b = \varlimsup y_n $$
+			$$ c_n = \sup\Set{x_m + y_m}, \quad c = \varlimsup \Set{x_n + y_n} $$
+			Зафиксируем $ n $.
+			$$ \forall m \ge n \quad x_m + y_m \le a_n + b_n \implies c_n \le a_n + b_n $$
+			Устремим $ n \to \infty $:
+			$$ c \le a + b $$
+	\end{itemize}
+
+	$$ C \sub l^\infty, \quad
+	C \coloneq \Set{x = \Set{x_n}_{n = 1}^\infty | \exists \lim x_n = x_0} $$
+
+	Определим $ f : C \to \R : \quad f(x) = \lim x_n = x_0 $.
+	$$ f(x) = \lim x_n \le \varlimsup x_n \implies f(x) \overset C \le p(x) $$
+	Применим теорему Хана"--~Банаха:
+	$$ \exists g \in \mathscr Lin(l^\infty, \R), \quad g(x) \overset C = f(x), \quad
+	g(x) \overset{l^\infty}\le \varlimsup x_n $$
+	По \autoref{st:cont:1}
+	$$ g(x) \ge -p(-x) = -\varlimsup(-x_n) \undereq{\text{задача из Демидовича}} \varliminf x_n $$
+
+	$ g = L $ "--- в теореме, $ \quad g \in \mathscr Lin(l^\infty, \R) $.
+	$$
+	\begin{rcases}
+		g(x) \le \varlimsup x_n \le \sup|x_n| \\
+		g(x) \ge \varliminf x_n \ge -\sup|x_n|
+	\end{rcases} \implies |g(x)| \le \|x\|_\infty \implies \|g\| \le 1 \implies
+	g \in (l^\infty)^* $$
+
+	Возьмём $ x = \Set{1, 1, \dotsc} $.
+	$$ \|x\| = 1, \quad |g(x)| = 1 \implies \|g\| \ge \frac{|g(x)|}{\|x\|} = 1 \implies \|g\| = 1 $$
+\end{proof}
+
+\subsection{Продолжение линейного функционала в комплексном линейном пространстве}
+
+\begin{theorem}[Боненблюст"--~Собчик]
+	$ X $ линейно над $ \Co, \quad p $ "--- полунорма, $ \quad L $ "--- подпространство $ X, $ \\
+	$ f \in \mathscr Lin(L, \Co), \quad |f(x)| \overset L \le p(x) $
+
+	$$ \exists g \in \mathscr Lin(X, \Co) : \quad
+	\begin{cases}
+		g \bigr|_L = f, \\
+		|g(x)| \overset X \le p(x)
+	\end{cases} $$
+\end{theorem}

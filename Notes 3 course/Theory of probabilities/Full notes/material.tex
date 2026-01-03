@@ -1,0 +1,891 @@
+\chapter{Вероятностное пространство}
+
+\section{Основные определения}
+
+\begin{definition}
+	Результаты опытов или наблюдений будем называть \emph{событиями}.
+\end{definition}
+
+\begin{notation}
+	$ \omega $ "--- исход, элементарное событие.
+\end{notation}
+
+\begin{notation}
+	$ \Omega $ "--- множество всех элементарных событий.
+\end{notation}
+
+\begin{definition}
+	Если $ A \cap B = \O $, то говорим, что $ A $ и $ B $ \emph{несовместны}.
+\end{definition}
+
+\begin{definition}
+	Если $ A \sub B $, то говорят, что появление события $ A $ \emph{влечёт} появление события $ B $.
+\end{definition}
+
+\begin{notation}
+	$ \sigma $-алгебру событий будем обозначать $ \Im $.
+\end{notation}
+
+\begin{definition}
+	Пусть $ P : \Im $ удовлетворяет следующим условиям:
+	\begin{enumerate}
+		\item $ P(A) \ge 0 \quad \forall A \in \Im $;
+		\item $ P(\Omega) = 1 $;
+		\item $ A_1, A_2, \dotsc $ "--- не более чем счётный набор событий,
+			$ A_i \cap A_j = \O $, то
+			$$ P \Bigl( \bigcup_{i = 1}^\infty A_i \Bigr) = \sum_{i = 1}^\infty P(A_i) $$
+	\end{enumerate}
+
+	Будем говорить, что $ P $ является \emph{вероятностной (счётно-аддитивной) мерой} или
+	\emph{вероятностью}.
+\end{definition}
+
+\begin{definition}
+	Говорят, что $ A_1, A_2, \dotsc $ "--- \emph{полная группа несовместных событий},
+	если их объединение представляет собой достоверное событие.
+\end{definition}
+
+\section{Свойства вероятностей}
+
+\begin{props}
+\item $ \ol A $ "--- событие, дополнительное к событию $ A $.
+	Тогда $ P(\ol A) = 1 - P(A) $.
+\item $ 0 \le P(A) \le 1 $.
+\item $ P(\O) = 0 $.
+\item $ P(A \cup B) = P(A) + P(B) - P(AB) $
+	$$ P \Bigl( \bigcup_{i = 1}^n A_i \Bigr) =
+	\sum_{i = 1}^n P(A_i) - \sum_{i < j} P(A_iA_j) + \sum_{i < j < k}P(A_iA_jA_k) -
+	\dots + (-1)^{n + 1}P \Bigl( \bigcap_{i = 1}^n A_i \Bigr) $$
+\item $ P(\bigcup A_i) \le \sum P(A_i) $.
+\item $ A \sub B \implies P(A) \le P(B) $.
+\item $ A_1 \sub A_2 \sub \dotso, \quad A = \bigcup A_n $
+	$$ P(A) = \lim\limits_{n \to \infty} P(A_n) $$
+\item $ B_1 \supset B_2 \supset \dotso, \quad B = \bigcap B_n $
+	$$ P(B) = \lim\limits_{n \to \infty} P(B_n) $$
+\item $ A_1, A_2, \dotsc $ "--- не более чем счётная полная группа событий
+	$$ \sum P(A_n) = 1 $$
+\end{props}
+
+\begin{statement}[неравенства Бонферрони]
+	$$ \sum_{k = 1}^n P(A_k) - \sum{1 \le k \le l \le n} P(A_kA_l) \le
+	P \Bigl( \bigcup_{k = 1}^n A_k \Bigr) \le \sum_{k = 1}^n P(A_k) $$
+\end{statement}
+
+\section{Условные вероятности}
+
+\begin{definition}
+	$ A, B \in \Im, \quad P(B) > 0 $
+
+	\emph{Условной вероятностью} $ P(A|B) $ называется отношение
+	$$ P(A|B) = \frac{P(AB)}{P(B)} $$
+\end{definition}
+
+\begin{statement}
+	Условная вероятность является вероятностью.
+\end{statement}
+
+\begin{eproof}
+\item
+	$$ P(A|B) = \frac{P(AB)}{P(B)} \ge 0 $$
+\item
+	$$ P(\Omega|B) = \frac{P(\Omega B)}{P(B)} = \frac{P(B)}{P(B)} = 1 $$
+\item
+	$$ P \Bigl( \bigcup_k A_k \Bigm| B \Bigr) =
+	\frac{P \Bigl\lgroup B \cap \Bigl( \bigcup_k A_k \Bigr) \Bigr\rgroup}{P(B)} =
+	\frac{P \Bigl( \bigcup_k A_kB \Bigr)}{P(B)} =
+	\frac{\sum_k P(A_kB)}{P(B)} = \sum_k P(A_k|B) $$
+\end{eproof}
+
+\section{Формула полной вероятности}
+
+\begin{theorem}
+	$ A_1, A_2, \dotsc $ "--- полная группа несовместных событий, $ \quad P(A_i) > 0 $
+
+	$$ P(B) = \sum_i P(B|A_i) \cdot P(A_i) $$
+\end{theorem}
+
+\begin{proof}
+	Учитывая несовместность событий $ BA_1, BA_2, \dotsc $, получаем
+	\begin{multline*}
+		P(B) = P(B \cap \Omega) =
+		p \Bigl\lgroup B \cap \Bigl( \bigcup_{i \ge 1}A_i \Bigr) \Bigr\rgroup =
+		P \Bigl( \bigcup_{i \ge 1} BA_i \Bigr) = \sum_{i \ge 1} P(BA_i) = \\
+		= \sum_{i \ge 1} \frac{P(BA_i)P(A_i)}{P(A_i)} = \sum_{i \ge 1} P(B|A_i) P(A_i)
+	\end{multline*}
+\end{proof}
+
+\begin{theorem}[формула Байеса]
+	$ A_1, A_2, \dotsc $ "--- полная группа несовместных событий \\
+	$ P(A_i) > 0, \quad P(B) > 0 $
+
+	$$ P(A_i|B) = \frac{P(B|A_i) \cdot P(A_i)}{\sum_j P(B|A_j) \cdot P(A_j)} $$
+\end{theorem}
+
+\begin{proof}
+	$$ \frac{P(B|A_i)P(A_i)}{\sum_j P(B|A_j)P(A_j)} = \frac{P(B|A_i)P(A_i)}{P(B)} =
+	\frac{P(A_iB)P(A_i)}{P(A_i)P(B)} = P(A_i|B) $$
+\end{proof}
+
+\section{Независимость случайных событий}
+
+\begin{definition}
+	$ P(B) \ne 0 $
+
+	События $ A $ и $ B $ будем называть \emph{независимыми}, если $ P(A|B) = P(A) $.
+\end{definition}
+
+\begin{definition}
+	События $ A $ и $ B $ будем называть \emph{независимыми}, если при $ P(A)P(B) \ne 0 $ выполнены
+	равенства
+	$$ P(A|B) = P(A), \quad P(B|A) = P(B) $$
+\end{definition}
+
+\begin{definition}
+	События $ A $ и $ B $ называются \emph{независимыми}, если $ P(AB) = P(A)P(B) $.
+\end{definition}
+
+\begin{definition}
+	События $ A_1, A_2, \dotsc $ \emph{попарно независимы}, если для любых двух событий $ A_i $ и
+	$ A_j $ выполняется соотношение
+	$$ P(A_iA_j) = P(A_i)P(A_j) $$
+\end{definition}
+
+\begin{definition}
+	Говорят, что события $ A_1, A_2, \dots, A_n $ \emph{независимы в совокупности (взаимно
+	независимы)}, если
+	$$ \forall k \le n \quad \forall 1 \le i_1 < i_2 < \dots < i_k \le n \quad
+	P \Bigl( \bigcap_{j = 1}^k A_{i_j} \Bigr) = \prod_{j = 1}^k P(A_{i_j}) $$
+\end{definition}
+
+\begin{theorem}
+	$ A_1, A_2, \dotsc $ взаимно независимы.
+
+	Тогда взаимно независимы события $ B_1, B_2, \dotsc $, где $ B_i $ "--- это $ A_i $ или его
+	дополнение.
+\end{theorem}
+
+\section{Схемы испытаний Бернулли}
+
+\begin{definition}
+	Повторные независимые испытания называются \emph{испытаниями Бернулли}, если каждое такое
+	испытание имеет только два возможных исхода и вероятности соответствующих исходов остаются
+	неизменными для всех испытаний.
+\end{definition}
+
+\begin{statement}
+	Вероятность из $ n $ испытаний получить ровно $ m $ успехов равна
+	$$ P_n(m) = C_n^m p^mq^{n - m} $$
+\end{statement}
+
+\begin{theorem}[локальная предельная]
+	$ 0 < p < 1 $
+
+	Соотношение
+	$$ \frac{\sqrt{npq}P_n(m)}{\phi \Bigl( \dfrac{m - np}{\sqrt{npq}} \Bigr)}
+	\underarr{n \to \infty} 1, $$
+	где
+	$$ \phi(x) = \frac1{\sqrt{2\pi}} e^{-\frac{x^2}2}
+	\text{ "--- плотность нормального распределения}, $$
+	выполняется равномерно для значений $ m $ таких, что
+	$$ -\infty < C_1 \le \frac{m - np}{\sqrt{npq}} \le C_2 < +\infty $$
+\end{theorem}
+
+\begin{notation}
+	$ \mu_n $ "--- количество успехов в испытаниях Бернулли.
+\end{notation}
+
+\begin{notation}
+	Определим \emph{функцию распределения нормального закона}:
+	$$ \Phi(x) = \frac1{\sqrt{2\pi}} \int_{-\infty}^x e^{-\frac{t^2}2} \di t =
+	\int_{-\infty}^x \phi(t) \di t $$
+\end{notation}
+
+\begin{theorem}[интегральная предельная]
+	$ 0 < p < 1 $
+
+	Равномерно по всем значениям $ -\infty \le a < b \le +\infty $ выполняется соотношение
+	$$ P\set{a \le \mu_n \le b} \underarr{n \to \infty}
+	\Phi \Bigl( \frac{b - np}{\sqrt{npq}} \Bigr) - \Phi \Bigl( \frac{a - np}{\sqrt{npq}} \Bigr) $$
+\end{theorem}
+
+Погрешность оценивается неравенством
+$$ \Delta_n \le \frac c{\sqrt{npq}} $$
+$ c $ "--- абсолютная константа.
+Можно взять $ c = 1 $ или $ c = 0.7655 $.
+
+\begin{theorem}
+	При большом $ n $ рассмотрим такую схему серий независимых событий: \\
+	\begin{tabular}{l | c}
+		& p \\
+		\hline
+		$ A_{11} $ & \lambda \\
+		$ A_{21} $ $ A_{22} $ & \lambda/2 \\
+		$ A_{31} $ $ A_{32} $ $ A_{33} $ & \lambda/3 \\
+		\vdots & \vdots \\
+		$ A_{n1} $ $ A_{n2} $ \dots $ A_{nn} $ & \lambda/n
+	\end{tabular}
+
+	Для каждого фиксированного $ m $ справедливо
+	$$ P_n(m) \underarr{n \to \infty} \frac{e^{-\lambda}\lambda^m}{m!} $$
+\end{theorem}
+
+\section{Полиномиальная схема}
+
+\begin{definition}
+	Пусть $ P\Set{A_i} = p_i, \quad p_1 + \dots + p_r = 1 $.
+
+	Вероятность того, что в $ n $ испытаниях событие $ A_i $ произойдёт $ m_i $ раз, равна:
+	$$ P_n(m_1, m_2, \dots, m_r) =
+	\frac{n!}{m_! m_2! \cdots m_r!} p_1^{m_1} p_2^{m_2} \cdots p_r^{m_r}, \quad
+	m_1 + m_2 + \dots + m_r = n $$
+\end{definition}
+
+\chapter{Случайные величины}
+
+\section{Случайные величины и их распределения}
+
+\begin{definition}
+	$ (\Omega, \Im, P) $
+
+	Говорим, что $ \xi : \Omega \to \R $ "--- \emph{случайная величина}, если $ \xi $ измерима.
+\end{definition}
+
+\begin{definition}
+	\emph{Функцией распределения} случайной величины $ \xi $ будем называть функцию
+	$$ F_\xi(x) = P_\xi \bigl( (-\infty, x) \bigr) = P \Set{\xi < x} $$
+\end{definition}
+
+\begin{remark}
+	$ P_\xi \bigl( [x, y) \bigr) = P \set{x \le \xi \le y} = F_\xi(y) - F_\xi(x) $
+\end{remark}
+
+\begin{props}
+\item $ 0 \le F_\xi(x) \le 1 $;
+\item $ F_\xi $ "--- неубывающая функция;
+\item $ F_\xi $ непрерывна слева во всех точках;
+\item $ F_\xi(x) \underarr{x \to -\infty} 0, \quad F_\xi(x) \underarr{x \to +\infty} 1 $.
+\end{props}
+
+\begin{definition}
+	Если для случайных величин функции распределения совпадают, то такие
+	случайные величины называют \emph{одинаково распределёнными}.
+\end{definition}
+
+\subsection{Типы вероятностных распределений}
+
+\subsubsection{Дискретный закон распределения}
+
+\begin{definition}
+	Говорим, что $ \xi $ "--- случайная величина с \emph{дискретным законом распределения}, если
+	существует не более чем счётное множество точек $ A \sub \R $ такое, что $ P(\xi \in A) = 1 $.
+\end{definition}
+
+\begin{exmpls}
+\item $ \xi $ "--- случайная величина с \emph{вырожденным распределением} в точке $ c $.
+	$$ F_\xi(x) =
+	\begin{cases}
+		0, \quad x \le c, \\
+		1, \quad x > c.
+	\end{cases} $$
+\item $ \xi $ "--- случайная величина с \emph{распределением Бернулли}.
+
+	$ \xi $ принимает значения 0 и 1 с вероятностями $ 1 - p $ и $ p $.
+	$$ F_\xi(x) =
+	\begin{cases}
+		0, \quad x \le 0, \\
+		1 - p, \quad 0 < x \le 1, \\
+		1, \quad x > 1.
+	\end{cases} $$
+\item $ \xi $ имеет \emph{биномиальное распределение} с параметрами $ n, p $.
+
+	Будем использовать обозначение $ \xi \in B(n, p) $.
+	$ \xi $ принимает значения 0, 1, \dots, n с вероятностями
+	$$ P(\xi = k) = C_n^k p^k (1 - p)^{n - k} $$
+\item $ \xi $ распределена по \emph{закону Пуассона} с параметром $ \lambda > 0 $.
+
+	Обозначение: $ \xi \in \Pi(\lambda) $.
+	$ \xi $ принимает целые неотрицательные значения с вероятностями
+	$$ P_k = \frac{e^{-\lambda}\lambda^k}{k!} $$
+\end{exmpls}
+
+\subsubsection{Абсолютно непрерывное распределение}
+
+\begin{definition}
+	Говорим, что $ \xi $ "--- случайная величина с \emph{абсолютно непрерывным распределением}, если
+	существует функция $ p_\xi(x) $ такая, что для любого борелевского множества
+	$ B \in \mathcal B $
+	$$ P( \xi \in B) = \int\limits_B p_\xi(x) \di x $$
+
+	Функцию $ p_\xi $ будем называть \emph{плотностью распределения} случайной величины $ \xi $.
+\end{definition}
+
+\begin{remark}
+	$ p_\xi(x) = F_\xi'(x) $ почти всюду.
+\end{remark}
+
+\begin{props}
+\item $ p_\xi(x) \ge $ почти всюду;
+\item
+	$$ \int_{-\infty}^\infty p_\xi(x) \di x = 1 $$
+\end{props}
+
+\begin{exmpls}
+\item $ \xi $ имеет \emph{равномерное распределение} на отрезке $ [a, b] $ ($ \xi \in U([a, b]) $),
+	если существует плотность распределения
+	$$ p_\xi(x) =
+	\begin{cases}
+		0, \quad x \notin [a, b], \\
+		\frac1{b - a}, \quad x \in [a, b].
+	\end{cases} $$
+	$$ F_\xi(x) = \frac{x - a}{b - a} \quad \text{ при } a \le x \le b $$
+\item $ \xi $ имеет \emph{экспоненциальное распределение} с параметром $ \lambda > 0 $, если
+	$$ p_\xi(x) =
+	\begin{cases}
+		0, \quad x \le 0, \\
+		\frac{e^{-\frac x \lambda}}\lambda, \quad x > 0.
+	\end{cases} $$
+	$$ F_\xi(x) =
+	\begin{cases}
+		0, \quad x \le 0, \\
+		1 - e^{-\frac x \lambda}, \quad x > 0.
+	\end{cases} $$
+\item $ \xi $ имеет \emph{нормальное (гауссово)} распределение с параметрами $ a, \sigma^2 $ ($ \xi
+	\in N(a, \sigma^2) $), если
+	$$ p_\xi(x) = \frac1{\sqrt{2\pi \sigma^2}}e^{-\frac{(x - a)^2}{2\sigma^2}} $$
+
+	Если $ a = 0, ~ \sigma^2 = 1 $, то говорят, что $ \xi $ имеет \emph{стандартное нормальное
+	распределение}.
+	При этом, обычно для плотности распределения и функции распределения используются обозначения
+	$ \phi(x) $ и $ \Phi(x) $.
+\item $ \xi $ имеет \emph{распределение Коши}, если
+	$$ p_\xi(x) = \frac1{\pi(1 + x^2)} $$
+	$$ F_\xi(x) = \frac12 + \frac{\arctg x}\pi $$
+\end{exmpls}
+
+\subsubsection{Сингулярная случайная величина}
+
+\begin{definition}
+	Говорим, что $ x $ "--- \emph{точка роста} функции распределения $ F(x) $, если
+	$$ \forall \eps > 0 \quad F(x + \eps) > F(x - \eps) $$
+\end{definition}
+
+\begin{definition}
+	$ \xi $ "--- случайная величина с \emph{сингулярным распределением}, если множество точек роста
+	$ F_\xi(x) $ имеет меру 0.
+\end{definition}
+
+\subsubsection{Семейство вероятностных распределений}
+
+\begin{definition}
+	$ \xi $ "--- случайная величина
+
+	К \emph{семейству}, включающему эту величину, относим все величины $ \eta $, получаемые линейным
+	преобразованием
+	$$ \eta = a + b \xi, $$
+	в котором $ a $ "--- \emph{параметр сдвига}, $ b > 0 $ "--- \emph{параметр масштаба}.
+
+	$$ F_\eta(x) = F_\xi \Bigl( \frac{x - a}b \Bigr) $$
+	$$ p_\eta(x) = \frac{p_\xi \bigl( \frac{x - a}b \bigr)}b $$
+\end{definition}
+
+\section{Случайные векторы}
+
+\begin{definition}
+	$ \xi : \Omega \to \R^d $ "--- \emph{случайный вектор}, если $ \xi $ измерима, \ie
+	$$ \forall B \in \mathcal B^d \quad \xi^{-1}(B) \in F $$
+\end{definition}
+
+\begin{definition}
+	\emph{Функция распределения} $ F_\xi $ $ d $-мерного случайного вектора задаётся как
+	$$ F_\xi(x_1, \dots, x_d) = P\Set{\xi_1 < x_1, \dots, \xi_d < x_d} $$
+\end{definition}
+
+\begin{props}
+\item $ 0 \le F_\xi(x_1, \dots, x_d) $;
+\item $ F_\xi $ непрерывна слева по каждой из координат;
+\item $ F_\xi(x_1, \dots, x_d) \to 0 $ если хотя бы одна из координат $ x_k \to -\infty $;
+\item $ F_\xi(x_1, \dots, x_k, \dots, x_d) \to
+	F_{(\xi_1, \dots, x_{k - 1}, \xi_{k + 1}, \dots, \xi_d)}
+	(x_1, \dots, x_{k - 1}, x_{k + 1}, \dots, x_d) $ если $ x_k \to +\infty $;
+\item $ F_\xi(x_1, \dots, x_d) \to 1 $ если все координаты $ x_i \to +\infty $;
+\item $ d = 2 $
+	$$ P \bigl( (\xi_1, \xi_2) \in [a_1, b_1) \times [a_2, b_2) \bigr) =
+	F_\xi(b_1, b_2) - F_\xi(a_1, b_2) - F_\xi(b_1, a_2) + F_\xi(a_1, a_2) $$
+\end{props}
+
+\subsection{Случайные векторы с дискретным распределением}
+
+\begin{definition}
+	Случайный вектор $ \xi $ имеет $ d $-мерное \emph{дискретное распределение}, если существует не
+	более чем счётное множество точек $ A \sub \R^d $ такое, что $ P(\xi \in A) = 1 $.
+\end{definition}
+
+\begin{statement}
+	Следующие утверждения равносильны:
+	\begin{enumerate}
+		\item $ \xi = (\xi_1, \dots, \xi_d) $ "--- случайный вектор с дискретным распределением;
+		\item величины $ \xi_k $ имеют дискретное распределение для всех $ k = 1, 2, \dots, d $.
+	\end{enumerate}
+\end{statement}
+
+\subsection{Случайные векторы с абсолютно непрерывным законом распределения}
+
+\begin{definition}
+	Случайный вектор $ \xi $ имеет $ d $-мерное \emph{абсолютно непрерывное распределение}, если
+	существует функция $ p_\xi(x_1, \dots, x_d) $ такая, что
+	$$ \forall y_1, \dots, y_d \quad F_\xi(y_1, \dots, y_d) = \int_{-\infty}^{y_1} \dots
+	\int_{-\infty}^{y_d} p_\xi(x_1, \dots, x_d) \di x_1 \dots \di x_d $$
+
+	Функция $ p_\xi(x_1, \dots, x_d) $ называется \emph{плотностью распределения} случайного
+	вектора.
+\end{definition}
+
+\begin{props}
+\item $ p_\xi(x_1, \dots, x_d) \ge 0 $;
+\item
+	$$ \iint\limits_{\R^d} p_\xi(x_1, \dots, x_d) \di x_1 \dots \di x_d = 1 $$
+\end{props}
+
+\begin{statement}
+	Каждая компонента $ \xi_k $ случайного вектора с абсолютно непрерывным распределением
+	представляет собой случайную величину с абсолютно непрерывным распределением.
+\end{statement}
+
+\section{Независимые случайные величины}
+
+\begin{definition}
+	Говорим, что $ \xi_1, \xi_2, \dots, \xi_n $ "--- \emph{независимые случайные величины}, если
+	$$ \forall x_1, x_2, \dots, x_n \in \mathbb R \quad F_{(\xi_1, \dots, \xi_n)}(x_1, \dots, x_n) =
+	\prod_{i = 1}^n F_{\xi_i}(x_i), $$
+	то есть
+	$$ P(\xi_1 < x_1, \dots, \xi_n < x_n) = \prod_{i = 1}^n P(\xi_i < x_i) $$
+\end{definition}
+
+\begin{definition}
+	Говорим, что $ \xi_1, \xi_2, \dots, \xi_n $ "--- \emph{независимые случайные величины}, если для
+	любых борелевских множеств $ B_1, \dots, B_n \in \mathcal B $ справедливо
+	$$ P(\xi_1 \in B_1, \dots, \xi_n \in B_n) = \prod_{i = 1}^n P(B_i) $$
+\end{definition}
+
+\begin{enumerate}
+	\item Для дискретных случайных величин $ \xi_1, \dots, \xi_n $ определение независимости
+		сводится к проверке соотношений
+		$$ P\Set{\xi_1 = a_1, \dots, \xi_n = a_n} = P\Set{\xi_1 = a_1} \cdots P\Set{\xi_n = a_n} $$
+		для всех значений, принимаемых этими случайными величинами.
+	\item Если случайные величины $ \xi_1, \dots, \xi_n $ имеют абсолютно непрерывные распределения,
+		то их независимость сводится к равенствам
+		$$ p_{(\xi_1, \dots, \xi_n)}(x_1, \dots, x_n) = \prod_{i = 1}^n p_{\xi_i}(x_i) $$
+\end{enumerate}
+
+\section{Формулы свёртки}
+
+Пусть $ \xi $ и $ \eta $ "--- независимые случайные величины с функциями распределения $ F_\xi $,
+$ F_\eta $, а $ \nu = \xi + \eta $.
+Найдём функцию распределения $ H(x) = P\Set{\xi + \eta < x} $.
+
+$$ H(x) = F_{(\xi + \eta)}(x) = \int_{-\infty}^\infty F_\xi(x - y) \di F_\eta(y) $$
+$$ H(x) = F_{(\xi + \eta)}(x) = \int_{-\infty}^\infty F_\eta(x - y) \di F_\xi(y) $$
+
+\begin{statement}
+	Если величина $ \xi $ имеет плотность распределения $ p_\xi(x) $, то
+	$$ F_\nu(x) = \int_{-\infty}^\infty F_\eta(x - y) p_\xi(y) \di y $$
+\end{statement}
+
+\begin{statement}
+	Если обе величины $ \xi, \eta $ имеют абсолютно непрерывные распределения, то их сумма $ \nu $
+	также имеет абсолютно непрерывное распределение, и
+	$$ p_\nu(x) = \int_{-\infty}^\infty p_\xi(x - y) p_\eta(y) \di y =
+	\int_{-\infty}^\infty p_\eta(x - y) p_\xi(y) \di y $$
+\end{statement}
+
+\chapter{Моменты случайных величин}
+
+\section{Математические ожидания}
+
+\begin{definition}
+	\emph{Математическим ожиданием} случайной величины $ \xi $ называется её усреднённое значение,
+	\ie среднее ожидаемое значение функции $ \xi(\omega) $, которое выражается в виде интеграла по
+	вероятностной мере
+	$$ \mathbb E \xi = \int\limits_\Omega \xi(\omega) P\Set{\di \omega} $$
+
+	Если множество $ \Omega $ состоит из конечного или счётного набора элементарных исходов, то
+	$$ \mathbb E \xi = \sum \xi(\omega_i)P(\omega_i) $$
+
+	Для дискретного распределения
+	$$ \mathbb E \xi = \sum_k x_k P\Set{\xi = x_k} $$
+
+	Для абсолютно непрерывного распределения
+	$$ \mathbb E \xi = \int_{-\infty}^\infty xp_\xi(x) \di x $$
+\end{definition}
+
+Если от величины $ \xi $ переходим к величине $ \eta = g(\xi) $, то математическое ожидание можно
+выразить через распределение исходной величины:
+$$ \mathbb E \eta = \sum_k g(x_k) P \Set{\xi = x_k}, \quad \text{дискретное распределение} $$
+$$ \mathbb E \eta = \int_{-\infty}^\infty g(x) p_\xi(x) \di x, \quad \text{абсолютно непрерывное
+распределение} $$
+
+\begin{definition}
+	Пусть $ g(x) = x^n $.
+	$$ \mathbb E \eta = \mathbb E g(\xi) = \mathbb E \xi^n =
+	\int_{-\infty}^\infty x^n \di F_\xi(x) =
+	\begin{cases}
+		\sum x_k^n P\Set{\xi = x_k} \\
+		\int x^n p_\xi(x) \di x
+	\end{cases} $$
+
+	$ \mathbb E \xi^n $ называется \emph{начальным моментом} случайной величины
+	$ \xi $ порядка $ n $.
+\end{definition}
+
+\begin{definition}
+	Если возьмём $ g(x) = (x - \mathbb E \xi)^n $, то получим
+	$ \mathbb E(\xi - \mathbb E \xi)^n $ "--- \emph{центральный момент} порядка $ n $.
+\end{definition}
+
+\begin{definition}
+	При $ g(x) = |x|^n $ получаем $ \mathbb E|\xi|^n $ "--- \emph{абсолютный начальный момент}
+	порядка $ n $.
+\end{definition}
+
+\begin{definition}
+	Если $ g(x) = |x - \mathbb E \xi|^n $, то получаем $ \mathbb E|\xi - \mathbb E \xi|^n $ "---
+	\emph{абсолютный центральный момент} порядка $ n $.
+\end{definition}
+
+\begin{definition}
+	Второй центральный момент случайной величины $ D \xi = \mathbb E(\xi - \mathbb E \xi)^2 $
+	называется \emph{дисперсией} этой случайной величины.
+\end{definition}
+
+\subsection{Свойства математических ожиданий}
+
+\begin{props}
+\item Если математические ожидания $ \xi $ и $ \eta $ существуют, то
+	$ \mathbb E(\xi + \eta) = \mathbb E \xi + \mathbb E \eta $.
+\item $ \mathbb E(\alpha + \beta \xi) = \alpha + \beta \mathbb E\xi $.
+\item $ \mathbb E c = c $.
+\item $ P\Set{\alpha \le \xi \le \beta} = 1 \implies \alpha \le \mathbb E \xi \le \beta $.
+\item $ \xi \le \eta \implies \mathbb E \xi \le \mathbb E \eta $.
+\item $ |\mathbb E \xi| \le \mathbb E |\xi| $ (\as $ -|\xi| \le \xi \le |\xi| $).
+\item Если $ P \Set{\xi \ge 0} = 1 $ и $ \mathbb E \xi = 0 $, то $ P\Set{\xi = 0} = 1 $.
+\item Если $ \xi $ и $ \eta $ независимы, то $ \mathbb \xi \eta =
+	\mathbb E \xi \cdot \mathbb E \eta $.
+\end{props}
+
+\subsection{Свойства дисперсии}
+
+\begin{props}
+\item $ D\xi \ge 0 $.
+\item Если $ D \xi = 0 $, то $ P\Set{\xi = C} = 1 $ в некоторой точке $ C $.
+\item $ D(\alpha \xi + \beta) = \alpha^2 D\xi $.
+\item Если $ \xi $ и $ \eta $ независимы, то $ D(\xi \pm \eta) = D\xi + D\eta $.
+\item $ D(\xi + \eta) = D\xi + D\eta + 2 \operatorname{cov}(\xi, \eta) $.
+\item $ D\xi \ge D|\xi| $.
+\item $ D \xi = \mathbb E\xi^2 - (\mathbb \xi)^2 $.
+\end{props}
+
+\subsection{Вычисление математических ожиданий и дисперсий}
+
+\begin{enumerate}
+	\item \emph{Вырожденное распределение}
+		$$ P\Set{\xi = C} = 1 $$
+		$$ \mathbb E \xi = C, \quad D\xi = 0 $$
+	\item \emph{Двухточечное распределение}
+		$$ \xi =
+		\begin{cases}
+			0 \quad \text{ с вероятностью } q = 1 - p \\
+			1 \quad \text{ с вероятностью } p
+		\end{cases} $$
+		$$ \mathbb E \xi = p, \quad D \xi = p(1 - p) $$
+		$$ \eta =
+		\begin{cases}
+			a \quad \text{ с вероятностью } q = 1 - p \\
+			b \quad \text{ с вероятностью } p
+		\end{cases} $$
+		$$ D \eta = (b - a)^2p(1 - p) $$
+	\item \emph{Биномиальное распределение} ($ \xi \sim B(n, p) $)
+
+		$ \xi $ принимает значения $ 0, 1, 2, \dots, n $ с вероятностями
+		$$ p_k = C_n^kp^k(1 - p)^{n - k} $$
+		$$ \mathbb E \xi = np, \quad D \xi = np(1 - p) $$
+	\item \emph{Пуассоновское распределение} ($ \xi \sim \pi(\lambda) $)
+		$$ P\Set{\xi = k} = e^{-\lambda}\frac{\lambda^k}{k!} $$
+		$$ \mathbb \xi = \lambda, \quad D\xi = \lambda $$
+	\item \emph{Геометрическое распределение} ($ \xi \sim \operatorname{Geom}(p) $)
+
+		$ \xi $ принимает значения $ 0, 1, 2, \dotsc $ с вероятностями
+		$$ p_k = (1 - p)p^k $$
+		$$ \mathbb E\xi = \frac p{1 - p}, \quad D \xi = \frac p{(1 - p)^2} $$
+	\item \emph{Равномерное распределение} ($ \xi \sim U[a, b] $)
+
+		Плотность распределения имеет следующий вид:
+		$$ p(x) =
+		\begin{cases}
+			\frac1{b - a}, \quad x \in [a, b], \\
+			0, \quad x \not\in [a, b]
+		\end{cases} $$
+		$$ \mathbb E \xi = \frac{b + a}2, \quad D \xi = \frac{(b - a)^2}{12} $$
+	\item \emph{Экспоненциальное распределение} ($ \xi \sim E(\lambda) $)
+
+		Плотность $ \xi $ имеет вид
+		$$ p(x) =
+		\begin{cases}
+			0, \quad x < 0, \\
+			\frac1\lambda e^{-\frac x \lambda}, \quad x \ge 0
+		\end{cases} $$
+		$$ \mathbb E \xi = \lambda, \quad D\xi = \lambda^2 $$
+	\item \emph{Распределение Коши}
+		$$ p(x) = \frac1\pi (1 + x^2) $$
+		$$ \int\limits_{-\infty}^\infty p(x) \di x = \infty $$
+		Значит, математического ожидания и дисперсии $ \xi $ не существует.
+		Более того, понятно, что и моментов более высокого порядка не существует.
+	\item \emph{Нормальное распределение} ($ \xi \sim N(a, \sigma^2) $)
+		$$ p(x) = (2\pi)^{-\frac12} \frac1\sigma e^{-\frac{(x - a)^2}{2\sigma^2}} $$
+		$$ \mathbb \xi = a, \quad D \xi = \sigma^2 $$
+\end{enumerate}
+
+\section{Вероятностные неравенства}
+
+\begin{lemma}[Чебышёва]
+	$ \xi \ge 0, \quad \exists \mathbb E \xi, \quad t > 0 $
+
+	$$ P\Set{\xi \ge t} \le \frac{\mathbb E \xi}t $$
+\end{lemma}
+
+\begin{proof}
+	$$ P\Set{\xi \ge t} = \int_t^\infty \di F(x) \le \frac1t \int_t^\infty x \di F(x) \le
+	\frac1t \int_0^\infty x \di F(x) = \frac{\mathbb E \xi}t $$
+\end{proof}
+
+\begin{remark}
+	Аналогично,
+	$$ P\Set{\xi \ge t} \le \frac{\mathbb E\xi^2}{t^n} $$
+\end{remark}
+
+Подставляя $ \xi = (\xi - \mathbb \xi)^2 $ и $ t = \eps^2 $, получаем следующий результат
+
+\begin{statement}[неравенство Чебышёва]
+	$ \exists \mathbb E \xi, ~ D \xi, \quad \eps > 0 $
+
+	$$ P\{|\xi - \mathbb E\xi| > \eps\} \le \frac{D\xi}{\eps^2} $$
+\end{statement}
+
+\begin{statement}[неравенство Лярунова]
+	$ \gamma_n \coloneq \mathbb E |\xi|^n $
+
+	$$ \implies \gamma_1 \le \gamma_2^{\frac12} \le \gamma_3^{\frac13} \le \dots \le
+	\gamma_{m - 1}^{\frac1{m - 1}} \le \gamma_m^{\frac1m} \le \dotso $$
+
+	$$ \phi(a) = (\mathbb E|\xi|^\alpha)^{\frac1\alpha} $$
+
+	Тогда $ \phi $ монотонно возрастает.
+\end{statement}
+
+\section{Смешанные моменты}
+
+\begin{definition}
+	Для $ n $-мерного случайного вектора $ \ol\xi = (\xi_1, \dots, \xi_n) $ рассмотрим
+	\emph{математическое ожидание}
+	$$ \mathbb E g(\xi_1, \dots, \xi_n) = \iiiint\limits_{-\infty}^\infty g(x_1, \dots, x_n)
+	F(\di x_1, \dots, \di x_n) $$
+
+	Для дискретных случайных векторов имеем
+	$$ \mathbb Eg(\xi_1, \dots, \xi_n) = \sum P\Set{\xi_1 = x_1, \dots, \xi_n = x_n}
+	g(x_1, \dots, x_n) $$
+
+	Для абсолютно непрерывных случайных векторов
+	$$ \mathbb Eg(\xi_1, \dots, \xi_n) = \iiint\limits_{-\infty}^\infty g(x_1, \dots, x_n)
+	p(x_1, \dots, x_n) \di x_1 \dots \di x_n $$
+\end{definition}
+
+Пусть $ \xi, \eta $ "--- независимые случайные величины.
+Тогда
+$$ F_{\xi, \eta}(x, y) = F_\xi(x)F_\eta(y) $$
+
+\begin{statement}
+	Если $ g(x, y) = h(x)r(y) $, то
+	$$ \mathbb Eg(\xi, \eta) = \mathbb E \bigl( h(\xi)r(\eta) \bigr) =
+	\int\limits_{-\infty}^\infty \int\limits_{-\infty}^\infty h(x)r(y) F_{\xi, \eta}(\di x, \di y) =
+	\int\limits_{-\infty}^\infty h(x)F_\xi(\di x) \int\limits_{-\infty}^\infty r(y) F_\eta(\di y) =
+	\mathbb Eh(\xi) \mathbb E r(\eta) $$
+\end{statement}
+
+\begin{definition}
+	\emph{Начальный смешанный момент} порядка $ n + m $ определяется для двумерных дискретных и
+	двумерных абсолютно непрерывных вектором следующими соотношениями:
+	$$ \mathbb E\xi^n \eta^m = \sum_k \sum_l x_k^n y^-l^m P\Set{\xi = x_k, ~ \eta = y_l} $$
+	$$ \mathbb E\xi^n\eta^m = \int\limits_{-\infty}^\infty \int\limits_{-\infty}^\infty x^ny^m
+	p_{\xi, \eta}(x, y) \di x \di y $$
+\end{definition}
+
+\begin{definition}
+	Если взять $ g(x, y) = (x - \mathbb E\xi)^n (y - \mathbb E\eta)^m $, то математическое ожидание
+	$ \mathbb E(\xi - \mathbb E\xi)^n(\eta - \mathbb \eta)^m $ называется
+	\emph{центральным смешанным моментом} порядка $ n + m $.
+\end{definition}
+
+\begin{definition}
+	Центральный смешанный момент $ \operatorname{cov}(\xi, \eta) =
+	\mathbb (\xi - \mathbb E\xi)(\eta - \mathbb \eta) $ называется \emph{ковариацией}.
+\end{definition}
+
+\subsection{Свойства ковариаций}
+
+\begin{props}
+\item $ \mathbb E(\xi - \mathbb E\xi)(\eta - \mathbb E\eta) =
+	\mathbb E(\xi\eta) - \mathbb E\xi \mathbb E \eta $.
+\item $ \operatorname{cov}(\xi, \xi) = \mathbb E(\xi - \mathbb E \xi)^2 = D\xi $.
+\item $ \operatorname{cov}(\alpha \xi + \beta, \gamma \eta + \delta) =
+	\alpha \gamma \operatorname{cov}(\xi ,\eta) $.
+\item Если $ \xi $ и $ \eta $ независимы, то $ \operatorname{cov}(\xi, \eta) = 0 $.
+\item $ D(\xi \pm \eta) = D\xi + D\eta \pm 2\operatorname{cov}(\xi, \eta) $.
+\item $ |\operatorname{cov}(\xi, \eta)| \le \sqrt{D\xi D\eta} $.
+\end{props}
+
+\begin{proof}[6]
+	$$ D \Bigl( \frac\xi{\sqrt{D\xi}} + \frac\eta{\sqrt{D\eta}} \Bigr) =
+	2 + 2 \frac{\operatorname{cov}(\xi, \eta)}{\sqrt{D\xi} \sqrt{D\eta}} \ge 0 $$
+	$$ D \Bigl( \frac\xi{\sqrt{D\xi}} - \frac\eta{\sqrt{D\eta}} \Bigr) =
+	2 - 2 \frac{\operatorname{cov}(\xi, \eta)}{\sqrt{D\xi} \sqrt{D \eta}} \ge 0 $$
+\end{proof}
+
+\subsection{Коэффициент корреляции}
+
+Пусть $ \xi, \eta $ "--- невырожденные случайные величины, у которых существуют дисперсии.
+Рассмотрим их центрированные и нормированные варианты
+$$ \hat\xi = \frac{\xi - \mathbb \xi}{\sqrt{D \xi}}, \quad \hat \eta =
+\frac{\eta - \mathbb E \eta}{\sqrt{D \eta}} $$
+
+Имеем равенства
+$$ \mathbb E \hat \xi = \mathbb E \hat \eta = 0, \quad D \hat \xi = D \hat \eta = 1 $$
+
+\begin{definition}
+	\emph{Коэффициент корреляции} $ \rho $ между $ \xi $ и $ \eta $ задаётся равенством
+	$$ \rho(\xi, \eta) = \operatorname{cov}(\hat \xi, \hat \eta) =
+	\frac{\operatorname{cov}(\xi, \eta)}{\sqrt{D \xi} \sqrt{D \eta}} $$
+\end{definition}
+
+\subsection{Свойства коэффициента корреляции}
+
+\begin{props}
+\item Если $ \xi, \eta $ независимы, то $ \rho(\xi, \eta) = 0 $.
+	В общем случае, если $ \rho(\xi, \eta) = 0 $, то говорим, что $ \xi, \eta $ "---
+	\emph{ортогональные (некоррелированные)} случайные величины.
+\item $ |\rho| \le 1 $.
+\item Если $ |\rho(\xi, \eta)| = 1 $, то $ \eta = \alpha\xi + \beta $, причём
+	$ \sign(\rho) = \sign(\alpha) $.
+\item $ \rho(\alpha \xi + \beta, \delta \eta + \gamma) = \sign(\alpha \delta) \rho(\xi, \eta) $.
+\end{props}
+
+\section{Производящие функции}
+
+\begin{definition}
+	$ \Set{a_n \in \mathbb R}_{k = 1}^\infty $
+	$$ A(s) = \sum_{n = 0}^\infty a_ns^n $$
+
+	Если ряд сходится на интервале $ [-s_0, s_0], ~ s_0 > 0 $, то функция $ A(s) $ называется
+	\emph{производящей функцией} последовательности $ \Set{a_n} $.
+\end{definition}
+
+Рассмотрим в качестве $ \Set{a_n} $ распределения вероятностей.
+Пусть случайная величина $ \xi $ принимает значения $ 0, 1, \dotsc $ с вероятностями
+$ p_n = P\Set{\xi = n} $.
+
+Построим производящую функцию для последовательности $ \Set{p_n} $:
+$$ P(s) = \sum_{n = 0}^\infty p_ns^n $$
+Ряд сходится абсолютно при $ -1 \le s \le 1 $.
+$ P(s) $ "--- производящая функция $ \xi $.
+Её можно представить в виде
+$$ P(s) = \sum_{n = 0}^\infty p_ns^n = \mathbb Es^\xi $$
+
+\begin{exmpls}
+\item Биномиальное распределение $ \xi \sim B(n, p) $.
+
+	Случайная величина принимает значения $ 0, 1, \dots, n $ с вероятностями
+	$$ p_m = C_n^m p^m(1 - p)^{n - m} $$
+	
+	Её производящая функция имеет вид
+	$$ P(s) = \sum_{m = 0}^n C_n^M p^m(1 - p)^{n - m}s^m =
+	\sum_{m = 0}^n C_n^m (ps)^m (1 - p)^{n - m} = (1 - p + ps)^n $$
+\item Пуассоновское распределение $ \xi \sim \pi(\lambda) $.
+
+	Случайная величина принимает значения $ 0, 1, \dotsc $ с вероятностями
+	$$ p_n = e^{-\lambda} \frac{\lambda^n}{n!} $$
+	$$ P(s) = \sum_{n = 0}^\infty e^{-\lambda} \frac{(\lambda s)^n}{n!} =
+	e^{-\lambda}e^{\lambda s} = e^{\lambda (s - 1)} $$
+\item Геометрическое распределение
+	$$ p_n = (1 - p)p^n, \quad n = 0, 1, \dots, \quad 0 < p < 1 $$
+	$$ P(s) = \sum_{n = 0}^\infty (1 - p)(ps)^n = \frac{1 - p}{1 - ps} $$
+\end{exmpls}
+
+\subsection{Свойства производящих функций}
+
+\begin{props}
+\item $ P(1) = 1 $.
+\item $ |P(s)| \le 1, \quad |s| \le 1 $.
+\item Если $ \xi $ и $ \eta $ независимы, и $ \nu = \xi + \eta $, то
+	$$ P_\nu(s) = \mathbb Es^\nu = \mathbb E s^\xi \cdot \mathbb E s^\eta = P_\xi(s)P_\eta(s) $$
+\item $ 0 \le 1 $
+	$$ P_\xi(s) = \sum_{n = 0}^\infty p_ns^n \ge 0 $$
+	$$ \nder[k]P(s) = \sum_{n = 0}^\infty n (n - 1) \cdots (n - k + 1)p_ns^{n - k} $$
+	$$ 0 \le \nder[k]P(s) \le \sum_{n = 0}^\infty n(n - 1) \cdots (n - k + 1)s^{n - k} $$
+\item Если известна производящая функция, то можно восстановить вероятности:
+	$$ \nder[k]P(0) = k!p_k $$
+	$$ p_k = \frac{\nder[k]P(0)}{k!}, \quad p_0 = P(0) $$
+\item $ P'(1) = \mathbb E \xi = \sum k p_k $
+
+	Наряду с вероятностями $ p_k = P\Set{\xi = k} $ рассмотрим вероятности $ q_n = P\Set{\xi > n} $.
+	\begin{multline*}
+		(s) = \sum_{n = 0}^\infty q_ns^n =
+		\sum_{n = 0}^\infty \Bigl( \sum_{k = n + 1}^\infty p_k \Bigr) s^n =
+		\sum_{k = 1}^\infty p_k \sum_{n = 0}^{k - 1}s^n =
+		\sum_{k = 1}^\infty p_k \cdot \frac{1 - s^k}{1 - s} = \\
+		= \frac1{1 - s} \Bigl( \sum_{k = 1}^\infty p_k - \sum_{k = 1}^\infty p_ks^k \Bigr) =
+		\frac1{1 - s} \bigl( 1 - P(s) \bigr)
+	\end{multline*}
+
+	При этом,
+	$$ Q(s) = \frac{1 - P(s)}{1 - s} $$
+	Переходя к пределу по $ s $, получаем
+	$$ \lim\limits_{s \to 1} Q(s) = P'(1) = \mathbb E \xi $$
+
+	Отсюда, в частности,
+	$$ \mathbb E \xi = \sum_{n = 0}^\infty P\Set{\xi > n} $$
+\end{props}
+
+\section{Факториальные моменты}
+
+\begin{definition}
+	\emph{Факториальным моментом} порядка $ k $ случайной величины $ \xi $ называется величина
+	$$ \mu_k = \mathbb E \bigl( \xi (\xi - 1)(\xi - 2) \cdots (\xi - k + 1) \bigr) $$	
+\end{definition}
+
+По начальным моментам однозначно находятся факториальные моменты:
+$$ \mu_1 = \mathbb \xi = \alpha_1 $$
+$$ \mu_2 = \mathbb E \xi (\xi - 1) = \alpha_2 - \alpha_1 $$
+$$ \mu_3 = \mathbb E \xi (\xi - 1) (\xi - 2) = \alpha_3 - 3\alpha_2 + 2\alpha_1 $$
+
+$$ \nder[k]P(s) = \sum_{n = 0}^\infty n (n - 1) \cdots (n - k + 1) p_ns^{n - k}, \quad 0 \le s < 1 $$
+Так как $ P(s) $ и её производные "--- монотонные непрерывные функции,
+$$ \exists \lim\limits_{s \to 1^-} \nder[k]P(s) = \nder[k]P(1) =
+\sum_{n = 0}^\infty n (n - 1) \cdots (n - k + 1)p_n = \mu_k $$
+
+Будем говорить, что существует \emph{конечный факториальный момент}, если существует конечный левый
+предел $ \nder[k]P(s) $ при $ s \to 1^- $.
+
+\begin{exmpls}
+\item $ \xi \sim B(n, p) $
+	$$ P(s) = (1 - p + ps)^n $$
+	$$ \mu_k =
+	\begin{cases}
+		\nder[k]P(1) = n(n - 1) \cdots (n - k + 1)p^n, \quad k \le n, \\
+		0, \quad k > n
+	\end{cases} $$
+\item $ \xi \sim \pi(\lambda) $
+	$$ P(s) = e^{\lambda(s - 1)} $$
+	$$ \mu_k = \nder[k]P(1) = \lambda^k $$
+\item Геометрическое распределение
+	$$ P(s) = \frac{1 - p}{1 - ps} $$
+	$$ \mu_k = \nder[k]P(1) = \frac{(1 - p)p^k k!}{(1 - p)^{k + 1}} = p^k k! (1 - p)^{-k} =
+	\Bigl( \frac{p}{1 - p} \Bigr)^k \cdot k! $$
+\end{exmpls}

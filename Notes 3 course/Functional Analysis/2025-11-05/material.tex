@@ -1,0 +1,227 @@
+\chapter{Линейные функционалы}
+
+\section{Линейные функционалы в гильбертовом пространстве}
+
+\subsection{Представление линейного непрерывного функционала в гильбертовом пространстве}
+
+\begin{theorem}[Рисс]
+	$ H $ "--- гильбертово пространство
+
+	\begin{enumerate}
+		\item $ y \in H $ "--- фиксирован, $ \quad f_y : H \to \Co : \quad f_y(x) = (x, y) $
+			$$ f_y \in H^*, \quad \|f_y\|_{H^*} = \|y\|_H $$
+		\item $ f \in H^* $
+			$$ \exists ! y \in H : \quad f = f_y $$
+	\end{enumerate}
+\end{theorem}
+
+\begin{eproof}
+\item $ y \in H $
+	\begin{itemize}
+		\item Проверим, что $ f_y \in \mathscr Lin(H, \Co) $
+
+			$ \alpha \in \Co, \quad x, y \in H $
+			$$ f_y(\alpha x + z) = (\alpha x + z, y) =
+			\alpha (x, y) + (z, y) = \alpha f(x) + f(z) $$
+		\item Оценим $ \|f_y\| $
+			$$ \|f_y\| = |(x, y)| \underset{\text{К"--~Б}}\le \|y\| \cdot \|x\| \implies
+			\|f_y\| \le \|y\| \implies f \in H^* $$
+
+			\begin{itemize}
+				\item Если $ y = 0 $, то $ f_y(x) = 0 \implies f_y = \On[], \quad \|f_y\| = 0 $
+				\item $ y \ne 0 $
+					$$ \|f_y\| = \sup\limits_{x \ne 0} \frac{|f_y(x)|}{\|x\|} \ge
+					\frac{|f_y(y)|}{\|y\|} = \frac{(y, y)}{\|y\|} = \|y\| $$
+			\end{itemize}
+	\end{itemize}
+\item $ f \in H^* $
+	\begin{itemize}
+		\item Если $ f = \On[] $, \ie $ f(x) \equiv 0 $, то $ f = f_0 $
+		\item $ f \ne \On[] $
+
+			Рассмотрим $ N = \operatorname{Ker} f \ne H $
+			$$ H = N \oplus N^\perp, \quad N^\perp \ne \set{0} $$
+			Возьмём $ y_0 \in N^\perp $.
+			Докажем, что $ \dim N^\perp = 1 $.
+
+			$$ f(y_0) \ne 0 $$
+			$$ v \coloneq \frac{y_0}{f(y_0)} \implies f(v) = 1 $$
+
+			Возьмём $ z \in N^\perp $.
+			Докажем, что $ z $ пропорционально $ v $.
+			$$ u \coloneq z - f(z)v \implies u \in N^\perp $$
+			$$ f(u) = f(z) - f(z)\underbrace{f(v)}_1 = 0 \implies u \in N $$
+			Значит, $ u = 0 \implies z = f(z)v $.
+
+			Будем искать $ y $ в виде $ y = \alpha v $, где $ \alpha \in \Co $.
+			$$ 1 = f_y(v) = f_y(v) = (v, \alpha v) = \alpha \|v\|^2 \implies
+			\alpha = \frac1{\|v\|^2} \implies y = \frac{v}{\|v\|^2} $$
+		\item Проверим единственность
+
+			Пусть $ f = f_y, ~ f = f_z $.
+			$$ \forall x \in H \quad f_y(x) = f_z(x) \implies (x, y) = (x, z) \implies
+			(x, y - z) = 0 \implies y - z \in H^\perp = \set{0} $$
+	\end{itemize}
+\end{eproof}
+
+\begin{remark}
+	$ C : H \to H^* : \quad C(y) = f_y $
+
+	Знаем, что $ \|f_y\|_{H^*} = \|y\|_H $.
+
+	$$ C(y + z) = f_{y + z} $$
+	$$ \forall x \in H \quad f_{y + z}(x) = (x, y + z) = (x, y) + (x, z) = f_y + f_z $$
+	$$ C(y + z) = C(y) + C(z) $$
+
+	Возьмём $ \alpha \in \Co $.
+	$$ C(\alpha y) = f_{\alpha y} $$
+	$$ f_{\alpha y}(h) = (x, \alpha y) = \ol\alpha (x, y) $$
+	$ C $ "--- сопряжённо-линейный изометрический изоморфизм между $ H $ и $ H^* $.
+	Говорят, что $ H^* = H, $ при этом имеют в виду, что $ C(H) = H^* $.
+\end{remark}
+
+\begin{exmpls}
+\item $ l^2 $
+	$$ f \in (l^2)^* \iff \exists! y = \set{y_n}_{n = 1}^\infty \in l^2 : \quad
+	\forall x \in l^2 \quad f(x) = f_y(x) = \sum_{n = 1}^\infty x_n \ol y_n $$
+\item $ (T, \mathcal U, \mu), \quad \mathrm L^2(\mu) $
+	$$ \Phi \in \bigl( \mathrm L^2 (T, \mu) \bigr)^* \iff \exists ! g \in \mathrm L^2(\mu) : \quad
+	\forall f \in \mathrm L^2(\mu) \quad \Phi(f) = \int\limits_T f(x) \ol{g(x)} \di \mu $$
+\end{exmpls}
+
+\section{Геометрический смысл линейного функционала}
+
+\begin{theorem}
+	$ X $ "--- линейное пространство над $ \mathbb K $
+	\begin{enumerate}
+		\item $ f \in \mathscr Lin(X, \mathbb K), \quad
+			f \ne \On[], \quad L = \operatorname{Ker} f $
+			$$ \operatorname{codim} L = \dim \bigl( \faktor X L \bigr) = 1 $$
+			Это называется \emph{коразмерность} $ L $.
+		\item $ L \sub X, \quad \operatorname{codim} L = 1, \quad x_0 \in X \setminus L $
+			$$ \exists ! f \in \mathscr Lin(X, \mathbb K) : \quad L = \operatorname{Ker} f, \quad
+			f(x_0) = 1 $$
+	\end{enumerate}
+\end{theorem}
+
+\begin{eproof}
+\item $ f \ne \On[] \implies \exists y_0 \notin L $
+	$$ v \coloneq \frac{y_0}{f(y_0)} \implies f(v) = 1 $$
+
+	Возьмём $ x \in X $.
+	\begin{multline*}
+		u \coloneq x - f(x)v \implies f(u) = f(x) - f(x)f(v) = 0 \implies u \in L \implies
+		\ol u = \ol 0 \implies \ol 0 = \ol x - f(x) \ol v \implies \\
+		\implies \ol x = f(x) \ol v \implies \ol x = f(x) \ol v \implies
+		\faktor X L = \set{\alpha \ol v | \alpha \in \mathbb K} \implies
+		\dim \bigl( \faktor X L \bigr) = 1
+	\end{multline*}
+\item $ L : \quad \dim \bigl( \faktor X L \bigr) = 1 $
+
+	Возьмём $ x \in X $.
+	$$ \exists \alpha \in \mathbb K : \ol x = \alpha \cdot \ol x_0 $$
+	Определим $ f(x) = \alpha $.
+	$$ \ol x_0 = 1 \cdot \ol x_0 \implies f(x_0) = 1 $$
+
+	Проверим, что $ f \in \mathscr Lin(X, \mathbb K) $.
+	Возьмём $ \alpha \in \mathbb K, \quad x, y \in X $.
+	$$
+	\begin{rcases}
+		\ol x = \beta \ol v \\
+		\ol y = \gamma \ol v
+	\end{rcases} \implies \alpha \ol x + \ol y = (\alpha \beta + \gamma) \ol v \implies
+	f(\alpha x + y) = \alpha \beta + \gamma = \alpha f(x) + f(y) $$
+	$$ f(x) = 0 \iff \ol x = 0 \cdot \ol v = \ol 0 \iff x \in L \implies \operatorname{Ker} f = L $$
+
+	Проверим единственность.
+	Пусть $ \exists g \in \mathscr Lin(X, \mathbb K), \quad \operatorname{Ker} g = L, \quad
+	g(x_0) = 1 $.
+	$$ \forall x \in X \quad x = \alpha \cdot \ol x_0 \implies
+	x = \alpha x_0 + y, \quad y \in L \implies
+	\begin{cases}
+		f(x) = \alpha \\
+		g(x) = \alpha
+	\end{cases} $$
+\end{eproof}
+
+\begin{remark}
+	В условиях второго пункта $ L = \operatorname{Ker} f, \quad f(x_0) = 1 $
+	$$ f^{-1}(1) = x_0 + L = \set{x_0 + y | y \in L} $$
+\end{remark}
+
+\begin{proof}
+	Обозначим $ M = f^{-1}(1) $.
+	\begin{itemize}
+		\item $ z \in x_0 + L $, \ie $ z = x_0 + y, \quad y \in L $
+			$$ f(z) = \underbrace{f(x_0)}_1 + \underbrace{f(y)}_0 = 1 \implies z \in M \implies
+			x_0 + L \sub M $$
+		\item $ z \in M $
+			$$ f(z) = 1 \implies f(z - x_0) = 0 \implies z - x_0 \in L \implies z - x_0 = y \implies
+			z = x_0 + y \in x_0 + L \implies M \sub x_0 + L $$
+	\end{itemize}
+\end{proof}
+
+\begin{theorem}[норма линейного функционала]
+	$ (X, \|\cdot\|), \quad f \in X^*, \quad f \ne \On[], \quad f(x_0) = 1, \quad
+	L = \operatorname{Ker} f $
+	$$ \| f \| = \frac1{\rho(x_0, L)} $$
+\end{theorem}
+
+\begin{proof}
+	Обозначим $ d = \rho(x_0, L) = \inf \|x_0 - y\| $.
+	\begin{itemize}
+		\item
+			$$ 1 = f(x_0) = f(x_0 - y) \le \|f\| \cdot \|x_0 - y\| \quad \forall y \in L \implies
+			1 \le \|f\| \inf \|x_0 - y\| = \|f\|d \implies \frac1d \le \|f\| $$
+		\item $ x \in X \setminus L, \quad f(x) \ne 0 $
+			\begin{multline*}
+				f \Bigl( \frac{x}{f(x)} \Bigr) = 1 \implies
+				f \Bigl( x_0 - \frac{x}{f(x)} \Bigr) \implies x_0 - \frac{x}{f(x)} \in L \implies
+				\Bigl\| x_0 - \Bigl( x_0 - \frac{x}{f(x)} \Bigr) \Bigr\| \ge d \iff \\
+				\iff \frac{\|x\|}{\|f(x)\|} \ge d \implies |f(x)| \le \frac1d \|x\| \implies
+				\|f\| \le \frac1d
+			\end{multline*}
+	\end{itemize}
+\end{proof}
+
+\begin{remark}
+	В обозначениях теоремы $ M = f^{-1}(1) $
+	$$ \rho(x_0, L) = \rho(0, M) $$
+\end{remark}
+
+\begin{proof}
+	$$ \rho(x_0, L) = \inf \|x_0 - y\| $$
+	$$ \rho(0, M) = \rho(0, x_0 + L) = \inf \|x_0 + y\| = \inf \|x_0 - y\| = \rho(x_0, L) $$
+\end{proof}
+
+\section{Продолжение линейных функционалов}
+
+\subsection{Небольшое отступление: трансфинитная индукция}
+
+\begin{definition}
+	$ \mathscr P $ "--- \emph{частично упорядоченное множество}, если для некоторых элементов
+	$ a, b \in \mathscr P $ выполняется $ a \le b $, \ie выделено
+	$$ R \sub \mathscr P \times \mathscr P : \quad (a, b) \in R \text{ если } a \le b $$
+	и выполнены аксиомы:
+	\begin{enumerate}
+		\item Рефлексивность: $ \forall a \in \mathscr P \quad a \le a $.
+		\item Транзитивность:
+			$$
+			\begin{rcases}
+				a \le b \\
+				b \le c
+			\end{rcases} \implies a \le c $$
+		\item Антисимметричность:
+			$$
+			\begin{rcases}
+				a \le b \\
+				b \le a
+			\end{rcases} \implies a = b $$
+	\end{enumerate}
+\end{definition}
+
+\begin{definition}
+	$ A \sub \mathscr P $
+
+	$ y $ "--- \emph{верхняя грань} для $ A $, если $ \forall a \in A \quad a \le y $.
+\end{definition}

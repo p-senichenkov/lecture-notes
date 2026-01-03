@@ -1,0 +1,283 @@
+\chapter{Линейные функционалы}
+
+\section{Продолжение линейных функционалов}
+
+\subsection{Продолжение линейного функционала в комплексном линейном пространстве}
+
+\begin{theorem}[Боненблюст"--~Собчик]
+	$ X $ линейно над $ \Co, \quad p $ "--- полунорма, $ \quad L $ "--- подпространство $ X, $ \\
+	$ f \in \mathscr Lin(L, \Co), \quad |f(x)| \overset L \le p(x) $
+
+	$$ \exists g \in \mathscr Lin(X, \Co) : \quad
+	\begin{cases}
+		g \bigr|_L = f, \\
+		|g(x)| \overset X \le p(x)
+	\end{cases} $$
+\end{theorem}
+
+\begin{proof}[овеществление]
+	$ X $ линейно и над $ \R $, \ie
+	$$
+	\begin{rcases}
+		a, b \in \R \\
+		x, y \in X
+	\end{rcases} \implies ax + by \in X $$
+	Также, $ L $ "--- подпространство и в вещественном смысле.
+	$$ f(x) = u(x) + \ii v(x), \quad u(x), v(x) \in \R $$
+
+	Проверим, что $ u, v \in \mathscr Lin(L, \R) $.
+	Пусть $ x, y \in L $.
+	$$ f(x) = u(x) + \ii v(x), \quad f(y) = u(y) + \ii v(y) $$
+	$$ f(x + y) = u(x + y) + \ii v(x + y) $$
+	Сложим первые два равенства:
+	$$ f(x + y) = \bigl( u(x) + u(y) \bigr) + \ii \bigl( v(x) + v(y) \bigr) $$
+	Вещественные и мнимые части равны:
+	$$ u(x+ y) = u(x) + u(y), \quad v(x + y) = v(x) + v(y) $$
+
+	Возьмём $ x \in X, ~ a \in \R $.
+	$$ f(x) = u(x) + \ii v(x) $$
+	$$ f(ax) = u(ax) + \ii v(ax) $$
+	$$ f(ax) = af(x) = a u(x) + \ii a v(x) \implies
+	\begin{cases}
+		u(ax) = au(x) \\
+		v(ax) = av(x)
+	\end{cases} $$
+	$$ \implies u, v \in \mathscr Lin(L, \R) $$
+	$$ f \in \mathscr Lin(X, \Co) \implies f(\ii x) = \ii f(x) \implies u(\ii x) + \ii v(\ii x) =
+	\ii \bigl( u(x) + \ii v(x) \bigr) \implies
+	u(\ii x) = -v(x) $$
+
+	Применим теорему Хана"--~Банаха к $ u $, а $ v $ определим из этого тождества.
+	\begin{multline*}
+		u(x) \le |f(x)| \le p(x) \quad \forall x \in L \underimp{\text{т. Хана"--~Банаха}} \\
+		\implies \exists \phi \in \mathscr Lin(X, \R) : \quad
+		\begin{cases}
+			\phi \bigr|_L = u, \\
+			\phi(x) \overset X \le p(x)
+		\end{cases} \underimp{p \text{ "--- полунорма}} |\phi(x)| \overset L \le p(x)
+	\end{multline*}
+	\begin{equ}{bone-sob:1}
+		x \in X \quad \psi(x) \coloneq -\phi(\ii x) \implies \psi \in \mathscr Lin(X, \R)
+	\end{equ}
+	$$ g(x) \coloneq \phi(x) + \ii \psi(x) \implies g \in \mathscr Lin(X, \R), \quad
+	g(x) \overset L = f(x) $$
+	$$ g(\ii x) =
+	\phi(\ii x) + \ii \psi(\ii x) \ii \bigl( -\ii \phi(\ii x) + \psi(\ii x) \bigr)
+	\undereq{\eref{bone-sob:1}} \ii \bigl(\phi(x) + \ii \psi(x) \bigr) \implies
+	g \in \mathscr Lin(X, \Co) $$
+
+	Проверим подчинение.
+	$$ x \in X, ~ g(x) \in \Co \quad g(x) = re^{\ii \theta}, \quad r \ge 0, ~ \theta \in \R $$
+	$$ \implies |g(x)| = r = g \bigl( xe^{-\ii \theta} \bigr) =
+	\phi \bigl( xe^{-\ii \theta} \bigr) + \ii \psi \bigl( xe^{-\ii \theta} \bigr) $$
+	Слева вещественное число, справа "--- комплексное, значит, мнимая часть равна нулю:
+	$$ |g(x)| = \phi \bigl( xe^{-\ii \theta} \bigr) \le
+	p \bigl( xe^{-\ii \theta} \bigr) \undereq{p \text{ "--- полунорма}} p(x) $$
+\end{proof}
+
+\subsection{Продолжение линейного функционала в нормированном пространстве}
+
+\begin{theorem}
+	$ (X, \|\cdot\|) $ над $ \mathbb K, \quad
+	L $ "--- подпространство $ X $ в алгебраическом смысле, $ \quad f \in L^* $
+
+	$$ \exists g \in X^* : \quad
+	\begin{cases}
+		g \bigr|_L = f, \\
+		\|g\|_{X^*} = \|f\|_{L^*}.
+	\end{cases} $$
+\end{theorem}
+
+\begin{proof}
+	Обозначим $ M = \|f\|_{L^*} $.
+	$$ p(x) \coloneq M \cdot \|x\| \implies p \text{ "--- норма на } X $$
+
+	Возьмём $ x \in L $.
+	$$ |f(x)| \le \|f\|_{L^*}\|x\| = M \|x\| = p(x) \implies f \text{ подчинён } p $$
+	Применяем теорему Хана"--~Банаха или Бонеблюста"--~Собчика:
+	$$ \exists g \in \mathscr Lin(X, \mathbb K) : \quad
+	\begin{cases}
+		g \bigr|_L = f, \\
+		|g(x)| \overset X \le p(x)
+	\end{cases} $$
+	$$ \implies |g(x)| \overset X \le M \cdot \|x\| \implies \|g\|_{X^*} \implies g \in X^* $$
+	$$ \|g\|_{X^*} = \sup\limits_{
+		\begin{subarray}{c}
+			x \in X \\
+			\|x\| \le 1
+		\end{subarray}}|g(x)| \ge \sup\limits_{
+		\begin{subarray}{c}
+			x \in L \\
+			\|x\| \ge 1
+		\end{subarray}}|g(x)| = \|f\|_{L^*} $$
+\end{proof}
+
+\begin{implication}[о достаточном множестве линейных функционалов]
+	$ (X, \|\cdot\|) $ над $ \mathbb K, \quad x_0 \in X $
+
+	\begin{enumerate}
+	\item
+		$$ \exists g \in X^* : \quad
+		\begin{cases}
+			\|g\| = 1, \\
+			g(x_0) = \|x_0\|;
+		\end{cases} $$
+	\item $ \|x_0\| = \max \{|h(x_0)| \mid \|h\|_{X^*} \le 1\} $.
+	\end{enumerate}
+\end{implication}
+
+\begin{iproof}
+\item $ x_0 \ne 0 $
+
+	Рассмотрим $ L = \Set{\alpha x_0}_{\alpha \in \mathbb K} $.
+	Определим $ f : L \to \mathbb K : \quad f(\alpha x_0) = \alpha \|x_0\| $. \\
+	Понятно, что $ f \in \mathscr Lin(L, \mathbb K), \quad f(x_0) = \|x_0\|, \quad
+	|f(\alpha x_0)| = |\alpha| \|x_0\| $.
+	$$ \implies \|f\|_{L^*} = 1 $$
+
+	По теореме
+	$$ \exists g \in X^* : \quad
+	\begin{cases}
+		\|g\|_{X^*} = 1, \\
+		g(x_0) = \|x_0\|.
+	\end{cases} $$
+
+	Рассмотрим $ h \in X^* : \quad \|h\| \le 1 $.
+	$$ |h(x_0)| \le \|h\| \|x_0\| \le \|x_0\| \implies \sup\limits_{\|h\| \le 1}|h(x_0)| \le
+	\|x_0\| $$
+	Но $ \exists g : \quad
+	\begin{cases}
+		\|g\| = 1, \\
+		|g(x_0)| = \|x_0\|.
+	\end{cases} $
+\item $ x_0 = 0 $
+
+	Возьмём $ g \in X^* : \quad \|g\| = 1 $.
+	$$ g(x_0) = 0 $$
+\end{iproof}
+
+\begin{remark}
+	Теперь имеем две похожие формулы:
+	$$ \|f\| = \sup\limits_{\|x\| \le 1}|f(x)| $$
+	$$ \|x\| = \max\limits_{\|f\|_{X^*} \le 1} |f(x)| $$
+\end{remark}
+
+\begin{implication}[расстояние до подпространства]
+	$ (X, \|\cdot\|), \quad L $ "--- замкнутое подпространство $ X, \quad
+	x_0 \in X \setminus L, \quad d \coloneq \rho(x_0, L) $
+
+	\begin{enumerate}
+	\item
+		$$ \exists g \in X^* : \quad
+		\begin{cases}
+			\|g\| = 1, \\
+			g(x_0) = d, \\
+			g \bigr|_L = 0;
+		\end{cases} $$
+	\item $ d = \min\{ |h(x_0)| \mid \|h\| \le 1, ~ h\bigr|_L = 0\} $.
+	\end{enumerate}
+\end{implication}
+
+\begin{proof}
+	$ M \coloneq \mathscr Lin(x_0, L) = \Set{\alpha x_0 + y | y \in L} $
+
+	Определим $ f : M \to \mathbb K : \quad f(\alpha x_0 + y) = \alpha $.
+	$$ \implies f(y) = 0 \quad \forall y \in L $$
+	$$ f(x_0) = 1 $$
+	Понятно, что $ f \in \mathscr Lin(M, \mathbb K) $.
+
+	Воспользуемся теоремой о норме линейного функционала:
+	$$ \|f\|_{M^*} = \frac1d $$
+	$$ f_1 \coloneq df \implies \|f_1\| = 1, \quad f_1(x_0) = d $$
+	$$ \exists g \in X^* : \quad
+	\begin{cases}
+		\|g\| = 1, \\
+		g \bigr|_M = f_1
+	\end{cases} \implies g \bigr|_L = 0, \quad g(x_0) = d $$
+
+	Возьмём $ h \in X* : \quad \|h\| \le 1, ~ h \bigr|_L = 0 $.
+	$$ |h(x_0)| = |h(x_0 - y)| \le \|h\| \cdot \|x_0 - y\| \le \|x_0 - y\| \quad \forall y \in L $$
+	$$ \implies |h(x_0)| \le d \implies \sup\limits_{
+		\begin{subarray}{c}
+			\|h\| \le 1 \\
+			h\bigr|_L = 0
+		\end{subarray}}|h(x_0)| \le d $$
+	$$ \exists g : \quad
+	\begin{cases}
+		g(x_0) = d, \\
+		g \bigr|_L = 0, \\
+		\|g\| \le 1.
+	\end{cases} $$
+	$$ \implies d = \max\limits_{
+		\begin{subarray}{c}
+			\|h\| \le 1 \\
+			h\bigr|_L = 0
+		\end{subarray}}|h(x_0)| $$
+\end{proof}
+
+\begin{remark}
+	Если $ L = \Set{0} $, то получим предыдущее следствие.
+\end{remark}
+
+\begin{implication}[критерий полноты семейства элементов в нормированном пространстве]
+	\hfill \\
+	$ (X, \|\cdot\|), \quad \Set{x_\alpha \in X}_{\alpha \in A} $
+
+	$ \Set{x_\alpha} $ "--- полная система элементов \textbf{тогда и только тогда}, когда
+	$$ \Bigl( f \in X^* \quad f(x_\alpha) = 0 \quad \forall \alpha \in A \Bigr) \implies f = \On[] $$
+\end{implication}
+
+\begin{proof}
+	$ L \coloneq \ol{\mathscr L \Set{x_\alpha}}_{\alpha \in A} $
+	\begin{itemize}
+		\item $ \implies $
+
+			$ \Set{x_\alpha} $ "--- полное, $ \quad f \in X^*, \quad f(x_\alpha) = 0 $
+			$$ x = \sum_{k = 1}^n c_kx_{\alpha_k} \implies f(x) = 0 $$
+			То есть, $ \forall x \in \mathscr L\Set{x_\alpha} \quad f(x) = 0 $.
+
+			Возьмём $ x \in X $.
+			$$ \exists \Set{x_n \in \mathscr L\Set{x_\alpha}}_{n = 1}^\infty : \quad \lim x_n = x $$
+			$ f $ непрерывна $ \implies f(x) = \lim f(x) = 0 \implies f = \On[] $.
+		\item $ \impliedby $
+
+			\textbf{Пусть} $ L \subsetneq X $, \ie $ \exists x_0 \ne 0 \in X \setminus L $.
+			По первому следствию
+			$$ \exists g \in X^* : \quad
+			\begin{cases}
+				\|g\| = 1, \\
+				g(x_0) = \|x_0\|
+			\end{cases} \implies g \ne \On[] $$
+			При этом, $ g \bigr|_L = 0 \implies g(x_\alpha) = 0 $ "--- \contra.
+	\end{itemize}
+\end{proof}
+
+\begin{theorem}
+	$ (X, \|\cdot\|) $
+
+	Если $ X^* $ сепарабельно, то $ X $ сепарабельно.
+\end{theorem}
+
+\begin{proof}
+	$ X^* $ сепарабельно $ \iff \exists \Set{f_n}_{n = 1}^\infty : \quad
+	f_n $ плотны в $ X^* $, \ie
+	$$ \forall f \in X^* \quad \exists \Set{f_{n_k}}_{k = 1}^\infty : \quad
+	\lim \|f - f_{n_k}\| = 0 $$
+
+	Пусть $ f \in X^* $.
+	$$ \|f\| = \sup\limits_{\|x\| = 1} |f(x)| \implies \exists x :
+	\begin{cases}
+		\|x\| = 1, \\
+		\|f\| \le 2|f(x)|
+	\end{cases} $$
+
+	Пусть теперь $ f \ne \On[] $.
+	$$ \exists x_n : \quad \|x_n\| = 1, \quad \|f_n\| \le 2|f_n(x_n)| $$
+	Проверим, что $ \Set{x_n} $ полна в $ X $ (по следствию 3).
+	Пусть $ f \in X^*, \quad f(x_n) = 0 \quad \forall n $.
+	$$ \exists f_{n_k} \in X^* : \quad \lim \|f - f_{n_k}\| = 0 $$
+	$$ \frac12 \|f_{n_k}\| \le |f_{n_k}(x_{n_k})| =
+	|\underbrace{f(x_{n_k})}_0 - f_{n_k}(x_{n_k})| \le
+	\|f - f_{n_k}\| \cdot \underbrace{\|x_{n_k}\|}_1 $$
+	$$ \implies \lim \|f_{n_k}\| = 0 \implies f = \On[] \implies \Set{x_n} \text{ полна} $$
+\end{proof}

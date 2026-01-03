@@ -1,0 +1,275 @@
+\chapter{Линейные функционалы}
+
+\section{Теория Фредгольма}
+
+\subsection{Альтернатива Фредгольма}
+
+\begin{theorem}\label{thm:alt_fred}
+	$$ \operatorname{Ker} S = \Set{0} \iff S(H) = H $$
+\end{theorem}
+
+\begin{restate}
+	Оператор $ S $ "--- инъекция \textbf{тогда и только тогда}, когда $ S $ "--- сюръекция.
+	Из любого из этих выражений следует, что $ S $ "--- биекция.
+\end{restate}
+
+\begin{restate}
+	\hfill
+	\begin{itemize}
+		\item \textbf{Либо} уравнение Фредгольма разрешимо для любой правой части и решение
+			единственно.
+		\item \textbf{Либо} существует ненулевое решение уравнения Фредгольма.
+	\end{itemize}
+\end{restate}
+
+\begin{lemma}[о стабилизации]
+	$ k \ge 0, \quad H_{k + 1} \coloneq S(H_k) $
+
+	$$ \exists n \ge 0 : \quad H_n = H_{n + 1} $$
+\end{lemma}
+
+\begin{proof}
+	\textbf{Допустим}, что $ H_{k + 1} \subseteq H_k $.
+	$$ \implies H_k = H_{k + 1} \oplus
+	\underbrace{H_{k + 1}^\perp}_{\text{ортогональное дополнение в } H_k} $$
+	$$ \implies \exists x_k \in H_k : \quad \|x_k\| = 1, \quad x_k \perp H_{k + 1} $$
+
+	Пусть $ n > m $.
+	Хотим оценить разность $ \|Tx_n - Tx_m\| $.
+	$$ Sx_n - Sx_m = x_n - Tx_n - x_m + Tx_m $$
+	$$ Sx_n = x_n - Tx_n $$
+	$$ \|Tx_n - Tx_m\| = \|x_n - Sx_n - x_m + Sx_m\| \ge 1 $$
+	$$ Sx_n \in H_{n + 1}, \quad Sx_m \in H_{m + 1} $$
+	$$ x_n, Sx_n, Sx_m \in H_{m + 1} \implies x_m \perp H_{m + 1} $$
+	Значит, не существует $ \Set{Tx_{n_k}} : \quad \exists \lim T_{x_{n_k}}, \quad
+	T \in \mathrm{Com}(H) $ "--- \contra.
+\end{proof}
+
+\begin{iproof}[теоремы]
+\item $ \implies $
+
+	$ \operatorname{Ker} S = \Set{0} $, \ie $ S $ "--- инъекция.
+
+	Докажем, что $ S(H) = H $.
+	\textbf{Пусть} $ S(H) \subsetneq H $, \ie $ \exists x \in H : \quad x \notin S(H) $.
+
+	Подействуем на $ x $ оператором $ S $:
+	$$ Sx \in S(H), \quad S(Sx) \notin S(H) $$
+	(\as прообраз у элемента ровно один, и это "--- $ Sx $)
+	$$ \implies Sx \in S(H) \setminus S^2(H) $$
+	И так далее для любого $ n $:
+	$$ S^nx \in S^n(H) \setminus S^{(n + 1)}(H) $$
+	Это \textbf{противоречит} лемме.
+\item $ \impliedby $
+	\begin{multline*}
+		\begin{rcases}
+			S(H) = H \\
+			H = S(H) \oplus \operatorname{Ker} S^*
+		\end{rcases} \implies \operatorname{Ker} S^* = \Set{0} \underimp{S^* = I - T^*} \\
+		\implies S^* \text{ "--- оператор Фредгольма} \underimp{\text{только что доказано}} S^*(H) = H
+	\end{multline*}
+	$$ H = S^*(H) \oplus \operatorname{Ker} S \implies \operatorname{Ker} S = \Set{0} $$
+\end{iproof}
+
+\subsection{Теорема о числе ЛНЗ решений однородного уравнения Фредгольма}
+
+\begin{theorem}
+	$ S = I - T, \quad T \in \mathrm{Com}(H) $
+
+	$$ \dim \operatorname{Ker} S = \dim \operatorname{Ker} S^* < +\infty $$
+\end{theorem}
+
+\begin{restate}
+	Однородные уравнения Фредгольма $ Sx = 0 $ и $ S^*y = 0 $ имеют одно и то же, и при том
+	конечное, число ЛНЗ решений.
+\end{restate}
+
+\begin{proof}
+	Пусть $ \dim \operatorname{Ker} S = n < +\infty $ (уже доказано для банахова пространства).
+	$$ \dim \operatorname{Ker} S^* \eqqcolon m < +\infty $$
+
+	\textbf{Пусть} $ n < m $.
+
+	Выберем в этих пространствах ОНБ:
+	$$ \Set{e_i}_{i = 1}^n \text{ "--- ОНБ } \operatorname{Ker} S, \quad \Set{f_j}_{j = 1}^m
+	\text{ "--- ОНБ } \operatorname{Ker} S^* $$
+
+	Определим $ V : H \to \operatorname{Ker} S^* $:
+	$$ x \in H \quad Vx = \sum_{k = 1}^n (x, e_k) f_K $$
+	$$ V(H) \sub \operatorname{Ker}S^* \implies \dim \bigl( V(H) \bigr) < +\infty \implies
+	V \text{ "--- конечного ранга } \implies V \in \mathrm{Com}(H) $$
+	$$ U \coloneq S + V = I - \underbrace{(T - V)}_{\in \mathrm{Com}(H)} \implies
+	U \text{ "--- оператор Фредгольма} $$
+
+	Для $ U $ верна \autoref{thm:alt_fred}.
+	Проверим, что $ \operatorname{Ker} U = \Set{0} $.
+	Пусть $ x \in \operatorname{Ker} U $.
+	$$ Ux = 0 \implies Sx + Vx = 0 $$
+	$$
+	\begin{rcases}
+		Sx \in S(H) \\
+		Vx \in \operatorname{Ker} S^*
+	\end{rcases} \underimp{S(H) \perp \operatorname{Ker} S^*} Sx \perp Vx \implies \\
+	\begin{cases}
+		Sx = 0 \\
+		Vx = 0
+	\end{cases} $$
+	$$ Vx = \sum_{k = 1}^n (x, e_k)  f_k = 0 \implies (x, e_K) = 0 \quad \forall k \implies
+	x \perp \operatorname{Ker} S \underimp{x \in \operatorname{Ker} S} x = 0 $$
+
+	По \ref{thm:alt_fred} $ U(H) = H $.
+	Проверим, что это невозможно для $ n + 1 $, \ie что
+	$$ f_{n + 1} \notin U(H) $$
+
+	Возьмём $ x \in H $.
+	$$ Ux = Sx + Vx $$
+	$$ f_{n + 1} \in \operatorname{Ker} S^* \implies f_{n + 1} \perp S(H) \implies
+	f_{n + 1} \perp Sx $$
+	$$ Vx = \sum (x, e_k) f_k \underimp{f_{n + 1} \perp f_k} f_{n + 1} \perp Vx \implies
+	f_{n + 1} \in \bigl( U(H) \bigr)^\perp = \Set{0} \text{ "--- } \contra $$
+
+	Тем самым, мы доказали, что
+	$$ \dim \operatorname{Ker} S \ge \dim \operatorname{Ker} S^* \ge \dim \operatorname{Ker} S^{**}
+	= \dim \operatorname{Ker} S $$
+\end{proof}
+
+\subsection{Следствие о спектре компактного оператора}
+
+\begin{implication}
+	$ T \in \mathrm{Com}(T) $
+	\begin{enumerate}
+		\item $ \lambda \notin 0, \quad \lambda \in \sigma(T) $
+
+			$$ \lambda \in \sigma_p(T) $$
+		\item $ \lambda \in \sigma_p(T), \quad H_\lambda = \operatorname{Ker}(\lambda I - T), \quad
+			Y_{\ol \lambda} = \operatorname{Ker}(\ol \lambda I - T^*) $
+
+			$$ \dim H_\lambda = \dim Y_{\ol \lambda} < +\infty $$
+		\item
+			$$ \sigma_p(T) \setminus \Set{0} = \Set{\lambda_n}_{n = 1}^N $$
+
+			При этом, если $ N = +\infty $, то
+			$$ \lim\limits_{n \to \infty} \lambda_n = 0 $$
+	\end{enumerate}
+\end{implication}
+
+\section{Самосопряжённые операторы}
+
+\subsection{Простейшие свойства самосопряжённого оператора}
+
+\begin{properties}
+	$ H $ "--- гильбертово, $ \quad T \in \mathscr B(H), \quad T = T^* $ (\ie $ (Tx, y) = (x, Ty) $)
+
+	\begin{enumerate}
+		\item $ (Tx, x) \in \R \quad \forall x $;
+		\item $ \lambda \in \sigma_p(T) \implies \lambda \in \R $;
+		\item $ \lambda, \mu \in \sigma_p(T), \quad Tu = \lambda u, \quad Tv = \mu v $
+			$$ u \perp v $$
+		\item $ \|T\| = \sup\limits_{\|x\| = 1} |(Tx, x)| $;
+	\end{enumerate}
+\end{properties}
+
+\begin{eproof}
+\item
+	$$
+	\begin{rcases}
+		(Tx, x) = \ol{(x, Tx)} \\
+		(Tx, x) = (x, Tx)
+	\end{rcases} \implies (x, Tx) \in \R $$
+\item
+	$$ \lambda \in \sigma_p(T) \implies \exists u \ne 0 $$
+	$$ Tu = \lambda u \implies (Tu, u) = (\lambda u, u) \implies
+	\lambda = \frac{(Tu, u)}{\|u\|^2} \in \R $$
+\item $ Tu = \lambda u, \quad Tv = \mu v, \quad \lambda \ne \mu, \quad u, v \ne 0 $
+	$$
+	\begin{rcases}
+		(Tu, v) = = (\lambda u, v) = \lambda (u, v) \\
+		(Tu, v) = (u, Tv) = (u, \mu v) \undereq{\mu \in \R} \mu (u, v)
+	\end{rcases} \underimp{\text{вычтем}} \underbrace{(\lambda - \mu)}_{\ne 0}(u, v) = 0 \implies
+	u \perp v $$
+\item $ Q = \sup\limits_{\|x\| = 1}|(Tx, x)| $
+	\begin{itemize}
+		\item Пусть $ x \in H, \quad \|x\| = 1 $.
+			$$ |(Tx, x)| \underset{\text{К"--~Б}}\le \|Tx\| \cdot \|x\| \le
+			\|T\| \cdot \underbrace{\|x\| \cdot \|x\|}_{= 1} = \|T\| \quad \forall x : ~ \|x\| = 1 $$
+			$$ \implies Q = \sup\limits_{\|x\| = 1} |(Tx, x)| \le \|T\| $$
+		\item Пусть $ u\in H, \quad u \ne 0 $.
+			\begin{equ}{self_dual_elem_props}
+				\Bigl\| \frac{u}{\|u\|} \Bigr\| = 1 \implies \Bigl| \Bigl\lgroup T
+				\Bigl( \frac{u}{\|u\|} \Bigr), \frac{u}{\|u\|} \Bigr\rgroup \Bigr| \le Q \implies
+				|(Tu, u)| \le Q\|u\|^2 \quad \forall u \in H
+			\end{equ}
+
+			Возьмём $ x, y \in H $.
+			Применим \eref{self_dual_elem_props} к $ (x + y) $ и к $ (x - y) $:
+			$$ \bigl( T(x + y), x + y \bigr) = (Tx, x) + (Tx, y) + (Ty, x) + (Ty, y) \le Q\|x + y\|^2 $$
+			$$ -\bigl( T(x - y), x - y \bigr) = - \bigl( (Tx, x) - (Tx, y) - (Ty, x) + (Ty, y) \bigr) \le
+			Q\|x - y\|^2 $$
+			Сложим эти два неравенства:
+			$$ 2 \bigl( (Tx, y) + (Ty, x) \bigr) \le Q \bigl( \|x + y\|^2 + \|x - y\|^2 \bigr) $$
+			К правой части применим тождество параллелограмма, а левую преобразуем:
+			\begin{multline*}
+				(Tx, y) + (Ty, x) = (Tx, y) + (y, Tx) = (Tx, y) + \ol{(Tx, y)} = 2 \Re (Tx, y) \implies \\
+				\implies 4 \Re (Tx, y) \le Q \cdot 2(\|x\|^2 + \|y\|^2)
+			\end{multline*}
+
+			Выберем $ x : \quad \|x\| = 1 $ такой, что $ Tx \ne 0 $.
+			$$ y \coloneq \frac{Tx}{\|Tx\|} \implies \|y\| = 1 $$
+			Подставим $ x, y $ в неравенство:
+			$$ 4 \Re \Bigl( Tx, \frac{Tx}{\|Tx\|} \Bigr) \le 4Q \implies
+			\|Tx\| \le Q \quad \forall x : ~ \|x\| = 1 \implies \|T\| \le Q $$
+	\end{itemize}
+\end{eproof}
+
+\begin{definition}
+	$ T = T^* $
+	$$ M \coloneq \sup\limits_{\|x\| = 1} (Tx, x), \quad m \coloneq \inf\limits_{\|x\| = 1}(Tx, x) $$
+
+	$ m $ и $ M $ называются \emph{границами} оператора $ T $.
+\end{definition}
+
+\begin{remark}
+	$$ \|T\| = \max\{|M|, |m|\} $$
+\end{remark}
+
+\section{Компактные самосопряжённые операторы}
+
+\begin{theorem}
+	$ H $ "--- гильбертово, $ \quad T = T*, \quad T \in \mathrm{Com}(H) $
+
+	$$ \exists \lambda \in \sigma_p(T) : \quad |\lambda| = \|T\| $$
+\end{theorem}
+
+\begin{proof}
+	$ \|T\| = \sup\limits_{\|x\| = 1}|(Tx, x)| $
+	\begin{itemize}
+		\item $ \|T\| = |M| $
+			$$ M = \sup\limits_{\|x\| = 1}(Tx, x) \implies \exists \Set{x_n}_{n = 1}^\infty : \quad
+			\|x_n\| = 1, \quad \lim(Tx_n, x_n) = M $$
+			$$
+			\begin{rcases}
+				m \le M \\
+				\max\{|M|, |m|\} = |M|
+			\end{rcases} \implies M > 0 $$
+			$$ T \in \mathrm{Com}(H) \implies \exists \Set{n_k}_{k = 1}^\infty : \quad
+			\exists \lim\limits_{k \to \infty} Tx_{n_k} = y $$
+
+			Переименуем: $ \lim\limits_{n \to \infty} Tx_n = y $.
+			Проверим, что $ y $ "--- с. в. $ T $ и $ Ty = My $.
+			\begin{multline*}
+				0 \le \|Tx_n - M \cdot x_n \|^2 = (Tx_n - Mx_n, Tx_n - Mx_n) = \\
+				= \|Tx_n\|^2 - \underbrace{M(Tx_n, x_n)}_{\to M} - \underbrace{M(x_n, Tx_n)}_{\to M} +
+				M^2 \underbrace{\|x_n\|^2}_{= 1} \underarr{n \to \infty} \|y\|^2 - M^2 \implies
+				\|y\| \ge M
+			\end{multline*}
+			$$ \|y\| = \lim \|Tx_n\| \le \|T\| \cdot \|x_n\| = \|T\| = M \implies \|y\| \le M $$
+			$$ \implies \lim M \cdot x_n = \lim Tx_n = y $$
+
+			Воспользуемся тем, что $ T $ непрерывен:
+			$$ M \cdot \lim x_n = y \implies M \underbrace{\lim Tx_n}_{= y} = Ty \implies
+			Ty = My, \implies M \in \sigma_p(T), \quad M = \|T\| $$
+
+		\item $ \|T\| = |m| $
+			\TODO{дописать этот случай}
+	\end{itemize}
+\end{proof}

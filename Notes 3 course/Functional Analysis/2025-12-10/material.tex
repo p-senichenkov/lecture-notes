@@ -1,0 +1,250 @@
+\chapter{Линейные функционалы}
+
+\section{Спектр компактного оператора}
+
+\begin{remark}[воспоминания из алгебры]
+	$ X $ "--- линейное пространство, $ \quad T \in \mathscr Lin(X), \quad
+	\Set{\lambda_j}_{j = 1}^n $ "--- с. ч., \\
+	$ Tx_j = \lambda_j x_j, \quad \lambda_j \ne \lambda_k, \quad x_j $ "--- с. в. ($ x_j \ne 0 $)
+
+	$$ \implies \Set{x_j} \text{ ЛНЗ} $$
+\end{remark}
+
+\begin{theorem}
+	$ X $ "--- банахово, $ \quad T \in \mathrm{Com}(X), \quad \lambda \in \sigma_p(T) $ "--- с. ч.,
+	$ \quad X_\lambda = \operatorname{Ker}(\lambda I - T) $ "--- собств. подпр-во, \\
+	$ \delta > 0 $
+
+	$$ \sum_{
+		\begin{subarray}{c}
+			\lambda \in \sigma_p(T) \\
+			|\lambda| \ge \delta
+		\end{subarray}
+	} \dim(X_\lambda) < +\infty $$
+
+	То есть, число линейно-независимых собственных векторов $ T $, соответствующих собственным
+	числам $ \lambda $, таких, что $ |\lambda| \ge \delta $, конечно.
+\end{theorem}
+
+\begin{proof}
+	\textbf{Пусть} $ \set{x_n}_{n = 1}^\infty $ "--- ЛНЗ с. в.:
+	$$ Tx_n = \lambda_n x_n, \quad |\lambda_n| \ge \delta $$
+
+	Рассмотрим последовательность подпространств:
+	$$ L_n = \mathscr L\Set{x_j}_{j = 1}^n, \quad L_n \subsetneq L_{n + 1} $$
+	$$ \underimp{\text{лемма Рисса}} \exists \Set{y_n}_{n = 1}^\infty : \quad \|y_n\| = 1, \quad
+	\rho(y_{n + 1}, L_n) = \inf\limits_{x \in L_n} \|y_{n + 1} - x\| \ge \frac12 $$
+	(\as $ \dim L_n = n $, то $ \exists y_{n + 1} : \rho(y_{n + 1}, L_n) = 1 $)
+
+	Проверим, что $ \|Ty_n - Ty_m\| \ge \frac\delta2 $.
+	Тогда не будет существовать фундаментальной подпоследовательности $ \Set{Ty_n} $, а значит,
+	и последовательности $ \Set{n_k} $ такой, что $ \exists \lim T y_{n_k} $ "--- \contra с $ T \in
+	\mathrm{Com}(X) $.
+
+	Пусть $ y_n \in L_n, \quad y_n \notin L_{n - 1} $.
+	Тогда $ y_n = \alpha n x_n + u_n, \quad \alpha_n \ne 0, ~ u_n \in L_{n - 1} $.
+	$$ Tx_n = \lambda_n x_n \implies Ty_n = \alpha_n \lambda_n x_n + Tu_n =
+	\lambda_n(\alpha_n x_n + u_n) -
+	\underbrace{\lambda_n u_n + Tu_n}_{ \eqqcolon v_n \in L_{n - 1}} = \lambda_ny_n + v_n $$
+
+	Пусть $ n > m $.
+	$$ Ty_m \in L_n \sub L_{n - 1} $$
+	$$ \|Ty_n - Ty_m\| = \|\lambda_ny_n + v_n - Ty_m\| =
+	|\lambda_n| \Bigl\| y_n - \underbrace{\frac1{\lambda_n}(-v_n + Ty_m)}_{\in L_{n - 1}} \Bigr\|
+	\ge \frac \delta 2 $$
+	Значит, последовательность $ y_n $ не содержит фундаментальных подпоследовательностей.
+\end{proof}
+
+\subsection{Следствие о точечном спектре компактного оператора}
+
+\begin{implication}
+	$ T \in \mathrm{Com} $
+	\begin{enumerate}
+		\item $ \delta > 0 $
+
+			$$ \bigl|\Set{\lambda \in \sigma_p(T) | {} |\lambda| \ge \delta}\bigr| < +\infty $$
+		\item $ \lambda \in \sigma_p(T), \quad \lambda \ne 0, \quad
+			X_\lambda = \operatorname{Ker}(\lambda I - T) $
+
+			$$ \dim X_\lambda <+\infty $$
+		\item $ N $ "--- число собственных чисел.
+
+			Тогда
+			\begin{enumerate}
+				\item $ 0 \le N \le +\infty $ (\ie $ \sigma_p(T) $ не более, чем счётно);
+				\item если $ N = +\infty $, то $ \lim\limits_{n \to \infty} \lambda_n = 0 $.
+			\end{enumerate}
+
+			Их можно занумеровать в порядке убывания модулей.
+	\end{enumerate}
+\end{implication}
+
+\begin{eproof}
+\item Очевидно.
+\item Очевидно.
+\item $ E_n \coloneq \Set{\lambda \in \sigma_n(T) | {} |\lambda| \ge \frac1n}, \quad |E_n| <+\infty $
+	$$ \sigma_p(T) \setminus \Set{0} = \bigcup_{n = 1}^\infty E_n \implies
+	\sigma_p(T) \text{ не более, чем счётно} $$
+	$$ \forall \delta > 0 \quad \Set{\lambda \in \sigma_p(T) | {} |\lambda| > \delta}
+	\text{ конечно } \implies \lim\limits_{n \to \infty}\lambda_n = 0 $$
+\end{eproof}
+
+\begin{remark}
+	$ 0 \in \sigma_p(T) \iff \operatorname{Ker} T \ne \Set{0} \iff T $ не инъекция.
+
+	Если $ T \in \mathrm{Com}(X), \quad \dim X = +\infty $, то $ 0 \in \sigma(T) $.
+\end{remark}
+
+\begin{proof}
+	$$ 0 \in \rho(T) \iff \exists V(0) = -T, \quad \exists T^{-1} \implies T(X) = X
+	\underimp{T \in \mathrm{Com}(X)} \dim X <+\infty $$
+\end{proof}
+
+\section{Теория Фредгольма}
+
+Будем изучать гильбертовы пространства, так как там проще доказательства.
+Всё это верно и для банаховых пространств.
+
+\begin{definition}
+	$ H $ "--- гильбертово, $ \quad T \in \mathrm{Com}(H), \quad S = I - T $
+
+	$ S $ будем называть \emph{оператором Фредгольма}
+\end{definition}
+
+\begin{definition}
+	Рассмотрим серию уравнений:
+	\begin{enumerate}
+		\item \emph{уравнение Фредгольма}: $ Sx = a $;
+		\item \emph{однородное уравнение Фредгольма}: $ Sx = 0 $;
+		\item \emph{сопряжённое уравнение Фредгольма}: $ S^*y = h $;
+		\item \emph{однородное сопряжённое уравнение Фредгольма}: $ S^*y = 0 $.
+	\end{enumerate}
+\end{definition}
+
+$$ \lambda \in \Co \ne 0, \quad V(\lambda) = \lambda I - T = \lambda \Bigl( I - \frac1\lambda T \Bigr) $$
+$$ \frac1\lambda \in \mathrm{Com}(H) \implies I - \frac1\lambda T \text{ "--- оператор Фредгольма} $$
+Значит, свойства $ S $ можно будет распространить на $ V(\lambda) $.
+
+\subsection{Условие разрешимости уравнения Фредгольма}
+
+\begin{theorem}
+	$ H $ "--- гильбертово, $ \quad T \in \mathrm{Com}(H), \quad S = I - T $
+
+	\begin{enumerate}
+		\item $ S(H) $ замкнуто;
+		\item $ S^*(H) $ замкнуто;
+		\item $ H = S(H) \oplus \operatorname{Ker} S^* $;
+		\item $ H = S^*(H) \oplus \operatorname{Ker}(S) $.
+	\end{enumerate}
+\end{theorem}
+
+\begin{remark}
+	3. и 4. эквивалентны тому, что
+
+	Уравнение $ Sx = a $ разрешимо \textbf{для тех и только тех} $ a $, которые
+	ортогональны решениям однородного сопряжённого уравнения Фредгольма $ S^*y = 0 $.
+\end{remark}
+
+\begin{lemma}[об ограниченных проообразах]
+	В условиях теоремы $ \Set{y_n \in S(H)}_{n = 1}^\infty $ ограничена
+
+	$$ \exists \Set{x_n}_{n = 1}^\infty : \quad \Set{x_n} \text{ ограничена}, \quad
+	Sx_n = y_n $$
+\end{lemma}
+
+\begin{proof}
+	$ M = \operatorname{Ker} S, \quad L = M^\perp, \quad H = M \oplus L $
+	$$ S(M) = 0 \implies S(H) = S(L) $$
+	$$ y \in S(H) \implies \exists! x \in L : \quad Sx = y $$
+	$$ \forall y_n \quad \exists x_n \in L : \quad Sx_n = y_n $$
+
+	Проверим, что $ \Set{x_n} $ ограничена.
+	\textbf{Пусть} это не так, \ie
+	$$ \exists \Set{n_k}_{k = 1}^\infty : \quad \lim\|x_{n_k}\| = +\infty $$
+	НУО будем считать, что сама последовательность $ \Set{x_n} $ обладает таким свойством:
+	$$ \lim\|x_n\| = +\infty $$
+
+	Возьмём последовательность
+	$$ \left\{\frac{x_n}{\|x_n\|}\right\}_{n = 1}^\infty $$
+	$$ T \in \mathrm{Com}(H) \implies \exists \Set{n_k} : \quad \exists
+	\lim T \Bigl( \frac{x_{n_k}}{\|x_{n_k}\|} \Bigr) \eqqcolon z_0 $$
+	\begin{multline*}
+		y_{n_k} = S(x_{n_k}) = x_{n_k} - T(x_{n_k}) \implies
+		\underbrace{\frac{y_{n_k}}{\|x_{n_k}\|}}_{\underarr{k \to \infty} 0} =
+		\frac{x_{n_k}}{\|x_{n_k}\|} -
+		\underbrace{T \Bigl( \frac{x_n}{\|x_{n_k}\|} \Bigr)}_{\underarr{k \to \infty} z_0}
+		\implies \\
+		\implies \lim\limits_{k \to \infty} \Bigl( \frac{x_{n_k}}{\|x_{n_k}\|} \Bigr) =
+		z_0 \underimp{T \in \mathscr B(H)} \lim\limits_{k \to \infty} T
+		\Bigl( \frac{x_{n_k}}{\|x_{n_k}\|} \Bigr) = T(z_0) \implies \\
+		\implies z_0 = T(z_0) \implies S(z_0) = z_0 - Tz_0 = 0 \implies z_0 \in M =
+		\operatorname{Ker} S
+	\end{multline*}
+	$$ \frac{x_{n_k}}{\|x_{n_k}\|} \in L \text{ "--- замкнуто}, \quad
+	\lim \frac{x_{n_k}}{\|x_{n_k}\|} = z_0 \implies z_0 \in L, \quad \|z_0\| = 1 $$
+	При этом, $ z_0 \in L \cap M \implies z_0 = 0 $ "--- \contra.
+\end{proof}
+
+\begin{replacementproof}[теоремы]
+	\hfill
+	\begin{enumerate}
+		\item 	Докажем, что $ S(H) $ замкнуто.
+			Возьмём $ \Set{y_n \in S(H)}_{n = 1}^\infty : \quad \exists \lim\limits_{n \to \infty} y_0 $.
+			$$ \exists \lim y_n \implies \Set{y_n} \text{ ограничена } \underimp{\text{лемма}}
+			\exists \Set{x_n \in H} : \quad \Set{x_n} \text{ ограничена}, \quad Sx_n = y_n $$
+			$$ T \in \mathrm{Com}(H) \implies \exists \Set{n_k} : \quad \lim T_{x_{n_k}} = z_0 $$
+			$$ \underbrace{y_{n_k}}_{\to y_0} = S(x_{n_k}) = x_{n_k} - \underbrace{Tx_{n_k}}_{\to z_0} $$
+			$$ \implies \exists \lim\limits_{k \to \infty} x_{n_k} = x_0
+			\underimp{T \in \mathscr B(H)}
+			\lim T(x_{n_k}) = Tx_0 $$
+			$$ \implies z_0 = Tx_0 \implies y_0 = x_0 - Tx_0 = S(x_0) \implies y_0 \in S(H) $$
+		\item $ S^* = I - T^*, \quad T^* \in \mathrm{Com}(H) \implies S^*(H) $ замкнуто.
+		\item
+			$$ \forall A \in \mathscr B(H) \quad H = \ol{A(H)} \oplus \operatorname{Ker} A^* $$
+			$$ S(H) = \ol{S(H)} \implies H = S(H) \oplus \operatorname{Ker} S^* $$
+		\item Аналогично.
+	\end{enumerate}
+\end{replacementproof}
+
+\subsection{Альтернатива Фредгольма}
+
+\begin{theorem}
+	$$ \operatorname{Ker} S = \Set{0} \iff S(H) = H $$
+\end{theorem}
+
+\begin{restate}
+	Оператор $ S $ "--- инъекция \textbf{тогда и только тогда}, когда $ S $ "--- сюръекция.
+	Из любого из этих выражений следует, что $ S $ "--- биекция.
+\end{restate}
+
+\begin{restate}
+	\hfill
+	\begin{itemize}
+		\item \textbf{Либо} уравнение Фредгольма разрешимо для любой правой части и решение
+			единственно.
+		\item \textbf{Либо} существует ненулевое решение уравнения Фредгольма.
+	\end{itemize}
+\end{restate}
+
+\begin{lemma}[о стабилизации]
+	$ k \ge 0, \quad H_{k + 1} \coloneq S(H_k) $
+
+	$$ \exists n \ge 0 : \quad H_n = H_{n + 1} $$
+\end{lemma}
+
+\begin{proof}
+	\textbf{Допустим}, что $ H_{k + 1} \subseteq H_k $.
+	$$ \implies H_k = H_{k + 1} \oplus
+	\underbrace{H_{k + 1}^\perp}_{\text{ортогональное дополнение в } H_k} $$
+	$$ \implies \exists x_k \in H_k : \quad \|x_k\| = 1, \quad x_k \perp H_{k + 1} $$
+
+	Пусть $ n > m $.
+	Хотим оценить разность $ \|Tx_n - Tx_m\| $.
+	$$ Sx_n - Sx_m = x_n - Tx_n - x_m + Tx_m $$
+	$$ Sx_n = x_n - Tx_n $$
+	$$ \|Tx_n - Tx_m\| = \|x_n - Sx_n - x_m + Sx_m\| \ge 1 $$
+	$$ Sx_n \in H_{n + 1}, \quad Sx_m \in H_{m + 1} $$
+	$$ x_n, Sx_n, Sx_m \in H_{m + 1} \implies x_m \perp H_{m + 1} $$
+	Значит, не существует $ \Set{Tx_{n_k}} : \quad \exists \lim T_{x_{n_k}}, \quad
+	T \in \mathrm{Com}(H) $ "--- \contra.
+\end{proof}

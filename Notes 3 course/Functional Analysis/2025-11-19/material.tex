@@ -1,0 +1,258 @@
+\chapter{Линейные функционалы}
+
+\section{Обратные операторы}
+
+\begin{quote}
+	\raggedleft
+	Когда существует непрерывный обратный оператор?
+\end{quote}
+
+\subsection{Обратимость оператора, близкого к тождественному}
+
+\begin{statement}\label{inv:st:1}
+	$ A, B \in \mathscr B(X) $
+
+	$$ \|AB\| \le \|A\| \cdot \|B\| $$
+\end{statement}
+
+\begin{proof}
+	$$ \|A(Bx)\| \le \|A\| \cdot \|Bx\| \le \|A\| \cdot \|B\| \cdot \|x\| $$
+\end{proof}
+
+\begin{theorem}
+	$ X $ "--- банахово, $ \quad I $ "--- тождественный, $ \quad A \in \mathscr B(X), \quad
+	\|A\| < 1 $
+
+	$$ \exists (I - A)^{-1}, \quad \|(I - A)^{-1}\| \le \frac1{1 - \|A\|}, \quad
+	(I - A)^{-1} = \sum_{k = 0}^\infty A^k $$
+\end{theorem}
+
+\begin{proof}
+	Проверим, что сумма норм операторов сходится.
+	По \autoref{inv:st:1}
+	$$ \|A^k\| \le \|A\|^k \implies \sum_{k = 0}^\infty \|A^k\| \le \sum_{k = 0}^\infty \|A\|^k =
+	\frac1{1 - \|A\|} $$
+	$ X $ "--- банахово $ \implies \mathscr B(X) $ "--- банахово.
+	Воспользуемся критерием полноты:
+	$$ \implies \exists S = \sum_{k = 0}^\infty A^k \in \mathscr B(X) $$
+	$$ S_n \coloneq \sum_{k = 0}^n A^k $$
+	$$ \|S_n\| \le \sum_{k = 0}^n \|A\|^k < \frac1{1 - \|A\|}, \quad
+	\lim\limits_{n \to \infty} \|S - S_n\| = 0 $$
+	$$ \implies \|S\| \le \frac1{1 - \|A\|} $$
+
+	$$ (I - A)S_n = (I - A) \sum_{k = 0}^n A^k = \sum_{k = 0}^n A^k - \sum_{k = 0}^n A^{k + 1} =
+	I - A^{n + 1} $$
+	$$ \lim\limits_{n \to \infty} \|A^{n + 1}\| = 0 \implies \lim (I - A^{n + 1}) = I $$
+	$$
+	\begin{rcases}
+		\begin{rcases}
+			\lim(I - A)S_n = I \\
+			\lim(I - A)S_n = (I - A)S
+		\end{rcases} \implies (I - A)S = I \\
+		S_n(I - A) = I - A^{n + 1} \implies S(I - A) = I
+	\end{rcases} \implies S = (I - A)^{-1} $$
+\end{proof}
+
+\begin{remark}
+	Если $ A \cdot B = I $, то \textbf{не обязательно} $ A = B^{-1} $.
+\end{remark}
+
+\begin{eg}
+	$ l^2, \quad x \in l^2, \quad x = (x_1, x_2, \dotsc) $
+	Рассмотрим \emph{операторы сдвига}:
+	$$ Sx = (0, x_1, x_2, \dotsc), \quad Tx = (x_2, x_3, \dotsc) $$
+	$$ (ST)x = (0, x_2, x_3, \dotsc), \quad (TS)x = x $$
+\end{eg}
+
+\begin{definition}
+	$ (X, \|\cdot\|), ~ (Y, \|\cdot\|) $
+
+	Определим \emph{множество обратимых операторов}:
+	$$ \mathrm{In}(X, Y) = \Set{A \in \mathscr B(X, Y) | \exists A^{-1} \in \mathscr B(Y, X)} $$
+\end{definition}
+
+\subsection{Множество обратимых операторов открыто}
+
+\begin{theorem}
+	$ X $ "--- банахово, $ \quad (Y, \|\cdot\|) $
+	\begin{enumerate}
+		\item $ U \in \mathrm{In}(X, Y), \quad V \in \mathscr B(X, Y), $
+			$$ \|U - V\| < \frac1{\|U^{-1}\|} $$
+
+			$$ \implies V \in \mathrm{In}(X, Y), $$
+			\begin{equ}1
+				\|V^{-1}\| \le \frac{\|U^{-1}\|}{1 - \|U - V\| \cdot \|U^{-1}\|}
+			\end{equ}
+			\begin{equ}2
+				\|U^{-1} - V^{-1}\| \le \frac{\|U^{-1}\|^2 \|U - V\|}{1 - \|U - V\| \cdot \|U^{-1}\|}
+			\end{equ}
+		\item $ \phi : \mathrm{In}(X, Y) \to \mathrm{In}(Y, X) : \quad \phi(A) = A^{-1} $
+
+			Тогда $ \phi $ непрерывно.
+	\end{enumerate}
+\end{theorem}
+
+\begin{remark}
+	$ \mathtt B_{\frac1{\|U^{-1}\|}}(U) \sub \mathrm{In}(X, Y) \implies \mathrm{In}(X, Y) $ открыто.
+\end{remark}
+
+\begin{eproof}
+\item Рассмотрим оператор $ W = U^{-1}(U - V) $.
+	$$ \|W\| \le \|U^{-1}\| \cdot \|U - V\| < 1, \quad W \in \mathscr B(X) $$
+	Можно применить предыдущую теорему:
+	$$ \exists (I - W)^{-1}, \quad \|(I - W)^{-1}\| \le \frac1{1 - \|W\|} \le
+	\frac1{1 - \|U^{-1}\| \|U - V\|} $$
+	$$ W = U^{-1}(U - V) = I - U^{-1}V \implies I - W = U^{-1}V $$
+	$$ V = U(U^{-1}V) = U(I - W) $$
+	Каждый их них обратим, значит,
+	$$ \exists V^{-1} = (I - W)^{-1}U^{-1} $$
+	$$ \|V^{-1}\| \le \|U^{-1}\| \cdot \|(I - W)^{-1}\| \le
+	\frac{\|U^{-1}\|}{1 - \|U^{-1}\| \cdot \|U - V\|} $$
+	Получили неравенство \eref{1}.
+	Получим из него неравенство \eref{2}:
+	$$ U^{-1} - V^{-1} = U^{-1}(V - U)V^{-1} \implies
+	\|U^{-1} - V^{-1}\| \le \|U^{-1}\| \|V - U\| \|V^{-1}\| \underset{\eref{1}}\le
+	\frac{\|U^{-1}\|^2 \|U - V\|}{1 - \|U^{-1}\| \cdot \|U - V\|} $$
+\item $ \phi(U) = U^{-1} $
+	$$ \phi(U) - \phi(V) = U^{-1} - V^{-1} \underimp{\eref{2}}
+	\lim\limits_{\|U - V\| \to 0}\|\phi(U) - \phi(V)\| = 0 $$
+\end{eproof}
+
+\section{Открытые отображения}
+
+\begin{definition}
+	$ (X, \tau_1), ~ (Y, \tau_2) $ "--- топологические пространства
+
+	Отображение $ U : X \to Y $ \emph{открыто}, если оно переводит открытые множества в открытые:
+	$$ G \sub X \text{ открыто } \implies U(G) \text{ открыто} $$
+\end{definition}
+
+\begin{remark}
+	$ U $ непрерывно, если \textbf{прообраз} открытого множества открыт.
+\end{remark}
+
+\begin{statement}
+	$ (X< \tau_1), ~ (Y, \tau_2) $ "--- топологические пространства, $ \quad
+	U : X \to Y $ "--- биекция
+
+	$$ U \text{ открыто } \iff U^{-1} \text{ непрерывно} $$
+\end{statement}
+
+\begin{proof}
+	Очевидно.
+\end{proof}
+
+\subsection{Критерий открытости линейного оператора}
+
+\begin{statement}
+	$ (X, \|\cdot\|), ~ (Y, \|\cdot\|), \quad U \in \mathscr Lin(X, Y) $
+
+	$$ U \text{ открыт } \iff \exists r > 0 : \quad
+	\mathtt B_r(0) \sub U \bigl( \mathtt B_1(0) \bigr) $$
+\end{statement}
+
+\begin{iproof}
+\item $ \implies $
+	$$
+	\begin{rcases}
+		U(0) = 0 \\
+		U \text{ открыто } \implies U \bigl( \mathtt B_1(0) \bigr) \text{ открыто }
+	\end{rcases} \implies 0 \in U \bigl( \mathtt B_1(0) \bigr) \implies
+	\exists r > 0 : \quad \mathtt B_r(0) \sub U \bigl( \mathtt B_1(0) \bigr) $$
+\item $ \impliedby $
+
+	Возьмём $ G \sub X $ "--- открытое.
+	Пусть $ y_0 \in U(G) $.
+	$$ \exists x_0 \in G : \quad Ux_0 = y_0 $$
+	$$ \exists R > 0 : \quad \mathtt B_R(x_0) \sub G $$
+	$$ \mathtt B_r(0) \sub U \bigl( \mathtt B_1(0) \bigr) \underimp{\text{линейность}}
+	\mathtt B_{rR}(0) \sub U \bigl( \mathtt B_R(0) \bigr) $$
+	Сдвинем на $ U(x_0) $:
+	$$ \underbrace{Ux_0 + \mathtt B_{rR}(0)}_{\mathtt B_{rR}(Ux_0) \sub
+	U(\mathtt B_R(x_0)) \sub U(G)} \sub
+	Ux_0 + U \bigl( \mathtt B_R(0) \bigr) = U \bigl( x_0 + \mathtt B_R(0) \bigr) =
+	U \bigl( \mathtt B_R(x_0) \bigr) $$
+	$ \implies Ux_0 $ "--- внутренняя точка $ U(G) $.
+\end{iproof}
+
+\subsection{Необходимое условие открытости линейного отображения}
+
+\begin{implication}
+	$ (X, \|\cdot\|), ~ (Y, \|\cdot\|), \quad U \in \mathscr Lin(X, Y) $
+
+	$$ U \text{ открыто } \implies U(X) = Y \text{, \ie $ U $ "--- сюръекция} $$
+\end{implication}
+
+\begin{proof}
+	По критерию $ \exists r > 0 : \quad \mathtt B_r(0) \sub U \bigl( \mathtt B_1(0) \bigr) $.
+	Возьмём $ y \in Y $.
+	$$ \exists n \in \mathbb N : \quad \|y\| < nr \implies y \in \mathtt B_{nr}(0) \sub
+	U \bigl( \mathtt B_n(0) \bigr) \implies y \in U(X) $$
+\end{proof}
+
+\subsection{Теорема об открытом отображении}
+
+\begin{lemma}[редукция]
+	$ X $ "--- банахово, $ \quad (Y, \|\cdot\|), \quad U \in \mathscr B(X, Y), \quad
+	\exists r > 0 : \quad \mathtt B_r(0) \sub \ol{U \bigl( \mathtt B_1(0) \bigr)} $
+
+	$$ \mathtt B_{\frac r2}(0) \sub U \bigl( \mathtt B_1(0) \bigr) $$
+\end{lemma}
+
+\begin{proof}
+	Пусть $ y \in \mathtt B_{\frac r2}(0) $, \ie $ \|y\| < \frac r2 $.
+	Докажем, что $ \exists x : \quad \|x\| < 1, \quad Ux = y $.
+	$$ \mathtt B_r(0) \sub \ol{U \bigl( \mathtt B_1(0) \bigr)} \implies
+	\forall k \in \mathbb N \quad \mathtt B_{\frac r {2^k}}(0) \sub
+	\ol{U \bigl( \mathtt B_{\frac1{2^k}}(0) \bigr)} $$
+	\begin{itemize}
+		\item При $ k = 1 $
+			$$ \|y\| < \frac r 2 \implies y \in \mathscr B_{\frac r 2}(0) \sub
+			\ol{U \bigl( \mathtt B_{\frac12}(0) \bigr)} $$
+			$$ \exists x_1 : \quad \|x_1\| < \frac12, \quad \|y - Ux_1\| < \frac r 4 $$
+		\item $ k = 2 $
+			$$ y - Ux_1 \in \mathtt B_{\frac r 4}(0) \sub
+			\ol{U \bigl( \mathtt B_{\frac14}(0) \bigr)} \implies
+			\exists x_2 : \quad \|x_2\| < \frac14, \quad \|y - Ux_1 - Ux_2\| < \frac r {2^3} $$
+			$$ \dots $$
+		\item Построим $ \Set{x_n}_{n = 1}^\infty $ такую, что
+			$$ \|x_n\| < \frac1{2^n}, \quad \|y - Ux_1 - \dots - Ux_n\| < \frac r {2^{n + 1}} $$
+	\end{itemize}
+	$$ \sum_{n = 1}^\infty \|x_n\| < 1 \underimp{\text{критерий полноты}}
+	\exists x = \sum_{n = 1}^\infty x_n \in X, \quad \|x\| < 1 $$
+	$$ S_n \coloneq \sum_{k = 1}^n x_k $$
+	$$
+	\begin{rcases}
+		\lim S_n = x \implies \lim US_n = Ux \\
+		\lim \|y - US_n\| = 0 \implies \lim US_n = y
+	\end{rcases} \implies Ux = y $$
+\end{proof}
+
+\begin{theorem}[Банах]
+	$ X, Y $ "--- банаховы, $ \quad U \in \mathscr B(X, Y) $
+
+	Если $ U(X) = Y $, то $ U $ открыто.
+\end{theorem}
+
+\begin{proof}
+	Обозначим $ B = \mathtt B_1(0) $.
+	$$ X = \bigcup_{n = 1}^\infty (nB) \implies U(X) = Y = \bigcup_{n = 1}^\infty U(nB) $$
+	По теореме Бэра о категориях
+	$$ \exists n_0 \in \mathbb N : \quad \operatorname{Int} \ol{U(n_0B)} \ne \emptyset $$
+	При этом, $ U(n_0B) = n_0U(B) $.
+	$$ \implies \operatorname{Int} \ol{U(B)} \ne \emptyset \implies
+	\exists a \in Y ~ \exists y > 0 : \quad \mathtt B_r(a) \sub \ol{U(B)} $$
+
+	Чтобы воспользоваться леммой, нужно сдвинуть точку $ a $ в 0.
+
+	Возьмём $ z \in X : \quad \|z\| < r $.
+	$$
+	\begin{rcases}
+		a + z \in \mathscr B_r(a) \sub \ol{U(B)} \\
+		a \in \ol{U(B)} \implies -a \in \ol{U(B)}
+	\end{rcases} \implies z = (a + z) + (-a) \in
+	\ol{U(B)} + \ol{U(B)} \sub \ol{U(2B)} $$
+	Воспользуемся подобием:
+	$$ \mathtt B_{\frac r2} \sub \ol{U(B)} \underimp{\text{лемма}}
+	\mathtt B_{\frac r4}(0) \sub U(B) $$
+\end{proof}

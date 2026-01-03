@@ -1,0 +1,272 @@
+\chapter{Линейные функционалы}
+
+\section{Спектр оператора}
+
+\begin{definition}
+	$ X $ "--- банахово, $ \quad T \in \mathscr B(X) $
+
+	Определим \emph{спектральный радиус}:
+	$$ r(T) = \max\limits_{\lambda \in \sigma(T)}|\lambda| $$
+\end{definition}
+
+\begin{statement}
+	$$ r(T) = \lim\limits_{n \to \infty} \sqrt[n]{\|T^n\|} $$
+\end{statement}
+
+\begin{noproof}
+\end{noproof}
+
+По теореме о свойствах резольвенты,
+$$ r(T) \le \|T\| $$
+
+\section{Компактные операторы}
+
+\begin{definition}
+	$ X, Y $ "--- банаховы, $ \quad T \in \mathscr Lin(X, Y) $
+
+	$ T $ называется \emph{компактным}, если $ T \bigl( \mathtt B_1(0) \bigr) $ относительно
+	компактен.
+\end{definition}
+
+\begin{notation}
+	$ \mathrm{Com}(X, Y) $ "--- множество компактных операторов.
+\end{notation}
+
+\begin{props}
+	\item $ \mathrm{Com}(X, Y) \sub \mathscr B(X, Y) $
+	\item $ T \in \mathrm Com(X, Y), \quad A \sub X $ ограничено
+		$$ T(A) \text{ относительно компактно} $$
+	\item $ T \in \mathrm{Com}(X, Y) $ \textbf{тогда и только тогда}, когда
+		$$ \Set{x_n \in X}_{n = 1}^\infty \text{ "--- ограниченная } \implies \exists
+		\Set{n_k}_{k = 1}^\infty : \quad \exists \lim\limits_{k \to \infty}T_{n_k} \in Y $$
+\end{props}
+
+\begin{eproof}
+\item $ T \in \mathrm{Com}(X, Y) $
+
+	Обозначим $ B = \mathtt B_1^X(0) $.
+	$$ \implies \ol{T(B)} \text{ "--- компакт } \implies T(B) \text{ ограничено } \implies T \in
+	\mathscr B(X, Y) $$
+\end{eproof}
+
+\begin{definition}
+	$ X, Y $ "--- банаховы, $ T \in \mathscr B(X, Y) $
+
+	Если $ \dim T(X) \le +\infty $, то $ T $ называется \emph{оператором конечного ранга}.
+\end{definition}
+
+\begin{eg}
+	$ X, Y $ "--- банаховы, $ \quad f_1, \dots, f_n \in X^*, \quad y_1, \dots, y_n \in Y $
+
+	Для $ x \in X $ определим
+	$$ Tx = \sum_{j = 1}^n f_j(x) y_j $$
+
+	$$ T(x) \sub \mathscr L \Set{y_j}_{j = 1}^n \implies \dim T(X) \le n \implies
+	T \text{ "--- конечного ранга} $$
+
+	Все операторы конечного ранга имеют такой вид.
+\end{eg}
+
+\begin{statement}
+	$ X, Y $ "--- банаховы, $ \quad T $ "--- конечного ранга
+
+	$$ T \in \mathrm{Com}(X, Y) $$
+\end{statement}
+
+\begin{proof}
+	$ B \coloneq \mathtt B_1^X(0) $
+	\begin{multline*}
+		T(B) \sub T(X) \implies T(B) \text{ "--- ограниченное множество в конечномерном пр-ве }
+		\implies \\
+		\implies T(B) \text{ относительно компактно}
+	\end{multline*}
+\end{proof}
+
+\subsection{Замкнутое подпространство образа компактного оператора конечномерно}
+
+\begin{theorem}
+	$ X, Y $ "--- банаховы, $ \quad T \in \mathrm{Com}(X, Y), \quad L \sub T(X) $ "--- замкнутое
+	подпространство
+
+	$$ \dim L < +\infty $$
+\end{theorem}
+
+\begin{iproof}
+\item $ T(X) $ "--- замкнутое подпространство $ Y $
+	\begin{multline*}
+		T \in \mathscr B(X, T(X)), \quad T(X) \text{ "--- банахово } \underimp{\text{т. Банаха об
+		откр. отобр.}} T \text{ открыто } \implies \\
+		\exists r > 0 : \quad \mathtt B_r^{T(x)}(0) \sub \underbrace{T(B)}_{\text{отн. комп.}}
+		\implies \mathtt B_r^{T(x)}(0) \text{ относительно компактно } \underimp{\text{т. Рисса}}
+		\dim T(X) < +\infty
+	\end{multline*}
+\item $ L \sub T(X) $ "--- замкнутое подпространство
+
+	Обозначим $ X_1 = T^{-1}(L) $ (прообраз)
+	$$ T \in \mathscr B(X, Y) \underimp{L \text{ замкнуто}} T^{-1}(L) \text{ замкнуто в } X \implies
+	X_1 \text{ замкнуто } \implies X_1 \text{ "--- банахово} $$
+	По первой части доказательства
+	$$ T(x_1) = L \implies \dim L < +\infty $$
+\end{iproof}
+
+\subsection{Арифметические операции и предельный переход в пространстве компактных операторов}
+
+\begin{theorem}
+	\hfill
+	\begin{enumerate}
+		\item $ X, Y $ "--- банаховы пространства
+			$$ \mathrm{Com}(X, Y) \text{ "--- замкнутое подпространство } \mathscr B(X, Y) $$
+		\item $ X, Y, Z $ "--- банаховы, $ \quad X \xrightarrow T Y \xrightarrow S Z $
+			\begin{enumerate}
+				\item $ T \in \mathrm{Com}(X, Y), \quad S \in \mathscr B(Y, Z) $
+					$$ ST \in \mathrm{Com}(X, Z) $$
+				\item $ T \in \mathscr B(X, Y), \quad S \in \mathrm{Com}(Y, Z) $
+					$$ ST \in \mathrm{Com}(X, Z) $$
+			\end{enumerate}
+	\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+	Обозначим $ B = \mathtt B_1^X(0) $.
+	\begin{enumerate}
+		\item
+			\begin{itemize}
+				\item $ \alpha \in \Co, \quad T \in \mathrm{Com}(X, Y) \implies
+					\alpha T \in \mathrm{Com}(X, Y) $ "--- очевидно
+				\item Возьмём $ T, S \in \mathrm{Com}(X, Y) $.
+
+					$ T(B) $ относительно компактно $ \implies T(B) $ вполне ограничено.
+					Возьмём $ \eps > 0 $ и рассмотрим $ \eps $-сети:
+					$$ \exists E \sub Y \text{ "--- конечная $ \eps $-сеть для } T(B) $$
+					$$ \exists F \sub Y \text{ "--- конечная $ \eps $-сеть для } S(B) $$
+					\begin{multline*}
+						E + F = \Set{e + f | e \in E, ~ f \in F} \text{ "--- конечное, $ 2\eps $-сеть для }
+						T(B) + S(B) \implies \\
+						\implies T(B) + S(B) \text{ относительно компактно}
+					\end{multline*}
+					$$ (T + S)(B) \sub T(B) + S(B) \implies (T + S)(B) \text{ относительно компактно}
+					\implies T + S \in \mathrm{Com}(X, Y) $$
+				\item $ \Set{T_n \in \mathrm{Com}(X, Y)}_{n = 1}^\infty, \quad
+					\lim\limits_{n \to \infty}\|T_n - T\| = 0 $
+
+					Возьмём $ \eps > 0 $.
+					$$ \exists n \in \N : \quad \|T - T_n\| < \eps $$
+					При этом, $ T_n(B) $ относительно компактно.
+					$$ \implies \exists E \text{ "--- конечная $ \eps $-сеть для } T_n(B) $$
+
+					Проверим, что $ E $ "--- $ \eps $-сеть для $ T(B) $.
+					Возьмём $ x \in B $.
+					$$ \exists e \in E : \quad \|T_nx - e\| < \eps $$
+					$$ \|Tx - e\| \trile \|Tx - T_nx\| + \|T_nx - e\| \le
+					\underbrace{\|T - T_n\|}_{< \eps} \cdot \underbrace{\|x\|}_{< 1} + \eps <
+					2\eps $$
+					Значит, $ T(B) $ вполне ограничено и относительно компактно.
+			\end{itemize}
+		\item $ X, Y, Z $
+			\begin{enumerate}
+				\item $ T \in \mathrm{Com}(X, Y) $
+					$$ T(B) \text{ относительно компактно }, \quad S \in \mathscr B(Y, Z) $$
+					$$ \underimp{\text{непр. } S} S \bigl( T(B) \bigr)
+					\text{ относительно компактно} \implies ST \in \mathrm{Com}(X, Z) $$
+				\item $ T \in \mathscr B(X, Y) $
+					$$ \implies T(B) \text{ ограничено}, \quad S \in \mathrm{Com}(X, Y) $$
+					$$ \implies S \bigl( T(B) \bigr) \text{ относительно компактно} $$
+			\end{enumerate}
+	\end{enumerate}
+\end{proof}
+
+\begin{implication}
+	$ X $ "--- банахово
+
+	Тогда $ \mathrm{Com}(X) $ "--- \emph{двусторонний замкнутый идеал алгебры } $ \mathscr B(X) $.
+\end{implication}
+
+\subsection{Компактность сопряжённого оператора}
+
+\begin{theorem}
+	$ H $ "--- гильбертово
+	$$ T \in \mathrm{Com}(H) \iff T^* \in \mathrm{Com}(H) $$
+	($ T^* $ "--- эрмитово сопряжённый)
+\end{theorem}
+
+\begin{iproof}
+\item $ T \in \mathrm{Com}(H) $
+
+	Возьмём $ x \in H $.
+	\begin{equ}{comp_dual:1}
+		\|T^*x\|^2 = (T^*x, T^*x) = (TT^*x, x) \underset{\text{К"--~Б}}\le \|TT^*x\| \cdot \|x\|
+	\end{equ}
+
+	Возьмём $ \Set{x_n \in H}_{n = 1}^\infty $ такую, что
+	$$ \exists M > 0 : \quad \|x_n\| \le \quad \forall n \in \N $$
+
+	Проверим, что $ \exists \Set{n_k} : \quad \exists \lim T^*x_{n_k} $.
+	\begin{multline*}
+		\begin{rcases}
+			T \in \mathrm{Com}(H) \\
+			T^* \in \mathscr B(H)
+		\end{rcases} \implies TT^* \in \mathrm{Com}(H) \implies \exists \Set{n_k} : \quad
+		\exists \lim TT^*x_{n_k} \implies \\
+		\implies \Set{TT^*x_{n_k}} \text{ фундаментальна}
+	\end{multline*}
+	\begin{multline*}
+		\|T^*x_{n_k} - T^*x_{n_j}\|^2 = \bigl\| T^*(x_{n_k} - x_{n_j}) \bigr\|^2
+		\underset{\eref{comp_dual:1}}\le
+		\underbrace{\|(TT^*)(x_{n_k}) - TT^*x_{n_j}\|}_{\underarr{k, j \to \infty} 0} \cdot
+		\underbrace{\|x_{n_k} - x_{n_j}\|}_{\le 2M} \implies \\
+		\implies \Set{T^*x_{n_k}} \text{ фундаментальна } \implies \exists \lim T^*x_{n_k}
+		\implies T^* \in \mathrm{Com}(H)
+	\end{multline*}
+\item $ T^* \in \mathrm{Com}(H) \implies T = T^{**} \in \mathrm{Com}(H) $
+\end{iproof}
+
+\begin{remark}
+	$ X, Y $ "--- банаховы
+
+	$$ T \in \mathrm{Com}(X, Y) \iff T^* \in \mathrm{Com}(Y^*, X^*) $$
+\end{remark}
+
+\begin{noproof}
+\end{noproof}
+
+\section{Спектр компактного оператора}
+
+\begin{remark}[воспоминания из алгебры]
+	$ X $ "--- линейное пространство, $ \quad T \in \mathscr Lin(X), \quad
+	\Set{\lambda_j}_{j = 1}^n $ "--- с. ч., \\
+	$ Tx_j = \lambda_j x_j, \quad \lambda_j \ne \lambda_k, \quad x_j $ "--- с. в. ($ x_j \ne 0 $)
+
+	$$ \implies \Set{x_j} \text{ ЛНЗ} $$
+\end{remark}
+
+\begin{theorem}
+	$ X $ "--- банахово, $ \quad T \in \mathrm{Com}(X), \quad \lambda \in \sigma_p(T) $ "--- с. ч.,
+	$ \quad X_\lambda = \operatorname{Ker}(\lambda I - T) $ "--- собств. подпр-во, \\
+	$ \delta > 0 $
+
+	$$ \sum_{
+		\begin{subarray}{c}
+			\lambda \in \sigma_p(T) \\
+			|\lambda| \ge \delta
+		\end{subarray}
+	} \dim(X_\lambda) < +\infty $$
+
+	То есть, число линейно-независимых собственных векторов $ T $, соответствующих собственным
+	числам $ \lambda $, таких, что $ |\lambda| \ge \delta $, конечно.
+\end{theorem}
+
+\begin{proof}
+	\textbf{Пусть} $ \set{x_n}_{n = 1}^\infty $ "--- ЛНЗ с. в.:
+	$$ Tx_n = \lambda_n x_n, \quad |\lambda_n| \ge \delta $$
+
+	Рассмотрим последовательность подпространств:
+	$$ L_n = \mathscr L\Set{x_j}_{j = 1}^n, \quad L_n \subsetneq L_{n + 1} $$
+	$$ \underimp{\text{лемма Рисса}} \exists \Set{y_n}_{n = 1}^\infty : \quad \|y_n\| = 1, \quad
+	\rho(y_{n + 1}, L_n) = \inf\limits_{x \in L_n} \|y_{n + 1} - x\| \ge \frac12 $$
+	(\as $ \dim L_n = n $, то $ \exists y_{n + 1} : \rho(y_{n + 1}, L_n) = 1 $)
+
+	Проверим, что $ \|Ty_n - Ty_m\| \ge \frac\delta2 $.
+	Тогда не будет существовать фундаментальной подпоследовательности $ \Set{Ty_n} $, а значит,
+	и последовательности $ \Set{n_k} $ такой, что $ \exists \lim T y_{n_k} $ "--- \contra с $ T \in
+	\mathrm{Com}(X) $.
+\end{proof}

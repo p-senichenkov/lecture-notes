@@ -1,0 +1,220 @@
+\chapter{Линейные функционалы}
+
+\section{Принцип равномерной ограниченности}
+
+\begin{lemma}
+	$ (X, \|\cdot\|), ~ (Y, \|\cdot\|), \quad U \in \mathscr Lin(X, Y) $
+
+	$$ \exists a \in X ~ \exists \eps > 0 ~ \exists R > 0 : \quad
+	U \bigl( \mathtt B_\eps(a) \bigr) \sub \ol{\mathtt B_R(0)} \implies
+	\begin{cases}
+		U \in \mathscr B(X, Y), \\
+		\|U\| \le \frac{2R}\eps
+	\end{cases} $$
+\end{lemma}
+
+\begin{proof}
+	Возьмём $ z \in X : \quad \|z\| < \eps $.
+	\begin{multline*}
+		a + z \in \mathtt B_\eps(a) \implies U (a + z) \sub \ol{B_R(0)} \implies
+		\begin{cases}
+			\|U(a + z)\| \le R, \\
+			\|U(a)\| \le R
+		\end{cases} \underimp{z = (a + z) - a} \\
+		\implies \|Uz\| \le \|U(a + z)\| + \|U(a)\| \le 2R
+	\end{multline*}
+
+	Возьмём $ x \in X : \quad \|x\| < 1 $.
+	$$ z = \eps x \implies \|\eps x\| < \eps \implies \|U(\eps x)\| \le 2R \implies
+	\|Ux\| \le \frac{2R}\eps \underimp{|U\| = \sup\limits_{\|x\| \le 1}\|Ux\|}
+	\|U\| \le \frac{2R}\eps $$
+\end{proof}
+
+\begin{theorem}
+	$ X $ "--- банахово, $ \quad (Y, \|\cdot\|), \quad
+	\Set{U_\alpha \in \mathscr B(X, Y)}_{\alpha \in A}, \quad \forall x \quad
+	\sup\limits_{\alpha \in A}\|U_\alpha x\| < +\infty $
+
+	$$ \sup\limits_{\alpha \in A}\|U_\alpha\| < +\infty $$
+\end{theorem}
+
+\begin{proof}
+	Нужно доказать, что $ \sup\limits_{\|x\| \le 1}\sup\limits_\alpha \|U_\alpha x\| < +\infty $.
+	$$ Y_n \coloneq \Set{y | \|y\| \le n} \sub Y $$
+	$ U_\alpha^{-1}(Y_n) $ замкнуто, \as $ U_\alpha $ непрерывен.
+	$$ E_n = \bigcap_{\alpha \in A} U_\alpha^{-1}(Y_n) $$
+	$ E_n $ замкнуты.
+
+	Пусть $ x \in X $.
+	$$ \exists n \in \N : \quad \sup\limits_{\alpha \in A}\|U_\alpha x\| < n \implies
+	x \in U_\alpha^{-1}(Y_n) \underimp{\forall \alpha \in A} x \in E_n \implies
+	X = \bigcup_{n = 1}^\infty E_n $$
+
+	Применим теорему Бэра о категориях:
+	$$ \exists n_0 : \quad \operatorname{Int}E_{n_0} \ne \O $$
+	То есть,
+	$$ \exists \mathtt B_\eps(a) \sub E_{n_0} \implies
+	\mathtt B_\eps(a) \in U_\alpha^{-1}(Y_{n_0}) \quad \forall \alpha \in A \implies
+	U_\alpha \bigl( \mathtt B_\eps(a) \bigr) \sub Y_{n_0} \underimp{\text{лемма}}
+	\|U_\alpha\| \le \frac{2n_0}\eps \quad \forall \alpha \in A $$
+\end{proof}
+
+\begin{implication}[Принцип фиксации особенности]
+	$ X $ "--- банахово, $ \quad (Y, \|\cdot\|), \quad \Set{U_\alpha \in \mathscr B(X, Y)}, $ \\
+	$ \sup\limits_{\alpha \in A}\|U_\alpha\| = +\infty $
+
+	$$ \exists x_0 \in X : \quad \sup\limits_{\alpha \in A}\|U_\alpha x_0\| = +\infty $$
+\end{implication}
+
+\begin{definition}
+	$ (X, \|\cdot\|), ~ (Y, \|\cdot\|), \quad \Set{U_n \in \mathscr Lin(X, Y)}_{n = 1}^\infty, \quad
+	\forall x \in X \quad \exists \lim\limits_{n \to \infty}U_n x \eqqcolon Ux $
+
+	$ U = \slim U_n $ "--- \emph{сильный (поточечный) предел} $ U_n $.
+\end{definition}
+
+\begin{props}
+	\item $ U_n \in \mathscr Lin(X, Y) $
+		$$ U = \operatorname{s-lim} U_n \implies U \in \mathscr Lin(X, Y) $$
+	\item $ U_n, U \in \mathscr B(X, Y) $
+		$$ \lim \|U - U_n\| = 0 \implies Ux = \slim U_n x $$
+\end{props}
+
+\begin{proof}
+\item Очевидно.
+\item $ x \in X $
+	$$ \|Ux - U_nx\| \le \underbrace{\|U - U_n\|}_{\to 0} \cdot \|x\| \implies \lim U_nx = Ux $$
+\end{proof}
+
+\begin{remark}
+	Если $ U = \slim U_n, \quad U, U_n \in \mathscr B(X, Y) $, то \textbf{не обязательно}
+	$ \lim \|U - U_n\| = 0 $.
+\end{remark}
+
+\begin{eg}
+	$ X = l^1 $
+	$$ x = \Set{x_n}_{n = 1}^\infty \in l^1 $$
+	$$ f_n(x) \coloneq x_n, \quad \|f_n(x)\| = |x_n| \le \|x_n\|_1 \implies \|f_n\| \le 1 \implies
+	f_n \in (l^1)^* $$
+
+	Пусть $ e_n = (0, \dots, 0, \underset n 1, 0, \dots, 0) $.
+	$$ f_n(e_n) = 1 \implies \|f_n\| \ge 1 $$
+
+	Найдём сильный предел:
+	$$ \lim x_n = 0 \implies \lim f_n(x) = 0 \quad \forall x \in l^1 \implies \On[] = \slim f_n $$
+	$$ \|f - \On[]\| = 1, \quad \lim \|f_n - \On[]\| = 1 \ne 0 $$
+\end{eg}
+
+\begin{implication}
+	$ X $ "--- банахово, $ \quad (Y, \|\cdot\|), \quad \Set{U_n}_{n = 1}^\infty, \quad
+	U_n \in \mathscr B(X, Y), \quad U = \slim U_n $
+
+	$$ U \in \mathscr B(X, Y), \quad \|U\| \le \varliminf \|U_n\| $$
+\end{implication}
+
+\begin{proof}
+	$$ \exists \lim U_n x \implies \sup\limits_{n \in \N} \|U_nx\| < +\infty \underimp{\text{теорема}}
+	\exists M > 0 : \quad \|U_n\| \le M \quad \forall n \in \N $$
+	$$ b \coloneq \varliminf \|U_n\| \in \R, \quad b \le M $$
+	$$ \exists \Set{n_k} : \quad b = \lim\limits_{k \to \infty} \|U_{n_k}\| \implies
+	Ux = \lim U_{n_k} x \quad \forall x \in X $$
+	$$ \|Ux\| = \lim\limits_{k \to \infty} \|U_{n_k}x\| \le \lim\|U_{n_k}\| \cdot \|x\| =
+	b\|x\| \implies \|U\| \le b $$
+\end{proof}
+
+\begin{remark}
+	$ U = \slim U_n $
+
+	Возможно строгое неравенство (в примере так и было).
+\end{remark}
+
+\subsection{Критерий сильной сходимости}
+
+\begin{theorem}[Банах"--~Штейнгауз]
+	$ X, Y $ "--- банаховы, $ \quad \Set{U_n \in \mathscr B(X, Y)}_{n = 1}^\infty $
+
+	Существует сильный предел $ U_n $ \textbf{тогда и только тогда}, когда
+	\begin{enumerate}
+		\item $ \exists M > 0 : \quad \|U_n\| \le M \quad \forall n \in \N $;
+		\item $ \Set{U_nx}_{n = 1}^\infty $ фундаментальна для $ \forall x \in E \sub X $, где
+			$ E $ "--- полное в $ X $, \ie $ \ol{\mathscr L\Set{E}} = X $.
+	\end{enumerate}
+\end{theorem}
+
+\begin{iproof}
+\item $ \implies $
+	\begin{enumerate}
+		\item уже доказано;
+		\item очевидно.
+	\end{enumerate}
+\item $ \impliedby $
+
+	Проверим, что $ \forall x \in X \quad \Set{U_nx} $ фундаментальна.
+
+	Обозначим $ L = \mathscr L\Set{E} $.
+	Возьмём $ x \in L $.
+	$$ x = \sum_{k = 1}^m c_kx_k, \quad x_k \in E $$
+	Пусть $ p > q \in \N $.
+	$$ \|U_px - U_qx\| \le
+	\sum_{k = 1}^\infty |c_k| \underbrace{\|U_px_k - U_qx_k\|}_{\to 0} \underarr{p, q \to \infty}
+	0 $$
+	$ \implies \Set{U_nx} $ фундаментальна для $ x \in L $.
+
+	Возьмём произвольный $ x \in X $.
+	$$ \forall \eps > 0 \quad \exists z \in L : \quad \|x - z\| < \eps $$
+	Воспользуемся тем, что $ \Set{U_nz} $ фундаментальна:
+	$$ \exists N \in \N : \quad \forall n > m \ge N \quad \|U_nz - U_mz\| < \eps $$
+	$$ \|Unx - U_mx\| \le
+	\underbrace{\|U_nx - U_nz\|}_{\le \|U_m\| \cdot \|x - z\| \le M\|x - z\| < M\eps} +
+	\underbrace{\|U_nz - U_mz\|}_{< \eps} + \underbrace{\|U_mz - U_mx\|}_{< M\eps} < \eps(2M + 1) $$
+	$ \implies \Set{U_nx}_{n = 1}^\infty $ фундаментальна для $ \forall x \in X $.
+	$$ \underimp{Y \text{ "--- банахово}} \exists \lim U_n x \eqqcolon U \quad
+	\forall x \in X, \quad U = \slim U_n $$
+\end{iproof}
+
+\begin{remark}
+	$ \implies $ верно для банахова $ X $ и нормированного $ Y $. \\
+	$ \impliedby $ верно для нормированного $ X $ и банахова $ Y $.
+\end{remark}
+
+\begin{theorem}[Банах"--~Штейнгауз]
+	$ X $ "--- банахово, $ \quad (Y, \|\cdot\|), \quad
+	\Set{U_n \in \mathscr B(X, Y)}_{n = 1}^\infty, \quad U \in \mathscr B(X, Y) $
+
+	$ U = \slim U_n $ \textbf{тогда и только тогда}, когда
+	\begin{enumerate}
+		\item $ \exists M > 0 : \quad \|U_n\| \le M \quad \forall n \in \N $;
+		\item $ \exists \lim U_nx \quad \forall x \in E \sub X $, где $ E $ "--- полное в $ X $.
+	\end{enumerate}
+\end{theorem}
+
+\begin{iproof}
+\item $ \implies $ "--- уже доказано.
+\item $ L \coloneq \mathscr L\Set{E}, \quad x \in L $
+	$$ x = \sum_{k = 1}^m ck x_k, \quad x_k \in E $$
+	$$ \exists \lim U_n x_k \quad \forall x_k \implies \exists \lim U_n x $$
+
+	Проверим, что $ \forall x \in X \quad \exists \lim U_n x $.
+	$$ \forall \eps > 0 \quad \exists z \in L : \quad \|x - z\| < \eps $$
+	$$ \exists N : \quad \forall n \ge N \quad \|Uz - U_nz\| < \eps $$
+	$$ \|Ux - U_nx\| \le \underbrace{\|Ux - U_z\|}_{\le \|U\| \cdot \|x - z\| < \|U\| \cdot \eps} +
+	\underbrace{\|Uz - U_nz\|}_{< \eps} +
+	\underbrace{\|U_nz - U_nx\|}_{\|U_n\| \cdot \|x - z\| < M\eps} < \eps(\|U\| + 1 + M) $$
+	$$ \implies \exists U_nx = Ux $$
+\end{iproof}
+
+\section{Обратные операторы}
+
+\begin{quote}
+	\raggedleft
+	Когда существует непрерывный обратный оператор?
+\end{quote}
+
+\subsection{Обратимость оператора, близкого к тождественному}
+
+\begin{theorem}
+	$ X $ "--- банахово, $ \quad I $ "--- тождественный, $ \quad A \in \mathscr B(X), \quad
+	\|A\| < 1 $
+
+	$$ \exists (I - A)^{-1}, \quad \|(I - A)^{-1}\| \le \frac1{1 - \|A\|} $$
+\end{theorem}

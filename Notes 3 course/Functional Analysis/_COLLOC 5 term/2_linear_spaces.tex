@@ -5,15 +5,16 @@
 Простейшие свойства}
 
 \begin{definition}
-	$ X $ "--- \emph{линейное пространство} над $ K $ ($ K = \R $ или $ \Co $), если
+	$ X $ "--- \emph{линейное пространство} над $ \mathbb K $, если
 	\begin{enumerate}
-		\item $ x, y \in X \implies \alpha x + \beta y \in X \quad \forall \alpha, \beta \in K $;
+		\item $ x, y \in X \implies \alpha x + \beta y \in X \quad
+			\forall \alpha, \beta \in \mathbb K $;
 		\item $ \O \in X $.
 	\end{enumerate}
 \end{definition}
 
 \begin{definition}
-	$ X, Y $ линейны над $ K, \quad A : X \to Y $.
+	$ X, Y $ линейны над $ \mathbb K, \quad A : X \to Y $.
 
 	Будем $ A $ называть \emph{линейным оператором}, если
 	\begin{enumerate}
@@ -23,16 +24,17 @@
 \end{definition}
 
 \begin{remark}
-	$ \mathscr Lin $ "--- линейное пространство над $ K $.
+	$ \mathscr Lin(X, Y) $ "--- линейное пространство над $ K $.
 \end{remark}
 
 \begin{exmpls}
 \item $ K(s, t) \in \mathcal C \bigl( [a, b] \times [a, b]\bigr) $
+
 	Определим \emph{интегральный оператор}:
-	$$ ( \mathcal K f)(s) = \int_a^b K(s, t) f(t) \di t $$
+	$$ ( \mathscr K f)(s) = \int_a^b K(s, t) f(t) \di t $$
 	$ K(s, t) $ называется \emph{ядром интегрального оператора}.
-	$$ \mathcal K \in \mathscr Lin \Bigl( \mathcal C[a, b] \Bigr) $$
-\item $ X = \nder[1]{\mathcal C}[a, b] = \set{f | f' \in \mathcal C[a, b]}, \quad Y = \mathcal C[a, b] $
+	$$ \mathscr K \in \mathscr Lin \Bigl( \mathcal C[a, b] \Bigr) $$
+\item $ X = \nder[1]{\mathcal C}[a, b], \quad Y = \mathcal C[a, b] $
 	$$ \mathcal D(f) \define f' $$
 	$$ \mathcal D \in \mathscr Lin (X, Y) $$
 \item $ l^1 \hookrightarrow l^2 $
@@ -41,18 +43,19 @@
 \end{exmpls}
 
 \begin{definition}
-	$ X $ "--- линейное пространство над полем $ K, \quad B \sub X $.
+	$ X $ "--- линейное пространство над полем $ \mathbb K, \quad B \sub X $.
 
 	$ B $ называется \emph{выпуклым}, если
 	$$ \forall x, y \in B \quad \forall t \in [0, 1] \quad tx + (1 - t)y \in B $$
 \end{definition}
 
 \begin{theorem}
-	$ X, Y $ "--- линейные пространства, $ A \in \mathscr Lin(X, Y) $.
+	$ X, Y $ "--- линейные пространства, $ \quad A \in \mathscr Lin(X, Y) $.
 
 	\begin{enumerate}
-		\item $ L \sub X $ "--- подпространство $ \implies A(L) $ "--- подпространство $ Y $;
-		\item $ M \sub Y $ "--- подпространство $ \implies \underset{\text{(прообраз)}}{A^{-1}(Y)} $ "--- подпространство $ X $;
+		\item $ L $ "--- подпространство $ X \implies A(L) $ "--- подпространство $ Y $;
+		\item $ M $ "--- подпространство $ Y \implies
+			\underset{\text{(прообраз)}}{A^{-1}(Y)} $ "--- подпространство $ X $;
 		\item $ B \sub X $ "--- выпуклое $ \implies A(B) $ "--- выпуклое в $ Y $;
 		\item $ C \sub Y $ "--- выпуклое $ \implies \underset{\text{(прообраз)}}{A^{-1}(C)} $ "--- выпуклое в $ X $;
 		\item $ A $ "--- биекция $ \implies \exists A^{-1} \in \mathscr Lin(Y, X) $.
@@ -64,7 +67,7 @@
 \end{noproof}
 
 \begin{definition}
-	$ A \in \mathscr Lin(X, Y), \quad X, Y $ линейны над $ K $.
+	$ A \in \mathscr Lin(X, Y), \quad X, Y $ линейны над $ \mathbb K $.
 
 	Определим \emph{ядро оператора}:
 	$$ \operatorname{Ker} A = \set{x \in X | Ax = 0} $$
@@ -89,44 +92,43 @@
 \hyphenation{оп-ре-де-ле-ни-е}
 
 \section{Непрерывность и ограниченность линейного оператора.
-Определение нормы}
+Определение нормы оператора}
 
 \begin{definition}
 	$ (X, \|\cdot\|), ~ (Y, \|\cdot\|), \quad A \in \mathscr Lin(X, Y) $.
 
-	$ A $ \emph{ограничен}, если
-	$$ \forall \text{ ограниченного } B \sub X \quad A(B) \text{ ограничено} $$
+	$ A $ \emph{ограничен}, если $ \forall $ ограниченного $ B \sub X \quad A(B) $ ограничено.
 \end{definition}
 
-\begin{theorem}[экввивалентность непрерывности и ограниченности линейного оператора]
-	\hfill \\
+\begin{theorem}
 	$ (X, \|\cdot\|), ~ (Y, \|\cdot\|), \quad A \in \mathscr Lin(X, Y) $.
 
 	Следующие условия равносильны:
 	\begin{enumerate}
-		\item $ A $ непрерывен в $ \On $;
+		\item $ A $ непрерывен в $ \On[] $;
 		\item $ A $ непрерывен на $ X $;
 		\item $ \exists c > 0 : \quad \|Ax\|_Y \le c\|x\|_X \quad \forall x \in X $;
 		\item $ A $ ограничен;
-		\item $ \exists r > 0 : \quad A \bigl( \mathtt B_r(\On) \bigr) $ ограничено.
+		\item $ \exists r > 0 : \quad A \bigl( \mathtt B_r(\On[]) \bigr) $ ограничено.
 	\end{enumerate}
 \end{theorem}
 
 \begin{iproof}
 \item 1 $ \implies $ 2
 
-	В силу линейности $ A(\On) = \On $.
+	В силу линейности $ A(\On[]) = \On[] $.
 
-	$ A $ непрерывен в $ \On \implies \exists \delta > 0 : \quad \forall \|x\| < \delta \quad \|Ax\| < \eps $.
+	$ A $ непрерывен в $ \On[] \iff \exists \delta > 0 : \quad
+	\forall \|x\| < \delta \quad \|Ax\| < \eps $.
 
-	Зафиксируем $ x_0 \in X $, обозначим $ y_0 = Ax_0 $.
-	$$ \|x - x_0\| < \delta \underimp{\text{непр. в } \On} \|A(x - x_0) \| < \eps \iff
+	Зафиксируем $ x_0 \in X $.
+	$$ \|x - x_0\| < \delta \underimp{\text{непр. в } {\On[]}} \|A(x - x_0) \| < \eps \iff
 	\|Ax - Ax_0\| < \eps \iff \text{ непр. в } x_0 $$
 \item 2 $ \implies $ 1 "--- очевидно.
 \item 1 $ \implies $ 3
-
-	$$ \forall \eps > 0 \exists \delta > 0 : \quad \forall \|x\| \le \delta \quad \|Ax\| < \eps $$
-	Возьмём $ z \in X, ~ z \ne \On $.
+	$$ \forall \eps > 0 \quad \exists \delta > 0 : \quad
+	\forall \|x\| \le \delta \quad \|Ax\| < \eps $$
+	Возьмём $ z \in X, ~ z \ne \On[] $.
 	$$ \Bigl\| \frac z{\|z\|} \Bigr\| = 1 $$
 	\begin{multline*}
 		x = \delta \cdot \frac z{\|z\|} \implies \|x\| = \delta \implies \|Ax\| < \eps \implies
@@ -140,24 +142,20 @@
 	$$ \exists R > 0 : \quad \forall x \in B \quad \|x\| \le R \implies \|Ax\| \underset{3)}\le c\|x\| \le cR \implies
 	A(B) \text{ ограничено} $$
 \item 4 $ \implies $ 5
-
-	$$ \mathtt B_r(\On) \text{ ограничено } \underimp{\text{очевидно}} A \bigl( \mathtt B_r(0) \bigr) $$
+	$$ \mathtt B_r(\On[]) \text{ ограничено } \underimp{\text{очевидно}}
+	A \bigl( \mathtt B_r(0) \bigr) \text{ ограничено} $$
 \item 5 $ \implies 1 $
-
-	$$ \exists R > 0 : \quad A \bigl( \mathtt B_r(0) \bigr) \sub \mathtt B_R(\On) $$
+	$$ \exists R > 0 : \quad A \bigl( \mathtt B_r(0) \bigr) \sub \mathtt B_R(\On[]) $$
 	\ie $ \|x\| < r \implies \|Ax\| < R $.
 
-	Пусть $ \|Ax\| < \eps $.
-	Найдём $ \delta : \|x\| < \delta $.
-	$$ \delta = \eps \cdot \frac r R $$
+	$$ \delta \coloneq \eps \cdot \frac r R $$
 	Пусть $ \|x\| < \delta $
 	$$ \implies \|x\| < \eps \cdot rR \implies \Bigl\| x \cdot \frac R\eps \Bigr\| < r \implies \Bigl\| A \Bigl( x \cdot \frac R\eps \Bigr) \Bigr\| < R \implies \|Ax\| \cdot \frac R\eps < R \iff
 	\|Ax\| < \eps $$
 \end{iproof}
 
 \begin{definition}
-	$ \mathscr B(X, Y) $ "--- множество всех ограниченных линейных операторов из $ X $ в $ Y $ \\
-	($ \iff $ множество всех непрерывных).
+	$ \mathscr B(X, Y) $ "--- множество всех ограниченных линейных операторов из $ X $ в $ Y $
 \end{definition}
 
 \begin{remark}
@@ -169,7 +167,6 @@
 
 	Введём \emph{норму} на $ \mathscr B $:
 	$$ \|A\| = \inf\set{c > 0 | \|Ax\| \le c\|x\| \quad \forall x \in X} $$
-	(по свойству 3 она конечна).
 \end{definition}
 
 \section{Формула для вычисления нормы линейного оператора.
@@ -244,7 +241,8 @@
 			\sup\limits_{x \ne 0} \frac{\|Ax\|}{\|x\|} \le \|A\| \implies
 			d \le \|A\| $$
 		\item Пусть $ z \in X \ne 0 $
-			$$ \Bigl\| \frac z{\|z\|} \Bigr\| = 1 \implies \Bigl\| A \Bigl( \frac z{\|z\|} \Bigr) \le c \implies
+			$$ \Bigl\| \frac z{\|z\|} \Bigr\| = 1 \implies
+			\Bigl\| A \Bigl( \frac z{\|z\|} \Bigr) \Bigr\| \le c \implies
 			\|Az\| \le c\|z\| \implies
 			\|A\| \le c $$
 	\end{enumerate}
@@ -252,52 +250,53 @@
 
 \begin{exmpls}
 \item $ X = \mathcal C[a, b], \quad h(x) \in \mathcal C[a, b] $
+
 	$ M_h(f) = h(x) \cdot f(x) $ "--- \emph{мультипликатор}.
 
-	Проверим, что
-	$$ M_h \in \mathscr B(\mathcal C[a, b]), \quad
-	\|M_h\|_{\mathscr B(\mathcal C[a, b])} = \|h\|_\infty $$
-
-	$$ x \in [a, b] \implies \bigl( M_h(f)(x) \bigr) = h(x)f(x) \implies
+	Проверим, что $ M_h \in \mathscr B(\mathcal C[a, b]), \quad
+	\|M_h\|_{\mathscr B(\mathcal C[a, b])} = \|h\|_\infty $.
+	$$ x \in [a, b] \implies \bigl( M_h(f) \bigr)(x) = h(x)f(x) \implies
 	\|h \cdot f\|_\infty \le \max\limits_{[a, b]} |h(x)| \cdot \max\limits_{[a, b]}|f(x)| =
 	\|h\|_\infty \cdot \|f\|_\infty $$
-
 	$$ \forall f \in \mathcal C[a, b] \quad \|M_h(f)\|_\infty \le \|h\|_\infty \|f\|_\infty \implies
-	\forall M_h \in \mathscr B(\mathcal C[a, b]) \quad \|M_h\|_{\mathscr B(\mathcal C[a, b])} \le \|h\|_\infty $$
+	\|M_h\|_{\mathscr B(\mathcal C[a, b])} \le \|h\|_\infty $$
 
-	$$ f(x) = \chi_{[a, b]}(x) \in \mathcal C[a, b], \quad \|\chi_{[a, b]}\|_\infty = 1 $$
+	Пусть $ f(x) = \chi_{[a, b]}(x) \in \mathcal C[a, b] $.
+	$$ \|\chi_{[a, b]}\|_\infty = 1 $$
 	$$ \|M_h\| = \sup\limits_{\|f\| = 1} \|M_h(f)\|_\infty \ge \|M_h(\chi_{[a, b]})\|_\infty =
 	\|h\|_\infty \implies
-	\|M_h\|_{\mathscr B(\mathcal C[a, b])} \|h\|_\infty $$
-\item $ Y = \mathcal C[0, 1], \quad X = \set{f | f' \in \mathcal [0, 1]} $
+	\|M_h\|_{\mathscr B(\mathcal C[a, b])} = \|h\|_\infty $$
+\item $ Y = \mathcal C[0, 1], \quad X = \set{f | f' \in \mathcal C[0, 1]} $
 
 	$ X $ "--- подпространство $ Y $, \ie $ \|f\|_X = \max\limits_{[0, 1]}|f(x)| $.
 	$$ f \in X, \quad \mathscr D(f) = f', \quad \mathscr D \in \mathscr Lin(X, Y) $$
-	Проверим, что $ \mathscr D $ не является непрерывным.
+	Проверим, что $ \mathscr D $ не ограничен.
 	$$ x^n \in \mathcal C[0, 1], \quad \|x^n\|_\infty = 1 \implies
 	\sup\limits_{\|f\| = 1} \|\mathscr D(f)\|_\infty \ge \sup\limits_{n \in \N} \|\mathscr D(x^n)\| $$
 	$$ \mathscr D(x^n) = nx^{n - 1} \implies \|\mathscr D(x^n)\|_\infty = n $$
-	$$ \implies \sup \|\mathscr D(f)\| \ge \sup \set{\mathscr D(x^n)} = +\infty $$
-\item $ Y = \mathcal C[0, 1], \quad X = \nder[1]{\mathcal C}[0, 1] = \set{f | f' \in \mathcal C[0, 1]} $
-	$$ \|f\|_X = \|f\|_{\nder[1]{\mathcal C}} = \max\set{\|f\|_\infty, \|f'\|_\infty} $$
+	$$ \implies \sup \|\mathscr D(f)\| \ge \sup \|\mathscr D(x^n)\| = +\infty $$
+\item $ Y = \mathcal C[0, 1], \quad X = \nder[1]{\mathcal C}[0, 1] $
+	$$ \|f\|_X = \max\{\|f\|_\infty, \|f'\|_\infty\} $$
 	$$ \mathcal D(f) = f' $$
 	Проверим, что $ \mathcal D \in \mathscr B(X, Y), ~ \|\mathcal D\|_{\mathscr B(X, Y)} = 1 $.
 
 	\begin{itemize}
 		\item Возьмём $ f \in X $.
 			$$ \mathcal D(f) \in Y, \quad \mathcal D \in \mathscr Lin(X, Y) $$
-			$$ \|\mathcal D(f)\| = \max\limits_{[0, 1]}|f(x)| = \|f\|_\infty \le \max\set{\|f\|_\infty, \|f'\|_\infty} $$
+			$$ \|\mathcal D(f)\| = \max\limits_{[0, 1]}|f(x)| = \|f\|_\infty \le
+			\max\{\|f\|_\infty, \|f'\|_\infty\} $$
 			$$ \implies \mathcal D \in \mathscr B(X, Y), \quad \|D\| \le 1 $$
 		\item Пусть $ f(x) = x \in X = \nder[1]{\mathcal C[0, 1]} $
 			$$ \|f\|_\infty = 1, \quad \|f'\| = 1 $$
-			$$ \implies \|\mathcal D(f)\| = 1, \quad \|f\|_X = \max\set{\|f\|_\infty, \|f'\|_\infty} = 1 $$
+			$$ \implies \|\mathcal D(f)\| = 1, \quad \|f\|_X =
+			\max\{\|f\|_\infty, \|f'\|_\infty\} = 1 $$
 			$$ \implies \|\mathcal D(f)\| = \sup\limits_{\|g\| = 1}\|\mathcal D(g)\| \ge
 			\|\mathcal D(x)\|_\infty = 1 \implies
 			\|\mathcal D \| = 1 $$
 	\end{itemize}
 \end{exmpls}
 
-\section{Теоремы вложения для \texorpdfstring{$ l^p $}{...} и для
+\section{Теоремы вложения для \texorpdfstring{$ l^p $}{l\textasciicircum p} и для
 \texorpdfstring{$ \mathrm L^p $}{пространств Лебега}.
 Полнота пространства операторов, действующих из нормированного пространства в банахово}
 
@@ -310,32 +309,31 @@
 
 \begin{proof}
 	Пусть $ x = \set{x_n}_{n = 1}^\infty \in l^{p_1}, \quad \|x\|_{p_1} = 1 $, \ie
-	$$ \Bigl( \sum_{n = 1}^\infty |x_n|^{p_1} \Bigr)^{\frac1{p_1}} = 1 $$
+	$$ \Bigl( \sum_{n = 1}^\infty |x_n|^{p_1} \Bigr)^{\frac1{p_1}} = 1 \implies
+	|x_n| \le 1 \quad \forall n $$
 
 	\begin{itemize}
 		\item $ p_2 < +\infty $
-			$$ \frac{p_2}{p_1} > 1, \quad |x_n| \le 1 \quad \forall n \implies
+			$$ \frac{p_2}{p_1} > 1 \implies
 			|x_n|^{p_2} \le |x_n|^{p_1} \implies
 			\|x\|_{p_2} = \Bigl( \sum_{n = 1}^\infty |x_n|^{p_2} \Bigr)^{\frac1{p_2}} \le
 			\|x\|_{p_1} = 1 $$
 			$$ \|A\| = \sup\limits_{\|x\|_{p_1} = 1}\|Ax\|_{p_2} \le 1 $$
-			$$ \implies A \in \mathscr B(l^{p_1}, l^{p_2}) $$
 		\item $ p_2 = +\infty $
-			$$ x \in l^{p_1}, ~ \|x\|_{p_1} = 1 \implies |x_n| \le 1 \implies
-			\|x\|_\infty = \sup\limits_{n \in \N} |x_n| \le 1 \implies
+			$$ \|x\|_\infty = \sup\limits_{n \in \N} |x_n| \le 1 \implies
 			\|A\|_{\mathscr B(l^{p_1}, l^{p_2})} \le 1 $$
-
-			Возьмём $ e = (1, 0, 0, \dotsc) $.
-			$$ \|e\|_p = 1 \quad \forall p $$
-			$$ \|Ae\|_{p_2} = \|e\|_{p_1} \implies \|A\| \ge 1, \quad
-			\|A\|_{\mathscr B(l^{p_1}, l^{p_2})} = 1 $$
 	\end{itemize}
+
+	Возьмём $ e = (1, 0, 0, \dotsc) $.
+	$$ \|e\|_p = 1 \quad \forall p $$
+	$$ \|Ae\|_{p_2} = \|e\|_{p_1} \implies \|A\| \ge 1, \quad
+	\|A\|_{\mathscr B(l^{p_1}, l^{p_2})} = 1 $$
 \end{proof}
 
 \begin{theorem}
 	$ (T, \mathcal U, \mu), \quad \mu(T) < +\infty, \quad
 	1 \le p_1 < p_2 \le +\infty, \quad
-	f \in \mathrm L^{p_2}(\mu), \quad
+	f \in \mathrm L^{p_2}(T, \mu), \quad
 	Af = f $
 
 	$$ \implies A \in \mathscr B(\mathrm L^{p_2}, \mathrm L^{p_1}), \quad
@@ -344,17 +342,12 @@
 
 \begin{iproof}
 \item $ p_2 = +\infty $
-
-	Пусть $ f \in \mathrm L^\infty(T, \mu) $, \ie
 	$$ |f(x)| \le \|f\|_\infty \text{ \ale по } \mu $$
 	$$ \|Af\|_{p_1} = \Bigl( \int\limits_T |f(x)|^{p_1} \di \mu \Bigr)^{\frac1{p_1}} \le
 	\|f\|_\infty \Bigl( \int\limits_T \di \mu \Bigr)^{\frac1{p_1}} =
 	\|f\|_\infty \Bigl( \mu(T) \Bigr)^{\frac1{p_1}} $$
-	$$ \implies A \in \mathscr B(\mathrm L^\infty, \mathrm L^{p_1}), \quad
-	\|A\| \le \Bigl( \mu(T) \Bigr)^{\frac1{p_1}} $$
+	$$ \implies \|A\| \le \Bigl( \mu(T) \Bigr)^{\frac1{p_1}} $$
 \item $ p_2 < +\infty $
-
-	Пусть $ f \in \mathrm L^{p_2} $
 	\begin{multline*}
 		\|Af\|_{p_1} = \Bigl( \int\limits_T |f|^{p_1} \di \mu \Bigr)^{\frac1{p_1}} \underset{
 			\begin{subarray}{c}
@@ -366,39 +359,20 @@
 		\Bigl\lgroup \Bigl( \int\limits_T (|f|^{p_1})^{\frac{p_2}{p_1}} \di \mu \Bigr)^{\frac{p_1}{p_2}}
 		\Bigl( \int\limits_T \di \mu \Bigr)^{1 - \frac{p_1}{p_2}} \Bigr\rgroup^{\frac1{p_1}} = \\
 		= \|f\|_{p_2} \cdot \Bigl( \mu(T) \Bigr)^{\frac1{p_1} - \frac1{p_2}} \implies
-		A \in \mathscr B(\mathrm L^{p_2}, \mathrm L^{p_1}), \quad
 		\|A\| \le \bigl( \mu(T) \bigr)^{\frac1{p_1} - \frac1{p_2}}
 	\end{multline*}
-\item $ f = \chi_T(x) \in \mathrm L^p, \quad 1 \le p \le +\infty $
+\item $ f = \chi_T(x) \in \mathrm L^p $
 	$$ \|\chi_T\|_{\mathrm L^p} = \Bigl( \int\limits_T \chi_T(x) \di \mu \Bigr)^{\frac1p} =
 	\bigl( \mu(T) \bigr)^{\frac1p} $$
 	$$ \|A\|_{\mathscr B(\mathrm L^{p_2}, \mathrm L^{p_1})} = \sup\limits_{
 		\begin{subarray}{c}
 			g \in \mathrm L^{p_2} \\
-			g \ne \On
+			g \ne \On[]
 	\end{subarray}} \frac{\|Ag\|_{p_2}}{\|g\|_{p_2}} =
 	\sup \frac{\|g\|_{p_1}}{\|g\|_{p_2}} \ge
 	\frac{\|\chi_T\|_{p_1}}{\|\chi_T\|_{p_2}} =
 	\bigl( \mu(T) \bigr)^{\frac1{p_1} - \frac1{p_2}} $$
 \end{iproof}
-
-\begin{remark}
-	Если $ \mu(T) = +\infty $, то всё возможно.
-\end{remark}
-
-\begin{eg}
-	$ T = [0, +\infty), \quad \lambda $ "--- мера Лебега.
-
-	Докажем, что $ \mathrm L^1 \not\sub \mathrm L^2, \quad
-	\mathrm L^2 \not\sub L^1 $.
-
-	Возьмём $ f(x) = \frac1{1 + x} $
-	$$ f \notin \mathrm L^1, \quad f \in \mathrm L^2 \quad
-	\implies L^1 \not\sub L^2 $$
-	Возьмём $ g(x) = \frac1{\sqrt x + x^2} $.
-	$$ g \in \mathrm L^1, \quad f \notin \mathrm L^2 \quad
-	\implies \mathrm L^1 \not\sub \mathrm L^2 $$
-\end{eg}
 
 \begin{theorem}\label{th:full:1}
 	$ (X, \|\cdot\|), \quad (Y, \|\cdot\|) $ "--- банахово.
@@ -407,11 +381,9 @@
 \end{theorem}
 
 \begin{proof}
-	$ \set{A_n}_{n = 1}^\infty, \quad
-	A_n \in \mathscr B(X, Y), \quad
-	\set{A_n}_{n = 1}^\infty $ фундаментальна.
-
+	Возьмём фундаментальную $ \set{A_n \in \mathscr B(X, Y)}_{n = 1}^\infty $.
 	$$ \forall \eps > 0 \quad \exists N \in \N : \quad \forall n, m > N \quad \|A_n - A_m\| < \eps $$
+
 	Зафиксируем $ x \in X $.
 	Проверим, что $ \set{A_nx} $ фундаментальна.
 	$$ \|A_nx - A_mx\| < \|A_n - A_m\| \cdot \|x\| < \eps \|x\| \implies
@@ -436,15 +408,12 @@
 \begin{definition}
 	$ (X, \|\cdot\|) $ "--- нормированное над полем $ \mathbb K $.
 
-	$ X^* $ называется \emph{сопряжённым пространством}, если
-	$$ X^* = \mathscr B(X, \mathbb K) $$
-	То есть $ X^* $ "--- множество линейных непрерывных функционалов.
-
+	$ X^* = \mathscr B(X, \mathbb K) $ называется \emph{сопряжённым пространством}.
 	$$ f \in X^* \quad \|f\|_{X^*} = \inf\set{C > 0 | \ |f(x)| \le C\|x\|} $$
 \end{definition}
 
 \begin{implication}
-	$ (X, \|\cdot\|) \implies X^* $ "--- банахово.
+	$ X^* $ "--- банахово.
 \end{implication}
 
 \begin{proof}
@@ -462,17 +431,15 @@
 \begin{exmpls}
 \item $ l^p, \quad $ зафиксируем $ i \in \N $
 	$$ x = \set{x_n}_{n = 1}^\infty \in l^p, \quad f(x) \define x_i $$
-	Докажем, что $ f \in (l^p)^*, \quad \|f\|_{(l^p)^*} = 1 $.
 	$$ |f(x)| = |x_i| \le \Bigl( \sum_{n = 1}^\infty |x_n|^p \Bigr)^{\frac1p}, \quad 1 \le p < +\infty $$
 	$$ |x_i| < \sup\limits_{n \ge 1}|x_n| = \|x\|_\infty, \quad p = +\infty $$
-	$$ \implies f \in (l^p)^* \implies \|f\|_{(l^p)^*} \le 1 $$
+	$$ \implies f \in (l^p)^*, \quad \|f\|_{(l^p)^*} \le 1 $$
 
 	Возьмём $ e_i = (0, \dots, 0, \underset i 1, 0, \dots, 0) $.
 	$$ \|e_i\|_p = 1, \quad |f(e_i)| = 1 \implies
 	\|f\|_{(l^p)^*} \ge 1 $$
 \item $ X = \mathcal C(K), \quad K $ "--- компакт, $ \quad x_0 \in K $ "--- фиксирована.
 	$$ G : \mathcal C(K) \to \Co : \quad f \in \mathcal C(k) \quad G(f) = f(x_0) \text{ "--- \emph{функционал значения в точке}} $$
-	Докажем, что $ G \in \bigl( \mathcal C(K) \bigr)^*, \quad \|G\| = 1 $.
 	$$ f \in \mathcal C(K) \quad |G(f)| = |f(x_0)| \le \max\limits_{x \in K}|f(x)| =
 	\|f\|_{\mathcal C(K)} $$
 	$$ \implies G \in \bigl( \mathcal C(K) \bigr)^*, \quad \|G\|_{\bigl( \mathcal C(K) \bigr)^*} \le 1 $$
@@ -498,65 +465,65 @@
 		\implies G \in \bigl( \mathcal C[a, b] \bigr)^*, \quad
 		\|G\| \le \int_a^b |\phi(x)| \di x
 	\end{multline*}
-\item $ \phi(x) \overset{[a, b]}> 0 $
+\item $ f = \chi_{[a, b]} $
+	$$ \|\chi_{[a, b]}\| = 1 $$
+	\begin{itemize}
+		\item $ \phi(x) \overset{[a, b]}> 0 $
+			$$ |G(\chi_{[a, b]})| = \Bigl| \int_a^b \phi(x) \di x \Bigr| \undereq{\phi(x) > 0}
+			\int_a^b \phi(x) \di x $$
+		\item $ \phi(x) \overset{[a, b]}\le 0 $
+			$$ |G(\chi_{[a, b]})| = \Bigl| \int_a^b \phi(x) \di x \Bigr| = \int_a^b |\phi(x)| \di x $$
+		\item $ \phi $ "--- произвольная
+			$$ g(x) \define \operatorname{sign} \phi(x), \quad \|g\|_\infty = 1 $$
+			$$ \int_a^b g\phi = \int_a^b |\phi(x)| \di x $$
+			$ g $ не является непрерывной, поэтому подставить её мы не можем.
+			Приблизим её непрерывными:
+			$$ \eps > 0 \quad \phi(t) \text{ равномерно непрерывна } \implies \exists \delta > 0 : \quad
+			\forall |t - s| < \delta \quad
+			|\phi(t) - \phi(s)| < \eps $$
+			$$ a = t_0 < t_1 < \dots < t_n = b \text{ "--- разбиение } [a, b] : \quad
+			t_k - t_{k - 1} < \delta $$
+			$$ x, t \in [t_{k - 1}, t_k] \implies |\phi(s) - \phi(t)| < \eps $$
+			$$ \mathscr F \define \set{[t_{k - 1}, t_k]}_{k = 1}^n $$
+			Разобьём отрезки на два множества:
+			\begin{enumerate}
+				\item $ \Delta_1, \dots, \Delta_r $ "--- отрезки такие, что $ \phi(t) \overset{\Delta_j}> 0 $
+					или $ \phi(t) \overset{\Delta_j} < 0 $;
+				\item $ \Delta_{r + 1}, \dots, \Delta_n $ "--- отрезки, на которых
+					$ \exists s \in \Delta_j : \quad \phi(s) = 0 $;
+			\end{enumerate}
 
-	Пусть $ f(x) = \chi_{[a, b]} $.
-	$$ \|\chi_{[a, b]} = 1 $$
-	$$ |G(\chi_{[a, b]})| = \Bigl| \int_a^b \phi(x) \di x \Bigr| \undereq{\phi(x) > 0}
-	\int_a^b \phi(x) \di x $$
-\item $ \phi(x) \overset{[a, b]}\le 0 $
-	$$ |G(\chi_{[a, b]})| = \Bigl| \int_a^b \phi(x) \di x \Bigr| = \int_a^b |\phi(x)| \di x $$
-\item $ \phi $ "--- произвольная
-	$$ g(x) \define \operatorname{sign} \phi(x), \quad \|g\|_\infty = 1 $$
-	$$ \int_a^b g\phi = \int_a^b |\phi(x)| \di x $$
-	$ g $ не является непрерывной, поэтому подставить её мы не можем.
-	Приблизим её непрерывными:
-	$$ \eps > 0 \quad \phi(t) \text{ равномерно непрерывна } \implies \exists \delta > 0 : \quad
-	\forall |t - s| < \delta \quad
-	|\phi(t) - \phi(s)| < \eps $$
-	$$ a = t_0 < t_1 < \dots < t_n = b \text{ "--- разбиение } [a, b] : \quad
-	t_k - t_{k - 1} < \delta $$
-	$$ x, t \in [t_{k - 1}, t_k] \implies |\phi(s) - \phi(t)| < \eps $$
-	$$ \mathscr F \define \set{[t_{k - 1}, t_k]}_{k = 1}^n $$
-	Разобьём отрезки на два множества:
-	\begin{enumerate}
-		\item $ \Delta_1, \dots, \Delta_2 $ "--- отрезки такие, что $ \phi(t) \overset{\Delta_j}> 0 $
-			или $ \phi(t) \overset{\Delta_j} < 0 $;
-		\item $ \Delta_{r + 1}, \dots, \Delta_n $ "--- отрезки, на которых
-			$ \exists s \in \Delta_j : \quad \phi(s) = 0 $;
-	\end{enumerate}
-
-	Проверим, что вклад отрезков второго сорта в интеграл очень маленький.
-	Пусть $ r + 1 \le j \le n, \quad t \in \Delta_j, \quad \exists s \in \Delta_j : \quad \phi(s) = 0 $.
-	$$ |\phi(t)| = |\phi(t) - \phi(s)| < \eps \implies
-	\int\limits_{\Delta_j} |\phi(t)| \di t \le \eps |\Delta_j| \implies
-	\int\limits_{\bigcup_{j = r + 1}^n \Delta_j}|\phi(t)| \di t \le
-	\eps \Bigl( \sum_{j = r + 1}^n |\Delta_j| \Bigr) \le
-	\eps(b - a) $$
-	$$ h(t) =
-	\begin{cases}
-		\operatorname{sign} \phi(t), \quad t \in \Delta_j, \quad 1 \le j \le r \\
-		\text{линейная на } \Delta_j, \quad r + 1 \le j \le n \\
-		\text{если } [a, t_1] = \Delta_j, \quad r + 1 \le j \le n, \text{ то } h(a) \define 0 \\
-		\text{если } [t_{n - 1}, b] = \Delta_j, \quad r + 1 \le j \le n, \text{ то } h(b) \define 0
-	\end{cases} $$
-	Понятно, что
-	$$ h(t) \in \mathcal C[a, b], \quad \|h\|_\infty \le 1, \quad
-	f(t) \cdot \phi(t) = |\phi(t)|, \quad
-	t \in \Delta_j, \quad 1 \le j \le r $$
-	$$ |h(t) \cdot \phi(t)| \le |\phi(t)| \quad \forall t \in [a, b] $$
-	\begin{multline*}
-		\|G\| = \sup\limits_{\|f\| \le 1} |G(f)| \ge |G(h)| =
-		\Bigl| \int_a^b \phi(t) \cdot h(t) \di t \Bigr| =
-		\Bigl| \int\limits_{\bigcup_{j = 1}^r \Delta_j} |\phi(t)| \di t + \int\limits_{\bigcup_{j = r + 1}^n \Delta_j} \phi(t) \cdot h(t) \di t \Bigr| \ge \\
-		\ge \int\limits_{\bigcup_{j = 1}^n \Delta_j} |\phi(t)| \di t - \Bigl| \int\limits_{\bigcup_{j = r + 1}^n \Delta_j} |\phi(t)| \cdot |h(t)| \di t \Bigr| \ge
-		\int\limits_{\bigcup_{j = 1}^n \Delta_j} |\phi(t)| \di t - \int\limits_{\bigcup_{j = r + 1}^n \Delta_j} |\phi(t)| \di t = \\
-		= \int_a^b |\phi(t)| \di t - 2 \int\limits_{\bigcup_{j = r + 1}^n \Delta_j} |\phi(t)| \di t \ge
-		\int_a^b |\phi(t)| \di t - 2 \eps(b - a) \quad \forall \eps > 0
-	\end{multline*}
-	$$ \implies \|G\| \ge \int_a^b |\phi(t)| \di t \implies
-	\|G\|_{\mathcal C^*[a, b]} =
-	\int_a^b |\phi(t)| \di t $$
+			Проверим, что вклад отрезков второго сорта в интеграл очень маленький. \\
+			Пусть $ r + 1 \le j \le n, \quad t \in \Delta_j, \quad \exists s \in \Delta_j : \quad \phi(s) = 0 $.
+			\begin{multline*}
+				|\phi(t)| = |\phi(t) - \phi(s)| < \eps \implies
+				\int\limits_{\Delta_j} |\phi(t)| \di t \le \eps |\Delta_j| \implies
+				\int\limits_{\bigcup_{j = r + 1}^n \Delta_j}|\phi(t)| \di t \le \\
+				\le \eps \Bigl( \sum_{j = r + 1}^n |\Delta_j| \Bigr) \le
+				\eps(b - a)
+			\end{multline*}
+			$$ h(t) =
+			\begin{cases}
+				\operatorname{sign} \phi(t), \quad t \in \Delta_j, \quad 1 \le j \le r \\
+				\text{линейная на } \Delta_j, \quad r + 1 \le j \le n \\
+				\text{если } [a, t_1] = \Delta_j, \quad r + 1 \le j \le n, \text{ то } h(a) \define 0 \\
+				\text{если } [t_{n - 1}, b] = \Delta_j, \quad r + 1 \le j \le n, \text{ то } h(b) \define 0
+			\end{cases} $$
+			$$ h(t) \in \mathcal C[a, b], \quad \|h\|_\infty \le 1, \quad
+			f(t) \cdot \phi(t) = |\phi(t)|, \quad
+			t \in \Delta_j, \quad 1 \le j \le r $$
+			$$ |h(t) \cdot \phi(t)| \le |\phi(t)| \quad \forall t \in [a, b] $$
+			\begin{multline*}
+				\|G\| = \sup\limits_{\|f\| \le 1} |G(f)| \ge |G(h)| =
+				\Bigl| \int_a^b \phi(t) \cdot h(t) \di t \Bigr| =
+				\Bigl| \int\limits_{\bigcup_{j = 1}^r \Delta_j} |\phi(t)| \di t + \int\limits_{\bigcup_{j = r + 1}^n \Delta_j} \phi(t) \cdot h(t) \di t \Bigr| \ge \\
+				\ge \int\limits_{\bigcup_{j = 1}^n \Delta_j} |\phi(t)| \di t - \Bigl| \int\limits_{\bigcup_{j = r + 1}^n \Delta_j} |\phi(t)| \cdot |h(t)| \di t \Bigr| \ge
+				\int\limits_{\bigcup_{j = 1}^n \Delta_j} |\phi(t)| \di t - \int\limits_{\bigcup_{j = r + 1}^n \Delta_j} |\phi(t)| \di t = \\
+				= \int_a^b |\phi(t)| \di t - 2 \int\limits_{\bigcup_{j = r + 1}^n \Delta_j} |\phi(t)| \di t \ge
+				\int_a^b |\phi(t)| \di t - 2 \eps(b - a) \quad \forall \eps > 0
+			\end{multline*}
+			$$ \implies \|G\| \ge \int_a^b |\phi(t)| \di t $$
+	\end{itemize}
 \end{iproof}
 
 \begin{theorem}
@@ -575,14 +542,12 @@
 	\begin{multline*}
 		|(\mathscr Kf)(s)| =
 		\Bigl| \int_a^b K(s, t) f(t) \di t \Bigr| \le
-		\|f\|_\infty \int_a^b |K(s, t) \di t \le
+		\|f\|_\infty \int_a^b |K(s, t)| \di t \le
 		M \cdot \|f\|_\infty \implies \\
 		\implies \|\mathscr K f\|_\infty = \max\limits_{a \le s \le b} |(\mathscr Kf)(s)| \le
-		M \cdot \|f\|_\infty \implies \mathscr K \in \mathscr B \bigl( \mathcal C[a, b] \bigr), \quad
-		\|\mathscr K\| \le M
+		M \cdot \|f\|_\infty \implies \|\mathscr K\| \le M
 	\end{multline*}
-\item $ \ge $
-
+\item $ \|\mathscr K\| \ge M $
 	$$ g(s) \define \int_a^b |K(s, t)| \di t \implies g \in \mathcal C[a, b] \implies
 	\exists s_0 : \quad \max g(s) = g(s_0) = M $$
 	$$ \phi(t) = K(s_0, t) $$
@@ -601,7 +566,7 @@
 Свойства линейно-изоморфных пространств}
 
 \begin{definition}
-	$ (X, \|\cdot\|), ~ (Y, \|\cdot\|) $ над $ \R $ (или $ \Co $)
+	$ (X, \|\cdot\|), ~ (Y, \|\cdot\|) $ над $ \mathbb K $
 
 	$ (X, \|\cdot\|) $ \emph{линейно изоморфно} $ (Y, |\cdot\|) $, если
 	$$ \exists A \in \mathscr B(X, Y), \quad \exists A^{-1} \in \mathscr B(Y, X) $$
@@ -621,7 +586,6 @@
 
 \begin{iproof}
 \item $ \implies $
-
 	$$ A \in \mathscr B(X, Y) \implies A \in \mathscr Lin(X, Y) $$
 	$$ \exists A^{-1} \implies A(X) = Y $$
 	$$ A \in \mathscr B(X, Y) \implies
@@ -633,8 +597,7 @@
 	\frac1{\|A^{-1}\|} \cdot \|x\| \le \|Ax\| \implies
 	C_1 = \frac1{\|A^{-1}\|} $$
 \item $ \impliedby $
-
-	$$ \|Ax\| \le C_2 \|x\| \implies A \in \mathscr B(X, Y), \quad \|A\| \le C_2 $$
+	$$ \|Ax\| \le C_2 \|x\| \implies \|A\| \le C_2 \implies A \in \mathscr B(X, Y) $$
 
 	Проверим, что $ A $ "--- инъекция, \ie ядро состоит только из нуля:
 	$$ Ax = 0 \implies C_1\|x\| \le \|Ax\| \implies \|x\| = 0 \implies x = 0 $$
@@ -677,7 +640,7 @@
 	\begin{multline*}
 		\|x_n - x_m\| = \|A^{-1}y_n - A^{-1}y_m\| =
 		\|A^{-1}(y_n - y_m)\| \le \\
-		\le \|A^{-1} \cdot \|y_n - y_m\| \underarr{n, m \to \infty} 0 \implies
+		\le \|A^{-1}\| \cdot \|y_n - y_m\| \underarr{n, m \to \infty} 0 \implies
 		\set{x_n}_{n = 1}^\infty \text{ фундаментальна}
 	\end{multline*}
 	$ X $ "--- банахово $ \implies \exists \lim x_n = x_0 \implies \lim y_n = Ax_0 \implies
@@ -687,11 +650,11 @@
 \end{eproof}
 
 \begin{definition}
-	$ X $ "--- линейное пространство над $ \R $(или $ \Co $), $ \quad
+	$ X $ "--- линейное пространство над $ \mathbb K, \quad
 	\|\cdot\|_1, ~ \|\cdot\|_2 $\ "--- различные нормы на $ X $.
 
 	$ \|\cdot\|_1 $ \emph{эквивалентна} $ \|\cdot\|_2 $, если
-	$$ \forall \set{x_n}_{n = 1}^\infty : x_n \in X, ~ x_0 \in X \quad
+	$$ \forall \set{x_n \in X}_{n = 1}^\infty \quad \forall x_0 \in X \quad
 	\lim\limits_{n \to \infty}\|x_n - x_0\|_1 = 0 \iff \lim\limits_{n \to \infty} \|x_n - x_0\|_2 = 0, $$
 	то есть, нормы порождают одну и ту же топологию.
 \end{definition}
@@ -732,7 +695,7 @@
 \end{definition}
 
 \begin{theorem}
-	$ (X, \|\cdot\|), ~ (Y, \|\cdot\|) $ "--- линейные над $ \R $ (или $ \Co $), $ \quad
+	$ (X, \|\cdot\|), ~ (Y, \|\cdot\|) $ "--- линейные над $ \mathbb K, \quad
 	\dim X = \dim Y = n \in \N $.
 
 	Тогда $ X $ линейно изоморфно $ Y $.
@@ -762,7 +725,7 @@
 			$ g(z) $ непрерывна на $ l_n^2 $.
 			$$ S \define \set{z \in l_n^2 | \|z\| = 1} $$
 			$ S $ "--- компакт в $ l_n^2 $.
-			$$ \exists \min\limits_{z \in S} g(z) = g(z_0) = r > 0 \implies
+			$$ \exists \min\limits_{z \in S} g(z) \eqqcolon r > 0 \implies
 			\forall z \in S \quad \|Az\| \ge r $$
 			Возьмём $ u \in l_n^2 \ne 0 $.
 			$$ \frac u{\|u\|} \in S \implies
@@ -828,22 +791,17 @@
 Существование многочлена наилучшего приближения}
 
 \begin{definition}
-	$ (X, \rho) $ "--- метрическое пространство, $ \quad Y \sub X, \quad a \in X $
+	$ (X, \rho), \quad Y \sub X, \quad a \in X $
 
 	$$ \rho(a, Y) = \inf\limits_{y \in Y} \rho(a, y) $$
 	Если $ \exists y_0 \in Y : \quad \rho(a, Y) = \rho(a, y_0) $, то $ y_0 $ называется
 	\emph{элементом наилучшего приближения}.
 \end{definition}
 
-\begin{remark}
-	Если $ Y $ "--- компакт, то элемент наилучшего приближения существует
-	(\as $ \rho(a, y) $ непрерывна).
-\end{remark}
-
 \begin{theorem}
 	$ (X, \|\cdot\|) $
 	\begin{enumerate}
-		\item $ L \in X, \quad L $ "--- конечномерное подпространство в алгебраическом смысле
+		\item $ L \sub X $ "--- конечномерное подпространство в алгебраическом смысле
 			$ \implies L $ замкнуто;
 		\item $ a \in X \implies $ в $ L $ существует элемент наилучшего приближения.
 	\end{enumerate}
@@ -861,27 +819,6 @@
 	$$ d \le \|a - y_{n_j}\| \le d + \frac1{n_j} \implies \|a - y_0\| = d $$
 \end{eproof}
 
-\begin{remark}
-	Элемент наилучшего приближения не обязательно единственен.
-\end{remark}
-
-\begin{exmpls}
-\item $ l_2^\infty = \{(x, y), \|(x, y)\| = \max\{|x|, |y|\}\} $
-	$ \mathtt B_1(0, 0) $ выглядит в этом пространстве как квадрат.
-
-	$ L = \set{y = kx}, \quad k \ne 0 $.
-	Для $ L $ существует единственный элемент наилучшего приближения.
-\item $ L = \set{y = 0} $.
-	Для $ L $ элемент наилучшего приближения не единственен.
-\item $ l_2^1 = \{ (x, y), \|(x, y)\| = |x| + |y|\} $
-	$ B_1(0, 0) $ выглядит как квадрат, повёрнутый на $ \frac\pi4 $.
-
-	$ L = \set{y = kx}, \quad k \ne \pm 1 $.
-	Для $ L $ существует единственный элемент наилучшего приближения.
-\item $ L = \set{y = x} $.
-	Для $ L $ элементов наилучшего приближения бесконечно много.
-\end{exmpls}
-
 \begin{implication}
 	$ \mathcal C[a, b], \quad \|f\|_\infty = \max|f(x)|, \quad
 	\mathscr P_n = \set{\sum_{j = 0}^n a_jx^j, \quad a_j \in \R} $
@@ -890,15 +827,12 @@
 	$ p $ называется \emph{многочленом наилучшего приближения}
 \end{implication}
 
-\begin{remark}
-	Для $ \mathscr P_n $ существует единственный элемент наилучшего приближения.
-\end{remark}
-
 \section{Лемма Рисса о почти перпендикуляре, следствия их неё.
 Теорема Рисса: критерий конечномерности пространства}
 
 \begin{lemma}
-	$ (X, \|\cdot\|), \quad L \subsetneq X $ "--- подпространство, $ L = \ol L, \quad 0 < \eps < 1 $
+	$ (X, \|\cdot\|), \quad L \subsetneq X $ "--- замкнутое подпространство, $ \quad
+	0 < \eps < 1 $
 
 	$$ \exists x_0 : \quad \|x_0\| = 1, \quad \rho(x_0, L) > 1 - \eps $$
 \end{lemma}
@@ -934,10 +868,9 @@
 	$ (X, \|\cdot\|), \quad \set{L_n}_{n = 1}^\infty, \quad L_n \subsetneq L_{n + 1}, \quad
 	L_n $ "--- замкнутые подпространства, $ \quad L_1 \ne \emptyset $
 
-	$$ \exists \set{y_n}_{n = 1}^\infty : \quad
+	$$ \exists \set{y_n \in L_n}_{n = 1}^\infty : \quad
 	\begin{cases}
 		\|y_n\| = 1, \\
-		y_n \in L_n, \\
 		\rho(y_{n + 1}, L_n) > \frac12
 	\end{cases} $$
 \end{implication}
@@ -967,7 +900,7 @@
 
 	\textbf{Пусть} $ \dim X = +\infty $.
 	Существует ЛНЗ набор $ \set{x_n}_{n = 1}^\infty $.
-	Положим $ L_n = \mathscr L \set{x_j}_{j = 1}^\infty $ "--- линейная оболочка.
+	Положим $ L_n = \mathscr L \set{x_j}_{j = 1}^\infty $.
 	$$ L_n \subsetneq L_{n + 1} \underimp{\text{второе следствие}}
 	\exists \set{y_n} : \quad
 	\begin{cases}
@@ -975,7 +908,7 @@
 		\|y_{n + 1} - y_m\| > \frac12 \quad \forall m \ne (n + 1)
 	\end{cases} $$
 	Значит, не существует фундаментальной подпоследовательности $ \set{y_{n_j}} $.
-	Значит, $ \not\exists \lim\limits_{j \to \infty} y_{n_j} $.
+	Значит, $ \not\exists \lim\limits_{j \to \infty} y_n $.
 \end{iproof}
 
 \section{Продолжение линейного оператора со всюду плотного множества}
@@ -1001,8 +934,7 @@
 	\|A(x_n - x_m)\| \le \|A\| \cdot \|x_n - x_m\| \underarr{n, m \to \infty} 0 $$
 	Значит, $ \set{Ax_n}_{n = 1}^\infty $ фундаментальна в $ Y \implies
 	\exists \lim Ax_n \in Y $.
-	Положим $ V_x = \lim Ax_n $.
-
+	Положим $ Vx = \lim Ax_n $.
 \item Корректность определения (не получится тот же предел для другой последовательности)
 
 	Пусть $ \lim z_n = x, \quad z_n \in L \quad \implies \exists \lim Az_n $
@@ -1012,9 +944,10 @@
 		\exists \lim Az_n
 	\end{rcases} \implies \lim \bigl( A(x_n - z_n) \bigr) = 0 \implies
 	\lim Ax_n = \lim Az_n $$
+\item Норма
 
 	Пусть $ x \in L, \quad x_n \equiv[n \in \N] x \quad \implies
-	Ax_n = Ax \implies V_x = \lim Ax_n = Ax $.
+	Ax_n = Ax \implies Vx = \lim Ax_n = Ax $.
 	$$ \lim x_n = x, \quad \|Ax_n\| \le \|A\| \cdot \|x_n\|, \quad x_n \in L $$
 	$$ \implies \|Vx\| = \lim \|Ax_n\| \le \|A\| \cdot \lim \|x_n\| =
 	\|A\| \cdot \|x\| \implies \|V\| \le \|A\| $$
@@ -1024,7 +957,6 @@
 	\sup\limits_{\set{x \in L | \|x\| \le 1}} \|Vx\| = \|A\| $$
 
 	В итоге $ \|V\| = \|A\| $.
-
 \item Единственность
 
 	Пусть $ V, W \in \mathscr B(X, Y), \quad V\big|_L = A, \quad W\big|_L = A, \quad
@@ -1096,7 +1028,7 @@
 			В силу произвольности $ u $ и $ v $, можно взять $ \inf $ в неравенствах:
 			$$ \|\ol x + \ol z\| \le
 			\inf\limits{u \in \ol x}\|u\| + \inf\limits_{v \in \ol z}\|v\| =
-			\|ol x\| + \|\ol z\| $$
+			\|\ol x\| + \|\ol z\| $$
 	\end{itemize}
 \item $ \phi(x) = \ol x $
 	$$ \|\ol x\| = \inf\limits_{u \in \ol x}\|u\| \underset{x \in \ol x}\le \|x\| \implies
@@ -1114,9 +1046,9 @@
 	Воспользуемся критерием полноты:
 	$$ \set{\ol x_n}_{n = 1}^\infty : \quad \sum_{n = 1}^\infty \|\ol x_n\| < +\infty \overset?\implies
 	\sum_{n = 1}^\infty \ol x_n < +\infty $$
-	$$ \exists z_n \in \ol x_n : \quad \|z_n\| \le 2\|\ol x_n\| \implies
+	$$ \exists \set{z_n \in \ol x_n} : \quad \|z_n\| \le 2\|\ol x_n\| \implies
 	\sum_{n = 1}^\infty \|z_n\| < +\infty $$
-	По критерию полноты к $ X $ имеем, что $ \exists z = \sum z_n, \quad z \in X $.
+	По критерию полноты для $ X $ имеем, что $ \exists z = \sum z_n, \quad z \in X $.
 	$$ S_n = \sum_{j = 1}^n z_j, \quad \lim S_n = z $$
 	$ \phi $ непрерывно $ \implies \lim \phi(S_n) = \phi(z) $
 	$$ \phi(z) = \ol z, \quad \phi(S_n) = \sum_{j = 1}^n \ol z_j = \sum \ol x_j $$
@@ -1128,8 +1060,9 @@
 Непрерывность скалярного произведения, тождество параллелограмма}
 
 \begin{definition}
-	$ H $ "--- линейное пространство над $ \Co $ \emph{со скалярным произведением}, то есть имеется
-	отображение $ H \times H \to \Co $, если
+	$ H $ "--- линейное пространство над $ \Co $.
+
+	Отображение $ (\cdot, \cdot) : H \times H \to \Co $ называется \emph{скалярным произведением}, если
 	\begin{enumerate}
 		\item $ (\lambda x, y) = \lambda (x, y), \quad \lambda \in \Co, \quad x, y \in H $;
 		\item $ (x + z, y) = (x, y) + (z, y), \quad x, y, z \in H $;
@@ -1159,7 +1092,7 @@
 	$$ |(x, y)| \le \|x\| \cdot \|y\| $$
 \item $ \|x\| = \sqrt{(x, x)} $ "--- норма
 \item Тождество параллелограмма
-	$$ x, y \in H \quad \|x + y\|^2 + \|x - y\|^2 = 2 \bigl( \|x\|^2 + \|y\|^2 \bigr) $$
+	$$ \|x + y\|^2 + \|x - y\|^2 = 2 \bigl( \|x\|^2 + \|y\|^2 \bigr) $$
 \item Непрерывность скалярного произведения
 	$$
 	\begin{rcases}
@@ -1196,10 +1129,12 @@
 				\bigl( \|x\| + \|y\| \bigr)^2
 			\end{multline*}
 	\end{enumerate}
-\item Упражнение
+\item
+	$$ (x + y, x + y) + (x - y, x - y) =
+	(x, x) + (x, y) + (y, x) + (y, y) + (x, x) - (y, x) - (x, y) + (y, y) = (x, x) + (y, y) $$
 \item
 	\begin{multline*}
-		|(x, y) - (x_n, y_n)| \le |(x, y) - (x_n, y_n)| + |(x_n, y) - (x_n, y_n)| =
+		|(x, y) - (x_n, y_n)| \trile |(x, y) - (x_n, y)| + |(x_n, y) - (x_n, y_n)| =
 		|(x - x_n, y) - (x_n, y - y_n)| \underset{\text{К"--~Б}}\le \\
 		\le \|x - x_n\| \cdot \|y\| + \|x_n\| \cdot \|y - y_n\| \underset{\lim x_n = x \implies \exists M > 0 : \|x_n\| \le M}\le
 		\underbrace{\|x - x_n\|}_{\underarr{n \to \infty} 0} \cdot \|y\| + M \cdot \underbrace{\|y - y_n\|}_{\underarr{n \to \infty} 0}
@@ -1247,7 +1182,7 @@
 	$$ \set{a_n}_{n = 0}^\infty \in l^2 = \lim\limits_{n \to \infty} a_n = 0 \implies
 	\ulim\limits_{n \to \infty} \sqrt[n]{|a_n|} \le 1 $$
 	Радиус сходимости $ R = \frac1{\ulim \sqrt[n]{|a_n|}} \ge 1 \implies
-	f $ аналитична в $ \set{z | \ |z| < 1} $.
+	f $ аналитична в $ \set{z | {} |z| < 1} $.
 \end{exmpls}
 
 \begin{definition}
@@ -1258,7 +1193,6 @@
 
 \begin{definition}
 	$ M \sub H $
-
 	$$ M^\perp = \set{y \in H | x \perp y \quad \forall x \in M} $$
 	Если $ M $ "--- подпространство, то $ M^\perp $ называется \emph{ортогональным
 	дополнением}.
@@ -1267,7 +1201,7 @@
 \begin{statement}
 	$ M \sub H $ (подмножество)
 
-	$ m^\perp $ "--- замкнутое подпространство $ H $.
+	$ M^\perp $ "--- замкнутое подпространство $ H $.
 \end{statement}
 
 \begin{iproof}
@@ -1277,12 +1211,12 @@
 	$$ \forall x \in M \quad
 	\begin{rcases}
 		(y, x) = 0 \\
-		z(x) = 0
+		(z, x) = 0
 	\end{rcases} \implies (\alpha y + \beta z, x) = \alpha(y, x) + \beta(z, x) = 0 \implies
 	\alpha y + \beta z \in M^\perp $$
 \item Замкнутость
 
-	Возьмём $ \set{y_n \in M^\perp}_{n = 1}^\infty ; \quad \lim\limits_{n \to \infty} y_n = y_0 $.
+	Возьмём $ \set{y_n \in M^\perp}_{n = 1}^\infty : \quad \lim\limits_{n \to \infty} y_n = y_0 $.
 	Возьмём $ x \in M $.
 	$$ (y_n, x) = 0 $$
 	$$ \lim (y_n, x) = (y_0, x) \implies
@@ -1438,9 +1372,7 @@
 
 	$$ \forall h \in H \quad \exists !x \in M, ~ y \in M^\perp : \quad h = x + y $$
 	Определим \emph{оператор ортогонального проектирования}:
-	$$ \underset M P h \define x $$
-	($ x $ "--- элемент наилучшего приближения для $ h $ в $ M $).
-	$$ \underset{M^\perp}P h = y $$
+	$$ \underset M P h \coloneq x, \quad \underset{M^\perp}P h \coloneq y $$
 \end{definition}
 
 \begin{theorem}
@@ -1465,9 +1397,8 @@
 \begin{eproof}
 \item $ M \sub H, \quad x \in H $
 	$$ \exists ! y, z ; \quad x = y + z, \quad y \in M, ~ z \in M^\perp $$
-	$$ Px = y $$
 	\begin{enumerate}
-		\item Проверим линейность
+		\item Проверим линейность и ограниченность
 
 			Возьмём $ \alpha \in \Co $.
 			$$ \alpha x = \alpha y + \alpha z, \quad \alpha y \in M, ~ \alpha z \in M^\perp $$
@@ -1562,32 +1493,6 @@
 	$ \set{x_\alpha}_{\alpha \in A} $ "--- полное $ \iff L = H \iff L^\perp = \set{0} \iff
 	\Bigl( x \in H \perp x_\alpha \quad \forall \alpha \in A \implies x = 0 \Bigr) $
 \end{proof}
-
-\begin{definition}
-	$ H $ "--- гильбертово, $ \quad
-	\set{e_n}_{n = 1}^\infty $ "--- ОНС (\emph{ортонормированное семейство}), \ie
-	$$ (e_n, e_m) =
-	\begin{cases}
-		1, \quad n = m \\
-		0, \quad n \ne m
-	\end{cases} $$
-	$$ x \in H, \quad L = \set{ce_n}_{c \in \Co}, \quad \dim L = 1 \implies Px = (x, e_n)e_n $$
-
-	Числа $ (x, e_n) $ будем называть \emph{абстрактными коэффициентами Фурье} по системе
-	$ \set{e_n}_{n = 1}^\infty $.
-
-	Будем говорить, что мы каждому $ x $ \textbf{сопоставили} \emph{ряд Фурье}:
-	$$ x \sim \sum_{n = 1}^\infty (x, e_n)e_n $$
-\end{definition}
-
-\begin{definition}
-	$ \set{e_n} $ "--- ОС (\emph{ортогональная система}), $ \quad \|e_n\| > 0 $
-	$$ L = \set{ce_n}_{c \in \Co}, \quad \vawe{e_n} = \frac{e_n}{\|e_n\|}, \quad
-	P_Lx = (x, \vawe{e_n}) = (x, \vawe{e_n})\vawe{e_n} = \frac{(x, e_n)}{\|e_n\|^2}e_n $$
-
-	$$ x \sim \sum_{k = 1}^\infty c_ne_n, \quad c_n = \frac{(x, e_n)}{\|e_n\|^2}
-	\text{ "--- \emph{коэффициенты Фурье по ОС }} \set{e_n}_{n = 1}^\infty $$
-\end{definition}
 
 \begin{implication}[неравенство Бесселя]
 	$ \set{e_n}_{n = 1}^\infty $ "--- ОНС в $ H, \quad x \in H $

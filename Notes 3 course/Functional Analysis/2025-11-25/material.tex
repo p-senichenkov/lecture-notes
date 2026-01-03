@@ -1,0 +1,251 @@
+\chapter{Линейные функционалы}
+
+\section{Открытые отображения}
+
+\subsection{Теорема об обратном операторе}
+
+\begin{theorem}[Банах]
+	$ X, Y $ "--- банаховы, $ \quad U \in \mathscr B(X, Y) $ "--- биекция
+
+	$$ U^{-1} \in \mathscr B(Y, X) $$
+\end{theorem}
+
+\begin{proof}
+	$$ U(X) = Y \underimp{\text{т. об откр. отобр.}} U \text{ открыто } \underimp{\text{утв.}}
+	U^{-1} \text{непрерывно} $$
+\end{proof}
+
+\subsection{Теорема о замкнутом графике}
+
+\begin{theorem}[об эквивалентных нормах]
+	$ (X, \|\cdot\|_1) $ "--- банахово, $ \quad (X, \|\cdot\|_2) $ "--- банахово, $ \quad
+	\exists C > 0 : \quad \|x\|_2 \overset X\le C\|x\|_1 $
+
+	$$ \exists A > 0 : \quad \|x\|_1 \overset X \le A\|x\|_2 $$
+\end{theorem}
+
+\begin{proof}
+	Обозначим $ X = (X, \|\cdot\|_1), \quad Y = (X, \|\cdot\|_2) $.
+
+	Определим оператор $ I : X \to Y : \quad Ix = x $.
+	Понятно, что $ I $ "--- биекция и $ I \in \mathscr Lin(X, Y) $.
+	$$ \|Ix\|_2 \le C\|x\|_1 \implies I \in \mathscr B(X, Y) $$
+
+	По теореме Банаха об обратном операторе
+	$$ I^{-1} \in \mathscr B(Y, X) \implies \|I^{-1}x\|_1 \le A\|x\|_2, \quad A = \|I^{-1}\| $$
+	$$ \iff \|x\|_1 \le A\|x\|_2 $$
+\end{proof}
+
+\begin{definition}
+	$ (X, \|\cdot\|), ~ (Y, \|\cdot\|) $ над $ \mathbb K $
+
+	$ X \times Y $ "--- \emph{линейное пространство}:
+	$$ (x_1, y_1) + (x_2, y_2) \coloneq (x_1 + x_2, y_1 + y_2) $$
+	$$ \alpha (x, y) = (\alpha x, \alpha y) $$
+
+	Определим \emph{норму} на $ X \times Y $:
+	$$ \|(x, y)\|_{X \times Y} = \|x\|_X + \|y\|_Y $$
+\end{definition}
+
+\begin{remark}
+	Сходимость по такой норме "--- покоординатная:
+	$$ \lim\limits_{n \to \infty}(x_n, y_n) = (x, y) \iff
+	\begin{cases}
+		\lim x_n = x \\
+		\lim y_n = y
+	\end{cases} $$
+
+	Если $ X, Y $ "--- банаховы, то $ X \times Y $ "--- банахово.
+\end{remark}
+
+\begin{definition}
+	$ (X, \|\cdot\|), ~ (Y, \|\cdot\|), \quad U \in \mathscr Lin(X, Y) $
+
+	Определим \emph{график} $ U $:
+	$$ G_U = \Set{(x, Ux)}_{x \in X} \sub X \times Y $$
+
+	Оператор $ U $ называется \emph{замкнутым}, если $ G_U $ замкнуто в $ X \times Y $.
+	$$ \iff \Bigl( \lim(x_n, Ux_n) = (x, y) \implies y = Ux \Bigr) $$
+	$$ \iff \left(
+		\begin{rcases}
+			\lim x_n = x \\
+			\lim Ux_n = y
+		\end{rcases} \implies y = Ux \right) $$
+\end{definition}
+
+\begin{remark}
+	Замкнутый оператор "--- это \textbf{не тот}, который переводит замкнутые множества в замкнутые.
+\end{remark}
+
+\begin{remark}
+	$ (X, \|\cdot\|), ~ (Y, \|\cdot\|), \quad U \in \mathscr Lin(X, Y) $
+
+	\begin{enumerate}
+		\item $ \lim x_n = x $;
+		\item $ \lim Ux_n = y $;
+		\item $ y = Ux $.
+	\end{enumerate}
+
+	$$ U \text{ замкнут } \iff \Bigl( 1) + 2) \implies 3) \Bigr) $$
+	$$ U \text{ непрерывен } \iff \Bigl( 1) \implies 2) + 3) \Bigr) $$
+
+	Значит, если $ U $ непрерывен, то он замкнут.
+\end{remark}
+
+\begin{theorem}[о замкнутом графике]
+	$ X, Y $ "--- банаховы, $ \quad U \in \mathscr Lin(X, Y) $ "--- замкнутый
+
+	$$ U \text{ непрерывен} $$
+\end{theorem}
+
+\begin{proof}
+	Определим новую норму пространства $ X $:
+	$$ \|x\|_1 = \|x\|_X + \|Ux\|_Y $$
+
+	Проверим, что $ (X, \|\cdot\|_1) $ банахово.
+	Пусть $ \Set{x_n}_{n = 1}^\infty $ фундаментальна в $ (X, \|\cdot\|_1) $, \ie
+	$$ \lim\limits_{n \to \infty}\|x_m - x_n\|_1 = 0 $$
+	$$ \iff \lim(\|x_m - x_n\|_X + \|Ux_m + Ux_n\|_Y) = 0 $$
+	Значит, $ \Set{x_n} $ фундаментальна в $ (X, \|\cdot\|_X) $, и $ \Set{Ux_n} $ фундаментальна в
+	$ Y $.
+	Оба эти пространства банаховы.
+	$$ \implies \exists x \in X ~ \exists y \in Y : \quad \lim \|x_n - x\|_X = 0 $$
+	$$ \implies
+	\begin{cases}
+		\lim x_n = x \text{ в } (X, \|\cdot\|_X) \\
+		\lim Ux_n = y \text{ в } Y
+	\end{cases} \underimp{U \text{ замкнут}} y = Ux \implies
+	\lim\bigl(\|x_n - x\|_X + \|Ux_n - Ux\|_Y \bigr) = 0 $$
+	\begin{multline*}
+		\implies \lim\|x_n - x\|_1 = 0 \implies (X, \|\cdot\|_1) \text{ банахово}, \quad
+		\|x\|_X \le \|x\|_X + \|Ux\|_Y = \|x\|_1 \underimp{\text{т. об экв. нормах}} \\
+		\implies \exists A > 0 : \quad \|x\|_1 \le A\|x\|_X \implies
+		\|x\|_X + \|Ux\|_Y \le A\|x\|_X \implies \|Ux\| \le A\|x\| \implies U \in \mathscr B(X, Y)
+	\end{multline*}
+\end{proof}
+
+\begin{eg}[$ U $ замкнут, но не непрерывен]
+	$ X = \Set{\exists f' \in \mathcal C[0, 1]}, \quad
+	\|f\|_X = \max\limits_{[0, 1]}|f(x)| $ \\
+	$ X \sub \mathcal C[0, 1] $ в алгебраическом смысле
+
+	$ Y = \mathcal C[0, 1], \quad \|g\|_Y = \max\limits_{[0, 1]}|g(x)| = \|g\|_\infty $
+
+	$$ \mathcal D(f) = f', \quad \mathcal D \in \mathscr Lin(X, Y), \quad
+	\mathcal D \text{ замкнут} $$
+	$$
+	\begin{rcases}
+		\Set{f_n \in X}_{n = 1}^\infty, \quad \lim f_n = f \iff f_n \uniarr{[0, 1]} f \\
+		\mathcal D(f_n) = f_n', \quad \mathcal D(f_n) \to g
+	\end{rcases} \underimp{\text{док. в анализе}} g = f' \implies g = \mathcal D(f) \iff
+	f_n' \uniarr{[0, 1]} g $$
+	$$ x^n \in X : \quad \|x^n\|_X = 1, \quad \mathcal D(x^n) = nx^{n - 1}, \quad
+	\|\mathcal D(x^n)\| = n $$
+	$$ \implies \sup\limits_{\|f\| \le 1} \|D(f)\| = +\infty \implies
+	\mathcal D \not\in \mathscr B(X, Y) $$
+\end{eg}
+
+\section{Сопряжённые пространства к \texorpdfstring{$ \mathrm L^p $}{пространствам Лебега}}
+
+\begin{theorem}[сопряжённые к $ l^p $]
+	$ 1 \le p < +\infty, \quad \frac1p + \frac1q = 1 $
+	\begin{enumerate}
+		\item $ y = \Set{y_n}_{n = 1}^\infty \in l^q, \quad F_y : l^p \to \mathbb K, \quad
+			x = \Set{x_n}_{n = 1}^\infty \in l^p, \quad
+			F_y(x) \coloneq \sum_{n = 1}^\infty x_ny_n $
+
+			$$ F_y \in \bigl( l^p \bigr)^*, \quad \|F_y\|_{(l^p)^*} = \|y\|_q $$
+		\item $ F \in \bigl( l^p \bigr)^* $
+			$$ \exists ! y : \quad F = F_y $$
+	\end{enumerate}
+\end{theorem}
+
+\begin{eproof}
+\item $ y \in l^q, \quad x \in l^p $
+	$$ |F_y(x)| = \Bigl| \sum_{n = 1}^\infty x_ny_n \Bigr| \underset{\text{нер-во Гёльдера}}\le
+	\|x\|_p \cdot \|y\|_q, \quad F_y \in \bigl( l^p, \mathbb K \bigr) $$
+	$$ \implies F_y \in \mathscr B \bigl(l^p, \mathbb K \bigr) = \bigl( l^p \bigr)^*, \quad
+	\|F_y\|_{(l^p)^*} \le \|y\|_q $$
+\item $ F \in \bigl( l^p \bigr)^*, \quad
+	e_n = (0, \dots, 0, \underset n 1, 0, \dots, 0) $ "--- базис $ l^p $
+
+	Определим $ y_n = F(e_n) $.
+	$$ x = \Set{x_n}_{n = 1}^\infty \in l^p \implies
+	x = \sum_{n = 1}^\infty x_ne_n \text{ "--- сходится в } l^p $$
+	\begin{multline*}
+		S_n \coloneq \sum_{k = 1}^n x_ke_k \implies
+		F(S_n) = \sum_{k = 1}^n x_ky_k \underimp{F \text{ непрерывен}} \\
+		\implies \lim S_n = x \implies
+		\lim F(S_n) = F(x) \implies F(x) = \sum_{k = 1}^\infty x_ky_k \implies
+		F = F_y
+	\end{multline*}
+
+	Проверим, что $ y \in l^q $.
+	\begin{itemize}
+		\item $ p > 1 \implies q < +\infty $
+			Рассмотрим пробные функции
+			$$ x_k =
+			\begin{cases}
+				\frac{\ol y_k}{|y_k|} \cdot |y_k|^{q - 1}, \quad y_k \ne 0, \\
+				0, \quad y_k = 0
+			\end{cases} $$
+
+			Рассмотрим последовательности
+			$$ \nder x = \sum_{k = 1}^n x_ke_k = (x_1, \dots, x_n, 0, \dots) $$
+			$$ F \bigl( \nder x \bigr) = \sum_{k = 1}^n x_ky_k = \sum |y_k|^q $$
+			$$ \bigl\| \nder x \bigr\|_p^p = \sum_{k = 1}^n |x_k|^p =
+			\sum |y_k|^{p(q - 1)} \undereq{\frac1p + \frac1q = 1 \implies p + q =
+			pq \implies pq - p = q} \sum_{k = 1}^n |y_k|^q $$
+			\begin{multline*}
+				\|F\| = \sup\limits_{x \ne 0} \frac{|F(x)|}{\|x\|_p} \ge
+				\frac{F(\nder x)}{\|\nder x\|} =
+				\frac{\sum_{k = 1}^n |y_k|^q}{ \bigl( \sum_{k = 1}^n |y_k|^q \bigr)^{\frac 1p}} =
+				\Bigl( \sum_{k = 1}^n |y_k|^q \Bigr)^{1 - \frac1p} =
+				\Bigl( \sum |y_k|^q \Bigr)^{\frac1q} \quad \forall n \implies \\
+				\implies y \in l^q, \quad \|F\| \ge \|y\|_q, \quad F = F_y
+			\end{multline*}
+
+			Докажем единственность: \\
+			\textbf{Пусть} $ F = F_y, ~ F = F_z $.
+			$$ F(e_n) = y_n, \quad F(e_n) = z_n \implies y_n = z_n $$
+		\item $ p = 1 \implies q = \infty $
+			$$ F(e_n) = y_n, \quad \|F\|_{(l^1)^*} \ge |y_n| \implies y \in l^\infty $$
+			$$ \|F\| \ge \sup\limits_{n \in \mathbb N}|y_n| = \|y\|_\infty $$
+	\end{itemize}
+\end{eproof}
+
+\begin{remark}
+	$ T : (l^q) \to \bigl( l^p \bigr)^* : \quad T(y) = F_y $
+
+	Мы доказали, что, при $ 1 \le p < +\infty $, $ T $ "--- линейный изометрический изоморфизм.
+	Говорят, что $ \bigl( l^p \bigr)^* = l^q $.
+\end{remark}
+
+\begin{theorem}[сопряжённое к $ C_0 $]
+	$ C_0 = \Set{ x = \Set{x_n \in \mathbb K}_{n = 1}^\infty |
+	\exists \lim\limits_{n \to \infty} x_n = 0} $
+	\begin{enumerate}
+		\item $ y \in l^1, \quad x \in C_0, \quad F_y(x) \coloneq \sum_{n = 1}^\infty x_ny_n $
+			$$ F_y \in C_0^*, \quad \|F_y\| = \|y\|_1 $$
+		\item $ F \in C_0^* $
+			$$ \exists ! y \in l^1 : \quad F = F_y $$
+	\end{enumerate}
+\end{theorem}
+
+\begin{eproof}
+\item $ y \in l^1, \quad x \in C_0 $
+	$$ |F_y(x)| = \Bigl| \sum_{n = 1}^\infty x_ny_n \Bigr| \le
+	\sup\limits_{n \in \mathbb N}|x_n| \cdot \sum_{n = 1}^\infty |y_n| =
+	\|x\|_\infty \cdot \|y\|_1 $$
+	$$ \implies F_y \in C_0^*, \quad \|F_y\| \le \|y\|_1 $$
+\item $ \Set{e_n}_{n = 1}^\infty $ "--- базис в $ C_0 $.
+	Рассмотрим $ F \in C_0^* $.
+	$$ y_n \coloneq F(e_n) $$
+	$$ x = \Set{x_n}_{n = 1}^\infty \in C_0 \implies x = \sum_{k = 1}^\infty x_ke_k $$
+	$$ S_n \coloneq \sum_{k = 1}^n x_ke_k $$
+	$$ F(S_n) = \sum_{k = 1}^n x_k y_k \underimp{F \text{ непрерывен}}
+	\lim F(S_n) = F(x) \implies F(x) = \sum_{k = 1}^\infty x_ky_k \text{ сходится } \implies
+	F = F_y $$
+
+	Проверим, что $ y \in l^1 $.
+\end{eproof}
