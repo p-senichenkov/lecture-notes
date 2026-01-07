@@ -31,7 +31,7 @@ $$ \frac1\lambda \in \mathrm{Com}(H) \implies I - \frac1\lambda T \text{ "--- о
 		\item $ S(H) $ замкнуто;
 		\item $ S^*(H) $ замкнуто;
 		\item $ H = S(H) \oplus \operatorname{Ker} S^* $;
-		\item $ H = S^*(H) \oplus \operatorname{Ker}(S) $.
+		\item $ H = S^*(H) \oplus \operatorname{Ker}S $.
 	\end{enumerate}
 \end{theorem}
 
@@ -103,31 +103,11 @@ $$ \frac1\lambda \in \mathrm{Com}(H) \implies I - \frac1\lambda T \text{ "--- о
 	\end{enumerate}
 \end{replacementproof}
 
-\TODO{Замкнутость образа оператора Фредгольма?}
-
 \section[Альтернатива Фредгольма: инъективность оператора Фредгольма эквивалентна его
 \texorpdfstring{\\}{}
 сюръективности]
 {Альтернатива Фредгольма: инъективность оператора Фредгольма эквивалентна его
 сюръективности}
-
-\begin{theorem}\label{thm:alt_fred}
-	$$ \operatorname{Ker} S = \Set{0} \iff S(H) = H $$
-\end{theorem}
-
-\begin{restate}
-	Оператор $ S $ "--- инъекция \textbf{тогда и только тогда}, когда $ S $ "--- сюръекция.
-	Из любого из этих выражений следует, что $ S $ "--- биекция.
-\end{restate}
-
-\begin{restate}
-	\hfill
-	\begin{itemize}
-		\item \textbf{Либо} уравнение Фредгольма разрешимо для любой правой части и решение
-			единственно.
-		\item \textbf{Либо} существует ненулевое решение уравнения Фредгольма.
-	\end{itemize}
-\end{restate}
 
 \begin{lemma}[о стабилизации]
 	$ k \ge 0, \quad H_{k + 1} \coloneq S(H_k) $
@@ -152,9 +132,24 @@ $$ \frac1\lambda \in \mathrm{Com}(H) \implies I - \frac1\lambda T \text{ "--- о
 	T \in \mathrm{Com}(H) $ "--- \contra.
 \end{proof}
 
-\hspace{.5em}
+\begin{theorem}\label{thm:alt_fred}
+	$$ \operatorname{Ker} S = \Set{0} \iff S(H) = H $$
+\end{theorem}
 
-\begin{iproof}[теоремы]
+\begin{restate}
+	Оператор $ S $ "--- инъекция \textbf{тогда и только тогда}, когда $ S $ "--- сюръекция.
+\end{restate}
+
+\begin{restate}
+	\hfill
+	\begin{itemize}
+		\item \textbf{Либо} уравнение Фредгольма разрешимо для любой правой части и решение
+			единственно.
+		\item \textbf{Либо} существует ненулевое решение однородного уравнения Фредгольма.
+	\end{itemize}
+\end{restate}
+
+\begin{iproof}
 \item $ \implies $
 
 	$ \operatorname{Ker} S = \Set{0} $, \ie $ S $ "--- инъекция.
@@ -334,7 +329,7 @@ $$ \frac1\lambda \in \mathrm{Com}(H) \implies I - \frac1\lambda T \text{ "--- о
 	$ T = T^* $
 	$$ M \coloneq \sup\limits_{\|x\| = 1} (Tx, x), \quad m \coloneq \inf\limits_{\|x\| = 1}(Tx, x) $$
 
-	$ m $ и $ M $ называются \emph{границами} оператора $ T $.
+	$ M $ и $ m $ называются \emph{границами} оператора $ T $.
 \end{definition}
 
 \begin{remark}
@@ -347,51 +342,235 @@ $$ \frac1\lambda \in \mathrm{Com}(H) \implies I - \frac1\lambda T \text{ "--- о
 	$$ \exists \lambda \in \sigma_p(T) : \quad |\lambda| = \|T\| $$
 \end{theorem}
 
-\begin{proof}
-	$ \|T\| = \sup\limits_{\|x\| = 1}|(Tx, x)| $
-	\begin{itemize}
-		\item $ \|T\| = |M| $
-			$$ M = \sup\limits_{\|x\| = 1}(Tx, x) \implies \exists \Set{x_n}_{n = 1}^\infty : \quad
-			\|x_n\| = 1, \quad \lim(Tx_n, x_n) = M $$
-			$$
-			\begin{rcases}
-				m \le M \\
-				\max\{|M|, |m|\} = |M|
-			\end{rcases} \implies M > 0 $$
-			$$ T \in \mathrm{Com}(H) \implies \exists \Set{n_k}_{k = 1}^\infty : \quad
-			\exists \lim\limits_{k \to \infty} Tx_{n_k} = y $$
+\begin{iproof}
+\item $ \|T\| = |M| $
+	$$ M = \sup\limits_{\|x\| = 1}(Tx, x) \implies \exists \Set{x_n}_{n = 1}^\infty : \quad
+	\|x_n\| = 1, \quad \lim(Tx_n, x_n) = M $$
+	$$
+	\begin{rcases}
+		m \le M \\
+		\max\{|M|, |m|\} = |M|
+	\end{rcases} \implies M > 0 $$
+	$$ T \in \mathrm{Com}(H) \implies \exists \Set{n_k}_{k = 1}^\infty : \quad
+	\exists \lim\limits_{k \to \infty} Tx_{n_k} = y $$
 
-			Переименуем: $ \lim\limits_{n \to \infty} Tx_n = y $.
-			Проверим, что $ y $ "--- с. в. $ T $ и $ Ty = My $.
-			\begin{multline*}
-				0 \le \|Tx_n - M \cdot x_n \|^2 = (Tx_n - Mx_n, Tx_n - Mx_n) = \\
-				= \|Tx_n\|^2 - \underbrace{M(Tx_n, x_n)}_{\to M} - \underbrace{M(x_n, Tx_n)}_{\to M} +
-				M^2 \underbrace{\|x_n\|^2}_{= 1} \underarr{n \to \infty} \|y\|^2 - M^2 \implies
-				\|y\| \ge M
-			\end{multline*}
-			$$ \|y\| = \lim \|Tx_n\| \le \|T\| \cdot \|x_n\| = \|T\| = M \implies \|y\| \le M $$
-			$$ \implies \lim M \cdot x_n = \lim Tx_n = y $$
+	Переименуем: $ \lim\limits_{n \to \infty} Tx_n = y $.
+	Проверим, что $ y $ "--- с. в. $ T $ и $ Ty = My $.
+	\begin{multline*}
+		0 \le \|Tx_n - M \cdot x_n \|^2 = (Tx_n - Mx_n, Tx_n - Mx_n) = \\
+		= \|Tx_n\|^2 - \underbrace{M(Tx_n, x_n)}_{\to M} - \underbrace{M(x_n, Tx_n)}_{\to M} +
+		M^2 \underbrace{\|x_n\|^2}_{= 1} \underarr{n \to \infty} \|y\|^2 - M^2 \implies
+		\|y\| \ge M
+	\end{multline*}
+	$$ \|y\| = \lim \|Tx_n\| \le \|T\| \cdot \|x_n\| = \|T\| = M \implies \|y\| \le M $$
+	$$ \implies \lim M \cdot x_n = \lim Tx_n = y $$
 
-			Воспользуемся тем, что $ T $ непрерывен:
-			$$ M \cdot \lim x_n = y \implies M \underbrace{\lim Tx_n}_{= y} = Ty \implies
-			Ty = My, \implies M \in \sigma_p(T), \quad M = \|T\| $$
+	Воспользуемся тем, что $ T $ непрерывен:
+	$$ M \cdot \lim x_n = y \implies M \underbrace{\lim Tx_n}_{= y} = Ty \implies
+	Ty = My, \implies M \in \sigma_p(T), \quad M = \|T\| $$
 
-		\item $ \|T\| = |m| $
-			\TODO{дописать этот случай}
-	\end{itemize}
-\end{proof}
+\item $ \|T\| = |m| $
+
+	Рассмотрим оператор $ T_1 = -T $.
+	$$ \sup\limits_{\|x\| = 1} (T_1x, x) = -m \implies \exists y \ne 0 : \quad T_1y = -my \implies
+	Ty = my $$
+\end{iproof}
 
 \section{Теорема Гильберта\texorpdfstring{"--~}{--}Шмидта о представлении компактного
 самосопряжённого оператора в виде суммы ортогональных проекторов}
 
-\TODO{Теорема Гильберта"--~Шмидта о представлении компактного самосопряжённого оператора}
+\begin{theorem}
+	$ H $ "--- гильбертово, $ \quad T = T^*, \quad T \in \mathrm{Com}(H),
+	\quad \sigma (T) \setminus \Set{0} = \Set{\lambda_n}_{n = 1}^{0 \le N \le +\infty}, $ \\
+	$ \lambda_n \in \sigma_p(T), \quad H_{\lambda_n} = \operatorname{Ker}(\lambda_n I - T),
+	\quad \dim H_{\lambda_n} < +\infty, \quad P_n $ "--- ортогональный проектор на $ H_{\lambda_n} $
+
+	$$ \implies T = \sum_{k = 1}^N \lambda_k P_k $$
+
+	Если $ N = +\infty $, то
+	$$ \Bigl\|T - \sum_{k = 1}^n \lambda_k P_{\lambda_k}\Bigr\| \underarr{n \to \infty} 0 $$
+\end{theorem}
+
+\begin{proof}
+	Возьмём $ \lambda \ne 0 $ из $ \sigma_p $.
+	Рассмотрим $ \vawe T = T - \lambda P_\lambda $ ($ P_\lambda $ "--- ортогональный проектор на
+	собственное подпространство $ H_\lambda $).
+	$$ L \coloneq H_\lambda^\perp $$
+	$$ \vawe T\bigr|_{H_\lambda} = 0 \implies H_\lambda \in \operatorname{Ker} \vawe T $$
+	$$ T^* = T \implies (\vawe T)^* = \vawe T $$
+	При этом, компактность сохраняется: $ \vawe T \in \mathrm{Com}(H) $.
+
+	Рассмотрим $ \mu \ne \lambda $ из $ \sigma_p(T) $.
+	$$ H_\mu \perp H_\lambda \implies H_\mu \sub L \implies \mu \in \sigma_p(\vawe T),
+	\quad \operatorname{Ker}(\mu I - \vawe T) = \operatorname{Ker}(\mu I - T) $$
+	$$ \operatorname{Ker} \vawe T = \operatorname{Ker} T \oplus H_\lambda $$
+
+	По предыдущей теореме,
+	$$ \exists \lambda_1 : \quad |\lambda_1| = \|T\| $$
+
+	Уже доказано, что $ \sigma(T) \sub \Set{\lambda \in \Co | {} |\lambda| \le \|T\|} $.
+	Значит, $ \lambda_1 $ "--- максимальное по модулю.
+	\begin{itemize}
+		\item Если $ \lambda_1 = 0 $, то $ T = \On[] $.
+		\item Если $ \|T\| > 0 $, то рассмотрим $ T_1 = T - \lambda_1 \cdot P_1 $.
+	\end{itemize}
+
+	По одному из простейших свойств самосопряжённого оператора,
+	$ |\lambda_1| = \sup\limits_{\|x\| = 1}|(Tx, x)| $.
+
+	Можем вычислить $ |\lambda_2| $:
+	$$ |\lambda_2| = \sup\limits_{\|x\| = 1}|(T_1x, x)| =
+	\sup\limits_{\begin{subarray}{c}
+		\|x\| = 1, \\
+		x \perp H_{\lambda_1}
+	\end{subarray}}|(Tx, x)| $$
+	Кроме того, $ |\lambda_2| = \|T_1\| $.
+
+	И так далее по индукции.
+	\begin{itemize}
+		\item Если $ \exists N : \quad T_N = 0 $, то
+			$$ T = \sum_{k = 1}^{N - 1}\lambda_k P_k $$
+		\item Иначе:
+			$$ \Bigl\| T - \sum_{k = 1}^{N - 1} \lambda_kP_k \Bigr\| = |\lambda_N| $$
+			Но $ \lim\limits_{N \to \infty}\lambda_N = 0 $, значит,
+			$ T = \sum_{k = 1}^\infty \lambda_k P_k $
+	\end{itemize}
+\end{proof}
 
 \section{Теорема Гильберта\texorpdfstring{"--~}{--}Шмидта о существовании ОНБ из собственных
 векторов компактного самосопряжённого оператора}
 
-\TODO{Теорема Гильберта"--~Шмидта о существовании ОНБ}
+\begin{theorem}
+	$ H $ "--- гильбертово, сепарабельно, $ \quad T = T^*, \quad T \in \mathrm{Com}(H) $
+
+	Тогда существует $ \Set{e_n}_{n = 1}^\infty $ "--- ОНБ из собственных векторов $ T $.
+\end{theorem}
+
+\begin{proof}
+	$$ \sigma_p(T) \setminus \Set{0} = \Set{\lambda_n}_{n = 1}^N, \quad
+	|\lambda_1| \ge |\lambda_2| \ge \dots $$
+
+	Если $ N = \infty $, то $ \lim\limits_{n \to \infty} \lambda_n = 0, \quad 0 \le N \le +\infty $.
+	$$ H_n = \operatorname{Ker}(\lambda_n I - T) $$
+	$$ \dim H_n = m_n, \quad 1 \le n < +\infty $$
+
+	Пусть $ \Set{e_{n~j}}_{j = 1}^N $ "--- ОНБ в $ H_n $.
+	$$ L \coloneq \mathscr L\Set{e_{n~j}}_{n = 1}^N, \quad 1 \le j \le m_n $$
+	$$ M \coloneq L^\perp, \quad H = L \oplus M $$
+
+	Проверим, что $ M = \operatorname{Ker} T $.
+	$$ H_0 \coloneq \operatorname{Ker}(0 \cdot I - T) = \operatorname{Ker} T =
+	H_0 \perp H_{\lambda_n} \quad \forall n \ge 1 $$
+	$$ x \in H_0 \implies x \in M, \quad \operatorname{Ker}T \sub M $$
+	($ H_\lambda $ все друг другу ортогональны; ноль "--- частный случай)
+
+	Возьмём $ z \in M $.
+	$$ z \perp H_{\lambda_n} \quad \forall n \ge 1 \implies P_z = 0 \underimp{\text{т. Г."--~Ш. о
+	предст. опер.}} Tz = \sum_{n = 1}^\infty \lambda_n P_H = 0 \implies
+	z \in \operatorname{Ker} T $$
+	$$ H \text{ сепарабельно } \implies H_0 \text{ сепарабельно } \implies
+	\exists \Set{e_{0~j}}_{n = 0, ~ 1 \le j \le m_n}^N \text{ "--- ОНБ в } H $$
+\end{proof}
+
+\begin{remark}
+	$ H $ "--- гильбертово пространство
+
+	Тогда существует ОНБ в $ \ol{T(H)} $ из собственных векторов $ T $.
+\end{remark}
+
+\begin{proof}
+	$$ H = \ol{T(H)} \oplus \operatorname{Ker} T^* \underimp{T = T^*}
+	H = \ol{T(H)} \oplus \operatorname{Ker}T \implies L = \ol{T(H)} $$
+	Для $ x \in \ol{T(H)} $
+	$$ x = \sum_{n = 1}^N \sum_{j = 1}^{m_n} (x, e_{n_j})e_{n_j} $$
+\end{proof}
 
 \section{Компактность интегрального оператора с ядром из
 \texorpdfstring{$ \mathrm L^2 $}{пространства Лебега}}
 
-\TODO{Компактность интегрального оператора}
+\begin{theorem}
+	$ \mathrm L^2(X, \mu), ~ \mathrm L^2(Y, \nu) $ сепарабельны, $ \quad
+	K(x, y) \in \mathrm L^2(X \times Y) $
+	$$ (\mathscr K f)(x) = \int\limits_Y K(x, y)f(y) \di \nu $$
+	$$ \implies \mathscr K \in \mathrm{Com} \bigl( \mathrm L^2 (Y), \mathrm L^2 (X) \bigr) $$
+\end{theorem}
+
+\begin{proof}
+	Пусть $ \Set{\phi_n(x)}_{n = 1}^\infty $ "--- ОНБ в $ \mathrm L^2(X, \mu), \quad
+	\Set{\psi_j(y)}_{j = 1}^\infty $ "--- ОНБ в $ \mathrm L^2(Y, \nu) $.
+
+	Проверим, что $ \Set{\phi_n(x), \psi_j(y)}_{n, j \in \N} $ "--- ОНБ в $ \mathrm L^2(X, Y) $.
+	$$ \int\limits_X \phi_n(x) \ol{\phi_m(x)} \di \mu =
+	\begin{cases}
+		1, \quad n = m, \\
+		0, \quad n \ne m,
+	\end{cases} \quad
+	\int\limits_Y \psi_i(y) \psi_k(y) \di \nu =
+	\begin{cases}
+		0 \quad j \ne k, \\
+		1, \quad j = k.
+	\end{cases} $$
+	\begin{itemize}
+		\item Проверим ортогональность
+			\begin{multline*}
+				\iint\limits_{X \times Y} \phi_n(x) \psi_i(y) \ol{\phi_m(x)} \ol{\psi_k(y)}
+				\di \mu \di \nu =
+				\int\limits_X \phi_n \ol\phi_m \di \mu \int\limits_Y \psi_j \ol\psi_k \di\nu =
+				\begin{cases}
+					1, \quad m = n, ~ j = k, \\
+					0
+				\end{cases} \implies \\
+				\implies \Set{\phi_n(x), \psi_j(y)} \text{ "--- ОС}
+			\end{multline*}
+		\item Проверим полноту
+
+			Возьмём $ f \in \mathrm L^2(X \times Y) $.
+			Пусть $ f \perp \Set{\phi_n(x), \psi_j(y)}_{n, j \in \N} $.
+			$$ \iint\limits_{X \times Y} f(x, y) \ol{\phi_n(x)} \ol{\psi_j(y)} \di\mu \di\nu = 0
+			\quad \forall n, k $$
+
+			Зафиксируем $ n $.
+			$$ \int\limits_Y \Bigl( \int\limits_X f(x, y) \ol{\phi_n(x)} \di \mu \Bigr)
+			\ol{\psi_k(y)} \di \nu = 0 $$
+			\begin{multline*}
+				\int\limits_X f(x, y) \ol\phi_n \di \mu \perp \psi_k(y) \quad \forall k \implies
+				\int\limits_X f(x, y) \ol \phi_n \di \mu = 0 \text{ \ale по } \nu \implies \\
+				\implies f(x, y) = 0 \text{ \ale по } \mu \implies
+				f = \On \text{ в } \mathrm L^2(X \times Y), \quad
+				K(x, y) = \sum_{1 \le i, j < +\infty} \alpha_{ij}\phi_i(x) \psi_j(y)
+			\end{multline*}
+
+			Рассмотрим частичные суммы:
+			$$ K_n(x, y) = \sum_{
+				\begin{subarray}{c}
+					1 \le j \le n \\
+					1 \le i \le n
+			\end{subarray}} \alpha_{ij} \phi_i(x) \psi_i(y) $$
+			$$ \lim \|K(x, y) - K_n(x, y)\| = 0 $$
+
+			Уже доказано, что
+			$$ \|\mathscr K\|_{\mathscr B(\mathrm L^2(Y), \mathrm L^2(X))} \le
+			\|K(x, y)\|_{\mathrm L^2(X \times Y)} $$
+
+			Возьмём $ f \in \mathrm L^2(Y, \nu) $.
+			$$ (\mathscr K_n f) = \int\limits_Y K_n(x, y) f(y) \di \nu =
+			\sum_{\begin{subarray}{c}
+				1 \le i \le n \\
+				1 \le j \le n
+		\end{subarray}} \alpha_{ij}\phi_i(x) \int\limits_Y f(y) \psi_j(y) \di \nu $$
+		$$ L_n \coloneq \mathscr L\Set{\phi_j}_{j = 1}^n, \quad \dim L_n = n, \quad
+		\mathscr K_n(f) \in L_n $$
+		Значит, $ \mathscr K_n $ "--- оператор конечного ранга.
+		$$ \implies \mathscr K_n \in \mathrm{Com} \bigl( \mathrm L^2(Y), \mathrm L^2(X) \bigr) $$
+		$$ \|\mathscr K - \mathscr K_n\|_{\mathscr B(\mathrm L^2(Y), \mathrm L^2(X))} \le
+		\|K(x, y) - K_n(x, y)\| \uniarr{\mathrm L^2(X \times Y)} 0 $$
+		Операторы компактные, значит, их предел по норме тоже компактен.
+	\end{itemize}
+\end{proof}
+
+\begin{implication}
+	$ \mathrm L^2(X, \mu) $ сепарабельно, $ \quad K(x, y) \in \mathrm L^2(X \times X), \quad
+	K(y, x) = \ol{K(x, y)} $
+
+	$$ \mathscr K \in \mathrm{Com} \bigl( \mathrm L^2(X) \bigr) $$
+\end{implication}

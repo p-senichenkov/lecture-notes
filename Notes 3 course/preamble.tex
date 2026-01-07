@@ -6,6 +6,9 @@
 % , showframe%
 ]{geometry}
 
+% The most important package
+\usepackage{figchild}
+
 \usepackage{fontspec}
 \setmainfont{CMU Serif}
 \setsansfont{CMU Sans Serif}
@@ -192,7 +195,7 @@
 % imaginary unit
 \newcommand\ii{\mathfrak i}
 
-%%    font style
+%%    font style (all DEPRECATED: vimTeX doesn't recognize them, save few clicks with completion)
 % math
 \newcommand\mc\mathcal
 \newcommand\msc\mathscr
@@ -278,7 +281,8 @@
 \newcommand\limz[1]{\lim\limits_{#1\to0}}
 \newcommand\limi[1]{\lim\limits_{#1\to\infty}}
 
-%%    integrals (all DEPRECATED)
+%%    integrals (all DEPRECATED: gives no profit, arguments are obvious,
+% turns debugging braces into a nightmare)
 % undefined
 \newcommand\uint[2][x]{\ensuremath{\int {#2} \, \operatorname{d} {#1}}}
 \newcommand\ufint[2][x]{ \ensuremath{ \int{ \dfrac{\operatorname{d} {#1}}{{#2}} } } }
@@ -298,12 +302,10 @@
 \newcommand*\comp[1]{\ensuremath{\underset{#1}{\equiv}}}
 
 %% definition:
-% := (DEPRECATED -- use /coloneq)
+% := (DEPRECATED: use /coloneq)
 \newcommand\define\coloneqq
-% =:
+% =: (DEPRECATED: use \eqqcolon)
 \newcommand\fed\eqqcolon
-% :{#1}
-\newcommand*\definerel[1]{\mathrel{:{#1}}}
 % by definition (default is =)
 \newcommand*\bydef[1][=]{\ensuremath{\stackrel{\operatorname{def}}{#1}}}
 % by definition with NECESSARY text:
@@ -320,7 +322,7 @@
 \newcommand\Q{\ensuremath{\mathbb{Q}}}
 \newcommand\Co{\ensuremath{\mathbb{C}}}     % because /C is already taken
 \newcommand\Prime{\ensuremath{\mathbb{P}}}     % prime numbers
-\newcommand\On[1][n]{\ensuremath{\mathbb{O}_{#1}}}  % (0, ..., 0)
+\newcommand\On[1][]{\ensuremath{\mathbb{O}_{#1}}}  % (0, ..., 0)
 
 % a line of dots (3em by default) (not desired -- use \dots wherever possible)
 % https://tex.stackexchange.com/a/332124/358925
@@ -372,7 +374,7 @@
 % controversy
 \newcommand\contra{~\scalebox{1.2}{$\lightning$}~}
 
-% roman numbers
+% roman numerals
 \makeatletter
 \newcommand*{\rom}[1]{\text{\expandafter\@slowromancap\romannumeral #1@}}
 \makeatother
@@ -384,26 +386,13 @@
 % math &
 \newcommand\amp{\ensuremath{\mathrel\&}}
 
-\newcommand\TODO[1]{\textcolor{red}{{\Huge TODO:} {#1}} \message{LaTeX Warning: TODO on line \the\inputlineno%
-%
-}}
+\makeatletter
+\newcommand\TODO[1]{\textcolor{red}{{\Huge TODO:} {#1}}
+\@latex@warning{TODO: #1}
+}
+\makeatother
 
 \newcommand\comment[1]{\textcolor{magenta}{\textit{#1}}}
-
-% "not important" (DEPRECATED: looks ugly)
-\newcommand\nimp[1][\text{если не оговорено иное}]{\textcolor{gray}{#1}}
-
-%%     \section (DEPRECATED: work strange)
-% "math string"
-\newcommand\mstring[1]{\texorpdfstring{$ {#1} $}{#1}}
-% \\
-\newcommand\n{\texorpdfstring\\{}}
-
-% polyglossia shorthands (XXX: does this work fine?)
-\AtBeginDocument{\newcommand\compname{\texorpdfstring{"--~}{--}}}
-
-\newcommand\tcir\textasciicircum
-\newcommand\tpst\texorpdfstring
 
 %% set package shorthands (DEPRECATED: prefer Set and Braket)
 \let\tset\set
@@ -411,9 +400,6 @@
 
 \let\tbraket\braket
 \let\braket\Braket
-
-% vector-argument of function (DEPRECATED: used only in theorem about implicit function)
-\newenvironment{barg}{\left(\begin{bmatrix}}{\end{bmatrix}\right)}
 
 % make dotted lines semi-transparent by default in nicematrix
 \NiceMatrixOptions{xdots/line-style=loosely dotted, nullify-dots}
@@ -446,6 +432,7 @@
 \newcommand\antlersimp{\commonantlers{}{\textcolor{red}{!!!}}}
 
 % Cauchy's problem
+% XXX: there's no Basov further
 \newcommand\caupr[2][]{$ \text{ЗК}_{\ensuremath{#1}}(#2) $}
 
 %%     theorems
@@ -532,6 +519,7 @@
 \declaretheorem[style=thmbluebox, numbered=no, name=Свойство]{property}
 \declaretheorem[style=thmbluebox, numbered=no, name=Свойства]{properties}
 \declaretheorem[style=thmbluebox, numbered=no, name=Алгоритм]{algorithm}
+% DEPRECATED: see answer
 \declaretheorem[style=thmbluebox, name=Вопрос]{quest}
 
 \declaretheorem[style=thmredbox, name=Теорема]{theorem}
@@ -549,8 +537,7 @@
 \declaretheorem[style=thmblueline, numbered=no, name=Замечание]{remark}
 \declaretheorem[style=thmblueline, numbered=no, name=Примечание]{note}
 
-% Basov's control point. It's green, because it's commonly used inside of algorithm, which is blue (XXX)
-\declaretheorem[style=thmgreenbox, numbered=no, name=Контрольная точка]{control}
+% DEPRECATED: it've been used a couple of times
 \declaretheorem[style=thmgreenbox, numbered=no, name=Ответ]{answerbase}
 
 \declaretheorem[style=thproblembox, name=Задача]{problem}
@@ -576,6 +563,7 @@
 
 % no-style theorems
 \newtheorem*{notation}{Обозначение}
+% DEPRECATED: it's ugly
 \newtheorem*{intuition}{Очевидно, что}
 \newtheorem*{remind}{Напоминание}
 
