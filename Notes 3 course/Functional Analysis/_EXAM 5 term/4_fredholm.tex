@@ -1,3 +1,5 @@
+\part{Теория Фредгольма}
+
 \section{Условие разрешимости уравнения Фредгольма.
 Замкнутость образа оператора Фредгольма}
 
@@ -51,7 +53,7 @@ $$ \frac1\lambda \in \mathrm{Com}(H) \implies I - \frac1\lambda T \text{ "--- о
 
 \begin{proof}
 	$ M = \operatorname{Ker} S, \quad L = M^\perp, \quad H = M \oplus L $
-	$$ S(M) = 0 \implies S(H) = S(L) $$
+	$$ S(M) = \Set{0} \implies S(H) = S(L) $$
 	$$ y \in S(H) \implies \exists! x \in L : \quad Sx = y $$
 	$$ \forall y_n \quad \exists x_n \in L : \quad Sx_n = y_n $$
 
@@ -86,10 +88,11 @@ $$ \frac1\lambda \in \mathrm{Com}(H) \implies I - \frac1\lambda T \text{ "--- о
 	\hfill
 	\begin{enumerate}
 		\item 	Докажем, что $ S(H) $ замкнуто.
-			Возьмём $ \Set{y_n \in S(H)}_{n = 1}^\infty : \quad \exists \lim\limits_{n \to \infty} y_0 $.
+			Возьмём $ \Set{y_n \in S(H)}_{n = 1}^\infty : \quad
+			\exists \lim\limits_{n \to \infty} y_n = y_0 $.
 			$$ \exists \lim y_n \implies \Set{y_n} \text{ ограничена } \underimp{\text{лемма}}
 			\exists \Set{x_n \in H} : \quad \Set{x_n} \text{ ограничена}, \quad Sx_n = y_n $$
-			$$ T \in \mathrm{Com}(H) \implies \exists \Set{n_k} : \quad \lim T_{x_{n_k}} = z_0 $$
+			$$ T \in \mathrm{Com}(H) \implies \exists \Set{n_k} : \quad \lim Tx_{n_k} = z_0 $$
 			$$ \underbrace{y_{n_k}}_{\to y_0} = S(x_{n_k}) = x_{n_k} - \underbrace{Tx_{n_k}}_{\to z_0} $$
 			$$ \implies \exists \lim\limits_{k \to \infty} x_{n_k} = x_0
 			\underimp{T \in \mathscr B(H)}
@@ -128,8 +131,8 @@ $$ \frac1\lambda \in \mathrm{Com}(H) \implies I - \frac1\lambda T \text{ "--- о
 	$$ \|Tx_n - Tx_m\| = \|x_n - Sx_n - x_m + Sx_m\| \ge 1 $$
 	$$ Sx_n \in H_{n + 1}, \quad Sx_m \in H_{m + 1} $$
 	$$ x_n, Sx_n, Sx_m \in H_{m + 1} \implies x_m \perp H_{m + 1} $$
-	Значит, не существует $ \Set{Tx_{n_k}} : \quad \exists \lim T_{x_{n_k}}, \quad
-	T \in \mathrm{Com}(H) $ "--- \contra.
+	Значит, не существует $ \Set{Tx_{n_k}} : \quad \exists \lim T_{x_{n_k}} $ "--- \contra с
+	$ T \in \mathrm{Com}(H) $.
 \end{proof}
 
 \begin{theorem}\label{thm:alt_fred}
@@ -200,7 +203,7 @@ $$ \frac1\lambda \in \mathrm{Com}(H) \implies I - \frac1\lambda T \text{ "--- о
 	\text{ "--- ОНБ } \operatorname{Ker} S^* $$
 
 	Определим $ V : H \to \operatorname{Ker} S^* $:
-	$$ x \in H \quad Vx = \sum_{k = 1}^n (x, e_k) f_K $$
+	$$ x \in H \quad Vx = \sum_{k = 1}^n (x, e_k) f_k $$
 	$$ V(H) \sub \operatorname{Ker}S^* \implies \dim \bigl( V(H) \bigr) < +\infty \implies
 	V \text{ "--- конечного ранга } \implies V \in \mathrm{Com}(H) $$
 	$$ U \coloneq S + V = I - \underbrace{(T - V)}_{\in \mathrm{Com}(H)} \implies
@@ -222,7 +225,7 @@ $$ \frac1\lambda \in \mathrm{Com}(H) \implies I - \frac1\lambda T \text{ "--- о
 	$$ Vx = \sum_{k = 1}^n (x, e_k)  f_k = 0 \implies (x, e_K) = 0 \quad \forall k \implies
 	x \perp \operatorname{Ker} S \underimp{x \in \operatorname{Ker} S} x = 0 $$
 
-	По \ref{thm:alt_fred} $ U(H) = H $.
+	По \autoref{thm:alt_fred} $ U(H) = H $.
 	Проверим, что это невозможно для $ n + 1 $, \ie что
 	$$ f_{n + 1} \notin U(H) $$
 
@@ -241,8 +244,7 @@ $$ \frac1\lambda \in \mathrm{Com}(H) \implies I - \frac1\lambda T \text{ "--- о
 \begin{implication}
 	$ T \in \mathrm{Com}(T) $
 	\begin{enumerate}
-		\item $ \lambda \notin 0, \quad \lambda \in \sigma(T) $
-
+		\item $ \lambda \ne 0, \quad \lambda \in \sigma(T) $
 			$$ \lambda \in \sigma_p(T) $$
 		\item $ \lambda \in \sigma_p(T), \quad H_\lambda = \operatorname{Ker}(\lambda I - T), \quad
 			Y_{\ol \lambda} = \operatorname{Ker}(\ol \lambda I - T^*) $
@@ -284,7 +286,7 @@ $$ \frac1\lambda \in \mathrm{Com}(H) \implies I - \frac1\lambda T \text{ "--- о
 \item $ Tu = \lambda u, \quad Tv = \mu v, \quad \lambda \ne \mu, \quad u, v \ne 0 $
 	$$
 	\begin{rcases}
-		(Tu, v) = = (\lambda u, v) = \lambda (u, v) \\
+		(Tu, v) = (\lambda u, v) = \lambda (u, v) \\
 		(Tu, v) = (u, Tv) = (u, \mu v) \undereq{\mu \in \R} \mu (u, v)
 	\end{rcases} \underimp{\text{вычтем}} \underbrace{(\lambda - \mu)}_{\ne 0}(u, v) = 0 \implies
 	u \perp v $$
@@ -539,33 +541,33 @@ $$ \frac1\lambda \in \mathrm{Com}(H) \implies I - \frac1\lambda T \text{ "--- о
 				f = \On \text{ в } \mathrm L^2(X \times Y), \quad
 				K(x, y) = \sum_{1 \le i, j < +\infty} \alpha_{ij}\phi_i(x) \psi_j(y)
 			\end{multline*}
-
-			Рассмотрим частичные суммы:
-			$$ K_n(x, y) = \sum_{
-				\begin{subarray}{c}
-					1 \le j \le n \\
-					1 \le i \le n
-			\end{subarray}} \alpha_{ij} \phi_i(x) \psi_i(y) $$
-			$$ \lim \|K(x, y) - K_n(x, y)\| = 0 $$
-
-			Уже доказано, что
-			$$ \|\mathscr K\|_{\mathscr B(\mathrm L^2(Y), \mathrm L^2(X))} \le
-			\|K(x, y)\|_{\mathrm L^2(X \times Y)} $$
-
-			Возьмём $ f \in \mathrm L^2(Y, \nu) $.
-			$$ (\mathscr K_n f) = \int\limits_Y K_n(x, y) f(y) \di \nu =
-			\sum_{\begin{subarray}{c}
-				1 \le i \le n \\
-				1 \le j \le n
-		\end{subarray}} \alpha_{ij}\phi_i(x) \int\limits_Y f(y) \psi_j(y) \di \nu $$
-		$$ L_n \coloneq \mathscr L\Set{\phi_j}_{j = 1}^n, \quad \dim L_n = n, \quad
-		\mathscr K_n(f) \in L_n $$
-		Значит, $ \mathscr K_n $ "--- оператор конечного ранга.
-		$$ \implies \mathscr K_n \in \mathrm{Com} \bigl( \mathrm L^2(Y), \mathrm L^2(X) \bigr) $$
-		$$ \|\mathscr K - \mathscr K_n\|_{\mathscr B(\mathrm L^2(Y), \mathrm L^2(X))} \le
-		\|K(x, y) - K_n(x, y)\| \uniarr{\mathrm L^2(X \times Y)} 0 $$
-		Операторы компактные, значит, их предел по норме тоже компактен.
 	\end{itemize}
+
+	Рассмотрим частичные суммы:
+	$$ K_n(x, y) = \sum_{
+		\begin{subarray}{c}
+			1 \le j \le n \\
+			1 \le i \le n
+	\end{subarray}} \alpha_{ij} \phi_i(x) \psi_i(y) $$
+	$$ \lim \|K(x, y) - K_n(x, y)\| = 0 $$
+
+	Уже доказано, что
+	$$ \|\mathscr K\|_{\mathscr B(\mathrm L^2(Y), \mathrm L^2(X))} \le
+	\|K(x, y)\|_{\mathrm L^2(X \times Y)} $$
+
+	Возьмём $ f \in \mathrm L^2(Y, \nu) $.
+	$$ (\mathscr K_n f) = \int\limits_Y K_n(x, y) f(y) \di \nu =
+	\sum_{\begin{subarray}{c}
+		1 \le i \le n \\
+		1 \le j \le n
+	\end{subarray}} \alpha_{ij}\phi_i(x) \int\limits_Y f(y) \psi_j(y) \di \nu $$
+	$$ L_n \coloneq \mathscr L\Set{\phi_j}_{j = 1}^n, \quad \dim L_n = n, \quad
+	\mathscr K_n(f) \in L_n $$
+	Значит, $ \mathscr K_n $ "--- оператор конечного ранга.
+	$$ \implies \mathscr K_n \in \mathrm{Com} \bigl( \mathrm L^2(Y), \mathrm L^2(X) \bigr) $$
+	$$ \|\mathscr K - \mathscr K_n\|_{\mathscr B(\mathrm L^2(Y), \mathrm L^2(X))} \le
+	\|K(x, y) - K_n(x, y)\| \uniarr{\mathrm L^2(X \times Y)} 0 $$
+	Операторы компактные, значит, их предел по норме тоже компактен.
 \end{proof}
 
 \begin{implication}
