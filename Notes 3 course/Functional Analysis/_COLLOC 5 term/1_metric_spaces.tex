@@ -881,7 +881,8 @@ $$ \|\ol f\|_\infty = 0 \iff \|f\|_\infty = 0 \iff f(x) = 0 ~\ale \iff f \in N =
 \end{remark}
 
 \begin{eg}[подготовительный]
-	$ \set{F_n}_{n = 1}^\infty, \quad F_n \sub \R, \quad F_n = \ol F_n, \quad F_{n + 1} \sub F_n, \quad \bigcup_{n = 1}^\infty F_n = \O $
+	$ \set{F_n}_{n = 1}^\infty, \quad F_n \sub \R, \quad F_n = \ol F_n, \quad F_{n + 1} \sub F_n,
+	\quad \bigcap_{n = 1}^\infty F_n = \O $
 
 	Примером таких множеств являются лучи $ F_n = [n, +\infty) $.
 \end{eg}
@@ -915,13 +916,14 @@ $$ \|\ol f\|_\infty = 0 \iff \|f\|_\infty = 0 \iff f(x) = 0 ~\ale \iff f \in N =
 					$$ \rho(n, x) = 1 + \frac1{n + x} < 1 + \frac1{2n} = r_n \implies x \in \mathtt D_n $$
 				\item $ x < n \implies x \notin \mathtt D_n $
 			\end{itemize}
-			$$ \mathtt D_n = [n, +\infty), \quad \bigcup_{n = 1}^\infty \mathtt D_n = \O $$
+			$$ \mathtt D_n = [n, +\infty), \quad \bigcap_{n = 1}^\infty \mathtt D_n = \O $$
 	\end{enumerate}
 \end{eg}
 
 \begin{remark}
 	Если $ (X, \|\cdot\|) $ нормировано, то требование стремления радиусов к нулю избыточно:
-	$$ \text{полнота } \iff \bigcup_{n = 1}^\infty \mathtt D_n \ne \O \text{ при } \mathtt D_{n + 1} \sub \mathtt D_n $$
+	$$ \text{полнота } \iff \bigcap_{n = 1}^\infty \mathtt D_n \ne \O \text{ при }
+	\mathtt D_{n + 1} \sub \mathtt D_n $$
 \end{remark}
 
 \begin{proof}
