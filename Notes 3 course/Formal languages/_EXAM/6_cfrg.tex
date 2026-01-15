@@ -1,0 +1,737 @@
+\part{КСР-грамматики}
+
+В этой главе $ V = \Set{\xi_1, \dots, \xi_n} $ "--- непустой алфавит.
+
+\section{Обобщённые регулярные выражения.
+КС-грамматика в регулярной форме (КСР"=грамматика).
+Примеры}
+
+\TODO{Обобщённые регулярные выражения}
+
+\section{Определение граф-схемы.
+Лемма о множестве слов \texorpdfstring{$ \operatorname L(\alpha, \beta) $}{L(a, b)}.
+Следствия о множестве слов, порождаемых маршрутами в граф-схеме}
+
+\begin{definition}
+	\emph{Граф-схемой} над алфавитом $ V $ называется конечная совокупность ориентированных графов
+	$ \Gamma = \Set{\Gamma_1, \dots, \Gamma_k} $, $ k \le n $, удовлетворяющая следующим условиям:
+	\begin{enumerate}
+		\item в каждом графе $ \Gamma_i $ выделены две вершины "--- входная и выходная, причём во
+			входную вершину не входит, а из выходной вершины не выходит ни одна из дуг, а
+			каждая из вершин, отличных от этих двух, помечена буквой из алфавита $ V $;
+		\item графы $ \Gamma_i $ для $ i = 1, \dots, k $ не имеют между собой общих вершин и
+			называются \emph{компонентами граф-схемы}.
+	\end{enumerate}
+\end{definition}
+
+\begin{notation}
+	Входную и выходную вершины в каждом графе $ \Gamma_i $ обозначим $ E_i $ и $ F_i $
+	соответственно.
+\end{notation}
+
+\begin{definition}
+	Буква $ \xi \in V $, которой помечена вершина $ \alpha \in \Gamma_i $, называется
+	\emph{меткой вершины} $ \alpha $ и обозначается $ \operatorname{m}(a) $.
+\end{definition}
+
+\begin{definition}
+	Каждой неконечной вершине $ \alpha \ne F_i $ поставим в соответствие множество вершин,
+	\emph{смежных} с данной вершиной:
+	$$ \operatorname{succ}(\alpha) = \Set{\beta \in \Gamma | \text{существует дуга из }
+	\alpha \text{ в } \beta} $$
+\end{definition}
+
+\begin{definition}
+	Множество слов $ L_i(\alpha, \beta) $, \emph{порождаемых маршрутами} от вершины $ \alpha $ к
+	вершине $ \beta $, "--- это
+	\begin{enumerate}
+		\item пустое слово, если $ \alpha = \beta $;
+		\item слово $ x\xi \in L_i(\alpha, \beta) $, если $ x \in L_i(\alpha, \gamma) $, и
+			существует вершина $ \beta $ графа $ \Gamma_i $ такая, что $ \beta \in
+			\operatorname{succ}(\gamma) $ и $ \operatorname{m}(\beta) = \xi $.
+	\end{enumerate}
+\end{definition}
+
+\begin{lemma}
+	Слово $ x \in V^* $ принадлежит множеству слов $ L_i(\alpha, \beta) $ \textbf{тогда и только
+	тогда}, когда существует последовательность вершин $ \alpha_0, \dots, \alpha_k $ графа
+	$ \Gamma_i $ такая, что $ \alpha = \alpha_0 $, $ \beta = \alpha_k $, $ \alpha_i \in
+	\operatorname{succ}(\alpha_{i - 1}) $ и $ x = \xi_1 \dots \xi_k $.
+\end{lemma}
+
+\begin{implication}
+	Если $ x \in L_i(\alpha, \beta) $ и $ y \in L_i(\beta, \gamma) $, то
+	$ xy \in L_i(\alpha, \gamma) $.
+\end{implication}
+
+\begin{implication}
+	Если для двух неконечных вершин $ \alpha $ и $ \beta $ графа $ \Gamma_i $
+	любой маршрут, которым вершина $ \alpha $ соединяется с вершиной $ \beta $, проходит через
+	вершину $ \gamma $, то $ L_i(\alpha, \beta) = L_i(\alpha, \gamma) \cdot L_i(\gamma, \beta) $.
+\end{implication}
+
+\begin{notation}
+	$ L_i $ "--- множество слов, порождаемых всеми маршрутами в графе $ \Gamma_i \in \Gamma $,
+	начинающихся из входной вершины $ E_i $:
+	$$ L = \bigcup_{F_i \in \operatorname{succ}(\beta)}(E_i, \beta) $$
+\end{notation}
+
+\begin{implication}
+	Слово $ x $ в алфавите $ V $ принадлежит множеству $ L_i $ \textbf{тогда и только тогда}, когда
+	существует последовательность вершин графа $ \Gamma_i $ $ \alpha_0, \dots, \alpha_k $ такая, что
+	$ \alpha_0 = E_i $, $ F_i \in \operatorname{succ}(\alpha_k) $, $ \alpha_i \in
+	\operatorname{succ}(\alpha_{i - 1}) $, $ \operatorname{m}(\alpha_i) = \xi_i $ и $ x = \xi_1
+	\dots \xi_k $.
+\end{implication}
+
+\section{Однозначные регулярные выражения.
+Утверждения об однозначности регулярных выражений}
+
+\begin{definition}
+	Регулярное выражение $ A $ называется \emph{однозначным}, если для любого слова $ x \in L(A) $ в
+	графе $ \Gamma_A $ существует только одна цепочка вершин.
+\end{definition}
+
+\begin{statement}
+	\hfill
+	\begin{enumerate}
+		\item Все регулярные выражения, представляющие элементарные множества слов, однозначны.
+		\item Если регулярные выражения $ A $ и $ B $ однозначны, не содержат операции итерации, и
+			оба регулярных множества, которые они представляют, не содержат пустое слово, то
+			регулярное выражение $ C = A\mathnormal{,}B $ однозначно.
+		\item Если регулярные выражения $ A $ и $ B $ однозначны, и $ L(A) \cap L(B) = \O $, то
+			регулярное выражение $ C = A\mathnormal{;}B $ однозначно.
+	\end{enumerate}
+\end{statement}
+
+\section{Построение графа для нетерминала в КСР-грамматике.
+Рекуррентный алгоритм построения синтаксической граф-схемы (СГС).
+Лемма 8.2}
+
+Будем в дальнейшем алфавитом $ V $ считать объединение алфавитов нетерминалов, терминалов и пустой
+буквы, то есть,
+$$ V = N \cup T \cup \Set{\lambda} $$
+
+\begin{itemize}
+	\item Если $ \operatorname{m}(\alpha) \in N $, то $ \alpha $ "--- \emph{нетерминальная вершина}.
+	\item Если $ \operatorname{m}(\alpha) \in T $, то $ \alpha $ "--- \emph{терминальная вершина}.
+	\item Если $ \operatorname{m}(\alpha) = \lambda $, то $ \alpha $ "--- \emph{пустая вершина}.
+\end{itemize}
+
+Тут есть замудрёные словесные описания, но в целом всё понятно по картиночкам.
+
+\usetikzlibrary{automata, calc}
+
+\begin{figure}[h]
+	\centering
+	\begin{subfigure}{0.3\textwidth}
+		\centering
+		\begin{tikzpicture}[>=Stealth, terminal/.style={rectangle, rounded corners=2mm, draw=red,
+			fill=red!30, minimum width=6mm, minimum height=5mm},
+			nonterminal/.style={rectangle, draw=black, fill=black!30, minimum width=6mm,
+			minimum height=5mm},
+			node distance=6mm, accepting/.style=accepting by arrow, initial text={}]
+			\node[terminal, initial, accepting] (q0) {$ a $};
+		\end{tikzpicture}
+		\caption{Терминал}
+	\end{subfigure}
+	\begin{subfigure}{0.3\textwidth}
+		\centering
+		\begin{tikzpicture}[>=Stealth, terminal/.style={rectangle, rounded corners=2mm, draw=red,
+			fill=red!30, minimum width=6mm, minimum height=5mm},
+			nonterminal/.style={rectangle, draw=black, fill=black!30, minimum width=6mm,
+			minimum height=5mm},
+			node distance=6mm, accepting/.style=accepting by arrow, initial text={}]
+			\node[nonterminal, initial, accepting] (q0) {$ A $};
+		\end{tikzpicture}
+		\caption{Нетерминал}
+	\end{subfigure}
+	\begin{subfigure}{0.3\textwidth}
+		\centering
+		\begin{tikzpicture}[>=Stealth, terminal/.style={rectangle, rounded corners=2mm, draw=red,
+			fill=red!30, minimum width=6mm, minimum height=5mm},
+			nonterminal/.style={rectangle, draw=black, fill=black!30, minimum width=6mm,
+			minimum height=5mm},
+			node distance=6mm, accepting/.style=accepting by arrow, initial text={}]
+			\node[nonterminal, initial] (A) {$ A $};
+			\node[nonterminal, right=of A, accepting] (B) {$ B $};
+
+			\draw[->] (A) -- (B);
+		\end{tikzpicture}
+		\caption{Конкатенация ($ A \mathnormal{;} B $)}
+	\end{subfigure}
+	\begin{subfigure}{0.3\textwidth}
+		\centering
+		\begin{tikzpicture}[>=Stealth, terminal/.style={rectangle, rounded corners=2mm, draw=red,
+			fill=red!30, minimum width=6mm, minimum height=5mm},
+			nonterminal/.style={rectangle, draw=black, fill=black!30, minimum width=6mm,
+			minimum height=5mm},
+			node distance=6mm, accepting/.style=accepting by arrow, initial text={}]
+			\node[nonterminal, initial, accepting] (A) {$ A $};
+			\node[nonterminal, below=of A] (B) {$ B $};
+
+			\draw[->] ($ (A.west) - (2mm, 0) $) |- (B) -| ($ (A.east) + (2mm, 0) $);
+		\end{tikzpicture}
+		\caption{Объединение ($ A \mathnormal{,} B $)}
+	\end{subfigure}
+	\begin{subfigure}{0.3\textwidth}
+		\centering
+		\begin{tikzpicture}[>=Stealth, terminal/.style={rectangle, rounded corners=2mm, draw=red,
+			fill=red!30, minimum width=6mm, minimum height=5mm},
+			nonterminal/.style={rectangle, draw=black, fill=black!30, minimum width=6mm,
+			minimum height=5mm},
+			node distance=6mm, accepting/.style=accepting by arrow, initial text={}]
+			\node[nonterminal, initial, accepting] (A) {$ A $};
+			\node[nonterminal, below=of A] (B) {$ B $};
+
+			\draw[->] ($ (A.east) + (2mm, 0) $) |- (B) -| ($ (A.west) - (2mm, 0) $);
+		\end{tikzpicture}
+		\caption{Итерация ($ A \# B $)}
+	\end{subfigure}
+\end{figure}
+
+\begin{lemma}[8.2]
+	$ A $ "--- регулярное выражение над алфавитом $ V, \quad \Gamma_A $ "--- граф для регулярного
+	выражения $ A $, построенный по выше описанным требованиям.
+
+	Тогда
+	\begin{enumerate}
+		\item $ L_A = A $;
+		\item во входную вершину $ \Gamma_A $ не входит ни одна дуга, а из выходной вершины
+			$ \Gamma_A $ не выходит ни одна дуга.
+	\end{enumerate}
+\end{lemma}
+
+\begin{definition}
+	$ R_A $ "--- КСР-правило в $ G(N, T, P, S) $, где
+	\begin{itemize}
+		\item $ A $ "--- нетерминал из $ N $;
+		\item $ R_A $ "--- регулярное выражение над $ V $;
+		\item $ \Gamma_A $ "--- граф для регулярного выражения $ R_A $;
+		\item $ E_A, F_A $ "--- входная и выходная вершины.
+	\end{itemize}
+
+	\emph{Графом} $ \Gamma_A $ для нетерминала $ A \in N $ будем называть граф для регулярного
+	выражения $ R_A $, в котором входной и выходной вершинам $ E_A $ и $ F_A $ приписаны метки
+	``начало-$ A $'' и ``конец-$ A $''.
+\end{definition}
+
+\begin{definition}
+	\emph{Синтаксической граф-схемой} для КСР-грамматики $ G $ называется совокупность всех графов
+	для нетерминалов из $ N $, то есть $ \Gamma_G = \Set{\Gamma_S, \Gamma_{A_1}, \dots,
+	\Gamma_{A_k}} $, где $ S, A_i \in N $.
+\end{definition}
+
+\section{Достижимые вершины.
+Определение множества начальных вершин \texorpdfstring{$ H(A) $}{H(A)} графа
+\texorpdfstring{$ \Gamma_A $}{Г\textunderscore A} и множества конечных вершин
+\texorpdfstring{$ K(A) $}{K(A)} графа \texorpdfstring{$ \Gamma_A $}{Г\textunderscore A}}
+
+\TODO{Достижимые вершины}
+
+\begin{definition}[множество начальных вершин]
+	\hfill
+	\begin{enumerate}
+		\item Если $ \alpha $ "--- вершина графа $ \Gamma_A $ и $ \alpha \in
+			\operatorname{succ}(E_A) $, то $ \alpha $ "--- \emph{начальная вершина} графа
+			$ \Gamma_A $ для нетерминала $ A $, $ \alpha \in H(A) $.
+		\item Если $ \alpha \in H(A) $ "--- нетерминальная вершина в $ \Gamma_G $,
+			$ \operatorname{m}(\alpha) = B $, и $ \beta \in H(B) $, то $ \beta $ "--- начальная
+			вершина графа $ \Gamma_A $, $ \beta \in H(A) $.
+	\end{enumerate}
+\end{definition}
+
+\begin{definition}[множество конечных вершин]
+	\hfill
+	\begin{enumerate}
+		\item Если $ \alpha $ "--- вершина графа $ \Gamma_A $ и выходная вершина $ F_A \in
+			\operatorname{succ}(\alpha) $, то $ \alpha $ "--- конечная вершина графа $ \Gamma_A $
+			для нетерминала $ A $, $ \alpha \in K(A) $.
+		\item Если $ \alpha \in K(A) $ "--- нетерминальная вершина в $ \Gamma_G $,
+			$ \operatorname{m}(\alpha) = B $ и $ \beta \in K(B) $, то $ \beta $ "--- конечная
+			вершина графа $ \Gamma_A $, $ \beta \in K(A) $.
+	\end{enumerate}
+\end{definition}
+
+\section{Понятие достижимости на множестве терминальных вершин в СГС.
+Отношение эквивалентности.
+Лемма и следствие о языке, порождаемом СГС}
+
+\subsection*{Понятие достижимости}
+
+\begin{definition}
+	Между терминальными вершинами $ \alpha_1 $ и $ \alpha_2 $ в синтаксической граф-схеме
+	$ \Gamma_G $ существует \emph{путь} (\emph{маршрут}), если выполняется одно из условий:
+	\begin{enumerate}
+		\item Вершины $ \alpha_1 $ и $ \alpha_2 $ "--- смежные, принадлежат одной компоненте, и
+			$ \alpha_2 \in \operatorname{succ}(\alpha_1) $ (\autoref{fig:path-def-1}).
+
+			Тогда \emph{путь} от вершины $ \alpha_1 $ к вершине $ \alpha_2 $ имеет вид
+			$ P_{\alpha_1\alpha_2} = \Set{\alpha_2} $.
+		\item Существует нетерминальная вершина $ \beta $, смежная с вершиной $ \alpha_1 $, $ \beta
+			\in \operatorname{succ}(\alpha_1) $ такая, что $ \operatorname{m}(\beta) = B $, а
+			терминальная вершина $ \alpha_2 $ "--- начальная вершина в графе для нетерминала $ B $,
+			$ \alpha_2 \in H(B) $.
+
+			В этом случае \emph{путь} от вершины $ \alpha_1 $ к вершине $ \alpha_2 $ имеет вид
+			$ \Set{\beta} \cdot P_\beta $, где
+			\begin{enumerate}
+				\item если $ \alpha_2 $ принадлежит графу $ \Gamma_B $, то есть, $ \alpha_2 \in
+					\operatorname{succ}(E_B) $, то $ P_\beta = P_{E_B \alpha_2} =
+					\Set{\omega_H \alpha_2} $, где $ \omega_H $ "--- специальный символ,
+					обозначающий \emph{след} прохождения через входную вершину графа для нетерминала
+					(\autoref{fig:path-def-2});
+				\item если в графе $ \Gamma_B $ существует нетерминальная вершина $ \gamma \in
+					\Gamma_B $ такая, что $ \operatorname{m}(\gamma) = C $, $ \gamma =
+					\operatorname{succ}(E_B) $ и $ \alpha_2 \in H(C) $, то $ P_\beta =
+					P_{E_B \gamma} \cdot P_\gamma = \Set{\omega_H \gamma} \cdot P_\gamma $
+					(\autoref{fig:path-def-3}).
+			\end{enumerate}
+		\item $ \alpha_1 $ "--- конечная вершина графа $ \Gamma_B $ и $ \alpha_2 \in
+			\operatorname{succ}(\beta) $, где $ \beta $ "--- нетерминальная вершина, и
+			$ \operatorname{m}(\beta) = B $.
+
+			Тогда \emph{путь} от вершины $ \alpha_1 $ к вершине $ \alpha_2 $ имеет вид
+			$ P_{\alpha_1 \alpha_2} = P_{\alpha_1}^\beta \cdot \Set{\alpha_2} $, где
+			\begin{enumerate}
+				\item если $ \alpha_1 $ "--- вершина графа $ \Gamma_B $, \ie $ F_B \in
+					\operatorname{succ}(\alpha_1) $, то $ P_{\alpha_1}^\beta =
+					\Set{\omega_K \beta} $, где $ \omega_K $ обозначает \emph{след} прохождения
+					через выходную вершину графа для соответствующего нетерминала
+					(\autoref{fig:path-def-4});
+				\item если $ \alpha_2 $ "--- конечная вершина графа $ \Gamma_C $, \ie $ F_C \in
+					\operatorname{succ}(\alpha_1) $ и существует нетерминальная вершина $ \gamma $,
+					$ \operatorname{m}(\gamma) = C $, и $ \gamma \in K(B) $, то
+					$ P_{\alpha_1}^\beta = \Set{\omega_K \gamma} \cdot P_\gamma^\beta $
+					(\autoref{fig:path-def-5}).
+			\end{enumerate}
+		\item Вершина $ \alpha_2 $ "--- конечная в графе $ \Gamma_B $, то есть
+			$ \alpha_1 \in K(B) $, $ \alpha_2 $ "--- начальная вершина графа $ \Gamma_C $, \ie
+			$ \alpha_2 \in H(C) $, и существуют нетерминальные вершины $ \beta $ и $ \gamma $ в
+			графе $ \Gamma_A $ такие, что $ \operatorname{m}(\beta) = B $ и
+			$ \operatorname{m}(\gamma) = C $.
+
+			Тогда \emph{путь} между вершинами $ \alpha_1 $ и $ \alpha_2 $ имеет вид
+			$ P_{\alpha_1 \alpha_2} = P_{\alpha_1}^\beta \cdot \Set{\gamma} \cdot P_\gamma $
+			(\autoref{fig:path-def-6}).
+	\end{enumerate}
+\end{definition}
+
+\begin{figure}[ht]
+	\centering
+	\begin{subfigure}{.3\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{path-def-1}
+		\caption{}
+		\label{fig:path-def-1}
+	\end{subfigure}
+	\begin{subfigure}{.3\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{path-def-2}
+		\caption{}
+		\label{fig:path-def-2}
+	\end{subfigure}
+	\begin{subfigure}{.3\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{path-def-3}
+		\caption{}
+		\label{fig:path-def-3}
+	\end{subfigure}
+	\begin{subfigure}{.3\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{path-def-4}
+		\caption{}
+		\label{fig:path-def-4}
+	\end{subfigure}
+	\begin{subfigure}{.3\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{path-def-5}
+		\caption{}
+		\label{fig:path-def-5}
+	\end{subfigure}
+	\begin{subfigure}{.3\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{path-def-6}
+		\caption{}
+		\label{fig:path-def-6}
+	\end{subfigure}
+	\caption{К определению пути}
+\end{figure}
+
+\begin{definition}
+	Терминальная вершина $ \alpha_2 $ \emph{достижима} из терминальной вершины $ \alpha_1 $ в
+	синтаксической граф-схеме $ \Gamma_G $, если существует путь $ P_{\alpha_1 \alpha_2} $.
+\end{definition}
+
+\begin{notation}
+	$ \alpha_1 \underarr{G} \alpha_2 $
+\end{notation}
+
+\subsection*{Отношение эквивалентности}
+
+Рассмотрим множестве всех вершин в синтаксической граф-схеме $ \Gamma_G $.
+Исключим из него все входные и выходные вершины компонент графов и добавим два новых элемента
+$ \omega_H $ и $ \omega_K $, где $ \omega_H $ заменяет все входные, а $ \omega_K $ "--- выходные
+вершины.
+Полученное множество обозначим $ \Im $.
+
+\begin{definition}
+	$ \alpha, \beta $ "--- нетерминальные вершины в множестве $ \Im, \quad x $ "--- цепочка
+	терминальных вершин, $ X, Y $ "--- произвольные цепочки в алфавите $ \Im \cup \Set{\Omega} $.
+
+	Введём на множестве всех маршрутов синтаксической граф-схемы \emph{отношение эквивалентности}:
+	$$ X \omega_H x \omega_K Y \sim X x Y, \quad X \alpha \omega_H x \omega_K \beta Y \sim
+	\begin{cases}
+		X x Y, \quad \alpha = \beta, \\
+		\Omega,
+	\end{cases} \quad X \Omega Y \sim \Omega, \quad X \sim X $$
+\end{definition}
+
+Двум терминальным вершинам $ \alpha $ и $ \beta $, принадлежащим синтаксической-граф схеме
+$ \Gamma_G $, поставим в соответствие множество слов $ L_{\Gamma_G}(\alpha, \beta) $, определяемое
+следующим образом:
+\begin{enumerate}
+	\item $ \eps \in L_{\Gamma_G}(\alpha, \beta) $, если $ \alpha = \beta $;
+	\item если $ x \in L_{\Gamma_G}(\alpha, \gamma) $, существует вершина $ \beta $ такая, что
+		$ \gamma \underarr{G} \beta $, $ \operatorname{m}(\beta) = \xi $, и существует путь
+		$ P_{\gamma \beta} $ такой, что $ P_x \cdot P_{\gamma \beta} \ne \Omega $, то $ x\xi \in
+		L_{\Gamma_G}(\alpha, \beta) $.
+\end{enumerate}
+
+$$ L_{\Gamma_G}(E_A) \coloneq \bigcup_{\beta \in K(A)} L_{\Gamma_G}(E_A, \beta) $$
+
+Если $ A = S $, то $ L_{\Gamma_G}(E_S) $ будем обозначать $ L_{\Gamma_G} $.
+
+\begin{lemma}
+	Слово $ x $ в алфавите терминалов $ T $ принадлежит множеству $ L_{\Gamma_G}(\alpha, \beta) $
+	\textbf{тогда и только тогда}, когда существует последовательность терминальных вершин
+	$ \alpha_0, \dots, \alpha_k $, и последовательность путей $ P_1, \dots, P_k $ в СГС $ \Gamma_G $
+	такие, что
+	$$ \alpha_0 = \alpha, \quad \alpha_k = \beta, \quad \operatorname{m}(\alpha_i) = \xi_i, \quad
+	\alpha_{i - 1} \underarr G \alpha_i, \quad P_i \sim P_{\alpha_{i - 1} \alpha_i}, \quad
+	x = \xi_1 \mathnormal{,} \dots \mathnormal{,} \xi_k, \quad P_x \sim P_1 \cdots P_k, \quad
+	P_x \ne \Omega $$
+\end{lemma}
+
+\begin{implication}
+	Слово $ x $ в алфавите $ T $ принадлежит множеству $ L_G(E_A) $ \textbf{тогда и только тогда},
+	когда существует последовательность терминальных вершин $ \alpha_0, \dots, \alpha_k $ в
+	$ \Gamma_G $ и последовательность путей $ P_1, \dots, P_k $ в $ \Gamma_G $ такие, что
+	$$ \alpha_0 = E_A, \quad \alpha_k \in K(A), \quad \alpha_{i - 1} \underarr G \alpha_i, \quad
+	\operatorname{m}(\alpha_i) = \xi_i, \quad P_i \sim P_{\alpha_{i - 1} \alpha_i}, \quad
+	x = \xi_1 \mathnormal{,} \dots \mathnormal{,} \xi_k, \quad P_x \sim P_1 \cdots P_k, $$
+	причём существуют такие вершины $ \beta_1, \dots, \beta_l $ в $ \Gamma_G $, что $ P_x \cdot
+	\omega_k \beta_1 \cdot \omega_k \beta_2 \cdots \omega_k \beta_l = \alpha_1 \dots \alpha_k $.
+\end{implication}
+
+\section{Синтез распознающего автомата для КСР-грамматики.
+Состояние для регулярного выражения в графе \texorpdfstring{$ \Gamma_A $}{Г\textunderscore A}.
+Состояние вершины в графе \texorpdfstring{$ \Gamma_A $}{Г\textunderscore A}.
+Переходное состояние.
+Регулярный случай}
+
+Рассмотрим случай, когда КСР-грамматика $ G $ порождает регулярный язык, а множество $ P $ правил
+грамматики содержит только одно $ S $-правило для начального нетерминала $ S $, $ P = \Set{S : A} $.
+Синтаксическая граф-схема $ \Gamma_G $ состоит из одного графа $ \Gamma_G = \Set{\Gamma_S} $ и
+не содержит нетерминальных вершин.
+
+\begin{definition}
+	\emph{Состоянием} (\emph{для регулярного выражения}) в графе $ \Gamma_A $ называется:
+	\begin{itemize}
+		\item выходная вершина $ F_A $;
+		\item терминальная вершина в $ \Gamma_A $;
+		\item объединение состояний в $ \Gamma_A $.
+	\end{itemize}
+\end{definition}
+
+\begin{definition}
+	\emph{Состоянием вершины} $ \beta $ в графе $ \Gamma_A $ называется множество вершин
+	$$ S_\beta = \Set{\alpha | \alpha \text{ "--- терм. или вых. вершина в } \Gamma_A, \quad \alpha
+		\in \operatorname{succ}(\beta)} $$
+
+	Если $ \beta $ "--- начальная вершина графа $ \Gamma_A $, то $ S_\beta $ называется
+	\emph{начальным состоянием} графа $ \Gamma_A $.
+\end{definition}
+
+\begin{implication}
+	Для любого слова $ x \in L_A $, $ x = \xi_1 \dots \xi_k $ существует путь порождения этого слова
+	в графе $ \Gamma_A $ такой, что
+	$$ \alpha_0, \dots, \alpha_k \in P_x, \quad \alpha_{i - 1} \to \alpha_i, \quad \alpha_0 = E_A, \quad
+	\alpha_1 \in S_{E_A}, \quad \alpha_i \in S_{\alpha_{i - 1}}, \quad F_A \in S_{\alpha_k}, \quad
+	\operatorname{m}(\alpha_i) = \xi_i $$
+\end{implication}
+
+\begin{definition}
+	$ S $ "--- состояние в графе $ \Gamma_A, \quad \xi $ "--- буква из алфавита $ T $.
+
+	Состояние $ S \faktor S \xi $ называется \emph{переходом по символу} (\emph{переходным
+	состоянием} для $ S $) в граф-схеме $ \Gamma_A $, причём
+	\begin{itemize}
+		\item если $ S = \O $ или $ S = \Set{F} $, то $ \faktor S \xi = \O $;
+		\item если $ S = \Set{\alpha}, \quad \alpha $ "--- терминальная вершина, то
+			$$ \faktor S \xi =
+			\begin{cases}
+				\O, \quad \operatorname{m}(\alpha) \ne \xi, \\
+				S_\alpha, \quad \operatorname{m}(\alpha) = \xi;
+			\end{cases} $$
+		\item если $ S = \bigcup_{i = 1}^k S_i $, то $ \faktor S \xi = \bigcup_{i = 1}^k
+			\faktor{S_i}\xi $.
+	\end{itemize}
+\end{definition}
+
+\begin{definition}
+	$ S $ "--- состояние в графе $ \Gamma_A, \quad x = x'\xi $ "--- слово в алфавите $ T, \quad
+	x' \in T^* $.
+
+	\emph{Переходом по слову} $ x $ называется состояние $ \faktor S x =
+	\faktor{\bigl(\faktor S {x'}\bigr)} \xi $.
+
+	\emph{Переходом по пустому слову} $ \eps $ называется состояние $ \faktor S \eps = S $.
+\end{definition}
+
+\begin{statement}
+	Язык, порождаемый графом для регулярного выражения, состоит из тех слов, переход по которым для
+	начального состояния $ S_{E_A} $ данного графа содержит выходную вершину:
+	$$ L_A = \Set{x \in T^* | F_A \in \faktor{S_{E_A}}x} $$
+\end{statement}
+
+\section{Синтез распознающего автомата для КСР-грамматики.
+Состояния в синтаксической граф-схеме.
+Состояние вершины в СГС.
+Переходное состояние.
+Общий случай}
+
+КСР-грамматика порождает КС-язык, а регулярные выражения для КСР-правил содержат нетерминалы.
+Синтаксическая граф-схема состоит из совокупности графов $ \Gamma_G = (\Gamma_S, \Gamma_{A_1},
+\dots, \Gamma_{A_k}) $ и содержит нетерминальные вершины.
+
+\begin{definition}
+	\emph{Состоянием} в граф-схеме $ \Gamma_G $ называется
+	\begin{itemize}
+		\item выходная вершина $ F_{A_i} $ графа $ \Gamma_{A_i} $ для некоторого нетерминала $ A_i
+			\in N $;
+		\item терминальная вершина в $ \Gamma_G $;
+		\item пара множеств $ (S_1, S_2) $, где $ S_1 $ и $ S_2 $ "--- состояния в $ \Gamma_G $;
+		\item объединение состояний в $ \Gamma_G $.
+	\end{itemize}
+\end{definition}
+
+\begin{definition}
+	Для вершины $ \beta $ в СГС $ \Gamma_G $ \emph{состояние вершины} $ \beta $ имеет вид:
+	$$ S_\beta = \left\{
+		\begin{array}{l}
+			\alpha \mid \alpha \in \operatorname{succ}(\beta), \quad \alpha \text{ "--- терм. или
+				вых. вершина в } \Gamma_G \\
+			(S_{E_{\operatorname{m}(\alpha)}}, S_\alpha) \mid \alpha \in \operatorname{succ}(\beta),
+			\quad \alpha \text{ "--- нетерм. вершина в } \Gamma_G
+	\end{array} \right\} $$
+\end{definition}
+
+\begin{definition}
+	Если $ \beta $ "--- входная вершина графа $ \Gamma_{A_i} $ для некоторого нетерминала
+	$ A_i \in N $, то состояние $ S_\beta $ в $ \Gamma_G $ будем называть \emph{начальным
+	состоянием} графа $ G_{A_i} $.
+\end{definition}
+
+\begin{notation}
+	$ S_{E_{A_i}} $
+\end{notation}
+
+\begin{definition}
+	Начальное состояние для стартового символа КСР-грамматики называется \emph{начальным состоянием}
+	СГС $ \Gamma_G $.
+\end{definition}
+
+\begin{notation}
+	$ S_0 $
+\end{notation}
+
+Состояние в $ \Gamma_G $ "--- это, в общем случае, объединение цепочек вложенных пар множеств
+терминальных или выходных вершин.
+Всё множество состояний в $ \Gamma_G $ можно разбить на классы.
+
+Обозначим через $ \Im_k $ множество состояний $ k $-го уровня.
+
+\begin{definition}
+	Состояние $ S $ принадлежит множеству $ \Im_0 $, если
+	\begin{itemize}
+		\item $ S = \Set{\alpha} $, где $ \alpha $ "--- терминальная или выходная вершина;
+		\item $ S = \bigcup S_I $, где $ S-i \in \Im_0 $.
+	\end{itemize}
+\end{definition}
+
+\begin{definition}
+	Состояние $ S $ принадлежит множеству $ \Im_k $, если
+	\begin{itemize}
+		\item $ S = (S_1, S_2) $, где $ S_1, S_2 \in \bigcup_{i = 1}^k S_i $;
+		\item $ S = \bigcup_{i = 1}^k S_i $, где $ S_i \in \Im_k $.
+	\end{itemize}
+\end{definition}
+
+Процесс построения состояния для некоторой вершины может не завершиться.
+В таком случае будем считать, что состояние этой вершины не существует.
+Множество всех состояний, которые существуют в $ \Gamma_G $, обозначим $ \Im_G $.
+
+\begin{definition}
+	Состояние $ \faktor S \xi $ называется \emph{переходным состоянием} по символу $ \xi $ для
+	состояния $ S $ в $ \Gamma_G $, причём
+	\begin{itemize}
+		\item если $ S = \O $ или $ S = \Set{F_{A_i}} $, то $ \faktor S \xi = \O $;
+		\item если $ S = \Set{\alpha} $, где $ \alpha $ "--- терминальная вершина, то
+			$$ \faktor S \xi =
+			\begin{cases}
+				\O, \quad \operatorname{m}(\alpha) \ne \xi, \\
+				S_\alpha, \quad \operatorname{m}(\alpha) = \xi;
+			\end{cases} $$
+		\item если $ S = \bigcup S_i $, то $ \faktor S \xi = \bigcup (\faktor{S_i}\xi) $;
+		\item если $ S = (S_1, S_2) $, то
+			$$ \faktor X \xi =
+			\begin{cases}
+				\bigl( \faktor{S_1}\xi, S_2 \bigr), \quad \faktor{S_1}\xi \ne \O, \\
+				\faktor{S_2}\xi, \quad \faktor{S_1}\xi = \O, \quad F_a \in S_1, \\
+				\O.
+			\end{cases} $$
+	\end{itemize}
+\end{definition}
+
+\section{Свойства синтаксической граф-схемы.
+Леммы о существовании состояний распознавателя в синтаксической граф-схеме}
+
+\begin{definition}
+	Нетерминальная вершина $ \beta $ в $ \Gamma_G $ \emph{обладает свойством} \textbf{D}, если
+	множество состояний $ \Im_G $ не содержит состояния вида $ \Bigl( \dots \bigl(
+	\Set{F_{\operatorname{m}(\beta)}, S}, S_\beta \bigr) \dots \Bigr) $, в котором ``фактическое''
+	состояние в $ S $ содержит терминальную вершину $ \alpha $, а состояние $ S_\beta $ содержит
+	вершину $ \gamma $ и $ \operatorname{m}(\alpha) = \operatorname{m}(\gamma) $.
+\end{definition}
+
+Свойство \textbf{D} гарантирует, что состояние вершины $ \beta $ не создаёт неопределённости при
+распознавании языка (\emph{конфликт типа Shift/Reduce}).
+
+\begin{definition}
+	Нетерминальная вершина $ \beta $ в $ \Gamma_G $ \emph{обладает свойством}
+	\textbf{D\textsubscript1}, если
+	\begin{enumerate}
+		\item вершина $ \beta $ обладает свойством \textbf{D};
+		\item множество начальных вершин $ H \bigl( \operatorname{m}(\beta) \bigr) $ не содержит
+			нетерминальной вершины $ \gamma \in \operatorname{succ}(\beta) $.
+	\end{enumerate}
+\end{definition}
+
+Свойство \textbf{D\textsubscript1} показывает, что состояние терминальной вершины $ \alpha $ такой,
+что $ \beta \in \operatorname{succ}(\alpha) $, принадлежит классу $ \Im_1 $.
+
+\begin{definition}
+	Для $ k > 1 $ считаем, что нетерминальная вершина $ \beta $ в синтаксической граф-схеме
+	$ \Gamma_G $ обладает свойством \textbf{D\textsubscript k}, если
+	\begin{enumerate}
+		\item вершина $ \beta $ обладает свойством \textbf{D};
+		\item
+			\begin{itemize}
+				\item либо существует нетерминальная вершина $ \gamma \in
+					\operatorname{succ}(\beta) $, вершина $ \gamma $ обладает свойством
+					\textbf{D\textsubscript t} ($ 1 \le t < k $), и все начальные нетерминальные
+					вершины из множества $ H \bigl( \operatorname{m}(\beta) \bigr) $ обладают
+					свойством \textbf{D\textsubscript t} ($ 1 \le t < k $);
+				\item либо не существует такой вершины $ \gamma \in \Gamma_G $, и среди начальных
+					вершин из множества $ H \bigl( \operatorname{m}(\beta) \bigr) $ есть хотя бы
+					одна нетерминальная вершина, обладающая свойством
+					\textbf{D\textsubscript{k - 1}}, а все другие нетерминальные вершины обладают
+					свойством \textbf{D\textsubscript j} для $ j < k - 1 $.
+			\end{itemize}
+	\end{enumerate}
+\end{definition}
+
+Будем считать, что СГС обладает свойством \textbf{D\textsubscript k}, если существует хотя бы одна
+вершина, обладающая свойством \textbf{D\textsubscript k}.
+
+\begin{lemma}
+	Для любой нетерминальной вершины $ \beta $ в $ \Gamma_G $, обладающей свойством
+	\textbf{D\textsubscript k}, $ \operatorname{m}(\beta) = B $, состояние $ (S_{E_B}, S_\beta)
+	\in \Im_k $.
+\end{lemma}
+
+\begin{lemma}
+	Для любой нетерминальной вершины $ \beta $ в $ \Gamma_G $, обладающей свойством
+	\textbf{D\textsubscript k}, $ \operatorname{m}(\beta) = B $ начальное состояние $ S_{E_B} $
+	существует, $ S_{E_B} \in \Im_t $ ($ 0 \le t < k $), и для всякой терминальной начальной
+	вершины $ \alpha \in H(B) $ существует последовательность нетерминальных вершин $ \beta_1,
+	\dots, \beta_l $ ($ 0 \le k < k $) в $ \Gamma_G $ таких, что
+	$$
+	\begin{cases}
+		\forall 1 \le i \le l \quad \operatorname{m}(\beta_i) = B_i, \\
+		\forall 2 \le i \le l \quad (S_{E_{B_i}}, S_{\beta_i}) \in S_{E_{B_{i - 1}}}, \\
+		\Bigl( \dots \bigl( (S_{E_{B_l}}, S_{\beta_l}), S_{\beta_{l - 1}} \bigr), \dots,
+		S_{\beta_1} \Bigr) \in S_{E_B}, \\
+		\alpha \in S_{E_{B_l}}, \\
+		P_\beta = \omega_H \beta_1 \omega_H \beta_2 \dots \omega_H \beta_l \omega_H \alpha.
+	\end{cases} $$
+\end{lemma}
+
+\section{Регуляризация КС-грамматики.
+Эквивалентные преобразования.
+Базисные преобразования.
+Синтаксическая модель языка}
+
+\subsection*{Синтаксическая модель языка}
+
+\emph{Модель языка} "--- это способ его описания.
+\emph{Синтаксическая модель} предполагает четыре аспекта:
+\begin{enumerate}
+	\item \emph{Лексика} определяет представление основных символов языка.
+	\item \emph{Синтаксис} определяет представление основных конструкций языка посредством
+		терминальных символов.
+	\item Не все нетерминалы порождают конструкции, а только те, для которых определена
+		\emph{семантика}.
+	\item \emph{Прагматика}.
+\end{enumerate}
+
+\subsection*{Базисные преобразования}
+
+\begin{itemize}
+	\item Подстановка вместо нетерминала его порождения;
+	\item удаление вхождения лево-(право-)рекурсивного нетерминала в правой части правила;
+	\item объединение общих префиксов в графе для нетерминала;
+	\item удаление повторяющихся альтернатив для нетерминала;
+	\item удаление крайних рекурсий для самовложенных нетерминалов;
+	\item свёртка регулярного подвыражения в новый нетерминал;
+	\item удаление лишних правил.
+\end{itemize}
+
+\section{Алгоритм исключения лево-(право-)рекурсивных нетерминалов в КСР-правиле.
+Общий случай для всех правил КСР-грамматики}
+
+Рассмотрим $ A $ "--- правило в КСР-грамматике, когда нетерминал является одновременно и лево-, и
+праворекурсивным, и рекурсия прямая:
+$$ A: A \mathnormal{,} r_{11} \mathnormal{,} A ; A \mathnormal{,} r_{12} ; r_{21} \mathnormal{,}
+A ; r_{22}, $$
+где $ r_{11}, r_{12}, r_{21}, r_{22} $ "--- регулярные выражения.
+
+Данное правило состоит четырёх частей ($ A_i $-фрагментов), разделённых знаком $ ; $.
+
+\begin{algorithm}
+	\hfill
+	\begin{enumerate}
+		\item Рассмотрим $ A_1 $-фрагмент $ A \mathnormal{,} r_{11} \mathnormal{,} A $.
+			Используя данный фрагмент, мы можем вывести строки $ Ar_{11}A $, $ A r_{11}Ar_{11}A,
+			\dotsc $
+			Из определения операции $ \# $, это множество строк совпадает с множеством строк,
+			порождаемым регулярным выражением $ A \# r_{11} $.
+		\item Рассмотрим $ A_2 $-фрагмент: $ A \mathnormal{,} r_{12} $.
+			Можем вывести строки: $ Ar_{12}, Ar_{12}r_{12}, \dotsc $
+			Из определения операции $ * $ следует, что это множество порождается регулярным
+			выражением $ A \mathnormal{,} (r_{12})^* $.
+		\item Аналогично для праворекурсивного вхождения нетерминала $ A $ в $ A_3 $-фрагменте.
+			Здесь мы выводим множество строк $ r_{21}A, r_{21}r_{21}A, \dots $, которые порождаются
+			регулярным выражением $ r_{21}^* \mathnormal{,}A $.
+		\item Окончательно, подставляя все регулярные выражения, получаем
+			$$ (r_{21}^* \mathnormal{,} r_{22} \mathnormal{,} r_{12}^*) \# r_{11} $$
+	\end{enumerate}
+\end{algorithm}
+
+\section{Общая схема получения регулярного выражения, эквивалентного приведённой КС"=грамматике без
+самовставлений.
+Пример}
+
+\TODO{Общая схема получения регулярного выражения, эквивалентного...}
+

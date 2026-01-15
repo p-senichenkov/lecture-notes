@@ -1,0 +1,556 @@
+\part{\texorpdfstring{$ \operatorname{LL}(k) $}{LL(k)}-грамматики и трансляции}
+
+\section{Определение \texorpdfstring{$ \operatorname{LL}(k) $}{LL(k)}-грамматики.
+Свойства \texorpdfstring{$ \operatorname{LL}(k) $}{LL(k)}-грамматик.
+Необходимые и достаточные условия принадлежности приведённой КС-грамматики классу
+\texorpdfstring{$ \operatorname{LL}(k) $}{LL(k)}.
+Теорема 2.1}
+
+\begin{definition}
+	$ G = (V_N, V_T, P, S) $ "--- cfg.
+
+	Определим функцию
+	$$ \operatorname{FIRST}_k^G(\alpha) = \Set{w \in V_T^* |
+		\begin{vars}
+			|w| < k, \quad \alpha \xRightarrow[G]* w, \\
+			|w| = k, \quad \alpha \xRightarrow[G]* wx \text{ для нек. цепочки } x \in V_T^*
+		\end{vars}
+	} $$
+	Здесь $ k \ge 0 $ "--- целое, $ \alpha \in (V_N \cup V_T)^* $.
+\end{definition}
+
+\begin{definition}
+	$ G = (V_N, V_T, P, S) $ "--- cfg.
+
+	Говорят, что $ G $ есть $ \operatorname{LL}(k) $-\emph{грамматика} для некоторого фиксированного
+	$ k $, если для любых двух левосторонних выводов вида
+	\begin{enumerate}
+		\item $ S \xRightarrow[\mathrm{lm}]* w A \alpha \underimp{\mathrm{lm}} w \beta \alpha
+			\xRightarrow[\mathrm{lm}]* wx $,
+		\item $ S \xRightarrow[\mathrm{lm}]* w A \alpha \underimp{\mathrm{lm}} w \gamma \alpha
+			\xRightarrow[\mathrm{lm}]* wy $,
+	\end{enumerate}
+	в которых $ \operatorname{FIRST}_k^G(x) = \operatorname{FIRST}_k^G(y) $ имеет место равенство
+	$ \beta = \gamma $.
+\end{definition}
+
+\begin{definition}
+	Говорят, что cfg есть LL-\emph{грамматика}, если она $ \operatorname{LL}(k) $ для некоторого
+	$ k $.
+\end{definition}
+
+\begin{definition}
+	Говорят, что cfg $ G $ является \emph{простой} $ \operatorname{LL}(1) $-грамматикой, если в ней
+	нет $ \eps $-правил, и все альтернативы для каждого нетерминала начинаются с терминалов и
+	притом различных.
+\end{definition}
+
+\begin{theorem}
+	Чтобы cfg $ G $ была $ \operatorname{LL}(k) $-грамматикой, \textbf{необходимо и достаточно},
+	чтобы
+	$$ \operatorname{FIRST}_k^G(\beta \alpha) \cap \operatorname{FIRST}_k^G(\gamma \alpha) = \O $$
+	для всех $ \alpha, \beta, \gamma $ таких, что
+	существуют правила $ A \to \beta, ~ A \to \gamma, \quad \beta \ne \gamma $ и существует вывод
+	$ S \xRightarrow[\mathrm{lm}]* w A \alpha $.
+\end{theorem}
+
+\section{Алгоритм вычисления функции \texorpdfstring{$ \operatorname{FIRST}_k^G(\beta) $}{FIRST}
+и его обоснование}
+
+\TODO{Алгоритм вычисления FIRST}
+
+\section{Определение функции \texorpdfstring{$ \operatorname{FOLLOW}_k^G(\beta) $}{FOLLOW}}
+
+\begin{definition}
+	$ G = (V_N, V_T, P, S) $ "--- cfg, $ \quad \beta \in V^* $
+
+	Определим функцию
+	$$ \operatorname{FOLLOW}_k^G(\beta) = \Set{w \in V_T^* | S \xRightarrow[G]* \gamma \beta \alpha,
+	\quad w \in \operatorname{FIRST}_k^G(\alpha)} $$
+	Здесь $ k \ge 0 $ "--- целое.
+\end{definition}
+
+\section{Необходимые и достаточные условия принадлежности приведённой КС"=грамматики классу
+\texorpdfstring{$ \operatorname{LL}(1) $}{LL(1)}.
+Сильные \texorpdfstring{$ \operatorname{LL}(k) $}{LL(k)}-грамматики.
+Теорема 2.2}
+
+\begin{theorem}
+	Чтобы cfg $ G = (V_N, V_T, P, S) $ была $ \operatorname{LL}(1) $-грамматикой, \textbf{необходимо
+	и достаточно}, чтобы
+	$$ \operatorname{FIRST}_1^G \bigl( \beta \operatorname{FOLLOW}_1^G(A) \bigr) \cap
+	\operatorname{FIRST}_1^G \bigl( \gamma \operatorname{FOLLOW}_1^G(A) \bigr) = \O $$
+	для всех $ A \in V_N, \quad \beta \ne \gamma \in (V_N \cup V_T)^* $ таких, что существуют правила
+	$ A \to \beta $ и $ A \to \gamma $.
+\end{theorem}
+
+\begin{implication}
+	КС-грамматика $ G $ является $ \operatorname{LL}(1) $-грамматикой \textbf{тогда и только тогда},
+	когда для каждого множества $ A $-правил: $ A \to \alpha_1 | \alpha_2 | \dots | \alpha_n $ "---
+	выполняются условия:
+	\begin{enumerate}
+		\item $ \operatorname{FIRST}_1^G(\alpha_i) \cap \operatorname{FIRST}_1^G(\alpha_j) = \O $;
+		\item если $ \alpha_i \xRightarrow[G]* \eps $, то $ \operatorname{FIRST}_1^G(\alpha_j) \cap
+			\operatorname{FOLLOW}_1^G(A) = \O $.
+	\end{enumerate}
+\end{implication}
+
+\begin{definition}
+	КС-грамматика $ G = (V_N, V_T, P, S) $ называется \emph{сильной} $ \operatorname{LL}(k) $-
+	\emph{грамматикой}, если
+	$$ \operatorname{FIRST}_k^G \bigl( \beta \operatorname{FOLLOW}_k^G(A) \bigr) \cap
+	\operatorname{FIRST}_k^G \bigl( \gamma \operatorname{FOLLOW}_k^G(A) \bigr) = \O $$
+	для всех $ A \to \beta, ~ A \to \gamma, \quad A \in V_N, \quad \beta \ne \gamma \in (V_N \cup
+	V_T)^* $ таких, что существуют правила $ A \to \beta $ и $ A \to \gamma $.
+\end{definition}
+
+\begin{implication}
+	Каждая $ \operatorname{LL}(1) $-грамматика является сильной.
+\end{implication}
+
+\section{Достаточные признаки непринадлежности КС-грамматики классу
+\texorpdfstring{$ \operatorname{LL} $}{LL}-грамматик: синтаксическая неоднозначность и
+леворекурсивность.
+Теорема 2.3}
+
+\begin{theorem}
+	Если $ G $ "--- cfg и $ G $ леворекурсивна, то $ G $ не $ \operatorname{LL}(k) $-грамматика ни
+	при каком $ k $.
+\end{theorem}
+
+\begin{implication}
+	Имеем два достаточных признака, чтобы считать КС-грамматику не LL-грамматикой.
+	Это "--- неоднозначность и леворекурсивность.
+\end{implication}
+
+\section{\texorpdfstring{$ k $}{k}-предсказывающие алгоритмы анализа.
+Формальное определение}
+
+\begin{definition}
+	$ k $-\emph{предсказывающим алгоритмом анализа} называется формальная система $ \mathscr A =
+	(\Sigma, \Gamma \cup \Set{\$}, \Delta, M, X_0, \$) $, где
+	\begin{itemize}
+		\item $ \Sigma $ "--- \emph{входной алфавит};
+		\item $ \Gamma \cup \Set{\$} $ "--- \emph{магазинный алфавит};
+		\item $ \$ \notin \Gamma $ "--- маркер \emph{дна магазина};
+		\item $ \Delta $ "--- \emph{выходной алфавит};
+		\item $ X_0 \in \Gamma $ "--- \emph{начальный символ магазина};
+		\item $ M : (\Gamma \cup \Set{\$}) \times \Sigma^{*k} \to \Set{(\beta, i), \mathrm{pop},
+			\mathrm{accept}, \mathrm{error}} $ "--- \emph{управляющая таблица}, причём $ \beta \in
+			\Gamma^* $, $ i \in \Delta $ "--- \emph{номер правила} грамматики.
+	\end{itemize}
+\end{definition}
+
+\begin{definition}
+	Под \emph{конфигурацией} $ k $-предсказывающего алгоритма анализа будем подразумевать тройку
+	$ (x, \alpha, \pi) $, где
+	\begin{itemize}
+		\item $ x \in \Sigma^* $ "--- \emph{непросмотренная часть} входной цепочки, причём $ u \in
+			\operatorname{FIRST}_k^G(x) $;
+		\item $ u \in \Sigma^{*k} $ "--- \emph{аванцепочка};
+		\item $ \alpha \in \Gamma^* \Set{\$} $ "--- магазинная цепочка;
+		\item $ \pi \in \Delta^* $ "--- \emph{выходная цепочка}.
+	\end{itemize}
+
+	\emph{Начальная конфигурация} есть $ (w, X_0\$, \eps) $, где $ w \in \Sigma^* $ "--- вся
+	входная цепочка.
+\end{definition}
+
+Пусть $ (x, X\alpha, \pi) $ "--- текущая конфигурация.
+Определим следующую конфигурацию в зависимости от значения элемента управляющей таблицы $ M(X, u) $:
+\begin{enumerate}
+	\item Если $ M(X, u) = (B, i) $, то $ (x, X\alpha, \pi) \vdash (x, \beta \alpha, \pi i) $.
+	\item Если $ M(X, u) = \mathrm{pop} $, и в этом случае всегда $ X = a \in \Sigma $,
+		$ x = a x' $, $ x' \in \Sigma^* $, то $ (x, X\alpha, \pi) = (ax', a\alpha, \pi) \vdash
+		(x', \alpha, \pi) $.
+	\item Если $ M(X, u) = \mathrm{accept} $, что бывает только по достижении \emph{конечной
+		конфигурации} $ (\eps, \$, \pi) $, то анализатор останавливается, принимая входную цепочку.
+	\item Если $ M(X, u) = \mathrm{error} $, то анализатор сообщает об ошибке и останавливается, не
+		принимая входную цепочку.
+\end{enumerate}
+
+\section{Построение 1-предсказывающего алгоритма анализа по
+\texorpdfstring{$ \operatorname{LL}(1) $}{LL(1)}-грамматике и его обоснование.
+Алгоритм 2.1.
+Теорема 2.4}
+
+\begin{algorithm}[построение $ \operatorname{LL}(1) $-анализатора]
+	\hfill \\
+	\textbf{Вход}: $ G = (V_N, V_T, P, S) $ "--- $ \operatorname{LL}(1) $-грамматика. \\
+	\textbf{Выход}: правильный $ \mathscr A $ "--- 1-предсказывающий алгоритм анализа для грамматики
+	$ G $.
+
+	Положим $ \mathscr A = \bigl( \Sigma, \Gamma \cup \Set{\$}, \Delta, M, X_0, \$ \bigr) $, где
+	\begin{itemize}
+		\item $ \Sigma = V_T $;
+		\item $ \Delta = \Set{1, \dots, \#P} $;
+		\item $ \Gamma = V_N \cup V_T $;
+		\item $ X_0 = S $.
+	\end{itemize}
+
+	Управляющая таблица $ M $ определяется на множестве $ (\Gamma \cup \Set{\$}) \times (\Sigma
+	\cup \Set{\eps}) $ следующим образом:
+	\begin{enumerate}
+		\item $ M(A, \alpha) = (\alpha, i) $, если $ A \to \alpha $ является $ i $-м правилом в
+			$ P $ и $ a \in \operatorname{FIRST}_1^G(\alpha), \quad a \ne \eps $.
+
+			Если $ \eps = \operatorname{FIRST}_1^G(\alpha) $, то $ M(A, b) = (\alpha, i) $ для всех
+			$ b \in \operatorname{FOLLOW}_1^G(A) $.
+		\item $ M(a, a) = \mathrm{pop} \quad \forall a \in \Sigma $.
+		\item $ M(\$, \eps) = \mathrm{accept} $.
+		\item $ M(X, a) = \mathrm{error} $ для всех остальных $ (X, a) $.
+	\end{enumerate}
+\end{algorithm}
+
+\begin{theorem}[2.4]
+	Приведённый алгоритм производит правильный 1-предсказывающий алгоритм анализа для любой
+	$ \operatorname{LL}(1) $-грамматики.
+\end{theorem}
+
+\section{Определение операции \texorpdfstring{$ \oplus_k $}{(+)k}
+Лемма 2.1.
+Обоснование тождества \texorpdfstring{$ \operatorname{FIRST}_k^G(\alpha \beta) =
+\operatorname{FIRST}_k^G(\alpha) \oplus_k \operatorname{FIRST}_k^G(\beta) $}{FIRST(ab) = FIRST(a)
+(+)k FIRST(b)}}
+
+\begin{definition}
+	$ \Sigma $ "--- алфавит, $ \quad L_1, L_2 \subset \Sigma^* $.
+
+	$$ L_1 \oplus_k L_2 \coloneq \Set{w \in \Sigma^{*k} | x \in L_1, \quad y \in L_2, \quad
+		\begin{vars}
+			w = xy, \quad |xy| \le k, \\
+			xy = wz, \quad |w| = k
+		\end{vars}
+	} $$
+\end{definition}
+
+\begin{lemma}\label{lemma:2.1}
+	Для любой cfg $ G = (V_N, V_T, P, S) $ и любых цепочек $ \alpha, \beta \in V^* $ имеет место
+	тождество
+	$$ \operatorname{FIRST}_k^G(\alpha \beta) = \operatorname{FIRST}_k^G(\alpha) \oplus_k
+	\operatorname{FIRST}_k^G(\beta) $$
+\end{lemma}
+
+\section{Анализ в \texorpdfstring{$ \operatorname{LL}(k) $}{LL(k)}-грамматиках.
+Определение 2.11.
+\texorpdfstring{$ \operatorname{LL}(k) $}{LL(k)}-таблицы.
+Алгоритм 2.2: построение множества \texorpdfstring{$ \operatorname{LL}(k) $}{LL(k)}-таблиц,
+необходимых и достаточных для анализа цепочек в данной
+\texorpdfstring{$ \operatorname{LL}(k) $}{LL(k)}-грамматике}
+
+\begin{definition}
+	$ G = (V_N, V_T, P, S) $ "--- cfg
+
+	Для каждого $ A \in V_N $ и $ L \subset V_T^{*k} $ определим $ T_{A~L} $ "---
+	$ \operatorname{LL}(k) $-\emph{таблицу}, ассоциированную с $ A $ и $ L $ как функцию, которая по
+	данной аванцепочке $ u \in V_T^{*k} $ выдаёт
+	\begin{itemize}
+		\item error, если не существует правила $ A \to \alpha $ такого, что $ u \in
+			\operatorname{FIRST}_k^G(\alpha) \oplus_k L $;
+		\item $ A $-правило и конечный список подмножеств $ V_T^{*k} $, если существует единственное
+			такое правило;
+		\item undefined, если подходящих правил несколько.
+	\end{itemize}
+\end{definition}
+
+\begin{algorithm}[построение множества $ \operatorname{LL}(k) $-таблиц, необходимых для анализа в
+	данной $ \operatorname{LL}(k) $-грамматике]
+	\textbf{Вход}: $ G = (V_N, V_T, P, S) $. \\
+	\textbf{Выход}: $ \mathcal T $ "--- множество $ \operatorname{LL}(k) $-таблиц, необходимых
+	для анализа в грамматике $ G $.
+	\begin{enumerate}
+		\item Построить $ T_0 = T_{S~\Set{\eps}} $ и $ \mathcal T = \Set{T_0} $.
+		\item Если $ T_{A~L} \in \mathcal T $ и для некоторой цепочки $ u \in V_T^{*k} $ имеет место
+			равенство $ T_{A~L}(u) = (A \to x_0 B_1 x_1 B_2 \dots B_m x_m, \Braket{Y_1, \dots,
+			Y_m}) $, то к множеству таблиц $ \mathcal T $ добавить таблицы из множества
+			$ \Set{T_{B_i~Y_i}}_{i = 1}^m $.
+		\item Повторять шаг 2 до тех пор, пока ни одну новую таблицу не удастся добавить к
+			$ \mathcal T $.
+	\end{enumerate}
+\end{algorithm}
+
+\section{Алгоритм 2.3: построение \texorpdfstring{$ k $}{k}-предсказывающего алгоритма анализа и
+его обоснование.
+Пример 2.9.
+Теорема 2.5}
+
+\begin{algorithm}[построение $ k $-предсказывающего алгоритма анализа]
+	\hfill \\
+	\textbf{Вход}: $ G = (V_N, V_T, P, S) $. \\
+	\textbf{Выход}: $ \mathscr A $ "--- правильный предсказывающий алгоритм анализа для $ G $.
+	\begin{enumerate}
+		\item Построим $ \mathcal T $ "--- множество необходимых $ \operatorname{LL}(k) $-таблиц для
+			грамматики $ G $.
+		\item Положим $ \mathscr A = (\Sigma, \Gamma \cup \Set{\$}, \Delta, M, T_0, \$) $, где
+			$ \Sigma = V_T $, $ \Delta = \Set{1, \dots, \#P} $, $ \Gamma = \mathcal T \cup V_T $,
+			где $ T_0 = T_{S~\Set{\eps}} $.
+		\item Управляющую таблицу $ M $ определим на множестве $ (\Gamma \cup \Set{\$}) \times
+			\Sigma^{*k} $ следующим образом:
+			\begin{enumerate}
+				\item $ M(T_{A~L}, u) = (x_0 T_{B_1~Y_1} x_1 T_{B_2~Y_2} \dots T_{B_m~Y_m} x_m,
+					i) $, если
+					$$ T_{A~L}(u) = (A \to x_0 B_1 x_1 B_2 \dots B_m x_m, \Braket{Y_1,
+					\dots Y_m}), $$
+					и $ A \to x_0 B_1 \dots B_m x_m $ является $ i $-м правилом в $ P $.
+				\item $ M(a, av) = \mathrm{pop} \quad \forall a \in \Sigma, ~ v \in \Sigma^{*k} $.
+				\item $ M(\$, \eps) = \mathrm{accept} $.
+				\item $ M(X, u) = \mathrm{error} $ для всех остальных $ (X, u) $.
+			\end{enumerate}
+	\end{enumerate}
+\end{algorithm}
+
+\begin{theorem}
+	Алгоритм производит правильный $ k $-предсказывающий алгоритм анализа для любой
+	$ \operatorname{LL}(k) $-грамматики.
+\end{theorem}
+
+\section{Тестирование \texorpdfstring{$ \operatorname{LL}(k) $}{LL(k)}-грамматик.
+Алгоритм 2.4.
+Определение 2.12}
+
+\begin{definition}
+	$ G = (V_N, V_T, P, S) $ "--- cfg, $ \quad A \in V_N $
+
+	$$ \sigma(A) \coloneq \Set{L \subset V_T^{*k} | \exists S \xRightarrow[\mathrm{lm}]* wA\alpha,
+	\quad w \in V_T^*, \quad L = \operatorname{FIRST}_k^G(\alpha)} $$
+\end{definition}
+
+\begin{algorithm}[тестирование $ \operatorname{LL}(k) $-грамматик]
+	\hfill \\
+	\textbf{Вход}: $ G = (V_N, V_T, P, S) $ "--- cfg. \\
+	\textbf{Выход}: `да', если $ G $ "--- $ \operatorname{LL}(k) $-грамматика, `нет' "--- в
+	противном случае.
+	\begin{enumerate}
+		\item Для каждого нетерминала $ A $, для которого существуют две или более альтернативы,
+			вычисляется $ \sigma(A) $.
+		\item Пусть $ A \to \beta $ и $ A \to \gamma $ "--- два различных $ A $-правила.
+			Для каждого $ L \in \sigma(A) $ вычисляется $ f(L) =
+			\bigl( \operatorname{FIRST}_k^G(\beta) \oplus_k L \bigr) \cap \bigl(
+			\operatorname{FIRST}_k^G(\gamma) \oplus_k L \bigr) = \O $.
+			\begin{itemize}
+				\item Если $ f(L) \ne \O $, то алгоритм завершается с результатом `нет'.
+				\item Если $ f(L) = \O $ для всех $ L \in \sigma(A) $, то шаг 1 повторяется для
+					других нетерминалов.
+			\end{itemize}
+		\item Повторить шаги 1 и 2 для всех нетерминалов.
+		\item Завершить алгоритм с результатом `да'.
+	\end{enumerate}
+\end{algorithm}
+
+\section{Алгоритм 2.5: вычисление функции
+\texorpdfstring{$ \operatorname{FIRST}_k^G(\beta) $}{FIRST} и её обоснование.
+Теорема 2.7}
+
+\begin{algorithm}[вычиление функции $ \operatorname{FIRST}_k^G(\beta) $]
+	\hfill \\
+	\textbf{Вход}: $ G = (V_N, V_T, P, S) $ "--- cfg, и $ \beta = X_1 \dots X_n $, $ X_i \in V $. \\
+	\textbf{Выход}: $ \operatorname{FIRST}_k^G(\beta) $.
+
+	Согласно лемме \ref{lemma:2.1}
+	$$ \operatorname{FIRST}_k^G(\beta) = \operatorname{FIRST}_k^G(X_1) \oplus_k \dots \oplus_k
+	\operatorname{FIRST}_k^G(X_n), $$
+	так что задача сводится к вычислению $ \operatorname{FIRST}_k^G(X) $ для $ X \in V $.
+
+	Если $ X \in V_T \cup \Set{\eps} $, то $ \operatorname{FIRST}_k^G(X) = \Set{X} $.
+	Пусть $ X \in V_N $.
+
+	Будем использовать метод последовательных приближений и строить последовательности множеств
+	$ F_i(X) $ для всех $ X \in V_N \cup V_T $.
+	\begin{enumerate}
+		\item $ F_i(a) = \Set{a} \quad \forall a \in V_T $.
+		\item $ F_0(A) = \Set{x \in V_T^{*k} | \exists A \to x \alpha, \quad
+			\begin{vars}
+				|x| = k, \\
+				|x| < k, \quad \alpha = \eps
+			\end{vars}
+			} $
+		\item
+			$$ F_i(A) = F_{i - 1}(A) \cup \Set{x \in V_T^{*k} | \exists A \to Y_1 \dots Y_m, \quad
+			x \in F_{i - 1}(Y_1) \oplus_k \dots \oplus_k F_{i - 1}(Y_m)} $$
+		\item Так как $ F_{i - 1}(A) \subset F_i(A) \subset V_T^{*k} \quad \forall A \in V_N $, то
+			шаг 3 требуется повторять, пока при некотором $ i = j $ не окажется $ F_j(A) =
+			F_{j + 1}(A) \quad \forall A \in V_N $.
+		\item $ \operatorname{FIRST}_k^G(A) \coloneq F_j(A) $.
+	\end{enumerate}
+\end{algorithm}
+
+\begin{theorem}
+	$ G $ "--- cfg
+
+	Алгоритм правильно вычисляет функцию $ \operatorname{FIRST}_k^G(\beta) $ для любой цепочки
+	$ \beta $.
+\end{theorem}
+
+\section{Вычисление функции \texorpdfstring{$ \sigma(A) $}{sigma(A)}.
+Алгоритм 2.6.
+Пример 2.11.
+Теорема 2.8}
+
+\begin{algorithm}[вычисление $ \sigma(A) $ для $ A \in V_N $]
+	\hfill \\
+	\textbf{Вход}: $ G = (V_N, V_T, P, S) $ "--- cfg. \\
+	\textbf{Выход}: $ \sigma(A) $ для всех $ A \in V_N $.
+
+	Введём в рассмотрение вспомогательную функцию
+	$$ \sigma'(A, B) = \Set{L \subset V_T^{*k} | \exists A \xRightarrow[\mathrm{lm}]* wB\alpha,
+	\quad w \in V_T^*, \quad L = \operatorname{FIRST}_k^G(\alpha)} $$
+
+	Очевидно, что $ \sigma(A) = \sigma'(S, A') $.
+	Будем вычислять $ \sigma'(A, B) $ методом последовательных приближений, параллельно выстраивая
+	последовательности множеств $ \sigma_i'(A, B) $ для всех возможных пар $ (A, B) \in V_N^2 $.
+	\begin{enumerate}
+		\item $ \sigma_0'(A, B) = \Set{L \subset V_T^{*k} | \exists A \to \beta B \alpha, \quad
+			\beta, \alpha \in V^*, \quad L = \operatorname{FIRST}_k^G(\alpha)} $
+
+			Пусть $ \sigma_0'(A, B), \dots, \sigma_i'(A, B) $ вычислены для всех пар нетерминалов.
+		\item Положим
+			$$ \sigma_{i + 1}'(A, B) = \sigma_i'(A, B) \cup \Set{L \subset V_T^{*k} | \exists A
+			\to X_1 \dots X_m, \quad L' \in \sigma_i'(X_p, B), \quad X_p \in V_n, \quad 1 \le p \le
+			m, \quad L = L' \oplus \operatorname{FIRST}_k^G(X_{p + 1} \dots X_m)} $$
+		\item Повторять шаг 2 до тех пор, пока не при некотором $ i = j $ не окажется, что
+			$ \sigma_{i + 1}'(A, B) = \sigma_j'(A, B) $ для всех $ (A, B) $.
+		\item Полагаем $ \sigma'(A, B) = \sigma_j'(A, B) $.
+		\item $ \sigma(A) = \sigma'(S, A) $.
+	\end{enumerate}
+\end{algorithm}
+
+\begin{eg}
+	$ G = (\Set{S, A}, \Set{a, b}, P, S) $, где
+	$$ P = \Set{S \to AS, \quad S \to \eps, \quad A \to aA, \quad A \to b} $$
+
+	Вычислим функции $ \sigma(S) $ и $ \sigma(A) $ при $ k = 1 $.
+	Сначала получаем $ \operatorname{FIRST}_1^G(S) = \Set{\eps, a, b} $ и
+	$ \operatorname{FIRST}_1^G(A) = \Set{a, b} $.
+	Затем строим последовательности $ \sigma_i'(X, Y) $, где $ (X, Y) \in V_N \times V_N $.
+	За два шага получаем $ \sigma(S) = \Set{\Set{\eps}} $, $ \sigma(A) = \Set{\Set{\eps, a, b}} $.
+\end{eg}
+
+\begin{theorem}
+	$ G = (V_N, V_T, P, S) $ "--- cfg
+
+	Алгоритм правильно вычисляет функцию $ \sigma(A) $ для любого нетерминала $ A $.
+\end{theorem}
+
+\section{Алгоритм 2.7 вычисления функции \texorpdfstring{$ \operatorname{FOLLOW}_k^G(A) $}{FOLLOW}
+и его обоснование.
+Теорема 2.9}
+
+\begin{algorithm}[вычисление $ \operatorname{FOLLOW}_k^G(A) $]
+	\hfill \\
+	\textbf{Вход}: $ G = (V_N, V_T, P, S) $ "--- cfg. \\
+	\textbf{Выход}: $ \operatorname{FOLLOW}_k^G(A) $ для всех $ A \in V_N $.
+
+	Определим вспомогательную функцию
+	$$ \phi(A, B) = \Set{w \in V_T^{*k} | \exists A \xRightarrow[G]* \gamma B \alpha, \quad
+	w \in \operatorname{FIRST}_k^G(\alpha)} $$
+
+	Очевидно, что $ \operatorname{FOLLOW}_k^G(A) = \phi(S, A) $.
+	\begin{enumerate}
+		\item $ \phi_0(A, B) = \Set{w \in V_T^{*k} | \exists A \to \gamma B \alpha, \quad \alpha,
+			\gamma \in V*, \quad w = \operatorname{FIRST}_k^G(\alpha)} $
+		\item Пусть значения $ \phi_0(A, B), \dots, \phi_i(A, B) $ уже построены для всех
+			$ (A, B) $.
+			\begin{multline*}
+				\phi_{i + 1}(A, B) = \phi_i(A, B) \cup \{w \in V_T^{*k} | \exists A \to X_1 \dots
+				X_p X_{p + 1} \dots X_m, \quad X_p \in V_N, \\
+				w \in \phi_i(X_p, B) \oplus_k
+				\operatorname{FIRST}_k^G(X_{p + 1}, \dots, X_m)\}
+			\end{multline*}
+		\item Шаг 2 повторяется до тех пор, пока при некотором $ i = j $ не окажется
+			$ \phi_{j + 1}(A, B) = \phi_j(A, B) $ для всех $ (A, B) $.
+			Тогда $ \phi(A, B) = \phi_j(A, B) $.
+		\item $ \operatorname{FOLLOW}_k^G(A) = \phi(S, A) $ и $ \operatorname{FOLLOW}_k^G(S) =
+			\phi(S, S) \cup \Set{\eps} $.
+	\end{enumerate}
+\end{algorithm}
+
+\begin{theorem}
+	$ G $ "--- cfg
+
+	Алгоритм правильно вычисляет функцию $ \operatorname{FOLLOW}_k^G(A) $ для любого $ A \in V_N $.
+\end{theorem}
+
+\section{Теорема 2.8\texorpdfstring{ "---}{~---} обоснование правильности вычисления функции
+\texorpdfstring{$ \sigma(A) $}{sigma(A)} для любого нетерминала
+\texorpdfstring{$ A \in V_N $}{A из V\textunderscore N} и \texorpdfstring{$ k \ge 0 $}{k >= 0}}
+
+\begin{theorem}
+	$ G = (V_N, V_T, P, S) $ "--- cfg
+
+	Алгоритм правильно вычисляет функцию $ \sigma(A) $ для любого нетерминала $ A $.
+\end{theorem}
+
+\section{\texorpdfstring{$ k $}{k}-предсказывающий алгоритм трансляции}
+
+\begin{algorithm}[построение $ k $-предсказвыающего алгоритма трансляции]
+	\hfill \\
+	\textbf{Вход}: $ T = (N, \Sigma, \Delta, R, S) $ "--- простая семантически однозначная схема
+	синтаксически-управляемой трансляции с входной грамматикой $ G_i $ класса
+	$ \operatorname{LL}(k) $. \\
+	\textbf{Выход}: $ \Im $ "--- $ k $-предсказывающий алгоритм трансляции, реализующий трансляцию
+	$ \tau(T) $.
+	\begin{enumerate}
+		\item Предполагая, что множество $ \operatorname{LL}(k) $-таблиц, необходимых для анализа в
+			грамматике $ G_i $ уже построено, положим
+			$$ \Im = (\Sigma, \Gamma \cup \Set{\$}, \Delta, M, X_0, \$), $$
+			где $ \Sigma $ и $ \Delta $ такие же, как в схеме $ T $,
+			$$ \Gamma = \mathcal T \cup \Sigma \cup \Delta', \quad
+			\Delta' = \Set{ b' | b' = h(b), \quad b \in \Delta}, \quad
+			\Sigma \cap \Delta' = \O, \quad X_0 = T_0 = T_{S~\Set{\eps}} $$
+			\begin{enumerate}
+				\item $ M(T_{A~L}, u) = x_0y_0' T_{A_1~L_1} \dots T_{A_m~L_m} x_my_m' $, если
+					$ T_{A~L}(u) = \bigl( A \to x_0 A_1 x_1 \dots A_m x_m, \Braket{Y_1, \dots, Y_m}
+					\bigr) $, и $ A \to x_0 A_1 x_1 \dots A_mx_m, y_0 A_1y_1 \dots A_m y_m $ "---
+					$ i $-е правило схемы.
+					Здесь $ y_i' = h(y_i) $.
+				\item $ M(a, u) = \mathrm{pop} $, если $ a \in \Sigma $, $ u = av $,
+					$ v \in \Sigma^{*k - 1} $.
+				\item $ M(b', u) = \mathrm{pass} $ для всех $ u \in \Sigma^{*k} $.
+					Такой управляющий элемент определяет переход $ (x, b' \alpha \$, y) \vdash
+					(x, \alpha \$, yb) $.
+				\item $ M(\$, \eps) = \mathrm{accept} $.
+				\item $ M(X, u) = \mathrm{error} $ для всех остальных $ (X, u) $.
+			\end{enumerate}
+	\end{enumerate}
+\end{algorithm}
+
+\begin{theorem}
+	$ T = (N, \Sigma, \Delta, R, S) $ "--- простая семантически однозначная схема синтаксически-
+	управляемой трансляции с входной грамматикой $ G_i $ класса $ \operatorname{LL}(k) $ и $ \Im =
+	(\Sigma, \Gamma \cup \Set{\$}, \Delta, M, T_0, \$) $ "--- $ k $-предсказывающий алгоритм
+	трансляции, построенный посредством алгоритма.
+
+	Тогда $ \tau(T) = \tau(\Im) $.
+\end{theorem}
+
+\begin{theorem}
+	$ T $ "--- простая семантически однозначная схема синтаксически-управляемой трансляции с
+	входной грамматикой $ G_i $ класса $ \operatorname{LL}(k) $.
+
+	Существует детерминированный магазинный преобразователь $ P $ такой, что $ \tau_e =
+	\Set{(x\$, y) | (x, y) \in \tau(T)} $.
+\end{theorem}
+
+\section{Неразрешимые и разрешимые проблемы, касающиеся формальных языков}
+
+\section{Алгоритмически разрешимые проблемы, касающиеся конечных автоматов (проблемы пустоты и
+бесконечности языков, распознаваемых конечными автоматами, проблема эквивалентности конечных
+автоматов)}
+
+\begin{theorem}
+	Множество цепочек, принимаемых конечным автоматом с $ n $ состояниями,
+	\begin{enumerate}
+		\item непусто \textbf{тогда и только тогда}, когда он принимает цепочку длиной меньше $ n $;
+		\item бесконечно \textbf{тогда и только тогда}, когда он принимает цепочку длиной
+			$ n \le l \le 2n $.
+	\end{enumerate}
+\end{theorem}
+
+\begin{implication}
+	Существуют алгоритмы, разрешающие вопрос о пустоте, конечности и бесконечности языка,
+	принимаемого любым данным конечным автоматом.
+\end{implication}
+
+\begin{theorem}
+	Существует алгоритм для определения, являются ли два конечных автомата эквивалентными.
+\end{theorem}

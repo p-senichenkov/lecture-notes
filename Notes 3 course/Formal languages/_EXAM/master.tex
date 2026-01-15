@@ -1,0 +1,35 @@
+\documentclass[a4paper]{article}
+\input{../../preamble.tex}
+
+% so that it will be more convenient for questions:
+\titleformat{\section}
+{\normalfont\bfseries\Large}    % font
+{\color{gray}{\thesection.}}  % number
+{0.5em} % separator
+{}  % before-code
+[]  % after-code
+
+\titleformat{\part}
+{\normalfont\bfseries\huge}    % font
+{\thepart.}  % number
+{0.2em} % separator
+{}  % before-code
+[]  % after-code
+
+\title{Теория формальных языков и трансляций}
+\author{}
+\date{2025--2026}
+
+\begin{document}
+	\maketitle
+	\tableofcontents
+
+    \input{./1_langs.tex}
+	\input{./2_grammars.tex}
+	\input{./3_automatas.tex}
+	\input{./4_cfg.tex}
+	\input{./5_pda.tex}
+	\input{./6_cfrg.tex}
+	\input{./7_transl.tex}
+	\input{./8_llk.tex}
+\end{document}

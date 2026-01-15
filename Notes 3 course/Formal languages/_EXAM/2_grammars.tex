@@ -1,0 +1,139 @@
+\part{Грамматики}
+
+\section*{Формальное определение грамматики.
+Типы грамматик.
+Пустое предложение}
+
+\begin{definition}
+	\emph{Грамматикой} называется четвёрка $ G = (V_N, V_T, P, S) $, где
+	\begin{itemize}
+		\item $ V_N $, $ V_T $ "---
+			\emph{алфавиты нетерминалов} и \emph{терминалов} соответственно, причём
+			$ V_N \cap V_T = \O $;
+		\item $ P $ "--- конечное \emph{множество правил}, каждое из которых имеет вид
+			$ \alpha \to \beta $, где
+			\begin{itemize}
+				\item $ \alpha \in V^*V_NV^* $;
+				\item $ \beta \in V^* $;
+			\end{itemize}
+		\item $ V = V_N \cup V_T $ "--- \emph{объединённый алфавит} грамматики;
+		\item $ S $ "--- \emph{начальный нетерминал}.
+	\end{itemize}
+\end{definition}
+
+\begin{definition}
+	$ \alpha \to \beta \in P $ "--- правило, $ \quad \gamma, \delta $ "--- цепочки из множества
+	$ V^* $
+
+	Будем говорить, что из цепочки $ \gamma \alpha \delta $ \emph{непосредственно выводится
+	цепочка} $ \gamma \beta \delta $ в грамматике $ G $ при помощи данного правила.
+\end{definition}
+
+\begin{notation}
+	$ \gamma \alpha \delta \underimp G \gamma \beta \delta $
+\end{notation}
+
+\begin{definition}
+	$ \alpha_1, \alpha_2, \dots, \alpha_m $ "--- цепочки из множества $ V^* $,
+	$$ \alpha_1 \underimp G \alpha_2, \quad \alpha_2 \underimp G \alpha_3, \quad \dots, \quad
+	\alpha_{m - 1} \underimp G \alpha_m $$
+
+	Тогда говорим, что из $ \alpha_1 $ \emph{выводится} $ \alpha_m $ в грамматике $ G $.
+\end{definition}
+
+\begin{notation}
+	$ \alpha_1 \xRightarrow[G]* \alpha_m $
+\end{notation}
+
+\begin{definition}
+	\emph{Язык, порождаемый} грамматикой $ G $ определим как
+	$$ L(G) = \Set{w | w \in V_T^*, \quad S \xRightarrow[G]* w} $$
+\end{definition}
+
+\begin{definition}
+	Любая цепочка $ \alpha \in V^* $ такая, что $ S \xRightarrow[G]* \alpha $ называется
+	\emph{сентенциальной формой}.
+\end{definition}
+
+\begin{definition}
+	Грамматики $ G_1 $ и $ G_2 $ называются \emph{эквивалентными}, если $ L(G_1) = L(G_2) $.
+\end{definition}
+
+\subsection*{Типы грамматик}
+
+\begin{definition}
+	Грамматику, на которую не наложено никаких ограничений, назовём \emph{грамматикой типа 0}.
+\end{definition}
+
+\begin{definition}
+	Грамматика $ G = (V_N, V_T, P, S) $ является \emph{грамматикой типа 1} или \emph{контекстно-
+	зависимой грамматикой}, если для каждого её правила $ \alpha \to \beta \in P $ выполняется
+	$ |\beta| \ge |\alpha| $.
+\end{definition}
+
+\begin{definition}
+	Грамматика $ G = (V_N, V_T, P, S) $ является \emph{грамматикой типа 2} или \emph{контекстно-
+	свободной} грамматикой, если каждое её правило имеет вид $ A \to \beta \in P $, где $ A \in
+	V_N $, $ \beta \in V^+ $.
+\end{definition}
+
+\begin{definition}
+	Грамматика $ G = (V_N, V_T, P, S) $ является \emph{грамматикой типа 3} или \emph{регулярной
+	грамматикой}, если каждое её правило имеет вид $ A \to aB $ или $ A \to a $, где $ a \in V_T, ~
+	A, B \in V_N $.
+\end{definition}
+
+\subsection*{Пустое предложение}
+
+Расширим данные ранее определения типов грамматик, допустив порождение пустого предложения правилом
+$ S \to \eps $, где $ S $ "--- начальный символ, при условии, что $ S $ не появляется в правой части
+никакого правила.
+
+\begin{lemma}
+	$ G = (V_N, V_T, P, S) $ "--- грамматика типа $ \ge 1 $
+
+	Тогда существует другая грамматика $ G_1 $ такого же типа, которая порождает тот же самый язык,
+	и в которой ни одно правило не содержит начальный символ в своей правой части.
+\end{lemma}
+
+\begin{theorem}
+	$ L $ "--- язык типа $ \ge 1 $
+
+	Языки $ L \cup \Set{\eps} $ и $ L \setminus \Set{\eps} $ имеют тот же тип.
+\end{theorem}
+
+\section{Рекурсивность контекстно-зависимых грамматик}
+
+\begin{definition}
+	Грамматика $ G = (V_N, V_T, P, S) $ \emph{рекурсивна}, если существует алгоритм, который
+	определяет, порождается ли любая данная цепочка $ x \in V_T^* $ грамматикой $ G $.
+\end{definition}
+
+\begin{theorem}
+	Если грамматика контекстно-зависима, то она рекурсивна.
+\end{theorem}
+
+\section{Деревья вывода в контекстно-свободных грамматиках.
+Теорема о деревьях вывода}
+
+\begin{definition}
+	$ G = (V_N, V_T, P, S) $ "--- cfg
+
+	Дерево является \emph{деревом вывода} в грамматике $ G $, если оно удовлетворяет четырём
+	условиям:
+	\begin{enumerate}
+		\item каждый узел имеет метку "--- символ из алфавита $ V $;
+		\item метка корня "--- $ S $;
+		\item если узел имеет по крайней мере одного потомка, то его метка должна быть нетерминалом;
+		\item если узлы $ n1, n_2, \dots, n_k $ "--- прямые потомки узла $ n $, перечисленные слева-
+			направо, с метками $ A_1, A_2, \dots, A_k $ соответственно, а метка узла $ n $ есть
+			$ A $, то $ A \to A_1 A_2 \dots A_k \in P $.
+	\end{enumerate}
+\end{definition}
+
+\begin{theorem}
+	$ G = (V_N, V_T, P, S) $ "--- cfg, $ \quad \alpha \in V^*, \quad \alpha \ne \eps $
+
+	Вывод $ S \xRightarrow[G]* \alpha $ существует \textbf{тогда и только тогда}, когда существует
+	дерево вывода в грамматике $ G $ с результатом $ \alpha $.
+\end{theorem}
