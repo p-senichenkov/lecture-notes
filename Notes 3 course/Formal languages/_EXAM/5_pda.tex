@@ -14,13 +14,13 @@
 \end{undefthm}
 
 \begin{definition}
-	\emph{Недетерминированный магазинный автомат} есть формальная система
+	\emph{Недетерминированный магазинный автомат} есть формальная система \\
 	$ M = (Q, \Sigma, \Gamma, \delta, q_0, Z_0, F) $, где
 	\begin{itemize}
 		\item $ Q $ "--- конечное \emph{множество состояний};
 		\item $ \Sigma $ "--- конечный \emph{входной алфавит};
 		\item $ \Gamma $ "--- конечный \emph{магазинный алфавит};
-		\item $ \delta $ "--- отображение типа $ Q \times \bigl( \Sigma \cup \Set{\eps} \bigr)
+		\item $ \delta $ "--- отображение $ Q \times \bigl( \Sigma \cup \Set{\eps} \bigr)
 			\times \Gamma \to 2^{Q \times \Gamma^*} $, представляющее конечное \emph{управление}
 			автомата;
 		\item $ q_0 \in Q $ "--- \emph{конечное состояние};
@@ -82,17 +82,18 @@
 	Условие 2 предотвращает выбор между $ \eps $-движением и движением, использующим входной символ.
 \end{remark}
 
-\begin{definition}
-	$ S \xRightarrow[\mathrm{lm}]* x\alpha, \quad x \in V_T^*, $
-	$$
-	\begin{vars}
-		\alpha = A\beta, \quad A \in V_N, \quad \beta \in V^*, \\
-		\alpha = \eps
-	\end{vars} $$
-
-	Цепочка $ x $ называется \emph{закрытой}, а $ \alpha $ "--- \emph{открытой} частью
-	сентенциальной формы $ x\alpha $.
-\end{definition}
+% Не знаю, к чему здесь это определение
+% \begin{definition}
+% 	$ S \xRightarrow[\mathrm{lm}]* x\alpha, \quad x \in V_T^*, $
+% 	$$
+% 	\begin{vars}
+% 		\alpha = A\beta, \quad A \in V_N, \quad \beta \in V^*, \\
+% 		\alpha = \eps
+% 	\end{vars} $$
+%
+% 	Цепочка $ x $ называется \emph{закрытой}, а $ \alpha $ "--- \emph{открытой} частью
+% 	сентенциальной формы $ x\alpha $.
+% \end{definition}
 
 \begin{theorem}
 	Если $ L $ "--- КС-язык, то существует недетерминированный магазинный автомат $ M $ такой, что

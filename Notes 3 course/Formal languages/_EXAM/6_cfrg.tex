@@ -6,7 +6,7 @@
 КС-грамматика в регулярной форме (КСР"=грамматика).
 Примеры}
 
-\TODO{Обобщённые регулярные выражения}
+\textcolor{gray}{Этого нигде нет\dots}
 
 \section{Определение граф-схемы.
 Лемма о множестве слов \texorpdfstring{$ \operatorname L(\alpha, \beta) $}{L(a, b)}.
@@ -105,26 +105,17 @@
 \end{statement}
 
 \section{Построение графа для нетерминала в КСР-грамматике.
-Рекуррентный алгоритм построения синтаксической граф-схемы (СГС).
+Рекуррентный алгоритм построения синтаксической граф"=схемы.
 Лемма 8.2}
 
 Будем в дальнейшем алфавитом $ V $ считать объединение алфавитов нетерминалов, терминалов и пустой
-буквы, то есть,
-$$ V = N \cup T \cup \Set{\lambda} $$
-
-\begin{itemize}
-	\item Если $ \operatorname{m}(\alpha) \in N $, то $ \alpha $ "--- \emph{нетерминальная вершина}.
-	\item Если $ \operatorname{m}(\alpha) \in T $, то $ \alpha $ "--- \emph{терминальная вершина}.
-	\item Если $ \operatorname{m}(\alpha) = \lambda $, то $ \alpha $ "--- \emph{пустая вершина}.
-\end{itemize}
-
-Тут есть замудрёные словесные описания, но в целом всё понятно по картиночкам.
+буквы: $ V = N \cup T \cup \Set{\lambda} $.
 
 \usetikzlibrary{automata, calc}
 
 \begin{figure}[h]
 	\centering
-	\begin{subfigure}{0.3\textwidth}
+	\begin{subfigure}{0.175\textwidth}
 		\centering
 		\begin{tikzpicture}[>=Stealth, terminal/.style={rectangle, rounded corners=2mm, draw=red,
 			fill=red!30, minimum width=6mm, minimum height=5mm},
@@ -135,7 +126,7 @@ $$ V = N \cup T \cup \Set{\lambda} $$
 		\end{tikzpicture}
 		\caption{Терминал}
 	\end{subfigure}
-	\begin{subfigure}{0.3\textwidth}
+	\begin{subfigure}{0.175\textwidth}
 		\centering
 		\begin{tikzpicture}[>=Stealth, terminal/.style={rectangle, rounded corners=2mm, draw=red,
 			fill=red!30, minimum width=6mm, minimum height=5mm},
@@ -146,7 +137,7 @@ $$ V = N \cup T \cup \Set{\lambda} $$
 		\end{tikzpicture}
 		\caption{Нетерминал}
 	\end{subfigure}
-	\begin{subfigure}{0.3\textwidth}
+	\begin{subfigure}{0.235\textwidth}
 		\centering
 		\begin{tikzpicture}[>=Stealth, terminal/.style={rectangle, rounded corners=2mm, draw=red,
 			fill=red!30, minimum width=6mm, minimum height=5mm},
@@ -160,7 +151,7 @@ $$ V = N \cup T \cup \Set{\lambda} $$
 		\end{tikzpicture}
 		\caption{Конкатенация ($ A \mathnormal{;} B $)}
 	\end{subfigure}
-	\begin{subfigure}{0.3\textwidth}
+	\begin{subfigure}{0.195\textwidth}
 		\centering
 		\begin{tikzpicture}[>=Stealth, terminal/.style={rectangle, rounded corners=2mm, draw=red,
 			fill=red!30, minimum width=6mm, minimum height=5mm},
@@ -174,7 +165,7 @@ $$ V = N \cup T \cup \Set{\lambda} $$
 		\end{tikzpicture}
 		\caption{Объединение ($ A \mathnormal{,} B $)}
 	\end{subfigure}
-	\begin{subfigure}{0.3\textwidth}
+	\begin{subfigure}{0.195\textwidth}
 		\centering
 		\begin{tikzpicture}[>=Stealth, terminal/.style={rectangle, rounded corners=2mm, draw=red,
 			fill=red!30, minimum width=6mm, minimum height=5mm},
@@ -190,7 +181,9 @@ $$ V = N \cup T \cup \Set{\lambda} $$
 	\end{subfigure}
 \end{figure}
 
-\begin{lemma}[8.2]
+\textcolor{gray}{Тут есть замудрёные словесные описания, но в целом всё понятно по картиночкам.}
+
+\begin{lemma}
 	$ A $ "--- регулярное выражение над алфавитом $ V, \quad \Gamma_A $ "--- граф для регулярного
 	выражения $ A $, построенный по выше описанным требованиям.
 
@@ -223,11 +216,8 @@ $$ V = N \cup T \cup \Set{\lambda} $$
 \end{definition}
 
 \section{Достижимые вершины.
-Определение множества начальных вершин \texorpdfstring{$ H(A) $}{H(A)} графа
-\texorpdfstring{$ \Gamma_A $}{Г\textunderscore A} и множества конечных вершин
-\texorpdfstring{$ K(A) $}{K(A)} графа \texorpdfstring{$ \Gamma_A $}{Г\textunderscore A}}
-
-\TODO{Достижимые вершины}
+Определение множества начальных вершин \texorpdfstring{$ H(A) $}{H(A)}
+и множества конечных вершин \texorpdfstring{$ K(A) $}{K(A)}}
 
 \begin{definition}[множество начальных вершин]
 	\hfill
@@ -253,7 +243,7 @@ $$ V = N \cup T \cup \Set{\lambda} $$
 	\end{enumerate}
 \end{definition}
 
-\section{Понятие достижимости на множестве терминальных вершин в СГС.
+\section{Понятие достижимости на множестве терминальных вершин.
 Отношение эквивалентности.
 Лемма и следствие о языке, порождаемом СГС}
 
@@ -369,7 +359,7 @@ $$ V = N \cup T \cup \Set{\lambda} $$
 
 \subsection*{Отношение эквивалентности}
 
-Рассмотрим множестве всех вершин в синтаксической граф-схеме $ \Gamma_G $.
+Рассмотрим множество всех вершин в синтаксической граф-схеме $ \Gamma_G $.
 Исключим из него все входные и выходные вершины компонент графов и добавим два новых элемента
 $ \omega_H $ и $ \omega_K $, где $ \omega_H $ заменяет все входные, а $ \omega_K $ "--- выходные
 вершины.
@@ -464,7 +454,7 @@ $$ L_{\Gamma_G}(E_A) \coloneq \bigcup_{\beta \in K(A)} L_{\Gamma_G}(E_A, \beta) 
 \begin{definition}
 	$ S $ "--- состояние в графе $ \Gamma_A, \quad \xi $ "--- буква из алфавита $ T $.
 
-	Состояние $ S \faktor S \xi $ называется \emph{переходом по символу} (\emph{переходным
+	Состояние $ \faktor S \xi $ называется \emph{переходом по символу} (\emph{переходным
 	состоянием} для $ S $) в граф-схеме $ \Gamma_A $, причём
 	\begin{itemize}
 		\item если $ S = \O $ или $ S = \Set{F} $, то $ \faktor S \xi = \O $;
@@ -556,7 +546,7 @@ $$ L_{\Gamma_G}(E_A) \coloneq \bigcup_{\beta \in K(A)} L_{\Gamma_G}(E_A, \beta) 
 	Состояние $ S $ принадлежит множеству $ \Im_0 $, если
 	\begin{itemize}
 		\item $ S = \Set{\alpha} $, где $ \alpha $ "--- терминальная или выходная вершина;
-		\item $ S = \bigcup S_I $, где $ S-i \in \Im_0 $.
+		\item $ S = \bigcup S_i $, где $ S_i \in \Im_0 $.
 	\end{itemize}
 \end{definition}
 
@@ -668,10 +658,15 @@ $$ L_{\Gamma_G}(E_A) \coloneq \bigcup_{\beta \in K(A)} L_{\Gamma_G}(E_A, \beta) 
 	\end{cases} $$
 \end{lemma}
 
-\section{Регуляризация КС-грамматики.
+\section[{Регуляризация КС-грамматики.
 Эквивалентные преобразования.
 Базисные преобразования.
-Синтаксическая модель языка}
+Синтаксическая модель языка}]
+{Регуляризация КС-грамматики.
+Эквивалентные преобразования.
+Базисные преобразования.
+Синтаксическая модель \\
+языка}
 
 \subsection*{Синтаксическая модель языка}
 
@@ -707,14 +702,12 @@ $$ A: A \mathnormal{,} r_{11} \mathnormal{,} A ; A \mathnormal{,} r_{12} ; r_{21
 A ; r_{22}, $$
 где $ r_{11}, r_{12}, r_{21}, r_{22} $ "--- регулярные выражения.
 
-Данное правило состоит четырёх частей ($ A_i $-фрагментов), разделённых знаком $ ; $.
-
 \begin{algorithm}
 	\hfill
 	\begin{enumerate}
 		\item Рассмотрим $ A_1 $-фрагмент $ A \mathnormal{,} r_{11} \mathnormal{,} A $.
-			Используя данный фрагмент, мы можем вывести строки $ Ar_{11}A $, $ A r_{11}Ar_{11}A,
-			\dotsc $
+			Используя данный фрагмент, мы можем вывести строки
+			$$ Ar_{11}A, \quad A r_{11}Ar_{11}A, \quad \dotsc $$
 			Из определения операции $ \# $, это множество строк совпадает с множеством строк,
 			порождаемым регулярным выражением $ A \# r_{11} $.
 		\item Рассмотрим $ A_2 $-фрагмент: $ A \mathnormal{,} r_{12} $.
@@ -729,9 +722,9 @@ A ; r_{22}, $$
 	\end{enumerate}
 \end{algorithm}
 
-\section{Общая схема получения регулярного выражения, эквивалентного приведённой КС"=грамматике без
+\section{Схема получения регулярного выражения, эквивалентного приведённой КС"=грамматике без
 самовставлений.
 Пример}
 
-\TODO{Общая схема получения регулярного выражения, эквивалентного...}
+\textcolor{gray}{Этого нет\dots}
 

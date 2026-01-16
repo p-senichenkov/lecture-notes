@@ -1,8 +1,7 @@
 \part{\texorpdfstring{$ \operatorname{LL}(k) $}{LL(k)}-грамматики и трансляции}
 
-\section{Определение \texorpdfstring{$ \operatorname{LL}(k) $}{LL(k)}-грамматики.
-Свойства \texorpdfstring{$ \operatorname{LL}(k) $}{LL(k)}-грамматик.
-Необходимые и достаточные условия принадлежности приведённой КС-грамматики классу
+\section{Определение и свойства \texorpdfstring{$ \operatorname{LL}(k) $}{LL(k)}-грамматики.
+Необходимые и достаточные условия принадлежности приведённой КС"=грамматики классу
 \texorpdfstring{$ \operatorname{LL}(k) $}{LL(k)}.
 Теорема 2.1}
 
@@ -57,7 +56,7 @@
 \section{Алгоритм вычисления функции \texorpdfstring{$ \operatorname{FIRST}_k^G(\beta) $}{FIRST}
 и его обоснование}
 
-\TODO{Алгоритм вычисления FIRST}
+\textcolor{gray}{Этого тоже нет\dots}
 
 \section{Определение функции \texorpdfstring{$ \operatorname{FOLLOW}_k^G(\beta) $}{FOLLOW}}
 
@@ -72,7 +71,7 @@
 
 \section{Необходимые и достаточные условия принадлежности приведённой КС"=грамматики классу
 \texorpdfstring{$ \operatorname{LL}(1) $}{LL(1)}.
-Сильные \texorpdfstring{$ \operatorname{LL}(k) $}{LL(k)}-грамматики.
+Сильные \texorpdfstring{$ \operatorname{LL}(k) $}{LL(k)}"=грамматики.
 Теорема 2.2}
 
 \begin{theorem}
@@ -100,7 +99,7 @@
 	\emph{грамматикой}, если
 	$$ \operatorname{FIRST}_k^G \bigl( \beta \operatorname{FOLLOW}_k^G(A) \bigr) \cap
 	\operatorname{FIRST}_k^G \bigl( \gamma \operatorname{FOLLOW}_k^G(A) \bigr) = \O $$
-	для всех $ A \to \beta, ~ A \to \gamma, \quad A \in V_N, \quad \beta \ne \gamma \in (V_N \cup
+	для всех $ A \in V_N, \quad \beta \ne \gamma \in (V_N \cup
 	V_T)^* $ таких, что существуют правила $ A \to \beta $ и $ A \to \gamma $.
 \end{definition}
 
@@ -108,10 +107,10 @@
 	Каждая $ \operatorname{LL}(1) $-грамматика является сильной.
 \end{implication}
 
-\section{Достаточные признаки непринадлежности КС-грамматики классу
-\texorpdfstring{$ \operatorname{LL} $}{LL}-грамматик: синтаксическая неоднозначность и
-леворекурсивность.
-Теорема 2.3}
+\section[{Достаточные признаки непринадлежности КС-грамматики классу
+\texorpdfstring{$ \operatorname{LL} $}{LL}. Теорема 2.3}]
+{Достаточные признаки непринадлежности КС-грамматики \\
+классу \texorpdfstring{$ \operatorname{LL} $}{LL}. Теорема 2.3}
 
 \begin{theorem}
 	Если $ G $ "--- cfg и $ G $ леворекурсивна, то $ G $ не $ \operatorname{LL}(k) $-грамматика ни
@@ -202,8 +201,8 @@
 	\end{enumerate}
 \end{algorithm}
 
-\begin{theorem}[2.4]
-	Приведённый алгоритм производит правильный 1-предсказывающий алгоритм анализа для любой
+\begin{theorem}
+	Алгоритм производит правильный 1-предсказывающий алгоритм анализа для любой
 	$ \operatorname{LL}(1) $-грамматики.
 \end{theorem}
 
@@ -233,7 +232,7 @@
 
 \section{Анализ в \texorpdfstring{$ \operatorname{LL}(k) $}{LL(k)}-грамматиках.
 Определение 2.11.
-\texorpdfstring{$ \operatorname{LL}(k) $}{LL(k)}-таблицы.
+\texorpdfstring{$ \operatorname{LL}(k) $}{LL(k)}"=таблицы.
 Алгоритм 2.2: построение множества \texorpdfstring{$ \operatorname{LL}(k) $}{LL(k)}-таблиц,
 необходимых и достаточных для анализа цепочек в данной
 \texorpdfstring{$ \operatorname{LL}(k) $}{LL(k)}-грамматике}
@@ -269,8 +268,11 @@
 	\end{enumerate}
 \end{algorithm}
 
-\section{Алгоритм 2.3: построение \texorpdfstring{$ k $}{k}-предсказывающего алгоритма анализа и
-его обоснование.
+\section[{Алгоритм 2.3: построение \texorpdfstring{$ k $}{k}-предсказывающего алгоритма анализа.
+Пример 2.9.
+Теорема 2.5}]
+{Алгоритм 2.3: построение \texorpdfstring{$ k $}{k}-предсказывающего алгоритма \\
+анализа.
 Пример 2.9.
 Теорема 2.5}
 
@@ -383,8 +385,7 @@
 
 \section{Вычисление функции \texorpdfstring{$ \sigma(A) $}{sigma(A)}.
 Алгоритм 2.6.
-Пример 2.11.
-Теорема 2.8}
+Пример 2.11.}
 
 \begin{algorithm}[вычисление $ \sigma(A) $ для $ A \in V_N $]
 	\hfill \\
@@ -404,9 +405,12 @@
 
 			Пусть $ \sigma_0'(A, B), \dots, \sigma_i'(A, B) $ вычислены для всех пар нетерминалов.
 		\item Положим
-			$$ \sigma_{i + 1}'(A, B) = \sigma_i'(A, B) \cup \Set{L \subset V_T^{*k} | \exists A
-			\to X_1 \dots X_m, \quad L' \in \sigma_i'(X_p, B), \quad X_p \in V_n, \quad 1 \le p \le
-			m, \quad L = L' \oplus \operatorname{FIRST}_k^G(X_{p + 1} \dots X_m)} $$
+			$$ \sigma_{i + 1}'(A, B) = \sigma_i'(A, B) \cup \Set{L \subset V_T^{*k} |
+				\begin{array}{r}
+					\exists A \to X_1 \dots X_m, \quad L' \in \sigma_i'(X_p, B), \quad
+					X_p \in V_n, \\[0.5em]
+					1 \le p \le m, \quad L = L' \oplus \operatorname{FIRST}_k^G(X_{p + 1} \dots X_m)
+			\end{array}} $$
 		\item Повторять шаг 2 до тех пор, пока не при некотором $ i = j $ не окажется, что
 			$ \sigma_{i + 1}'(A, B) = \sigma_j'(A, B) $ для всех $ (A, B) $.
 		\item Полагаем $ \sigma'(A, B) = \sigma_j'(A, B) $.
@@ -419,20 +423,14 @@
 	$$ P = \Set{S \to AS, \quad S \to \eps, \quad A \to aA, \quad A \to b} $$
 
 	Вычислим функции $ \sigma(S) $ и $ \sigma(A) $ при $ k = 1 $.
-	Сначала получаем $ \operatorname{FIRST}_1^G(S) = \Set{\eps, a, b} $ и
-	$ \operatorname{FIRST}_1^G(A) = \Set{a, b} $.
-	Затем строим последовательности $ \sigma_i'(X, Y) $, где $ (X, Y) \in V_N \times V_N $.
+	Сначала получаем
+	$$ \operatorname{FIRST}_1^G(S) = \Set{\eps, a, b}, \quad \operatorname{FIRST}_1^G(A) =
+	\Set{a, b} $$
+	Затем строим последовательности $ \sigma_i'(X, Y) $.
 	За два шага получаем $ \sigma(S) = \Set{\Set{\eps}} $, $ \sigma(A) = \Set{\Set{\eps, a, b}} $.
 \end{eg}
 
-\begin{theorem}
-	$ G = (V_N, V_T, P, S) $ "--- cfg
-
-	Алгоритм правильно вычисляет функцию $ \sigma(A) $ для любого нетерминала $ A $.
-\end{theorem}
-
-\section{Алгоритм 2.7 вычисления функции \texorpdfstring{$ \operatorname{FOLLOW}_k^G(A) $}{FOLLOW}
-и его обоснование.
+\section{Алгоритм 2.7 вычисления функции \texorpdfstring{$ \operatorname{FOLLOW}_k^G(A) $}{FOLLOW}.
 Теорема 2.9}
 
 \begin{algorithm}[вычисление $ \operatorname{FOLLOW}_k^G(A) $]
@@ -450,12 +448,11 @@
 			\gamma \in V*, \quad w = \operatorname{FIRST}_k^G(\alpha)} $
 		\item Пусть значения $ \phi_0(A, B), \dots, \phi_i(A, B) $ уже построены для всех
 			$ (A, B) $.
-			\begin{multline*}
-				\phi_{i + 1}(A, B) = \phi_i(A, B) \cup \{w \in V_T^{*k} | \exists A \to X_1 \dots
-				X_p X_{p + 1} \dots X_m, \quad X_p \in V_N, \\
-				w \in \phi_i(X_p, B) \oplus_k
-				\operatorname{FIRST}_k^G(X_{p + 1}, \dots, X_m)\}
-			\end{multline*}
+			$$ \phi_{i + 1}(A, B) = \phi_i(A, B) \cup \Set{w \in V_T^{*k} |
+				\begin{array}{l}
+					\exists A \to X_1 \dots X_p X_{p + 1} \dots X_m, \quad X_p \in V_N, \\[0.5em]
+					w \in \phi_i(X_p, B) \oplus_k \operatorname{FIRST}_k^G(X_{p + 1}, \dots, X_m)
+			\end{array}} $$
 		\item Шаг 2 повторяется до тех пор, пока при некотором $ i = j $ не окажется
 			$ \phi_{j + 1}(A, B) = \phi_j(A, B) $ для всех $ (A, B) $.
 			Тогда $ \phi(A, B) = \phi_j(A, B) $.
@@ -499,15 +496,19 @@
 			\Sigma \cap \Delta' = \O, \quad X_0 = T_0 = T_{S~\Set{\eps}} $$
 			\begin{enumerate}
 				\item $ M(T_{A~L}, u) = x_0y_0' T_{A_1~L_1} \dots T_{A_m~L_m} x_my_m' $, если
-					$ T_{A~L}(u) = \bigl( A \to x_0 A_1 x_1 \dots A_m x_m, \Braket{Y_1, \dots, Y_m}
-					\bigr) $, и $ A \to x_0 A_1 x_1 \dots A_mx_m, y_0 A_1y_1 \dots A_m y_m $ "---
-					$ i $-е правило схемы.
+					$$
+					\begin{cases}
+						T_{A~L}(u) = \bigl( A \to x_0 A_1 x_1 \dots A_m x_m, \Braket{Y_1, \dots,
+						Y_m} \bigr), \\
+						A \to x_0 A_1 x_1 \dots A_mx_m, y_0 A_1y_1 \dots A_m y_m \text{ "--- }
+						i \text{-е правило схемы}
+					\end{cases} $$
 					Здесь $ y_i' = h(y_i) $.
 				\item $ M(a, u) = \mathrm{pop} $, если $ a \in \Sigma $, $ u = av $,
 					$ v \in \Sigma^{*k - 1} $.
 				\item $ M(b', u) = \mathrm{pass} $ для всех $ u \in \Sigma^{*k} $.
-					Такой управляющий элемент определяет переход $ (x, b' \alpha \$, y) \vdash
-					(x, \alpha \$, yb) $.
+					Такой управляющий элемент определяет переход
+					$$ (x, b' \alpha \$, y) \vdash (x, \alpha \$, yb) $$
 				\item $ M(\$, \eps) = \mathrm{accept} $.
 				\item $ M(X, u) = \mathrm{error} $ для всех остальных $ (X, u) $.
 			\end{enumerate}
@@ -527,11 +528,13 @@
 	$ T $ "--- простая семантически однозначная схема синтаксически-управляемой трансляции с
 	входной грамматикой $ G_i $ класса $ \operatorname{LL}(k) $.
 
-	Существует детерминированный магазинный преобразователь $ P $ такой, что $ \tau_e =
-	\Set{(x\$, y) | (x, y) \in \tau(T)} $.
+	Существует детерминированный магазинный преобразователь $ P $ такой, что
+	$$ \tau_e = \Set{(x\$, y) | (x, y) \in \tau(T)} $$
 \end{theorem}
 
 \section{Неразрешимые и разрешимые проблемы, касающиеся формальных языков}
+
+\textcolor{gray}{И этого нет\dots}
 
 \section{Алгоритмически разрешимые проблемы, касающиеся конечных автоматов (проблемы пустоты и
 бесконечности языков, распознаваемых конечными автоматами, проблема эквивалентности конечных
