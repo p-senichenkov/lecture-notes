@@ -55,7 +55,7 @@
 	\begin{enumerate}
 		\item $ L $ "--- подпространство $ X \implies A(L) $ "--- подпространство $ Y $;
 		\item $ M $ "--- подпространство $ Y \implies
-			\underset{\text{(прообраз)}}{A^{-1}(Y)} $ "--- подпространство $ X $;
+			\underset{\text{(прообраз)}}{A^{-1}(M)} $ "--- подпространство $ X $;
 		\item $ B \sub X $ "--- выпуклое $ \implies A(B) $ "--- выпуклое в $ Y $;
 		\item $ C \sub Y $ "--- выпуклое $ \implies \underset{\text{(прообраз)}}{A^{-1}(C)} $ "--- выпуклое в $ X $;
 		\item $ A $ "--- биекция $ \implies \exists A^{-1} \in \mathscr Lin(Y, X) $.
@@ -109,7 +109,7 @@
 		\item $ A $ непрерывен на $ X $;
 		\item $ \exists c > 0 : \quad \|Ax\|_Y \le c\|x\|_X \quad \forall x \in X $;
 		\item $ A $ ограничен;
-		\item $ \exists r > 0 : \quad A \bigl( \mathtt B_r(\On[]) \bigr) $ ограничено.
+		\item $ \exists r > 0 : \quad A \bigl( \mathtt B_r(0) \bigr) $ ограничено.
 	\end{enumerate}
 \end{theorem}
 
@@ -142,16 +142,18 @@
 	$$ \exists R > 0 : \quad \forall x \in B \quad \|x\| \le R \implies \|Ax\| \underset{3)}\le c\|x\| \le cR \implies
 	A(B) \text{ ограничено} $$
 \item 4 $ \implies $ 5
-	$$ \mathtt B_r(\On[]) \text{ ограничено } \underimp{\text{очевидно}}
+	$$ \mathtt B_r(0) \text{ ограничено } \implies
 	A \bigl( \mathtt B_r(0) \bigr) \text{ ограничено} $$
 \item 5 $ \implies 1 $
-	$$ \exists R > 0 : \quad A \bigl( \mathtt B_r(0) \bigr) \sub \mathtt B_R(\On[]) $$
+	$$ \exists R > 0 : \quad A \bigl( \mathtt B_r(0) \bigr) \sub \mathtt B_R(0) $$
 	\ie $ \|x\| < r \implies \|Ax\| < R $.
 
 	$$ \delta \coloneq \eps \cdot \frac r R $$
 	Пусть $ \|x\| < \delta $
-	$$ \implies \|x\| < \eps \cdot rR \implies \Bigl\| x \cdot \frac R\eps \Bigr\| < r \implies \Bigl\| A \Bigl( x \cdot \frac R\eps \Bigr) \Bigr\| < R \implies \|Ax\| \cdot \frac R\eps < R \iff
-	\|Ax\| < \eps $$
+	$$ \|x\| < \eps \cdot \frac r R \implies
+	\Bigl\| x \cdot \frac R\eps \Bigr\| < r \implies
+	\Bigl\| A \Bigl( x \cdot \frac R\eps \Bigr) \Bigr\| < R \implies
+	\|Ax\| \cdot \frac R\eps < R \iff \|Ax\| < \eps $$
 \end{iproof}
 
 \begin{definition}
@@ -220,7 +222,7 @@
 \begin{proof}
 	Обозначим $ a = \sup\limits_{\|x\| \le 1}, \quad b = \sup\limits_{\|x\| < 1}, \quad c = \sup\limits_{\|x\| = 1}, \quad
 	d = \sup\limits_{x \ne 0} $. \\
-	Очевидно, что $ a \le b, \quad d \ge c $.
+	Очевидно, что $ a \ge b, \quad a \ge c, \quad d \ge c $.
 
 	Докажем, что
 	$$ \|A\| \ge a \ge b \ge \|A\|, \quad \|A\| \ge d \ge c \ge \|A\| $$
@@ -266,15 +268,15 @@
 	$$ \|M_h\| = \sup\limits_{\|f\| = 1} \|M_h(f)\|_\infty \ge \|M_h(\chi_{[a, b]})\|_\infty =
 	\|h\|_\infty \implies
 	\|M_h\|_{\mathscr B(\mathcal C[a, b])} = \|h\|_\infty $$
-\item $ Y = \mathcal C[0, 1], \quad X = \set{f | f' \in \mathcal C[0, 1]} $
+\item $ Y = \mathcal C[0, 1], \quad X = \Bigl( \mathcal C^{(1)}[0, 1], \ \|f\|_X =
+	\max\limits_{[0, 1]}|f(x)| \Bigr) $
 
-	$ X $ "--- подпространство $ Y $, \ie $ \|f\|_X = \max\limits_{[0, 1]}|f(x)| $.
-	$$ f \in X, \quad \mathscr D(f) = f', \quad \mathscr D \in \mathscr Lin(X, Y) $$
-	Проверим, что $ \mathscr D $ не ограничен.
+	$$ f \in X, \quad \mathcal D(f) = f', \quad \mathcal D \in \mathcal Lin(X, Y) $$
+	Проверим, что $ \mathcal D $ не ограничен.
 	$$ x^n \in \mathcal C[0, 1], \quad \|x^n\|_\infty = 1 \implies
-	\sup\limits_{\|f\| = 1} \|\mathscr D(f)\|_\infty \ge \sup\limits_{n \in \N} \|\mathscr D(x^n)\| $$
-	$$ \mathscr D(x^n) = nx^{n - 1} \implies \|\mathscr D(x^n)\|_\infty = n $$
-	$$ \implies \sup \|\mathscr D(f)\| \ge \sup \|\mathscr D(x^n)\| = +\infty $$
+	\sup\limits_{\|f\| = 1} \|\mathcal D(f)\|_\infty \ge \sup\limits_{n \in \N} \|\mathcal D(x^n)\| $$
+	$$ \mathcal D(x^n) = nx^{n - 1} \implies \|\mathcal D(x^n)\|_\infty = n $$
+	$$ \implies \sup \|\mathcal D(f)\| \ge \sup \|\mathcal D(x^n)\| = +\infty $$
 \item $ Y = \mathcal C[0, 1], \quad X = \nder[1]{\mathcal C}[0, 1] $
 	$$ \|f\|_X = \max\{\|f\|_\infty, \|f'\|_\infty\} $$
 	$$ \mathcal D(f) = f' $$
@@ -431,7 +433,8 @@
 \begin{exmpls}
 \item $ l^p, \quad $ зафиксируем $ i \in \N $
 	$$ x = \set{x_n}_{n = 1}^\infty \in l^p, \quad f(x) \define x_i $$
-	$$ |f(x)| = |x_i| \le \Bigl( \sum_{n = 1}^\infty |x_n|^p \Bigr)^{\frac1p}, \quad 1 \le p < +\infty $$
+	$$ |f(x)| = |x_i| \le \Bigl( \sum_{n = 1}^\infty |x_n|^p \Bigr)^{\frac1p} = \|x\|_p, \quad
+	1 \le p < +\infty $$
 	$$ |x_i| < \sup\limits_{n \ge 1}|x_n| = \|x\|_\infty, \quad p = +\infty $$
 	$$ \implies f \in (l^p)^*, \quad \|f\|_{(l^p)^*} \le 1 $$
 
@@ -451,7 +454,7 @@
 \end{exmpls}
 
 \begin{theorem}
-	$ \phi(x) \in \mathcal [a, b], \quad \phi(x) $ фиксирована, $ \quad f \in \mathcal C[a, b] $.
+	$ \phi(x) \in \mathcal C [a, b] $ "--- фиксирована, $ \quad f \in \mathcal C[a, b] $.
 	$$ G(f) \define \int_a^b f(x) \cdot \phi(x) \di x $$
 
 	$$ \implies G \in \bigl( C[a, b] \bigr)^*, \quad \|G\| = \int_a^b |\phi(x)| \di x $$
@@ -483,8 +486,8 @@
 			|\phi(t) - \phi(s)| < \eps $$
 			$$ a = t_0 < t_1 < \dots < t_n = b \text{ "--- разбиение } [a, b] : \quad
 			t_k - t_{k - 1} < \delta $$
-			$$ x, t \in [t_{k - 1}, t_k] \implies |\phi(s) - \phi(t)| < \eps $$
-			$$ \mathscr F \define \set{[t_{k - 1}, t_k]}_{k = 1}^n $$
+			$$ s, t \in [t_{k - 1}, t_k] \implies |\phi(s) - \phi(t)| < \eps $$
+			$$ \mathscr F \coloneq \set{[t_{k - 1}, t_k]}_{k = 1}^n $$
 			Разобьём отрезки на два множества:
 			\begin{enumerate}
 				\item $ \Delta_1, \dots, \Delta_r $ "--- отрезки такие, что $ \phi(t) \overset{\Delta_j}> 0 $
@@ -504,11 +507,11 @@
 			\end{multline*}
 			$$ h(t) =
 			\begin{cases}
-				\operatorname{sign} \phi(t), \quad t \in \Delta_j, \quad 1 \le j \le r \\
-				\text{линейная на } \Delta_j, \quad r + 1 \le j \le n \\
-				\text{если } [a, t_1] = \Delta_j, \quad r + 1 \le j \le n, \text{ то } h(a) \define 0 \\
-				\text{если } [t_{n - 1}, b] = \Delta_j, \quad r + 1 \le j \le n, \text{ то } h(b) \define 0
+				\operatorname{sign} \phi(t), \quad t \in \Delta_j, \quad 1 \le j \le r, \\
+				\text{линейная на } \Delta_j, \quad r + 1 \le j \le n. \\
 			\end{cases} $$
+			Если $ [a, t_1] $ "--- отрезок второго сорта, то $ h(a) \coloneq 0 $.
+			Аналогично для $ [t_{n - 1}, b] $.
 			$$ h(t) \in \mathcal C[a, b], \quad \|h\|_\infty \le 1, \quad
 			f(t) \cdot \phi(t) = |\phi(t)|, \quad
 			t \in \Delta_j, \quad 1 \le j \le r $$
@@ -576,7 +579,7 @@
 \begin{theorem}
 	$ (X, \|\cdot\|), ~ (Y, \|\cdot\|), \quad A : X \to Y $
 
-	$ A $ "--- линейный изоморфизм тогда и только тогда, когда
+	$ A $ "--- линейный изоморфизм \emph{тогда и только тогда}, когда
 	\begin{enumerate}
 		\item $ A \in \mathscr Lin(X, Y) $;
 		\item $ A(X) = Y $ ($ A $ "--- сюръекция);
@@ -710,7 +713,7 @@
 	e_j = (0, \dots, 0, \underset j 1, 0, \dots, 0) $ "--- базис в $ l_n^2 $.
 
 	Определим $ A : l_n^2 \to X : \quad Ae_j = f_j $.
-	$$ A \Bigl( \sum_{j = 1}^n c_je_j \Bigr) \define \sum_{j = 1}^n c_jf_j \implies
+	$$ A \Bigl( \sum_{j = 1}^n c_je_j \Bigr) = \sum_{j = 1}^n c_jf_j \implies
 	A \in \mathscr Lin(l_n^2, X) $$
 	Понятно, что $ A $ "--- биекция.
 	\begin{itemize}
@@ -776,9 +779,8 @@
 
 	Пусть $ l_n^2 \overarr A X \overarr U Y, \quad A $ "--- линейный изоморфизм.
 	Положим $ T = UA $.
-	$$ \implies T \in \mathscr Lin(l_n^2, Y) = \mathrm B(l_n^2, Y) \implies
-	T \in \mathscr B(l_n^2, Y) $$
-	$$ U = TA^{-1} \implies U \in \mathscr B(X, Y) $$
+	$$ T \in \mathscr Lin(l_n^2, Y) = \mathscr B(l_n^2, Y) \underimp{U = TA^{-1}}
+	U \in \mathscr B(X, Y) $$
 \end{iproof}
 
 \begin{implication}
@@ -799,17 +801,16 @@
 \end{definition}
 
 \begin{theorem}
-	$ (X, \|\cdot\|) $
+	$ (X, \|\cdot\|), \quad L $ "--- конечномерное подпространство $ X $ в алгебраическом смысле
 	\begin{enumerate}
-		\item $ L \sub X $ "--- конечномерное подпространство в алгебраическом смысле
-			$ \implies L $ замкнуто;
+		\item $ L $ замкнуто;
 		\item $ a \in X \implies $ в $ L $ существует элемент наилучшего приближения.
 	\end{enumerate}
 \end{theorem}
 
 \begin{eproof}
 \item $ \dim L < +\infty \implies L $ "--- банахово $ \implies L $ замкнуто.
-\item $ a \in X, \quad f = \rho(a, L) = \inf\|a - y\| $
+\item $ a \in X, \quad d \coloneq \rho(a, L) = \inf\|a - y\| $
 	$$ \exists \set{y_n}_{n = 1}^\infty : \quad d \le \|a - y_n\| \le d + \frac1n $$
 	Проверим, что $ \set{y_n} $ ограничена:
 	$$ \|y_n\| \trile \|a\| + \|y_n - a\| \le \|a\| + d + 1 $$
@@ -839,13 +840,14 @@
 
 \begin{proof}
 	Возьмём $ z \in X \setminus L $.
-	$$ \rho(z, L) = d > 0 \quad \text{ (\as $ L = \ol L $)} $$
-	$$ \rho(z, L) = \inf\limits_{y \in L} \|z - y\| $$
+	$$ \rho(z, L) = \inf\limits_{y \in L} \|z - y\| \eqqcolon d > 0 \quad
+	\text{ (\as $ L = \ol L $)} $$
 	$$ \exists y \in L : \quad d \le \|z - y\| < \frac d{1 - \eps} $$
-	Выберем $ x_0 = \frac{z - y}{\|z - y\|} $.
+	$$ x_0 \coloneq \frac{z - y}{\|z - y\|} $$
+
 	Возьмём $ u \in L $.
 	$$ \|x_0 - u\| = \Bigl\| \frac{z - y}{\|z - y\|} - u \Bigr\| =
-	\frac{\bigl\|z - y - u \cdot \|z - y\| \bigr\|}{\|z - y\|} \ge
+	\frac{\bigl\|z - \overbrace{y - u \cdot \|z - y\|}^{\in L} \bigr\|}{\|z - y\|} \ge
 	\frac d {\frac d {1 - \eps}} = 1 - \eps $$
 \end{proof}
 
@@ -908,7 +910,7 @@
 		\|y_{n + 1} - y_m\| > \frac12 \quad \forall m \ne (n + 1)
 	\end{cases} $$
 	Значит, не существует фундаментальной подпоследовательности $ \set{y_{n_j}} $.
-	Значит, $ \not\exists \lim\limits_{j \to \infty} y_n $.
+	Это \textbf{противоречит} секвенциальной компактности $ \mathtt B $.
 \end{iproof}
 
 \section{Продолжение линейного оператора со всюду плотного множества}
@@ -1015,10 +1017,8 @@
 \begin{eproof}
 \item
 	\begin{itemize}
-		\item $ \|\ol x\| = 0 \implies \rho(x, Y) = 0 $
-
-			$ Y $ замкнуто $ \implies $ расстояние может быть равно нулю только при $ x \in Y \implies
-			\ol x = \ol\On $
+		\item $ \|\ol x\| = 0 \implies \rho(x, Y) = 0 \underimp{Y \text{ замкнуто}} x \in Y
+			\implies \ol x = \ol 0 $
 		\item $ \alpha \in \Co, \quad \alpha \ol x = \ol{\alpha x} $
 			$$ \|\ol{\alpha x}\| = \inf\limits_{x \in X}\|\alpha x\| =
 			|\alpha| \cdot \inf\limits_{x \in \ol x}\|x\| =
@@ -1160,7 +1160,7 @@
 	$$ (f, g) = \int\limits_T f(x) \ol{g(x)} \di \mu $$
 	$$ \|f\|^2 = (f, f) $$
 \item $ \mathcal C_\Co[a, b], \quad f : [a, b] \to \Co $
-	$$ (f, g) = \sum_a^b f(x) \ol{g(x)} \di x $$
+	$$ (f, g) = \int^b f(x) \ol{g(x)} \di x $$
 	$$ \|f\| = \Bigl( \int_a^b |f(x)|^2 \di x \Bigr)^{\frac12} $$
 	$ \bigl( \mathcal C[a, b], \|\cdot\|_2 \bigr) $ не полно $ \implies $ оно предгильбертово.
 	Его пополнение до гильбертова "--- $ L^2([a, b], \lambda) $.
@@ -1179,7 +1179,7 @@
 	$$ (f, g) = \sum_{n = 0}^\infty a_n\ol{b_n}, \quad \|f\|_{H^2} = \|\set{a_n}\|_2 =
 	\Bigl( \sum_{n = 0}^\infty |a_n|^2 \Bigr)^{\frac12} $$
 	$ H^2 $ "--- гильбертово.
-	$$ \set{a_n}_{n = 0}^\infty \in l^2 = \lim\limits_{n \to \infty} a_n = 0 \implies
+	$$ \set{a_n}_{n = 0}^\infty \in l^2 \implies \lim\limits_{n \to \infty} a_n = 0 \implies
 	\ulim\limits_{n \to \infty} \sqrt[n]{|a_n|} \le 1 $$
 	Радиус сходимости $ R = \frac1{\ulim \sqrt[n]{|a_n|}} \ge 1 \implies
 	f $ аналитична в $ \set{z | {} |z| < 1} $.
@@ -1232,7 +1232,7 @@
 \begin{lemma}
 	$ M $ "--- замкнутое подпространство $ H, \quad
 	u, v \in M, \quad x \in H \setminus M, \quad
-	d = \rho(x, M) = \inf\limits_{z \in M} \|x - z\| $
+	d = \rho(x, M) $
 	$$ \|u - v\|^2 \le 2 \bigl( \|u - x\|^2 + \|v - x\|^2 \bigr) - 4d^2 $$
 \end{lemma}
 
@@ -1251,8 +1251,7 @@
 	$ H $ "--- гильбертово, $ \quad M $ "--- замкнутое подпространство, $ \quad
 	x \in H $
 
-	$$ \exists ! y \in M : \quad \rho(x, M) = \|x - y\|, $$
-	\ie $ y $ "--- элемент наилучшего приближения для $ H $.
+	$$ \exists ! y \in M : \quad \rho(x, M) = \|x - y\| $$
 \end{theorem}
 
 \begin{iproof}
@@ -1262,18 +1261,21 @@
 	$$ \exists \set{y_n \in M}_{n = 1}^\infty : \quad \lim\limits_{n \to \infty} \|x - y_n\| = d $$
 	Проверим, что $ \set{y_n} $ фундаментальна.
 	Применим лемму.
-	$$ \|y_n - y_m\|^2 \le 2 \bigl( \underbrace{\|y_n - x\|^2}_{\underarr{n \to \infty} d^2}
-	+ \underbrace{\|y_m - x\|^2}_{\underarr{m \to \infty} d^2} \bigr)
+	$$ \|y_n - y_m\|^2 \le 2 \bigl( \underbrace{\|y_n - x\|^2}_{\to d^2}
+	+ \underbrace{\|y_m - x\|^2}_{\to d^2} \bigr)
 	- 4d^2 \underarr{n, m \to \infty} 0 $$
-	$ \implies \set{y_n} $ фундаментальна, $ M $ замкнуто $ \implies M $ полно $ \implies
-	\exists y \in M : \quad \lim\limits_{n \to \infty} y_n = y \implies
-	\underbrace{\lim\|x - y_n\|}_{d} = \|x - y\| \implies
-	\|x - y\| = d $
+	\begin{multline*}
+		\implies \Set{y_n} \text{ фундаментальна } \underimp{M \text{ замкнуто } \implies M
+		\text{ полно}}
+		\exists y \in M : \quad \lim\limits_{n \to \infty} y_n = y \implies \\
+		\implies \underbrace{\lim\|x - y_n\|}_{d} = \|x - y\| \implies
+		\|x - y\| = d
+	\end{multline*}
 \item Единственность
 
 	Пусть $ \|x - y\| = d, \quad \|x - z\| = d $.
 	По лемме
-	$$ \|y - z\|^2 = 2 \bigl( \|y - x\|^2 + \|z - x\|^2 \bigr) - 4d^2 = 0 \implies y = z $$
+	$$ \|y - z\|^2 \le 2 \bigl( \|y - x\|^2 + \|z - x\|^2 \bigr) - 4d^2 = 0 \implies y = z $$
 \end{iproof}
 
 \begin{theorem}
@@ -1317,7 +1319,7 @@
 	$$ \operatorname{Im}(z, u) = 0 $$
 \item Единственность
 	$$ x = y + z, ~ x = y_1 + z_1, \quad y, y_1 \in M, ~ z, z_1 \in M^\perp $$
-	$$ u = y - y_1 \implies u = z_1 - z $$
+	$$ u \coloneq y - y_1 \implies u = z_1 - z $$
 	$$ \implies u \in M \text{ и } u \in M^\perp \text{ "--- \contra } \implies u = 0 $$
 \end{iproof}
 
@@ -1327,7 +1329,7 @@
 	Будем говорить, что $ H $ "--- \emph{ортогональная сумма} ($ H = X \oplus Y $), если
 	\begin{enumerate}
 		\item $ \forall h \in H \quad \exists x \in X, ~ y \in Y : \quad h = x + y $;
-		\item $ \forall x \in X, ~ y \in Y \quad (x, y) = 0 $.
+		\item $ \forall x \in X, ~ y \in Y \quad x \perp y $.
 	\end{enumerate}
 \end{definition}
 
@@ -1402,7 +1404,7 @@
 
 			Возьмём $ \alpha \in \Co $.
 			$$ \alpha x = \alpha y + \alpha z, \quad \alpha y \in M, ~ \alpha z \in M^\perp $$
-			Значит, разложение единственно.
+			Разложение единственно.
 			$$ \implies P(\alpha x) = \alpha y = \alpha P(x) $$
 
 			Возьмём $ w \in H $
@@ -1416,7 +1418,7 @@
 			\|Px\|^2 \le \|x\|^2 \implies \|Px\| \le \|x\| \quad \forall x \in H $$
 			$$ P \in \mathscr B(H), \quad \|P\| \le 1 $$
 			$$ M \ne \set{0} \implies \exists x \ne 0 \in M : \quad \|P\| =
-			\sup\limits_{u \ne 0 \in H} \frac{\|Pu\|}{\|u\|} \ge \frac{\|Px\|}{\|x\|} = 1 \implies
+			\sup\limits_{u \ne 0} \frac{\|Pu\|}{\|u\|} \ge \frac{\|Px\|}{\|x\|} = 1 \implies
 			\|P\| = 1 $$
 		\item $ P^2 = P $
 
@@ -1505,7 +1507,7 @@
 	Запишем теорему Пифагора:
 	$$ \Bigl\| \sum_{j = 1}^n \alpha_j e_j \Bigr\|^2 =
 	\Bigl( \sum_{j = 1}^n \alpha_j e_j, \sum_{k = 1}^n \alpha_k e_k \Bigr) \undereq{e_j \perp e_k}
-	\sum_{j = 1}^k |\alpha_j|^2 $$
+	\sum_{j = 1}^n |\alpha_j|^2 $$
 
 	Пусть $ L_n = \mathscr L \set{e_j}_{j = 1}^\infty $
 	$$ P_{L_n}x = \sum_{j = 1}^n (x, e_j)e_j \implies

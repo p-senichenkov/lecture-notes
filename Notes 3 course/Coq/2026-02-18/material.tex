@@ -1,0 +1,183 @@
+\chapter{Введение}
+
+Семантика ЯП = ``смысл программы''
+
+В Паскале есть два вида циклов:
+
+\begin{figure}[h]
+	\centering
+	\begin{subfigure}{.49\textwidth}
+		\begin{minted}{Pascal}
+			while E do S
+		\end{minted}
+	\end{subfigure}
+	\begin{subfigure}{.49\textwidth}
+		\begin{minted}{Pascal}
+			for i := L to U do S
+		\end{minted}
+	\end{subfigure}
+\end{figure}
+
+Хотим спроецировать for в while.
+
+\begin{minted}{Pascal}
+	i := L;
+	while [i >= L] & i <= U do begin
+		S;
+		i := i + 1;
+	end
+\end{minted}
+
+Условие в квадратных скобках не является необходимым, и, более того, неверно.
+
+Предположим, написан такой код:
+
+\begin{minted}{Pascal}
+	function lwb(n: integer) integer
+	begin
+		print('lwb=', n);
+		lwb := n;
+	end
+
+	for i := lwb(3) to upb(5) do ...
+\end{minted}
+
+Получается, наша проекция неверна: нижняя и верхняя границы вычисляются несколько раз, а каждое
+такое вычисление может иметь побочный эффект.
+Нужно так:
+
+\begin{minted}{Pascal}
+	i := L;
+	u := U;
+	while i <= u do begin
+		S;
+		i := i + 1;
+	end
+\end{minted}
+
+Кроме того, в Паскале цикл со счётчикам можно делать не только по целым числам, а по любым
+упорядоченным типам.
+Это: целые числа, bool, enum и интервалы.
+
+\begin{minted}{Pascal}
+	i := L;
+	u := U;
+	while i <= u do begin
+		S;
+		i := succ(i);
+	end
+\end{minted}
+
+При этом, succ(i) не определён для верхней границы (например, интервала, или true), поэтому
+использовать его так нельзя.
+
+\section{Основные понятия}
+
+\begin{definition}
+	\emph{Язык программирования} "--- это множество (представлений) программ.
+\end{definition}
+
+\begin{notation}
+	$ \mathscr L $
+\end{notation}
+
+\begin{definition}
+	$ R $ "--- бинарное отношение.
+
+	$$ \pi_1 R = \Set{x | \exists y : x R y} $$
+\end{definition}
+
+\begin{definition}
+	\emph{Семантика} языка программирования "--- это отношение
+	$ \llbracket \cdot \rrbracket \subseteq \mathscr L
+	\times D $.
+	При этом, $ \pi_1 \llbracket \cdot \rrbracket = \mathscr L $, то есть
+	$$ \forall p \in \mathscr L \quad \exists d \in D : \quad (p, d) \in \llbracket\cdot\rrbracket $$
+
+	$ D $ "--- \emph{семантический домен}.
+\end{definition}
+
+\begin{definition}
+	\emph{Детерминизм}
+
+	$$ \forall p, d_1, d_2 : \quad
+	\begin{rcases}
+		(p, d) \in \llbracket\cdot\rrbracket, \\
+		(p, d_2) \in \llbracket\cdot\rrbracket
+	\end{rcases} \implies d_1 = d_2 $$
+
+	То есть, $ \llbracket\cdot\rrbracket $ является функцией.
+\end{definition}
+
+\begin{definition}
+	Если семантика детерминирована, то определим отношение \emph{эквивалентности программ}:
+	$$ p_1 \sim p_2 \iff \llbracket p_1\rrbracket = \llbracket p_2\rrbracket $$
+\end{definition}
+
+Далее будем рассматривать только детерминированные семантики.
+
+\begin{definition}
+	\emph{Трансформация} $ \tau : \mathscr L \mapsto \mathscr L $ (значок $ \mapsto $ означает, что
+	функция всюду определена).
+
+	$ \tau $ корректна $ \iff \forall p \quad \llbracket\tau p\rrbracket = \llbracket p\rrbracket $.
+\end{definition}
+
+\begin{definition}
+	$ \mathscr L, \mathscr D, \quad \llbracket\cdot\rrbracket_1 : \mathscr L \mapsto \mathscr D, \quad
+	\llbracket\cdot\rrbracket_2 : \mathscr \mapsto \mathscr D $
+
+	\emph{Эквивалентность семантик}:
+	$$ \llbracket\cdot\rrbracket_1 \sim \llbracket\cdot\rrbracket_2 \iff
+	\forall p \quad \llbracket p\rrbracket_1 = \llbracket p\rrbracket_2 $$
+\end{definition}
+
+\begin{definition}
+	$ \mathscr L, \mathscr M, \quad \llbracket\cdot\rrbracket_{\mathscr L} : \mathscr L \mapsto \mathscr D, \quad
+	\llbracket\cdot\rrbracket_{\mathscr M} : \mathscr M \mapsto \mathscr D $
+
+	\TODO{Определение трансляции}
+\end{definition}
+
+\section{Язык выражений}
+
+$ X = \Set{x, y, z, \dotsc} $ "--- счётно-бесконечное множество переменных.
+$$ \bigotimes = \Set{+, -, *, /, \%, <, \le, >, \ge, =, \ne, \&, \vee} $$
+Эти два множества определяют \emph{абстрактный синтаксис}.
+
+$$
+\begin{matrix}
+	\mathscr E = & X \\
+				 & \N \\
+				 & \mathscr E \times \mathscr E
+\end{matrix} $$
+
+$ \mathscr E $ "--- множество упорядоченных по вложению деревьев.
+
+\subsection*{Пример семантики}
+
+$$ D = \Z \cup \Set{\bot} \eqqcolon \Z_\bot $$
+$ \bot $ "--- это \emph{неопределённость}.
+Говорят, что $ \Z_\bot $ \emph{поднято над неопределённостью}.
+
+\TODO{Some strange warning with llbracket}
+\TODO{Make shorthand for llbracket}
+$$ \llbracket \cdot \rrbracket : \mathscr E \mapsto \Z_\bot $$
+$$
+\begin{cases}
+	\llbracket \circled{x} \rrbracket = \bot, \\
+	\llbracket \circled{x} \rrbracket = n, \\
+	\llbracket e \otimes r \rrbracket = \llbracket e \rrbracket \oplus \llbracket r \rrbracket
+\end{cases} $$
+
+$$
+\begin{cases}
+	\bot \oplus \_ = \bot, \\
+	\_ \oplus \_ = \bot
+\end{cases} $$
+
+Есть огромная таблица соотношений между вентилем ($ \oplus $) и лампочкой ($ \otimes $).
+Смысл в том, что вентиль ``применяет'' операцию, записанную в лампочке (и возвращает $ \bot $, если
+она не определена).
+
+Верно ли, что $ \forall e_1, e_2 \quad e_1 + e_2 \sim e_2 + e_1 $?

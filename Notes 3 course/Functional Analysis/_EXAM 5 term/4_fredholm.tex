@@ -26,26 +26,9 @@ $$ \lambda \in \Co \ne 0, \quad V(\lambda) = \lambda I - T = \lambda \Bigl( I - 
 $$ \frac1\lambda \in \mathrm{Com}(H) \implies I - \frac1\lambda T \text{ "--- оператор Фредгольма} $$
 Значит, свойства $ S $ можно будет распространить на $ V(\lambda) $.
 
-\begin{theorem}
-	$ H $ "--- гильбертово, $ \quad T \in \mathrm{Com}(H), \quad S = I - T $
-
-	\begin{enumerate}
-		\item $ S(H) $ замкнуто;
-		\item $ S^*(H) $ замкнуто;
-		\item $ H = S(H) \oplus \operatorname{Ker} S^* $;
-		\item $ H = S^*(H) \oplus \operatorname{Ker}S $.
-	\end{enumerate}
-\end{theorem}
-
-\begin{remark}
-	3. и 4. эквивалентны тому, что
-
-	Уравнение $ Sx = a $ разрешимо \textbf{для тех и только тех} $ a $, которые
-	ортогональны решениям однородного сопряжённого уравнения Фредгольма $ S^*y = 0 $.
-\end{remark}
-
 \begin{lemma}[об ограниченных проообразах]
-	В условиях теоремы $ \Set{y_n \in S(H)}_{n = 1}^\infty $ ограничена
+	$ H $ "--- гильбертово, $ \quad T \in \mathrm{Com}(H), \quad S = I - T, $ \\
+	$ \Set{y_n \in S(H)}_{n = 1}^\infty $ ограничена
 
 	$$ \exists \Set{x_n}_{n = 1}^\infty : \quad \Set{x_n} \text{ ограничена}, \quad
 	Sx_n = y_n $$
@@ -84,27 +67,41 @@ $$ \frac1\lambda \in \mathrm{Com}(H) \implies I - \frac1\lambda T \text{ "--- о
 	При этом, $ z_0 \in L \cap M \implies z_0 = 0 $ "--- \contra.
 \end{proof}
 
-\begin{replacementproof}[теоремы]
-	\hfill
+\begin{theorem}
+	$ H $ "--- гильбертово, $ \quad T \in \mathrm{Com}(H), \quad S = I - T $
+
 	\begin{enumerate}
-		\item 	Докажем, что $ S(H) $ замкнуто.
-			Возьмём $ \Set{y_n \in S(H)}_{n = 1}^\infty : \quad
-			\exists \lim\limits_{n \to \infty} y_n = y_0 $.
-			$$ \exists \lim y_n \implies \Set{y_n} \text{ ограничена } \underimp{\text{лемма}}
-			\exists \Set{x_n \in H} : \quad \Set{x_n} \text{ ограничена}, \quad Sx_n = y_n $$
-			$$ T \in \mathrm{Com}(H) \implies \exists \Set{n_k} : \quad \lim Tx_{n_k} = z_0 $$
-			$$ \underbrace{y_{n_k}}_{\to y_0} = S(x_{n_k}) = x_{n_k} - \underbrace{Tx_{n_k}}_{\to z_0} $$
-			$$ \implies \exists \lim\limits_{k \to \infty} x_{n_k} = x_0
-			\underimp{T \in \mathscr B(H)}
-			\lim T(x_{n_k}) = Tx_0 $$
-			$$ \implies z_0 = Tx_0 \implies y_0 = x_0 - Tx_0 = S(x_0) \implies y_0 \in S(H) $$
-		\item $ S^* = I - T^*, \quad T^* \in \mathrm{Com}(H) \implies S^*(H) $ замкнуто.
-		\item
-			$$ \forall A \in \mathscr B(H) \quad H = \ol{A(H)} \oplus \operatorname{Ker} A^* $$
-			$$ S(H) = \ol{S(H)} \implies H = S(H) \oplus \operatorname{Ker} S^* $$
-		\item Аналогично.
+		\item $ S(H) $ замкнуто;
+		\item $ S^*(H) $ замкнуто;
+		\item $ H = S(H) \oplus \operatorname{Ker} S^* $;
+		\item $ H = S^*(H) \oplus \operatorname{Ker}S $.
 	\end{enumerate}
-\end{replacementproof}
+\end{theorem}
+
+\begin{remark}
+	3. и 4. эквивалентны тому, что
+
+	Уравнение $ Sx = a $ разрешимо \textbf{для тех и только тех} $ a $, которые
+	ортогональны решениям однородного сопряжённого уравнения Фредгольма $ S^*y = 0 $.
+\end{remark}
+
+\begin{eproof}
+\item Возьмём $ \Set{y_n \in S(H)}_{n = 1}^\infty : \quad
+	\exists \lim\limits_{n \to \infty} y_n = y_0 $.
+	$$ \exists \lim y_n \implies \Set{y_n} \text{ ограничена } \underimp{\text{лемма}}
+	\exists \Set{x_n \in H} : \quad \Set{x_n} \text{ ограничена}, \quad Sx_n = y_n $$
+	$$ T \in \mathrm{Com}(H) \implies \exists \Set{n_k} : \quad \exists \lim Tx_{n_k} = z_0 $$
+	$$ \underbrace{y_{n_k}}_{\to y_0} = S(x_{n_k}) = x_{n_k} - \underbrace{Tx_{n_k}}_{\to z_0} $$
+	$$ \implies \exists \lim\limits_{k \to \infty} x_{n_k} = x_0
+	\underimp{T \in \mathscr B(H)}
+	\lim T(x_{n_k}) = Tx_0 $$
+	$$ \implies z_0 = Tx_0 \implies y_0 = x_0 - Tx_0 = S(x_0) \implies y_0 \in S(H) $$
+\item $ S^* = I - T^*, \quad T^* \in \mathrm{Com}(H) \implies S^*(H) $ замкнуто.
+\item
+	$$ \forall A \in \mathscr B(H) \quad H = \ol{A(H)} \oplus \operatorname{Ker} A^* $$
+	$$ S(H) = \ol{S(H)} \implies H = S(H) \oplus \operatorname{Ker} S^* $$
+\item Аналогично.
+\end{eproof}
 
 \section[Альтернатива Фредгольма: инъективность оператора Фредгольма эквивалентна его
 \texorpdfstring{\\}{}
@@ -119,15 +116,13 @@ $$ \frac1\lambda \in \mathrm{Com}(H) \implies I - \frac1\lambda T \text{ "--- о
 \end{lemma}
 
 \begin{proof}
-	\textbf{Допустим}, что $ H_{k + 1} \subseteq H_k $.
-	$$ \implies H_k = H_{k + 1} \oplus
-	\underbrace{H_{k + 1}^\perp}_{\text{ортогональное дополнение в } H_k} $$
+	\textbf{Допустим}, что $ H_{k + 1} \subsetneq H_k $.
+	$$ \implies H_k = H_{k + 1} \oplus H_{k + 1}^\perp \text{ (ортогональное дополнение в $ H_k $)} $$
 	$$ \implies \exists x_k \in H_k : \quad \|x_k\| = 1, \quad x_k \perp H_{k + 1} $$
 
 	Пусть $ n > m $.
 	Хотим оценить разность $ \|Tx_n - Tx_m\| $.
 	$$ Sx_n - Sx_m = x_n - Tx_n - x_m + Tx_m $$
-	$$ Sx_n = x_n - Tx_n $$
 	$$ \|Tx_n - Tx_m\| = \|x_n - Sx_n - x_m + Sx_m\| \ge 1 $$
 	$$ Sx_n \in H_{n + 1}, \quad Sx_m \in H_{m + 1} $$
 	$$ x_n, Sx_n, Sx_m \in H_{m + 1} \implies x_m \perp H_{m + 1} $$
@@ -135,7 +130,7 @@ $$ \frac1\lambda \in \mathrm{Com}(H) \implies I - \frac1\lambda T \text{ "--- о
 	$ T \in \mathrm{Com}(H) $.
 \end{proof}
 
-\begin{theorem}\label{thm:alt_fred}
+\begin{theorem}
 	$ \operatorname{Ker} S = \Set{0} \iff S(H) = H $
 \end{theorem}
 
@@ -193,7 +188,8 @@ $$ \frac1\lambda \in \mathrm{Com}(H) \implies I - \frac1\lambda T \text{ "--- о
 \end{restate}
 
 \begin{proof}
-	Пусть $ \dim \operatorname{Ker} S = n < +\infty $ (уже доказано для банахова пространства).
+	Пусть $ \dim \operatorname{Ker} S = n < +\infty $ (\as это собственное подпространство для
+	компактного оператора)
 	$$ \dim \operatorname{Ker} S^* \eqqcolon m < +\infty $$
 
 	\textbf{Пусть} $ n < m $.
@@ -204,12 +200,13 @@ $$ \frac1\lambda \in \mathrm{Com}(H) \implies I - \frac1\lambda T \text{ "--- о
 
 	Определим $ V : H \to \operatorname{Ker} S^* $:
 	$$ x \in H \quad Vx = \sum_{k = 1}^n (x, e_k) f_k $$
+	В $ \operatorname{Ker} S^* $ мы попадём, так как оно замкнуто относительно линейных комбинаций.
 	$$ V(H) \sub \operatorname{Ker}S^* \implies \dim \bigl( V(H) \bigr) < +\infty \implies
 	V \text{ "--- конечного ранга } \implies V \in \mathrm{Com}(H) $$
 	$$ U \coloneq S + V = I - \underbrace{(T - V)}_{\in \mathrm{Com}(H)} \implies
 	U \text{ "--- оператор Фредгольма} $$
 
-	Для $ U $ верна \autoref{thm:alt_fred}.
+	Для $ U $ верна альтернатива Фредгольма.
 	Проверим, что $ \operatorname{Ker} U = \Set{0} $.
 	Пусть $ x \in \operatorname{Ker} U $.
 	$$ Ux = 0 \implies Sx + Vx = 0 $$
@@ -225,16 +222,18 @@ $$ \frac1\lambda \in \mathrm{Com}(H) \implies I - \frac1\lambda T \text{ "--- о
 	$$ Vx = \sum_{k = 1}^n (x, e_k)  f_k = 0 \implies (x, e_K) = 0 \quad \forall k \implies
 	x \perp \operatorname{Ker} S \underimp{x \in \operatorname{Ker} S} x = 0 $$
 
-	По \autoref{thm:alt_fred} $ U(H) = H $.
+	По альтернативе Фредгольма $ U(H) = H $.
 	Проверим, что это невозможно для $ n + 1 $, \ie что
 	$$ f_{n + 1} \notin U(H) $$
 
 	Возьмём $ x \in H $.
 	$$ Ux = Sx + Vx $$
-	$$ f_{n + 1} \in \operatorname{Ker} S^* \implies f_{n + 1} \perp S(H) \implies
-	f_{n + 1} \perp Sx $$
-	$$ Vx = \sum (x, e_k) f_k \underimp{f_{n + 1} \perp f_k} f_{n + 1} \perp Vx \implies
-	f_{n + 1} \in \bigl( U(H) \bigr)^\perp = \Set{0} \text{ "--- } \contra $$
+	$$
+	\begin{rcases}
+		f_{n + 1} \in \operatorname{Ker} S^* \implies f_{n + 1} \perp S(H) \implies
+		f_{n + 1} \perp Sx \\
+		Vx = \sum (x, e_k) f_k \underimp{f_{n + 1} \perp f_k} f_{n + 1} \perp Vx
+	\end{rcases} \implies f_{n + 1} \in \bigl( U(H) \bigr)^\perp = \Set{0} \text{ "--- } \contra $$
 
 	Тем самым, мы доказали, что
 	$$ \dim \operatorname{Ker} S \ge \dim \operatorname{Ker} S^* \ge \dim \operatorname{Ker} S^{**}
@@ -250,11 +249,9 @@ $$ \frac1\lambda \in \mathrm{Com}(H) \implies I - \frac1\lambda T \text{ "--- о
 			Y_{\ol \lambda} = \operatorname{Ker}(\ol \lambda I - T^*) $
 
 			$$ \dim H_\lambda = \dim Y_{\ol \lambda} < +\infty $$
-		\item
-			$$ \sigma_p(T) \setminus \Set{0} = \Set{\lambda_n}_{n = 1}^N $$
+		\item $ \sigma_p(T) \setminus \Set{0} = \Set{\lambda_n}_{n = 1}^N $
 
-			При этом, если $ N = +\infty $, то
-			$$ \lim\limits_{n \to \infty} \lambda_n = 0 $$
+			При этом, если $ N = +\infty $, то $ \lim\limits_{n \to \infty} \lambda_n = 0 $.
 	\end{enumerate}
 \end{implication}
 
@@ -280,14 +277,14 @@ $$ \frac1\lambda \in \mathrm{Com}(H) \implies I - \frac1\lambda T \text{ "--- о
 		(Tx, x) = (x, Tx)
 	\end{rcases} \implies (x, Tx) \in \R $$
 \item
-	$$ \lambda \in \sigma_p(T) \implies \exists u \ne 0 $$
-	$$ Tu = \lambda u \implies (Tu, u) = (\lambda u, u) \implies
+	$$ \lambda \in \sigma_p(T) \implies \exists u \ne 0 : \quad u = \lambda u \implies
+	(Tu, u) = (\lambda u, u) \implies
 	\lambda = \frac{(Tu, u)}{\|u\|^2} \in \R $$
 \item $ Tu = \lambda u, \quad Tv = \mu v, \quad \lambda \ne \mu, \quad u, v \ne 0 $
 	$$
 	\begin{rcases}
 		(Tu, v) = (\lambda u, v) = \lambda (u, v) \\
-		(Tu, v) = (u, Tv) = (u, \mu v) \undereq{\mu \in \R} \mu (u, v)
+		(Tu, v) = (u, Tv) = (u, \mu v) = \mu (u, v)
 	\end{rcases} \underimp{\text{вычтем}} \underbrace{(\lambda - \mu)}_{\ne 0}(u, v) = 0 \implies
 	u \perp v $$
 \item $ Q = \sup\limits_{\|x\| = 1}|(Tx, x)| $
@@ -360,7 +357,7 @@ $$ \frac1\lambda \in \mathrm{Com}(H) \implies I - \frac1\lambda T \text{ "--- о
 	Проверим, что $ y $ "--- с. в. $ T $ и $ Ty = My $.
 	\begin{multline*}
 		0 \le \|Tx_n - M \cdot x_n \|^2 = (Tx_n - Mx_n, Tx_n - Mx_n) = \\
-		= \|Tx_n\|^2 - \underbrace{M(Tx_n, x_n)}_{\to M} - \underbrace{M(x_n, Tx_n)}_{\to M} +
+		= \|Tx_n\|^2 - M \underbrace{(Tx_n, x_n)}_{\to M} - M \underbrace{(x_n, Tx_n)}_{\to M} +
 		M^2 \underbrace{\|x_n\|^2}_{= 1} \underarr{n \to \infty} \|y\|^2 - M^2 \implies
 		\|y\| \ge M
 	\end{multline*}
@@ -369,7 +366,7 @@ $$ \frac1\lambda \in \mathrm{Com}(H) \implies I - \frac1\lambda T \text{ "--- о
 
 	Воспользуемся тем, что $ T $ непрерывен:
 	$$ M \cdot \lim x_n = y \implies M \underbrace{\lim Tx_n}_{= y} = Ty \implies
-	Ty = My, \implies M \in \sigma_p(T), \quad M = \|T\| $$
+	Ty = My \implies M \in \sigma_p(T) $$
 
 \item $ \|T\| = |m| $
 
@@ -383,9 +380,9 @@ $$ \frac1\lambda \in \mathrm{Com}(H) \implies I - \frac1\lambda T \text{ "--- о
 
 \begin{theorem}
 	$ H $ "--- гильбертово, $ \quad T = T^*, \quad T \in \mathrm{Com}(H),
-	\quad \sigma (T) \setminus \Set{0} = \Set{\lambda_n}_{n = 1}^{0 \le N \le +\infty}, $ \\
+	\quad \sigma (T) \setminus \Set{0} = \Set{\lambda_n}_{n = 1}^{0 \le N \le +\infty} $ \\
 	$ \lambda_n \in \sigma_p(T), \quad H_{\lambda_n} = \operatorname{Ker}(\lambda_n I - T),
-	\quad \dim H_{\lambda_n} < +\infty, \quad P_n $ "--- ортогональный проектор на $ H_{\lambda_n} $
+	\quad P_n $ "--- ортогональный проектор на $ H_{\lambda_n} $
 
 	$$ \implies T = \sum_{k = 1}^N \lambda_k P_k $$
 
@@ -395,10 +392,10 @@ $$ \frac1\lambda \in \mathrm{Com}(H) \implies I - \frac1\lambda T \text{ "--- о
 
 \begin{proof}
 	Возьмём $ \lambda \ne 0 $ из $ \sigma_p $.
-	Рассмотрим $ \vawe T = T - \lambda P_\lambda $ ($ P_\lambda $ "--- ортогональный проектор на
-	собственное подпространство $ H_\lambda $).
+	Рассмотрим $ \vawe T = T - \lambda P_\lambda $
 	$$ L \coloneq H_\lambda^\perp $$
-	$$ \vawe T\bigr|_{H_\lambda} = 0 \implies H_\lambda \in \operatorname{Ker} \vawe T $$
+	$$ \vawe T\bigr|_{H_\lambda} = 0 \implies H_\lambda \sub \operatorname{Ker} \vawe T $$
+	$$ \vawe T \bigr|_L = T \bigl|_L $$
 	$$ T^* = T \implies (\vawe T)^* = \vawe T $$
 	При этом, компактность сохраняется: $ \vawe T \in \mathrm{Com}(H) $.
 
@@ -450,28 +447,29 @@ $$ \frac1\lambda \in \mathrm{Com}(H) \implies I - \frac1\lambda T \text{ "--- о
 
 \begin{proof}
 	$$ \sigma_p(T) \setminus \Set{0} = \Set{\lambda_n}_{n = 1}^N, \quad
-	|\lambda_1| \ge |\lambda_2| \ge \dots $$
+	|\lambda_1| \ge |\lambda_2| \ge \dotsb $$
 
-	Если $ N = \infty $, то $ \lim\limits_{n \to \infty} \lambda_n = 0, \quad 0 \le N \le +\infty $.
+	Если $ N = \infty $, то $ \lim\limits_{n \to \infty} \lambda_n = 0 $.
 	$$ H_n = \operatorname{Ker}(\lambda_n I - T) $$
 	$$ \dim H_n = m_n, \quad 1 \le n < +\infty $$
 
-	Пусть $ \Set{e_{n~j}}_{j = 1}^N $ "--- ОНБ в $ H_n $.
-	$$ L \coloneq \mathscr L\Set{e_{n~j}}_{n = 1}^N, \quad 1 \le j \le m_n $$
+	Пусть $ \Set{e_{n\,j}}_{j = 1}^N $ "--- ОНБ в $ H_n $.
+	$$ L \coloneq \mathscr L\Set{e_{n\,j}}_{n = 1}^N, \quad 1 \le j \le m_n $$
 	$$ M \coloneq L^\perp, \quad H = L \oplus M $$
 
 	Проверим, что $ M = \operatorname{Ker} T $.
-	$$ H_0 \coloneq \operatorname{Ker}(0 \cdot I - T) = \operatorname{Ker} T =
-	H_0 \perp H_{\lambda_n} \quad \forall n \ge 1 $$
-	$$ x \in H_0 \implies x \in M, \quad \operatorname{Ker}T \sub M $$
+	$$ H_0 \coloneq \operatorname{Ker}(0 \cdot I - T) = \operatorname{Ker} T
+	\perp H_{\lambda_n} \quad \forall n \ge 1 $$
 	($ H_\lambda $ все друг другу ортогональны; ноль "--- частный случай)
+	$$ x \in H_0 \implies x \in M, \quad \operatorname{Ker}T \sub M $$
 
 	Возьмём $ z \in M $.
-	$$ z \perp H_{\lambda_n} \quad \forall n \ge 1 \implies P_z = 0 \underimp{\text{т. Г."--~Ш. о
+	$$ z \perp H_{\lambda_n} \quad \forall n \ge 1 \implies P_{H_\lambda} z = 0
+	\underimp{\text{т. Г."--~Ш. о
 	предст. опер.}} Tz = \sum_{n = 1}^\infty \lambda_n P_H = 0 \implies
 	z \in \operatorname{Ker} T $$
 	$$ H \text{ сепарабельно } \implies H_0 \text{ сепарабельно } \implies
-	\exists \Set{e_{0~j}}_{n = 0, ~ 1 \le j \le m_n}^N \text{ "--- ОНБ в } H $$
+	\exists \Set{e_{0~j}}_{1 \le j \le m_n} \text{ "--- ОНБ в } H $$
 \end{proof}
 
 \begin{remark}
@@ -501,16 +499,17 @@ $$ \frac1\lambda \in \mathrm{Com}(H) \implies I - \frac1\lambda T \text{ "--- о
 	Пусть $ \Set{\phi_n(x)}_{n = 1}^\infty $ "--- ОНБ в $ \mathrm L^2(X, \mu), \quad
 	\Set{\psi_j(y)}_{j = 1}^\infty $ "--- ОНБ в $ \mathrm L^2(Y, \nu) $.
 
-	Проверим, что $ \Set{\phi_n(x), \psi_j(y)}_{n, j \in \N} $ "--- ОНБ в $ \mathrm L^2(X, Y) $.
+	Проверим, что $ \Set{\phi_n(x), \psi_j(y)}_{n, j \in \N} $ "--- ОНБ в
+	$ \mathrm L^2(X \times Y) $.
 	$$ \int\limits_X \phi_n(x) \ol{\phi_m(x)} \di \mu =
 	\begin{cases}
 		1, \quad n = m, \\
 		0, \quad n \ne m,
 	\end{cases} \quad
-	\int\limits_Y \psi_i(y) \psi_k(y) \di \nu =
+	\int\limits_Y \psi_i(y) \ol{\psi_k(y)} \di \nu =
 	\begin{cases}
-		0 \quad j \ne k, \\
-		1, \quad j = k.
+		1, \quad j = k, \\
+		0 \quad j \ne k.
 	\end{cases} $$
 	\begin{itemize}
 		\item Проверим ортогональность
@@ -532,23 +531,19 @@ $$ \frac1\lambda \in \mathrm{Com}(H) \implies I - \frac1\lambda T \text{ "--- о
 			\quad \forall n, k $$
 
 			Зафиксируем $ n $.
-			$$ \int\limits_Y \Bigl( \int\limits_X f(x, y) \ol{\phi_n(x)} \di \mu \Bigr)
-			\ol{\psi_k(y)} \di \nu = 0 $$
 			\begin{multline*}
-				\int\limits_X f(x, y) \ol\phi_n \di \mu \perp \psi_k(y) \quad \forall k \implies
-				\int\limits_X f(x, y) \ol \phi_n \di \mu = 0 \text{ \ale по } \nu \implies \\
-				\implies f(x, y) = 0 \text{ \ale по } \mu \implies
-				f = \On \text{ в } \mathrm L^2(X \times Y), \quad
+				\int\limits_Y \Bigl( \int\limits_X f(x, y) \ol{\phi_n(x)} \di \mu \Bigr)
+				\ol{\psi_k(y)} \di \nu = 0 \implies
+				\int\limits_X f(x, y) \ol\phi_n \di \mu \perp \psi_k(y) \quad \forall k \implies \\
+				\implies \int\limits_X f(x, y) \ol \phi_n \di \mu = 0 \text{ \ale по } \nu \implies
+				f(x, y) = 0 \text{ \ale по } \mu \implies \\
+				\implies f = \On \text{ в } \mathrm L^2(X \times Y), \quad
 				K(x, y) = \sum_{1 \le i, j < +\infty} \alpha_{ij}\phi_i(x) \psi_j(y)
 			\end{multline*}
 	\end{itemize}
 
 	Рассмотрим частичные суммы:
-	$$ K_n(x, y) = \sum_{
-		\begin{subarray}{c}
-			1 \le j \le n \\
-			1 \le i \le n
-	\end{subarray}} \alpha_{ij} \phi_i(x) \psi_i(y) $$
+	$$ K_n(x, y) = \sum_{1 \le i,j \le n} \alpha_{ij} \phi_i(x) \psi_i(y) $$
 	$$ \lim \|K(x, y) - K_n(x, y)\| = 0 $$
 
 	Уже доказано, что
@@ -557,10 +552,7 @@ $$ \frac1\lambda \in \mathrm{Com}(H) \implies I - \frac1\lambda T \text{ "--- о
 
 	Возьмём $ f \in \mathrm L^2(Y, \nu) $.
 	$$ (\mathscr K_n f) = \int\limits_Y K_n(x, y) f(y) \di \nu =
-	\sum_{\begin{subarray}{c}
-		1 \le i \le n \\
-		1 \le j \le n
-	\end{subarray}} \alpha_{ij}\phi_i(x) \int\limits_Y f(y) \psi_j(y) \di \nu $$
+	\sum_{1 \le i, j \le n} \alpha_{ij}\phi_i(x) \int\limits_Y f(y) \psi_j(y) \di \nu $$
 	$$ L_n \coloneq \mathscr L\Set{\phi_j}_{j = 1}^n, \quad \dim L_n = n, \quad
 	\mathscr K_n(f) \in L_n $$
 	Значит, $ \mathscr K_n $ "--- оператор конечного ранга.

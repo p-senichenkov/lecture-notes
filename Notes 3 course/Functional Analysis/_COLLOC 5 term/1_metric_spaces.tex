@@ -192,7 +192,7 @@
 	$$ \lambda \in K, \quad \|\lambda f\|_\infty = \sup\limits_{x \in X}|\lambda f(x)| = |\lambda| \sup\limits_{x \in X} |f(x)| = |\lambda| \cdot \|f\|_\infty $$
 	Пусть $ f, g \in m(X), ~ x $ фиксирован.
 	Тогда $ f(x), g(x) $ "--- числа.
-	$$ \|f\|_\infty + \|g\|_\infty \ge \implies |f(x)| + |g(x)| \trige |f(x) + g(x)| \quad \forall x \in X $$
+	$$ \|f\|_\infty + \|g\|_\infty \ge |f(x)| + |g(x)| \trige |f(x) + g(x)| $$
 	В силу произвольности $ x $,
 	$$ \implies \|f\|_\infty + \|g\|_\infty \ge
 	\sup\limits_{x \in X} |f(x) + g(x)| = \|f + g\|_\infty $$
@@ -203,9 +203,8 @@
 	\|f_n - f_m\|_\infty < \eps $$
 	Зафиксируем $ x \in X $.
 	$$ \implies |f_n(x) - f_m(x)| < \eps $$
-	Из полноты $ K $ следует, что $ \exists \lim\limits_{n \to \infty} f_n(x) $.
-
-	Обозначим $ f(x) \coloneq \lim\limits_{n \to \infty} f_n(x) $ (поточечный).
+	Из полноты $ \mathbb K $ следует, что существует поточечный предел $ \lim\limits_{n \to \infty}
+	f_n(x) = f(x) $.
 
 	$$ |f_n(x) - f_m(x)| < \eps \text{ при фиксированном } x, \quad n, m > N $$
 	Перейдём к пределу по $ n $:
@@ -383,7 +382,7 @@
 			$$ |a + b|^p \le 2^p \max\{|a|^p, |b|^p\} \le 2^p \bigl( |a|^p + |b|^p \bigr) $$
 			Подставим $ a = f(x), ~ b = g(x) $ (для фиксированного $ x $):
 			$$ |f(x) + g(x)|^p \le 2^p \bigl( |f(x)|^p + |g(x)|^p \bigr) $$
-			Проинтегрируем по $ T $ и $ \mu $:
+			Проинтегрируем:
 			$$ C^p = \int\limits_T |f + g|^p \di \mu \le 2^p \Bigl( \int\limits_T |f|^p \di \mu + \int\limits_T |g|^p \di \mu \Bigr) = 2^p (A^p + B^p) < +\infty $$
 
 			Теперь докажем само неравенство:
@@ -482,22 +481,18 @@
 \end{statement}
 
 \begin{proof}
-	При фиксированном $ p $ можно считать, что $ (F, \|\cdot\|_p) \sub l^p $
-	(подпространство в алгебраическом смысле).
-
+	$ (F, \|\cdot\|_p) $ "--- подпространство $ l^p $ в алгебраическом смысле при фиксированном
+	$ p $.
 	Проверим, что оно не замкнуто.
-	Возьмём
-	$$ x = \set{\frac1{2^k}}_{k = 1}^\infty \in l^p \quad \forall 1 \le p \le +\infty $$
-	$$ \sum_{k = 1}^\infty \frac1{2^{kp}} < +\infty $$
-	Положим
-	$$ \nder[m]x = \Bigl( \frac12, \frac1{2^2}, \dots, \frac1{2^m}, 0, \dots \Bigr) \in F $$
+
+	$$ x \coloneq \set{\frac1{2^k}}_{k = 1}^\infty \in l^p \setminus F \quad \forall 1 \le p \le +\infty $$
+	$$ \nder[m]x \coloneq \Bigl( \frac12, \frac1{2^2}, \dots, \frac1{2^m}, 0, \dots \Bigr) \in F $$
 	\begin{itemize}
 		\item $ 1 \le p < +\infty $
 			$$ \|x - \nder[m]x\|_p = \Bigl( \sum_{k = m + 1}^\infty \frac1{2^{pk}} \Bigr)^{\frac1p} \underarr{m \to \infty} 0 $$
 		\item $ p = +\infty $
 			$$ \|x - \nder[m]x\|_\infty = \frac1{2^{m + 1}} \underarr{m \to \infty} 0 $$
 	\end{itemize}
-	Значит, $ F $ не замкнуто.
 \end{proof}
 
 \section{Определение и полнота пространств \texorpdfstring{$ \mathrm L^p $}{Лебега},
@@ -844,9 +839,9 @@ $$ \|\ol f\|_\infty = 0 \iff \|f\|_\infty = 0 \iff f(x) = 0 ~\ale \iff f \in N =
 
 \begin{theorem}
 	$ (X, \rho) $ "--- полное \textbf{тогда и только тогда}, когда
-	$$ \forall \set{\mathtt D_n = \mathtt D_{r_n}(x)}_{n = 1}^\infty :
+	$$ \forall \set{D_n = \mathtt D_{r_n}(x)}_{n = 1}^\infty :
 	~ D_{n + 1} \sub D_n, ~ \lim\limits_{n \to \infty} r_n = 0 \quad
-	\bigcap_{n = 1}^\infty \mathtt D_n \ne \O $$
+	\bigcap_{n = 1}^\infty D_n \ne \O $$
 \end{theorem}
 
 \begin{iproof}
@@ -858,17 +853,18 @@ $$ \|\ol f\|_\infty = 0 \iff \|f\|_\infty = 0 \iff f(x) = 0 ~\ale \iff f \in N =
 	Возьмём фундаментальную последовательность $ \set{x_n}_{n = 1}^\infty $.
 
 	Обозначим $ \eps_k = \frac1{2^k} $.
-	В силу фундаментальности $ x_k $
+	В силу фундаментальности $ x_n $
 	$$ \exists \set{x_{n_k}}_{k = 1}^\infty : \quad \rho(x_{n_k}, x_{n_{k + 1}}) < \frac1{2^{k + 1}} $$
-	$$ \mathtt D_k = \mathtt D_{\eps_k} (x_{n_k}) $$
+	$$ D_k \coloneq \mathtt D_{\eps_k} (x_{n_k}) $$
 
-	Проверим, что $ \mathtt D_{k + 1} \sub \mathtt D_k $.
-	Возьмём $ y \in \mathtt D_{k + 1} $.
+	Проверим, что $ D_{k + 1} \sub D_k $.
+	Возьмём $ y \in D_{k + 1} $.
 	$$ \rho(x_{n_{k + 1}}, y) \le \frac1{2^{k + 1}} $$
 	\begin{multline*}
 		\rho(y, x_{n_k}) \trile \rho(x_{n_k}, x_{n_{k + 1}}) + \rho(x_{n_{k + 1}}, y)
-		< \frac1{2^{k + 1}} + \frac1{2^{k + 1}} = \frac1{2^k} \implies y \in \mathtt D_k \implies \\
-		\implies \mathtt D_{k + 1} \sub \mathtt D_k \implies \exists a \in \bigcap_{k = 1}^\infty \mathtt D_k \implies \lim x_{n_k} = a
+		< \frac1{2^{k + 1}} + \frac1{2^{k + 1}} = \frac1{2^k} \implies y \in D_k \implies \\
+		\implies D_{k + 1} \sub \mathtt D_k \implies
+		\exists a \in \bigcap_{k = 1}^\infty D_k \implies \lim x_{n_k} = a
 	\end{multline*}
 \end{iproof}
 
@@ -1048,7 +1044,7 @@ $$ \|\ol f\|_\infty = 0 \iff \|f\|_\infty = 0 \iff f(x) = 0 ~\ale \iff f \in N =
 \end{proof}
 
 \begin{theorem}
-	$ (X, \rho) $ "--- метрическое пространство, сепарабельно, $ \quad Y \sub X $.
+	$ (X, \rho) $ сепарабельно, $ \quad Y \sub X $.
 
 	Тогда $ Y $ сепарабельно.
 \end{theorem}
@@ -1059,7 +1055,7 @@ $$ \|\ol f\|_\infty = 0 \iff \|f\|_\infty = 0 \iff f(x) = 0 ~\ale \iff f \in N =
 	Рассмотрим $ F = \set{y_{n, k}}_{n \in \N, ~ k \in \N} $ "--- счётное.
 	Проверим, что $ F $ всюду плотно в $ Y $.
 
-	Пусть $ y \in Y, ~ \eps > 0, ~ y \in X $.
+	Пусть $ y \in Y, ~ \eps > 0 $.
 	$$ \exists x_n : \quad \rho(x_n, y) < \eps $$
 	$$ \implies \rho(x_n, Y) < \eps \implies \exists y_{n k} : \quad \rho(x_n, y_{n, k}) < \eps $$
 	$$ \implies \rho(y, y_{n k}) \trile \rho(y, x_n) + \rho(x_n, y_{n k}) < 2\eps $$
@@ -1076,9 +1072,9 @@ $$ \|\ol f\|_\infty = 0 \iff \|f\|_\infty = 0 \iff f(x) = 0 ~\ale \iff f \in N =
 
 	Рассмотрим $ L = \set{f : X \to \R | f(x) \in m(X), \quad f(x) \equiv[x \ne a_j] 0} $.
 	$$ f \in L \quad \|f\| = \sup\limits_{x \in X} |f(x)| = \sup\limits_{j \in \N} |f(a_j)| $$
-	$$ L \xrightarrow \Phi l^\infty : \quad f \mapsto \set{f(a_j)}_{j = 1}^\infty $$
-	$ \Phi $ "--- изометрия $ \implies L \sub m(X) $.
-	$ l^\infty $ не сепарабельно $ \implies L $ не сепарабельно.
+	$$ \Phi : L \to l^\infty : \quad f \mapsto \set{f(a_j)}_{j = 1}^\infty $$
+	$ \Phi $ "--- изометрия $ \underimp{L \sub m(X)} l^\infty $ не сепарабельно $ \implies L $
+	не сепарабельно.
 	Значит, $ m(x) $ не сепарабельно.
 \end{proof}
 
@@ -1537,7 +1533,7 @@ $$ \|\ol f\|_\infty = 0 \iff \|f\|_\infty = 0 \iff f(x) = 0 ~\ale \iff f \in N =
 \end{notation}
 
 \begin{lemma}
-	$ (X, \rho), \quad \eps > 0, \quad A \sub X, \quad \exists $ конченая $ \eps $-сеть для $ A $.
+	$ (X, \rho), \quad \eps > 0, \quad A \sub X, \quad \exists $ конечная $ \eps $-сеть для $ A $.
 
 	$$ \implies A = \bigcup_{j = 1}^n C_j, \quad C_j \cap C_i = \O, \quad
 	C_j \ne \O, \quad \operatorname{diam} C_j \le 2\eps $$
@@ -1679,7 +1675,7 @@ $ \mathcal C(K) $}
 
 					$$ \forall \eps > 0 \quad \exists \text{ конечная } \eps \text{-сеть }
 					\set{\phi_j \in \mathcal C(K)}_{j = 1}^n $$
-					$$ \phi_j \text{ равном. непр. } \implies
+					$$ \phi_j \text{ равност. непр. } \implies
 					\exists \delta_j : \quad \forall x, y \in K : \rho(x, y) < \delta_j \quad
 					|\phi_j(x) - \phi_j(y)| < \eps \quad 1 \le j \le n $$
 					Положим $ \delta = \min\limits_{1 \le j \le n}\set{\delta_j} $.
@@ -1750,7 +1746,7 @@ $ \mathcal C(K) $}
 						\eref{arzela-ascoli:1} \\
 						\eref{arzela-ascoli:2} \implies \rho(x, x_m) < \delta
 					\end{subarray}
-				}< \eps \quad \as ~ \rho(x, x_m) < \delta
+				}< \eps
 			\end{multline*}
 	\end{itemize}
 \end{proof}
@@ -1811,7 +1807,7 @@ $ \mathcal C(K) $}
 	Теперь рассмотрим $ F = \R^n \setminus G $ "--- компакт.
 	Известно, что $ \rho(x, F) $ непрерывна.
 	$$ h(x) \define \rho(x, F), \quad x \in K $$
-	$$ \forall x \in F \quad h(x) > 0 $$
+	$$ \forall x \in K \quad h(x) > 0 $$
 	$$ \exists \min\limits_{x \in K} h(x) \fed r > 0 $$
 	Пусть $ x, y \in K : \quad \rho(x, y) < r $.
 	$$ y \in \mathtt B_r(x) \sub G \implies [x, y] \sub G $$

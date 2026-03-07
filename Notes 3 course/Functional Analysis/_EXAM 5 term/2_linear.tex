@@ -23,7 +23,7 @@
 			$$ f_y(\alpha x + z) = (\alpha x + z, y) =
 			\alpha (x, y) + (z, y) = \alpha f(x) + f(z) $$
 		\item Оценим $ \|f_y\| $
-			$$ \|f_y\| = |(x, y)| \underset{\text{К"--~Б}}\le \|y\| \cdot \|x\| \implies
+			$$ \|f_y x\| = |(x, y)| \underset{\text{К"--~Б}}\le \|y\| \cdot \|x\| \implies
 			\|f_y\| \le \|y\| \implies f \in H^* $$
 
 			\begin{itemize}
@@ -40,8 +40,8 @@
 
 			Рассмотрим $ N = \operatorname{Ker} f \ne H $
 			$$ H = N \oplus N^\perp, \quad N^\perp \ne \set{0} $$
-			Возьмём $ y_0 \in N^\perp $.
 			Докажем, что $ \dim N^\perp = 1 $.
+			Возьмём $ y_0 \in N^\perp $.
 
 			$$ f(y_0) \ne 0 $$
 			$$ v \coloneq \frac{y_0}{f(y_0)} \implies f(v) = 1 $$
@@ -53,7 +53,7 @@
 			Значит, $ u = 0 \implies z = f(z)v $.
 
 			Будем искать $ y $ в виде $ y = \alpha v $, где $ \alpha \in \Co $.
-			$$ 1 = f_y(v) = f_y(v) = (v, \alpha v) = \alpha \|v\|^2 \implies
+			$$ 1 = f_y(v) = (v, y) = (v, \alpha v) = \alpha \|v\|^2 \implies
 			\alpha = \frac1{\|v\|^2} \implies y = \frac{v}{\|v\|^2} $$
 		\item Проверим единственность
 
@@ -214,7 +214,7 @@
 
 \begin{eproof}
 \item Возьмём $ z \in X \setminus L $
-	$$ L_1 \coloneq \mathscr L\set{L, z} = \Set{tx + z | t \in \R} $$
+	$$ L_1 \coloneq \mathscr L\set{L, z} = \Set{x + tz | x \in L, \quad t \in \R} $$
 
 	Построим $ f_1 \in \mathscr Lin(L_1, \R) : \quad
 	f_1 \bigr|_L = f, \quad f_1(y) \overset{L_1}\le p(y) $.
@@ -243,6 +243,7 @@
 	$$ A \coloneq \Set{p(u + z) - f(u)}_{u \in L} \sub \R, \quad
 	B \coloneq \Set{f(v) - p(v - z)}_{v \in L} \sub \R $$
 	Проверим, что $ \forall a \in B \quad \forall b \in B \quad b \le a $.
+	Тогда, в силу полноты $ \R $, между $ A $ и $ B $ будет $ c $.
 	$$ b \le a \iff f(v) - p(v - z) \le p(u + z) - f(u) \iff
 	\underbrace{f(u) + f(v)}_{f(u + v) \in L} \le p(u + z) + p(v - z) $$
 	$ f $ подчинён $ p $, значит,
@@ -283,7 +284,7 @@
 \end{theorem}
 
 \begin{eproof}
-\item[2.] $ \mathcal P \coloneq \Set{(M, h)}, \quad L \sub M \sub X, \quad
+\item[2.] $ \mathcal P \coloneq \Set{(M, h)}_{L \sub M \sub X}: \quad
 	M $ "--- подпр-во, $ \quad h \in \mathscr Lin(M, \R), \quad h \bigr|_L = f, \quad
 	h(x) \overset M \le p(x) $
 
@@ -297,10 +298,10 @@
 	Пусть $ A $ "--- цепь в $ \mathcal P $, \ie
 	$$ A = \Set{(M_\alpha, h_\alpha)}_{\alpha \in I} : \quad \forall \alpha, \beta \in I \quad
 	\left[
-	\begin{array}{l}
+	\begin{matrix}
 		(M_\alpha, h_\alpha) \le (M_\beta, h_\beta) \\
 		(M_\beta, h_\beta) \le (M_\alpha, h_\alpha)
-	\end{array} \right. $$
+	\end{matrix} \right. $$
 
 	Построим верхнюю грань для $ A $.
 	$$ M_0 \coloneq \bigcup_{\alpha \in I} M_\alpha $$
@@ -308,12 +309,13 @@
 	Проверим, что $ M_0 $ "--- подпространство.
 	Пусть $ x, y \in M_0 $.
 	$$ \exists \alpha, \beta : x \in M_\alpha, ~ y \in M_\beta \implies \left[
-	\begin{array}{l}
+	\begin{matrix}
 		M_\alpha \sub M_\beta, \\
 		M_\beta \sub M_\alpha
-	\end{array} \right. $$
+	\end{matrix} \right. $$
 	Пусть выполняется первое.
-	$$ \implies x, y \in M_\beta \text{ "--- подпространство } \implies ax + by \in M_\beta \subset
+	$$ \implies x, y \in M_\beta \underimp{M_\beta \text{ "--- подпространство}}
+	ax + by \in M_\beta \subset
 	M_0 \implies M_0 \text{ "--- подпространство} $$
 
 	Определим $ h_0 : M_0 \to \R $.
@@ -325,10 +327,10 @@
 	Проверим корректность.
 	Пусть $ x \in M_\beta $.
 	$$ \left[
-	\begin{array}{l}
+	\begin{matrix}
 		(M_\alpha, h_\alpha) \le (M_\beta, h_\beta), \\
 		(M_\beta, h_\beta) \le (M_\alpha, h_\alpha)
-	\end{array} \right. $$
+	\end{matrix} \right. $$
 	Пусть выполнено первое.
 	$$ x \in M_\alpha, ~ x \in M_\beta \implies h_\beta(x) = h_\alpha(x) = h(x) $$
 
@@ -351,7 +353,7 @@
 
 \begin{statement}\label{st:cont:1}
 	$ X $ линейно над $ \R, \quad p $ "--- выпуклый функционал, $ \quad
-	f \in \mathscr Lin(X, \R), \quad f(x) \overset X \le p(x) $
+	f \in \mathscr Lin(X, \R), \quad f(x) \le p(x) $
 
 	$$ f(x) \ge -p(-x) $$
 \end{statement}
@@ -361,7 +363,7 @@
 \end{proof}
 
 \begin{statement}
-	$ p $ "--- полунорма, $ \quad f(x) \overset X \le p(x) $
+	$ p $ "--- полунорма, $ \quad f(x) \le p(x) $
 
 	$$ |f(x)| \le p(x) $$
 \end{statement}
@@ -462,40 +464,37 @@
 	$$ u(x+ y) = u(x) + u(y), \quad v(x + y) = v(x) + v(y) $$
 
 	Возьмём $ x \in X, ~ a \in \R $.
-	$$ f(x) = u(x) + \ii v(x) $$
-	$$ f(ax) = u(ax) + \ii v(ax) $$
-	$$ f(ax) = af(x) = a u(x) + \ii a v(x) \implies
+	$$
+	\begin{rcases}
+		f(ax) = u(ax) + \ii v(ax) \\
+		f(ax) = af(x) = a u(x) + \ii a v(x)
+	\end{rcases} \implies
 	\begin{cases}
 		u(ax) = au(x) \\
 		v(ax) = av(x)
-	\end{cases} $$
-	$$ \implies u, v \in \mathscr Lin(L, \R) $$
+	\end{cases} \implies u, v \in \mathscr Lin(L, \R) $$
 	$$ f \in \mathscr Lin(X, \Co) \implies f(\ii x) = \ii f(x) \implies u(\ii x) + \ii v(\ii x) =
 	\ii \bigl( u(x) + \ii v(x) \bigr) \implies
 	u(\ii x) = -v(x) $$
 
 	Применим теорему Хана"--~Банаха к $ u $, а $ v $ определим из этого тождества.
-	\begin{multline*}
-		u(x) \le |f(x)| \le p(x) \quad \forall x \in L \underimp{\text{т. Хана"--~Банаха}} \\
-		\implies \exists \phi \in \mathscr Lin(X, \R) : \quad
-		\begin{cases}
-			\phi \bigr|_L = u, \\
-			\phi(x) \overset X \le p(x)
-		\end{cases} \underimp{p \text{ "--- полунорма}} |\phi(x)| \overset L \le p(x)
-	\end{multline*}
-	\begin{equ}{bone-sob:1}
-		x \in X \quad \psi(x) \coloneq -\phi(\ii x) \implies \psi \in \mathscr Lin(X, \R)
-	\end{equ}
+	$$ u(x) \le |f(x)| \le p(x) \quad \forall x \in L \underimp{\text{Х"--~Б}}
+	\exists \phi \in \mathscr Lin(X, \R) : \quad
+	\begin{cases}
+		\phi \bigr|_L = u, \\
+		\phi(x) \overset X \le p(x)
+	\end{cases} \underimp{p \text{ "--- полунорма}} |\phi(x)| \overset L \le p(x) $$
+	$$ x \in X \quad \psi(x) \coloneq -\phi(\ii x) \implies \psi \in \mathscr Lin(X, \R) $$
 	$$ g(x) \coloneq \phi(x) + \ii \psi(x) \implies g \in \mathscr Lin(X, \R), \quad
 	g(x) \overset L = f(x) $$
 	$$ g(\ii x) =
-	\phi(\ii x) + \ii \psi(\ii x) \ii \bigl( -\ii \phi(\ii x) + \psi(\ii x) \bigr)
-	\undereq{\eref{bone-sob:1}} \ii \bigl(\phi(x) + \ii \psi(x) \bigr) \implies
+	\phi(\ii x) + \ii \psi(\ii x) = \ii \bigl( -\ii \phi(\ii x) + \psi(\ii x) \bigr)
+	\undereq{\text{лин.}} \ii \bigl(\phi(x) + \ii \psi(x) \bigr) \implies
 	g \in \mathscr Lin(X, \Co) $$
 
 	Проверим подчинение.
 	$$ x \in X, ~ g(x) \in \Co \quad g(x) = re^{\ii \theta}, \quad r \ge 0, ~ \theta \in \R $$
-	$$ \implies |g(x)| = r = g \bigl( xe^{-\ii \theta} \bigr) =
+	$$ |g(x)| = r = g \bigl( xe^{-\ii \theta} \bigr) =
 	\phi \bigl( xe^{-\ii \theta} \bigr) + \ii \psi \bigl( xe^{-\ii \theta} \bigr) $$
 	Слева вещественное число, справа "--- комплексное, значит, мнимая часть равна нулю:
 	$$ |g(x)| = \phi \bigl( xe^{-\ii \theta} \bigr) \le
@@ -526,13 +525,13 @@
 
 	Возьмём $ x \in L $.
 	$$ |f(x)| \le \|f\|_{L^*}\|x\| = M \|x\| = p(x) \implies f \text{ подчинён } p $$
-	Применяем теорему Хана"--~Банаха или Бонеблюста"--~Собчика:
+	Применяем теорему Хана"--~Банаха или Боненблюста"--~Собчика:
 	$$ \exists g \in \mathscr Lin(X, \mathbb K) : \quad
 	\begin{cases}
 		g \bigr|_L = f, \\
 		|g(x)| \overset X \le p(x)
 	\end{cases} $$
-	$$ \implies |g(x)| \overset X \le M \cdot \|x\| \implies \|g\|_{X^*} \implies g \in X^* $$
+	$$ \implies |g(x)| \overset X \le M \cdot \|x\| \implies \|g\|_{X^*} \le M \implies g \in X^* $$
 	$$ \|g\|_{X^*} = \sup\limits_{
 		\begin{subarray}{c}
 			x \in X \\
@@ -558,23 +557,29 @@
 	\end{enumerate}
 \end{implication}
 
-\begin{iproof}
-\item $ x_0 \ne 0 $
+\begin{eproof}
+\item
+	\begin{itemize}
+	\item $ x_0 \ne 0 $
 
-	Рассмотрим $ L = \Set{\alpha x_0}_{\alpha \in \mathbb K} $.
-	Определим $ f : L \to \mathbb K : \quad f(\alpha x_0) = \alpha \|x_0\| $. \\
-	Понятно, что $ f \in \mathscr Lin(L, \mathbb K), \quad f(x_0) = \|x_0\|, \quad
-	|f(\alpha x_0)| = |\alpha| \|x_0\| $.
-	$$ \implies \|f\|_{L^*} = 1 $$
+		Рассмотрим $ L = \Set{\alpha x_0}_{\alpha \in \mathbb K} $.
+		Определим $ f : L \to \mathbb K : \quad f(\alpha x_0) = \alpha \|x_0\| $. \\
+		Понятно, что $ f \in \mathscr Lin(L, \mathbb K), \quad f(x_0) = \|x_0\|, \quad
+		|f(\alpha x_0)| = |\alpha| \|x_0\| $.
+		$$ \implies \|f\|_{L^*} = 1 $$
 
-	По теореме
-	$$ \exists g \in X^* : \quad
-	\begin{cases}
-		\|g\|_{X^*} = 1, \\
-		g(x_0) = \|x_0\|.
-	\end{cases} $$
+		По теореме
+		$$ \exists g \in X^* : \quad
+		\begin{cases}
+			\|g\|_{X^*} = 1, \\
+			g(x_0) = f(x_0) = \|x_0\|.
+		\end{cases} $$
+	\item $ x_0 = 0 $
 
-	Рассмотрим $ h \in X^* : \quad \|h\| \le 1 $.
+		Возьмём произвольную $ g \in X^* : \quad \|g\| = 1 $.
+		$$ g(x_0) = 0 $$
+	\end{itemize}
+\item Рассмотрим $ h \in X^* : \quad \|h\| \le 1 $.
 	$$ |h(x_0)| \le \|h\| \|x_0\| \le \|x_0\| \implies \sup\limits_{\|h\| \le 1}|h(x_0)| \le
 	\|x_0\| $$
 	Но $ \exists g : \quad
@@ -582,11 +587,7 @@
 		\|g\| = 1, \\
 		|g(x_0)| = \|x_0\|.
 	\end{cases} $
-\item $ x_0 = 0 $
-
-	Возьмём $ g \in X^* : \quad \|g\| = 1 $.
-	$$ g(x_0) = 0 $$
-\end{iproof}
+\end{eproof}
 
 \begin{implication}[расстояние до подпространства]
 	$ (X, \|\cdot\|), \quad L $ "--- замкнутое подпространство $ X, \\ $
@@ -598,18 +599,17 @@
 		\begin{cases}
 			\|g\| = 1, \\
 			g(x_0) = d, \\
-			g \bigr|_L = 0;
+			g \bigr|_L \equiv 0;
 		\end{cases} $$
-	\item $ d = \min\left\{ |h(x_0)| \mid \|h\| \le 1, ~ h\bigr|_L = 0\right\} $.
+	\item $ d = \min\left\{ |h(x_0)| \mid \|h\| \le 1, ~ h\bigr|_L \equiv 0\right\} $.
 	\end{enumerate}
 \end{implication}
 
-\begin{proof}
-	$ M \coloneq \mathscr Lin(x_0, L) = \Set{\alpha x_0 + y | y \in L} $
+\begin{eproof}
+\item $ M \coloneq \mathscr Lin(x_0, L) = \Set{\alpha x_0 + y | y \in L} $
 
 	Определим $ f : M \to \mathbb K : \quad f(\alpha x_0 + y) = \alpha $.
-	$$ \implies f(y) = 0 \quad \forall y \in L $$
-	$$ f(x_0) = 1 $$
+	$$ \implies f(y) = 0 \quad \forall y \in L, \quad f(x_0) = 1 $$
 	Понятно, что $ f \in \mathscr Lin(M, \mathbb K) $.
 
 	Воспользуемся теоремой о норме линейного функционала:
@@ -620,8 +620,7 @@
 		\|g\| = 1, \\
 		g \bigr|_M = f_1
 	\end{cases} \implies g \bigr|_L = 0, \quad g(x_0) = d $$
-
-	Возьмём $ h \in X^* : \quad \|h\| \le 1, ~ h \bigr|_L = 0 $.
+\item Возьмём $ h \in X^* : \quad \|h\| \le 1, ~ h \bigr|_L = 0 $.
 	$$ |h(x_0)| = |h(x_0 - y)| \le \|h\| \cdot \|x_0 - y\| \le \|x_0 - y\| \quad \forall y \in L $$
 	$$ \implies |h(x_0)| \le d \implies \sup\limits_{
 		\begin{subarray}{c}
@@ -639,7 +638,7 @@
 			\|h\| \le 1 \\
 			h\bigr|_L = 0
 		\end{subarray}}|h(x_0)| $$
-\end{proof}
+\end{eproof}
 
 \begin{remark}
 	Если $ L = \Set{0} $, то получим предыдущее следствие.
@@ -698,9 +697,8 @@
 		\|x\| = 1, \\
 		\|f\| \le 2|f(x)|
 	\end{cases} $$
-
-	Пусть теперь $ f \ne \On[] $.
 	$$ \exists \Set{x_n} : \quad \|x_n\| = 1, \quad \|f_n\| \le 2|f_n(x_n)| $$
+
 	Проверим, что $ \Set{x_n} $ полна в $ X $ (по следствию 3).
 	Пусть $ f \in X^*, \quad f(x_n) = 0 \quad \forall n $.
 	$$ \exists f_{n_k} \in X^* : \quad \lim \|f - f_{n_k}\| = 0 $$
@@ -754,7 +752,6 @@
 \end{theorem}
 
 \begin{proof}
-	Нужно доказать, что $ \sup\limits_{\|x\| \le 1}\sup\limits_\alpha \|U_\alpha x\| < +\infty $.
 	$$ Y_n \coloneq \Set{y | \|y\| \le n} \sub Y $$
 	$ U_\alpha^{-1}(Y_n) $ замкнуто, \as $ U_\alpha $ непрерывен.
 	$$ E_n = \bigcap_{\alpha \in A} U_\alpha^{-1}(Y_n) $$
@@ -880,8 +877,8 @@
 	$$ \forall \eps > 0 \quad \exists z \in L : \quad \|x - z\| < \eps $$
 	Воспользуемся тем, что $ \Set{U_nz} $ фундаментальна:
 	$$ \exists N \in \N : \quad \forall n > m \ge N \quad \|U_nz - U_mz\| < \eps $$
-	$$ \|Unx - U_mx\| \le
-	\underbrace{\|U_nx - U_nz\|}_{\le \|U_m\| \cdot \|x - z\| \le M\|x - z\| < M\eps} +
+	$$ \|U_nx - U_mx\| \le
+	\underbrace{\|U_nx - U_nz\|}_{\le \|U_n\| \cdot \|x - z\| \le M\|x - z\| < M\eps} +
 	\underbrace{\|U_nz - U_mz\|}_{< \eps} + \underbrace{\|U_mz - U_mx\|}_{< M\eps} < \eps(2M + 1) $$
 	$ \implies \Set{U_nx}_{n = 1}^\infty $ фундаментальна для $ \forall x \in X $.
 	$$ \underimp{Y \text{ "--- банахово}} \exists \lim U_n x \eqqcolon U \quad
@@ -907,7 +904,7 @@
 \begin{iproof}
 \item $ \implies $ "--- уже доказано.
 \item $ L \coloneq \mathscr L\Set{E}, \quad x \in L $
-	$$ x = \sum_{k = 1}^m ck x_k, \quad x_k \in E $$
+	$$ x = \sum_{k = 1}^m c_k x_k, \quad x_k \in E $$
 	$$ \exists \lim U_n x_k \quad \forall x_k \implies \exists \lim U_n x $$
 
 	Проверим, что $ \forall x \in X \quad \exists \lim U_n x $.
@@ -948,11 +945,10 @@
 	\frac1{1 - \|A\|} $$
 	$ X $ "--- банахово $ \implies \mathscr B(X) $ "--- банахово.
 	Воспользуемся критерием полноты:
-	$$ \implies \exists S = \sum_{k = 0}^\infty A^k \in \mathscr B(X) $$
+	$$ \exists S = \sum_{k = 0}^\infty A^k \in \mathscr B(X) $$
 	$$ S_n \coloneq \sum_{k = 0}^n A^k $$
-	$$ \|S_n\| \le \sum_{k = 0}^n \|A\|^k < \frac1{1 - \|A\|}, \quad
-	\lim\limits_{n \to \infty} \|S - S_n\| = 0 $$
-	$$ \implies \|S\| \le \frac1{1 - \|A\|} $$
+	$$ \|S_n\| \le \sum_{k = 0}^n \|A\|^k < \frac1{1 - \|A\|} \underimp{\|S - S_n\| \to 0}
+	\|S\| \le \frac1{1 - \|A\|} $$
 
 	$$ (I - A)S_n = (I - A) \sum_{k = 0}^n A^k = \sum_{k = 0}^n A^k - \sum_{k = 0}^n A^{k + 1} =
 	I - A^{n + 1} $$
@@ -1048,9 +1044,9 @@
 \item $ \implies $
 	$$
 	\begin{rcases}
-		U(0) = 0 \\
+		U(0) = 0 \implies 0 \in U \bigl( \mathtt B_1(0) \bigr) \\
 		U \text{ открыто } \implies U \bigl( \mathtt B_1(0) \bigr) \text{ открыто }
-	\end{rcases} \implies 0 \in U \bigl( \mathtt B_1(0) \bigr) \implies
+	\end{rcases} \implies
 	\exists r > 0 : \quad \mathtt B_r(0) \sub U \bigl( \mathtt B_1(0) \bigr) $$
 \item $ \impliedby $
 
@@ -1061,11 +1057,10 @@
 	$$ \mathtt B_r(0) \sub U \bigl( \mathtt B_1(0) \bigr) \underimp{\text{линейность}}
 	\mathtt B_{rR}(0) \sub U \bigl( \mathtt B_R(0) \bigr) $$
 	Сдвинем на $ U(x_0) $:
-	$$ \underbrace{Ux_0 + \mathtt B_{rR}(0)}_{\mathtt B_{rR}(Ux_0) \sub
-	U(\mathtt B_R(x_0)) \sub U(G)} \sub
+	$$ \underbrace{Ux_0 + \mathtt B_{rR}(0)}_{\mathtt B_{rR}(Ux_0) = \mathtt B_{rR}(y_0)} \sub
 	Ux_0 + U \bigl( \mathtt B_R(0) \bigr) = U \bigl( x_0 + \mathtt B_R(0) \bigr) =
-	U \bigl( \mathtt B_R(x_0) \bigr) $$
-	$ \implies Ux_0 $ "--- внутренняя точка $ U(G) $.
+	U \bigl( \underbrace{\mathtt B_R(x_0)}_{\sub G} \bigr) $$
+	То есть, $ y_0 $ содержится в $ U(G) $ с окрестностью.
 \end{iproof}
 
 \begin{implication}
@@ -1098,7 +1093,7 @@
 	\ol{U \bigl( \mathtt B_{\frac1{2^k}}(0) \bigr)} $$
 	\begin{itemize}
 		\item При $ k = 1 $
-			$$ \|y\| < \frac r 2 \implies y \in \mathscr B_{\frac r 2}(0) \sub
+			$$ \|y\| < \frac r 2 \implies y \in \mathtt B_{\frac r 2}(0) \sub
 			\ol{U \bigl( \mathtt B_{\frac12}(0) \bigr)} $$
 			$$ \exists x_1 : \quad \|x_1\| < \frac12, \quad \|y - Ux_1\| < \frac r 4 $$
 		\item $ k = 2 $
@@ -1132,20 +1127,19 @@
 	$$ \exists n_0 \in \mathbb N : \quad \operatorname{Int} \ol{U(B_{n_0})} \ne \emptyset $$
 	При этом, $ U(B_{n_0}) = n_0U(B_1) $ (в $ n_0 $ раз увеличенное $ U(B_1) $).
 	$$ \implies \operatorname{Int} \ol{U(B_1)} \ne \emptyset \implies
-	\exists a \in Y ~ \exists y > 0 : \quad \mathtt B_r(a) \sub \ol{U(B_1)} $$
+	\exists a \in Y ~ \exists r > 0 : \quad \mathtt B_r(a) \sub \ol{U(B_1)} $$
 
 	Чтобы воспользоваться леммой, нужно сдвинуть точку $ a $ в 0.
-
 	Возьмём $ z \in X : \quad \|z\| < r $.
 	$$
 	\begin{rcases}
-		a + z \in \mathscr B_r(a) \sub \ol{U(B_1)} \\
-		a \in \ol{U(B)} \implies -a \in \ol{U(B_1)}
+		a + z \in \mathtt B_r(a) \sub \ol{U(B_1)} \\
+		a \in \ol{U(B_1)} \implies -a \in \ol{U(B_1)}
 	\end{rcases} \implies z = (a + z) + (-a) \in
-	\ol{U(B)} + \ol{U(B_1)} \sub \ol{U(B_1)} $$
+	\ol{U(B_1)} + \ol{U(B_1)} \sub \ol{U(B_1)} $$
 	Воспользуемся подобием:
-	$$ \mathtt B_{\frac r2}(0) \sub \ol{U(B)} \underimp{\text{лемма}}
-	\mathtt B_{\frac r4}(0) \sub U(B) $$
+	$$ \mathtt B_{\frac r2}(0) \sub \ol{U(B_1)} \underimp{\text{лемма}}
+	\mathtt B_{\frac r4}(0) \sub U(B_1) $$
 \end{proof}
 
 \section[Теорема Банаха об обратном операторе.
@@ -1162,7 +1156,7 @@
 
 \begin{proof}
 	$$ U(X) = Y \underimp{\text{т. об откр. отобр.}} U \text{ открыто } \underimp{\text{утв.}}
-	U^{-1} \text{непрерывно} $$
+	U^{-1} \text{ непрерывно} $$
 \end{proof}
 
 \begin{theorem}[об эквивалентных нормах]
@@ -1261,28 +1255,25 @@
 	Значит, $ \Set{x_n} $ фундаментальна в $ (X, \|\cdot\|_X) $, и $ \Set{Ux_n} $ фундаментальна в
 	$ Y $.
 	Оба эти пространства банаховы.
-	$$ \implies \exists x \in X ~ \exists y \in Y : \quad \lim \|x_n - x\|_X = 0 $$
-	$$ \implies
+	Значит,
+	$$ \exists x \in X ~ \exists y \in Y : \quad
 	\begin{cases}
 		\lim x_n = x \text{ в } (X, \|\cdot\|_X) \\
 		\lim Ux_n = y \text{ в } Y
 	\end{cases} \underimp{U \text{ замкнут}} y = Ux \implies
 	\lim\bigl(\|x_n - x\|_X + \|Ux_n - Ux\|_Y \bigr) = 0 $$
+	$$ \implies \lim\|x_n - x\|_1 = 0 \implies (X, \|\cdot\|_1) \text{ банахово} $$
 	\begin{multline*}
-		\implies \lim\|x_n - x\|_1 = 0 \implies (X, \|\cdot\|_1) \text{ банахово}, \quad
-		\|x\|_X \le \|x\|_X + \|Ux\|_Y = \|x\|_1 \underimp{\text{т. об экв. нормах}} \\
-		\implies \exists A > 0 : \quad \|x\|_1 \le A\|x\|_X \implies
-		\|x\|_X + \|Ux\|_Y \le A\|x\|_X \implies \|Ux\| \le A\|x\| \implies U \in \mathscr B(X, Y)
+		\|x\|_X \le \|x\|_X + \|Ux\|_Y = \|x\|_1 \underimp{\text{т. об экв. нормах}}
+		\exists A > 0 : \quad \|x\|_1 \le A\|x\|_X \implies \\
+		\implies \|x\|_X + \|Ux\|_Y \le A\|x\|_X \implies \|Ux\| \le A\|x\| \implies
+		U \in \mathscr B(X, Y)
 	\end{multline*}
 \end{proof}
 
 \begin{eg}[$ U $ замкнут, но не непрерывен]
-	$ X = \Set{\exists f' \in \mathcal C[0, 1]}, \quad
-	\|f\|_X = \max\limits_{[0, 1]}|f(x)| $ \\
-	$ X \sub \mathcal C[0, 1] $ в алгебраическом смысле
-
-	$ Y = \mathcal C[0, 1], \quad \|g\|_Y = \max\limits_{[0, 1]}|g(x)| = \|g\|_\infty $
-
+	$ X = \Bigl( \nder[1]{\mathcal C}[0, 1], \|\cdot\|_\infty \Bigr), \quad
+	Y = \mathcal C[0, 1] $
 	$$ \mathcal D(f) = f', \quad \mathcal D \in \mathscr Lin(X, Y), \quad
 	\mathcal D \text{ замкнут} $$
 	$$
@@ -1291,13 +1282,13 @@
 		\mathcal D(f_n) = f_n', \quad \mathcal D(f_n) \to g
 	\end{rcases} \underimp{\text{док. в анализе}} g = f' \implies g = \mathcal D(f) \iff
 	f_n' \uniarr{[0, 1]} g $$
-	$$ x^n \in X : \quad \|x^n\|_X = 1, \quad \mathcal D(x^n) = nx^{n - 1}, \quad
+	$$ x^n \in X : \quad \|x^n\| = 1, \quad \mathcal D(x^n) = nx^{n - 1}, \quad
 	\|\mathcal D(x^n)\| = n $$
 	$$ \implies \sup\limits_{\|f\| \le 1} \|D(f)\| = +\infty \implies
 	\mathcal D \not\in \mathscr B(X, Y) $$
 \end{eg}
 
-\section(Сопряжённые пространства к пространствам последовательностей)
+\section(Сопряжённые пространства к пространствам последовательностей и пространствам Лебега)
 {Сопряжённые пространства к пространствам последовательностей $ C_0 $, $ l^p $, пространству
 $ \mathrm L^p $ для конечных $ p $}
 
@@ -1317,37 +1308,37 @@ $ \mathrm L^p $ для конечных $ p $}
 \begin{eproof}
 \item $ y \in l^q, \quad x \in l^p $
 	$$ |F_y(x)| = \Bigl| \sum_{n = 1}^\infty x_ny_n \Bigr| \underset{\text{нер-во Гёльдера}}\le
-	\|x\|_p \cdot \|y\|_q, \quad F_y \in \bigl( l^p, \mathbb K \bigr) $$
-	$$ \implies F_y \in \mathscr B \bigl(l^p, \mathbb K \bigr) = \bigl( l^p \bigr)^*, \quad
-	\|F_y\|_{(l^p)^*} \le \|y\|_q $$
+	\|x\|_p \cdot \|y\|_q \implies \|F_y\| \le \|y\|, \quad F_y \in (l^p)^* $$
 \item $ F \in \bigl( l^p \bigr)^*, \quad
 	e_n = (0, \dots, 0, \underset n 1, 0, \dots, 0) $ "--- базис $ l^p $
 
 	Определим $ y_n = F(e_n) $.
 	$$ x = \Set{x_n}_{n = 1}^\infty \in l^p \implies
 	x = \sum_{n = 1}^\infty x_ne_n \text{ "--- сходится в } l^p $$
-	\begin{multline*}
-		S_n \coloneq \sum_{k = 1}^n x_ke_k \implies
-		F(S_n) = \sum_{k = 1}^n x_ky_k \underimp{F \text{ непрерывен}} \\
-		\implies \lim S_n = x \implies
-		\lim F(S_n) = F(x) \implies F(x) = \sum_{k = 1}^\infty x_ky_k \implies
-		F = F_y
-	\end{multline*}
+	$$ S_n \coloneq \sum_{k = 1}^n x_ke_k \implies
+	\begin{cases}
+		F(S_n) = \sum x_ky_k \\
+		S_n \to x
+	\end{cases} \underimp{\text{непр. } F}
+	F(S_n) \to F(x) \implies F(x) = \sum_{k = 1}^\infty x_ky_k = F_y(x) $$
 
 	Проверим, что $ y \in l^q $.
 	\begin{itemize}
 		\item $ p > 1 \implies q < +\infty $
+
 			Рассмотрим пробные функции
 			$$ x_k =
 			\begin{cases}
-				\frac{\ol y_k}{|y_k|} \cdot |y_k|^{q - 1}, \quad y_k \ne 0, \\
+				\ol y_k \cdot |y_k|^{q - 2}, \quad y_k \ne 0, \\
 				0, \quad y_k = 0
 			\end{cases} $$
 
 			Рассмотрим последовательности
 			$$ \nder x = \sum_{k = 1}^n x_ke_k = (x_1, \dots, x_n, 0, \dots) $$
-			$$ F \bigl( \nder x \bigr) = \sum_{k = 1}^n x_ky_k = \sum |y_k|^q $$
+			$$ F \bigl( \nder x \bigr) = \sum_{k = 1}^n x_ky_k = \sum |y_k|^2 \cdot |y_k|^{q - 2} =
+			\sum |y_k|^q $$
 			$$ \bigl\| \nder x \bigr\|_p^p = \sum_{k = 1}^n |x_k|^p =
+			\sum \Bigl| \frac{\ol{y_k}}{|y_k|} \Bigr|^p |y_k|^{p(q - 1)} =
 			\sum |y_k|^{p(q - 1)} \undereq{\frac1p + \frac1q = 1 \implies p + q =
 			pq \implies pq - p = q} \sum_{k = 1}^n |y_k|^q $$
 			\begin{multline*}
@@ -1356,7 +1347,7 @@ $ \mathrm L^p $ для конечных $ p $}
 				\frac{\sum_{k = 1}^n |y_k|^q}{ \bigl( \sum_{k = 1}^n |y_k|^q \bigr)^{\frac 1p}} =
 				\Bigl( \sum_{k = 1}^n |y_k|^q \Bigr)^{1 - \frac1p} =
 				\Bigl( \sum |y_k|^q \Bigr)^{\frac1q} \quad \forall n \implies \\
-				\implies y \in l^q, \quad \|F\| \ge \|y\|_q, \quad F = F_y
+				\implies y \in l^q, \quad \|F\| \ge \|y\|_q
 			\end{multline*}
 
 			Докажем единственность: \\
@@ -1369,9 +1360,9 @@ $ \mathrm L^p $ для конечных $ p $}
 \end{eproof}
 
 \begin{remark}
-	$ T : (l^q) \to \bigl( l^p \bigr)^* : \quad T(y) = F_y $
+	$ T : (l^q) \to \bigl( l^{1 \le p < \infty} \bigr)^* : \quad T(y) = F_y $
 
-	Мы доказали, что, при $ 1 \le p < +\infty $, $ T $ "--- линейный изометрический изоморфизм.
+	Мы доказали, что $ T $ "--- линейный изометрический изоморфизм.
 	Говорят, что $ \bigl( l^p \bigr)^* = l^q $.
 \end{remark}
 
@@ -1438,7 +1429,7 @@ $ \mathrm L^p $ для конечных $ p $}
 			Рассмотрим пробные функции
 			$$ U(x) =
 			\begin{cases}
-				\frac{\ol{g(x)}}{|g(x)|} |g(x)|^{q - 1}, \quad g(x) \ne 0, \\
+				\ol{g(x)} |g(x)|^{q - 2}, \quad g(x) \ne 0, \\
 				0, \quad g(x) = 0
 			\end{cases} $$
 
@@ -1447,18 +1438,17 @@ $ \mathrm L^p $ для конечных $ p $}
 			|g|^q \implies \Bigl( \int\limits_X |U|^p \di \mu \Bigr)^{\frac1p} =
 			\Bigl( \int\limits_X |g|^q \di \mu \Bigr)^{\frac1p} \implies U \in \mathrm L^p $$
 			$$ F_g(U) = \int\limits_X g(x) \frac{\ol{g(x)}}{|g(x)|} |g(x)|^{q - 1}\di \mu =
-			\int\limits_X |g|^q \di \mu = \|g\|^q $$
+			\int\limits_X |g|^q \di \mu = \|g\|_q^q $$
 			$$ \|F_g\| = \sup\limits_{h \ne 0} \frac{\|F_g(h)\|}{\|h\|} \ge \frac{|F_g(U)|}{\|U\|} =
-			\frac{\|g\|^q}{\|g\|^{\frac q p}} = \|g\| $$
+			\frac{\|g\|_q^q}{\|g\|_q^{\frac q p}} = \|g\|_q^{q - \frac q p} = \|g\|_q $$
 		\item $ p = 1, ~ q = \infty $
-
 			\begin{itemize}
 				\item $ \|g\|_\infty = 0 \implies g = 0 $ \ale $ \implies F_g = \On, \quad
 					\|F_g\| = 0 $;
 				\item $ \|g\|_\infty > 0 $
 
 					Возьмём $ c > 0: \quad \|g\| > c $.
-					$$ A \coloneq \Set{x \in X | {} |g(x)| \ge c} \implies +\infty > \mu(A) > 0 $$
+					$$ A \coloneq \Set{x \in X | {} |g(x)| \ge c} \implies 0 < \mu(A) < \infty $$
 
 					Докажем, что такое $ A $ вообще существует.
 					Возьмём $ e \sub A $.
@@ -1536,25 +1526,23 @@ $ \mathrm L^p $ для конечных $ p $}
 		\item Проверим, что $ \pi(x) \in \mathscr Lin(X^*, \Co) $
 
 			Для $ \alpha \in \Co $ и $ f \in X^* $
-			$$ \bigl( \pi(x) \bigr)(f) \bydef = (\alpha f)(x) = \alpha f(x) =
+			$$ \bigl( \pi(x) \bigr)(\alpha f) \bydef (\alpha f)(x) = \alpha f(x) =
 			\alpha \bigl(\pi(x) \bigr)(f) $$
 
-			Для $ f, g \in X^* $ имеем по определению
-			$$ \bigl(\pi(x) \bigr)(f + g) = (f + g)(x) = f(x) + g(x) =
+			Для $ f, g \in X^* $
+			$$ \bigl(\pi(x) \bigr)(f + g) \bydef (f + g)(x) = f(x) + g(x) =
 			\bigl(\pi(x) \bigr)(f) + \bigl(\pi(x) \bigr)(g) $$
-			Значит, $ \pi(x) \in \mathscr Lin(X^*, \Co) $.
 		\item Проверим, что $ \|\pi(x)\| = \|x\| $
 			$$ \bigl| \bigl( \pi(x) \bigr)(f) \bigr| =
 			|f(x)| \le \|f\| \cdot \|x\| \quad \forall f \in X^* \implies
 			\pi(x) \in (X^*)^*, \quad \|\pi(x)\| \le \|x\| $$
 
 			Неравенство в другую сторону имеем по следствию о достаточном числе линейных
-			функционалов:
+			функционалов.
+			Для фиксированного $ x \in X $
 			$$ \exists g \in X^* : \quad \|g\| = 1, \quad g(x) = \|x\| $$
-			(для фиксированного $ x \in X $)
 			$$ \|\pi(x)\| =
-			\sup\limits_{f \in X^* : ~ \|f\| \le 1} \bigl| \bigl(\pi(x)\bigr)(f) \bigr|
-			\underset{\text{можно взять такое } g}\ge
+			\sup\limits_{\|f\| \le 1} \bigl| \bigl(\pi(x)\bigr)(f) \bigr| \ge
 			\bigl| \bigl(\pi(x)\bigr)(g)\bigr| = |g(x)| = \|x\| $$
 		\item Проверим, что $ \pi \in \mathscr Lin(X, X^{**}) $
 			\begin{itemize}
@@ -1589,14 +1577,11 @@ $ \mathrm L^p $ для конечных $ p $}
 \begin{definition}
 	Пространство $ X $ называется \emph{рефлексивным}, если $ \pi(X) = X^{**} $, \ie $ \pi $
 	сюръективно, \ie
-	$$ \forall G \in (X^*)^* \quad \exists x \in X : \quad G = G_x \quad
-	\bigl( \text{или } G = \pi(x) \bigr) $$
+	$$ \forall G \in (X^*)^* \quad \exists x \in X : \quad G = G_x = \pi(x) $$
 \end{definition}
 
 \begin{implication}
-	$ X $ рефлексивно.
-
-	Тогда $ X $ "--- банахово.
+	$ X $ рефлексивно $ \implies X $ "--- банахово.
 \end{implication}
 
 \begin{implication}

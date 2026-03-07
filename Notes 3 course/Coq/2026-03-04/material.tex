@@ -1,0 +1,136 @@
+\chapter{Семантики языков программирования}
+
+\section{Язык выражений}
+
+$$ \llb \cdot \rrb : \mathcal E \to (\Sigma \to \Z) $$
+$$ \llb \cdot \rrb_s : \mathcal E \to \underbrace{\Set{\text{Int}, \text{Bool}}_\bot}_T $$
+
+$ \Gamma \vdash e : T $ "--- judgement (суждение).
+
+$$ \Gamma \vdash e : \text{Bool} $$
+$$ \Gamma \vdash e : \text{Int} $$
+$$ \Gamma \vdash e : \bot $$
+
+$$ \llb \text{Int} \rrb = \Z, \quad \llb \text{Bool} \rrb = \Set{0, 1}, \quad \llb \bot \rrb = \bot $$
+$$ \llb \Gamma = \Set{\sigma | \forall x \quad \sigma x \in \llb \Gamma x \rrb} $$
+
+\begin{undefthm}{Наша семантика.}
+	$$ \llb n \rrb = \sigma \mapsto w $$
+	$$ \llb x \rrb = \sigma \mapsto \sigma x $$
+	$$ \llb l \otimes r \rrb = \sigma \mapsto \llb l \rrb \oplus \llb r \rrb $$
+\end{undefthm}
+
+Такой стиль описания семантик называется \emph{денотационным}.
+
+\begin{undefthm}{Вторая наша семантика.}
+	$$ \Gamma \vdash x : \Gamma x, \quad \Gamma \vdash n : \text{Int} $$
+	$$ \frac{\Gamma \vdash l : \text{Int} \quad r : \text{Int}}{\Gamma \vdash l
+		\begin{subarray}{c}
+			+ \\
+			- \\
+			*
+		\end{subarray} r : \text{Int}}, \quad
+		\frac{\Gamma \vdash l : \text{Int} \quad \Gamma \vdash r : \text{Int}}{\Gamma \vdash l
+		\begin{subarray}{c}
+			/ \\
+			\%
+		\end{subarray} r : \bot} $$
+	$$ \frac{\Gamma \vdash l : \text{Int} \quad \Gamma \vdash r : \text{Int}}{\Gamma \vdash l
+		\begin{subarray}{c}
+			< \\
+			\le \\
+			> \\
+			\ge \\
+			= \\
+			\ne
+		\end{subarray} r : \text{Bool}}, \quad
+	\frac{\Gamma \vdash l : \text{Bool} \quad \Gamma \vdash r : \text{Bool}}{\Gamma \vdash l
+		\begin{subarray}{c}
+			\vee \\
+			\amp
+		\end{subarray} r : \text{Bool}} $$
+	И ещё одно правило, когда один из аргументов не определён (тогда и результат не определён).
+\end{undefthm}
+
+\begin{statement}
+	$$ \forall \Gamma, e, T \quad \Gamma \vdash e : T \stackrel?\iff
+	\forall \sigma \in \llb \Gamma \rrb \quad \llb e \rrb_\sigma \in \llb T \rrb $$
+\end{statement}
+
+$ \implies $ называется ``\emph{безопасность}'' (\emph{type safety}).
+$ \impliedby $ называется ``\emph{полнота}'' (\emph{type completeness}).
+
+\begin{proof}[безопасность]
+	Структурная индукция.
+\end{proof}
+
+\begin{proof}[неполнота]
+	Нужно доказать, что
+	$$ \forall \sigma ~ \forall e \quad \llb e \rrb_\sigma = z \stackrel?\implies
+	\sigma \in \llb \Gamma \rrb \quad \Gamma \vdash e : T \quad z \in \llb T \rrb $$
+
+	Это верно не всегда:
+	$$ \sigma = [x = 1, ~ y = 1] \quad \llb x \vee y \rrb_\sigma = 1 $$
+	$ \sigma $ лежит в такой интерпретации:
+	$$ \sigma \in \llb x : \text{Int}, ~ y : \text{Int} \rrb \vdash x \vee y : \bot $$
+\end{proof}
+
+Можно считать, что существует только один тип (и неопределённость тоже лежит в этом типе), то будет
+и полнота и безопасность, но это бесполезно.
+Почти для любой нетривиальной безопасной системы типов, полноты не будет (по теореме Гильберта).
+
+Рассмотрим выражение $ e_1 / e_2 $.
+Сейчас мы ему приписываем тип $ \bot $, поскольку $ e_2 $ может быть равно нулю.
+Если бы мы могли доказать, что $ e_2 $ не обращается в ноль (в некоторых случаях это можно
+доказать), то можно было бы ввести правило
+$$ \frac{\Gamma \vdash e_1 : \text{Int} \quad \Gamma \vdash e_2 : \text{Int} \quad \forall \sigma ~
+\llb e_2 \rrb_\sigma \ne 0}{\Gamma \vdash e_1/e_2 : \text{Int}} $$
+Но $ \forall \sigma ~ \llb e_2 \rrb_\sigma \ne 0 $ "--- это одна неразрешимая проблема.
+
+\section{Ещё два способа писания семантик}
+
+\subsection[Операционная семантика большого шага]
+{Операционная семантика большого шага (\textenglish{Big-Step Operational Semantics})}
+
+Для начала надо описать \emph{отношение перехода} (\emph{transition relation}):
+$$ \text{``$ \implies $''} \subseteq \Sigma \times \mathcal E \times \Z $$
+Обычно используется инфиксная запись:
+$$ \underset{\in \Sigma}c \xRightarrow{e \in \mathcal E} \underset{\in \Z}z $$
+
+Определим отношение перехода для языка выражений:
+$$ \sigma \xRightarrow{n} n $$
+$$ \sigma \xRightarrow{x} \sigma x $$
+$$ \frac{\sigma \xRightarrow{e} x \quad \sigma \xRightarrow{r} y}
+{\sigma \xRightarrow{e \otimes r} x \oplus y} $$
+
+Теперь семантика определяется так:
+$$ \frac{\sigma \xRightarrow{e} z}{\llb e \rrb_\sigma = z} $$
+
+$$ \llb (x + y) * (z + r) \rrb $$
+В каком порядке надо посчитать множители?
+Эта семантика нам не даёт ответа.
+$$ \frac{\dfrac{\sigma \dots}{\sigma \xRightarrow{x + y} \dots} \quad
+\dfrac{\sigma \xRightarrow{z} \sigma z \quad \sigma \xRightarrow{r} \sigma r}
+{\sigma \xRightarrow{z + r} \dots}}
+{\sigma \xRightarrow{(x + y) * (z + r)} \dots} $$
+
+\subsection{Операционная семантика малого шага
+(\texorpdfstring{\textenglish{Small-Step Operational Semantics}}{Small-Step Operational Semantics})}
+
+$$ \text{``$ \to $''} \subseteq \Sigma \times \mathcal E \times \Z \cup
+\Sigma \times \mathcal E \times \mathcal E $$
+
+$$ \sigma \xrightarrow{z_1 \otimes z_2} z_1 \oplus z_2, \quad \sigma \xrightarrow{x} \sigma x $$
+
+$$ \frac{\sigma \xrightarrow{e} e', \quad e \notin \Z}{\sigma \xrightarrow{e \otimes r}{e' \otimes r}} $$
+$$ \frac{\sigma \xrightarrow{e} z, \quad e \notin \Z}{\sigma \xrightarrow{e \otimes r}{z \otimes r}} $$
+$$ \frac{\sigma \xrightarrow{\Gamma}{z'}}{\sigma \xrightarrow{z \otimes r} z \oplus z'} $$
+$$ \frac{\sigma \xrightarrow{r} r'}{\sigma \xrightarrow{z \otimes r} z \otimes r} $$
+
+В такой семантике мы строим последовательность вывода:
+$$ \sigma \xrightarrow{e} r', \quad \sigma \xrightarrow{e'} e'', \quad \dots $$
+
+Семантики большого и малого шага эквивалентны функционально (то есть, одинаковым программам они
+приписывают одинаковые результаты).
+Но, несмотря на это, у них разная доказательная сила: в семантике малого шага нельзя доказать, что
+программа, которая падает, не эквивалентна программе, которая зацикливается.

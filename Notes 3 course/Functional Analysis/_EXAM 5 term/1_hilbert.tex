@@ -6,7 +6,7 @@
 полноты ОНС}
 
 \begin{theorem}
-	$ H $ "--- гильбертово, $ \quad \set{e_n}_{n = 1}^\infty $ "--- \textbf{ОНС}
+	$ H $ "--- гильбертово, $ \quad \set{e_n}_{n = 1}^\infty $ "--- ОНС
 
 	Следующие условия равносильны:
 	\begin{enumerate}
@@ -86,8 +86,8 @@
 	Существует всюду плотное $ \set{x_n}_{n = 1}^\infty $, \ie $ \ol{\set{x_n}} = H $.
 	Значит, $ \set{x_n}_{n = 1}^\infty $ "--- полная, \ie $ \ol{\mathscr L\set{x_n}} = H $.
 
-	Положим $ x_1 = \dots = x_{n_1 - 1} = 0, \quad x_{n_1} \ne 0, \quad
-	z_1 \coloneq x_{n_1}, \quad L_1 = \mathscr L\set{z_1} $.
+	Пусть $ x_1 = \dots = x_{n_1 - 1} = 0, \quad x_{n_1} \ne 0 $.
+	Положим $ z_1 = x_{n_1}, \quad L_1 = \mathscr L\set{z_1} $.
 	$$ L_1 = \mathscr L \set{x_1, \dots, x_{n_1}} $$
 	$$ x_{n_1 + 1} \in L_1, \dots, x_{n_2 - 1} \in L_1, \quad x_{n_2} \notin L_1, \quad
 	z_2 \coloneq x_{n_2}, \quad L_2 = \mathscr L\set{z_1, z_2} $$
@@ -120,9 +120,9 @@
 	Известно, что в $ H $ существует ОНБ $ \set{f_n}_{n = 1}^\infty $.
 	$$ x \in H \quad x = \sum_{n = 1}^\infty (x, f_n)f_n $$
 	Определим оператор $ T : H \to l^2 $:
-	$$ Tx = \set{(x, e_n)}_{n = 1}^\infty $$
+	$$ Tx = \set{(x, f_n)}_{n = 1}^\infty $$
 	В $ l^2 $ мы попадаем в силу равенства Парсеваля:
-	$$ \|x\|^2 = \sum_{n = 1}^\infty |(x, e_n)|^2 \implies
+	$$ \|x\|^2 = \sum_{n = 1}^\infty |(x, f_n)|^2 \implies
 	\begin{cases}
 		Tx \in l^2, \\
 		T \text{ "--- изометрия, \ie~} \|Tx\|_2 = \|x\|_H.
@@ -131,9 +131,7 @@
 	Из свойств скалярного произведения очевидно, что $ T \in \mathscr Lin(H, l^2) $.
 	$$ \|Tx\| = \|x\| \implies \|T\| = 1, \quad T \in \mathscr B(H, l^2) $$
 
-	Проверили, что $ T(H) \sub l^2 $.
-	Докажем равенство.
-
+	Докажем, что $ T $ "--- сюръекция.
 	Возьмём $ y = \set{y_n}_{n = 1}^\infty \in l^2 $.
 	$$ \sum_{n = 1}^\infty |y_n|^2 = \|y\|_2^2 < +\infty $$
 	$$ g_n \coloneq \sum_{j = 1}^n y_j f_j \in H $$
@@ -145,10 +143,8 @@
 	$$ \|g_m - g_n\|^2 = \Bigl\| \sum_{j = n + 1}^m y_jf_j \Bigr\|^2 =
 	\sum_{j = n + 1}^m |y_j|^2 < \eps $$
 	Значит, $ \set{g_n} $ фундаментальна.
-
-	$$ \underimp{H \text{ "--- гильбертово }} \exists g = \lim g_n \implies
-	g = \sum_{j = 1}^\infty y_jf_j \underimp{\text{разложение единственно}}
-	e_j = (g, f_j) \implies T(g) = y $$
+	$$ \implies \exists g = \lim g_n \implies
+	g = \sum_{j = 1}^\infty y_jf_j \implies T(g) = \Set{y_j} = y $$
 \end{proof}
 
 \section{Классические ряды Фурье}
@@ -174,9 +170,9 @@
 	\int_{-\pi}^\pi \cos(nx) \cos (mx) \di x =
 	\begin{cases}
 		0, \quad n \ne m, \\
-		\pi, \quad n = m.
-	\end{cases} $$
-	$$ \int_{-\pi}^\pi 1 \di x = 2\pi $$
+		\pi, \quad n = m,
+	\end{cases} \quad \int_{-\pi}^\pi 1 \di x = 2\pi $$
+	Значит, $ \Set{1, \cos nx, \sin nx} $ "--- ортогональная система.
 
 	$ f \in \mathrm L^2[-\pi, \pi], \quad \mathcal C[-\pi, \pi] $ плотно в $ \mathrm L^2[-\pi, \pi] $
 	$$ \exists g \in \mathcal C[-\pi, \pi] : \quad \|f - g\|_2 < \eps $$
@@ -196,9 +192,9 @@
 	\eps \sqrt{2\pi} $$
 	$$ \|f - h\|_2 \le \|f - g\|_2 + \|g - h\|_2 $$
 	$$ \|f - T_n\|_2 \le \underbrace{\|f - g\|_2}_{< \eps} + \|g - T_n\|_2 <
-	\eps + \|g - h\|_2 + \|h - T_n\| + \|h - T_n\|_2 < 3\eps + \eps \sqrt{2\pi} $$
+	\eps + \|g - h\|_2 + \|h - T_n\|_2 < 2\eps + \eps \sqrt{2\pi} $$
 
-	Базис:
+	ОНБ:
 	$$ \set{\frac1{\sqrt{2\pi}}, \frac{\cos(nx)}{\sqrt\pi}, \frac{\sin(nx)}{\sqrt\pi}}_{n \in \N} $$
 	Коэффициенты Фурье:
 	$$ a_k = \frac1\pi \int_{-\pi}^\pi f(x) \cos (kx) \di x, \quad
@@ -206,10 +202,8 @@
 	$$ a_0 = \frac1{2\pi} \int_{-\pi}^\pi f(x) \di x $$
 	$$ S_n(x) = a_0 + \sum_{k = 1}^n \bigl( a_k \cos(kx) + b_k \sin(kx) \bigr) $$
 
-	Ряд Фурье сходится в функции в пространстве $ \mathrm L^2 $:
+	Ряд Фурье сходится к функции в пространстве $ \mathrm L^2 $:
 	$$ \forall f \in \mathrm L^2 [-\pi, \pi] \quad \|f - S_n\|_2 \underarr{n \to \infty} 0 $$
-	То есть,
-	$$ \lim \Bigl( \int_{-\pi}^\pi |f(x) - S_n(x)|^2 \di x \Bigr)^{\frac12} = 0 $$
 \item $ \mathrm L_\Co^2 [-\pi, \pi], \quad f \in \mathrm L_\Co^2 [-\pi, \pi] $
 	$$ f = u + \ii v, \quad u, v \in \mathrm L_\R^2 [-\pi, \pi] $$
 

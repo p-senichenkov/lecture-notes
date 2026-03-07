@@ -1,0 +1,335 @@
+\chapter{Общие слова про уравнения}
+
+\section{Продолжение про корректность}
+
+\begin{notation}
+	$ \mathcal{CB}(\R) $ "--- непрерывные ограниченные функции на $ \R $.
+\end{notation}
+
+\begin{eg}[Ж. Адамар]
+	Приведём пример, когда есть разрешимость и единственность, но нет непрерывной зависимости.
+
+	Рассмотрим задачу Коши для уравнения Лапласса.
+	$$ \Delta u = 0 $$
+	Поставим начальные условия при $ y = 0 $, задачу будем решать в полоске $ \Pi_\delta =
+	\Set{y \in [-\delta, \delta]} $.
+	$$
+	\begin{cases}
+		u\bigr|_{y = 0} = \phi(x) \\
+		u_y \bigr|_{y = 0} = 0
+	\end{cases} $$
+	$$ Y = \mathcal{CB}(\R), \quad \|\phi\|_{\mathcal{CB}} = \sup|\phi| $$
+	$$ X = \mathcal{CB}(\roverline[0.3pt] \Pi_\delta), \quad \|u\|_{\mathcal CB} = \sup|u| $$
+
+	Возьмём
+	$$ \phi_k(x) = \frac1k \cos(kx) $$
+
+	Знаем, что решение существует и единственно:
+	$$ u_k(x, y) = \frac1k \cos(kx) \ch(ky) $$
+
+	Попробуем усилить требования:
+	$$ Y = \mathcal{CB}^1(\R), \quad \|\phi\|_{\mathcal{CB}^1} = \sup|\phi| + \sup|\phi'| $$
+	(это означает, что и функция, и её производная непрерывны и ограничены)
+	$$ \phi_k(x) = \frac1{k^2} \cos(kx) $$
+	$$ u_k(x, y) = \frac1{k^2} \cos(kx) \ch(ky) $$
+
+	Можно потребовать любую априорную гладкость, но последовательность решений всё равно будет
+	расходиться.
+\end{eg}
+
+\chapter{Волновое уравнение}
+
+$$ u_{tt} = -a^2 \Delta u = f(x, t), \quad x \in \R^n, \quad t \ge 0 $$
+
+Характеристической поверхностью будет конус:
+$$ |x - x^0|^2 - a^2 (t - t^0)^2 = 0 $$
+
+Нас будет интересовать только нижняя его часть.
+
+Сечение конуса плоскостью $ t = 0 $ образует шар $ \Omega_0 = \mathtt B_{at^0}(x^0) $.
+Сечение некоторой плоскостью $ T $ обозначим $ \Omega_T $.
+Множество, лежащее между двумя плоскостями, обозначим $ K_T $.
+
+\begin{theorem}[Энергетическое неравенство]
+	$ u \in \mathcal C^2(\ol K), \quad u_{tt} - a^2 \Delta u = 0 $ в $ \ol K $
+
+	$$ \int\limits_{\Omega_T}(u_t^2 + a^2 |\mathcal Du|^2) \di x \le \int\limits_{\Omega_0}
+	(u_t^2 + a^2|\mathcal Du|^2) \di x $$
+\end{theorem}
+
+\begin{proof}
+	Умножим однородное уравнение на $ u_t $ и распишем $ \Delta $:
+	$$ u_{tt}u_t - a^2 \sum_i \mathcal D_i \mathcal D_i u \cdot u_t = 0 $$
+	Проинтегрируем:
+	$$ \int\limits_{K_T} u_{tt}u_t - a^2 \sum_i \mathcal D_i \mathcal D_i u \cdot u_t \di x \di t =
+	0 $$
+	$$ u_{tt} \cdot u_t = \frac\partial {\partial t} \Bigl( \frac12 u_t^2 \Bigr) $$
+	$$ \mathcal D_i \mathcal D_i u \cdot u_t = \mathcal D_i \bigl( \mathcal D_i u \cdot u_t \bigr)
+	- \mathcal D_i u \cdot \mathcal D_i u_t =
+	\mathcal D_i (\mathcal D_i u \cdot u_t) - \pder t
+	\Bigl( \frac12(\mathcal D_i u)^2 \Bigr) $$
+	\begin{multline*}
+		0 = \frac12 \int\limits_{K_T} \Bigl\lgroup \pder t (u_t^2) - 2 a^2 \sum_i \mathcal D_i
+		(\mathcal D_i u \cdot u_t) + a^2 \pder t \bigl( (\mathcal D_i u)^2 \bigr) \Bigr\rgroup \di x
+		\di t \undereq{\text{ф. Гаусса"--~Остроградского}} \\
+		= \frac12 \int\limits_{\partial K_T} u_t^2 \cdot \vv n_t - 2a^2 \sum_i \mathcal D_i u
+		\cdot u_t \cdot \vv n_i + a^2 \sum_i \bigl( \mathcal D_i u \bigr)^2 \vv n_t \di S = I
+	\end{multline*}
+	Внешняя нормаль к верхнему основанию направлена вверх вдоль оси $ t $.
+	Значит, $ \vv n_t = 1 $, $ \vv n_i = 0 $.
+	Для нормали к нижнему основанию "--- аналогично.
+	$$ I = \frac12 \int\limits_{\Omega_T} u_t^2 + a^2 |\mathcal D u|^2 \di x -
+	\frac12 \int\limits_{\Omega_0} u_t^2 + a^2|\mathcal Du|^2 \di x +
+	\int\limits_{S_{\text{бок}}} \dots $$
+	Нужно доказать, что $ \int\limits_{S_{\text{бок}}} \ge 0 $.
+
+	Знаем, что на поверхности характеристического конуса выполняется:
+	$$ \vv n_t^2 - a^2 |\vv n_x|^2 = 0 $$
+	$$ u_t^2 \vv n_t - 2a^2 \sum_i \mathcal D_i u \cdot u_t \vv n_i +
+	a^2 \sum_i (\mathcal D_i u)^2 \vv n_t \ge 0 $$
+	Домножим на $ \vv n_t $:
+	$$ u_t^2 \vv n_t^2 - 2a^2 \sum_i \mathcal D_i u \cdot u_t \vv n_i \vv n_t +
+	a^2 \sum_i (\mathcal D_i u)^2 \vv n_t^2 \ge 0 $$
+	$$ a^2 \sum_i \Bigl( u_t^2 \vv n_i^2 - 2 \mathcal D_i u \cdot u_t \vv n_i \vv n_t +
+	(\mathcal D_i u)^2 \vv n_t^2 \Bigr) \ge 0 $$
+	В скобках стоит полный квадрат.
+\end{proof}
+
+\begin{implication}
+	Возьмём некоторую точку $ x^0, t^0 $, опустим из неё характеристический конус на
+	плоскость $ t = 0 $.
+
+	$ u \in \mathcal C^2(\ol K), \quad u_{tt} - a^2 \Delta u = 0 $ в $ K $
+	$$
+	\begin{cases}
+		u \bigr|_{t = 0} = 0 \\
+		u_t \bigr|_{t = 0} = 0
+	\end{cases} \text{ в } \mathtt B_{at_0}(x^0) $$
+
+	Тогда $ u \equiv 0 $ в $ \ol K $.
+\end{implication}
+
+\begin{proof}
+	$$ \int\limits_{\Omega_T} u_t^2 + a^2 |\mathcal Du|^2 \di x \le 0 $$
+	\TODO{Тут было много махания руками, надо бы разобраться}
+\end{proof}
+
+\section{Физические следствия}
+
+Рассмотрим однородное волновое уравнение
+$$
+\begin{cases}
+	u_{tt} - a^2 \Delta u = 0 \\
+	u\bigr|_{t = 0} = \phi(x) \\
+	u_t \bigr|_{t = 0} = \psi(x)
+\end{cases} $$
+
+Начальные данные имеют носитель в $ \ol\Omega $: $ \operatorname{supp}(\phi, \psi) \sub \ol\Omega $.
+
+Имеются некоторые точки $ t^0 $ и $ x^0 $.
+Из точки $ t^0 $ выпустим характеристический конус на плоскость $ t = 0 $.
+
+Обозначим за $ t_* $ точку, в которой волна дойдёт до точки $ x^0 $.
+Мы можем гарантировать, что решение равно нулю от $ x^0 $ до $ t_* $.
+
+При этом,
+$$ t_* = \frac{\operatorname{dist}(x^0, \ol\Omega)}a $$
+
+\section{Решение задачи Коши при \texorpdfstring{$ n = 1 $}{n = 1}}
+
+$$ u_{tt} - a^2u_{xx} = 0, \quad x \in \R, \quad t \ge 0 $$
+$$
+\begin{cases}
+	u \bigr|_{t = 0} = \phi(x) \\
+	u_t \bigr|_{t = 0} = \psi(x)
+\end{cases} $$
+
+Сделаем замену переменных:
+$$ \xi = x + at, \quad \eta = x - at $$
+$$ u_t = u_\xi \cdot a + u_\eta \cdot (-a) $$
+$$ u_{tt} = u_{\xi\xi} a^2 + u_{\xi\eta} (-a^2) + u_{\eta\xi}(-a^2) + u_{\eta\eta}a^2 =
+a^2(u_{\xi\xi} - 2u_{\xi\eta} + u_{\eta\eta}) $$
+$$ u_x = u_\xi + u_\eta $$
+$$ u_{xx} = u_{\xi\xi} + u_{\xi\eta} + u_{\eta\xi} + u_{\eta\eta} =
+u_{\xi\xi} + 2u_{\xi\eta} + u_{\eta\eta} $$
+$$ \underimp{u_{tt} - a^2u_{xx} = 0} u_{\xi\eta} = 0 \implies u_\xi = C(\xi) $$
+
+$$ u = C_1(\xi) + C_2(\eta) $$
+$$ u(x, t) = C_1(x + at) + C_2(x - at) $$
+
+$$
+\begin{cases}
+	C_1(x) + C_2(x) = \phi(x) \\
+	aC_1'(x) - aC_2'(x) = \psi(x)
+\end{cases} $$
+$$ C_1'(x) + C_2'(x) = \phi'(x) $$
+$$ C_1'(x) = \frac{a\phi'(x) + \psi(x)}{2a} $$
+$$ C_1(x) = \frac12 \phi(x) + \frac1{2a} \int_0^x \psi(y) \di y + \gamma $$
+Подставим в первое уравнение:
+$$ C_2(x) = \frac12 \phi(x) - \int_0^x \psi(y) \di y - \gamma $$
+\begin{equ}{1}
+	u(x, t) = \frac{\phi(x + at) + \phi(x - at)}2 + \frac1{2a}\int_{x - at}^{x + at} \psi(y) \di y
+\end{equ}
+
+\begin{statement}
+	$ \phi \in \mathcal C^2(\R), \quad \psi \in \mathcal C^1(\R) $
+
+	Тогда $ u \in \mathcal C^2(\R \times \ol \R_+) $ (задаваемая формулой \eref{1}) является
+	решением задачи Коши.
+\end{statement}
+
+Формула \eref{1} называется \emph{формулой Д'Аламбера}.
+
+\section{Колебания полуограниченной струны}
+
+Предположим, что струна бесконечна только в одну сторону.
+А с другой стороны жёстко закреплена (существуют и другие варианты).
+
+$$ u_{tt} - a^2 u_{xx} = 0, \quad x \ge 0, \quad t \ge 0 $$
+$$
+\begin{cases}
+	u\bigr|_{t = 0} = \phi(x) \\
+	u_t\bigr|_{t = 0} = \psi(x) \\
+	u\bigr|_{x = 0} = 0
+\end{cases} $$
+
+Понятно, что $ \phi(0) = 0 $, $ \psi(0) = 0 $, $ \phi''(0) = 0 $ "--- это \emph{необходимое условие
+разрешимости} (чтобы это увидеть, нужно расписать соответствующие производные в нуле).
+
+Будем решать другую задачу.
+
+Рассмотрим вспомогательную задачу Коши:
+$$
+\begin{cases}
+	u_{tt} - a^2u_{xx} = 0 \\
+	u\bigr|_{t = 0} = \vawe\phi(x) \\
+	u_t\bigr|_{t = 0} = \vawe\psi(x)
+\end{cases} $$
+
+$$ \vawe \psi(x) =
+\begin{vars}
+	\phi(x), \quad x \ge 0 \\
+	-\phi(-x), \quad x \le 0
+\end{vars}, \quad \vawe\psi(x) =
+\begin{vars}
+	\psi(x), \quad x \ge 0 \\
+	-\psi(-x), \quad x \le 0
+\end{vars} $$
+
+Нужно проверить, что функции $ \vawe\phi $ и $ \vawe\psi $ имеют нужную гладкость.
+
+$ \vawe\phi $ непрерывна в нуле, \as у неё производные и справа, и слева равны нулю (на самом
+деле, производная нечётной функции чётная).
+Вторая производная будет непрерывна из необходимых условий.
+Значит, $ \phi \in \mathcal C^2(\ol \R_+) \implies \vawe\phi \in \mathcal C^2(\R) $.
+Аналогично для $ \vawe\psi $.
+
+Эта задача имеет решение по формуле Д'Аламбера.
+$$ u(x, t) = \frac{\vawe\phi(x + at) + \vawe\phi(x - at)}2 +
+\frac1{2a} \int_{x - at}^{x + at} \vawe\psi(y) \di y $$
+В силу нечётности функций, $ u(0, t) = 0 $.
+
+Выразим решение через $ \phi $ и $ \psi $.
+На правой полуплоскости $ \vawe\phi(x + at) = \phi(x + at) $.
+Нужно рассмотреть $ \vawe\phi(x - at) $.
+\begin{itemize}
+	\item $ x \ge at $
+		$$ u(x, t) = \frac{\phi(x + at) + \phi(x - at)}2 +
+		\frac1{2a} \int_{x - at}^{x + at}\psi(y) \di y $$
+	\item $ x \le at $
+
+		Отрезок интегрирования разделим до симметричной точки (то есть, $ [x - at, at - x] $ и
+		$ [at - x, x + at] $).
+		Первый интеграл будет от нечётной функции по симметричному промежутку.
+		$$ u(x, t) = \frac{\phi(x + at) - \phi(at - x)}2 +
+		\frac1{2a} \int_{at - x}^{x + at} \psi(y) \di y $$
+\end{itemize}
+
+\subsection{Отступление}
+
+Вернёмся к формуле Д'Аламбера.
+$$ u(x, t) = \frac{\phi(x + at) + \phi(x - at)}2 + \frac1{2a} \int_{x - at}^{x + at}\psi(y) \di y $$
+Имеем два слагаемых, одно зависит от $ \phi $, другое "--- от $ \psi $.
+Это так и должно быть, потому что задача линейная, а значит, все данные можно рассматривать
+по-отдельности.
+Физики это называют \emph{``принцип суперпозиции''}.
+
+Если второе слагаемое продифференцировать по $ t $, то получим первое, в котором вместо $ \phi $
+стоит $ \psi $.
+$$
+\begin{cases}
+	u_{tt} - a^2 \Delta u = f(x, t) \quad \text{в } \R^n \times \ol \R_+ \\
+	u\bigr|_{t = 0} = \phi(x) \text{ в } \R^n \\
+	u\bigr|_{t = 0} = \psi(x) \text{ в } \R^n
+\end{cases} $$
+
+Разобьём задачу на три части:
+\begin{enumerate}
+	\item
+		$
+		\begin{cases}
+			u_{tt} - a^2\Delta u = 0 \\
+			u\bigr|_{t = 0} = 0 \\
+			u_t\bigr|_{t = 0} = \psi(x)
+		\end{cases} $
+	\item
+		$
+		\begin{cases}
+			u_{tt} - a^2 \Delta u = 0 \\
+			u\bigr|_{t = 0} = \phi(x) \\
+			u\bigr|_{t = 0} = 0
+		\end{cases} $
+	\item
+		$
+		\begin{cases}
+			u_{tt} - a^2 \Delta u = f(x, t) \\
+			u\bigr|_{t = 0} = 0 \\
+			u\bigr|_{t = 0} = 0
+		\end{cases} $
+\end{enumerate}
+
+Если мы научимся решать каждую из этих задач, то, по линейности, их сумма будет решением
+исходной задачи.
+
+\begin{statement}
+	Пусть $ u_\psi^{\rom1} $ "--- решение первой задачи.
+	Тогда $ u_\phi^{\rom2} = \pder t u_\phi^{\rom1} $.
+\end{statement}
+
+\begin{proof}
+	Пусть $ v_\phi = \pder t u_\phi^{\rom1} $.
+	$$ (v_\phi)_{tt} - a^2 \Delta v_\phi = \pder t \Bigl( (u_\phi^{\rom1})_{tt} -
+	a^2 \Delta u_\phi^{\rom1} \Bigr) = 0 $$
+	$$ v_\phi \bigr|_{t = 0} = \pder t u_\phi^{\rom1} \bigr|_{t = 0} = \phi(x) $$
+	$$ (v_\phi)_t \bigr|_{t = 0} = \frac{\partial^2}{\partial t^2} u_\phi^{\rom1} \bigr|_{t = 0} =
+	a^2 \Delta u_\phi^{\rom1} \bigr|_{t = 0} = 0 $$
+\end{proof}
+
+Рассмотрим вспомогательную задачу $ v(x, t, \tau) $.
+$$
+\begin{cases}
+	v_{tt} - a^2 \Delta v = 0, \quad t \ge \tau \\
+	v\bigr|_{t = \tau} = 0 \\
+	v_t\bigr|_{t = \tau} = f(x, \tau)
+\end{cases} $$
+
+\begin{statement}
+	$$ u_{f(x, t)}^{\rom3} = \int_0^t v(x, t, \tau) \di \tau $$
+\end{statement}
+
+\begin{proof}
+	$$ u_f^{\rom3}\bigr|_{t = 0} = \int_0^0 = 0 $$
+	$$ \pder t u_f^{\rom3} = \underbrace{v(x, t, t)}_{0} + \int_0^t v_t(x, t, \tau) \di \tau \implies
+	\pder t u_f^{\rom3}\bigr|_{t = 0} = 0 $$
+	$$ \frac{\partial^2}{\partial t^2} u_f^{\rom3} = \underbrace{v_t(x, t, t)}_{f(x, t)} +
+	\int_0^t v_{tt} (x, t, \tau) \di \tau = f(x, t) + a^2 \int_0^t \Delta v(x, t, \tau) \di \tau =
+	f + a^2 \Delta u_f^{\rom3} $$
+\end{proof}
+
+Эта формула называется \emph{формулой Дюамеля}.
+
+\begin{undefthm}{Упражнение.}
+	В явном виде написать решение задачи \rom3.
+\end{undefthm}
+
+\section{Свойства сферических средних}

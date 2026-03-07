@@ -1,0 +1,151 @@
+% vim:foldmethod=marker:foldmarker=(((,))):foldlevel=0
+
+\usepackage{thmtools}
+\usepackage[framemethod=TikZ]{mdframed}
+\mdfsetup{skipabove=.5em, skipbelow=0em}
+
+%: Theorem styles (((
+\theoremstyle{definition}
+
+\declaretheoremstyle[
+    headfont=\bfseries\sffamily\color{ForestGreen!70!black}, bodyfont=\normalfont,
+    mdframed={
+        linewidth=2pt,
+        rightline=false, topline=false, bottomline=false,
+        linecolor=ForestGreen, backgroundcolor=ForestGreen!5,
+    }
+]{thmgreenbox}
+
+\declaretheoremstyle[
+    headfont=\bfseries\sffamily\color{NavyBlue!70!black}, bodyfont=\normalfont,
+    mdframed={
+        linewidth=2pt,
+        rightline=false, topline=false, bottomline=false,
+        linecolor=NavyBlue, backgroundcolor=NavyBlue!5,
+    }
+]{thmbluebox}
+
+\declaretheoremstyle[
+    headfont=\bfseries\sffamily\color{NavyBlue!70!black}, bodyfont=\normalfont,
+    mdframed={
+        linewidth=2pt,
+        rightline=false, topline=false, bottomline=false,
+        linecolor=NavyBlue
+    }
+]{thmblueline}
+
+\declaretheoremstyle[
+    headfont=\bfseries\sffamily\color{RawSienna!70!black}, bodyfont=\normalfont,
+    mdframed={
+        linewidth=2pt,
+        rightline=false, topline=false, bottomline=false,
+        linecolor=RawSienna, backgroundcolor=RawSienna!5,
+    }
+]{thmredbox}
+
+\declaretheoremstyle[
+    headfont=\bfseries\sffamily\color{RawSienna!70!black}, bodyfont=\normalfont,
+    mdframed={
+        linewidth=2pt,
+        rightline=false, topline=false, bottomline=false,
+        linecolor=RawSienna, backgroundcolor=RawSienna!2.5
+    }
+]{thmredline}
+
+\declaretheoremstyle[
+    headfont=\bfseries\sffamily\color{RawSienna!70!black}, bodyfont=\normalfont,
+    numbered=no,
+    mdframed={
+        linewidth=2pt,
+        rightline=false, topline=false, bottomline=false,
+        linecolor=RawSienna, backgroundcolor=RawSienna!1,
+    },
+    qed=\qedsymbol
+]{thmproofbox}
+
+\newcommand\chevron{\square\hspace{-0.82em}\raisebox{0.41em}{\resizebox{0.85em}{0.25em}{\triangledown}}}
+
+\declaretheoremstyle[
+    headfont=\bfseries\sffamily,
+    bodyfont=\normalfont,
+    numbered=yes,
+    mdframed={
+        linewidth=2pt,
+        rightline=false, topline=false, bottomline=false,
+        linecolor=Black, backgroundcolor=Black!1,
+    },
+    qed=\chevron
+]{thproblembox}
+
+%: )))
+
+%: Theorems (((
+
+%: Simple theorems (((
+
+\declaretheorem[style=thmgreenbox, name=Определение]{definition}
+
+\declaretheorem[style=thmbluebox, numbered=no, name=Пример]{eg}
+\declaretheorem[style=thmbluebox, numbered=no, name=Примеры]{egs}
+\declaretheorem[style=thmbluebox, numbered=no, name=Свойство]{property}
+\declaretheorem[style=thmbluebox, numbered=no, name=Свойства]{properties}
+\declaretheorem[style=thmbluebox, numbered=no, name=Алгоритм]{algorithm}
+
+\declaretheorem[style=thmredbox, name=Теорема]{theorem}
+\declaretheorem[style=thmredbox, name=Лемма]{lemma}
+\declaretheorem[style=thmredbox, name=Утверждение]{statement}
+\declaretheorem[style=thmredbox, name=Аксиома]{axiom}
+\declaretheorem[style=thmredbox, numbered=no, name=Утверждения]{statements}
+\declaretheorem[style=thmredbox, numbered=no, name=Следствие]{implication}
+\declaretheorem[style=thmredbox, numbered=no, name=Вывод]{corollary}
+
+\declaretheorem[style=thmblueline, numbered=no, name=Замечание]{remark}
+\declaretheorem[style=thmblueline, numbered=no, name=Примечание]{note}
+
+\declaretheorem[style=thproblembox, name=Задача]{problem}
+
+\newtheorem*{notation}{Обозначение}
+\newtheorem*{remind}{Напоминание}
+
+%: )))
+
+%: Enumerated theorems (((
+
+\newenvironment{props}[1][ ]{\begin{properties}[{#1}]\hfill\begin{enumerate}}{\end{enumerate}\end{properties}}
+\newenvironment{stmts}[1][ ]{\begin{statements}[{#1}]\hfill\begin{enumerate}}{\end{enumerate}\end{statements}}
+\newenvironment{exmpls}[1][ ]{\begin{egs}[{#1}]\hfill\begin{enumerate}}{\end{enumerate}\end{egs}}
+\newenvironment{algo}[1][ ]{\begin{algorithm}[{#1}]\hfill\begin{enumerate}}{\end{enumerate}\end{algorithm}}
+
+\newenvironment{iproof}[1][ ]{\begin{proof}[{#1}]\hfill\begin{itemize}}{\end{itemize}\end{proof}}
+\newenvironment{eproof}[1][ ]{\begin{proof}[{#1}]\hfill\begin{enumerate}}{\end{enumerate}\end{proof}}
+
+%: )))
+
+%: Raised theorems (((
+
+\declaretheorem[style=thmredline, numbered=no, name=Другая формулировка]{restatebase}
+\newenvironment{restate}{\vspace{-.5em}\begin{restatebase}}{\end{restatebase}}
+
+\declaretheorem[style=thmproofbox, name=Доказательство]{replacementproof}
+% proof, moved 0.5em up
+\renewenvironment{proof}{\vspace{-.5em}\begin{replacementproof}}{\end{replacementproof}}
+
+\declaretheorem[style=thmproofbox, name=Без доказательства]{noproofbase}
+% Reasons go inside
+\newenvironment{noproof}{\vspace{-.5em}\begin{noproofbase}}{\end{noproofbase}}
+
+%: )))
+
+%: Theorem-like environments (((
+
+% "undefined theorem" -- theorem-like environment with custom header
+\newmdenv[linewidth=2pt, rightline=false, topline=false, bottomline=false, linecolor=black, backgroundcolor=black!2]{undefinedtheorem}
+\newenvironment{undefthm}[1]{\begin{undefinedtheorem}\textbf{#1 }}{\end{undefinedtheorem}}
+
+% markdown quote
+\newmdenv[linewidth=2pt, rightline=false, topline=false, bottomline=false, linecolor=black!25,
+backgroundcolor=black!2]{mquote}
+
+%: )))
+
+%: )))

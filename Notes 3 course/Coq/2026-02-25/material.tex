@@ -1,0 +1,195 @@
+\chapter{Введение}
+
+\section{Язык выражений}
+
+\begin{statement}
+	$ e_1 + e_2 \sim e_2 + e_1 $
+\end{statement}
+
+\begin{proof}
+	Распишем эквивалентность:
+	$$ \llb e_1 + e_2 \rrb \stackrel?= \llb e_2 + e_2 \rrb $$
+	(по определению эквивалентности)
+	$$ \llb e_1 \rrb + \llb e_2 \rrb \stackrel?=
+	\llb e_2 + \rrb + \llb e_1 \rrb $$
+	(по определению $ \llb \cdot \rrb $)
+	$$ \llb e_1 \rrb =
+	\begin{cases}
+		z_1 \\
+		\bot
+	\end{cases}, \quad e_2 =
+	\begin{cases}
+		z_2 \\
+		\bot
+	\end{cases} $$
+	Нужно рассмотреть 4 случая, получится всё, что нужно.
+\end{proof}
+
+$ 0 \sim x - x $ "--- неверно:
+$$ \llb 0 \rrb = 0, \quad \llb x - x \rrb = \llb x \rrb - \llb x \rrb = \bot - \bot = \bot $$
+
+\subsection{Экскурс в индукцию}
+
+Так выглядит индукция в общем виде:
+$$ \texttt{p\textunderscore ind} = P_\O \to \Bigl( \forall n \quad P_n \to P_{n + 1} \Bigr) \to
+\forall n \quad P_n $$
+
+\begin{minted}{OCaml}
+	let P_ind pbase pstep = fun n ->
+		match n with
+		| 0 -> pbase
+		| n -> pstep (n - 1) (P_ind pbase pstep (n - 1))
+\end{minted}
+
+Нужно доказать \texttt{pbase} и \texttt{pstep}.
+
+$$
+\begin{matrix}
+	\mathscr E = & \N \\
+				 & X \\
+				 & \mathscr E \otimes \mathscr E
+\end{matrix} $$
+
+Доказательство по индукции для такого дерева выглядит так:
+\begin{itemize}
+	\item \textbf{База}
+		$$ \forall n \quad P(\circled{n}) \wedge \forall x \quad P(\circled{x}) $$
+	\item \textbf{Переход}
+		$$ \forall e_1, e_2 \in \mathscr E \quad P(e_1) \to P(e_2) \to P \left(
+			\begin{smallmatrix}
+				& \otimes & \\
+				\diagup & & \diagdown \\
+				e_1 & & e_2
+		\end{smallmatrix} \right) $$
+\end{itemize}
+
+\begin{statement}
+	$ D = \Z_\bot $
+	$$ \forall e \quad \llb e \rrb \ne \bot \implies FV(e) = \O $$
+\end{statement}
+
+\begin{proof}
+	По \textbf{индукции}.
+	\begin{itemize}
+		\item \textbf{База}
+			\begin{itemize}
+				\item $ e = w $
+					$$ \llb n \rrb = n \ne \bot $$
+					$$ FV(n) = \O $$
+				\item $ e = x $
+					$$ \llb x \rrb = \bot $$
+					$$ FV(x) = \Set{x} $$
+			\end{itemize}
+		\item \textbf{Переход}
+			$$ e_1, e_2 $$
+			$$ \llb e_1 \rrb \ne \bot \implies FV(e_1) = \O $$
+			$$ \llb e_2 \rrb \ne \bot \implies FV(e_2) = \O $$
+	\end{itemize}
+\end{proof}
+
+\begin{definition}
+	\emph{Структурная индукция} "--- индукция по структуре программы (выражения).
+\end{definition}
+
+\begin{notation}
+	$ FV(e) $ "--- множество свободных переменных $ e $.
+\end{notation}
+
+\begin{statement}
+	$ \llb e \rrb \ne \bot \stackrel?\impliedby FV(e) = \O $
+\end{statement}
+
+\begin{proof}
+	Хотим доказать, что
+	$$ FV(e) = \O \stackrel?\implies \llb e \rrb \ne \bot $$
+	Воспользуемся \textbf{структурной индукцией}.
+	\begin{itemize}
+		\item \textbf{База}
+			\begin{itemize}
+				\item $ n $
+					$$ FV(n) \ne \O, \quad \llb n \rrb = n $$
+				\item $ x $
+					$$ FV(x) = \Set{x} \ne \O, \quad \llb x \rrb = \bot $$
+			\end{itemize}
+		\item \textbf{Переход}
+			$$ e_1, e_2 $$
+			$$ FV(e_1) = \O \implies \llb e_1 \rrb \ne \bot $$
+			$$ FV(e_2) = \O \implies \llb e_2 \rrb \ne \bot $$
+			$$ (e_1 \otimes e_2) = \O = FV(e_1) \cup FV(e_2) \implies
+			\begin{cases}
+				FV(e_1) = \O \\
+				FV(e_2) = \O
+			\end{cases} $$
+			$$ \llb e_1 \rrb \ne \bot, \quad \llb e_2 \rrb \ne \bot, \quad
+			\llb e_1 \otimes e_2 \rrb = \llb e_1 \rrb \oplus \llb e_2 \rrb \stackrel?\ne \bot $$
+			Это требует, чтобы $ \oplus $ был всюду определён, а это, очевидно, \textbf{неверно}.
+	\end{itemize}
+\end{proof}
+
+$$ \llb \cdot \rrb \mathscr E \to \Z_\bot $$
+Хотим выражения разделить на два сорта: те, у которых есть значение, и те, у которых нет.
+Это можно сделать, просто вычислив значения, но мы так не хотим.
+
+Таким образом, нужно отображение $ \llb \cdot \rrb_s \mathscr E \mapsto \Set{\top, \bot} $:
+$$ \forall e \quad \llb e \rrb_s = \top \iff \llb e \rrb \ne \bot $$
+
+Попробуем его определить индуктивно:
+$$ \llb n \rrb_s = \top $$
+$$ \llb x \rrb_s = \bot $$
+$$ \llb e_1 \otimes e_2 \rrb_s =
+\begin{cases}
+	\bot, \quad \llb e_1 \rrb_s = \bot \vee \llb e_2 \rrb_s = \bot \\
+	\top, \quad \oplus \text{ всюду определена} \\
+	\bot
+\end{cases} $$
+
+Надо проверить, верно ли, что так определённая $ \llb \cdot \rrb_s $
+$$ \forall e \llb e \rrb_s = \top \stackrel?\iff \llb e \rrb \ne \bot $$
+
+Это неверно, так как, например, для деления мы берём второй случай (не всюду определено), и говорим
+везде $ \bot $.
+А это неправда.
+
+Определим семантику так, чтобы можно было учитывать значения переменных.
+$$ \llb \cdot \rrb : \mathscr E \mapsto ??? $$
+
+$$ \llb n \rrb = n $$
+$$ \llb x \rrb = \sigma \mapsto \sigma x $$
+$$ \llb e_1 \otimes e_2 \rrb = \llb e_1 \rrb \oplus \llb e_2 \rrb $$
+
+$$ \llb \cdot \rrb : \mathscr E \mapsto \bigl( \Sigma \to \Z \bigr), \quad
+\Sigma = X \to \Z $$
+$ \Sigma $ называется \emph{состоянием} (\emph{окружением}).
+
+$$ FV(e) $$
+$$ \forall e, \sigma \quad \llb e \rrb \sigma \ne \bot \implies ??? $$
+Понятно, что из этого не следует, что $ FV(e) = \O $.
+$$ \forall e, \sigma \quad \llb e \rrb \sigma \ne \bot \implies \bigl( \forall x \in FV(e) \quad
+\sigma x \text{ определена} \bigr) $$
+Доказывается это \textbf{структурной индукцией} по $ e $.
+
+$$ \llb \cdot \rrb : \mathscr E \to \bigl( \Sigma \to \Z \bigr) $$
+
+$$ \text{Type} = \Set{\text{Int}, \text{Bool}} $$
+$$ \Gamma = X \to \text{Type}_\bot $$
+Построим статическую семантику
+$$ \llb \cdot \rrb_s : \mathscr E \mapsto \bigl( \Gamma \to \text{Type}_\bot \bigr) $$
+$$
+\begin{cases}
+	\llb n \rrb_s = \gamma \to \text{Type} \\
+	\llb x \rrb_s = \gamma \to \gamma x \\
+	\llb e_1 \otimes e_2 \rrb_s = \gamma \to
+	\begin{cases}
+		\bot, \quad \llb e_1 \rrb \gamma = \bot \quad \vee \quad \llb e_2 \rrb = \bot \\
+		\text{Int}, \quad \llb e_1 \rrb \gamma = \text{Int} \wedge \llb e_2 \rrb \gamma = \text{Int}
+		\wegde \otimes = +, -, * \\
+		\bot, \quad \llb e_1 \rrb \gamma = \text{Int} \wedge \llb e_2 \rrb \gamma \text{int} \wedge
+		\otimes = / \% \\
+		\text{Bool}, \quad \llb e_1 \rrb \gamma = \text{Int} \wedge \llb e_2 \rrb \gamma =
+		\text{Int} \wedge \otimes = <, >, \le, \ge, =, \ne \\
+		\text{Bool}, \quad \llb e_1 \gamma = \text{Bool} \wegde \llb e_2 \rrb \gamma = \text{Bool}
+		\wedge \otimes = \amp, \vee
+	\end{cases}
+\end{cases} $$
+
+Можно записать сокращённо, но я не успел.

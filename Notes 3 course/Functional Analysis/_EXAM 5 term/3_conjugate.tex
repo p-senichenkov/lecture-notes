@@ -107,7 +107,7 @@
 			\mathscr B \bigl( \mathrm L^q(\mathbb R^m), \mathrm L^p(\mathbb R^n) \bigr), \quad
 			\|\mathscr K\| \le M $;
 		\item $ \mathscr K^* \in
-			\mathscr B \bigl( \mathrm L^q(\mathbb R^m), \mathrm L^p(\mathbb R^m) \bigr) $
+			\mathscr B \bigl( \mathrm L^q(\mathbb R^n), \mathrm L^p(\mathbb R^m) \bigr) $
 			$$ (\mathscr K^* g)(y) = \int\limits_{\mathbb R^n} K^*(y, x) g(x) \di x $$
 			$$ \implies K^*(y, x) = K(x, y) $$
 	\end{enumerate}
@@ -121,12 +121,12 @@
 	Возьмём $ f \in \mathrm L^q(\R^m) $ и $ x $ такой, что внутренний интеграл конечен.
 	$$ |(\mathscr Kf)(x)| = \Bigl| \int\limits_{\R^m} K(x, y)f(y) \di y \Bigr|
 	\underset{\text{нер-во Гёльдера}}\le
-	\Bigl( \int\limits_{\R^m}|K(x, y)|^p \di y \Bigr)^{\frac1q} \cdot \|f\|_q $$
+	\Bigl( \int\limits_{\R^m}|K(x, y)|^p \di y \Bigr)^{\frac1p} \cdot \|f\|_q $$
 	Возведём в степень $ p $ и проинтегрируем по $ \R^n $:
 	\begin{multline*}
 		\int\limits_{\R^n}|(\mathscr Kf)(x)|^p \di x \le
 		\|f\|_q^p \int\limits_{\R^n} \Bigl( \int\limits_{\R^m}|K(x, y)|^p \di y \Bigr) \di x =
-		M^p \implies \\
+		\|f\|_q^p M^p \implies \\
 		\implies \|\mathscr Kf\|_p \le M\|f\|_q \quad \forall f \in \mathrm L^q \implies
 		\|\mathscr K\| \le M, \quad \mathscr K \in \mathscr B(\dots)
 	\end{multline*}
@@ -260,7 +260,7 @@ $$ \exists ! z \in H : \quad G_y(x) = (x, z), \quad \|z\| = \|G_y\|_{H^*} $$
 \begin{proof}
 	В качестве $ L $ возьмём $ L = T^*(H) $.
 	Возьмём $ x \in L^\perp $.
-	$$ (x, T^*y) = 0 \iff (Tx, y) = 0 \iff Ty = 0 \iff y \in \operatorname{Ker} M $$
+	$$ (x, T^*y) = 0 \iff (Tx, y) = 0 \iff Ty = 0 \iff y \in \operatorname{Ker} T $$
 	$$ \implies \bigl( T^*(H) \bigr)^\perp = \operatorname{Ker}T \implies H =
 	\operatorname{Ker} T \oplus \ol{T^*(H)} $$
 
@@ -417,30 +417,32 @@ $$ \exists ! z \in H : \quad G_y(x) = (x, z), \quad \|z\| = \|G_y\|_{H^*} $$
 		\exists R(\lambda) = \bigl( V(\lambda) \bigr)^{-1} =
 		\frac1\lambda \Bigl( I - \frac1\lambda T \Bigr)^{-1}
 	\end{multline*}
-\item $ \mu \in \rho(T) $
-	$$ \lim\limits_{\lambda \to \mu} \bigl( V(\mu) - V(\lambda) \bigr) =
-	\lim\limits_{\lambda \to \mu} (\mu - \lambda) I = 0 $$
-	По теореме об открытости $ \mathrm{In}(A) $,
-	$$ \phi : A \to A^{-1}, \quad A \in \mathrm{In}(X) \implies \phi \text{ непрерывно} $$
-	$$
-	\begin{rcases}
-		\phi \bigl( V(\lambda) \bigr) = V(\lambda) \\
-		\lim\limits_{\lambda \to \mu} V(\lambda) = V(\mu)
-	\end{rcases} \implies \lim\limits_{\lambda \to \mu} R(\lambda) = R(\mu) $$
-
-	Пусть $ |\lambda| > \|T\| $.
-	$$ \lim\limits_{\lambda \to \infty} \Bigl( I - \frac1\lambda T \Bigr) = I $$
-	$$ R(\lambda) = \frac1\lambda \Bigl( I - \frac1\lambda T \Bigr)^{-1} $$
-	По непрерывности,
-	$$ \lim \Bigl( I - \frac1\lambda T \Bigr)^{-1} = I \implies
-	\lim R(\lambda) = 0 $$
+\item
+	\begin{itemize}
+		\item $ \mu \in \rho(T) $
+			$$ \lim\limits_{\lambda \to \mu} \bigl( V(\mu) - V(\lambda) \bigr) =
+			\lim\limits_{\lambda \to \mu} (\mu - \lambda) I = 0 $$
+			По теореме об открытости $ \mathrm{In}(A) $,
+			$$ \phi : A \to A^{-1}, \quad A \in \mathrm{In}(X) \implies \phi \text{ непрерывно} $$
+			$$
+			\begin{rcases}
+				\phi \bigl( V(\lambda) \bigr) = R(\lambda) \\
+				\lim\limits_{\lambda \to \mu} V(\lambda) = V(\mu)
+			\end{rcases} \implies \lim\limits_{\lambda \to \mu} R(\lambda) = R(\mu) $$
+		\item Пусть $ |\lambda| > \|T\| $.
+			$$ \lim\limits_{\lambda \to \infty} \Bigl( I - \frac1\lambda T \Bigr) = I $$
+			$$ R(\lambda) = \frac1\lambda \Bigl( I - \frac1\lambda T \Bigr)^{-1} $$
+			По непрерывности,
+			$$ \lim \Bigl( I - \frac1\lambda T \Bigr)^{-1} = I \implies
+			\lim R(\lambda) = 0 $$
+	\end{itemize}
 \item $ \mu \in \rho(T), \quad \lambda $ из некоторой окрестности $ \mu $
 	$$ \frac{R(\lambda) - R(\mu)}{\lambda - \mu} \undereq{\text{т-во Гильберта}}
-	\frac{(\mu - \lambda)R(\lambda)R(\mu)}{\lambda - \mu)} = -R(\lambda)R(\mu) \implies
+	\frac{(\mu - \lambda)R(\lambda)R(\mu)}{(\lambda - \mu)} = -R(\lambda)R(\mu) \implies
 	\exists \lim\limits_{\lambda \to \mu} \frac{R(\lambda) - R(\mu)}{\lambda - \mu} =
 	- \bigl( R(\mu) \bigr)^2 $$
 
-	Возьмём $ F \in \bigl( \mathscr B(X) \bigr)^*, \quad F : \mathscr B(X) \to \Co $.
+	Возьмём $ F \in \bigl( \mathscr B(X) \bigr)^* $.
 	Рассмотрим функцию $ g(\lambda) = F \bigl( R(\lambda) \bigr) $ при $ \lambda \in \rho(T) $.
 	$$ \lim\limits_{\lambda \to \mu} \frac{g(\lambda) - g(\mu)}{\lambda - \mu} =
 	\lim\limits_{\lambda \to \mu} \frac{ F \bigl( R(\lambda) \bigr) - F \bigl( R(\mu) \bigr)}
@@ -505,7 +507,7 @@ $$ \exists ! z \in H : \quad G_y(x) = (x, z), \quad \|z\| = \|G_y\|_{H^*} $$
 			Если $ \lambda \in \rho(T) $, то
 			$$ \bigl( R(\lambda, T) \bigr)^* = R(\lambda, T^*) $$
 		\item $ H $ "--- гильбертово, $ \quad T \in \mathscr B(H), \quad
-			T $ "--- эрмитово-сопряжённый
+			T^* $ "--- эрмитово-сопряжённый
 
 			$$ \implies \sigma(T^*) = \Set{\lambda | \ol \lambda \in \sigma(T)} $$
 
@@ -625,9 +627,8 @@ $$ \exists ! z \in H : \quad G_y(x) = (x, z), \quad \|z\| = \|G_y\|_{H^*} $$
 
 \begin{eproof}
 \item Очевидно.
-\item \textbf{Пусть} $ 0 \in \rho(T) $.
-	$$ 0 \in \rho(T) \iff V(0) = 0 \cdot I - T = -T \underimp{\exists T^{-1}} T(X) = X
-	\text{ "--- \contra с первым пунктом} $$
+\item \textbf{Пусть} $ 0 \in \rho(T) \iff V(0) = 0 \cdot I - T = -T \implies
+	\exists T^{-1} \implies T(X) = X $ "--- \contra с первым пунктом.
 \end{eproof}
 
 \section{Теорема об арифметических операциях с компактными операторами.
@@ -658,12 +659,12 @@ $$ \exists ! z \in H : \quad G_y(x) = (x, z), \quad \|z\| = \|G_y\|_{H^*} $$
 					\alpha T \in \mathrm{Com}(X, Y) $ "--- очевидно
 				\item Возьмём $ T, S \in \mathrm{Com}(X, Y) $.
 
-					$ T(B) $ относительно компактно $ \implies T(B) $ вполне ограничено.
+					$ T(B) $ относительно компактно и вполне ограничено.
 					Возьмём $ \eps > 0 $ и рассмотрим $ \eps $-сети:
 					$$ \exists E \sub Y \text{ "--- конечная $ \eps $-сеть для } T(B) $$
 					$$ \exists F \sub Y \text{ "--- конечная $ \eps $-сеть для } S(B) $$
 					\begin{multline*}
-						E + F = \Set{e + f | e \in E, ~ f \in F} \text{ "--- конечное, $ 2\eps $-сеть для }
+						E + F = \Set{e + f | e \in E, ~ f \in F} \text{ "--- конечная $ 2\eps $-сеть для }
 						T(B) + S(B) \implies \\
 						\implies T(B) + S(B) \text{ относительно компактно}
 					\end{multline*}
@@ -688,12 +689,11 @@ $$ \exists ! z \in H : \quad G_y(x) = (x, z), \quad \|z\| = \|G_y\|_{H^*} $$
 		\item $ X, Y, Z $
 			\begin{enumerate}
 				\item $ T \in \mathrm{Com}(X, Y) $
-					$$ T(B) \text{ относительно компактно }, \quad S \in \mathscr B(Y, Z) $$
-					$$ \underimp{\text{непр. } S} S \bigl( T(B) \bigr)
-					\text{ относительно компактно} \implies ST \in \mathrm{Com}(X, Z) $$
+					$$ T(B) \text{ относительно компактно } \underimp{\text{непр. } S}
+					S \bigl( T(B) \bigr) \text{ относительно компактно} $$
 				\item $ T \in \mathscr B(X, Y) $
-					$$ \implies T(B) \text{ ограничено}, \quad S \in \mathrm{Com}(X, Y) $$
-					$$ \implies S \bigl( T(B) \bigr) \text{ относительно компактно} $$
+					$$ T(B) \text{ ограничено } \underimp{S \in \mathrm{Com}}
+					S \bigl( T(B) \bigr) \text{ относительно компактно} $$
 			\end{enumerate}
 	\end{enumerate}
 \end{proof}
@@ -709,18 +709,18 @@ $$ \exists ! z \in H : \quad G_y(x) = (x, z), \quad \|z\| = \|G_y\|_{H^*} $$
 \begin{theorem}
 	$ H $ "--- гильбертово
 	$$ T \in \mathrm{Com}(H) \iff T^* \in \mathrm{Com}(H) $$
-	($ T^* $ "--- эрмитово сопряжённый)
 \end{theorem}
 
-\begin{iproof}
-\item $ T \in \mathrm{Com}(H) $
+\begin{proof}
+	Достаточно доказать в одну сторону, так как $ T = T^** $.
+	Пусть $ T \in \mathrm{Com}(H) $.
 
 	Возьмём $ x \in H $.
 	\begin{equ}{comp_dual:1}
 		\|T^*x\|^2 = (T^*x, T^*x) = (TT^*x, x) \underset{\text{К"--~Б}}\le \|TT^*x\| \cdot \|x\|
 	\end{equ}
 
-	Возьмём $ \Set{x_n \in H}_{n = 1}^\infty $ такую, что
+	Возьмём ограниченную $ \Set{x_n \in H}_{n = 1}^\infty $:
 	$$ \exists M > 0 : \quad \|x_n\| \le M \quad \forall n \in \N $$
 
 	Проверим, что $ \exists \Set{n_k} : \quad \exists \lim T^*x_{n_k} $.
@@ -735,13 +735,12 @@ $$ \exists ! z \in H : \quad G_y(x) = (x, z), \quad \|z\| = \|G_y\|_{H^*} $$
 	\begin{multline*}
 		\|T^*x_{n_k} - T^*x_{n_j}\|^2 = \bigl\| T^*(x_{n_k} - x_{n_j}) \bigr\|^2
 		\underset{\eref{comp_dual:1}}\le
-		\underbrace{\|(TT^*)(x_{n_k}) - TT^*x_{n_j}\|}_{\underarr{k, j \to \infty} 0} \cdot
+		\underbrace{\|TT^*x_{n_k} - TT^*x_{n_j}\|}_{\underarr{k, j \to \infty} 0} \cdot
 		\underbrace{\|x_{n_k} - x_{n_j}\|}_{\le 2M} \implies \\
 		\implies \Set{T^*x_{n_k}} \text{ фундаментальна } \implies \exists \lim T^*x_{n_k}
 		\implies T^* \in \mathrm{Com}(H)
 	\end{multline*}
-\item $ T^* \in \mathrm{Com}(H) \implies T = T^{**} \in \mathrm{Com}(H) $
-\end{iproof}
+\end{proof}
 
 \begin{remark}
 	$ X, Y $ "--- банаховы
@@ -788,25 +787,23 @@ $$ \exists ! z \in H : \quad G_y(x) = (x, z), \quad \|z\| = \|G_y\|_{H^*} $$
 	$$ L_n = \mathscr L\Set{x_j}_{j = 1}^n, \quad L_n \subsetneq L_{n + 1} $$
 	$$ \underimp{\text{лемма Рисса}} \exists \Set{y_n}_{n = 1}^\infty : \quad \|y_n\| = 1, \quad
 	\rho(y_{n + 1}, L_n) = \inf\limits_{x \in L_n} \|y_{n + 1} - x\| \ge \frac12 $$
-	(\as $ \dim L_n = n $, то $ \exists y_{n + 1} : \rho(y_{n + 1}, L_n) = 1 $)
 
-	Проверим, что $ \|Ty_n - Ty_m\| \ge \frac\delta2 $.
-	Тогда не будет существовать фундаментальной подпоследовательности $ \Set{Ty_n} $, а значит,
-	и последовательности $ \Set{n_k} $ такой, что $ \exists \lim T y_{n_k} $ "--- \contra с $ T \in
-	\mathrm{Com}(X) $.
+	Проверим, что $ \Set{Ty_n} $ не фундаментальна.
+	Тогда в ней не будет существовать сходящейся подпоследовательности
+	$ \Set{Ty_{n_k}} $ "--- \contra с $ T \in \mathrm{Com}(X) $.
 
 	Пусть $ y_n \in L_n, \quad y_n \notin L_{n - 1} $.
-	Тогда $ y_n = \alpha n x_n + u_n, \quad \alpha_n \ne 0, ~ u_n \in L_{n - 1} $.
+	Тогда $ y_n = \alpha_n x_n + u_n, \quad \alpha_n \ne 0, ~ u_n \in L_{n - 1} $.
 	$$ Tx_n = \lambda_n x_n \implies Ty_n = \alpha_n \lambda_n x_n + Tu_n =
 	\lambda_n(\alpha_n x_n + u_n) -
 	\underbrace{\lambda_n u_n + Tu_n}_{ \eqqcolon v_n \in L_{n - 1}} = \lambda_ny_n + v_n $$
 
 	Пусть $ n > m $.
-	$$ Ty_m \in L_n \sub L_{n - 1} $$
+	$$ Ty_m \in L_{n - 1} \sub L_n $$
 	$$ \|Ty_n - Ty_m\| = \|\lambda_ny_n + v_n - Ty_m\| =
 	|\lambda_n| \Bigl\| y_n - \underbrace{\frac1{\lambda_n}(-v_n + Ty_m)}_{\in L_{n - 1}} \Bigr\|
 	\ge \frac \delta 2 $$
-	Значит, последовательность $ y_n $ не содержит фундаментальных подпоследовательностей.
+	Значит, последовательность $ \Set{Ty_n} $ не содержит фундаментальных подпоследовательностей.
 \end{proof}
 
 \begin{implication}
@@ -819,13 +816,12 @@ $$ \exists ! z \in H : \quad G_y(x) = (x, z), \quad \|z\| = \|G_y\|_{H^*} $$
 			$$ \dim X_\lambda <+\infty $$
 		\item $ N $ "--- количество собственных чисел.
 
-			Тогда
 			\begin{enumerate}
 				\item $ 0 \le N \le +\infty $ (\ie $ \sigma_p(T) $ не более, чем счётно);
 				\item если $ N = +\infty $, то $ \lim\limits_{n \to \infty} \lambda_n = 0 $.
 			\end{enumerate}
 
-			Их можно занумеровать в порядке убывания модулей.
+			$ \lambda_n $ можно занумеровать в порядке убывания модулей.
 	\end{enumerate}
 \end{implication}
 

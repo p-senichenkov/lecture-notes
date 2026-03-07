@@ -1,0 +1,30 @@
+% vim:foldmethod=marker:foldmarker=(((,))):foldlevel=0
+
+% These packages interfere with `\import` and must be `\input` directly
+
+% add file names in logs
+\usepackage{structuredlog}
+
+\usepackage{import}
+
+% These packages change catcodes, and therefore, interfere with `import`
+\usepackage[a4paper, portrait, margin=.75in%
+% , showframe%
+]{geometry}
+
+\usepackage{fontspec}
+\setmainfont{CMU Serif}
+\setsansfont{CMU Sans Serif}
+\setmonofont{CMU Typewriter Text}
+
+\usepackage{polyglossia}
+\setmainlanguage[babelshorthands=true, mathfunctions=true]{russian}
+\setotherlanguage{english}
+
+%% polyglossia shorthands:
+%   "-   -- additional hyphen point, does *not* disable others
+%   ""   -- *allows* linebreak, *without* hyphen sign
+%	"=	 -- hyphen, but does *not* disable linebreak at other places
+%   "--- -- normal dash ( -- )
+%   "--~ -- dash for compound names (--)
+%   "--* -- dash for direct speech (--  )

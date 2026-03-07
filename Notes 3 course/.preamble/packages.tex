@@ -1,0 +1,115 @@
+% vim:foldmethod=marker:foldmarker=(((,))):foldlevel=0
+
+%: Utility (((
+
+\usepackage{ifthen}
+
+% space that doesn't disappear at the end of text commands, but is omitted when needed (e. g. before comma)
+\usepackage{xspace}
+
+%: )))
+
+%: Common TeX packages (((
+
+% references in table of contents
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linktoc=all,
+    linkcolor=black,
+}
+\urlstyle{same}
+
+\usepackage{graphicx}
+\usepackage[dvipsnames]{xcolor}
+
+\usepackage{amsmath, amsfonts, mathtools, amsthm, amssymb}
+
+\usepackage{tikz}
+% XXX: It's better to include libraries only when they are really needed
+\usetikzlibrary{intersections, angles, arrows.meta, decorations.pathreplacing, quotes, positioning, chains, patterns}
+
+%: )))
+
+%: Fonts (((
+
+% for the \mathscr command
+\usepackage{mathrsfs}
+
+% The most important package
+% \usepackage{figchild}
+
+% some extra characters
+\usepackage[only,lightning,llbracket,rrbracket]{stmaryrd}
+% https://tex.stackexchange.com/questions/106714/stmaryrd-and-boldsymbol-avoid-warnings
+\SetSymbolFont{stmry}{bold}{U}{stmry}{m}{n}
+
+% requires LuaLaTeX
+% \usepackage{emoji}
+
+% bold font in maths, that preserve spacing (should be loaded *last*)
+\usepackage{bm}
+
+%: )))
+
+%: "Smart" built-ins (((
+
+% custom \chapter and \section formats
+\usepackage{titlesec}
+
+\usepackage{hypbmsec}
+% \section forms:
+% 	\section{toc, out, text}
+%	\section[toc, out]{text}
+%	\section(out)[toc]{text}
+%	\section(out){toc, text}
+
+\usepackage{multicol}
+
+% tabular, but can span multiple pages
+\usepackage{longtable}
+
+% additional matrix features
+\usepackage{nicematrix}
+% make dotted lines semi-transparent by default
+\NiceMatrixOptions{xdots/line-style=loosely dotted, nullify-dots}
+
+%: )))
+
+%: Features (((
+
+%: Math (((
+
+% \set and \braket
+\usepackage{braket}
+
+% fancy vectors
+\usepackage[e]{esvect}
+
+% subequations
+\usepackage[ntheorem]{empheq}
+
+% diagonal lines through items ("cancelling" 'em)
+\usepackage{cancel}
+
+% fractions like 2/a and faktorgroups
+\usepackage{faktor}
+
+% xlongequal
+\usepackage{extarrows}
+
+%: )))
+
+% listings with syntax highlighting
+\usepackage[newfloat]{minted}
+% disable "syntax error" highlighting (haven't seen this anywhere else. Looks strange...)
+% \AtBeginEnvironment{minted}{\dontdofcolorbox}
+% \def\dontdofcolorbox{\renewcommand\fcolorbox[4][]{##4}}
+% \setminted{autogobble}
+\SetupFloatingEnvironment{listing}{name=Листинг}
+\SetupFloatingEnvironment{listing}{listname=Листинги}
+
+% multiple images in one figure
+\usepackage{subcaption}
+
+%: )))
