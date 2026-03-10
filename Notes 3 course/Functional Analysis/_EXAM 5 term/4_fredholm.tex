@@ -110,22 +110,24 @@ $$ \frac1\lambda \in \mathrm{Com}(H) \implies I - \frac1\lambda T \text{ "--- о
 сюръективности}
 
 \begin{lemma}[о стабилизации]
-	$ k \ge 0, \quad H_{k + 1} \coloneq S(H_k) $
+	$ H_0 = H, \quad \forall k \ge 0 \quad H_{k + 1} \coloneq S(H_k) $
 
 	$$ \exists n \ge 0 : \quad H_n = H_{n + 1} $$
 \end{lemma}
 
 \begin{proof}
 	\textbf{Допустим}, что $ H_{k + 1} \subsetneq H_k $.
-	$$ \implies H_k = H_{k + 1} \oplus H_{k + 1}^\perp \text{ (ортогональное дополнение в $ H_k $)} $$
-	$$ \implies \exists x_k \in H_k : \quad \|x_k\| = 1, \quad x_k \perp H_{k + 1} $$
+
+	Только что доказали, что $ H_{n + 1} $ замкнуто в $ H_n $.
+	При этом, $ S(H) $ "--- подпространство $ H $ (по линейности $ S $).
+	$$ H_k = H_{k + 1} \oplus H_{k + 1}^\perp \text{ (ортогональное дополнение в $ H_k $)} $$
+	$$ \exists x_k \in H_k : \quad \|x_k\| = 1, \quad x_k \perp H_{k + 1} $$
 
 	Пусть $ n > m $.
 	Хотим оценить разность $ \|Tx_n - Tx_m\| $.
 	$$ Sx_n - Sx_m = x_n - Tx_n - x_m + Tx_m $$
-	$$ \|Tx_n - Tx_m\| = \|x_n - Sx_n - x_m + Sx_m\| \ge 1 $$
-	$$ Sx_n \in H_{n + 1}, \quad Sx_m \in H_{m + 1} $$
-	$$ x_n, Sx_n, Sx_m \in H_{m + 1} \implies x_m \perp H_{m + 1} $$
+	$$ \|Tx_n - Tx_m\| = \|\underbrace{x_n - Sx_n + Sx_m}_{\in H_{n + 1}} -
+	\underbrace{x_m}_{\perp H_{n + 1}}\| \ge \|x_m\| = 1 $$
 	Значит, не существует $ \Set{Tx_{n_k}} : \quad \exists \lim T_{x_{n_k}} $ "--- \contra с
 	$ T \in \mathrm{Com}(H) $.
 \end{proof}
@@ -163,13 +165,15 @@ $$ \frac1\lambda \in \mathrm{Com}(H) \implies I - \frac1\lambda T \text{ "--- о
 	$$ S^nx \in S^n(H) \setminus S^{(n + 1)}(H) $$
 	Это \textbf{противоречит} лемме.
 \item $ \impliedby $
-	\begin{multline*}
+	$$
+	\begin{rcases}
 		\begin{rcases}
 			S(H) = H \\
 			H = S(H) \oplus \operatorname{Ker} S^*
-		\end{rcases} \implies \operatorname{Ker} S^* = \Set{0} \underimp{S^* = I - T^*} \\
-		\implies S^* \text{ "--- оператор Фредгольма} \underimp{\text{только что доказано}} S^*(H) = H
-	\end{multline*}
+		\end{rcases} \implies \operatorname{Ker} S^* = \Set{0} \\
+		S^* = I - T^* \implies S^* \text{ "--- оператор Фредгольма}
+	\end{rcases}
+	\underimp{\text{только что доказано}} S^*(H) = H $$
 	$$ H = S^*(H) \oplus \operatorname{Ker} S \implies \operatorname{Ker} S = \Set{0} $$
 \end{iproof}
 
@@ -241,7 +245,7 @@ $$ \frac1\lambda \in \mathrm{Com}(H) \implies I - \frac1\lambda T \text{ "--- о
 \end{proof}
 
 \begin{implication}
-	$ T \in \mathrm{Com}(T) $
+	$ T \in \mathrm{Com}(H) $
 	\begin{enumerate}
 		\item $ \lambda \ne 0, \quad \lambda \in \sigma(T) $
 			$$ \lambda \in \sigma_p(T) $$
@@ -262,7 +266,7 @@ $$ \frac1\lambda \in \mathrm{Com}(H) \implies I - \frac1\lambda T \text{ "--- о
 
 	\begin{enumerate}
 		\item $ (Tx, x) \in \R \quad \forall x $;
-		\item $ \lambda \in \sigma_p(T) \implies \lambda \in \R $;
+		\item $ \sigma_p(T) \sub \R $;
 		\item $ \lambda, \mu \in \sigma_p(T), \quad Tu = \lambda u, \quad Tv = \mu v $
 			$$ u \perp v $$
 		\item $ \|T\| = \sup\limits_{\|x\| = 1} |(Tx, x)| $;
@@ -336,7 +340,7 @@ $$ \frac1\lambda \in \mathrm{Com}(H) \implies I - \frac1\lambda T \text{ "--- о
 \end{remark}
 
 \begin{theorem}
-	$ H $ "--- гильбертово, $ \quad T = T*, \quad T \in \mathrm{Com}(H) $
+	$ H $ "--- гильбертово, $ \quad T = T^*, \quad T \in \mathrm{Com}(H) $
 
 	$$ \exists \lambda \in \sigma_p(T) : \quad |\lambda| = \|T\| $$
 \end{theorem}
@@ -466,7 +470,7 @@ $$ \frac1\lambda \in \mathrm{Com}(H) \implies I - \frac1\lambda T \text{ "--- о
 	Возьмём $ z \in M $.
 	$$ z \perp H_{\lambda_n} \quad \forall n \ge 1 \implies P_{H_\lambda} z = 0
 	\underimp{\text{т. Г."--~Ш. о
-	предст. опер.}} Tz = \sum_{n = 1}^\infty \lambda_n P_H = 0 \implies
+	предст. опер.}} Tz = \sum_{n = 1}^\infty \lambda_n P_\lambda = 0 \implies
 	z \in \operatorname{Ker} T $$
 	$$ H \text{ сепарабельно } \implies H_0 \text{ сепарабельно } \implies
 	\exists \Set{e_{0~j}}_{1 \le j \le m_n} \text{ "--- ОНБ в } H $$
@@ -499,7 +503,7 @@ $$ \frac1\lambda \in \mathrm{Com}(H) \implies I - \frac1\lambda T \text{ "--- о
 	Пусть $ \Set{\phi_n(x)}_{n = 1}^\infty $ "--- ОНБ в $ \mathrm L^2(X, \mu), \quad
 	\Set{\psi_j(y)}_{j = 1}^\infty $ "--- ОНБ в $ \mathrm L^2(Y, \nu) $.
 
-	Проверим, что $ \Set{\phi_n(x), \psi_j(y)}_{n, j \in \N} $ "--- ОНБ в
+	Проверим, что $ \Set{\phi_n(x) \psi_j(y)}_{n, j \in \N} $ "--- ОНБ в
 	$ \mathrm L^2(X \times Y) $.
 	$$ \int\limits_X \phi_n(x) \ol{\phi_m(x)} \di \mu =
 	\begin{cases}
@@ -521,13 +525,13 @@ $$ \frac1\lambda \in \mathrm{Com}(H) \implies I - \frac1\lambda T \text{ "--- о
 					1, \quad m = n, ~ j = k, \\
 					0
 				\end{cases} \implies \\
-				\implies \Set{\phi_n(x), \psi_j(y)} \text{ "--- ОС}
+				\implies \Set{\phi_n(x) \psi_j(y)} \text{ "--- ОС}
 			\end{multline*}
 		\item Проверим полноту
 
 			Возьмём $ f \in \mathrm L^2(X \times Y) $.
-			Пусть $ f \perp \Set{\phi_n(x), \psi_j(y)}_{n, j \in \N} $.
-			$$ \iint\limits_{X \times Y} f(x, y) \ol{\phi_n(x)} \ol{\psi_j(y)} \di\mu \di\nu = 0
+			Пусть $ f \perp \Set{\phi_n(x) \psi_j(y)}_{n, j \in \N} $.
+			$$ \iint\limits_{X \times Y} f(x, y) \ol{\phi_n(x)} \ol{\psi_k(y)} \di\mu \di\nu = 0
 			\quad \forall n, k $$
 
 			Зафиксируем $ n $.
@@ -543,7 +547,7 @@ $$ \frac1\lambda \in \mathrm{Com}(H) \implies I - \frac1\lambda T \text{ "--- о
 	\end{itemize}
 
 	Рассмотрим частичные суммы:
-	$$ K_n(x, y) = \sum_{1 \le i,j \le n} \alpha_{ij} \phi_i(x) \psi_i(y) $$
+	$$ K_n(x, y) = \sum_{1 \le i,j \le n} \alpha_{ij} \phi_i(x) \psi_j(y) $$
 	$$ \lim \|K(x, y) - K_n(x, y)\| = 0 $$
 
 	Уже доказано, что

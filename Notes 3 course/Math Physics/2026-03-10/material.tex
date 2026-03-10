@@ -1,0 +1,280 @@
+\chapter{Волновое уравнение}
+
+\section{Свойства сферических средних}
+
+$ u \in \mathcal C(\R^n) $
+
+Определим функцию (это среднее значение по сфере вокруг точки $ x $):
+$$ I(x, r) = \frac1{|S_r|} \int\limits_{S_r} u(x + y) \di S_y \undereq{y = rz}
+\frac1{|S_1|} \int\limits_{S_1} u(x + rz) \di S_z $$
+Понятно, что функция непрерывна по $ r $.
+
+\begin{statement}
+	$ I(x, 0) = u(x) $
+\end{statement}
+
+\begin{proof}
+	Совершенно очевидно из второй формулы.
+\end{proof}
+
+\begin{statement}
+	$ u \in \mathcal C^2(\R^n) $
+
+	$$ \int\limits_{\mathtt B_R} u(x + y) \di y =
+	\int_0^R \int\limits_{S_r} u(x + y) \di S_r(y) \di r =
+	\int_0^R |S_1| r^{n - 1} I(x, r) \di r $$
+	Возьмём оператор Лапласа от левой и правой частей:
+	$$ \int_0^R |S_1| r^{n - 1} \Delta_x I(x, r) \di r =
+	\int\limits_{\mathtt B_R} \Delta u(x + y) \di y = A $$
+	Применим формулу Гаусса"--~Остроградского ($ \Delta u = \dive (\mathcal D u) $):
+	\begin{multline*}
+		A = \int\limits_{S_R} \bigl( \mathcal D u(x + y), \vv n_y \bigr) \di S_y =
+		\int\limits_{S_R} \sum_i \mathcal D_i u(x + y) \cdot \vv n_i(y) \di S_y
+		\undereq{y = Rz} \\
+		= \int\limits_{S_1} R^{n - 1} \sum_i \mathcal D_i u(x + Rz) \vv n_i(Rz) \di S_z =
+		\int\limits_{S_1} R^{n - 1} \sum_i \mathcal D_i (x + Rz) z_i \di S_z = \\
+		= \int\limits_{S_1} R^{n - 1} \pder R u(x + Rz) \di S_z = |S_1| R^{n - 1} \pder R  I(x, R)
+	\end{multline*}
+
+	Сократим на $ |S_1| $ и продифференцируем по $ R $:
+	$$ R^{n - 1} \Delta_x I(x, R) = \pder R \Bigl( R^{n - 1} \pder R I(x, R) \Bigr) $$
+	$$ \Delta_x I(x, R) = \frac1{R^{n - 1}} \pder R \Bigl( R^{n - 1} \pder R I(x, R) \Bigr) $$
+\end{statement}
+
+\begin{statement}
+	$ n = 3 $
+
+	$$ \Delta_x I(x, R) = \frac{\partial^2}{\partial R^2} I(x, R) + \frac2R I(x, R) $$
+
+	Введём функцию $ I_1(x, R) = R I(x, R) $.
+	Домножим тождество на $ R $:
+	$$ \Delta_x I_1(x, R) = R \frac{\partial^2}{\partial R^2} I(x, R) + 2I(x, R) =
+	\frac{\partial^2}{\partial R^2} I_1(x, R) $$
+\end{statement}
+
+\section{Решение задачи Коши для волнового уравнения при \texorpdfstring{$ n = 3 $}{n = 3}}
+
+\subsection{Решение задачи \rom1}
+
+В прошлый раз мы выяснили, что достаточно решить задачу \rom1:
+$$
+\begin{cases}
+	u_{tt} - a^2 \Delta u = 0, \quad x \in \R^3, \quad t \ge 0 \\
+	u\bigr|_{t = 0} = 0 \\
+	u_t\bigr|_{t = 0} = \psi(x)
+\end{cases} $$
+
+Возьмём сферическое среднее по $ x $ ($ t $ будет параметром):
+$$ I(x, t, R) = \frac1{|S_R|} \int\limits_{S_R} u(x + y, t) \di S_y $$
+$$ \frac1{|S_R|} \int\limits_{S_R} u_{tt} (x + Ry, t) \di S_y =
+\frac{\partial^2}{\partial t^2} I(x, t, R) $$
+$$ \frac1{|S_R|} \int\limits_{S_R} \Delta_x u(x + Ry, t) \di S_y = \Delta_x I(x, t, R) $$
+Получили, что
+$$ \frac{\partial^2}{\partial t^2} I - a^2 \Delta_x I = 0 $$
+Домножим на $ R $:
+$$ \frac{\partial^2}{\partial R^2} I_1 - a^2 \Delta_x I_1 = 0 $$
+А Лаплас от $ I_1 $ мы уже знаем:
+$$ \frac{\partial^2}{\partial R^2} I_1(x, t, R) -
+a^2 \frac{\partial^2}{\partial R^2} I_1 (x, t, R) = 0 $$
+А это "--- одномерное волновое уравнение ($ x $ теперь играет роль параметра).
+
+При этом, $ t \ge 0 $ и $ \R \ge 0 $.
+То есть, мы получили уравнение колебаний полуограниченной струны.
+Но нужны ещё два начальных условия и одно граничное условие:
+$$ I_1\bigr|_{t = 0} = 0 $$
+$$ I_{1t}\bigr|_{t = 0} = R \cdot \frac1{|S_R|} \int\limits_{S_R} \psi(x + y) \di S_y \eqqcolon
+\psi_1(x, R) $$
+$$ I_1\bigr|_{R = 0} = 0 $$
+
+Предположим, что мы эту задачу решили.
+Как теперь вернуться к исходной?
+$$ \lim\limits_{R \to 0} \frac{I_1(x, t, R)}R = u(x, t) $$
+Воспользуемся формулой Д'Аламбера для $ R \le at $:
+$$ I_1(x, t, R) = \frac1{2a} \int_{at - R}^{at + R} \psi_1(x, \rho) \di \rho $$
+$$ u(x, t) = \lim\limits_{R \to 0} \frac1{2aR} \int_{at - R}^{at + R} \psi_1(x, \rho) \di \rho =
+\frac1a \psi_1(x, at) \bydef t \frac1{|S_1|} \int\limits_{S_1} \psi(x + atz) \di S_z =
+\frac{t}{4 \pi} \int\limits_{S_1} \psi(x + atz) \di S $$
+
+\subsection{Решение задачи \rom2}
+
+Напишем решение задачи \rom2:
+$$
+\begin{cases}
+	u_{tt} - a^2 \Delta u = 0 \\
+	u\bigr|_{t = 0} = \phi(x) \\
+	u_t\bigr|_{t = 0} = \psi(x)
+\end{cases} $$
+$$ u(x, t) = \pder t \Bigl( \frac t{4\pi} \int\limits_{S_1} \phi(x + atz) \di S_z \Bigr) +
+\frac t{4\pi} \int\limits_{S_1} \psi(x + atz) \di S_z $$
+
+Эта формула называется \emph{формулой Кирхгофа}.
+
+Но нужно, чтобы все нужные функции были достаточно дифференцируемы:
+
+\begin{theorem}
+	$ \phi \in \mathcal C^3(\R^3), \quad \psi \in \mathcal C^2(\R^3) $
+
+	Тогда $ u \in \mathcal C^2(\R^3 \times \ol \R_+) $, задаваемая уравнением Кирхгофа,
+	удовлетворяет однородному волновому уравнению и начальным условиям, то есть, является решением
+	задачи Коши.
+\end{theorem}
+
+Можно показать, что, если снизить гладкости $ \phi $ и $ \psi $, то функции из $ \mathcal C^2 $ мы
+не получим.
+
+\subsection{Физические следствия из формулы Кирхгофа}
+
+Пусть функция $ u $ имеет носитель $ \Omega $ (по $ x $), а мы находимся в точке $ x_0 $
+(вне $ \Omega $).
+Опуская из некоторой точки $ t $ характеристический конус, получаем некоторый шар в $ X $.
+Обозначим за $ t_* $ ту точку, в которой этот шар начинает касаться $ \Omega $, $ t^* $ "--- ту,
+в которой перестаёт касаться.
+
+Из формулы понятно, что и до $ t_* $, и после $ t^* $ интегралы равны нулю.
+
+\comment{Тут есть картиночка, можно будет нарисовать, если совсем скучно станет.}
+
+\section{Решение задачи Коши для волнового уравнения при \texorpdfstring{$ n = 2 $}{n = 2}}
+
+\subsection{Решение задачи \rom1}
+
+$$
+\begin{cases}
+	u_{tt} - a^2 \Delta_2 u = 0, \quad x \in \R^2, \quad t \ge 0 \\
+	u\bigr|_{t = 0} = 0 \\
+	u_t\bigr|_{t = 0} = \psi(x)
+\end{cases} $$
+
+Будем решать другую задачу:
+$$
+\begin{cases}
+	u_{tt} - a^2 \Delta_3 u = 0 \\
+	u\bigr|_{t = 0} = 0 \\
+	u_t\bigr|_{t = 0} = \psi(x_1, x_2)
+\end{cases} $$
+\begin{multline*}
+	u(x, t) = \frac t{4\pi} \int\limits_{S_1} (x_1 + atz_1, x_2 + atz_2) \di S_z
+	\undereq{\int\limits_{S} = 2\int\limits_{\mathtt B}}
+	\frac t{2\pi} \int\limits_{z_1^2 + z_2^2 \le 1} \frac{\psi(x_1 + atz_1, x_2 + atz_2)}
+	{\sqrt{1 - z_1^2 - z_2^2}} \di z_1 \di z_2 = \\
+	= \int\limits_{|y| \le at} \frac{\psi(x + y)}{\sqrt{(at)^2 - |y|^2}} \di y
+\end{multline*}
+Эту формулу иногда называют \emph{формулой Пуассона"--~Кирхгофа}.
+
+\subsection{Решение задачи \rom2}
+
+$$
+\begin{cases}
+	u_{tt} - a^2 \Delta_2 u = 0 \\
+	u\bigr|_{t = 0} \phi(x) \\
+	u_t\bigr|_{t = 0} = \psi(x)
+\end{cases} $$
+$$ u(x, t) = \pder t \Bigl( \frac1{\pi a} \int\limits_{|y| \le at}
+\frac{\phi(x + y)}{\sqrt{(at)^2 - |y|^2}} \di y \Bigr) +
+\frac1{2 \pi a} \int\limits_{|y| \le at} \frac{\psi(x + y)}{\sqrt{(at)^2 - |y|^2}} \di y $$
+Условия те же, что и трёхмерном случае: $ \phi \in \mathcal C^3(\R^2) $, $ \psi \in
+\mathcal C^2(\R^2) $.
+
+\subsection{Физические следствия из формулы Пуассона\texorpdfstring{"--~}{--}Кирхгофа}
+
+Картинка та же: носитель $ \Omega $, характеристический конус и точка $ t_* $.
+Но в формуле Пуассона"--~Кирхгофа интегрирование ведётся по кругу, поэтому мы не можем утверждать,
+что колебания прекратятся при прохождении через некоторую точку $ t^* $.
+
+Но в какой-то момент расширяющийся шар поглотит $ \Omega $, и все интегралы станут интегралами по
+фиксированной области.
+А подынтегральное выражение убывает.
+Значит, колебания затухают, но не прекращаются.
+Это явление называют \emph{диффузией волн}.
+Можно показать, что во всех чётных размерностях имеет место диффузия волн, а во всех нечётных "---
+задний фронт.
+
+\chapter{Уравнение теплопроводности}
+
+Пусть $ \Omega \sub \R^n $.
+Рассмотрим цилиндр $ Q = \Omega \times (0, \tau] $.
+
+$$
+\begin{cases}
+	u_t - a^2 \Delta u = f(x, t) \text{ в } Q \\
+	u\bigr|_{S_{\text{бок}}} = u_0(x, t) \\
+	u\bigr|_{t = 0} = \phi(x)
+\end{cases} $$
+$$ u \in \mathcal C_{x,t}^{2,1} (Q) \cap \mathcal C(\ol Q) $$
+
+\section{Принцип максимума для уравнения теплопроводности}
+
+\begin{statement}
+	$ u \in \mathcal C_{x,t}^{2,1}(Q) \cap \mathcal C(\ol Q) $
+	$$ u_t - a^2 \Delta u = 0 \text{ в } Q $$
+
+	$$ \implies \max\limits_{\ol Q} u = \max\limits_{\ol Q \setminus Q} u, \quad
+	\min\limits_{\ol Q} u = \min\limits_{\ol Q \setminus Q} u $$
+\end{statement}
+
+\begin{proof}
+	\textbf{Пусть} $ m \coloneq \max\limits_{\ol Q \setminus Q} u <
+	M \coloneq \max\limits_{\ol Q} u $.
+	$$ \exists (x^0, t^0) \in Q : \quad M = u(x^0, t^0) $$
+
+	Рассмотрим функцию
+	$$ u_\eps(x, t) = u(x, t) + \eps (t^0 - t) $$
+	$$ u_\eps(x^0, t^0) = M $$
+	На $ \ol Q \setminus Q \quad u_\eps \le m + \eps \tau $.
+	Выберем $ \eps $ так, чтобы $ m + \eps \tau < M $.
+
+	Функция $ u_\eps $ достигает максимума не на стакане:
+	$$ \max e_\eps = e_\eps(x^1, t^1), \quad (x^1, t^1) \in Q $$
+	Воспользуемся необходимым условием локального максимума:
+	$$ (u_\eps)_t (x^1, t^1) \ge 0 $$
+	(для $ t^1 < \tau $ будет равенство)
+	$$ \mathcal D_i \mathcal D_i u_\eps (x^1, t^1) \le 0 $$
+	$$ \Bigl( (u_\eps)_t - a^2 \Delta u_\eps \Bigr)(x^1, t^1) \ge 0 $$
+	Но $ (u_\eps)_t - a^2 \Delta u_\eps \equiv -\eps $ "--- \contra.
+\end{proof}
+
+\subsection{Следствия из принципа максимума}
+
+\begin{theorem}[единственности, для начальной краевой задачи]
+	Вот та задача не может иметь более, чем одно решение.
+\end{theorem}
+
+\begin{proof}
+	\textbf{Пусть} имеется два решения, $ v $ "--- их разность.
+	$$
+	\begin{cases}
+		v_t - a^2 \Delta v = 0 \\
+		v\bigr|_{S_{\text{бок}}} = 0 \\
+		v\bigr|_{t = 0}
+	\end{cases} $$
+	\textbf{Но} по принципу максимума, максимум находится на стакане.
+\end{proof}
+
+\begin{theorem}
+	$$
+	\begin{cases}
+		u_t - a^2 \Delta u = 0 \text{ в } Q = \Omega \times \R_+ \\
+		u\bigr|_{S_{\text{бок}}} = 0 \\
+		u\bigr|_{t = 0} = \phi(x)
+	\end{cases} $$
+
+	$$ \implies u(x, t) \uniarr[t \to \infty]{} 0 $$
+\end{theorem}
+
+\begin{proof}
+	$$ w(x, t) \coloneq A \cos (cx_1) e^{-bt} $$
+	$$ w_t - aw^2 = w(-b + a^2c^2) = 0 \implies b = a^2 c^2 $$
+	$$ \Omega \sub \Set{x \in \R^n | {} |x_1| < d} $$
+	Хотим, чтобы в этом слое $ \cos $ был положительным.
+	Возьмём $ c = \frac{\pi}{3d} $.
+	$$ w\bigr|_{S_{\text{бок}}} \ge \frac12 A e^{-bt} \ge |u| = 0 $$
+	$$ w\bigr|_{t = 0} \ge \frac12 A $$
+	$$ A \coloneq 2 \max |\phi| $$
+	Тогда $ w\bigr|_{t = 0} \ge |u| = |\phi| $.
+
+	Теперь $ w $ мажорирует $ |u| $ на $ \ol Q \setminus Q $.
+	$$ \implies w \pm u \ge 0 \text{ на } \ol Q \setminus Q $$
+	По принципу максимума, $ w \pm u \ge 0 $ в $ \ol Q $.
+	$$ \implies w \ge |u| \text{ на } \ol Q $$
+	$$ |u(x, t)| \le A e^{-bt} $$
+\end{proof}

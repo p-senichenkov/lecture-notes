@@ -1456,7 +1456,8 @@ $ \mathrm L^p $ для конечных $ p $}
 					0 < \mu e < +\infty $$
 					$$ \implies A = \bigcup_{j = 1}^\infty (A \cap X_j), \quad
 					e_j = A \cap X_j \implies \mu e_j < +\infty $$
-					$$ \implies e = e_j, \quad 0 < \mu e < +\infty, \quad e \sub A $$
+					Если бы все $ \mu e_j = 0 $, то $ \mu A = 0 $.
+					Значит, $ \exists e = e_j : \quad 0 < \mu e < +\infty $
 					$$ U(x) = \frac{\ol{g(x)}}{|g(x)|} \chi_e(x) \implies \|U\|_\infty = 1 $$
 					$$ F_g(U) = \int\limits_X g(x) \frac{\ol{g(x)}}{|g(x)|}\chi_e \di \mu =
 					\int\limits_e |g(x)| \di \mu \ge c \mu(e) $$
@@ -1570,8 +1571,8 @@ $ \mathrm L^p $ для конечных $ p $}
 \end{implication}
 
 \begin{proof}
-	$ X^* $ "--- банахово $ \implies X^{**} $ банахово $ \implies \pi : X \to X^{**} $ "---
-	изометрическое вложение $ \implies \ol{\pi(X)} $ "--- пополнение $ X $.
+	$ X^* $ "--- банахово $ \implies X^{**} $ банахово $ \underimp{\pi \text{ "--- изометрическое
+	вложение}} \ol{\pi(X)} $ "--- пополнение $ X $.
 \end{proof}
 
 \begin{definition}

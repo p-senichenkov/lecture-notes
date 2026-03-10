@@ -480,10 +480,16 @@ $$ \exists ! z \in H : \quad G_y(x) = (x, z), \quad \|z\| = \|G_y\|_{H^*} $$
 	Тогда $ \rho(T) = \Co $, то есть
 	$$ \forall F \in \bigl( \mathscr B(X) \bigr)^* \quad g(\lambda) = F \bigl( R(\lambda) \bigr)
 	\text{ "--- аналитическая в } \Co \text{ (целая)} $$
-
-	$$ V(0) = -T \implies \exists T^{-1} \in \mathscr B(X) \underimp{\text{сл. из т. Хана"--~Банаха}}
-	\exists F \in \bigl( \mathscr B(X) \bigr)^* : \quad g(0) \ne 0 $$
+	$$ V(0) = -T \implies \exists T^{-1} \in \mathscr B(X)
+	\underimp{\text{сл. о дост. кол-ве лин. функц.}}
+	\exists F \in \bigl( \mathscr B(X) \bigr)^* : \quad F(T^{-1}) = \|T^{-1}\| \ne 0 $$
 	Выберем $ g(\lambda) = F \bigl( R(\lambda) \bigr) $.
+
+	$$
+	\begin{cases}
+		\exists R > 0 : \quad |g(\lambda)| \le 1 \text{ при } \lambda \ge R \\
+		\exists M = \max\limits_{|\lambda| \le R} |g(\lambda)|
+	\end{cases} $$
 
 	Таким образом, $ g(z) $ "--- целая, $ g $ ограничена.
 	Значит, по теореме Лиувилля, $ g \equiv \const $ "--- \contra с $ \lim\limits_{g \to 0} = 0 $.
@@ -547,7 +553,7 @@ $$ \exists ! z \in H : \quad G_y(x) = (x, z), \quad \|z\| = \|G_y\|_{H^*} $$
 		$$ T(A) \text{ относительно компактно} $$
 	\item $ T \in \mathrm{Com}(X, Y) $ \textbf{тогда и только тогда}, когда
 		$$ \Set{x_n \in X}_{n = 1}^\infty \text{ "--- ограниченная } \implies \exists
-		\Set{n_k}_{k = 1}^\infty : \quad \exists \lim\limits_{k \to \infty}T_{n_k} \in Y $$
+		\Set{n_k}_{k = 1}^\infty : \quad \exists \lim\limits_{k \to \infty}Tx_{n_k} \in Y $$
 \end{props}
 
 \begin{eproof}
@@ -603,7 +609,7 @@ $$ \exists ! z \in H : \quad G_y(x) = (x, z), \quad \|z\| = \|G_y\|_{H^*} $$
 	\begin{multline*}
 		T \in \mathscr B(X, T(X)), \quad T(X) \text{ "--- банахово } \underimp{\text{т. Банаха об
 		откр. отобр.}} T \text{ открыто } \implies \\
-		\exists r > 0 : \quad \mathtt B_r^{T(x)}(0) \sub \underbrace{T(B)}_{\text{отн. комп.}}
+		\exists r > 0 : \quad \mathtt B_r^{T(x)}(0) \sub \underbrace{T(X)}_{\text{отн. комп.}}
 		\implies \mathtt B_r^{T(x)}(0) \text{ относительно компактно } \underimp{\text{т. Рисса}}
 		\dim T(X) < +\infty
 	\end{multline*}
@@ -659,14 +665,14 @@ $$ \exists ! z \in H : \quad G_y(x) = (x, z), \quad \|z\| = \|G_y\|_{H^*} $$
 					\alpha T \in \mathrm{Com}(X, Y) $ "--- очевидно
 				\item Возьмём $ T, S \in \mathrm{Com}(X, Y) $.
 
-					$ T(B) $ относительно компактно и вполне ограничено.
+					$ T(B), T(S) $ относительно компактны и вполне ограничены.
 					Возьмём $ \eps > 0 $ и рассмотрим $ \eps $-сети:
 					$$ \exists E \sub Y \text{ "--- конечная $ \eps $-сеть для } T(B) $$
 					$$ \exists F \sub Y \text{ "--- конечная $ \eps $-сеть для } S(B) $$
 					\begin{multline*}
 						E + F = \Set{e + f | e \in E, ~ f \in F} \text{ "--- конечная $ 2\eps $-сеть для }
 						T(B) + S(B) \implies \\
-						\implies T(B) + S(B) \text{ относительно компактно}
+						\implies T(B) + S(B) \text{ вполне ограничено и относительно компактно}
 					\end{multline*}
 					$$ (T + S)(B) \sub T(B) + S(B) \implies (T + S)(B) \text{ относительно компактно}
 					\implies T + S \in \mathrm{Com}(X, Y) $$
@@ -698,21 +704,13 @@ $$ \exists ! z \in H : \quad G_y(x) = (x, z), \quad \|z\| = \|G_y\|_{H^*} $$
 	\end{enumerate}
 \end{proof}
 
-\begin{implication}
-	$ X $ "--- банахово
-
-	Тогда $ \mathrm{Com}(X) $ "--- \emph{двусторонний замкнутый идеал алгебры } $ \mathscr B(X) $.
-\end{implication}
-
-\textcolor{gray}{Про предел компактных операторов тоже нигде найти не могу...}
-
 \begin{theorem}
 	$ H $ "--- гильбертово
 	$$ T \in \mathrm{Com}(H) \iff T^* \in \mathrm{Com}(H) $$
 \end{theorem}
 
 \begin{proof}
-	Достаточно доказать в одну сторону, так как $ T = T^** $.
+	Достаточно доказать в одну сторону, так как $ T = T^{**} $.
 	Пусть $ T \in \mathrm{Com}(H) $.
 
 	Возьмём $ x \in H $.
@@ -788,11 +786,7 @@ $$ \exists ! z \in H : \quad G_y(x) = (x, z), \quad \|z\| = \|G_y\|_{H^*} $$
 	$$ \underimp{\text{лемма Рисса}} \exists \Set{y_n}_{n = 1}^\infty : \quad \|y_n\| = 1, \quad
 	\rho(y_{n + 1}, L_n) = \inf\limits_{x \in L_n} \|y_{n + 1} - x\| \ge \frac12 $$
 
-	Проверим, что $ \Set{Ty_n} $ не фундаментальна.
-	Тогда в ней не будет существовать сходящейся подпоследовательности
-	$ \Set{Ty_{n_k}} $ "--- \contra с $ T \in \mathrm{Com}(X) $.
-
-	Пусть $ y_n \in L_n, \quad y_n \notin L_{n - 1} $.
+	Пусть $ y_n \in L_n \setminus L_{n - 1} $.
 	Тогда $ y_n = \alpha_n x_n + u_n, \quad \alpha_n \ne 0, ~ u_n \in L_{n - 1} $.
 	$$ Tx_n = \lambda_n x_n \implies Ty_n = \alpha_n \lambda_n x_n + Tu_n =
 	\lambda_n(\alpha_n x_n + u_n) -
@@ -803,7 +797,9 @@ $$ \exists ! z \in H : \quad G_y(x) = (x, z), \quad \|z\| = \|G_y\|_{H^*} $$
 	$$ \|Ty_n - Ty_m\| = \|\lambda_ny_n + v_n - Ty_m\| =
 	|\lambda_n| \Bigl\| y_n - \underbrace{\frac1{\lambda_n}(-v_n + Ty_m)}_{\in L_{n - 1}} \Bigr\|
 	\ge \frac \delta 2 $$
-	Значит, последовательность $ \Set{Ty_n} $ не содержит фундаментальных подпоследовательностей.
+	Таким образом, $ \Set{Ty_n} $ не фундаментальна.
+	Значит, она не содержит фундаментальных подпоследовательностей "--- \contra с $ T \in
+	\operatorname{Com}(X) $.
 \end{proof}
 
 \begin{implication}
@@ -828,7 +824,7 @@ $$ \exists ! z \in H : \quad G_y(x) = (x, z), \quad \|z\| = \|G_y\|_{H^*} $$
 \begin{eproof}
 \item Очевидно.
 \item Очевидно.
-\item $ E_n \coloneq \Set{\lambda \in \sigma_n(T) | {} |\lambda| \ge \frac1n}, \quad |E_n| <+\infty $
+\item $ E_n \coloneq \Set{\lambda \in \sigma_p(T) | {} |\lambda| \ge \frac1n}, \quad |E_n| <+\infty $
 	$$ \sigma_p(T) \setminus \Set{0} = \bigcup_{n = 1}^\infty E_n \implies
 	\sigma_p(T) \text{ не более, чем счётно} $$
 	$$ \forall \delta > 0 \quad \Set{\lambda \in \sigma_p(T) | {} |\lambda| > \delta}

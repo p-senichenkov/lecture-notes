@@ -1,9 +1,42 @@
 % vim:foldmethod=marker:foldmarker=(((,))):foldlevel=0
 
-% These packages interfere with `\import` and must be `\input` directly
+%: Before-features (((
 
 % add file names in logs
 \usepackage{structuredlog}
+
+%: Profiler (((
+
+% TODO: profiler
+% It gives "missing number, treated as zero" for now
+
+% \usepackage{etoolbox}
+% \newtoggle{profiler}
+% \toggletrue{profiler}
+%
+% \iftoggle{profiler}{%
+% 	\usepackage{tikz}%
+% 	\usetikzlibrary{profiler}%
+% }{}
+%
+% \newcommand*\swstart[1]{\iftoggle{profiler}{%
+% 	\pgfprofilenew{{#1}}%
+% 	\pgfprofilestart{{#1}}%
+% }{}}
+%
+% \newcommand*\swstop[1]{\iftoggle{profiler}{%
+% 	\pgfprofileend{{#1}}%
+% }{}}
+%
+% \swstart{Core packages}
+
+%: )))
+
+%: )))
+
+%: Interfere with \import (((
+
+% These packages interfere with `\import` and must be `\input` directly
 
 \usepackage{import}
 
@@ -28,3 +61,7 @@
 %   "--- -- normal dash ( -- )
 %   "--~ -- dash for compound names (--)
 %   "--* -- dash for direct speech (--  )
+
+%: )))
+
+% \swstop{Core packages}
