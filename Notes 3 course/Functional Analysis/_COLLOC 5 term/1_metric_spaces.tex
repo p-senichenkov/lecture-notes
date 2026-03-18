@@ -1675,7 +1675,7 @@ $ \mathcal C(K) $}
 
 					$$ \forall \eps > 0 \quad \exists \text{ конечная } \eps \text{-сеть }
 					\set{\phi_j \in \mathcal C(K)}_{j = 1}^n $$
-					$$ \phi_j \text{ равност. непр. } \implies
+					$$ \phi_j \in \mathcal C \implies
 					\exists \delta_j : \quad \forall x, y \in K : \rho(x, y) < \delta_j \quad
 					|\phi_j(x) - \phi_j(y)| < \eps \quad 1 \le j \le n $$
 					Положим $ \delta = \min\limits_{1 \le j \le n}\set{\delta_j} $.
@@ -1755,27 +1755,26 @@ $ \mathcal C(K) $}
 \texorpdfstring{$ \mathcal C(K) $}{пространстве непрерывных функций}}
 
 \begin{theorem}
-	$ f \in \Phi \sub \mathcal C(K) $
+	$ \Phi \sub \mathcal C(K) $
 
 	\begin{enumerate}
 		\item $ \exists M > 0, ~ \alpha, \beta > 0 : \quad
-			\forall x, y \in K : \rho(x, y) < \beta \quad
+			\forall x, y \in K : \rho(x, y) < \beta \quad \forall f \in \Phi \quad
 			|f(x) - f(y)| \le M \bigl( \rho(x, y) \bigr)^\alpha $
 		\item $ K = [a, b], \quad
 			\exists f'(x), \quad
-			\exists L > 0 : \quad
+			\exists L > 0 : \quad \forall f \in \Phi \quad
 			|f'(x)| \le L \quad \forall x \in (a, b) $
 		\item $ K \sub G \sub \R^n, \quad
 			K $ "--- компакт, $ \quad
-			G $ "--- открытое, $ \quad
-			\exists \pder f{x_j}(x) $
-			$$ \exists L > 0 : \quad
-			\forall x \in G \quad \Bigl| \pder f{x_j}(x) \Bigr| \le L $$
+			G $ "--- открытое
+			$$ \exists L > 0 : \quad \forall f \in \Phi \quad
+			\forall x \in G \quad \exists \Bigl| \pder f{x_j}(x) \Bigr| \le L $$
 		\item $ K \sub G \sub \Co, \quad
 			K $ "--- компакт, $ \quad
 			G $ "--- открытое, $ \quad
-			f $ аналитична в $ G $
-			$$ \exists L > 0 : \quad |f(z)| \le L $$
+			\forall f $ аналитична в $ G $
+			$$ \exists L > 0 : \quad \forall f \in \Phi \quad |f(z)| \le L $$
 	\end{enumerate}
 
 	В каждом из этих случаев $ \Phi $ равностепенно непрерывно.

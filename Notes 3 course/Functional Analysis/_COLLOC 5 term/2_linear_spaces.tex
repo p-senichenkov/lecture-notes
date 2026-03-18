@@ -377,7 +377,7 @@
 \end{iproof}
 
 \begin{theorem}\label{th:full:1}
-	$ (X, \|\cdot\|), \quad (Y, \|\cdot\|) $ "--- банахово.
+	$ (X, \|\cdot\|), \quad Y $ "--- банахово.
 
 	Тогда $ \mathscr B(X, Y) $ "--- банахово.
 \end{theorem}
@@ -750,13 +750,11 @@
 
 \begin{eproof}
 \item $ l_n^2 $ "--- банахово $ \implies X $ "--- банахово.
-\item $ K \sub X, \quad A : X \to l_n^2 $ "--- линейный изоморфизм $ \implies
-	A, A^{-1} $ ограничены.
+\item $ A : X \to l_n^2 $ "--- линейный изоморфизм
 
-	$ K $ "--- компакт $ \implies \Bigl( A(K) $ "--- компакт $ \iff
-	K $ ограничено и замкнуто $ \Bigr) $.
-	$$ \implies K = A^{-1} \bigl( A(K) \bigr), \quad
-	K \text{ ограничено и замкнуто} $$
+	В $ l_n^2 $ компакты ограничены и замкнуты.
+	$ A $ сохраняет компактность (как линейный изоморфизм), ограниченность (\as он ограничен) и
+	замкнутость (\as он непрерывен).
 \end{eproof}
 
 \begin{theorem}
@@ -965,7 +963,7 @@
 	x \in X $.
 
 	$$ \exists \set{x_n \in L} : \quad \lim x_n = x \implies
-	V_x = \lim Vx_n = \lim Ax_n = \lim Wx_n = Wx $$
+	Vx = \lim Vx_n = \lim Ax_n = \lim Wx_n = Wx $$
 \end{iproof}
 
 \section{Фактор-пространство нормированного и банахова пространства}

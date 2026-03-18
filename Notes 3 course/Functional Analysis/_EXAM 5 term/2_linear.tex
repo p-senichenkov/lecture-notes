@@ -1,7 +1,6 @@
 \part{Линейные функционалы}
 
-\section{Теорема Рисса о представлении линейного функционала для вещественного
-пространства.}
+\section{Теорема Рисса о представлении линейного функционала в гильбертовом пространстве}
 
 \begin{theorem}[Рисс]
 	$ H $ "--- гильбертово пространство
@@ -601,7 +600,7 @@
 			g(x_0) = d, \\
 			g \bigr|_L \equiv 0;
 		\end{cases} $$
-	\item $ d = \min\left\{ |h(x_0)| \mid \|h\| \le 1, ~ h\bigr|_L \equiv 0\right\} $.
+	\item $ d = \max\left\{ |h(x_0)| \mid \|h\| \le 1, ~ h\bigr|_L \equiv 0\right\} $.
 	\end{enumerate}
 \end{implication}
 
@@ -759,7 +758,7 @@
 
 	Пусть $ x \in X $.
 	$$ \exists n \in \N : \quad \sup\limits_{\alpha \in A}\|U_\alpha x\| < n \implies
-	x \in U_\alpha^{-1}(Y_n) \underimp{\forall \alpha \in A} x \in E_n \implies
+	x \in U_\alpha^{-1}(Y_n) \quad \forall \alpha \in A \implies x \in E_n \implies
 	X = \bigcup_{n = 1}^\infty E_n $$
 
 	Применим теорему Бэра о категориях:
@@ -818,8 +817,8 @@
 \end{eg}
 
 \begin{implication}
-	$ X $ "--- банахово, $ \quad (Y, \|\cdot\|), \quad \Set{U_n}_{n = 1}^\infty, \quad
-	U_n \in \mathscr B(X, Y), \quad U = \slim U_n $
+	$ X $ "--- банахово, $ \quad (Y, \|\cdot\|), \quad
+	\Set{U_n \in \mathscr B(X, Y)}_{n = 1}^\infty, \quad U = \slim U_n $
 
 	$$ U \in \mathscr B(X, Y), \quad \|U\| \le \varliminf \|U_n\| $$
 \end{implication}
@@ -835,13 +834,11 @@
 \end{proof}
 
 \begin{remark}
-	$ U = \slim U_n $
-
 	Возможно строгое неравенство (в примере так и было).
 \end{remark}
 
 \section{Теоремы Банаха\texorpdfstring{"--~}{--}Штейнгауза:
-критерий сходимости операторов}
+критерий сильной сходимости операторов}
 
 \begin{theorem}[Банах"--~Штейнгауз]
 	$ X, Y $ "--- банаховы, $ \quad \Set{U_n \in \mathscr B(X, Y)}_{n = 1}^\infty $
@@ -897,7 +894,7 @@
 	$ U = \slim U_n $ \textbf{тогда и только тогда}, когда
 	\begin{enumerate}
 		\item $ \exists M > 0 : \quad \|U_n\| \le M \quad \forall n \in \N $;
-		\item $ \exists \lim U_nx \quad \forall x \in E \sub X $, где $ E $ "--- полное в $ X $.
+		\item $ \exists \lim U_nx = Ux \quad \forall x \in E \sub X $, где $ E $ "--- полное в $ X $.
 	\end{enumerate}
 \end{theorem}
 
@@ -916,8 +913,7 @@
 	$$ \implies \exists U_nx = Ux $$
 \end{iproof}
 
-\section{Обратный оператор к \texorpdfstring{$ I - A $}{I - A} , где
-\texorpdfstring{$ A $ "--- }{A~--- } сжатие.
+\section{Обратный оператор к \texorpdfstring{$ I - A $}{I - A}.
 Множество обратимых операторов открыто}
 
 \begin{statement}\label{inv:st:1}
@@ -1122,7 +1118,7 @@
 
 \begin{proof}
 	Обозначим $ B_r = \mathtt B_r(0) $.
-	$$ X = \bigcup_{n = 1}^\infty (B_n) \implies U(X) = Y = \bigcup_{n = 1}^\infty U(B_n) $$
+	$$ X = \bigcup_{n = 1}^\infty B_n \implies U(X) = Y = \bigcup_{n = 1}^\infty U(B_n) $$
 	По теореме Бэра о категориях
 	$$ \exists n_0 \in \mathbb N : \quad \operatorname{Int} \ol{U(B_{n_0})} \ne \emptyset $$
 	При этом, $ U(B_{n_0}) = n_0U(B_1) $ (в $ n_0 $ раз увеличенное $ U(B_1) $).
@@ -1322,7 +1318,6 @@ $ \mathrm L^p $ для конечных $ p $}
 	\end{cases} \underimp{\text{непр. } F}
 	F(S_n) \to F(x) \implies F(x) = \sum_{k = 1}^\infty x_ky_k = F_y(x) $$
 
-	Проверим, что $ y \in l^q $.
 	\begin{itemize}
 		\item $ p > 1 \implies q < +\infty $
 
@@ -1341,22 +1336,19 @@ $ \mathrm L^p $ для конечных $ p $}
 			\sum \Bigl| \frac{\ol{y_k}}{|y_k|} \Bigr|^p |y_k|^{p(q - 1)} =
 			\sum |y_k|^{p(q - 1)} \undereq{\frac1p + \frac1q = 1 \implies p + q =
 			pq \implies pq - p = q} \sum_{k = 1}^n |y_k|^q $$
-			\begin{multline*}
-				\|F\| = \sup\limits_{x \ne 0} \frac{|F(x)|}{\|x\|_p} \ge
-				\frac{F(\nder x)}{\|\nder x\|} =
-				\frac{\sum_{k = 1}^n |y_k|^q}{ \bigl( \sum_{k = 1}^n |y_k|^q \bigr)^{\frac 1p}} =
-				\Bigl( \sum_{k = 1}^n |y_k|^q \Bigr)^{1 - \frac1p} =
-				\Bigl( \sum |y_k|^q \Bigr)^{\frac1q} \quad \forall n \implies \\
-				\implies y \in l^q, \quad \|F\| \ge \|y\|_q
-			\end{multline*}
-
-			Докажем единственность: \\
-			\textbf{Пусть} $ F = F_y, ~ F = F_z $.
-			$$ F(e_n) = y_n, \quad F(e_n) = z_n \implies y_n = z_n $$
+			$$ \|F\| = \sup\limits_{x \ne 0} \frac{|F(x)|}{\|x\|_p} \ge
+			\frac{F(\nder x)}{\|\nder x\|} =
+			\frac{\sum_{k = 1}^n |y_k|^q}{ \bigl( \sum_{k = 1}^n |y_k|^q \bigr)^{\frac 1p}} =
+			\Bigl( \sum_{k = 1}^n |y_k|^q \Bigr)^{1 - \frac1p} =
+			\Bigl( \sum |y_k|^q \Bigr)^{\frac1q} = \|y\|_q $$
 		\item $ p = 1 \implies q = \infty $
 			$$ F(e_n) = y_n, \quad \|F\|_{(l^1)^*} \ge |y_n| \implies y \in l^\infty $$
 			$$ \|F\| \ge \sup\limits_{n \in \mathbb N}|y_n| = \|y\|_\infty $$
 	\end{itemize}
+
+	Докажем единственность: \\
+	\textbf{Пусть} $ F = F_y, ~ F = F_z $.
+	$$ F(e_n) = y_n, \quad F(e_n) = z_n \implies y_n = z_n $$
 \end{eproof}
 
 \begin{remark}
@@ -1402,14 +1394,14 @@ $ \mathrm L^p $ для конечных $ p $}
 \begin{theorem}[сопряжённое к $ \mathrm L^p $]
 	\hfill
 	\begin{enumerate}
-		\item $ 1 \le p \le +\infty, \quad g \in \mathrm L^q(X, \mu), \quad \frac1p + \frac1q = 1,
-			\quad g $ "--- фиксирована, $ \quad h \in \mathrm L^p $
+		\item $ 1 \le p \le +\infty, \quad g \in \mathrm L^q(X, \mu) $ "--- фиксирована, $ \quad
+			\frac1p + \frac1q = 1, \quad h \in \mathrm L^p $
 			$$ F_g(h) \coloneq \int\limits_X h(x) g(x) \di \mu $$
 
-			$$ \implies F_g \in (\mathrm L^p)^*, \quad \|F_g\| = \|g\|_{\mathrm L^p} $$
+			$$ \implies F_g \in (\mathrm L^p)^*, \quad \|F_g\| = \|g\|_{\mathrm L^q} $$
 		\item $ 1 \le p < +\infty, \quad F \in (\mathrm L^p)^* $
 
-			$$ \exists! g \in \mathrm L^p : \quad F = F_g $$
+			$$ \exists! g \in \mathrm L^q : \quad F = F_g $$
 	\end{enumerate}
 \end{theorem}
 

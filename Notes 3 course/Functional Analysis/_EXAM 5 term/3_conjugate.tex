@@ -172,7 +172,7 @@ $$ \exists ! z \in H : \quad G_y(x) = (x, z), \quad \|z\| = \|G_y\|_{H^*} $$
 		\item $ T^* \in \mathscr B(H), \quad \|T^*\| = \|T\| $;
 		\item $ \alpha \in \Co, \quad (\alpha T)^* = \ol \alpha T^* $;
 		\item $ T, S \in \mathscr B(H) \implies (T + S)^* = T^* + S^* $;
-		\item $ (TS)^* = S^* T^* $;
+		\item $ (ST)^* = T^* S^* $;
 		\item если $ T $ "--- биекция, то $ \exists T^{-1} \in \mathscr B(H), \quad
 			\exists (T^*)^{-1} $, при этом $ (T^*)^{-1} = (T^{-1})^* $.
 	\end{enumerate}
@@ -344,13 +344,10 @@ $$ \exists ! z \in H : \quad G_y(x) = (x, z), \quad \|z\| = \|G_y\|_{H^*} $$
 			$$ \sigma_p(T) = \Set{\lambda \in \Co | \lambda T - I \text{ не инъекция}} $$
 			Для линейного оператора это означает, что
 			$ X_\lambda = \operatorname{Ker}(\lambda I - T) \ne \Set{0} $.
-			$$ u \ne 0 \in X \implies Tu = \lambda u $$
-			$ u $ "--- собственный вектор $ T $, соответствующий с. ч. $ \lambda $.
-			$ X_\lambda $ "--- собственное подпространство.
+			$$ \exists u \ne 0 \in X : \quad Tu = \lambda u $$
 		\item $ \sigma_c(T) $ "--- \emph{непрерывный спектр}
 			$$ \sigma_c(T) = \Set{\lambda \in \Co | \operatorname{Ker}(\lambda I - T) = \Set{0},
 			\quad \ol{V(\lambda)(X)} = X} $$
-			(\ie образ $ V(\lambda) $ всюду плотен в $ X $).
 		\item $ \sigma_r(T) $ "--- \emph{остаточный спектр}
 			$$ \sigma_r(T) = \Set{\lambda \in \Co | \operatorname{Ker}(\lambda I - T) = \Set{0},
 			\quad \ol{V(\lambda)(X)} \subsetneq X} = \sigma \setminus (\sigma_p \cup \sigma_c) $$
@@ -590,11 +587,8 @@ $$ \exists ! z \in H : \quad G_y(x) = (x, z), \quad \|z\| = \|G_y\|_{H^*} $$
 
 \begin{proof}
 	$ B \coloneq \mathtt B_1^X(0) $
-	\begin{multline*}
-		T(B) \sub T(X) \implies T(B) \text{ "--- ограниченное множество в конечномерном пр-ве }
-		\implies \\
-		\implies T(B) \text{ относительно компактно}
-	\end{multline*}
+	$$ T(B) \sub T(X) \implies T(B) \text{ ограничено } \underimp{T(X) \text{ конечномерно}}
+	T(B) \text{ относительно компактно} $$
 \end{proof}
 
 \begin{theorem}
@@ -762,9 +756,8 @@ $$ \exists ! z \in H : \quad G_y(x) = (x, z), \quad \|z\| = \|G_y\|_{H^*} $$
 \end{remark}
 
 \begin{theorem}
-	$ X $ "--- банахово, $ \quad T \in \mathrm{Com}(X), \quad \lambda \in \sigma_p(T) $ "--- с. ч.,
-	$ \quad X_\lambda = \operatorname{Ker}(\lambda I - T) $ "--- собств. подпр-во, \\
-	$ \delta > 0 $
+	$ X $ "--- банахово, $ \quad T \in \mathrm{Com}(X), \quad \lambda \in \sigma_p(T) $,
+	$ \quad X_\lambda = \operatorname{Ker}(\lambda I - T), \quad \delta > 0 $
 
 	$$ \sum_{
 		\begin{subarray}{c}
@@ -772,9 +765,6 @@ $$ \exists ! z \in H : \quad G_y(x) = (x, z), \quad \|z\| = \|G_y\|_{H^*} $$
 			|\lambda| \ge \delta
 		\end{subarray}
 	} \dim(X_\lambda) < +\infty $$
-
-	То есть, число линейно-независимых собственных векторов $ T $, соответствующих собственным
-	числам $ \lambda $, таких, что $ |\lambda| \ge \delta $, конечно.
 \end{theorem}
 
 \begin{proof}
@@ -788,7 +778,7 @@ $$ \exists ! z \in H : \quad G_y(x) = (x, z), \quad \|z\| = \|G_y\|_{H^*} $$
 
 	Пусть $ y_n \in L_n \setminus L_{n - 1} $.
 	Тогда $ y_n = \alpha_n x_n + u_n, \quad \alpha_n \ne 0, ~ u_n \in L_{n - 1} $.
-	$$ Tx_n = \lambda_n x_n \implies Ty_n = \alpha_n \lambda_n x_n + Tu_n =
+	$$ Ty_n = \alpha_n T x_n + T u_n = \alpha_n \lambda_n x_n + Tu_n =
 	\lambda_n(\alpha_n x_n + u_n) -
 	\underbrace{\lambda_n u_n + Tu_n}_{ \eqqcolon v_n \in L_{n - 1}} = \lambda_ny_n + v_n $$
 

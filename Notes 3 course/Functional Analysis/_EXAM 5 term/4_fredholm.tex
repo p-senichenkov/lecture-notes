@@ -119,7 +119,7 @@ $$ \frac1\lambda \in \mathrm{Com}(H) \implies I - \frac1\lambda T \text{ "--- о
 	\textbf{Допустим}, что $ H_{k + 1} \subsetneq H_k $.
 
 	Только что доказали, что $ H_{n + 1} $ замкнуто в $ H_n $.
-	При этом, $ S(H) $ "--- подпространство $ H $ (по линейности $ S $).
+	При этом, $ S(H_n) $ "--- подпространство $ H_n $.
 	$$ H_k = H_{k + 1} \oplus H_{k + 1}^\perp \text{ (ортогональное дополнение в $ H_k $)} $$
 	$$ \exists x_k \in H_k : \quad \|x_k\| = 1, \quad x_k \perp H_{k + 1} $$
 
@@ -155,7 +155,8 @@ $$ \frac1\lambda \in \mathrm{Com}(H) \implies I - \frac1\lambda T \text{ "--- о
 	$ \operatorname{Ker} S = \Set{0} $, \ie $ S $ "--- инъекция.
 
 	Докажем, что $ S(H) = H $.
-	\textbf{Пусть} $ S(H) \subsetneq H $, \ie $ \exists x \in H : \quad x \notin S(H) $.
+	\textbf{Пусть} $ S(H) \subsetneq H $, \ie $ \exists x \in H : \quad x \notin S(H) $
+	(\ie $ Sx \in H $).
 
 	Подействуем на $ x $ оператором $ S $:
 	$$ Sx \in S(H), \quad S(Sx) \notin S(H) $$
@@ -258,6 +259,19 @@ $$ \frac1\lambda \in \mathrm{Com}(H) \implies I - \frac1\lambda T \text{ "--- о
 			При этом, если $ N = +\infty $, то $ \lim\limits_{n \to \infty} \lambda_n = 0 $.
 	\end{enumerate}
 \end{implication}
+
+\begin{eproof}
+\item $ \lambda \in \sigma(T) \implies V(\lambda) $ необратим.
+
+	\textbf{Если} $ V(\lambda) $ "--- сюръекция, то
+	$ \dim \operatorname{Ker} \bigl( V(\lambda) \bigr)* = \Set{0} $
+	(\as $ H = V(\lambda)(H) \oplus \operatorname{Ker} \bigl( V(\lambda) \bigr)^* $).
+	Но по теореме это означает, что $ \dim \operatorname{Ker} V(\lambda) = \Set{0} \implies
+	V(\lambda) $ обратим "--- \contra.
+
+	Значит, $ V(\lambda) $ не сюръекция $ \underimp{\text{альт. Фредгольма}}
+	\operatorname{Ker} V(\lambda) \ne \Set{0} $.
+\end{eproof}
 
 \section{Простейшие свойства самосопряжённого оператора}
 
@@ -472,8 +486,12 @@ $$ \frac1\lambda \in \mathrm{Com}(H) \implies I - \frac1\lambda T \text{ "--- о
 	\underimp{\text{т. Г."--~Ш. о
 	предст. опер.}} Tz = \sum_{n = 1}^\infty \lambda_n P_\lambda = 0 \implies
 	z \in \operatorname{Ker} T $$
+
+	Получили, что $ M = \operatorname{Ker} T = H_0 $.
 	$$ H \text{ сепарабельно } \implies H_0 \text{ сепарабельно } \implies
-	\exists \Set{e_{0~j}}_{1 \le j \le m_n} \text{ "--- ОНБ в } H $$
+	\exists \Set{e_{0~j}}_{1 \le j \le m_n} \text{ "--- ОНБ в } H_0 = M $$
+	А в $ L $ ОНБ мы уже нашли.
+	Значит, ОНБ $ H $ будет их объединением.
 \end{proof}
 
 \begin{remark}
@@ -517,20 +535,17 @@ $$ \frac1\lambda \in \mathrm{Com}(H) \implies I - \frac1\lambda T \text{ "--- о
 	\end{cases} $$
 	\begin{itemize}
 		\item Проверим ортогональность
-			\begin{multline*}
-				\iint\limits_{X \times Y} \phi_n(x) \psi_i(y) \ol{\phi_m(x)} \ol{\psi_k(y)}
-				\di \mu \di \nu =
-				\int\limits_X \phi_n \ol\phi_m \di \mu \int\limits_Y \psi_j \ol\psi_k \di\nu =
-				\begin{cases}
-					1, \quad m = n, ~ j = k, \\
-					0
-				\end{cases} \implies \\
-				\implies \Set{\phi_n(x) \psi_j(y)} \text{ "--- ОС}
-			\end{multline*}
+			$$ \iint\limits_{X \times Y} \phi_n(x) \psi_i(y) \ol{\phi_m(x)} \ol{\psi_k(y)}
+			\di \mu \di \nu =
+			\int\limits_X \phi_n \ol\phi_m \di \mu \int\limits_Y \psi_j \ol\psi_k \di\nu =
+			\begin{cases}
+				1, \quad m = n, ~ j = k, \\
+				0
+			\end{cases} $$
 		\item Проверим полноту
 
 			Возьмём $ f \in \mathrm L^2(X \times Y) $.
-			Пусть $ f \perp \Set{\phi_n(x) \psi_j(y)}_{n, j \in \N} $.
+			Пусть $ f \perp \Set{\phi_n(x) \psi_j(y)}_{n, j \in \N} $, \ie
 			$$ \iint\limits_{X \times Y} f(x, y) \ol{\phi_n(x)} \ol{\psi_k(y)} \di\mu \di\nu = 0
 			\quad \forall n, k $$
 
@@ -540,12 +555,12 @@ $$ \frac1\lambda \in \mathrm{Com}(H) \implies I - \frac1\lambda T \text{ "--- о
 				\ol{\psi_k(y)} \di \nu = 0 \implies
 				\int\limits_X f(x, y) \ol\phi_n \di \mu \perp \psi_k(y) \quad \forall k \implies \\
 				\implies \int\limits_X f(x, y) \ol \phi_n \di \mu = 0 \text{ \ale по } \nu \implies
-				f(x, y) = 0 \text{ \ale по } \mu \implies \\
-				\implies f = \On \text{ в } \mathrm L^2(X \times Y), \quad
-				K(x, y) = \sum_{1 \le i, j < +\infty} \alpha_{ij}\phi_i(x) \psi_j(y)
+				f(x, y) = 0 \text{ \ale по } \mu \implies
+				f = \On \text{ в } \mathrm L^2(X \times Y)
 			\end{multline*}
 	\end{itemize}
 
+	$$ K(x, y) = \sum_{1 \le i, j < +\infty} \alpha_{ij}\phi_i(x) \psi_j(y) $$
 	Рассмотрим частичные суммы:
 	$$ K_n(x, y) = \sum_{1 \le i,j \le n} \alpha_{ij} \phi_i(x) \psi_j(y) $$
 	$$ \lim \|K(x, y) - K_n(x, y)\| = 0 $$
