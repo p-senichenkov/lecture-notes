@@ -1,0 +1,68 @@
+\section{Продолжение}
+
+$$ \llb \mathrm{while}~e~\mathrm{do}~S \rrb =
+\llb \mathrm{if}~e~\mathrm{then}~S; \mathrm{while}~e~\mathrm{do}~S~\mathrm{else}~\mathrm{skip}
+\rrb =
+\begin{cases}
+	\llb S; \mathrm{while}~e~\mathrm{do}~S \rrb =
+	\llb \mathrm{while}~e~\mathrm{do}~S \rrb \circ \llb S \rrb, \quad \llb e \rrb \sigma = 1 \\
+	\mathrm{id}_\sigma, \quad \llb e \rrb_\eps \sigma = 0
+\end{cases} $$
+$$ \llb \mathrm{while}~e~\mathrm{do}~S \rrb = \mathrm{fix} \left[ f \mapsto
+	\begin{cases}
+		f \circ \llb S \rrb, \quad \llb e \rrb_\sigma = 1 \\
+		\mathrm{id}_\sigma, \quad \llb e \rrb_\sigma = 0
+	\end{cases} \right] $$
+
+$$ \mathrm{fact}~n = \mathrm{if}~n \le 1~\mathrm{then}~1~\mathrm{else}~n \cdot
+\mathrm{fact}(n - 1) $$
+$$ \mathcal F = f \mapsto \underbrace{n \mapsto \mathrm{if}~n \le 1~\mathrm{then}~n~\mathrm{else}~n
+\cdot f(n - 1)} $$
+
+Возьмём в качестве неподвижной точки функцию
+$$ f_\perp n = \mathrm{if}~n \le 1~\mathrm{then}~1~\mathrm{else}~\perp $$
+$$ \mathcal F(f_\perp) = n \mapsto \mathrm{if}~n \le 1~\mathrm{then}~1~\mathrm{else}~n
+\cdot f_\perp(n - 1) $$
+
+\section{Теория доменов}
+
+\begin{enumerate}
+	\item Возьмём частично-упорядоченное множество $ (X, \sqsubseteq) $.
+	\item Введём операцию \emph{объединения}:
+		$$ x \sqcup y = \inf\Set{z | z \sqsupseteq x, ~ z \sqsupseteq y} $$
+		Понятно, что $ x \sqsubset y \implies x \sqcup y = y $.
+	\item $ \exists \perp \in X : \quad \forall x \in X \quad \perp \sqsubseteq x $.
+		Такие множества (1--3) называются \emph{pointed set}.
+	\item \emph{Цепь}:
+		$$ S \le X : \quad \forall x, y \in S \quad
+		\begin{vars}
+			x \sqsubseteq y \\
+			y \sqsubseteq x
+		\end{vars} $$
+	\item $ X $ называется \emph{chain-complete partial order (CCPO)}, если
+		$$ \forall \text{ цепи } S \quad \exists \bigsqcup S \in X : \quad
+		{z | z \sqsupseteq x, ~ x \in S} $$
+		$ \bigsqcup $ называется \emph{точная верхняя грань} $ S $.
+	\item $ f : X \to X $
+		$$ f \text{ \emph{монотонна} } \iff \forall x, y \quad x \sqsubseteq y \implies
+		f(x) \sqsubseteq f(y) $$
+
+		$$ f(x \sqcup y) \sqsupseteq f(x) \sqcup f(y) $$
+	\item $ f $ \emph{непрерывна}, если
+		$$ \forall \text{ цепи } S \quad f(\bigsqcup S) = \bigsqcup f(S) $$
+
+		Тогда
+		$$ x \sqsubseteq y \quad f(x \sqcup y) = f(y) \sqcup f(y) $$
+	\item $ f $ дистрибутивна, $ \quad x \sqsubseteq y \implies x \sqcup y = y \implies $
+		$$ f(x \sqcup y) = f(x) \sqcup f(y)  = f(y) $$
+		$ \implies f $ монотонна.
+	\item $ X_\perp $ "--- pointed CCPO, $ \quad f $ "--- непрерывная функция
+		$$ \underbrace{\perp \sqsubseteq f(\perp) \sqsubseteq f^2(\perp) \sqsubseteq \dots \sqsubseteq
+		f^k(\perp) \sqsubseteq \dotso}_{\text{цепь}} $$
+		$$ \implies \bigsqcup_{n = 0}^\infty \Set{f^n(\perp)} $$
+\end{enumerate}
+
+\begin{statement}
+	$ \bigsqcup_{n = 0}^\infty f^n(\perp) $ "--- наименьшее \comment{???} $ f $
+	$$ f \Bigl( \bigsqcup_{n = 0}^\infty f^n(\perp) \Bigr) = \bigsqcup_{n = 0}^\infty f^n(\perp) $$
+\end{statement}

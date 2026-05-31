@@ -308,12 +308,6 @@ TSWLatexianTemp*
 # Don't upload lecture recordings
 *.mp4
 
-# Don't upload courseworks
-Coursework
-
-# Exclude Math logic lecture materials
-**/Math logic/Lectures
-
 # There're only presentations in OS
 OS
 

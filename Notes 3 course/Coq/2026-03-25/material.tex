@@ -1,0 +1,94 @@
+Стили описания семантики:
+\begin{itemize}
+	\item денотационная
+	\item операционная
+		\begin{itemize}
+			\item семантика большого шага
+			\item семантика малого шага
+			\item система помеченных переходов
+			\item редукционные контексты
+		\end{itemize}
+	\item аксиоматическая
+	\item игровая
+\end{itemize}
+
+\section{LTS}
+
+$ (S, \to, L, \mu) $ "--- LTS (система помеченных переходов)
+
+$$ S_0 \to S_1 \to \dots \to S_k $$
+
+\begin{definition}
+	$ \Sigma_1 = (S_1, \to_1, L_1, \mu_1), \quad \Sigma_2 = (S_2, \to_2, L_2, \mu_2) $
+
+	Будем говорить, что между $ \Sigma_1 $ и $ \Sigma_2 $ установлено отношение \emph{симуляции}:
+	$ \Sigma_2 \gtrsim \Sigma_1 $ ($ \Sigma_1 $ \emph{симулирует} $ \Sigma_2 $), если
+	$ \exists \text{`$ \gtrsim $'} \subseteq S_2 \times S_1 $ такое, что
+	\begin{enumerate}
+		\item $ \underset{\in S_2}{s_2} \xrightarrow{l}_2 \underset{\in S_2}{s_2'} $ и
+			$ \exists s_1 \in S_1 : \quad s_2 \gtrsim s_1 $
+			$$ \implies s_1 \xrightarrow{l} s_1' \text{ и } s_2' \gtrsim s_1' $$
+	\end{enumerate}
+\end{definition}
+
+\begin{definition}
+	Можно построить отношение \emph{бисимуляции}: $ \sim \subseteq S_2 \times S_1 $:
+	\begin{itemize}
+		\item $ \sim $ "--- симуляция;
+		\item $ \sim^{-1} $ "--- симуляция.
+	\end{itemize}
+\end{definition}
+
+\begin{remark}
+	Бисимуляция "--- отношение эквивалентности.
+\end{remark}
+
+\begin{eg}
+	Рассмотрим \emph{помеченный граф потока управления}:
+	\begin{enumerate}
+		\item ориентированный граф $ C $;
+		\item две выделенные вершины start, stop $ \in C.N $ (вершины $ C $);
+		\item $ u \xrightarrow{*} \mathrm{start} \implies u = \mathrm{start} $ \\
+			$ \mathrm{stop} \xrightarrow{*} u \implies u = \mathrm{stop} $
+		\item $ \forall u \quad \mathrm{start} \xrightarrow{*} u \xrightarrow{*} \mathrm{stop} $
+	\end{enumerate}
+
+	$ L $ "--- метки
+	$$ \mu : C.N \mapsto L $$
+
+	Пусть есть граф $ C $.
+	Определим для него семантику помеченных переходов:
+	$$ S = \Braket{C, \underset{\in C.N}{u}} $$
+	$$ L = \text{ множество пометок вершин графа} $$
+	$$ S_0 = \Braket{C, \mathrm{start}}, \quad S_{fin} = \Braket{C, \mathrm{stop}} $$
+	$$ \Braket{C, u} \xrightarrow{\mu(u)} \Braket{C, v} \iff \text{ есть дуга } u \to v $$
+
+	$ \Sigma_C $ соответствует последовательность вывода в $ \Sigma_C $.
+\end{eg}
+
+\section{Денотационная семантика}
+
+$ \llb \cdot \rrb_s : \mathscr L \to \bigl( \Z^* \to \Z^* \bigr) $ "--- поверхностная семантика.
+$$ C = \sigma \times (\Z^*, \Z^*) $$
+
+$$ \llb \cdot \rrb \subseteq S \mapsto \bigl( C \to C \bigr) $$
+
+$$ \llb \mathrm{skip} \rrb = c \mapsto c = \operatorname{Id}_C $$
+$$ \llb x \coloneq e \rrb = \Braket{\sigma, i, 0} \mapsto
+\Braket{\sigma[x \leftarrow \llb e \rrb_\eps \sigma], i, o} = \operatorname{Assign}(x, e)_C $$
+$$ \llb \mathrm{read}(x) \rrb = \Braket{\sigma, zi, o} \mapsto
+\Braket{\sigma[x \leftarrow z], i, o} = \operatorname{Read}(x)_C $$
+$$ \llb \operatorname{write}(e) \rrb = \Braket{\sigma, i, o} \mapsto
+\Braket{\sigma, i, o \bigl( \llb e \rrb_\eps \sigma \bigr)} = \operatorname{Write}(e)_C $$
+$$ \llb S_1; S_2 \rrb = c \mapsto \llb S_1 \rrb (\llb S_2 \rrb) =
+\llb S_2 \rrb \cdot \llb S_1 \rrb $$
+$$ \llb \mathrm{if}~e~\mathrm{then}~S_1~\mathrm{else}~S_2 \rrb \mapsto c \mapsto
+\begin{cases}
+	\llb S_1 \rrb c, \quad \llb e \rrb_\eps \sigma = 1, \\
+	\llb S_2 \rrb c, \quad \llb e \rrb_\eps \sigma = \O
+\end{cases} $$
+$$ \llb \mathrm{while}~e~\mathrm{do}~S \rrb \mapsto c \mapsto
+\begin{cases}
+	c, \quad \llb e \rrb_\eps \sigma = \O, \\
+	\llb S; \mathrm{while}~e~\mathrm{do}~S \rrb c, \quad \llb e \rrb_\eps \sigma = 1
+\end{cases} $$
