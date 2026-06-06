@@ -1,0 +1,242 @@
+\chapter{Вероятностное пространство}
+
+\section{Основные определения}
+
+\begin{definition}
+	Результаты опытов или наблюдений будем называть \emph{событиями}.
+\end{definition}
+
+\begin{notation}
+	$ \omega $ "--- исход, элементарное событие.
+\end{notation}
+
+\begin{notation}
+	$ \Omega $ "--- множество всех элементарных событий.
+\end{notation}
+
+\begin{definition}
+	Если $ A \cap B = \O $, то говорим, что $ A $ и $ B $ \emph{несовместны}.
+\end{definition}
+
+\begin{definition}
+	Если $ A \sub B $, то говорят, что появление события $ A $ \emph{влечёт} появление события $ B $.
+\end{definition}
+
+\begin{notation}
+	$ \sigma $-алгебру событий будем обозначать $ \Im $.
+\end{notation}
+
+\begin{definition}
+	Пусть $ P : \Im $ удовлетворяет следующим условиям:
+	\begin{enumerate}
+		\item $ P(A) \ge 0 \quad \forall A \in \Im $;
+		\item $ P(\Omega) = 1 $;
+		\item $ A_1, A_2, \dotsc $ "--- не более чем счётный набор событий,
+			$ A_i \cap A_j = \O $, то
+			$$ P \Bigl( \bigcup_{i = 1}^\infty A_i \Bigr) = \sum_{i = 1}^\infty P(A_i) $$
+	\end{enumerate}
+
+	Будем говорить, что $ P $ является \emph{вероятностной (счётно-аддитивной) мерой} или
+	\emph{вероятностью}.
+\end{definition}
+
+\begin{definition}
+	Говорят, что $ A_1, A_2, \dotsc $ "--- \emph{полная группа несовместных событий},
+	если их объединение представляет собой достоверное событие.
+\end{definition}
+
+\section{Свойства вероятностей}
+
+\begin{props}
+\item $ \ol A $ "--- событие, дополнительное к событию $ A $.
+	Тогда $ P(\ol A) = 1 - P(A) $.
+\item $ 0 \le P(A) \le 1 $.
+\item $ P(\O) = 0 $.
+\item $ P(A \cup B) = P(A) + P(B) - P(AB) $
+	$$ P \Bigl( \bigcup_{i = 1}^n A_i \Bigr) =
+	\sum_{i = 1}^n P(A_i) - \sum_{i < j} P(A_iA_j) + \sum_{i < j < k}P(A_iA_jA_k) -
+	\dots + (-1)^{n + 1}P \Bigl( \bigcap_{i = 1}^n A_i \Bigr) $$
+\item $ P(\bigcup A_i) \le \sum P(A_i) $.
+\item $ A \sub B \implies P(A) \le P(B) $.
+\item $ A_1 \sub A_2 \sub \dotso, \quad A = \bigcup A_n $
+	$$ P(A) = \lim\limits_{n \to \infty} P(A_n) $$
+\item $ B_1 \supset B_2 \supset \dotso, \quad B = \bigcap B_n $
+	$$ P(B) = \lim\limits_{n \to \infty} P(B_n) $$
+\item $ A_1, A_2, \dotsc $ "--- не более чем счётная полная группа событий
+	$$ \sum P(A_n) = 1 $$
+\end{props}
+
+\begin{statement}[неравенства Бонферрони]
+	$$ \sum_{k = 1}^n P(A_k) - \sum{1 \le k \le l \le n} P(A_kA_l) \le
+	P \Bigl( \bigcup_{k = 1}^n A_k \Bigr) \le \sum_{k = 1}^n P(A_k) $$
+\end{statement}
+
+\section{Условные вероятности}
+
+\begin{definition}
+	$ A, B \in \Im, \quad P(B) > 0 $
+
+	\emph{Условной вероятностью} $ P(A|B) $ называется отношение
+	$$ P(A|B) = \frac{P(AB)}{P(B)} $$
+\end{definition}
+
+\begin{statement}
+	Условная вероятность является вероятностью.
+\end{statement}
+
+\begin{eproof}
+\item
+	$$ P(A|B) = \frac{P(AB)}{P(B)} \ge 0 $$
+\item
+	$$ P(\Omega|B) = \frac{P(\Omega B)}{P(B)} = \frac{P(B)}{P(B)} = 1 $$
+\item
+	$$ P \Bigl( \bigcup_k A_k \Bigm| B \Bigr) =
+	\frac{P \Bigl\lgroup B \cap \Bigl( \bigcup_k A_k \Bigr) \Bigr\rgroup}{P(B)} =
+	\frac{P \Bigl( \bigcup_k A_kB \Bigr)}{P(B)} =
+	\frac{\sum_k P(A_kB)}{P(B)} = \sum_k P(A_k|B) $$
+\end{eproof}
+
+\section{Формула полной вероятности}
+
+\begin{theorem}
+	$ A_1, A_2, \dotsc $ "--- полная группа несовместных событий, $ \quad P(A_i) > 0 $
+
+	$$ P(B) = \sum_i P(B|A_i) \cdot P(A_i) $$
+\end{theorem}
+
+\begin{proof}
+	Учитывая несовместность событий $ BA_1, BA_2, \dotsc $, получаем
+	\begin{multline*}
+		P(B) = P(B \cap \Omega) =
+		p \Bigl\lgroup B \cap \Bigl( \bigcup_{i \ge 1}A_i \Bigr) \Bigr\rgroup =
+		P \Bigl( \bigcup_{i \ge 1} BA_i \Bigr) = \sum_{i \ge 1} P(BA_i) = \\
+		= \sum_{i \ge 1} \frac{P(BA_i)P(A_i)}{P(A_i)} = \sum_{i \ge 1} P(B|A_i) P(A_i)
+	\end{multline*}
+\end{proof}
+
+\begin{theorem}[формула Байеса]
+	$ A_1, A_2, \dotsc $ "--- полная группа несовместных событий \\
+	$ P(A_i) > 0, \quad P(B) > 0 $
+
+	$$ P(A_i|B) = \frac{P(B|A_i) \cdot P(A_i)}{\sum_j P(B|A_j) \cdot P(A_j)} $$
+\end{theorem}
+
+\begin{proof}
+	$$ \frac{P(B|A_i)P(A_i)}{\sum_j P(B|A_j)P(A_j)} = \frac{P(B|A_i)P(A_i)}{P(B)} =
+	\frac{P(A_iB)P(A_i)}{P(A_i)P(B)} = P(A_i|B) $$
+\end{proof}
+
+\section{Независимость случайных событий}
+
+\begin{definition}
+	$ P(B) \ne 0 $
+
+	События $ A $ и $ B $ будем называть \emph{независимыми}, если $ P(A|B) = P(A) $.
+\end{definition}
+
+\begin{definition}
+	События $ A $ и $ B $ будем называть \emph{независимыми}, если при $ P(A)P(B) \ne 0 $ выполнены
+	равенства
+	$$ P(A|B) = P(A), \quad P(B|A) = P(B) $$
+\end{definition}
+
+\begin{definition}
+	События $ A $ и $ B $ называются \emph{независимыми}, если $ P(AB) = P(A)P(B) $.
+\end{definition}
+
+\begin{definition}
+	События $ A_1, A_2, \dotsc $ \emph{попарно независимы}, если для любых двух событий $ A_i $ и
+	$ A_j $ выполняется соотношение
+	$$ P(A_iA_j) = P(A_i)P(A_j) $$
+\end{definition}
+
+\begin{definition}
+	Говорят, что события $ A_1, A_2, \dots, A_n $ \emph{независимы в совокупности (взаимно
+	независимы)}, если
+	$$ \forall k \le n \quad \forall 1 \le i_1 < i_2 < \dots < i_k \le n \quad
+	P \Bigl( \bigcap_{j = 1}^k A_{i_j} \Bigr) = \prod_{j = 1}^k P(A_{i_j}) $$
+\end{definition}
+
+\begin{theorem}
+	$ A_1, A_2, \dotsc $ взаимно независимы.
+
+	Тогда взаимно независимы события $ B_1, B_2, \dotsc $, где $ B_i $ "--- это $ A_i $ или его
+	дополнение.
+\end{theorem}
+
+\section{Схемы испытаний Бернулли}
+
+\begin{definition}
+	Повторные независимые испытания называются \emph{испытаниями Бернулли}, если каждое такое
+	испытание имеет только два возможных исхода и вероятности соответствующих исходов остаются
+	неизменными для всех испытаний.
+\end{definition}
+
+\begin{statement}
+	Вероятность из $ n $ испытаний получить ровно $ m $ успехов равна
+	$$ P_n(m) = C_n^m p^mq^{n - m} $$
+\end{statement}
+
+\begin{theorem}[локальная предельная]
+	$ 0 < p < 1 $
+
+	Соотношение
+	$$ \frac{\sqrt{npq}P_n(m)}{\phi \Bigl( \dfrac{m - np}{\sqrt{npq}} \Bigr)}
+	\underarr{n \to \infty} 1, $$
+	где
+	$$ \phi(x) = \frac1{\sqrt{2\pi}} e^{-\frac{x^2}2}
+	\text{ "--- плотность нормального распределения}, $$
+	выполняется равномерно для значений $ m $ таких, что
+	$$ -\infty < C_1 \le \frac{m - np}{\sqrt{npq}} \le C_2 < +\infty $$
+\end{theorem}
+
+\begin{notation}
+	$ \mu_n $ "--- количество успехов в испытаниях Бернулли.
+\end{notation}
+
+\begin{notation}
+	Определим \emph{функцию распределения нормального закона}:
+	$$ \Phi(x) = \frac1{\sqrt{2\pi}} \int_{-\infty}^x e^{-\frac{t^2}2} \di t =
+	\int_{-\infty}^x \phi(t) \di t $$
+\end{notation}
+
+\begin{theorem}[интегральная предельная]
+	$ 0 < p < 1 $
+
+	Равномерно по всем значениям $ -\infty \le a < b \le +\infty $ выполняется соотношение
+	$$ P\set{a \le \mu_n \le b} \underarr{n \to \infty}
+	\Phi \Bigl( \frac{b - np}{\sqrt{npq}} \Bigr) - \Phi \Bigl( \frac{a - np}{\sqrt{npq}} \Bigr) $$
+\end{theorem}
+
+Погрешность оценивается неравенством
+$$ \Delta_n \le \frac c{\sqrt{npq}} $$
+$ c $ "--- абсолютная константа.
+Можно взять $ c = 1 $ или $ c = 0.7655 $.
+
+\begin{theorem}
+	При большом $ n $ рассмотрим такую схему серий независимых событий: \\
+	\begin{tabular}{l | c}
+		& p \\
+		\hline
+		$ A_{11} $ & \lambda \\
+		$ A_{21} $ $ A_{22} $ & \lambda/2 \\
+		$ A_{31} $ $ A_{32} $ $ A_{33} $ & \lambda/3 \\
+		\vdots & \vdots \\
+		$ A_{n1} $ $ A_{n2} $ \dots $ A_{nn} $ & \lambda/n
+	\end{tabular}
+
+	Для каждого фиксированного $ m $ справедливо
+	$$ P_n(m) \underarr{n \to \infty} \frac{e^{-\lambda}\lambda^m}{m!} $$
+\end{theorem}
+
+\section{Полиномиальная схема}
+
+\begin{definition}
+	Пусть $ P\Set{A_i} = p_i, \quad p_1 + \dots + p_r = 1 $.
+
+	Вероятность того, что в $ n $ испытаниях событие $ A_i $ произойдёт $ m_i $ раз, равна:
+	$$ P_n(m_1, m_2, \dots, m_r) =
+	\frac{n!}{m_! m_2! \cdots m_r!} p_1^{m_1} p_2^{m_2} \cdots p_r^{m_r}, \quad
+	m_1 + m_2 + \dots + m_r = n $$
+\end{definition}
+

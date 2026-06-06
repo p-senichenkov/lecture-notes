@@ -1,11 +1,18 @@
 \documentclass[a4paper]{report}
-\input{../../preamble.tex}
-\input{../../../hyphenations.tex}
+
+\input{../../.preamble/core-packages.tex}
+
+\import{../..}{preamble.tex}
 
 \begin{document}
     \let\hat\widehat  % this line somehow works only if placed here (perhaps "report" class breaks it)
 
     \tableofcontents
 
-    \input{./material.tex}
+    \input{./1_prob_space.tex}
+    \input{./2_rand_value.tex}
+    \input{./3_moments.tex}
+    \input{./4_discr_proc.tex}
+    \input{./5_char_func.tex}
+    \input{./6_congruence.tex}
 \end{document}

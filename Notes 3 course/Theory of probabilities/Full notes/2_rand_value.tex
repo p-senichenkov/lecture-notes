@@ -1,0 +1,258 @@
+\chapter{Случайные величины}
+
+\section{Случайные величины и их распределения}
+
+\begin{definition}
+	$ (\Omega, \Im, P) $
+
+	Говорим, что $ \xi : \Omega \to \R $ "--- \emph{случайная величина}, если $ \xi $ измерима.
+\end{definition}
+
+\begin{definition}
+	\emph{Функцией распределения} случайной величины $ \xi $ будем называть функцию
+	$$ F_\xi(x) = P_\xi \bigl( (-\infty, x) \bigr) = P \Set{\xi < x} $$
+\end{definition}
+
+\begin{remark}
+	$ P_\xi \bigl( [x, y) \bigr) = P \set{x \le \xi \le y} = F_\xi(y) - F_\xi(x) $
+\end{remark}
+
+\begin{props}
+\item $ 0 \le F_\xi(x) \le 1 $;
+\item $ F_\xi $ "--- неубывающая функция;
+\item $ F_\xi $ непрерывна слева во всех точках;
+\item $ F_\xi(x) \underarr{x \to -\infty} 0, \quad F_\xi(x) \underarr{x \to +\infty} 1 $.
+\end{props}
+
+\begin{definition}
+	Если для случайных величин функции распределения совпадают, то такие
+	случайные величины называют \emph{одинаково распределёнными}.
+\end{definition}
+
+\subsection{Типы вероятностных распределений}
+
+\subsubsection{Дискретный закон распределения}
+
+\begin{definition}
+	Говорим, что $ \xi $ "--- случайная величина с \emph{дискретным законом распределения}, если
+	существует не более чем счётное множество точек $ A \sub \R $ такое, что $ P(\xi \in A) = 1 $.
+\end{definition}
+
+\begin{exmpls}
+\item $ \xi $ "--- случайная величина с \emph{вырожденным распределением} в точке $ c $.
+	$$ F_\xi(x) =
+	\begin{cases}
+		0, \quad x \le c, \\
+		1, \quad x > c.
+	\end{cases} $$
+\item $ \xi $ "--- случайная величина с \emph{распределением Бернулли}.
+
+	$ \xi $ принимает значения 0 и 1 с вероятностями $ 1 - p $ и $ p $.
+	$$ F_\xi(x) =
+	\begin{cases}
+		0, \quad x \le 0, \\
+		1 - p, \quad 0 < x \le 1, \\
+		1, \quad x > 1.
+	\end{cases} $$
+\item $ \xi $ имеет \emph{биномиальное распределение} с параметрами $ n, p $.
+
+	Будем использовать обозначение $ \xi \in B(n, p) $.
+	$ \xi $ принимает значения 0, 1, \dots, n с вероятностями
+	$$ P(\xi = k) = C_n^k p^k (1 - p)^{n - k} $$
+\item $ \xi $ распределена по \emph{закону Пуассона} с параметром $ \lambda > 0 $.
+
+	Обозначение: $ \xi \in \Pi(\lambda) $.
+	$ \xi $ принимает целые неотрицательные значения с вероятностями
+	$$ P_k = \frac{e^{-\lambda}\lambda^k}{k!} $$
+\end{exmpls}
+
+\subsubsection{Абсолютно непрерывное распределение}
+
+\begin{definition}
+	Говорим, что $ \xi $ "--- случайная величина с \emph{абсолютно непрерывным распределением}, если
+	существует функция $ p_\xi(x) $ такая, что для любого борелевского множества
+	$ B \in \mathcal B $
+	$$ P( \xi \in B) = \int\limits_B p_\xi(x) \di x $$
+
+	Функцию $ p_\xi $ будем называть \emph{плотностью распределения} случайной величины $ \xi $.
+\end{definition}
+
+\begin{remark}
+	$ p_\xi(x) = F_\xi'(x) $ почти всюду.
+\end{remark}
+
+\begin{props}
+\item $ p_\xi(x) \ge $ почти всюду;
+\item
+	$$ \int_{-\infty}^\infty p_\xi(x) \di x = 1 $$
+\end{props}
+
+\begin{exmpls}
+\item $ \xi $ имеет \emph{равномерное распределение} на отрезке $ [a, b] $ ($ \xi \in U([a, b]) $),
+	если существует плотность распределения
+	$$ p_\xi(x) =
+	\begin{cases}
+		0, \quad x \notin [a, b], \\
+		\frac1{b - a}, \quad x \in [a, b].
+	\end{cases} $$
+	$$ F_\xi(x) = \frac{x - a}{b - a} \quad \text{ при } a \le x \le b $$
+\item $ \xi $ имеет \emph{экспоненциальное распределение} с параметром $ \lambda > 0 $, если
+	$$ p_\xi(x) =
+	\begin{cases}
+		0, \quad x \le 0, \\
+		\frac{e^{-\frac x \lambda}}\lambda, \quad x > 0.
+	\end{cases} $$
+	$$ F_\xi(x) =
+	\begin{cases}
+		0, \quad x \le 0, \\
+		1 - e^{-\frac x \lambda}, \quad x > 0.
+	\end{cases} $$
+\item $ \xi $ имеет \emph{нормальное (гауссово)} распределение с параметрами $ a, \sigma^2 $ ($ \xi
+	\in N(a, \sigma^2) $), если
+	$$ p_\xi(x) = \frac1{\sqrt{2\pi \sigma^2}}e^{-\frac{(x - a)^2}{2\sigma^2}} $$
+
+	Если $ a = 0, ~ \sigma^2 = 1 $, то говорят, что $ \xi $ имеет \emph{стандартное нормальное
+	распределение}.
+	При этом, обычно для плотности распределения и функции распределения используются обозначения
+	$ \phi(x) $ и $ \Phi(x) $.
+\item $ \xi $ имеет \emph{распределение Коши}, если
+	$$ p_\xi(x) = \frac1{\pi(1 + x^2)} $$
+	$$ F_\xi(x) = \frac12 + \frac{\arctg x}\pi $$
+\end{exmpls}
+
+\subsubsection{Сингулярная случайная величина}
+
+\begin{definition}
+	Говорим, что $ x $ "--- \emph{точка роста} функции распределения $ F(x) $, если
+	$$ \forall \eps > 0 \quad F(x + \eps) > F(x - \eps) $$
+\end{definition}
+
+\begin{definition}
+	$ \xi $ "--- случайная величина с \emph{сингулярным распределением}, если множество точек роста
+	$ F_\xi(x) $ имеет меру 0.
+\end{definition}
+
+\subsubsection{Семейство вероятностных распределений}
+
+\begin{definition}
+	$ \xi $ "--- случайная величина
+
+	К \emph{семейству}, включающему эту величину, относим все величины $ \eta $, получаемые линейным
+	преобразованием
+	$$ \eta = a + b \xi, $$
+	в котором $ a $ "--- \emph{параметр сдвига}, $ b > 0 $ "--- \emph{параметр масштаба}.
+
+	$$ F_\eta(x) = F_\xi \Bigl( \frac{x - a}b \Bigr) $$
+	$$ p_\eta(x) = \frac{p_\xi \bigl( \frac{x - a}b \bigr)}b $$
+\end{definition}
+
+\section{Случайные векторы}
+
+\begin{definition}
+	$ \xi : \Omega \to \R^d $ "--- \emph{случайный вектор}, если $ \xi $ измерима, \ie
+	$$ \forall B \in \mathcal B^d \quad \xi^{-1}(B) \in F $$
+\end{definition}
+
+\begin{definition}
+	\emph{Функция распределения} $ F_\xi $ $ d $-мерного случайного вектора задаётся как
+	$$ F_\xi(x_1, \dots, x_d) = P\Set{\xi_1 < x_1, \dots, \xi_d < x_d} $$
+\end{definition}
+
+\begin{props}
+\item $ 0 \le F_\xi(x_1, \dots, x_d) $;
+\item $ F_\xi $ непрерывна слева по каждой из координат;
+\item $ F_\xi(x_1, \dots, x_d) \to 0 $ если хотя бы одна из координат $ x_k \to -\infty $;
+\item $ F_\xi(x_1, \dots, x_k, \dots, x_d) \to
+	F_{(\xi_1, \dots, x_{k - 1}, \xi_{k + 1}, \dots, \xi_d)}
+	(x_1, \dots, x_{k - 1}, x_{k + 1}, \dots, x_d) $ если $ x_k \to +\infty $;
+\item $ F_\xi(x_1, \dots, x_d) \to 1 $ если все координаты $ x_i \to +\infty $;
+\item $ d = 2 $
+	$$ P \bigl( (\xi_1, \xi_2) \in [a_1, b_1) \times [a_2, b_2) \bigr) =
+	F_\xi(b_1, b_2) - F_\xi(a_1, b_2) - F_\xi(b_1, a_2) + F_\xi(a_1, a_2) $$
+\end{props}
+
+\subsection{Случайные векторы с дискретным распределением}
+
+\begin{definition}
+	Случайный вектор $ \xi $ имеет $ d $-мерное \emph{дискретное распределение}, если существует не
+	более чем счётное множество точек $ A \sub \R^d $ такое, что $ P(\xi \in A) = 1 $.
+\end{definition}
+
+\begin{statement}
+	Следующие утверждения равносильны:
+	\begin{enumerate}
+		\item $ \xi = (\xi_1, \dots, \xi_d) $ "--- случайный вектор с дискретным распределением;
+		\item величины $ \xi_k $ имеют дискретное распределение для всех $ k = 1, 2, \dots, d $.
+	\end{enumerate}
+\end{statement}
+
+\subsection{Случайные векторы с абсолютно непрерывным законом распределения}
+
+\begin{definition}
+	Случайный вектор $ \xi $ имеет $ d $-мерное \emph{абсолютно непрерывное распределение}, если
+	существует функция $ p_\xi(x_1, \dots, x_d) $ такая, что
+	$$ \forall y_1, \dots, y_d \quad F_\xi(y_1, \dots, y_d) = \int_{-\infty}^{y_1} \dots
+	\int_{-\infty}^{y_d} p_\xi(x_1, \dots, x_d) \di x_1 \dots \di x_d $$
+
+	Функция $ p_\xi(x_1, \dots, x_d) $ называется \emph{плотностью распределения} случайного
+	вектора.
+\end{definition}
+
+\begin{props}
+\item $ p_\xi(x_1, \dots, x_d) \ge 0 $;
+\item
+	$$ \iint\limits_{\R^d} p_\xi(x_1, \dots, x_d) \di x_1 \dots \di x_d = 1 $$
+\end{props}
+
+\begin{statement}
+	Каждая компонента $ \xi_k $ случайного вектора с абсолютно непрерывным распределением
+	представляет собой случайную величину с абсолютно непрерывным распределением.
+\end{statement}
+
+\section{Независимые случайные величины}
+
+\begin{definition}
+	Говорим, что $ \xi_1, \xi_2, \dots, \xi_n $ "--- \emph{независимые случайные величины}, если
+	$$ \forall x_1, x_2, \dots, x_n \in \mathbb R \quad F_{(\xi_1, \dots, \xi_n)}(x_1, \dots, x_n) =
+	\prod_{i = 1}^n F_{\xi_i}(x_i), $$
+	то есть
+	$$ P(\xi_1 < x_1, \dots, \xi_n < x_n) = \prod_{i = 1}^n P(\xi_i < x_i) $$
+\end{definition}
+
+\begin{definition}
+	Говорим, что $ \xi_1, \xi_2, \dots, \xi_n $ "--- \emph{независимые случайные величины}, если для
+	любых борелевских множеств $ B_1, \dots, B_n \in \mathcal B $ справедливо
+	$$ P(\xi_1 \in B_1, \dots, \xi_n \in B_n) = \prod_{i = 1}^n P(B_i) $$
+\end{definition}
+
+\begin{enumerate}
+	\item Для дискретных случайных величин $ \xi_1, \dots, \xi_n $ определение независимости
+		сводится к проверке соотношений
+		$$ P\Set{\xi_1 = a_1, \dots, \xi_n = a_n} = P\Set{\xi_1 = a_1} \cdots P\Set{\xi_n = a_n} $$
+		для всех значений, принимаемых этими случайными величинами.
+	\item Если случайные величины $ \xi_1, \dots, \xi_n $ имеют абсолютно непрерывные распределения,
+		то их независимость сводится к равенствам
+		$$ p_{(\xi_1, \dots, \xi_n)}(x_1, \dots, x_n) = \prod_{i = 1}^n p_{\xi_i}(x_i) $$
+\end{enumerate}
+
+\section{Формулы свёртки}
+
+Пусть $ \xi $ и $ \eta $ "--- независимые случайные величины с функциями распределения $ F_\xi $,
+$ F_\eta $, а $ \nu = \xi + \eta $.
+Найдём функцию распределения $ H(x) = P\Set{\xi + \eta < x} $.
+
+$$ H(x) = F_{(\xi + \eta)}(x) = \int_{-\infty}^\infty F_\xi(x - y) \di F_\eta(y) $$
+$$ H(x) = F_{(\xi + \eta)}(x) = \int_{-\infty}^\infty F_\eta(x - y) \di F_\xi(y) $$
+
+\begin{statement}
+	Если величина $ \xi $ имеет плотность распределения $ p_\xi(x) $, то
+	$$ F_\nu(x) = \int_{-\infty}^\infty F_\eta(x - y) p_\xi(y) \di y $$
+\end{statement}
+
+\begin{statement}
+	Если обе величины $ \xi, \eta $ имеют абсолютно непрерывные распределения, то их сумма $ \nu $
+	также имеет абсолютно непрерывное распределение, и
+	$$ p_\nu(x) = \int_{-\infty}^\infty p_\xi(x - y) p_\eta(y) \di y =
+	\int_{-\infty}^\infty p_\eta(x - y) p_\xi(y) \di y $$
+\end{statement}
+

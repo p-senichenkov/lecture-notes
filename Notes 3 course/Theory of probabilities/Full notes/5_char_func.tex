@@ -1,0 +1,213 @@
+\chapter{Характеристические функции}
+
+\section{Преобразование Лапласа}
+
+\begin{definition}
+    Для неотрицательной случайной величины $ \xi $ определим её \emph{преобразование Лапласа}:
+    $$ \phi(s) = \mathbb E e^{-s\xi}, \quad s \ge 0, $$
+    которое можно представить в виде
+    $$ \phi(s) = \int_0^\infty e^{-xs} \di F(x), $$
+    где $ F(x) $ "--- функция распределения $ \xi $.
+\end{definition}
+
+Если $ \zeta $ "--- дискретная случайная величина, принимающая значения $ x_k $ с вероятностями
+$ p_k $, то
+$$ \phi(s) = \sum_k e^{-sx_k}p_k $$
+
+Если имеем дело с абсолютно непрерывным распределением с плотностью $ p(x) $, то преобразование
+Лапласа задаётся равенством
+$$ \phi(s) = \int_0^\infty e^{-sx}p(x) \di x $$
+
+Если $ \zeta $ имеет производящую функцию $ P(s) $, то
+$$ \phi(s) = P(e^{-s}) $$
+
+\begin{exmpls}
+    \item $ \xi \sim B(n, p) $
+        $$ P(s) = (1 - p + ps)^n $$
+        $$ \phi(s) = P(e^{-s}) = (1 - p + pe^{-s})^n $$
+    \item $ \xi \sim \pi(\lambda) $
+        $$ P(s) = e^{\lambda(s - 1)} $$
+        $$ \phi(s) = \exp \bigl( \lambda(e^{-s} - 1) \bigr) $$
+    \item $ \xi \sim \operatorname{Geom}(p) $
+        $$ P(s) = \frac{1 - p}{1 - ps} $$
+        $$ \phi(s) = \frac{1 - p}{1 - pe^{-s}} $$
+    \item $ p(x) = e^{-x}, \quad x \ge 0 $
+        $$ \phi(s) = \int_0^\infty e^{-sx} e^{-x} \di x = \frac1{1 + s} $$
+    \item Гамма-распределение
+        $$ p(x) = \frac{x^{\alpha - 1}e^{-x}}{\Gamma(\alpha)}, \quad x \ge 0, \quad \alpha > 0 $$
+        $$ \phi(s) = \frac1{\Gamma(\alpha)} \int_0^\infty e^{-sx}x^{\alpha - 1} e^{-x} \di x =
+        \frac1{\Gamma(\alpha)(1 + s)^\alpha} \int_0^\infty x^{\alpha - 1}e^{-x} \di x =
+        \frac1{(1 + s)^\alpha} $$
+\end{exmpls}
+
+\subsection{Свойства преобразований Лапласа}
+
+\begin{props}
+\item $ \phi(0) = 1 $
+\item $ |\phi(s)| \le 1 $
+\item $ \xi, \eta $ "--- независимые, $ \quad \nu = \xi + \eta $
+    $$ \phi_\nu(s) = \mathbb Ee^{-s\nu} = \mathbb E e^{-s\xi}e^{-s\eta} =
+    \mathbb E e^{-s\xi} \mathbb E e^{-s\eta} = \phi_\xi(s) \phi_\eta(s) $$
+\item $ \eta = \alpha\xi + \beta \ge 0 $
+    $$ \phi_\eta(s) = \mathbb Ee^{-s(\alpha \xi \beta)} = e^{-s\beta} \mathbb E e^{-s\alpha \xi} =
+    e^{-s\beta} \phi_\xi(\alpha s) $$
+
+    $ \zeta \sim E(1), \quad \eta = \lambda \zeta, \quad \lambda > 0 $
+    $$ \phi_\zeta(s) = \frac1{1 + s}, \quad \phi_\eta(s) = \phi_\zeta(\lambda s) =
+    \frac1{1 + \lambda s} $$
+\item Продифференцируем $ n $ раз преобразование Лапласа:
+    $$ (-1)^n \phi^{(n)}(s) = \int_0^\infty x^n e^{-xs} \di F(x) $$
+    Взяв $ s = 0 $, получаем формулу для начальных моментов:
+    $$ a_n = \mathbb E \xi^n = (-1)^n \phi^{(n)}(0) $$
+\end{props}
+
+\section{Характеристические функции}
+
+\begin{definition}
+    \emph{Характеристическая функция} случайной величины $ \xi $ задаётся равенствами
+    $$ f(t) = \mathbb E e^{\ii t\xi} = \int_{-\infty}^{+\infty} e^{\ii tx} \di F(x) =
+    \mathbb E \cos(t\xi) + \ii \mathbb E \sin(t\xi) =
+    \int_{-\infty}^{+\infty} \cos(tx) \di F(x) + \ii \int_{-\infty}^{+\infty} \sin(tx) \di F(x) $$
+\end{definition}
+
+Если у $ \xi $ существует производящая функция $ P(s) = \mathbb E s^\xi $ или преобразование
+Лапласа $ \phi(s) = \mathbb E e^{-s\xi} $, то верны соотношения:
+$$ f(t) = P(e^{\ii t}), \quad f(t) = \phi(-\ii t) $$
+
+\begin{exmpls}
+\item $ \xi \sim B(n, p) $
+    $$ P(s) = (1 - p + ps)^n, \quad f(t) = (1 - p + pe^{\ii t})^n $$
+\item $ \xi \sim \pi(\lambda) $
+    $$ P(s) = e^\lambda(s - 1), \quad f(t) = \exp \bigl( \lambda(e^{\ii t} - 1) \bigr) $$
+\item $ \xi \sim \operatorname{Geom}(p) $
+    $$ P(s) = \frac{1 - p}{1 - ps} $$
+\item $ \xi \sim E(\lambda) $
+    $$ \phi(s) = \frac1{1 + \lambda s}, \quad f(t) = \frac1{1 - \lambda \ii t} $$
+\item Вырожденное в точке $ C $ распределение
+    $$ f(t) = e^{\ii t C} $$
+\item $ \xi \sim U[a, b] $
+    $$ f(t) = \int_a^b e^{\ii t x} \frac1{b - a} \di x =
+    \frac{e^{\ii tb} - e^{\ii ta}}{(b - a)\ii t} $$
+\item $ \xi \sim \operatorname{Cauchy} $
+    $$ f(t) = e^{-|t|} $$
+\item $ \xi \sim N(a, \sigma^2) $
+
+    Рассмотрим сначала $ \zeta \sim N(0, 1) $.
+    $$ p_\zeta(x) = \frac1{\sqrt{2\pi}}e^{-\frac{x^2}2} $$
+    $$ f_\zeta(t) = \int_{-\infty}^{+\infty} e^{\ii tx} \frac1{\sqrt{2\pi}} e^{-\frac{x^2}2} \di x $$
+    Продифференцируем по $ t $ и проинтегрируем по частям:
+    \begin{multline*}
+        f_\zeta'(t) =
+        \frac{\ii}{\sqrt{2\pi}} \int_{-\infty}^{+\infty} x e^{\ii t x} e^{-\frac{x^2}2} \di x =
+        \frac{-\ii}{\sqrt{2\pi}} \int_{-\infty}^{+\infty} e^{\ii tx} \di e^{-\frac{x^2}2} = \\
+        = \underbrace{\frac{-\ii}{\sqrt{2\pi}}e^{\ii t x - \frac{x^2}2}
+        \Bigr|_{-\infty}^{+\infty}}_0 -
+        \frac{t}{\sqrt{2\pi}} \int_{-\infty}^{+\infty} e^{\ii tx}e^{-\frac{x^2}2} \di x =
+        -tf_\zeta(t)
+    \end{multline*}
+    Приршли к дифференциальному уравнению
+    $$ f_\zeta'(t) = -tf_\zeta(t) $$
+    $$ f_\zeta(t) = Ce^{-\frac{t^2}2} $$
+    Учитывая, что характеристические функции в нуле равны единице, $ C = 1 $, и
+    $$ f_\zeta(t) = e^{-\frac{t^2}2} $$
+
+    Теперь перейдём к случайной величине $ \eta = \sigma \zeta + a $.
+    $$ f_\eta(t) = e^{\ii ta} f_\zeta(\sigma t) = e^{\ii a t} e^{-\frac{t^2\sigma^2}2} $$
+\end{exmpls}
+
+\subsection{Свойства характеристических функций}
+
+\begin{props}
+\item $ |f(t)| \le 1 $
+\item $ f(0) = 1 $
+\item $ f_\xi(-t) = \mathbb E \cos(-t\xi) + \ii \mathbb E \sin(-t\xi) =
+    \mathbb E \cos (t\xi) - \ii \mathbb E \sin(t\xi) = \ol{f_\xi(t)} $
+\item $ f_{a\xi + b}(t) = \mathbb E e^{\ii t(a \xi + b)} = \mathbb E e^{\ii tb} e^{\ii at\xi} =
+    e^{\ii tb} \mathbb E e^{\ii at\xi} = e^{\ii tb} f_\xi(at) $
+\item $ \xi, \eta $ "--- независимые случайные величины, \quad $ \nu = \xi + \eta $
+    $$ f_\nu(t) = \mathbb E e^{\ii t(\xi + \eta)} = \mathbb E e^{\ii t\xi} e^{\ii t\eta} =
+    \mathbb E e^{\ii t\xi} \mathbb E e^{\ii t \eta} = f_\xi(t) f_\eta(t) $$
+\item Если у случайных величин одинаковые характеристические функции, то распределения тоже
+    совпадают.
+\item $ f(t) $ "--- вещественная характеристическая функция
+    $$ f(t) = \mathbb E \cos(t \xi) \implies f(t) = f(-t) $$
+\item $ \xi $ "--- симметричная (\ie $ \xi $ и $ -\xi $ распределены одинаково)
+    $$ \mathbb E \sin(t\xi) = \mathbb E \sin (-t\xi) = -\mathbb E \sin(t\xi) \implies
+    \mathbb E \sin(t\xi) = 0 $$
+    $$ f(t) = \mathbb E \cos(t\xi) = \mathbb E \cos(-t\xi) = f(-t) $$
+\item Любая характеристическая функция равномерно непрерывна.
+\end{props}
+
+\section{Формулы обращения}
+
+$ \xi $ "--- случайная величина, $ \quad f(t) $ "--- её характеристическая функция.
+Если
+\begin{equ}{rev:1}
+    \int_{-\infty}^{+\infty} |f(t)| \di t < \infty,
+\end{equ}
+то существует плотность распределения
+$$ p(x) = \frac1{2\pi} \int_{-\infty}^{+\infty} e^{-\ii tx} f(t) \di t $$
+Проинтегрируем от $ x_1 $ до $ x_2 $:
+$$ F(x_2) - F(x_1) = \frac1{2\pi} \int_{-\infty}^{+\infty}
+\frac{e^{-\ii tx_2} - e^{-\ii tx_1}}{-\ii t} f(t) \di t $$
+Отметим, что это же соотношение выполняется при более слабом условии (вместо \eref{rev:1}):
+$$ \int_{-\infty}^{+\infty} \Bigl| \frac{f(t)}t \Bigr| \di t < \infty $$
+
+Для произвольной случайной величины $ \xi $ можно использовать следующий вариант формулы обращения:
+$$ F(x_2) - F(x_1) = \lim\limits_{T \to \infty} \frac1{2\pi} \int_{-T}^T
+\frac{e^{-\ii tx_2} - e^{-\ii tx_1}}{-\ii t} f(t) \di t $$
+
+Отсюда следует важная теорема:
+\begin{theorem}[единственности]
+    Если случайные величины $ \xi $ и $ \eta $ имеют одинаковые характеристические функции, то их
+    распределения совпадают.
+\end{theorem}
+
+\begin{theorem}
+    $ F_1(x), F_2(x), \dotsc $ "--- функции распределения, $ \quad f_1(t), f_2(t), \dotsc $ "---
+    характеристические функции
+    \begin{enumerate}
+    \item $ \forall \text{т. непр. } x \quad F_n(x) \to F(x) $
+        $$ f_n(t) \underarr{n \to \infty} f(t) $$
+    \item $ f_n(t) \underarr{n \to \infty} f(t) $ для произвольного $ t $
+        $$ \forall \text{т. непр. } x \quad F_n(x) \underarr{n \to \infty} F(x) $$
+    \end{enumerate}
+\end{theorem}
+
+\section{Характеристические функции и моменты случайных величин}
+
+Рассмотрим характеристическую функцию
+$$ f(t) = \int_{-\infty}^{+\infty} e^{\ii t x} \di F(x) $$
+Проинтегрируем $ b $ раз:
+$$ \nder f(t) = \ii^n \int_{-\infty}^{+\infty} e^{\ii xt} \di F(x) $$
+Для этого необходимо существование момента $ n $-го порядка:
+$$ \mathbb E \xi^n = \int_{-\infty}^{+\infty} |x|^n \di F(x) < +\infty $$
+В этом случае для производных выполняется
+$$ \nder f(0) = \int_{-\infty}^{+\infty} x^n \ii^n \di F(x) = \ii^n \mathbb E \xi^n $$
+Выделим два полезных соотношения:
+$$ \mathbb E \xi = \frac{f'(0)}\ii = -\ii f'(0), \quad
+\mathcal D \xi = -f''(0) + \bigl( f'(0) \bigr)^2 $$
+
+Иногда удобнее рассматривать производные не самой характеристической функции, а её логарифма:
+$$ g(t) = \ln f(t) $$
+$$ \mathbb E \xi = f'(0) = -f'(0), \quad
+\mathcal D \xi = f'(0) - \bigl( f'(0) \bigr)^2 = -g''(0) $$
+
+Рассмотрим конечный или бесконечный набор неотрицательных коэффициентов $ p_0, p_1, \dotsc $, сумма
+которых равна единице, характеристические функции $ f_1(t), f_2(t), \dotsc $, соответствующие
+функциям распределения $ F_1(x), F_2(x), \dotsc $, и $ f_0(t) = 1 $ "--- характеристическую
+функцию вырожденного в нуле распределения.
+Тогда соответствующая комбинация $ g(t) = \sum p_k f_k(t) $ представляет собой также
+характеристическую функцию случайной величины с функцией распределения $ G(x) = \sum p_k F_k(x) $.
+
+Также ряд характеристических функций можно получить, воспользовавшись \emph{критерием Пойа}.
+\begin{theorem}[критерий Пойа]
+    Если функция $ f(t) $ удовлетворяет следующим критериям, то она является характеристической:
+    \begin{enumerate}
+        \item $ f(0) = 1 $;
+        \item $ f(t) $ непрерывна;
+        \item $ f(t) $ "--- чётная;
+        \item $ f(t) $ выпукла на положительной полуоси;
+        \item $ \lim\limits_{t \to \infty} f(t) = 0 $.
+    \end{enumerate}
+\end{theorem}

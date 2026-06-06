@@ -1,0 +1,146 @@
+\chapter{Сходимость случайных величин}
+
+\section{Типы сходимостей случайных величин}
+
+Пусть $ \xi,  \xi_1, \xi_2, \dotsc $ "--- случайные величины, заданные на одном вероятностном
+пространстве.
+
+\begin{definition}
+    Будем говорить, что последовательность случайных величин $ \xi_1, \xi_2, \dotsc $
+    \emph{сходится} к случайной величине $ \xi $ \emph{по вероятности} $ \xi_n \overarr{P} \xi $,
+    если
+    $$ \forall \eps > 0 \quad P(|\xi_n - \xi| \ge \eps) \underarr{n \to \infty} 0 $$
+\end{definition}
+
+\begin{definition}
+    Последовательность случайных величин $ \xi_1, \xi_2, \dotsc $ \emph{сходится}
+    к случайной величине $ \xi $ \emph{почти наверное} (\emph{с вероятностью 1})
+    $ \xi_n \underarr{\text{п. н.}} \xi $, если
+    $$ P(\lim x_n = \xi) = 1 $$
+\end{definition}
+
+\begin{definition}
+    Случайные величины $ \xi_1, \xi_2, \dotsc $ \emph{сходятся} к предельной случайной величине
+    $ \xi $ \emph{в среднем порядка $ r $} $ \xi_n \overarr{r} \xi $, если существуют моменты
+    $ \mathbb E \xi_n^r $ и $ \mathbb \xi^r $ порядка $ r $ и
+    $$ \mathbb E |\xi_n - \xi|^r \underarr{n \to \infty} 0 $$
+\end{definition}
+
+\begin{definition}
+    Будем говорить, что последовательность $ \xi_1, \xi_2, \dotsc $ \emph{сходится} к
+    случайной величине $ \xi $ \emph{по распределению} $ \xi_n \overarr{d} \xi $, если
+    для любой точки непрерывности $ x $ функции распределения $ F(x) $ предельной случайной величины
+    $$ \lim \bigl( F_n(x) - F(x) \bigr) = 0 $$
+\end{definition}
+
+\begin{remark}
+    \hfill
+    \begin{itemize}
+        \item \emph{почти наверное} $ \implies $ \emph{по вероятности}
+        \item \emph{в среднем} $ \implies $ \emph{по вероятности}
+        \item \emph{по вероятности} $ \implies $ \emph{по распределению}
+    \end{itemize}
+\end{remark}
+
+\section{Центральная предельная теорема}
+
+Начнём с самого простого варианта ЦПТ:
+\begin{theorem}[Леви]
+    $ \xi_1, \xi_2, \dotsc $ "--- последовательность одинаково распределённых случайных величин с
+    математическим ожиданием $ a $ и ненулевой дисперсией $ \sigma^2 $.
+    Тогда выполняется предельное соотношение
+    $$ \sup\limits_x \Bigl| P \Set{\frac{\xi_1 + \dots + \xi_n - na}{\sigma \sqrt n}} -
+    \Phi(x) \Bigr| \underarr{n \to \infty} 0 $$
+\end{theorem}
+
+\begin{proof}
+    Отметим, что речь идёт об исходных случайных величинах, у которых существует момент второго
+    порядка.
+    НУО будем считать, что $ a = 0 $ и $ \sigma = 1 $.
+    $$ S_n \coloneq \xi_1 + \dots + \xi_n $$
+
+    Пусть $ f(t) $ "--- характеристическая функция величин $ \xi_1, \xi_2, \dotsc $, а
+    $ g_n(t) $ "--- характеристическая функция надлежащим образом нормированной суммы
+    $ \frac{S_n}{\sqrt n} $ этих величин:
+    $$ g_n(t) = \Bigl( f \bigl( \frac{t}{\sqrt n} \bigr) \Bigr)^n $$
+    Учитывая равенства,
+    $$ f'(0) = \ii \mathbb E \xi = 0, \quad f''(0) = -\mathbb \xi^2 = -1, $$
+    в окрестности нуля справедливо
+    $$ f(t) = f(0) + rf'(0) + \frac12 t^2 f''(0) + o(t^2) = 1 + \ii t \mathbb E \xi - \frac{t^2}2
+    \mathbb E \xi^2 + o(t^2) = 1 - \frac{t^2}2 + o(t^2) $$
+
+    Рассмотрим при $ n \to \infty $, асимптотику функции
+    $$ \ln g_n(t) = b \ln f \Bigl( \frac t {\sqrt n} \Bigr) $$
+    При фиксированных $ t $ можно написать, что
+    $$ f \Bigl( \frac{t}{\sqrt n} \Bigr) = 1 - \frac{t^2}{2n} + o \Bigl( \frac1n \Bigr), \quad
+    n \to \infty $$
+    При этом, при $ \alpha \to 0 $ справедливо
+    $$ \ln(1 + \alpha) = \alpha - \frac{\alpha^2}2 + o(\alpha^2) $$
+    Значит,
+    $$ \ln f \Bigl( \frac{t}{\sqrt n} \Bigr) = -\frac{t^2}{2n} + o \Bigl( \frac1n \Bigr), \quad
+    n \to \infty $$
+    $$ \ln g_n(t) = -\frac{t^2}{2n} + o \Bigl( \frac1n \Bigr), \quad n \to \infty $$
+    $$ g_n(t) \underarr{n \to \infty} e^{-\frac{t^2}2} $$
+    Справа получили характеристическую функцию нормального распределения $ N(0, 1) $.
+\end{proof}
+
+Приведём также один из более общих вариантов ЦПТ:
+\begin{theorem}[Ляпунова]
+    $ \xi_1, \xi_2, \dotsc $ "--- независимые случайные величины, $ \quad
+    S_n = \xi_1 + \dots + \xi_n $ "--- их суммы, $ \quad a_k = \mathbb E \xi_k, \quad
+    \sigma_k^2 $ "--- их дисперсии, $ \quad \gamma_{3k} = \mathbb E |\xi_k -
+    \mathbb E \xi_k|^3 $ "--- центральные моменты третьего порядка
+    $$ A_n = a_1 + \dots + a_n = \mathbb E S_n, \quad
+    B_n^2 = \mathcal D S_n = \sigma_1^2 + \dots + \sigma_n^2, \quad
+    \Gamma_n = \sum_{k = 1}^n \gamma_{3k} $$
+    Обозначим \emph{дробь Ляпунова}
+    $$ L_n = \frac{\Gamma_n}{B_n^3} $$
+    $$ \implies \sup\limits_x \Bigl| P\Set{\frac{S_n - A_n}{B_n} < x} - \Phi(x) \Bigr| \le CL_n, $$
+    где $ C $ "--- абсолютная (не зависящая от случайных величин и $ n $) константа.
+\end{theorem}
+
+Важную роль в теории вероятностей имеют функция распределения и плотность распределения
+стандартного нормального распределения $ N(0, 1) $:
+$$ \Phi(x) = \frac1{\sqrt{2\pi}} \int_{-\infty}^x e^{-\frac{t^2}2}\di t =
+\int_{-\infty}^x \phi(t) \di t, \quad \phi(x) = \frac1{\sqrt{2\pi}} e^{-\frac{x^2}2} $$
+
+\section{Законы больших чисел}
+
+\begin{definition}
+    $ \xi_1, \xi_2, \dotsc $ "--- последовательность случайных величин с математическими
+    ожиданиями $ a_1, a_2, \dotsc $
+
+    Говорим, что эта последовательность удовлетворяет \emph{закону больших чисел}, если
+    $$ \frac{\xi_1 + \dots + \xi_n}n - \frac{a_1 + \dots + a_n}n \overarr{P} 0 \quad \text{при}
+    n \to \infty $$
+\end{definition}
+
+\begin{theorem}[Чебышёва]
+    $ \xi_1, \xi_2, \dotsc $ "--- независимые случайные величины с математическими ожиданиями
+    $ a_1, a_2, \dotsc $ и дисперсиями $ \sigma_1^2, \sigma_2^2, \dotsc $.
+    Если $ \sigma_k^2 \le c $ для некоторого $ c $, то рассматриваемая последовательность
+    \textbf{удовлетворяет закону больших чисел}.
+\end{theorem}
+
+Теорема Чебышёва представляет собой частный случай следующего утверждения:
+\begin{theorem}[Маркова]
+    Для произвольных случайных величин $ \xi_1, \xi_2, \dotsc $ выполняется
+    $$ \frac{\mathcal D(\xi_1 + \dots + \xi_n)}{n^2} \underarr{n \to \infty} 0 $$
+
+    Тогда эта последовательность \textbf{удовлетворяет закону больших чисел}.
+\end{theorem}
+
+\begin{theorem}[Хинчина]
+    $ \xi_1, \xi_2, \dotsc $ "--- независимые случайные величины с одинаковым распределением
+    и конечным математическим ожиданием $ a $.
+
+    $$ \frac{\xi_1 + \dots + \xi_n}n \xrightarrow[n \to \infty]{P} a $$
+\end{theorem}
+
+\begin{remark}
+    Из теоремы Хинчина следует соотношение для числа успехов $ \mu_n $ в схеме Бернулли при
+    вероятности успеха $ p $ в каждом испытании:
+    $$ \frac{\mu_n}n \overarr{P} p $$
+\end{remark}
+
+\section{Закон нуля и единицы и усиленный закон больших чисел}
