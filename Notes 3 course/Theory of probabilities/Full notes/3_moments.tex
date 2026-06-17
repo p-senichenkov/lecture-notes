@@ -79,7 +79,8 @@ $$ \mathbb E \eta = \int_{-\infty}^\infty g(x) p_\xi(x) \di x, \quad \text{аб�
 \item Если $ D \xi = 0 $, то $ P\Set{\xi = C} = 1 $ в некоторой точке $ C $.
 \item $ D(\alpha \xi + \beta) = \alpha^2 D\xi $.
 \item Если $ \xi $ и $ \eta $ независимы, то $ D(\xi \pm \eta) = D\xi + D\eta $.
-\item $ D(\xi + \eta) = D\xi + D\eta + 2 \operatorname{cov}(\xi, \eta) $.
+\item $ D(\xi + \eta) = D\xi + D\eta + 2 \operatorname{cov}(\xi, \eta) $, где
+    $ \operatorname{cov}(\xi, \eta) = \mathbb E(\xi \eta) - \mathbb E \xi \mathbb E \eta $.
 \item $ D\xi \ge D|\xi| $.
 \item $ D \xi = \mathbb E\xi^2 - (\mathbb E \xi)^2 $.
 \end{props}
@@ -110,11 +111,11 @@ $$ \mathbb E \eta = \int_{-\infty}^\infty g(x) p_\xi(x) \di x, \quad \text{аб�
 		$$ \mathbb E \xi = np, \quad D \xi = np(1 - p) $$
 	\item \emph{Пуассоновское распределение} ($ \xi \sim \pi(\lambda) $)
 		$$ P\Set{\xi = k} = e^{-\lambda}\frac{\lambda^k}{k!} $$
-		$$ \mathbb \xi = \lambda, \quad D\xi = \lambda $$
+		$$ \mathbb E \xi = \lambda, \quad D\xi = \lambda $$
 	\item \emph{Геометрическое распределение} ($ \xi \sim \operatorname{Geom}(p) $)
 
 		$ \xi $ принимает значения $ 0, 1, 2, \dotsc $ с вероятностями
-		$$ p_k = (1 - p)p^k $$
+		$$ P_k = (1 - p)p^k $$
 		$$ \mathbb E\xi = \frac p{1 - p}, \quad D \xi = \frac p{(1 - p)^2} $$
 	\item \emph{Равномерное распределение} ($ \xi \sim U[a, b] $)
 
@@ -170,11 +171,11 @@ $$ \mathbb E \eta = \int_{-\infty}^\infty g(x) p_\xi(x) \di x, \quad \text{аб�
 	$$ P\{|\xi - \mathbb E\xi| > \eps\} \le \frac{D\xi}{\eps^2} $$
 \end{statement}
 
-\begin{statement}[неравенство Лярунова]
+\begin{statement}[неравенство Ляпунова]
 	$ \gamma_n \coloneq \mathbb E |\xi|^n $
 
 	$$ \implies \gamma_1 \le \gamma_2^{\frac12} \le \gamma_3^{\frac13} \le \dots \le
-	\gamma_{m - 1}^{\frac1{m - 1}} \le \gamma_m^{\frac1m} \le \dotso $$
+	\gamma_{m - 1}^{\frac1{m - 1}} \le \gamma_m^{\frac1m} \le \dotsb $$
 
 	$$ \phi(a) = (\mathbb E|\xi|^\alpha)^{\frac1\alpha} $$
 
@@ -186,7 +187,7 @@ $$ \mathbb E \eta = \int_{-\infty}^\infty g(x) p_\xi(x) \di x, \quad \text{аб�
 \begin{definition}
 	Для $ n $-мерного случайного вектора $ \ol\xi = (\xi_1, \dots, \xi_n) $ рассмотрим
 	\emph{математическое ожидание}
-	$$ \mathbb E g(\xi_1, \dots, \xi_n) = \iiiint\limits_{-\infty}^\infty g(x_1, \dots, x_n)
+	$$ \mathbb E g(\xi_1, \dots, \xi_n) = \iiint\limits_{-\infty}^\infty g(x_1, \dots, x_n)
 	F(\di x_1, \dots, \di x_n) $$
 
 	Для дискретных случайных векторов имеем
@@ -212,7 +213,7 @@ $$ F_{\xi, \eta}(x, y) = F_\xi(x)F_\eta(y) $$
 
 \begin{definition}
 	\emph{Начальный смешанный момент} порядка $ n + m $ определяется для двумерных дискретных и
-	двумерных абсолютно непрерывных вектором следующими соотношениями:
+	двумерных абсолютно непрерывных векторов следующими соотношениями:
 	$$ \mathbb E\xi^n \eta^m = \sum_k \sum_l x_k^n y^-l^m P\Set{\xi = x_k, ~ \eta = y_l} $$
 	$$ \mathbb E\xi^n\eta^m = \int\limits_{-\infty}^\infty \int\limits_{-\infty}^\infty x^ny^m
 	p_{\xi, \eta}(x, y) \di x \di y $$
@@ -220,13 +221,13 @@ $$ F_{\xi, \eta}(x, y) = F_\xi(x)F_\eta(y) $$
 
 \begin{definition}
 	Если взять $ g(x, y) = (x - \mathbb E\xi)^n (y - \mathbb E\eta)^m $, то математическое ожидание
-	$ \mathbb E(\xi - \mathbb E\xi)^n(\eta - \mathbb \eta)^m $ называется
+	$ \mathbb E(\xi - \mathbb E\xi)^n(\eta - \mathbb E \eta)^m $ называется
 	\emph{центральным смешанным моментом} порядка $ n + m $.
 \end{definition}
 
 \begin{definition}
 	Центральный смешанный момент $ \operatorname{cov}(\xi, \eta) =
-	\mathbb (\xi - \mathbb E\xi)(\eta - \mathbb \eta) $ называется \emph{ковариацией}.
+	\mathbb E(\xi - \mathbb E\xi)(\eta - \mathbb E \eta) $ называется \emph{ковариацией}.
 \end{definition}
 
 \subsection{Свойства ковариаций}
@@ -238,11 +239,10 @@ $$ F_{\xi, \eta}(x, y) = F_\xi(x)F_\eta(y) $$
 \item $ \operatorname{cov}(\alpha \xi + \beta, \gamma \eta + \delta) =
 	\alpha \gamma \operatorname{cov}(\xi ,\eta) $.
 \item Если $ \xi $ и $ \eta $ независимы, то $ \operatorname{cov}(\xi, \eta) = 0 $.
-\item $ D(\xi \pm \eta) = D\xi + D\eta \pm 2\operatorname{cov}(\xi, \eta) $.
-\item $ |\operatorname{cov}(\xi, \eta)| \le \sqrt{D\xi D\eta} $.
+\item\label{cov-prop-5} $ |\operatorname{cov}(\xi, \eta)| \le \sqrt{D\xi D\eta} $.
 \end{props}
 
-\begin{proof}[6]
+\begin{proof}[\ref{cov-prop-5}]
 	$$ D \Bigl( \frac\xi{\sqrt{D\xi}} + \frac\eta{\sqrt{D\eta}} \Bigr) =
 	2 + 2 \frac{\operatorname{cov}(\xi, \eta)}{\sqrt{D\xi} \sqrt{D\eta}} \ge 0 $$
 	$$ D \Bigl( \frac\xi{\sqrt{D\xi}} - \frac\eta{\sqrt{D\eta}} \Bigr) =
@@ -253,7 +253,7 @@ $$ F_{\xi, \eta}(x, y) = F_\xi(x)F_\eta(y) $$
 
 Пусть $ \xi, \eta $ "--- невырожденные случайные величины, у которых существуют дисперсии.
 Рассмотрим их центрированные и нормированные варианты
-$$ \hat\xi = \frac{\xi - \mathbb \xi}{\sqrt{D \xi}}, \quad \hat \eta =
+$$ \hat\xi = \frac{\xi - \mathbb E \xi}{\sqrt{D \xi}}, \quad \hat \eta =
 \frac{\eta - \mathbb E \eta}{\sqrt{D \eta}} $$
 
 Имеем равенства
@@ -323,8 +323,9 @@ $$ P(s) = \sum_{n = 0}^\infty p_ns^n = \mathbb Es^\xi $$
 \begin{props}
 \item $ P(1) = 1 $.
 \item $ |P(s)| \le 1, \quad |s| \le 1 $.
-\item Если $ \xi $ и $ \eta $ независимы, и $ \nu = \xi + \eta $, то
-	$$ P_\nu(s) = \mathbb Es^\nu = \mathbb E s^\xi \cdot \mathbb E s^\eta = P_\xi(s)P_\eta(s) $$
+\item Если $ \xi $ и $ \eta $ независимы
+    $$ P_{\xi + \eta}(s) = \mathbb Es^{\xi + \eta} =
+    \mathbb E s^\xi \cdot \mathbb E s^\eta = P_\xi(s)P_\eta(s) $$
 \item $ 0 \le 1 $
 	$$ P_\xi(s) = \sum_{n = 0}^\infty p_ns^n \ge 0 $$
 	$$ \nder[k]P(s) = \sum_{n = 0}^\infty n (n - 1) \cdots (n - k + 1)p_ns^{n - k} $$
@@ -336,7 +337,7 @@ $$ P(s) = \sum_{n = 0}^\infty p_ns^n = \mathbb Es^\xi $$
 
 	Наряду с вероятностями $ p_k = P\Set{\xi = k} $ рассмотрим вероятности $ q_n = P\Set{\xi > n} $.
 	\begin{multline*}
-		(s) = \sum_{n = 0}^\infty q_ns^n =
+		Q(s) = \sum_{n = 0}^\infty q_ns^n =
 		\sum_{n = 0}^\infty \Bigl( \sum_{k = n + 1}^\infty p_k \Bigr) s^n =
 		\sum_{k = 1}^\infty p_k \sum_{n = 0}^{k - 1}s^n =
 		\sum_{k = 1}^\infty p_k \cdot \frac{1 - s^k}{1 - s} = \\
@@ -357,11 +358,11 @@ $$ P(s) = \sum_{n = 0}^\infty p_ns^n = \mathbb Es^\xi $$
 
 \begin{definition}
 	\emph{Факториальным моментом} порядка $ k $ случайной величины $ \xi $ называется величина
-	$$ \mu_k = \mathbb E \bigl( \xi (\xi - 1)(\xi - 2) \cdots (\xi - k + 1) \bigr) $$	
+	$$ \mu_k = \mathbb E \bigl( \xi (\xi - 1)(\xi - 2) \cdots (\xi - k + 1) \bigr) $$
 \end{definition}
 
 По начальным моментам однозначно находятся факториальные моменты:
-$$ \mu_1 = \mathbb \xi = \alpha_1 $$
+$$ \mu_1 = \mathbb E \xi = \alpha_1 $$
 $$ \mu_2 = \mathbb E \xi (\xi - 1) = \alpha_2 - \alpha_1 $$
 $$ \mu_3 = \mathbb E \xi (\xi - 1) (\xi - 2) = \alpha_3 - 3\alpha_2 + 2\alpha_1 $$
 
@@ -430,3 +431,93 @@ ps \frac{1 - \sqrt{1 - 4pqs^2}}{2ps} = 1 - \sqrt{1 - 4pqs^2} $$
 Отсюда видно, что
 $$ f_{2n} = \frac{C_{2n}^n}{2n - 1}p^nq^n $$
 Математическое ожидание числа шагов равно бесконечности для любого $ p $.
+
+\section{Дискретные ветвящиеся процессы}
+
+Пусть $ \xi_1, \xi_2, \dots $ "--- независимые одинаково распределённые случайные величины, имеющие
+производящую функцию
+$$ P(s) = \sum_{n = 0}^\infty P\Set{\xi = n}s^n $$
+
+Для суммы $ s_n = \xi_1 + \dots + \xi_n $ производящая функция имеет вид
+$$ P_{s_n}(s) = \prod_{k = 1}^n P_{\xi_k}(s) = \bigl( P(s) \bigr)^n $$
+
+Рассмотрим случайную величину $ N = 0, 1, \dots, $ которая не зависит от $ \xi_i $.
+Её производящую функцию обозначим
+$$ Q(s) = \sum_{n = 0}^\infty P\Set{N = n}s^n $$
+
+Пусть $ v = s_N $ "--- сумма случайного числа $ N $ слагаемых.
+Её производящая функция
+$$ P_v(s) = \sum_{m = 0}^\infty P\Set{S_N = m}s^m $$
+По формуле полной вероятности и из независимости величин $ s_n $ и $ N $ получаем, что
+\begin{multline*}
+    P\Set{S_N = m} = \sum_{n = 0}^\infty P\Set{S_N = m | N = n} P\Set{N = n} =
+    \sum_{n = 0}^\infty P\Set{s_n = m | N = n} P\Set{N = n} = \\
+    = \sum_{n = 0}^\infty P\Set{s_n = m} P\Set{N = n}
+\end{multline*}
+\begin{multline*}
+    P_v(s) = \sum_{m = 0}^\infty P\Set{s_N = m}s^m =
+    \sum_{n = 0}^\infty P\Set{N = n} \Bigl( \sum_{m = 0}^\infty P\Set{s_n = m}s^m \Bigr) = \\
+    = \sum_{n = 0}^\infty P\Set{N = n} \Bigl( \sum_{m = 0}^\infty P\Set{s_n = m}s^m \Bigr) =
+    Q \bigl( P(s) \bigr)
+\end{multline*}
+
+Рассмотрим теперь ветвящийся процесс, в котором каждая частица может дать некоторое случайное число
+потомков $ \mu = 0, 1, \dots $.
+Начнём с одной исходной частицы, представляющее нулевое поколение.
+Пусть производящая функция для числа её потомков
+$$ \mu(s) = \sum_n P\Set{\mu = n}s^n $$
+Обозначим $ \mu_n $ "--- число потомков исходной частицы в $ n $-м поколении.
+Нужно найти распределение $ \mu_n $
+$$ \mu_{n + 1} = X_1 + \dots + X_{\mu_n}, $$
+где $ X_i $ "--- число потомков $ i $-й частицы из $ n $-го поколения.
+Каждая величина $ X_i $ имеет производящую функцию $ \mu(s) $.
+В качестве $ Q(s) $ берём $ \mu_n(s) $.
+$$ \mu_{n + 1}(s) = \mu_n \bigl( \mu(s) \bigr) = \mu \bigl( \mu_n(s) \bigr) $$
+
+Пусть $ A(n) = \mathtt E \mu_n $ "--- среднее число потомков в $ n $-м поколении.
+Обозначим $ a = \mathtt E\mu = \mu'(1) $ "--- среднее число потомков одной частицы.
+$$ A(n) = \mu_n'(1) = \mu_{n - 1}'(1) \mu'(1) = aA(n - 1) = a^n $$
+
+\subsection{Классификация ветвящихся процессов}
+
+В зависимости от среднего числа потомков частиц процессы разделяют на:
+\begin{enumerate}
+    \item докритический "--- $ a < 1 $;
+    \item критический "--- $ a = 1 $;
+    \item надкритический "--- $ a > 1 $;
+    \item детерминированный "--- $ \mu(s) = s $.
+\end{enumerate}
+
+\subsection{Вероятность вырождения ветвящегося процесса}
+
+$$ A_n \coloneq \Set{\mu_n = 0}, \quad A = \bigcup_n A_n $$
+Событие $ A_n $ соответствует тому, что ветвящийся процесс выродится к моменту $ n $, а событие
+$ A $ "--- процесс когда-нибудь выродится.
+
+Будем искать $ q = P\Set{A} $, где
+$$ q = \lim P\Set{A_n} = \lim P\Set{\mu_n = 0} = \lim \mu_n(0) $$
+
+Используя тождество для $ \mu_{n + 1} $ и переходя к пределу, получаем $ q = \mu(q) $.
+\begin{enumerate}
+    \item Для детерминированного процесса $ q = 0 $.
+    \item Учитывая, что $ \mu(s) $ "--- монотонная и выпуклая вниз функция, имеем два случая
+        (\autoref{fig:proc_q_vars}).
+        \begin{itemize}
+            \item Во втором из них сразу видим, что $ \mu'(1) \le 1 \implies a = \mathbb E \mu \le
+                1 $.
+            \item В первом случае имеем два корня.
+                Проверим, что взять нужно меньший из них.
+                $$ \mu_1(q_2) = q_2, \quad \mu_2(q_2) = \mu \bigl( \mu_1(q_2) \bigr) = \mu_1(q_2) =
+                q_2, \quad \dots $$
+                $$ \mu_n(q_2) = q_2 $$
+                $$ q = \lim P\Set{A_n} = \lim P\Set{\mu_n = 0} = \lim \mu_n(0) $$
+                $$ \mu_n(0) \le \mu_n(q_2) = q_2 $$
+        \end{itemize}
+\end{enumerate}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=.9\textwidth]{proc_q_vars}
+    \caption{Случаи функции $ q $}
+    \label{fig:proc_q_vars}
+\end{figure}

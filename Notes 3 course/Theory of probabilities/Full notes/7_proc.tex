@@ -1,0 +1,127 @@
+\chapter{Случайные процессы}
+
+\begin{definition}
+    \emph{Случайный процесс} $ \xi_t $ представляет собой заданное на вероятностном пространстве
+    однопараметрическое семейство случайных величин с параметром $ t \in T $ (в качестве $ T $ можно
+    брать различные множества).
+\end{definition}
+
+$ \xi_t(\omega) $ для $ \omega \in \Omega $ можно рассматривать
+\begin{itemize}
+    \item при фиксированном значении $ t $ как значения случайной величины;
+    \item при фиксированных $ \omega $ как траекторию случайного процесса.
+\end{itemize}
+
+\begin{definition}
+    Для любого $ n $ и при любых значениях $ t(1), t(2), \dotsc \in T $ функции
+    $$ F_{t(1), \dots, t(n)}(x_1, \dots, x_n) = P\Set{\xi_{t(1)} < x_1, \quad \dots, \quad
+    \xi_{t(n)} < x_n} $$
+    представляют собой \emph{конечномерные} распределения.
+\end{definition}
+
+\begin{notation}
+    Введём обозначения:
+    \begin{itemize}
+        \item \emph{Математическое ожидание}: $ \mathcal A(t) = \mathbb E \xi_t $.
+        \item \emph{Дисперсия}: $ \mathcal D(t) = \mathcal D \xi_t $.
+        \item \emph{Ковариационная (корреляционная) функция}: $ \mathcal B(t, s) =
+            \mathcal B(\xi_t, \xi_s) = \mathbb E \xi_t \xi_s $.
+    \end{itemize}
+\end{notation}
+
+\begin{definition}
+    Процесс $ \xi_t $ называется \emph{процессом с независимыми приращениями}, если
+    $$ \forall n = 2, 3, \dotsc \quad \forall t(1) < \dots < t(n) \quad
+    \text{независимы приращения} \xi_{t(1)}, \quad \xi_{t(2)} - \xi_{t(1)}, \quad \dots, \quad
+    \xi_{t(n)} - \xi_{t(n - 1)} $$
+\end{definition}
+
+\begin{remark}
+    Для таких процессов достаточно знать их одномерные распределения.
+\end{remark}
+
+\begin{definition}
+    Процесс с независимыми приращениями имеет \emph{однородные (стационарные)} приращения, если
+    для любых $ t $ и $ \tau > 0 $ распределения разностей $ \xi_{t + \tau} - \xi_{t} $ не
+    зависят от $ t $.
+\end{definition}
+
+\begin{remark}
+    Для таких процессов верно
+    $$ \mathcal A(t) = \mathcal A(s) + \mathcal A(t - s) $$
+    $$ \mathcal D(t) = \mathcal D(s) + \mathcal D(t - s), $$
+    а значит, $ \mathcal A $ и $ \mathcal D $ являются линейными функциями.
+\end{remark}
+
+\begin{definition}
+    Процесс называется \emph{стационарным в узком смысле}, если для любого $ n $ и любых
+    $ t(1) < \dots < t(n) $ многомерные распределения случайных величин
+    $$ \xi_{t(1) + \tau)}, \quad \dots, \quad \xi_{t(1) + \tau} $$
+    не зависят от $ \tau $.
+\end{definition}
+
+\begin{remark}
+    Для таких процессов выполняется
+    $$ \mathcal A(t) = \const, \quad \mathcal D(t) = \const, \quad
+    \mathcal B(t, s) = \mathcal B(s - t) $$
+\end{remark}
+
+\begin{definition}
+    Процесс называется \emph{стационарным в широком смысле}, если
+    $$ \mathcal A(t) = \const, \quad \mathcal B(t, s) = \mathcal B(s - t) $$
+\end{definition}
+
+\begin{exmpls}
+\item Любая последовательность независимых одинаково распределённых случайных величин
+    является стационарным в узком смысле процессом.
+\item Последовательность независимых случайных величин, у которых совпадают математические
+    ожидания и дисперсии, представляет собой стационарный в широком смысле процесс.
+\end{exmpls}
+
+\section{Пуассоновские процессы}
+
+\begin{definition}
+    Процесс с независимыми однородными приращениями называется \emph{пуассоновским} с параметром
+    $ \lambda > 0 $, если $ \xi_0 = 0 $, а $ \xi_t $ при каждом $ t > 0 $ имеет пуассоновское
+    распределение с параметром $ \lambda t $.
+\end{definition}
+
+Траектории такого процесса имеют единичные скачки в случайных точках вида $ z_1 + \dots z_k $, где
+$ z_i $ независимы и имеют экспоненциальное распределение с параметром $ \frac1\lambda $.
+
+\section{Винеровские процессы}
+
+\begin{definition}
+    Процесс $ W(t) $ с независимыми однородными приращениями называется \emph{винеровским},
+    если $ W(0) = 0 $, а случайная величина $ W(t) $ при любом фиксированном $ t > 0 $ имеет
+    нормальное распределение $ N(0, t) $.
+\end{definition}
+
+\begin{undefthm}{Моментные характеристики винеровского процесса}
+    $$ \mathbb E W(t) = 0, \quad \mathcal D W(t) = t $$
+
+    Пусть $ s \le t $.
+    \begin{multline*}
+        \mathcal B(s, t) = \mathbb EW(s)W(t) = \mathbb E W(s) \Bigl( W(s) + \bigl( W(t) -
+        W(s) \bigr) \Bigr) = \mathbb EW^2(s) + \mathbb EW(s) \bigl( W(t) - W(s) \bigr) = \\
+        = \mathbb EW^2(s) + \mathbb EW(s) \mathbb E \bigl( W(t) - W(s) \bigr) = \mathbb EW^2(s) = s
+    \end{multline*}
+    Аналогично можно рассмотреть ситуацию, когда $ t \le s $.
+
+    В результате получаем, что $ \mathcal B(s, t) = \min\Set{s, t} $.
+\end{undefthm}
+
+\begin{property}
+    Траектории винеровского процесса с вероятностью 1 \textbf{непрерывны}, но нигде \textbf{не
+    дифференцируемы}.
+\end{property}
+
+Пусть $ H(x) = P\Set{\max\limits_{0 \le t \le 1} W(t) < x} $ "--- функция распределения
+максимального значения того уровня, который достигается траекторией на временном интервале
+$ [0, 1] $.
+Для этой функции справедливо:
+$$ H(x) =
+\begin{cases}
+    0, \quad x < 0 \\
+    2\Phi(x) - 1, \quad x \ge 0
+\end{cases} $$
