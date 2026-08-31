@@ -1,0 +1,220 @@
+% vim:foldmethod=marker:foldmarker=(((,))):foldlevel=0
+
+\subimport{.preamble}{packages.tex}
+
+%: External variables (((
+
+% russian names for autoref:
+\AtBeginDocument{\renewcommand\figureautorefname{рис.}}
+\AtBeginDocument{\renewcommand\theoremautorefname{теор.}}
+\AtBeginDocument{\renewcommand\lemmaautorefname{лемма}}
+\AtBeginDocument{\renewcommand\definitionautorefname{опр.}}
+\AtBeginDocument{\renewcommand\statementautorefname{утв.}}
+
+% BibTeX month names:
+% \def\bbljan{Jan}
+% \def\bblfeb{Feb}
+% \def\bblmar{Mar}
+% \def\bblapr{Apr}
+% \def\bblmay{May}
+% \def\bbljun{Jun}
+% \def\bbljul{Jul}
+% \def\bblaug{Aug}
+% \def\bblsep{Sep}
+% \def\bbloct{Oct}
+% \def\bblnov{Nov}
+% \def\bbldec{Dec}
+
+%: )))
+
+%: Math operators (((
+
+% constant
+\DeclareMathOperator{\const}{const}
+
+% differential
+\newcommand\di[1][]{\ensuremath{\operatorname{d}^{#1}}}
+
+%: )))
+
+%: Equations and labels (((
+
+% labeled equation
+\newenvironment{equ}[1]{\begin{equation} \label{eq:#1}}{\end{equation}}
+% multiline equation with *every* line numbered
+\newenvironment{mequ}[1][\empheqlbrace]
+{
+    \setkeys{EmphEqEnv}{align} \setkeys{EmphEqOpt}{left={#1}} \EmphEqMainEnv
+}
+{\endEmphEqMainEnv}
+
+% labels and references
+\newcommand*\lbl[1]{\label{eq:#1}}
+\newcommand*\eref[1]{\eqref{eq:#1}}
+
+%: )))
+
+%: Shorthands (((
+
+% phi and epsilon
+\let\tphi\phi
+\let\phi\varphi
+\let\teps\epsilon
+\let\eps\varepsilon
+
+% short for stmaryrd's \llbracket and \rrbracket
+\newcommand\llb\llbracket
+\newcommand\rrb\rrbracket
+
+% over-decorations
+\let\ol\overline
+\let\vawe\widetilde
+% "raised overline" -- for capital letters
+\newcommand*{\roverline}[2][1pt]{%
+	% Namespace for \argheight
+	\begingroup%
+	\newlength\argheight%
+	\settoheight{\argheight}{#2}%
+	\addtolength{\argheight}{#1}%
+	\ensuremath{\overline{\raisebox{0pt}[\argheight]{\ensuremath{{#2}}}}}%
+	\endgroup%
+}
+% long hat
+\newcommand\smallhat\hat
+\AtBeginDocument{\renewcommand\hat\widehat}
+
+%: )))
+
+%: Bells and whistles (and misc) (((
+
+% imaginary unit
+\newcommand\ii{\mathfrak i}
+
+% text in a circle
+\newcommand\circled[1]{\text{\textcircled{$ {#1} $}}}
+
+% partial derivative
+\newcommand*\pder[2][]{\ensuremath{\frac{\partial {#1}}{\partial {#2}}}}
+
+% n-th derivative
+\newcommand*\nder[2][n]{\ensuremath{{#2}^{({#1})}}}
+
+% variants
+\newenvironment{vars}{\left[\begin{matrix}}{\end{matrix}\right.}
+
+% by definition (default is =)
+\newcommand*\bydef[1][=]{\ensuremath{\stackrel{\operatorname{def}}{#1}}}
+
+% divisible by
+\DeclareRobustCommand{\divby}{%
+  \mathrel{\vbox{\baselineskip.65ex\lineskiplimit0pt\hbox{.}\hbox{.}\hbox{.}}}%
+}
+
+% not divisible by
+\DeclareRobustCommand{\ndivby}{%
+  \mathrel{\not\vbox{\baselineskip.65ex\lineskiplimit0pt\hbox{.}\hbox{.}\hbox{.}}}%
+}
+
+% controversy
+\newcommand\contra{~\scalebox{1.2}{$\lightning$}~}
+
+% roman numerals
+\makeatletter
+\newcommand*{\rom}[1]{\text{\expandafter\@slowromancap\romannumeral #1@}}
+\makeatother
+
+% triangle inequality
+\newcommand\trile{\ensuremath{\stackrel\vartriangle\le}}
+\newcommand\trige{\ensuremath{\stackrel\vartriangle\ge}}
+
+% math &
+\newcommand\amp{\ensuremath{\mathrel\&}}
+
+%: )))
+
+%: Extensible arrows (((
+
+% arrows with text below `em
+\newcommand\underarr[1]{\ensuremath\xrightarrow[#1]{}}
+\newcommand\underimp[1]{\ensuremath\xRightarrow[#1]{}}
+\newcommand\underiff[1]{\ensuremath\xLeftrightarrow[#1]{}}
+
+% arrow-like with text below `em
+\newcommand\undereq[1]{\ensuremath\xlongequal[#1]{}}
+
+\makeatletter
+\let\equiv@\equiv
+\newcommand\@equiv[1][]{\overset{#1}\equiv@}
+\let\equiv\@equiv
+\makeatother
+
+% custom extensible arrows
+\makeatletter
+% xrightrightarrow
+\newdimen\@temp
+\settowidth\@temp{$ \m@th \relbar $}
+\def\@highRelbar{\raisebox{-0.1675em}{$ \relbar $}\hspace{-\@temp}\raisebox{0.1675em}{$ \relbar $}}
+\def\xrightrightarrowsfill@{\arrowfill@\@highRelbar\@highRelbar\rightrightarrows}
+\newcommand\xrightrightarrows[2][]{\ext@arrow 0099\xrightrightarrowsfill@{#1}{#2}}
+
+% xequiv
+\let\equv@\equiv
+\newcommand\xequivfill@{\arrowfill@\equiv@\equiv@\equiv@}
+\newcommand\xequiv[2][]{\ext@arrow 0099\xequivfill@{#1}{#2}}
+% equiv with domain
+\AtBeginDocument{\renewcommand\equiv[1][]{\xequiv{#1}}}
+
+\makeatother
+
+% other custom arrows
+
+\newcommand\curveddownarrowright{\rotatebox{180}{$ \curvearrowleft $}}
+\newcommand\curveddownarrowleft{\rotatebox{180}{$ \curvearrowright $}}
+
+% 1 is left-to-right
+\newcommand\curvedir[2][1]{\ifthenelse{\isodd{#1}}
+    {\ensuremath{\overset{\curveddownarrowright}{#2}}}
+    {\ensuremath{\overset{\curveddownarrowleft}{#2}}}}
+
+%: )))
+
+%: Sets (((
+
+\newcommand\N{\ensuremath{\mathbb{N}}}
+\newcommand\R{\ensuremath{\mathbb{R}}}
+\newcommand\Z{\ensuremath{\mathbb{Z}}}
+\renewcommand\O{\ensuremath{\emptyset}}
+\newcommand\Q{\ensuremath{\mathbb{Q}}}
+\newcommand\Co{\ensuremath{\mathbb{C}}}     % because /C is already taken
+\newcommand\Prime{\ensuremath{\mathbb{P}}}     % prime numbers
+\newcommand\On[1][]{\ensuremath{\mathbb{O}_{#1}}}  % (0, ..., 0)
+
+%: )))
+
+%: Text abbreviations (((
+
+\newcommand\as{\text{т.~к.}\xspace}
+\newcommand\As{\text{Т.~к.}\xspace}
+\newcommand\ie{\text{т.~е.}\xspace}
+% so-called
+\newcommand\soc{\text{т.~н.}\xspace}
+% always-everywhere
+\newcommand\ale{\text{п.~в.}\xspace}
+
+%: )))
+
+%: Source-related (((
+
+\makeatletter
+\newcommand\TODO[1]{\textcolor{red}{{\Huge TODO:} {#1}}
+\@latex@warning{TODO: #1}
+}
+\makeatother
+
+\newcommand\comment[1]{\textcolor{magenta}{\textit{#1}}}
+
+%: )))
+
+\subimport{.preamble}{theorems.tex}
+
+\subimport{..}{hyphenations.tex}
