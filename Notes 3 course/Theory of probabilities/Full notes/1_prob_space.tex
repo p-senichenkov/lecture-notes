@@ -67,7 +67,7 @@
 \end{props}
 
 \begin{statement}[неравенства Бонферрони]
-	$$ \sum_{k = 1}^n P(A_k) - \sum_{1 \le k \le l \le n} P(A_kA_l) \le
+	$$ \sum_{k = 1}^n P(A_k) - \sum_{1 \le k < l \le n} P(A_kA_l) \le
 	P \Bigl( \bigcup_{k = 1}^n A_k \Bigr) \le \sum_{k = 1}^n P(A_k) $$
 \end{statement}
 
@@ -90,7 +90,7 @@
 \item
 	$$ P(\Omega|B) = \frac{P(\Omega B)}{P(B)} = \frac{P(B)}{P(B)} = 1 $$
 \item
-	$$ P \Bigl( \bigcup_k A_k \Bigm| B \Bigr) =
+	$$ P \Bigl( \bigcup_k A_k \bigm| B \Bigr) =
 	\frac{P \Bigl\lgroup B \cap \Bigl( \bigcup_k A_k \Bigr) \Bigr\rgroup}{P(B)} =
 	\frac{P \Bigl( \bigcup_k A_kB \Bigr)}{P(B)} =
 	\frac{\sum_k P(A_kB)}{P(B)} = \sum_k P(A_k|B) $$
@@ -164,6 +164,8 @@
 	дополнение.
 \end{theorem}
 
+\textcolor{gray}{Пример Бернштейна "--- это про разноцветный тетраэдр.}
+
 \section{Схемы испытаний Бернулли}
 
 \begin{definition}
@@ -181,8 +183,7 @@
 	$ 0 < p < 1 $
 
 	Соотношение
-	$$ \frac{\sqrt{npq}P_n(m)}{\phi \Bigl( \dfrac{m - np}{\sqrt{npq}} \Bigr)}
-	\underarr{n \to \infty} 1, $$
+    $$ \sqrt{npq}P_n(m) \underarr{n \to \infty} \phi \Bigl( \dfrac{m - np}{\sqrt{npq}} \Bigr), $$
 	где
 	$$ \phi(x) = \frac1{\sqrt{2\pi}} e^{-\frac{x^2}2}
 	\text{ "--- плотность нормального распределения}, $$
@@ -236,7 +237,6 @@ $ c $ "--- абсолютная константа.
 
 	Вероятность того, что в $ n $ испытаниях событие $ A_i $ произойдёт $ m_i $ раз, равна:
 	$$ P_n(m_1, m_2, \dots, m_r) =
-	\frac{n!}{m_! m_2! \cdots m_r!} p_1^{m_1} p_2^{m_2} \cdots p_r^{m_r}, \quad
+	\frac{n!}{m_1! m_2! \cdots m_r!} p_1^{m_1} p_2^{m_2} \cdots p_r^{m_r}, \quad
 	m_1 + m_2 + \dots + m_r = n $$
 \end{definition}
-

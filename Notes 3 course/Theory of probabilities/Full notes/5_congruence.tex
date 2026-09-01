@@ -9,14 +9,16 @@
     Будем говорить, что последовательность случайных величин $ \xi_1, \xi_2, \dotsc $
     \emph{сходится} к случайной величине $ \xi $ \emph{по вероятности} $ \xi_n \overarr{P} \xi $,
     если
-    $$ \forall \eps > 0 \quad P(|\xi_n - \xi| \ge \eps) \underarr{n \to \infty} 0 $$
+    $$ \forall \eps > 0 \quad P\{|\xi_n - \xi| \ge \eps\} \underarr{n \to \infty} 0 $$
 \end{definition}
 
 \begin{definition}
     Последовательность случайных величин $ \xi_1, \xi_2, \dotsc $ \emph{сходится}
     к случайной величине $ \xi $ \emph{почти наверное} (\emph{с вероятностью 1})
     $ \xi_n \underarr{\text{п. н.}} \xi $, если
-    $$ P(\lim x_n = \xi) = 1 $$
+    $$ P\set{\lim \xi_n = \xi} = 1 $$
+
+    \textcolor{gray}{Здесь имеется в виду поточечный предел функций $ \xi_n : \Omega \to \R $.}
 \end{definition}
 
 \begin{definition}
@@ -30,7 +32,7 @@
     Будем говорить, что последовательность $ \xi_1, \xi_2, \dotsc $ \emph{сходится} к
     случайной величине $ \xi $ \emph{по распределению} $ \xi_n \overarr{d} \xi $, если
     для любой точки непрерывности $ x $ функции распределения $ F(x) $ предельной случайной величины
-    $$ \lim \bigl( F_n(x) - F(x) \bigr) = 0 $$
+    $$ F_n(x) \underarr{n \to \infty} F(x) $$
 \end{definition}
 
 \begin{remark}
@@ -49,7 +51,7 @@
     $ \xi_1, \xi_2, \dotsc $ "--- последовательность одинаково распределённых случайных величин с
     математическим ожиданием $ a $ и ненулевой дисперсией $ \sigma^2 $.
     Тогда выполняется предельное соотношение
-    $$ \sup\limits_x \Bigl| P \Set{\frac{\xi_1 + \dots + \xi_n - na}{\sigma \sqrt n}} -
+    $$ \sup\limits_x \Bigl| P \Set{\frac{\xi_1 + \dots + \xi_n - na}{\sigma \sqrt n} < x} -
     \Phi(x) \Bigr| \underarr{n \to \infty} 0 $$
 \end{theorem}
 
@@ -66,7 +68,7 @@
     Учитывая равенства,
     $$ f'(0) = \ii \mathbb E \xi = 0, \quad f''(0) = -\mathbb \xi^2 = -1, $$
     в окрестности нуля справедливо
-    $$ f(t) = f(0) + rf'(0) + \frac12 t^2 f''(0) + o(t^2) = 1 + \ii t \mathbb E \xi - \frac{t^2}2
+    $$ f(t) = f(0) + tf'(0) + \frac12 t^2 f''(0) + o(t^2) = 1 + \ii t \mathbb E \xi - \frac{t^2}2
     \mathbb E \xi^2 + o(t^2) = 1 - \frac{t^2}2 + o(t^2) $$
 
     Рассмотрим при $ n \to \infty $, асимптотику функции
@@ -111,8 +113,7 @@ $$ \Phi(x) = \frac1{\sqrt{2\pi}} \int_{-\infty}^x e^{-\frac{t^2}2}\di t =
     ожиданиями $ a_1, a_2, \dotsc $
 
     Говорим, что эта последовательность удовлетворяет \emph{закону больших чисел}, если
-    $$ \frac{\xi_1 + \dots + \xi_n}n - \frac{a_1 + \dots + a_n}n \overarr{P} 0 \quad \text{при}
-    n \to \infty $$
+    $$ \frac{\xi_1 + \dots + \xi_n}n \xrightarrow[n \to \infty]{P} \frac{a_1 + \dots + a_n}n $$
 \end{definition}
 
 \begin{theorem}[Чебышёва]
